@@ -4,8 +4,10 @@
   <meta charset="UTF-8" />
   <title>Red Rocks Party Shuttle | Party At Red Rocks</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Party shuttle service to Red Rocks Amphitheatre. $59 shared party shuttle seats. $499 private Suburbans. Private party buses available. Book your 2026 ride now." />
+  <meta name="description"
+        content="Party shuttle service to Red Rocks Amphitheatre. $59 shared shuttle seats, $499 private Suburbans, and private party buses for 2026 concerts." />
 
+  <!-- Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -22,22 +24,25 @@
       { "@type": "Offer", "price": "1499", "priceCurrency": "USD" }
     ]
   }
-    <section id="schedule-2026">
+  </script>
+</head>
+
+<body>
+
+<section id="schedule-2026">
   <h2>Confirmed 2026 Red Rocks Concerts</h2>
   <div id="dcc-events">
     <p><em>Loading confirmed 2026 events…</em></p>
   </div>
 </section>
 
-
-    <section>
+<section>
   <h2>Red Rocks 2026 Summer Concert Schedule</h2>
 
-<p>
-  Transportation availability is loaded in real time as events are announced.
-  Booking opens automatically when inventory is available.
-</p>
-
+  <p>
+    Transportation availability is loaded in real time as events are announced.
+    Booking opens automatically when inventory is available.
+  </p>
 
   <p>
     This page will update automatically as 2026 shows are confirmed.
@@ -55,132 +60,40 @@
   </p>
 </section>
 
+<!-- DCC EVENTS SCRIPT -->
+<script>
+(async () => {
+  const endpoint =
+    "https://dcc-redrocks-2026.denverairportpickup.workers.dev/api/dcc/red-rocks/2026/events";
 
-    
-  </script>
-
-  <style>
-
-    <script>
-(async function () {
-  const container = document.getElementById("dcc-events");
+  const el = document.getElementById("dcc-events");
 
   try {
-    const res = await fetch(
-      "https://dcc-redrocks-2026.denverairportpickup.workers.dev/api/dcc/red-rocks/2026/events"
-    );
-
-    if (!res.ok) throw new Error("DCC unavailable");
-
+    const res = await fetch(endpoint);
     const data = await res.json();
 
-    if (!data.events || data.events.length === 0) {
-      container.innerHTML =
-        "<p>No confirmed 2026 shows yet. This page updates as events are announced.</p>";
+    if (!data.events || !data.events.length) {
+      el.innerHTML = "<p>No confirmed 2026 events yet.</p>";
       return;
     }
 
-    const list = document.createElement("ul");
+    el.innerHTML = data.events.map(e => `
+      <div style="margin-bottom:20px">
+        <strong>${e.artist}</strong><br>
+        ${e.date} (${e.dayOfWeek})<br>
+        <a href="https://gosnotransportation58.rezdy.com/catalog" target="_blank">
+          <h2>BOOK YOUR RIDE – LIVE TEST</h2>
 
-    data.events.forEach(event => {
-      const li = document.createElement("li");
-      li.innerHTML = `<strong>${event.artist}</strong> — ${event.date}`;
-      list.appendChild(li);
-    });
-
-    container.innerHTML = "";
-    container.appendChild(list);
-
-    if (data.scheduleStatus === "partial") {
-      const note = document.createElement("p");
-      note.innerHTML =
-        "<em>More 2026 shows will be added as they’re officially announced.</em>";
-      container.appendChild(note);
-    }
+        </a>
+      </div>
+    `).join("");
 
   } catch (err) {
-    container.innerHTML =
-      "<p><em>Schedule temporarily unavailable. Please check back shortly.</em></p>";
+    el.innerHTML = "<p>Failed to load events.</p>";
+    console.error(err);
   }
 })();
 </script>
-
-    
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #0b0b0b;
-      color: #ffffff;
-      line-height: 1.6;
-    }
-    header {
-      padding: 70px 20px;
-      text-align: center;
-      background: linear-gradient(180deg, #1a1a1a, #0b0b0b);
-    }
-    h1 {
-      font-size: 2.6rem;
-      margin-bottom: 12px;
-    }
-    .cta {
-      display: inline-block;
-      margin: 12px;
-      padding: 16px 26px;
-      background: #e63946;
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      border-radius: 10px;
-    }
-    section {
-      max-width: 900px;
-      margin: 50px auto;
-      padding: 0 20px;
-    }
-    ul {
-      padding-left: 20px;
-    }
-    footer {
-      text-align: center;
-      font-size: 0.9rem;
-      color: #aaa;
-      padding: 40px 20px;
-    }
-  </style>
-</head>
-
-<body>
-
-<header>
-  <h1>Red Rocks Party Shuttle</h1>
-  <p>Ride together. Pre-game hard. Get home safe.</p>
-
-  <a class="cta" href="#booking">$59 Party Shuttle Seats</a>
-  <a class="cta" href="#booking">$499 Private Suburban</a>
-</header>
-
-<section>
-  <h2>2026 Transportation Options</h2>
-  <ul>
-    <li><strong>$59 per person</strong> — Shared Party Shuttle (party bus vibes)</li>
-    <li><strong>$499 flat</strong> — Private Suburban (6–7 passengers)</li>
-    <li><strong>$999</strong> — Private 14-Passenger Party Bus</li>
-    <li><strong>$1,499</strong> — Private 24-Passenger Party Bus</li>
-  </ul>
-</section>
-
-<section id="booking">
-  <h2>Book Your Ride</h2>
-  <p>Reserve your transportation to Red Rocks for 2026 shows. Popular nights sell out fast.</p>
-
-  <!-- REZDY EMBEDS GO HERE NEXT -->
-  <p><em>Booking calendar loading shortly.</em></p>
-</section>
-
-<footer>
-  <p>Independent transportation service. Not affiliated with Red Rocks Amphitheatre.</p>
-  <p>Event and venue information provided by Destination Command Center.</p>
-</footer>
 
 </body>
 </html>
