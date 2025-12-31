@@ -229,7 +229,25 @@
       calendarHTML += `
         <div class="calendar-day">
           <strong>${d.getDate()}</strong>
-          ${event ? `<div class="calendar-event">${event.artist}</div>` : ""}
+${event ? `
+  <div class="calendar-event">
+    <div>${event.artist}</div>
+    <div style="margin-top:6px; display:flex; gap:6px; flex-wrap:wrap;">
+      <a
+        href="/book?product=shuttle&price=59&event=${encodeURIComponent(event.eventId)}&date=${encodeURIComponent(event.date)}"
+        style="background:#e11d48;color:#fff;padding:4px 8px;border-radius:999px;font-size:11px;text-decoration:none;font-weight:700;"
+      >
+        $59 Shuttle
+      </a>
+      <a
+        href="/book?product=suburban&price=499&event=${encodeURIComponent(event.eventId)}&date=${encodeURIComponent(event.date)}"
+        style="background:#111827;color:#fff;padding:4px 8px;border-radius:999px;font-size:11px;text-decoration:none;font-weight:700;"
+      >
+        $499 Suburban
+      </a>
+    </div>
+  </div>
+` : ""}
         </div>
       `;
     }
