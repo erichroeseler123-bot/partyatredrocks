@@ -2,22 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-
-  <!-- ============================
-       BASIC SEO / META
-       ============================ -->
   <title>Red Rocks Party Shuttle | Party At Red Rocks</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta
-    name="description"
-    content="Party shuttle service to Red Rocks Amphitheatre. $59 shared party shuttle seats and $499 private Suburbans for 2026 Red Rocks concerts."
-  />
+  <meta name="description" content="Party shuttle transportation to Red Rocks Amphitheatre. $59 shared shuttles and $499 private Suburbans. Live 2026 concert calendar." />
 
-  <!-- ============================
-       SCHEMA: TRANSPORTATION SERVICE
-       PARR = for-profit renderer
-       DCC  = source of truth
-       ============================ -->
+  <!-- Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -34,257 +23,205 @@
   }
   </script>
 
-  <!-- ============================
-       BASE STYLES (TEMP / SAFE)
-       ============================ -->
   <style>
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       margin: 0;
-      padding: 24px;
-      background: #ffffff;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #fff;
       color: #111;
-      line-height: 1.45;
     }
 
-    h1, h2 {
-      margin-top: 0;
-    }
-
-    section {
-      margin-bottom: 40px;
-    }
-
-    /* ===== Event cards ===== */
-    .event-card {
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 20px;
-    }
-
-    .event-artist {
-      font-size: 18px;
-      font-weight: 700;
-    }
-
-    .event-date {
-      margin-top: 4px;
-      color: #374151;
-    }
-
-    .booking-actions {
-      margin-top: 12px;
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 10px 16px;
-      border-radius: 999px;
-      font-weight: 700;
-      text-decoration: none;
+    header {
+      background: radial-gradient(circle at top, #222, #000);
       color: #fff;
+      padding: 80px 20px;
+      text-align: center;
     }
 
-    .btn-shuttle {
-      background: #e11d48;
+    header h1 {
+      margin: 0;
+      font-size: 42px;
     }
 
-    .btn-suburban {
-      background: #111827;
+    header p {
+      opacity: 0.8;
     }
 
-    /* ===== Calendar ===== */
-    #calendar-grid {
+    main {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 24px;
+      padding: 24px;
+      max-width: 1400px;
+      margin: auto;
+    }
+
+    aside {
+      border-right: 1px solid #eee;
+      padding-right: 20px;
+      position: sticky;
+      top: 20px;
+      height: fit-content;
+    }
+
+    aside img {
+      width: 100%;
+      border-radius: 6px;
+      margin: 12px 0;
+    }
+
+    .calendar {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
       gap: 10px;
-      margin-top: 20px;
     }
 
-    .calendar-day {
-      border: 1px solid #e5e7eb;
-      border-radius: 10px;
-      padding: 8px;
+    .day {
+      border: 1px solid #e5e5e5;
+      border-radius: 6px;
+      padding: 6px;
       min-height: 90px;
       font-size: 13px;
     }
 
-    .calendar-day strong {
+    .day strong {
       display: block;
-      font-size: 14px;
-      margin-bottom: 6px;
+      font-size: 12px;
+      opacity: 0.6;
+      margin-bottom: 4px;
     }
 
-    .calendar-event {
-      background: #111827;
+    .event {
+      background: #111;
       color: #fff;
-      border-radius: 6px;
-      padding: 6px;
-      margin-top: 4px;
+      padding: 4px 6px;
+      border-radius: 4px;
       font-size: 12px;
+      margin-top: 4px;
+      cursor: pointer;
+    }
+
+    .event:hover {
+      background: #e11d2e;
+    }
+
+    .booking button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      font-size: 15px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .shuttle {
+      background: #e11d2e;
+      color: #fff;
+    }
+
+    .suburban {
+      background: #111;
+      color: #fff;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 12px;
+      opacity: 0.5;
+      padding: 40px 20px;
     }
   </style>
 </head>
 
 <body>
 
-<!-- ============================
-     PAGE HEADER
-     ============================ -->
-<h1>Party Shuttle Transportation to Red Rocks</h1>
+<header>
+  <h1>Red Rocks Party Shuttle</h1>
+  <p>Ride together. Pre-game hard. Get home safe.</p>
+</header>
 
-<p>
-  Shared party shuttles and private vehicles for Red Rocks Amphitheatre concerts.
-  Live event data is powered by our internal Destination Command Center (DCC).
-</p>
+<main>
 
-<!-- ============================
-     LIVE 2026 CALENDAR (DCC)
-     ============================ -->
-<section id="calendar">
-  <h2>2026 Red Rocks Concert Calendar</h2>
-  <div id="calendar-grid"></div>
-</section>
+  <!-- LEFT SIDEBAR -->
+  <aside id="sidebar">
+    <h2>Select a Show</h2>
+    <p>Click a concert date to view details and book transportation.</p>
+  </aside>
 
-<!-- ============================
-     EVENT LIST (LATENT)
-     ============================ -->
-<section id="schedule-2026">
-  <h2>Confirmed 2026 Red Rocks Concerts</h2>
+  <!-- MAIN CONTENT -->
+  <section>
+    <h2>2026 Red Rocks Concert Calendar</h2>
+    <div id="calendar" class="calendar"></div>
 
-  <!-- DCC injects events here -->
-  <div id="dcc-events">
-    <p><em>Loading confirmed 2026 events…</em></p>
-  </div>
-</section>
-
-<!-- ============================
-     SUPPORTING CONTENT
-     ============================ -->
-<section>
-  <h2>Red Rocks 2026 Summer Concert Schedule</h2>
-
-  <p>
-    Transportation availability is loaded in real time as events are announced.
-    Booking opens automatically when inventory is available.
-  </p>
-
-  <ul>
-    <li>Typical season: May – September</li>
-    <li>Most shows: Thursday–Sunday</li>
-    <li>High-demand weekends sell out first</li>
-  </ul>
-
-  <p>
-    <strong>Planning ahead?</strong>
-    Private Suburbans and group transportation can be reserved in advance.
-  </p>
-</section>
-
-<!-- ======================================================
-     DCC → PARR CALENDAR + EVENT RENDERER
-     ======================================================
-     RULES:
-     - DCC decides what is real
-     - PARR only renders
-     - No CMS
-     - No DB
-     - No Rezdy yet
-     ====================================================== -->
-<script>
-(async () => {
-  const DCC_ENDPOINT =
-    "https://dcc-redrocks-2026.denverairportpickup.workers.dev/api/dcc/red-rocks/2026/events";
-
-  const listContainer = document.getElementById("dcc-events");
-  const calendarContainer = document.getElementById("calendar-grid");
-
-  try {
-    const res = await fetch(DCC_ENDPOINT);
-    const data = await res.json();
-
-    if (!data.events || data.events.length === 0) {
-      listContainer.innerHTML = "<p>No confirmed 2026 events yet.</p>";
-      return;
-    }
-
-    /* ===== Calendar rendering ===== */
-    const eventsByDate = {};
-    data.events.forEach(e => {
-      eventsByDate[e.date] = e;
-    });
-
-    const start = new Date("2026-05-01");
-    const end = new Date("2026-09-30");
-
-    let calendarHTML = "";
-    for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
-      const dateStr = d.toISOString().slice(0, 10);
-      const event = eventsByDate[dateStr];
-
-      calendarHTML += `
-        <div class="calendar-day">
-          <strong>${d.getDate()}</strong>
-${event ? `
-  <div class="calendar-event">
-    <div>${event.artist}</div>
-    <div style="margin-top:6px; display:flex; gap:6px; flex-wrap:wrap;">
-      <a
-        href="/book?product=shuttle&price=59&event=${encodeURIComponent(event.eventId)}&date=${encodeURIComponent(event.date)}"
-        style="background:#e11d48;color:#fff;padding:4px 8px;border-radius:999px;font-size:11px;text-decoration:none;font-weight:700;"
-      >
-        $59 Shuttle
-      </a>
-      <a
-        href="/book?product=suburban&price=499&event=${encodeURIComponent(event.eventId)}&date=${encodeURIComponent(event.date)}"
-        style="background:#111827;color:#fff;padding:4px 8px;border-radius:999px;font-size:11px;text-decoration:none;font-weight:700;"
-      >
-        $499 Suburban
-      </a>
+    <div class="booking" id="booking-panel">
+      <h3>Book Transportation</h3>
+      <p>Select a concert to unlock booking.</p>
     </div>
-  </div>
-` : ""}
-        </div>
-      `;
-    }
+  </section>
 
-    calendarContainer.innerHTML = calendarHTML;
+</main>
 
-    /* ===== Event list rendering ===== */
-    listContainer.innerHTML = data.events.map(event => `
+<footer>
+  Independent transportation service. Not affiliated with Red Rocks Amphitheatre.<br>
+  Event data powered by Destination Command Center (DCC).
+</footer>
+
+<script>
+const API_URL = "https://dcc-redrocks-2026.denverairportpickup.workers.dev/api/dcc/red-rocks/2026/events";
+let EVENTS = [];
+
+// Load events + render calendar
+fetch(API_URL)
+  .then(r => r.json())
+  .then(data => {
+    EVENTS = data.events || [];
+    renderCalendar(EVENTS);
+  });
+
+function renderCalendar(events) {
+  const cal = document.getElementById("calendar");
+  cal.innerHTML = "";
+
+  for (let day = 1; day <= 31; day++) {
+    const cell = document.createElement("div");
+    cell.className = "day";
+    cell.innerHTML = `<strong>${day}</strong>`;
+
+events.forEach(event => {
+  calendarDay.innerHTML += `
+    <a href="/show.html?eventId=${event.eventId}" class="event-link">
       <div class="event-card">
-        <div class="event-artist">${event.artist}</div>
-        <div class="event-date">
-          ${event.date} (${event.dayOfWeek})
-        </div>
+        <div class="event-title">${event.artist}</div>
+        <div class="event-date">${event.date}</div>
 
-        <div class="booking-actions">
-          <a
-            class="btn btn-shuttle"
-            href="/book?product=shuttle&price=59&event=${encodeURIComponent(event.eventId)}&date=${encodeURIComponent(event.date)}"
-          >
-            $59 Party Shuttle
-          </a>
-
-          <a
-            class="btn btn-suburban"
-            href="/book?product=suburban&price=499&event=${encodeURIComponent(event.eventId)}&date=${encodeURIComponent(event.date)}"
-          >
-            $499 Private Suburban
-          </a>
-        </div>
+        <div class="price">$59 Shuttle</div>
+        <div class="price secondary">$499 Suburban</div>
       </div>
-    `).join("");
+    </a>
+  `;
+});
 
-  } catch (error) {
-    console.error("DCC fetch failed:", error);
-    listContainer.innerHTML = "<p>Failed to load events.</p>";
+    cal.appendChild(cell);
   }
-})();
+}
+
+// Sidebar + booking update
+function selectEvent(event) {
+  document.getElementById("sidebar").innerHTML = `
+    <h2>${event.artist}</h2>
+    <p><strong>${event.date}</strong> (${event.dayOfWeek})</p>
+    <img src="${event.image}" />
+    <p><a href="${event.ticketUrl}" target="_blank">View Tickets</a></p>
+  `;
+
+  document.getElementById("booking-panel").innerHTML = `
+    <h3>Book Transportation</h3>
+    <button class="shuttle">$59 Party Shuttle</button>
+    <button class="suburban">$499 Private Suburban</button>
+  `;
+}
 </script>
 
 </body>
