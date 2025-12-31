@@ -15,8 +15,8 @@
 
   <!-- ============================
        SCHEMA: TRANSPORTATION SERVICE
-       NOTE: PARR is a FOR-PROFIT renderer.
-       DCC is the source of truth.
+       PARR = for-profit renderer
+       DCC  = source of truth
        ============================ -->
   <script type="application/ld+json">
   {
@@ -35,8 +35,7 @@
   </script>
 
   <!-- ============================
-       VERY LIGHT STYLES
-       (TEMPORARY / SAFE)
+       BASE STYLES (TEMP / SAFE)
        ============================ -->
   <style>
     body {
@@ -52,6 +51,11 @@
       margin-top: 0;
     }
 
+    section {
+      margin-bottom: 40px;
+    }
+
+    /* ===== Event cards ===== */
     .event-card {
       border: 1px solid #e5e7eb;
       border-radius: 12px;
@@ -86,11 +90,42 @@
     }
 
     .btn-shuttle {
-      background: #e11d48; /* red */
+      background: #e11d48;
     }
 
     .btn-suburban {
-      background: #111827; /* near-black */
+      background: #111827;
+    }
+
+    /* ===== Calendar ===== */
+    #calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .calendar-day {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 8px;
+      min-height: 90px;
+      font-size: 13px;
+    }
+
+    .calendar-day strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .calendar-event {
+      background: #111827;
+      color: #fff;
+      border-radius: 6px;
+      padding: 6px;
+      margin-top: 4px;
+      font-size: 12px;
     }
   </style>
 </head>
@@ -108,28 +143,27 @@
 </p>
 
 <!-- ============================
-     2026 EVENT SCHEDULE (LATENT)
-     IMPORTANT:
-     - This section exists NOW
-     - Content is injected dynamically
-     - Page updates automatically as DCC updates
+     LIVE 2026 CALENDAR (DCC)
+     ============================ -->
+<section id="calendar">
+  <h2>2026 Red Rocks Concert Calendar</h2>
+  <div id="calendar-grid"></div>
+</section>
+
+<!-- ============================
+     EVENT LIST (LATENT)
      ============================ -->
 <section id="schedule-2026">
   <h2>Confirmed 2026 Red Rocks Concerts</h2>
 
-  <!--
-    DCC will render events into this container.
-    If this div is empty, either:
-      - DCC returned no events
-      - Fetch failed (network/CORS)
-  -->
+  <!-- DCC injects events here -->
   <div id="dcc-events">
     <p><em>Loading confirmed 2026 events…</em></p>
   </div>
 </section>
 
 <!-- ============================
-     SUPPORTING CONTENT (STATIC)
+     SUPPORTING CONTENT
      ============================ -->
 <section>
   <h2>Red Rocks 2026 Summer Concert Schedule</h2>
@@ -152,45 +186,64 @@
 </section>
 
 <!-- ======================================================
-     DCC → PARR EVENT FETCH + RENDER LOGIC
+     DCC → PARR CALENDAR + EVENT RENDERER
      ======================================================
-     ARCHITECTURE RULES:
-     - DCC = Source of truth (events, dates)
-     - PARR = Renderer + commerce surface
-     - NO event guessing here
-     - NO CMS
-     - NO database
+     RULES:
+     - DCC decides what is real
+     - PARR only renders
+     - No CMS
+     - No DB
+     - No Rezdy yet
      ====================================================== -->
 <script>
 (async () => {
   const DCC_ENDPOINT =
     "https://dcc-redrocks-2026.denverairportpickup.workers.dev/api/dcc/red-rocks/2026/events";
 
-  const container = document.getElementById("dcc-events");
-  if (!container) return;
+  const listContainer = document.getElementById("dcc-events");
+  const calendarContainer = document.getElementById("calendar-grid");
 
   try {
-    const response = await fetch(DCC_ENDPOINT);
-    const data = await response.json();
+    const res = await fetch(DCC_ENDPOINT);
+    const data = await res.json();
 
     if (!data.events || data.events.length === 0) {
-      container.innerHTML = "<p>No confirmed 2026 events yet.</p>";
+      listContainer.innerHTML = "<p>No confirmed 2026 events yet.</p>";
       return;
     }
 
-    container.innerHTML = data.events.map(event => `
+    /* ===== Calendar rendering ===== */
+    const eventsByDate = {};
+    data.events.forEach(e => {
+      eventsByDate[e.date] = e;
+    });
+
+    const start = new Date("2026-05-01");
+    const end = new Date("2026-09-30");
+
+    let calendarHTML = "";
+    for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+      const dateStr = d.toISOString().slice(0, 10);
+      const event = eventsByDate[dateStr];
+
+      calendarHTML += `
+        <div class="calendar-day">
+          <strong>${d.getDate()}</strong>
+          ${event ? `<div class="calendar-event">${event.artist}</div>` : ""}
+        </div>
+      `;
+    }
+
+    calendarContainer.innerHTML = calendarHTML;
+
+    /* ===== Event list rendering ===== */
+    listContainer.innerHTML = data.events.map(event => `
       <div class="event-card">
         <div class="event-artist">${event.artist}</div>
         <div class="event-date">
           ${event.date} (${event.dayOfWeek})
         </div>
 
-        <!--
-          PRODUCT DECISION IS EXPLICIT:
-          - $59 Shared Party Shuttle (per seat)
-          - $499 Private Suburban (flat rate)
-          Routing only. Inventory handled later.
-        -->
         <div class="booking-actions">
           <a
             class="btn btn-shuttle"
@@ -211,7 +264,7 @@
 
   } catch (error) {
     console.error("DCC fetch failed:", error);
-    container.innerHTML = "<p>Failed to load events.</p>";
+    listContainer.innerHTML = "<p>Failed to load events.</p>";
   }
 })();
 </script>
