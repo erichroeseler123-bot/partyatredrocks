@@ -2,12 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+
+  <!-- ============================
+       BASIC SEO / META
+       ============================ -->
   <title>Red Rocks Party Shuttle | Party At Red Rocks</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description"
-        content="Party shuttle service to Red Rocks Amphitheatre. $59 shared shuttle seats, $499 private Suburbans, and private party buses for 2026 concerts." />
+  <meta
+    name="description"
+    content="Party shuttle service to Red Rocks Amphitheatre. $59 shared party shuttle seats and $499 private Suburbans for 2026 Red Rocks concerts."
+  />
 
-  <!-- Schema -->
+  <!-- ============================
+       SCHEMA: TRANSPORTATION SERVICE
+       NOTE: PARR is a FOR-PROFIT renderer.
+       DCC is the source of truth.
+       ============================ -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -19,34 +29,114 @@
     },
     "offers": [
       { "@type": "Offer", "price": "59", "priceCurrency": "USD" },
-      { "@type": "Offer", "price": "499", "priceCurrency": "USD" },
-      { "@type": "Offer", "price": "999", "priceCurrency": "USD" },
-      { "@type": "Offer", "price": "1499", "priceCurrency": "USD" }
+      { "@type": "Offer", "price": "499", "priceCurrency": "USD" }
     ]
   }
   </script>
+
+  <!-- ============================
+       VERY LIGHT STYLES
+       (TEMPORARY / SAFE)
+       ============================ -->
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #ffffff;
+      color: #111;
+      line-height: 1.45;
+    }
+
+    h1, h2 {
+      margin-top: 0;
+    }
+
+    .event-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+
+    .event-artist {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .event-date {
+      margin-top: 4px;
+      color: #374151;
+    }
+
+    .booking-actions {
+      margin-top: 12px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .btn-shuttle {
+      background: #e11d48; /* red */
+    }
+
+    .btn-suburban {
+      background: #111827; /* near-black */
+    }
+  </style>
 </head>
 
 <body>
 
+<!-- ============================
+     PAGE HEADER
+     ============================ -->
+<h1>Party Shuttle Transportation to Red Rocks</h1>
+
+<p>
+  Shared party shuttles and private vehicles for Red Rocks Amphitheatre concerts.
+  Live event data is powered by our internal Destination Command Center (DCC).
+</p>
+
+<!-- ============================
+     2026 EVENT SCHEDULE (LATENT)
+     IMPORTANT:
+     - This section exists NOW
+     - Content is injected dynamically
+     - Page updates automatically as DCC updates
+     ============================ -->
 <section id="schedule-2026">
   <h2>Confirmed 2026 Red Rocks Concerts</h2>
+
+  <!--
+    DCC will render events into this container.
+    If this div is empty, either:
+      - DCC returned no events
+      - Fetch failed (network/CORS)
+  -->
   <div id="dcc-events">
     <p><em>Loading confirmed 2026 events…</em></p>
   </div>
 </section>
 
+<!-- ============================
+     SUPPORTING CONTENT (STATIC)
+     ============================ -->
 <section>
   <h2>Red Rocks 2026 Summer Concert Schedule</h2>
 
   <p>
     Transportation availability is loaded in real time as events are announced.
     Booking opens automatically when inventory is available.
-  </p>
-
-  <p>
-    This page will update automatically as 2026 shows are confirmed.
-    Transportation bookings will open as soon as events are announced.
   </p>
 
   <ul>
@@ -56,82 +146,75 @@
   </ul>
 
   <p>
-    <strong>Planning ahead?</strong> Private vehicles and party buses can be reserved in advance.
+    <strong>Planning ahead?</strong>
+    Private Suburbans and group transportation can be reserved in advance.
   </p>
 </section>
 
-<!-- DCC EVENTS SCRIPT -->
+<!-- ======================================================
+     DCC → PARR EVENT FETCH + RENDER LOGIC
+     ======================================================
+     ARCHITECTURE RULES:
+     - DCC = Source of truth (events, dates)
+     - PARR = Renderer + commerce surface
+     - NO event guessing here
+     - NO CMS
+     - NO database
+     ====================================================== -->
 <script>
 (async () => {
-  const endpoint =
+  const DCC_ENDPOINT =
     "https://dcc-redrocks-2026.denverairportpickup.workers.dev/api/dcc/red-rocks/2026/events";
 
-  const el = document.getElementById("dcc-events");
+  const container = document.getElementById("dcc-events");
+  if (!container) return;
 
   try {
-    const res = await fetch(endpoint);
-    const data = await res.json();
+    const response = await fetch(DCC_ENDPOINT);
+    const data = await response.json();
 
-    if (!data.events || !data.events.length) {
-      el.innerHTML = "<p>No confirmed 2026 events yet.</p>";
+    if (!data.events || data.events.length === 0) {
+      container.innerHTML = "<p>No confirmed 2026 events yet.</p>";
       return;
     }
 
-    el.innerHTML = data.events.map(e => `
-      <div style="margin-bottom:20px">
-        <strong>${e.artist}</strong><br>
-        ${e.date} (${e.dayOfWeek})<br>
-        <a href="https://gosnotransportation58.rezdy.com/catalog" target="_blank">
-          <h2>BOOK YOUR RIDE – LIVE TEST</h2>
+    container.innerHTML = data.events.map(event => `
+      <div class="event-card">
+        <div class="event-artist">${event.artist}</div>
+        <div class="event-date">
+          ${event.date} (${event.dayOfWeek})
+        </div>
 
-        </a>
+        <!--
+          PRODUCT DECISION IS EXPLICIT:
+          - $59 Shared Party Shuttle (per seat)
+          - $499 Private Suburban (flat rate)
+          Routing only. Inventory handled later.
+        -->
+        <div class="booking-actions">
+          <a
+            class="btn btn-shuttle"
+            href="/book?product=shuttle&price=59&event=${encodeURIComponent(event.eventId)}&date=${encodeURIComponent(event.date)}"
+          >
+            $59 Party Shuttle
+          </a>
+
+          <a
+            class="btn btn-suburban"
+            href="/book?product=suburban&price=499&event=${encodeURIComponent(event.eventId)}&date=${encodeURIComponent(event.date)}"
+          >
+            $499 Private Suburban
+          </a>
+        </div>
       </div>
     `).join("");
 
-  } catch (err) {
-    el.innerHTML = "<p>Failed to load events.</p>";
-    console.error(err);
+  } catch (error) {
+    console.error("DCC fetch failed:", error);
+    container.innerHTML = "<p>Failed to load events.</p>";
   }
 })();
 </script>
 
 </body>
 </html>
-<script>
-(async () => {
-  const endpoint =
-    "https://dcc-redrocks-2026.denverairportpickup.workers.dev/api/dcc/red-rocks/2026/events";
-
-  const el = document.getElementById("dcc-events");
-
-  if (!el) {
-    console.error("dcc-events container not found");
-    return;
-  }
-
-  try {
-    const res = await fetch(endpoint);
-    const data = await res.json();
-
-    if (!data.events || !data.events.length) {
-      el.innerHTML = "<p>No confirmed 2026 events yet.</p>";
-      return;
-    }
-
-    el.innerHTML = data.events.map(e => `
-      <div style="margin-bottom:20px">
-        <strong>${e.artist}</strong><br>
-        ${e.date} (${e.dayOfWeek})<br>
-        <a href="https://gosnotransportation58.rezdy.com/catalog"
-           target="_blank">
-          Book Shuttle
-        </a>
-      </div>
-    `).join("");
-
-  } catch (err) {
-    console.error(err);
-    el.innerHTML = "<p>Failed to load events.</p>";
-  }
-})();
-</script>
