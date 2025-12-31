@@ -97,3 +97,41 @@
 
 </body>
 </html>
+<script>
+(async () => {
+  const endpoint =
+    "https://dcc-redrocks-2026.denverairportpickup.workers.dev/api/dcc/red-rocks/2026/events";
+
+  const el = document.getElementById("dcc-events");
+
+  if (!el) {
+    console.error("dcc-events container not found");
+    return;
+  }
+
+  try {
+    const res = await fetch(endpoint);
+    const data = await res.json();
+
+    if (!data.events || !data.events.length) {
+      el.innerHTML = "<p>No confirmed 2026 events yet.</p>";
+      return;
+    }
+
+    el.innerHTML = data.events.map(e => `
+      <div style="margin-bottom:20px">
+        <strong>${e.artist}</strong><br>
+        ${e.date} (${e.dayOfWeek})<br>
+        <a href="https://gosnotransportation58.rezdy.com/catalog"
+           target="_blank">
+          Book Shuttle
+        </a>
+      </div>
+    `).join("");
+
+  } catch (err) {
+    console.error(err);
+    el.innerHTML = "<p>Failed to load events.</p>";
+  }
+})();
+</script>
