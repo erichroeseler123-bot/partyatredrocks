@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Red Rocks Show | Party at Red Rocks</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0b0f1a;
+      color: #fff;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* LEFT SIDEBAR */
+    .sidebar {
+      width: 320px;
+      background: #070a12;
+      padding: 20px;
+      box-sizing: border-box;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      border-right: 1px solid #1a1f2e;
+    }
+
+    .sidebar h2 {
+      margin-top: 0;
+      font-size: 20px;
+    }
+
+    .price {
+      margin: 12px 0;
+      padding: 10px;
+      background: #11162a;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    /* MAIN CONTENT */
+    .content {
+      margin-left: 340px;
+      padding: 30px;
+      max-width: 900px;
+    }
+
+    .hero img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .artist {
+      font-size: 36px;
+      font-weight: 800;
+    }
+
+    .date {
+      font-size: 18px;
+      opacity: 0.85;
+      margin-bottom: 20px;
+    }
+
+    .book-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 14px 22px;
+      background: #e63946;
+      color: white;
+      font-weight: 700;
+      border-radius: 10px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h2>Book Transportation</h2>
+
+    <div class="price">$59 — Party Shuttle</div>
+    <div class="price">$499 — Private Suburban</div>
+
+    <p style="opacity:.7; font-size:14px;">
+      Prices per show. Inventory opens automatically when available.
+    </p>
+  </div>
+
+  <!-- MAIN -->
+  <div class="content">
+    <div id="show"></div>
+  </div>
+
+<script>
+(async function () {
+  const params = new URLSearchParams(window.location.search);
+  const eventId = params.get("eventId");
+
+  if (!eventId) {
+    document.getElementById("show").innerHTML =
+      "<h1>No event selected</h1><p>Missing eventId.</p>";
+    return;
+  }
+
+  const res = await fetch(
+    "https://dcc-redrocks-2026.denverairportpickup.workers.dev/api/dcc/red-rocks/2026/events"
+  );
+
+  const data = await res.json();
+  const event = data.events.find(e => e.eventId === eventId);
+
+  if (!event) {
+    document.getElementById("show").innerHTML =
+      "<h1>Event not found</h1><p>Invalid eventId.</p>";
+    return;
+  }
+
+  document.getElementById("show").innerHTML = `
+    <div class="hero">
+      <img src="${event.image}" alt="${event.artist}">
+    </div>
+    <div class="artist">${event.artist}</div>
+    <div class="date">${event.date} (${event.dayOfWeek})</div>
+
+    <a class="book-btn" href="#">
+      Book Shuttle for This Show
+    </a>
+  `;
+})();
+</script>
+
+</body>
+</html>
