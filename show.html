@@ -2,137 +2,210 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Red Rocks Show | Party at Red Rocks</title>
+  <title>Red Rocks Show | Party At Red Rocks</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <meta name="description" content="Book party shuttle or private suburban transportation to Red Rocks Amphitheatre concerts." />
+
+  <!-- BASIC STYLES -->
+  <link rel="stylesheet" href="styles.css" />
+
   <style>
-    body {
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #9ca3af;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.back-link:hover {
+  color: white;
+}
+
+    /* ====== LAYOUT ====== */
+<a href="/" class="back-link">← Back to 2026 Calendar</a>
+    
+body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #0b0f1a;
-      color: #fff;
+      background: #f7f7f8;
+      color: #111;
+    }
+
+    .layout {
       display: flex;
       min-height: 100vh;
     }
 
-    /* LEFT SIDEBAR */
+    /* ====== SIDEBAR ====== */
     .sidebar {
       width: 320px;
-      background: #070a12;
-      padding: 20px;
-      box-sizing: border-box;
-      position: fixed;
+      background: #0f172a;
+      color: white;
+      padding: 24px;
+      position: sticky;
       top: 0;
-      left: 0;
-      bottom: 0;
-      border-right: 1px solid #1a1f2e;
+      height: 100vh;
+      box-sizing: border-box;
     }
 
-    .sidebar h2 {
-      margin-top: 0;
+    .sidebar img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+
+    .sidebar h1 {
       font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .sidebar p {
+      opacity: 0.85;
+      margin: 4px 0;
     }
 
     .price {
-      margin: 12px 0;
-      padding: 10px;
-      background: #11162a;
-      border-radius: 8px;
-      font-weight: bold;
-    }
-
-    /* MAIN CONTENT */
-    .content {
-      margin-left: 340px;
-      padding: 30px;
-      max-width: 900px;
-    }
-
-    .hero img {
-      width: 100%;
-      border-radius: 12px;
-      margin-bottom: 20px;
-    }
-
-    .artist {
-      font-size: 36px;
-      font-weight: 800;
-    }
-
-    .date {
-      font-size: 18px;
-      opacity: 0.85;
-      margin-bottom: 20px;
-    }
-
-    .book-btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 14px 22px;
-      background: #e63946;
-      color: white;
-      font-weight: 700;
+      margin-top: 16px;
+      padding: 12px;
+      background: #111827;
       border-radius: 10px;
-      text-decoration: none;
+    }
+
+    .price span {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .cta {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin-top: 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .cta.shuttle {
+      background: #ef4444;
+      color: white;
+    }
+
+    .cta.suburban {
+      background: #1f2933;
+      color: white;
+    }
+
+    /* ====== CONTENT ====== */
+    .content {
+      flex: 1;
+      padding: 40px;
+      box-sizing: border-box;
+    }
+
+    .content h2 {
+      margin-top: 0;
+    }
+
+    .notice {
+      background: #fff3cd;
+      border: 1px solid #ffeeba;
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 24px;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- SIDEBAR -->
-  <div class="sidebar">
+<div class="layout">
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar" id="sidebar">
+    <p>Loading show…</p>
+  </aside>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="content">
     <h2>Book Transportation</h2>
 
-    <div class="price">$59 — Party Shuttle</div>
-    <div class="price">$499 — Private Suburban</div>
-
-    <p style="opacity:.7; font-size:14px;">
-      Prices per show. Inventory opens automatically when available.
-    </p>
-  </div>
-
-  <!-- MAIN -->
-  <div class="content">
-    <div id="show"></div>
-  </div>
-
-<script>
-(async function () {
-  const params = new URLSearchParams(window.location.search);
-  const eventId = params.get("eventId");
-
-  if (!eventId) {
-    document.getElementById("show").innerHTML =
-      "<h1>No event selected</h1><p>Missing eventId.</p>";
-    return;
-  }
-
-  const res = await fetch(
-    "https://dcc-redrocks-2026.denverairportpickup.workers.dev/api/dcc/red-rocks/2026/events"
-  );
-
-  const data = await res.json();
-  const event = data.events.find(e => e.eventId === eventId);
-
-  if (!event) {
-    document.getElementById("show").innerHTML =
-      "<h1>Event not found</h1><p>Invalid eventId.</p>";
-    return;
-  }
-
-  document.getElementById("show").innerHTML = `
-    <div class="hero">
-      <img src="${event.image}" alt="${event.artist}">
+    <div class="notice">
+      Transportation inventory opens automatically when events are confirmed.
+      Shuttle seats and private vehicles sell out quickly for weekends.
     </div>
-    <div class="artist">${event.artist}</div>
-    <div class="date">${event.date} (${event.dayOfWeek})</div>
 
-    <a class="book-btn" href="#">
-      Book Shuttle for This Show
-    </a>
-  `;
-})();
+    <p>
+      Choose your ride on the left.  
+      Your show details remain visible while booking.
+    </p>
+
+    <!-- Booking embeds / checkout flow goes here later -->
+  </main>
+
+</div>
+
+<!-- ================= SCRIPT ================= -->
+<script>
+/*
+  show.html
+  ----------
+  This page:
+  - Reads eventId from URL
+  - Fetches live event data from DCC
+  - Renders a fixed sidebar
+  - Does NOT load the calendar
+*/
+
+const params = new URLSearchParams(window.location.search);
+const eventId = params.get("eventId");
+
+if (!eventId) {
+  document.getElementById("sidebar").innerHTML =
+    "<p>Error: Missing event ID.</p>";
+  throw new Error("Missing eventId");
+}
+
+const API_URL =
+  "https://dcc-redrocks-2026.denverairportpickup.workers.dev/api/dcc/red-rocks/2026/events";
+
+fetch(API_URL)
+  .then(res => res.json())
+  .then(data => {
+    const event = data.events.find(e => e.eventId === eventId);
+
+    if (!event) {
+      document.getElementById("sidebar").innerHTML =
+        "<p>Event not found.</p>";
+      return;
+    }
+
+    document.getElementById("sidebar").innerHTML = `
+      <img src="${event.image}" alt="${event.artist}">
+      <h1>${event.artist}</h1>
+      <p>${event.date} (${event.dayOfWeek})</p>
+      <p>Red Rocks Amphitheatre</p>
+
+      <div class="price">
+        <span>$59 Party Shuttle (per person)</span>
+        <button class="cta shuttle">Book Shuttle</button>
+
+        <span>$499 Private Suburban</span>
+        <button class="cta suburban">Book Suburban</button>
+      </div>
+    `;
+  })
+  .catch(err => {
+    console.error(err);
+    document.getElementById("sidebar").innerHTML =
+      "<p>Failed to load show data.</p>";
+  });
 </script>
 
 </body>
