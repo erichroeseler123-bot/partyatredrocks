@@ -1,15 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style>
-  body { background: red !important; }
-</style>
- 
- <meta charset="UTF-8" />
+  <meta charset="UTF-8" />
   <title>Red Rocks Party Shuttle</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- IMPORTANT: absolute path -->
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
@@ -54,39 +48,37 @@
     <div id="calendar" class="calendar-grid"></div>
   </main>
 
-  <!-- CALENDAR GENERATOR (DOM FIRST) -->
+  <!-- CALENDAR GRID BUILDER (RUNS FIRST) -->
   <script>
-    const calendar = document.getElementById("calendar");
+    (function () {
+      const calendar = document.getElementById("calendar");
 
-    const year = 2026;
-    const monthIndex = 4; // May (0-based)
-    const month = "05";
+      const year = 2026;
+      const monthIndex = 4; // May (0-based)
+      const month = "05";
 
-    const firstDay = new Date(year, monthIndex, 1).getDay();
-    const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
+      const firstDay = new Date(year, monthIndex, 1).getDay();
+      const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
 
-    // Empty offset cells
-    for (let i = 0; i < firstDay; i++) {
-      const spacer = document.createElement("div");
-      spacer.className = "day spacer";
-      calendar.appendChild(spacer);
-    }
+      // Offset cells
+      for (let i = 0; i < firstDay; i++) {
+        const spacer = document.createElement("div");
+        spacer.className = "day spacer";
+        calendar.appendChild(spacer);
+      }
 
-    // Actual days
-    for (let day = 1; day <= daysInMonth; day++) {
-      const el = document.createElement("div");
-      el.className = "day";
-      el.dataset.date = `${year}-${month}-${String(day).padStart(2, "0")}`;
-      el.innerHTML = `<span class="day-number">${day}</span>`;
-el.addEventListener("click", () => {
-  window.location.href = `/show.html?date=${el.dataset.date}`;
-});
-
-      calendar.appendChild(el);
-    }
+      // Actual days
+      for (let day = 1; day <= daysInMonth; day++) {
+        const el = document.createElement("div");
+        el.className = "day";
+        el.dataset.date = \`\${year}-\${month}-\${String(day).padStart(2, "0")}\`;
+        el.innerHTML = \`<span class="day-number">\${day}</span>\`;
+        calendar.appendChild(el);
+      }
+    })();
   </script>
 
-  <!-- EVENT BINDER -->
+  <!-- EVENT BINDER (RUNS AFTER GRID EXISTS) -->
   <script src="/calendar.js"></script>
 
 </body>
