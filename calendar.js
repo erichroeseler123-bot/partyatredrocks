@@ -1,109 +1,178 @@
-(async function () {
-  const calendar = document.getElementById("calendar");
-  const preview = document.getElementById("dcc-preview");
-  const label = document.getElementById("month-label");
+// ===============================
+// DCC Red Rocks Calendar Engine
+// ===============================
 
-  if (!calendar || !preview || !label) {
-    console.error("Missing required DOM elements");
-    return;
-  }
+const calendar = document.getElementById("calendar");
+const preview = document.getElementById("dcc-preview");
+const label = document.getElementById("month-label");
+const prevBtn = document.getElementById("prev-month");
+const nextBtn = document.getElementById("next-month");
 
-  let lockedEventId = null;
+let events = [];
+let lockedEventId = null;
 
+// CONFIG
+let year = 2026;
+let month = 4; // May (0-indexed)
+
+// ===============================
+// Fetch Events
+// ===============================
+
+async function loadEvents() {
   const res = await fetch(
-    "https://dcc-redrocks-2026.denverairportpickup.workers.dev/api/dcc/red-rocks/2026/events"
+    "https://dcc-redrocks-2026.denverairportpickup.workers.dev/api/dcc/events"
   );
   const data = await res.json();
-  const events = data.events || [];
+  events = data.events || [];
+  render();
+}
 
-  let year = 2026;
-  let month = 4; // May (0-based)
+// ===============================
+// Sidebar Logic
+// ===============================
 
-  function updateSidebar(event, locked = false) {
-    preview.innerHTML = `
-      <div class="dcc-event ${locked ? "locked" : ""}">
-        <h3>${event.artist}</h3>
-        <div class="dcc-date">${event.date} (${event.dayOfWeek})</div>
-        <div class="dcc-venue">Red Rocks Amphitheatre</div>
+function updateSidebar(ev, locked = false) {
+  if (!preview || !ev) return;
 
-        <a class="dcc-link" href="/show.html?eventId=${event.eventId}">
-          View show →
-        </a>
+  preview.classList.add("active");
+  preview.innerHTML = `
+    <strong>${ev.artist}</strong>
+    <div>${new Date(ev.date).toLocaleDateString()}</div>
+    <div>Red Rocks Amphitheatre</div>
+    <a href="/show.html?eventId=${ev.eventId}">View show →</a>
+  `;
 
-        <a class="dcc-ticket" href="${event.ticketUrl}" target="_blank">
-          Buy tickets →
-        </a>
-      </div>
-    `;
-  }
+  if (locked) lockedEventId = ev.eventId;
+}
 
-  function clearSidebar() {
-    if (lockedEventId) return;
-    preview.innerHTML = `<div class="dcc-muted">Hover a show to preview</div>`;
-  }
+function clearSidebar() {
+  if (lockedEventId) return;
 
-  function render() {
-    calendar.innerHTML = "";
+  preview.classList.remove("active");
+  preview.innerHTML = `
+    <em>Hover a show on the calendar<br>to preview details.</em>
+  `;
+}
 
-    const first = new Date(year, month, 1);
-    const last = new Date(year, month + 1, 0);
-    const offset = first.getDay();
+// ===============================
+// Calendar Render
+// ===============================
 
-    label.textContent = first.toLocaleString("en-US", {
-      month: "long",
-      year: "numeric",
-    });
+function render() {
+  calendar.innerHTML = "";
 
-    const byDay = {};
-    events.forEach((e) => {
-      const d = new Date(e.date);
-      if (d.getMonth() === month) {
-        const day = d.getDate();
-        if (!byDay[day]) byDay[day] = [];
-        byDay[day].push(e);
-      }
-    });
+  const first = new Date(year, month, 1);
+  const last = new Date(year, month + 1, 0);
+  const offset = first.getDay();
 
-    // Empty cells before month start
-    for (let i = 0; i < offset; i++) {
-      const empty = document.createElement("div");
-      empty.className = "calendar-empty";
-      calendar.appendChild(empty);
+  label.textContent = first.toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
+  });
+
+  // Group events by day
+  const byDay = {};
+  events.forEach(ev => {
+    const d = new Date(ev.date);
+    if (d.getFullYear() === year && d.getMonth() === month) {
+      const day = d.getDate();
+      if (!byDay[day]) byDay[day] = [];
+      byDay[day].push(ev);
     }
+  });
 
-    // Actual days
-    for (let d = 1; d <= last.getDate(); d++) {
-      const cell = document.createElement("div");
-      cell.className = "calendar-day";
+  // Empty offset cells
+  for (let i = 0; i < offset; i++) {
+    const empty = document.createElement("div");
+    empty.className = "day empty";
+    calendar.appendChild(empty);
+  }
 
-      cell.innerHTML = `<div class="day-number">${d}</div>`;
+  // Day cells
+  for (let d = 1; d <= last.getDate(); d++) {
+    const cell = document.createElement("div");
+    cell.className = "day";
 
-      (byDay[d] || []).forEach((event) => {
-        const item = document.createElement("div");
-        item.className = "calendar-event";
-        item.textContent = event.artist;
+    const num = document.createElement("div");
+    num.className = "num";
+    num.textContent = d;
+    cell.appendChild(num);
 
-        // 🔥 THIS IS WHAT YOU WERE ASKING ABOUT
-        item.addEventListener("mouseenter", () => {
-          if (!lockedEventId) updateSidebar(event);
+    const eventsForDay = byDay[d];
+
+    if (eventsForDay && eventsForDay.length) {
+      cell.classList.add("has-event");
+
+      eventsForDay.forEach(ev => {
+        const link = document.createElement("a");
+        link.href = `/show.html?eventId=${ev.eventId}`;
+        link.textContent = ev.artist;
+        link.className = "artist";
+        cell.appendChild(link);
+
+        // Hover / click wiring
+        cell.addEventListener("mouseenter", () => {
+          if (!lockedEventId) updateSidebar(ev);
         });
 
-        item.addEventListener("mouseleave", () => {
+        cell.addEventListener("mouseleave", () => {
           clearSidebar();
         });
 
-        item.addEventListener("click", () => {
-          lockedEventId = event.eventId;
-          updateSidebar(event, true);
-          window.location.href = `/show.html?eventId=${event.eventId}`;
+        cell.addEventListener("click", () => {
+          updateSidebar(ev, true);
         });
-
-        cell.appendChild(item);
       });
-
-      calendar.appendChild(cell);
     }
-  }
 
+    calendar.appendChild(cell);
+  }
+}
+
+// ===============================
+// Month Navigation
+// ===============================
+
+prevBtn.addEventListener("click", () => {
+  month--;
+  if (month < 0) {
+    month = 11;
+    year--;
+  }
+  lockedEventId = null;
+  clearSidebar();
   render();
-})();
+});
+
+nextBtn.addEventListener("click", () => {
+  month++;
+  if (month > 11) {
+    month = 0;
+    year++;
+  }
+  lockedEventId = null;
+  clearSidebar();
+  render();
+});
+
+// ===============================
+// Optional: Auto-select NEXT show
+// (INTENTIONALLY OFF)
+// ===============================
+
+// function autoSelectNextShow() {
+//   const now = new Date();
+//   const next = events
+//     .map(ev => ({ ...ev, dateObj: new Date(ev.date) }))
+//     .filter(ev => ev.dateObj > now)
+//     .sort((a, b) => a.dateObj - b.dateObj)[0];
+//
+//   if (next) updateSidebar(next, true);
+// }
+
+// ===============================
+// Boot
+// ===============================
+
+loadEvents();
