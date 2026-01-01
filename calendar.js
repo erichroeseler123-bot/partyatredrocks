@@ -1,128 +1,61 @@
 (async function () {
-  console.log("calendar.js loaded");
-
   const calendar = document.getElementById("calendar");
-  const preview = document.getElementById("dcc-preview");
-  const label = document.getElementById("month-label");
-  const prevBtn = document.getElementById("prevMonth");
-  const nextBtn = document.getElementById("nextMonth");
-
-  if (!calendar || !label) {
-    console.error("Calendar DOM missing");
+  if (!calendar) {
+    console.error("Calendar element missing");
     return;
   }
 
-  let year = 2026;
-  let month = 4; // May (0-based)
-  let events = [];
-  let lockedEventId = null;
+  // BUILD GRID
+  const year = 2026;
+  const monthIndex = 4; // May
+  const month = "05";
 
-  async function loadEvents() {
-    const res = await fetch(
-      "https://dcc-redrocks-2026.denverairportpickup.workers.dev/api/dcc/redrocks"
+  const firstDay = new Date(year, monthIndex, 1).getDay();
+  const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
+
+  for (let i = 0; i < firstDay; i++) {
+    const spacer = document.createElement("div");
+    spacer.className = "day spacer";
+    calendar.appendChild(spacer);
+  }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const day = document.createElement("div");
+    day.className = "day";
+    day.dataset.date = `${year}-${month}-${String(d).padStart(2, "0")}`;
+    day.innerHTML = `<span class="day-number">${d}</span>`;
+    calendar.appendChild(day);
+  }
+
+  // FETCH EVENTS
+  const res = await fetch(
+    "https://dcc-redrocks-2026.denverairportpickup.workers.dev/events/redrocks"
+  );
+  const data = await res.json();
+
+  data.events.forEach(ev => {
+    const el = document.querySelector(
+      `.day[data-date="${ev.date}"]`
     );
-    const data = await res.json();
-    events = data.events || [];
-  }
+    if (!el) return;
 
-  function render() {
-    calendar.innerHTML = "";
-
-    const first = new Date(year, month, 1);
-    const last = new Date(year, month + 1, 0);
-    const offset = first.getDay();
-
-    label.textContent = first.toLocaleString("en-US", {
-      month: "long",
-      year: "numeric",
-    });
-
-    // Empty offset cells
-    for (let i = 0; i < offset; i++) {
-      const empty = document.createElement("div");
-      empty.className = "day empty";
-      calendar.appendChild(empty);
-    }
-
-    // Group events by day
-    const byDay = {};
-    events.forEach((e) => {
-      const d = new Date(e.date);
-      if (d.getFullYear() === year && d.getMonth() === month) {
-        const day = d.getDate();
-        byDay[day] = byDay[day] || [];
-        byDay[day].push(e);
-      }
-    });
-
-    for (let d = 1; d <= last.getDate(); d++) {
-      const cell = document.createElement("div");
-      cell.className = "day";
-      cell.innerHTML = `<div class="num">${d}</div>`;
-
-      (byDay[d] || []).forEach((event) => {
-        const item = document.createElement("div");
-        item.className = "event";
-        item.textContent = event.artist;
-
-        item.addEventListener("mouseenter", () => {
-          if (!lockedEventId) updateSidebar(event);
-        });
-
-        item.addEventListener("click", () => {
-          lockedEventId = event.eventId;
-          updateSidebar(event, true);
-        });
-
-        cell.appendChild(item);
-      });
-
-      calendar.appendChild(cell);
-    }
-  }
-
-  function updateSidebar(event, locked = false) {
-    if (!preview) return;
-
-    preview.innerHTML = `
-      <strong>${event.artist}</strong><br/>
-      ${new Date(event.date).toDateString()}<br/>
-      Red Rocks Amphitheatre<br/><br/>
-      <a href="${event.ticketUrl || "#"}" target="_blank">
-        View on Ticketmaster →
-      </a>
+    el.classList.add("has-show");
+    el.innerHTML += `
+      <div class="show">
+        <strong>${ev.artists.join(", ") || ev.name}</strong>
+        <span>${ev.time || ""}</span>
+      </div>
     `;
-  }
 
-  function autoSelectNextShow() {
-    const now = new Date();
-    const next = events
-      .map((e) => ({ ...e, t: new Date(e.date) }))
-      .filter((e) => e.t > now)
-      .sort((a, b) => a.t - b.t)[0];
+    el.onmouseenter = () => {
+      document.getElementById("dcc-preview").innerHTML = `
+        <strong>${ev.artists.join(", ") || ev.name}</strong><br/>
+        <span>${ev.date} · ${ev.time || ""}</span>
+      `;
+    };
 
-    if (next) updateSidebar(next, true);
-  }
-
-  prevBtn?.addEventListener("click", () => {
-    month--;
-    if (month < 0) {
-      month = 11;
-      year--;
-    }
-    render();
+    el.onclick = () => {
+      window.location.href = `/show.html?date=${ev.date}`;
+    };
   });
-
-  nextBtn?.addEventListener("click", () => {
-    month++;
-    if (month > 11) {
-      month = 0;
-      year++;
-    }
-    render();
-  });
-
-  await loadEvents();
-  render();
-  autoSelectNextShow();
 })();

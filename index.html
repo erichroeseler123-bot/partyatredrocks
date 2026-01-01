@@ -8,7 +8,6 @@
 </head>
 <body>
 
-  <!-- LEFT SIDEBAR -->
   <aside id="dcc-sidebar">
     <h2>DCC · Red Rocks</h2>
     <div class="status">LIVE EVENT DATA</div>
@@ -24,61 +23,27 @@
     </a>
   </aside>
 
-  <!-- MAIN CONTENT -->
   <main id="main">
     <h1>Red Rocks Party Shuttle</h1>
     <p class="tagline">Ride together. Pre-game hard. Get home safe.</p>
 
     <h2>2026 Red Rocks Concert Calendar</h2>
 
-    <!-- MONTH HEADER -->
     <div class="calendar-header">
       <button id="prev-month">‹</button>
       <strong>May 2026</strong>
       <button id="next-month">›</button>
     </div>
 
-    <!-- DAY LABELS -->
     <div class="calendar-labels">
       <span>Sun</span><span>Mon</span><span>Tue</span>
       <span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
     </div>
 
-    <!-- CALENDAR GRID -->
     <div id="calendar" class="calendar-grid"></div>
   </main>
 
-  <!-- CALENDAR GRID BUILDER (RUNS FIRST) -->
-  <script>
-    (function () {
-      const calendar = document.getElementById("calendar");
-
-      const year = 2026;
-      const monthIndex = 4; // May (0-based)
-      const month = "05";
-
-      const firstDay = new Date(year, monthIndex, 1).getDay();
-      const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
-
-      // Offset cells
-      for (let i = 0; i < firstDay; i++) {
-        const spacer = document.createElement("div");
-        spacer.className = "day spacer";
-        calendar.appendChild(spacer);
-      }
-
-      // Actual days
-      for (let day = 1; day <= daysInMonth; day++) {
-        const el = document.createElement("div");
-        el.className = "day";
-        el.dataset.date = \`\${year}-\${month}-\${String(day).padStart(2, "0")}\`;
-        el.innerHTML = \`<span class="day-number">\${day}</span>\`;
-        calendar.appendChild(el);
-      }
-    })();
-  </script>
-
-  <!-- EVENT BINDER (RUNS AFTER GRID EXISTS) -->
+  <!-- All logic lives in calendar.js -->
   <script src="/calendar.js"></script>
 
 </body>
