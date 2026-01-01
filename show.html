@@ -4,8 +4,6 @@
   <meta charset="UTF-8" />
   <title>Show · Party At Red Rocks</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- Absolute path required -->
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
@@ -50,39 +48,47 @@
   </main>
 
   <script>
-    // SAME EVENT MAP AS calendar.js (temporary single source of truth)
-    const EVENTS = {
-      "2026-05-03": { artist: "Odesza", time: "6:30 PM" },
-      "2026-05-07": { artist: "Zeds Dead", time: "7:00 PM" },
-      "2026-05-15": { artist: "Kacey Musgraves", time: "6:00 PM" }
-    };
+    (async () => {
+      const date = new URLSearchParams(location.search).get("date");
+      if (!date) {
+        document.getElementById("show-title").textContent = "No date specified";
+        return;
+      }
 
-    const params = new URLSearchParams(window.location.search);
-    const date = params.get("date");
+      const res = await fetch(
+        "https://dcc-redrocks-2026.denverairportpickup.workers.dev/events/redrocks"
+      );
 
-    if (!date || !EVENTS[date]) {
-      document.getElementById("show-title").textContent =
-        "Show not found";
-      document.getElementById("dcc-preview").innerHTML =
-        "<div class='placeholder'>Invalid or missing date</div>";
-    } else {
-      const ev = EVENTS[date];
+      if (!res.ok) {
+        document.getElementById("show-title").textContent =
+          "Failed to load event data";
+        return;
+      }
 
-      // Main content
-      document.getElementById("show-title").textContent = ev.artist;
+      const data = await res.json();
+      const ev = data.events.find(e => e.date === date);
+
+      if (!ev) {
+        document.getElementById("show-title").textContent = "Show not found";
+        return;
+      }
+
+      const title = ev.artists.length
+        ? ev.artists.join(", ")
+        : ev.name;
+
+      document.getElementById("show-title").textContent = title;
       document.getElementById("show-date").textContent =
-        `${date} · ${ev.time}`;
+        \`\${ev.date} · \${ev.time || ""}\`;
 
-      // Sidebar
-      document.getElementById("dcc-preview").innerHTML = `
-        <strong>${ev.artist}</strong><br />
-        <span>${date} · ${ev.time}</span>
-      `;
+      document.getElementById("dcc-preview").innerHTML = \`
+        <strong>\${title}</strong><br/>
+        <span>\${ev.date} · \${ev.time || ""}</span>
+      \`;
 
-      // Shuttle link (future-proof)
       document.getElementById("book-shuttle").href =
-        `/book.html?date=${encodeURIComponent(date)}`;
-    }
+        \`/book.html?date=\${ev.date}\`;
+    })();
   </script>
 
 </body>
