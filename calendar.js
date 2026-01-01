@@ -1,41 +1,128 @@
-<div id="dcc-sidebar">
-  <h2>DCC · Red Rocks</h2>
-  <div class="status">Live Event Data</div>
+(async function () {
+  console.log("calendar.js loaded");
 
-  <div id="dcc-preview">
-    <div style="opacity:.6">Hover a show to preview details</div>
-  </div>
+  const calendar = document.getElementById("calendar");
+  const preview = document.getElementById("dcc-preview");
+  const label = document.getElementById("month-label");
+  const prevBtn = document.getElementById("prevMonth");
+  const nextBtn = document.getElementById("nextMonth");
 
-  <a
-    class="dcc-link"
-    href="https://destinationcommandcenter.com"
-    target="_blank"
-  >
-    Open Destination Command Center →
-  </a>
-</div>
+  if (!calendar || !label) {
+    console.error("Calendar DOM missing");
+    return;
+  }
 
-<div class="main">
-  <h1>Red Rocks Party Shuttle</h1>
-  <div class="subtitle">Ride together. Pre-game hard. Get home safe.</div>
+  let year = 2026;
+  let month = 4; // May (0-based)
+  let events = [];
+  let lockedEventId = null;
 
-  <div class="calendar-header">
-    <div id="month-label"></div>
-    <div class="calendar-nav">
-      <button id="prev-month">←</button>
-      <button id="next-month">→</button>
-    </div>
-  </div>
+  async function loadEvents() {
+    const res = await fetch(
+      "https://dcc-redrocks-2026.denverairportpickup.workers.dev/api/dcc/redrocks"
+    );
+    const data = await res.json();
+    events = data.events || [];
+  }
 
-  <div class="weekdays">
-    <div>Sun</div><div>Mon</div><div>Tue</div>
-    <div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
-  </div>
+  function render() {
+    calendar.innerHTML = "";
 
-  <div id="calendar"></div>
+    const first = new Date(year, month, 1);
+    const last = new Date(year, month + 1, 0);
+    const offset = first.getDay();
 
-  <div class="footer-note">
-    Independent transportation service. Not affiliated with Red Rocks Amphitheatre.
-    Event data powered by DCC.
-  </div>
-</div>
+    label.textContent = first.toLocaleString("en-US", {
+      month: "long",
+      year: "numeric",
+    });
+
+    // Empty offset cells
+    for (let i = 0; i < offset; i++) {
+      const empty = document.createElement("div");
+      empty.className = "day empty";
+      calendar.appendChild(empty);
+    }
+
+    // Group events by day
+    const byDay = {};
+    events.forEach((e) => {
+      const d = new Date(e.date);
+      if (d.getFullYear() === year && d.getMonth() === month) {
+        const day = d.getDate();
+        byDay[day] = byDay[day] || [];
+        byDay[day].push(e);
+      }
+    });
+
+    for (let d = 1; d <= last.getDate(); d++) {
+      const cell = document.createElement("div");
+      cell.className = "day";
+      cell.innerHTML = `<div class="num">${d}</div>`;
+
+      (byDay[d] || []).forEach((event) => {
+        const item = document.createElement("div");
+        item.className = "event";
+        item.textContent = event.artist;
+
+        item.addEventListener("mouseenter", () => {
+          if (!lockedEventId) updateSidebar(event);
+        });
+
+        item.addEventListener("click", () => {
+          lockedEventId = event.eventId;
+          updateSidebar(event, true);
+        });
+
+        cell.appendChild(item);
+      });
+
+      calendar.appendChild(cell);
+    }
+  }
+
+  function updateSidebar(event, locked = false) {
+    if (!preview) return;
+
+    preview.innerHTML = `
+      <strong>${event.artist}</strong><br/>
+      ${new Date(event.date).toDateString()}<br/>
+      Red Rocks Amphitheatre<br/><br/>
+      <a href="${event.ticketUrl || "#"}" target="_blank">
+        View on Ticketmaster →
+      </a>
+    `;
+  }
+
+  function autoSelectNextShow() {
+    const now = new Date();
+    const next = events
+      .map((e) => ({ ...e, t: new Date(e.date) }))
+      .filter((e) => e.t > now)
+      .sort((a, b) => a.t - b.t)[0];
+
+    if (next) updateSidebar(next, true);
+  }
+
+  prevBtn?.addEventListener("click", () => {
+    month--;
+    if (month < 0) {
+      month = 11;
+      year--;
+    }
+    render();
+  });
+
+  nextBtn?.addEventListener("click", () => {
+    month++;
+    if (month > 11) {
+      month = 0;
+      year++;
+    }
+    render();
+  });
+
+  await loadEvents();
+  render();
+  autoSelectNextShow();
+})();
