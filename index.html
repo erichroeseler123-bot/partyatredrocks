@@ -4,48 +4,78 @@
   <meta charset="UTF-8" />
   <title>Red Rocks Party Shuttle</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+
 <body>
+
   <div class="layout">
 
-    <!-- DCC SIDEBAR -->
-    <aside class="sidebar" id="dccSidebar">
+    <!-- ========================= -->
+    <!-- DCC SIDEBAR (LEFT) -->
+    <!-- ========================= -->
+    <aside class="sidebar">
       <h2>DCC · Red Rocks</h2>
+      <div class="dcc-status">Live Event Data</div>
 
-      <div class="dcc-block">
-        <strong>Status</strong>
-        <p>Live event data</p>
+      <div id="dcc-preview" class="dcc-preview">
+        <div class="dcc-muted">
+          Hover a show on the calendar<br />
+          to preview details
+        </div>
       </div>
 
-      <div class="dcc-block" id="dccPreview">
-        <p>Hover a show to preview</p>
-      </div>
-
-      <hr />
-
-      <a href="https://destinationcommandcenter.com" target="_blank">
-        Open DCC →
+      <a
+        href="https://destinationcommandcenter.com"
+        target="_blank"
+        class="dcc-link-out"
+      >
+        Open Destination Command Center →
       </a>
     </aside>
 
+    <!-- ========================= -->
     <!-- MAIN CONTENT -->
+    <!-- ========================= -->
     <main class="content">
-      <h1>Red Rocks Party Shuttle</h1>
-      <p>Ride together. Pre-game hard. Get home safe.</p>
 
-      <h2>2026 Red Rocks Concert Calendar</h2>
+      <header class="hero">
+        <h1>Red Rocks Party Shuttle</h1>
+        <p>Ride together. Pre-game hard. Get home safe.</p>
+      </header>
 
-      <div id="calendar" class="calendar-grid">
-        <p>Loading events…</p>
+      <section class="calendar-header">
+        <h2>2026 Red Rocks Concert Calendar</h2>
+        <div id="month-label" class="month-label"></div>
+      </section>
+
+      <!-- Weekday labels -->
+      <div class="weekday-row">
+        <div>Sun</div>
+        <div>Mon</div>
+        <div>Tue</div>
+        <div>Wed</div>
+        <div>Thu</div>
+        <div>Fri</div>
+        <div>Sat</div>
       </div>
-    </main>
 
+      <!-- Calendar grid -->
+      <div id="calendar" class="calendar-grid"></div>
+
+      <footer class="footer-note">
+        Independent transportation service.<br />
+        Not affiliated with Red Rocks Amphitheatre.<br />
+        Event data powered by DCC.
+      </footer>
+
+    </main>
   </div>
 
+  <!-- Calendar Logic -->
   <script src="/calendar.js"></script>
+
 </body>
-
-  <!-- Main styles -->
-  <link rel="stylesheet" href="./styles.css" />
-</head>
-
 </html>
