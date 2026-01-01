@@ -3,68 +3,57 @@
 <head>
   <meta charset="UTF-8" />
   <title>Red Rocks Party Shuttle</title>
-
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Ride together to Red Rocks. Live concert calendar powered by DCC." />
 
-  <link rel="stylesheet" href="/styles.css" />
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <!-- App Shell -->
-  <div class="app">
+  <!-- ============================= -->
+  <!-- DCC SIDEBAR -->
+  <!-- ============================= -->
+  <aside id="dcc-sidebar">
+    <h2>DCC · Red Rocks</h2>
+    <div class="status">Live Event Data</div>
 
-    <!-- =========================
-         DCC SIDEBAR
-    ========================== -->
-    <aside id="dcc-sidebar">
-      <h2>DCC · Red Rocks</h2>
-
-      <div class="status">Live Event Data</div>
-
-      <div id="dcc-preview">
-        <div class="preview-placeholder">
-          Hover a show on the calendar<br />
-          to preview details
-        </div>
+    <div id="dcc-preview">
+      <div class="placeholder">
+        Hover a show on the calendar to preview details
       </div>
+    </div>
 
-      <a
-        class="dcc-link"
-        href="https://destinationcommandcenter.com"
-        target="_blank"
-        rel="noopener"
-      >
-        Open Destination Command Center →
-      </a>
-    </aside>
+    <a
+      class="dcc-link"
+      href="https://destinationcommandcenter.com"
+      target="_blank"
+      rel="noopener"
+    >
+      Open Destination Command Center →
+    </a>
+  </aside>
 
-    <!-- =========================
-         MAIN CONTENT
-    ========================== -->
-    <main class="main">
+  <!-- ============================= -->
+  <!-- MAIN CONTENT -->
+  <!-- ============================= -->
+  <main id="main">
 
-      <!-- Header -->
-      <header class="page-header">
-        <h1>Red Rocks Party Shuttle</h1>
-        <p class="tagline">
-          Ride together. Pre-game hard. Get home safe.
-        </p>
-      </header>
+    <header class="hero">
+      <h1>Red Rocks Party Shuttle</h1>
+      <p>Ride together. Pre-game hard. Get home safe.</p>
+    </header>
 
-      <!-- Calendar Title -->
-      <h2 class="calendar-title">
-        2026 Red Rocks Concert Calendar
-      </h2>
+    <section class="calendar-section">
+      <h2>2026 Red Rocks Concert Calendar</h2>
 
       <!-- Month Navigation -->
-      <div class="calendar-header">
-        <button id="prevMonth" aria-label="Previous Month">←</button>
+      <div class="month-nav">
+        <button id="prev-month" aria-label="Previous month">←</button>
         <div id="month-label"></div>
-        <button id="nextMonth" aria-label="Next Month">→</button>
+        <button id="next-month" aria-label="Next month">→</button>
       </div>
 
-      <!-- Day Labels -->
+      <!-- Weekday Labels -->
       <div class="weekday-row">
         <div>Sun</div>
         <div>Mon</div>
@@ -77,19 +66,20 @@
 
       <!-- Calendar Grid -->
       <div id="calendar"></div>
+    </section>
 
-      <!-- Footer -->
-      <footer class="footer">
-        <div>Independent transportation service.</div>
-        <div>Not affiliated with Red Rocks Amphitheatre.</div>
-        <div>Event data powered by DCC.</div>
-      </footer>
+    <footer class="legal">
+      <p>Independent transportation service.</p>
+      <p>Not affiliated with Red Rocks Amphitheatre.</p>
+      <p>Event data powered by DCC.</p>
+    </footer>
 
-    </main>
-  </div>
+  </main>
 
-  <!-- Calendar Logic -->
-  <script src="/calendar.js" defer></script>
+  <!-- ============================= -->
+  <!-- SCRIPTS -->
+  <!-- ============================= -->
+  <script src="calendar.js" defer></script>
 
 </body>
 </html>
