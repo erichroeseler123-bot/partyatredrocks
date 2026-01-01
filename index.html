@@ -2,227 +2,66 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Red Rocks Party Shuttle | Party At Red Rocks</title>
+  <title>Red Rocks Party Shuttle</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Party shuttle transportation to Red Rocks Amphitheatre. $59 shared shuttles and $499 private Suburbans. Live 2026 concert calendar." />
 
-  <!-- Schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TransportationService",
-    "name": "Party At Red Rocks",
-    "areaServed": {
-      "@type": "Place",
-      "name": "Red Rocks Amphitheatre"
-    },
-    "offers": [
-      { "@type": "Offer", "price": "59", "priceCurrency": "USD" },
-      { "@type": "Offer", "price": "499", "priceCurrency": "USD" }
-    ]
-  }
-  </script>
-
-  <style>
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #fff;
-      color: #111;
-    }
-
-    header {
-      background: radial-gradient(circle at top, #222, #000);
-      color: #fff;
-      padding: 80px 20px;
-      text-align: center;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 42px;
-    }
-
-    header p {
-      opacity: 0.8;
-    }
-
-    main {
-      display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 24px;
-      padding: 24px;
-      max-width: 1400px;
-      margin: auto;
-    }
-
-    aside {
-      border-right: 1px solid #eee;
-      padding-right: 20px;
-      position: sticky;
-      top: 20px;
-      height: fit-content;
-    }
-
-    aside img {
-      width: 100%;
-      border-radius: 6px;
-      margin: 12px 0;
-    }
-
-    .calendar {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 10px;
-    }
-
-    .day {
-      border: 1px solid #e5e5e5;
-      border-radius: 6px;
-      padding: 6px;
-      min-height: 90px;
-      font-size: 13px;
-    }
-
-    .day strong {
-      display: block;
-      font-size: 12px;
-      opacity: 0.6;
-      margin-bottom: 4px;
-    }
-
-    .event {
-      background: #111;
-      color: #fff;
-      padding: 4px 6px;
-      border-radius: 4px;
-      font-size: 12px;
-      margin-top: 4px;
-      cursor: pointer;
-    }
-
-    .event:hover {
-      background: #e11d2e;
-    }
-
-    .booking button {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      font-size: 15px;
-      border-radius: 6px;
-      border: none;
-      cursor: pointer;
-    }
-
-    .shuttle {
-      background: #e11d2e;
-      color: #fff;
-    }
-
-    .suburban {
-      background: #111;
-      color: #fff;
-    }
-
-    footer {
-      text-align: center;
-      font-size: 12px;
-      opacity: 0.5;
-      padding: 40px 20px;
-    }
-  </style>
+  <!-- MAIN STYLES (IMPORTANT: plural) -->
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 
 <body>
 
-<header>
-  <h1>Red Rocks Party Shuttle</h1>
-  <p>Ride together. Pre-game hard. Get home safe.</p>
-</header>
-
-<main>
-
-  <!-- LEFT SIDEBAR -->
-  <aside id="sidebar">
-    <h2>Select a Show</h2>
-    <p>Click a concert date to view details and book transportation.</p>
-  </aside>
-
-  <!-- MAIN CONTENT -->
-  <section>
-    <h2>2026 Red Rocks Concert Calendar</h2>
-    <div id="calendar" class="calendar"></div>
-
-    <div class="booking" id="booking-panel">
-      <h3>Book Transportation</h3>
-      <p>Select a concert to unlock booking.</p>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-inner">
+      <h1>Red Rocks Party Shuttle</h1>
+      <p class="tagline">Ride together. Pre-game hard. Get home safe.</p>
     </div>
-  </section>
+  </header>
 
-</main>
+  <!-- MAIN LAYOUT -->
+  <main class="layout">
 
-<footer>
-  Independent transportation service. Not affiliated with Red Rocks Amphitheatre.<br>
-  Event data powered by Destination Command Center (DCC).
-</footer>
+    <!-- LEFT SIDEBAR (30%) -->
+    <aside class="sidebar" id="sidebar">
+      <h2>Select a Show</h2>
+      <p class="sidebar-hint">
+        Hover a date to preview details.<br />
+        Click a show to book transportation.
+      </p>
 
-<script>
-const API_URL = "https://dcc-redrocks-2026.denverairportpickup.workers.dev/api/dcc/red-rocks/2026/events";
-let EVENTS = [];
-
-// Load events + render calendar
-fetch(API_URL)
-  .then(r => r.json())
-  .then(data => {
-    EVENTS = data.events || [];
-    renderCalendar(EVENTS);
-  });
-
-function renderCalendar(events) {
-  const cal = document.getElementById("calendar");
-  cal.innerHTML = "";
-
-  for (let day = 1; day <= 31; day++) {
-    const cell = document.createElement("div");
-    cell.className = "day";
-    cell.innerHTML = `<strong>${day}</strong>`;
-
-events.forEach(event => {
-  calendarDay.innerHTML += `
-    <a href="/show.html?eventId=${event.eventId}" class="event-link">
-      <div class="event-card">
-        <div class="event-title">${event.artist}</div>
-        <div class="event-date">${event.date}</div>
-
-        <div class="price">$59 Shuttle</div>
-        <div class="price secondary">$499 Suburban</div>
+      <div class="sidebar-preview" id="sidebar-preview">
+        <p class="muted">
+          No show selected yet.
+        </p>
       </div>
-    </a>
-  `;
-});
 
-    cal.appendChild(cell);
-  }
-}
+      <div class="sidebar-footer">
+        <small>
+          Independent transportation service.<br />
+          Not affiliated with Red Rocks Amphitheatre.<br />
+          Event data powered by DCC.
+        </small>
+      </div>
+    </aside>
 
-// Sidebar + booking update
-function selectEvent(event) {
-  document.getElementById("sidebar").innerHTML = `
-    <h2>${event.artist}</h2>
-    <p><strong>${event.date}</strong> (${event.dayOfWeek})</p>
-    <img src="${event.image}" />
-    <p><a href="${event.ticketUrl}" target="_blank">View Tickets</a></p>
-  `;
+    <!-- RIGHT CONTENT (70%) -->
+    <section class="content">
+      <h2>2026 Red Rocks Concert Calendar</h2>
+      <p class="subhead">
+        Click a show date to view details and book transportation.
+      </p>
 
-  document.getElementById("booking-panel").innerHTML = `
-    <h3>Book Transportation</h3>
-    <button class="shuttle">$59 Party Shuttle</button>
-    <button class="suburban">$499 Private Suburban</button>
-  `;
-}
-</script>
+      <!-- CALENDAR GRID -->
+      <div id="calendar" class="calendar-grid">
+        <p class="loading">Loading events…</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- CALENDAR RENDERER -->
+  <script src="/calendar.js"></script>
 
 </body>
 </html>
