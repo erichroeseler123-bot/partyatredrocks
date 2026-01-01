@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Red Rocks Show | Party At Red Rocks</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!--
+    PAGE PURPOSE
+    ------------
+    This is the SHOW PAGE.
+    - Sidebar (LEFT) = DCC truth (artist, date, venue, context)
+    - Main panel (RIGHT) = booking & commerce
+    - Sidebar NEVER changes during booking
+    - Main panel may later embed Rezdy
+  -->
+
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0b0b0b;
+      color: #111;
+    }
+
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* LEFT SIDEBAR (DCC TRUTH) */
+    .sidebar {
+      width: 35%;
+      min-width: 320px;
+      max-width: 460px;
+      background: #0f172a;
+      color: #fff;
+      padding: 32px;
+      box-sizing: border-box;
+    }
+
+    .sidebar h1 {
+      margin-top: 0;
+      font-size: 28px;
+    }
+
+    .sidebar .meta {
+      margin: 16px 0;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #1e293b;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      margin-right: 6px;
+      margin-bottom: 6px;
+    }
+
+    /* RIGHT MAIN PANEL (BOOKING) */
+    .main {
+      flex: 1;
+      background: #ffffff;
+      padding: 48px;
+      box-sizing: border-box;
+    }
+
+    .main h2 {
+      margin-top: 0;
+      font-size: 26px;
+    }
+
+    .product {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .product h3 {
+      margin: 0 0 6px 0;
+    }
+
+    .price {
+      font-weight: 700;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .cta {
+      display: inline-block;
+      background: #e11d48;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .note {
+      margin-top: 40px;
+      font-size: 13px;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="layout">
+
+    <!-- ===================== -->
+    <!-- LEFT: DCC SIDEBAR     -->
+    <!-- ===================== -->
+    <aside class="sidebar">
+      <h1 id="artist-name">Loading…</h1>
+
+      <div class="meta" id="event-meta">
+        Fetching event details…
+      </div>
+
+      <div id="dcc-badges"></div>
+
+      <div class="meta">
+        <strong>Source of truth:</strong><br>
+        Destination Command Center (DCC)
+      </div>
+    </aside>
+
+    <!-- ===================== -->
+    <!-- RIGHT: BOOKING PANEL  -->
+    <!-- ===================== -->
+    <main class="main">
+      <h2>Book Transportation</h2>
+
+      <div class="product">
+        <h3>Shared Party Shuttle</h3>
+        <div class="price">$59 per person</div>
+        <p>Party bus vibes. Ride together. Most popular option.</p>
+        <a href="#" class="cta">Book Shuttle</a>
+      </div>
+
+      <div class="product">
+        <h3>Private Suburban</h3>
+        <div class="price">$499 flat</div>
+        <p>Private SUV for 6–7 passengers. Door-to-door.</p>
+        <a href="#" class="cta">Book Suburban</a>
+      </div>
+
+      <div class="product">
+        <h3>Private Party Bus</h3>
+        <div class="price">$999 / $1,499</div>
+        <p>14- or 24-passenger buses for full groups.</p>
+        <a href="#" class="cta">Request Party Bus</a>
+      </div>
+
+      <div class="note">
+        Booking inventory opens automatically when transportation is available.
+        This page updates in real time based on confirmed events.
+      </div>
+    </main>
+
+  </div>
+
+  <!-- ===================== -->
+  <!-- DCC DATA FETCH LOGIC  -->
+  <!-- ===================== -->
+  <script>
+    /**
+     * HOW THIS WORKS
+     * --------------
+     * 1. For now, this page loads the 2026 Red Rocks events list
+     * 2. We select the FIRST confirmed event (placeholder logic)
+     * 3. Later: this will be driven by URL (/shows/:slug)
+     */
+
+    const DCC_ENDPOINT =
+      "https://dcc-redrocks-2026.denverairportpickup.workers.dev/api/dcc/red-rocks/2026/events";
+
+    fetch(DCC_ENDPOINT)
+      .then(res => res.json())
+      .then(data => {
+        const event = data.events[0];
+
+        document.getElementById("artist-name").textContent = event.artist;
+
+        document.getElementById("event-meta").innerHTML = `
+          <strong>Date:</strong> ${event.date} (${event.dayOfWeek})<br>
+          <strong>Venue:</strong> ${data.venue.name}<br>
+          <strong>Location:</strong> ${data.venue.city}, ${data.venue.state}
+        `;
+
+        const badges = document.getElementById("dcc-badges");
+        badges.innerHTML = `
+          <span class="badge">Confirmed</span>
+          <span class="badge">2026 Season</span>
+          <span class="badge">Red Rocks</span>
+        `;
+      })
+      .catch(err => {
+        document.getElementById("event-meta").textContent =
+          "Unable to load event data.";
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
