@@ -1,228 +1,247 @@
-/* =========================
-   GLOBAL
-========================= */
+/* ============================= */
+/* Base / Reset */
+/* ============================= */
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background: radial-gradient(circle at top, #0b0f1a, #02030a);
-  color: #eaeaea;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  background: radial-gradient(circle at top, #0c1220, #05070d);
+  color: #e6e8eb;
 }
 
-/* =========================
-   LAYOUT
-========================= */
-.layout {
-  display: grid;
-  grid-template-columns: 300px 1fr;
+/* ============================= */
+/* Layout */
+/* ============================= */
+
+.app-layout {
+  display: flex;
   min-height: 100vh;
 }
 
-/* =========================
-   SIDEBAR (DCC)
-========================= */
-.sidebar {
-  padding: 20px;
-  background: linear-gradient(180deg, #05070d, #02030a);
+/* ============================= */
+/* DCC Sidebar */
+/* ============================= */
+
+#dcc-sidebar {
+  width: 320px;
+  padding: 22px;
+  background: linear-gradient(180deg, #070b14, #04060b);
   border-right: 1px solid rgba(255,255,255,0.08);
+  position: sticky;
+  top: 0;
 }
 
-.sidebar h2 {
-  margin: 0 0 6px;
-  font-size: 1.1rem;
+#dcc-sidebar h2 {
+  font-size: 1rem;
+  margin: 0 0 4px 0;
+  letter-spacing: 0.04em;
 }
 
-.dcc-status {
-  font-size: 0.8rem;
-  opacity: 0.6;
-  margin-bottom: 20px;
-}
-
-.dcc-preview {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 10px;
-  padding: 12px;
-  min-height: 120px;
-  font-size: 0.85rem;
-}
-
-.dcc-muted {
-  opacity: 0.5;
-}
-
-.dcc-link-out {
-  display: inline-block;
-  margin-top: 16px;
-  color: #4dd0ff;
-  text-decoration: none;
-  font-size: 0.85rem;
-}
-
-/* =========================
-   MAIN CONTENT
-========================= */
-.content {
-  padding: 32px;
-  max-width: 1100px;
-}
-
-/* =========================
-   HERO
-========================= */
-.hero h1 {
-  margin: 0;
-  font-size: 2rem;
-}
-
-.hero p {
-  margin-top: 6px;
-  opacity: 0.7;
-}
-
-/* =========================
-   CALENDAR HEADER
-========================= */
-.calendar-header {
-  margin-top: 32px;
-}
-
-.month-label {
-  font-size: 0.9rem;
-  opacity: 0.6;
-  margin-top: 4px;
-}
-
-/* =========================
-   WEEKDAY ROW
-========================= */
-.weekday-row {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  margin-top: 20px;
+#dcc-sidebar .status {
   font-size: 0.75rem;
-  opacity: 0.5;
+  opacity: 0.6;
+  margin-bottom: 16px;
 }
 
-/* =========================
-   CALENDAR GRID
-========================= */
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 12px;
-  margin-top: 10px;
-}
-
-/* Empty offset cells */
-.day.empty {
-  background: none;
-  border: none;
-}
-
-/* =========================
-   DAY CELLS
-========================= */
-.day {
-  background: linear-gradient(180deg, #0b0f1a, #05070d);
-  border: 1px solid rgba(255,255,255,0.08);
+#dcc-preview {
+  background: linear-gradient(180deg, #0b1220, #070b14);
   border-radius: 12px;
-  padding: 10px;
-  min-height: 110px;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  padding: 14px;
+  font-size: 0.85rem;
+  min-height: 120px;
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
-.day:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-.num {
-  font-size: 0.7rem;
-  opacity: 0.5;
-  margin-bottom: 6px;
-}
-
-/* =========================
-   EVENT LINKS
-========================= */
-.day a {
-  display: block;
-  font-size: 0.75rem;
-  color: #4dd0ff;
-  text-decoration: none;
-  line-height: 1.2;
+#dcc-preview .artist {
+  font-weight: 600;
   margin-bottom: 4px;
 }
 
-.day a:hover {
+#dcc-preview .date {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin-bottom: 6px;
+}
+
+#dcc-preview a {
+  display: inline-block;
+  margin-top: 8px;
+  color: #6ecbff;
+  text-decoration: none;
+  font-size: 0.8rem;
+}
+
+#dcc-preview a:hover {
   text-decoration: underline;
 }
 
-/* =========================
-   FOOTER NOTE
-========================= */
-.footer-note {
-  margin-top: 40px;
+#dcc-sidebar .dcc-link {
+  margin-top: 18px;
+  display: block;
+  color: #6ecbff;
   font-size: 0.75rem;
-  opacity: 0.4;
-}
-/* =========================
-   CALENDAR SIGNALS
-========================= */
-
-/* Today highlight */
-.day.today {
-  outline: 2px solid #4dd0ff;
-  outline-offset: -2px;
+  text-decoration: none;
 }
 
-/* Days with events */
-.day.has-event {
-  box-shadow: inset 0 0 0 1px rgba(77,208,255,0.25);
+#dcc-sidebar .dcc-link:hover {
+  text-decoration: underline;
 }
 
-/* Hover focus */
-.day:hover {
-  background: linear-gradient(180deg, #11182b, #070b14);
+/* ============================= */
+/* Main Content */
+/* ============================= */
+
+.main {
+  flex: 1;
+  padding: 32px 36px 48px;
 }
 
-/* Event text tightening */
-.day a {
-  font-weight: 500;
+/* ============================= */
+/* Header */
+/* ============================= */
+
+h1 {
+  font-size: 1.6rem;
+  margin: 0;
 }
 
-/* Sidebar live emphasis */
-.dcc-preview.active {
-  border-color: #4dd0ff;
-  box-shadow: 0 0 20px rgba(77,208,255,0.15);
+.subtitle {
+  font-size: 0.9rem;
+  opacity: 0.75;
+  margin-top: 4px;
 }
-.sidebar-actions {
-  margin-top: 14px;
+
+/* ============================= */
+/* Calendar Header */
+/* ============================= */
+
+.calendar-header {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 26px;
+  margin-bottom: 12px;
+}
+
+#month-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.calendar-nav {
+  display: flex;
   gap: 8px;
 }
 
-.tm-link {
-  background: #026cdf;
-  color: white;
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-weight: 600;
-  text-decoration: none;
-  text-align: center;
+.calendar-nav button {
+  background: #0b1220;
+  color: #e6e8eb;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
 }
 
-.tm-link:hover {
-  background: #0b7dff;
+.calendar-nav button:hover {
+  border-color: #6ecbff;
 }
 
-.details-link {
-  color: #6ecbff;
-  text-decoration: none;
+/* ============================= */
+/* Weekday Labels */
+/* ============================= */
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 14px;
+  font-size: 0.7rem;
+  opacity: 0.6;
+  margin-bottom: 6px;
+}
+
+/* ============================= */
+/* Calendar Grid */
+/* ============================= */
+
+#calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 14px;
+}
+
+/* ============================= */
+/* Calendar Day Cells */
+/* ============================= */
+
+.calendar-day {
+  min-height: 110px;
+  padding: 10px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #0b0f1a, #05070d);
+  border: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.calendar-day:hover {
+  border-color: rgba(110,203,255,0.35);
+}
+
+.calendar-day.empty {
+  background: transparent;
+  border: none;
+  pointer-events: none;
+}
+
+/* ============================= */
+/* Day Number */
+/* ============================= */
+
+.calendar-day .day-number {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-size: 0.7rem;
+  opacity: 0.35;
+}
+
+/* ============================= */
+/* Event Entry */
+/* ============================= */
+
+.calendar-day .event {
+  margin-top: 18px;
   font-size: 0.85rem;
+  color: #6ecbff;
+  cursor: pointer;
+  line-height: 1.25;
+}
+
+.calendar-day .event:hover {
+  text-decoration: underline;
+}
+
+/* ============================= */
+/* Selected / Active Day */
+/* ============================= */
+
+.calendar-day.active {
+  box-shadow: 0 0 0 1px rgba(110,203,255,0.45),
+              0 10px 40px rgba(0,0,0,0.6);
+}
+
+/* ============================= */
+/* Footer Note */
+/* ============================= */
+
+.footer-note {
+  margin-top: 26px;
+  font-size: 0.7rem;
+  opacity: 0.5;
 }
