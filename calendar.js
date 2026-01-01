@@ -1,116 +1,105 @@
-/* =========================================================
-   CONFIG
-   ========================================================= */
+(async function () {
+  const calendar = document.getElementById("calendar");
+  const preview = document.getElementById("dcc-preview");
+  const monthLabel = document.getElementById("month-label");
 
-const API_URL =
-  "https://dcc-redrocks-2026.denverairportpickup.workers.dev/api/dcc/red-rocks/2026/events";
+  if (!calendar) return;
 
-const calendarEl = document.getElementById("calendar");
-const sidebarTitle = document.getElementById("dcc-title");
-const sidebarMeta = document.getElementById("dcc-meta");
+  let lockedEventId = null;
 
-/* =========================================================
-   HELPERS
-   ========================================================= */
+  const res = await fetch(
+    "https://dcc-redrocks-2026.denverairportpickup.workers.dev/api/dcc/red-rocks/2026/events"
+  );
 
-function daysInMonth(year, month) {
-  return new Date(year, month + 1, 0).getDate();
-}
-
-function firstWeekday(year, month) {
-  return new Date(year, month, 1).getDay(); // 0 = Sun
-}
-
-function clearSidebar() {
-  if (!sidebarTitle || !sidebarMeta) return;
-  sidebarTitle.textContent = "No show selected";
-  sidebarMeta.textContent = "Hover a date to preview details.";
-}
-
-function updateSidebar(event) {
-  if (!sidebarTitle || !sidebarMeta) return;
-
-  sidebarTitle.textContent = event.artist;
-  sidebarMeta.textContent =
-    `${event.date} • ${event.dayOfWeek}\nRed Rocks Amphitheatre`;
-}
-
-/* =========================================================
-   RENDER CALENDAR
-   ========================================================= */
-
-async function renderCalendar() {
-  if (!calendarEl) return;
-
-  const res = await fetch(API_URL);
   const data = await res.json();
-
   const events = data.events || [];
 
-  // Hard-lock to May 2026 (can be made dynamic later)
   const year = 2026;
-  const month = 4; // May (0-indexed)
+  const month = 4; // MAY (0-based)
 
-  const totalDays = daysInMonth(year, month);
-  const startDay = firstWeekday(year, month);
+  function updateSidebar(ev, locked = false) {
+    if (!preview) return;
 
-  // Map events by day
-  const eventMap = {};
-  events.forEach(ev => {
-    const day = new Date(ev.date).getDate();
-    eventMap[day] = ev;
-  });
+    preview.innerHTML = `
+      <div class="dcc-card">
+        <div class="dcc-title">${ev.artist}</div>
+        <div class="dcc-date">${ev.date} (${ev.dayOfWeek})</div>
+        <div class="dcc-venue">Red Rocks Amphitheatre</div>
+        <a class="dcc-link" href="/show.html?eventId=${ev.eventId}">
+          View Show →
+        </a>
+      </div>
+    `;
 
-  calendarEl.innerHTML = "";
-
-  // Empty padding days
-  for (let i = 0; i < startDay; i++) {
-    const empty = document.createElement("div");
-    empty.className = "calendar-day empty";
-    calendarEl.appendChild(empty);
+    if (locked) lockedEventId = ev.eventId;
   }
 
-  // Actual days
-  for (let day = 1; day <= totalDays; day++) {
-    const cell = document.createElement("div");
-    cell.className = "calendar-day";
+  function clearSidebar() {
+    if (!preview || lockedEventId) return;
+    preview.innerHTML = `<div class="dcc-muted">Hover a show to preview</div>`;
+  }
 
-    const num = document.createElement("div");
-    num.className = "day-number";
-    num.textContent = day;
-    cell.appendChild(num);
+  function render() {
+    calendar.innerHTML = "";
 
-    const ev = eventMap[day];
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
 
-    if (ev) {
-      const title = document.createElement("div");
-      title.className = "event-title";
-      title.textContent = ev.artist;
-      cell.appendChild(title);
+    monthLabel.textContent = firstDay.toLocaleString("en-US", {
+      month: "long",
+      year: "numeric",
+    });
 
-      // Hover → sidebar preview
-      cell.addEventListener("mouseenter", () => {
-        updateSidebar(ev);
-      });
+    const byDay = {};
+    events.forEach(ev => {
+      const d = new Date(ev.date);
+      if (d.getMonth() === month) {
+        const day = d.getDate();
+        if (!byDay[day]) byDay[day] = [];
+        byDay[day].push(ev);
+      }
+    });
 
-      cell.addEventListener("mouseleave", () => {
-        clearSidebar();
-      });
-
-      // Click → show page
-      cell.addEventListener("click", () => {
-        window.location.href =
-          `/show.html?eventId=${encodeURIComponent(ev.eventId)}`;
-      });
+    // Empty cells before month start
+    for (let i = 0; i < firstDay.getDay(); i++) {
+      const empty = document.createElement("div");
+      empty.className = "calendar-cell empty";
+      calendar.appendChild(empty);
     }
 
-    calendarEl.appendChild(cell);
+    // Real days
+    for (let d = 1; d <= lastDay.getDate(); d++) {
+      const cell = document.createElement("div");
+      cell.className = "calendar-cell";
+
+      const num = document.createElement("div");
+      num.className = "day-num";
+      num.textContent = d;
+      cell.appendChild(num);
+
+      (byDay[d] || []).forEach(ev => {
+        const a = document.createElement("a");
+        a.className = "event-link";
+        a.href = `/show.html?eventId=${ev.eventId}`;
+        a.textContent = ev.artist;
+
+        a.addEventListener("mouseenter", () => {
+          if (!lockedEventId) updateSidebar(ev);
+        });
+
+        a.addEventListener("mouseleave", clearSidebar);
+
+        a.addEventListener("click", () => {
+          lockedEventId = ev.eventId;
+          updateSidebar(ev, true);
+        });
+
+        cell.appendChild(a);
+      });
+
+      calendar.appendChild(cell);
+    }
   }
-}
 
-/* =========================================================
-   INIT
-   ========================================================= */
-
-clearSidebar();
-renderCalendar();
+  render();
+})();
