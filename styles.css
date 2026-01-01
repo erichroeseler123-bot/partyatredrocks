@@ -170,3 +170,33 @@ body {
   font-size: 0.75rem;
   opacity: 0.4;
 }
+/* =========================
+   CALENDAR SIGNALS
+========================= */
+
+/* Today highlight */
+.day.today {
+  outline: 2px solid #4dd0ff;
+  outline-offset: -2px;
+}
+
+/* Days with events */
+.day.has-event {
+  box-shadow: inset 0 0 0 1px rgba(77,208,255,0.25);
+}
+
+/* Hover focus */
+.day:hover {
+  background: linear-gradient(180deg, #11182b, #070b14);
+}
+
+/* Event text tightening */
+.day a {
+  font-weight: 500;
+}
+
+/* Sidebar live emphasis */
+.dcc-preview.active {
+  border-color: #4dd0ff;
+  box-shadow: 0 0 20px rgba(77,208,255,0.15);
+}
