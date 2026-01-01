@@ -17,13 +17,13 @@
       <div class="placeholder">Loading show…</div>
     </div>
 
-    <a class="dcc-link" href="/" >← Back to Calendar</a>
+    <a class="dcc-link" href="/">← Back to Calendar</a>
   </aside>
 
   <!-- MAIN CONTENT -->
   <main id="main">
     <h1 id="show-title">Loading…</h1>
-    <p id="show-date"></p>
+    <p id="show-date" class="muted"></p>
 
     <section class="booking-card">
       <h3>Transportation</h3>
@@ -36,35 +36,59 @@
 
     <section class="tickets">
       <h3>Tickets</h3>
-      <a id="ticketmaster-link" target="_blank">Buy Tickets</a>
+      <a id="ticketmaster-link" target="_blank" rel="noopener">Buy Tickets</a>
     </section>
   </main>
 
+  <!-- SCRIPT -->
   <script>
     (async function () {
       const params = new URLSearchParams(window.location.search);
       const eventId = params.get("eventId");
-      if (!eventId) return;
 
-      const res = await fetch(
-        "https://dcc-redrocks-2026.denverairportpickup.workers.dev/api/dcc/redrocks"
-      );
-      const data = await res.json();
-      const ev = (data.events || []).find(e => e.eventId === eventId);
-      if (!ev) return;
+      if (!eventId) {
+        document.getElementById("show-title").textContent = "No show selected";
+        return;
+      }
 
-      document.getElementById("show-title").textContent = ev.artist;
-      document.getElementById("show-date").textContent = ev.date;
+      try {
+        const res = await fetch(
+          "https://dcc-redrocks-2026.denverairportpickup.workers.dev/api/events"
+        );
 
-      document.getElementById("dcc-preview").innerHTML = `
-        <strong>${ev.artist}</strong><br/>
-        ${ev.date}<br/>
-        Red Rocks Amphitheatre
-      `;
+        if (!res.ok) throw new Error("API error");
 
-      document.getElementById("ticketmaster-link").href = ev.ticketmaster || "#";
-      document.getElementById("book-shuttle").href =
-        "https://gosnotransportation58.rezdy.com";
+        const data = await res.json();
+        const ev = (data.events || []).find(e => e.eventId === eventId);
+
+        if (!ev) {
+          document.getElementById("show-title").textContent = "Show not found";
+          return;
+        }
+
+        // MAIN CONTENT
+        document.getElementById("show-title").textContent = ev.artist;
+        document.getElementById("show-date").textContent =
+          `${ev.date} · ${ev.time}`;
+
+        // SIDEBAR PREVIEW
+        document.getElementById("dcc-preview").innerHTML = `
+          <strong>${ev.artist}</strong><br/>
+          <span>${ev.date} · ${ev.time}</span>
+        `;
+
+        // LINKS
+        document.getElementById("book-shuttle").href =
+          `/book.html?eventId=${encodeURIComponent(ev.eventId)}`;
+
+        document.getElementById("ticketmaster-link").href =
+          ev.ticketUrl || "https://www.ticketmaster.com/red-rocks-amphitheatre-tickets-morrison/venue/246";
+
+      } catch (err) {
+        console.error(err);
+        document.getElementById("show-title").textContent =
+          "Unable to load show data";
+      }
     })();
   </script>
 
