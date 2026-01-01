@@ -4,11 +4,13 @@
   <meta charset="UTF-8" />
   <title>Show · Party At Red Rocks</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Absolute path required -->
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
 
-  <!-- LEFT SIDEBAR (DCC stays visible) -->
+  <!-- LEFT SIDEBAR -->
   <aside id="dcc-sidebar">
     <h2>DCC · Red Rocks</h2>
     <div class="status">SHOW CONTEXT</div>
@@ -36,60 +38,51 @@
 
     <section class="tickets">
       <h3>Tickets</h3>
-      <a id="ticketmaster-link" target="_blank" rel="noopener">Buy Tickets</a>
+      <a
+        id="ticketmaster-link"
+        href="https://www.ticketmaster.com/red-rocks-amphitheatre-tickets-morrison/venue/246"
+        target="_blank"
+        rel="noopener"
+      >
+        Buy Tickets
+      </a>
     </section>
   </main>
 
-  <!-- SCRIPT -->
   <script>
-    (async function () {
-      const params = new URLSearchParams(window.location.search);
-      const eventId = params.get("eventId");
+    // SAME EVENT MAP AS calendar.js (temporary single source of truth)
+    const EVENTS = {
+      "2026-05-03": { artist: "Odesza", time: "6:30 PM" },
+      "2026-05-07": { artist: "Zeds Dead", time: "7:00 PM" },
+      "2026-05-15": { artist: "Kacey Musgraves", time: "6:00 PM" }
+    };
 
-      if (!eventId) {
-        document.getElementById("show-title").textContent = "No show selected";
-        return;
-      }
+    const params = new URLSearchParams(window.location.search);
+    const date = params.get("date");
 
-      try {
-        const res = await fetch(
-          "https://dcc-redrocks-2026.denverairportpickup.workers.dev/api/events"
-        );
+    if (!date || !EVENTS[date]) {
+      document.getElementById("show-title").textContent =
+        "Show not found";
+      document.getElementById("dcc-preview").innerHTML =
+        "<div class='placeholder'>Invalid or missing date</div>";
+    } else {
+      const ev = EVENTS[date];
 
-        if (!res.ok) throw new Error("API error");
+      // Main content
+      document.getElementById("show-title").textContent = ev.artist;
+      document.getElementById("show-date").textContent =
+        `${date} · ${ev.time}`;
 
-        const data = await res.json();
-        const ev = (data.events || []).find(e => e.eventId === eventId);
+      // Sidebar
+      document.getElementById("dcc-preview").innerHTML = `
+        <strong>${ev.artist}</strong><br />
+        <span>${date} · ${ev.time}</span>
+      `;
 
-        if (!ev) {
-          document.getElementById("show-title").textContent = "Show not found";
-          return;
-        }
-
-        // MAIN CONTENT
-        document.getElementById("show-title").textContent = ev.artist;
-        document.getElementById("show-date").textContent =
-          `${ev.date} · ${ev.time}`;
-
-        // SIDEBAR PREVIEW
-        document.getElementById("dcc-preview").innerHTML = `
-          <strong>${ev.artist}</strong><br/>
-          <span>${ev.date} · ${ev.time}</span>
-        `;
-
-        // LINKS
-        document.getElementById("book-shuttle").href =
-          `/book.html?eventId=${encodeURIComponent(ev.eventId)}`;
-
-        document.getElementById("ticketmaster-link").href =
-          ev.ticketUrl || "https://www.ticketmaster.com/red-rocks-amphitheatre-tickets-morrison/venue/246";
-
-      } catch (err) {
-        console.error(err);
-        document.getElementById("show-title").textContent =
-          "Unable to load show data";
-      }
-    })();
+      // Shuttle link (future-proof)
+      document.getElementById("book-shuttle").href =
+        `/book.html?date=${encodeURIComponent(date)}`;
+    }
   </script>
 
 </body>
