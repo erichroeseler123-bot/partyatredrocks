@@ -28,33 +28,46 @@ async function loadEvents() {
   render();
 }
 
+function getTicketmasterLink(ev) {
+  if (ev.ticketmasterUrl) return ev.ticketmasterUrl;
+
+  if (ev.ticketmasterEventId) {
+    return `https://www.ticketmaster.com/event/${ev.ticketmasterEventId}`;
+  }
+
+  // fallback: Red Rocks TM search
+  const q = encodeURIComponent(`${ev.artist} Red Rocks`);
+  return `https://www.ticketmaster.com/search?q=${q}`;
+}
+
+
 // ===============================
 // Sidebar Logic
 // ===============================
-
 function updateSidebar(ev, locked = false) {
   if (!preview || !ev) return;
+
+  const ticketUrl = getTicketmasterLink(ev);
 
   preview.classList.add("active");
   preview.innerHTML = `
     <strong>${ev.artist}</strong>
     <div>${new Date(ev.date).toLocaleDateString()}</div>
     <div>Red Rocks Amphitheatre</div>
-    <a href="/show.html?eventId=${ev.eventId}">View show →</a>
+
+    <div class="sidebar-actions">
+      <a href="${ticketUrl}" target="_blank" rel="noopener" class="tm-link">
+        🎟 Buy tickets
+      </a>
+
+      <a href="/show.html?eventId=${ev.eventId}" class="details-link">
+        View show →
+      </a>
+    </div>
   `;
 
   if (locked) lockedEventId = ev.eventId;
 }
-
-function clearSidebar() {
-  if (lockedEventId) return;
-
-  preview.classList.remove("active");
-  preview.innerHTML = `
-    <em>Hover a show on the calendar<br>to preview details.</em>
-  `;
-}
-
 // ===============================
 // Calendar Render
 // ===============================
