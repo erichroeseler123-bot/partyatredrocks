@@ -1,34 +1,54 @@
-body {
-  margin: 0;
-  font-family: system-ui, sans-serif;
+/* ============================= */
+/* Calendar Grid + Cards */
+/* ============================= */
+
+#calendar {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
 }
 
-.layout {
-  display: flex;
-  min-height: 100vh;
-}
-
-.sidebar {
-  width: 320px;
-  padding: 20px;
-  background: #111;
+.calendar-card {
+  background: linear-gradient(180deg, #0b0f1a, #05070d);
   color: white;
-  position: sticky;
-  top: 0;
+  border-radius: 14px;
+  padding: 16px;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.content {
-  flex: 1;
-  padding: 40px;
+.calendar-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.6);
 }
 
-.event-row {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
+.card-inner strong {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
 }
 
-.booking-card {
-  border: 1px solid #ccc;
-  padding: 20px;
-  margin-bottom: 20px;
+.card-inner .date {
+  font-size: 0.8rem;
+  opacity: 0.75;
+}
+
+.prices {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.pill {
+  background: #ff4d5a;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.pill.dark {
+  background: #1c1c1c;
 }
