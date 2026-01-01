@@ -5,17 +5,15 @@
   <title>Red Rocks Party Shuttle</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="styles.css" />
+  <!-- IMPORTANT: absolute path -->
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
 
-  <!-- ============================= -->
-  <!-- DCC SIDEBAR -->
-  <!-- ============================= -->
+  <!-- LEFT SIDEBAR -->
   <aside id="dcc-sidebar">
     <h2>DCC · Red Rocks</h2>
-    <div class="status">Live Event Data</div>
+    <div class="status">LIVE EVENT DATA</div>
 
     <div id="dcc-preview">
       <div class="placeholder">
@@ -23,63 +21,69 @@
       </div>
     </div>
 
-    <a
-      class="dcc-link"
-      href="https://destinationcommandcenter.com"
-      target="_blank"
-      rel="noopener"
-    >
+    <a class="dcc-link" href="#">
       Open Destination Command Center →
     </a>
   </aside>
 
-  <!-- ============================= -->
   <!-- MAIN CONTENT -->
-  <!-- ============================= -->
   <main id="main">
+    <h1>Red Rocks Party Shuttle</h1>
+    <p class="tagline">Ride together. Pre-game hard. Get home safe.</p>
 
-    <header class="hero">
-      <h1>Red Rocks Party Shuttle</h1>
-      <p>Ride together. Pre-game hard. Get home safe.</p>
-    </header>
+    <h2>2026 Red Rocks Concert Calendar</h2>
 
-    <section class="calendar-section">
-      <h2>2026 Red Rocks Concert Calendar</h2>
+    <!-- MONTH HEADER -->
+    <div class="calendar-header">
+      <button id="prev-month">‹</button>
+      <strong>May 2026</strong>
+      <button id="next-month">›</button>
+    </div>
 
-      <!-- Month Navigation -->
-      <div class="month-nav">
-        <button id="prev-month" aria-label="Previous month">←</button>
-        <div id="month-label"></div>
-        <button id="next-month" aria-label="Next month">→</button>
-      </div>
+    <!-- DAY LABELS -->
+    <div class="calendar-labels">
+      <span>Sun</span><span>Mon</span><span>Tue</span>
+      <span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+    </div>
 
-      <!-- Weekday Labels -->
-      <div class="weekday-row">
-        <div>Sun</div>
-        <div>Mon</div>
-        <div>Tue</div>
-        <div>Wed</div>
-        <div>Thu</div>
-        <div>Fri</div>
-        <div>Sat</div>
-      </div>
-
-      <!-- Calendar Grid -->
-      <div id="calendar"></div>
-    </section>
-
-    <footer class="legal">
-      <p>Independent transportation service.</p>
-      <p>Not affiliated with Red Rocks Amphitheatre.</p>
-      <p>Event data powered by DCC.</p>
-    </footer>
-
+    <!-- CALENDAR GRID -->
+    <div id="calendar" class="calendar-grid"></div>
   </main>
 
-  <!-- ============================= -->
-  <!-- SCRIPTS -->
-  <!-- ============================= -->
-  <script src="calendar.js" defer></script>
+  <!-- CALENDAR GENERATOR (DOM FIRST) -->
+  <script>
+    const calendar = document.getElementById("calendar");
+
+    const year = 2026;
+    const monthIndex = 4; // May (0-based)
+    const month = "05";
+
+    const firstDay = new Date(year, monthIndex, 1).getDay();
+    const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
+
+    // Empty offset cells
+    for (let i = 0; i < firstDay; i++) {
+      const spacer = document.createElement("div");
+      spacer.className = "day spacer";
+      calendar.appendChild(spacer);
+    }
+
+    // Actual days
+    for (let day = 1; day <= daysInMonth; day++) {
+      const el = document.createElement("div");
+      el.className = "day";
+      el.dataset.date = `${year}-${month}-${String(day).padStart(2, "0")}`;
+      el.innerHTML = `<span class="day-number">${day}</span>`;
+el.addEventListener("click", () => {
+  window.location.href = `/show.html?date=${el.dataset.date}`;
+});
+
+      calendar.appendChild(el);
+    }
+  </script>
+
+  <!-- EVENT BINDER -->
+  <script src="/calendar.js"></script>
 
 </body>
 </html>
