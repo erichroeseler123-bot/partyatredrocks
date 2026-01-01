@@ -4,51 +4,36 @@
   <meta charset="UTF-8" />
   <title>Red Rocks Party Shuttle</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- Main styles -->
-  <link rel="stylesheet" href="./styles.css" />
-</head>
-
 <body>
-
-  <!-- HERO / HEADER -->
-  <header class="hero">
-    <h1>Red Rocks Party Shuttle</h1>
-    <p class="tagline">Ride together. Pre-game hard. Get home safe.</p>
-  </header>
-
-  <!-- MAIN LAYOUT -->
   <div class="layout">
 
-    <!-- LEFT SIDEBAR (30%) -->
-    <aside class="sidebar">
-      <h2>Select a Show</h2>
-      <p class="muted">
-        Hover a date to preview details.<br />
-        Click a show to book transportation.
-      </p>
+    <!-- DCC SIDEBAR -->
+    <aside class="sidebar" id="dccSidebar">
+      <h2>DCC · Red Rocks</h2>
 
-      <div id="sidebar-preview">
-        <p><strong>No show selected yet.</strong></p>
+      <div class="dcc-block">
+        <strong>Status</strong>
+        <p>Live event data</p>
+      </div>
+
+      <div class="dcc-block" id="dccPreview">
+        <p>Hover a show to preview</p>
       </div>
 
       <hr />
 
-      <p class="legal">
-        Independent transportation service.<br />
-        Not affiliated with Red Rocks Amphitheatre.<br />
-        Event data powered by DCC.
-      </p>
+      <a href="https://destinationcommandcenter.com" target="_blank">
+        Open DCC →
+      </a>
     </aside>
 
     <!-- MAIN CONTENT -->
     <main class="content">
-      <h2>2026 Red Rocks Concert Calendar</h2>
-      <p class="muted">
-        Click a show to view details and book transportation.
-      </p>
+      <h1>Red Rocks Party Shuttle</h1>
+      <p>Ride together. Pre-game hard. Get home safe.</p>
 
-      <!-- CALENDAR GRID (JS injects cards here) -->
+      <h2>2026 Red Rocks Concert Calendar</h2>
+
       <div id="calendar" class="calendar-grid">
         <p>Loading events…</p>
       </div>
@@ -56,8 +41,11 @@
 
   </div>
 
-  <!-- CALENDAR LOGIC -->
-  <script src="./calendar.js"></script>
-
+  <script src="/calendar.js"></script>
 </body>
+
+  <!-- Main styles -->
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
 </html>

@@ -115,3 +115,45 @@ body {
 .pill.dark {
   background: #1c1c1c;
 }
+/* ============================= */
+/* Month Calendar */
+/* ============================= */
+
+.month-calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.calendar-header {
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-align: center;
+  opacity: 0.6;
+}
+
+.calendar-day {
+  min-height: 120px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #0b0f1a, #05070d);
+  padding: 8px;
+  color: white;
+}
+
+.day-number {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  margin-bottom: 6px;
+}
+
+.calendar-event {
+  display: block;
+  font-size: 0.75rem;
+  margin-bottom: 4px;
+  color: #4fd1ff;
+  text-decoration: none;
+}
+
+.calendar-event:hover {
+  text-decoration: underline;
+}

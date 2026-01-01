@@ -1,82 +1,62 @@
-/**
- * calendar.js
- *
- * Responsibilities:
- * 1. Fetch live 2026 Red Rocks events from DCC Worker
- * 2. Render calendar cards
- * 3. Link each card → show.html?eventId=XXXX
- * 4. Update sidebar preview on hover
- */
-
 (async function () {
-  const calendarEl = document.getElementById("calendar");
-  const sidebarPreview = document.getElementById("sidebar-preview");
+  const calendar = document.getElementById("calendar");
+  if (!calendar) return;
 
-  if (!calendarEl) {
-    console.error("❌ calendar element not found");
-    return;
+  const YEAR = 2026;
+  const MONTH = 4; // May (0 = Jan)
+
+  const res = await fetch(
+    "https://dcc-redrocks-2026.denverairportpickup.workers.dev/api/dcc/red-rocks/2026/events"
+  );
+  const data = await res.json();
+  const events = data.events || [];
+
+  // Group events by date
+  const eventsByDate = {};
+  events.forEach(ev => {
+    if (!eventsByDate[ev.date]) eventsByDate[ev.date] = [];
+    eventsByDate[ev.date].push(ev);
+  });
+
+  const firstDay = new Date(YEAR, MONTH, 1);
+  const lastDay = new Date(YEAR, MONTH + 1, 0);
+  const startWeekday = firstDay.getDay();
+  const daysInMonth = lastDay.getDate();
+
+  calendar.innerHTML = "";
+
+  // Weekday headers
+  ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].forEach(d => {
+    const h = document.createElement("div");
+    h.className = "calendar-header";
+    h.textContent = d;
+    calendar.appendChild(h);
+  });
+
+  // Empty leading cells
+  for (let i = 0; i < startWeekday; i++) {
+    calendar.appendChild(document.createElement("div"));
   }
 
-  const API_URL =
-    "https://dcc-redrocks-2026.denverairportpickup.workers.dev/api/dcc/red-rocks/2026/events";
+  // Day cells
+  for (let day = 1; day <= daysInMonth; day++) {
+    const dateStr = `${YEAR}-05-${String(day).padStart(2,"0")}`;
+    const cell = document.createElement("div");
+    cell.className = "calendar-day";
 
-  try {
-    const res = await fetch(API_URL);
-    const data = await res.json();
+    const num = document.createElement("div");
+    num.className = "day-number";
+    num.textContent = day;
+    cell.appendChild(num);
 
-    if (!data.events || !data.events.length) {
-      calendarEl.innerHTML = "<p>No confirmed events yet.</p>";
-      return;
-    }
-
-    // Clear loading state
-    calendarEl.innerHTML = "";
-
-    data.events.forEach(event => {
-      const card = document.createElement("a");
-      card.className = "calendar-card";
-      card.href = `/show.html?eventId=${event.eventId}`;
-
-      card.innerHTML = `
-        <div class="card-inner">
-          <strong>${event.artist}</strong>
-          <div class="date">
-            ${event.date} (${event.dayOfWeek})
-          </div>
-        </div>
-      `;
-
-      /**
-       * HOVER → update sidebar preview
-       * (NO booking buttons here by design)
-       */
-      card.addEventListener("mouseenter", () => {
-        if (!sidebarPreview) return;
-
-        sidebarPreview.innerHTML = `
-          <h3>${event.artist}</h3>
-          <p><strong>${event.date}</strong> (${event.dayOfWeek})</p>
-          <p>Venue: Red Rocks Amphitheatre</p>
-          <p class="muted">Click to view show details and booking options.</p>
-        `;
-      });
-
-      /**
-       * MOUSE LEAVE → reset sidebar
-       */
-      card.addEventListener("mouseleave", () => {
-        if (!sidebarPreview) return;
-
-        sidebarPreview.innerHTML = `
-          <p><strong>No show selected yet.</strong></p>
-        `;
-      });
-
-      calendarEl.appendChild(card);
+    (eventsByDate[dateStr] || []).forEach(ev => {
+      const link = document.createElement("a");
+      link.href = `/show.html?eventId=${ev.eventId}`;
+      link.className = "calendar-event";
+      link.textContent = ev.artist;
+      cell.appendChild(link);
     });
-  } catch (err) {
-    console.error("❌ Failed to load events", err);
-    calendarEl.innerHTML =
-      "<p>Failed to load events. Please try again later.</p>";
+
+    calendar.appendChild(cell);
   }
 })();
