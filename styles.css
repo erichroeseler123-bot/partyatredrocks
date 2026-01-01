@@ -1,7 +1,6 @@
-/* ============================= */
-/* Base Reset */
-/* ============================= */
-
+/* =========================
+   GLOBAL
+========================= */
 * {
   box-sizing: border-box;
 }
@@ -9,299 +8,165 @@
 body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #05070d;
-  color: #e6e9ef;
+  background: radial-gradient(circle at top, #0b0f1a, #02030a);
+  color: #eaeaea;
 }
 
-/* ============================= */
-/* Layout */
-/* ============================= */
-
-.app {
-  display: flex;
+/* =========================
+   LAYOUT
+========================= */
+.layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
   min-height: 100vh;
 }
 
-/* ============================= */
-/* DCC Sidebar */
-/* ============================= */
-
+/* =========================
+   SIDEBAR (DCC)
+========================= */
 .sidebar {
-  width: 30%;
-  min-width: 300px;
-  max-width: 420px;
-  padding: 28px 24px;
-  background: radial-gradient(
-    120% 120% at 0% 0%,
-    #0b1220 0%,
-    #05070d 70%
-  );
+  padding: 20px;
+  background: linear-gradient(180deg, #05070d, #02030a);
   border-right: 1px solid rgba(255,255,255,0.08);
-  position: sticky;
-  top: 0;
 }
 
 .sidebar h2 {
-  margin: 0 0 12px;
-  font-size: 0.85rem;
-  letter-spacing: 0.12em;
-  opacity: 0.8;
-}
-
-.sidebar .panel {
-  background: linear-gradient(180deg, #0c1324, #070b14);
-  border-radius: 14px;
-  padding: 16px;
-  margin-bottom: 18px;
-  border: 1px solid rgba(255,255,255,0.08);
-}
-
-.sidebar .panel strong {
-  display: block;
-  font-size: 0.9rem;
-  margin-bottom: 6px;
-}
-
-.sidebar .panel small {
-  opacity: 0.7;
-  font-size: 0.75rem;
-}
-
-.sidebar a {
-  display: inline-block;
-  margin-top: 10px;
-  color: #4dd2ff;
-  text-decoration: none;
-  font-size: 0.8rem;
-}
-
-.sidebar a:hover {
-  text-decoration: underline;
-}
-
-/* ============================= */
-/* Main Content */
-/* ============================= */
-
-.main {
-  flex: 1;
-  padding: 32px 40px;
-}
-
-.main h1 {
   margin: 0 0 6px;
-  font-size: 1.6rem;
+  font-size: 1.1rem;
 }
 
-.main .subtitle {
-  opacity: 0.7;
+.dcc-status {
+  font-size: 0.8rem;
+  opacity: 0.6;
+  margin-bottom: 20px;
+}
+
+.dcc-preview {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 12px;
+  min-height: 120px;
   font-size: 0.85rem;
-  margin-bottom: 24px;
 }
 
-/* ============================= */
-/* Calendar Header */
-/* ============================= */
+.dcc-muted {
+  opacity: 0.5;
+}
 
+.dcc-link-out {
+  display: inline-block;
+  margin-top: 16px;
+  color: #4dd0ff;
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+/* =========================
+   MAIN CONTENT
+========================= */
+.content {
+  padding: 32px;
+  max-width: 1100px;
+}
+
+/* =========================
+   HERO
+========================= */
+.hero h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.hero p {
+  margin-top: 6px;
+  opacity: 0.7;
+}
+
+/* =========================
+   CALENDAR HEADER
+========================= */
 .calendar-header {
+  margin-top: 32px;
+}
+
+.month-label {
+  font-size: 0.9rem;
+  opacity: 0.6;
+  margin-top: 4px;
+}
+
+/* =========================
+   WEEKDAY ROW
+========================= */
+.weekday-row {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  margin-bottom: 12px;
-  gap: 10px;
-  font-size: 0.7rem;
-  opacity: 0.6;
-  text-align: right;
-  padding-right: 6px;
+  margin-top: 20px;
+  font-size: 0.75rem;
+  opacity: 0.5;
 }
 
-/* ============================= */
-/* Calendar Grid */
-/* ============================= */
-
-#calendar {
+/* =========================
+   CALENDAR GRID
+========================= */
+.calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 12px;
+  margin-top: 10px;
 }
 
-/* ============================= */
-/* Calendar Cells */
-/* ============================= */
+/* Empty offset cells */
+.day.empty {
+  background: none;
+  border: none;
+}
 
+/* =========================
+   DAY CELLS
+========================= */
 .day {
-  position: relative;
-  min-height: 110px;
+  background: linear-gradient(180deg, #0b0f1a, #05070d);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
   padding: 10px;
-  border-radius: 14px;
-  background: linear-gradient(180deg, #0b0f1a, #060912);
-  border: 1px solid rgba(255,255,255,0.06);
+  min-height: 110px;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .day:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 40px rgba(0,0,0,0.6);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-/* Day number */
-.day .num {
-  position: absolute;
-  top: 8px;
-  right: 10px;
-  font-size: 0.65rem;
-  opacity: 0.45;
+.num {
+  font-size: 0.7rem;
+  opacity: 0.5;
+  margin-bottom: 6px;
 }
 
-/* Event link */
+/* =========================
+   EVENT LINKS
+========================= */
 .day a {
   display: block;
-  margin-top: 20px;
   font-size: 0.75rem;
-  color: #4dd2ff;
+  color: #4dd0ff;
   text-decoration: none;
-  line-height: 1.3;
+  line-height: 1.2;
+  margin-bottom: 4px;
 }
 
 .day a:hover {
   text-decoration: underline;
 }
 
-/* Empty days */
-.day.empty {
-  background: transparent;
-  border: none;
-}
-
-/* ============================= */
-/* Holographic Accent (subtle) */
-/* ============================= */
-
-.day::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 14px;
-  background: radial-gradient(
-    600px 120px at -20% -20%,
-    rgba(77,210,255,0.06),
-    transparent 40%
-  );
-  pointer-events: none;
-}
-/* ============================= */
-/* Holographic Red Rocks */
-/* ============================= */
-
-.holo {
-  position: relative;
-  height: 160px;
-  margin-bottom: 24px;
-  border-radius: 16px;
-  background: radial-gradient(
-    120% 120% at 50% 0%,
-    #0b1a2a 0%,
-    #05070d 70%
-  );
-  overflow: hidden;
-  border: 1px solid rgba(77,210,255,0.2);
-}
-
-.holo svg {
-  width: 100%;
-  height: 100%;
-  opacity: 0.9;
-  filter: drop-shadow(0 0 12px rgba(77,210,255,0.35));
-}
-
-.scanline {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    rgba(77,210,255,0.08),
-    transparent
-  );
-  animation: scan 4s linear infinite;
-}
-
-@keyframes scan {
-  from { transform: translateY(-100%); }
-  to   { transform: translateY(100%); }
-}
-/* ============================= */
-/* DCC Sidebar */
-/* ============================= */
-
-.dcc-sidebar {
-  width: 30%;
-  min-width: 320px;
-  max-width: 380px;
-  background: radial-gradient(circle at top, #0b1220, #05070d);
-  color: #e6eaf2;
-  padding: 22px;
-  display: flex;
-  flex-direction: column;
-  border-right: 1px solid rgba(255,255,255,0.08);
-}
-
-.dcc-header h2 {
-  margin: 0;
-  font-size: 1.1rem;
-  letter-spacing: 0.04em;
-}
-
-.dcc-status {
+/* =========================
+   FOOTER NOTE
+========================= */
+.footer-note {
+  margin-top: 40px;
   font-size: 0.75rem;
-  opacity: 0.6;
-}
-
-.dcc-content {
-  flex: 1;
-  margin-top: 20px;
-}
-
-.dcc-idle {
-  opacity: 0.6;
-  font-size: 0.9rem;
-  line-height: 1.4;
-}
-
-.dcc-preview h3 {
-  margin: 0 0 6px 0;
-  font-size: 1rem;
-}
-
-.dcc-preview .date {
-  font-size: 0.85rem;
-  opacity: 0.7;
-}
-
-.dcc-preview .actions {
-  margin-top: 14px;
-}
-
-.dcc-preview button {
-  width: 100%;
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  background: #ff4d5a;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.dcc-preview.locked {
-  outline: 2px solid rgba(0,180,255,0.5);
-}
-
-.dcc-footer {
-  margin-top: 20px;
-  font-size: 0.75rem;
-}
-
-.dcc-footer a {
-  color: #4dc3ff;
-  text-decoration: none;
+  opacity: 0.4;
 }
