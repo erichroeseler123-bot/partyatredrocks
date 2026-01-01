@@ -3,64 +3,66 @@
 <head>
   <meta charset="UTF-8" />
   <title>Red Rocks Party Shuttle</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- MAIN STYLES (IMPORTANT: plural) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Party Shuttle and Private Transportation to Red Rocks Amphitheatre. View the 2026 concert calendar and book your ride." />
+
+  <!-- Styles -->
   <link rel="stylesheet" href="/styles.css" />
 </head>
 
 <body>
 
   <!-- HERO -->
-  <header class="hero">
-    <div class="hero-inner">
-      <h1>Red Rocks Party Shuttle</h1>
-      <p class="tagline">Ride together. Pre-game hard. Get home safe.</p>
-    </div>
+  <header style="padding: 40px 40px 20px 40px;">
+    <h1>Red Rocks Party Shuttle</h1>
+    <p>Ride together. Pre-game hard. Get home safe.</p>
   </header>
 
   <!-- MAIN LAYOUT -->
-  <main class="layout">
+  <div class="layout">
 
-    <!-- LEFT SIDEBAR (30%) -->
-    <aside class="sidebar" id="sidebar">
-      <h2>Select a Show</h2>
-      <p class="sidebar-hint">
+    <!-- SIDEBAR (30%) -->
+    <aside class="sidebar">
+      <h2 id="sidebar-title">Select a Show</h2>
+
+      <p id="sidebar-instructions">
         Hover a date to preview details.<br />
         Click a show to book transportation.
       </p>
 
-      <div class="sidebar-preview" id="sidebar-preview">
-        <p class="muted">
-          No show selected yet.
-        </p>
+      <div id="sidebar-preview" style="margin-top: 20px;">
+        <p><strong>No show selected yet.</strong></p>
       </div>
 
-      <div class="sidebar-footer">
-        <small>
-          Independent transportation service.<br />
-          Not affiliated with Red Rocks Amphitheatre.<br />
-          Event data powered by DCC.
-        </small>
+      <div id="sidebar-prices" style="display:none; margin-top: 20px;">
+        <p><strong>$59</strong> — Party Shuttle</p>
+        <p><strong>$499</strong> — Private Suburban</p>
       </div>
+
+      <hr style="margin: 30px 0; border-color: #333;" />
+
+      <small>
+        Independent transportation service.<br />
+        Not affiliated with Red Rocks Amphitheatre.<br />
+        Event data powered by DCC.
+      </small>
     </aside>
 
-    <!-- RIGHT CONTENT (70%) -->
-    <section class="content">
+    <!-- CONTENT (70%) -->
+    <main class="content">
       <h2>2026 Red Rocks Concert Calendar</h2>
-      <p class="subhead">
-        Click a show date to view details and book transportation.
-      </p>
+      <p>Click a show date to view details and book transportation.</p>
 
-      <!-- CALENDAR GRID -->
-      <div id="calendar" class="calendar-grid">
-        <p class="loading">Loading events…</p>
+      <!-- Calendar renders here -->
+      <div id="calendar">
+        <p>Loading events…</p>
       </div>
-    </section>
+    </main>
 
-  </main>
+  </div>
 
-  <!-- CALENDAR RENDERER -->
+  <!-- Scripts -->
   <script src="/calendar.js"></script>
 
 </body>
