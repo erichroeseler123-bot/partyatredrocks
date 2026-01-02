@@ -2,45 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Concert Details</title>
+  <title>Show Details</title>
   <script src="./concerts.js"></script>
   <style>
-    body { font-family: system-ui; max-width: 800px; margin: 40px auto; }
-    .btn { display: inline-block; margin: 10px 10px 0 0; padding: 12px 16px; background: #000; color: #fff; text-decoration: none; }
-    .secondary { background: #444; }
+    body { font-family: system-ui; max-width: 800px; margin: auto; padding: 24px; }
+    .btn { display: inline-block; margin: 8px 8px 0 0; padding: 12px 16px; background: #000; color: #fff; text-decoration: none; }
   </style>
 </head>
 <body>
 
-<h1 id="title"></h1>
-<p id="date"></p>
-<p id="desc"></p>
-
-<a id="axs" class="btn" target="_blank">🎟 Buy Tickets</a>
-<a id="shuttle" class="btn secondary">🚌 Book Shuttle</a>
-<a id="suburban" class="btn secondary">🚐 Book Suburban</a>
+<div id="app">Loading…</div>
 
 <script>
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
-
-  const show = window.redRocks2026Events.find(e => e.id === id);
+  const id = new URLSearchParams(location.search).get("id");
+  const show = window.redRocks2026Events.find(s => s.id === id);
 
   if (!show) {
-    document.body.innerHTML = "<h1>Show not found</h1>";
-  } else {
-    document.getElementById("title").textContent = show.title;
-    document.getElementById("date").textContent = show.start + " · " + show.venue;
-    document.getElementById("desc").textContent = show.description;
-
-    document.getElementById("axs").href = show.axs;
-
-    document.getElementById("shuttle").href =
-      `https://partyatredrocks.com/book?show=${show.id}`;
-
-    document.getElementById("suburban").href =
-      `https://partyatredrocks.com/suburban?show=${show.id}`;
+    document.getElementById("app").innerHTML =
+      "<h1>Show not found</h1><p>ID mismatch between calendar and concerts.js</p>";
+    throw new Error("Show not found");
   }
+
+  document.getElementById("app").innerHTML = `
+    <h1>${show.title}</h1>
+    <p><strong>Date:</strong> ${show.date}</p>
+    <p><strong>Venue:</strong> Red Rocks Amphitheatre</p>
+
+    <a class="btn" href="${show.ticketUrl}" target="_blank">Buy Tickets (AXS)</a>
+    <a class="btn" href="/book-shuttle.html?show=${show.id}">Book Shuttle</a>
+    <a class="btn" href="/book-suburban.html?show=${show.id}">Book Suburban</a>
+  `;
 </script>
 
 </body>
