@@ -1,31 +1,43 @@
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const calendarEl = document.getElementById("calendar");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Party at Red Rocks 2026</title>
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+  <script src="./concerts.js"></script> <!-- Loads the event data -->
+</head>
+<body>
+  <h1>Red Rocks 2026 Concerts</h1>
+  <div id="calendar"></div>
 
-  const calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: "dayGridMonth",
-    initialDate: "2026-05-01",
-    height: "auto",
-    headerToolbar: {
-      left: "prev,next today",
-      center: "title",
-      right: "dayGridMonth,timeGridWeek"
-    },
-    events: redRocks2026Events.map(ev => ({
-      title: ev.title,
-      start: ev.start,
-      url: "https://www.axs.com/events?query=red+rocks+" + encodeURIComponent(ev.title), // Links to AXS search — safe default
-      target: "_blank"
-    })),
-    eventClick(info) {
-      info.jsEvent.preventDefault();
-      window.open(info.event.url, "_blank");
-    }
-  });
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const calendarEl = document.getElementById("calendar");
 
-  calendar.render();
-});
-</script>
+      const calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: "dayGridMonth",
+        initialDate: "2026-05-01",
+        height: "auto",
+        headerToolbar: {
+          left: "prev,next today",
+          center: "title",
+          right: "dayGridMonth,timeGridWeek"
+        },
+        events: redRocks2026Events.map(ev => ({
+          title: ev.title,
+          start: ev.start,
+          url: ev.url || "https://www.redrocksonline.com/events/",
+          target: "_blank"
+        })),
+        eventClick: function(info) {
+          info.jsEvent.preventDefault();
+          window.open(info.event.url, "_blank");
+        }
+      });
 
-<!-- Add this at the top of <head> or before the script if not already -->
-<script src="./concerts.js"></script>
+      calendar.render();
+    });
+  </script>
+</body>
+</html>
