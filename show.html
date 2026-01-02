@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8">
   <title>Show Details – Red Rocks</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Concert data -->
+  <!-- Concert data (SOURCE OF TRUTH) -->
   <script src="./concerts.js"></script>
 
-  <!-- Spotify embed styling -->
   <style>
     body {
+      margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       background: #0b0b0b;
       color: #fff;
-      margin: 0;
-      padding: 24px;
+      padding: 32px;
     }
 
     .container {
@@ -29,110 +27,95 @@
     }
 
     .meta {
-      opacity: 0.85;
+      opacity: 0.8;
       margin-bottom: 24px;
     }
 
-    .cta-row {
+    .buttons {
       display: flex;
-      flex-wrap: wrap;
       gap: 12px;
-      margin: 28px 0;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
     }
 
-    .cta {
-      padding: 14px 20px;
-      background: #ff0055;
-      color: #fff;
+    .btn {
+      padding: 14px 18px;
+      border-radius: 10px;
       text-decoration: none;
-      font-weight: 700;
-      border-radius: 6px;
-      text-align: center;
-      flex: 1 1 200px;
+      font-weight: 600;
+      color: #fff;
+      display: inline-block;
     }
 
-    .cta.secondary {
-      background: #222;
-    }
-
-    .cta.suburban {
-      background: #0a4cff;
-    }
-
-    .section {
-      margin-top: 36px;
-    }
+    .tickets { background: #ff0055; }
+    .shuttle { background: #222; }
+    .suburban { background: #0047ff; }
 
     iframe {
-      border-radius: 12px;
-      margin-top: 12px;
+      width: 100%;
+      height: 420px;
+      border-radius: 14px;
+      border: none;
     }
 
     .back {
-      display: inline-block;
       margin-top: 40px;
+      display: inline-block;
       opacity: 0.7;
-      text-decoration: none;
-      color: #aaa;
     }
   </style>
 </head>
+
 <body>
+  <div class="container">
+    <h1 id="title"></h1>
+    <div class="meta">
+      <span id="date"></span> • Red Rocks Amphitheatre – Morrison, CO
+    </div>
 
-<div class="container" id="app">
-  <h1>Loading…</h1>
-</div>
+    <div class="buttons">
+      <a id="ticket" class="btn tickets" target="_blank">Buy Tickets (AXS)</a>
+      <a href="/shuttle.html" class="btn shuttle">Book Party Shuttle</a>
+      <a href="/suburban.html" class="btn suburban">Book Suburban / Private Ride</a>
+    </div>
 
-<script>
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
+    <h2>Listen</h2>
+    <iframe
+      id="spotify"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy">
+    </iframe>
 
-  if (!id || !window.redRocks2026Events) {
-    document.getElementById("app").innerHTML = "<h1>Show not found</h1>";
-  } else {
+    <a href="/" class="back">← Back to calendar</a>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    if (!window.redRocks2026Events) {
+      document.body.innerHTML = "<h1>Concert data not loaded</h1>";
+      throw new Error("concerts.js missing");
+    }
+
     const show = window.redRocks2026Events.find(e => e.id === id);
 
     if (!show) {
-      document.getElementById("app").innerHTML = "<h1>Show not found</h1>";
-    } else {
-      const artistForSpotify = encodeURIComponent(show.title.split(" feat")[0]);
-
-      document.getElementById("app").innerHTML = `
-        <h1>${show.title}</h1>
-        <div class="meta">
-          📅 ${show.date}<br>
-          📍 Red Rocks Amphitheatre – Morrison, CO
-        </div>
-
-        <div class="cta-row">
-          <a class="cta" href="${show.ticketUrl}" target="_blank">
-            🎟 Buy Tickets (AXS)
-          </a>
-          <a class="cta secondary" href="https://partyatredrocks.com">
-            🚌 Book Party Shuttle
-          </a>
-          <a class="cta suburban" href="https://denverairportpickup.com">
-            🚐 Book Suburban / Private Ride
-          </a>
-        </div>
-
-        <div class="section">
-          <h2>🎧 Listen</h2>
-          <iframe
-            src="https://open.spotify.com/embed/search/${artistForSpotify}"
-            width="100%"
-            height="352"
-            frameborder="0"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy">
-          </iframe>
-        </div>
-
-        <a class="back" href="/">← Back to calendar</a>
-      `;
+      document.body.innerHTML = "<h1>Show not found</h1>";
+      throw new Error("Invalid show ID");
     }
-  }
-</script>
 
+    document.getElementById("title").textContent = show.title;
+    document.getElementById("date").textContent = show.date;
+    document.getElementById("ticket").href = show.ticketUrl;
+
+    const primaryArtist = show.title
+      .split(/ with | & |,| feat| featuring/i)[0]
+      .trim();
+
+    document.getElementById("spotify").src =
+      "https://open.spotify.com/embed/search/" +
+      encodeURIComponent(primaryArtist);
+  </script>
 </body>
 </html>
