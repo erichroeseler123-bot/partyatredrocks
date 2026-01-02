@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Show Details · Red Rocks</title>
+  <meta charset="UTF-8" />
+  <title>Show Details – Red Rocks</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Load concert data FIRST -->
+  <script src="./concerts.js"></script>
 
   <style>
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #0b0e13;
+      background: #0b0b0d;
       color: #fff;
-      line-height: 1.5;
+      padding-bottom: 90px;
     }
 
     .container {
@@ -20,12 +23,7 @@
       padding: 24px;
     }
 
-    .back {
-      color: #aaa;
-      text-decoration: none;
-      display: inline-block;
-      margin-bottom: 16px;
-    }
+    a { color: #8ab4ff; text-decoration: none; }
 
     h1 {
       font-size: 2.2rem;
@@ -33,48 +31,69 @@
     }
 
     .meta {
-      color: #bbb;
-      margin-bottom: 16px;
-    }
-
-    .badge {
-      display: inline-block;
-      background: #1e293b;
-      color: #9ca3af;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      margin-right: 8px;
-    }
-
-    .description {
-      margin: 24px 0;
-      font-size: 1.05rem;
-      color: #e5e7eb;
-    }
-
-    .section {
-      margin-top: 32px;
-    }
-
-    .section h2 {
-      font-size: 1.3rem;
+      color: #b5b5b5;
+      font-size: 0.95rem;
       margin-bottom: 12px;
     }
 
-    .cta {
-      display: block;
-      text-align: center;
-      padding: 16px;
-      margin-top: 16px;
-      border-radius: 10px;
-      font-size: 1.1rem;
-      text-decoration: none;
+    .pill {
+      display: inline-block;
+      background: #1e1e22;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      margin-right: 6px;
+    }
+
+    .description {
+      margin: 18px 0 26px;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #e0e0e0;
+    }
+
+    .section-title {
+      margin: 28px 0 12px;
+      font-size: 1.2rem;
       font-weight: 600;
     }
 
+    .spotify {
+      margin-top: 12px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      margin: 40px 0;
+      font-size: 0.95rem;
+    }
+
+    /* Sticky CTA */
+    .sticky-cta {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      gap: 10px;
+      padding: 12px;
+      background: rgba(0,0,0,0.95);
+      backdrop-filter: blur(8px);
+      z-index: 999;
+    }
+
+    .sticky-cta a {
+      flex: 1;
+      text-align: center;
+      padding: 14px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
     .tickets {
-      background: #e11d48;
+      background: #ff0055;
       color: #fff;
     }
 
@@ -82,104 +101,110 @@
       background: #2563eb;
       color: #fff;
     }
-
-    .spotify {
-      margin-top: 24px;
-    }
-
-    .not-found {
-      text-align: center;
-      padding: 80px 20px;
-    }
   </style>
 </head>
-<body>
 
+<body>
   <div class="container">
-    <a class="back" href="/">← Back to Calendar</a>
+
+    <a href="/" style="opacity:.7">← Back to calendar</a>
 
     <h1 id="title"></h1>
 
     <div class="meta">
-      <span class="badge" id="date"></span>
-      <span class="badge" id="genre"></span>
+      <span id="date"></span> · Red Rocks Amphitheatre – Morrison, CO
     </div>
 
-    <div class="meta" id="times"></div>
-
-    <p class="description" id="description"></p>
-
-    <div class="section spotify" id="spotify"></div>
-
-    <div class="section">
-      <a id="tickets" class="cta tickets" target="_blank">
-        🎟 Buy Tickets on AXS
-      </a>
-
-      <a id="shuttle" class="cta shuttle" style="display:none;">
-        🚍 Book Party Shuttle
-      </a>
+    <div>
+      <span class="pill" id="genre"></span>
+      <span class="pill">Doors: <span id="doors"></span></span>
+      <span class="pill">Show: <span id="showTime"></span></span>
     </div>
+
+    <div class="description" id="description"></div>
+
+    <div class="section-title">Listen</div>
+    <div class="spotify" id="spotify"></div>
+
+    <div class="nav">
+      <a id="prev"></a>
+      <a id="next"></a>
+    </div>
+
   </div>
 
-  <!-- DATA SOURCE -->
-  <script src="./concerts.js"></script>
+  <!-- Sticky Money Bar -->
+  <div class="sticky-cta">
+    <a id="tickets" class="tickets" target="_blank">🎟 Buy Tickets (AXS)</a>
+    <a id="shuttle" class="shuttle" target="_blank">🚍 Book Party Shuttle</a>
+  </div>
 
-  <!-- PAGE LOGIC -->
   <script>
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
 
     if (!window.redRocks2026Events || !id) {
-      document.body.innerHTML = '<div class="not-found"><h1>Show not found</h1></div>';
+      document.body.innerHTML = "<h1 style='padding:40px'>Show not found</h1>";
+      throw new Error("Missing data or ID");
+    }
+
+    const events = window.redRocks2026Events;
+    const index = events.findIndex(e => e.id === id);
+    const event = events[index];
+
+    if (!event) {
+      document.body.innerHTML = "<h1 style='padding:40px'>Show not found</h1>";
+      throw new Error("Invalid show ID");
+    }
+
+    // Populate content
+    document.getElementById("title").textContent = event.title;
+    document.getElementById("date").textContent =
+      new Date(event.date).toLocaleDateString("en-US", {
+        weekday: "long", month: "long", day: "numeric", year: "numeric"
+      });
+
+    document.getElementById("genre").textContent = event.genre;
+    document.getElementById("doors").textContent = event.doors;
+    document.getElementById("showTime").textContent = event.showTime;
+    document.getElementById("description").textContent = event.description;
+
+    document.getElementById("tickets").href = event.ticketUrl;
+
+    document.getElementById("shuttle").href =
+      `/shuttle.html?event=${event.id}`;
+
+    // Spotify embed (ID ONLY — no search)
+    if (event.spotifyArtistId) {
+      document.getElementById("spotify").innerHTML = `
+        <iframe
+          src="https://open.spotify.com/embed/artist/${event.spotifyArtistId}"
+          width="100%"
+          height="352"
+          style="border-radius:12px;border:none"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy">
+        </iframe>
+      `;
     } else {
-      const event = window.redRocks2026Events.find(e => e.id === id);
+      document.getElementById("spotify").innerHTML =
+        "<p>No music preview available.</p>";
+    }
 
-      if (!event) {
-        document.body.innerHTML = '<div class="not-found"><h1>Show not found</h1></div>';
-      } else {
-        document.getElementById("title").textContent = event.title;
+    // Prev / Next navigation
+    if (events[index - 1]) {
+      document.getElementById("prev").href =
+        `/show.html?id=${events[index - 1].id}`;
+      document.getElementById("prev").textContent =
+        "← " + events[index - 1].title;
+    }
 
-        document.getElementById("date").textContent =
-          new Date(event.date).toLocaleDateString("en-US", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric"
-          });
-
-        document.getElementById("genre").textContent = event.genre || "Live Music";
-
-        document.getElementById("times").textContent =
-          `Doors: ${event.doors || "TBA"} · Show: ${event.showTime || "TBA"}`;
-
-        document.getElementById("description").textContent =
-          event.description || "";
-
-        document.getElementById("tickets").href = event.ticketUrl;
-
-        if (event.shuttleRecommended) {
-          const shuttle = document.getElementById("shuttle");
-          shuttle.style.display = "block";
-          shuttle.href = `/shuttle.html?date=${event.date}&show=${encodeURIComponent(event.title)}`;
-        }
-
-        if (event.spotifyArtistId) {
-          document.getElementById("spotify").innerHTML = `
-            <h2>Listen</h2>
-            <iframe style="border-radius:12px"
-              src="https://open.spotify.com/embed/artist/${event.spotifyArtistId}"
-              width="100%"
-              height="352"
-              frameborder="0"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy">
-            </iframe>
-          `;
-        }
-      }
+    if (events[index + 1]) {
+      document.getElementById("next").href =
+        `/show.html?id=${events[index + 1].id}`;
+      document.getElementById("next").textContent =
+        events[index + 1].title + " →";
     }
   </script>
-
 </body>
 </html>
