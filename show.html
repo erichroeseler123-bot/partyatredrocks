@@ -1,95 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Show · Party At Red Rocks</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="/styles.css" />
+  <meta charset="utf-8">
+  <title>Concert Details</title>
+
+  <script src="./concerts.js"></script>
+  <script src="./show.js" defer></script>
+
+  <style>
+    body { font-family: system-ui; padding: 30px; max-width: 900px; margin: auto; }
+    .btn { display: inline-block; padding: 12px 18px; margin: 10px 10px 0 0; text-decoration: none; color: white; border-radius: 6px; }
+    .axs { background: #0057ff; }
+    .shuttle { background: #e63946; }
+    .suburban { background: #222; }
+  </style>
 </head>
 <body>
 
-  <!-- LEFT SIDEBAR -->
-  <aside id="dcc-sidebar">
-    <h2>DCC · Red Rocks</h2>
-    <div class="status">SHOW CONTEXT</div>
+<h1 id="title"></h1>
+<p id="date"></p>
+<p id="venue"></p>
+<p id="description"></p>
 
-    <div id="dcc-preview">
-      <div class="placeholder">Loading show…</div>
-    </div>
-
-    <a class="dcc-link" href="/">← Back to Calendar</a>
-  </aside>
-
-  <!-- MAIN CONTENT -->
-  <main id="main">
-    <h1 id="show-title">Loading…</h1>
-    <p id="show-date" class="muted"></p>
-
-    <section class="booking-card">
-      <h3>Transportation</h3>
-      <ul>
-        <li>$59 Shuttle Seat</li>
-        <li>$499 Suburban (private)</li>
-      </ul>
-      <a id="book-shuttle" href="#" class="cta">Book Shuttle</a>
-    </section>
-
-    <section class="tickets">
-      <h3>Tickets</h3>
-      <a
-        id="ticketmaster-link"
-        href="https://www.ticketmaster.com/red-rocks-amphitheatre-tickets-morrison/venue/246"
-        target="_blank"
-        rel="noopener"
-      >
-        Buy Tickets
-      </a>
-    </section>
-  </main>
-
-  <script>
-    (async () => {
-      const date = new URLSearchParams(location.search).get("date");
-      if (!date) {
-        document.getElementById("show-title").textContent = "No date specified";
-        return;
-      }
-
-      const res = await fetch(
-        "https://dcc-redrocks-2026.denverairportpickup.workers.dev/events/redrocks"
-      );
-
-      if (!res.ok) {
-        document.getElementById("show-title").textContent =
-          "Failed to load event data";
-        return;
-      }
-
-      const data = await res.json();
-      const ev = data.events.find(e => e.date === date);
-
-      if (!ev) {
-        document.getElementById("show-title").textContent = "Show not found";
-        return;
-      }
-
-      const title = ev.artists.length
-        ? ev.artists.join(", ")
-        : ev.name;
-
-      document.getElementById("show-title").textContent = title;
-      document.getElementById("show-date").textContent =
-        \`\${ev.date} · \${ev.time || ""}\`;
-
-      document.getElementById("dcc-preview").innerHTML = \`
-        <strong>\${title}</strong><br/>
-        <span>\${ev.date} · \${ev.time || ""}</span>
-      \`;
-
-      document.getElementById("book-shuttle").href =
-        \`/book.html?date=\${ev.date}\`;
-    })();
-  </script>
+<a id="ticketLink" class="btn axs" target="_blank">Buy Tickets (AXS)</a>
+<a id="shuttleLink" class="btn shuttle" target="_blank">Book Shuttle</a>
+<a id="suburbanLink" class="btn suburban" target="_blank">Private Suburban</a>
 
 </body>
 </html>
