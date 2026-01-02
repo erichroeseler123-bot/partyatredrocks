@@ -1,61 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Red Rocks 2026 Concert Calendar</title>
-
-  <!-- FullCalendar -->
-  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
-
-  <!-- Concert data MUST load first -->
-  <script src="./concerts.js"></script>
-
-  <style>
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      padding: 20px;
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (!window.redRocks2026Events) {
+      console.error("Concert data not loaded");
+      return;
     }
-    #calendar {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-  </style>
-</head>
-<body>
 
-  <h1>Red Rocks 2026 Concert Calendar</h1>
-  <div id="calendar"></div>
+    const calendarEl = document.getElementById("calendar");
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: "dayGridMonth",
+      initialDate: "2026-05-01",
+      height: "auto",
+      headerToolbar: {
+        left: "prev,next today",
+        center: "title",
+        right: "dayGridMonth,timeGridWeek"
+      },
 
-      if (!window.redRocks2026Events || !window.redRocks2026Events.length) {
-        console.error("❌ Concert data not loaded");
-        return;
+      events: window.redRocks2026Events.map(ev => ({
+        id: ev.id,
+        title: ev.title,
+        start: ev.date,        // Uses the correct date field
+        url: `/show.html?id=${ev.id}`
+      })),
+
+      eventClick(info) {
+        info.jsEvent.preventDefault();
+        window.open(info.event.url, "_blank");
       }
-
-      const calendarEl = document.getElementById("calendar");
-
-      const calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: "dayGridMonth",
-        initialDate: "2026-05-01",
-        height: "auto",
-        headerToolbar: {
-          left: "prev,next today",
-          center: "title",
-          right: "dayGridMonth,timeGridWeek"
-        },
-        events: window.redRocks2026Events,
-        eventClick(info) {
-          info.jsEvent.preventDefault();
-          window.open(info.event.url, "_blank");
-        }
-      });
-
-      calendar.render();
     });
-  </script>
 
-</body>
-</html>
+    calendar.render();
+  });
+</script>
