@@ -111,18 +111,18 @@
     document.getElementById("date").textContent = show.date;
     document.getElementById("ticket").href = show.ticketUrl;
 
-const artistQuery = show.title
-  // remove smart quotes
-  .replace(/[“”"]/g, "")
-  // remove album / tour subtitles after dash
-  .replace(/\s*[-–—]\s*.*/g, "")
-  // remove "with" and featured artists
-  .replace(/\s+with.*$/i, "")
-  .replace(/\s+featuring.*$/i, "")
-  .replace(/\s+ft\..*$/i, "")
-  // remove extra artists after &
-  .replace(/\s*&.*$/i, "")
-  .trim();
+function extractPrimaryArtist(title) {
+  return title
+    .replace(/[“”"]/g, "")
+    .replace(/\s*[-–—]\s*.*/g, "")
+    .replace(/\s+with.*$/i, "")
+    .replace(/\s+featuring.*$/i, "")
+    .replace(/\s+ft\..*$/i, "")
+    .replace(/\s*&.*$/i, "")
+    .trim();
+}
+
+const artistQuery = extractPrimaryArtist(show.title);
 
 document.getElementById("spotify").src =
   "https://open.spotify.com/embed/search/" +
