@@ -1,35 +1,71 @@
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    if (!window.redRocks2026Events) {
-      console.error("Concert data not loaded");
-      return;
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Red Rocks 2026 Concerts</title>
 
-    const calendarEl = document.getElementById("calendar");
+  <!-- FullCalendar CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css"
+    rel="stylesheet"
+  />
 
-    const calendar = new FullCalendar.Calendar(calendarEl, {
-      initialView: "dayGridMonth",
-      initialDate: "2026-05-01",
-      height: "auto",
-      headerToolbar: {
-        left: "prev,next today",
-        center: "title",
-        right: "dayGridMonth,timeGridWeek"
-      },
+  <!-- FullCalendar JS (GLOBAL build) -->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
 
-      events: window.redRocks2026Events.map(ev => ({
-        id: ev.id,
-        title: ev.title,
-        start: ev.date,        // Uses the correct date field
-        url: `/show.html?id=${ev.id}`
-      })),
+  <!-- 🔑 LOAD DATA FIRST -->
+  <script src="./concerts.js"></script>
+</head>
+<body>
 
-      eventClick(info) {
-        info.jsEvent.preventDefault();
-        window.open(info.event.url, "_blank");
+  <h1>Red Rocks 2026 Concert Calendar</h1>
+
+  <!-- 🔑 REQUIRED -->
+  <div id="calendar"></div>
+
+  <!-- 🔑 CALENDAR INIT COMES LAST -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      console.log("Events loaded:", window.redRocks2026Events?.length);
+
+      if (!window.redRocks2026Events) {
+        console.error("Concert data not loaded");
+        return;
       }
-    });
 
-    calendar.render();
-  });
-</script>
+      if (!window.FullCalendar) {
+        console.error("FullCalendar not loaded");
+        return;
+      }
+
+      const calendarEl = document.getElementById("calendar");
+
+      const calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: "dayGridMonth",
+        initialDate: "2026-05-01",
+        height: "auto",
+        headerToolbar: {
+          left: "prev,next today",
+          center: "title",
+          right: "dayGridMonth,timeGridWeek"
+        },
+
+        events: window.redRocks2026Events.map(ev => ({
+          id: ev.id,
+          title: ev.title,
+          start: ev.date,
+          url: `/show.html?id=${ev.id}`
+        })),
+
+        eventClick(info) {
+          info.jsEvent.preventDefault();
+          window.open(info.event.url, "_blank");
+        }
+      });
+
+      calendar.render();
+    });
+  </script>
+
+</body>
+</html>
