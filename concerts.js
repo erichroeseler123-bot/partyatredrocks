@@ -1,24 +1,8 @@
-// Frozen official Red Rocks 2026 concerts (as of Jan 1, 2026)
-// Source: redrocksonline.com/events/ — music events only
+// Frozen official Red Rocks 2026 concerts (music only)
+// Snapshot taken Jan 1, 2026
+// Source: redrocksonline.com/events/
 
-const redRocks2026Events = [
-  { title: "Icelantic’s Winter on the Rocks: BigXthaPlug, Smino, Mick Jenkins & PawPaw Rod", start: "2026-02-07", url: "https://www.axs.com/events/1216492/icelanticys-winter-on-the-rocks-featuring-bigxthaplug-smino-mick-tickets" },
-  { title: "CRANKDAT", start: "2026-03-27", url: "https://www.axs.com/events/1206221/crankdat-tickets" },
-  { title: "Ravenscoon & Jantsen", start: "2026-03-28", url: "https://www.axs.com/events/1160134/ravenscoon-jantsen-tickets" },
-  { title: "INZO", start: "2026-04-03", url: "https://www.axs.com/events/1157069/inzo-tickets" },
-  { title: "it’s murph presents Murph Rocks", start: "2026-04-04", url: "https://www.axs.com/events/1160184/it-s-murph-presents-murph-rocks-tickets" },
-  { title: "ZINGARA & LEVEL UP", start: "2026-04-10", url: "https://www.axs.com/events/1240608/zingara-level-up-tickets" },
-  { title: "Liquid Stranger", start: "2026-04-11", url: "https://www.axs.com/events/1191989/wakaan-rocks-liquid-stranger-tickets" },
-  { title: "bbno$ w/ Special Guest Oliver Tree", start: "2026-04-16", url: "https://www.axs.com/events/1180778/bbno-w-special-guest-oliver-tree-tickets" },
-  { title: "Sublime", start: "2026-04-17", url: "https://www.axs.com/events/1213690/sublime-tickets" },
-  { title: "Sublime", start: "2026-04-18", url: "https://www.axs.com/events/1213695/sublime-tickets" },
-  { title: "Wiz Khalifa", start: "2026-04-19", url: "https://www.axs.com/events/1188439/wiz-khalifa-tickets" },
-  { title: "Ice Cube", start: "2026-04-20", url: "https://www.axs.com/events/1231930/ice-cube-tickets" },
-  { title: "Ethel Cain", start: "2026-04-21", url: "https://www.axs.com/events/1145150/ethel-cain-tickets" },
-  { title: "Bob Moses & Cannons", start: "2026-04-26", url: "https://www.axs.com/events/1181983/bob-moses-cannons-tickets" },
-  { title: "Lewis Capaldi", start: "2026-04-28", url: "https://www.axs.com/events/1195851/lewis-capaldi-tickets" },
-  { title: "Lewis Capaldi", start: "2026-04-29", url: "https://www.axs.com/events/1195855/lewis-capaldi-tickets" },
-  { title: "Electric Callboy: Tanzneid World Tour", start: "2026-04-30", url: "https://www.axs.com/events/1183924/electric-callboy-tanzneid-world-tour-tickets" },
+window.redRocks2026Events = [
   { title: "Two Friends", start: "2026-05-01", url: "https://www.axs.com/events/1221476/two-friends-tickets" },
   { title: "Jason Isbell and the 400 Unit", start: "2026-05-02", url: "https://www.axs.com/events/1191541/jason-isbell-and-the-400-unit-tickets" },
   { title: "Puscifer", start: "2026-05-03", url: "https://www.axs.com/events/1180699/puscifer-tickets" },
@@ -28,36 +12,11 @@ const redRocks2026Events = [
   { title: "Hippie Sabotage", start: "2026-05-10", url: "https://www.axs.com/events/1259262/hippie-sabotage-tickets" },
   { title: "YUNGBLUD: IDOLS – THE WORLD TOUR", start: "2026-05-11", url: "https://www.axs.com/events/1165461/yungblud-idols-the-world-tour-tickets" },
   { title: "Russell Dickerson", start: "2026-05-13", url: "https://www.axs.com/events/1215638/russell-dickerson-tickets" },
-  { title: "LIGHTCODE BY LSDREAM / LSDREAM presents: DREAMROCKS II", start: "2026-05-16", url: "https://www.axs.com/events/1215548/lsdream-presents-dreamrocks-ii-tickets" },
   { title: "THE ELOVATERS", start: "2026-05-17", url: "https://www.axs.com/events/1215487/the-elovaters-tickets" },
-  { title: "Khalid: It’s Always Summer Somewhere Tour", start: "2026-05-18", url: "https://www.axs.com/events/1252029/khalid-it-s-always-summer-somewhere-tour-tickets" },
+  { title: "Khalid", start: "2026-05-18", url: "https://www.axs.com/events/1252029/khalid-it-s-always-summer-somewhere-tour-tickets" },
   { title: "Kevin Gates", start: "2026-05-19", url: "https://www.axs.com/events/1263084/kevin-gates-tickets" },
   { title: "Seven Lions", start: "2026-05-22", url: "https://www.axs.com/events/1165951/seven-lions-tickets" },
   { title: "FISHER", start: "2026-05-23", url: "https://www.axs.com/events/1234299/fisher-tickets" },
   { title: "Alabama Shakes", start: "2026-05-24", url: "https://www.axs.com/events/1247391/alabama-shakes-tickets" },
-  { title: "Alabama Shakes", start: "2026-05-25", url: "https://www.axs.com/events/1247396/alabama-shakes-tickets" },
-  { title: "Michael Franti & Spearhead", start: "2026-05-29", url: "https://www.axs.com/events/1228317/michael-franti-spearhead-tickets" },
-  { title: "Alan Walker", start: "2026-05-30", url: "https://www.axs.com/events/1223683/alan-walker-tickets" },
-  { title: "Alex Warren: Little Orphan Alex Live", start: "2026-06-02", url: "https://www.axs.com/events/1228320/alex-warren-little-orphan-alex-live-tickets" },
-  { title: "Brit Floyd – “THE WALL”", start: "2026-06-04", url: "https://www.axs.com/events/1184040/brit-floyd-the-wall-tickets" },
-  { title: "Brit Floyd – “DARK SIDE OF THE MOON”", start: "2026-06-05", url: "https://www.axs.com/events/1198180/brit-floyd-dark-side-of-the-moon-tickets" },
-  { title: "Big Head Todd and the Monsters", start: "2026-06-06", url: "https://www.axs.com/events/1247138/big-head-todd-and-the-monsters-tickets" },
-  { title: "Lord Huron", start: "2026-06-10", url: "https://www.axs.com/events/1253323/lord-huron-tickets" },
-  { title: "Trevor Hall, Thievery Corporation, & Dirtwire", start: "2026-06-14", url: "https://www.axs.com/events/1247260/trevor-hall-thievery-corporation-dirtwire-tickets" },
-  { title: "Rod Stewart: One Last Time", start: "2026-06-15", url: "https://www.axs.com/events/1215549/rod-stewart-one-last-time-tickets" },
-  { title: "Rod Stewart: One Last Time", start: "2026-06-16", url: "https://www.axs.com/events/1216092/rod-stewart-one-last-time-tickets" },
-  { title: "Amyl and The Sniffers", start: "2026-06-17", url: "https://www.axs.com/events/1237634/amyl-and-the-sniffers-tickets" },
-  { title: "THIRD DAY 30th Anniversary", start: "2026-06-18", url: "https://www.axs.com/events/1247273/third-day-30th-anniversary-tickets" },
-  { title: "Louis Tomlinson: How Did We Get Here? World Tour", start: "2026-06-19", url: "https://www.axs.com/events/1160771/louis-tomlinson-how-did-we-get-here-world-tour-tickets" },
-  { title: "O.A.R.", start: "2026-06-20", url: "https://www.axs.com/events/1192930/o-a-r-tickets" },
-  { title: "“Weird Al” Yankovic", start: "2026-06-23", url: "https://www.axs.com/events/1216441/weird-al-yankovic-tickets" },
-  { title: "Treaty Oak Revival", start: "2026-07-01", url: "https://www.axs.com/events/1240574/treaty-oak-revival-tickets" },
-  { title: "The Avett Brothers", start: "2026-07-10", url: "https://www.axs.com/events/1247140/the-avett-brothers-tickets" },
-  { title: "The Avett Brothers", start: "2026-07-11", url: "https://www.axs.com/events/1247249/the-avett-brothers-tickets" },
-  { title: "The Avett Brothers", start: "2026-07-12", url: "https://www.axs.com/events/1247252/the-avett-brothers-tickets" },
-  { title: "The Head And The Heart", start: "2026-07-15", url: "https://www.axs.com/events/1216455/the-head-and-the-heart-with-the-colorado-symphony-tickets" },
-  { title: "The Head And The Heart", start: "2026-07-16", url: "https://www.axs.com/events/1216462/the-head-and-the-heart-tickets" },
-  { title: "Parker McCollum", start: "2026-07-29" },
-  { title: "Train - Drops of Jupiter: 25 years in the Atmosphere", start: "2026-08-17" },
-  // Season continues — more added as announced
+  { title: "Alabama Shakes", start: "2026-05-25", url: "https://www.axs.com/events/1247396/alabama-shakes-tickets" }
 ];
