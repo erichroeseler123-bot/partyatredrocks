@@ -109,13 +109,16 @@
     document.getElementById("date").textContent = show.date;
     document.getElementById("ticket").href = show.ticketUrl;
 
-    const primaryArtist = show.title
-      .split(/ with | & |,| feat| featuring/i)[0]
-      .trim();
+const artistQuery = show.title
+  .replace(/with.*$/i, "")
+  .replace(/&.*$/i, "")
+  .replace(/,.*$/i, "")
+  .trim();
 
-    document.getElementById("spotify").src =
-      "https://open.spotify.com/embed/search/" +
-      encodeURIComponent(primaryArtist);
+document.getElementById("spotify").src =
+  "https://open.spotify.com/embed/search?type=artist&q=" +
+  encodeURIComponent(artistQuery);
+
   </script>
 </body>
 </html>
