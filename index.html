@@ -1,55 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Red Rocks Party Shuttle</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="/styles.css" />
-</head>
-<body>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const calendarEl = document.getElementById("calendar");
 
-  <!-- LEFT SIDEBAR -->
-  <aside id="dcc-sidebar">
-    <h2>DCC · Red Rocks</h2>
-    <div class="status">LIVE EVENT DATA</div>
+  const calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: "dayGridMonth",
+    initialDate: "2026-05-01",
+    height: "auto",
+    headerToolbar: {
+      left: "prev,next today",
+      center: "title",
+      right: "dayGridMonth,timeGridWeek"
+    },
+    events: redRocks2026Events.map(ev => ({
+      title: ev.title,
+      start: ev.start,
+      url: "https://www.axs.com/events?query=red+rocks+" + encodeURIComponent(ev.title), // Links to AXS search — safe default
+      target: "_blank"
+    })),
+    eventClick(info) {
+      info.jsEvent.preventDefault();
+      window.open(info.event.url, "_blank");
+    }
+  });
 
-    <div id="dcc-preview">
-      <div class="placeholder">
-        Hover a show on the calendar to preview details
-      </div>
-    </div>
+  calendar.render();
+});
+</script>
 
-    <a class="dcc-link" href="#">
-      Open Destination Command Center →
-    </a>
-  </aside>
-
-  <!-- MAIN CONTENT -->
-  <main id="main">
-    <h1>Red Rocks Party Shuttle</h1>
-    <p class="tagline">Ride together. Pre-game hard. Get home safe.</p>
-
-    <h2>2026 Red Rocks Concert Calendar</h2>
-
-    <div class="calendar-header">
-      <button id="prev-month">‹</button>
-      <strong>May 2026</strong>
-      <button id="next-month">›</button>
-    </div>
-
-    <div class="calendar-labels">
-      <span>Sun</span><span>Mon</span><span>Tue</span>
-      <span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
-    </div>
-
-    <div id="calendar" class="calendar-grid"></div>
-  </main>
-
-  <!-- IMPORTANT: data loads FIRST -->
-  <script src="/concerts.js"></script>
-
-  <!-- calendar rendering logic -->
-  <script src="/calendar.js"></script>
-
-</body>
-</html>
+<!-- Add this at the top of <head> or before the script if not already -->
+<script src="./concerts.js"></script>
