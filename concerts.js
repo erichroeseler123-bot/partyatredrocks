@@ -1,5 +1,41 @@
 // concerts.js
-// Frozen snapshot of official Red Rocks concerts
-// Generated 2026-01-02T01:40:58.331Z
+// Frozen snapshot of official Red Rocks concerts (temporary)
+// This file is the single source of truth until APIs are ready
 
-window.CONCERTS = [];
+window.CONCERTS = [
+  { title: "CRANKDAT", start: "2026-03-27", url: "https://www.axs.com/" },
+  { title: "Ravenscoon & Jantsen", start: "2026-03-28", url: "https://www.axs.com/" },
+  { title: "INZO", start: "2026-04-03", url: "https://www.axs.com/" },
+  { title: "it’s murph presents Murph Rocks", start: "2026-04-04", url: "https://www.axs.com/" },
+  { title: "ZINGARA & LEVEL UP", start: "2026-04-10", url: "https://www.axs.com/" },
+  { title: "Liquid Stranger", start: "2026-04-11", url: "https://www.axs.com/" },
+  { title: "bbno$ w/ Oliver Tree", start: "2026-04-16", url: "https://www.axs.com/" },
+  { title: "Sublime", start: "2026-04-17", url: "https://www.axs.com/" },
+  { title: "Sublime", start: "2026-04-18", url: "https://www.axs.com/" },
+  { title: "Wiz Khalifa", start: "2026-04-19", url: "https://www.axs.com/" },
+  { title: "Ice Cube", start: "2026-04-20", url: "https://www.axs.com/" },
+  { title: "Ethel Cain", start: "2026-04-21", url: "https://www.axs.com/" },
+  { title: "Bob Moses & Cannons", start: "2026-04-26", url: "https://www.axs.com/" },
+  { title: "Lewis Capaldi", start: "2026-04-28", url: "https://www.axs.com/" },
+  { title: "Lewis Capaldi", start: "2026-04-29", url: "https://www.axs.com/" },
+  { title: "Electric Callboy", start: "2026-04-30", url: "https://www.axs.com/" },
+  { title: "Two Friends", start: "2026-05-01", url: "https://www.axs.com/" },
+  { title: "Jason Isbell and the 400 Unit", start: "2026-05-02", url: "https://www.axs.com/" },
+  { title: "Puscifer", start: "2026-05-03", url: "https://www.axs.com/" },
+  { title: "Bright Eyes", start: "2026-05-06", url: "https://www.axs.com/" },
+  { title: "Alejandro Fernández", start: "2026-05-07", url: "https://www.axs.com/" },
+  { title: "Cloonee", start: "2026-05-09", url: "https://www.axs.com/" },
+  { title: "Hippie Sabotage", start: "2026-05-10", url: "https://www.axs.com/" },
+  { title: "YUNGBLUD", start: "2026-05-11", url: "https://www.axs.com/" },
+  { title: "Russell Dickerson", start: "2026-05-13", url: "https://www.axs.com/" },
+  { title: "LIGHTCODE / LSDREAM", start: "2026-05-16", url: "https://www.axs.com/" },
+  { title: "THE ELOVATERS", start: "2026-05-17", url: "https://www.axs.com/" },
+  { title: "Khalid", start: "2026-05-18", url: "https://www.axs.com/" },
+  { title: "Kevin Gates", start: "2026-05-19", url: "https://www.axs.com/" },
+  { title: "Seven Lions", start: "2026-05-22", url: "https://www.axs.com/" },
+  { title: "FISHER", start: "2026-05-23", url: "https://www.axs.com/" },
+  { title: "Alabama Shakes", start: "2026-05-24", url: "https://www.axs.com/" },
+  { title: "Alabama Shakes", start: "2026-05-25", url: "https://www.axs.com/" },
+  { title: "Michael Franti & Spearhead", start: "2026-05-29", url: "https://www.axs.com/" },
+  { title: "Alan Walker", start: "2026-05-30", url: "https://www.axs.com/" }
+];

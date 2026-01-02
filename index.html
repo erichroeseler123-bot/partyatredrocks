@@ -8,6 +8,7 @@
 </head>
 <body>
 
+  <!-- LEFT SIDEBAR -->
   <aside id="dcc-sidebar">
     <h2>DCC · Red Rocks</h2>
     <div class="status">LIVE EVENT DATA</div>
@@ -23,6 +24,7 @@
     </a>
   </aside>
 
+  <!-- MAIN CONTENT -->
   <main id="main">
     <h1>Red Rocks Party Shuttle</h1>
     <p class="tagline">Ride together. Pre-game hard. Get home safe.</p>
@@ -43,7 +45,10 @@
     <div id="calendar" class="calendar-grid"></div>
   </main>
 
-  <!-- All logic lives in calendar.js -->
+  <!-- IMPORTANT: data loads FIRST -->
+  <script src="/concerts.js"></script>
+
+  <!-- calendar rendering logic -->
   <script src="/calendar.js"></script>
 
 </body>
