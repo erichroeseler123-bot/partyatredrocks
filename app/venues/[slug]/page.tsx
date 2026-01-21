@@ -1,42 +1,86 @@
-import { notFound } from 'next/navigation';
-import { VENUES } from '@/data/venues';
-import VenueShows from '@/components/VenueShows';
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import { getVenueEvents } from "@/lib/seatgeek";
 
-export default async function VenuePage({ params }: { params: Promise<{ slug: string }> }) {
-  const resolvedParams = await params;
-  // Standardize the slug to prevent "Not Found" errors
-  const slug = resolvedParams.slug.toLowerCase().trim();
-  const venue = VENUES[slug];
+export const revalidate = 3600; // 1 hour
 
-  if (!venue) {
-    return (
-      <main className="min-h-screen bg-black text-white flex flex-col items-center justify-center font-mono">
-        <h1 className="text-4xl font-black italic mb-4">VENUE NOT FOUND</h1>
-        <p className="text-zinc-500 mb-8 uppercase tracking-widest text-xs">Node: {slug} is inactive in registry</p>
-        <a href="/venues" className="border border-white/20 px-6 py-2 hover:bg-white hover:text-black transition-all text-xs">VIEW ALL ACTIVE NODES</a>
-      </main>
-    );
+export default async function VenuePage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const { slug } = params;
+
+  // Only apply this logic to Red Rocks
+  if (slug !== "red-rocks-amphitheatre") {
+    return notFound();
   }
 
+  // SeatGeek venue ID for Red Rocks Amphitheatre
+  const RED_ROCKS_VENUE_ID = 196; // this is correct
+
+  const events = await getVenueEvents(RED_ROCKS_VENUE_ID);
+
   return (
-    <main className="min-h-screen bg-black text-white pt-32 px-6 font-mono">
+    <main className="min-h-screen bg-black text-white px-6 py-24">
       <div className="max-w-5xl mx-auto">
-        <header className="mb-16 border-b border-white/10 pb-12">
-          <h1 className="text-6xl md:text-8xl font-black italic uppercase tracking-tighter mb-4 text-blue-500">
-            {venue.name}
+        {/* HEADER */}
+        <header className="mb-16">
+          <h1 className="text-5xl md:text-7xl font-black italic uppercase tracking-tight mb-6">
+            Red Rocks Shuttle
           </h1>
-          <div className="text-xs text-zinc-500 uppercase tracking-widest">
-            {venue.city}, {venue.state} // Mission Rate: ${venue.price}.00 RT
-          </div>
+          <p className="text-zinc-400 max-w-2xl">
+            Round-trip shuttle service to Red Rocks Amphitheatre.
+            Pickup anywhere in Denver. Driver waits after the show.
+          </p>
         </header>
 
-        <section className="mb-24 p-10 bg-blue-600 rounded-3xl shadow-2xl">
-           <h2 className="text-white font-black uppercase tracking-widest text-sm mb-4">DEPLOY FLEET</h2>
-           <p className="text-blue-100 text-[10px] mb-8 uppercase">Direct Door-to-Door Shuttle Service. $250.00 Minimum activation fee.</p>
-           <a href="/book-shuttle" className="inline-block bg-black text-white px-10 py-4 rounded-xl font-black uppercase tracking-widest text-xs">Reserve Suburban</a>
-        </section>
+        {/* SHOW LIST */}
+        <section>
+          <h2 className="text-2xl font-black uppercase tracking-wide mb-8">
+            Upcoming Shows
+          </h2>
 
-        <VenueShows venue={venue} />
+          <div className="space-y-6">
+            {events.map((event) => {
+              const date = new Date(event.datetime_local);
+
+              return (
+                <div
+                  key={event.id}
+                  className="flex flex-col md:flex-row md:items-center md:justify-between border border-white/10 rounded-xl p-6"
+                >
+                  <div>
+                    <div className="text-sm text-zinc-400 mb-1">
+                      {date.toLocaleDateString("en-US", {
+                        weekday: "short",
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                      })}
+                    </div>
+                    <div className="text-xl font-bold">
+                      {event.title}
+                    </div>
+                  </div>
+
+                  <Link
+                    href={`/book-shuttle?venue=red-rocks&eventId=${event.id}`}
+                    className="mt-4 md:mt-0 inline-block bg-red-600 hover:bg-red-500 transition px-6 py-3 rounded-full font-bold uppercase tracking-widest text-xs"
+                  >
+                    Book Shuttle
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
+
+          {events.length === 0 && (
+            <p className="text-zinc-500 mt-8">
+              No upcoming shows found.
+            </p>
+          )}
+        </section>
       </div>
     </main>
   );
