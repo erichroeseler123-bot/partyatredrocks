@@ -4,7 +4,7 @@ export default function DispatchHome() {
   const services = [
     {
       title: "Red Rocks Shuttle",
-      desc: "Live show list & concert transport. Book by event.",
+      desc: "Live show list & premium concert transport. Book by event.",
       link: "/venues/red-rocks-amphitheatre",
       price: "Per Person",
       tag: "Live Shows",
@@ -30,36 +30,59 @@ export default function DispatchHome() {
 
   return (
     <main className="min-h-screen bg-[#050505] text-white selection:bg-red-500">
+      {/* Header Area */}
       <section className="px-6 pt-32 pb-20 border-b border-white/5">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center gap-4 mb-8">
             <span className="h-[1px] w-12 bg-red-600"></span>
-            <span className="text-[10px] uppercase tracking-[0.5em] font-black text-red-500">Dispatch Hub</span>
+            <span className="text-[10px] uppercase tracking-[0.5em] font-black text-red-500">
+              Party at Red Rocks / Dispatch Center
+            </span>
           </div>
-          <h1 className="text-7xl md:text-8xl font-black italic uppercase tracking-tighter leading-none">
-            GoSno <span className="text-zinc-800">Dispatch</span>
+          <h1 className="text-7xl md:text-9xl font-black italic uppercase tracking-tighter leading-[0.8]">
+            Dispatch <br />
+            <span className="text-zinc-900 outline-text">Hub</span>
           </h1>
+          <p className="mt-10 text-zinc-500 max-w-xl text-lg leading-relaxed uppercase font-bold tracking-tight">
+            Professional mountain transport and concert shuttles. Select a destination to view availability.
+          </p>
         </div>
       </section>
 
+      {/* Services Grid */}
       <section className="px-6 py-20">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
           {services.map((s) => (
             <Link key={s.title} href={s.link} className="group">
-              <div className="h-full border border-white/10 bg-white/[0.02] p-8 rounded-[2rem] hover:bg-white/[0.05] hover:border-white/20 transition-all duration-300">
-                <div className="flex justify-between items-start mb-12">
-                  <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${s.color}`}>
-                    {s.tag}
-                  </span>
+              <div className="h-full border border-white/10 bg-white/[0.01] p-10 rounded-[2.5rem] hover:bg-white/[0.03] hover:border-white/20 transition-all duration-500 flex flex-col justify-between">
+                <div>
+                  <div className="mb-12">
+                    <span className={`px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${s.color}`}>
+                      {s.tag}
+                    </span>
+                  </div>
+                  <h3 className="text-4xl font-black italic uppercase mb-4 tracking-tighter group-hover:text-red-500 transition-colors">
+                    {s.title}
+                  </h3>
+                  <p className="text-zinc-500 text-sm leading-relaxed mb-10 font-medium">
+                    {s.desc}
+                  </p>
                 </div>
-                <h3 className="text-3xl font-black italic uppercase mb-4 tracking-tight">{s.title}</h3>
-                <p className="text-zinc-500 text-sm leading-relaxed mb-8">{s.desc}</p>
-                <div className="text-2xl font-mono font-bold tracking-tighter">{s.price}</div>
+                <div className="text-3xl font-mono font-bold tracking-tighter text-white">
+                  {s.price}
+                </div>
               </div>
             </Link>
           ))}
         </div>
       </section>
+
+      {/* Footer Dispatch Line */}
+      <footer className="px-6 py-12 border-t border-white/5 text-center">
+        <a href="tel:7203696292" className="text-zinc-700 text-[11px] uppercase tracking-[0.4em] font-black hover:text-white transition-colors">
+          Direct Dispatch: (720) 369-6292
+        </a>
+      </footer>
     </main>
   );
 }
