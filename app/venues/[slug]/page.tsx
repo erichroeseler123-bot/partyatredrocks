@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getVenueEvents } from "@/lib/seatgeek";
-import { venues } from "@/data/venues"; // or wherever your venue data lives
+import { VENUES } from "@/data/venues";
 
 export const revalidate = 3600;
 
@@ -54,7 +54,7 @@ export default async function VenuePage({
   }
 
   // 🟢 ALL OTHER VENUES (Mishawaka, etc.)
-  const venue = venues.find((v) => v.slug === slug);
+const venue = VENUES.find((v) => v.slug === slug);
   if (!venue) return notFound();
 
   return (
