@@ -1,97 +1,94 @@
 import Link from "next/link";
 
-export default function HomePage() {
+export default function DispatchHome() {
+  const services = [
+    {
+      title: "Red Rocks Shuttle",
+      desc: "Live show list & concert transport. Book by event.",
+      link: "/venues/red-rocks-amphitheatre",
+      price: "Per Person",
+      tag: "Live Shows",
+      color: "bg-red-600"
+    },
+    {
+      title: "Mishawaka Shuttle",
+      desc: "$65 Shared shuttle service through the Poudre Canyon.",
+      link: "/venues/mishawaka-amphitheatre",
+      price: "$65 RT",
+      tag: "Shared",
+      color: "bg-blue-600"
+    },
+    {
+      title: "All-Venue Private",
+      desc: "Private transport to any front-range venue.",
+      link: "/venues/all-venues", // We will build this or redirect it next
+      price: "$250 Min",
+      tag: "Private",
+      color: "bg-zinc-800"
+    }
+  ];
+
   return (
-    <main className="min-h-screen bg-black text-white">
-      {/* HERO */}
-      <section className="relative flex items-center justify-center h-[70vh] border-b border-white/10">
-        <div className="absolute inset-0 bg-[url('https://www.partyatredrocks.com/Shuttle_jpg')] bg-cover bg-center opacity-40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20" />
-        <div className="relative z-10 text-center px-6 max-w-4xl">
-          <p className="text-red-500 uppercase tracking-[0.4em] text-xs font-mono mb-6">
-            Premium Concert Transportation
-          </p>
-          <h1 className="text-5xl md:text-7xl font-black italic uppercase tracking-tight mb-6">
-            You Go to the Show.<br />We Handle the Ride.
+    <main className="min-h-screen bg-[#050505] text-white selection:bg-red-500">
+      {/* Hero / Header */}
+      <section className="px-6 pt-32 pb-20 border-b border-white/5">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center gap-4 mb-8">
+            <span className="h-[1px] w-12 bg-red-600"></span>
+            <span className="text-[10px] uppercase tracking-[0.5em] font-black text-red-500">
+              GoSno / Party at Red Rocks
+            </span>
+          </div>
+          <h1 className="text-7xl md:text-8xl font-black italic uppercase tracking-tighter leading-[0.85]">
+            Dispatch <br />
+            <span className="text-zinc-800 outline-text">Center</span>
           </h1>
-          <p className="text-zinc-300 text-lg max-w-2xl mx-auto">
-            Professional round-trip shuttle service for Colorado’s best concert venues.
-            No driving. No parking. No stress.
+          <p className="mt-8 text-zinc-400 max-w-xl text-lg leading-relaxed">
+            Professional mountain transport and concert shuttles. 
+            Select your destination below to view availability and book.
           </p>
         </div>
       </section>
 
-      {/* SERVICES */}
-      <section className="max-w-7xl mx-auto px-6 py-32 grid grid-cols-1 md:grid-cols-3 gap-10">
-        
-        {/* RED ROCKS */}
-        <div className="rounded-3xl bg-white/[0.03] border border-white/10 p-10 flex flex-col">
-          <h2 className="text-3xl font-black italic uppercase mb-4">
-            Party at Red Rocks
-          </h2>
-          <p className="text-zinc-400 mb-6">
-            Our flagship round-trip shuttle to Red Rocks Amphitheatre.
-          </p>
-          <ul className="text-sm text-zinc-300 space-y-2 mb-8">
-            <li>• Pickup anywhere in Denver</li>
-            <li>• Driver waits after the show</li>
-            <li>• Drink, vape, and music allowed</li>
-          </ul>
-          <Link
-            href="/venues/red-rocks-amphitheatre"
-            className="mt-auto inline-block text-center bg-red-600 hover:bg-red-500 transition px-8 py-4 rounded-full font-black uppercase tracking-widest text-xs"
-          >
-            Book Red Rocks Shuttle
-          </Link>
+      {/* Grid */}
+      <section className="px-6 py-20">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+          {services.map((s) => (
+            <Link key={s.title} href={s.link} className="group">
+              <div className="h-full border border-white/10 bg-white/[0.02] p-8 rounded-[2rem] hover:bg-white/[0.05] hover:border-white/20 transition-all duration-300 flex flex-col justify-between">
+                <div>
+                  <div className="flex justify-between items-start mb-12">
+                    <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${s.color}`}>
+                      {s.tag}
+                    </span>
+                    <span className="text-zinc-600 group-hover:text-white transition-colors">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                        <path d="M7 17L17 7M17 7H7M17 7V17" />
+                      </svg>
+                    </span>
+                  </div>
+                  <h3 className="text-3xl font-black italic uppercase mb-4 tracking-tight">
+                    {s.title}
+                  </h3>
+                  <p className="text-zinc-500 text-sm leading-relaxed mb-8">
+                    {s.desc}
+                  </p>
+                </div>
+                <div className="text-2xl font-mono font-bold tracking-tighter">
+                  {s.price}
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
-
-        {/* MISHAWAKA */}
-        <div className="rounded-3xl bg-white/[0.03] border border-white/10 p-10 flex flex-col">
-          <h2 className="text-3xl font-black italic uppercase mb-4">
-            Mishawaka Shuttle
-          </h2>
-          <p className="text-zinc-400 mb-6">
-            Shared mountain shuttle to the Mishawaka Amphitheatre.
-          </p>
-          <ul className="text-sm text-zinc-300 space-y-2 mb-8">
-            <li>• Shared round-trip shuttle</li>
-            <li>• Canyon logistics handled for you</li>
-            <li>• Ideal for sold-out shows</li>
-          </ul>
-          <p className="text-sm font-bold text-zinc-200 mb-6">
-            $65 Round Trip
-          </p>
-          <Link
-            href="/venues/mishawaka-amphitheatre"
-            className="mt-auto inline-block text-center border border-white/20 hover:bg-white hover:text-black transition px-8 py-4 rounded-full font-black uppercase tracking-widest text-xs"
-          >
-            Book Mishawaka Shuttle
-          </Link>
-        </div>
-
-        {/* ALL VENUE */}
-        <div className="rounded-3xl bg-white/[0.03] border border-white/10 p-10 flex flex-col">
-          <h2 className="text-3xl font-black italic uppercase mb-4">
-            All-Venue Shuttle
-          </h2>
-          <p className="text-zinc-400 mb-6">
-            Flexible round-trip shuttle to any concert venue in Denver or Boulder.
-          </p>
-          <ul className="text-sm text-zinc-300 space-y-2 mb-8">
-            <li>• $50 per person</li>
-            <li>• $250 minimum total</li>
-            <li>• Cash payment at pickup</li>
-            <li>• One stop each way allowed</li>
-          </ul>
-          <Link
-            href="/book-all-venues"
-            className="mt-auto inline-block text-center border border-white/20 hover:bg-white hover:text-black transition px-8 py-4 rounded-full font-black uppercase tracking-widest text-xs"
-          >
-            View All-Venue Shuttle
-          </Link>
-        </div>
-
       </section>
+
+      {/* Contact Footer */}
+      <footer className="px-6 py-12 border-t border-white/5 text-center">
+        <p className="text-zinc-600 text-[10px] uppercase tracking-widest font-bold">
+          Questions? Call/Text: (720) 369-6292
+        </p>
+      </footer>
     </main>
   );
 }
