@@ -54,7 +54,7 @@ export default async function VenuePage({
   }
 
   // 🟢 ALL OTHER VENUES (Mishawaka, etc.)
-const venue = VENUES.find((v) => v.slug === slug);
+const venue = VENUES[slug];
   if (!venue) return notFound();
 
   return (
