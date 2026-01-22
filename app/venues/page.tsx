@@ -13,15 +13,15 @@ const VENUES = [
   { name: "Gerald R. Ford Amphitheater", slug: "vail-amp", id: "2795" }
 ];
 
-export default function AllVenuesPage() {
+export default function VenuesPage() {
   return (
     <main className="min-h-screen bg-black text-white p-12">
       <Link href="/" className="text-red-600 text-xs font-bold uppercase tracking-widest mb-4 inline-block">← Back to Hub</Link>
-      <h1 className="text-5xl font-black italic uppercase mb-12 tracking-tighter">Shuttle Destinations</h1>
+      <h1 className="text-5xl font-black italic uppercase mb-12 tracking-tighter text-red-600">Shuttle Destinations</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {VENUES.map((v) => (
           <Link key={v.slug} href={`/venues/${v.slug}`} className="group p-8 border border-white/10 rounded-3xl bg-zinc-900/50 hover:bg-red-600 transition duration-300">
-            <h2 className="text-2xl font-black italic uppercase group-hover:scale-105 transition-transform">{v.name}</h2>
+            <h2 className="text-2xl font-black italic uppercase">{v.name}</h2>
             <p className="text-zinc-500 text-xs mt-2 group-hover:text-white/80 uppercase font-bold tracking-widest">View Shuttles & Shows →</p>
           </Link>
         ))}
