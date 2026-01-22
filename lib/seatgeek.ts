@@ -1,7 +1,7 @@
 const CLIENT_ID = process.env.SEATGEEK_CLIENT_ID;
 const BASE_URL = 'https://api.seatgeek.com/2';
 
-// 1. All Red Rocks Events
+// 1. All Red Rocks Events (Primary Feed)
 export async function getEvents() {
   const res = await fetch(`${BASE_URL}/events?venue.id=196&client_id=${CLIENT_ID}&per_page=50`);
   if (!res.ok) return [];
@@ -9,7 +9,7 @@ export async function getEvents() {
   return data.events;
 }
 
-// 2. Single Event Detail
+// 2. Single Event Detail (Show Page)
 export async function getEvent(id: string) {
   const res = await fetch(`${BASE_URL}/events/${id}?client_id=${CLIENT_ID}`);
   if (!res.ok) return null;
@@ -18,6 +18,7 @@ export async function getEvent(id: string) {
 
 // 3. Artist Specific Shows (Fixes Error #1)
 export async function getArtistShows(artistSlug: string) {
+  // Only shows the artist's upcoming Red Rocks shows
   const res = await fetch(`${BASE_URL}/events?performers.slug=${artistSlug}&venue.id=196&client_id=${CLIENT_ID}`);
   if (!res.ok) return [];
   const data = await res.json();
