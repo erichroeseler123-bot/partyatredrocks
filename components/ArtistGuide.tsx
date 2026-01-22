@@ -24,13 +24,14 @@ export default function ArtistGuide({ artistName, venue }: { artistName: string,
     fetchGuide();
   }, [artistName, venue]);
 
-  if (loading) return <div className="animate-pulse text-zinc-500 text-sm">Generating artist guide...</div>;
+  if (loading) return <div className="animate-pulse text-zinc-500 text-sm">Generating artist spotlight...</div>;
 
   return (
     <div className="prose prose-invert max-w-none">
-      <p className="text-zinc-300 leading-relaxed italic">
-        "{guide}"
-      </p>
+      {/* whitespace-pre-wrap ensures the paragraphs from Gemini are preserved */}
+      <div className="text-zinc-300 leading-relaxed space-y-4 whitespace-pre-wrap italic">
+        {guide}
+      </div>
     </div>
   );
 }
