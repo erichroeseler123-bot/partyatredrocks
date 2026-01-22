@@ -5,9 +5,12 @@ import MusicPlayer from "@/components/MusicPlayer";
 import Setlist from "@/components/Setlist";
 import TicketButtons from "@/components/TicketButtons";
 
+// Forces on-demand rendering to prevent production 404s
 export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
 
 export default async function ShowPage({ params }: { params: Promise<{ id: string }> }) {
+  // CRITICAL: Await params to fix the "Event not found"
   const { id } = await params;
   const show = await getEvent(id);
 
@@ -25,7 +28,7 @@ export default async function ShowPage({ params }: { params: Promise<{ id: strin
           className="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-1000"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
-        <div className="absolute bottom-0 left-0 p-12 z-10">
+        <div className="absolute bottom-0 left-0 p-12 z-10 text-left">
            <p className="text-red-600 font-bold uppercase tracking-[0.4em] mb-4 text-xs italic">Live @ {show.venue.name}</p>
            <h1 className="text-6xl md:text-8xl font-black italic uppercase tracking-tighter leading-none">{show.title}</h1>
         </div>
@@ -40,13 +43,12 @@ export default async function ShowPage({ params }: { params: Promise<{ id: strin
 
         <div className="lg:col-span-8 space-y-8">
           <div className="bg-zinc-900/40 p-10 rounded-[3rem] border border-white/5">
-            <h2 className="text-red-600 font-black uppercase text-xs mb-6 tracking-widest text-zinc-500">Artist Spotlight</h2>
+            <h2 className="text-red-600 font-black uppercase text-xs mb-6 tracking-widest text-zinc-500 italic">Artist Spotlight</h2>
             <ArtistGuide artistName={performer.name} venue={show.venue.name} />
           </div>
 
           <div className="bg-zinc-900/60 p-10 rounded-[3rem] border border-white/5 shadow-2xl">
             <h3 className="text-3xl font-black italic uppercase mb-8 tracking-tighter leading-none">Secure Transportation</h3>
-            {/* Logic: ID 196 = Red Rocks Dispatch */}
             <CustomBooking venue={show.venue.id === 196 ? 'redrocks' : 'other'} />
           </div>
         </div>
