@@ -28,8 +28,7 @@ export default async function ShowPage({ params }: { params: { id: string } }) {
         <div className="lg:col-span-2">
           <div className="border border-white/5 bg-zinc-950/50 p-12 rounded-[3rem] backdrop-blur-md">
             <h2 className="text-4xl font-black italic uppercase mb-8 tracking-tighter">Secure Shuttle Dispatch</h2>
-            <RezdyWidget />
-          </div>
+<RezdyWidget accountBaseUrl="https://partyatredrocks.rezdy.com" />          </div>
         </div>
 
         <div className="space-y-12">
