@@ -9,7 +9,7 @@ export interface SeatGeekEvent {
 
 const CLIENT_ID = process.env.SEATGEEK_CLIENT_ID;
 
-// Fetches 50 shows for a venue, sorted chronologically
+// Fetches shows for a specific venue
 export async function getVenueEvents(venueId: string): Promise<SeatGeekEvent[]> {
   const url = `https://api.seatgeek.com/2/events?venue.id=${venueId}&client_id=${CLIENT_ID}&per_page=50&sort=datetime_local.asc`;
   const res = await fetch(url, { cache: 'no-store' });
@@ -23,4 +23,12 @@ export async function getEvent(id: string): Promise<SeatGeekEvent | null> {
   const res = await fetch(url, { cache: 'no-store' });
   if (!res.ok) return null;
   return await res.json();
+}
+
+// FIX: Added curly braces and ensured full export for artist shows
+export async function getArtistShows(artistSlug: string): Promise<SeatGeekEvent[]> {
+  const url = `https://api.seatgeek.com/2/events?performers.slug=${artistSlug}&client_id=${CLIENT_ID}&per_page=10&sort=datetime_local.asc`;
+  const res = await fetch(url, { cache: 'no-store' });
+  const data = await res.json();
+  return data.events || [];
 }
