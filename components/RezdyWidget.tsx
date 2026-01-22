@@ -2,25 +2,28 @@
 
 interface RezdyWidgetProps {
   productId?: string;
+  accountBaseUrl?: string;
   height?: number | string;
 }
 
 export default function RezdyWidget({ 
   productId, 
-  height = 700 // Default height for individual show pages
+  accountBaseUrl = "https://partyatredrocks.rezdy.com",
+  height = 700 
 }: RezdyWidgetProps) {
   const url = productId 
-    ? `https://partyatredrocks.rezdy.com/calendar/${productId}?iframe=true`
-    : "https://partyatredrocks.rezdy.com/catalog?iframe=true";
+    ? `${accountBaseUrl}/calendar/${productId}?iframe=true`
+    : `${accountBaseUrl}/catalog?iframe=true`;
 
   return (
-    <div className="w-full overflow-hidden rounded-3xl border border-white/10 bg-zinc-900/20">
+    <div className="w-full overflow-hidden rounded-3xl border border-white/10 bg-zinc-950/50 backdrop-blur-md">
       <iframe
         src={url}
         width="100%"
         height={height}
         frameBorder="0"
         title="Booking Terminal"
+        className="w-full"
       />
     </div>
   );
