@@ -6,11 +6,9 @@ import Setlist from "@/components/Setlist";
 import TicketButtons from "@/components/TicketButtons";
 
 export const dynamic = 'force-dynamic';
-export const dynamicParams = true;
 
 export default async function ShowPage({ params }: { params: Promise<{ id: string }> }) {
-  // CRITICAL: Await params in Next.js 16
-  const { id } = await params;
+  const { id } = await params; // Async params for Next.js 16
   const show = await getEvent(id);
 
   if (!show) {
@@ -25,7 +23,6 @@ export default async function ShowPage({ params }: { params: Promise<{ id: strin
 
   return (
     <main className="min-h-screen bg-black text-white">
-      {/* Hero Section */}
       <div className="relative h-[60vh] bg-zinc-900 overflow-hidden border-b border-red-600/20">
         <img 
           src={performer.image || '/hero/transport.jpg'} 
@@ -41,18 +38,19 @@ export default async function ShowPage({ params }: { params: Promise<{ id: strin
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 p-12">
         <div className="lg:col-span-4 space-y-8">
+          {/* Hybrid YouTube Player */}
           <MusicPlayer artistName={performer.name} />
           <TicketButtons event={show} />
           <Setlist artistName={performer.name} />
         </div>
 
-<div className="bg-zinc-900/40 p-10 rounded-[3rem] border border-white/5">
-  <h2 className="text-red-600 font-black uppercase text-xs mb-6 tracking-widest text-zinc-500 italic">
-    Artist Spotlight
-  </h2>
-  {/* Corrected: Removed 'venue' prop to match Last.fm ArtistGuide */}
-  <ArtistGuide artistName={performer.name} />
-</div>
+        <div className="lg:col-span-8 space-y-8">
+          <div className="bg-zinc-900/40 p-10 rounded-[3rem] border border-white/5">
+            <h2 className="text-red-600 font-black uppercase text-xs mb-6 tracking-widest text-zinc-500 italic">Artist Spotlight</h2>
+            {/* Last.fm Powered Bio */}
+            <ArtistGuide artistName={performer.name} />
+          </div>
+
           <div className="bg-zinc-900/60 p-10 rounded-[3rem] border border-white/5 shadow-2xl">
             <h3 className="text-3xl font-black italic uppercase mb-8 tracking-tighter leading-none">Secure Transportation</h3>
             <CustomBooking venue={show.venue.id === 196 ? 'redrocks' : 'other'} />
