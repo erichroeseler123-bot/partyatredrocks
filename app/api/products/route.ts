@@ -2,23 +2,24 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   const apiKey = process.env.REZDY_API_KEY;
-  // Category 541037 is your "Party at Red Rocks" folder
-  const url = `https://api.rezdy.com/v1/products?apiKey=${apiKey}&categoryId=541037`;
+  if (!apiKey) return NextResponse.json({ error: 'Missing API Key' }, { status: 500 });
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(`https://api.rezdy.com/v1/products?apiKey=${apiKey}`);
     const data = await response.json();
     
-    // We also want to make sure the Mishawaka codes are included
-    const mishawakaCodes = ['PGG11Z', 'PB7VBT'];
-    const filteredProducts = data.products.filter((p: any) => 
-      p.productCode.includes('PGG') || 
-      p.productCode.includes('PB7') || 
-      mishawakaCodes.includes(p.productCode)
-    );
+    // Define your specific product IDs
+    const redRocksIds = ['P0U1MY', 'P5FACM', 'PLQWXF'];
+    const mishawakaIds = ['PGG11Z', 'PB7VBT'];
 
-    return NextResponse.json(filteredProducts.length > 0 ? filteredProducts : data.products);
+    // Filter products to only include your specific offerings
+    const products = (data.products || []).filter((p: any) => 
+      redRocksIds.includes(p.productCode) || 
+      mishawakaIds.includes(p.productCode)
+    );
+    
+    return NextResponse.json(products);
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to fetch specific products' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to fetch products' }, { status: 500 });
   }
 }

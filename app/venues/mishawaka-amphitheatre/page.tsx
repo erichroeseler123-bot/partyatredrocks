@@ -1,8 +1,14 @@
 import Link from "next/link";
 import CustomBooking from "@/components/CustomBooking";
 
-const REZDY_BASE = "https://partyatredrocks.rezdy.com";
-const PRODUCT_ID = "P6N3P7"; // Default Mishawaka Shuttle code
+// Upcoming Mishawaka Shows
+const UPCOMING_SHOWS = [
+  { date: "Mar 7", title: "Graham Good & The Painters", time: "8:00 PM" },
+  { date: "Apr 18", title: "San Holo: Wholesome Riddim", time: "7:00 PM" },
+  { date: "May 1", title: "Benjamin Tod & The Inline Six", time: "8:00 PM" },
+  { date: "Jun 14", title: "Lane 8: TNH TEN", time: "5:00 PM" },
+  { date: "Jun 20", title: "Tycho (Live)", time: "8:00 PM" }
+];
 
 export default function MishawakaPage() {
   return (
@@ -25,38 +31,27 @@ export default function MishawakaPage() {
         </div>
       </div>
 
-      {/* Booking Section */}
-      <section className="max-w-4xl mx-auto px-6 py-12">
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Book Your Shuttle</h2>
-          <p className="text-zinc-400 mb-8">
-            Select your trip below. This custom booking system handles all Mishawaka and Red Rocks 
-            transportation services including private Suburbans and shared shuttles.
-          </p>
-          
+      <section className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-3 gap-12">
+        {/* Booking Section */}
+        <div className="lg:col-span-2">
+          <h2 className="text-2xl font-bold mb-6">Book Your Shuttle</h2>
           <div className="bg-zinc-900/50 border border-white/5 rounded-3xl p-8 backdrop-blur-md">
-            {/* The new custom component replaces the old RezdyWidget */}
             <CustomBooking />
           </div>
         </div>
 
-        {/* Venue Info */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-white/10 pt-12">
-          <div>
-            <h3 className="text-red-600 font-bold uppercase tracking-tighter mb-4">Venue Details</h3>
-            <p className="text-sm text-zinc-400 leading-relaxed">
-              Located in the Poudre Canyon, the Mishawaka is a legendary Colorado venue. 
-              Our shuttle service ensures a safe, reliable ride through the canyon so you 
-              can focus on the music.
-            </p>
-          </div>
-          <div>
-            <h3 className="text-red-600 font-bold uppercase tracking-tighter mb-4">Travel Info</h3>
-            <ul className="text-sm text-zinc-400 space-y-2">
-              <li>• Pickup locations vary by event</li>
-              <li>• Private SUVs available for groups up to 6</li>
-              <li>• Vans available for larger parties</li>
-            </ul>
+        {/* Shows Section */}
+        <div className="border border-white/5 p-8 rounded-2xl bg-zinc-950/50 backdrop-blur-md">
+          <h3 className="text-[10px] font-black uppercase text-red-600 mb-6 tracking-[0.2em]">
+            Upcoming Shows
+          </h3>
+          <div className="space-y-6">
+            {UPCOMING_SHOWS.map((show, i) => (
+              <div key={i} className="flex flex-col border-b border-white/5 pb-4 last:border-0">
+                <span className="text-[10px] text-zinc-500 font-mono uppercase">{show.date} • {show.time}</span>
+                <span className="text-sm font-bold mt-1 text-zinc-200">{show.title}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
