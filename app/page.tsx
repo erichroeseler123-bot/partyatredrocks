@@ -5,21 +5,21 @@ export default function DispatchHub() {
     {
       title: "Red Rocks",
       detail: "Live Show List",
-      link: "/venues/red-rocks-amphitheatre",
+      link: "/venues/red-rocks-amphitheatre", // Connects to SeatGeek list
       cta: "Book Dispatch",
       accent: "bg-red-600"
     },
     {
       title: "Mishawaka",
       detail: "$65 Round Trip",
-      link: "/venues/mishawaka-amphitheatre",
+      link: "/venues/mishawaka-amphitheatre", // Connects to Rezdy page
       cta: "Reserve Seat",
       accent: "bg-blue-600"
     },
     {
       title: "All Venues",
       detail: "$250 Minimum",
-      link: "/venues/all-venues",
+      link: "/venues/all-venues", // Connects to Private logic
       cta: "Request Vehicle",
       accent: "bg-zinc-800"
     }
@@ -27,7 +27,7 @@ export default function DispatchHub() {
 
   return (
     <main className="min-h-screen bg-[#000] text-white p-6 md:p-12 font-sans selection:bg-red-600 relative overflow-hidden">
-      {/* Background Zhooze: Grid & Glow */}
+      {/* Background Grid Zhooze */}
       <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#111_1px,transparent_1px),linear-gradient(to_bottom,#111_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
       
       <header className="relative z-10 max-w-7xl mx-auto pt-20 pb-24 border-b border-white/5">
@@ -52,7 +52,6 @@ export default function DispatchHub() {
       <section className="relative z-10 max-w-7xl mx-auto py-24 grid grid-cols-1 md:grid-cols-3 gap-6">
         {options.map((opt) => (
           <Link key={opt.title} href={opt.link} className="group relative overflow-hidden border border-white/5 bg-zinc-950/50 backdrop-blur-sm p-12 rounded-[2.5rem] hover:border-white/20 transition-all duration-700">
-            {/* Hover Glow */}
             <div className={`absolute -top-24 -right-24 w-64 h-64 ${opt.accent} blur-[120px] opacity-0 group-hover:opacity-20 transition-opacity duration-700`} />
             
             <div className="relative z-10">
@@ -63,7 +62,7 @@ export default function DispatchHub() {
                 </div>
               </div>
               
-              <h3 className="text-6xl font-black italic uppercase mb-16 tracking-tighter group-hover:italic transition-all">{opt.title}</h3>
+              <h3 className="text-6xl font-black italic uppercase mb-16 tracking-tighter transition-all">{opt.title}</h3>
               
               <div className="inline-block bg-white text-black px-10 py-4 rounded-full text-[10px] font-black uppercase tracking-[0.2em] group-hover:bg-red-600 group-hover:text-white transition-all duration-300">
                 {opt.cta}
