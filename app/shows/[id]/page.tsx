@@ -1,43 +1,46 @@
 import { getEvent } from "@/lib/seatgeek";
 import TicketButtons from "@/components/TicketButtons";
 
-// MUST HAVE 'default' HERE
-export default async function ShowPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
+// Next.js 16 PageProps require 'params' to be a Promise
+export default async function ShowPage(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
+  const id = params.id;
   const show = await getEvent(id);
 
-  // 404 Guard: If no show is found, or it's NOT Red Rocks (Venue ID 196)
+  // DCC Guard: Ensure we only show Red Rocks (ID 196)
   if (!show || show.venue.id !== 196) {
     return (
-      <main className="min-h-screen bg-black text-white flex items-center justify-center p-20 text-center">
-        <div>
-          <h1 className="text-4xl font-black italic uppercase text-red-600 mb-4">Venue Mismatch</h1>
-          <p className="text-zinc-500 font-bold uppercase tracking-widest text-xs">This intelligence is reserved for Red Rocks Amphitheatre.</p>
-        </div>
+      <main className="min-h-screen bg-black text-white flex items-center justify-center">
+        <h1 className="text-xl font-black uppercase italic text-red-600">Event Intelligence Offline</h1>
       </main>
     );
   }
 
-  const performer = show.performers[0];
-
   return (
-    <main className="min-h-screen bg-black text-white">
-      <div className="p-12 border-b border-white/5 flex justify-between items-end">
-        <div>
-          <h1 className="text-7xl md:text-9xl font-black italic uppercase tracking-tighter leading-none">{show.title}</h1>
-          <p className="text-zinc-600 font-bold uppercase mt-4 tracking-widest italic">Morrison, CO // Red Rocks</p>
+    <main className="min-h-screen bg-black text-white p-10">
+      <div className="flex justify-between items-end border-b border-white/5 pb-10 mb-10">
+        <div className="max-w-4xl">
+           <h1 className="text-6xl md:text-8xl font-black italic uppercase tracking-tighter">{show.title}</h1>
+           <p className="text-zinc-500 font-bold uppercase mt-4 tracking-widest italic">Morrison, CO // Venue 196</p>
         </div>
-        <div className="text-right border-l border-zinc-900 pl-10">
+        <div className="text-right">
           <p className="text-zinc-600 uppercase font-black text-[10px] tracking-widest mb-1">DCC Price Watch</p>
-          <p className="text-5xl font-black italic text-yellow-400">${show.stats.lowest_price || "TBA"}</p>
+          <p className="text-4xl font-black italic text-yellow-400">
+            ${show.stats.lowest_price || show.stats.average_price || "TBA"}
+          </p>
         </div>
       </div>
 
-      <div className="grid grid-cols-12 gap-12 p-12">
-        <div className="col-span-12 lg:col-span-4 space-y-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="md:col-span-1">
           <TicketButtons event={show} />
         </div>
-        {/* ... rest of your UI ... */}
+        <div className="md:col-span-2">
+           <section id="booking" className="bg-zinc-900/50 p-10 rounded-[3rem] border border-white/5 min-h-[400px] scroll-mt-20">
+             <p className="text-zinc-500 uppercase font-black italic mb-4">Secure Destination Shuttle</p>
+             {/* Rezdy Widget will load here */}
+           </section>
+        </div>
       </div>
     </main>
   );
