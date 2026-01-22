@@ -5,11 +5,14 @@ import MusicPlayer from "@/components/MusicPlayer";
 import Setlist from "@/components/Setlist";
 import TicketButtons from "@/components/TicketButtons";
 
-export const dynamic = 'force-dynamic'; // Prevents 404s on new shows
+export const dynamic = 'force-dynamic';
 
-export default async function ShowPage({ params }: { params: { id: string } }) {
-  const show = await getEvent(params.id);
-  if (!show) return <div className="p-20 text-center">Event not found.</div>;
+export default async function ShowPage({ params }: { params: Promise<{ id: string }> }) {
+  // CRITICAL: You must await params in Next.js 16
+  const { id } = await params;
+  const show = await getEvent(id);
+
+  if (!show) return <div className="p-20 text-center uppercase font-black italic">Event not found.</div>;
 
   const performer = show.performers[0].name;
 
@@ -33,8 +36,8 @@ export default async function ShowPage({ params }: { params: { id: string } }) {
           </div>
 
           <div className="bg-zinc-900/60 p-10 rounded-[2.5rem] border border-white/5">
-            <h3 className="text-2xl font-black italic uppercase mb-8 tracking-widest">Secure Transportation</h3>
-            <CustomBooking venue={show.venue.id === 119 ? 'redrocks' : 'other'} />
+            <h3 className="text-2xl font-black italic uppercase mb-8">Secure Transportation</h3>
+            <CustomBooking venue={show.venue.id === 196 ? 'redrocks' : 'other'} />
           </div>
         </div>
       </div>

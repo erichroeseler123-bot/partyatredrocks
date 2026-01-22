@@ -5,8 +5,12 @@ import { getVenueEvents } from "@/lib/seatgeek";
 const VENUE_DATA: Record<string, { name: string; id: string; location: string }> = {
   "red-rocks-amphitheatre": { name: "Red Rocks", id: "196", location: "Morrison, CO" },
   "mishawaka-amphitheatre": { name: "Mishawaka", id: "119", location: "Bellvue, CO" },
-  "mission-ballroom": { name: "Mission Ballroom", id: "428753", location: "Denver, CO" }
-  // Add other venues as needed...
+  "mission-ballroom": { name: "Mission Ballroom", id: "428753", location: "Denver, CO" },
+  "fiddlers-green-amphitheatre": { name: "Fiddler's Green", id: "1221", location: "Englewood, CO" },
+  "fillmore-auditorium": { name: "Fillmore Auditorium", id: "424", location: "Denver, CO" },
+  "ogden-theatre": { name: "Ogden Theatre", id: "422", location: "Denver, CO" },
+  "bluebird-theater": { name: "Bluebird Theater", id: "423", location: "Denver, CO" },
+  "gothic-theatre": { name: "Gothic Theatre", id: "1218", location: "Englewood, CO" }
 };
 
 export default async function VenuePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -17,8 +21,7 @@ export default async function VenuePage({ params }: { params: Promise<{ slug: st
 
   const shows = await getVenueEvents(venue.id);
 
-  // Logic to group shows by Month
-  const groupedShows = shows.reduce((acc: any, show) => {
+  const groupedShows = shows.reduce((acc: Record<string, any[]>, show) => {
     const month = new Date(show.datetime_local).toLocaleString('default', { month: 'long', year: 'numeric' });
     if (!acc[month]) acc[month] = [];
     acc[month].push(show);
@@ -27,24 +30,22 @@ export default async function VenuePage({ params }: { params: Promise<{ slug: st
 
   return (
     <main className="min-h-screen bg-black text-white p-12">
-      <header className="mb-12">
-        <h1 className="text-6xl font-black italic uppercase tracking-tighter">{venue.name}</h1>
+      <header className="mb-16">
+        <h1 className="text-6xl font-black italic uppercase tracking-tighter leading-none">{venue.name}</h1>
         <p className="text-red-600 font-bold uppercase tracking-widest text-sm">{venue.location}</p>
       </header>
 
       {Object.keys(groupedShows).map((month) => (
-        <section key={month} className="mb-16">
-          <h2 className="text-3xl font-black italic uppercase mb-8 border-b border-white/10 pb-2 text-zinc-500">
-            {month}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {groupedShows[month].map((show: any) => (
-              <Link key={show.id} href={`/shows/${show.id}`} className="group bg-zinc-900/50 border border-white/10 rounded-3xl p-6 hover:border-red-600 transition">
-                <div className="text-zinc-500 text-[10px] font-black uppercase mb-2">
+        <section key={month} className="mb-20">
+          <h2 className="text-4xl font-black italic uppercase mb-8 border-b border-white/10 pb-4 text-zinc-800">{month}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {groupedShows[month].map((show) => (
+              <Link key={show.id} href={`/shows/${show.id}`} className="group bg-zinc-900/50 border border-white/10 rounded-3xl p-8 hover:border-red-600 transition">
+                <div className="text-zinc-500 text-[10px] font-black uppercase mb-4 tracking-widest">
                   {new Date(show.datetime_local).toLocaleDateString()}
                 </div>
-                <h3 className="text-xl font-black italic uppercase group-hover:text-red-600 transition">{show.title}</h3>
-                <p className="text-zinc-600 text-xs mt-4 uppercase font-bold">Book Shuttle →</p>
+                <h3 className="text-2xl font-black italic uppercase group-hover:text-red-600 transition">{show.title}</h3>
+                <p className="text-zinc-600 text-xs mt-6 uppercase font-bold tracking-widest">View Shuttles →</p>
               </Link>
             ))}
           </div>

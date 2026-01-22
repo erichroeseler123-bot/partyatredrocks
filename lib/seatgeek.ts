@@ -9,7 +9,6 @@ export interface SeatGeekEvent {
 
 const CLIENT_ID = process.env.SEATGEEK_CLIENT_ID;
 
-// Fetches the next 50 shows for a specific venue
 export async function getVenueEvents(venueId: string): Promise<SeatGeekEvent[]> {
   const url = `https://api.seatgeek.com/2/events?venue.id=${venueId}&client_id=${CLIENT_ID}&per_page=50&sort=datetime_local.asc`;
   const res = await fetch(url, { cache: 'no-store' });
@@ -17,7 +16,6 @@ export async function getVenueEvents(venueId: string): Promise<SeatGeekEvent[]> 
   return data.events || [];
 }
 
-// Fetches a single event by ID
 export async function getEvent(id: string): Promise<SeatGeekEvent | null> {
   const url = `https://api.seatgeek.com/2/events/${id}?client_id=${CLIENT_ID}`;
   const res = await fetch(url, { cache: 'no-store' });
@@ -25,7 +23,6 @@ export async function getEvent(id: string): Promise<SeatGeekEvent | null> {
   return await res.json();
 }
 
-// Fetches shows for a specific artist slug
 export async function getArtistShows(artistSlug: string): Promise<SeatGeekEvent[]> {
   const url = `https://api.seatgeek.com/2/events?performers.slug=${artistSlug}&client_id=${CLIENT_ID}&per_page=10&sort=datetime_local.asc`;
   const res = await fetch(url, { cache: 'no-store' });
