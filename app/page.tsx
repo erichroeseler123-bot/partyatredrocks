@@ -17,7 +17,7 @@ export default function DispatchHub() {
       accent: "bg-blue-600"
     },
     {
-      title: "Private",
+      title: "All Venues",
       detail: "$250 Minimum",
       link: "/venues/all-venues",
       cta: "Request Vehicle",
@@ -26,29 +26,46 @@ export default function DispatchHub() {
   ];
 
   return (
-    <main className="min-h-screen bg-black text-white p-6 md:p-12 font-sans selection:bg-red-600">
-      <header className="max-w-7xl mx-auto pt-20 pb-24 border-b border-white/10">
-        <div className="flex items-center gap-4 mb-6">
-          <div className="h-2 w-2 bg-red-600 animate-pulse rounded-full" />
-          <span className="text-[10px] uppercase tracking-[0.4em] font-black text-zinc-500">System Status: Active</span>
+    <main className="min-h-screen bg-[#000] text-white p-6 md:p-12 font-sans selection:bg-red-600 relative overflow-hidden">
+      {/* Background Zhooze: Grid & Glow */}
+      <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#111_1px,transparent_1px),linear-gradient(to_bottom,#111_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+      
+      <header className="relative z-10 max-w-7xl mx-auto pt-20 pb-24 border-b border-white/5">
+        <div className="flex items-center gap-4 mb-10">
+          <div className="flex items-center gap-2 px-3 py-1 rounded-full border border-red-900/50 bg-red-950/20">
+            <div className="h-1.5 w-1.5 bg-red-600 animate-pulse rounded-full shadow-[0_0_8px_rgba(220,38,38,0.8)]" />
+            <span className="text-[9px] uppercase tracking-[0.4em] font-black text-red-500">System Active</span>
+          </div>
+          <span className="text-[9px] uppercase tracking-[0.4em] font-black text-zinc-700">Uplink: Denver_HQ</span>
         </div>
-        <h1 className="text-8xl md:text-[12rem] font-black italic uppercase leading-[0.8] tracking-tighter">
+        
+        <h1 className="text-8xl md:text-[14rem] font-black italic uppercase leading-[0.75] tracking-tighter">
           Dispatch <br />
-          <span className="text-zinc-900" style={{ WebkitTextStroke: '1px #333' }}>Hub</span>
+          <span className="text-transparent" style={{ WebkitTextStroke: '2px rgba(255,255,255,0.05)' }}>Hub</span>
         </h1>
-        <p className="mt-12 text-zinc-500 max-w-xl text-lg uppercase font-bold tracking-tighter leading-tight">
-          Professional Mountain Transport & Concert Shuttles. No Fluff. Direct Booking.
+        
+        <p className="mt-16 text-zinc-500 max-w-xl text-xs uppercase font-black tracking-[0.3em] leading-relaxed">
+          Premium Transport Logistics // Party at Red Rocks // Concierge Dispatch
         </p>
       </header>
 
-      <section className="max-w-7xl mx-auto py-24 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <section className="relative z-10 max-w-7xl mx-auto py-24 grid grid-cols-1 md:grid-cols-3 gap-6">
         {options.map((opt) => (
-          <Link key={opt.title} href={opt.link} className="group relative overflow-hidden border border-white/10 bg-zinc-950 p-12 rounded-3xl hover:border-red-600/50 transition-all duration-500">
-            <div className={`absolute top-0 right-0 w-32 h-32 ${opt.accent} blur-[100px] opacity-20 group-hover:opacity-40 transition-opacity`} />
+          <Link key={opt.title} href={opt.link} className="group relative overflow-hidden border border-white/5 bg-zinc-950/50 backdrop-blur-sm p-12 rounded-[2.5rem] hover:border-white/20 transition-all duration-700">
+            {/* Hover Glow */}
+            <div className={`absolute -top-24 -right-24 w-64 h-64 ${opt.accent} blur-[120px] opacity-0 group-hover:opacity-20 transition-opacity duration-700`} />
+            
             <div className="relative z-10">
-              <span className="text-[10px] uppercase tracking-widest font-black text-zinc-600">{opt.detail}</span>
-              <h3 className="text-5xl font-black italic uppercase mt-4 mb-12 tracking-tighter group-hover:translate-x-2 transition-transform">{opt.title}</h3>
-              <div className="inline-block bg-white text-black px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest group-hover:bg-red-600 group-hover:text-white transition-colors">
+              <div className="flex justify-between items-start mb-16">
+                <span className="text-[10px] uppercase tracking-[0.2em] font-black text-zinc-500">{opt.detail}</span>
+                <div className="h-4 w-4 text-zinc-800 group-hover:text-white transition-colors duration-500">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                </div>
+              </div>
+              
+              <h3 className="text-6xl font-black italic uppercase mb-16 tracking-tighter group-hover:italic transition-all">{opt.title}</h3>
+              
+              <div className="inline-block bg-white text-black px-10 py-4 rounded-full text-[10px] font-black uppercase tracking-[0.2em] group-hover:bg-red-600 group-hover:text-white transition-all duration-300">
                 {opt.cta}
               </div>
             </div>
@@ -56,9 +73,12 @@ export default function DispatchHub() {
         ))}
       </section>
 
-      <footer className="max-w-7xl mx-auto py-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8">
-        <div className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-700">© 2026 Party at Red Rocks / Dispatch Center</div>
-        <a href="tel:7203696292" className="text-2xl font-black italic uppercase tracking-tighter hover:text-red-600 transition-colors">720.369.6292</a>
+      <footer className="relative z-10 max-w-7xl mx-auto py-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+        <div className="text-[9px] font-black uppercase tracking-[0.4em] text-zinc-800">Verified Secure Booking Terminal</div>
+        <a href="tel:7203696292" className="group flex items-center gap-4">
+            <span className="text-zinc-600 text-[10px] font-black uppercase tracking-widest group-hover:text-red-600 transition-colors">Direct Line</span>
+            <span className="text-3xl font-black italic uppercase tracking-tighter group-hover:text-white transition-colors">720.369.6292</span>
+        </a>
       </footer>
     </main>
   );
