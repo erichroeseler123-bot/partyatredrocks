@@ -46,13 +46,13 @@ export default async function ShowPage({ params }: { params: Promise<{ id: strin
           <Setlist artistName={performer.name} />
         </div>
 
-        <div className="lg:col-span-8 space-y-8">
-          <div className="bg-zinc-900/40 p-10 rounded-[3rem] border border-white/5">
-            <h2 className="text-red-600 font-black uppercase text-xs mb-6 tracking-widest text-zinc-500 italic">Artist Spotlight</h2>
-            {/* FIX: Removed 'venue' prop to resolve Type Error */}
-            <ArtistGuide artistName={performer.name} />
-          </div>
-
+<div className="bg-zinc-900/40 p-10 rounded-[3rem] border border-white/5">
+  <h2 className="text-red-600 font-black uppercase text-xs mb-6 tracking-widest text-zinc-500 italic">
+    Artist Spotlight
+  </h2>
+  {/* Corrected: Removed 'venue' prop to match Last.fm ArtistGuide */}
+  <ArtistGuide artistName={performer.name} />
+</div>
           <div className="bg-zinc-900/60 p-10 rounded-[3rem] border border-white/5 shadow-2xl">
             <h3 className="text-3xl font-black italic uppercase mb-8 tracking-tighter leading-none">Secure Transportation</h3>
             <CustomBooking venue={show.venue.id === 196 ? 'redrocks' : 'other'} />
