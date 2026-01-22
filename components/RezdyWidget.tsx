@@ -3,13 +3,13 @@
 interface RezdyWidgetProps {
   productId?: string;
   accountBaseUrl?: string;
-  height?: number | string;
+  height?: string | number;
 }
 
 export default function RezdyWidget({ 
   productId, 
   accountBaseUrl = "https://partyatredrocks.rezdy.com",
-  height = 700 
+  height = "700" 
 }: RezdyWidgetProps) {
   const url = productId 
     ? `${accountBaseUrl}/calendar/${productId}?iframe=true`
