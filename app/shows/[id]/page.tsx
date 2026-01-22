@@ -8,35 +8,48 @@ import TicketButtons from "@/components/TicketButtons";
 export const dynamic = 'force-dynamic';
 
 export default async function ShowPage({ params }: { params: Promise<{ id: string }> }) {
-  // CRITICAL: You must await params in Next.js 16
+  // Fixes the "Event not found" by correctly awaiting the ID
   const { id } = await params;
   const show = await getEvent(id);
 
   if (!show) return <div className="p-20 text-center uppercase font-black italic">Event not found.</div>;
 
-  const performer = show.performers[0].name;
+  const performer = show.performers[0];
 
   return (
     <main className="min-h-screen bg-black text-white">
-      <div className="relative h-[40vh] bg-zinc-900 flex items-end p-12 border-b border-white/5">
-        <h1 className="text-7xl font-black italic uppercase tracking-tighter leading-none z-10">{show.title}</h1>
+      {/* Restored Artist Image Hero */}
+      <div className="relative h-[50vh] bg-zinc-900 overflow-hidden">
+        <img 
+          src={performer.image || '/hero/transport.jpg'} 
+          className="w-full h-full object-cover opacity-50 grayscale hover:grayscale-0 transition-all duration-1000"
+          alt={show.title}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent" />
+        <div className="absolute bottom-0 left-0 p-12 z-10">
+           <p className="text-red-600 font-bold uppercase tracking-[0.3em] mb-4 text-xs">Live at {show.venue.name}</p>
+           <h1 className="text-8xl font-black italic uppercase tracking-tighter leading-none">{show.title}</h1>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 p-12">
+        {/* Left: Engagement & Tickets */}
         <div className="lg:col-span-4 space-y-8">
-          <MusicPlayer artistName={performer} />
+          <MusicPlayer artistName={performer.name} />
           <TicketButtons event={show} />
-          <Setlist artistName={performer} />
+          <Setlist artistName={performer.name} />
         </div>
 
+        {/* Right: AI Dispatch Intel & Booking */}
         <div className="lg:col-span-8 space-y-8">
           <div className="bg-zinc-900/40 p-10 rounded-[2.5rem] border border-white/5">
             <h2 className="text-red-600 font-black uppercase text-xs mb-6 tracking-widest">Artist Spotlight</h2>
-            <ArtistGuide artistName={performer} venue={show.venue.name} />
+            <ArtistGuide artistName={performer.name} venue={show.venue.name} />
           </div>
 
           <div className="bg-zinc-900/60 p-10 rounded-[2.5rem] border border-white/5">
-            <h3 className="text-2xl font-black italic uppercase mb-8">Secure Transportation</h3>
+            <h3 className="text-3xl font-black italic uppercase mb-8">Secure Transportation</h3>
+            {/* Logic: If Red Rocks (ID 196), show shuttle; else show private Suburban */}
             <CustomBooking venue={show.venue.id === 196 ? 'redrocks' : 'other'} />
           </div>
         </div>
