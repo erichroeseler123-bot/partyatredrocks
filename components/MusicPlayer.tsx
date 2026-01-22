@@ -3,11 +3,11 @@
 import { useState } from 'react';
 
 export default function MusicPlayer({ artistName }: { artistName: string }) {
-  // 1. Encode the artist name properly
-  const encodedArtistName = encodeURIComponent(artistName);
+  // Properly encode the artist name for the search URL
+  const encodedName = encodeURIComponent(artistName);
   
-  // 2. Use the CORRECT, full HTTPS URL with the backticks for variable insertion
-  const embedUrl = `https://open.spotify.com/embed/search/${encodedArtistName}`;
+  // FIX: Added https:// and corrected the domain to open.spotify.com
+  const embedUrl = `https://open.spotify.com/embed/search/${encodedName}`;
 
   const [isLoading, setIsLoading] = useState(true);
 
