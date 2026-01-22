@@ -1,9 +1,0 @@
-export default async function ShowPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
-  
-  // LOG: Check Vercel logs to see if this ID is coming through
-  console.log("Fetching show ID:", id); 
-  
-  const show = await getEvent(id);
-  // ... rest of code
-}
