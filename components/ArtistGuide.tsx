@@ -1,59 +1,39 @@
 'use client';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
-export default function ArtistGuide({ artistName, venue }: { artistName: string, venue: string }) {
-  const [guide, setGuide] = useState('');
+export default function ArtistGuide({ artistName }: { artistName: string }) {
+  const [info, setInfo] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [showButton, setShowButton] = useState(false);
-  const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    async function fetchGuide() {
+    async function fetchInfo() {
       try {
-        const res = await fetch('/api/gemini-content', {
-          method: 'POST',
-          body: JSON.stringify({ artistName, venue }),
-          headers: { 'Content-Type': 'application/json' }
-        });
+        const res = await fetch(`/api/artist-info?artist=${encodeURIComponent(artistName)}`);
         const data = await res.json();
-        setGuide(data.text);
-      } catch (err) {
-        console.error("Failed to load guide");
+        setInfo(data);
+      } catch (e) {
+        console.error("Last.fm Fetch Failed");
       } finally {
         setLoading(false);
       }
     }
-    fetchGuide();
-  }, [artistName, venue]);
+    fetchInfo();
+  }, [artistName]);
 
-  // Check if text is long enough to need a "Read More" button
-  useEffect(() => {
-    if (textRef.current) {
-      const isTruncated = textRef.current.scrollHeight > textRef.current.clientHeight;
-      setShowButton(isTruncated);
-    }
-  }, [guide]);
-
-  if (loading) return <div className="animate-pulse text-zinc-500 text-sm italic">Gathering intel on {artistName}...</div>;
+  if (loading) return <div className="animate-pulse text-zinc-500 uppercase font-black italic">Syncing Intel...</div>;
 
   return (
-    <div className="space-y-4">
-      <div 
-        ref={textRef}
-        className={`text-zinc-300 leading-relaxed whitespace-pre-wrap italic transition-all duration-500 ${!isExpanded ? 'line-clamp-3' : ''}`}
-      >
-        {guide}
+    <div className="space-y-6">
+      <div className="flex gap-2">
+        {info?.tags?.map((tag: string) => (
+          <span key={tag} className="px-3 py-1 bg-red-600/10 border border-red-600/20 text-red-600 text-[10px] font-black uppercase tracking-widest rounded-full">
+            {tag}
+          </span>
+        ))}
       </div>
-      
-      {showButton && (
-        <button 
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="text-red-600 text-xs font-black uppercase tracking-widest hover:text-white transition-colors"
-        >
-          {isExpanded ? 'Show Less ↑' : 'Read More ↓'}
-        </button>
-      )}
+      <p className="text-zinc-400 text-sm leading-relaxed font-medium">
+        {info?.bio || "Dispatch Intel Unavailable."}
+      </p>
     </div>
   );
 }
