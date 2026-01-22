@@ -1,12 +1,11 @@
 'use client';
 
 export default function MusicPlayer({ artistName }: { artistName: string }) {
-  // We'll use a generic search embed for the artist
-  // For production, you'd ideally pass a specific Spotify Artist ID
+  // Use the standard Spotify search embed URL to avoid 404s
   const embedUrl = `https://open.spotify.com/embed/search/${encodeURIComponent(artistName)}`;
 
   return (
-    <div className="rounded-3xl overflow-hidden border border-white/10 bg-zinc-900 shadow-2xl">
+    <div className="rounded-[2rem] overflow-hidden border border-white/10 bg-zinc-900">
       <iframe 
         src={embedUrl}
         width="100%" 

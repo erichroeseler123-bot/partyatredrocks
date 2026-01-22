@@ -8,7 +8,7 @@ import TicketButtons from "@/components/TicketButtons";
 export const dynamic = 'force-dynamic';
 
 export default async function ShowPage({ params }: { params: Promise<{ id: string }> }) {
-  // CRITICAL: Await params in Next.js 16 to get the ID
+  // CRITICAL: Await params to correctly resolve the ID for Next.js 16
   const { id } = await params;
   const show = await getEvent(id);
 
@@ -45,9 +45,9 @@ export default async function ShowPage({ params }: { params: Promise<{ id: strin
             <ArtistGuide artistName={performer.name} venue={show.venue.name} />
           </div>
 
-          <div className="bg-zinc-900/60 p-10 rounded-[3rem] border border-white/5 shadow-2xl shadow-red-900/20">
-            <h3 className="text-3xl font-black italic uppercase mb-8 tracking-tighter leading-none text-zinc-300">Secure Transportation</h3>
-            {/* Red Rocks (ID 196) Logic for Shuttle */}
+          <div className="bg-zinc-900/60 p-10 rounded-[3rem] border border-white/5 shadow-2xl">
+            <h3 className="text-3xl font-black italic uppercase mb-8 tracking-tighter">Secure Transportation</h3>
+            {/* Red Rocks (ID 196) Logic triggers your specific shuttle pricing */}
             <CustomBooking venue={show.venue.id === 196 ? 'redrocks' : 'other'} />
           </div>
         </div>
