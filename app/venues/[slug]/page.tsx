@@ -14,14 +14,13 @@ export default async function VenuePage({ params }: { params: Promise<{ slug: st
 
   if (!venue) notFound();
 
-  // Passing as a string to satisfy TypeScript
   const shows = await getVenueEvents(venue.id);
 
-  // Organize shows by Month Year
+  // Groups shows chronologically by "Month Year"
   const groupedShows = shows.reduce((acc: Record<string, any[]>, show) => {
-    const month = new Date(show.datetime_local).toLocaleString('default', { month: 'long', year: 'numeric' });
-    if (!acc[month]) acc[month] = [];
-    acc[month].push(show);
+    const monthYear = new Date(show.datetime_local).toLocaleString('default', { month: 'long', year: 'numeric' });
+    if (!acc[monthYear]) acc[monthYear] = [];
+    acc[monthYear].push(show);
     return acc;
   }, {});
 
@@ -29,7 +28,7 @@ export default async function VenuePage({ params }: { params: Promise<{ slug: st
     <main className="min-h-screen bg-black text-white p-12">
       <header className="mb-16">
         <h1 className="text-6xl font-black italic uppercase tracking-tighter leading-none mb-2">{venue.name}</h1>
-        <p className="text-red-600 font-bold uppercase tracking-widest text-sm">{venue.location} • Season Schedule</p>
+        <p className="text-red-600 font-bold uppercase tracking-widest text-sm">{venue.location} • Season Calendar</p>
       </header>
 
       {Object.keys(groupedShows).map((month) => (
@@ -44,7 +43,7 @@ export default async function VenuePage({ params }: { params: Promise<{ slug: st
                   {new Date(show.datetime_local).toLocaleDateString()}
                 </div>
                 <h3 className="text-2xl font-black italic uppercase group-hover:text-red-600 transition">{show.title}</h3>
-                <p className="text-zinc-600 text-xs mt-6 uppercase font-bold tracking-widest">Book Shuttle →</p>
+                <p className="text-zinc-600 text-xs mt-6 uppercase font-bold tracking-widest group-hover:text-white transition">Book Shuttle →</p>
               </Link>
             ))}
           </div>
