@@ -3,12 +3,10 @@
 import { useState } from 'react';
 
 export default function MusicPlayer({ artistName }: { artistName: string }) {
-  // Properly encode the artist name for the search URL
-  const encodedName = encodeURIComponent(artistName);
+  // Use a stable, high-reliability search embed
+  const searchQuery = encodeURIComponent(artistName);
+  const embedUrl = `https://open.spotify.com/embed/search/${searchQuery}`;
   
-  // FIX: Added https:// and corrected the domain to open.spotify.com
-  const embedUrl = `https://open.spotify.com/embed/search/${encodedName}`;
-
   const [isLoading, setIsLoading] = useState(true);
 
   return (
@@ -29,7 +27,6 @@ export default function MusicPlayer({ artistName }: { artistName: string }) {
         loading="lazy"
         className={`relative z-10 transition-opacity duration-700 ${isLoading ? 'opacity-0' : 'opacity-80 group-hover:opacity-100'}`}
         onLoad={() => setIsLoading(false)}
-        title={`Spotify player for ${artistName}`}
       ></iframe>
     </div>
   );
