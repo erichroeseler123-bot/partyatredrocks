@@ -1,27 +1,19 @@
-import { getEvent } from "@/lib/seatgeek";
-import TicketButtons from "@/components/TicketButtons";
-import SetlistDisplay from "@/components/SetlistDisplay";
-import CustomBooking from "@/components/CustomBooking";
+{/* PRICE WATCH: Styled for high visibility */}
+<div className="text-right border-l-2 border-red-600/20 pl-10">
+  <p className="text-zinc-600 uppercase font-black text-[10px] tracking-[0.3em] mb-2">DCC Market Intel</p>
+  <div className="flex flex-col items-end">
+    <p className="text-5xl font-black italic text-yellow-400 leading-none">
+      ${show.stats.lowest_price || "TBA"}
+    </p>
+    <p className="text-[10px] text-zinc-500 font-bold uppercase mt-2 italic">Lowest Live Listing</p>
+  </div>
+</div>
 
-export default async function ShowPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
-  const show = await getEvent(id);
-
-  // FIX: Guard clause to handle null data
-  if (!show) {
-    return (
-      <main className="min-h-screen bg-black text-white flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-4xl font-black italic uppercase text-red-600 mb-4">Event Intelligence Missing</h1>
-          <p className="text-zinc-500 font-bold uppercase tracking-widest text-xs">Dispatch Error: ID {id} Not Found</p>
-        </div>
-      </main>
-    );
-  }
-
-  // Now TypeScript knows 'show' is NOT null here
-  const performer = show.performers[0];
-
-  return (
-    <main className="min-h-screen bg-black text-white">
-      {/* ... rest of your code ... */}
+{/* MAP SECTION: Grayscale/High Contrast for the DCC aesthetic */}
+<div className="rounded-[3rem] overflow-hidden border border-white/5 h-80 grayscale contrast-[1.2] brightness-75 hover:grayscale-0 transition-all duration-1000">
+  <iframe
+    width="100%" height="100%" frameBorder="0"
+    src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}&q=Red+Rocks+Amphitheatre+Morrison+CO`}
+    allowFullScreen
+  ></iframe>
+</div>
