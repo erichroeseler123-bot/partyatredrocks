@@ -9,44 +9,56 @@ export default async function VenuePage({ params }: { params: Promise<{ slug: st
   // CRITICAL FIX: Await the dynamic params
   const { slug } = await params;
 
-  // 1. Specialized Red Rocks Dispatch
-  if (slug === "red-rocks-amphitheatre") {
+if (slug === "red-rocks-amphitheatre") {
     const shows = await getVenueEvents(196);
     return (
       <main className="min-h-screen bg-black text-white px-6 py-24 relative overflow-hidden">
-        <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#111_1px,transparent_1px),linear-gradient(to_bottom,#111_1px,transparent_1px)] bg-[size:40px_40px] opacity-20" />
+        <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#111_1px,transparent_1px),linear-gradient(to_bottom,#111_1px,transparent_1px)] bg-[size:40px_40px] opacity-10" />
         
-        <div className="relative z-10 max-w-5xl mx-auto">
-          <header className="flex justify-between items-center mb-16 border-b border-white/10 pb-12">
+        <div className="relative z-10 max-w-6xl mx-auto">
+          <header className="flex justify-between items-center mb-16 border-b border-white/5 pb-12">
             <div>
-               <h1 className="text-5xl font-black italic uppercase tracking-tighter">Party @ Red Rocks</h1>
-               <p className="text-red-600 font-black uppercase text-[10px] tracking-[0.3em] mt-2">Live Show Dispatch</p>
+               <h1 className="text-6xl font-black italic uppercase tracking-tighter">Party @ Red Rocks</h1>
+               <p className="text-red-600 font-black uppercase text-[10px] tracking-[0.4em] mt-2">Live Show Dispatch</p>
             </div>
-            <Link href="/" className="bg-white text-black px-6 py-3 rounded-full font-black uppercase text-[10px] tracking-widest hover:bg-red-600 hover:text-white transition-all">
+            <Link href="/" className="bg-white text-black px-8 py-4 rounded-full font-black uppercase text-[10px] tracking-widest hover:bg-red-600 hover:text-white transition-all">
               Back to Hub
             </Link>
           </header>
 
-          <div className="grid gap-4">
+          <div className="grid gap-6">
             {shows.map((show) => (
-              <div key={show.id} className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 border border-white/5 p-8 rounded-[2rem] bg-zinc-950/50 backdrop-blur-sm hover:border-red-600/30 transition-all group">
-                <div>
-                  <div className="text-2xl font-black uppercase italic tracking-tight mb-2 group-hover:text-red-600 transition-colors">{show.title}</div>
-                  <div className="text-[10px] text-zinc-500 font-black uppercase tracking-[0.4em]">
-                    {new Date(show.datetime_local).toDateString()}
-                  </div>
+              <Link key={show.id} href={`/shows/${show.id}`} className="group relative flex flex-col md:flex-row items-center gap-8 border border-white/5 bg-zinc-950/40 backdrop-blur-md rounded-[2.5rem] overflow-hidden hover:border-red-600/40 transition-all">
+                {/* Full Color Performer Image */}
+                <div className="w-full md:w-64 h-48 relative overflow-hidden">
+                  <img 
+                    src={show.performers[0]?.image || '/hero/transport.jpg'} 
+                    alt={show.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
                 </div>
-                <Link href={`/book-shuttle?venue=red-rocks&eventId=${show.id}`} className="bg-white text-black hover:bg-red-600 hover:text-white px-10 py-5 rounded-full font-black uppercase text-[10px] tracking-widest transition-all text-center">
-                  Book Shuttle
-                </Link>
-              </div>
+                
+                <div className="flex-1 p-8 md:p-0">
+                  <div className="text-[10px] text-zinc-500 font-black uppercase tracking-[0.5em] mb-2">
+                    {new Date(show.datetime_local).toLocaleDateString(undefined, { weekday: 'long', month: 'short', day: 'numeric' })}
+                  </div>
+                  <h3 className="text-3xl font-black uppercase italic tracking-tighter group-hover:text-red-500 transition-colors">
+                    {show.title}
+                  </h3>
+                </div>
+
+                <div className="pr-12 hidden md:block">
+                   <div className="h-12 w-12 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
+                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M9 5l7 7-7 7"/></svg>
+                   </div>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
       </main>
     );
   }
-
   // 2. Specialized All Other Venues Dispatch
   if (slug === "all-venues") {
     return (
