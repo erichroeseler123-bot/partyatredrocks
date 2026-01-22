@@ -1,20 +1,30 @@
-import Link from 'next/link';
-import { VENUES } from '@/data/venues'; // Fixed Import
+import Link from "next/link";
 
-export default function VenuesPage() {
+const VENUES = [
+  { name: "Mission Ballroom", slug: "mission-ballroom", id: "428753" },
+  { name: "Fiddler's Green", slug: "fiddlers-green-amphitheatre", id: "1221" },
+  { name: "Fillmore Auditorium", slug: "fillmore-auditorium", id: "424" },
+  { name: "Ogden Theatre", slug: "ogden-theatre", id: "422" },
+  { name: "Bluebird Theater", slug: "bluebird-theater", id: "423" },
+  { name: "Gothic Theatre", slug: "gothic-theatre", id: "1218" },
+  { name: "Summit Denver", slug: "summit-denver", id: "14757" },
+  { name: "Cervantes' Masterpiece", slug: "cervantes-masterpiece", id: "10094" },
+  { name: "Dillon Amphitheater", slug: "dillon-amphitheater", id: "341857" },
+  { name: "Gerald R. Ford Amphitheater", slug: "vail-amp", id: "2795" }
+];
+
+export default function AllVenuesPage() {
   return (
-    <main className="min-h-screen bg-black text-white pt-32 px-8 font-mono">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-7xl font-black italic uppercase tracking-tighter mb-12 border-b border-white/10 pb-6">DESTINATION_NODES</h1>
-        <div className="grid gap-1 md:grid-cols-3">
-          {Object.entries(VENUES).map(([slug, venue]: [string, any]) => (
-            <Link key={slug} href={`/venues/${slug}`} className="group border border-zinc-800 p-8 hover:bg-zinc-900/50 hover:border-blue-500 transition-all">
-              <div className="text-[10px] text-zinc-600 mb-4 tracking-widest uppercase">ID: NODE_{venue.seatgeekVenueId}</div>
-              <div className="text-3xl font-black italic uppercase group-hover:text-blue-400 transition-colors">{venue.name}</div>
-              <div className="text-[10px] text-zinc-500 mt-2 uppercase tracking-tighter">{venue.city}, {venue.state} // ${venue.price}.00 RT</div>
-            </Link>
-          ))}
-        </div>
+    <main className="min-h-screen bg-black text-white p-12">
+      <Link href="/" className="text-red-600 text-xs font-bold uppercase tracking-widest mb-4 inline-block">← Back to Hub</Link>
+      <h1 className="text-5xl font-black italic uppercase mb-12 tracking-tighter">Shuttle Destinations</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {VENUES.map((v) => (
+          <Link key={v.slug} href={`/venues/${v.slug}`} className="group p-8 border border-white/10 rounded-3xl bg-zinc-900/50 hover:bg-red-600 transition duration-300">
+            <h2 className="text-2xl font-black italic uppercase group-hover:scale-105 transition-transform">{v.name}</h2>
+            <p className="text-zinc-500 text-xs mt-2 group-hover:text-white/80 uppercase font-bold tracking-widest">View Shuttles & Shows →</p>
+          </Link>
+        ))}
       </div>
     </main>
   );
