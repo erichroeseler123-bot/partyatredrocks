@@ -22,3 +22,10 @@ export async function getEvent(id: string): Promise<SeatGeekEvent | null> {
   if (!res.ok) return null;
   return await res.json();
 }
+
+export async function getArtistShows(artistSlug: string): Promise<SeatGeekEvent[]> {
+  const url = `https://api.seatgeek.com/2/events?performers.slug=${artistSlug}&client_id=${CLIENT_ID}&per_page=10&sort=datetime_local.asc`;
+  const res = await fetch(url, { cache: 'no-store' });
+  const data = await res.json();
+  return data.events || [];
+}
