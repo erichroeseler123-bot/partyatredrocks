@@ -7,7 +7,7 @@ export async function POST(req: Request) {
   try {
     const { artistName, venue } = await req.json();
     
-    // Stable model to prevent server-side 500 crashes
+    // Stable model to prevent 500 errors
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     
     const prompt = `Write a high-energy, multi-paragraph professional concert preview for ${artistName} performing at ${venue}. Focus on their musical style and why this venue is the perfect place to see them.`;
