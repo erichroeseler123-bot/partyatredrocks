@@ -69,7 +69,7 @@ export default function MishawakaRezdyPage() {
             </a>
           </div>
 
-<RezdyWidget accountBaseUrl={REZDY_BASE} productId={PRODUCT_ID} height={1150} />
+<RezdyWidget accountBaseUrl={REZDY_BASE} productId={PRODUCT_ID} height="1150" />
         </section>
 
         {/* Footer note */}
