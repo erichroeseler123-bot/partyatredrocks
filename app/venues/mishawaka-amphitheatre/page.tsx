@@ -1,6 +1,5 @@
 import Link from "next/link";
-import RezdyWidget from "@/components/RezdyWidget";
-
+import CustomBooking from "@/components/CustomBooking";
 export const revalidate = 3600;
 
 export default function MishawakaRezdyPage() {
@@ -69,7 +68,7 @@ export default function MishawakaRezdyPage() {
             </a>
           </div>
 
-<RezdyWidget accountBaseUrl={REZDY_BASE} productId={PRODUCT_ID} height="1150" />
+<CustomBooking />
         </section>
 
         {/* Footer note */}
