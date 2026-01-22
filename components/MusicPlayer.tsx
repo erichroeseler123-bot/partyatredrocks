@@ -1,32 +1,37 @@
 'use client';
-
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function MusicPlayer({ artistName }: { artistName: string }) {
-  // Use a stable, high-reliability search embed
-  const searchQuery = encodeURIComponent(artistName);
-  const embedUrl = `https://open.spotify.com/embed/search/${searchQuery}`;
-  
-  const [isLoading, setIsLoading] = useState(true);
+  const [artistId, setArtistId] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchId() {
+      try {
+        const res = await fetch(`/api/spotify-id?artist=${encodeURIComponent(artistName)}`);
+        const data = await res.json();
+        setArtistId(data.id);
+      } catch (e) {
+        console.error("Player sync failed");
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchId();
+  }, [artistName]);
+
+  if (loading) return <div className="animate-pulse bg-zinc-900 aspect-video rounded-3xl" />;
+  if (!artistId) return <div className="text-zinc-500 italic p-10">Audio Intel Unavailable.</div>;
 
   return (
-    <div className="rounded-[2.5rem] overflow-hidden border border-white/5 bg-zinc-900/50 aspect-video relative group">
-      {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-zinc-900 z-0">
-          <div className="text-zinc-500 text-[10px] font-black uppercase tracking-[0.3em] animate-pulse italic">
-            Initializing Dispatch Audio...
-          </div>
-        </div>
-      )}
+    <div className="rounded-[2.5rem] overflow-hidden border border-white/5 bg-zinc-900/50 aspect-video">
       <iframe
-        src={embedUrl}
+        src={`https://open.spotify.com/embed/artist/${artistId}`}
         width="100%"
         height="100%"
         frameBorder="0"
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
         loading="lazy"
-        className={`relative z-10 transition-opacity duration-700 ${isLoading ? 'opacity-0' : 'opacity-80 group-hover:opacity-100'}`}
-        onLoad={() => setIsLoading(false)}
       ></iframe>
     </div>
   );
