@@ -13,13 +13,13 @@ export async function GET(request: Request) {
       `https://api.song.link/v1-alpha.1/links?url=${encodeURIComponent(spotifyUrl)}&userCountry=US`,
       {
         headers: { 'User-Agent': 'PartyAtRedRocks-Bot/1.0 (https://partyatredrocks.com)' },
-        next: { revalidate: 3600 } // Cache results for 1 hour to save hits
+        next: { revalidate: 3600 } 
       }
     );
 
     if (!res.ok) return NextResponse.json({ error: `Odesli error: ${res.status}` }, { status: res.status });
 
-    const data = await res.json();
+    const data = await res.json() as any; // Cast as any to bypass strict property checks
     let youtubeId: string | null = null;
     const ytData = data.linksByPlatform?.youtube;
 
@@ -28,10 +28,12 @@ export async function GET(request: Request) {
       youtubeId = match ? match[1] : null;
     }
 
-    // Artist Fallback: If no direct video, get the artist name for a search embed
+    // Artist Fallback: Detect if it's an artist link instead of a track link
     if (!youtubeId && data.entity?.type === 'artist') {
+      const entities = data.entitiesByUniqueId;
       const artistName = data.entity.title || 
-        (data.entitiesByUniqueId && Object.values(data.entitiesByUniqueId)[0]?.title);
+        (entities && Object.values(entities)[0] ? (Object.values(entities)[0] as any).title : null);
+      
       if (artistName) {
         return NextResponse.json({ artistName, isArtistFallback: true });
       }
