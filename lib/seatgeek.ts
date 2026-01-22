@@ -1,31 +1,16 @@
-export interface SeatGeekEvent {
-  id: number;
-  title: string;
-  datetime_local: string;
-  url: string;
-  performers: any[];
-  venue: any;
+const SEATGEEK_CLIENT_ID = process.env.SEATGEEK_CLIENT_ID;
+
+export async function getEvent(id: string) {
+  // Fetches the specific event details, including venue and performer info
+  const url = `https://api.seatgeek.com/2/events/${id}?client_id=${SEATGEEK_CLIENT_ID}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error("Failed to fetch event from SeatGeek");
+  return res.json();
 }
 
-const CLIENT_ID = process.env.SEATGEEK_CLIENT_ID;
-
-export async function getVenueEvents(venueId: number): Promise<SeatGeekEvent[]> {
-  const url = `https://api.seatgeek.com/2/events?venue.id=${venueId}&per_page=50&client_id=${CLIENT_ID}`;
-  const res = await fetch(url, { cache: 'force-cache', next: { revalidate: 3600 } });
-  const data = await res.json();
-  return data.events || [];
-}
-
-export async function getEvent(id: string): Promise<SeatGeekEvent | null> {
-  const url = `https://api.seatgeek.com/2/events/${id}?client_id=${CLIENT_ID}`;
-  const res = await fetch(url, { cache: 'force-cache', next: { revalidate: 3600 } });
-  if (!res.ok) return null;
-  return await res.json();
-}
-
-export async function getArtistShows(artistSlug: string): Promise<SeatGeekEvent[]> {
-  const url = `https://api.seatgeek.com/2/events?performers.slug=${artistSlug}&per_page=10&client_id=${CLIENT_ID}`;
-  const res = await fetch(url, { cache: 'force-cache', next: { revalidate: 3600 } });
+export async function getVenueEvents(venueId: string) {
+  const url = `https://api.seatgeek.com/2/events?venue.id=${venueId}&client_id=${SEATGEEK_CLIENT_ID}&per_page=15&sort=datetime_local.asc`;
+  const res = await fetch(url);
   const data = await res.json();
   return data.events || [];
 }
