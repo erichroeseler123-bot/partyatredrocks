@@ -5,10 +5,12 @@ import MusicPlayer from "@/components/MusicPlayer";
 import Setlist from "@/components/Setlist";
 import TicketButtons from "@/components/TicketButtons";
 
+// Force dynamic rendering and allow on-demand ID generation
 export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
 
 export default async function ShowPage({ params }: { params: Promise<{ id: string }> }) {
-  // CRITICAL: Await params in Next.js 16 to get the ID
+  // CRITICAL: Await params to get the ID
   const { id } = await params;
   const show = await getEvent(id);
 
@@ -41,13 +43,13 @@ export default async function ShowPage({ params }: { params: Promise<{ id: strin
 
         <div className="lg:col-span-8 space-y-8">
           <div className="bg-zinc-900/40 p-10 rounded-[3rem] border border-white/5">
-            <h2 className="text-red-600 font-black uppercase text-xs mb-6 tracking-widest">Artist Spotlight</h2>
+            <h2 className="text-red-600 font-black uppercase text-xs mb-6 tracking-widest text-zinc-500">Artist Spotlight</h2>
             <ArtistGuide artistName={performer.name} venue={show.venue.name} />
           </div>
 
           <div className="bg-zinc-900/60 p-10 rounded-[3rem] border border-white/5 shadow-2xl">
             <h3 className="text-3xl font-black italic uppercase mb-8 tracking-tighter">Secure Transportation</h3>
-            {/* Logic: ID 196 triggers Red Rocks Shuttle */}
+            {/* Red Rocks Logic using Venue ID 196 */}
             <CustomBooking venue={show.venue.id === 196 ? 'redrocks' : 'other'} />
           </div>
         </div>

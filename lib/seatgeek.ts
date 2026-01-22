@@ -9,7 +9,7 @@ export interface SeatGeekEvent {
 
 const CLIENT_ID = process.env.SEATGEEK_CLIENT_ID;
 
-// Fetches 50 shows for a specific venue, sorted by date
+// Fetches 50 shows for a venue, sorted by date
 export async function getVenueEvents(venueId: string): Promise<SeatGeekEvent[]> {
   const url = `https://api.seatgeek.com/2/events?venue.id=${venueId}&client_id=${CLIENT_ID}&per_page=50&sort=datetime_local.asc`;
   const res = await fetch(url, { cache: 'no-store' });
