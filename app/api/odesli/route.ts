@@ -4,22 +4,34 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const spotifyUrl = searchParams.get('url');
 
-  if (!spotifyUrl) {
-    return NextResponse.json({ error: 'Missing URL' }, { status: 400 });
+  if (!spotifyUrl || spotifyUrl === 'undefined') {
+    return NextResponse.json({ error: 'Valid URL required' }, { status: 400 });
   }
 
   try {
-    // Vercel handles this fetch server-side, bypassing browser CORS
-    const res = await fetch(`https://api.song.link/v1-alpha.1/links?url=${encodeURIComponent(spotifyUrl)}&userCountry=US`);
-    
-    if (!res.ok) throw new Error('Odesli API unreachable');
-    
+    const res = await fetch(
+      `https://api.song.link/v1-alpha.1/links?url=${encodeURIComponent(spotifyUrl)}&userCountry=US`,
+      {
+        headers: { 'User-Agent': 'PartyAtRedRocks-Bot/1.0' }, // Identifies the request to avoid blocks
+        next: { revalidate: 3600 } // Caches the result on Vercel for 1 hour to save resources
+      }
+    );
+
+    if (!res.ok) throw new Error(`Odesli responded with ${res.status}`);
+
     const data = await res.json();
-    const youtubeId = data.linksByPlatform?.youtube?.url?.split('v=')[1];
+    
+    // Safety check: ensure the platform and URL exist before splitting
+    const youtubeUrl = data.linksByPlatform?.youtube?.url;
+    const youtubeId = youtubeUrl ? youtubeUrl.split('v=')[1] : null;
+
+    if (!youtubeId) {
+      return NextResponse.json({ error: 'No YouTube match found' }, { status: 404 });
+    }
 
     return NextResponse.json({ youtubeId });
-  } catch (error) {
-    console.error("Vercel Function Error:", error);
-    return NextResponse.json({ error: 'Server-side Dispatch Failed' }, { status: 500 });
+  } catch (error: any) {
+    console.error("Vercel Function Crash:", error.message);
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
