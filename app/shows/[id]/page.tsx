@@ -8,7 +8,7 @@ import TicketButtons from "@/components/TicketButtons";
 export const dynamic = 'force-dynamic';
 
 export default async function ShowPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params; // Async params for Next.js 16
+  const { id } = await params;
   const show = await getEvent(id);
 
   if (!show) {
@@ -27,9 +27,9 @@ export default async function ShowPage({ params }: { params: Promise<{ id: strin
         <img 
           src={performer.image || '/hero/transport.jpg'} 
           alt={show.title}
-          className="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-1000"
+          className="w-full h-full object-cover opacity-60 grayscale"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
         <div className="absolute bottom-0 left-0 p-12 z-10">
            <p className="text-red-600 font-bold uppercase tracking-[0.4em] mb-4 text-xs italic">Live @ {show.venue.name}</p>
            <h1 className="text-6xl md:text-8xl font-black italic uppercase tracking-tighter leading-none">{show.title}</h1>
@@ -38,7 +38,6 @@ export default async function ShowPage({ params }: { params: Promise<{ id: strin
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 p-12">
         <div className="lg:col-span-4 space-y-8">
-          {/* Hybrid YouTube Player */}
           <MusicPlayer artistName={performer.name} />
           <TicketButtons event={show} />
           <Setlist artistName={performer.name} />
@@ -47,7 +46,6 @@ export default async function ShowPage({ params }: { params: Promise<{ id: strin
         <div className="lg:col-span-8 space-y-8">
           <div className="bg-zinc-900/40 p-10 rounded-[3rem] border border-white/5">
             <h2 className="text-red-600 font-black uppercase text-xs mb-6 tracking-widest text-zinc-500 italic">Artist Spotlight</h2>
-            {/* Last.fm Powered Bio */}
             <ArtistGuide artistName={performer.name} />
           </div>
 
