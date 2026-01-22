@@ -3,14 +3,18 @@
 import { useState } from 'react';
 
 export default function MusicPlayer({ artistName }: { artistName: string }) {
-  // Use the verified Spotify embed search pattern
-  const searchQuery = encodeURIComponent(artistName);
-  const embedUrl = `https://open.spotify.com/embed/search/${searchQuery}`;
+  // 1. Encode the artist name so it works in a URL
+  const encodedArtistName = encodeURIComponent(artistName);
   
+  // 2. Use the official, secure Spotify search embed URL
+  // This URL will search for the artist and display their top tracks
+  const embedUrl = `open.spotify.com8/{encodedArtistName}`;
+
   const [isLoading, setIsLoading] = useState(true);
 
   return (
     <div className="rounded-[2.5rem] overflow-hidden border border-white/5 bg-zinc-900/50 aspect-video relative group">
+      {/* Show a loading message while the iframe loads */}
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-zinc-900 z-0">
           <div className="text-zinc-500 text-[10px] font-black uppercase tracking-[0.3em] animate-pulse italic">
@@ -18,6 +22,7 @@ export default function MusicPlayer({ artistName }: { artistName: string }) {
           </div>
         </div>
       )}
+      {/* The Spotify Player iframe */}
       <iframe
         src={embedUrl}
         width="100%"
@@ -25,8 +30,10 @@ export default function MusicPlayer({ artistName }: { artistName: string }) {
         frameBorder="0"
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
         loading="lazy"
+        // Fade the player in once it's ready
         className={`relative z-10 transition-opacity duration-700 ${isLoading ? 'opacity-0' : 'opacity-80 group-hover:opacity-100'}`}
         onLoad={() => setIsLoading(false)}
+        title={`Spotify player for ${artistName}`}
       ></iframe>
     </div>
   );
