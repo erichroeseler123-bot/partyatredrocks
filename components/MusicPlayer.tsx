@@ -7,7 +7,8 @@ export default function MusicPlayer({ spotifyUrl }: { spotifyUrl?: string }) {
 
   useEffect(() => {
     async function fetchSmartLink() {
-      if (!spotifyUrl || spotifyUrl.includes('undefined')) {
+      // Logic to ignore non-music links from the SeatGeek 'url' field
+      if (!spotifyUrl || spotifyUrl.includes('seatgeek.com')) {
         setStatus('error');
         return;
       }
@@ -29,11 +30,13 @@ export default function MusicPlayer({ spotifyUrl }: { spotifyUrl?: string }) {
     fetchSmartLink();
   }, [spotifyUrl]);
 
-  if (status === 'loading') return <div className="h-24 animate-pulse bg-zinc-900 rounded-3xl border border-white/5" />;
+  if (status === 'loading') return <div className="h-24 animate-pulse bg-zinc-900 rounded-3xl border border-white/5"></div>;
   
   if (status === 'error') return (
     <div className="h-24 flex items-center justify-center rounded-[2rem] border border-white/5 bg-zinc-900/10">
-      <p className="text-zinc-500 text-[10px] uppercase font-black italic tracking-widest">Audio Dispatch Unavailable</p>
+      <p className="text-zinc-500 text-[10px] uppercase font-black italic tracking-widest px-4 text-center leading-tight">
+        Audio Dispatch Offline: Direct Music Link Needed
+      </p>
     </div>
   );
 
