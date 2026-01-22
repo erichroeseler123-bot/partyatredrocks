@@ -1,32 +1,28 @@
 'use client';
 
 export default function TicketButtons({ event }: { event: any }) {
-  // SeatGeek link is usually provided directly in their API response
-  const seatGeekUrl = event.url;
-  
-  // For Ticketmaster, we use their 'url' field if available
-  const ticketmasterUrl = event.external_links?.find((l: any) => l.type === 'ticketmaster')?.url;
-
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {seatGeekUrl && (
-        <a 
-          href={seatGeekUrl} 
-          target="_blank" 
-          className="bg-[#1673E6] hover:bg-[#125bb8] text-white p-4 rounded-2xl font-black uppercase text-center tracking-widest transition"
-        >
-          Tickets on SeatGeek
-        </a>
-      )}
-      {ticketmasterUrl && (
-        <a 
-          href={ticketmasterUrl} 
-          target="_blank" 
-          className="bg-[#026cdf] hover:bg-[#0154ad] text-white p-4 rounded-2xl font-black uppercase text-center tracking-widest transition"
-        >
-          Tickets on Ticketmaster
-        </a>
-      )}
+    <div className="flex flex-col gap-4">
+      {/* PRIMARY CTA: Shuttle Booking (Prominent) */}
+      <a 
+        href="#booking" 
+        className="w-full bg-red-600 hover:bg-red-700 text-white p-5 rounded-2xl font-black uppercase text-center tracking-[0.2em] transition-all transform hover:scale-[1.02] shadow-[0_0_20px_rgba(220,38,38,0.3)]"
+      >
+        Book Red Rocks Shuttle — $59+
+      </a>
+
+      {/* SECONDARY CTA: SeatGeek Tickets (Less Prominent) */}
+      <a 
+        href={event.url} 
+        target="_blank" 
+        className="w-full bg-transparent border border-zinc-800 hover:border-zinc-600 text-zinc-400 hover:text-white p-4 rounded-2xl font-bold uppercase text-center tracking-widest text-xs transition"
+      >
+        Buy Concert Tickets on SeatGeek
+      </a>
+      
+      <p className="text-[10px] text-zinc-600 uppercase font-bold italic text-center tracking-tighter">
+        *Shuttle tickets do not include concert entry
+      </p>
     </div>
   );
 }
