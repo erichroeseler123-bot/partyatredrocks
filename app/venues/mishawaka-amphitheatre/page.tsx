@@ -1,44 +1,48 @@
 import Link from "next/link";
-import CustomBooking from "@/components/CustomBooking";
+import { getVenueEvents } from "@/lib/seatgeek";
 import ArtistGuide from "@/components/ArtistGuide";
 
-const MISH_SHOWS = [
-  { date: "Mar 7, 2026", title: "Graham Good & The Painters" },
-  { date: "Apr 18, 2026", title: "San Holo" },
-  { date: "May 1, 2026", title: "Benjamin Tod & The Inline Six" },
-  { date: "Jun 14, 2026", title: "Lane 8" },
-  { date: "Jun 20, 2026", title: "Tycho (Live)" }
-];
+export const dynamic = 'force-dynamic';
 
-export default function MishawakaPage() {
+export default async function MishawakaPage() {
+  const venueId = "119"; // SeatGeek ID for Mishawaka
+  const shows = await getVenueEvents(venueId);
+
   return (
-    <main className="min-h-screen bg-black text-white p-8">
-      <Link href="/" className="text-red-600 uppercase font-bold text-xs tracking-widest">← Back</Link>
-      <h1 className="text-5xl font-black italic uppercase my-6">Mishawaka Amphitheatre</h1>
-      
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-        <div className="lg:col-span-2 space-y-8">
-          <div className="bg-zinc-900/50 p-8 rounded-3xl border border-white/5">
-            <h2 className="text-xl font-bold mb-4 text-red-600">Venue Spotlight</h2>
-            <ArtistGuide artistName="Upcoming Artists" venue="Mishawaka Amphitheatre" />
+    <main className="min-h-screen bg-black text-white p-12">
+      <header className="mb-16">
+        <h1 className="text-6xl font-black italic uppercase tracking-tighter leading-none mb-2">Mishawaka Amphitheatre</h1>
+        <p className="text-red-600 font-bold uppercase tracking-widest text-sm">Bellvue, CO • Season Calendar</p>
+      </header>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <div className="lg:col-span-8">
+          <div className="bg-zinc-900/40 p-10 rounded-[3rem] border border-white/5 mb-12">
+            <h2 className="text-red-600 font-black uppercase text-xs mb-6 tracking-widest text-zinc-500 italic">Venue Spotlight</h2>
+            {/* FIX: Removed 'venue' prop to resolve TypeScript error */}
+            <ArtistGuide artistName="Mishawaka Amphitheatre" />
           </div>
-          
-          <div className="bg-zinc-900/50 p-8 rounded-3xl border border-white/5">
-            <h2 className="text-xl font-bold mb-4">Mishawaka Shuttles</h2>
-            {/* venue="mishawaka" filters for PGG11Z and PB7VBT */}
-            <CustomBooking venue="mishawaka" />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {shows.map((show) => (
+              <Link key={show.id} href={`/shows/${show.id}`} className="group bg-zinc-900/50 border border-white/10 rounded-3xl p-8 hover:border-red-600 transition-all duration-500">
+                <div className="text-zinc-500 text-[10px] font-black uppercase mb-4 tracking-widest">
+                  {new Date(show.datetime_local).toLocaleDateString()}
+                </div>
+                <h3 className="text-2xl font-black italic uppercase tracking-tight group-hover:text-red-600 transition">{show.title}</h3>
+                <p className="text-zinc-600 text-xs mt-6 uppercase font-bold tracking-widest">Book Shuttle →</p>
+              </Link>
+            ))}
           </div>
         </div>
 
-        <div className="bg-zinc-950 p-8 rounded-3xl border border-white/5 h-fit">
-          <h3 className="text-xs font-black uppercase text-red-600 mb-6 tracking-widest">Upcoming 2026 Shows</h3>
-          <div className="space-y-4">
-            {MISH_SHOWS.map((show, i) => (
-              <div key={i} className="border-b border-white/5 pb-4 last:border-0">
-                <div className="text-[10px] font-mono text-zinc-500 uppercase">{show.date}</div>
-                <div className="font-bold text-zinc-200">{show.title}</div>
-              </div>
-            ))}
+        <div className="lg:col-span-4">
+           <div className="bg-zinc-900/60 p-10 rounded-[3rem] border border-white/5 shadow-2xl sticky top-12">
+            <h3 className="text-3xl font-black italic uppercase mb-8 tracking-tighter leading-none">Transportation</h3>
+            <p className="text-zinc-400 text-sm mb-8 font-medium italic">Private shuttle service available for all Mishawaka events. Safe mountain transit from Fort Collins and surrounding areas.</p>
+            <Link href="/private-suburban" className="block w-full bg-red-600 text-white text-center py-4 rounded-full font-black uppercase italic hover:bg-red-700 transition">
+              Request Private SUV
+            </Link>
           </div>
         </div>
       </div>
