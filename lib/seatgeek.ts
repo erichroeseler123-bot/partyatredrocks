@@ -25,7 +25,7 @@ export async function getVenueEvents(venueId: string): Promise<SeatGeekEvent[]> 
   return data.events || [];
 }
 
-// FIX: Added this missing export for the Artist Page build
+// FIX: Exported for Artist Page build
 export async function getArtistShows(artistSlug: string): Promise<SeatGeekEvent[]> {
   const url = `https://api.seatgeek.com/2/events?performers.slug=${artistSlug}&client_id=${CLIENT_ID}&per_page=10&sort=datetime_local.asc`;
   const res = await fetch(url, { cache: 'no-store' });
