@@ -5,51 +5,58 @@ import MusicPlayer from "@/components/MusicPlayer";
 import Setlist from "@/components/Setlist";
 import TicketButtons from "@/components/TicketButtons";
 
+// Forces the page to fetch fresh data for every visitor
 export const dynamic = 'force-dynamic';
 
 export default async function ShowPage({ params }: { params: Promise<{ id: string }> }) {
-  // Fixes the "Event not found" by correctly awaiting the ID
+  // FIX: Await params to get the actual ID
   const { id } = await params;
   const show = await getEvent(id);
 
-  if (!show) return <div className="p-20 text-center uppercase font-black italic">Event not found.</div>;
+  if (!show) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <h1 className="text-2xl font-black uppercase italic">Dispatch Error: Event Not Found</h1>
+      </div>
+    );
+  }
 
   const performer = show.performers[0];
 
   return (
     <main className="min-h-screen bg-black text-white">
-      {/* Restored Artist Image Hero */}
-      <div className="relative h-[50vh] bg-zinc-900 overflow-hidden">
+      {/* Restored Hero Section with Artist Picture */}
+      <div className="relative h-[60vh] bg-zinc-900 overflow-hidden border-b border-red-600/20">
         <img 
           src={performer.image || '/hero/transport.jpg'} 
-          className="w-full h-full object-cover opacity-50 grayscale hover:grayscale-0 transition-all duration-1000"
           alt={show.title}
+          className="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-1000"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
         <div className="absolute bottom-0 left-0 p-12 z-10">
-           <p className="text-red-600 font-bold uppercase tracking-[0.3em] mb-4 text-xs">Live at {show.venue.name}</p>
+           <p className="text-red-600 font-bold uppercase tracking-[0.4em] mb-4 text-xs">Live @ {show.venue.name}</p>
            <h1 className="text-8xl font-black italic uppercase tracking-tighter leading-none">{show.title}</h1>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 p-12">
-        {/* Left: Engagement & Tickets */}
+        {/* Left: Media & Tickets (4 cols) */}
         <div className="lg:col-span-4 space-y-8">
           <MusicPlayer artistName={performer.name} />
           <TicketButtons event={show} />
           <Setlist artistName={performer.name} />
         </div>
 
-        {/* Right: AI Dispatch Intel & Booking */}
+        {/* Right: Dispatch Intel & Booking (8 cols) */}
         <div className="lg:col-span-8 space-y-8">
-          <div className="bg-zinc-900/40 p-10 rounded-[2.5rem] border border-white/5">
+          <div className="bg-zinc-900/40 p-10 rounded-[3rem] border border-white/5">
             <h2 className="text-red-600 font-black uppercase text-xs mb-6 tracking-widest">Artist Spotlight</h2>
             <ArtistGuide artistName={performer.name} venue={show.venue.name} />
           </div>
 
-          <div className="bg-zinc-900/60 p-10 rounded-[2.5rem] border border-white/5">
-            <h3 className="text-3xl font-black italic uppercase mb-8">Secure Transportation</h3>
-            {/* Logic: If Red Rocks (ID 196), show shuttle; else show private Suburban */}
+          <div className="bg-zinc-900/60 p-10 rounded-[3rem] border border-white/5 shadow-2xl shadow-red-900/10">
+            <h3 className="text-3xl font-black italic uppercase mb-8 tracking-tighter">Secure Transportation</h3>
+            {/* Logic: ID 196 triggers Red Rocks Shuttle; otherwise shows Private SUV */}
             <CustomBooking venue={show.venue.id === 196 ? 'redrocks' : 'other'} />
           </div>
         </div>
