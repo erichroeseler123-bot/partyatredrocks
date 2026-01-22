@@ -25,7 +25,7 @@ export default async function ShowPage({ params }: { params: Promise<{ id: strin
     <main className="min-h-screen bg-black text-white">
       <div className="relative h-[60vh] bg-zinc-900 overflow-hidden border-b border-red-600/20">
         <img 
-          src={performer.image || '/hero/transport.jpg'} 
+          src={performer.image || "/hero/transport.jpg"} 
           alt={show.title}
           className="w-full h-full object-cover opacity-60 grayscale"
         />
@@ -38,7 +38,8 @@ export default async function ShowPage({ params }: { params: Promise<{ id: strin
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 p-12">
         <div className="lg:col-span-4 space-y-8">
-          <MusicPlayer artistName={performer.name} />
+          {/* FIX: Changed artistName to spotifyUrl to match the Odesli MusicPlayer prop */}
+          <MusicPlayer spotifyUrl={show.url} /> 
           <TicketButtons event={show} />
           <Setlist artistName={performer.name} />
         </div>
@@ -51,7 +52,7 @@ export default async function ShowPage({ params }: { params: Promise<{ id: strin
 
           <div className="bg-zinc-900/60 p-10 rounded-[3rem] border border-white/5 shadow-2xl">
             <h3 className="text-3xl font-black italic uppercase mb-8 tracking-tighter leading-none">Secure Transportation</h3>
-            <CustomBooking venue={show.venue.id === 196 ? 'redrocks' : 'other'} />
+            <CustomBooking venue={show.venue.id === 196 ? "redrocks" : "other"} />
           </div>
         </div>
       </div>
