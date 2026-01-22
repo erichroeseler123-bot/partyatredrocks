@@ -5,21 +5,21 @@ export default function DispatchHub() {
     {
       title: "Red Rocks",
       detail: "Live Show List",
-      link: "/venues/red-rocks-amphitheatre", // Connects to SeatGeek list
+      link: "/venues/red-rocks-amphitheatre", 
       cta: "Book Dispatch",
       accent: "bg-red-600"
     },
     {
       title: "Mishawaka",
       detail: "$65 Round Trip",
-      link: "/venues/mishawaka-amphitheatre", // Connects to Rezdy page
+      link: "/venues/mishawaka-amphitheatre", 
       cta: "Reserve Seat",
       accent: "bg-blue-600"
     },
     {
       title: "All Venues",
       detail: "$250 Minimum",
-      link: "/venues/all-venues", // Connects to Private logic
+      link: "/venues/all-venues", 
       cta: "Request Vehicle",
       accent: "bg-zinc-800"
     }
