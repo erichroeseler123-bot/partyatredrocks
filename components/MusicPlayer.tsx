@@ -1,11 +1,11 @@
 'use client';
 
 export default function MusicPlayer({ artistName }: { artistName: string }) {
-  // Use the standard Spotify search embed URL to avoid 404s
+  // Official Spotify Embed URL to fix the 404
   const embedUrl = `https://open.spotify.com/embed/search/${encodeURIComponent(artistName)}`;
 
   return (
-    <div className="rounded-[2rem] overflow-hidden border border-white/10 bg-zinc-900">
+    <div className="rounded-[2rem] overflow-hidden border border-white/10 bg-zinc-900 aspect-video">
       <iframe 
         src={embedUrl}
         width="100%" 

@@ -9,18 +9,18 @@ export interface SeatGeekEvent {
 
 const CLIENT_ID = process.env.SEATGEEK_CLIENT_ID;
 
-// Fetches a single event by ID
-export async function getEvent(id: string): Promise<SeatGeekEvent | null> {
-  const url = `https://api.seatgeek.com/2/events/${id}?client_id=${CLIENT_ID}`;
-  const res = await fetch(url, { cache: 'no-store' });
-  if (!res.ok) return null;
-  return await res.json();
-}
-
 // Fetches 50 shows for a venue, sorted chronologically
 export async function getVenueEvents(venueId: string): Promise<SeatGeekEvent[]> {
   const url = `https://api.seatgeek.com/2/events?venue.id=${venueId}&client_id=${CLIENT_ID}&per_page=50&sort=datetime_local.asc`;
   const res = await fetch(url, { cache: 'no-store' });
   const data = await res.json();
   return data.events || [];
+}
+
+// Fetches a single event by ID
+export async function getEvent(id: string): Promise<SeatGeekEvent | null> {
+  const url = `https://api.seatgeek.com/2/events/${id}?client_id=${CLIENT_ID}`;
+  const res = await fetch(url, { cache: 'no-store' });
+  if (!res.ok) return null;
+  return await res.json();
 }
