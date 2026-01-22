@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 export default function MusicPlayer({ artistName }: { artistName: string }) {
-  // FIX: Absolute search embed URL to prevent 404
+  // Use the verified Spotify embed search pattern
   const searchQuery = encodeURIComponent(artistName);
   const embedUrl = `https://open.spotify.com/embed/search/${searchQuery}`;
   
