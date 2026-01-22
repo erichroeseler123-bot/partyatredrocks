@@ -1,7 +1,8 @@
 'use client';
 import { useEffect, useState } from 'react';
 
-export default function CustomBooking() {
+// Define the "venue" prop so TypeScript doesn't crash the build
+export default function CustomBooking({ venue }: { venue?: string }) {
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
   const [sessions, setSessions] = useState([]);
@@ -17,13 +18,19 @@ export default function CustomBooking() {
   });
 
   useEffect(() => {
-    fetch('/api/products').then(res => res.json()).then(setProducts).finally(() => setLoading(false));
-  }, []);
+    // We pass the venue prop to the API to filter the products
+    const url = venue ? `/api/products?venue=${venue}` : '/api/products';
+    fetch(url)
+      .then(res => res.json())
+      .then(setProducts)
+      .finally(() => setLoading(false));
+  }, [venue]);
 
   useEffect(() => {
     if (selectedProduct) {
       fetch(`/api/availability?productCode=${selectedProduct.productCode}`)
-        .then(res => res.json()).then(setSessions);
+        .then(res => res.json())
+        .then(setSessions);
     }
   }, [selectedProduct]);
 
@@ -55,7 +62,7 @@ export default function CustomBooking() {
         setSelectedProduct(null);
         setSelectedSession(null);
       } else {
-        alert('Booking Failed. Check your Rezdy dashboard or try again.');
+        alert('Booking Failed. Please check details and try again.');
       }
     } catch (err) {
       alert('Error connecting to booking service.');
@@ -64,42 +71,42 @@ export default function CustomBooking() {
     }
   };
 
-  if (loading) return <div className="text-white p-4">Loading services...</div>;
+  if (loading) return <div className="text-zinc-500 text-sm">Loading services...</div>;
 
   return (
     <div className="space-y-6">
       {!selectedProduct ? (
         <div className="grid gap-4">
-          <h3 className="text-xl font-bold text-white">1. Select Service</h3>
-          {products.map((p: any) => (
-            <button key={p.productCode} onClick={() => setSelectedProduct(p)} className="p-4 border border-white/20 bg-white/5 rounded-xl hover:bg-white/10 text-left">
+          <h3 className="text-lg font-bold text-white uppercase tracking-tighter">1. Select Service</h3>
+          {products.length > 0 ? products.map((p: any) => (
+            <button key={p.productCode} onClick={() => setSelectedProduct(p)} className="p-4 border border-white/10 bg-white/5 rounded-2xl hover:bg-white/10 text-left transition">
               <div className="font-bold text-white">{p.name}</div>
-              <div className="text-gray-400">${p.advertisedPrice}</div>
+              <div className="text-red-600 text-sm font-mono">${p.advertisedPrice}</div>
             </button>
-          ))}
+          )) : <p className="text-zinc-500 italic">No services available for this venue.</p>}
         </div>
       ) : !selectedSession ? (
         <div className="space-y-4">
-          <button onClick={() => setSelectedProduct(null)} className="text-blue-400 text-sm">← Back</button>
-          <h3 className="text-xl font-bold text-white">2. Pick a Date</h3>
+          <button onClick={() => setSelectedProduct(null)} className="text-zinc-500 text-xs uppercase font-black hover:text-white">← Back</button>
+          <h3 className="text-lg font-bold text-white uppercase tracking-tighter">2. Pick a Date</h3>
           <div className="grid gap-2">
             {sessions.length > 0 ? sessions.map((s: any) => (
-              <button key={s.id} onClick={() => setSelectedSession(s)} className="p-3 border border-white/10 bg-white/5 rounded-lg text-white hover:bg-blue-600 flex justify-between">
-                <span>{new Date(s.startTime).toLocaleDateString()}</span>
-                <span>{s.seatsAvailable} seats left</span>
+              <button key={s.id} onClick={() => setSelectedSession(s)} className="p-4 border border-white/10 bg-zinc-900 rounded-xl text-white hover:bg-red-600 transition flex justify-between items-center">
+                <span className="font-mono">{new Date(s.startTime).toLocaleDateString()}</span>
+                <span className="text-[10px] bg-white/10 px-2 py-1 rounded-full uppercase">{s.seatsAvailable} Left</span>
               </button>
-            )) : <p className="text-zinc-500 italic">No available dates found.</p>}
+            )) : <p className="text-zinc-500 italic">No available dates found for this service.</p>}
           </div>
         </div>
       ) : (
         <div className="space-y-4">
-          <button onClick={() => setSelectedSession(null)} className="text-blue-400 text-sm">← Back</button>
-          <h3 className="text-xl font-bold text-white">3. Passenger & Contact Info</h3>
+          <button onClick={() => setSelectedSession(null)} className="text-zinc-500 text-xs uppercase font-black hover:text-white">← Back</button>
+          <h3 className="text-lg font-bold text-white uppercase tracking-tighter">3. Finalize Booking</h3>
           
           <div className="flex flex-col gap-2">
-            <label className="text-[10px] uppercase text-zinc-500 font-bold">Passengers</label>
+            <label className="text-[10px] uppercase text-zinc-500 font-black tracking-widest">Passengers</label>
             <select 
-              className="w-full p-3 bg-zinc-900 border border-white/10 rounded text-white"
+              className="w-full p-4 bg-zinc-900 border border-white/10 rounded-xl text-white focus:border-red-600 outline-none"
               value={formData.quantity}
               onChange={e => setFormData({...formData, quantity: parseInt(e.target.value)})}
             >
@@ -110,18 +117,18 @@ export default function CustomBooking() {
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <input type="text" placeholder="First Name" className="p-3 bg-white/5 border border-white/10 rounded text-white" onChange={e => setFormData({...formData, firstName: e.target.value})} />
-            <input type="text" placeholder="Last Name" className="p-3 bg-white/5 border border-white/10 rounded text-white" onChange={e => setFormData({...formData, lastName: e.target.value})} />
+            <input type="text" placeholder="First Name" className="p-4 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-red-600" onChange={e => setFormData({...formData, firstName: e.target.value})} />
+            <input type="text" placeholder="Last Name" className="p-4 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-red-600" onChange={e => setFormData({...formData, lastName: e.target.value})} />
           </div>
-          <input type="email" placeholder="Email" className="w-full p-3 bg-white/5 border border-white/10 rounded text-white" onChange={e => setFormData({...formData, email: e.target.value})} />
-          <input type="tel" placeholder="Phone" className="w-full p-3 bg-white/5 border border-white/10 rounded text-white" onChange={e => setFormData({...formData, phone: e.target.value})} />
+          <input type="email" placeholder="Email" className="w-full p-4 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-red-600" onChange={e => setFormData({...formData, email: e.target.value})} />
+          <input type="tel" placeholder="Phone" className="w-full p-4 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-red-600" onChange={e => setFormData({...formData, phone: e.target.value})} />
           
           <button 
             disabled={bookingLoading}
             onClick={handleBooking} 
-            className={`w-full p-4 rounded-xl font-bold transition ${bookingLoading ? 'bg-zinc-700' : 'bg-red-600 hover:bg-red-700'}`}
+            className={`w-full p-5 rounded-2xl font-black uppercase tracking-widest transition ${bookingLoading ? 'bg-zinc-800 text-zinc-500' : 'bg-red-600 hover:bg-red-700 text-white shadow-lg shadow-red-900/20'}`}
           >
-            {bookingLoading ? 'Processing...' : 'Complete Booking'}
+            {bookingLoading ? 'Processing...' : 'Complete Reservation'}
           </button>
         </div>
       )}
