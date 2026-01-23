@@ -1,80 +1,74 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import VenueShows from '@/components/VenueShows';
-import FleetGrid from '@/components/FleetGrid';
-
 export default function HomePage() {
-  const redRocksVenue = { slug: 'red-rocks-amphitheatre' };
-
   return (
     <main className="bg-black text-white">
 
       {/* =========================
-          SECTION A — HERO
+          HERO
       ========================== */}
-      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[85vh] w-full">
         <Image
-          src="/redrocks-color.jpg"
+          src="/hero-redrocks.jpg"
           alt="Red Rocks Amphitheatre"
           fill
           priority
-          className="object-cover opacity-80"
+          className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black" />
 
-        <div className="relative z-10 max-w-5xl px-6 text-center">
-          <h1 className="text-5xl md:text-7xl font-black tracking-tight">
-            Concert Transportation.
-            <br />
-            No Driving. No Stress.
-          </h1>
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20" />
 
-          <p className="mt-6 text-lg text-zinc-300 max-w-2xl mx-auto">
-            Door-to-door shuttle and private SUV service for concerts across Denver & Boulder.
-          </p>
+        <div className="relative z-10 flex h-full items-end px-6 pb-20 max-w-7xl mx-auto">
+          <div>
+            <h1 className="text-6xl md:text-8xl font-black italic tracking-tight">
+              PARTY @ RED ROCKS
+            </h1>
+            <p className="mt-4 text-xl text-zinc-300 max-w-xl">
+              Concert transportation. No driving. No stress.
+            </p>
 
-          <Link
-            href="/book-shuttle"
-            className="inline-block mt-10 px-10 py-4 bg-red-600 hover:bg-red-700 font-bold rounded-md"
-          >
-            Book Your Ride
-          </Link>
+            <div className="mt-8 flex gap-4">
+              <Link
+                href="/book-shuttle"
+                className="bg-red-600 hover:bg-red-500 px-8 py-4 rounded-full font-bold"
+              >
+                Book a Ride
+              </Link>
+
+              <Link
+                href="/shows"
+                className="border border-white/30 hover:border-white px-8 py-4 rounded-full font-bold"
+              >
+                View Shows
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* =========================
-          SECTION B — UPCOMING SHOWS
+          UPCOMING SHOWS
       ========================== */}
       <section className="py-24 px-6 max-w-7xl mx-auto">
-        <div className="flex items-end justify-between mb-10">
-          <h2 className="text-4xl font-black">Upcoming Shows</h2>
-          <Link
-            href="/shows"
-            className="text-red-500 font-bold hover:underline"
-          >
-            View All Shows →
-          </Link>
-        </div>
+        <h2 className="text-4xl font-black mb-10">
+          Upcoming Red Rocks Shows
+        </h2>
 
-        <VenueShows venue={redRocksVenue} />
+        <p className="text-zinc-400 max-w-xl mb-8">
+          We run shuttles and private SUVs for every major Red Rocks event.
+        </p>
+
+        <Link
+          href="/shows"
+          className="inline-block bg-red-600 hover:bg-red-500 px-8 py-4 rounded-full font-bold"
+        >
+          View All 90+ 2026 Shows →
+        </Link>
       </section>
 
       {/* =========================
-          SECTION C — FEATURED ARTISTS
-      ========================== */}
-      <section className="py-24 px-6 bg-zinc-950">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-black mb-10">
-            Featured Artists
-          </h2>
-
-          <VenueShows venue={redRocksVenue} />
-        </div>
-      </section>
-
-      {/* =========================
-          SECTION D — VENUES WE SERVE
+          VENUES
       ========================== */}
       <section className="py-24 px-6 max-w-7xl mx-auto">
         <h2 className="text-4xl font-black mb-12">
@@ -82,70 +76,92 @@ export default function HomePage() {
         </h2>
 
         <div className="grid md:grid-cols-3 gap-8">
-
-          <Link
-            href="/venues/red-rocks-amphitheatre"
-            className="group relative rounded-xl overflow-hidden border border-zinc-800"
-          >
-            <Image
-              src="/redrocks-color.jpg"
-              alt="Red Rocks Amphitheatre"
-              width={600}
-              height={400}
-              className="object-cover group-hover:scale-105 transition"
-            />
-            <div className="absolute inset-0 bg-black/50" />
-            <div className="absolute bottom-4 left-4 font-black text-xl">
+          <Link href="/venues/red-rocks-amphitheatre" className="group">
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
+              <Image
+                src="/hero-redrocks.jpg"
+                alt="Red Rocks Amphitheatre"
+                fill
+                className="object-cover group-hover:scale-105 transition"
+              />
+            </div>
+            <h3 className="mt-4 text-xl font-bold">
               Red Rocks Amphitheatre
-            </div>
+            </h3>
           </Link>
 
-          <Link
-            href="/venues/mishawaka-amphitheatre"
-            className="group relative rounded-xl overflow-hidden border border-zinc-800"
-          >
-            <Image
-              src="/hero/transport.jpg"
-              alt="Mishawaka Amphitheatre"
-              width={600}
-              height={400}
-              className="object-cover group-hover:scale-105 transition"
-            />
-            <div className="absolute inset-0 bg-black/50" />
-            <div className="absolute bottom-4 left-4 font-black text-xl">
+          <Link href="/venues/mishawaka-amphitheatre" className="group">
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
+              <Image
+                src="/hero-transport.jpg"
+                alt="Mishawaka Amphitheatre"
+                fill
+                className="object-cover group-hover:scale-105 transition"
+              />
+            </div>
+            <h3 className="mt-4 text-xl font-bold">
               Mishawaka Amphitheatre
-            </div>
+            </h3>
           </Link>
 
-          <Link
-            href="/book-shuttle"
-            className="group relative rounded-xl overflow-hidden border border-red-600"
-          >
-            <Image
-              src="/fleet/shuttle.jpg"
-              alt="All Venues Shuttle"
-              width={600}
-              height={400}
-              className="object-cover group-hover:scale-105 transition"
-            />
-            <div className="absolute inset-0 bg-black/60" />
-            <div className="absolute bottom-4 left-4 font-black text-xl">
+          <Link href="/book-all-venues" className="group">
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-red-600">
+              <Image
+                src="/shuttle-sprinter.jpg"
+                alt="All Venues Shuttle"
+                fill
+                className="object-cover group-hover:scale-105 transition"
+              />
+            </div>
+            <h3 className="mt-4 text-xl font-bold">
               All-Venues Shuttle
-            </div>
+            </h3>
           </Link>
-
         </div>
       </section>
 
       {/* =========================
-          SECTION E — FLEET
+          FLEET
       ========================== */}
-      <section className="py-24 px-6 bg-gradient-to-b from-black to-zinc-950">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-black mb-12 text-center">
-            Our Fleet
-          </h2>
-          <FleetGrid />
+      <section className="py-24 px-6 max-w-7xl mx-auto">
+        <h2 className="text-4xl font-black mb-12">
+          Our Fleet
+        </h2>
+
+        <div className="grid md:grid-cols-2 gap-10">
+          <div className="bg-zinc-900 rounded-3xl overflow-hidden">
+            <div className="relative aspect-[16/9]">
+              <Image
+                src="/shuttle-sprinter.jpg"
+                alt="Sprinter Shuttle"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="p-8">
+              <h3 className="text-2xl font-black">Sprinter Shuttle</h3>
+              <p className="text-zinc-400 mt-2">
+                $50 per person · Denver & Boulder pickups · Drink & vape allowed
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-zinc-900 rounded-3xl overflow-hidden border border-red-600">
+            <div className="relative aspect-[16/9]">
+              <Image
+                src="/suburban-primary.jpg"
+                alt="Private Suburban SUV"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="p-8">
+              <h3 className="text-2xl font-black">Private Suburban</h3>
+              <p className="text-zinc-400 mt-2">
+                $300 minimum · Door-to-door · Your group, your music
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
