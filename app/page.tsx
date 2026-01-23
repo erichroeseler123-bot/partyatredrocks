@@ -24,6 +24,7 @@ export default function HomePage() {
             <h1 className="text-6xl md:text-8xl font-black italic tracking-tight">
               PARTY @ RED ROCKS
             </h1>
+
             <p className="mt-4 text-xl text-zinc-300 max-w-xl">
               Concert transportation. No driving. No stress.
             </p>
@@ -31,14 +32,14 @@ export default function HomePage() {
             <div className="mt-8 flex gap-4">
               <Link
                 href="/book-shuttle"
-                className="bg-red-600 hover:bg-red-500 px-8 py-4 rounded-full font-bold"
+                className="bg-red-600 hover:bg-red-500 px-8 py-4 rounded-full font-bold transition"
               >
                 Book a Ride
               </Link>
 
               <Link
                 href="/shows"
-                className="border border-white/30 hover:border-white px-8 py-4 rounded-full font-bold"
+                className="border border-white/30 hover:border-white px-8 py-4 rounded-full font-bold transition"
               >
                 View Shows
               </Link>
@@ -48,10 +49,10 @@ export default function HomePage() {
       </section>
 
       {/* =========================
-          UPCOMING SHOWS
+          SHOWS CTA
       ========================== */}
       <section className="py-24 px-6 max-w-7xl mx-auto">
-        <h2 className="text-4xl font-black mb-10">
+        <h2 className="text-4xl font-black mb-6">
           Upcoming Red Rocks Shows
         </h2>
 
@@ -61,7 +62,7 @@ export default function HomePage() {
 
         <Link
           href="/shows"
-          className="inline-block bg-red-600 hover:bg-red-500 px-8 py-4 rounded-full font-bold"
+          className="inline-block bg-red-600 hover:bg-red-500 px-8 py-4 rounded-full font-bold transition"
         >
           View All 90+ 2026 Shows →
         </Link>
@@ -84,6 +85,7 @@ export default function HomePage() {
                 fill
                 className="object-cover group-hover:scale-105 transition"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
             </div>
             <h3 className="mt-4 text-xl font-bold">
               Red Rocks Amphitheatre
@@ -98,6 +100,7 @@ export default function HomePage() {
                 fill
                 className="object-cover group-hover:scale-105 transition"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
             </div>
             <h3 className="mt-4 text-xl font-bold">
               Mishawaka Amphitheatre
@@ -112,6 +115,7 @@ export default function HomePage() {
                 fill
                 className="object-cover group-hover:scale-105 transition"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
             </div>
             <h3 className="mt-4 text-xl font-bold">
               All-Venues Shuttle
@@ -121,7 +125,7 @@ export default function HomePage() {
       </section>
 
       {/* =========================
-          FLEET
+          FLEET (CROPPED + DEPTH)
       ========================== */}
       <section className="py-24 px-6 max-w-7xl mx-auto">
         <h2 className="text-4xl font-black mb-12">
@@ -129,15 +133,19 @@ export default function HomePage() {
         </h2>
 
         <div className="grid md:grid-cols-2 gap-10">
-          <div className="bg-zinc-900 rounded-3xl overflow-hidden">
-            <div className="relative aspect-[16/9]">
+          {/* Shuttle */}
+          <div className="relative bg-zinc-900 rounded-3xl overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.8)] hover:shadow-[0_40px_120px_rgba(220,38,38,0.35)] transition">
+            <div className="relative aspect-[16/9] overflow-hidden">
               <Image
                 src="/shuttle-sprinter.jpg"
                 alt="Sprinter Shuttle"
                 fill
                 className="object-cover"
+                style={{ objectPosition: 'center calc(50% + 100px)' }}
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
             </div>
+
             <div className="p-8">
               <h3 className="text-2xl font-black">Sprinter Shuttle</h3>
               <p className="text-zinc-400 mt-2">
@@ -146,15 +154,19 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="bg-zinc-900 rounded-3xl overflow-hidden border border-red-600">
-            <div className="relative aspect-[16/9]">
+          {/* Suburban */}
+          <div className="relative bg-zinc-900 rounded-3xl overflow-hidden border border-red-600 shadow-[0_30px_80px_rgba(0,0,0,0.8)] hover:shadow-[0_40px_120px_rgba(220,38,38,0.35)] transition">
+            <div className="relative aspect-[16/9] overflow-hidden">
               <Image
                 src="/suburban-primary.jpg"
                 alt="Private Suburban SUV"
                 fill
                 className="object-cover"
+                style={{ objectPosition: 'center calc(50% + 100px)' }}
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
             </div>
+
             <div className="p-8">
               <h3 className="text-2xl font-black">Private Suburban</h3>
               <p className="text-zinc-400 mt-2">
