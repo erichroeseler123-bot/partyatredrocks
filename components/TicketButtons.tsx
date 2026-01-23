@@ -1,17 +1,17 @@
-'use client';
+type TicketButtonsProps = {
+  event?: any;
+};
 
-export default function TicketButtons({ event }: { event: any }) {
+export default function TicketButtons({ event }: TicketButtonsProps) {
   return (
-    <div className="flex flex-col gap-4">
-      <a href="#booking" className="w-full bg-red-600 hover:bg-red-700 text-white p-6 rounded-[2rem] font-black uppercase text-center tracking-widest transition transform hover:scale-[1.02]">
-        Book Shared Shuttle
-      </a>
-      <a href="#booking" className="w-full bg-blue-600 hover:bg-blue-700 text-white p-6 rounded-[2rem] font-black uppercase text-center tracking-widest transition transform hover:scale-[1.02]">
-        Book Private Suburban
-      </a>
-      {/* YELLOW BUTTON */}
-      <a href={event?.url || '#'} target="_blank" className="w-full mt-4 bg-yellow-400 hover:bg-yellow-500 text-black p-4 rounded-2xl font-black uppercase text-center text-xs tracking-widest transition">
-        Buy Tickets on SeatGeek
+    <div className="flex gap-4 my-6">
+      <a
+        href={event?.url || "#"}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="px-6 py-3 bg-white text-black font-bold rounded hover:bg-zinc-200 transition"
+      >
+        Buy Tickets
       </a>
     </div>
   );
