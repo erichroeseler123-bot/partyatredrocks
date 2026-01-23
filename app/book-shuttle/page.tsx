@@ -1,17 +1,45 @@
-export default function BookingTerminal() {
+'use client';
+
+import { useEffect } from 'react';
+
+export default function BookShuttlePage() {
+  useEffect(() => {
+    // Load Rezdy widget script ONCE
+    if (!document.getElementById('rezdy-script')) {
+      const script = document.createElement('script');
+      script.id = 'rezdy-script';
+      script.src = 'https://book.rezdy.com/plugin/widget.js';
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  }, []);
+
   return (
     <main className="min-h-screen bg-black text-white pt-32 px-6 font-mono">
-      <div className="max-w-3xl mx-auto border border-zinc-800 p-12 bg-zinc-900/10 rounded-lg shadow-[0px_0px_50px_rgba(30,58,138,0.1)]">
-        <h1 className="text-5xl font-black italic uppercase tracking-tighter mb-8 text-blue-500">// DEPLOY_FLEET</h1>
-        <div className="bg-blue-600/20 border border-blue-500/30 p-6 mb-8">
-          <div className="text-[10px] text-blue-400 uppercase font-bold tracking-widest mb-2">MISSION_PRICING</div>
-          <div className="text-4xl font-black tracking-tighter">$50.00 <span className="text-sm font-normal text-zinc-500 italic">RT / PER PERSON</span></div>
-          <div className="text-[10px] text-zinc-500 mt-2 uppercase tracking-tighter">* $250.00 MINIMUM ACTIVATION FEE APPLIES</div>
-        </div>
-        <form className="space-y-4">
-          <input type="text" placeholder="PICKUP_ADDRESS_NODE" className="w-full bg-black border border-zinc-800 p-4 text-xs focus:border-blue-500 outline-none uppercase tracking-widest" />
-          <button className="w-full bg-blue-600 hover:bg-blue-500 py-6 font-black uppercase tracking-[0.4em] text-xs transition-all border-b-4 border-blue-800">Execute_Reservation</button>
-        </form>
+      <div className="max-w-4xl mx-auto border border-zinc-800 p-12 bg-zinc-950">
+        
+        <h1 className="text-5xl font-black italic uppercase tracking-tighter mb-6">
+          Book Your Concert Shuttle
+        </h1>
+
+        <p className="text-zinc-400 mb-10">
+          Round-trip concert transportation. Pickup anywhere in Denver or Boulder.
+          Drink, vape, play music — we handle the driving and wait after the show.
+        </p>
+
+        {/* Rezdy Widget */}
+        <div
+          className="rezdy rezdy-widget"
+          data-widget-type="inline"
+          data-widget-id="YOUR_REZDY_PRODUCT_ID"
+          data-widget-width="100%"
+          data-widget-height="800"
+        />
+
+        <p className="text-xs text-zinc-500 mt-6">
+          Questions? You’ll receive a confirmation and calendar invite after booking.
+        </p>
+
       </div>
     </main>
   );
