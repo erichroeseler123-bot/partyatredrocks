@@ -1,13 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  rewrites: async () => {
-    return [
+  images: {
+    remotePatterns: [
       {
-        source: '/api/python/:path*',
-        destination: process.env.NODE_ENV === 'development'
-          ? 'http://127.0.0.1:5328/api/:path*' // Local Python Server
-          : '/api/', // Production Python Functions
+        protocol: "https",
+        hostname: "seatgeekcdn.com",
       },
-    ]
+      {
+        protocol: "https",
+        hostname: "img.seatgeek.com",
+      },
+    ],
   },
-}
+};
+
+module.exports = nextConfig;
