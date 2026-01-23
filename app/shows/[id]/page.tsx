@@ -2,44 +2,64 @@ import { getEvent } from "@/lib/seatgeek";
 import TicketButtons from "@/components/TicketButtons";
 import RezdyWidgets from "@/components/RezdyWidgets";
 
-// Hardened static data to ensure guests appear even if SeatGeek API is partial
-const MASTER_GUEST_LIST: Record<string, string> = {
-  "crankdat": "with Dr. Fresch, Smoakland, Capochino, and HerShe",
-  "inzo": "with What So Not, Lumasi, Daggz, Common Creation, and Spenny",
-  "it-s-murph-presents-murph-rocks": "with D.O.D, oskar med k, and me n ü",
-  "sublime": "with Common Kings, Bumpin Uglies, and Pepper",
-  "liquid-stranger": "with TVBOO b2b AHEE and AVELLO",
+// Dynamic routing for real-time intelligence feed
+export const dynamic = 'force-dynamic';
+
+// MASTER GUEST LIST: Ensures full names load even if API data is partial
+const MASTER_DETAILS: Record<string, { title: string; guests: string }> = {
+  "crankdat": { title: "CRANKDAT", guests: "with Dr. Fresch, Smoakland, Capochino, and HerShe" },
+  "inzo": { title: "INZO", guests: "with What So Not, Lumasi, Daggz, Common Creation, and Spenny" },
+  "it-s-murph": { title: "IT'S MURPH", guests: "presents Murph Rocks with D.O.D, oskar med k, and me n ü" },
+  "liquid-stranger": { title: "LIQUID STRANGER", guests: "with TVBOO b2b AHEE and AVELLO" },
+  "sublime": { title: "SUBLIME", guests: "with Common Kings, Bumpin Uglies, and Pepper" },
+  "lewis-capaldi": { title: "LEWIS CAPALDI", guests: "with Joy Crookes" }
 };
 
 export default async function ShowPage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
+  const showId = params.id.toLowerCase();
+  
+  // 1. Fetch live SeatGeek data
   const show = await getEvent(params.id);
+  const localDetails = MASTER_DETAILS[showId];
 
-  // Fallback data for cases where SeatGeek is missing the 'special guests' detail
-  const guestInfo = MASTER_GUEST_LIST[params.id.toLowerCase()] || "";
-  const performer = show?.performers[0] || { name: params.id.toUpperCase(), image: "/hero-bg.jpg" };
+  // 2. Hardened Venue Guard: SeatGeek Venue ID for Red Rocks is 196
+  // Note: We bypass this if the show exists in our local 2026 Intelligence List
+  const isRedRocks = show?.venue?.id === 196 || !!localDetails;
+
+  if (!isRedRocks) {
+    return (
+      <main className="min-h-screen bg-black text-white flex items-center justify-center p-20 text-center">
+        <div>
+          <h1 className="text-4xl font-black italic uppercase text-red-600 mb-4 underline decoration-red-600">Venue Mismatch</h1>
+          <p className="text-zinc-500 font-bold uppercase tracking-widest text-[10px]">Restricted to Red Rocks Amphitheatre Intelligence.</p>
+        </div>
+      </main>
+    );
+  }
+
+  const performer = show?.performers?.[0] || { name: localDetails?.title || showId, image: "/hero-bg.jpg" };
   const eventDate = show ? new Date(show.datetime_local) : new Date();
 
   return (
-    <main className="min-h-screen bg-black text-white">
-      {/* HERO IMAGE & FULL HEADER */}
+    <main className="min-h-screen bg-black text-white font-sans">
+      {/* HERO IMAGE & HEADER RESTORATION */}
       <div className="relative h-[65vh] w-full overflow-hidden border-b border-white/10 shadow-2xl">
         <img 
           src={performer.image || "/hero-bg.jpg"} 
-          alt={show?.title || params.id}
-          className="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-1000"
+          alt={show?.title || performer.name}
+          className="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-1000 scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-12 flex flex-col md:flex-row justify-between items-end gap-10">
           <div className="max-w-5xl">
-            {/* FULL NAME WITH SPECIAL GUEST RESTORATION */}
-            <h1 className="text-6xl md:text-8xl font-black italic uppercase tracking-tighter leading-[0.9] mb-6">
-              {show?.title || params.id}
+            <h1 className="text-7xl md:text-9xl font-black italic uppercase tracking-tighter leading-[0.8] mb-6">
+              {localDetails?.title || show?.title || performer.name}
             </h1>
-            <p className="text-yellow-400 font-black italic uppercase text-lg mb-10 tracking-tight">
-              {guestInfo}
+            <p className="text-yellow-400 font-black italic uppercase text-xl mb-10 tracking-tight">
+              {localDetails?.guests || "Destination Performance // 2026"}
             </p>
-            <div className="flex flex-wrap gap-8 items-center bg-black/40 p-4 rounded-2xl backdrop-blur-md border border-white/5 w-fit">
+            <div className="flex flex-wrap gap-8 items-center bg-black/50 p-4 rounded-2xl border border-white/5 backdrop-blur-xl">
               <p className="text-red-600 font-black uppercase tracking-[0.3em] text-sm italic">
                 {eventDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })} @ {eventDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
               </p>
@@ -47,9 +67,9 @@ export default async function ShowPage(props: { params: Promise<{ id: string }> 
               <a href="https://www.redrocksonline.com" target="_blank" className="text-zinc-400 font-black uppercase tracking-widest text-[9px] hover:text-white transition underline decoration-yellow-400 underline-offset-4 italic">Venue Official</a>
             </div>
           </div>
-          <div className="text-right border-l border-white/20 pl-10 hidden lg:block bg-black/40 p-6 rounded-3xl backdrop-blur-md font-mono italic">
-            <p className="text-zinc-500 uppercase font-black text-[9px] tracking-widest mb-1">DCC Price Watch</p>
-            <p className="text-7xl font-black text-yellow-400">${show?.stats?.lowest_price || "TBA"}</p>
+          <div className="text-right border-l border-white/20 pl-10 hidden lg:block bg-black/40 p-6 rounded-3xl backdrop-blur-md">
+            <p className="text-zinc-500 uppercase font-black text-[9px] tracking-widest mb-1 font-mono">DCC Market Watch</p>
+            <p className="text-7xl font-black italic text-yellow-400 tracking-tighter">${show?.stats?.lowest_price || "TBA"}</p>
           </div>
         </div>
       </div>
@@ -59,35 +79,36 @@ export default async function ShowPage(props: { params: Promise<{ id: string }> 
           {show && <div className="p-2 rounded-[3.5rem] bg-zinc-900/30 border border-white/5 shadow-2xl"><TicketButtons event={show} /></div>}
           
           {/* ARTIST INTELLIGENCE */}
-          <div className="p-10 rounded-[3rem] bg-zinc-900/50 border border-white/5 shadow-2xl relative overflow-hidden group">
-            <h3 className="text-red-600 font-black uppercase text-[10px] tracking-[0.5em] mb-8 italic border-b border-white/5 pb-4">Destination Context</h3>
+          <div className="p-10 rounded-[4rem] bg-zinc-900/50 border border-white/5 shadow-2xl relative overflow-hidden group">
+            <h3 className="text-red-600 font-black uppercase text-[10px] tracking-[0.5em] mb-8 italic border-b border-white/5 pb-4">Destination Intelligence</h3>
             <div className="space-y-6 text-zinc-300 text-lg leading-relaxed font-medium italic">
               <p>
-                {performer.name} is descending on Morrison for a defining set. Based on historical data, these 2026 dates are expected to reach maximum capacity.
+                {performer.name} is descending on Morrison for a career-defining set at Venue 196. Based on 2026 data, this performance is expected to reach maximum capacity early.
               </p>
               <p>
-                Secure your transportation now to bypass the 2026 surge pricing and high-traffic delays on the I-70 corridor.
+                Secure your transportation now to bypass high-traffic delays on the I-70 corridor and avoid surge pricing.
               </p>
             </div>
           </div>
 
           {/* SETLIST INTELLIGENCE */}
-          <div className="p-10 rounded-[3rem] bg-zinc-900/50 border border-white/5 shadow-2xl">
-            <h3 className="text-yellow-400 font-black uppercase text-[10px] tracking-[0.5em] mb-8 italic border-b border-white/5 pb-4">Setlist Intelligence</h3>
-            <div className="space-y-6">
-              <div className="flex justify-between items-center bg-black/30 p-4 rounded-2xl border border-white/5">
-                <span className="text-zinc-500 font-black uppercase text-[9px] tracking-widest italic">Predicted Set Length</span>
-                <span className="text-white font-black italic text-lg">14 - 18 Tracks</span>
-              </div>
-              <p className="text-zinc-400 text-sm leading-relaxed font-medium italic">
-                Setlist intelligence is being aggregated from past tour data. Expect a mix of core hits and unreleased 2026 material curated for the Red Rocks soundstage.
-              </p>
+          <div className="p-10 rounded-[4rem] bg-zinc-900/50 border border-white/5 shadow-2xl">
+            <h3 className="text-yellow-400 font-black uppercase text-[10px] tracking-[0.5em] mb-8 italic border-b border-white/5 pb-4">Live Setlist Intelligence</h3>
+            <div className="space-y-6 text-center">
+               <div className="bg-black/40 py-8 rounded-[2rem] border border-white/5">
+                 <p className="text-zinc-500 uppercase font-black text-[9px] mb-2">Predicted Set Length</p>
+                 <p className="text-4xl font-black italic text-white tracking-tighter">14 - 18 Tracks</p>
+               </div>
+               <p className="text-zinc-400 text-sm leading-relaxed font-medium italic px-4 text-left">
+                 Intelligence is being aggregated from past tour data. Expect a mix of core hits and new 2026 material curated for the natural monoliths.
+               </p>
             </div>
           </div>
         </div>
 
         <div className="col-span-12 lg:col-span-8">
-          <section id="booking" className="bg-zinc-900/40 p-2 rounded-[4rem] border border-white/5 min-h-[1200px] shadow-inner">
+          {/* REZDY SHUTTLE WIDGETS */}
+          <section id="booking" className="bg-zinc-900/40 p-2 rounded-[4.5rem] border border-white/5 min-h-[1200px] shadow-inner">
             <RezdyWidgets />
           </section>
         </div>
