@@ -4,7 +4,7 @@ import ArtistGuide from "@/components/ArtistGuide";
 
 export default async function MishawakaPage() {
   // Hardcoded Venue ID for Mishawaka
-  const shows = await getVenueEvents("384");
+  const shows = await getVenueEvents("1562");
 
   return (
     <main className="min-h-screen bg-black text-white p-12">

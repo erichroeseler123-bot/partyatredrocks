@@ -1,57 +1,111 @@
 import Link from 'next/link';
+import Image from 'next/image';
+
+function pickBestImage(event: any): string | null {
+  // SeatGeek usually provides performer images
+  const p0 = event?.performers?.[0];
+  const perfImg =
+    p0?.image ||
+    p0?.images?.huge ||
+    p0?.images?.large ||
+    p0?.images?.medium ||
+    p0?.images?.small;
+
+  // Some responses include venue image
+  const venueImg =
+    event?.venue?.image ||
+    event?.venue?.images?.huge ||
+    event?.venue?.images?.large;
+
+  return perfImg || venueImg || null;
+}
+
+function shouldHideEvent(event: any): boolean {
+  const title = String(event?.title || '').toLowerCase();
+  // Kill the “Winter on the Rocks / Icelantic” hero item
+  if (title.includes('winter on the rocks')) return true;
+  if (title.includes('icelantic')) return true;
+  return false;
+}
 
 export default function VenueEventsGrid({ events }: { events: any[] }) {
+  const filtered = (events || []).filter((e) => !shouldHideEvent(e));
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {events.map((event) => {
-        const image =
-          event.performers?.[0]?.image ||
-          '/hero/hero-home.jpg'; // safe fallback
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {filtered.map((event: any) => {
+        const img = pickBestImage(event);
+        const dateLabel = event?.datetime_local
+          ? new Date(event.datetime_local).toLocaleDateString()
+          : '';
+
+        const ticketUrl = event?.url; // SeatGeek event URL
 
         return (
           <div
             key={event.id}
-            className="group rounded-[2.5rem] overflow-hidden bg-zinc-900/40 border border-zinc-800 hover:border-red-500 transition"
+            className="group rounded-[2.5rem] overflow-hidden border border-zinc-800 bg-zinc-950/40 hover:border-zinc-600 transition"
           >
-            {/* IMAGE */}
-            <div className="relative h-56 overflow-hidden">
-              <img
-                src={image}
-                alt={event.title}
-                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-            </div>
+            <Link href={`/shows/${event.id}`} className="block">
+              <div className="relative h-44 w-full bg-black">
+                {img ? (
+                  <Image
+                    src={img}
+                    alt={event.title}
+                    fill
+                    unoptimized
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-xs">
+                    No image
+                  </div>
+                )}
 
-            {/* CONTENT */}
-            <div className="p-6">
-              <p className="text-zinc-400 text-[10px] font-black uppercase tracking-widest">
-                {new Date(event.datetime_local).toLocaleDateString()}
-              </p>
+                {/* subtle depth */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-black/0" />
 
-              <h3 className="text-xl font-black italic uppercase leading-tight mt-1">
-                {event.title}
-              </h3>
-
-              <div className="flex gap-3 mt-6">
-                {/* INTERNAL SHOW PAGE */}
-                <Link
-                  href={`/shows/${event.id}`}
-                  className="flex-1 text-center rounded-full border border-zinc-700 py-2 text-sm hover:border-white transition"
-                >
-                  Details
-                </Link>
-
-                {/* SEATGEEK TICKETS */}
-                <a
-                  href={event.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 text-center rounded-full bg-red-600 py-2 text-sm font-bold hover:bg-red-500 transition"
-                >
-                  Tickets
-                </a>
+                <div className="absolute bottom-4 left-5 right-5">
+                  <p className="text-zinc-300 text-[10px] font-black uppercase tracking-widest">
+                    {dateLabel}
+                  </p>
+                  <h3 className="mt-1 text-xl font-black italic uppercase leading-none text-white">
+                    {event.title}
+                  </h3>
+                  {event?.performers?.length ? (
+                    <p className="mt-2 text-[10px] uppercase tracking-widest text-zinc-400 line-clamp-1">
+                      {event.performers
+                        .map((p: any) => p?.name)
+                        .filter(Boolean)
+                        .join(', ')}
+                    </p>
+                  ) : null}
+                </div>
               </div>
+            </Link>
+
+            <div className="px-5 py-4 flex items-center justify-between gap-3">
+              <Link
+                href={`/shows/${event.id}`}
+                className="text-[11px] font-black uppercase tracking-widest text-white/90 hover:text-white"
+              >
+                View Show →
+              </Link>
+
+              {ticketUrl ? (
+                <a
+                  href={ticketUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-[11px] font-black uppercase tracking-widest px-4 py-2 rounded-full border border-zinc-700 bg-zinc-900/50 hover:bg-zinc-900 hover:border-zinc-500 transition"
+                >
+                  Buy Tickets
+                </a>
+              ) : (
+                <span className="text-[11px] font-black uppercase tracking-widest text-zinc-600">
+                  Tickets N/A
+                </span>
+              )}
             </div>
           </div>
         );
