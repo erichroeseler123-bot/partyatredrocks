@@ -1,197 +1,209 @@
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function HomePage() {
   return (
     <main className="bg-black text-white">
+
       {/* =========================
-          SECTION 1 — HERO
-         ========================= */}
-      <section className="relative h-[85vh] w-full overflow-hidden">
+         HERO
+      ========================= */}
+      <section className="relative h-[80vh] flex items-center">
         <Image
           src="/hero/hero-home.jpg"
-          alt="Party at Red Rocks Transportation"
+          alt="Party at Red Rocks"
           fill
           priority
-          className="object-cover object-top"
+          className="object-cover object-center"
         />
+        <div className="absolute inset-0 bg-black/60" />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
-
-        <div className="relative z-10 max-w-6xl mx-auto h-full flex flex-col justify-end px-6 pb-24">
-          <h1 className="text-6xl md:text-7xl font-black tracking-tight leading-none">
-            Get to the Show.
-            <br />
-            <span className="text-red-500">We Handle the Rest.</span>
+        <div className="relative z-10 max-w-6xl mx-auto px-6">
+          <h1 className="text-6xl md:text-7xl font-black italic tracking-tight">
+            PARTY @ RED ROCKS
           </h1>
-
-          <p className="mt-6 text-lg text-zinc-300 max-w-xl">
-            Premium concert transportation for Red Rocks and Colorado venues.
-            Drink, play music, skip parking — we wait and take you home.
+          <p className="mt-6 text-xl text-zinc-300 max-w-xl">
+            Concert transportation. No driving. No stress.
           </p>
 
           <div className="mt-10 flex gap-4">
             <Link
               href="/book-shuttle"
-              className="bg-red-600 hover:bg-red-500 px-8 py-4 font-bold uppercase tracking-wide"
+              className="bg-red-600 hover:bg-red-500 px-8 py-4 rounded-full font-bold"
             >
-              Book Shuttle
+              Book a Ride
             </Link>
-
             <Link
-              href="/private-suburban"
-              className="border border-zinc-600 hover:border-white px-8 py-4 font-bold uppercase tracking-wide"
+              href="/shows"
+              className="border border-white/30 hover:border-white px-8 py-4 rounded-full font-semibold"
             >
-              Private SUV
+              View Shows
             </Link>
           </div>
         </div>
       </section>
 
       {/* =========================
-          SECTION 2 — SHOW CTA
-         ========================= */}
-      <section className="py-24 px-6 bg-zinc-950 text-center">
-        <h2 className="text-4xl font-black mb-6">
-          Upcoming Shows at Red Rocks
-        </h2>
+         UPCOMING SHOWS (SeatGeek pages)
+      ========================= */}
+      <section className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-black mb-10">
+            Upcoming Red Rocks Shows
+          </h2>
 
-        <p className="text-zinc-400 max-w-xl mx-auto mb-10">
-          Browse show schedules, artists, and transportation options for every
-          event.
-        </p>
+          <p className="text-zinc-400 max-w-xl mb-8">
+            Browse upcoming concerts. Each show page includes direct
+            transportation options.
+          </p>
 
-        <Link
-          href="/venues/red-rocks-amphitheatre"
-          className="inline-block bg-red-600 hover:bg-red-500 px-10 py-5 font-black uppercase tracking-wide"
-        >
-          View Shows
-        </Link>
+          <Link
+            href="/shows"
+            className="inline-block bg-zinc-900 hover:bg-zinc-800 px-6 py-3 rounded-lg font-semibold"
+          >
+            View All Shows →
+          </Link>
+        </div>
       </section>
 
       {/* =========================
-          SECTION 3 — VENUES
-         ========================= */}
-      <section className="py-28 px-6 bg-black">
-        <div className="max-w-6xl mx-auto">
+         VENUES WE SERVE
+      ========================= */}
+      <section className="py-24 px-6 bg-zinc-950">
+        <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-black mb-12">
-            Covered Venues
+            Venues We Serve
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8">
+
             {/* Red Rocks */}
-            <Link href="/venues/red-rocks-amphitheatre" className="group">
-              <div className="relative h-64 overflow-hidden">
+            <Link href="/venues/red-rocks-amphitheatre">
+              <div className="group cursor-pointer rounded-2xl overflow-hidden border border-zinc-800 hover:border-red-600 transition">
                 <Image
                   src="/venues/rrsite.jpg"
                   alt="Red Rocks Amphitheatre"
-                  fill
-                  className="object-cover object-top group-hover:scale-105 transition"
+                  width={800}
+                  height={500}
+                  className="object-cover object-top h-64 w-full"
                 />
-                <div className="absolute inset-0 bg-black/40" />
-                <div className="absolute bottom-6 left-6 font-black text-2xl">
-                  Red Rocks
+                <div className="p-5 font-semibold">
+                  Red Rocks Amphitheatre
                 </div>
               </div>
             </Link>
 
-            {/* Mishawaka (image placeholder, link later if needed) */}
-            <div className="relative h-64 overflow-hidden opacity-80">
-              <Image
-                src="/venues/mishsite.jpg"
-                alt="Mishawaka Amphitheatre"
-                fill
-                className="object-cover object-top"
-              />
-              <div className="absolute inset-0 bg-black/50" />
-              <div className="absolute bottom-6 left-6 font-black text-2xl">
-                Mishawaka
+            {/* Mishawaka */}
+            <Link href="/venues/mishawaka-amphitheatre">
+              <div className="group cursor-pointer rounded-2xl overflow-hidden border border-zinc-800 hover:border-red-600 transition">
+                <Image
+                  src="/venues/mishsite.jpg"
+                  alt="Mishawaka Amphitheatre"
+                  width={800}
+                  height={500}
+                  className="object-cover object-top h-64 w-full"
+                />
+                <div className="p-5 font-semibold">
+                  Mishawaka Amphitheatre
+                </div>
               </div>
-            </div>
+            </Link>
 
             {/* All Venues */}
-            <div className="relative h-64 overflow-hidden opacity-80">
-              <Image
-                src="/venues/missionsite.jpg"
-                alt="All Venues Shuttle"
-                fill
-                className="object-cover object-top"
-              />
-              <div className="absolute inset-0 bg-black/50" />
-              <div className="absolute bottom-6 left-6 font-black text-2xl">
-                All Venues
+            <Link href="/book-all-venues">
+              <div className="group cursor-pointer rounded-2xl overflow-hidden border border-zinc-800 hover:border-red-600 transition">
+                <Image
+                  src="/venues/missionsite.jpg"
+                  alt="All Venues Shuttle"
+                  width={800}
+                  height={500}
+                  className="object-cover object-top h-64 w-full"
+                />
+                <div className="p-5 font-semibold">
+                  All-Venues Shuttle
+                </div>
               </div>
-            </div>
+            </Link>
+
           </div>
         </div>
       </section>
 
       {/* =========================
-          SECTION 4 — FLEET
-         ========================= */}
-      <section className="py-28 px-6 bg-zinc-950">
-        <div className="max-w-6xl mx-auto">
+         THE FLEET
+      ========================= */}
+      <section className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-black mb-12">
             The Fleet
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-10">
-            {/* Sprinter */}
-            <div className="relative h-80 overflow-hidden">
-              <Image
-                src="/fleet/fleet-sprinter.jpg"
-                alt="Sprinter Shuttle"
-                fill
-                className="object-cover object-top"
-              />
-              <div className="absolute inset-0 bg-black/40" />
-              <div className="absolute bottom-6 left-6">
-                <div className="text-2xl font-black">Sprinter Shuttle</div>
-                <div className="text-zinc-300 text-sm uppercase">
-                  Shared • Party Friendly
-                </div>
-              </div>
-            </div>
+          <div className="grid md:grid-cols-2 gap-12">
 
-            {/* Suburban */}
-            <div className="relative h-80 overflow-hidden">
-              <Image
-                src="/fleet/fleet-suburban.jpg"
-                alt="Private Suburban SUV"
-                fill
-                className="object-cover object-top"
-              />
-              <div className="absolute inset-0 bg-black/40" />
-              <div className="absolute bottom-6 left-6">
-                <div className="text-2xl font-black">Private Suburban</div>
-                <div className="text-zinc-300 text-sm uppercase">
-                  VIP • On Your Schedule
+            {/* Sprinter Shuttle */}
+            <Link href="/book-shuttle">
+              <div className="cursor-pointer rounded-3xl overflow-hidden border border-zinc-800 hover:border-red-600 transition">
+                <Image
+                  src="/fleet/fleet-sprinter.jpg"
+                  alt="Sprinter Shuttle"
+                  width={900}
+                  height={600}
+                  className="object-cover object-top h-[380px] w-full"
+                />
+                <div className="p-6">
+                  <h3 className="text-xl font-bold">
+                    Sprinter Shuttle
+                  </h3>
+                  <p className="text-zinc-400 mt-1">
+                    $50 per person · Denver & Boulder · Drink & vape allowed
+                  </p>
                 </div>
               </div>
-            </div>
+            </Link>
+
+            {/* Private Suburban */}
+            <Link href="/private-suburban">
+              <div className="cursor-pointer rounded-3xl overflow-hidden border border-zinc-800 hover:border-red-600 transition">
+                <Image
+                  src="/fleet/fleet-suburban.jpg"
+                  alt="Private Suburban"
+                  width={900}
+                  height={600}
+                  className="object-cover object-top h-[380px] w-full"
+                />
+                <div className="p-6">
+                  <h3 className="text-xl font-bold">
+                    Private Suburban
+                  </h3>
+                  <p className="text-zinc-400 mt-1">
+                    $300 minimum · Door-to-door · Your group, your music
+                  </p>
+                </div>
+              </div>
+            </Link>
+
           </div>
         </div>
       </section>
 
       {/* =========================
-          SECTION 5 — FINAL CTA
-         ========================= */}
-      <section className="py-24 px-6 bg-black text-center">
+         FINAL CTA
+      ========================= */}
+      <section className="py-32 px-6 bg-zinc-950 text-center">
         <h2 className="text-5xl font-black mb-6">
           Don’t Drive to the Show.
         </h2>
-
         <p className="text-zinc-400 max-w-xl mx-auto mb-10">
           Let us handle the ride so you can focus on the music.
         </p>
-
         <Link
           href="/book-shuttle"
-          className="inline-block bg-red-600 hover:bg-red-500 px-10 py-5 font-black uppercase tracking-wide"
+          className="bg-red-600 hover:bg-red-500 px-10 py-5 rounded-full font-bold"
         >
           Book Now
         </Link>
       </section>
+
     </main>
   );
 }
