@@ -1,9 +1,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
+
 import VenueShows from '@/components/VenueShows';
 import FleetGrid from '@/components/FleetGrid';
+import { venues } from '@/data/venues';
 
 export default function HomePage() {
+  // Reuse existing venue data exactly as VenueShows expects
+  const redRocksVenue = venues.find(
+    (v) => v.slug === 'red-rocks-amphitheatre'
+  );
+
   return (
     <main className="bg-black text-white">
 
@@ -22,11 +29,15 @@ export default function HomePage() {
 
         <div className="relative z-10 max-w-5xl px-6 text-center">
           <h1 className="text-5xl md:text-7xl font-black tracking-tight">
-            Concert Transportation.<br />No Driving. No Stress.
+            Concert Transportation.
+            <br />
+            No Driving. No Stress.
           </h1>
+
           <p className="mt-6 text-lg text-zinc-300 max-w-2xl mx-auto">
             Door-to-door shuttle and private SUV service for concerts across Denver & Boulder.
           </p>
+
           <Link
             href="/book-shuttle"
             className="inline-block mt-10 px-10 py-4 bg-red-600 hover:bg-red-700 font-bold rounded-md"
@@ -50,13 +61,14 @@ export default function HomePage() {
           </Link>
         </div>
 
-        {/* Uses your existing show + artist pages */}
-        <VenueShows limit={8} />
+        {redRocksVenue && (
+          <VenueShows venue={redRocksVenue} />
+        )}
       </section>
 
       {/* =========================
           SECTION C — FEATURED ARTISTS
-          (reuse show cards visually)
+          (intentionally reuses show cards)
       ========================== */}
       <section className="py-24 px-6 bg-zinc-950">
         <div className="max-w-7xl mx-auto">
@@ -64,7 +76,9 @@ export default function HomePage() {
             Featured Artists
           </h2>
 
-          <VenueShows limit={4} variant="artists" />
+          {redRocksVenue && (
+            <VenueShows venue={redRocksVenue} />
+          )}
         </div>
       </section>
 
@@ -114,7 +128,7 @@ export default function HomePage() {
             </div>
           </Link>
 
-          {/* All Venues */}
+          {/* All Venues Shuttle */}
           <Link
             href="/book-shuttle"
             className="group relative rounded-xl overflow-hidden border border-red-600"
