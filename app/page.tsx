@@ -1,67 +1,146 @@
-// app/page.tsx
+import Image from 'next/image';
 import Link from 'next/link';
+import VenueShows from '@/components/VenueShows';
 import FleetGrid from '@/components/FleetGrid';
 
 export default function HomePage() {
   return (
     <main className="bg-black text-white">
-      
-      {/* SECTION A: HERO — decision forcing */}
-      <section
-        className="relative h-[80vh] flex items-center justify-center text-center"
-        style={{
-          backgroundImage:
-            "url('https://seatgeek.com/images/venues/red-rocks-amphitheatre-196/huge.jpg')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      >
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="relative z-10 max-w-4xl px-6">
-          <h1 className="text-5xl md:text-7xl font-black leading-tight">
+
+      {/* =========================
+          SECTION A — HERO
+      ========================== */}
+      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+        <Image
+          src="/redrocks-color.jpg"
+          alt="Red Rocks Amphitheatre"
+          fill
+          priority
+          className="object-cover opacity-80"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black" />
+
+        <div className="relative z-10 max-w-5xl px-6 text-center">
+          <h1 className="text-5xl md:text-7xl font-black tracking-tight">
             Concert Transportation.<br />No Driving. No Stress.
           </h1>
-          <p className="mt-6 text-lg md:text-xl text-gray-200">
+          <p className="mt-6 text-lg text-zinc-300 max-w-2xl mx-auto">
             Door-to-door shuttle and private SUV service for concerts across Denver & Boulder.
           </p>
           <Link
             href="/book-shuttle"
-            className="inline-block mt-10 px-10 py-4 text-lg font-bold bg-red-600 hover:bg-red-700 transition"
+            className="inline-block mt-10 px-10 py-4 bg-red-600 hover:bg-red-700 font-bold rounded-md"
           >
             Book Your Ride
           </Link>
         </div>
       </section>
 
-      {/* SECTION B: HOW IT WORKS — clarity */}
-      <section className="max-w-5xl mx-auto px-6 py-24 text-center">
-        <h2 className="text-4xl font-black mb-12">How It Works</h2>
-        <div className="grid md:grid-cols-3 gap-10 text-lg">
-          <div>
-            <h3 className="font-bold mb-2">Pickups Anywhere</h3>
-            <p className="text-gray-300">
-              We pick you up anywhere in Denver or Boulder and get you to the show.
-            </p>
-          </div>
-          <div>
-            <h3 className="font-bold mb-2">Ride How You Want</h3>
-            <p className="text-gray-300">
-              Drink, vape, play your music — it’s your ride.
-            </p>
-          </div>
-          <div>
-            <h3 className="font-bold mb-2">We Wait</h3>
-            <p className="text-gray-300">
-              After the show, your driver is waiting to take you home.
-            </p>
-          </div>
+      {/* =========================
+          SECTION B — UPCOMING SHOWS
+      ========================== */}
+      <section className="py-24 px-6 max-w-7xl mx-auto">
+        <div className="flex items-end justify-between mb-10">
+          <h2 className="text-4xl font-black">Upcoming Shows</h2>
+          <Link
+            href="/shows"
+            className="text-red-500 font-bold hover:underline"
+          >
+            View All Shows →
+          </Link>
+        </div>
+
+        {/* Uses your existing show + artist pages */}
+        <VenueShows limit={8} />
+      </section>
+
+      {/* =========================
+          SECTION C — FEATURED ARTISTS
+          (reuse show cards visually)
+      ========================== */}
+      <section className="py-24 px-6 bg-zinc-950">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-black mb-10">
+            Featured Artists
+          </h2>
+
+          <VenueShows limit={4} variant="artists" />
         </div>
       </section>
 
-      {/* SECTION C: FLEET — confidence */}
-      <section className="bg-neutral-900 py-24">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-black text-center mb-12">
+      {/* =========================
+          SECTION D — VENUES WE SERVE
+      ========================== */}
+      <section className="py-24 px-6 max-w-7xl mx-auto">
+        <h2 className="text-4xl font-black mb-12">
+          Venues We Serve
+        </h2>
+
+        <div className="grid md:grid-cols-3 gap-8">
+
+          {/* Red Rocks */}
+          <Link
+            href="/venues/red-rocks-amphitheatre"
+            className="group relative rounded-xl overflow-hidden border border-zinc-800"
+          >
+            <Image
+              src="/redrocks-color.jpg"
+              alt="Red Rocks Amphitheatre"
+              width={600}
+              height={400}
+              className="object-cover group-hover:scale-105 transition"
+            />
+            <div className="absolute inset-0 bg-black/50" />
+            <div className="absolute bottom-4 left-4 font-black text-xl">
+              Red Rocks Amphitheatre
+            </div>
+          </Link>
+
+          {/* Mishawaka */}
+          <Link
+            href="/venues/mishawaka-amphitheatre"
+            className="group relative rounded-xl overflow-hidden border border-zinc-800"
+          >
+            <Image
+              src="/hero/transport.jpg"
+              alt="Mishawaka Amphitheatre"
+              width={600}
+              height={400}
+              className="object-cover group-hover:scale-105 transition"
+            />
+            <div className="absolute inset-0 bg-black/50" />
+            <div className="absolute bottom-4 left-4 font-black text-xl">
+              Mishawaka Amphitheatre
+            </div>
+          </Link>
+
+          {/* All Venues */}
+          <Link
+            href="/book-shuttle"
+            className="group relative rounded-xl overflow-hidden border border-red-600"
+          >
+            <Image
+              src="/fleet/shuttle.jpg"
+              alt="All Venues Shuttle"
+              width={600}
+              height={400}
+              className="object-cover group-hover:scale-105 transition"
+            />
+            <div className="absolute inset-0 bg-black/60" />
+            <div className="absolute bottom-4 left-4 font-black text-xl">
+              All-Venues Shuttle
+            </div>
+          </Link>
+
+        </div>
+      </section>
+
+      {/* =========================
+          SECTION E — FLEET
+      ========================== */}
+      <section className="py-24 px-6 bg-gradient-to-b from-black to-zinc-950">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-black mb-12 text-center">
             Our Fleet
           </h2>
           <FleetGrid />
