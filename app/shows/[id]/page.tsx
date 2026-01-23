@@ -1,6 +1,10 @@
 import { getEvent } from "@/lib/seatgeek";
 import TicketButtons from "@/components/TicketButtons";
+// ADD THIS LINE BELOW TO FIX THE BUILD ERROR
+import RezdyWidgets from "@/components/RezdyWidgets";
 
+export default async function ShowPage(props: { params: Promise<{ id: string }> }) {
+  // ... rest of your code ...
 // Next.js 16: params is a Promise
 export default async function ShowPage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
