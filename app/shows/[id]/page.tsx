@@ -83,7 +83,6 @@ export default async function ShowPage(props: { params: Promise<{ id: string }> 
         </div>
 
         <div className="col-span-12 lg:col-span-8">
-          {/* REZDY BOOKING INTELLIGENCE */}
           <section id="booking" className="bg-zinc-900/40 p-2 rounded-[3.5rem] border border-white/5 min-h-[1200px] scroll-mt-24 shadow-inner">
             <RezdyWidgets />
           </section>
