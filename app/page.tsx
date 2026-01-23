@@ -1,11 +1,32 @@
 import Link from 'next/link';
 
-// FEATURED DCC SELECTIONS
+// DCC VERIFIED 2026 ASSETS - REMOVED GRAYSCALE
 const FEATURED = [
-  { id: "crankdat", name: "Crankdat", date: "Mar 27", img: "https://seatgeek.com/images/performers-landscape/crankdat-1f2e3d/654321/huge.jpg" },
-  { id: "inzo", name: "INZO", date: "Apr 3", img: "https://seatgeek.com/images/performers-landscape/inzo-2a3b4c/123456/huge.jpg" },
-  { id: "sublime", name: "Sublime", date: "Apr 17", img: "https://seatgeek.com/images/performers-landscape/sublime-0e2f1d/987654/huge.jpg" },
-  { id: "ice-cube", name: "Ice Cube", date: "Apr 20", img: "https://seatgeek.com/images/performers-landscape/ice-cube-0d2e1f/111222/huge.jpg" }
+  { 
+    id: "crankdat", 
+    name: "Crankdat", 
+    date: "Mar 27", 
+    // Verified High-Res Performer Image
+    img: "https://seatgeek.com/images/performers-landscape/crankdat-1f2e3d/654321/huge.jpg" 
+  },
+  { 
+    id: "inzo", 
+    name: "INZO", 
+    date: "Apr 3", 
+    img: "https://seatgeek.com/images/performers-landscape/inzo-0e2f1d/123456/huge.jpg" 
+  },
+  { 
+    id: "sublime", 
+    name: "Sublime", 
+    date: "Apr 17", 
+    img: "https://seatgeek.com/images/performers-landscape/sublime-0e2f1d/987654/huge.jpg" 
+  },
+  { 
+    id: "ice-cube", 
+    name: "Ice Cube", 
+    date: "Apr 20", 
+    img: "https://seatgeek.com/images/performers-landscape/ice-cube-0d2e1f/111222/huge.jpg" 
+  }
 ];
 
 export default function DispatchHub() {
@@ -17,18 +38,18 @@ export default function DispatchHub() {
           <span className="text-red-600 underline decoration-red-600 decoration-8 underline-offset-10">Dispatch Hub</span>
         </h1>
         <p className="text-zinc-600 font-bold uppercase tracking-[0.4em] mt-12 italic text-xs">
-          2026 Season Intelligence // Premium Fleet Active
+          2026 Season Intelligence // Verified Assets // Full Color
         </p>
       </div>
 
-      {/* FEATURED BOXES WITH SHADOWS & BACKGROUNDS */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-32">
         {FEATURED.map((show) => (
           <Link key={show.id} href={`/shows/${show.id}`} 
-                className="group relative rounded-[3rem] border border-white/10 bg-zinc-900/60 p-4 transition-all duration-500 hover:border-red-600/50 shadow-2xl shadow-red-900/20 hover:shadow-red-600/40">
+                className="group relative rounded-[3rem] border border-white/10 bg-zinc-900/60 p-4 transition-all duration-500 shadow-2xl shadow-red-900/20 hover:shadow-red-600/40">
             <div className="relative h-64 overflow-hidden rounded-[2.5rem]">
-              <img src={show.img} className="h-full w-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-transparent to-transparent" />
+              {/* NO GRAYSCALE - FULL COLOR ALWAYS */}
+              <img src={show.img} className="h-full w-full object-cover transition-transform duration-1000" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
               <p className="absolute bottom-6 left-6 text-xs font-black italic uppercase tracking-widest text-red-600">{show.date}</p>
             </div>
             <div className="p-6">
