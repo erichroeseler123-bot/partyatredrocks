@@ -92,7 +92,7 @@ const RED_ROCKS_SCHEDULE = [
 
 export default function RedRocksVenueFeed() {
   // DCC Monthly Grouping Logic
-  const groupedShows = RED_ROC_SCHEDULE.reduce((acc: any, show) => {
+const groupedShows = RED_ROCKS_SCHEDULE.reduce((acc: any, show) => {
     const monthYear = new Date(show.date).toLocaleString('default', { month: 'long', year: 'numeric' });
     if (!acc[monthYear]) acc[monthYear] = [];
     acc[monthYear].push(show);
