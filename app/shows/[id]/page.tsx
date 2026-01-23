@@ -1,11 +1,7 @@
 import { getEvent } from "@/lib/seatgeek";
 import TicketButtons from "@/components/TicketButtons";
-// ADD THIS LINE BELOW TO FIX THE BUILD ERROR
 import RezdyWidgets from "@/components/RezdyWidgets";
 
-export default async function ShowPage(props: { params: Promise<{ id: string }> }) {
-  // ... rest of your code ...
-// Next.js 16: params is a Promise
 export default async function ShowPage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
   const show = await getEvent(params.id);
@@ -28,7 +24,7 @@ export default async function ShowPage(props: { params: Promise<{ id: string }> 
         <div className="text-right">
           <p className="text-zinc-600 uppercase font-black text-[10px] tracking-widest mb-1">DCC Price Watch</p>
           <p className="text-4xl font-black italic text-yellow-400">
-            ${show.stats.lowest_price || "TBA"}
+            ${show.stats.lowest_price || show.stats.average_price || "TBA"}
           </p>
         </div>
       </div>
@@ -38,11 +34,9 @@ export default async function ShowPage(props: { params: Promise<{ id: string }> 
           <TicketButtons event={show} />
         </div>
         <div className="md:col-span-2">
-<div className="col-span-12 lg:col-span-8">
-  <section id="booking" className="bg-zinc-900/40 p-2 rounded-[3.5rem] border border-white/5 min-h-[1600px] scroll-mt-24">
-    <RezdyWidgets />
-  </section>
-</div>
+           <section id="booking" className="bg-zinc-900/50 p-2 rounded-[3rem] border border-white/5 min-h-[1600px] scroll-mt-20">
+             <RezdyWidgets />
+           </section>
         </div>
       </div>
     </main>
