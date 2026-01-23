@@ -1,35 +1,79 @@
 import Link from "next/link";
-import { getVenueEvents } from "@/lib/seatgeek";
+import { venues } from "@/data/venues";
+import { fetchSeatGeekEventsByVenue } from "@/lib/seatgeek";
 import ArtistGuide from "@/components/ArtistGuide";
 
+export const dynamic = "force-dynamic";
+
 export default async function MishawakaPage() {
-  // Hardcoded Venue ID for Mishawaka
-  const shows = await getVenueEvents("1562");
+  const venue = venues["mishawaka-amphitheatre"];
+
+  if (!venue || !venue.seatgeekVenueId) {
+    return (
+      <main className="min-h-screen bg-black text-white px-6 py-20">
+        <h1 className="text-4xl font-black">Mishawaka Amphitheatre</h1>
+        <p className="text-zinc-400 mt-4">Venue data unavailable.</p>
+      </main>
+    );
+  }
+
+  const events = await fetchSeatGeekEventsByVenue(venue.seatgeekVenueId);
 
   return (
-    <main className="min-h-screen bg-black text-white p-12">
-      <div className="mb-16">
-        <h1 className="text-7xl font-black italic uppercase tracking-tighter">Mishawaka Amphitheatre</h1>
-        <p className="text-zinc-500 font-bold uppercase tracking-widest mt-4 italic">Bellvue, CO // Venue 384</p>
-      </div>
+    <main className="min-h-screen bg-black text-white px-6 py-20">
+      <h1 className="text-5xl font-black mb-2">{venue.name}</h1>
+      <p className="text-zinc-400 mb-8">
+        {venue.city}, {venue.state}
+      </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* FIXED: Added ': any' to 'show' to satisfy the TypeScript build check */}
-        {shows.map((show: any) => (
-          <Link 
-            key={show.id} 
-            href={`/shows/${show.id}`} 
-            className="group bg-zinc-900/50 border border-white/10 rounded-3xl p-8 hover:border-red-600 transition-all duration-500"
-          >
-            <div className="text-zinc-500 text-[10px] font-black uppercase mb-4 tracking-widest">
-              {new Date(show.datetime_local).toLocaleDateString()}
-            </div>
-            <h3 className="text-2xl font-black italic uppercase leading-none group-hover:text-red-600 transition-colors">
-              {show.title}
-            </h3>
-          </Link>
-        ))}
-      </div>
+      {/* Shuttle CTA */}
+      <section className="mb-12">
+        <p className="text-lg">
+          <strong>$50 per person round-trip shuttle</strong>
+          <br />
+          $250 trip minimum · Pay at pickup
+        </p>
+        <Link
+          href="/book-shuttle"
+          className="inline-block mt-4 underline"
+        >
+          Book a shuttle
+        </Link>
+      </section>
+
+      {/* Events */}
+      <section className="mb-16">
+        <h2 className="text-3xl font-bold mb-6">Upcoming Shows</h2>
+
+        {events.length === 0 && (
+          <p className="text-zinc-500">No upcoming events listed.</p>
+        )}
+
+        <ul className="space-y-4">
+          {events.map((event) => (
+            <li
+              key={event.id}
+              className="border border-zinc-800 rounded-lg p-4 hover:border-white transition"
+            >
+              <div className="font-semibold">{event.title}</div>
+              <div className="text-sm text-zinc-400">
+                {new Date(event.datetime_local).toLocaleString()}
+              </div>
+              <a
+                href={event.url}
+                target="_blank"
+                className="text-sm underline mt-1 inline-block"
+              >
+                View tickets
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Optional enrichment */}
+      <ArtistGuide />
     </main>
   );
 }
+
