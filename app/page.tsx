@@ -3,11 +3,10 @@ import Link from 'next/link';
 
 import VenueShows from '@/components/VenueShows';
 import FleetGrid from '@/components/FleetGrid';
-import { venues } from '@/data/venues';
+import { VENUES } from '@/data/venues';
 
 export default function HomePage() {
-  // Reuse existing venue data exactly as VenueShows expects
-  const redRocksVenue = venues.find(
+  const redRocksVenue = VENUES.find(
     (v) => v.slug === 'red-rocks-amphitheatre'
   );
 
@@ -61,14 +60,11 @@ export default function HomePage() {
           </Link>
         </div>
 
-        {redRocksVenue && (
-          <VenueShows venue={redRocksVenue} />
-        )}
+        {redRocksVenue && <VenueShows venue={redRocksVenue} />}
       </section>
 
       {/* =========================
           SECTION C — FEATURED ARTISTS
-          (intentionally reuses show cards)
       ========================== */}
       <section className="py-24 px-6 bg-zinc-950">
         <div className="max-w-7xl mx-auto">
@@ -76,9 +72,7 @@ export default function HomePage() {
             Featured Artists
           </h2>
 
-          {redRocksVenue && (
-            <VenueShows venue={redRocksVenue} />
-          )}
+          {redRocksVenue && <VenueShows venue={redRocksVenue} />}
         </div>
       </section>
 
@@ -92,7 +86,6 @@ export default function HomePage() {
 
         <div className="grid md:grid-cols-3 gap-8">
 
-          {/* Red Rocks */}
           <Link
             href="/venues/red-rocks-amphitheatre"
             className="group relative rounded-xl overflow-hidden border border-zinc-800"
@@ -110,7 +103,6 @@ export default function HomePage() {
             </div>
           </Link>
 
-          {/* Mishawaka */}
           <Link
             href="/venues/mishawaka-amphitheatre"
             className="group relative rounded-xl overflow-hidden border border-zinc-800"
@@ -128,7 +120,6 @@ export default function HomePage() {
             </div>
           </Link>
 
-          {/* All Venues Shuttle */}
           <Link
             href="/book-shuttle"
             className="group relative rounded-xl overflow-hidden border border-red-600"
