@@ -1,87 +1,59 @@
-'use client';
-
-import React from 'react';
-import { PhoneCall, MapPin, DollarSign, Clock, Users } from 'lucide-react';
+import Link from 'next/link';
+import { VENUES } from '@/data/venues';
 
 export default function BookAllVenuesPage() {
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-sans">
+    <main className="min-h-screen bg-black text-white px-6 py-24">
       {/* HERO */}
-      <header className="relative py-32 px-6 bg-gradient-to-b from-slate-900 to-slate-800 text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-7xl font-black uppercase italic tracking-tighter mb-6">
-            All Concert Venue Shuttle
-          </h1>
+      <section className="max-w-5xl mx-auto text-center mb-20">
+        <h1 className="text-5xl md:text-6xl font-black italic uppercase mb-6">
+          All Concert Venue Shuttle
+        </h1>
 
-          <p className="text-2xl md:text-3xl font-extrabold text-green-400 mb-6">
-            $50 per person · $250 minimum — Round Trip Price
-          </p>
+        <p className="text-2xl font-extrabold text-green-400 mb-6">
+          $50 per person · $250 minimum — Round Trip
+        </p>
 
-          <p className="text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            Private, flexible concert transportation anywhere in the Denver metro
-            area to any concert venue in the Front Range.
-          </p>
-        </div>
-      </header>
+        <p className="text-lg text-zinc-400 max-w-3xl mx-auto">
+          Private, flexible concert transportation anywhere in the Denver metro
+          area to any concert venue along the Front Range.
+        </p>
+      </section>
 
-      {/* DETAILS */}
-      <section className="py-20 px-6">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid gap-8 text-lg">
+      {/* VENUE LIST */}
+      <section className="max-w-6xl mx-auto">
+        <h2 className="text-3xl font-black italic uppercase mb-10">
+          Venues We Serve
+        </h2>
 
-            <div className="flex gap-4 items-start">
-              <MapPin className="w-6 h-6 text-blue-600 mt-1" />
-              <p>
-                <strong>Pickup anywhere</strong> in the Denver metro area and
-                drop-off at any concert venue in Denver or the Front Range.
-              </p>
-            </div>
-
-            <div className="flex gap-4 items-start">
-              <Users className="w-6 h-6 text-blue-600 mt-1" />
-              <p>
-                Ride together with your group. Includes up to
-                <strong> two pickup locations within 5 miles</strong> of each other.
-              </p>
-            </div>
-
-            <div className="flex gap-4 items-start">
-              <Clock className="w-6 h-6 text-blue-600 mt-1" />
-              <p>
-                Your driver waits for you after the show.
-                No surge pricing. No waiting for rideshares.
-              </p>
-            </div>
-
-            <div className="flex gap-4 items-start">
-              <DollarSign className="w-6 h-6 text-green-600 mt-1" />
-              <p>
-                <strong>Payment is due at pickup time.</strong><br />
-                <span className="text-red-600 font-bold">
-                  Cash only.
-                </span>
-              </p>
-            </div>
-          </div>
-
-          {/* CTA */}
-          <div className="mt-16 flex flex-col sm:flex-row gap-6 justify-center">
-            <a
-              href="tel:7203696292"
-              className="inline-flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 text-white px-10 py-5 rounded-full font-black text-lg shadow-xl uppercase tracking-widest transition-all"
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {VENUES.map((venue) => (
+            <Link
+              key={venue.slug}
+              href={`/venues/${venue.slug}`}
+              className="rounded-3xl border border-zinc-800 p-8 bg-zinc-900/40 hover:border-red-500 hover:bg-zinc-900 transition"
             >
-              <PhoneCall className="w-5 h-5" />
-              Book Via Text: (720) 369-6292
-            </a>
-          </div>
+              <h3 className="text-2xl font-black italic uppercase">
+                {venue.name}
+              </h3>
 
-          {/* FOOTNOTE */}
-          <p className="mt-10 text-center text-sm text-slate-500">
-            Alcohol permitted for passengers · Designated driver provided ·
-            Return stop options available
-          </p>
+              <p className="text-zinc-400 mt-2">
+                Shuttle & private SUV service
+              </p>
+            </Link>
+          ))}
         </div>
       </section>
-    </div>
+
+      {/* CTA */}
+      <section className="max-w-4xl mx-auto text-center mt-24">
+        <Link
+          href="/book"
+          className="inline-block bg-red-600 hover:bg-red-500 text-white font-black uppercase px-10 py-6 rounded-full transition"
+        >
+          Book Your Ride
+        </Link>
+      </section>
+    </main>
   );
 }
