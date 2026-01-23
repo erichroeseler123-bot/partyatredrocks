@@ -3,12 +3,9 @@ import Link from 'next/link';
 
 import VenueShows from '@/components/VenueShows';
 import FleetGrid from '@/components/FleetGrid';
-import { VENUES } from '@/data/venues';
 
 export default function HomePage() {
-  const redRocksVenue = VENUES.find(
-    (v) => v.slug === 'red-rocks-amphitheatre'
-  );
+  const redRocksVenue = { slug: 'red-rocks-amphitheatre' };
 
   return (
     <main className="bg-black text-white">
@@ -60,7 +57,7 @@ export default function HomePage() {
           </Link>
         </div>
 
-        {redRocksVenue && <VenueShows venue={redRocksVenue} />}
+        <VenueShows venue={redRocksVenue} />
       </section>
 
       {/* =========================
@@ -72,7 +69,7 @@ export default function HomePage() {
             Featured Artists
           </h2>
 
-          {redRocksVenue && <VenueShows venue={redRocksVenue} />}
+          <VenueShows venue={redRocksVenue} />
         </div>
       </section>
 
