@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-// FIXED: Removed the broken SeatGeekEvent import and used 'any' to pass the build
+// FIXED: Removed broken SeatGeekEvent import, used 'any'
 export default function VenueEventsGrid({ events }: { events: any[] }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
