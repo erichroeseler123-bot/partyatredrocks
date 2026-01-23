@@ -1,17 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    remotePatterns: [
+  rewrites: async () => {
+    return [
       {
-        protocol: 'https',
-        hostname: 's1.iticket.com', // SeatGeek's primary image host
+        source: '/api/python/:path*',
+        destination: process.env.NODE_ENV === 'development'
+          ? 'http://127.0.0.1:5328/api/:path*' // Local Python Server
+          : '/api/', // Production Python Functions
       },
-      {
-        protocol: 'https',
-        hostname: 'seatgeek.com',
-      }
-    ],
+    ]
   },
 }
-
-module.exports = nextConfig
