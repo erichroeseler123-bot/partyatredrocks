@@ -27,3 +27,21 @@ export async function getVenueEvents(venueId: string) {
   const data = await res.json();
   return data.events || [];
 }
+// Add this to lib/seatgeek.ts
+export async function getSetlist(artistName: string) {
+  try {
+    const res = await fetch(
+      `https://api.setlist.fm/rest/1.0/search/setlists?artistName=${encodeURIComponent(artistName)}&p=1`,
+      {
+        headers: {
+          'x-api-key': process.env.SETLIST_API_KEY || '', // You'll need a free key from setlist.fm
+          'Accept': 'application/json'
+        }
+      }
+    );
+    const data = await res.json();
+    return data.setlist?.[0] || null; // Returns the most recent setlist
+  } catch (e) {
+    return null;
+  }
+}
