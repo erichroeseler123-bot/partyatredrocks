@@ -34,10 +34,11 @@ export default async function ShowPage(props: { params: Promise<{ id: string }> 
           <TicketButtons event={show} />
         </div>
         <div className="md:col-span-2">
-           <section id="booking" className="bg-zinc-900/50 p-10 rounded-[3rem] border border-white/5 min-h-[400px] scroll-mt-20">
-             <p className="text-zinc-500 uppercase font-black italic mb-4">Secure Destination Shuttle</p>
-             {/* Rezdy Widget will load here */}
-           </section>
+<div className="col-span-12 lg:col-span-8">
+  <section id="booking" className="bg-zinc-900/40 p-2 rounded-[3.5rem] border border-white/5 min-h-[1600px] scroll-mt-24">
+    <RezdyWidgets />
+  </section>
+</div>
         </div>
       </div>
     </main>
