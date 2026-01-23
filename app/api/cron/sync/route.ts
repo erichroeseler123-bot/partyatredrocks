@@ -1,10 +1,9 @@
-import { VENUES } from '@/data/venues'
+import { venues } from "@/data/venues";
 
-export const runtime = 'nodejs'
+export const runtime = "nodejs";
 
 export async function GET() {
   return Response.json({
-    ok: true,
-    venueCount: Object.keys(VENUES).length,
-  })
+    venues: Object.keys(venues),
+  });
 }
