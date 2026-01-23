@@ -1,7 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import FleetGrid from "@/components/FleetGrid";
-import VenueShows from "@/components/VenueShows";
 
 export default function HomePage() {
   return (
@@ -18,7 +16,6 @@ export default function HomePage() {
           className="object-cover object-top"
         />
 
-        {/* overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
 
         <div className="relative z-10 max-w-6xl mx-auto h-full flex flex-col justify-end px-6 pb-24">
@@ -40,6 +37,7 @@ export default function HomePage() {
             >
               Book Shuttle
             </Link>
+
             <Link
               href="/private-suburban"
               className="border border-zinc-600 hover:border-white px-8 py-4 font-bold uppercase tracking-wide"
@@ -51,17 +49,24 @@ export default function HomePage() {
       </section>
 
       {/* =========================
-          SECTION 2 — SHOWS
+          SECTION 2 — SHOW CTA
          ========================= */}
-      <section className="py-28 px-6 bg-zinc-950">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-black mb-10">
-            Upcoming Shows
-          </h2>
+      <section className="py-24 px-6 bg-zinc-950 text-center">
+        <h2 className="text-4xl font-black mb-6">
+          Upcoming Shows at Red Rocks
+        </h2>
 
-          {/* SeatGeek-powered, unchanged */}
-          <VenueShows />
-        </div>
+        <p className="text-zinc-400 max-w-xl mx-auto mb-10">
+          Browse show schedules, artists, and transportation options for every
+          event.
+        </p>
+
+        <Link
+          href="/venues/red-rocks-amphitheatre"
+          className="inline-block bg-red-600 hover:bg-red-500 px-10 py-5 font-black uppercase tracking-wide"
+        >
+          View Shows
+        </Link>
       </section>
 
       {/* =========================
@@ -90,7 +95,7 @@ export default function HomePage() {
               </div>
             </Link>
 
-            {/* Mishawaka */}
+            {/* Mishawaka (image placeholder, link later if needed) */}
             <div className="relative h-64 overflow-hidden opacity-80">
               <Image
                 src="/venues/mishsite.jpg"
@@ -169,12 +174,13 @@ export default function HomePage() {
       </section>
 
       {/* =========================
-          SECTION 5 — CTA
+          SECTION 5 — FINAL CTA
          ========================= */}
       <section className="py-24 px-6 bg-black text-center">
         <h2 className="text-5xl font-black mb-6">
           Don’t Drive to the Show.
         </h2>
+
         <p className="text-zinc-400 max-w-xl mx-auto mb-10">
           Let us handle the ride so you can focus on the music.
         </p>
