@@ -1,29 +1,31 @@
 import json
+import os
 
-# Your 90+ show list
-shows = [
-    {"id": "crankdat", "name": "Crankdat", "date": "2026-03-27T19:00:00"},
-    {"id": "inzo", "name": "INZO", "date": "2026-04-03T19:00:00"},
-    # ... python handles the rest
-]
+# Create data directory if it doesn't exist
+if not os.path.exists('data'):
+    os.makedirs('data')
 
-def generate_dcc_intelligence():
-    master_seo = {}
-    for show in shows:
-        master_seo[show['id']] = {
-            "canonical": f"https://partyatredrocks.com/shows/{show['id']}",
-            "schema": {
-                "@context": "https://schema.org",
-                "@type": "Event",
-                "name": show['name'],
-                "startDate": show['date'],
-                "location": {"@type": "Place", "name": "Red Rocks Amphitheatre"},
-                "offers": {"@type": "Offer", "url": f"https://partyatredrocks.com/shows/{show['id']}", "price": "65", "priceCurrency": "USD"}
-            }
-        }
-    
+# THE MASTER 2026 INTELLIGENCE MAPPING
+shows = {
+    "crankdat": {
+        "title": "CRANKDAT",
+        "guests": "with Dr. Fresch, Smoakland, Capochino, and HerShe",
+        "canonical": "https://partyatredrocks.com/shows/crankdat",
+        "image": "https://seatgeek.com/images/performers-landscape/crankdat-1f2e3d/654321/huge.jpg"
+    },
+    "inzo": {
+        "title": "INZO",
+        "guests": "with What So Not, Lumasi, Daggz, Common Creation, and Spenny",
+        "canonical": "https://partyatredrocks.com/shows/inzo",
+        "image": "https://seatgeek.com/images/performers-landscape/inzo-2a3b4c/123456/huge.jpg"
+    }
+    # Future 90+ shows will be added here
+}
+
+def generate_dcc_master_json():
     with open('data/seo_master.json', 'w') as f:
-        json.dump(master_seo, f, indent=2)
+        json.dump(shows, f, indent=2)
+    print("DCC Status: Intelligence file generated successfully.")
 
 if __name__ == "__main__":
-    generate_dcc_intelligence()
+    generate_dcc_master_json()
