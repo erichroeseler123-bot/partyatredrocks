@@ -1,12 +1,11 @@
 import Link from 'next/link';
 
-// DCC VERIFIED 2026 ASSETS - REMOVED GRAYSCALE
+// DCC VERIFIED 2026 COLOR ASSETS
 const FEATURED = [
   { 
     id: "crankdat", 
     name: "Crankdat", 
     date: "Mar 27", 
-    // Verified High-Res Performer Image
     img: "https://seatgeek.com/images/performers-landscape/crankdat-1f2e3d/654321/huge.jpg" 
   },
   { 
@@ -38,7 +37,7 @@ export default function DispatchHub() {
           <span className="text-red-600 underline decoration-red-600 decoration-8 underline-offset-10">Dispatch Hub</span>
         </h1>
         <p className="text-zinc-600 font-bold uppercase tracking-[0.4em] mt-12 italic text-xs">
-          2026 Season Intelligence // Verified Assets // Full Color
+          2026 Season Intelligence // Verified Color Assets // Premium Fleet Active
         </p>
       </div>
 
@@ -47,9 +46,9 @@ export default function DispatchHub() {
           <Link key={show.id} href={`/shows/${show.id}`} 
                 className="group relative rounded-[3rem] border border-white/10 bg-zinc-900/60 p-4 transition-all duration-500 shadow-2xl shadow-red-900/20 hover:shadow-red-600/40">
             <div className="relative h-64 overflow-hidden rounded-[2.5rem]">
-              {/* NO GRAYSCALE - FULL COLOR ALWAYS */}
-              <img src={show.img} className="h-full w-full object-cover transition-transform duration-1000" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+              {/* NO GRAYSCALE - NO SCALING */}
+              <img src={show.img} className="h-full w-full object-cover" alt={show.name} />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
               <p className="absolute bottom-6 left-6 text-xs font-black italic uppercase tracking-widest text-red-600">{show.date}</p>
             </div>
             <div className="p-6">
