@@ -32,7 +32,10 @@ export default async function VenueShows({ venue }: Props) {
       {events.length === 0 ? (
         <p className="text-zinc-400">No upcoming events listed.</p>
       ) : (
-        <VenueEventsGrid events={events} />
+<VenueEventsGrid
+  events={events}
+  venueSlug={venue.slug}
+/>
       )}
     </section>
   );
