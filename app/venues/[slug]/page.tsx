@@ -1,10 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { venues } from "@/data/venues";
-import {
-  fetchSeatGeekEventsByVenue,
-  fetchSeatGeekEventsByVenueSlug,
-} from "@/lib/seatgeek";
+import { fetchSeatGeekEventsByVenueSlug } from "@/lib/seatgeek";
 
 export const dynamic = "force-dynamic";
 
@@ -18,12 +15,8 @@ export default async function VenuePage({ params }: Props) {
 
   if (!venue) notFound();
 
-  // ✅ SeatGeek resolution:
-  // - Red Rocks → numeric venue ID
-  // - Mishawaka → slug-based lookup
-  const events = venue.seatgeekVenueId
-    ? await fetchSeatGeekEventsByVenue(venue.seatgeekVenueId)
-    : await fetchSeatGeekEventsByVenueSlug(venue.slug);
+  // ✅ ONE source of truth: SeatGeek venue slug
+  const events = await fetchSeatGeekEventsByVenueSlug(venue.slug);
 
   // Group events by Month + Year
   const eventsByMonth = events.reduce<Record<string, any[]>>(
@@ -33,7 +26,7 @@ export default async function VenuePage({ params }: Props) {
         year: "numeric",
       });
 
-      if (!acc[month]) acc[month] = [];
+      acc[month] = acc[month] || [];
       acc[month].push(event);
       return acc;
     },
