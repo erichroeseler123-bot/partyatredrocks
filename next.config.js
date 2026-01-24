@@ -4,11 +4,8 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "seatgeekcdn.com",
-      },
-      {
-        protocol: "https",
-        hostname: "img.seatgeek.com",
+        hostname: "seatgeekimages.com",
+        pathname: "/**",
       },
     ],
   },

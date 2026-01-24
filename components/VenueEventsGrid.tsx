@@ -1,49 +1,46 @@
-import Image from "next/image";
-import Link from "next/link";
+type Props = {
+  events: any[];
+  venueSlug: string;
+};
 
-export default function VenueEventsGrid({ events }: { events: any[] }) {
+export default function VenueEventsGrid({ events, venueSlug }: Props) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
       {events.map((event) => {
-        const image =
-          event.performers?.[0]?.image || "/images/fallback.jpg";
+        const performerImage =
+          event.performers?.find((p: any) => p.image)?.image ?? null;
 
         return (
-          <Link
+          <a
             key={event.id}
-            href={`/shows/${event.slug}`}
-            className="group relative rounded-[3rem] overflow-hidden border border-white/5 hover:border-yellow-400 transition-all shadow-xl"
+            href={`/shows/${event.slug ?? event.id}`}
+            className="relative h-48 rounded-2xl bg-black border border-white/5 overflow-hidden hover:border-white/20 transition"
           >
-            {/* IMAGE */}
-            <div className="relative h-56 w-full">
-              <Image
-                src={image}
+            {/* IMAGE ONLY IF IT IS A REAL PERFORMER IMAGE */}
+            {performerImage && (
+              <img
+                src={performerImage}
                 alt={event.title}
-                fill
-                sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover opacity-70 group-hover:opacity-90 transition"
+                className="absolute inset-0 h-full w-full object-cover opacity-30"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
-            </div>
+            )}
 
-            {/* CONTENT */}
-            <div className="p-8 bg-black/60 backdrop-blur">
-              <p className="text-zinc-500 text-[10px] font-black uppercase mb-3 tracking-widest">
-                {new Date(event.datetime_local).toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                })}
-              </p>
+            <div className="relative z-10 p-6">
+              <div className="text-xs tracking-widest text-zinc-400 mb-1">
+                {new Date(event.datetime_local).toLocaleDateString()}
+              </div>
 
-              <h3 className="text-2xl font-black italic uppercase mb-3 group-hover:text-yellow-400 transition-colors">
+              <h3 className="text-lg font-black uppercase leading-tight">
                 {event.title}
               </h3>
 
-              <p className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest truncate">
-                {event.performers?.map((p: any) => p.name).join(", ")}
-              </p>
+              {event.performers?.length > 0 && (
+                <p className="text-xs text-zinc-400 mt-1">
+                  {event.performers.map((p: any) => p.name).join(", ")}
+                </p>
+              )}
             </div>
-          </Link>
+          </a>
         );
       })}
     </div>

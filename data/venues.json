@@ -1,0 +1,14 @@
+{
+  "red-rocks-amphitheatre": {
+    "name": "Red Rocks Amphitheatre",
+    "city": "Morrison",
+    "state": "CO",
+    "seatgeekVenueId": 4208
+  },
+  "mission-ballroom": {
+    "name": "Mission Ballroom",
+    "city": "Denver",
+    "state": "CO",
+    "seatgeekVenueId": 575850
+  }
+}
