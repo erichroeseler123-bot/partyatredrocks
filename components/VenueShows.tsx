@@ -1,24 +1,38 @@
-import { getVenueEvents } from '@/lib/seatgeek';
-import VenueEventsGrid from './VenueEventsGrid';
+import { fetchSeatGeekEventsByVenue } from "@/lib/seatgeek";
+import VenueEventsGrid from "./VenueEventsGrid";
 
-export default async function VenueShows({
-  venueId,
-}: {
-  venueId: number;
-}) {
-  const events = await getVenueEvents(venueId);
+type Props = {
+  venue: {
+    seatgeekVenueId?: number | null;
+    name: string;
+  };
+};
 
-  if (!events || events.length === 0) {
+export default async function VenueShows({ venue }: Props) {
+  if (!venue.seatgeekVenueId) {
     return (
-      <p className="text-zinc-500 mt-12">
-        No upcoming events found.
-      </p>
+      <section>
+        <h2 className="text-zinc-500 font-bold uppercase tracking-widest mb-4">
+          Upcoming Shows
+        </h2>
+        <p className="text-zinc-400">No events available.</p>
+      </section>
     );
   }
 
+  const events = await fetchSeatGeekEventsByVenue(venue.seatgeekVenueId);
+
   return (
-    <section className="mt-16">
-      <VenueEventsGrid events={events} />
+    <section>
+      <h2 className="text-zinc-500 font-bold uppercase tracking-widest mb-4">
+        Upcoming Shows
+      </h2>
+
+      {events.length === 0 ? (
+        <p className="text-zinc-400">No upcoming events listed.</p>
+      ) : (
+        <VenueEventsGrid events={events} />
+      )}
     </section>
   );
 }
