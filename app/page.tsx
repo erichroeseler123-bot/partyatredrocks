@@ -32,12 +32,12 @@ export default function HomePage() {
             >
               Book a Shuttle
             </Link>
-            <Link
-              href="/private-suburban"
-              className="border border-zinc-700 hover:border-white px-8 py-4 font-black uppercase tracking-wide rounded-full"
-            >
-              Private SUV
-            </Link>
+<Link
+  href="/private-suburban"
+  className="bg-blue-600 hover:bg-blue-500 px-8 py-4 font-bold uppercase rounded-full transition text-white"
+>
+  Private SUV
+</Link>
           </div>
         </div>
       </section>
@@ -78,7 +78,8 @@ export default function HomePage() {
               title="Mishawaka Amphitheatre"
             />
             <VenueCard
-              href="/book-all-venues"
+              href="/venues"
+  className="bg-zinc-800 hover:bg-zinc-700 px-8 py-4 font-bold uppercase rounded-full transition text-white"
               image="/venues/missionsite.jpg"
               title="All Venues Shuttle"
             />
