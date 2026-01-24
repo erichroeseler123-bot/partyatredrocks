@@ -3,35 +3,43 @@ export type SeatGeekEvent = {
   title: string;
   datetime_local: string;
   url: string;
-  performers?: {
-    name: string;
-    image?: string;
+  performers: {
+    image?: string | null;
+    images?: {
+      huge?: string;
+    };
   }[];
 };
 
-const BASE_URL = "https://api.seatgeek.com/2/events";
+export async function fetchSeatGeekEventsByVenueSlug(
+  venueSlug: string
+): Promise<{
+  id: number;
+  title: string;
+  datetime: string;
+  url: string;
+  image: string | null;
+}[]> {
+  const res = await fetch(
+    `https://api.seatgeek.com/2/events?venue.slug=${venueSlug}&sort=datetime_local.asc&per_page=100&client_id=${process.env.SEATGEEK_CLIENT_ID}`,
+    { cache: "no-store" }
+  );
 
-export async function fetchSeatGeekEventsByVenue(
-  venueId: number
-): Promise<SeatGeekEvent[]> {
-  const clientId = process.env.SEATGEEK_CLIENT_ID;
-  if (!clientId) return [];
-
-  const now = new Date();
-  const future = new Date();
-  future.setDate(now.getDate() + 90);
-
-  const url =
-    `${BASE_URL}?venue.id=${venueId}` +
-    `&datetime_local.gte=${now.toISOString()}` +
-    `&datetime_local.lte=${future.toISOString()}` +
-    `&sort=datetime_local.asc` +
-    `&per_page=50` +
-    `&client_id=${clientId}`;
-
-  const res = await fetch(url, { next: { revalidate: 300 } });
-  if (!res.ok) return [];
+  if (!res.ok) {
+    console.error("SeatGeek error", res.status);
+    return [];
+  }
 
   const data = await res.json();
-  return data.events ?? [];
+
+  return data.events.map((event: SeatGeekEvent) => ({
+    id: event.id,
+    title: event.title,
+    datetime: event.datetime_local,
+    url: event.url,
+    image:
+      event.performers?.[0]?.images?.huge ??
+      event.performers?.[0]?.image ??
+      null,
+  }));
 }
