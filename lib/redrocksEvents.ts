@@ -1,28 +1,42 @@
 import { RED_ROCKS_2026 } from "@/data/redrocks-2026";
 import seatgeek from "@/public/data/redrocks-events.json";
 
-type SeatGeekEvent = {
+export type RedRocksEvent = {
+  id?: number;
+  date: string;
   title: string;
-  datetime: string;
+  support?: string;
   image?: string | null;
-  url?: string;
+  url?: string | null;
 };
 
-export function getRedRocksEvents() {
-  const sgByTitle = new Map<string, SeatGeekEvent>();
+export function getRedRocksEvents(): RedRocksEvent[] {
+  const byDate = new Map<string, RedRocksEvent>();
 
-  (seatgeek as SeatGeekEvent[]).forEach((e) => {
-    sgByTitle.set(e.title.toLowerCase(), e);
-  });
+  // 1️⃣ Seed with master schedule (ALL shows)
+  for (const show of RED_ROCKS_2026) {
+    byDate.set(show.date, {
+      date: show.date,
+      title: show.event,
+      support: show.support,
+      image: null,
+      url: null,
+    });
+  }
 
-  return RED_ROCKS_2026.map((show) => {
-    const match = sgByTitle.get(show.event.toLowerCase());
+  // 2️⃣ Merge SeatGeek data (images + ticket links)
+  for (const sg of seatgeek as any[]) {
+    const date = sg.datetime?.slice(0, 10);
+    if (!date || !byDate.has(date)) continue;
 
-    return {
-      ...show,
-      image: match?.image ?? null,
-      ticketUrl: match?.url ?? null,
-      source: match ? "seatgeek" : "manual",
-    };
-  });
+    const existing = byDate.get(date)!;
+    existing.image = sg.image ?? existing.image;
+    existing.url = sg.url ?? existing.url;
+    existing.id = sg.id;
+  }
+
+  // 3️⃣ Return sorted
+  return Array.from(byDate.values()).sort((a, b) =>
+    a.date.localeCompare(b.date)
+  );
 }
