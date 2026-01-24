@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
 
 export default function HomePage() {
   return (
@@ -32,12 +32,14 @@ export default function HomePage() {
             >
               Book a Shuttle
             </Link>
-<Link
-  href="/private-suburban"
-  className="bg-blue-600 hover:bg-blue-500 px-8 py-4 font-bold uppercase rounded-full transition text-white"
->
-  Private SUV
-</Link>
+
+            {/* 🔵 PRIVATE SUV (BLUE) */}
+            <Link
+              href="/private-suburban"
+              className="bg-blue-600 hover:bg-blue-500 px-8 py-4 font-black uppercase tracking-wide rounded-full transition"
+            >
+              Private SUV
+            </Link>
           </div>
         </div>
       </section>
@@ -72,16 +74,19 @@ export default function HomePage() {
               image="/venues/rrsite.jpg"
               title="Red Rocks Amphitheatre"
             />
+
             <VenueCard
               href="/venues/mishawaka-amphitheatre"
               image="/venues/mishsite.jpg"
               title="Mishawaka Amphitheatre"
             />
+
+            {/* ✅ ALL VENUES SHUTTLE — ACTUALLY BOOKS */}
             <VenueCard
-              href="/venues"
-  className="bg-zinc-800 hover:bg-zinc-700 px-8 py-4 font-bold uppercase rounded-full transition text-white"
+              href="/book-shuttle"
               image="/venues/missionsite.jpg"
               title="All Venues Shuttle"
+              className="hover:border-red-500"
             />
           </div>
         </div>
@@ -136,15 +141,17 @@ function VenueCard({
   href,
   image,
   title,
+  className = "",
 }: {
   href: string;
   image: string;
   title: string;
+  className?: string;
 }) {
   return (
     <Link
       href={href}
-      className="group rounded-3xl overflow-hidden border border-zinc-800"
+      className={`group rounded-3xl overflow-hidden border border-zinc-800 transition ${className}`}
     >
       <Image
         src={image}
