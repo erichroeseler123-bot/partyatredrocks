@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { venues } from "@/data/venues";
 import { fetchSeatGeekEventsByVenue } from "@/lib/seatgeek";
-import ArtistGuide from "@/components/ArtistGuide";
 
 export const dynamic = "force-dynamic";
 
@@ -70,9 +69,6 @@ export default async function MishawakaPage() {
           ))}
         </ul>
       </section>
-
-      {/* Optional enrichment */}
-      <ArtistGuide />
     </main>
   );
 }
