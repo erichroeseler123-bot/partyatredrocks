@@ -1,8 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { venues } from "@/data/venues";
-import { fetchSeatGeekEventsByVenue } from "@/lib/seatgeek";
-
+app/venues/[slug]/page.tsx
 export const dynamic = "force-dynamic";
 
 type Props = {
@@ -15,8 +14,9 @@ export default async function VenuePage({ params }: Props) {
 
   if (!venue) notFound();
 
-  const events = venue.seatgeekVenueId
-    ? await fetchSeatGeekEventsByVenue(venue.seatgeekVenueId)
+const events = venue.seatgeekVenueId
+  ? await fetchSeatGeekEventsByVenue(venue.seatgeekVenueId)
+  : await fetchSeatGeekEventsByVenueSlug(venue.slug);
     : [];
 
   return (
