@@ -1,4 +1,4 @@
-import MASTER from "@/data/redrocks-2026";
+import { RED_ROCKS_2026 } from "@/data/redrocks-2026";
 import seatgeek from "@/public/data/redrocks-events.json";
 
 type SeatGeekEvent = {
@@ -11,11 +11,11 @@ type SeatGeekEvent = {
 export function getRedRocksEvents() {
   const sgByTitle = new Map<string, SeatGeekEvent>();
 
-  seatgeek.forEach((e: SeatGeekEvent) => {
+  (seatgeek as SeatGeekEvent[]).forEach((e) => {
     sgByTitle.set(e.title.toLowerCase(), e);
   });
 
-  return MASTER.map(show => {
+  return RED_ROCKS_2026.map((show) => {
     const match = sgByTitle.get(show.event.toLowerCase());
 
     return {
