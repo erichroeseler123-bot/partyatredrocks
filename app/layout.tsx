@@ -1,24 +1,28 @@
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
-import "@/styles/globals.css"; // Ensure your global styles are imported
+// app/layout.tsx
+import './globals.css'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Party at Red Rocks',
+  description: 'Colorado\'s Premier Concert Transportation',
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <html lang="en">
-      <head />
       <body className="bg-black text-white">
-        <Navbar />
-        {children}
-        <Footer />
+        {/* If there is a <nav> or <header> here, keep it */}
         
-        {/* Your Verified GTM ID from the screenshot */}
-        <GoogleTagManager gtmId="GTM-TG86VJC" />
+        {children} 
+
+        {/* LOOK HERE: If there is a <footer> tag below {children}, 
+            DELETE IT to remove the GOSNO LLC text from all pages. 
+        */}
       </body>
     </html>
-  );
+  )
 }
