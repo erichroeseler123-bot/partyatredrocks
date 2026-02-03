@@ -1,14 +1,13 @@
-import "./globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="dark scroll-smooth"> {/* Added scroll-smooth here */}
-      <body className="bg-black text-white antialiased min-h-screen">
+    <html lang="en">
+      <body>
+        <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );

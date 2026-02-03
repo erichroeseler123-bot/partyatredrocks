@@ -2,26 +2,23 @@ import requests
 import json
 from datetime import datetime
 
-# ======================
-# CONFIG
-# ======================
 SEATGEEK_CLIENT_ID = "NTUyMjcyMDV8MTc2NzU1MDc0Ni41MDEyNjgx"
-VENUE_ID = 196  # Red Rocks Amphitheatre
 BASE_URL = "https://api.seatgeek.com/2/events"
+OUTPUT_PATH = "public/data/mishawaka-events.json"
 
-OUTPUT_PATH = "public/data/redrocks-events.json"
-
-# ======================
-# FETCH EVENTS
-# ======================
 all_events = []
 page = 1
 per_page = 100
 
+today = datetime.utcnow().strftime("%Y-%m-%d")
+
 while True:
     params = {
         "client_id": SEATGEEK_CLIENT_ID,
-        "venue.id": VENUE_ID,
+        "venue.name": "Mishawaka Amphitheatre",
+        "venue.state": "CO",
+        "type": "concert",
+        "datetime_local.gte": today,
         "per_page": per_page,
         "page": page,
         "sort": "datetime_local.asc",
@@ -36,16 +33,10 @@ while True:
         break
 
     for event in events:
-        performer = None
-        if event.get("performers"):
-            performer = event["performers"][0]
-
+        performer = event["performers"][0] if event.get("performers") else None
         image = None
         if performer:
-            image = (
-                performer.get("images", {}).get("huge")
-                or performer.get("image")
-            )
+            image = performer.get("images", {}).get("huge") or performer.get("image")
 
         all_events.append({
             "id": event["id"],
@@ -58,10 +49,7 @@ while True:
     print(f"Fetched page {page} ({len(events)} events)")
     page += 1
 
-# ======================
-# WRITE OUTPUT
-# ======================
 with open(OUTPUT_PATH, "w") as f:
     json.dump(all_events, f, indent=2)
 
-print(f"\n✅ Wrote {len(all_events)} events to {OUTPUT_PATH}")
+print(f"\n✅ Wrote {len(all_events)} upcoming Mishawaka concerts to {OUTPUT_PATH}")

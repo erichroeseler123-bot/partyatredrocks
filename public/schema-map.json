@@ -1,0 +1,33 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TransportationService",
+      "name": "Party at Red Rocks",
+      "description": "Licensed Tier-1 Red Rocks Shuttle service (LL-02649).",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "GoSno LLC",
+        "telephone": "+13035550199",
+        "areaServed": [
+          "Denver",
+          "Golden",
+          "Morrison"
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Where does the Red Rocks shuttle drop off?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our shuttles are authorized for Top Circle Drop-off, putting you at the very top of the amphitheatre (Row 70) to avoid the uphill climb."
+          }
+        }
+      ]
+    }
+  ]
+}

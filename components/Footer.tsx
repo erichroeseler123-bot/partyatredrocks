@@ -1,73 +1,41 @@
-import Link from "next/link";
-import { venues } from "@/data/venues";
+import Link from 'next/link';
 
 export default function Footer() {
-  const venueList = Object.values(venues);
-
   return (
-    <footer className="border-t border-zinc-800 mt-24 px-6 py-12 bg-black text-white">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-        
+    <footer className="bg-black border-t border-zinc-800 py-16 px-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
         {/* Brand */}
-        <div>
-          <h3 className="font-black text-lg mb-2">Party at Red Rocks</h3>
-          <p className="text-sm text-zinc-400">
-            Concert shuttles & private transportation across Colorado.
+        <div className="col-span-1 md:col-span-2">
+          <h4 className="text-2xl font-black italic uppercase text-white mb-4">GoSno LLC</h4>
+          <p className="text-zinc-500 text-sm max-w-xs leading-relaxed">
+            Colorado&apos;s premier concert transportation specialist. Licensed PUC LL-02649. Direct Top Circle access for every show.
           </p>
         </div>
 
-        {/* Venues */}
+        {/* THE PRETTY BOW: GUIDE LINKS */}
         <div>
-          <h4 className="uppercase text-xs font-bold tracking-widest text-zinc-500 mb-3">
-            Venues
-          </h4>
-          <ul className="space-y-1">
-            {venueList.map((venue) => (
-              <li key={venue.slug}>
-                <Link
-                  href={`/venues/${venue.slug}`}
-                  className="text-sm text-zinc-300 hover:text-white transition"
-                >
-                  {venue.name}
-                </Link>
-              </li>
-            ))}
+          <h5 className="font-black uppercase text-xs tracking-widest text-red-600 mb-6">Venue Guide</h5>
+          <ul className="space-y-3 text-sm font-medium text-zinc-400">
+            <li><Link href="/guide/logistics/parking-lots" className="hover:text-white">Parking Lot Hacks</Link></li>
+            <li><Link href="/guide/logistics/bag-policy" className="hover:text-white">2026 Bag Rules</Link></li>
+            <li><Link href="/guide/logistics/sold-out-survival" className="hover:text-white">Sold-Out Survival</Link></li>
+            <li><Link href="/guide/safety-and-legitimacy" className="hover:text-white">Safety & Licensing</Link></li>
           </ul>
         </div>
 
-        {/* Booking */}
+        {/* Local Pickups */}
         <div>
-          <h4 className="uppercase text-xs font-bold tracking-widest text-zinc-500 mb-3">
-            Book a Ride
-          </h4>
-          <ul className="space-y-1">
-            <li>
-              <Link
-                href="/book-shuttle"
-                className="text-sm text-zinc-300 hover:text-white"
-              >
-                Red Rocks Shuttle
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/private-suburban"
-                className="text-sm text-zinc-300 hover:text-white"
-              >
-                Private SUV
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/book-all-venues"
-                className="text-sm text-zinc-300 hover:text-white"
-              >
-                All Venues
-              </Link>
-            </li>
+          <h5 className="font-black uppercase text-xs tracking-widest text-red-600 mb-6">Pickup Hubs</h5>
+          <ul className="space-y-3 text-sm font-medium text-zinc-400">
+            <li><Link href="/guide/local/denver-pickups" className="hover:text-white">Denver: Sheraton</Link></li>
+            <li><Link href="/guide/local/trailhead-taphouse" className="hover:text-white">Golden: Trailhead Taphouse</Link></li>
+            <li><Link href="/guide/local/morrison" className="hover:text-white">Morrison Logistics</Link></li>
           </ul>
         </div>
-
+      </div>
+      
+      <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-zinc-900 text-center text-xs text-zinc-600 font-bold uppercase tracking-widest">
+        © 2026 Party at Red Rocks | All Rights Reserved
       </div>
     </footer>
   );

@@ -33,13 +33,42 @@ export default function HomePage() {
               Book a Shuttle
             </Link>
 
-            {/* 🔵 PRIVATE SUV (BLUE) */}
             <Link
               href="/private-suburban"
               className="bg-blue-600 hover:bg-blue-500 px-8 py-4 font-black uppercase tracking-wide rounded-full transition"
             >
               Private SUV
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= AUTHORITY HUB (NEW) ================= */}
+      <section className="py-24 px-6 bg-zinc-900 border-y border-zinc-800">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-16">
+            <h2 className="text-3xl font-black italic uppercase mb-4">Red Rocks Intelligence</h2>
+            <p className="text-zinc-400">Master the logistics before the show starts.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-black p-8 rounded-3xl border border-zinc-800 hover:border-red-600 transition">
+              <h3 className="font-black uppercase text-xl mb-4 text-red-600">Parking & Arrival</h3>
+              <p className="text-zinc-400 text-sm mb-6">Learn why the &quot;Lower South Lot&quot; is a 400-stair nightmare and how our Top Circle drop-off saves your night.</p>
+              <Link href="/guide/logistics/parking-lots" className="font-bold uppercase tracking-widest text-xs hover:text-red-500">Read the Guide →</Link>
+            </div>
+
+            <div className="bg-black p-8 rounded-3xl border border-zinc-800 hover:border-red-600 transition">
+              <h3 className="font-black uppercase text-xl mb-4 text-red-600">2026 Venue Rules</h3>
+              <p className="text-zinc-400 text-sm mb-6">The &quot;Single-Pocket&quot; bag rule is strictly enforced this season. See exactly what security allows at the gate.</p>
+              <Link href="/guide/logistics/bag-policy" className="font-bold uppercase tracking-widest text-xs hover:text-red-500">Security Prep →</Link>
+            </div>
+
+            <div className="bg-black p-8 rounded-3xl border border-zinc-800 hover:border-red-600 transition">
+              <h3 className="font-black uppercase text-xl mb-4 text-red-600">Sold-Out Survival</h3>
+              <p className="text-zinc-400 text-sm mb-6">Sold-out shows mean $150+ Uber surges and traffic gridlock. Here is your strategy to beat the surge.</p>
+              <Link href="/guide/logistics/sold-out-survival" className="font-bold uppercase tracking-widest text-xs hover:text-red-500">Survival Tips →</Link>
+            </div>
           </div>
         </div>
       </section>
@@ -52,7 +81,6 @@ export default function HomePage() {
         <p className="text-zinc-400 mb-8 max-w-2xl">
           Browse upcoming concerts at Red Rocks and book your ride in advance.
         </p>
-
         <Link
           href="/venues/red-rocks-amphitheatre"
           className="text-red-500 font-black uppercase tracking-widest hover:text-red-400"
@@ -67,61 +95,28 @@ export default function HomePage() {
           <h2 className="text-3xl font-black italic uppercase mb-12">
             Venues We Serve
           </h2>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <VenueCard
-              href="/venues/red-rocks-amphitheatre"
-              image="/venues/rrsite.jpg"
-              title="Red Rocks Amphitheatre"
-            />
-
-            <VenueCard
-              href="/venues/mishawaka-amphitheatre"
-              image="/venues/mishsite.jpg"
-              title="Mishawaka Amphitheatre"
-            />
-
-            {/* ✅ ALL VENUES SHUTTLE — ACTUALLY BOOKS */}
-            <VenueCard
-              href="/book-shuttle"
-              image="/venues/missionsite.jpg"
-              title="All Venues Shuttle"
-              className="hover:border-red-500"
-            />
+            <VenueCard href="/venues/red-rocks-amphitheatre" image="/venues/rrsite.jpg" title="Red Rocks Amphitheatre" />
+            <VenueCard href="/venues/mishawaka-amphitheatre" image="/venues/mishsite.jpg" title="Mishawaka Amphitheatre" />
+            <VenueCard href="/book-shuttle" image="/venues/missionsite.jpg" title="All Venues Shuttle" className="hover:border-red-500" />
           </div>
         </div>
       </section>
 
       {/* ================= FLEET ================= */}
       <section className="py-24 px-6 max-w-7xl mx-auto">
-        <h2 className="text-3xl font-black italic uppercase mb-12">
-          Our Fleet
-        </h2>
-
+        <h2 className="text-3xl font-black italic uppercase mb-12">Our Fleet</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <FleetCard
-            image="/fleet/fleet-sprinter.jpg"
-            title="Sprinter Shuttle"
-            desc="Shared concert shuttles from Denver & Golden"
-          />
-          <FleetCard
-            image="/fleet/fleet-suburban.jpg"
-            title="Private Suburban"
-            desc="Private SUV service for up to 6 guests"
-          />
+          <FleetCard image="/fleet/fleet-sprinter.jpg" title="Sprinter Shuttle" desc="Shared concert shuttles from Denver & Golden" />
+          <FleetCard image="/fleet/fleet-suburban.jpg" title="Private Suburban" desc="Private SUV service for up to 6 guests" />
         </div>
       </section>
 
-      {/* ================= CTA ================= */}
+      {/* ================= FINAL CTA ================= */}
       <section className="py-24 px-6 border-t border-zinc-800">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-black italic uppercase">
-            Don’t Drive. Don’t Stress.
-          </h2>
-          <p className="mt-6 text-zinc-400 text-lg">
-            Book your ride, enjoy the show, and we’ll handle the rest.
-          </p>
-
+          <h2 className="text-4xl font-black italic uppercase">Don’t Drive. Don’t Stress.</h2>
+          <p className="mt-6 text-zinc-400 text-lg">Book your ride, enjoy the show, and we’ll handle the rest.</p>
           <Link
             href="/book-shuttle"
             className="inline-block mt-10 bg-red-600 hover:bg-red-500 px-10 py-5 font-black uppercase tracking-wide rounded-full"
@@ -137,52 +132,19 @@ export default function HomePage() {
 
 /* ================= COMPONENTS ================= */
 
-function VenueCard({
-  href,
-  image,
-  title,
-  className = "",
-}: {
-  href: string;
-  image: string;
-  title: string;
-  className?: string;
-}) {
+function VenueCard({ href, image, title, className = "" }: { href: string; image: string; title: string; className?: string; }) {
   return (
-    <Link
-      href={href}
-      className={`group rounded-3xl overflow-hidden border border-zinc-800 transition ${className}`}
-    >
-      <Image
-        src={image}
-        alt={title}
-        width={800}
-        height={500}
-        className="object-cover h-64 w-full group-hover:scale-105 transition"
-      />
+    <Link href={href} className={`group rounded-3xl overflow-hidden border border-zinc-800 transition ${className}`}>
+      <Image src={image} alt={title} width={800} height={500} className="object-cover h-64 w-full group-hover:scale-105 transition" />
       <div className="p-6 font-black uppercase">{title}</div>
     </Link>
   );
 }
 
-function FleetCard({
-  image,
-  title,
-  desc,
-}: {
-  image: string;
-  title: string;
-  desc: string;
-}) {
+function FleetCard({ image, title, desc }: { image: string; title: string; desc: string; }) {
   return (
     <div className="rounded-3xl overflow-hidden border border-zinc-800">
-      <Image
-        src={image}
-        alt={title}
-        width={800}
-        height={500}
-        className="object-cover h-64 w-full"
-      />
+      <Image src={image} alt={title} width={800} height={500} className="object-cover h-64 w-full" />
       <div className="p-6">
         <h3 className="font-black uppercase">{title}</h3>
         <p className="text-zinc-400 text-sm mt-2">{desc}</p>
