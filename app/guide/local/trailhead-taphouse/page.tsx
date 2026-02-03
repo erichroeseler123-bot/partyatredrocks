@@ -15,19 +15,19 @@ export default function TrailheadHub() {
         It’s the perfect pre-show basecamp for locals and travelers alike.
       </p>
 
-      <div className="grid md:grid-cols-2 gap-10 items-center border border-zinc-800 rounded-[2.5rem] overflow-hidden bg-zinc-900/30 p-8">
+      <div className="grid md:grid-cols-2 gap-10 items-center border border-zinc-800 rounded-[2.5rem] overflow-hidden bg-zinc-900/30 p-8 shadow-2xl">
         <div>
           <h3 className="text-xl font-bold mb-4 text-red-600 uppercase tracking-tight">Pre-Show Logistics</h3>
           <p className="text-zinc-400 text-sm leading-relaxed mb-6">Located in the heart of downtown Golden, the Taphouse offers craft beers and Cajun-influenced pub fare.</p>
           <ul className="space-y-4 text-sm text-zinc-300 font-medium">
             <li className="flex gap-2"><span>📍</span> <span><strong>Address:</strong> 811 12th St, Golden, CO 80401</span></li>
             <li className="flex gap-2"><span>🍺</span> <span><strong>Pro-Tip:</strong> Arrive 60 mins early for a pint before the shuttle departs.</span></li>
-            <li>🔗 <a href="https://trailheadtaphouse.com/" target="_blank" className="text-red-500 hover:underline">Official Site</a></li>
+            <li>🔗 <a href="https://trailheadtaphouse.com/" target="_blank" className="text-red-500 hover:underline transition">Official Site</a></li>
           </ul>
         </div>
         <div className="aspect-square md:aspect-auto md:h-full min-h-[300px] rounded-2xl overflow-hidden border border-zinc-800 shadow-2xl">
           <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3067.873238692694!2d-105.22634352345532!3d39.75375549574482!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876b84013476906b%3A0x6e24694901f46754!2sTrailhead%20Taphouse%20%26%20Kitchen!5e0!3m2!1sen!2sus!4v1706972000000!5m2!1sen!2sus" 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3067.87680076295!2d-105.2238479!3d39.7536341!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876b856719e7a275%3A0x633658516c49877b!2sTrailhead%20Taphouse%20%26%20Kitchen!5e0!3m2!1sen!2sus!4v1706990000000!5m2!1sen!2sus" 
             width="100%" height="100%" style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg)' }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         </div>
