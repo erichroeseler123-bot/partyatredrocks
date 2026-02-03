@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-// 1. Unified Master Database
+// 1. Unified Master Database (All 21 venues)
 const venueData = {
   'mission-ballroom': { name: 'Mission Ballroom', location: 'RiNo, Denver', address: '4242 Wynkoop St, Denver, CO 80216', pickupNote: '38th & Blake St.' },
   'ball-arena': { name: 'Ball Arena', location: 'Downtown Denver', address: '1000 Chopper Cir, Denver, CO 80204', pickupNote: 'Downtown hotel corridor.' },
@@ -37,12 +37,14 @@ async function getEvents(venueName: string) {
   } catch (e) { return []; }
 }
 
-// 2. Component - Note the 'await params' for Next.js 16 compatibility
+// 2. COMPONENT: Note the 'await params' for Next.js 16 compatibility
 export default async function VenuePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const venue = venueData[slug as keyof typeof venueData];
   
-  if (!venue) notFound();
+  if (!venue) {
+    notFound();
+  }
 
   const events = await getEvents(venue.name);
 
@@ -50,40 +52,44 @@ export default async function VenuePage({ params }: { params: Promise<{ slug: st
     <main className="min-h-screen bg-black text-white py-24 px-6">
       <div className="max-w-5xl mx-auto">
         <header className="mb-12 border-l-4 border-red-600 pl-8">
-          <h1 className="text-5xl md:text-7xl font-black uppercase italic tracking-tighter">{venue.name}</h1>
+          <h1 className="text-5xl md:text-7xl font-black uppercase italic tracking-tighter leading-tight">
+            {venue.name}
+          </h1>
           <p className="mt-3 text-xl text-zinc-400 font-bold uppercase tracking-widest">{venue.location}</p>
         </header>
 
+        {/* Dynamic Event Intelligence */}
         <section className="mb-20">
-          <h2 className="text-3xl font-black mb-8 border-b border-zinc-800 pb-4 uppercase italic">Upcoming Intel</h2>
+          <h2 className="text-3xl font-black mb-8 border-b border-zinc-800 pb-4 uppercase italic">Upcoming Shows</h2>
           <div className="space-y-4">
             {events.length > 0 ? events.map((event: any) => (
               <div key={event.id} className="bg-zinc-900/40 border border-zinc-800 rounded-2xl p-6 flex justify-between items-center hover:border-red-600 transition-all shadow-xl">
                 <div>
                   <h3 className="text-xl font-black uppercase italic">{event.title}</h3>
-                  <p className="text-zinc-500 font-bold text-sm">{new Date(event.datetime_local).toLocaleDateString()}</p>
+                  <p className="text-zinc-500 font-bold text-sm uppercase">{new Date(event.datetime_local).toLocaleDateString()}</p>
                 </div>
                 <div className="flex gap-4">
                   {event.url && <a href={event.url} target="_blank" rel="noopener noreferrer" className="bg-zinc-800 hover:bg-zinc-700 px-6 py-3 rounded-full text-xs font-black uppercase tracking-widest transition">Tickets</a>}
                   <Link href="/book-all-venue" className="bg-red-600 hover:bg-red-500 px-6 py-3 rounded-full text-xs font-black uppercase tracking-widest transition shadow-lg">Book Ride</Link>
                 </div>
               </div>
-            )) : <p className="text-zinc-500 italic text-center py-10">Searching SeatGeek for live updates...</p>}
+            )) : <p className="text-zinc-500 italic text-center py-10 tracking-widest uppercase text-xs font-bold">Syncing live schedule from SeatGeek...</p>}
           </div>
         </section>
 
+        {/* Location Intelligence Hub */}
         <section className="mb-20">
-          <h3 className="text-2xl font-black mb-6 uppercase italic">Location & Maps</h3>
-          <p className="text-zinc-400 mb-6 font-medium">{venue.address}</p>
+          <h3 className="text-2xl font-black mb-6 uppercase italic">Location & Directions</h3>
+          <p className="text-zinc-400 mb-6 font-medium tracking-wide">{venue.address}</p>
           <div className="aspect-video rounded-[2.5rem] overflow-hidden border border-zinc-800 shadow-2xl relative">
             <iframe
-              src={`https://maps.google.com/?q=1621+Glenarm+Pl,+Denver,+CO+802029{encodeURIComponent(venue.address)}&output=embed`}
+              src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&q=${encodeURIComponent(venue.address)}`}
               width="100%" height="100%" style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg)' }} allowFullScreen loading="lazy"
             ></iframe>
           </div>
-          <div className="mt-8 p-8 bg-zinc-900/30 rounded-3xl border border-zinc-800 flex justify-between items-center">
-            <p className="text-zinc-400 text-sm font-medium">Pickup Intel: {venue.pickupNote} Guaranteed post-show waiting service.</p>
-            <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(venue.address)}`} target="_blank" rel="noopener noreferrer" className="bg-white text-black px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-zinc-200 transition">Open Maps</a>
+          <div className="mt-8 p-8 bg-zinc-900/30 rounded-3xl border border-zinc-800 flex flex-col md:flex-row justify-between items-center gap-6">
+            <p className="text-zinc-400 text-sm font-medium">Pickup Intel: {venue.pickupNote} Reliable door-to-door shuttle for any group size.</p>
+            <Link href="/book-all-venue" className="bg-white text-black px-10 py-3 rounded-full font-black uppercase text-xs tracking-[0.2em] hover:bg-zinc-200 transition shrink-0 shadow-lg">Book Now</Link>
           </div>
         </section>
       </div>
