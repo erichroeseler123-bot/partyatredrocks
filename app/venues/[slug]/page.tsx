@@ -54,14 +54,14 @@ export default async function VenuePage({ params }: { params: { slug: string } }
           <p className="mt-3 text-xl text-zinc-400 font-bold">{venue.location}</p>
         </header>
 
-        {/* Updated Pricing: No Max Capacity */}
+        {/* Updated Pricing: Corrected Capacity Message */}
         <div className="mb-16 bg-zinc-900/50 border border-zinc-800 rounded-[2.5rem] p-10 text-center shadow-2xl">
           <h2 className="text-3xl font-black mb-4 uppercase italic">All-Venue City Service</h2>
           <p className="text-xl text-zinc-300 mb-8 font-medium italic">
-            $50 / Person • $250 Group Minimum • Door-to-Door • No Passenger Maximum
+            $50 / Person • $250 Group Minimum • Door-to-Door • Professional Fleet for Any Group Size
           </p>
           <Link href="/book-all-venue" className="bg-red-600 hover:bg-red-500 px-10 py-5 rounded-full font-black uppercase text-lg shadow-xl inline-block transition">
-            Book Shuttle for Any Group Size →
+            Book Shuttle for Your Group →
           </Link>
         </div>
 
@@ -90,11 +90,11 @@ export default async function VenuePage({ params }: { params: { slug: string } }
           </div>
         </section>
 
-        {/* Location & Map Section */}
+        {/* Map Section */}
         <section className="mb-20">
           <h3 className="text-2xl font-black mb-6 uppercase italic">Location & Directions</h3>
-          <p className="text-zinc-400 mb-6">{venue.address}</p>
-          <div className="aspect-video rounded-[2.5rem] overflow-hidden border border-zinc-800 shadow-2xl">
+          <p className="text-zinc-400 mb-6 font-medium">{venue.address}</p>
+          <div className="aspect-video rounded-[2.5rem] overflow-hidden border border-zinc-800 shadow-2xl relative">
             <iframe
               src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&q=${encodeURIComponent(venue.address)}`}
               width="100%" height="100%" style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg)' }} allowFullScreen loading="lazy"
