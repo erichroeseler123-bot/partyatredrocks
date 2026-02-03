@@ -2,12 +2,12 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 // -----------------------------------------------------------------------------
-// 1. MASTER UNIFIED DATABASE (Matches all links in /shuttles/all-venue)
+// 1. MASTER UNIFIED DATABASE (Matches all 21 links in /shuttles/all-venue)
 // -----------------------------------------------------------------------------
 const venueData = {
   'mission-ballroom': { name: 'Mission Ballroom', location: 'RiNo, Denver', address: '4242 Wynkoop St, Denver, CO 80216', pickupNote: '38th & Blake St.' },
-  'ball-arena': { name: 'Ball Arena', location: 'Downtown Denver', address: '1000 Chopper Cir, Denver, CO 80204', pickupNote: 'Downtown hotel corridor.' },
-  'fiddlers-green': { name: "Fiddler's Green Amphitheatre", location: 'Greenwood Village', address: '6350 Greenwood Plaza Blvd, Greenwood Village, CO 80111', pickupNote: 'DTC hotel pickup.' },
+  'ball-arena': { name: 'Ball Arena', location: 'Downtown Denver', address: '1000 Chopper Cir, Denver, CO 80204', pickupNote: 'Downtown hotel hub.' },
+  'fiddlers-green': { name: "Fiddler's Green Amphitheatre", location: 'Greenwood Village', address: '6350 Greenwood Plaza Blvd, Greenwood Village, CO 80111', pickupNote: 'DTC hotel corridor.' },
   'ogden-theatre': { name: 'Ogden Theatre', location: 'Colfax, Denver', address: '935 E Colfax Ave, Denver, CO 80218', pickupNote: 'Colfax door-to-door.' },
   'fillmore-auditorium': { name: 'Fillmore Auditorium', location: 'Colfax, Denver', address: '1510 Clarkson St, Denver, CO 80218', pickupNote: 'Clarkson St entrance.' },
   'bluebird-theater': { name: 'Bluebird Theater', location: 'East Colfax, Denver', address: '3317 E Colfax Ave, Denver, CO 80206', pickupNote: 'East Colfax pickup.' },
@@ -57,7 +57,7 @@ export default async function VenuePage({ params }: { params: { slug: string } }
           <p className="mt-3 text-xl text-zinc-400 font-bold uppercase tracking-widest">{venue.location}</p>
         </header>
 
-        {/* Dynamic Schedule Node */}
+        {/* Dynamic Schedule Section */}
         <section className="mb-20">
           <h2 className="text-3xl font-black mb-8 border-b border-zinc-800 pb-4 uppercase italic">Show Intelligence</h2>
           <div className="space-y-4">
@@ -78,13 +78,13 @@ export default async function VenuePage({ params }: { params: { slug: string } }
           </div>
         </section>
 
-        {/* Map & Directions Hub */}
+        {/* Location & Map Hub */}
         <section className="mb-20">
-          <h3 className="text-2xl font-black mb-6 uppercase italic">Location & Directions</h3>
+          <h3 className="text-2xl font-black mb-6 uppercase italic tracking-tighter">Location & Directions</h3>
           <p className="text-zinc-400 mb-6 font-medium tracking-wide">{venue.address}</p>
           <div className="aspect-video rounded-[2.5rem] overflow-hidden border border-zinc-800 shadow-2xl relative">
             <iframe
-              src={`https://maps.google.com/?q=1621+Glenarm+Pl,+Denver,+CO+802029{encodeURIComponent(venue.address)}&output=embed`}
+              src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&q=${encodeURIComponent(venue.address)}`}
               width="100%" height="100%" style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg)' }} allowFullScreen loading="lazy"
             ></iframe>
           </div>
