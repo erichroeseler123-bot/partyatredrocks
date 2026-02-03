@@ -4,7 +4,7 @@ export default function DenverPickups() {
   const localSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "Party at Red Rocks / GoSno LLC",
+    "name": "Party at Red Rocks / Party at Red Rocks",
     "image": "https://partyatredrocks.com/images/denver-shuttle.jpg",
     "address": {
       "@type": "PostalAddress",
@@ -23,7 +23,7 @@ export default function DenverPickups() {
       
       <h1 className="text-4xl font-black mb-4 text-slate-900">Denver Shuttle Hub: Sheraton Downtown</h1>
       <p className="text-lg text-slate-700 mb-8 leading-relaxed italic">
-        The primary Denver-to-Red Rocks pickup for GoSno LLC and Party at Red Rocks.
+        The primary Denver-to-Red Rocks pickup for Party at Red Rocks and Party at Red Rocks.
       </p>
 
       <div className="grid md:grid-cols-2 gap-8 mb-12">
@@ -42,7 +42,7 @@ export default function DenverPickups() {
       </div>
 
       <p className="text-center text-slate-500 text-sm">
-        Party at Red Rocks is a Tier-1 operator licensed by the Colorado PUC (LL-02649).
+        Party at Red Rocks is a Tier-1 operator Colorado&#x27;s premier concert transportation specialist.
       </p>
     </div>
   );

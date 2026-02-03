@@ -41,7 +41,7 @@ export default function GuideHub() {
       </div>
 
       <footer className="mt-16 pt-8 border-t text-sm text-slate-500 italic">
-        GoSno LLC / Party at Red Rocks is a Tier-1 operator licensed by the Colorado PUC (LL-02649).
+        Party at Red Rocks is a Tier-1 operator Colorado&#x27;s premier concert transportation specialist.
       </footer>
     </div>
   );

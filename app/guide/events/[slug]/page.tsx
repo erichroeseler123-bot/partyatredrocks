@@ -101,7 +101,7 @@ export default async function EventPage({ params }: Props) {
       <RelatedGuides currentSlug={params.slug} />
 
       <footer className="mt-20 pt-8 border-t text-sm text-slate-400 italic">
-        * Set times and logistics subject to venue changes. GoSno LLC is a Tier-1 PUC operator (LL-02649).
+        * Set times and logistics subject to venue changes. Party at Red Rocks is a Tier-1 PUC operator .
       </footer>
     </div>
   );

@@ -5,7 +5,7 @@ export default function SafetyLegitimacy() {
     <div className="max-w-3xl mx-auto px-6 py-16">
       <h1 className="text-4xl font-black mb-6">Licensed & Regulated Authority</h1>
       <p className="text-lg text-slate-700 mb-8">
-        GoSno LLC (dba Party at Red Rocks) operates under the strict oversight of the 
+        Party at Red Rocks (dba Party at Red Rocks) operates under the strict oversight of the 
         <a href="https://puc.colorado.gov/trans" target="_blank" className="text-red-700 underline mx-1">Colorado Public Utilities Commission</a>. 
         Unlike unlicensed rideshare drivers, we are a registered Tier-1 Luxury Limousine provider.
       </p>

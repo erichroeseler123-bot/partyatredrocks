@@ -6,7 +6,7 @@ export default function LocalTrust() {
       <div>
         <h3 className="text-white font-black uppercase text-xl mb-2">Verified Tier-1 Operator</h3>
         <p className="text-zinc-500 text-sm max-w-sm">
-          GoSno LLC (LL-02649) is a vetted Colorado carrier. From the Sheraton Downtown to the Trailhead Taphouse, we are your local Red Rocks connection.
+          Party at Red Rocks  is a vetted Colorado carrier. From the Sheraton Downtown to the Trailhead Taphouse, we are your local Red Rocks connection.
         </p>
       </div>
       <div className="flex flex-col items-center gap-3">

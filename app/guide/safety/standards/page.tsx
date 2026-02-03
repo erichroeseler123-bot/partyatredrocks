@@ -3,7 +3,7 @@ export default function SafetyStandards() {
     <div className="max-w-4xl mx-auto px-6 py-16">
       <h1 className="text-4xl font-black mb-6">Colorado Shuttle Safety: Our Tier-1 Commitment</h1>
       <p className="text-lg mb-8">
-        GoSno LLC (Party at Red Rocks) isn't just a transport service; we are a 
+        Party at Red Rocks (Party at Red Rocks) isn't just a transport service; we are a 
         <strong>Licensed Luxury Limousine Carrier</strong> regulated by the 
         <a href="https://puc.colorado.gov/trans" target="_blank" className="mx-1 underline text-red-700">Colorado PUC</a>.
       </p>
