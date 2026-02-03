@@ -84,7 +84,7 @@ export default async function VenuePage({ params }: { params: { slug: string } }
           <p className="text-zinc-400 mb-6 font-medium tracking-wide">{venue.address}</p>
           <div className="aspect-video rounded-[2.5rem] overflow-hidden border border-zinc-800 shadow-2xl relative">
             <iframe
-              src={`http://googleusercontent.com/maps.google.com/78{encodeURIComponent(venue.address)}&output=embed`}
+              src={`https://maps.google.com/?q=1621+Glenarm+Pl,+Denver,+CO+802029{encodeURIComponent(venue.address)}&output=embed`}
               width="100%" height="100%" style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg)' }} allowFullScreen loading="lazy"
             ></iframe>
           </div>
