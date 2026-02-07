@@ -1,4 +1,5 @@
 export const dynamicParams = true;
+
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -18,7 +19,7 @@ type Props = {
 };
 
 /* ================================
-   BUILD STATIC PAGES
+   STATIC GENERATION
 ================================ */
 
 export async function generateStaticParams() {
@@ -28,17 +29,50 @@ export async function generateStaticParams() {
 }
 
 /* ================================
-   HELPER: FIND BY BASE SLUG
-   (for legacy URLs)
+   SLUG NORMALIZER
 ================================ */
 
-function findByLegacySlug(slug: string): Show | undefined {
-  return shows2026.find((s) => {
-    if (s.slug === slug) return true;
+function normalizeSlug(input: string) {
+  return input
+    .toLowerCase()
+    .trim()
+    .replace(/\/+$/, "");
+}
 
-    // Match base slug without date
-    return s.slug.startsWith(slug + "-");
-  });
+/* ================================
+   CANONICAL SHOW RESOLVER
+================================ */
+
+function resolveShow(rawSlug: string): Show | undefined {
+  const slug = normalizeSlug(rawSlug);
+
+  /* 1. Exact match */
+  let match = shows2026.find((s) => s.slug === slug);
+  if (match) return match;
+
+  /* 2. Prefix match (legacy / base) */
+  match = shows2026.find((s) => s.slug.startsWith(slug + "-"));
+  if (match) return match;
+
+  /* 3. Reverse prefix (user hit long version) */
+  match = shows2026.find((s) => slug.startsWith(s.slug + "-"));
+  if (match) return match;
+
+  /* 4. Artist-based fallback */
+  const byArtist = shows2026.filter((s) =>
+    s.artist
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .includes(slug)
+  );
+
+  if (byArtist.length) {
+    return byArtist.sort(
+      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+    )[0];
+  }
+
+  return undefined;
 }
 
 /* ================================
@@ -49,7 +83,7 @@ export async function generateMetadata(
   { params }: Props
 ): Promise<Metadata> {
 
-  const show = findByLegacySlug(params.slug);
+  const show = resolveShow(params.slug);
 
   if (!show) return {};
 
@@ -68,6 +102,10 @@ export async function generateMetadata(
   return {
     title,
     description,
+
+    alternates: {
+      canonical: `/guide/events/${show.slug}`,
+    },
 
     openGraph: {
       title,
@@ -91,13 +129,13 @@ export async function generateMetadata(
 
 export default function EventPage({ params }: Props) {
 
-  const show = findByLegacySlug(params.slug);
+  const show = resolveShow(params.slug);
 
   if (!show) {
     notFound();
   }
 
-  /* 🔁 AUTO REDIRECT OLD SLUGS */
+  /* 🔁 CANONICAL REDIRECT */
   if (show.slug !== params.slug) {
     redirect(`/guide/events/${show.slug}`);
   }
@@ -135,15 +173,12 @@ export default function EventPage({ params }: Props) {
 
       {show.img && (
         <div className="mb-12 overflow-hidden rounded-3xl border border-zinc-800">
-
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={show.img}
             alt={`${show.artist} at Red Rocks`}
             className="w-full h-[320px] object-cover"
             loading="eager"
           />
-
         </div>
       )}
 
@@ -158,9 +193,8 @@ export default function EventPage({ params }: Props) {
         <p className="text-zinc-300 leading-relaxed text-base">
 
           {show.operational?.bio ||
-            `This ${show.artist} performance is expected to draw strong demand. 
-            Plan to arrive early and secure transportation in advance to avoid
-            parking congestion, surge pricing, and long exit delays.`}
+            `This ${show.artist} performance is expected to draw strong demand.
+            Plan to arrive early and secure transportation in advance.`}
 
         </p>
 
