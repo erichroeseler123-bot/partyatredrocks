@@ -29,14 +29,15 @@ export async function generateStaticParams() {
 }
 
 /* ================================
-   SLUG NORMALIZER
+   STRING HELPERS (SAFE)
 ================================ */
 
-function normalizeSlug(input: string) {
-  return input
-    .toLowerCase()
-    .trim()
-    .replace(/\/+$/, "");
+function safe(str?: string) {
+  return (str || "").toLowerCase().trim();
+}
+
+function normalize(str?: string) {
+  return safe(str).replace(/[^a-z0-9]+/g, "-");
 }
 
 /* ================================
@@ -44,31 +45,37 @@ function normalizeSlug(input: string) {
 ================================ */
 
 function resolveShow(rawSlug: string): Show | undefined {
-  const slug = normalizeSlug(rawSlug);
+  const slug = normalize(rawSlug);
 
-  /* 1. Exact match */
-  let match = shows2026.find((s) => s.slug === slug);
-  if (match) return match;
-
-  /* 2. Prefix match (legacy / base) */
-  match = shows2026.find((s) => s.slug.startsWith(slug + "-"));
-  if (match) return match;
-
-  /* 3. Reverse prefix (user hit long version) */
-  match = shows2026.find((s) => slug.startsWith(s.slug + "-"));
-  if (match) return match;
-
-  /* 4. Artist-based fallback */
-  const byArtist = shows2026.filter((s) =>
-    s.artist
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .includes(slug)
+  /* 1. Exact slug */
+  let match = shows2026.find(
+    (s) => normalize(s.slug) === slug
   );
+  if (match) return match;
+
+  /* 2. Prefix slug */
+  match = shows2026.find(
+    (s) => normalize(s.slug).startsWith(slug + "-")
+  );
+  if (match) return match;
+
+  /* 3. Reverse prefix */
+  match = shows2026.find(
+    (s) => slug.startsWith(normalize(s.slug) + "-")
+  );
+  if (match) return match;
+
+  /* 4. Artist fallback (SAFE) */
+  const byArtist = shows2026.filter((s) => {
+    const artist = normalize(s.artist);
+    return artist && artist.includes(slug);
+  });
 
   if (byArtist.length) {
     return byArtist.sort(
-      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+      (a, b) =>
+        new Date(a.date || 0).getTime() -
+        new Date(b.date || 0).getTime()
     )[0];
   }
 
@@ -93,11 +100,13 @@ export async function generateMetadata(
     year: "numeric",
   });
 
-  const title = `${show.artist} at Red Rocks — ${date}`;
+  const title = `${show.artist || "Concert"} at Red Rocks — ${date}`;
 
   const description =
     show.operational?.bio ||
-    `Transportation and concert guide for ${show.artist} at Red Rocks Amphitheatre on ${date}. Shuttle service, parking tips, and arrival planning.`;
+    `Transportation and concert guide for ${
+      show.artist || "this show"
+    } at Red Rocks Amphitheatre on ${date}. Shuttle service, parking tips, and arrival planning.`;
 
   return {
     title,
@@ -156,7 +165,7 @@ export default function EventPage({ params }: Props) {
       <header className="mb-12">
 
         <h1 className="text-4xl md:text-5xl font-black uppercase italic tracking-tight mb-4">
-          {show.artist}
+          {show.artist || "Live at Red Rocks"}
         </h1>
 
         <p className="text-red-600 font-bold uppercase tracking-widest text-sm mb-3">
@@ -175,7 +184,7 @@ export default function EventPage({ params }: Props) {
         <div className="mb-12 overflow-hidden rounded-3xl border border-zinc-800">
           <img
             src={show.img}
-            alt={`${show.artist} at Red Rocks`}
+            alt={`${show.artist || "Concert"} at Red Rocks`}
             className="w-full h-[320px] object-cover"
             loading="eager"
           />
@@ -193,7 +202,9 @@ export default function EventPage({ params }: Props) {
         <p className="text-zinc-300 leading-relaxed text-base">
 
           {show.operational?.bio ||
-            `This ${show.artist} performance is expected to draw strong demand.
+            `This ${
+              show.artist || "event"
+            } is expected to draw strong demand.
             Plan to arrive early and secure transportation in advance.`}
 
         </p>
