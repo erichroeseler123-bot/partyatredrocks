@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -17,22 +17,27 @@ type Props = {
 };
 
 /* ================================
-   PRECOMPUTE LOOKUP MAP (FAST + SAFE)
-================================ */
-
-// Build once at load time
-const SHOW_MAP = new Map<string, Show>(
-  shows2026.map((s) => [s.slug, s])
-);
-
-/* ================================
-   STATIC GENERATION
+   BUILD STATIC PAGES
 ================================ */
 
 export async function generateStaticParams() {
   return shows2026.map((show) => ({
     slug: show.slug,
   }));
+}
+
+/* ================================
+   HELPER: FIND BY BASE SLUG
+   (for legacy URLs)
+================================ */
+
+function findByLegacySlug(slug: string): Show | undefined {
+  return shows2026.find((s) => {
+    if (s.slug === slug) return true;
+
+    // Match base slug without date
+    return s.slug.startsWith(slug + "-");
+  });
 }
 
 /* ================================
@@ -43,59 +48,38 @@ export async function generateMetadata(
   { params }: Props
 ): Promise<Metadata> {
 
-  const show = SHOW_MAP.get(params.slug);
+  const show = findByLegacySlug(params.slug);
 
-  if (!show) {
-    return {
-      title: "Event Not Found | Party at Red Rocks",
-      robots: { index: false, follow: false },
-    };
-  }
+  if (!show) return {};
 
-  const dateText = new Date(show.date).toLocaleDateString("en-US", {
+  const date = new Date(show.date).toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
     year: "numeric",
   });
 
-  const title = `${show.artist} at Red Rocks — ${dateText}`;
+  const title = `${show.artist} at Red Rocks — ${date}`;
 
   const description =
     show.operational?.bio ||
-    `Concert transportation and planning guide for ${show.artist} at Red Rocks Amphitheatre on ${dateText}. Shuttle service, parking tips, and arrival strategy.`;
-
-  const image = show.img || "/og/default-red-rocks.jpg";
-
-  const url = `https://www.partyatredrocks.com/guide/events/${show.slug}`;
+    `Transportation and concert guide for ${show.artist} at Red Rocks Amphitheatre on ${date}. Shuttle service, parking tips, and arrival planning.`;
 
   return {
     title,
     description,
 
-    alternates: {
-      canonical: url,
-    },
-
     openGraph: {
       title,
       description,
-      url,
       type: "article",
-      images: [
-        {
-          url: image,
-          width: 1200,
-          height: 630,
-          alt: title,
-        },
-      ],
+      images: show.img ? [show.img] : [],
     },
 
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [image],
+      images: show.img ? [show.img] : [],
     },
   };
 }
@@ -106,13 +90,20 @@ export async function generateMetadata(
 
 export default function EventPage({ params }: Props) {
 
-  const show = SHOW_MAP.get(params.slug);
+  const show = findByLegacySlug(params.slug);
 
   if (!show) {
     notFound();
   }
 
-  const formattedDate = new Date(show.date).toLocaleDateString("en-US", {
+  /* 🔁 AUTO REDIRECT OLD SLUGS */
+  if (show.slug !== params.slug) {
+    redirect(`/guide/events/${show.slug}`);
+  }
+
+  const date = new Date(show.date);
+
+  const formattedDate = date.toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
     year: "numeric",
@@ -139,7 +130,7 @@ export default function EventPage({ params }: Props) {
 
       </header>
 
-      {/* ================= HERO IMAGE ================= */}
+      {/* ================= HERO ================= */}
 
       {show.img && (
         <div className="mb-12 overflow-hidden rounded-3xl border border-zinc-800">
@@ -155,7 +146,7 @@ export default function EventPage({ params }: Props) {
         </div>
       )}
 
-      {/* ================= INTELLIGENCE ================= */}
+      {/* ================= INTEL ================= */}
 
       <section className="bg-zinc-900/60 border border-zinc-800 rounded-3xl p-8 mb-14">
 
@@ -166,7 +157,7 @@ export default function EventPage({ params }: Props) {
         <p className="text-zinc-300 leading-relaxed text-base">
 
           {show.operational?.bio ||
-            `This ${show.artist} performance is expected to draw strong demand.
+            `This ${show.artist} performance is expected to draw strong demand. 
             Plan to arrive early and secure transportation in advance to avoid
             parking congestion, surge pricing, and long exit delays.`}
 
