@@ -1,4 +1,4 @@
-window.RED_ROCKS_2026 = [
+export const shows2026 = [
   {
     "slug": "crankdat-with-dr-fresch-smoakland-capochino-and-hershe",
     "artist": "Crankdat",
