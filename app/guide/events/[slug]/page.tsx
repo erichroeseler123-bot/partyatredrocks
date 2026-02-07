@@ -19,71 +19,118 @@ type Props = {
 };
 
 /* ================================
+   PREBUILD INDEXES (FAST + SAFE)
+================================ */
+
+const showMap = new Map<string, Show>();
+const normalizedMap = new Map<string, Show[]>();
+
+function normalize(input = "") {
+  return input
+    .toLowerCase()
+    .trim()
+    .replace(/\/+$/, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+for (const show of shows2026) {
+  if (!show?.slug) continue;
+
+  // Exact map
+  showMap.set(show.slug, show);
+
+  // Normalized index
+  const key = normalize(show.slug);
+
+  if (!normalizedMap.has(key)) {
+    normalizedMap.set(key, []);
+  }
+
+  normalizedMap.get(key)!.push(show);
+}
+
+/* ================================
    STATIC GENERATION
 ================================ */
 
 export async function generateStaticParams() {
-  return shows2026.map((show) => ({
-    slug: show.slug,
-  }));
+  return Array.from(showMap.keys()).map((slug) => ({ slug }));
 }
 
 /* ================================
-   STRING HELPERS (SAFE)
+   SLUG RESOLVER (DETERMINISTIC)
 ================================ */
 
-function safe(str?: string) {
-  return (str || "").toLowerCase().trim();
-}
+function resolveShow(raw: string): Show | undefined {
+  const slug = normalize(raw);
 
-function normalize(str?: string) {
-  return safe(str).replace(/[^a-z0-9]+/g, "-");
-}
+  /* -------------------------------------------------
+     1. Exact match (authoritative)
+  ------------------------------------------------- */
 
-/* ================================
-   CANONICAL SHOW RESOLVER
-================================ */
+  const exact = showMap.get(slug);
+  if (exact) return exact;
 
-function resolveShow(rawSlug: string): Show | undefined {
-  const slug = normalize(rawSlug);
+  /* -------------------------------------------------
+     2. Normalized exact (handles weird chars)
+  ------------------------------------------------- */
 
-  /* 1. Exact slug */
-  let match = shows2026.find(
-    (s) => normalize(s.slug) === slug
+  const normalized = normalizedMap.get(slug);
+  if (normalized?.length) {
+    return pickCanonical(normalized);
+  }
+
+  /* -------------------------------------------------
+     3. Safe prefix match
+  ------------------------------------------------- */
+
+  const prefixMatches = shows2026.filter(
+    (s) =>
+      normalize(s.slug).startsWith(slug + "-") ||
+      slug.startsWith(normalize(s.slug) + "-")
   );
-  if (match) return match;
 
-  /* 2. Prefix slug */
-  match = shows2026.find(
-    (s) => normalize(s.slug).startsWith(slug + "-")
-  );
-  if (match) return match;
+  if (prefixMatches.length) {
+    return pickCanonical(prefixMatches);
+  }
 
-  /* 3. Reverse prefix */
-  match = shows2026.find(
-    (s) => slug.startsWith(normalize(s.slug) + "-")
-  );
-  if (match) return match;
+  /* -------------------------------------------------
+     4. Artist match (last resort)
+  ------------------------------------------------- */
 
-  /* 4. Artist fallback (SAFE) */
-  const byArtist = shows2026.filter((s) => {
-    const artist = normalize(s.artist);
-    return artist && artist.includes(slug);
+  const artistSlug = slug.replace(/-?\d+day-pass.*$/, "");
+
+  const artistMatches = shows2026.filter((s) => {
+    if (!s.artist) return false;
+
+    const a = normalize(s.artist);
+
+    return a === artistSlug || a.includes(artistSlug);
   });
 
-  if (byArtist.length) {
-    return byArtist.sort(
-      (a, b) =>
-        new Date(a.date || 0).getTime() -
-        new Date(b.date || 0).getTime()
-    )[0];
+  if (artistMatches.length) {
+    return pickCanonical(artistMatches);
   }
 
   return undefined;
 }
 
 /* ================================
-   SEO METADATA
+   CANONICAL PICKER
+================================ */
+
+function pickCanonical(list: Show[]): Show {
+  // Always pick earliest date = canonical
+  return list
+    .slice()
+    .sort(
+      (a, b) => +new Date(a.date) - +new Date(b.date)
+    )[0];
+}
+
+/* ================================
+   SEO
 ================================ */
 
 export async function generateMetadata(
@@ -100,13 +147,11 @@ export async function generateMetadata(
     year: "numeric",
   });
 
-  const title = `${show.artist || "Concert"} at Red Rocks — ${date}`;
+  const title = `${show.artist} at Red Rocks — ${date}`;
 
   const description =
-    show.operational?.bio ||
-    `Transportation and concert guide for ${
-      show.artist || "this show"
-    } at Red Rocks Amphitheatre on ${date}. Shuttle service, parking tips, and arrival planning.`;
+    show.operational?.bio ??
+    `Transportation and concert guide for ${show.artist} at Red Rocks Amphitheatre on ${date}. Shuttle service, parking tips, and arrival planning.`;
 
   return {
     title,
@@ -144,8 +189,8 @@ export default function EventPage({ params }: Props) {
     notFound();
   }
 
-  /* 🔁 CANONICAL REDIRECT */
-  if (show.slug !== params.slug) {
+  /* Canonical redirect */
+  if (normalize(params.slug) !== normalize(show.slug)) {
     redirect(`/guide/events/${show.slug}`);
   }
 
@@ -160,15 +205,15 @@ export default function EventPage({ params }: Props) {
   return (
     <main className="max-w-4xl mx-auto px-6 py-24 text-white">
 
-      {/* ================= HEADER ================= */}
+      {/* HEADER */}
 
       <header className="mb-12">
 
-        <h1 className="text-4xl md:text-5xl font-black uppercase italic tracking-tight mb-4">
-          {show.artist || "Live at Red Rocks"}
+        <h1 className="text-4xl md:text-5xl font-black uppercase italic mb-4">
+          {show.artist}
         </h1>
 
-        <p className="text-red-600 font-bold uppercase tracking-widest text-sm mb-3">
+        <p className="text-red-600 font-bold uppercase text-sm mb-3">
           {formattedDate}
         </p>
 
@@ -178,53 +223,51 @@ export default function EventPage({ params }: Props) {
 
       </header>
 
-      {/* ================= HERO ================= */}
+      {/* HERO */}
 
       {show.img && (
         <div className="mb-12 overflow-hidden rounded-3xl border border-zinc-800">
           <img
             src={show.img}
-            alt={`${show.artist || "Concert"} at Red Rocks`}
+            alt={`${show.artist} at Red Rocks`}
             className="w-full h-[320px] object-cover"
             loading="eager"
           />
         </div>
       )}
 
-      {/* ================= INTEL ================= */}
+      {/* INTEL */}
 
       <section className="bg-zinc-900/60 border border-zinc-800 rounded-3xl p-8 mb-14">
 
-        <h2 className="text-xl font-black uppercase mb-4 tracking-tight">
+        <h2 className="text-xl font-black uppercase mb-4">
           Show Intelligence
         </h2>
 
-        <p className="text-zinc-300 leading-relaxed text-base">
+        <p className="text-zinc-300 leading-relaxed">
 
-          {show.operational?.bio ||
-            `This ${
-              show.artist || "event"
-            } is expected to draw strong demand.
+          {show.operational?.bio ??
+            `This ${show.artist} performance is expected to draw strong demand. 
             Plan to arrive early and secure transportation in advance.`}
 
         </p>
 
       </section>
 
-      {/* ================= CTA ================= */}
+      {/* CTA */}
 
       <section className="flex flex-col sm:flex-row gap-4">
 
         <Link
           href="/book-shuttle"
-          className="px-7 py-3 bg-red-600 hover:bg-red-700 transition font-black uppercase text-sm tracking-widest rounded-full text-center"
+          className="px-7 py-3 bg-red-600 hover:bg-red-700 font-black uppercase text-sm rounded-full text-center"
         >
           Book Shuttle
         </Link>
 
         <Link
           href="/guide/events/2026-season-preview"
-          className="px-7 py-3 border border-zinc-700 hover:border-zinc-500 transition font-black uppercase text-sm tracking-widest rounded-full text-center"
+          className="px-7 py-3 border border-zinc-700 hover:border-zinc-500 font-black uppercase text-sm rounded-full text-center"
         >
           View Full Season
         </Link>
