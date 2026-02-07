@@ -2,23 +2,13 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 
-import { shows2026 } from "@/public/data/shows-2026";
+import { shows2026 } from "@/lib/shows-2026";
 
 /* ================================
    TYPES
 ================================ */
 
-type Show = {
-  slug: string;
-  artist: string;
-  date: string;
-  venue: string;
-  img?: string;
-
-  operational?: {
-    bio?: string;
-  };
-};
+type Show = (typeof shows2026)[number];
 
 type Props = {
   params: {
@@ -27,11 +17,20 @@ type Props = {
 };
 
 /* ================================
+   PRECOMPUTE LOOKUP MAP (FAST + SAFE)
+================================ */
+
+// Build once at load time
+const SHOW_MAP = new Map<string, Show>(
+  shows2026.map((s) => [s.slug, s])
+);
+
+/* ================================
    STATIC GENERATION
 ================================ */
 
 export async function generateStaticParams() {
-  return shows2026.map((show: Show) => ({
+  return shows2026.map((show) => ({
     slug: show.slug,
   }));
 }
@@ -44,40 +43,59 @@ export async function generateMetadata(
   { params }: Props
 ): Promise<Metadata> {
 
-  const show = shows2026.find(
-    (s: Show) => s.slug === params.slug
-  );
+  const show = SHOW_MAP.get(params.slug);
 
-  if (!show) return {};
+  if (!show) {
+    return {
+      title: "Event Not Found | Party at Red Rocks",
+      robots: { index: false, follow: false },
+    };
+  }
 
-  const date = new Date(show.date).toLocaleDateString("en-US", {
+  const dateText = new Date(show.date).toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
     year: "numeric",
   });
 
-  const title = `${show.artist} at Red Rocks — ${date}`;
+  const title = `${show.artist} at Red Rocks — ${dateText}`;
 
   const description =
     show.operational?.bio ||
-    `Transportation and concert guide for ${show.artist} at Red Rocks Amphitheatre on ${date}. Shuttle service, parking tips, and arrival planning.`;
+    `Concert transportation and planning guide for ${show.artist} at Red Rocks Amphitheatre on ${dateText}. Shuttle service, parking tips, and arrival strategy.`;
+
+  const image = show.img || "/og/default-red-rocks.jpg";
+
+  const url = `https://www.partyatredrocks.com/guide/events/${show.slug}`;
 
   return {
     title,
     description,
 
+    alternates: {
+      canonical: url,
+    },
+
     openGraph: {
       title,
       description,
+      url,
       type: "article",
-      images: show.img ? [show.img] : [],
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
     },
 
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: show.img ? [show.img] : [],
+      images: [image],
     },
   };
 }
@@ -88,17 +106,13 @@ export async function generateMetadata(
 
 export default function EventPage({ params }: Props) {
 
-  const show = shows2026.find(
-    (s: Show) => s.slug === params.slug
-  );
+  const show = SHOW_MAP.get(params.slug);
 
   if (!show) {
     notFound();
   }
 
-  const date = new Date(show.date);
-
-  const formattedDate = date.toLocaleDateString("en-US", {
+  const formattedDate = new Date(show.date).toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
     year: "numeric",
@@ -152,7 +166,7 @@ export default function EventPage({ params }: Props) {
         <p className="text-zinc-300 leading-relaxed text-base">
 
           {show.operational?.bio ||
-            `This ${show.artist} performance is expected to draw strong demand. 
+            `This ${show.artist} performance is expected to draw strong demand.
             Plan to arrive early and secure transportation in advance to avoid
             parking congestion, surge pricing, and long exit delays.`}
 
@@ -165,7 +179,7 @@ export default function EventPage({ params }: Props) {
       <section className="flex flex-col sm:flex-row gap-4">
 
         <Link
-          href="/"
+          href="/book-shuttle"
           className="px-7 py-3 bg-red-600 hover:bg-red-700 transition font-black uppercase text-sm tracking-widest rounded-full text-center"
         >
           Book Shuttle
