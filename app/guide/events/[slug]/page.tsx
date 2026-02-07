@@ -1,108 +1,95 @@
-import { Metadata } from 'next';
-import { getRedRocksEvents } from '@/lib/events';
-import { getEventSchema } from '@/lib/schema';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import RelatedGuides from '@/components/RelatedGuides';
+import Link from "next/link";
 
-interface Props {
+type Show = {
+  slug: string;
+  artist: string;
+  date: string;
+  venue: string;
+  img?: string;
+};
+
+async function getShows(): Promise<Show[]> {
+  const res = await fetch(
+    "https://www.partyatredrocks.com/data/shows-2026.js",
+    { cache: "no-store" }
+  );
+
+  const text = await res.text();
+
+  // Extract JSON from: window.RED_ROCKS_2026 = [...]
+  const json = text.replace("window.RED_ROCKS_2026 = ", "").replace(/;$/, "");
+
+  return JSON.parse(json);
+}
+
+export default async function ShowPage({
+  params,
+}: {
   params: { slug: string };
-}
+}) {
+  const shows = await getShows();
 
-export async function generateStaticParams() {
-  const events = await getRedRocksEvents();
-  return events.map((event) => ({
-    slug: event.slug,
-  }));
-}
+  const show = shows.find((s) => s.slug === params.slug);
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const events = await getRedRocksEvents();
-  const event = events.find((e) => e.slug === params.slug);
-  if (!event) return { title: 'Event Not Found' };
+  if (!show) {
+    return (
+      <div className="max-w-4xl mx-auto px-6 py-24 text-white text-center">
+        <h1 className="text-3xl font-black mb-6">Show Not Found</h1>
 
-  return {
-    title: `${event.artist} Red Rocks Shuttle 2026 | No-Surge Pricing`,
-    description: `Book your $55 round-trip shuttle for ${event.artist}. Top Circle drop-off included.`,
-  };
-}
+        <Link
+          href="/guide/events/2026-season-preview"
+          className="text-red-500 underline"
+        >
+          ← Back to 2026 Season
+        </Link>
+      </div>
+    );
+  }
 
-export default async function EventPage({ params }: Props) {
-  const events = await getRedRocksEvents();
-  const event = events.find((e) => e.slug === params.slug);
-  if (!event) notFound();
-
-  const schema = getEventSchema(event);
+  const date = new Date(show.date);
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-16">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-      />
+    <div className="max-w-4xl mx-auto px-6 py-24 text-white">
 
-      <div className="mb-8">
-        <Link href="/guide" className="text-red-700 hover:underline flex items-center gap-2">
-          ← Back to Venue Intelligence Hub
-        </Link>
+      {/* Back */}
+      <Link
+        href="/guide/events/2026-season-preview"
+        className="text-zinc-500 text-sm hover:text-red-500"
+      >
+        ← Back to Season
+      </Link>
+
+      {/* Date */}
+      <p className="mt-6 text-red-500 font-mono uppercase tracking-widest text-xs">
+        {date.toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        })}
+      </p>
+
+      {/* Artist */}
+      <h1 className="text-5xl font-black italic uppercase mt-4">
+        {show.artist}
+      </h1>
+
+      {/* Venue */}
+      <p className="mt-4 text-zinc-400">
+        {show.venue}
+      </p>
+
+      {/* CTA */}
+      <div className="mt-12">
+
+        <a
+          href="/book"
+          className="inline-block px-8 py-4 bg-red-600 text-black font-black rounded-full hover:bg-red-500 transition"
+        >
+          Book Shuttle
+        </a>
+
       </div>
 
-      <header className="mb-12">
-        <span className="text-red-700 font-bold uppercase tracking-widest text-sm">
-          {new Date(event.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
-        </span>
-        <h1 className="text-5xl font-black mt-2 mb-6 text-slate-900 uppercase italic tracking-tighter">
-          {event.artist} <span className="text-slate-400">@</span> Red Rocks
-        </h1>
-        <p className="text-xl text-slate-600 leading-relaxed max-w-2xl">
-          {event.description} Prepare for the 2026 tour stop with our professional shuttle and logistics intelligence.
-        </p>
-      </header>
-
-      <div className="grid md:grid-cols-2 gap-8 mb-16">
-        <div className="bg-slate-50 p-8 rounded-3xl border border-slate-200">
-          <h3 className="text-red-700 font-bold mb-4 uppercase text-sm tracking-tighter">Shuttle Timing</h3>
-          <ul className="space-y-4">
-            <li className="flex justify-between border-b pb-2 text-slate-700">
-              <span className="font-medium">Denver Pickup (Sheraton)</span>
-              <span className="font-bold">{event.pickupDenver || '5:00'} PM</span>
-            </li>
-            <li className="flex justify-between border-b pb-2 text-slate-700">
-              <span className="font-medium">Golden Pickup (Trailhead)</span>
-              <span className="font-bold">{event.pickupGolden || '5:45'} PM</span>
-            </li>
-            <li className="flex justify-between text-xs text-slate-400 font-bold uppercase tracking-widest pt-2">
-              <span>Return Departure</span>
-              <span>30 Min Post-Encore</span>
-            </li>
-          </ul>
-        </div>
-
-        <div className="bg-slate-900 text-white p-8 rounded-3xl shadow-xl">
-          <h3 className="text-red-400 font-bold mb-4 uppercase text-sm tracking-tighter text-left">Pro Intelligence</h3>
-          <p className="text-sm mb-4 italic leading-relaxed text-zinc-300 text-left">
-            &quot;For {event.artist}, expect high merchandise lines at the new South Merch stand. We recommend heading in 45 minutes before set time.&quot;
-          </p>
-          <div className="text-xs text-slate-500 font-bold uppercase tracking-widest text-left">Verified Feed</div>
-        </div>
-      </div>
-
-      <div className="bg-red-700 text-white p-12 rounded-3xl text-center shadow-2xl">
-        <h2 className="text-white text-3xl font-black mb-4 italic uppercase">Save Your Seat</h2>
-        <p className="text-xl mb-8 text-red-100 leading-relaxed">
-          Average Uber surge for {event.artist} is projected at $165+. 
-          Our fixed-rate $55 shuttle includes <strong>Top Circle Drop-off</strong>.
-        </p>
-        <Link href="/book-shuttle" className="inline-block bg-white text-red-700 px-12 py-4 rounded-full font-black text-xl hover:scale-105 transition transform shadow-lg no-underline">
-          Book Round-Trip Shuttle
-        </Link>
-      </div>
-
-      <RelatedGuides currentSlug={params.slug} />
-
-      <footer className="mt-20 pt-8 border-t text-sm text-slate-400 italic">
-        * Set times and logistics subject to venue changes. Party at Red Rocks is a Tier-1 PUC operator .
-      </footer>
     </div>
   );
 }
