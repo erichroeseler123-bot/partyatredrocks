@@ -14,26 +14,33 @@ type Show = {
 
 declare global {
   interface Window {
-    RED_ROCKS_2026: Show[];
+    RED_ROCKS_2026?: Show[];
   }
 }
 
 export default function SeasonPreview() {
   const [shows, setShows] = useState<Show[]>([]);
+  const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => {
+  // Read data after script loads
+  const loadShows = () => {
     if (window.RED_ROCKS_2026 && window.RED_ROCKS_2026.length) {
       setShows(window.RED_ROCKS_2026);
+      setLoaded(true);
     }
+  };
+
+  useEffect(() => {
+    loadShows();
   }, []);
 
   return (
     <>
-      {/* Load generated data */}
-      <Script
-        src="/shows-2026.js"
-        strategy="beforeInteractive"
-      />
+      {/* Load generated data from /public */}
+<Script
+  src="/data/shows-2026.js"
+  strategy="beforeInteractive"
+/>
 
       <div className="max-w-4xl mx-auto px-6 py-20 bg-black text-white">
 
@@ -53,9 +60,15 @@ export default function SeasonPreview() {
 
         <div className="grid gap-6 mb-16">
 
-          {shows.length === 0 && (
+          {!loaded && (
             <p className="text-zinc-500 text-center">
               Loading season data…
+            </p>
+          )}
+
+          {loaded && shows.length === 0 && (
+            <p className="text-zinc-500 text-center">
+              No shows found.
             </p>
           )}
 
