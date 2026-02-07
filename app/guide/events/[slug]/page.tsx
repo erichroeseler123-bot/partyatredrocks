@@ -19,11 +19,8 @@ type Props = {
 };
 
 /* ================================
-   PREBUILD INDEXES (FAST + SAFE)
+   NORMALIZER
 ================================ */
-
-const showMap = new Map<string, Show>();
-const normalizedMap = new Map<string, Show[]>();
 
 function normalize(input = "") {
   return input
@@ -34,20 +31,36 @@ function normalize(input = "") {
     .replace(/(^-|-$)/g, "");
 }
 
-for (const show of shows2026) {
-  if (!show?.slug) continue;
+/* ================================
+   PREBUILD INDEXES
+================================ */
 
-  // Exact map
-  showMap.set(show.slug, show);
+const showMap = new Map<string, Show>();
+const normalizedMap = new Map<string, Show[]>();
+const artistMap = new Map<string, Show[]>();
 
-  // Normalized index
-  const key = normalize(show.slug);
+for (let i = 0; i < shows2026.length; i++) {
+  const show = shows2026[i];
 
-  if (!normalizedMap.has(key)) {
-    normalizedMap.set(key, []);
+  if (!show?.slug || !show?.artist) continue;
+
+  const slug = normalize(show.slug);
+  const artist = normalize(show.artist);
+
+  // Exact
+  showMap.set(slug, show);
+
+  // Normalized
+  if (!normalizedMap.has(slug)) {
+    normalizedMap.set(slug, []);
   }
+  normalizedMap.get(slug)!.push(show);
 
-  normalizedMap.get(key)!.push(show);
+  // Artist
+  if (!artistMap.has(artist)) {
+    artistMap.set(artist, []);
+  }
+  artistMap.get(artist)!.push(show);
 }
 
 /* ================================
@@ -59,74 +72,80 @@ export async function generateStaticParams() {
 }
 
 /* ================================
-   SLUG RESOLVER (DETERMINISTIC)
+   CANONICAL PICKER
+================================ */
+
+function pickCanonical(list: Show[]): Show {
+  return list
+    .slice()
+    .sort(function (a, b) {
+      return +new Date(a.date) - +new Date(b.date);
+    })[0];
+}
+
+/* ================================
+   RESOLVER
 ================================ */
 
 function resolveShow(raw: string): Show | undefined {
   const slug = normalize(raw);
 
-  /* -------------------------------------------------
-     1. Exact match (authoritative)
-  ------------------------------------------------- */
+  /* 1. Exact */
 
   const exact = showMap.get(slug);
   if (exact) return exact;
 
-  /* -------------------------------------------------
-     2. Normalized exact (handles weird chars)
-  ------------------------------------------------- */
+  /* 2. Normalized */
 
   const normalized = normalizedMap.get(slug);
-  if (normalized?.length) {
+  if (normalized && normalized.length) {
     return pickCanonical(normalized);
   }
 
-  /* -------------------------------------------------
-     3. Safe prefix match
-  ------------------------------------------------- */
-
-  const prefixMatches = shows2026.filter(
-    (s) =>
-      normalize(s.slug).startsWith(slug + "-") ||
-      slug.startsWith(normalize(s.slug) + "-")
-  );
-
-  if (prefixMatches.length) {
-    return pickCanonical(prefixMatches);
-  }
-
-  /* -------------------------------------------------
-     4. Artist match (last resort)
-  ------------------------------------------------- */
+  /* 3. Artist direct */
 
   const artistSlug = slug.replace(/-?\d+day-pass.*$/, "");
 
-  const artistMatches = shows2026.filter((s) => {
-    if (!s.artist) return false;
+  const direct = artistMap.get(artistSlug);
 
-    const a = normalize(s.artist);
+  if (direct && direct.length) {
+    return pickCanonical(direct);
+  }
 
-    return a === artistSlug || a.includes(artistSlug);
-  });
+  /* 4. Artist partial (ES5 safe) */
 
-  if (artistMatches.length) {
-    return pickCanonical(artistMatches);
+  const entries = Array.from(artistMap);
+
+  for (let i = 0; i < entries.length; i++) {
+    const artist = entries[i][0];
+    const shows = entries[i][1];
+
+    if (artist.indexOf(artistSlug) !== -1) {
+      return pickCanonical(shows);
+    }
+  }
+
+  /* 5. Prefix fallback */
+
+  const prefix = [];
+
+  for (let i = 0; i < shows2026.length; i++) {
+    const s = shows2026[i];
+    const sSlug = normalize(s.slug);
+
+    if (
+      sSlug.indexOf(slug + "-") === 0 ||
+      slug.indexOf(sSlug + "-") === 0
+    ) {
+      prefix.push(s);
+    }
+  }
+
+  if (prefix.length) {
+    return pickCanonical(prefix);
   }
 
   return undefined;
-}
-
-/* ================================
-   CANONICAL PICKER
-================================ */
-
-function pickCanonical(list: Show[]): Show {
-  // Always pick earliest date = canonical
-  return list
-    .slice()
-    .sort(
-      (a, b) => +new Date(a.date) - +new Date(b.date)
-    )[0];
 }
 
 /* ================================
@@ -147,18 +166,22 @@ export async function generateMetadata(
     year: "numeric",
   });
 
-  const title = `${show.artist} at Red Rocks — ${date}`;
+  const title = show.artist + " at Red Rocks — " + date;
 
   const description =
-    show.operational?.bio ??
-    `Transportation and concert guide for ${show.artist} at Red Rocks Amphitheatre on ${date}. Shuttle service, parking tips, and arrival planning.`;
+    show.operational?.bio ||
+    "Transportation and concert guide for " +
+      show.artist +
+      " at Red Rocks Amphitheatre on " +
+      date +
+      ".";
 
   return {
     title,
     description,
 
     alternates: {
-      canonical: `/guide/events/${show.slug}`,
+      canonical: "/guide/events/" + show.slug,
     },
 
     openGraph: {
@@ -190,13 +213,12 @@ export default function EventPage({ params }: Props) {
   }
 
   /* Canonical redirect */
+
   if (normalize(params.slug) !== normalize(show.slug)) {
-    redirect(`/guide/events/${show.slug}`);
+    redirect("/guide/events/" + show.slug);
   }
 
-  const date = new Date(show.date);
-
-  const formattedDate = date.toLocaleDateString("en-US", {
+  const formattedDate = new Date(show.date).toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
     year: "numeric",
@@ -204,8 +226,6 @@ export default function EventPage({ params }: Props) {
 
   return (
     <main className="max-w-4xl mx-auto px-6 py-24 text-white">
-
-      {/* HEADER */}
 
       <header className="mb-12">
 
@@ -223,20 +243,16 @@ export default function EventPage({ params }: Props) {
 
       </header>
 
-      {/* HERO */}
-
       {show.img && (
         <div className="mb-12 overflow-hidden rounded-3xl border border-zinc-800">
           <img
             src={show.img}
-            alt={`${show.artist} at Red Rocks`}
+            alt={show.artist + " at Red Rocks"}
             className="w-full h-[320px] object-cover"
             loading="eager"
           />
         </div>
       )}
-
-      {/* INTEL */}
 
       <section className="bg-zinc-900/60 border border-zinc-800 rounded-3xl p-8 mb-14">
 
@@ -246,15 +262,15 @@ export default function EventPage({ params }: Props) {
 
         <p className="text-zinc-300 leading-relaxed">
 
-          {show.operational?.bio ??
-            `This ${show.artist} performance is expected to draw strong demand. 
-            Plan to arrive early and secure transportation in advance.`}
+          {show.operational?.bio ||
+            "This " +
+              show.artist +
+              " performance is expected to draw strong demand. " +
+              "Plan to arrive early and secure transportation in advance."}
 
         </p>
 
       </section>
-
-      {/* CTA */}
 
       <section className="flex flex-col sm:flex-row gap-4">
 
