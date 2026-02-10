@@ -1,34 +1,37 @@
 {
   "name": "partyatredrocks",
-  "version": "1.0.0",
+  "version": "1.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "sync": "node sync.js",
+    "sync:publish": "node sync.js && git add public/data/shows-2026.js && git commit -m \"Update 2026 show data\" && git push"
+  },
   "dependencies": {
-    "@google/generative-ai": "^0.24.1",
     "@next/third-parties": "^16.1.6",
     "@vercel/blob": "^2.0.0",
     "@vercel/edge-config": "^1.4.3",
-    "autoprefixer": "^10.4.23",
     "axios": "^1.7.7",
-    "eslint-config-next": "^16.1.1",
     "globby": "^16.1.0",
     "lucide-react": "^0.562.0",
     "mapbox-gl": "^3.18.0",
+    "react-map-gl": "^8.1.0",
     "next": "^16.1.1",
-    "postcss": "^8.5.6",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "react-map-gl": "^8.1.0",
     "swiper": "^11.1.14",
+    "postcss": "^8.5.6",
+    "autoprefixer": "^10.4.23",
     "tailwindcss": "^3.4.19"
   },
-"scripts": {
-  "dev": "next dev",
-  "build": "node sync.js && next build",
-  "start": "next start"
-  },
   "devDependencies": {
+    "@google/generative-ai": "^0.24.1",
     "@types/node": "25.0.6",
     "@types/react": "19.2.8",
     "tsx": "^4.21.0",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "eslint": "^9.0.0"
   }
 }
