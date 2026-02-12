@@ -29,12 +29,12 @@ export default function VenuePolicies() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <h1 className="text-4xl font-black mb-6">Red Rocks Rules: The Insider FAQ</h1>
       
-      <section className="mb-12">
+      <section className="mb-16">
         <h2 className="text-2xl font-bold mb-4 text-red-700">Alcohol & Tailgating</h2>
         <p className="mb-4">You can bring <strong>beer and wine</strong> into the parking lots for tailgating, but <strong>no glass</strong> and <strong>no kegs</strong>. Once you hit the gate, all alcohol must stay behind. You are allowed one factory-sealed non-alcoholic beverage (32oz or less) per person.</p>
       </section>
 
-      <section className="mb-12 bg-slate-50 p-8 rounded-2xl border">
+      <section className="mb-16 bg-slate-50 p-8 rounded-2xl border hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
         <h2 className="text-2xl font-bold mb-4">Cannabis & Smoking</h2>
         <p>Colorado law is clear: No public consumption. Security <em>will</em> eject you for smoking in the rows. If you must smoke, head to the <strong>designated rails</strong> on the North/South stairs. Pro-tip: Edibles are the common workaround for fans, but remember the high altitude triples the effect.</p>
       </section>

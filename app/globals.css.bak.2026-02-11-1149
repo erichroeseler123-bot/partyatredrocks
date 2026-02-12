@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ────────────────────────────────────────────────
+   Custom CSS Variables (Brand & Dark Mode System)
+───────────────────────────────────────────────── */
+:root {
+  /* Brand accents */
+  --accent: 255 90 31;       /* Red Rocks ember / orange-red */
+  --accent2: 64 170 255;     /* Electric blue */
+
+  /* Dark surface system */
+  --bg0: 7 9 12;             /* Deepest near-black */
+  --bg1: 12 14 18;           /* Base page/surface */
+  --bg2: 18 21 28;           /* Raised / card surface */
+
+  /* Text & borders */
+  --text: 245 247 255;       /* Near-white */
+  --muted: 170 176 190;      /* Subtle gray */
+  --border: 255 255 255;     /* Very faint white borders */
+}
+
+/* ────────────────────────────────────────────────
+   Global Page Background (Gradient Depth)
+───────────────────────────────────────────────── */
+html, body {
+  background:
+    radial-gradient(900px 600px at 15% 10%, rgba(var(--accent2), 0.16), transparent 60%),
+    radial-gradient(800px 520px at 85% 0%, rgba(var(--accent), 0.14), transparent 55%),
+    linear-gradient(180deg, rgb(var(--bg0)) 0%, rgb(var(--bg1)) 45%, rgb(var(--bg0)) 100%);
+  color: rgb(var(--text));
+  min-height: 100vh;
+}
+
+/* ────────────────────────────────────────────────
+   Utility Classes
+───────────────────────────────────────────────── */
+.bg-surface { 
+  background: rgba(var(--bg2), 0.55); 
+  backdrop-filter: blur(10px); 
+}
+.bg-surface-strong { 
+  background: rgba(var(--bg2), 0.78); 
+  backdrop-filter: blur(10px); 
+}
+.text-zinc-200 { 
+  color: rgba(var(--muted), 0.92); 
+}
+.border-soft { 
+  border: 1px solid rgba(var(--border), 0.08); 
+}
+.shadow-soft { 
+  box-shadow: 0 18px 50px rgba(0,0,0,0.45); 
+}
+
+/* Glow accents (use sparingly on cards/buttons) */
+.glow-accent {
+  box-shadow: 0 0 0 1px rgba(var(--accent), 0.18), 0 18px 60px rgba(var(--accent), 0.10);
+}
+.glow-accent2 {
+  box-shadow: 0 0 0 1px rgba(var(--accent2), 0.20), 0 18px 60px rgba(var(--accent2), 0.10);
+}
+
+/* Hide scrollbars cleanly (for tab bars, carousels) */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ────────────────────────────────────────────────
+   Reusable Components
+───────────────────────────────────────────────── */
+
+/* Pro Card — glassmorphic raised surface with hover lift */
+.card-pro {
+  @apply bg-surface-strong border-soft rounded-3xl p-6 md:p-8 shadow-soft overflow-hidden transition-all duration-300 hover:shadow-[0_25px_60px_rgba(0,0,0,0.55)] hover:-translate-y-1;
+}
+
+/* Consistent section wrapper — max-width + padding */
+.section-pro {
+  @apply max-w-5xl mx-auto px-6 py-16 md:py-20;
+}
+
+/* Primary CTA Button — red, bold, premium hover/focus */
+.btn-primary {
+  @apply bg-red-600 text-white font-black uppercase tracking-wide btn-primary transition-all duration-300 shadow-xl inline-flex items-center justify-center hover:bg-red-500 hover:shadow-2xl hover:scale-[1.03] active:scale-95 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 focus:ring-offset-black disabled:opacity-60 disabled:cursor-not-allowed;
+}
+
+/* Secondary CTA — outline style */
+.btn-secondary {
+  @apply border border-zinc-700 hover:border-zinc-500 text-white font-bold uppercase tracking-wide px-6 py-3 rounded-full transition-all duration-300 hover:bg-zinc-800/50 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:ring-offset-2 focus:ring-offset-black disabled:opacity-60 disabled:cursor-not-allowed;
+}
+
+/* ────────────────────────────────────────────────
+   Typography & Prose Overrides
+───────────────────────────────────────────────── */
+.prose {
+  @apply text-base md:text-lg leading-relaxed text-zinc-300 max-w-none;
+}
+
+.prose h1, .prose h2, .prose h3 {
+  @apply font-black uppercase tracking-tight text-white mb-6;
+}
+
+.prose p, .prose li {
+  @apply text-zinc-300 mb-4;
+}
+
+.prose a {
+  @apply text-red-500 hover:text-red-400 underline transition;
+}
+
+/* Reduce overuse of tiny mono text in main content */
+main :not(pre):not(code):not(.text-xs):not(.font-mono) {
+  @apply font-sans;
+}
+
+/* Better muted text contrast */
+.text-zinc-200 {
+  color: rgba(var(--muted), 0.95);
+}

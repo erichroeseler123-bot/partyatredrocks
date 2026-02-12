@@ -1,0 +1,84 @@
+"use client";
+
+// components/SiteNav.tsx
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+type Tab = {
+  label: string;
+  href: string;
+  accent?: "book";
+  match?: (path: string) => boolean;
+};
+
+const TABS: Tab[] = [
+  {
+    label: "Book",
+    href: "/book",
+    accent: "book",
+    match: (p) => p === "/book" || p.startsWith("/book-") || p.startsWith("/booking") || p.startsWith("/private-"),
+  },
+  { label: "This Week", href: "/week", match: (p) => p === "/week" || p.startsWith("/week/") },
+  { label: "Venues", href: "/venues", match: (p) => p === "/venues" || p.startsWith("/venues/") },
+  { label: "Intel", href: "/guide", match: (p) => p === "/guide" || p.startsWith("/guide/") },
+  { label: "Shuttles", href: "/shuttles", match: (p) => p === "/shuttles" || p.startsWith("/shuttles/") },
+];
+
+function isActive(tab: Tab, path: string) {
+  if (tab.match) return tab.match(path);
+  return path === tab.href;
+}
+
+export default function SiteNav() {
+  const pathname = usePathname() || "/";
+
+  return (
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-black/90 backdrop-blur">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        {/* Top row: brand + primary CTA */}
+        <div className="h-14 flex items-center justify-between gap-4">
+          <Link href="/" className="text-white font-black uppercase tracking-widest whitespace-nowrap">
+            Party <span className="text-red-500">@</span> Red Rocks
+          </Link>
+
+          <Link
+            href="/book-shuttle"
+            className="shrink-0 btn-primary uppercase tracking-widest transition"
+          >
+            Book Shuttle
+          </Link>
+        </div>
+
+        {/* Tab bar: mobile-first, horizontal scroll */}
+        <nav className="pb-3">
+          <div className="flex gap-2 overflow-x-auto no-scrollbar -mx-1 px-1">
+            {TABS.map((t) => {
+              const active = isActive(t, pathname);
+              const base =
+                "whitespace-nowrap rounded-2xl px-4 py-2 text-[11px] font-black uppercase tracking-widest border transition";
+              const activeCls =
+                t.accent === "book"
+                  ? "bg-red-600 border-red-500 text-white"
+                  : "bg-white/10 border-white/20 text-white";
+              const idleCls =
+                t.accent === "book"
+                  ? "bg-red-600/10 border-red-600/30 text-red-200 hover:bg-red-600/20"
+                  : "bg-black/40 border-white/10 text-zinc-300 hover:border-white/25 hover:text-white";
+
+              return (
+                <Link key={t.href} href={t.href} className={`${base} ${active ? activeCls : idleCls}`}>
+                  {t.label}
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Small “status” microcopy (optional, keeps the vibe) */}
+          <div className="mt-2 text-[10px] text-zinc-500 font-mono uppercase tracking-widest">
+            Transport first. Intel supports ranking.
+          </div>
+        </nav>
+      </div>
+    </header>
+  );
+}

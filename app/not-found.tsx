@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-6 text-center">
+    <main className="min-h-screen bg-surface text-white flex flex-col items-center justify-center px-6 text-center">
       {/* Visual Error Code */}
       <h1 className="text-9xl font-black text-red-600 italic tracking-tighter mb-4">404</h1>
       
@@ -26,22 +26,22 @@ export default function NotFound() {
 
         {/* Recovery Links: Guiding users back to authority content */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12 text-left">
-          <Link href="/guide/logistics/parking-lots" className="p-4 border border-zinc-800 rounded-2xl hover:border-red-600 transition group">
+          <Link href="/guide/logistics/parking-lots" className="p-4 border border-white/10 rounded-2xl hover:border-red-600 transition group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
             <span className="block font-black uppercase text-red-600 group-hover:text-red-500">Parking Hacks</span>
             <span className="text-xs text-zinc-500">Avoid the 380-stair climb.</span>
           </Link>
           
-          <Link href="/guide/logistics/bag-policy" className="p-4 border border-zinc-800 rounded-2xl hover:border-red-600 transition group">
+          <Link href="/guide/logistics/bag-policy" className="p-4 border border-white/10 rounded-2xl hover:border-red-600 transition group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
             <span className="block font-black uppercase text-red-600 group-hover:text-red-500">2026 Bag Rules</span>
             <span className="text-xs text-zinc-500">New single-pocket policy.</span>
           </Link>
           
-          <Link href="/guide/local/denver-pickups" className="p-4 border border-zinc-800 rounded-2xl hover:border-red-600 transition group">
+          <Link href="/guide/local/denver-pickups" className="p-4 border border-white/10 rounded-2xl hover:border-red-600 transition group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
             <span className="block font-black uppercase text-red-600 group-hover:text-red-500">Denver Pickups</span>
             <span className="text-xs text-zinc-500">Sheraton Downtown hub.</span>
           </Link>
           
-          <Link href="/guide/logistics/sold-out-survival" className="p-4 border border-zinc-800 rounded-2xl hover:border-red-600 transition group">
+          <Link href="/guide/logistics/sold-out-survival" className="p-4 border border-white/10 rounded-2xl hover:border-red-600 transition group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
             <span className="block font-black uppercase text-red-600 group-hover:text-red-500">Sold-Out Survival</span>
             <span className="text-xs text-zinc-500">Beat the $150 Uber surge.</span>
           </Link>
@@ -49,7 +49,7 @@ export default function NotFound() {
 
         <Link 
           href="/" 
-          className="inline-block bg-red-600 text-white px-10 py-4 rounded-full font-black uppercase hover:bg-red-500 transition shadow-xl"
+          className="inline-block btn-primary uppercase hover:bg-red-500 transition shadow-xl"
         >
           Return to Homepage
         </Link>

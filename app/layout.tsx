@@ -1,52 +1,77 @@
-// app/layout.tsx
-import './globals.css'
-import type { Metadata } from 'next'
+import type { Metadata } from "next";
+import "./globals.css";
+import SiteNav from "@/components/SiteNav";
 
 export const metadata: Metadata = {
-  title: 'Party at Red Rocks',
-  description: 'Colorado\'s Premier Concert Transportation',
-}
+  metadataBase: new URL("https://www.partyatredrocks.com"),
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  const businessSchema = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Party at Red Rocks",
-    "url": "https://partyatredrocks.com",
-    "telephone": "+17203696292",
-    "priceRange": "$55-$499",
-    "image": "https://partyatredrocks.com/hero/hero-home.jpg",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Denver",
-      "addressRegion": "CO",
-      "postalCode": "80202",
-      "addressCountry": "US"
+  title: {
+    default: "Red Rocks Shuttle from Denver | $59 Seats + Private SUVs",
+    template: "%s | Party at Red Rocks",
+  },
+
+  description:
+    "Book reliable Red Rocks shuttle transportation from Denver. Fixed pricing, pro drivers, and guaranteed post-show return. Shuttle seats from $59/pp or Private Suburban from $499.",
+
+  alternates: {
+    canonical: "/",
+  },
+
+  keywords: [
+    "Red Rocks shuttle",
+    "Red Rocks transportation",
+    "Red Rocks shuttle from Denver",
+    "Red Rocks concert shuttle",
+    "Denver to Red Rocks shuttle",
+    "Red Rocks private car",
+    "Red Rocks SUV",
+  ],
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
     },
-    "areaServed": [
-      { "@type": "AdministrativeArea", "name": "Denver Metro Area" },
-      { "@type": "AdministrativeArea", "name": "Boulder" },
-      { "@type": "AdministrativeArea", "name": "Morrison" }
-    ],
-    "description": "Premium concert shuttle service for Red Rocks and all Denver/Boulder venues. Featuring Top Circle access and guaranteed post-show return."
-  };
+  },
 
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "Party at Red Rocks",
+    title: "Red Rocks Shuttle from Denver | $59 Seats + Private SUVs",
+    description:
+      "Fixed pricing, professional drivers, and guaranteed post-show return. Shuttle seats from $59/pp or Private Suburban from $499.",
+    images: [
+      {
+        url: "/hero/hero-home.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Red Rocks shuttle transportation",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Red Rocks Shuttle from Denver | $59 Seats + Private SUVs",
+    description:
+      "Fixed pricing, professional drivers, and guaranteed post-show return. Shuttle seats from $59/pp or Private Suburban from $499.",
+    images: ["/hero/hero-home.jpg"],
+  },
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <head>
-        <script 
-          type="application/ld+json" 
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema) }} 
-        />
-      </head>
-      <body className="bg-black text-white antialiased">
+      <body className="bg-surface text-white">
+        <SiteNav />
         {children}
-        {/* Footers are now handled by individual hub pages or the shared component */}
       </body>
     </html>
-  )
+  );
 }

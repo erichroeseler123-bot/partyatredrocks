@@ -1,0 +1,250 @@
+
+==== app/book-shuttle/page.tsx ====
+Rezdy iframes:
+  <iframe
+          className="rezdy w-full"
+          height="1000"
+          frameBorder="0"
+          src="https://gosnotransportation58.rezdy.com/catalog/638971/red-rocks-shuttle?iframe=true"
+        >
+
+==== app/private-suburban/page.tsx ====
+Rezdy iframes:
+  <iframe
+              seamless
+              width="100%"
+              height="1000px"
+              frameBorder="0"
+              className="rezdy rounded-[2rem] bg-surface"
+              src="https://gosnotransportation58.rezdy.com/596193/suburban?iframe=true"
+            >
+
+==== app/api/resolve-image/route.ts ====
+fetch() calls:
+  fetch(
+    `https://api.seatgeek.com/2/performers?q=${encodeURIComponent(
+      artist
+    )}&client_id=${process.env.seatgeekclientid}`
+  );
+
+==== app/api/cron/cleanup-guides/route.ts ====
+fetch() calls:
+  fetch(blob.url);
+
+==== app/api/products/route.ts ====
+fetch() calls:
+  fetch(`https://api.rezdy.com/v1/products?apiKey=${apiKey}`);
+
+==== app/api/availability/route.ts ====
+fetch() calls:
+  fetch(`https://api.rezdy.com/v1/availability?apiKey=${apiKey}&productCode=${productCode}`);
+
+==== app/api/bookings/route.ts ====
+fetch() calls:
+  fetch(`https://api.rezdy.com/v1/bookings?apiKey=${apiKey}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+
+==== app/api/setlists/route.ts ====
+fetch() calls:
+  fetch(`https://api.setlist.fm/rest/1.0/search/setlists?artistName=${encodeURIComponent(artist)}`, {
+    headers: { 'x-api-key': apiKey!, 'Accept': 'application/json' }
+  });
+
+==== app/api/artist-top-track/route.ts ====
+fetch() calls:
+  fetch(
+      `https://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=${encodeURIComponent(artist)}&api_key=${API_KEY}&format=json&limit=1`
+    );
+
+==== app/api/odesli/route.ts ====
+fetch() calls:
+  fetch(
+      `https://api.song.link/v1-alpha.1/links?url=${encodeURIComponent(spotifyUrl)}&userCountry=US`,
+      {
+        headers: { 'User-Agent': 'PartyAtRedRocks-Bot/1.0 (https://partyatredrocks.com)' },
+        next: { revalidate: 3600 } 
+      }
+    );
+
+==== app/api/setlist/route.ts ====
+fetch() calls:
+  fetch(
+      `https://api.setlist.fm/rest/1.0/search/setlists?artistName=${encodeURIComponent(artist)}`,
+      {
+        headers: {
+          'x-api-key': apiKey,
+          'Accept': 'application/json'
+        }
+      }
+    );
+
+==== app/booking/page.tsx ====
+Rezdy iframes:
+  <iframe 
+              seamless 
+              width="100%" 
+              height="1000px" 
+              frameBorder="0" 
+              className="rezdy" 
+              src="https://gosnotransportation58.rezdy.com/catalog/541037/party-at-red-rocks?iframe=true"
+            >
+
+==== app/week/search/WeekSearchClient.tsx ====
+fetch() calls:
+  fetch("/api/week-events", { cache: "no-store" });
+
+==== app/week/page.tsx ====
+fetch() calls:
+  fetch(`${SITE}/api/week-events`, {
+      // let Next cache this fetch for 60s
+      next: { revalidate: 60 },
+    });
+
+==== components/BookingTerminal.tsx ====
+fetch() calls:
+  fetch('https://api.rezdy.com/v1/availability/...')
+    }
+    syncRezdy();
+
+==== components/SitRep.tsx ====
+fetch() calls:
+  fetch(
+    "https://api.open-meteo.com/v1/forecast?latitude=39.6654&longitude=-105.2057&current_weather=true&temperature_unit=fahrenheit",
+    { next: { revalidate: 600 } }
+  );
+
+==== components/Setlist.tsx ====
+fetch() calls:
+  fetch(`/api/setlists?artist=${encodeURIComponent(artistName)}`);
+
+==== components/MusicPlayer.tsx ====
+fetch() calls:
+  fetch(`/api/odesli?url=${encodeURIComponent(spotifyUrl)}`);
+
+==== components/SetlistDisplay.tsx ====
+fetch() calls:
+  fetch(`/api/setlist?artist=${encodeURIComponent(artistName)}`);
+
+==== components/ArtistIntelDrawer.tsx ====
+fetch() calls:
+  fetch(
+          `/api/artist-intel?name=${encodeURIComponent(safeName)}&n=${nonce}`,
+          { cache: "no-store" }
+        );
+  fetch(`/api/artist-top-track?name=${encodeURIComponent(safeName)}&n=${nonce}`, {
+          cache: "no-store",
+        });
+
+==== components/CustomBooking.tsx ====
+fetch() calls:
+  fetch(url)
+      .then(res => res.json())
+      .then(setProducts)
+      .finally(() => setLoading(false));
+  fetch(`/api/availability?productCode=${selectedProduct.productCode}`)
+        .then(res => res.json())
+        .then(setSessions);
+  fetch('/api/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(bookingPayload)
+      });
+
+==== components/RezdyWidgets.tsx ====
+Rezdy iframes:
+  <iframe 
+          src="https://gosnotransportation58.rezdy.com/catalog/638971/red-rocks-shuttle?iframe=true"
+          width="100%" height="800px" frameBorder="0" className="rezdy"
+        />
+  <iframe 
+          src="https://gosnotransportation58.rezdy.com/596193/suburban?iframe=true"
+          width="100%" height="800px" frameBorder="0" className="rezdy"
+        />
+
+==== lib/geocode.ts ====
+fetch() calls:
+  fetch(
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
+        query
+      )}.json?access_token=${process.env.MAPBOX_TOKEN}`,
+      { cache: "force-cache" }
+    );
+
+==== lib/musicbrainz.ts ====
+fetch() calls:
+  fetch(
+      `${BASE_URL}/artist/?query=${encodeURIComponent(artistName)}&fmt=json`,
+      {
+        headers: {
+          "User-Agent": "PartyAtRedRocks/1.0 (contact@partyatredrocks.com)",
+        },
+        cache: "force-cache",
+      }
+    );
+  fetch(
+      `${BASE_URL}/artist/${artist.id}?inc=release-groups&fmt=json`,
+      {
+        headers: {
+          "User-Agent": "PartyAtRedRocks/1.0 (contact@partyatredrocks.com)",
+        },
+        cache: "force-cache",
+      }
+    );
+
+==== lib/safeFetch.ts ====
+fetch() calls:
+  fetch(input, init);
+
+==== lib/seatgeek.ts ====
+fetch() calls:
+  fetch(url.toString(), {
+    ...init,
+    next: { revalidate: 1800 }, // 30 min cache for server fetches
+  });
+
+==== lib/gemini.ts ====
+fetch() calls:
+  fetch(process.env.GEMINI_ENDPOINT!, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.GEMINI_API_KEY}`,
+    },
+    body: JSON.stringify({
+      artist,
+      format: "json",
+    }),
+    cache: "force-cache",
+  });
+
+==== lib/setlists.ts ====
+fetch() calls:
+  fetch(url, {
+    headers: { 'x-api-key': API_KEY || '', 'Accept': 'application/json' },
+    next: { revalidate: 86400 } // Cache for 24 hours
+  });
+
+==== lib/bandsintown.ts ====
+fetch() calls:
+  fetch(url, { next: { revalidate: 3600 } });
+
+==== lib/lastfm.ts ====
+fetch() calls:
+  fetch(url, { next: { revalidate: 86400 } });
+
+==== lib/spotify.ts ====
+fetch() calls:
+  fetch("https://accounts.spotify.com/api/token", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      Authorization: `Basic ${Buffer.from(`${client_id}:${client_secret}`).toString("base64")}`,
+    },
+    body: "grant_type=client_credentials",
+  });
+  fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(artistName)}&type=artist&limit=1`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });

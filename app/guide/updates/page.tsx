@@ -2,9 +2,9 @@ import GbpPost from '@/app/components/GbpPost';
 
 export default function UpdatesPage() {
   return (
-    <div className="max-w-3xl mx-auto px-6 py-16">
+    <div className="max-w-4xl mx-auto px-6 py-16">
       <h1 className="text-4xl font-black mb-4">Live Venue Intelligence & Alerts</h1>
-      <p className="text-lg text-slate-600 mb-10">
+      <p className="text-lg text-zinc-200 mb-10">
         Real-time updates on parking, weather, and show-day logistics for Red Rocks 2026.
       </p>
 
@@ -25,7 +25,7 @@ export default function UpdatesPage() {
         />
       </div>
 
-      <div className="mt-16 p-8 bg-slate-900 rounded-3xl text-white">
+      <div className="mt-16 p-8 bg-surface rounded-3xl text-white hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
         <h2 className="text-white text-xl font-bold mb-2">Want these updates via SMS?</h2>
         <p className="text-slate-400 mb-4">Text 'REDROCKS' to [Your Number] for show-day traffic and weather alerts.</p>
       </div>

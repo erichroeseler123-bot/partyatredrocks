@@ -4,7 +4,7 @@ export default function TailgatingRules() {
       <h1 className="text-4xl font-black mb-6">Tailgating at Red Rocks: 2026 Rules & Hacks</h1>
       
       <div className="grid md:grid-cols-2 gap-8 mb-12">
-        <div className="bg-green-50 p-6 rounded-2xl">
+        <div className="bg-green-50 p-6 rounded-2xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
           <h3 className="text-green-800 font-bold mb-2">The "Do's"</h3>
           <ul className="list-disc ml-5 space-y-2">
             <li>Tailgate directly behind your vehicle only.</li>
@@ -12,7 +12,7 @@ export default function TailgatingRules() {
             <li>Keep it small; lots are for parking, not parties.</li>
           </ul>
         </div>
-        <div className="bg-red-50 p-6 rounded-2xl">
+        <div className="bg-red-50 p-6 rounded-2xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
           <h3 className="text-red-800 font-bold mb-2">The "Don'ts"</h3>
           <ul className="list-disc ml-5 space-y-2 text-red-900">
             <li>No glass bottles (Strictly enforced).</li>
@@ -27,7 +27,7 @@ export default function TailgatingRules() {
         "If you're in the Lower North lot, bring a collapsible wagon. The walk to the gate is longer than you think, even if you're tailgating near the entrance." — r/RedRocks
       </blockquote>
 
-      <p className="text-center bg-red-700 text-white p-8 rounded-2xl">
+      <p className="text-center bg-red-700 text-white p-8 rounded-2xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
         <strong>The Ultimate Hack:</strong> Let us handle the gear. Our Sprinters have ample storage for your pre-show supplies.
       </p>
     </div>

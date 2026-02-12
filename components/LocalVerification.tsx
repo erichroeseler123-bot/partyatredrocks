@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function LocalVerification() {
   return (
-    <div className="bg-zinc-950 border border-zinc-800 p-8 rounded-3xl mt-12">
+    <div className="bg-zinc-950 border border-white/10 p-8 rounded-3xl mt-12 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
       <div className="flex flex-col md:flex-row justify-between items-center gap-6">
         <div>
           <h3 className="text-white font-black uppercase text-xl mb-2">Verified Local Operator</h3>

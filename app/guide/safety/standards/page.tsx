@@ -25,8 +25,8 @@ export default function SafetyStandards() {
         </section>
       </div>
 
-      <div className="mt-12 p-6 bg-slate-900 text-white rounded-xl">
-        <p className="text-sm font-mono uppercase tracking-widest text-slate-400">Official Registration</p>
+      <div className="mt-12 p-6 bg-surface text-white rounded-2xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+        <p className="text-base font-mono uppercase tracking-widest text-slate-400">Official Registration</p>
         <p className="text-2xl font-bold">PUC LICENSE: LL-02649</p>
       </div>
     </div>

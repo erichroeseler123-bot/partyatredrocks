@@ -10,7 +10,7 @@ export default function ShuttleComparison() {
       "name": "Party at Red Rocks",
       "address": "Golden, CO"
     },
-    "description": "Fixed-rate $55 shared shuttle and $499 private SUV service from Denver and Golden to Red Rocks.",
+    "description": "Fixed-rate $59 shared shuttle and $499 private SUV service from Denver and Golden to Red Rocks.",
     "offers": {
       "@type": "AggregateOffer",
       "lowPrice": "55.00",
@@ -24,26 +24,26 @@ export default function ShuttleComparison() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(comparisonSchema) }} />
       
       <h1 className="text-4xl font-black mb-6">Comparing Red Rocks Shuttles (2026 Guide)</h1>
-      <p className="text-lg text-slate-700 mb-10">
+      <p className="text-lg text-zinc-200 mb-10">
         Finding a ride to Red Rocks is easy; finding a ride that doesn't leave you stranded in the 
         <strong> Jurassic Lot</strong> or charge you a <strong>$150 surge</strong> is the challenge. 
         Here is how the top providers stack up this season.
       </p>
 
-      <div className="overflow-x-auto mb-16 shadow-xl rounded-3xl border">
+      <div className="overflow-x-auto mb-16 shadow-xl rounded-3xl border hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-slate-900 text-white">
+            <tr className="bg-surface text-white">
               <th className="p-5">Feature</th>
               <th className="p-5">Party at Red Rocks</th>
               <th className="p-5">Broker/Public Vans</th>
               <th className="p-5">Rideshare (Uber/Lyft)</th>
             </tr>
           </thead>
-          <tbody className="text-slate-700">
+          <tbody className="text-zinc-200">
             <tr className="border-b">
               <td className="p-5 font-bold">Round-Trip Rate</td>
-              <td className="p-5 text-green-700 font-bold">$55 Fixed</td>
+              <td className="p-5 text-green-700 font-bold">$59 Fixed</td>
               <td className="p-5">$65 - $85</td>
               <td className="p-5 text-red-600">Surge: $120 - $250</td>
             </tr>
@@ -70,18 +70,18 @@ export default function ShuttleComparison() {
       </div>
 
       <div className="grid md:grid-cols-2 gap-10">
-        <section className="bg-white border p-8 rounded-3xl">
+        <section className="bg-white border p-8 rounded-3xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
           <h3 className="text-2xl font-bold mb-4 text-slate-900">Why we bypass the "Broker Trap"</h3>
-          <p className="text-slate-600 leading-relaxed">
+          <p className="text-zinc-200 leading-relaxed">
             Many popular shuttle sites are actually <strong>brokers</strong> who farm out your ride to third-party drivers. 
             This often leads to "ghost shuttles" or late arrivals. At Party at Red Rocks, we own our fleet 
             of Suburbans and Sprinters. One operator, one point of contact.
           </p>
         </section>
 
-        <section className="bg-white border p-8 rounded-3xl">
+        <section className="bg-white border p-8 rounded-3xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
           <h3 className="text-2xl font-bold mb-4 text-slate-900">The "Top Circle" Difference</h3>
-          <p className="text-slate-600 leading-relaxed">
+          <p className="text-zinc-200 leading-relaxed">
             Most competitors drop you in the Upper North Lot. While better than the Lower lots, it still requires a significant hike. 
             Our <Link href="/shuttle/private-suv" className="text-red-700 underline">private SUV service</Link> is authorized for 
             Top Circle access, putting you directly at Row 70.
@@ -89,12 +89,12 @@ export default function ShuttleComparison() {
         </section>
       </div>
 
-      <div className="mt-16 bg-red-700 text-white p-12 rounded-3xl text-center shadow-2xl">
+      <div className="mt-16 bg-red-700 text-white p-12 rounded-3xl text-center shadow-2xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
         <h2 className="text-white text-3xl font-black mb-4">Ready for a Better Experience?</h2>
         <p className="mb-8 text-xl">Stop comparing and start relaxing. Book your 2026 shuttle today.</p>
         <div className="flex flex-col md:flex-row gap-4 justify-center">
-          <Link href="/shuttle/shared-shuttle-denver" className="bg-white text-red-700 px-8 py-4 rounded-full font-black hover:bg-slate-100 transition">Shared Shuttle: $55</Link>
-          <Link href="/shuttle/private-suv" className="bg-slate-900 text-white px-8 py-4 rounded-full font-black hover:bg-black transition">Private SUV: $499</Link>
+          <Link href="/shuttle/shared-shuttle-denver" className="bg-white text-red-700 px-8 py-4 rounded-full font-black hover:bg-slate-100 transition">Shared Shuttle: $59</Link>
+          <Link href="/shuttle/private-suv" className="bg-surface text-white px-8 py-4 rounded-full font-black hover:bg-surface transition">Private SUV: $499</Link>
         </div>
       </div>
     </div>

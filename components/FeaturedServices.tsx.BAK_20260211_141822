@@ -1,0 +1,212 @@
+import Link from "next/link";
+
+type Card = {
+  group: "Red Rocks options" | "Mishawaka & other venues";
+  title: string;
+  price: string;
+  note?: string;
+  bullets: string[];
+  href: string;
+  cta: string;
+  tone: "shared" | "suv" | "sprinter" | "bus" | "other";
+};
+
+const CARDS: Card[] = [
+  // ---------------- RED ROCKS ----------------
+  {
+    group: "Red Rocks options",
+    title: "Group coach seats",
+    price: "$59–$65",
+    note: "per person",
+    bullets: ["Denver pickup windows", "Pro driver + clean timing", "Best value for most groups"],
+    href: "/book-shuttle",
+    cta: "Reserve seats",
+    tone: "shared",
+  },
+  {
+    group: "Red Rocks options",
+    title: "Private SUV",
+    price: "$499",
+    note: "flat rate",
+    bullets: ["Just your group", "Flexible pickup timing", "Direct return after the show"],
+    href: "/private-suburban",
+    cta: "Book Private SUV",
+    tone: "suv",
+  },
+  {
+    group: "Red Rocks options",
+    title: "Sprinter van",
+    price: "$699",
+    note: "flat rate",
+    bullets: ["More room, premium ride", "Ideal for larger groups", "Direct pickup + direct return"],
+    href: "/book",
+    cta: "Request Sprinter",
+    tone: "sprinter",
+  },
+  {
+    group: "Red Rocks options",
+    title: "20-passenger bus",
+    price: "$1,099",
+    note: "flat rate",
+    bullets: ["Big groups, one vehicle", "Best for corporate / birthdays", "Direct pickup + direct return"],
+    href: "/book",
+    cta: "Request bus",
+    tone: "bus",
+  },
+
+  // ------------- OTHER VENUES / MISHAWAKA -------------
+  {
+    group: "Mishawaka & other venues",
+    title: "Any-venue SUV",
+    price: "$250",
+    note: "flat rate",
+    bullets: ["Any venue (Denver metro)", "Your group only", "Simple, no surge"],
+    href: "/book-all-venues",
+    cta: "Book any-venue SUV",
+    tone: "other",
+  },
+  {
+    group: "Mishawaka & other venues",
+    title: "Any-venue Sprinter",
+    price: "$450",
+    note: "flat rate",
+    bullets: ["More seats + more comfort", "Great for groups", "Venue-specific timing"],
+    href: "/book-all-venues",
+    cta: "Request Sprinter",
+    tone: "sprinter",
+  },
+  {
+    group: "Mishawaka & other venues",
+    title: "Any-venue 20-pass bus",
+    price: "$1,000",
+    note: "flat rate",
+    bullets: ["Big groups", "Private vehicle for your group", "Venue-specific timing"],
+    href: "/book-all-venues",
+    cta: "Request bus",
+    tone: "bus",
+  },
+];
+
+function toneBadge(tone: Card["tone"]) {
+  const base =
+    "inline-flex items-center rounded-full border px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.22em]";
+  switch (tone) {
+    case "shared":
+      return <span className={`${base} border-zinc-600/60 bg-surface/40 text-zinc-200`}>Shared ride</span>;
+    case "suv":
+      return <span className={`${base} border-red-500/30 bg-red-500/10 text-red-200`}>Private vehicle</span>;
+    case "sprinter":
+      return <span className={`${base} border-cyan-500/30 bg-cyan-500/10 text-cyan-100`}>Group vehicle</span>;
+    case "bus":
+      return <span className={`${base} border-violet-500/30 bg-violet-500/10 text-violet-100`}>Large group</span>;
+    default:
+      return <span className={`${base} border-zinc-600/60 bg-surface/40 text-zinc-200`}>Other</span>;
+  }
+}
+
+function PricingCard({ c }: { c: Card }) {
+  return (
+    <div className="bg-surface border-soft shadow-soft rounded-3xl p-6 hover:glow-accent transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+      <div className="flex items-start justify-between gap-4">
+        <div className="min-w-0">
+          {toneBadge(c.tone)}
+          <h3 className="mt-3 text-xl md:text-2xl font-black tracking-tight">{c.title}</h3>
+        </div>
+
+        <div className="text-right shrink-0">
+          <div className="text-2xl md:text-3xl font-black leading-none">{c.price}</div>
+          {c.note ? <div className="mt-1 text-[11px] uppercase tracking-[0.22em] text-zinc-400">{c.note}</div> : null}
+        </div>
+      </div>
+
+      <ul className="mt-5 space-y-2 text-sm text-zinc-200/90">
+        {c.bullets.map((b) => (
+          <li key={b} className="flex gap-2">
+            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400/60" />
+            <span>{b}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div className="mt-6">
+        <Link
+          href={c.href}
+          className="inline-flex w-full items-center justify-center rounded-full border border-zinc-600/50 bg-surface/30 px-4 py-3 text-xs font-black uppercase tracking-[0.22em] text-zinc-100 hover:bg-surface/45 transition"
+        >
+          {c.cta}
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+export default function FeaturedServices() {
+  const rr = CARDS.filter((c) => c.group === "Red Rocks options");
+  const other = CARDS.filter((c) => c.group === "Mishawaka & other venues");
+
+  return (
+    <section className="relative z-10 max-w-7xl mx-auto px-6 -mt-16 pb-10">
+      <div className="bg-surface-strong border-soft shadow-soft rounded-3xl p-7 md:p-10 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <div className="max-w-3xl">
+            <p className="text-[12px] font-black uppercase tracking-[0.30em] text-zinc-400">
+              Transportation options
+            </p>
+            <h2 className="mt-3 text-3xl md:text-5xl font-black tracking-tight">
+              Would you rather ride with other people — or have a private vehicle just for your group?
+            </h2>
+            <p className="mt-4 text-zinc-300">
+              Choose the option that matches your group size and vibe. Clean vehicles, professional drivers, and timing
+              built for show nights.
+            </p>
+          </div>
+
+          <div className="flex gap-3">
+            <Link href="/book-shuttle" className="btn-primary">
+              Book seats
+            </Link>
+            <Link
+              href="/private-suburban"
+              className="inline-flex items-center justify-center rounded-full border border-red-500/30 bg-red-500/10 px-5 py-3 text-xs font-black uppercase tracking-[0.22em] text-red-100 hover:bg-red-500/15 transition"
+            >
+              Private SUV — $499
+            </Link>
+          </div>
+        </div>
+
+        <div className="mt-10">
+          <div className="flex items-center justify-between gap-4">
+            <h3 className="text-sm font-black uppercase tracking-[0.28em] text-zinc-400">Red Rocks options</h3>
+            <Link href="/book" className="text-xs font-black uppercase tracking-[0.28em] text-zinc-300 hover:text-white">
+              Get a quote →
+            </Link>
+          </div>
+          <div className="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {rr.map((c) => (
+              <PricingCard key={c.title + c.price} c={c} />
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-12">
+          <div className="flex items-center justify-between gap-4">
+            <h3 className="text-sm font-black uppercase tracking-[0.28em] text-zinc-400">
+              Mishawaka & other venues
+            </h3>
+            <Link
+              href="/book-all-venues"
+              className="text-xs font-black uppercase tracking-[0.28em] text-zinc-300 hover:text-white"
+            >
+              See all venues →
+            </Link>
+          </div>
+          <div className="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {other.map((c) => (
+              <PricingCard key={c.title + c.price} c={c} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

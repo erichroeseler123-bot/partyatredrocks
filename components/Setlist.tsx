@@ -24,7 +24,7 @@ export default function Setlist({ artistName }: { artistName: string }) {
   if (songs.length === 0) return <div className="text-zinc-600 text-xs italic">Setlist data unavailable for this tour.</div>;
 
   return (
-    <div className="bg-zinc-950/50 p-6 rounded-3xl border border-white/5">
+    <div className="bg-zinc-950/50 p-6 rounded-3xl border border-white/5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
       <h3 className="text-red-600 font-black uppercase text-[10px] tracking-[0.2em] mb-4">Probable Setlist</h3>
       <ul className="space-y-2">
         {songs.slice(0, 10).map((song, i) => (

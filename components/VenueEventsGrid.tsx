@@ -14,7 +14,7 @@ export default function VenueEventsGrid({ events, venueSlug }: Props) {
           <a
             key={event.id}
             href={`/shows/${event.slug ?? event.id}`}
-            className="relative h-48 rounded-2xl bg-black border border-white/5 overflow-hidden hover:border-white/20 transition"
+            className="relative h-48 rounded-2xl bg-black border border-white/5 overflow-hidden hover:border-white/20 transition hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
           >
             {/* IMAGE ONLY IF IT IS A REAL PERFORMER IMAGE */}
             {performerImage && (

@@ -1,0 +1,110 @@
+import json
+from pathlib import Path
+
+def w(path: Path, lines: list[str]):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("\n".join(lines) + "\n")
+
+def hub_lines(spec):
+    title = spec["title"]
+    desc  = spec["description"]
+    cta_href = spec.get("ctaHref", "/book-shuttle")
+    cta_text = spec.get("ctaText", "Book Red Rocks Shuttle — $59/pp →")
+
+    cards = []
+    for leaf in spec["leaves"]:
+        cards += [
+          f'          <Link href="{(leaf.get("href") or leaf.get("url") or (hub + "/" + leaf.get("slug","")))}" className="block p-6 bg-surface-strong rounded-2xl border border-white/10 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">',
+          f'            <h3 className="text-xl font-bold mb-2">{(leaf.get("cardTitle") or leaf.get("title") or leaf.get("crumb") or "Read more")}</h3>',
+          f'            <p className="text-zinc-300">{(leaf.get("cardDesc") or leaf.get("description") or "")}</p>',
+          f'          </Link>',
+          '',
+        ]
+
+    return [
+      'import Link from "next/link";',
+      '',
+      'export const metadata = {',
+      f'  title: {title!r},',
+      f'  description: {desc!r},',
+      '};',
+      '',
+      'export default function Page() {',
+      '  return (',
+      '    <main className="min-h-screen bg-surface text-white px-6 py-24">',
+      '      <div className="max-w-6xl mx-auto">',
+      f'        <h1 className="text-5xl md:text-6xl font-black tracking-tight">{title}</h1>',
+      f'        <p className="mt-4 text-lg text-zinc-300 max-w-3xl">{desc}</p>',
+      '',
+      '        <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-6">',
+      *cards,
+      '        </div>',
+      '',
+      '        <div className="mt-14">',
+      f'          <Link href="{cta_href}" className="btn-primary">{cta_text}</Link>',
+      '          <div className="mt-3 text-sm text-zinc-300">Seats fill fast on sold-out shows. Lock it in now.</div>',
+      '        </div>',
+      '      </div>',
+      '    </main>',
+      '  );',
+      '}',
+    ]
+
+def leaf_lines(spec, leaf):
+    hub = spec["hubHref"]
+    crumb = leaf.get("crumb") or leaf.get("cardTitle") or leaf.get("title") or "Guide"
+    title = leaf.get("title") or crumb
+    desc  = leaf.get("description") or ""
+    bullets = leaf.get("bullets", [])
+
+    blocks = []
+    for b in bullets:
+        blocks += [
+          '          <div className="bg-surface-strong border border-white/10 rounded-2xl p-6">',
+          f'            <h3 className="text-xl font-bold">{b["h"]}</h3>',
+          f'            <p className="mt-2 text-zinc-300">{b["p"]}</p>',
+          '          </div>',
+        ]
+
+    return [
+      'import Link from "next/link";',
+      '',
+      'export const metadata = {',
+      f'  title: {title!r},',
+      f'  description: {desc!r},',
+      '};',
+      '',
+      'export default function Page() {',
+      '  return (',
+      '    <main className="min-h-screen bg-surface text-white px-6 py-24">',
+      '      <div className="max-w-4xl mx-auto">',
+      '        <nav className="text-sm text-zinc-400">',
+      f'          <Link className="hover:text-white" href="{hub}">Transportation</Link>{{" "}}',
+      f'          <span className="text-zinc-600">/</span> {crumb}',
+      '        </nav>',
+      f'        <h1 className="mt-4 text-5xl font-black tracking-tight">{crumb}</h1>',
+      f'        <p className="mt-4 text-lg text-zinc-300">{desc}</p>',
+      '',
+      '        <section className="mt-10 grid gap-6">',
+      *blocks,
+      '        </section>',
+      '',
+      '        <div className="mt-12">',
+      '          <Link href="/book-shuttle" className="btn-primary">Book the $59 shuttle →</Link>',
+      '        </div>',
+      '      </div>',
+      '    </main>',
+      '  );',
+      '}',
+    ]
+
+def main():
+    spec = json.loads(Path("_authority_spec.json").read_text())
+    base = Path(spec["baseDir"])
+    w(base / "page.tsx", hub_lines(spec))
+    for leaf in spec["leaves"]:
+        w(base / (leaf.get("slug") or leaf.get("path") or "leaf") / "page.tsx", leaf_lines(spec, leaf))
+    print("Wrote hub +", len(spec["leaves"]), "leaf pages into", base)
+
+if __name__ == "__main__":
+    main()

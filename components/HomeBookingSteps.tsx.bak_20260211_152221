@@ -1,0 +1,82 @@
+import Link from "next/link";
+
+function Step({ n, title, body }: { n: string; title: string; body: string }) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 shadow-soft hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+      <div className="flex items-center gap-3">
+        <div className="flex h-9 w-9 items-center justify-center rounded-2xl border border-white/12 bg-black/35 text-sm font-black text-white/85 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+          {n}
+        </div>
+        <h3 className="text-base font-black tracking-tight text-white">{title}</h3>
+      </div>
+      <p className="mt-3 text-sm text-white/70">{body}</p>
+    </div>
+  );
+}
+
+export default function HomeBookingSteps() {
+  return (
+    <section className="relative z-10 max-w-7xl mx-auto px-6 -mt-12 pb-10">
+      <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 md:p-8 shadow-soft hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="text-[11px] font-black uppercase tracking-[0.30em] text-white/55">
+              Booking is simple
+            </p>
+            <h2 className="mt-2 text-3xl md:text-4xl font-black tracking-tight text-white">
+              Book in 1–2–3
+            </h2>
+            <p className="mt-3 max-w-2xl text-sm md:text-base text-white/70">
+              We’re known for our Suburbans — and we make it painless to lock in a real pickup plan.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-3">
+            {/* Feature Suburban FIRST */}
+            <Link href="/private-suburban" className="btn-primary">
+              Book Suburban (Signature)
+            </Link>
+
+            <Link
+              href="/book-shuttle"
+              className="btn-ghost"
+            >
+              Red Rocks Shuttle
+            </Link>
+
+            <Link
+              href="/book-all-venue"
+              className="btn-ghost"
+            >
+              Mission + Other Venues →
+            </Link>
+          </div>
+        </div>
+
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <Step
+            n="1"
+            title="Choose your ride"
+            body="Shuttle seats for Red Rocks, or private Suburban/Sprinter for your group."
+          />
+          <Step
+            n="2"
+            title="Select the date"
+            body="Pick the show date and lock in a clear pickup plan with pro timing."
+          />
+          <Step
+            n="3"
+            title="Get confirmation"
+            body="Instant confirmation. Cancel up to 3 days in advance — after that, non-cancelable."
+          />
+        </div>
+
+        <div className="mt-6 rounded-2xl border border-white/10 bg-black/30 p-4 text-sm text-white/70 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+          <span className="font-black text-white/80">Cancellation:</span>{" "}
+          cancel up to <span className="font-black text-white/80">3 days</span> before.
+          After that, <span className="font-black text-white/80">non-cancelable</span>.
+        </div>
+      </div>
+    </section>
+  );
+}

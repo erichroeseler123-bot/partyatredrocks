@@ -1,0 +1,175 @@
+app/book-shuttle/page.tsx:14:          src="https://gosnotransportation58.rezdy.com/pluginJs"
+app/book-shuttle/page.tsx:18:          className="rezdy w-full"
+app/book-shuttle/page.tsx:21:          src="https://gosnotransportation58.rezdy.com/catalog/638971/red-rocks-shuttle?iframe=true"
+app/private-suburban/page.tsx:37:      {/* Rezdy embed */}
+app/private-suburban/page.tsx:45:              Pricing and availability are managed in Rezdy.
+app/private-suburban/page.tsx:53:              src="https://gosnotransportation58.rezdy.com/pluginJs"
+app/private-suburban/page.tsx:61:              className="rezdy rounded-[2rem] bg-surface"
+app/private-suburban/page.tsx:62:              src="https://gosnotransportation58.rezdy.com/596193/suburban?iframe=true"
+app/api/products/route.ts:9:    const response = await fetch(`https://api.rezdy.com/v1/products?apiKey=${apiKey}`);
+app/api/availability/route.ts:11:    const response = await fetch(`https://api.rezdy.com/v1/availability?apiKey=${apiKey}&productCode=${productCode}`);
+app/api/bookings/route.ts:8:    const response = await fetch(`https://api.rezdy.com/v1/bookings?apiKey=${apiKey}`, {
+app/shows/[id]/page.tsx:2:import RezdyWidgets from "@/components/RezdyWidgets";
+app/shows/[id]/page.tsx:16:      <RezdyWidgets />
+app/booking/page.tsx:38:            {/* Rezdy Script Loader */}
+app/booking/page.tsx:40:              src="https://gosnotransportation58.rezdy.com/pluginJs" 
+app/booking/page.tsx:49:              className="rezdy" 
+app/booking/page.tsx:50:              src="https://gosnotransportation58.rezdy.com/catalog/541037/party-at-red-rocks?iframe=true"
+components/BookingTerminal.tsx:7:  // Placeholder for real-time Rezdy sync
+components/BookingTerminal.tsx:9:    async function syncRezdy() {
+components/BookingTerminal.tsx:11:      // fetch('https://api.rezdy.com/v1/availability/...')
+components/BookingTerminal.tsx:13:    syncRezdy();
+components/RezdyWidget.tsx:3:interface RezdyWidgetProps {
+components/RezdyWidget.tsx:9:export default function RezdyWidget({ 
+components/RezdyWidget.tsx:11:  accountBaseUrl = "https://partyatredrocks.rezdy.com",
+components/RezdyWidget.tsx:13:}: RezdyWidgetProps) {
+components/RezdyWidgets.tsx:5:export default function RezdyWidgets() {
+components/RezdyWidgets.tsx:8:    script.src = "https://gosnotransportation58.rezdy.com/pluginJs";
+components/RezdyWidgets.tsx:25:          src="https://gosnotransportation58.rezdy.com/catalog/638971/red-rocks-shuttle?iframe=true"
+components/RezdyWidgets.tsx:26:          width="100%" height="800px" frameBorder="0" className="rezdy"
+components/RezdyWidgets.tsx:36:          src="https://gosnotransportation58.rezdy.com/596193/suburban?iframe=true"
+components/RezdyWidgets.tsx:37:          width="100%" height="800px" frameBorder="0" className="rezdy"
+components/BookWithRezdy.tsx:1:// components/BookWithRezdy.tsx
+components/BookWithRezdy.tsx:6:interface BookWithRezdyProps {
+components/BookWithRezdy.tsx:8:  productId?: string;            // Rezdy product ID for specific shuttle type
+components/BookWithRezdy.tsx:15:export default function BookWithRezdy({
+components/BookWithRezdy.tsx:17:  productId = 'YOUR_DEFAULT_SHUTTLE_PRODUCT_ID', // replace with your actual Rezdy product ID
+components/BookWithRezdy.tsx:22:}: BookWithRezdyProps) {
+components/BookWithRezdy.tsx:25:  const baseUrl = 'https://YOURCOMPANY.rezdy.com/book'; // ← Replace with your Rezdy booking URL
+components/BookWithRezdy.tsx:30:    // Prefill date if provided (Rezdy supports ?date=YYYY-MM-DD)
+components/BookWithRezdy.tsx:80:          {loading ? 'Opening Rezdy...' : label}
+lib/rezdy.ts:2: * PARR v1 Rezdy Booking Helpers
+lib/rezdy.ts:7:  SHUTTLE: "https://partyatredrocks.rezdy.com/calendarWidget/shuttle",
+lib/rezdy.ts:8:  SUV: "https://partyatredrocks.rezdy.com/calendarWidget/private-suv",
+app/api/resolve-image/route.ts:21:  const sgRes = await fetch(
+app/api/cron/cleanup-guides/route.ts:10:    const res = await fetch(blob.url);
+app/api/products/route.ts:9:    const response = await fetch(`https://api.rezdy.com/v1/products?apiKey=${apiKey}`);
+app/api/availability/route.ts:11:    const response = await fetch(`https://api.rezdy.com/v1/availability?apiKey=${apiKey}&productCode=${productCode}`);
+app/api/bookings/route.ts:8:    const response = await fetch(`https://api.rezdy.com/v1/bookings?apiKey=${apiKey}`, {
+app/api/setlists/route.ts:10:  const res = await fetch(`https://api.setlist.fm/rest/1.0/search/setlists?artistName=${encodeURIComponent(artist)}`, {
+app/api/artist-top-track/route.ts:11:    const res = await fetch(
+app/api/odesli/route.ts:12:    const res = await fetch(
+app/api/setlist/route.ts:13:    const res = await fetch(
+app/api/artist-intel/route.ts:80:    const res = await fetch(url, {
+app/week/search/WeekSearchClient.tsx:32:        const res = await fetch("/api/week-events", { cache: "no-store" });
+app/week/page.tsx:47:    const res = await fetch(`${SITE}/api/week-events`, {
+components/BookingTerminal.tsx:11:      // fetch('https://api.rezdy.com/v1/availability/...')
+components/SitRep.tsx:13:  const res = await fetch(
+components/Setlist.tsx:11:        const res = await fetch(`/api/setlists?artist=${encodeURIComponent(artistName)}`);
+components/MusicPlayer.tsx:16:        const res = await fetch(`/api/odesli?url=${encodeURIComponent(spotifyUrl)}`);
+components/SetlistDisplay.tsx:12:        const res = await fetch(`/api/setlist?artist=${encodeURIComponent(artistName)}`);
+components/ArtistIntelDrawer.tsx:67:        const res = await fetch(
+components/ArtistIntelDrawer.tsx:111:        const res = await fetch(`/api/artist-top-track?name=${encodeURIComponent(safeName)}&n=${nonce}`, {
+components/CustomBooking.tsx:23:    fetch(url)
+components/CustomBooking.tsx:31:      fetch(`/api/availability?productCode=${selectedProduct.productCode}`)
+components/CustomBooking.tsx:54:      const res = await fetch('/api/bookings', {
+lib/geocode.ts:15:    const response = await fetch(
+lib/musicbrainz.ts:23:    const res = await fetch(
+lib/musicbrainz.ts:40:    const relRes = await fetch(
+lib/safeFetch.ts:5:  const res = await fetch(input, init);
+lib/seatgeek.ts:82:  const res = await fetch(url.toString(), {
+lib/gemini.ts:12:  const res = await fetch(process.env.GEMINI_ENDPOINT!, {
+lib/setlists.ts:5:  const res = await fetch(url, {
+lib/bandsintown.ts:6:    const res = await fetch(url, { next: { revalidate: 3600 } });
+lib/lastfm.ts:6:  const res = await fetch(url, { next: { revalidate: 86400 } }); // Cache for 24 hours
+lib/spotify.ts:6:  const response = await fetch("https://accounts.spotify.com/api/token", {
+lib/spotify.ts:20:  const res = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(artistName)}&type=artist&limit=1`, {
+app/guide/logistics/weather-prep/page.tsx:21:      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+app/guide/logistics/sold-out-survival/page.tsx:14:      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(survivalSchema) }} />
+app/guide/logistics/policies/page.tsx:29:      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+app/guide/local/trailhead-taphouse/page.tsx.bak_20260211_135345:35:        type="application/ld+json"
+app/guide/local/trailhead-taphouse/page.tsx.bak_20260211_135345:36:        dangerouslySetInnerHTML={{ __html: JSON.stringify(localSchema) }}
+app/guide/local/trailhead-taphouse/page.tsx:35:        type="application/ld+json"
+app/guide/local/trailhead-taphouse/page.tsx:36:        dangerouslySetInnerHTML={{ __html: JSON.stringify(localSchema) }}
+app/guide/local/denver-pickups/page.tsx.bak_20260211_135345:43:        type="application/ld+json"
+app/guide/local/denver-pickups/page.tsx.bak_20260211_135345:44:        dangerouslySetInnerHTML={{ __html: JSON.stringify(localSchema) }}
+app/guide/local/denver-pickups/page.tsx:43:        type="application/ld+json"
+app/guide/local/denver-pickups/page.tsx:44:        dangerouslySetInnerHTML={{ __html: JSON.stringify(localSchema) }}
+app/guide/events/tailgate-guide/page.tsx:18:        type="application/ld+json"
+app/guide/events/tailgate-guide/page.tsx:19:        dangerouslySetInnerHTML={{
+app/guide/safety-and-legitimacy/page.tsx:15:      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(safetySchema) }} />
+app/guide/compare/page.tsx:24:      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(comparisonSchema) }} />
+app/week/search/page.tsx:50:        type="application/ld+json"
+app/week/search/page.tsx:51:        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+app/week/page.tsx:139:        type="application/ld+json"
+app/week/page.tsx:140:        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+app/api/resolve-image/route.ts:5:type SeatGeekPerformer = {
+app/api/resolve-image/route.ts:9:type SeatGeekResponse = {
+app/api/resolve-image/route.ts:10:  performers?: SeatGeekPerformer[];
+app/api/resolve-image/route.ts:22:    `https://api.seatgeek.com/2/performers?q=${encodeURIComponent(
+app/api/resolve-image/route.ts:24:    )}&client_id=${process.env.seatgeekclientid}`
+app/api/resolve-image/route.ts:28:    return new NextResponse("SeatGeek error", { status: 502 });
+app/api/resolve-image/route.ts:31:  const sgData = (await sgRes.json()) as SeatGeekResponse;
+app/api/odesli/route.ts:7:  if (!spotifyUrl || spotifyUrl === 'undefined' || spotifyUrl.includes('seatgeek.com')) {
+app/api/week-events/route.ts:4:import { resolveSeatGeekVenue, seatgeekEventsByVenueId } from "@/lib/seatgeek";
+app/api/week-events/route.ts:10: * This prevents SeatGeek from being called on every request.
+app/api/week-events/route.ts:119:  const venues = VENUE_REGISTRY.filter((v) => v?.seatgeekSlug || v?.seatgeekId);
+app/api/week-events/route.ts:128:        seatgeekSlug: canonicalVenue.seatgeekSlug ?? null,
+app/api/week-events/route.ts:129:        seatgeekId: canonicalVenue.seatgeekId ?? null,
+app/api/week-events/route.ts:137:        // If you already know SeatGeek venue id, skip resolving.
+app/api/week-events/route.ts:139:          typeof canonicalVenue.seatgeekId === "number" && Number.isFinite(canonicalVenue.seatgeekId)
+app/api/week-events/route.ts:140:            ? canonicalVenue.seatgeekId
+app/api/week-events/route.ts:146:          const sgVenue = await resolveSeatGeekVenue({
+app/api/week-events/route.ts:148:            seatgeekSlug: canonicalVenue.seatgeekSlug,
+app/api/week-events/route.ts:161:        const events = await seatgeekEventsByVenueId(resolvedId);
+app/venues/red-rocks-amphitheatre/page.tsx:15:          Morrison, CO · Live events pulled from SeatGeek · Venue ID 196
+app/venues/[slug]/page.tsx:4:import { resolveSeatGeekVenue, seatgeekEventsByVenueId } from "@/lib/seatgeek";
+app/venues/[slug]/page.tsx:64:  const sgVenue = await resolveSeatGeekVenue({
+app/venues/[slug]/page.tsx:66:    seatgeekSlug: canonical.seatgeekSlug,
+app/venues/[slug]/page.tsx:75:          We couldn’t match this venue to SeatGeek yet. Add the correct{" "}
+app/venues/[slug]/page.tsx:76:          <code>seatgeekSlug</code> in <code>lib/venues/registry.ts</code>.
+app/venues/[slug]/page.tsx:90:  const events = await seatgeekEventsByVenueId(sgVenue.id);
+app/venues/[slug]/page.tsx:108:          Real-time events powered by SeatGeek. Book your ride before surge hits.
+app/venues/[slug]/page.tsx:217:                SeatGeek Venue Page →
+app/venues/[slug]/page.tsx:236:            SeatGeek returned 0 upcoming events for this venue.
+app/week/page.tsx:268:                                SeatGeek →
+components/VenueShows.tsx:1:import { resolveSeatGeekVenue, seatgeekEventsByVenueId } from "@/lib/seatgeek";
+components/VenueShows.tsx:8:    seatgeekSlug?: string; // optional if you have it later
+components/VenueShows.tsx:24:  // Resolve SeatGeek venue (slug-first if seatgeekSlug exists, otherwise smart CO/Denver fallback)
+components/VenueShows.tsx:25:  const sgVenue = await resolveSeatGeekVenue({
+components/VenueShows.tsx:27:    seatgeekSlug: venue.seatgeekSlug,
+components/VenueShows.tsx:32:  const events = sgVenue ? await seatgeekEventsByVenueId(sgVenue.id) : [];
+components/MusicPlayer.tsx:10:      if (!spotifyUrl || spotifyUrl.includes('seatgeek.com') || spotifyUrl.includes('undefined')) {
+components/MusicPlayer.tsx:44:        Audio Dispatch Offline – Check SeatGeek for Details
+lib/seatgeek.ts:1:// lib/seatgeek.ts
+lib/seatgeek.ts:2:type SeatGeekVenue = {
+lib/seatgeek.ts:13:type SeatGeekEvent = {
+lib/seatgeek.ts:22:  venue?: SeatGeekVenue;
+lib/seatgeek.ts:25:const SEATGEEK_BASE = "https://api.seatgeek.com/2";
+lib/seatgeek.ts:27:function requireSeatGeekKey() {
+lib/seatgeek.ts:31:      "Missing SeatGeek key. Set SEATGEEK_CLIENT_ID (recommended) or NEXT_PUBLIC_SEATGEEK_CLIENT_ID."
+lib/seatgeek.ts:42:  candidate: SeatGeekVenue;
+lib/seatgeek.ts:74:  const key = requireSeatGeekKey();
+lib/seatgeek.ts:89:    throw new Error(`SeatGeek error ${res.status} on ${path}: ${text.slice(0, 500)}`);
+lib/seatgeek.ts:95:/** Exact venue lookup by SeatGeek slug */
+lib/seatgeek.ts:96:export async function seatgeekVenueBySlug(seatgeekSlug: string): Promise<SeatGeekVenue | null> {
+lib/seatgeek.ts:97:  const data = await sgFetch<{ venues: SeatGeekVenue[] }>(
+lib/seatgeek.ts:99:    { slug: seatgeekSlug }
+lib/seatgeek.ts:105:export async function seatgeekVenueByQuerySmart(targetName: string, targetSlugHint?: string) {
+lib/seatgeek.ts:106:  const data = await sgFetch<{ venues: SeatGeekVenue[] }>(
+lib/seatgeek.ts:122:  let best: SeatGeekVenue | null = null;
+lib/seatgeek.ts:143: * Resolve SeatGeek venue:
+lib/seatgeek.ts:144: * 1) If seatgeekSlug is known, try /venues?slug=
+lib/seatgeek.ts:147:export async function resolveSeatGeekVenue(opts: {
+lib/seatgeek.ts:149:  seatgeekSlug?: string;
+lib/seatgeek.ts:151:}): Promise<SeatGeekVenue | null> {
+lib/seatgeek.ts:152:  if (opts.seatgeekSlug) {
+lib/seatgeek.ts:153:    const v = await seatgeekVenueBySlug(opts.seatgeekSlug);
+lib/seatgeek.ts:157:  return await seatgeekVenueByQuerySmart(opts.targetName, opts.siteSlug ?? opts.seatgeekSlug);
+lib/seatgeek.ts:162: * IMPORTANT: SeatGeek expects "venue.id" (not venue_id) for /events filtering in many implementations.
+lib/seatgeek.ts:164:export async function seatgeekEventsByVenueId(venueId: number): Promise<SeatGeekEvent[]> {
+lib/seatgeek.ts:166:    throw new Error(`Invalid venueId passed to seatgeekEventsByVenueId: ${String(venueId)}`);
+lib/seatgeek.ts:169:  const data = await sgFetch<{ events: SeatGeekEvent[] }>(
+lib/bandsintown.ts:3:  const url = `https://rest.bandsintown.com/artists/${encodeURIComponent(artistName)}?app_id=${appId}`;
+lib/redrocksEvents.ts:2:import seatgeek from "@/public/data/redrocks-events.json";
+lib/redrocksEvents.ts:28:  // 2️⃣ Merge SeatGeek data where available (images + URLs)
+lib/redrocksEvents.ts:29:  for (const sg of seatgeek as any[]) {
+lib/venues/registry.ts:15:  // SeatGeek mapping (fill these in over time)
+lib/venues/registry.ts:16:  seatgeekSlug?: string;   // preferred: exact SeatGeek venue slug
+lib/venues/registry.ts:17:  seatgeekId?: number;     // best: numeric id once resolved
+lib/venues/registry.ts:26:    seatgeekSlug: "red-rocks-amphitheatre",
+lib/venues/registry.ts:33:    seatgeekSlug: "mission-ballroom",
+lib/venues/registry.ts:40:    // IMPORTANT: your discovered correct SeatGeek slug:
+lib/venues/registry.ts:41:    seatgeekSlug: "bluebird-theater-denver",
+lib/venues/registry.ts:48:    // IMPORTANT: your discovered correct SeatGeek slug:
+lib/venues/registry.ts:49:    seatgeekSlug: "fiddler-s-green-amphitheatre",

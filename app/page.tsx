@@ -1,141 +1,162 @@
 import Image from "next/image";
 import Link from "next/link";
-import HomepageBridge from "@/components/HomepageBridge";
 
 export default function HomePage() {
   return (
-    <main className="bg-black text-white selection:bg-red-600 selection:text-white">
-
-      {/* ================= HERO SECTION ================= */}
+    <main className="bg-black text-white">
+      {/* ================= HERO ================= */}
       <section className="relative min-h-[85vh] flex items-end">
         <Image
-          src="/hero/hero-home.jpg" 
-          alt="Party at Red Rocks Shuttle"
+          src="/hero/hero-home.jpg"
+          alt="Party at Red Rocks Transportation"
           fill
           priority
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 pb-24 text-left">
-          <h1 className="text-6xl md:text-8xl font-black italic uppercase leading-tight tracking-tighter text-white">
-            Party at <br /> Red Rocks
+        <div className="relative z-10 max-w-7xl mx-auto px-6 pb-24">
+          <h1 className="text-5xl md:text-7xl font-black italic uppercase leading-none">
+            Party at Red Rocks
           </h1>
-          <p className="mt-6 max-w-xl text-zinc-200 text-xl font-medium leading-relaxed">
-            Concert transportation, done right. <span className="text-red-600 font-bold">$55 round-trip shuttles</span>, 
-            private SUVs, and now <span className="text-white font-bold">All-Venue City Service</span>.
+          <p className="mt-6 max-w-xl text-zinc-300 text-lg">
+            Premium concert transportation in Colorado — fixed pricing, professional drivers, and a reliable
+            post-show return.
           </p>
 
-          <div className="mt-10 flex flex-wrap gap-4">
-            <Link
-              href="/book-shuttle"
-              className="bg-red-600 hover:bg-red-500 px-10 py-5 font-black uppercase tracking-wide rounded-full transition transform hover:scale-105 shadow-2xl"
-            >
-              Book Red Rocks — $55
+          <div className="mt-10 flex flex-wrap gap-3">
+            <Link href="/book-shuttle" className="btn-primary">
+              Book Red Rocks Shuttle — $59/pp →
             </Link>
-
             <Link
-              href="/shuttles/all-venue"
-              className="bg-white text-black hover:bg-zinc-200 px-10 py-5 font-black uppercase tracking-wide rounded-full transition transform hover:scale-105 shadow-2xl"
+              href="/private-suburban"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 transition"
             >
-              All Venue City Service
+              Private Suburban — Flat Rate →
+            </Link>
+            <Link
+              href="/week"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 transition"
+            >
+              This Week at Red Rocks →
+            </Link>
+          </div>
+
+          <div className="mt-6 text-sm text-zinc-400">
+            Prefer to research first?{" "}
+            <Link className="underline decoration-white/20 hover:decoration-white/60" href="/guide">
+              Read the Red Rocks Guide →
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ================= SERVICE GRID ================= */}
-      <section className="py-24 px-6 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-          
-          {/* Shared Red Rocks Shuttle */}
-          <div className="group rounded-[2.5rem] bg-zinc-900/50 border border-zinc-800 p-10 hover:border-red-600/50 transition-all">
-            <h3 className="text-2xl font-black uppercase italic mb-4">Red Rocks Shuttle</h3>
-            <p className="text-zinc-400 mb-8 text-sm leading-relaxed">
-              Our flagship high-roof Sprinters run direct to the Top Circle. 
-              $55 round-trip from Downtown Denver and Golden.
-            </p>
-            <Link href="/book-shuttle" className="text-red-500 font-bold uppercase tracking-widest text-[10px] hover:underline">
-              Check Dates →
-            </Link>
-          </div>
+      {/* ================= PRICING / OPTIONS (kept minimal) ================= */}
+      <section className="max-w-6xl mx-auto px-6 py-16">
+        <h2 className="text-3xl font-black">Options</h2>
+        <p className="mt-3 text-zinc-300 max-w-3xl">
+          Pick the simple plan: shuttle seats for most people, private vehicles for groups or comfort.
+        </p>
 
-          {/* All Venue Shuttle Card */}
-          <div className="group rounded-[2.5rem] bg-zinc-900/50 border border-red-600 p-10 hover:bg-zinc-900 transition-all">
-            <div className="inline-block bg-red-600 text-white text-[9px] font-black px-2 py-1 uppercase rounded mb-4">
-              Featured
+        <div className="mt-10 grid md:grid-cols-2 gap-6">
+          <div className="bg-surface-strong border border-white/10 rounded-3xl p-7">
+            <div className="text-2xl font-black">Shuttle Seats</div>
+            <div className="mt-2 text-zinc-300">Per-person, fixed price. Best for most shows.</div>
+            <div className="mt-6 flex items-center justify-between">
+              <div>
+                <div className="text-3xl font-black">$59</div>
+                <div className="text-sm text-zinc-400">per person</div>
+              </div>
+              <Link href="/book-shuttle" className="btn-primary">
+                Book Shuttle →
+              </Link>
             </div>
-            <h3 className="text-2xl font-black uppercase italic mb-4">All Venue Shuttle</h3>
-            <p className="text-zinc-400 mb-8 text-sm leading-relaxed font-bold">
-              $50 per person ($250 min). Door-to-door to Mission Ballroom, 
-              Ball Arena, Fiddler&apos;s Green, and beyond.
-            </p>
-            <Link href="/shuttles/all-venue" className="text-white font-black uppercase tracking-widest text-[10px] hover:underline">
-              Book City Service →
-            </Link>
-          </div>
-          
-          {/* Private SUV Card */}
-          <div className="group rounded-[2.5rem] bg-zinc-900/50 border border-zinc-800 p-10 hover:border-blue-600/50 transition-all">
-            <h3 className="text-2xl font-black uppercase italic mb-4">Private SUV</h3>
-            <p className="text-zinc-400 mb-8 text-sm leading-relaxed">
-              Luxury for up to 6 guests. Custom timing from your hotel or Airbnb. 
-              Private SUV packages starting at $499.
-            </p>
-            <Link href="/private-suburban" className="text-blue-500 font-bold uppercase tracking-widest text-[10px] hover:underline">
-              Book Private →
-            </Link>
           </div>
 
+          <div className="bg-surface-strong border border-white/10 rounded-3xl p-7">
+            <div className="text-2xl font-black">Private Suburban</div>
+            <div className="mt-2 text-zinc-300">Flat rate. More room + more comfort.</div>
+            <div className="mt-6 flex items-center justify-between">
+              <div>
+                <div className="text-3xl font-black">$499</div>
+                <div className="text-sm text-zinc-400">flat rate</div>
+              </div>
+              <Link href="/private-suburban" className="btn-primary">
+                View Details →
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ================= THE BRIDGE ================= */}
-      <HomepageBridge />
-
-      {/* ================= THE CLEAN FOOTER (ONLY ONE) ================= */}
-      <footer className="py-24 border-t border-zinc-900 bg-black">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 text-left">
-            
+      {/* ================= QUICK INTEL ================= */}
+      <section className="max-w-6xl mx-auto px-6 pb-20">
+        <div className="bg-surface-strong border border-white/10 rounded-3xl p-8">
+          <div className="flex items-start justify-between gap-6 flex-wrap">
             <div>
-              <h3 className="text-2xl font-black italic uppercase text-white mb-6 tracking-tighter">
-                Party at Red Rocks
-              </h3>
-              <p className="text-zinc-500 text-sm leading-relaxed max-w-xs">
-                Colorado&apos;s premier concert transportation specialist. Direct Top Circle 
-                access for every show. No parking stress, no rideshare surges.
+              <h2 className="text-3xl font-black">Quick intel for show night</h2>
+              <p className="mt-3 text-zinc-300 max-w-3xl">
+                Keep the homepage clean — deep logistics live on dedicated authority pages.
               </p>
             </div>
-
-            <div>
-              <h4 className="text-red-600 font-black uppercase text-xs tracking-[0.2em] mb-8">Venue Guide</h4>
-              <ul className="space-y-4 text-zinc-400 text-sm font-bold">
-                <li><Link href="/guide/logistics/parking-lots" className="hover:text-white transition">Parking Lot Hacks →</Link></li>
-                <li><Link href="/guide/logistics/bag-policy" className="hover:text-white transition">2026 Bag Rules →</Link></li>
-                <li><Link href="/guide/logistics/shuttle-vs-westracks-2026" className="hover:text-white transition">vs. Westracks Pilot →</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-red-600 font-black uppercase text-xs tracking-[0.2em] mb-8">Service Hubs</h4>
-              <ul className="space-y-4 text-zinc-400 text-sm font-bold">
-                <li><Link href="/guide/local/denver-pickups" className="hover:text-white transition">Denver: Sheraton →</Link></li>
-                <li><Link href="/guide/local/trailhead-taphouse" className="hover:text-white transition">Golden: Trailhead Taphouse →</Link></li>
-                <li><Link href="/shuttles/all-venue" className="hover:text-white transition">All Venue City Service →</Link></li>
-              </ul>
-            </div>
-
+            <Link
+              href="/guide"
+              className="inline-flex items-center justify-center px-5 py-3 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 transition"
+            >
+              View all guides →
+            </Link>
           </div>
 
-          <div className="mt-20 pt-8 border-t border-zinc-900 text-center">
-            <p className="text-[9px] text-zinc-700 font-bold uppercase tracking-[0.4em]">
-              &copy; 2026 Party at Red Rocks | All Rights Reserved
-            </p>
+          <div className="mt-8 grid md:grid-cols-2 gap-6">
+            <div className="bg-surface border border-white/10 rounded-2xl p-6">
+              <h3 className="text-xl font-black">Local Music Intelligence</h3>
+              <p className="mt-2 text-zinc-300">
+                Pickup reality, post-show timing, and how to avoid the trap.
+              </p>
+              <div className="mt-4">
+                <Link className="underline decoration-white/20 hover:decoration-white/60" href="/guide">
+                  Open →
+                </Link>
+              </div>
+            </div>
+
+            <div className="bg-surface border border-white/10 rounded-2xl p-6">
+              <h3 className="text-xl font-black">Red Rocks FAQ</h3>
+              <p className="mt-2 text-zinc-300">
+                Bag policy, tailgating, entry timing, and exits — quick answers.
+              </p>
+              <div className="mt-4">
+                <Link className="underline decoration-white/20 hover:decoration-white/60" href="/guide">
+                  Open →
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
-      </footer>
+      </section>
 
+      {/* ================= FOOTER ================= */}
+      <footer className="border-t border-white/10">
+        <div className="max-w-6xl mx-auto px-6 py-10 text-sm text-zinc-400 flex flex-wrap items-center gap-3">
+          <span>© {new Date().getFullYear()} Party at Red Rocks. All rights reserved.</span>
+          <span className="text-zinc-600">•</span>
+          <Link className="hover:text-white" href="/guide">
+            Guides
+          </Link>
+          <span className="text-zinc-600">•</span>
+          <Link className="hover:text-white" href="/week">
+            This Week
+          </Link>
+          <span className="text-zinc-600">•</span>
+          <Link className="hover:text-white" href="/venues">
+            Venues
+          </Link>
+          <span className="text-zinc-600">•</span>
+          <Link className="hover:text-white" href="/book-shuttle">
+            Shuttles
+          </Link>
+        </div>
+      </footer>
     </main>
   );
 }

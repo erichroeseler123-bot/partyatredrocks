@@ -1,0 +1,251 @@
+import Link from "next/link";
+
+type Card = {
+  eyebrow: string;
+  title: string;
+  price: string;
+  note?: string;
+  bullets: string[];
+  href: string;
+  cta: string;
+  tone: "shared" | "private" | "sprinter" | "bus" | "other";
+};
+
+const RED_ROCKS: Card[] = [
+  {
+    eyebrow: "Shared ride",
+    title: "Group coach seats",
+    price: "$59–$65",
+    note: "Per person",
+    bullets: [
+      "Pickup windows in Denver metro",
+      "Professional driver + clean timing",
+      "Best value for most groups",
+    ],
+    href: "/book-shuttle",
+    cta: "Reserve seats",
+    tone: "shared",
+  },
+  {
+    eyebrow: "Private vehicle",
+    title: "Private SUV",
+    price: "$499",
+    note: "Flat rate",
+    bullets: [
+      "Just your group (door-to-door)",
+      "Flexible pickup timing",
+      "No strangers, no waiting",
+    ],
+    href: "/private-suburban",
+    cta: "Book Private SUV",
+    tone: "private",
+  },
+  {
+    eyebrow: "Private vehicle",
+    title: "Sprinter van",
+    price: "$699",
+    note: "Flat rate",
+    bullets: [
+      "Roomy, comfortable, premium",
+      "Ideal for larger groups",
+      "Direct pickup + direct return",
+    ],
+    href: "/book",
+    cta: "Request Sprinter",
+    tone: "sprinter",
+  },
+  {
+    eyebrow: "Private vehicle",
+    title: "20-passenger bus",
+    price: "$1099",
+    note: "Flat rate",
+    bullets: [
+      "Big groups, one vehicle",
+      "Professional transport plan",
+      "Best for events + parties",
+    ],
+    href: "/book",
+    cta: "Request bus",
+    tone: "bus",
+  },
+];
+
+const OTHER_VENUES: Card[] = [
+  {
+    eyebrow: "All other venues",
+    title: "Private SUV",
+    price: "$250",
+    note: "Up to 7",
+    bullets: ["Ball Arena, Mission Ballroom, Ogden, Gothic, more", "One price, no surge", "Direct pickup + direct return"],
+    href: "/book-all-venues",
+    cta: "Book private",
+    tone: "other",
+  },
+  {
+    eyebrow: "All other venues",
+    title: "Sprinter van",
+    price: "$450",
+    note: "Flat rate",
+    bullets: ["More room, more comfort", "Great for groups", "Simple pickup / drop"],
+    href: "/book-all-venues",
+    cta: "Request Sprinter",
+    tone: "other",
+  },
+  {
+    eyebrow: "All other venues",
+    title: "20-passenger bus",
+    price: "$1000",
+    note: "Flat rate",
+    bullets: ["Large groups, one ride", "Professional driver", "Event-grade logistics"],
+    href: "/book-all-venues",
+    cta: "Request bus",
+    tone: "other",
+  },
+  {
+    eyebrow: "Mishawaka",
+    title: "Per-person seats",
+    price: "$65",
+    note: "Per person",
+    bullets: ["Mishawaka-focused timing", "Reliable return plan", "Clean, pro logistics"],
+    href: "/shuttles/mishawaka",
+    cta: "Reserve seats",
+    tone: "other",
+  },
+];
+
+function TonePill({ tone }: { tone: Card["tone"] }) {
+  const cls =
+    tone === "shared"
+      ? "border-red-400/20 bg-red-500/10 text-red-200"
+      : tone === "private"
+      ? "border-cyan-400/20 bg-cyan-500/10 text-cyan-100"
+      : tone === "sprinter"
+      ? "border-violet-400/20 bg-violet-500/10 text-violet-100"
+      : tone === "bus"
+      ? "border-emerald-400/20 bg-emerald-500/10 text-emerald-100"
+      : "border-white/15 bg-white/5 text-zinc-200";
+
+  return (
+    <span className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[10px] font-black uppercase tracking-[0.28em] ${cls}`}>
+      <span className="h-1.5 w-1.5 rounded-full bg-current opacity-80" />
+      {tone === "shared"
+        ? "Shared ride"
+        : tone === "private"
+        ? "Private"
+        : tone === "sprinter"
+        ? "Sprinter"
+        : tone === "bus"
+        ? "Bus"
+        : "Other"}
+    </span>
+  );
+}
+
+function PricingCard({ c }: { c: Card }) {
+  return (
+    <div className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 shadow-[0_18px_60px_rgba(0,0,0,0.45)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-white/18 hover:bg-white/7 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+      {/* hologram sheen */}
+      <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        <div className="absolute -inset-24 rotate-12 bg-gradient-to-r from-cyan-400/10 via-transparent to-red-400/10" />
+      </div>
+
+      <div className="relative z-10 flex items-start justify-between gap-4">
+        <div>
+          <div className="flex items-center gap-3">
+            <TonePill tone={c.tone} />
+            <span className="text-[11px] uppercase tracking-[0.22em] text-zinc-300">{c.eyebrow}</span>
+          </div>
+          <h3 className="mt-3 text-2xl font-black tracking-tight text-white">{c.title}</h3>
+        </div>
+
+        <div className="text-right">
+          <div className="text-2xl font-black text-white">{c.price}</div>
+          {c.note ? <div className="mt-1 text-[11px] uppercase tracking-[0.22em] text-zinc-300">{c.note}</div> : null}
+        </div>
+      </div>
+
+      <ul className="relative z-10 mt-5 space-y-2 text-sm text-zinc-200/90">
+        {c.bullets.map((b) => (
+          <li key={b} className="flex gap-2">
+            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/55" />
+            <span>{b}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div className="relative z-10 mt-6">
+        <Link
+          href={c.href}
+          className="inline-flex w-full items-center justify-center rounded-full bg-white text-zinc-950 px-5 py-3 text-[12px] font-black uppercase tracking-[0.22em] transition-all duration-200 hover:opacity-90"
+        >
+          {c.cta}
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+export default function FeaturedServices() {
+  return (
+    <section className="relative z-10 max-w-7xl mx-auto px-6 -mt-16 pb-10">
+      <div className="rounded-[32px] border border-white/10 bg-white/5 p-6 md:p-8 shadow-[0_30px_90px_rgba(0,0,0,0.55)] backdrop-blur-xl">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+          <div>
+            <p className="text-[12px] font-black uppercase tracking-[0.32em] text-zinc-300">
+              Transportation options
+            </p>
+            <h2 className="mt-3 text-3xl md:text-4xl font-black tracking-tight text-white">
+              Would you rather share a ride with other fans — or have a private vehicle just for your group?
+            </h2>
+            <p className="mt-3 max-w-3xl text-zinc-200/85">
+              Professional transport and a real return plan. Choose shared seats for value, or book private vehicles for timing and comfort.
+            </p>
+          </div>
+
+          <div className="flex gap-2 md:justify-end">
+            <Link
+              href="/book-shuttle"
+              className="inline-flex items-center justify-center rounded-full border border-red-400/25 bg-red-500/10 px-5 py-3 text-[11px] font-black uppercase tracking-[0.22em] text-red-100 hover:bg-red-500/15 transition-all"
+            >
+              Reserve seats · $59–$65
+            </Link>
+            <Link
+              href="/private-suburban"
+              className="inline-flex items-center justify-center rounded-full border border-cyan-400/25 bg-cyan-500/10 px-5 py-3 text-[11px] font-black uppercase tracking-[0.22em] text-cyan-100 hover:bg-cyan-500/15 transition-all"
+            >
+              Private SUV · $499
+            </Link>
+          </div>
+        </div>
+
+        <div className="mt-8">
+          <div className="flex items-center justify-between">
+            <h3 className="text-[12px] font-black uppercase tracking-[0.32em] text-zinc-300">Red Rocks</h3>
+            <Link href="/book" className="text-[12px] font-black uppercase tracking-[0.32em] text-white/80 hover:text-white">
+              Get a quote →
+            </Link>
+          </div>
+          <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {RED_ROCKS.map((c) => (
+              <PricingCard key={c.title} c={c} />
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-10">
+          <div className="flex items-center justify-between">
+            <h3 className="text-[12px] font-black uppercase tracking-[0.32em] text-zinc-300">Mishawaka + other venues</h3>
+            <Link href="/venues" className="text-[12px] font-black uppercase tracking-[0.32em] text-white/80 hover:text-white">
+              View venues →
+            </Link>
+          </div>
+          <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {OTHER_VENUES.map((c) => (
+              <PricingCard key={c.title + c.price} c={c} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

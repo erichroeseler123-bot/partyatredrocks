@@ -14,7 +14,7 @@ const richData = {
         "postalCode": "80401",
         "streetAddress": "811 12th St"
       },
-      "priceRange": "$55 - $499",
+      "priceRange": "$59 - $499",
       "telephone": "+1-303-XXXXXXX"
     },
     {

@@ -19,7 +19,7 @@ export default function RedRocksShowsGrid({
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="group bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-800 hover:border-white transition"
+            className="group bg-surface rounded-2xl overflow-hidden border border-white/10 hover:border-white transition hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
           >
             <div className="relative aspect-[16/9] w-full bg-black">
               {event.image && (

@@ -2,22 +2,22 @@ import Link from 'next/link';
 
 export default function WinterSurvival() {
   return (
-    <div className="max-w-4xl mx-auto px-6 py-16 bg-black text-white">
+    <div className="max-w-4xl mx-auto px-6 py-16 bg-surface text-white">
       <h1 className="text-5xl font-black mb-6 italic uppercase tracking-tighter">
         Red Rocks <span className="text-blue-500">Winter Survival</span> Guide 2026
       </h1>
       
-      <p className="text-xl text-zinc-400 mb-10 leading-relaxed">
+      <p className="text-xl text-zinc-400 mb-16 leading-relaxed">
         March and April at Red Rocks are unpredictable. While Denver might feel like spring, the amphitheater sits at <strong>6,450 feet</strong>—nearly 1,000 feet higher than the city—meaning temperatures drop drastically once the sun dips.
       </p>
 
-      <section className="mb-12 bg-zinc-900 border border-blue-900/50 p-8 rounded-3xl">
+      <section className="mb-16 bg-surface-strong border border-blue-900/50 p-8 rounded-3xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
         <h3 className="text-blue-400 font-bold uppercase mb-4 italic">The "20-Degree" Rule</h3>
         <p className="text-lg">Always assume the venue temperature is <strong>20 degrees colder</strong> than the Denver forecast. Wind "howls" through the rocks and is the primary cause of mid-show chills.</p>
       </section>
 
       <h2 className="text-3xl font-black uppercase mb-6 italic">Essential Gear List</h2>
-      <ul className="space-y-6 mb-12">
+      <ul className="space-y-6 mb-16">
         <li className="flex items-start gap-4">
           <span className="text-2xl">🧊</span>
           <div>
@@ -38,9 +38,9 @@ export default function WinterSurvival() {
         </li>
       </ul>
 
-      <div className="bg-blue-600 text-white p-10 rounded-3xl text-center shadow-2xl">
+      <div className="bg-blue-600 text-white p-10 rounded-3xl text-center shadow-2xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
         <h2 className="text-3xl font-black mb-4 uppercase">Heated Return Transport</h2>
-        <p className="text-lg mb-8">
+        <p className="text-lg mb-16">
           Don't wait 90 minutes in a frozen lot for an Uber. Our heated Sprinters wait at the Top Circle 30 minutes post-encore.
         </p>
         <Link href="/book-shuttle" className="inline-block bg-white text-blue-600 px-10 py-4 rounded-full font-black uppercase hover:bg-zinc-100 transition shadow-lg">

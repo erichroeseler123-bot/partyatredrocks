@@ -1,0 +1,45 @@
+/* ===== HOLOGRAM BACKDROP (calmer than pure black) ===== */
+html, body { min-height: 100%; }
+
+body{
+  position: relative;
+  background:
+    radial-gradient(1200px 800px at 10% 10%, rgba(0,229,255,0.10), transparent 60%),
+    radial-gradient(900px 700px at 90% 0%, rgba(255,90,31,0.08), transparent 55%),
+    linear-gradient(180deg, rgb(12, 15, 22) 0%, rgb(16, 21, 31) 55%, rgb(12, 15, 22) 100%);
+  color: rgb(245, 247, 255);
+}
+
+/* hologram “film” overlay */
+body::before{
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  background:
+    /* soft diagonal hologram wash */
+    linear-gradient(135deg,
+      rgba(0,229,255,0.10) 0%,
+      rgba(255,90,31,0.06) 35%,
+      rgba(0,229,255,0.08) 70%,
+      rgba(255,90,31,0.05) 100%
+    ),
+    /* scanline texture */
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.025) 0px,
+      rgba(255,255,255,0.025) 1px,
+      rgba(0,0,0,0) 3px,
+      rgba(0,0,0,0) 6px
+    );
+  opacity: 0.55;
+  mix-blend-mode: screen;
+}
+
+/* reduce “overwhelming” glow intensity */
+.glow-accent{
+  box-shadow: 0 0 0 1px rgba(0,229,255,0.06), 0 10px 40px rgba(0,0,0,0.35);
+}
+.glow-accent:hover{
+  box-shadow: 0 0 0 1px rgba(0,229,255,0.10), 0 14px 55px rgba(0,0,0,0.40);
+}

@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -------------------------------------------------------
+   Global tokens: dark but NOT "all black"
+------------------------------------------------------- */
+:root{
+  --bg0: 12 14 20;      /* deep navy */
+  --bg1: 18 22 34;      /* slate */
+  --text: 245 247 255;
+  --muted: 172 178 194;
+  --border: 255 255 255;
+
+  --accent: 255 90 31;  /* ember */
+  --accent2: 0 229 255; /* cyan */
+
+  --radius-xl: 28px;
+  --radius-pill: 9999px;
+}
+
+html, body { min-height: 100%; }
+
+body{
+  color: rgb(var(--text));
+  background:
+    radial-gradient(1200px 700px at 10% 0%, rgba(var(--accent2),0.10), transparent 60%),
+    radial-gradient(900px 700px at 90% 10%, rgba(var(--accent),0.09), transparent 55%),
+    linear-gradient(180deg, rgb(var(--bg0)) 0%, rgb(var(--bg1)) 55%, rgb(var(--bg0)) 100%);
+}
+
+/* subtle hologram overlay (scanlines + prism) */
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    linear-gradient(90deg,
+      rgba(0,229,255,0.06),
+      transparent 25%,
+      rgba(255,90,31,0.05),
+      transparent 65%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.028) 0px,
+      rgba(255,255,255,0.028) 1px,
+      transparent 1px,
+      transparent 7px
+    );
+  mix-blend-mode: screen;
+  opacity: 0.55;
+}
+
+/* keep app content above overlay */
+main, header, footer { position: relative; z-index: 1; }
+
+/* -------------------------------------------------------
+   Utility-ish classes (pure CSS)
+------------------------------------------------------- */
+.bg-surface{
+  background: rgba(18, 22, 34, 0.72);
+  backdrop-filter: blur(12px);
+}
+
+.bg-surface-strong{
+  background: rgba(12, 14, 22, 0.82);
+  backdrop-filter: blur(14px);
+}
+
+.border-soft{
+  border: 1px solid rgba(var(--border), 0.10);
+}
+
+.shadow-soft{
+  box-shadow: 0 20px 70px rgba(0,0,0,0.45);
+}
+
+.glow-accent{
+  box-shadow:
+    0 0 0 1px rgba(var(--accent2), 0.14),
+    0 0 40px rgba(var(--accent2), 0.10);
+}
+
+.glow-accent:hover{
+  box-shadow:
+    0 0 0 1px rgba(var(--accent2), 0.22),
+    0 0 55px rgba(var(--accent2), 0.16);
+}
+
+/* buttons */
+.btn-primary{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  padding: 0.65rem 1.15rem;
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #ffffff;
+  background: rgb(220 38 38);
+  transition: transform .15s ease, background-color .15s ease, box-shadow .15s ease;
+}
+.btn-primary:hover{ background: rgb(239 68 68); transform: translateY(-1px); }
+.btn-primary:active{ transform: scale(0.98); }

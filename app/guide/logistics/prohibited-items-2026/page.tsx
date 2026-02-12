@@ -9,7 +9,7 @@ export default function ProhibitedItems() {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-20 bg-black text-white text-left">
+    <div className="max-w-4xl mx-auto px-6 py-20 bg-surface text-white text-left">
       <header className="mb-16 border-l-4 border-red-600 pl-8">
         <h1 className="text-5xl font-black uppercase italic tracking-tighter">
           2026 <span className="text-red-600">Prohibited</span> Items Deep Dive
@@ -23,10 +23,10 @@ export default function ProhibitedItems() {
       {/* Rules Grid */}
       <div className="grid gap-6 mb-16">
         {items.map((item, i) => (
-          <div key={i} className="bg-zinc-900/50 border border-zinc-800 p-8 rounded-[2rem]">
+          <div key={i} className="bg-surface-strong/50 border-soft shadow-soft p-8 rounded-[2rem]">
             <h3 className="text-red-500 font-black uppercase mb-2 italic text-2xl">{item.name}</h3>
             <p className="text-white font-bold mb-4">{item.rule}</p>
-            <div className="bg-black/40 p-4 rounded-xl border border-zinc-800 text-zinc-500 text-sm italic">
+            <div className="bg-surface/40 p-4 rounded-2xl border-soft shadow-soft text-zinc-500 text-base italic hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
               Pro Tip: {item.tip}
             </div>
           </div>
@@ -34,16 +34,16 @@ export default function ProhibitedItems() {
       </div>
 
       {/* Internal "Web of Relevance" Links */}
-      <div className="bg-zinc-900 p-10 rounded-[2.5rem] border border-zinc-800 mb-16">
+      <div className="bg-surface-strong p-10 rounded-[2.5rem] border-soft shadow-soft mb-16">
         <h3 className="text-2xl font-black mb-6 uppercase italic text-white">Related Intelligence</h3>
         <div className="grid sm:grid-cols-2 gap-6">
           <Link href="/guide/logistics/bag-policy" className="group">
             <h4 className="text-zinc-100 font-bold group-hover:text-red-500 transition">2026 Bag Rules →</h4>
-            <p className="text-zinc-500 text-xs mt-1">Detailed sizing for fanny packs and purses.</p>
+            <p className="text-zinc-500 text-base mt-1">Detailed sizing for fanny packs and purses.</p>
           </Link>
           <Link href="/guide/logistics/winter-survival" className="group">
             <h4 className="text-zinc-100 font-bold group-hover:text-blue-500 transition">Winter Gear Prep →</h4>
-            <p className="text-zinc-500 text-xs mt-1">What clothing items pass security in March.</p>
+            <p className="text-zinc-500 text-base mt-1">What clothing items pass security in March.</p>
           </Link>
         </div>
       </div>
@@ -55,7 +55,7 @@ export default function ProhibitedItems() {
           If security rejects an item, a rideshare leaves you stranded. Our shuttle drivers provide 
           a final check and allow you to leave gear safely in our locked vehicles during the show.
         </p>
-        <Link href="/book-shuttle" className="bg-red-600 text-white px-12 py-5 rounded-full font-black uppercase hover:bg-red-500 transition shadow-lg inline-block">
+        <Link href="/book-shuttle" className="btn-primary uppercase hover:bg-red-500 transition shadow-lg inline-block">
           Book Your 2026 Ride
         </Link>
       </div>

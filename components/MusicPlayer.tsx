@@ -36,10 +36,10 @@ export default function MusicPlayer({ spotifyUrl }: { spotifyUrl?: string }) {
     fetchSmartLink();
   }, [spotifyUrl]);
 
-  if (status === 'loading') return <div className="h-24 animate-pulse bg-zinc-900 rounded-3xl border border-white/5" />;
+  if (status === 'loading') return <div className="h-24 animate-pulse bg-surface rounded-3xl border border-white/5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300" />;
 
   if (status === 'error') return (
-    <div className="h-24 flex items-center justify-center rounded-[2rem] border border-white/5 bg-zinc-900/10">
+    <div className="h-24 flex items-center justify-center rounded-[2rem] border border-white/5 bg-surface/10">
       <p className="text-zinc-500 text-[10px] uppercase font-black italic tracking-widest px-4 text-center leading-tight">
         Audio Dispatch Offline – Check SeatGeek for Details
       </p>
@@ -47,7 +47,7 @@ export default function MusicPlayer({ spotifyUrl }: { spotifyUrl?: string }) {
   );
 
   return (
-    <div className="relative rounded-[2rem] overflow-hidden border border-white/5 bg-zinc-900/50 h-24 group">
+    <div className="relative rounded-[2rem] overflow-hidden border border-white/5 bg-surface/50 h-24 group">
       <iframe
         src={embedUrl!}
         width="100%" height="300" frameBorder="0" allow="autoplay; encrypted-media; fullscreen"

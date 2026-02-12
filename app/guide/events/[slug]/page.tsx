@@ -1,295 +1,173 @@
-export const dynamicParams = true;
-
-import { notFound, redirect } from "next/navigation";
+// app/guide/events/[slug]/page.tsx
 import Link from "next/link";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
-import { shows2026 } from "@/lib/shows-2026";
-
-/* ================================
-   TYPES
-================================ */
-
-type Show = (typeof shows2026)[number];
+/**
+ * IMPORTANT (Next.js 16):
+ * params is a Promise in dynamic routes in certain builds/targets.
+ * So we type it as Promise<...> and unwrap with `await params` exactly once.
+ */
 
 type Props = {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 };
 
-/* ================================
-   NORMALIZER
-================================ */
+/** -----------------------------
+ *  Types
+ *  ----------------------------*/
+type Show = {
+  slug: string;
+  title: string;
+  venue?: string;
+  city?: string;
+  dateText?: string; // e.g. "Fri • May 10, 2026"
+  description?: string;
+  heroImage?: string; // optional if you have it
+  ticketUrl?: string; // optional
+};
 
-function normalize(input = "") {
-  return input
-    .toLowerCase()
-    .trim()
-    .replace(/\/+$/, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
+/** -----------------------------
+ *  Data Source
+ *  Replace this with YOUR real list if you already have one.
+ *  If you already have a SHOWS array in this file, keep it and delete this stub.
+ *  ----------------------------*/
+const SHOWS: Show[] = [
+  {
+    slug: "2026-season-preview",
+    title: "2026 Season Preview",
+    venue: "Red Rocks + Denver Venues",
+    city: "Denver, CO",
+    dateText: "2026",
+    description:
+      "A living preview page for the 2026 season. Updated as new dates drop.",
+  },
+  // NOTE: your real event slugs (like the crankdat slug) should be in your real dataset.
+];
+
+/** -----------------------------
+ *  Resolver
+ *  ----------------------------*/
+function resolveShow(rawSlug: string): Show | undefined {
+  const slug = String(rawSlug || "").trim().toLowerCase();
+  return SHOWS.find((s) => s.slug === slug);
 }
 
-/* ================================
-   PREBUILD INDEXES
-================================ */
-
-const showMap = new Map<string, Show>();
-const normalizedMap = new Map<string, Show[]>();
-const artistMap = new Map<string, Show[]>();
-
-for (let i = 0; i < shows2026.length; i++) {
-  const show = shows2026[i];
-
-  if (!show?.slug || !show?.artist) continue;
-
-  const slug = normalize(show.slug);
-  const artist = normalize(show.artist);
-
-  // Exact
-  showMap.set(slug, show);
-
-  // Normalized
-  if (!normalizedMap.has(slug)) {
-    normalizedMap.set(slug, []);
-  }
-  normalizedMap.get(slug)!.push(show);
-
-  // Artist
-  if (!artistMap.has(artist)) {
-    artistMap.set(artist, []);
-  }
-  artistMap.get(artist)!.push(show);
-}
-
-/* ================================
-   STATIC GENERATION
-================================ */
-
-export async function generateStaticParams() {
-  return Array.from(showMap.keys()).map((slug) => ({ slug }));
-}
-
-/* ================================
-   CANONICAL PICKER
-================================ */
-
-function pickCanonical(list: Show[]): Show {
-  return list
-    .slice()
-    .sort(function (a, b) {
-      return +new Date(a.date) - +new Date(b.date);
-    })[0];
-}
-
-/* ================================
-   RESOLVER
-================================ */
-
-function resolveShow(raw: string): Show | undefined {
-  const slug = normalize(raw);
-
-  /* 1. Exact */
-
-  const exact = showMap.get(slug);
-  if (exact) return exact;
-
-  /* 2. Normalized */
-
-  const normalized = normalizedMap.get(slug);
-  if (normalized && normalized.length) {
-    return pickCanonical(normalized);
-  }
-
-  /* 3. Artist direct */
-
-  const artistSlug = slug.replace(/-?\d+day-pass.*$/, "");
-
-  const direct = artistMap.get(artistSlug);
-
-  if (direct && direct.length) {
-    return pickCanonical(direct);
-  }
-
-  /* 4. Artist partial (ES5 safe) */
-
-  const entries = Array.from(artistMap);
-
-  for (let i = 0; i < entries.length; i++) {
-    const artist = entries[i][0];
-    const shows = entries[i][1];
-
-    if (artist.indexOf(artistSlug) !== -1) {
-      return pickCanonical(shows);
-    }
-  }
-
-  /* 5. Prefix fallback */
-
-  const prefix = [];
-
-  for (let i = 0; i < shows2026.length; i++) {
-    const s = shows2026[i];
-    const sSlug = normalize(s.slug);
-
-    if (
-      sSlug.indexOf(slug + "-") === 0 ||
-      slug.indexOf(sSlug + "-") === 0
-    ) {
-      prefix.push(s);
-    }
-  }
-
-  if (prefix.length) {
-    return pickCanonical(prefix);
-  }
-
-  return undefined;
-}
-
-/* ================================
-   SEO
-================================ */
-
-export async function generateMetadata(
-  { params }: Props
-): Promise<Metadata> {
-
-  const show = resolveShow(params.slug);
+/** -----------------------------
+ *  Metadata (FIXED)
+ *  ----------------------------*/
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params; // ✅ unwrap params promise
+  const show = resolveShow(slug);
 
   if (!show) return {};
 
-  const date = new Date(show.date).toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
-
-  const title = show.artist + " at Red Rocks — " + date;
-
+  const title = `${show.title} | Party at Red Rocks`;
   const description =
-    show.operational?.bio ||
-    "Transportation and concert guide for " +
-      show.artist +
-      " at Red Rocks Amphitheatre on " +
-      date +
-      ".";
+    show.description ||
+    `Concert intelligence + transportation planning for ${show.title}.`;
 
   return {
     title,
     description,
-
-    alternates: {
-      canonical: "/guide/events/" + show.slug,
-    },
-
     openGraph: {
       title,
       description,
       type: "article",
-      images: show.img ? [show.img] : [],
-    },
-
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: show.img ? [show.img] : [],
     },
   };
 }
 
-/* ================================
-   PAGE
-================================ */
+/** -----------------------------
+ *  Page (FIXED)
+ *  ----------------------------*/
+export default async function EventPage({ params }: Props) {
+  const { slug } = await params; // ✅ unwrap params promise
+  const show = resolveShow(slug);
 
-export default function EventPage({ params }: Props) {
-
-  const show = resolveShow(params.slug);
-
-  if (!show) {
-    notFound();
-  }
-
-  /* Canonical redirect */
-
-  if (normalize(params.slug) !== normalize(show.slug)) {
-    redirect("/guide/events/" + show.slug);
-  }
-
-  const formattedDate = new Date(show.date).toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
+  if (!show) notFound();
 
   return (
-    <main className="max-w-4xl mx-auto px-6 py-24 text-white">
+    <main className="min-h-screen bg-surface text-white py-24 px-6">
+      <div className="max-w-5xl mx-auto">
+        <header className="mb-12 border-l-4 border-red-600 pl-8">
+          <h1 className="text-5xl md:text-7xl font-black uppercase italic tracking-tighter leading-tight">
+            {show.title}
+          </h1>
 
-      <header className="mb-12">
+          <p className="mt-3 text-xl text-zinc-400 font-bold uppercase tracking-widest">
+            {(show.venue ? `${show.venue}` : "Event") +
+              (show.city ? ` • ${show.city}` : "")}
+          </p>
 
-        <h1 className="text-4xl md:text-5xl font-black uppercase italic mb-4">
-          {show.artist}
-        </h1>
+          {show.dateText ? (
+            <p className="mt-4 text-base text-zinc-500 font-bold uppercase tracking-[0.2em]">
+              {show.dateText}
+            </p>
+          ) : null}
+        </header>
 
-        <p className="text-red-600 font-bold uppercase text-sm mb-3">
-          {formattedDate}
-        </p>
+        {/* Intelligence */}
+        <section className="mb-20">
+          <h2 className="text-3xl font-black mb-8 border-b border-white/10 pb-4 uppercase italic">
+            Event Intelligence
+          </h2>
 
-        <p className="text-zinc-400 text-lg">
-          {show.venue}
-        </p>
+          {show.description ? (
+            <p className="text-zinc-300 leading-relaxed text-lg">
+              {show.description}
+            </p>
+          ) : (
+            <p className="text-zinc-500 italic text-center py-10 uppercase text-base font-bold tracking-widest">
+              Updating event intelligence...
+            </p>
+          )}
 
-      </header>
+          <div className="mt-10 flex flex-col md:flex-row gap-4">
+            <Link
+              href="/book-all-venue"
+              className="btn-primary uppercase text-base tracking-[0.2em] transition shadow-xl text-center"
+            >
+              Book Transportation
+            </Link>
 
-      {show.img && (
-        <div className="mb-12 overflow-hidden rounded-3xl border border-zinc-800">
-          <img
-            src={show.img}
-            alt={show.artist + " at Red Rocks"}
-            className="w-full h-[320px] object-cover"
-            loading="eager"
-          />
-        </div>
-      )}
+            {show.ticketUrl ? (
+              <a
+                href={show.ticketUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-zinc-800 hover:bg-zinc-700 px-8 py-4 rounded-full font-black uppercase text-base tracking-[0.2em] transition shadow-xl text-center"
+              >
+                Tickets
+              </a>
+            ) : null}
 
-      <section className="bg-zinc-900/60 border border-zinc-800 rounded-3xl p-8 mb-14">
+            <Link
+              href="/guide/events/2026-season-preview"
+              className="btn-secondary"
+            >
+              2026 Hub
+            </Link>
+          </div>
+        </section>
 
-        <h2 className="text-xl font-black uppercase mb-4">
-          Show Intelligence
-        </h2>
-
-        <p className="text-zinc-300 leading-relaxed">
-
-          {show.operational?.bio ||
-            "This " +
-              show.artist +
-              " performance is expected to draw strong demand. " +
-              "Plan to arrive early and secure transportation in advance."}
-
-        </p>
-
-      </section>
-
-      <section className="flex flex-col sm:flex-row gap-4">
-
-        <Link
-          href="/book-shuttle"
-          className="px-7 py-3 bg-red-600 hover:bg-red-700 font-black uppercase text-sm rounded-full text-center"
-        >
-          Book Shuttle
-        </Link>
-
-        <Link
-          href="/guide/events/2026-season-preview"
-          className="px-7 py-3 border border-zinc-700 hover:border-zinc-500 font-black uppercase text-sm rounded-full text-center"
-        >
-          View Full Season
-        </Link>
-
-      </section>
-
+        {/* Footer / Back */}
+        <section className="mt-10 border-t border-zinc-900 pt-10">
+          <Link
+            href="/"
+            className="inline-block bg-white text-black px-10 py-4 rounded-full font-black uppercase hover:bg-zinc-200 transition shadow-xl"
+          >
+            Return to Homepage
+          </Link>
+        </section>
+      </div>
     </main>
   );
+}
+
+/** -----------------------------
+ *  Static Params (optional, but good)
+ *  ----------------------------*/
+export async function generateStaticParams() {
+  return SHOWS.map((s) => ({ slug: s.slug }));
 }

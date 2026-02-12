@@ -17,7 +17,7 @@ export default async function SitRep() {
 
   if (!res.ok) {
     return (
-      <div className="border border-zinc-800 p-4 bg-zinc-950/50 backdrop-blur-sm text-zinc-400">
+      <div className="border border-white/10 p-4 bg-zinc-950/50 backdrop-blur-sm text-zinc-400">
         Weather unavailable
       </div>
     );
@@ -27,7 +27,7 @@ export default async function SitRep() {
   const { temperature, windspeed } = data.current_weather;
 
   return (
-    <div className="border border-zinc-800 p-4 bg-zinc-950/50 backdrop-blur-sm">
+    <div className="border border-white/10 p-4 bg-zinc-950/50 backdrop-blur-sm">
       <div className="text-xs uppercase tracking-widest text-zinc-400 mb-2">
         Situation Report
       </div>

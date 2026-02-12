@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function LocalTrust() {
   return (
-    <div className="bg-zinc-950 border border-zinc-800 p-8 rounded-3xl mt-12 flex flex-col md:flex-row justify-between items-center gap-6">
+    <div className="bg-surface border border-white/10 p-8 rounded-3xl mt-12 flex flex-col md:flex-row justify-between items-center gap-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
       <div>
         <h3 className="text-white font-black uppercase text-xl mb-2">Verified Tier-1 Operator</h3>
         <p className="text-zinc-500 text-sm max-w-sm">
@@ -14,7 +14,7 @@ export default function LocalTrust() {
         <Link 
           href="https://search.google.com/local/writereview?placeid=[YOUR_PLACE_ID]" 
           target="_blank"
-          className="bg-red-600 text-white px-8 py-3 rounded-full font-black text-sm uppercase hover:bg-red-500 transition shadow-lg"
+          className="btn-primary text-sm uppercase hover:bg-red-500 transition shadow-lg"
         >
           Review us on Google
         </Link>

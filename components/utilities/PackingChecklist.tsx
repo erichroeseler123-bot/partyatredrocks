@@ -2,7 +2,7 @@
 
 export default function PackingChecklist() {
   return (
-    <div className="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-6 mb-10">
+    <div className="bg-surface/60 border border-white/10 rounded-2xl p-6 mb-10 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
       <h3 className="text-xl font-black uppercase mb-4 tracking-tight">
         Quick Red Rocks Packing List
       </h3>

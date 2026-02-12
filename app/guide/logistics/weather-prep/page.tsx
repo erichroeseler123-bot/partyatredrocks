@@ -21,7 +21,7 @@ export default function WeatherPrep() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       
       <h1 className="text-4xl font-black mb-4">Red Rocks Weather Prep Guide (2026)</h1>
-      <p className="text-lg text-slate-700 mb-8">
+      <p className="text-lg text-zinc-200 mb-8">
         Red Rocks is a high-altitude outdoor venue (6,450ft). Weather changes fast. Use the 
         <a href="https://forecast.weather.gov/MapClick.php?lat=39.6653&lon=-105.2069" target="_blank" className="text-red-700 underline mx-1">NWS Morrison Point Forecast</a> 
         for the most accurate data.

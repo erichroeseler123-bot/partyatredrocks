@@ -26,7 +26,7 @@ const venues = [
 
 export default function AllVenueHub() {
   return (
-    <div className="min-h-screen bg-black text-white py-24 px-6">
+    <div className="min-h-screen bg-surface text-white py-24 px-6">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-6xl font-black uppercase italic tracking-tighter mb-4">
           All-Venue <span className="text-red-600">City Service</span>
@@ -37,7 +37,7 @@ export default function AllVenueHub() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
           {venues.map((v) => (
-            <Link key={v.slug} href={`/venues/${v.slug}`} className="group p-8 bg-zinc-900/40 border border-zinc-800 rounded-[2.5rem] hover:border-red-600 transition-all flex flex-col justify-between h-full">
+            <Link key={v.slug} href={`/venues/${v.slug}`} className="group p-8 bg-surface-strong/40 border border-white/10 rounded-[2.5rem] hover:border-red-600 transition-all flex flex-col justify-between h-full">
               <div>
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="text-2xl font-black uppercase italic leading-tight">{v.name}</h3>
@@ -50,7 +50,7 @@ export default function AllVenueHub() {
           ))}
         </div>
 
-        <div className="bg-red-600 p-12 rounded-[3rem] text-center shadow-2xl">
+        <div className="btn-primary">
           <h2 className="text-4xl font-black mb-4 uppercase italic tracking-tighter text-white">Secure Your Ride</h2>
           <p className="text-red-100 mb-10 font-medium text-lg max-w-xl mx-auto">
             Door-to-door fleet service for solo riders or massive groups. $50/person with a $250 total minimum.

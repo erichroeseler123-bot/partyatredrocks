@@ -1,6 +1,6 @@
 export default function PrivateSuburbanPage() {
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main className="min-h-screen bg-surface text-white">
       <section className="pt-28 pb-10 px-6">
         <div className="max-w-5xl mx-auto">
           <p className="text-zinc-500 text-[10px] font-black uppercase tracking-[0.35em]">
@@ -36,8 +36,8 @@ export default function PrivateSuburbanPage() {
 
       {/* Rezdy embed */}
       <section id="book" className="px-6 pb-24">
-        <div className="max-w-5xl mx-auto rounded-[2.5rem] overflow-hidden border border-zinc-800 bg-zinc-950/40">
-          <div className="p-6 md:p-10 border-b border-zinc-800">
+        <div className="max-w-5xl mx-auto rounded-[2.5rem] overflow-hidden border border-white/10 bg-surface/40">
+          <div className="p-6 md:p-10 border-b border-white/10">
             <h2 className="text-2xl md:text-3xl font-black italic uppercase">
               Book Now
             </h2>
@@ -58,7 +58,7 @@ export default function PrivateSuburbanPage() {
               width="100%"
               height="1000px"
               frameBorder="0"
-              className="rezdy rounded-[2rem] bg-black"
+              className="rezdy rounded-[2rem] bg-surface"
               src="https://gosnotransportation58.rezdy.com/596193/suburban?iframe=true"
             ></iframe>
           </div>

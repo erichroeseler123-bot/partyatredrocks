@@ -11,8 +11,8 @@ export default function FleetGrid() {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
       
       {/* 🚐 SHUTTLE EXEC CARD */}
-      <div className="bg-zinc-900/40 border border-zinc-800 rounded-3xl p-6 flex flex-col items-center text-center space-y-6">
-        <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl">
+      <div className="bg-surface/40 border border-white/10 rounded-3xl p-6 flex flex-col items-center text-center space-y-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+        <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
           <img src="/shuttle-exec.jpg" alt="Shuttle Exec" className="object-cover w-full h-full" />
           <span className="absolute top-4 right-4 bg-neon-blue text-black font-black text-[10px] px-3 py-1 rounded-full shadow-[0_0_10px_#00f2ff]">
             $59.00
@@ -26,15 +26,15 @@ export default function FleetGrid() {
         {/* ✅ FIXED BUTTON: NEON BLUE + NO 404 LINK */}
         <Link 
           href={`/shows/${primarySlug}`}
-          className="w-full py-4 bg-neon-blue text-black font-black uppercase italic tracking-tighter text-sm rounded-xl hover:bg-white transition-all shadow-[0_0_20px_#00f2ff] active:scale-95"
+          className="w-full py-4 bg-neon-blue text-black font-black uppercase italic tracking-tighter text-sm rounded-2xl hover:bg-white transition-all shadow-[0_0_20px_#00f2ff] active:scale-95 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
         >
           BOOK_SHUTTLE
         </Link>
       </div>
 
       {/* 🏎️ PRIVATE SUV NODE CARD */}
-      <div className="bg-zinc-900/40 border border-zinc-800 rounded-3xl p-6 flex flex-col items-center text-center space-y-6">
-        <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl">
+      <div className="bg-surface/40 border border-white/10 rounded-3xl p-6 flex flex-col items-center text-center space-y-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+        <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
           <img src="/private-suv.jpg" alt="Private Suburban" className="object-cover w-full h-full" />
           <span className="absolute top-4 right-4 bg-white text-black font-black text-[10px] px-3 py-1 rounded-full shadow-lg">
             $499.00
@@ -48,7 +48,7 @@ export default function FleetGrid() {
         {/* ✅ FIXED BUTTON: NEON BLUE + NEW LABEL */}
         <Link 
           href={`/shows/${primarySlug}`}
-          className="w-full py-4 bg-neon-blue text-black font-black uppercase italic tracking-tighter text-sm rounded-xl hover:bg-white transition-all shadow-[0_0_20px_#00f2ff] active:scale-95"
+          className="w-full py-4 bg-neon-blue text-black font-black uppercase italic tracking-tighter text-sm rounded-2xl hover:bg-white transition-all shadow-[0_0_20px_#00f2ff] active:scale-95 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
         >
           BOOK_PRIVATE_SUBURBAN
         </Link>

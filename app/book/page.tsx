@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function BookPage() {
   return (
-    <main className="min-h-screen bg-black text-white px-6 py-24">
+    <main className="min-h-screen bg-surface text-white px-6 py-24">
       <div className="max-w-6xl mx-auto">
 
         {/* HEADER */}
@@ -25,7 +25,7 @@ export default function BookPage() {
           {/* RED ROCKS */}
           <Link
             href="/venues/red-rocks-amphitheatre"
-            className="group rounded-3xl border border-white/10 bg-white/[0.02] p-10 hover:bg-white/[0.05] transition-all"
+            className="group rounded-3xl border border-white/10 bg-white/[0.02] p-10 hover:bg-white/[0.05] transition-all hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
           >
             <h2 className="text-3xl font-black italic uppercase mb-4 group-hover:text-red-500">
               Party at Red Rocks
@@ -44,7 +44,7 @@ export default function BookPage() {
           {/* MISHAWAKA */}
           <Link
             href="/venues/mishawaka-amphitheatre"
-            className="group rounded-3xl border border-white/10 bg-white/[0.02] p-10 hover:bg-white/[0.05] transition-all"
+            className="group rounded-3xl border border-white/10 bg-white/[0.02] p-10 hover:bg-white/[0.05] transition-all hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
           >
             <h2 className="text-3xl font-black italic uppercase mb-4 group-hover:text-blue-400">
               Mishawaka Shuttle
@@ -63,7 +63,7 @@ export default function BookPage() {
           {/* ALL VENUE */}
           <Link
             href="/book-all-venues"
-            className="group rounded-3xl border border-white/10 bg-white/[0.02] p-10 hover:bg-white/[0.05] transition-all"
+            className="group rounded-3xl border border-white/10 bg-white/[0.02] p-10 hover:bg-white/[0.05] transition-all hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
           >
             <h2 className="text-3xl font-black italic uppercase mb-4 group-hover:text-green-400">
               All-Venue Shuttle

@@ -3,23 +3,23 @@ import GlobalSearch from '@/components/GlobalSearch';
 
 export default function ShuttlesPage() {
   return (
-    <div className="min-h-screen bg-black text-white font-mono selection:bg-matrix-green/30 w-full pb-20">
+    <div className="min-h-screen bg-surface text-white font-mono selection:bg-matrix-green/30 w-full pb-20">
       <main className="p-8 lg:p-12 max-w-7xl mx-auto">
         
         {/* SECTION B: INTEL_HEADER & GLOBAL_SEARCH */}
-        <header className="mb-12 border-b border-zinc-800 pb-8">
+        <header className="mb-12 border-b border-white/10 pb-8">
           <p className="text-[10px] text-neon-blue mb-2 tracking-[0.4em] uppercase italic font-bold">Global Intelligence // System_Active</p>
           <h1 className="text-6xl font-black uppercase italic tracking-tighter mb-8 text-white">TRANSPORT <span className="text-neon-blue not-italic">INTEL</span></h1>
           <GlobalSearch />
         </header>
 
         {/* SECTION C: VISUAL_SYNC_PORTAL */}
-        <section className="relative w-full aspect-video lg:aspect-[21/9] bg-zinc-900 border border-zinc-800 rounded-xl mb-4 flex flex-col items-center justify-center group overflow-hidden shadow-2xl">
+        <section className="relative w-full aspect-video lg:aspect-[21/9] bg-surface-strong border border-white/10 rounded-2xl mb-4 flex flex-col items-center justify-center group overflow-hidden shadow-2xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
           <img src="/fleet.jpg" alt="DCC Fleet Operations" className="absolute inset-0 w-full h-full object-cover z-0 opacity-100" />
           <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden opacity-10">
             <div className="w-full h-full bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%]" />
           </div>
-          <div className="absolute top-4 left-4 z-30 font-mono text-[10px] text-neon-blue uppercase tracking-widest bg-black/60 px-2 py-1 border border-neon-blue/20 font-bold italic">REC ● LIVE_FEED // FLEET_SYNC_ACTIVE</div>
+          <div className="absolute top-4 left-4 z-30 font-mono text-[10px] text-neon-blue uppercase tracking-widest bg-surface/60 px-2 py-1 border border-neon-blue/20 font-bold italic">REC ● LIVE_FEED // FLEET_SYNC_ACTIVE</div>
         </section>
 
         <div className="mb-16 text-center">
@@ -35,7 +35,7 @@ export default function ShuttlesPage() {
           
           {/* NODE 01: SHARED SHUTTLE */}
           <section className="space-y-6">
-            <div className="border border-zinc-800 rounded-xl overflow-hidden group hover:border-neon-blue transition-all shadow-2xl">
+            <div className="border border-white/10 rounded-2xl overflow-hidden group hover:border-neon-blue transition-all shadow-2xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
               <img src="/Shuttle.jpg" alt="Shuttle Service" className="w-full h-64 object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
             </div>
             <div className="space-y-6">
@@ -55,7 +55,7 @@ export default function ShuttlesPage() {
 
           {/* NODE 02: VIP SUV (CHEVROLET SUBURBAN) */}
           <section className="space-y-6">
-            <div className="border border-zinc-800 rounded-xl overflow-hidden group hover:border-matrix-green transition-all shadow-2xl">
+            <div className="border border-white/10 rounded-2xl overflow-hidden group hover:border-matrix-green transition-all shadow-2xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
               <img src="/VIPSUV.jpg" alt="VIP Service" className="w-full h-64 object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
             </div>
             <div className="space-y-6">
@@ -76,7 +76,7 @@ export default function ShuttlesPage() {
         </div>
 
         {/* SECTION E: GLOBAL CARRIER NETWORK // SHARED VECTOR INTELLIGENCE */}
-        <section className="border-t border-zinc-800 pt-16 mb-20">
+        <section className="border-t border-white/10 pt-16 mb-20">
           <div className="mb-12">
             <h3 className="text-2xl font-black uppercase italic tracking-widest mb-2">Carrier Network // Shared Intelligence</h3>
             <p className="text-[10px] text-zinc-500 font-mono uppercase tracking-widest italic">// Intelligence summaries for per-person transport vectors</p>
@@ -84,17 +84,17 @@ export default function ShuttlesPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {[
               { name: "Bus to Show", url: "https://bustoshow.org", rate: "$35", intel: "Non-profit // School buses // BYOB // Union Station + Boulder Nodes." },
-              { name: "Bus Party Colorado", url: "https://buspartyco.com", rate: "$55", intel: "21+ Only // RiNo Pre-Party at Shambles // Lights + Music sync." },
+              { name: "Bus Party Colorado", url: "https://buspartyco.com", rate: "$59", intel: "21+ Only // RiNo Pre-Party at Shambles // Lights + Music sync." },
               { name: "RM Event Shuttles", url: "https://rmeshuttles.com", rate: "$57.50", intel: "Hotel Pickup (Kimpton/Origin) // All ages // Minimal walking node." },
               { name: "On Location (RRX)", url: "https://rrxshuttles.com", rate: "$65", intel: "55-Pax capacity // Onboard bathrooms // Illegal Pete's + Union Station." },
               { name: "Red Rocks Shuttle", url: "https://redrocksshuttle.com", rate: "$65-69", intel: "Air-conditioned transit // Union Station node // Private options available." }
             ].map((node) => (
-              <a key={node.name} href={node.url} target="_blank" rel="noopener noreferrer" className="p-6 border border-zinc-800 bg-zinc-900/30 hover:border-neon-blue transition-all group">
+              <a key={node.name} href={node.url} target="_blank" rel="noopener noreferrer" className="p-6 border border-white/10 bg-surface-strong/30 hover:border-neon-blue transition-all group">
                 <div className="flex justify-between items-start mb-4">
                   <h5 className="font-black italic uppercase text-xl group-hover:text-neon-blue transition-colors">{node.name}</h5>
                   <span className="text-xs text-neon-blue font-black underline italic tracking-widest">{node.rate}</span>
                 </div>
-                <p className="text-[11px] text-zinc-400 font-mono tracking-widest leading-relaxed uppercase border-l-2 border-zinc-800 pl-4">
+                <p className="text-[11px] text-zinc-400 font-mono tracking-widest leading-relaxed uppercase border-l-2 border-white/10 pl-4">
                   <span className="text-zinc-600 font-bold">SitRep:</span> {node.intel}
                 </p>
                 <div className="mt-6 text-[9px] text-zinc-600 font-bold tracking-[0.4em] uppercase group-hover:text-neon-blue">Execute_External_Resolve →</div>
@@ -104,7 +104,7 @@ export default function ShuttlesPage() {
         </section>
 
         {/* SECTION F: PRIVATE COMMAND NODES // SUV INTELLIGENCE */}
-        <section className="border-t border-zinc-800 pt-16">
+        <section className="border-t border-white/10 pt-16">
           <div className="mb-12">
             <h3 className="text-2xl font-black uppercase italic tracking-widest mb-2">Private Command Nodes // SUV Ops</h3>
             <p className="text-[10px] text-zinc-500 font-mono uppercase tracking-widest italic">// Resolve external private SUV intelligence</p>
@@ -120,7 +120,7 @@ export default function ShuttlesPage() {
               { name: "Red Rocks Limo", url: "https://redrocks.limo", intel: "Escalade Focus // VIP Priority" },
               { name: "Silver Mountain Express", url: "https://silvermountainexpress.com", intel: "Reliable Event Reliability Node" }
             ].map((node) => (
-              <a key={node.name} href={node.url} target="_blank" rel="noopener noreferrer" className="p-5 border border-zinc-800 bg-zinc-900/10 hover:border-matrix-green transition-all group">
+              <a key={node.name} href={node.url} target="_blank" rel="noopener noreferrer" className="p-5 border border-white/10 bg-surface-strong/10 hover:border-matrix-green transition-all group">
                 <h5 className="font-black italic uppercase text-sm mb-2 group-hover:text-matrix-light">{node.name}</h5>
                 <p className="text-[9px] text-zinc-500 font-mono tracking-widest uppercase mb-4">{node.intel}</p>
                 <div className="text-[8px] text-zinc-700 font-bold tracking-[0.3em] uppercase group-hover:text-matrix-green">Resolve_Command_Node →</div>

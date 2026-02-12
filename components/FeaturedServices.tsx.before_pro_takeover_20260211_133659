@@ -1,0 +1,111 @@
+import Link from "next/link";
+
+const services = [
+ {
+ title: "Red Rocks Shuttle",
+ badge: "MOST POPULAR",
+ priceLine: "$59 / person",
+ desc: "Per-person shuttle seats to Red Rocks. Simple pickup, pro driver, zero stress.",
+ bullets: ["Per-person seats", "Timed pickup windows", "Best for groups & solo"],
+ cta: { label: "Book $59 Shuttle", href: "/book-shuttle" },
+ accent: "glow-accent",
+ buttonClass: "btn-accent",
+ },
+ {
+ title: "Private Red Rocks Suburban",
+ badge: "PRIVATE",
+ priceLine: "$499 flat",
+ desc: "Private Suburban to Red Rocks. Door-to-door, premium timing, no strangers.",
+ bullets: ["Private vehicle", "Flexible pickup", "Best for couples / VIP"],
+ cta: { label: "Book $499 Private", href: "/private-suburban" },
+ accent: "glow-accent2",
+ buttonClass: "btn-accent2",
+ },
+ {
+ title: "Any Venue Suburban",
+ badge: "ANY VENUE",
+ priceLine: "$250 (up to 7)",
+ desc: "Ball Arena, Mission Ballroom, Ogden, Gothic, Fillmore—private Suburban anywhere.",
+ bullets: ["Up to 7 passengers", "Anywhere in Denver Metro", "One price, no surge"],
+ cta: { label: "Book Any Venue", href: "/book-all-venues" },
+ accent: "",
+ buttonClass: "btn-accent2",
+ },
+ {
+ title: "Mishawaka Shuttle",
+ badge: "FORT COLLINS",
+ priceLine: "$65 / person",
+ desc: "Per-person shuttle to The Mishawaka. Clean timing, reliable return, no chaos.",
+ bullets: ["Per-person seats", "Mishawaka focused", "Perfect for show nights"],
+ cta: { label: "Book Mishawaka", href: "/shuttles/mishawaka" },
+ accent: "",
+ buttonClass: "btn-accent2",
+ },
+];
+
+export default function FeaturedServices() {
+ return (
+ <section className="relative z-10 max-w-7xl mx-auto px-6 -mt-16 pb-10 section section-divider">
+ <div className="bg-surface border-soft shadow-soft rounded-3xl p-6 md:p-8 hover:shadow-2xl hover:-translate-y-1 hover:glow-accent transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+ <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+ <div>
+ <p className="text-base uppercase tracking-[0.18em] text-zinc-200">
+ Transportation Services
+ </p>
+ <h2 className="mt-2 text-3xl md:text-4xl font-black leading-tight">
+ 3 ways to ride — plus Mishawaka
+ </h2>
+ <p className="mt-3 max-w-2xl text-zinc-200">
+ Make it painfully obvious what you sell: Red Rocks shuttle seats, Red Rocks private Suburban,
+ Any-Venue private Suburban, and Mishawaka per-person seats.
+ </p>
+ </div>
+
+ <Link
+ href="/book"
+ className="inline-flex items-center justify-center rounded-2xl px-5 py-3 border-soft bg-surface-strong hover:opacity-95 transition hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+ >
+ View booking options →
+ </Link>
+ </div>
+
+ <div className="mt-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+ {services.map((s) => (
+ <div
+ key={s.title}
+ className={`rounded-3xl p-5 bg-surface-strong border-soft ${s.accent || ""}`}
+ >
+ <div className="flex items-center justify-between gap-2">
+ <div className="text-xs uppercase tracking-[0.18em] text-zinc-200">
+ {s.badge}
+ </div>
+ <div className="text-base font-semibold">
+ {s.priceLine}
+ </div>
+ </div>
+
+ <h3 className="mt-3 text-2xl font-extrabold">{s.title}</h3>
+ <p className="mt-2 text-base text-zinc-200">{s.desc}</p>
+
+ <ul className="mt-4 space-y-2 text-base">
+ {s.bullets.map((b) => (
+ <li key={b} className="flex gap-2 text-zinc-200">
+ <span className="mt-[6px] h-1.5 w-1.5 rounded-full bg-white/40" />
+ <span>{b}</span>
+ </li>
+ ))}
+ </ul>
+
+ <Link
+ href={s.cta.href}
+ className={`mt-5 inline-flex w-full items-center justify-center rounded-2xl px-4 py-3 font-bold transition ${s.buttonClass}`}
+ >
+ {s.cta.label}
+ </Link>
+ </div>
+ ))}
+ </div>
+ </div>
+ </section>
+ );
+}

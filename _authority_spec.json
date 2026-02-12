@@ -1,0 +1,70 @@
+{
+  "base": "app/red-rocks/transportation",
+  "hub": {
+    "title": "Red Rocks Transportation",
+    "description": "How to get to Red Rocks: shuttle vs rideshare, parking reality, and post-show pickup strategy.",
+    "ctaHref": "/book-shuttle",
+    "ctaText": "Book Red Rocks Shuttle \u2014 $59/pp \u2192",
+    "href": "/red-rocks/transportation"
+  },
+  "leaves": [
+    {
+      "slug": "shuttle-vs-uber",
+      "title": "Shuttle vs Uber at Red Rocks",
+      "description": "Cost, reliability, surge pricing, and the best return strategy after the encore.",
+      "cards": [
+        {
+          "h": "Cost",
+          "p": "Shuttles are fixed. Rideshares spike post-show and can exceed expectations, especially after sellouts."
+        },
+        {
+          "h": "Reliability",
+          "p": "Pickup depends on lot control, queue length, and driver availability. Shuttles run on schedule."
+        },
+        {
+          "h": "Best strategy",
+          "p": "If you rideshare, leave slightly before the final rush or wait it out. If you shuttle, treat it like a reservation."
+        }
+      ]
+    },
+    {
+      "slug": "parking-reality",
+      "title": "Red Rocks Parking Reality",
+      "description": "Arrival timing, overflow lots, and what actually happens on busy nights.",
+      "cards": [
+        {
+          "h": "Arrival windows",
+          "p": "The earlier you arrive, the better your lot and exit. Late arrivals risk overflow and long hikes."
+        },
+        {
+          "h": "Overflow + long walks",
+          "p": "When primary lots fill, you\u2019re walking. Budget time and bring layers for post-show temps."
+        },
+        {
+          "h": "Exit congestion",
+          "p": "The show ends and everyone moves at once. Your lot placement and patience matter."
+        }
+      ]
+    },
+    {
+      "slug": "post-show-pickup",
+      "title": "Post-Show Pickup Strategy (Red Rocks)",
+      "description": "Where to meet, best pickup windows, and how to avoid the chaos after the encore.",
+      "cards": [
+        {
+          "h": "Best windows",
+          "p": "Leaving immediately can mean gridlock. Waiting 15\u201325 minutes can make pickup faster and cheaper."
+        },
+        {
+          "h": "Meeting points",
+          "p": "Pick a specific landmark and communicate it. \u201cI\u2019m by the stairs\u201d is not a plan."
+        },
+        {
+          "h": "Don\u2019t rely on cell service",
+          "p": "Crowds strain networks. Agree on a fallback plan before the encore ends."
+        }
+      ]
+    }
+  ],
+  "baseDir": "app/red-rocks/transportation"
+}

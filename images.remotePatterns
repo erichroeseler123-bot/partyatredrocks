@@ -1,0 +1,11 @@
+images: {
+  formats: ["image/avif", "image/webp"],
+  remotePatterns: [
+    { protocol: "https", hostname: "www.partyatredrocks.com" },
+
+    // ✅ SeatGeek performer / event images
+    { protocol: "https", hostname: "seatgeekimages.com" },
+    { protocol: "https", hostname: "static.seatgeek.com" },
+    { protocol: "https", hostname: "images.seatgeek.com" },
+  ],
+},

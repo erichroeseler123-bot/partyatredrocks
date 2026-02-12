@@ -18,7 +18,7 @@ export default function RezdyWidgets() {
     <div className="flex flex-col gap-12 w-full">
       {/* SHARED SHUTTLE WIDGET ($59+) */}
       <div className="rounded-[2rem] overflow-hidden bg-white">
-        <div className="bg-red-600 p-4 text-center">
+        <div className="btn-primary">
           <p className="text-white font-black uppercase tracking-widest text-sm">Shared Shuttle Booking</p>
         </div>
         <iframe 

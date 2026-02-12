@@ -1,0 +1,57 @@
+import Image from "next/image";
+import HomeBookingSteps from "@/components/HomeBookingSteps";
+import RedRocksFAQ from "@/components/RedRocksFAQ";
+import SiteFooter from "@/components/SiteFooter";
+import Link from "next/link";
+
+export default function HomePage() {
+  return (
+    <main className="text-white">
+      {/* HERO (no button row) */}
+      <section className="relative min-h-[82vh] flex items-end">
+        <Image
+          src="/hero/hero-home.jpg"
+          alt="Red Rocks transportation"
+          fill
+          priority
+          className="object-cover"
+        />
+
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/10" />
+        <div className="absolute inset-0 bg-[radial-gradient(900px_600px_at_15%_10%,rgba(0,229,255,0.14),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(900px_600px_at_85%_0%,rgba(255,90,31,0.10),transparent_55%)]" />
+
+        <div className="relative z-10 w-full">
+          <div className="max-w-7xl mx-auto px-6 pb-24">
+            <div className="max-w-3xl">
+              <h1 className="text-5xl md:text-7xl font-black italic uppercase leading-none tracking-tight">
+                Party at Red Rocks
+              </h1>
+
+              <p className="mt-6 text-[16px] md:text-[20px] leading-relaxed text-zinc-200">
+                Fixed pricing. Pro drivers. Reliable post-show return.{" "}
+                <span className="font-bold">Shuttle seats $59–$65/pp</span> or{" "}
+                <span className="font-bold">Private Suburban $499</span>.
+              </p>
+
+              {/* keep this tiny + blue link */}
+              <div className="mt-6">
+                <Link href="/other-venues" className="text-sm font-black uppercase tracking-[0.22em]">
+                  Going somewhere else? Mishawaka + other venues →
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Red Rocks 1-2-3 booking block */}
+      <HomeBookingSteps />
+
+      {/* Red Rocks info/FAQ */}
+      <RedRocksFAQ />
+
+      <SiteFooter />
+    </main>
+  );
+}
