@@ -9,7 +9,7 @@ export default function TicketButtons({ event }: TicketButtonsProps) {
         href={event?.url || "#"}
         target="_blank"
         rel="noopener noreferrer"
-        className="px-6 py-3 bg-white text-black font-bold rounded hover:bg-zinc-200 transition"
+        className="px-6 py-3 bg-white/5 text-white font-black rounded border border-white/10 hover:bg-white/10 transition"
       >
         Buy Tickets
       </a>

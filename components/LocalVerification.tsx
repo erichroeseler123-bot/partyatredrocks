@@ -15,7 +15,7 @@ export default function LocalVerification() {
           <Link 
             href="https://g.page/r/[YOUR_GBP_ID]/review" 
             target="_blank"
-            className="bg-white text-black px-6 py-3 rounded-full font-bold text-sm uppercase hover:bg-zinc-200 transition"
+            className="bg-white/5 text-white px-6 py-3 rounded-full border border-white/10 font-black text-sm uppercase hover:bg-white/10 transition"
           >
             Review us on Google
           </Link>
