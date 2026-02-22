@@ -17,7 +17,7 @@ export default function RezdyWidgets() {
   return (
     <div className="flex flex-col gap-12 w-full">
       {/* SHARED SHUTTLE WIDGET ($59+) */}
-      <div className="rounded-[2rem] overflow-hidden bg-white">
+      <div className="rounded-[2rem] overflow-hidden border border-white/10 bg-white/[0.03] backdrop-blur-xl">
         <div className="btn-primary">
           <p className="text-white font-black uppercase tracking-widest text-sm">Shared Shuttle Booking</p>
         </div>
@@ -28,7 +28,7 @@ export default function RezdyWidgets() {
       </div>
 
       {/* PRIVATE SUBURBAN WIDGET ($499) */}
-      <div className="rounded-[2rem] overflow-hidden bg-white">
+      <div className="rounded-[2rem] overflow-hidden border border-white/10 bg-white/[0.03] backdrop-blur-xl">
         <div className="bg-[#1673E6] p-4 text-center">
           <p className="text-white font-black uppercase tracking-widest text-sm">Private Suburban Booking</p>
         </div>
