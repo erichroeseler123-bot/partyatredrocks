@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "NEXT_DISABLE_TURBOPACK=1 next build",
+    "build": "next build",
     "start": "next start",
     "sync": "node sync.js",
     "sync:publish": "node sync.js && git add public/data/shows-2026.js && git commit -m \"Update 2026 show data\" && git push"
