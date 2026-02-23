@@ -1,9 +1,6 @@
 import { VENUES } from "@/lib/venues";
 
 export const DISPLAY = {
-  // ---------------------------
-  // THEME TOKENS (runtime set)
-  // ---------------------------
   theme: {
     surface: "#070A12",
     surface2: "#0B1020",
@@ -16,9 +13,6 @@ export const DISPLAY = {
       "linear-gradient(180deg, rgba(7,10,18,0.10) 0%, rgba(7,10,18,0.72) 55%, rgba(7,10,18,0.92) 100%)",
   },
 
-  // ---------------------------
-  // IMAGES (single source)
-  // ---------------------------
   images: {
     heroHome: "/hero/hero-home.jpg",
     heroDefaultVenue: "/hero/hero-home.jpg",
@@ -33,9 +27,6 @@ export const DISPLAY = {
     showFallback: "/images/shows/fallback.jpg",
   },
 
-  // ---------------------------
-  // UI COPY / LABELS
-  // ---------------------------
   ui: {
     brand: "Party @ Red Rocks",
     cta: {
@@ -44,9 +35,6 @@ export const DISPLAY = {
     },
   },
 
-  // ---------------------------
-  // NAV (single source)
-  // ---------------------------
   nav: {
     links: [
       { label: "Book", href: "/book" },
@@ -54,16 +42,12 @@ export const DISPLAY = {
       { label: "Venues", href: "/venues" },
       { label: "Guides", href: "/guide" },
       { label: "Shuttles", href: "/shuttles" },
-      // keep Scene in nav but not dominant
       { label: "Scene", href: "/scene" },
     ],
   },
 
-  // ---------------------------
-  // QUICK-PILLS (homepage)
-  // ---------------------------
   pills: {
-    // Venue quick pills shown on homepage (order matters)
+    // venue quick pills shown on homepage (order matters)
     venueSlugs: [
       "red-rocks-amphitheatre",
       "mission-ballroom",
@@ -73,7 +57,7 @@ export const DISPLAY = {
       "cervantes-masterpiece",
     ],
 
-    // Scene pills shown on homepage
+    // scene pills shown on homepage
     scenes: [
       { key: "jam", label: "Jam", href: "/scene/jam" },
       { key: "edm", label: "EDM", href: "/scene/edm" },
@@ -82,9 +66,7 @@ export const DISPLAY = {
   },
 } as const;
 
-// -------------------------------------------
-// Derived helpers (still controlled by DISPLAY)
-// -------------------------------------------
+// derived helpers
 export const NAV_LINKS = DISPLAY.nav.links;
 
 export const VENUE_PILLS = DISPLAY.pills.venueSlugs
