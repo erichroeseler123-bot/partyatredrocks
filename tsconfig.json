@@ -36,6 +36,14 @@
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "app_backup_20260211_1252",
+    "app_backup_post_bg_replace_20260211_1140",
+    "_backups",
+    "_parked",
+    "**/*.bak",
+    "**/*.bak_*",
+    "**/*.BROKEN",
+    "**/*.STARTOVER*"
   ]
 }
