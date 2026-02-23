@@ -12,3 +12,6 @@ cache/
 # stray artifacts (should never be committed)
 import
 partyatredrocks@*
+
+# stray terminal paste artifacts
+NEXT_DISABLE_TURBOPACK=1
