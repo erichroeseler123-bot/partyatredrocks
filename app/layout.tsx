@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import SiteNav from "@/components/SiteNav";
+import DisplayTheme from "@/components/DisplayTheme";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.partyatredrocks.com"),
@@ -13,9 +14,7 @@ export const metadata: Metadata = {
   description:
     "Book reliable Red Rocks shuttle transportation from Denver. Fixed pricing, pro drivers, and guaranteed post-show return. Shuttle seats from $59/pp or Private Suburban from $499.",
 
-  alternates: {
-    canonical: "/",
-  },
+  alternates: { canonical: "/" },
 
   keywords: [
     "Red Rocks shuttle",
@@ -47,12 +46,7 @@ export const metadata: Metadata = {
     description:
       "Fixed pricing, professional drivers, and guaranteed post-show return. Shuttle seats from $59/pp or Private Suburban from $499.",
     images: [
-      {
-        url: "/hero/hero-home.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Red Rocks shuttle transportation",
-      },
+      { url: "/hero/hero-home.jpg", width: 1200, height: 630, alt: "Red Rocks shuttle transportation" },
     ],
   },
 
@@ -68,7 +62,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="bg-surface text-white">
+      <body className="bg-surface text-default">
+        <DisplayTheme />
         <SiteNav />
         {children}
       </body>

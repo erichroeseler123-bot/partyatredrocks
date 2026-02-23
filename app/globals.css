@@ -1,10 +1,59 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+:root{
+  --surface:#070A12;
+  --surface2:#0B1020;
+  --text:#E8EEF9;
+  --muted:rgba(232,238,249,0.72);
+  --accent:#FF3B3B;
+  --accent2:#4CC9F0;
+  --glow:rgba(76,201,240,0.28);
+  --heroOverlay:linear-gradient(180deg, rgba(7,10,18,0.10) 0%, rgba(7,10,18,0.72) 55%, rgba(7,10,18,0.92) 100%);
+}
 
+body { background: var(--surface); color: var(--text); }
+
+a { color: var(--accent2); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:visited { color: var(--accent2); }
+
+:root{
+  --surface:#070A12;
+  --surface2:#0B1020;
+  --text:#E8EEF9;
+  --muted:rgba(232,238,249,0.72);
+  --accent:#FF3B3B;
+  --accent2:#4CC9F0;
+  --glow:rgba(76,201,240,0.28);
+  --heroOverlay:linear-gradient(180deg, rgba(7,10,18,0.10) 0%, rgba(7,10,18,0.72) 55%, rgba(7,10,18,0.92) 100%);
+}
+
+body { background: var(--surface); color: var(--text); }
+
+a { color: var(--accent2); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:visited { color: var(--accent2); }
+
+:root{
+  --surface: #070A12;
+  --surface2: #0B1020;
+  --text: #E8EEF9;
+  --muted: rgba(232,238,249,0.72);
+  --accent: #FF3B3B;
+  --accent2: #4CC9F0;
+  --glow: rgba(76,201,240,0.28);
+  --heroOverlay: linear-gradient(180deg, rgba(7,10,18,0.10) 0%, rgba(7,10,18,0.72) 55%, rgba(7,10,18,0.92) 100%);
+}
+
+/* optional: convenient utility-ish classes */
+.bg-surface { background: var(--surface); }
+.bg-surface2 { background: var(--surface2); }
+.text-default { color: var(--text); }
+.text-muted { color: var(--muted); }
 /* Ensure cards don't inherit default link colors */
 .step-card{
-  color: rgb(var(--text));
+  color: var(--text);
   text-decoration: none;
 }
 
@@ -197,7 +246,7 @@ footer{
 
 /* Base defaults */
 html, body { height: 100%; }
-body { background: #000; color: #fff; }
+body { background: var(--surface); color: var(--text); }
 /* =========================================================
    Premium Surfaces (used by Guides + hubs)
    ========================================================= */
