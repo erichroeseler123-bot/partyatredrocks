@@ -4,3 +4,7 @@ node_modules
 .next
 node_modules
 .next
+
+# local generated
+cache/
+.vercel/
