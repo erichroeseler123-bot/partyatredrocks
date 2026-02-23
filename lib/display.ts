@@ -33,6 +33,17 @@ export const DISPLAY = {
       primary: "Book Shuttle",
       secondary: "This Week",
     },
+
+    home: {
+      badge: "Colorado Concert Shuttles",
+      headline: "Red Rocks — without the parking chaos.",
+      subhead: "Fixed-price shuttle seats and private SUVs from Denver to Red Rocks and major Colorado venues. No surge, no waiting, guaranteed ride home.",
+      trustLine: "Sheraton pickup • Pro drivers • Clear meetup plan • Support text line",
+      quickBookLabel: "Book in 10 seconds",
+      tipPrefix: "Tip: browse an event on",
+      tipLinkText: "This Week",
+      tipSuffix: "then tap “Ride Options”.",
+    },
   },
 
   nav: {

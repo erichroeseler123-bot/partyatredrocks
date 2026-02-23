@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { DISPLAY, VENUE_PILLS, SCENE_PILLS } from "@/lib/display";
 
 type EventPreview = {
   id: number;
@@ -27,16 +28,15 @@ export default function HomeSections({
       {/* 1) HERO */}
       <section className="rounded-[36px] border border-white/10 bg-white/[0.03] p-8 md:p-12 shadow-[0_22px_70px_rgba(0,0,0,0.45)] backdrop-blur-xl">
         <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white/80">
-          Colorado Concert Shuttles
+          {DISPLAY.ui.home.badge}
         </div>
 
         <h1 className="mt-4 text-4xl md:text-6xl font-black tracking-tight">
-          Red Rocks — without the parking chaos.
+          {DISPLAY.ui.home.headline}
         </h1>
 
         <p className="mt-4 max-w-3xl text-white/75 text-base md:text-lg">
-          Fixed-price shuttle seats and private SUVs from Denver to Red Rocks and major Colorado venues.
-          No surge, no waiting, guaranteed ride home.
+          {DISPLAY.ui.home.subhead}
         </p>
 
         <div className="mt-7 flex flex-col gap-3 sm:flex-row">
@@ -55,7 +55,7 @@ export default function HomeSections({
           </Link>
 
           <Link
-            href="/private"
+            href="/private-suburban"
             className="inline-flex items-center justify-center rounded-full border border-white/14 bg-white/5 px-8 py-4 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 hover:bg-white/10 transition"
           >
             Private SUVs →
@@ -63,42 +63,42 @@ export default function HomeSections({
         </div>
 
         <div className="mt-5 text-xs text-white/55">
-          Sheraton pickup • Pro drivers • Clear meetup plan • Support text line
+          {DISPLAY.ui.home.trustLine}
         </div>
       </section>
 
       {/* 2) FAST BOOK STRIP */}
       <section className="mt-8 rounded-3xl border border-white/10 bg-white/[0.03] p-6">
         <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">
-          Book in 10 seconds
+          {DISPLAY.ui.home.quickBookLabel}
         </div>
 
         <div className="mt-4 flex flex-wrap gap-2">
-          {["red-rocks", "mission-ballroom", "fiddlers-green", "fillmore-auditorium", "gothic-theatre"].map((slug) => (
+          {VENUE_PILLS.map((v) => (
             <Link
-              key={slug}
-              href={`/book?venue=${slug}`}
+              key={v.slug}
+              href={`/book?venue=`}
               className="rounded-full border border-white/12 bg-white/5 px-4 py-2 text-xs font-bold text-white/85 hover:bg-white/10 transition"
             >
-              {slug.replace(/-/g, " ")}
+              {v.name}
             </Link>
           ))}
         </div>
 
         <div className="mt-3 flex flex-wrap gap-2">
-          {["jam", "edm", "hiphop", "rock", "country"].map((scene) => (
+          {SCENE_PILLS.map((s) => (
             <Link
-              key={scene}
-              href={`/book?scene=${scene}`}
+              key={s.key}
+              href={s.href}
               className="rounded-full border border-white/12 bg-white/5 px-4 py-2 text-xs font-bold text-white/75 hover:bg-white/10 transition"
             >
-              {scene.toUpperCase()}
+              {s.label.toUpperCase()}
             </Link>
           ))}
         </div>
 
         <div className="mt-4 text-xs text-white/50">
-          Tip: browse an event on <Link className="underline" href="/week">This Week</Link> then tap “Ride Options”.
+          {DISPLAY.ui.home.tipPrefix} <Link className="underline" href="/week">{DISPLAY.ui.home.tipLinkText}</Link> {DISPLAY.ui.home.tipSuffix}
         </div>
       </section>
 
