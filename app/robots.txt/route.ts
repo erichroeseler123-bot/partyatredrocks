@@ -6,6 +6,7 @@ export async function GET() {
   const body = `User-agent: *
 Allow: /
 
+Host: https://www.partyatredrocks.com
 Sitemap: https://www.partyatredrocks.com/sitemap.xml
 `;
 

@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-
-export const revalidate = 300;
+import { VENUE_SLUGS } from "@/lib/venues";
 
 type UrlEntry = {
   loc: string;
@@ -21,25 +20,20 @@ function esc(s: string) {
 function toXml(entries: UrlEntry[]) {
   const items = entries
     .map((u) => {
-      const lastmod = u.lastmod ? `<lastmod>${esc(u.lastmod)}</lastmod>` : "";
-      const changefreq = u.changefreq
-        ? `<changefreq>${esc(u.changefreq)}</changefreq>`
-        : "";
-      const priority =
-        typeof u.priority === "number"
-          ? `<priority>${u.priority.toFixed(1)}</priority>`
-          : "";
-      return `<url><loc>${esc(u.loc)}</loc>${lastmod}${changefreq}${priority}</url>`;
+      const lastmod = u.lastmod ? `\n    <lastmod>${esc(u.lastmod)}</lastmod>` : "";
+      const changefreq = u.changefreq ? `\n    <changefreq>${esc(u.changefreq)}</changefreq>` : "";
+      const priority = typeof u.priority === "number" ? `\n    <priority>${u.priority.toFixed(1)}</priority>` : "";
+      return `  <url>\n    <loc>${esc(u.loc)}</loc>${lastmod}${changefreq}${priority}\n  </url>`;
     })
-    .join("");
+    .join("\n");
 
-  return (
-    `<?xml version="1.0" encoding="UTF-8"?>` +
-    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">` +
+  return `<?xml version="1.0" encoding="UTF-8"?>\n` +
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
     items +
-    `</urlset>`
-  );
+    `\n</urlset>\n`;
 }
+
+export const revalidate = 300;
 
 export async function GET() {
   const base = "https://www.partyatredrocks.com";
@@ -49,15 +43,27 @@ export async function GET() {
     { loc: `${base}/`, lastmod: now, changefreq: "daily", priority: 1.0 },
     { loc: `${base}/week`, lastmod: now, changefreq: "hourly", priority: 0.9 },
     { loc: `${base}/venues`, lastmod: now, changefreq: "daily", priority: 0.8 },
+
+    // scenes (keep if these routes exist)
     { loc: `${base}/scene/jam`, lastmod: now, changefreq: "hourly", priority: 0.8 },
     { loc: `${base}/scene/edm`, lastmod: now, changefreq: "hourly", priority: 0.8 },
     { loc: `${base}/scene/hiphop`, lastmod: now, changefreq: "hourly", priority: 0.8 },
   ];
 
+  // venue detail pages
+  for (const slug of VENUE_SLUGS) {
+    urls.push({
+      loc: `${base}/venues/${slug}`,
+      lastmod: now,
+      changefreq: "hourly",
+      priority: 0.7,
+    });
+  }
+
   return new NextResponse(toXml(urls), {
     headers: {
       "Content-Type": "application/xml; charset=utf-8",
-"Cache-Control": "public, s-maxage=300, stale-while-revalidate=86400",
+      "Cache-Control": "public, s-maxage=300, stale-while-revalidate=86400",
     },
   });
 }
