@@ -1,23 +1,26 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export function middleware(req: NextRequest) {
-  const p = req.nextUrl.pathname;
+  const { pathname } = req.nextUrl;
 
-  if (p === "/community" || p.startsWith("/community/")) {
-    return new NextResponse("Gone", {
-      status: 410,
-      headers: {
-        "X-Robots-Tag": "noindex, nofollow",
-        "Cache-Control": "public, max-age=0, must-revalidate",
-        "Content-Type": "text/plain; charset=utf-8",
-      },
-    });
+  // ✅ Never override cache headers for these (they manage their own caching)
+  if (
+    pathname === "/robots.txt" ||
+    pathname === "/sitemap.xml" ||
+    pathname.startsWith("/api/") ||
+    pathname.startsWith("/_next/") ||
+    pathname === "/favicon.ico"
+  ) {
+    return NextResponse.next();
   }
 
-  return NextResponse.next();
+  // Your existing behavior for “normal pages”
+  const res = NextResponse.next();
+  res.headers.set("Cache-Control", "public, max-age=0, must-revalidate");
+  return res;
 }
 
+// Apply middleware to everything (we still early-return above)
 export const config = {
-  matcher: ["/community", "/community/:path*"],
+  matcher: "/:path*",
 };
