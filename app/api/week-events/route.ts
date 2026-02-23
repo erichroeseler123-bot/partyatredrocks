@@ -116,7 +116,7 @@ export async function GET(req: Request) {
         "Cache-Control": "public, s-maxage=300, stale-while-revalidate=3600",
       };
 
-  const venues = VENUE_REGISTRY.filter((v) => v?.seatgeekSlug || v?.seatgeekId);
+  const venues = VENUE_REGISTRY;
 
   const debugRows: any[] = [];
   const all: WeekEvent[] = [];

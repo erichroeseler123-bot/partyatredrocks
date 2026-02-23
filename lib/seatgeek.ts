@@ -14,6 +14,8 @@ type SeatGeekEvent = {
   id: number;
   title: string;
   datetime_local: string;
+  datetime_utc?: string;
+  datetime?: string;
   url?: string;
   performers?: Array<{
     name?: string;

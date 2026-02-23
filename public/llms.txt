@@ -1,0 +1,25 @@
+# Party at Red Rocks (Denver / Boulder / Colorado Springs)
+Primary: Concert transportation + venue intel + scene hubs.
+
+Key pages:
+- /week (this week’s shows)
+- /venues (venue directory)
+- /venues/{slug} (venue intel + upcoming)
+- /scene/jam (jam scene hub)
+- /scene/edm (EDM/bass scene hub)
+- /scene/hiphop (hip-hop scene hub)
+- /shows/{id} (show intel + shuttle options)
+
+Data sources (used for enrichment/caching):
+- SeatGeek (events/venues)
+- Ticketmaster (fallback/events)
+- MusicBrainz (entity IDs + canonical metadata)
+- Setlist.fm (setlists)
+- Last.fm (tags + discovery)
+
+Freshness:
+- Scene + venue caches refresh via /api/cron/sync and are timestamped on-page.
+
+Business:
+- Service area: Denver, Boulder, Colorado Springs (Front Range).
+- Booking: /book (shared + private options).
