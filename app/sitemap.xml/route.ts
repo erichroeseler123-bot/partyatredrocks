@@ -57,7 +57,7 @@ export async function GET() {
   return new NextResponse(toXml(urls), {
     headers: {
       "content-type": "application/xml; charset=utf-8",
-      "cache-control": "public, max-age=0, must-revalidate",
+"cache-control": "public, s-maxage=300, stale-while-revalidate=86400",
     },
   });
 }
