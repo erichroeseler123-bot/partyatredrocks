@@ -8,3 +8,7 @@ node_modules
 # local generated
 cache/
 .vercel/
+
+# stray artifacts (should never be committed)
+import
+partyatredrocks@*
