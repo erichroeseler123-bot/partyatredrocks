@@ -1,3 +1,4 @@
+import { venueImage } from "@/lib/display";
 import Link from "next/link";
 import { VENUES } from "@/lib/venues";
 
