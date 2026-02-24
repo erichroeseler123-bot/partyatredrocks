@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { DISPLAY, VENUE_PILLS, SCENE_PILLS } from "@/lib/display";
+import { DISPLAY, VENUE_PILLS, SCENE_PILLS, venueImage } from "@/lib/display";
 
 type EventPreview = {
   id: number;
@@ -26,7 +26,7 @@ export default function HomeSections({
   return (
     <main className="mx-auto max-w-6xl px-4 py-10 md:py-14">
       {/* 1) HERO */}
-      <section className="rounded-[36px] border border-white/10 bg-white/[0.03] p-8 md:p-12 shadow-[0_22px_70px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+      <section className="rounded-[36px] border border-white/10 bg-white/[0.04] p-8 md:p-12 shadow-[0_22px_70px_rgba(0,0,0,0.45)] backdrop-blur-xl">
         <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white/80">
           {DISPLAY.ui.home.badge}
         </div>
@@ -68,21 +68,28 @@ export default function HomeSections({
       </section>
 
       {/* 2) FAST BOOK STRIP */}
-      <section className="mt-8 rounded-3xl border border-white/10 bg-white/[0.03] p-6">
+      <section className="mt-8 rounded-3xl border border-white/10 bg-white/[0.04] p-6">
         <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">
           {DISPLAY.ui.home.quickBookLabel}
         </div>
 
         <div className="mt-4 flex flex-wrap gap-2">
           {VENUE_PILLS.map((v) => (
-            <Link
-              key={v.slug}
-              href={`/book?venue=`}
-              className="rounded-full border border-white/12 bg-white/5 px-4 py-2 text-xs font-bold text-white/85 hover:bg-white/10 transition"
-            >
-              {v.name}
-            </Link>
-          ))}
+              <Link
+                key={v.slug}
+                href={`/book?venue=`}
+                className="group relative overflow-hidden rounded-full border border-white/12 bg-white/[0.04] px-4 py-2 text-xs font-bold text-white/90 hover:border-white/20 transition"
+              >
+                <img
+                  src={venueImage(v.slug)}
+                  alt={v.name}
+                  className="absolute inset-0 h-full w-full object-cover opacity-20 transition-opacity duration-300 group-hover:opacity-30"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span className="relative z-10">{v.name}</span>
+              </Link>
+            ))}
         </div>
 
         <div className="mt-3 flex flex-wrap gap-2">
@@ -115,7 +122,7 @@ export default function HomeSections({
           {(events ?? []).slice(0, 6).map((e) => (
             <div
               key={e.id}
-              className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 hover:bg-white/[0.05] transition"
+              className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 hover:bg-white/[0.07] transition"
             >
               <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">
                 {new Date(e.datetime_local).toLocaleString("en-US", {
@@ -143,7 +150,7 @@ export default function HomeSections({
           ))}
 
           {(events ?? []).length === 0 ? (
-            <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 text-white/70">
+            <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 text-white/70">
               No events loaded yet. Wire your events feed into the homepage preview.
             </div>
           ) : null}
@@ -151,7 +158,7 @@ export default function HomeSections({
       </section>
 
       {/* 4) WHY SHUTTLE */}
-      <section className="mt-10 rounded-3xl border border-white/10 bg-white/[0.03] p-8">
+      <section className="mt-10 rounded-3xl border border-white/10 bg-white/[0.04] p-8">
         <h2 className="text-2xl md:text-3xl font-black">Why shuttle beats parking / rideshare</h2>
         <ul className="mt-4 grid gap-3 md:grid-cols-2 text-white/75">
           <li className="rounded-2xl border border-white/10 bg-white/[0.02] p-4">
@@ -193,7 +200,7 @@ export default function HomeSections({
             <Link
               key={v.slug}
               href={`/venues/${v.slug}`}
-              className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 hover:bg-white/[0.06] transition"
+              className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 hover:bg-white/[0.07] transition"
             >
               <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">
                 Venue Intel
@@ -207,7 +214,7 @@ export default function HomeSections({
           ))}
 
           {(venues ?? []).length === 0 ? (
-            <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 text-white/70">
+            <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 text-white/70">
               No venues loaded yet. Wire your venue list into the homepage preview.
             </div>
           ) : null}
@@ -215,7 +222,7 @@ export default function HomeSections({
       </section>
 
       {/* 6) GUIDES TEASER */}
-      <section className="mt-10 rounded-3xl border border-white/10 bg-white/[0.03] p-8">
+      <section className="mt-10 rounded-3xl border border-white/10 bg-white/[0.04] p-8">
         <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">
           The Zine
         </div>
@@ -236,7 +243,7 @@ export default function HomeSections({
             <Link
               key={href}
               href={href}
-              className="rounded-2xl border border-white/10 bg-white/[0.02] p-4 hover:bg-white/[0.05] transition"
+              className="rounded-2xl border border-white/10 bg-white/[0.02] p-4 hover:bg-white/[0.07] transition"
             >
               <div className="font-black">{label}</div>
               <div className="mt-1 text-sm text-white/65">Read →</div>
@@ -255,7 +262,7 @@ export default function HomeSections({
       </section>
 
       {/* 7) TRUST */}
-      <section className="mt-10 rounded-3xl border border-white/10 bg-white/[0.03] p-8">
+      <section className="mt-10 rounded-3xl border border-white/10 bg-white/[0.04] p-8">
         <h2 className="text-2xl md:text-3xl font-black">Trust & support</h2>
         <div className="mt-4 grid gap-4 md:grid-cols-3">
           {[
@@ -272,7 +279,7 @@ export default function HomeSections({
       </section>
 
       {/* 8) FOOTER CTA */}
-      <section className="mt-10 rounded-3xl border border-white/10 bg-white/[0.03] p-8">
+      <section className="mt-10 rounded-3xl border border-white/10 bg-white/[0.04] p-8">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <div className="text-xl font-black">Ready?</div>
