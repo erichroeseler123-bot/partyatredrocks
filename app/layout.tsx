@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import SiteNav from "@/components/SiteNav";
 import DisplayTheme from "@/components/DisplayTheme";
+import FloatingBook from "@/components/FloatingBook";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.partyatredrocks.com"),
@@ -66,6 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <DisplayTheme />
         <SiteNav />
         {children}
+        <FloatingBook />
       </body>
     </html>
   );

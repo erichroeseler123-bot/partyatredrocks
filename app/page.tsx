@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "Party at Red Rocks | Concert Shuttles + Private SUVs",
   description:
     "Fixed-price concert shuttles and private SUVs from Denver to Red Rocks and major Colorado venues. No surge. Clear pickup. Guaranteed ride home.",
-  alternates: { canonical: "https://partyatredrocks.com/" },
+  alternates: { canonical: "https://www.partyatredrocks.com/" },
 };
 
 type ScenePayload = {

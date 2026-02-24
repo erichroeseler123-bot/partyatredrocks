@@ -15,3 +15,7 @@ partyatredrocks@*
 
 # stray terminal paste artifacts
 NEXT_DISABLE_TURBOPACK=1
+
+# local edit backups
+*.bak
+*.bak_*
