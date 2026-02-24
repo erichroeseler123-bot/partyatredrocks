@@ -1,3 +1,4 @@
+// lib/display.ts
 import { VENUES } from "@/lib/venues";
 
 export const DISPLAY = {
@@ -19,6 +20,7 @@ export const DISPLAY = {
       fleet: "/images/marketing/fleet.jpg",
       shuttle: "/images/marketing/shuttle.jpg",
     },
+
     heroHome: "/hero/hero-home.jpg",
     heroDefaultVenue: "/hero/hero-home.jpg",
 
@@ -28,7 +30,17 @@ export const DISPLAY = {
       hiphop: "/images/scenes/hiphop.jpg",
     },
 
-    venueFallback: "/images/venues/fallback.jpg",
+    // venue images keyed by venue slug
+    venues: {
+      fallback: "/images/venues/fallback.jpg",
+      "cervantes-masterpiece": "/images/venues/cervantes-masterpiece.jpg",
+      "fiddlers-green-amphitheatre": "/images/venues/fiddlers-green-amphitheatre.jpg",
+      "fillmore-auditorium": "/images/venues/fillmore-auditorium.jpg",
+      "gothic-theatre": "/images/venues/gothic-theatre.jpg",
+      "mission-ballroom": "/images/venues/mission-ballroom.jpg",
+      "red-rocks-amphitheatre": "/images/venues/red-rocks-amphitheatre.jpg",
+    },
+
     showFallback: "/images/shows/fallback.jpg",
   },
 
@@ -42,7 +54,8 @@ export const DISPLAY = {
     home: {
       badge: "Colorado Concert Shuttles",
       headline: "Red Rocks — without the parking chaos.",
-      subhead: "Fixed-price shuttle seats and private SUVs from Denver to Red Rocks and major Colorado venues. No surge, no waiting, guaranteed ride home.",
+      subhead:
+        "Fixed-price shuttle seats and private SUVs from Denver to Red Rocks and major Colorado venues. No surge, no waiting, guaranteed ride home.",
       trustLine: "Sheraton pickup • Pro drivers • Clear meetup plan • Support text line",
       quickBookLabel: "Book in 10 seconds",
       tipPrefix: "Tip: browse an event on",
@@ -81,6 +94,11 @@ export const DISPLAY = {
     ],
   },
 } as const;
+
+export function venueImage(slug: string) {
+  const venues = DISPLAY.images.venues as Record<string, string>;
+  return venues[slug] ?? venues.fallback ?? DISPLAY.images.showFallback;
+}
 
 // derived helpers
 export const NAV_LINKS = DISPLAY.nav.links;
