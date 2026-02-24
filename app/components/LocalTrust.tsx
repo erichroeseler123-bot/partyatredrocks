@@ -2,10 +2,10 @@ import Link from 'next/link';
 
 export default function LocalTrust() {
   return (
-    <div className="bg-surface border border-white/10 p-8 rounded-3xl mt-12 flex flex-col md:flex-row justify-between items-center gap-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+    <div className="panel-soft p-8 rounded-3xl mt-12 flex flex-col md:flex-row justify-between items-center gap-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
       <div>
         <h3 className="text-white font-black uppercase text-xl mb-2">Verified Tier-1 Operator</h3>
-        <p className="text-zinc-500 text-sm max-w-sm">
+        <p className="text-muted text-sm max-w-sm">
           Party at Red Rocks  is a vetted Colorado carrier. From the Sheraton Downtown to the Trailhead Taphouse, we are your local Red Rocks connection.
         </p>
       </div>

@@ -49,7 +49,7 @@ export default function DenverPickups() {
           Denver Shuttle Hub: Sheraton Downtown
         </h1>
 
-        <p className="text-lg text-zinc-400 leading-relaxed italic">
+        <p className="text-lg text-muted leading-relaxed italic">
           The primary Downtown Denver pickup hub for Party at Red Rocks riders. Check in, rally, and roll —
           no parking stress, no surge pricing, guaranteed post-show return.
         </p>
@@ -63,24 +63,24 @@ export default function DenverPickups() {
           </Link>
           <Link
             href="/week"
-            className="inline-block border border-white/15 hover:border-white/40 px-5 py-3 font-bold uppercase rounded-full transition"
+            className="inline-block border border-soft hover:border-soft px-5 py-3 font-bold uppercase rounded-full transition"
           >
             See This Week’s Shows →
           </Link>
         </div>
       </header>
 
-      <section className="grid md:grid-cols-2 gap-10 mb-16 border border-white/10 rounded-[2.5rem] overflow-hidden bg-surface-strong/30 p-8 shadow-2xl">
+      <section className="grid md:grid-cols-2 gap-10 mb-16 border border-soft rounded-[2.5rem] overflow-hidden bg-surface-strong/30 p-8 shadow-2xl">
         <div>
           <h2 className="font-bold text-xl mb-4 text-red-600 uppercase tracking-tight">
             Pre-Concert Strategy
           </h2>
-          <p className="text-zinc-400 text-base mb-6 leading-relaxed">
+          <p className="text-muted text-base mb-6 leading-relaxed">
             Located at <strong>1550 Court Pl</strong>, the Sheraton is our central Denver basecamp.
             We recommend arriving <strong>45 minutes prior to departure</strong> so you can check in and settle.
           </p>
 
-          <ul className="space-y-4 text-base text-zinc-300 font-medium">
+          <ul className="space-y-4 text-base text-soft font-medium">
             <li className="flex gap-2">
               <span>📍</span>{" "}
               <span>
@@ -113,7 +113,7 @@ export default function DenverPickups() {
           </ul>
         </div>
 
-        <div className="aspect-square md:aspect-auto md:h-full min-h-[320px] rounded-2xl overflow-hidden border border-white/10 shadow-2xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+        <div className="aspect-square md:aspect-auto md:h-full min-h-[320px] rounded-2xl overflow-hidden border border-soft shadow-2xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3067.439164214555!2d-104.99227562402128!3d39.74301597155639!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876c78d052848c41%3A0xe212879659b85c8e!2sSheraton%20Denver%20Downtown%20Hotel!5e0!3m2!1sen!2sus!4v1706990100000!5m2!1sen!2sus"
             width="100%"
@@ -135,7 +135,7 @@ export default function DenverPickups() {
       />
 
       <footer className="mt-20 pt-10 border-t border-zinc-900 text-center">
-        <p className="text-zinc-600 text-[10px] font-black uppercase tracking-[0.4em]">
+        <p className="text-faint text-[10px] font-black uppercase tracking-[0.4em]">
           Party at Red Rocks | Colorado&apos;s Premier Concert Logistics
         </p>
       </footer>

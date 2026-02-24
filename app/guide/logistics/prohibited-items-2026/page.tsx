@@ -14,7 +14,7 @@ export default function ProhibitedItems() {
         <h1 className="text-5xl font-black uppercase italic tracking-tighter">
           2026 <span className="text-red-600">Prohibited</span> Items Deep Dive
         </h1>
-        <p className="mt-4 text-zinc-400 text-xl font-medium max-w-2xl">
+        <p className="mt-4 text-muted text-xl font-medium max-w-2xl">
           Don&apos;t get sent back to the lot. Security at the East Terrace and North ramps is utilizing 
           AI-scanning for the 2026 season. Here is the intelligence you need.
         </p>
@@ -26,7 +26,7 @@ export default function ProhibitedItems() {
           <div key={i} className="bg-surface-strong/50 border-soft shadow-soft p-8 rounded-[2rem]">
             <h3 className="text-red-500 font-black uppercase mb-2 italic text-2xl">{item.name}</h3>
             <p className="text-white font-bold mb-4">{item.rule}</p>
-            <div className="bg-surface/40 p-4 rounded-2xl border-soft shadow-soft text-zinc-500 text-base italic hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+            <div className="bg-surface/40 p-4 rounded-2xl border-soft shadow-soft text-muted text-base italic hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
               Pro Tip: {item.tip}
             </div>
           </div>
@@ -38,12 +38,12 @@ export default function ProhibitedItems() {
         <h3 className="text-2xl font-black mb-6 uppercase italic text-white">Related Intelligence</h3>
         <div className="grid sm:grid-cols-2 gap-6">
           <Link href="/guide/logistics/bag-policy" className="group">
-            <h4 className="text-zinc-100 font-bold group-hover:text-red-500 transition">2026 Bag Rules →</h4>
-            <p className="text-zinc-500 text-base mt-1">Detailed sizing for fanny packs and purses.</p>
+            <h4 className="text-strong font-bold group-hover:text-red-500 transition">2026 Bag Rules →</h4>
+            <p className="text-muted text-base mt-1">Detailed sizing for fanny packs and purses.</p>
           </Link>
           <Link href="/guide/logistics/winter-survival" className="group">
-            <h4 className="text-zinc-100 font-bold group-hover:text-blue-500 transition">Winter Gear Prep →</h4>
-            <p className="text-zinc-500 text-base mt-1">What clothing items pass security in March.</p>
+            <h4 className="text-strong font-bold group-hover:text-blue-500 transition">Winter Gear Prep →</h4>
+            <p className="text-muted text-base mt-1">What clothing items pass security in March.</p>
           </Link>
         </div>
       </div>

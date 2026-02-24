@@ -33,13 +33,13 @@ export default function RedRocks123() {
     <section className="max-w-7xl mx-auto px-6 py-14">
       <div className="flex items-end justify-between gap-6">
         <div>
-          <p className="text-[12px] font-black uppercase tracking-[0.32em] text-zinc-400">
+          <p className="text-[12px] font-black uppercase tracking-[0.32em] text-muted">
             Red Rocks only
           </p>
           <h2 className="mt-2 text-3xl md:text-4xl font-black tracking-tight">
             Pick your ride in 10 seconds
           </h2>
-          <p className="mt-3 text-zinc-300 max-w-2xl">
+          <p className="mt-3 text-soft max-w-2xl">
             Click any option to go straight to booking.
           </p>
         </div>
@@ -54,7 +54,7 @@ export default function RedRocks123() {
           <Link
             key={s.n}
             href={s.href}
-            className="group rounded-3xl border border-white/10 bg-surface-strong shadow-soft p-6 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+            className="group rounded-3xl border border-soft bg-surface-strong shadow-soft p-6 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
           >
             <div className="flex items-start justify-between gap-4">
               <div className="flex items-center gap-3">
@@ -67,7 +67,7 @@ export default function RedRocks123() {
                 →
               </div>
             </div>
-            <p className="mt-3 text-zinc-200/85">{s.desc}</p>
+            <p className="mt-3 text-strong/85">{s.desc}</p>
           </Link>
         ))}
       </div>

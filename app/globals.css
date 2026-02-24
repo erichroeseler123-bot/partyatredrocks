@@ -337,3 +337,61 @@ body { background: var(--surface); color: var(--text); }
     linear-gradient(90deg, rgba(255,255,255,0.06), transparent 40%, rgba(255,255,255,0.05));
   opacity: 0.6;
 }
+
+
+/* =========================
+   Semantic UI building blocks
+   ========================= */
+.panel{
+  border:1px solid rgba(255,255,255,0.10);
+  background:rgba(12,14,22,0.72);
+  box-shadow:0 18px 60px rgba(0,0,0,0.40);
+  border-radius:1.5rem;
+}
+.panel-soft{
+  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(12,14,22,0.55);
+  box-shadow:0 16px 40px rgba(0,0,0,0.35);
+  border-radius:1.5rem;
+}
+.pill{
+  border:1px solid rgba(255,255,255,0.15);
+  background:rgba(255,255,255,0.05);
+  border-radius:9999px;
+}
+.text-muted{ color: rgba(232,238,249,0.72); }
+
+
+.text-soft{ color: rgba(232,238,249,0.82); }
+.text-dim{ color: rgba(232,238,249,0.62); }
+
+/* =========================
+   Semantic tokens (expanded)
+   ========================= */
+
+.border-soft{ border:1px solid rgba(255,255,255,0.10); }
+
+.text-strong{ color: rgba(255,255,255,0.92); }
+.text-faint{ color: rgba(232,238,249,0.56); }
+
+.pill-soft{
+  border:1px solid rgba(255,255,255,0.12);
+  background:rgba(255,255,255,0.04);
+  border-radius:9999px;
+}
+
+:root{ --glowHex: rgba(76,201,240,0.55); }
+
+
+/* =========================
+   Semantic badges
+   ========================= */
+.badge-hot{
+  background: rgba(255,90,31,0.92);
+  color: rgba(0,0,0,0.92);
+}
+.badge-cool{
+  background: rgba(64,170,255,0.22);
+  border: 1px solid rgba(64,170,255,0.35);
+  color: rgba(255,255,255,0.92);
+}

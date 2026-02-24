@@ -21,7 +21,7 @@ export default function VenuesPage() {
           <Link
             key={v.slug}
             href={`/venues/`}
-            className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-7 shadow-[0_18px_55px_rgba(0,0,0,0.45)] transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.07]"
+            className="group relative overflow-hidden rounded-3xl border border-soft panel p-7 shadow-[0_18px_55px_rgba(0,0,0,0.45)] transition-all duration-300 hover:-translate-y-1 hover:border-soft hover:bg-surface/40"
           >
             <img
               src={venueImage(v.slug)}

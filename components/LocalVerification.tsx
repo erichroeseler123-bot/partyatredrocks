@@ -2,11 +2,11 @@ import Link from 'next/link';
 
 export default function LocalVerification() {
   return (
-    <div className="bg-zinc-950 border border-white/10 p-8 rounded-3xl mt-12 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+    <div className="bg-zinc-950 border border-soft p-8 rounded-3xl mt-12 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
       <div className="flex flex-col md:flex-row justify-between items-center gap-6">
         <div>
           <h3 className="text-white font-black uppercase text-xl mb-2">Verified Local Operator</h3>
-          <p className="text-zinc-500 text-sm max-w-sm">
+          <p className="text-muted text-sm max-w-sm">
             Party at Red Rocks is a registered Colorado business. Proudly serving the Denver, Golden, and Morrison concert communities since 2024.
           </p>
         </div>
@@ -15,7 +15,7 @@ export default function LocalVerification() {
           <Link 
             href="https://g.page/r/[YOUR_GBP_ID]/review" 
             target="_blank"
-            className="bg-white/5 text-white px-6 py-3 rounded-full border border-white/10 font-black text-sm uppercase hover:bg-white/10 transition"
+            className="pill text-white px-6 py-3 rounded-full border border-soft font-black text-sm uppercase hover:pill-soft transition"
           >
             Review us on Google
           </Link>

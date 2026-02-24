@@ -34,7 +34,7 @@ export default function VenueEventsGrid({ events, venueSlug }: Props) {
           <Link
             key={event.id}
             href={href}
-            className="group relative h-48 overflow-hidden rounded-2xl border border-white/10 bg-black transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:shadow-2xl"
+            className="group relative h-48 overflow-hidden rounded-2xl border border-soft bg-black transition-all duration-300 hover:-translate-y-1 hover:border-soft hover:shadow-2xl"
           >
             {/* Background image */}
             <img

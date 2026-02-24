@@ -72,40 +72,40 @@ export default function WeekSearchClient({ initialQ }: { initialQ: string }) {
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder="Search artist / band (e.g., Zeds Dead, String Cheese, etc.)"
-          className="w-full px-4 py-4 rounded-2xl bg-surface border border-white/10 text-white placeholder:text-zinc-600 focus:outline-none focus:border-white/25 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+          className="w-full px-4 py-4 rounded-2xl panel-soft text-white placeholder:text-faint focus:outline-none focus:border-soft hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
         />
-        <div className="mt-3 text-sm text-zinc-500">
-          Tip: you can link directly: <span className="text-zinc-300">/week/search?q=YOUR+ARTIST</span>
+        <div className="mt-3 text-sm text-muted">
+          Tip: you can link directly: <span className="text-soft">/week/search?q=YOUR+ARTIST</span>
         </div>
       </div>
 
       <div className="mt-8">
         {loading ? (
-          <div className="text-zinc-400">Loading week events…</div>
+          <div className="text-muted">Loading week events…</div>
         ) : err ? (
-          <div className="rounded-2xl border border-white/10 bg-surface p-5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+          <div className="rounded-2xl border border-soft bg-surface p-5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
             <div className="text-red-300 font-semibold">Search is temporarily unavailable.</div>
-            <div className="mt-2 text-sm text-zinc-500">{err}</div>
+            <div className="mt-2 text-sm text-muted">{err}</div>
             <div className="mt-4">
               <Link
                 href="/week"
-                className="px-3 py-2 rounded-full border border-white/15 text-xs font-bold uppercase tracking-widest text-white hover:border-white/30"
+                className="px-3 py-2 rounded-full border border-soft text-xs font-bold uppercase tracking-widest text-white hover:border-soft"
               >
                 Back to Week
               </Link>
             </div>
           </div>
         ) : filtered.length === 0 ? (
-          <div className="text-zinc-400">No matches.</div>
+          <div className="text-muted">No matches.</div>
         ) : (
           <div className="grid gap-4">
             {filtered
               .slice()
               .sort((a, b) => +new Date(a.datetime_local) - +new Date(b.datetime_local))
               .map((ev) => (
-                <div key={ev.id} className="rounded-2xl border border-white/10 bg-surface p-5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                <div key={ev.id} className="rounded-2xl border border-soft bg-surface p-5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
                   <div className="text-lg font-black">{ev.title}</div>
-                  <div className="mt-2 text-sm text-zinc-400">
+                  <div className="mt-2 text-sm text-muted">
                     {new Date(ev.datetime_local).toLocaleString("en-US", {
                       weekday: "short",
                       month: "short",
@@ -131,7 +131,7 @@ export default function WeekSearchClient({ initialQ }: { initialQ: string }) {
                         href={ev.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="px-3 py-2 rounded-full border border-white/15 text-xs font-bold uppercase tracking-widest text-white hover:border-white/30"
+                        className="px-3 py-2 rounded-full border border-soft text-xs font-bold uppercase tracking-widest text-white hover:border-soft"
                       >
                         Tickets
                       </a>
@@ -139,7 +139,7 @@ export default function WeekSearchClient({ initialQ }: { initialQ: string }) {
 
                     <Link
                       href={`/shows/${ev.id}`}
-                      className="px-3 py-2 rounded-full border border-white/15 text-xs font-bold uppercase tracking-widest text-white hover:border-white/30"
+                      className="px-3 py-2 rounded-full border border-soft text-xs font-bold uppercase tracking-widest text-white hover:border-soft"
                     >
                       Show Details
                     </Link>

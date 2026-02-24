@@ -9,17 +9,17 @@ export default function MythsVsFacts() {
   ];
 
   return (
-    <div className="bg-surface/60 border border-white/10 rounded-2xl p-6 mb-10 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+    <div className="panel-soft rounded-2xl p-6 mb-10 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
       <h3 className="text-xl font-black uppercase mb-4 tracking-tight">Red Rocks Myths vs Facts</h3>
       <div className="space-y-4">
         {items.map((item, i) => (
           <div key={i} className="grid grid-cols-2 gap-4 text-sm">
             <p className="text-red-400 font-bold">Myth: {item.myth}</p>
-            <p className="text-zinc-300">Fact: {item.fact}</p>
+            <p className="text-soft">Fact: {item.fact}</p>
           </div>
         ))}
       </div>
-      <p className="mt-4 text-xs text-zinc-500 italic">Based on 2026 policies — always verify with venue.</p>
+      <p className="mt-4 text-xs text-muted italic">Based on 2026 policies — always verify with venue.</p>
     </div>
   );
 }

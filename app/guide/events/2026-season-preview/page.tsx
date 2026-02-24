@@ -21,7 +21,7 @@ export default function SeasonPreview() {
         2026 <span className="text-red-600">Season</span> Lineup Intelligence
       </h1>
 
-      <p className="text-zinc-400 text-xl mb-12 leading-relaxed font-medium">
+      <p className="text-muted text-xl mb-12 leading-relaxed font-medium">
         The definitive Red Rocks transportation guide for 2026.
       </p>
 
@@ -37,7 +37,7 @@ export default function SeasonPreview() {
             <Link
               key={show.slug}
               href={`/guide/events/${show.slug}`}
-              className="p-8 bg-surface-strong/50 border border-white/10 rounded-[2.5rem] hover:border-red-600 transition-all group shadow-xl"
+              className="p-8 panel rounded-[2.5rem] hover:border-red-600 transition-all group shadow-xl"
             >
 
               <span className="text-red-600 font-bold uppercase text-base tracking-widest font-mono">
@@ -52,7 +52,7 @@ export default function SeasonPreview() {
                 {show.artist}
               </h3>
 
-              <p className="text-zinc-500 text-base mt-3">
+              <p className="text-muted text-base mt-3">
                 {show.venue}
               </p>
 
@@ -65,7 +65,7 @@ export default function SeasonPreview() {
       {/* ================= FOOTER ================= */}
 
       <div className="pt-10 border-t border-zinc-900 text-center">
-        <p className="text-zinc-600 text-[10px] font-black uppercase tracking-[0.4em]">
+        <p className="text-faint text-[10px] font-black uppercase tracking-[0.4em]">
           © 2026 Party at Red Rocks
         </p>
       </div>

@@ -14,7 +14,7 @@ export default function BookingPage() {
       <nav className="bg-white border-b border-slate-200 py-4 px-6 flex justify-between items-center sticky top-0 z-50">
         <button 
           onClick={() => router.push('/')}
-          className="flex items-center gap-2 text-zinc-200 hover:text-blue-600 font-bold uppercase text-xs transition-colors"
+          className="flex items-center gap-2 text-strong hover:text-blue-600 font-bold uppercase text-xs transition-colors"
         >
           <ChevronLeft className="w-4 h-4" /> Back to Home
         </button>
@@ -31,7 +31,7 @@ export default function BookingPage() {
         <div className="bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-slate-200">
           <div className="p-8 border-b border-slate-100 bg-slate-50">
             <h1 className="text-3xl font-black uppercase italic tracking-tighter">Secure Your Transport</h1>
-            <p className="text-zinc-200 font-medium uppercase text-xs tracking-widest mt-1">Select your service and vehicle below</p>
+            <p className="text-strong font-medium uppercase text-xs tracking-widest mt-1">Select your service and vehicle below</p>
           </div>
           
           <div className="relative min-h-[1000px]">

@@ -8,7 +8,7 @@ export const metadata = {
 
 function FAQ({ q, a }: { q: string; a: string }) {
   return (
-    <details className="rounded-2xl border border-white/10 bg-surface/30 p-5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+    <details className="rounded-2xl border border-soft bg-surface/30 p-5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
       <summary className="cursor-pointer list-none text-base font-black tracking-tight">
         {q}
       </summary>
@@ -50,7 +50,7 @@ export default function RedRocksFAQ() {
 
       <section className="section section-alt">
         <div className="max-w-5xl mx-auto px-6">
-          <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 md:p-8 shadow-soft hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+          <div className="rounded-3xl border border-soft panel p-6 md:p-8 shadow-soft hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
             <h2 className="text-2xl md:text-3xl font-black tracking-tight">
               Quick answers
             </h2>

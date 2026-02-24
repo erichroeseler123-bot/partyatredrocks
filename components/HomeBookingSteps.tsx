@@ -21,7 +21,7 @@ const STEPS = [
 export default function HomeBookingSteps() {
   return (
     <section className="relative z-10 max-w-7xl mx-auto px-6 -mt-24 pb-10">
-      <div className="bg-white/[0.04] text-white rounded-[28px] shadow-2xl border border-white/10 backdrop-blur-xl p-6 md:p-8">
+      <div className="panel text-white rounded-[28px] shadow-2xl border border-soft backdrop-blur-xl p-6 md:p-8">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
           <div>
             <p className="text-[11px] font-black uppercase tracking-[0.34em] text-white/60">
@@ -45,7 +45,7 @@ export default function HomeBookingSteps() {
             <Link
               key={s.n}
               href="/book-shuttle"
-              className="step-card rounded-2xl border border-white/10 bg-white/[0.04] hover:bg-white/[0.05] shadow-md hover:shadow-xl transition p-5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+              className="step-card rounded-2xl border border-soft panel hover:bg-surface/40 shadow-md hover:shadow-xl transition p-5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
               aria-label={`Step ${s.n}: ${s.title}. Go to booking.`}
             >
               <div className="flex items-start gap-4">
@@ -61,7 +61,7 @@ export default function HomeBookingSteps() {
           ))}
         </div>
 
-        <div className="mt-5 rounded-2xl bg-white/[0.04] border border-white/10 px-4 py-3 text-sm text-white/70 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+        <div className="mt-5 rounded-2xl panel px-4 py-3 text-sm text-white/70 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
           <span className="font-black">Cancellation:</span> cancel up to <span className="font-bold">3 days</span> before.
           After that, <span className="font-bold">non-cancelable</span>.
         </div>

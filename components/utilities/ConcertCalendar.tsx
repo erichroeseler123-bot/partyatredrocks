@@ -24,14 +24,14 @@ export default function ConcertCalendar() {
     .slice(0, 8);
 
   return (
-    <div className="bg-surface/60 border border-white/10 rounded-2xl p-6 mb-10 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+    <div className="panel-soft rounded-2xl p-6 mb-10 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
       <h3 className="text-xl font-black uppercase mb-5 tracking-tight">Denver Concerts – Next 30 Days</h3>
       <div className="space-y-4">
         {upcoming.map(event => (
           <div key={event.slug} className="flex justify-between items-center">
             <div>
               <p className="font-bold text-white">{event.artist}</p>
-              <p className="text-sm text-zinc-400">
+              <p className="text-sm text-muted">
                 {new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} • {event.venue}
               </p>
             </div>
@@ -45,7 +45,7 @@ export default function ConcertCalendar() {
         ))}
       </div>
       <div className="mt-5 text-center">
-        <Link href="/guide/events/2026-season-preview" className="text-sm text-zinc-400 hover:text-white">
+        <Link href="/guide/events/2026-season-preview" className="text-sm text-muted hover:text-white">
           View full calendar →
         </Link>
       </div>

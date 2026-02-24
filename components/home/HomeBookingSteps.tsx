@@ -28,13 +28,13 @@ export default function HomeBookingSteps() {
         <div className="bg-surface-strong border-soft shadow-soft rounded-[32px] p-6 md:p-8">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div>
-              <p className="text-[11px] font-black uppercase tracking-[0.32em] text-zinc-400">
+              <p className="text-[11px] font-black uppercase tracking-[0.32em] text-muted">
                 Red Rocks shuttle booking
               </p>
               <h2 className="mt-2 text-2xl md:text-3xl font-black tracking-tight">
                 1–2–3 and you’re locked in
               </h2>
-              <p className="mt-2 text-zinc-300">
+              <p className="mt-2 text-soft">
                 These steps are for <span className="font-bold">Red Rocks</span>. Tap any step to go straight to booking.
               </p>
             </div>
@@ -64,7 +64,7 @@ export default function HomeBookingSteps() {
             ))}
           </div>
 
-          <div className="mt-4 text-xs text-zinc-400">
+          <div className="mt-4 text-xs text-muted">
             Cancellation: cancel up to 3 days before. After that, non-cancelable.
           </div>
         </div>

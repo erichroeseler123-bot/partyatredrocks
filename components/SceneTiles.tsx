@@ -9,7 +9,7 @@ export default function SceneTiles() {
   });
 
   return (
-    <section className="mt-8 rounded-3xl border border-white/10 bg-white/[0.04] p-6">
+    <section className="mt-8 rounded-3xl border border-soft panel p-6">
       <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">
         Explore the Denver Scene
       </div>
@@ -19,7 +19,7 @@ export default function SceneTiles() {
           <Link
             key={t.key}
             href={t.href}
-            className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-5 hover:bg-white/[0.06] transition"
+            className="group relative overflow-hidden rounded-3xl border border-soft panel p-5 hover:bg-surface/40 transition"
           >
             <div className="absolute inset-0">
               <Image

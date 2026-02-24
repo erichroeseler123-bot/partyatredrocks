@@ -318,14 +318,14 @@ export default async function ShowPage({ params }: Props) {
       ) : null}
 
       {/* HERO */}
-      <div className="rounded-[32px] border border-white/10 bg-white/[0.04] p-8 shadow-[0_22px_70px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+      <div className="rounded-[32px] border border-soft panel p-8 shadow-[0_22px_70px_rgba(0,0,0,0.45)] backdrop-blur-xl">
         <div className="flex flex-wrap items-center gap-2">
-          <div className="inline-flex items-center rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white/80">
+          <div className="inline-flex items-center rounded-full pill px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white/80">
             Show Intel
           </div>
 
           {e?.datetime_local ? (
-            <div className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60">
+            <div className="inline-flex items-center rounded-full border border-soft panel px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60">
               {fmtDateTime(e.datetime_local)}
             </div>
           ) : null}
@@ -333,13 +333,13 @@ export default async function ShowPage({ params }: Props) {
           {venueSlug ? (
             <Link
               href={`/venues/${venueSlug}`}
-              className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60 hover:bg-white/[0.06]"
+              className="inline-flex items-center rounded-full border border-soft panel px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60 hover:bg-surface/40"
               title="Venue intel"
             >
               {venueName} →
             </Link>
           ) : e?.venue?.siteName ? (
-            <div className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60">
+            <div className="inline-flex items-center rounded-full border border-soft panel px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60">
               {venueName}
             </div>
           ) : null}
@@ -358,14 +358,14 @@ export default async function ShowPage({ params }: Props) {
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <Link
             href={`/book?event=${idNum}${venueSlug ? `&venue=${encodeURIComponent(venueSlug)}` : ""}`}
-            className="inline-flex items-center justify-center rounded-full bg-neon-blue px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-black transition hover:bg-white"
+            className="inline-flex items-center justify-center rounded-full bg-neon-blue px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-black transition hover:bg-surface/40"
           >
             Ride Options
           </Link>
 
           <Link
             href="/week"
-            className="inline-flex items-center justify-center rounded-full border border-white/14 bg-white/5 px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:bg-white/10"
+            className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft"
           >
             This Week →
           </Link>
@@ -375,7 +375,7 @@ export default async function ShowPage({ params }: Props) {
               href={e.url}
               target="_blank"
               rel="nofollow noopener"
-              className="inline-flex items-center justify-center rounded-full border border-white/14 bg-white/5 px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:bg-white/10"
+              className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft"
               title="Tickets"
             >
               Tickets →
@@ -398,7 +398,7 @@ export default async function ShowPage({ params }: Props) {
 
       {/* PERFORMERS (quick GEO win: scannable entities) */}
       {e?.performers?.length ? (
-        <div className="mt-8 rounded-3xl border border-white/10 bg-white/[0.02] p-6">
+        <div className="mt-8 rounded-3xl border border-soft panel-soft p-6">
           <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">
             Performers
           </div>

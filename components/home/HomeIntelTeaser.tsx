@@ -22,16 +22,16 @@ const CARDS: IntelCard[] = [
 export default function HomeIntelTeaser() {
   return (
     <section className="max-w-7xl mx-auto px-6 pb-10">
-      <div className="rounded-[32px] border border-white/10 bg-white/[0.02] p-7 md:p-10">
+      <div className="rounded-[32px] border border-soft panel-soft p-7 md:p-10">
         <div className="flex items-end justify-between gap-6 flex-wrap">
           <div className="max-w-3xl">
-            <p className="text-[12px] font-black uppercase tracking-[0.32em] text-zinc-400">
+            <p className="text-[12px] font-black uppercase tracking-[0.32em] text-muted">
               Guides
             </p>
             <h2 className="mt-3 text-2xl md:text-4xl font-black tracking-tight">
               Quick intel for show night
             </h2>
-            <p className="mt-4 text-[15px] md:text-[18px] leading-relaxed text-zinc-300">
+            <p className="mt-4 text-[15px] md:text-[18px] leading-relaxed text-soft">
               Keep the homepage clean — put the deep stuff on dedicated pages.
             </p>
           </div>
@@ -49,16 +49,16 @@ export default function HomeIntelTeaser() {
             <Link
               key={c.href}
               href={c.href}
-              className="group block rounded-3xl border border-white/10 bg-black/35 p-6
+              className="group block rounded-3xl border border-soft bg-black/35 p-6
                          shadow-[0_18px_50px_rgba(0,0,0,0.35)]
-                         transition hover:-translate-y-1 hover:border-white/20 hover:bg-black/45"
+                         transition hover:-translate-y-1 hover:border-soft hover:bg-black/45"
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
                   <h3 className="text-xl md:text-2xl font-black tracking-tight text-white">
                     {c.title}
                   </h3>
-                  <p className="mt-3 text-[15px] leading-relaxed text-zinc-300">
+                  <p className="mt-3 text-[15px] leading-relaxed text-soft">
                     {c.desc}
                   </p>
                 </div>

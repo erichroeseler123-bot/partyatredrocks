@@ -5,7 +5,7 @@ export default function ShuttleBookingPage() {
         <h1 className="text-5xl font-black mb-6">
           Red Rocks Shuttle
         </h1>
-        <p className="text-zinc-400 mb-10">
+        <p className="text-muted mb-10">
           Shared shuttle service from Denver or Golden to Red Rocks Amphitheatre.
         </p>
 

@@ -95,13 +95,13 @@ export default async function EventPage({ params }: Props) {
             {show.title}
           </h1>
 
-          <p className="mt-3 text-xl text-zinc-400 font-bold uppercase tracking-widest">
+          <p className="mt-3 text-xl text-muted font-bold uppercase tracking-widest">
             {(show.venue ? `${show.venue}` : "Event") +
               (show.city ? ` • ${show.city}` : "")}
           </p>
 
           {show.dateText ? (
-            <p className="mt-4 text-base text-zinc-500 font-bold uppercase tracking-[0.2em]">
+            <p className="mt-4 text-base text-muted font-bold uppercase tracking-[0.2em]">
               {show.dateText}
             </p>
           ) : null}
@@ -109,16 +109,16 @@ export default async function EventPage({ params }: Props) {
 
         {/* Intelligence */}
         <section className="mb-20">
-          <h2 className="text-3xl font-black mb-8 border-b border-white/10 pb-4 uppercase italic">
+          <h2 className="text-3xl font-black mb-8 border-b border-soft pb-4 uppercase italic">
             Event Intelligence
           </h2>
 
           {show.description ? (
-            <p className="text-zinc-300 leading-relaxed text-lg">
+            <p className="text-soft leading-relaxed text-lg">
               {show.description}
             </p>
           ) : (
-            <p className="text-zinc-500 italic text-center py-10 uppercase text-base font-bold tracking-widest">
+            <p className="text-muted italic text-center py-10 uppercase text-base font-bold tracking-widest">
               Updating event intelligence...
             </p>
           )}

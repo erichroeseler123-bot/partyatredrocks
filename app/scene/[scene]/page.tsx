@@ -225,9 +225,9 @@ export default async function SceneHub({ params }: Props) {
         }}
       />
 
-      <div className="rounded-[32px] border border-white/10 bg-white/[0.04] p-8 shadow-[0_22px_70px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+      <div className="rounded-[32px] border border-soft panel p-8 shadow-[0_22px_70px_rgba(0,0,0,0.45)] backdrop-blur-xl">
         <div
-          className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white/80"
+          className="inline-flex items-center gap-2 rounded-full pill px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white/80"
           style={def.accentColor ? { borderColor: def.accentColor } : undefined}
         >
           Scene Hub • {def.emoji ? <span>{def.emoji}</span> : null} {def.slug}
@@ -246,14 +246,14 @@ export default async function SceneHub({ params }: Props) {
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <Link
             href={`/book?scene=${def.slug}`}
-            className="inline-flex items-center justify-center rounded-full bg-neon-blue px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-black transition hover:bg-white"
+            className="inline-flex items-center justify-center rounded-full bg-neon-blue px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-black transition hover:bg-surface/40"
           >
             Book Shuttle
           </Link>
 
           <Link
             href="/venues"
-            className="inline-flex items-center justify-center rounded-full border border-white/14 bg-white/5 px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:bg-white/10"
+            className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft"
           >
             Browse Venues →
           </Link>
@@ -262,7 +262,7 @@ export default async function SceneHub({ params }: Props) {
             href={`${DCC}/scene/${def.slug}`}
             target="_blank"
             rel="nofollow noopener"
-            className="inline-flex items-center justify-center rounded-full border border-white/14 bg-white/5 px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:bg-white/10"
+            className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft"
             title="Authority intel (DCC)"
           >
             Deep Intel (DCC) →
@@ -275,7 +275,7 @@ export default async function SceneHub({ params }: Props) {
       </div>
 
       {events.length === 0 ? (
-        <div className="mt-10 rounded-3xl border border-white/10 bg-white/[0.04] p-8 text-white/70">
+        <div className="mt-10 rounded-3xl border border-soft panel p-8 text-white/70">
           No upcoming shows found for this scene yet. Run <span className="text-white/90">/api/cron/sync</span>{" "}
           to refresh the feed.
         </div>
@@ -284,7 +284,7 @@ export default async function SceneHub({ params }: Props) {
           {events.map((e) => (
             <div
               key={e.id}
-              className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 transition hover:bg-white/[0.05]"
+              className="rounded-3xl border border-soft panel p-6 transition hover:bg-surface/40"
             >
               <div className="flex items-baseline justify-between gap-3">
                 <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">

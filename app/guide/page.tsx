@@ -100,15 +100,15 @@ function CardLink({ c }: { c: Card }) {
   return (
     <Link href={c.href} className="group block p-6 card-premium">
       {c.kicker ? (
-        <div className="text-[11px] font-black uppercase tracking-[0.25em] text-zinc-400">
+        <div className="text-[11px] font-black uppercase tracking-[0.25em] text-muted">
           {c.kicker}
         </div>
       ) : null}
 
       <div className="mt-2 text-2xl font-black leading-tight">{c.title}</div>
-      <p className="mt-3 text-sm text-zinc-200/90 leading-relaxed">{c.desc}</p>
+      <p className="mt-3 text-sm text-strong/90 leading-relaxed">{c.desc}</p>
 
-      <div className="mt-5 inline-flex items-center gap-2 text-sm text-zinc-200 underline decoration-white/20 group-hover:decoration-white/60">
+      <div className="mt-5 inline-flex items-center gap-2 text-sm text-strong underline decoration-white/20 group-hover:decoration-white/60">
         Open <span aria-hidden>→</span>
       </div>
     </Link>
@@ -133,18 +133,18 @@ export default function GuideHub() {
         </div>
 
         <div className="relative z-10 max-w-6xl mx-auto px-6 pt-16 pb-14">
-          <div className="inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.25em] text-zinc-300">
-            <span className="px-3 py-1 rounded-full border border-white/15 bg-white/5">
+          <div className="inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.25em] text-soft">
+            <span className="px-3 py-1 rounded-full pill">
               Authority Layer
             </span>
-            <span className="text-zinc-400">Red Rocks</span>
+            <span className="text-muted">Red Rocks</span>
           </div>
 
           <h1 className="mt-5 text-5xl md:text-6xl font-black tracking-tight">
             Red Rocks Guides
           </h1>
 
-          <p className="mt-4 text-lg text-zinc-200 max-w-3xl leading-relaxed">
+          <p className="mt-4 text-lg text-strong max-w-3xl leading-relaxed">
             No fluff. Just what works on show nights: transportation strategy,
             parking reality, policy traps, and post-encore extraction.
           </p>
@@ -156,13 +156,13 @@ export default function GuideHub() {
 
             <Link
               href="/book-shuttle"
-              className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 transition"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-full pill hover:pill-soft transition"
             >
               Book Shuttle — $59/pp →
             </Link>
           </div>
 
-          <div className="mt-6 text-sm text-zinc-300/90">
+          <div className="mt-6 text-sm text-soft/90">
             Sources worth checking:{" "}
             <a
               className="underline decoration-white/25 hover:decoration-white/60"
@@ -190,13 +190,13 @@ export default function GuideHub() {
         <section className="banner-premium p-7 mt-8">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div className="max-w-2xl">
-              <div className="text-[11px] font-black uppercase tracking-[0.25em] text-zinc-300">
+              <div className="text-[11px] font-black uppercase tracking-[0.25em] text-soft">
                 Strategy → Execution
               </div>
               <div className="mt-2 text-2xl font-black">
                 Want the cleanest possible post-show exit?
               </div>
-              <p className="mt-2 text-zinc-200/90">
+              <p className="mt-2 text-strong/90">
                 Guides are intel. Booking is how you avoid “figure it out later.”
               </p>
             </div>
@@ -207,7 +207,7 @@ export default function GuideHub() {
               </Link>
               <Link
                 href="/guide/transportation"
-                className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 transition"
+                className="inline-flex items-center justify-center px-6 py-3 rounded-full pill hover:pill-soft transition"
               >
                 Read Transportation Hub →
               </Link>
@@ -220,13 +220,13 @@ export default function GuideHub() {
           <div className="flex items-end justify-between gap-6 flex-wrap">
             <div>
               <h2 className="text-3xl font-black">Featured</h2>
-              <p className="mt-2 text-zinc-300/90">
+              <p className="mt-2 text-soft/90">
                 Your highest leverage pages — start here.
               </p>
             </div>
             <Link
               href="/guide/all"
-              className="underline decoration-white/20 hover:decoration-white/60 text-zinc-200"
+              className="underline decoration-white/20 hover:decoration-white/60 text-strong"
             >
               Browse everything →
             </Link>
@@ -242,7 +242,7 @@ export default function GuideHub() {
         {/* Authority hubs */}
         <section className="mt-14">
           <h2 className="text-2xl font-black">Authority Hubs</h2>
-          <p className="mt-2 text-zinc-300/90 max-w-3xl">
+          <p className="mt-2 text-soft/90 max-w-3xl">
             These are the “pillar” pages Google likes: clean structure, tight intent,
             and internal links to leaf guides.
           </p>
@@ -254,7 +254,7 @@ export default function GuideHub() {
           </div>
         </section>
 
-        <footer className="mt-16 pt-10 border-t border-white/10 text-sm text-zinc-400">
+        <footer className="mt-16 pt-10 border-t border-soft text-sm text-muted">
           This is the authority layer: no fluff, no hype — just show-night reality and what works.
         </footer>
       </div>

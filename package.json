@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "sync": "node sync.js",
-    "sync:publish": "node sync.js && git add public/data/shows-2026.js && git commit -m \"Update 2026 show data\" && git push"
+    "sync:publish": "node sync.js && git add public/data/shows-2026.js && git commit -m \"Update 2026 show data\" && git push",
+    "style:check": "bash scripts/style_leaks_no_globals.sh"
   },
   "dependencies": {
     "@next/third-parties": "^16.1.6",

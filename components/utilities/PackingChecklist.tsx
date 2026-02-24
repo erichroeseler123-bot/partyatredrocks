@@ -2,12 +2,12 @@
 
 export default function PackingChecklist() {
   return (
-    <div className="bg-surface/60 border border-white/10 rounded-2xl p-6 mb-10 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+    <div className="panel-soft rounded-2xl p-6 mb-10 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
       <h3 className="text-xl font-black uppercase mb-4 tracking-tight">
         Quick Red Rocks Packing List
       </h3>
 
-      <ul className="space-y-3 text-sm text-zinc-300">
+      <ul className="space-y-3 text-sm text-soft">
 
         <li className="flex items-center gap-2">
           <span className="text-red-500">✓</span> Ticket + ID
@@ -35,7 +35,7 @@ export default function PackingChecklist() {
 
       </ul>
 
-      <p className="mt-4 text-xs text-zinc-500 italic">
+      <p className="mt-4 text-xs text-muted italic">
         See full prohibited items in our bag policy guide.
       </p>
     </div>

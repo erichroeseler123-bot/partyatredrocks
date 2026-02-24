@@ -19,7 +19,7 @@ export default function RedRocksShowsGrid({
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="group bg-surface rounded-2xl overflow-hidden border border-white/10 hover:border-white transition hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+            className="group bg-surface rounded-2xl overflow-hidden border border-soft hover:border-white transition hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
           >
             <div className="relative aspect-[16/9] w-full bg-black">
               {event.image && (
@@ -38,7 +38,7 @@ export default function RedRocksShowsGrid({
                 {event.title}
               </h3>
 
-              <p className="text-sm text-zinc-400 mt-1">
+              <p className="text-sm text-muted mt-1">
                 {new Date(event.date).toLocaleDateString("en-US", {
                   weekday: "short",
                   month: "short",
@@ -48,7 +48,7 @@ export default function RedRocksShowsGrid({
               </p>
 
               {event.support && (
-                <p className="text-xs text-zinc-500 mt-1">
+                <p className="text-xs text-muted mt-1">
                   {event.support}
                 </p>
               )}

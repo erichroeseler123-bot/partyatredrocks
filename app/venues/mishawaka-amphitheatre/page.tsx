@@ -39,32 +39,32 @@ export default function MishawakaPage() {
 
       <section className="section section-alt">
         <div className="max-w-5xl mx-auto px-6">
-          <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 md:p-8 shadow-soft hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+          <div className="rounded-3xl border border-soft panel p-6 md:p-8 shadow-soft hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
             <h2 className="text-2xl md:text-3xl font-black tracking-tight">What matters for Mishawaka</h2>
 
             <div className="mt-5 grid gap-4 md:grid-cols-2">
-              <div className="rounded-2xl border border-white/10 bg-surface/30 p-5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+              <div className="rounded-2xl border border-soft bg-surface/30 p-5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
                 <p className="text-[11px] font-black uppercase tracking-[0.30em] text-white/55">Timing</p>
                 <p className="mt-2 text-white/75">
                   Mountain roads + limited options near the venue. You want a clear pickup plan and buffer.
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-white/10 bg-surface/30 p-5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+              <div className="rounded-2xl border border-soft bg-surface/30 p-5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
                 <p className="text-[11px] font-black uppercase tracking-[0.30em] text-white/55">Pickup reality</p>
                 <p className="mt-2 text-white/75">
                   We’ll confirm the best pickup spot and what to expect post-show (service + crowd flow).
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-white/10 bg-surface/30 p-5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+              <div className="rounded-2xl border border-soft bg-surface/30 p-5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
                 <p className="text-[11px] font-black uppercase tracking-[0.30em] text-white/55">Private is best</p>
                 <p className="mt-2 text-white/75">
                   Mishawaka is best as private Suburban / Sprinter: fewer variables, cleaner exit plan.
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-white/10 bg-surface/30 p-5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+              <div className="rounded-2xl border border-soft bg-surface/30 p-5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
                 <p className="text-[11px] font-black uppercase tracking-[0.30em] text-white/55">Next step</p>
                 <p className="mt-2 text-white/75">
                   Book a private vehicle and we’ll confirm timing + details by text.

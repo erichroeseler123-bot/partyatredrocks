@@ -4,7 +4,7 @@ export default function UpdatesPage() {
   return (
     <div className="max-w-4xl mx-auto px-6 py-16">
       <h1 className="text-4xl font-black mb-4">Live Venue Intelligence & Alerts</h1>
-      <p className="text-lg text-zinc-200 mb-10">
+      <p className="text-lg text-strong mb-10">
         Real-time updates on parking, weather, and show-day logistics for Red Rocks 2026.
       </p>
 

@@ -10,7 +10,7 @@ export default function HubPage() {{
   return (
     <div className="max-w-5xl mx-auto px-6 py-16 bg-surface text-white">
       <h1 className="text-4xl md:text-5xl font-black mb-6">{title}</h1>
-      <p className="text-xl text-zinc-300 mb-12">{desc}</p>
+      <p className="text-xl text-soft mb-12">{desc}</p>
 
       {/* Sub-pages grid will go here - add links to leaf pages later */}
 

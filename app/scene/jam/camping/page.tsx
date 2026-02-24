@@ -6,8 +6,8 @@ export const runtime = "nodejs";
 export default function JamCampingGuide() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-12">
-      <div className="rounded-[32px] border border-white/10 bg-white/[0.04] p-8 shadow-[0_22px_70px_rgba(0,0,0,0.45)] backdrop-blur-xl">
-        <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white/80">
+      <div className="rounded-[32px] border border-soft panel p-8 shadow-[0_22px_70px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+        <div className="inline-flex items-center gap-2 rounded-full pill px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white/80">
           Jam • Festivals • Camping
         </div>
 
@@ -22,13 +22,13 @@ export default function JamCampingGuide() {
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <Link
             href="/scene/jam"
-            className="inline-flex items-center justify-center rounded-full border border-white/14 bg-white/5 px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 hover:bg-white/10 transition"
+            className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 hover:pill-soft transition"
           >
             Back to Jam Hub →
           </Link>
           <Link
             href="/book?scene=jam"
-            className="inline-flex items-center justify-center rounded-full bg-neon-blue px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-black hover:bg-white transition"
+            className="inline-flex items-center justify-center rounded-full bg-neon-blue px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-black hover:bg-surface/40 transition"
           >
             Plan Your Ride
           </Link>
@@ -37,7 +37,7 @@ export default function JamCampingGuide() {
 
       <section className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {JAM_FESTIVALS.map((f) => (
-          <div key={f.slug} className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 hover:bg-white/[0.05] transition">
+          <div key={f.slug} className="rounded-3xl border border-soft panel p-6 hover:bg-surface/40 transition">
             <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">
               {f.whenText}
             </div>
@@ -60,7 +60,7 @@ export default function JamCampingGuide() {
             <div className="mt-6 flex flex-wrap gap-3">
               <Link
                 href={f.bookHref}
-                className="inline-flex items-center justify-center rounded-full bg-neon-blue px-5 py-2.5 text-[12px] font-black uppercase tracking-[0.22em] text-black hover:bg-white transition"
+                className="inline-flex items-center justify-center rounded-full bg-neon-blue px-5 py-2.5 text-[12px] font-black uppercase tracking-[0.22em] text-black hover:bg-surface/40 transition"
               >
                 Shuttle Plan
               </Link>
@@ -68,7 +68,7 @@ export default function JamCampingGuide() {
                 href={f.officialUrl}
                 target="_blank"
                 rel="nofollow noopener"
-                className="inline-flex items-center justify-center rounded-full border border-white/14 bg-white/5 px-5 py-2.5 text-[12px] font-black uppercase tracking-[0.22em] text-white/85 hover:bg-white/10 transition"
+                className="inline-flex items-center justify-center rounded-full pill px-5 py-2.5 text-[12px] font-black uppercase tracking-[0.22em] text-white/85 hover:pill-soft transition"
               >
                 Official Info →
               </a>
@@ -81,7 +81,7 @@ export default function JamCampingGuide() {
         ))}
       </section>
 
-      <section className="mt-12 rounded-3xl border border-white/10 bg-white/[0.04] p-8">
+      <section className="mt-12 rounded-3xl border border-soft panel p-8">
         <h3 className="text-2xl font-black">Colorado jam camping basics</h3>
         <ul className="mt-4 space-y-2 text-white/75">
           <li>• Nights drop fast — bring a warm bag + real layers.</li>

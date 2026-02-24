@@ -31,19 +31,19 @@ export default function AllVenueHub() {
         <h1 className="text-6xl font-black uppercase italic tracking-tighter mb-4">
           All-Venue <span className="text-red-600">City Service</span>
         </h1>
-        <p className="text-xl text-zinc-400 mb-16 font-medium max-w-3xl leading-relaxed">
+        <p className="text-xl text-muted mb-16 font-medium max-w-3xl leading-relaxed">
           $50 per person ($250 min). Professional door-to-door transport for any group size. No passenger maximum.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
           {venues.map((v) => (
-            <Link key={v.slug} href={`/venues/${v.slug}`} className="group p-8 bg-surface-strong/40 border border-white/10 rounded-[2.5rem] hover:border-red-600 transition-all flex flex-col justify-between h-full">
+            <Link key={v.slug} href={`/venues/${v.slug}`} className="group p-8 panel rounded-[2.5rem] hover:border-red-600 transition-all flex flex-col justify-between h-full">
               <div>
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="text-2xl font-black uppercase italic leading-tight">{v.name}</h3>
-                  <span className="text-[10px] font-bold bg-zinc-800 px-2 py-1 rounded text-zinc-500 uppercase">{v.loc}</span>
+                  <span className="text-[10px] font-bold bg-zinc-800 px-2 py-1 rounded text-muted uppercase">{v.loc}</span>
                 </div>
-                <p className="text-zinc-500 text-sm mb-6 font-medium">Professional transport and post-show waiting service for this venue.</p>
+                <p className="text-muted text-sm mb-6 font-medium">Professional transport and post-show waiting service for this venue.</p>
               </div>
               <span className="text-red-600 font-bold uppercase tracking-widest text-[10px] group-hover:underline">View Schedule & Intel →</span>
             </Link>

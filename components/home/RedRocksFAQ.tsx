@@ -22,13 +22,13 @@ export default function RedRocksFAQ() {
     <section className="py-12">
       <div className="max-w-7xl mx-auto px-6">
         <div className="bg-surface-strong border-soft shadow-soft rounded-[32px] p-7 md:p-10">
-          <p className="text-[11px] font-black uppercase tracking-[0.32em] text-zinc-400">
+          <p className="text-[11px] font-black uppercase tracking-[0.32em] text-muted">
             Red Rocks info
           </p>
           <h2 className="mt-2 text-3xl md:text-4xl font-black tracking-tight">
             FAQ + show-night reality
           </h2>
-          <p className="mt-3 text-zinc-300 max-w-2xl">
+          <p className="mt-3 text-soft max-w-2xl">
             Short answers. No fluff. Built for show nights.
           </p>
 

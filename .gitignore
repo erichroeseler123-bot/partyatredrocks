@@ -19,3 +19,10 @@ NEXT_DISABLE_TURBOPACK=1
 # local edit backups
 *.bak
 *.bak_*
+
+# Python
+__pycache__/
+*.pyc
+
+# OS/editor
+.DS_Store

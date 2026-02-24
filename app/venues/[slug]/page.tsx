@@ -415,24 +415,24 @@ export default async function VenuePage({
       />
 
       {/* HERO */}
-      <div className="rounded-[32px] border border-white/10 bg-white/[0.04] p-8 shadow-[0_22px_70px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+      <div className="rounded-[32px] border border-soft panel p-8 shadow-[0_22px_70px_rgba(0,0,0,0.45)] backdrop-blur-xl">
         <div className="flex flex-wrap items-center gap-2">
-          <div className="inline-flex items-center rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white/80">
+          <div className="inline-flex items-center rounded-full pill px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white/80">
             Venue Intel
           </div>
 
-          <div className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60">
+          <div className="inline-flex items-center rounded-full border border-soft panel px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60">
             {city}
           </div>
 
           {v?.kind ? (
-            <div className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60">
+            <div className="inline-flex items-center rounded-full border border-soft panel px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60">
               {v.kind}
             </div>
           ) : null}
 
           {v?.capacity ? (
-            <div className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60">
+            <div className="inline-flex items-center rounded-full border border-soft panel px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60">
               ~{v.capacity.toLocaleString()} cap
             </div>
           ) : null}
@@ -448,14 +448,14 @@ export default async function VenuePage({
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <Link
             href={`/book?venue=${slug}`}
-            className="inline-flex items-center justify-center rounded-full bg-neon-blue px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-black transition hover:bg-white"
+            className="inline-flex items-center justify-center rounded-full bg-neon-blue px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-black transition hover:bg-surface/40"
           >
             Book this venue
           </Link>
 
           <Link
             href="/week"
-            className="inline-flex items-center justify-center rounded-full border border-white/14 bg-white/5 px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:bg-white/10"
+            className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft"
           >
             This Week →
           </Link>
@@ -464,7 +464,7 @@ export default async function VenuePage({
             href={dccVenueUrl}
             target="_blank"
             rel="nofollow noopener"
-            className="inline-flex items-center justify-center rounded-full border border-white/14 bg-white/5 px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:bg-white/10"
+            className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft"
             title="Authority intel (DCC)"
           >
             Deep Intel (DCC) →
@@ -486,7 +486,7 @@ export default async function VenuePage({
 
       {/* 3-CARD INTEL */}
       <div className="mt-8 grid gap-6 md:grid-cols-3">
-        <div className="rounded-3xl border border-white/10 bg-white/[0.02] p-6">
+        <div className="rounded-3xl border border-soft panel-soft p-6">
           <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">
             Pickup Strategy
           </div>
@@ -496,7 +496,7 @@ export default async function VenuePage({
           </p>
         </div>
 
-        <div className="rounded-3xl border border-white/10 bg-white/[0.02] p-6">
+        <div className="rounded-3xl border border-soft panel-soft p-6">
           <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">
             Return Plan
           </div>
@@ -505,7 +505,7 @@ export default async function VenuePage({
           </p>
         </div>
 
-        <div className="rounded-3xl border border-white/10 bg-white/[0.02] p-6">
+        <div className="rounded-3xl border border-soft panel-soft p-6">
           <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">
             Options
           </div>
@@ -531,7 +531,7 @@ export default async function VenuePage({
             {events.slice(0, 10).map((e) => (
               <div
                 key={e.id}
-                className="rounded-3xl border border-white/10 bg-white/[0.02] p-5 hover:bg-white/[0.05] transition"
+                className="rounded-3xl border border-soft panel-soft p-5 hover:bg-surface/40 transition"
               >
                 <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">
                   {new Date(e.datetime_local).toLocaleString("en-US", {
@@ -569,20 +569,20 @@ export default async function VenuePage({
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/shuttles/all-venue"
-              className="inline-flex items-center justify-center rounded-full border border-white/14 bg-white/5 px-6 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:bg-white/10"
+              className="inline-flex items-center justify-center rounded-full pill px-6 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft"
             >
               All-Venue Shuttle
             </Link>
             <Link
               href={`/book?venue=${slug}`}
-              className="inline-flex items-center justify-center rounded-full bg-neon-blue px-6 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-black transition hover:bg-white"
+              className="inline-flex items-center justify-center rounded-full bg-neon-blue px-6 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-black transition hover:bg-surface/40"
             >
               Book Now
             </Link>
           </div>
         </section>
       ) : (
-        <div className="mt-10 rounded-3xl border border-white/10 bg-white/[0.04] p-6 text-white/70">
+        <div className="mt-10 rounded-3xl border border-soft panel p-6 text-white/70">
           <span className="font-black">Upcoming at {name}:</span> Not synced yet. Run{" "}
           <code className="text-white/85">/api/cron/sync</code>.
         </div>

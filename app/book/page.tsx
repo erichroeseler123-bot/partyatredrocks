@@ -15,7 +15,7 @@ export default function BookPage() {
           <h1 className="text-5xl md:text-7xl font-black italic uppercase tracking-tight mb-6">
             Where Are You Going?
           </h1>
-          <p className="text-zinc-400 max-w-2xl mx-auto text-lg">
+          <p className="text-muted max-w-2xl mx-auto text-lg">
             Choose your destination and we’ll route you to the correct shuttle
             service. You go to the show. We handle the ride.
           </p>
@@ -27,12 +27,12 @@ export default function BookPage() {
           {/* RED ROCKS */}
           <Link
             href="/venues/red-rocks-amphitheatre"
-            className="group rounded-3xl border border-white/10 bg-white/[0.02] p-10 hover:bg-white/[0.07] transition-all hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+            className="group rounded-3xl border border-soft panel-soft p-10 hover:bg-surface/40 transition-all hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
           >
             <h2 className="text-3xl font-black italic uppercase mb-4 group-hover:text-red-500">
               Party at Red Rocks
             </h2>
-            <ul className="text-sm text-zinc-300 space-y-2 mb-6">
+            <ul className="text-sm text-soft space-y-2 mb-6">
               <li>• Flagship round-trip shuttle</li>
               <li>• Pickup anywhere in Denver</li>
               <li>• Driver waits after the show</li>
@@ -46,12 +46,12 @@ export default function BookPage() {
           {/* MISHAWAKA */}
           <Link
             href="/venues/mishawaka-amphitheatre"
-            className="group rounded-3xl border border-white/10 bg-white/[0.02] p-10 hover:bg-white/[0.07] transition-all hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+            className="group rounded-3xl border border-soft panel-soft p-10 hover:bg-surface/40 transition-all hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
           >
             <h2 className="text-3xl font-black italic uppercase mb-4 group-hover:text-blue-400">
               Mishawaka Shuttle
             </h2>
-            <ul className="text-sm text-zinc-300 space-y-2 mb-6">
+            <ul className="text-sm text-soft space-y-2 mb-6">
               <li>• Shared mountain shuttle</li>
               <li>• Canyon logistics handled</li>
               <li>• Ideal for sold-out shows</li>
@@ -65,12 +65,12 @@ export default function BookPage() {
           {/* ALL VENUE */}
           <Link
             href="/book-all-venues"
-            className="group rounded-3xl border border-white/10 bg-white/[0.02] p-10 hover:bg-white/[0.07] transition-all hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+            className="group rounded-3xl border border-soft panel-soft p-10 hover:bg-surface/40 transition-all hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
           >
             <h2 className="text-3xl font-black italic uppercase mb-4 group-hover:text-green-400">
               All-Venue Shuttle
             </h2>
-            <ul className="text-sm text-zinc-300 space-y-2 mb-6">
+            <ul className="text-sm text-soft space-y-2 mb-6">
               <li>• Any venue in Denver or Boulder</li>
               <li>• $50 per person</li>
               <li>• $250 minimum total</li>

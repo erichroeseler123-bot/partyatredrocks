@@ -51,12 +51,12 @@ function CardUI({ c }: { c: Card }) {
   return (
     <Link
       href={c.href}
-      className="group block rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.35)]
-                 transition hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.07]"
+      className="group block rounded-3xl border border-soft panel p-6 shadow-[0_18px_50px_rgba(0,0,0,0.35)]
+                 transition hover:-translate-y-1 hover:border-soft hover:bg-surface/40"
     >
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
-          <div className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[10px] font-black uppercase tracking-[0.22em] text-zinc-200">
+          <div className="inline-flex items-center rounded-full border border-soft panel px-3 py-1 text-[10px] font-black uppercase tracking-[0.22em] text-strong">
             Other venues
           </div>
           <h3 className="mt-3 text-xl md:text-2xl font-black tracking-tight text-white">{c.title}</h3>
@@ -64,11 +64,11 @@ function CardUI({ c }: { c: Card }) {
 
         <div className="text-right shrink-0">
           <div className="text-2xl md:text-3xl font-black leading-none text-white">{c.price}</div>
-          <div className="mt-1 text-[11px] uppercase tracking-[0.22em] text-zinc-400">{c.note}</div>
+          <div className="mt-1 text-[11px] uppercase tracking-[0.22em] text-muted">{c.note}</div>
         </div>
       </div>
 
-      <ul className="mt-5 space-y-2 text-[15px] leading-relaxed text-zinc-200/90">
+      <ul className="mt-5 space-y-2 text-[15px] leading-relaxed text-strong/90">
         {c.bullets.map((b) => (
           <li key={b} className="flex gap-2">
             <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400/60" />
@@ -90,7 +90,7 @@ function CardUI({ c }: { c: Card }) {
 export default function OtherVenuesPage() {
   return (
     <main className="text-white">
-      <section className="relative border-b border-white/10 bg-surface/40">
+      <section className="relative border-b border-soft bg-surface/40">
         <div className="max-w-7xl mx-auto px-6 pt-20 pb-10">
           <h1 className="text-4xl md:text-6xl font-black italic uppercase tracking-tight">
             Mishawaka + other venues
@@ -114,9 +114,9 @@ export default function OtherVenuesPage() {
           ))}
         </div>
 
-        <div className="mt-10 rounded-3xl border border-white/10 bg-white/[0.04] p-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+        <div className="mt-10 rounded-3xl border border-soft panel p-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
           <h2 className="text-lg font-black uppercase tracking-[0.18em]">Heads up</h2>
-          <p className="mt-3 text-zinc-200/90 leading-relaxed">
+          <p className="mt-3 text-strong/90 leading-relaxed">
             For far destinations (like Mishawaka), exact pickup/return timing depends on the show schedule and canyon traffic.
             We’ll confirm details after you submit.
           </p>

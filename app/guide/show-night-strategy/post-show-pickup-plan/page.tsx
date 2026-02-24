@@ -9,7 +9,7 @@ export default function Page() {
   return (
     <main className="min-h-screen bg-surface text-white px-6 py-20">
       <div className="max-w-4xl mx-auto">
-        <div className="text-[11px] font-black uppercase tracking-[0.25em] text-zinc-500">
+        <div className="text-[11px] font-black uppercase tracking-[0.25em] text-muted">
           Strategy • Exit
         </div>
 
@@ -17,17 +17,17 @@ export default function Page() {
           Post-Show Pickup Plan (Don’t Get Stranded)
         </h1>
 
-        <p className="mt-5 text-lg text-zinc-300 leading-relaxed">
+        <p className="mt-5 text-lg text-soft leading-relaxed">
           Where to go, what to text, and how to avoid the post-encore chaos window that strands people.
         </p>
 
-        <div className="mt-5 text-sm text-zinc-500">
+        <div className="mt-5 text-sm text-muted">
           Last updated: Feb 11, 2026
         </div>
 
-        <div className="mt-10 rounded-3xl border border-white/10 bg-surface-strong p-6">
+        <div className="mt-10 rounded-3xl border border-soft bg-surface-strong p-6">
           <h2 className="text-2xl font-black">What actually matters</h2>
-          <ul className="mt-4 space-y-2 text-zinc-300 leading-relaxed list-disc pl-5">
+          <ul className="mt-4 space-y-2 text-soft leading-relaxed list-disc pl-5">
               <li>Decide: speed exit vs full encore. You can’t optimize both.</li>
               <li>Pick a meet point that’s specific and easy to describe.</li>
               <li>Text instructions before the encore starts (service can be unreliable).</li>
@@ -41,7 +41,7 @@ export default function Page() {
           </Link>
           <Link
             href="/guide/show-night-strategy"
-            className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 transition"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-soft pill hover:pill-soft transition"
           >
             Back to Strategy →
           </Link>
@@ -50,17 +50,17 @@ export default function Page() {
         <div className="mt-10">
           <h2 className="text-2xl font-black">Quick FAQ</h2>
           <div className="mt-4 space-y-3">
-            <details className="rounded-2xl border border-white/10 bg-surface-strong p-5">
+            <details className="rounded-2xl border border-soft bg-surface-strong p-5">
               <summary className="cursor-pointer font-black">What’s the #1 mistake people make?</summary>
-              <p className="mt-2 text-zinc-300 leading-relaxed">Waiting until after encore to decide where to meet.</p>
+              <p className="mt-2 text-soft leading-relaxed">Waiting until after encore to decide where to meet.</p>
             </details>
-            <details className="rounded-2xl border border-white/10 bg-surface-strong p-5">
+            <details className="rounded-2xl border border-soft bg-surface-strong p-5">
               <summary className="cursor-pointer font-black">What should I text my driver/friends?</summary>
-              <p className="mt-2 text-zinc-300 leading-relaxed">A landmark + ETA + backup meet point.</p>
+              <p className="mt-2 text-soft leading-relaxed">A landmark + ETA + backup meet point.</p>
             </details>
-            <details className="rounded-2xl border border-white/10 bg-surface-strong p-5">
+            <details className="rounded-2xl border border-soft bg-surface-strong p-5">
               <summary className="cursor-pointer font-black">How long does it take to get out?</summary>
-              <p className="mt-2 text-zinc-300 leading-relaxed">Depends on crowd + weather + enforcement. Assume it takes longer on sold-out nights.</p>
+              <p className="mt-2 text-soft leading-relaxed">Depends on crowd + weather + enforcement. Assume it takes longer on sold-out nights.</p>
             </details>
           </div>
         </div>
@@ -93,7 +93,7 @@ export default function Page() {
         }}
       />
 
-        <footer className="mt-16 pt-10 border-t border-white/10 text-sm text-zinc-400">
+        <footer className="mt-16 pt-10 border-t border-soft text-sm text-muted">
           This is the authority layer: no fluff, no hype — just show-night reality and what works.
         </footer>
       </div>

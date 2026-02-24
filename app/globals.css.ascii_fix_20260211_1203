@@ -53,7 +53,7 @@ body {
   -webkit-backdrop-filter: blur(10px);
 }
 
-.text-zinc-200 {
+.text-strong {
   color: rgba(var(--muted), 0.95);
 }
 

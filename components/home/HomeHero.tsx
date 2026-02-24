@@ -14,7 +14,7 @@ export default function HomeHero() {
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 pb-24">
-        <p className="text-[11px] font-black uppercase tracking-[0.32em] text-zinc-200/70">
+        <p className="text-[11px] font-black uppercase tracking-[0.32em] text-strong/70">
           Premium Red Rocks transportation
         </p>
 
@@ -22,9 +22,9 @@ export default function HomeHero() {
           Party at Red Rocks
         </h1>
 
-        <p className="mt-6 max-w-3xl text-zinc-100/90 text-lg md:text-2xl font-medium leading-relaxed">
+        <p className="mt-6 max-w-3xl text-strong text-lg md:text-2xl font-medium leading-relaxed">
           Fixed pricing. Pro drivers. Reliable post-show return.
-          <span className="text-zinc-200/80"> Shuttle seats $59–$65/pp or Private Suburban $499.</span>
+          <span className="text-strong/80"> Shuttle seats $59–$65/pp or Private Suburban $499.</span>
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row gap-3">

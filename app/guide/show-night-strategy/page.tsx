@@ -9,7 +9,7 @@ export default function Page() {
   return (
     <main className="min-h-screen bg-surface text-white px-6 py-20">
       <div className="max-w-4xl mx-auto">
-        <div className="text-[11px] font-black uppercase tracking-[0.25em] text-zinc-500">
+        <div className="text-[11px] font-black uppercase tracking-[0.25em] text-muted">
           Strategy
         </div>
 
@@ -17,17 +17,17 @@ export default function Page() {
           Show-Night Strategy Guide
         </h1>
 
-        <p className="mt-5 text-lg text-zinc-300 leading-relaxed">
+        <p className="mt-5 text-lg text-soft leading-relaxed">
           Arrival windows, crowd flow, weather risk, and the exit plan that prevents ‘stuck at Red Rocks’ syndrome.
         </p>
 
-        <div className="mt-5 text-sm text-zinc-500">
+        <div className="mt-5 text-sm text-muted">
           Last updated: Feb 11, 2026
         </div>
 
-        <div className="mt-10 rounded-3xl border border-white/10 bg-surface-strong p-6">
+        <div className="mt-10 rounded-3xl border border-soft bg-surface-strong p-6">
           <h2 className="text-2xl font-black">What actually matters</h2>
-          <ul className="mt-4 space-y-2 text-zinc-300 leading-relaxed list-disc pl-5">
+          <ul className="mt-4 space-y-2 text-soft leading-relaxed list-disc pl-5">
               <li>The show-night ‘pain’ is predictable: arrival congestion + post-show extraction.</li>
               <li>Weather and temperature swings are the silent killers of comfort.</li>
               <li>Have a meeting point and backup plan before the show starts.</li>
@@ -41,7 +41,7 @@ export default function Page() {
           </Link>
           <Link
             href="/guide"
-            className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 transition"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-soft pill hover:pill-soft transition"
           >
             Back to Guides →
           </Link>
@@ -50,17 +50,17 @@ export default function Page() {
         <div className="mt-10">
           <h2 className="text-2xl font-black">Quick FAQ</h2>
           <div className="mt-4 space-y-3">
-            <details className="rounded-2xl border border-white/10 bg-surface-strong p-5">
+            <details className="rounded-2xl border border-soft bg-surface-strong p-5">
               <summary className="cursor-pointer font-black">What time should I plan to leave?</summary>
-              <p className="mt-2 text-zinc-300 leading-relaxed">Plan around the encore + crowd surge. Your best window depends on whether you prioritize speed or the full ending.</p>
+              <p className="mt-2 text-soft leading-relaxed">Plan around the encore + crowd surge. Your best window depends on whether you prioritize speed or the full ending.</p>
             </details>
-            <details className="rounded-2xl border border-white/10 bg-surface-strong p-5">
+            <details className="rounded-2xl border border-soft bg-surface-strong p-5">
               <summary className="cursor-pointer font-black">Where should we meet after the show?</summary>
-              <p className="mt-2 text-zinc-300 leading-relaxed">Pick a specific landmark and stick to it—service and crowds make improvising fail.</p>
+              <p className="mt-2 text-soft leading-relaxed">Pick a specific landmark and stick to it—service and crowds make improvising fail.</p>
             </details>
-            <details className="rounded-2xl border border-white/10 bg-surface-strong p-5">
+            <details className="rounded-2xl border border-soft bg-surface-strong p-5">
               <summary className="cursor-pointer font-black">What if it’s cold or snowing?</summary>
-              <p className="mt-2 text-zinc-300 leading-relaxed">Assume longer exit times and plan warm layers + a clear pickup plan.</p>
+              <p className="mt-2 text-soft leading-relaxed">Assume longer exit times and plan warm layers + a clear pickup plan.</p>
             </details>
           </div>
         </div>
@@ -93,7 +93,7 @@ export default function Page() {
         }}
       />
 
-        <footer className="mt-16 pt-10 border-t border-white/10 text-sm text-zinc-400">
+        <footer className="mt-16 pt-10 border-t border-soft text-sm text-muted">
           This is the authority layer: no fluff, no hype — just show-night reality and what works.
         </footer>
       </div>

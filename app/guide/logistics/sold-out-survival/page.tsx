@@ -17,7 +17,7 @@ export default function SoldOutSurvival() {
         Sold-Out Survival: <span className="text-red-700">Don't Get Stranded at Red Rocks</span>
       </h1>
 
-      <p className="text-xl text-zinc-200 mb-16 leading-relaxed">
+      <p className="text-xl text-strong mb-16 leading-relaxed">
         For 2026 high-demand shows like <strong>Zac Brown Band</strong> or <strong>Widespread Panic</strong>, logistics change. 
         Standard parking lots fill 2-3 hours before doors, and the &quot;Jurassic Lot&quot; overflow becomes a 1.5-mile hike.
       </p>

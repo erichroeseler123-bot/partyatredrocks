@@ -60,7 +60,7 @@ function badge(tone: Card["tone"]) {
     "inline-flex items-center rounded-full border px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.22em]";
   switch (tone) {
     case "shared":
-      return <span className={`${base} border-zinc-600/60 bg-surface/35 text-zinc-200`}>Shared ride</span>;
+      return <span className={`${base} border-zinc-600/60 bg-surface/35 text-strong`}>Shared ride</span>;
     case "suv":
       return <span className={`${base} border-red-500/30 bg-red-500/10 text-red-100`}>Private</span>;
     case "sprinter":
@@ -81,11 +81,11 @@ function CardUI({ c }: { c: Card }) {
 
         <div className="text-right shrink-0">
           <div className="text-2xl md:text-3xl font-black leading-none">{c.price}</div>
-          <div className="mt-1 text-[11px] uppercase tracking-[0.22em] text-zinc-400">{c.note}</div>
+          <div className="mt-1 text-[11px] uppercase tracking-[0.22em] text-muted">{c.note}</div>
         </div>
       </div>
 
-      <ul className="mt-5 space-y-2 text-[15px] leading-relaxed text-zinc-200/90">
+      <ul className="mt-5 space-y-2 text-[15px] leading-relaxed text-strong/90">
         {c.bullets.map((b) => (
           <li key={b} className="flex gap-2">
             <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400/60" />
@@ -97,7 +97,7 @@ function CardUI({ c }: { c: Card }) {
       <div className="mt-6">
         <Link
           href={c.href}
-          className="inline-flex w-full items-center justify-center rounded-full border border-zinc-600/45 bg-surface/25 px-4 py-3 text-xs font-black uppercase tracking-[0.22em] text-zinc-100 hover:bg-surface/40 transition"
+          className="inline-flex w-full items-center justify-center rounded-full border border-zinc-600/45 bg-surface/25 px-4 py-3 text-xs font-black uppercase tracking-[0.22em] text-strong hover:bg-surface/40 transition"
         >
           {c.cta}
         </Link>
@@ -112,13 +112,13 @@ export default function FeaturedServices() {
       <div className="bg-surface-strong border-soft shadow-soft rounded-[32px] p-7 md:p-10">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
           <div className="max-w-3xl">
-            <p className="text-[12px] font-black uppercase tracking-[0.32em] text-zinc-400">
+            <p className="text-[12px] font-black uppercase tracking-[0.32em] text-muted">
               Transportation options
             </p>
             <h2 className="mt-3 text-3xl md:text-5xl font-black tracking-tight">
               Would you rather ride with other people — or have a private vehicle just for your group?
             </h2>
-            <p className="mt-4 text-[16px] md:text-[18px] leading-relaxed text-zinc-300">
+            <p className="mt-4 text-[16px] md:text-[18px] leading-relaxed text-soft">
               Fixed pricing, professional drivers, and timing built for show nights. Pick the option that fits your
               group size and vibe.
             </p>
@@ -127,8 +127,8 @@ export default function FeaturedServices() {
 
         <div className="mt-10">
           <div className="flex items-center justify-between gap-4">
-            <h3 className="text-sm font-black uppercase tracking-[0.28em] text-zinc-400">Red Rocks</h3>
-            <Link href="/book" className="text-xs font-black uppercase tracking-[0.28em] text-zinc-300 hover:text-white">
+            <h3 className="text-sm font-black uppercase tracking-[0.28em] text-muted">Red Rocks</h3>
+            <Link href="/book" className="text-xs font-black uppercase tracking-[0.28em] text-soft hover:text-white">
               Get a quote →
             </Link>
           </div>

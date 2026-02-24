@@ -41,7 +41,7 @@ export default function SidebarSatMap() {
       <p className="text-[9px] text-neon-blue uppercase font-black tracking-widest border-l-2 border-neon-blue pl-2 mb-2">
         // SITE_INTEL_ROTATING
       </p>
-      <div ref={mapContainer} className="h-64 w-full border border-white/10 bg-surface shadow-2xl" />
+      <div ref={mapContainer} className="h-64 w-full border border-soft bg-surface shadow-2xl" />
     </div>
   );
 }

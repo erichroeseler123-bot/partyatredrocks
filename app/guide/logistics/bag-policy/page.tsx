@@ -2,7 +2,7 @@ export default function BagPolicy() {
   return (
     <div className="max-w-4xl mx-auto px-6 py-16">
       <h1 className="text-4xl font-black mb-6">Red Rocks Bag Policy 2026: The "Single-Pocket" Rule</h1>
-      <p className="text-xl text-zinc-200 mb-10">
+      <p className="text-xl text-strong mb-10">
         Don't get turned away at the gate. Red Rocks has updated their security protocols—multi-pocket 
         hiking backpacks are officially banned for 2026.
       </p>
@@ -10,7 +10,7 @@ export default function BagPolicy() {
       <div className="grid gap-8 mb-12">
         <div className="border-l-4 border-green-500 pl-6">
           <h3 className="text-xl font-bold">What IS Allowed:</h3>
-          <ul className="list-disc ml-5 text-zinc-200">
+          <ul className="list-disc ml-5 text-strong">
             <li><strong>Single-pocket</strong> bags (13” x 15” x 8” or smaller)</li>
             <li>Small purses and fanny packs (6” x 9” or smaller)</li>
             <li>Hydration packs (2L or smaller, emptied, max 1 extra pocket)</li>
@@ -20,7 +20,7 @@ export default function BagPolicy() {
 
         <div className="border-l-4 border-red-500 pl-6">
           <h3 className="text-xl font-bold text-red-700">What IS NOT Allowed:</h3>
-          <ul className="list-disc ml-5 text-zinc-200">
+          <ul className="list-disc ml-5 text-strong">
             <li>Any bag with multiple pockets (backpacks, camelbaks with storage)</li>
             <li>Hard-sided coolers</li>
             <li>Umbrellas or Totems</li>

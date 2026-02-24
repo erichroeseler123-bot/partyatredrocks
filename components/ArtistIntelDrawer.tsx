@@ -151,7 +151,7 @@ export default function ArtistIntelDrawer({ artistName }: { artistName: string }
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="px-3 py-2 rounded-full border border-white/15 text-xs font-bold uppercase tracking-widest text-white hover:border-white/30"
+        className="px-3 py-2 rounded-full border border-soft text-xs font-bold uppercase tracking-widest text-white hover:border-soft"
       >
         Artist Info
       </button>
@@ -160,10 +160,10 @@ export default function ArtistIntelDrawer({ artistName }: { artistName: string }
         <div className="fixed inset-0 z-50">
           <div className="absolute inset-0 bg-black/70" onClick={() => setOpen(false)} />
 
-          <div className="absolute right-0 top-0 h-full w-full sm:w-[560px] bg-black border-l border-white/10 p-6 overflow-y-auto">
+          <div className="absolute right-0 top-0 h-full w-full sm:w-[560px] bg-black border-l border-soft p-6 overflow-y-auto">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <div className="text-xs uppercase tracking-widest text-zinc-500">
+                <div className="text-xs uppercase tracking-widest text-muted">
                   Artist Intelligence
                 </div>
                 <h3 className="mt-2 text-2xl font-black text-white">
@@ -175,14 +175,14 @@ export default function ArtistIntelDrawer({ artistName }: { artistName: string }
                 <button
                   type="button"
                   onClick={() => setNonce((n) => n + 1)}
-                  className="px-3 py-2 rounded-full border border-white/15 text-xs font-bold uppercase tracking-widest text-white hover:border-white/30"
+                  className="px-3 py-2 rounded-full border border-soft text-xs font-bold uppercase tracking-widest text-white hover:border-soft"
                 >
                   Retry
                 </button>
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
-                  className="px-3 py-2 rounded-full border border-white/15 text-xs font-bold uppercase tracking-widest text-white hover:border-white/30"
+                  className="px-3 py-2 rounded-full border border-soft text-xs font-bold uppercase tracking-widest text-white hover:border-soft"
                 >
                   Close
                 </button>
@@ -191,30 +191,30 @@ export default function ArtistIntelDrawer({ artistName }: { artistName: string }
 
             <div className="mt-6">
               {loading ? (
-                <div className="text-zinc-400">Loading MusicBrainz…</div>
+                <div className="text-muted">Loading MusicBrainz…</div>
               ) : err ? (
                 <div className="text-red-300">
                   {err}
-                  <div className="mt-3 text-xs text-zinc-500">
+                  <div className="mt-3 text-xs text-muted">
                     If MusicBrainz is rate-limiting, Retry in a few seconds.
                   </div>
                 </div>
               ) : data ? (
                 "found" in data && data.found ? (
                   <div className="space-y-5">
-                    <div className="rounded-2xl border border-white/10 p-4 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-                      <div className="grid gap-3 text-sm text-zinc-300">
+                    <div className="rounded-2xl border border-soft p-4 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                      <div className="grid gap-3 text-sm text-soft">
                         {data.type ? (
                           <div>
-                            <div className="text-xs uppercase tracking-widest text-zinc-500">Type</div>
-                            <div className="text-zinc-200">{data.type}</div>
+                            <div className="text-xs uppercase tracking-widest text-muted">Type</div>
+                            <div className="text-strong">{data.type}</div>
                           </div>
                         ) : null}
 
                         {data.lifeSpan?.begin ? (
                           <div>
-                            <div className="text-xs uppercase tracking-widest text-zinc-500">Active</div>
-                            <div className="text-zinc-200">
+                            <div className="text-xs uppercase tracking-widest text-muted">Active</div>
+                            <div className="text-strong">
                               {data.lifeSpan.begin}
                               {data.lifeSpan.end
                                 ? ` → ${data.lifeSpan.end}`
@@ -227,8 +227,8 @@ export default function ArtistIntelDrawer({ artistName }: { artistName: string }
 
                         {(data.area || data.country) ? (
                           <div>
-                            <div className="text-xs uppercase tracking-widest text-zinc-500">Region</div>
-                            <div className="text-zinc-200">
+                            <div className="text-xs uppercase tracking-widest text-muted">Region</div>
+                            <div className="text-strong">
                               {[data.area, data.country].filter(Boolean).join(" · ")}
                             </div>
                           </div>
@@ -236,41 +236,41 @@ export default function ArtistIntelDrawer({ artistName }: { artistName: string }
 
                         {data.disambiguation ? (
                           <div>
-                            <div className="text-xs uppercase tracking-widest text-zinc-500">Note</div>
-                            <div className="text-zinc-200">{data.disambiguation}</div>
+                            <div className="text-xs uppercase tracking-widest text-muted">Note</div>
+                            <div className="text-strong">{data.disambiguation}</div>
                           </div>
                         ) : null}
 
                         {typeof data.score === "number" ? (
                           <div>
-                            <div className="text-xs uppercase tracking-widest text-zinc-500">Match Score</div>
-                            <div className="text-zinc-200">{data.score}</div>
+                            <div className="text-xs uppercase tracking-widest text-muted">Match Score</div>
+                            <div className="text-strong">{data.score}</div>
                           </div>
                         ) : null}
                       </div>
                     </div>
 
-                    <div className="rounded-2xl border border-white/10 p-4 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-                      <div className="text-xs uppercase tracking-widest text-zinc-500">Top Tracks</div>
+                    <div className="rounded-2xl border border-soft p-4 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                      <div className="text-xs uppercase tracking-widest text-muted">Top Tracks</div>
 
                       <div className="mt-3">
                         {tracksLoading ? (
-                          <div className="text-zinc-400 text-sm">Loading…</div>
+                          <div className="text-muted text-sm">Loading…</div>
                         ) : tracksErr ? (
-                          <div className="text-zinc-500 text-sm">{tracksErr}</div>
+                          <div className="text-muted text-sm">{tracksErr}</div>
                         ) : topTracks.length ? (
                           <div className="grid gap-2">
                             {topTracks.map((t, idx) => (
                               <div
                                 key={`${t.title}-${idx}`}
-                                className="flex items-center justify-between gap-3 rounded-2xl border border-white/10 px-3 py-2 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+                                className="flex items-center justify-between gap-3 rounded-2xl border border-soft px-3 py-2 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
                               >
                                 <div className="min-w-0">
-                                  <div className="text-zinc-200 text-sm font-semibold truncate">
+                                  <div className="text-strong text-sm font-semibold truncate">
                                     {t.title}
                                   </div>
                                   {t.provider ? (
-                                    <div className="text-xs text-zinc-500 uppercase tracking-widest">
+                                    <div className="text-xs text-muted uppercase tracking-widest">
                                       {t.provider}
                                     </div>
                                   ) : null}
@@ -281,7 +281,7 @@ export default function ArtistIntelDrawer({ artistName }: { artistName: string }
                                     href={t.url}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="shrink-0 px-3 py-2 rounded-full border border-white/15 text-xs font-bold uppercase tracking-widest text-white hover:border-white/30"
+                                    className="shrink-0 px-3 py-2 rounded-full border border-soft text-xs font-bold uppercase tracking-widest text-white hover:border-soft"
                                   >
                                     Listen
                                   </a>
@@ -290,21 +290,21 @@ export default function ArtistIntelDrawer({ artistName }: { artistName: string }
                             ))}
                           </div>
                         ) : (
-                          <div className="text-zinc-500 text-sm">No tracks found.</div>
+                          <div className="text-muted text-sm">No tracks found.</div>
                         )}
                       </div>
                     </div>
 
                     {(data.genres?.length || data.tags?.length) ? (
-                      <div className="rounded-2xl border border-white/10 p-4 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                      <div className="rounded-2xl border border-soft p-4 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
                         {data.genres?.length ? (
                           <div>
-                            <div className="text-xs uppercase tracking-widest text-zinc-500">Genres</div>
+                            <div className="text-xs uppercase tracking-widest text-muted">Genres</div>
                             <div className="mt-2 flex flex-wrap gap-2">
                               {data.genres.map((g) => (
                                 <span
                                   key={g}
-                                  className="px-3 py-1 rounded-full border border-white/10 text-xs text-zinc-200"
+                                  className="px-3 py-1 rounded-full border border-soft text-xs text-strong"
                                 >
                                   {g}
                                 </span>
@@ -315,12 +315,12 @@ export default function ArtistIntelDrawer({ artistName }: { artistName: string }
 
                         {data.tags?.length ? (
                           <div className="mt-4">
-                            <div className="text-xs uppercase tracking-widest text-zinc-500">Tags</div>
+                            <div className="text-xs uppercase tracking-widest text-muted">Tags</div>
                             <div className="mt-2 flex flex-wrap gap-2">
                               {data.tags.map((t) => (
                                 <span
                                   key={t}
-                                  className="px-3 py-1 rounded-full border border-white/10 text-xs text-zinc-300"
+                                  className="px-3 py-1 rounded-full border border-soft text-xs text-soft"
                                 >
                                   {t}
                                 </span>
@@ -331,8 +331,8 @@ export default function ArtistIntelDrawer({ artistName }: { artistName: string }
                       </div>
                     ) : null}
 
-                    <div className="rounded-2xl border border-white/10 p-4 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-                      <div className="text-xs uppercase tracking-widest text-zinc-500">Links</div>
+                    <div className="rounded-2xl border border-soft p-4 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                      <div className="text-xs uppercase tracking-widest text-muted">Links</div>
 
                       <div className="mt-3 grid gap-2 text-sm">
                         {Object.entries(data.urls || {}).map(([k, v]) =>
@@ -342,7 +342,7 @@ export default function ArtistIntelDrawer({ artistName }: { artistName: string }
                               href={v}
                               target="_blank"
                               rel="noreferrer"
-                              className="text-zinc-200 hover:text-white underline underline-offset-4"
+                              className="text-strong hover:text-white underline underline-offset-4"
                             >
                               {prettyKey(k)}
                             </a>
@@ -353,7 +353,7 @@ export default function ArtistIntelDrawer({ artistName }: { artistName: string }
                           href={`https://musicbrainz.org/artist/${data.mbid}`}
                           target="_blank"
                           rel="noreferrer"
-                          className="text-zinc-200 hover:text-white underline underline-offset-4"
+                          className="text-strong hover:text-white underline underline-offset-4"
                         >
                           MusicBrainz Profile
                         </a>
@@ -361,10 +361,10 @@ export default function ArtistIntelDrawer({ artistName }: { artistName: string }
                     </div>
                   </div>
                 ) : (
-                  <div className="text-zinc-400">No MusicBrainz match found.</div>
+                  <div className="text-muted">No MusicBrainz match found.</div>
                 )
               ) : (
-                <div className="text-zinc-500">No data.</div>
+                <div className="text-muted">No data.</div>
               )}
             </div>
           </div>

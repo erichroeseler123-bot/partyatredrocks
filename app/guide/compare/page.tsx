@@ -24,7 +24,7 @@ export default function ShuttleComparison() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(comparisonSchema) }} />
       
       <h1 className="text-4xl font-black mb-6">Comparing Red Rocks Shuttles (2026 Guide)</h1>
-      <p className="text-lg text-zinc-200 mb-10">
+      <p className="text-lg text-strong mb-10">
         Finding a ride to Red Rocks is easy; finding a ride that doesn't leave you stranded in the 
         <strong> Jurassic Lot</strong> or charge you a <strong>$150 surge</strong> is the challenge. 
         Here is how the top providers stack up this season.
@@ -40,7 +40,7 @@ export default function ShuttleComparison() {
               <th className="p-5">Rideshare (Uber/Lyft)</th>
             </tr>
           </thead>
-          <tbody className="text-zinc-200">
+          <tbody className="text-strong">
             <tr className="border-b">
               <td className="p-5 font-bold">Round-Trip Rate</td>
               <td className="p-5 text-green-700 font-bold">$59 Fixed</td>
@@ -72,7 +72,7 @@ export default function ShuttleComparison() {
       <div className="grid md:grid-cols-2 gap-10">
         <section className="bg-white border p-8 rounded-3xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
           <h3 className="text-2xl font-bold mb-4 text-slate-900">Why we bypass the "Broker Trap"</h3>
-          <p className="text-zinc-200 leading-relaxed">
+          <p className="text-strong leading-relaxed">
             Many popular shuttle sites are actually <strong>brokers</strong> who farm out your ride to third-party drivers. 
             This often leads to "ghost shuttles" or late arrivals. At Party at Red Rocks, we own our fleet 
             of Suburbans and Sprinters. One operator, one point of contact.
@@ -81,7 +81,7 @@ export default function ShuttleComparison() {
 
         <section className="bg-white border p-8 rounded-3xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
           <h3 className="text-2xl font-bold mb-4 text-slate-900">The "Top Circle" Difference</h3>
-          <p className="text-zinc-200 leading-relaxed">
+          <p className="text-strong leading-relaxed">
             Most competitors drop you in the Upper North Lot. While better than the Lower lots, it still requires a significant hike. 
             Our <Link href="/shuttle/private-suv" className="text-red-700 underline">private SUV service</Link> is authorized for 
             Top Circle access, putting you directly at Row 70.

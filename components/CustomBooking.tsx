@@ -71,7 +71,7 @@ export default function CustomBooking({ venue }: { venue?: string }) {
     }
   };
 
-  if (loading) return <div className="text-zinc-500 text-sm">Loading services...</div>;
+  if (loading) return <div className="text-muted text-sm">Loading services...</div>;
 
   return (
     <div className="space-y-6">
@@ -79,34 +79,34 @@ export default function CustomBooking({ venue }: { venue?: string }) {
         <div className="grid gap-4">
           <h3 className="text-lg font-bold text-white uppercase tracking-tighter">1. Select Service</h3>
           {products.length > 0 ? products.map((p: any) => (
-            <button key={p.productCode} onClick={() => setSelectedProduct(p)} className="p-4 border border-white/10 bg-white/5 rounded-2xl hover:bg-white/10 text-left transition hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+            <button key={p.productCode} onClick={() => setSelectedProduct(p)} className="p-4 border border-soft pill rounded-2xl hover:pill-soft text-left transition hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
               <div className="font-bold text-white">{p.name}</div>
               <div className="text-red-600 text-sm font-mono">${p.advertisedPrice}</div>
             </button>
-          )) : <p className="text-zinc-500 italic">No services available for this venue.</p>}
+          )) : <p className="text-muted italic">No services available for this venue.</p>}
         </div>
       ) : !selectedSession ? (
         <div className="space-y-4">
-          <button onClick={() => setSelectedProduct(null)} className="text-zinc-500 text-xs uppercase font-black hover:text-white">← Back</button>
+          <button onClick={() => setSelectedProduct(null)} className="text-muted text-xs uppercase font-black hover:text-white">← Back</button>
           <h3 className="text-lg font-bold text-white uppercase tracking-tighter">2. Pick a Date</h3>
           <div className="grid gap-2">
             {sessions.length > 0 ? sessions.map((s: any) => (
               <button key={s.id} onClick={() => setSelectedSession(s)} className="btn-primary">
                 <span className="font-mono">{new Date(s.startTime).toLocaleDateString()}</span>
-                <span className="text-[10px] bg-white/10 px-2 py-1 rounded-full uppercase">{s.seatsAvailable} Left</span>
+                <span className="text-[10px] pill-soft px-2 py-1 rounded-full uppercase">{s.seatsAvailable} Left</span>
               </button>
-            )) : <p className="text-zinc-500 italic">No available dates found for this service.</p>}
+            )) : <p className="text-muted italic">No available dates found for this service.</p>}
           </div>
         </div>
       ) : (
         <div className="space-y-4">
-          <button onClick={() => setSelectedSession(null)} className="text-zinc-500 text-xs uppercase font-black hover:text-white">← Back</button>
+          <button onClick={() => setSelectedSession(null)} className="text-muted text-xs uppercase font-black hover:text-white">← Back</button>
           <h3 className="text-lg font-bold text-white uppercase tracking-tighter">3. Finalize Booking</h3>
           
           <div className="flex flex-col gap-2">
-            <label className="text-[10px] uppercase text-zinc-500 font-black tracking-widest">Passengers</label>
+            <label className="text-[10px] uppercase text-muted font-black tracking-widest">Passengers</label>
             <select 
-              className="w-full p-4 bg-surface border border-white/10 rounded-2xl text-white focus:border-red-600 outline-none hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+              className="w-full p-4 panel-soft rounded-2xl text-white focus:border-red-600 outline-none hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
               value={formData.quantity}
               onChange={e => setFormData({...formData, quantity: parseInt(e.target.value)})}
             >
@@ -117,16 +117,16 @@ export default function CustomBooking({ venue }: { venue?: string }) {
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <input type="text" placeholder="First Name" className="p-4 bg-white/5 border border-white/10 rounded-2xl text-white outline-none focus:border-red-600 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300" onChange={e => setFormData({...formData, firstName: e.target.value})} />
-            <input type="text" placeholder="Last Name" className="p-4 bg-white/5 border border-white/10 rounded-2xl text-white outline-none focus:border-red-600 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300" onChange={e => setFormData({...formData, lastName: e.target.value})} />
+            <input type="text" placeholder="First Name" className="p-4 panel-soft rounded-2xl text-white outline-none focus:border-red-600 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300" onChange={e => setFormData({...formData, firstName: e.target.value})} />
+            <input type="text" placeholder="Last Name" className="p-4 panel-soft rounded-2xl text-white outline-none focus:border-red-600 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300" onChange={e => setFormData({...formData, lastName: e.target.value})} />
           </div>
-          <input type="email" placeholder="Email" className="w-full p-4 bg-white/5 border border-white/10 rounded-2xl text-white outline-none focus:border-red-600 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300" onChange={e => setFormData({...formData, email: e.target.value})} />
-          <input type="tel" placeholder="Phone" className="w-full p-4 bg-white/5 border border-white/10 rounded-2xl text-white outline-none focus:border-red-600 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300" onChange={e => setFormData({...formData, phone: e.target.value})} />
+          <input type="email" placeholder="Email" className="w-full p-4 panel-soft rounded-2xl text-white outline-none focus:border-red-600 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300" onChange={e => setFormData({...formData, email: e.target.value})} />
+          <input type="tel" placeholder="Phone" className="w-full p-4 panel-soft rounded-2xl text-white outline-none focus:border-red-600 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300" onChange={e => setFormData({...formData, phone: e.target.value})} />
           
           <button 
             disabled={bookingLoading}
             onClick={handleBooking} 
-            className={`w-full p-5 rounded-2xl font-black uppercase tracking-widest transition ${bookingLoading ? 'bg-zinc-800 text-zinc-500' : 'bg-red-600 hover:bg-red-700 text-white shadow-lg shadow-red-900/20'}`}
+            className={`w-full p-5 rounded-2xl font-black uppercase tracking-widest transition ${bookingLoading ? 'bg-zinc-800 text-muted' : 'bg-red-600 hover:bg-red-700 text-white shadow-lg shadow-red-900/20'}`}
           >
             {bookingLoading ? 'Processing...' : 'Complete Reservation'}
           </button>

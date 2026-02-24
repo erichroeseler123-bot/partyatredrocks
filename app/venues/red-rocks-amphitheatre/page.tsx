@@ -11,7 +11,7 @@ export default function RedRocksPage() {
           Red Rocks Amphitheatre
         </h1>
 
-        <p className="text-zinc-400 max-w-2xl">
+        <p className="text-muted max-w-2xl">
           Morrison, CO · Live events pulled from SeatGeek · Venue ID 196
         </p>
       </header>

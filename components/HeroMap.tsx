@@ -49,7 +49,7 @@ export default function HeroMap() {
   }, [registerMap]);
 
   return (
-    <section className="w-full h-[400px] border border-white/10 relative group overflow-hidden">
+    <section className="w-full h-[400px] border border-soft relative group overflow-hidden">
       <div ref={mapContainer} className="w-full h-full brightness-110 contrast-105" />
     </section>
   );

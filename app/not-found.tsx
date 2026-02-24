@@ -19,31 +19,31 @@ export default function NotFound() {
       
       <div className="max-w-xl">
         <h2 className="text-3xl font-black uppercase mb-6">Looks like you took a wrong turn.</h2>
-        <p className="text-zinc-400 text-lg mb-10 leading-relaxed">
+        <p className="text-muted text-lg mb-10 leading-relaxed">
           The 2025 event or guide you're looking for has been moved to our new <strong>2026 Venue Intelligence Hub</strong>. 
           Don't get stranded—use the guides below to master your Red Rocks logistics.
         </p>
 
         {/* Recovery Links: Guiding users back to authority content */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12 text-left">
-          <Link href="/guide/logistics/parking-lots" className="p-4 border border-white/10 rounded-2xl hover:border-red-600 transition group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+          <Link href="/guide/logistics/parking-lots" className="p-4 border border-soft rounded-2xl hover:border-red-600 transition group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
             <span className="block font-black uppercase text-red-600 group-hover:text-red-500">Parking Hacks</span>
-            <span className="text-xs text-zinc-500">Avoid the 380-stair climb.</span>
+            <span className="text-xs text-muted">Avoid the 380-stair climb.</span>
           </Link>
           
-          <Link href="/guide/logistics/bag-policy" className="p-4 border border-white/10 rounded-2xl hover:border-red-600 transition group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+          <Link href="/guide/logistics/bag-policy" className="p-4 border border-soft rounded-2xl hover:border-red-600 transition group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
             <span className="block font-black uppercase text-red-600 group-hover:text-red-500">2026 Bag Rules</span>
-            <span className="text-xs text-zinc-500">New single-pocket policy.</span>
+            <span className="text-xs text-muted">New single-pocket policy.</span>
           </Link>
           
-          <Link href="/guide/local/denver-pickups" className="p-4 border border-white/10 rounded-2xl hover:border-red-600 transition group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+          <Link href="/guide/local/denver-pickups" className="p-4 border border-soft rounded-2xl hover:border-red-600 transition group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
             <span className="block font-black uppercase text-red-600 group-hover:text-red-500">Denver Pickups</span>
-            <span className="text-xs text-zinc-500">Sheraton Downtown hub.</span>
+            <span className="text-xs text-muted">Sheraton Downtown hub.</span>
           </Link>
           
-          <Link href="/guide/logistics/sold-out-survival" className="p-4 border border-white/10 rounded-2xl hover:border-red-600 transition group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+          <Link href="/guide/logistics/sold-out-survival" className="p-4 border border-soft rounded-2xl hover:border-red-600 transition group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
             <span className="block font-black uppercase text-red-600 group-hover:text-red-500">Sold-Out Survival</span>
-            <span className="text-xs text-zinc-500">Beat the $150 Uber surge.</span>
+            <span className="text-xs text-muted">Beat the $150 Uber surge.</span>
           </Link>
         </div>
 

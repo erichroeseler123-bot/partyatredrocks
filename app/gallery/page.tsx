@@ -31,7 +31,7 @@ export default function GalleryPage() {
         {images.map((src) => (
           <div
             key={src}
-            className="border border-white/10 rounded-2xl overflow-hidden bg-surface hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+            className="border border-soft rounded-2xl overflow-hidden bg-surface hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
           >
             <div className="relative h-64">
               <Image
@@ -42,7 +42,7 @@ export default function GalleryPage() {
               />
             </div>
 
-            <div className="p-4 text-sm text-zinc-400 break-all">
+            <div className="p-4 text-sm text-muted break-all">
               {src}
             </div>
           </div>

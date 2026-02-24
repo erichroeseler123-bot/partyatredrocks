@@ -9,7 +9,7 @@ export default function Page() {
   return (
     <main className="min-h-screen bg-surface text-white px-6 py-20">
       <div className="max-w-4xl mx-auto">
-        <div className="text-[11px] font-black uppercase tracking-[0.25em] text-zinc-500">
+        <div className="text-[11px] font-black uppercase tracking-[0.25em] text-muted">
           Parking
         </div>
 
@@ -17,17 +17,17 @@ export default function Page() {
           Red Rocks Parking Guide
         </h1>
 
-        <p className="mt-5 text-lg text-zinc-300 leading-relaxed">
+        <p className="mt-5 text-lg text-soft leading-relaxed">
           Which lots fill first, how to reduce walking, and how to avoid the exit gridlock that traps people for an hour.
         </p>
 
-        <div className="mt-5 text-sm text-zinc-500">
+        <div className="mt-5 text-sm text-muted">
           Last updated: Feb 11, 2026
         </div>
 
-        <div className="mt-10 rounded-3xl border border-white/10 bg-surface-strong p-6">
+        <div className="mt-10 rounded-3xl border border-soft bg-surface-strong p-6">
           <h2 className="text-2xl font-black">What actually matters</h2>
-          <ul className="mt-4 space-y-2 text-zinc-300 leading-relaxed list-disc pl-5">
+          <ul className="mt-4 space-y-2 text-soft leading-relaxed list-disc pl-5">
               <li>Lots fill by time, not by good intentions—earlier arrival changes everything.</li>
               <li>The best ‘experience’ lot isn’t always the best ‘exit’ lot.</li>
               <li>Leave strategy beats parking strategy on sold-out nights.</li>
@@ -41,7 +41,7 @@ export default function Page() {
           </Link>
           <Link
             href="/guide"
-            className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 transition"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-soft pill hover:pill-soft transition"
           >
             Back to Guides →
           </Link>
@@ -50,17 +50,17 @@ export default function Page() {
         <div className="mt-10">
           <h2 className="text-2xl font-black">Quick FAQ</h2>
           <div className="mt-4 space-y-3">
-            <details className="rounded-2xl border border-white/10 bg-surface-strong p-5">
+            <details className="rounded-2xl border border-soft bg-surface-strong p-5">
               <summary className="cursor-pointer font-black">Is parking free at Red Rocks?</summary>
-              <p className="mt-2 text-zinc-300 leading-relaxed">Often yes for general events, but rules can vary by event; plan to arrive early regardless.</p>
+              <p className="mt-2 text-soft leading-relaxed">Often yes for general events, but rules can vary by event; plan to arrive early regardless.</p>
             </details>
-            <details className="rounded-2xl border border-white/10 bg-surface-strong p-5">
+            <details className="rounded-2xl border border-soft bg-surface-strong p-5">
               <summary className="cursor-pointer font-black">What time should I arrive?</summary>
-              <p className="mt-2 text-zinc-300 leading-relaxed">For busy nights, arriving well before doors gives you better lot selection and less stress.</p>
+              <p className="mt-2 text-soft leading-relaxed">For busy nights, arriving well before doors gives you better lot selection and less stress.</p>
             </details>
-            <details className="rounded-2xl border border-white/10 bg-surface-strong p-5">
+            <details className="rounded-2xl border border-soft bg-surface-strong p-5">
               <summary className="cursor-pointer font-black">How do I avoid gridlock?</summary>
-              <p className="mt-2 text-zinc-300 leading-relaxed">Pick an exit route before the show, and don’t wait until the crowd surge to move.</p>
+              <p className="mt-2 text-soft leading-relaxed">Pick an exit route before the show, and don’t wait until the crowd surge to move.</p>
             </details>
           </div>
         </div>
@@ -93,7 +93,7 @@ export default function Page() {
         }}
       />
 
-        <footer className="mt-16 pt-10 border-t border-white/10 text-sm text-zinc-400">
+        <footer className="mt-16 pt-10 border-t border-soft text-sm text-muted">
           This is the authority layer: no fluff, no hype — just show-night reality and what works.
         </footer>
       </div>

@@ -5,13 +5,13 @@ export default function HomeOtherDestinations() {
     <section className="max-w-7xl mx-auto px-6 pb-14">
       <div className="flex items-end justify-between gap-4 mb-5">
         <div>
-          <p className="text-[11px] font-black uppercase tracking-[0.32em] text-zinc-400">
+          <p className="text-[11px] font-black uppercase tracking-[0.32em] text-muted">
             Not Red Rocks?
           </p>
           <h2 className="mt-2 text-2xl md:text-3xl font-black tracking-tight">
             Mishawaka + other venues
           </h2>
-          <p className="mt-2 text-zinc-300">
+          <p className="mt-2 text-soft">
             Keep the homepage clean. These live on their own pages.
           </p>
         </div>

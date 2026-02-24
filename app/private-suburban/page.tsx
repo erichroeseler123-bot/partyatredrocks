@@ -3,7 +3,7 @@ export default function PrivateSuburbanPage() {
     <main className="min-h-screen bg-surface text-white">
       <section className="pt-28 pb-10 px-6">
         <div className="max-w-5xl mx-auto">
-          <p className="text-zinc-500 text-[10px] font-black uppercase tracking-[0.35em]">
+          <p className="text-muted text-[10px] font-black uppercase tracking-[0.35em]">
             Private SUV Service
           </p>
 
@@ -11,7 +11,7 @@ export default function PrivateSuburbanPage() {
             Private Suburban
           </h1>
 
-          <p className="mt-4 text-zinc-300 max-w-2xl">
+          <p className="mt-4 text-soft max-w-2xl">
             Door-to-door. Your group, your music. Round trip service for concerts across Denver &amp; Boulder.
           </p>
 
@@ -36,12 +36,12 @@ export default function PrivateSuburbanPage() {
 
       {/* Rezdy embed */}
       <section id="book" className="px-6 pb-24">
-        <div className="max-w-5xl mx-auto rounded-[2.5rem] overflow-hidden border border-white/10 bg-surface/40">
-          <div className="p-6 md:p-10 border-b border-white/10">
+        <div className="max-w-5xl mx-auto rounded-[2.5rem] overflow-hidden border border-soft bg-surface/40">
+          <div className="p-6 md:p-10 border-b border-soft">
             <h2 className="text-2xl md:text-3xl font-black italic uppercase">
               Book Now
             </h2>
-            <p className="mt-2 text-zinc-400 text-sm">
+            <p className="mt-2 text-muted text-sm">
               Pricing and availability are managed in Rezdy.
             </p>
           </div>

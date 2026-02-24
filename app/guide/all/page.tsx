@@ -90,14 +90,14 @@ export default function AllGuidesIndex() {
       <div className="max-w-6xl mx-auto">
         <header className="mb-10">
           <h1 className="text-5xl md:text-6xl font-black tracking-tight">All Guides</h1>
-          <p className="mt-4 text-lg text-zinc-300 max-w-3xl">
+          <p className="mt-4 text-lg text-soft max-w-3xl">
             This is your authority index (internal sitemap). Add pages and they’ll show up here automatically.
           </p>
 
           <div className="mt-7 flex flex-wrap gap-3">
             <Link
               href="/guide"
-              className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 transition"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-soft pill hover:pill-soft transition"
             >
               Back to Guide Hub →
             </Link>
@@ -118,10 +118,10 @@ export default function AllGuidesIndex() {
                   <Link
                     key={x.href}
                     href={x.href}
-                    className="block p-6 bg-surface-strong rounded-2xl border border-white/10 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+                    className="block p-6 bg-surface-strong rounded-2xl border border-soft hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
                   >
                     <div className="text-xl font-black">{x.title}</div>
-                    <div className="mt-3 text-sm text-zinc-300 underline decoration-white/20 hover:decoration-white/60">
+                    <div className="mt-3 text-sm text-soft underline decoration-white/20 hover:decoration-white/60">
                       Open →
                     </div>
                   </Link>
@@ -130,8 +130,8 @@ export default function AllGuidesIndex() {
           </section>
         ))}
 
-        <footer className="mt-16 pt-10 border-t border-white/10 text-sm text-zinc-400">
-          Tip: add an “All Guides” button on <span className="text-zinc-200">/guide</span>.
+        <footer className="mt-16 pt-10 border-t border-soft text-sm text-muted">
+          Tip: add an “All Guides” button on <span className="text-strong">/guide</span>.
         </footer>
       </div>
     </main>

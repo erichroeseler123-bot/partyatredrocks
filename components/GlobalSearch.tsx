@@ -25,7 +25,7 @@ export default function GlobalSearch() {
           placeholder="SEARCH ARTIST, VENUE, OR CARRIER" 
           className="flex-grow bg-transparent px-5 py-4 text-sm font-mono uppercase tracking-widest text-white placeholder-zinc-500 focus:outline-none"
         />
-        <button type="submit" className="px-8 bg-neon-blue text-black font-black uppercase tracking-widest text-sm hover:bg-white transition-colors">
+        <button type="submit" className="px-8 bg-neon-blue text-black font-black uppercase tracking-widest text-sm hover:bg-surface/40 transition-colors">
           SEARCH →
         </button>
       </form>

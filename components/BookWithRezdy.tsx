@@ -67,9 +67,9 @@ export default function BookWithRezdy({
 
   if (variant === 'card') {
     return (
-      <div className={`bg-surface/80 border border-white/10 rounded-2xl p-6 text-center ${className}`}>
+      <div className={`panel-soft rounded-2xl p-6 text-center ${className}`}>
         <h4 className="text-lg font-black uppercase mb-3">Ready for the Show?</h4>
-        <p className="text-zinc-400 mb-5 text-sm">
+        <p className="text-muted mb-5 text-sm">
           Secure your spot with our fixed-price shuttle — no surge, no stress.
         </p>
         <button

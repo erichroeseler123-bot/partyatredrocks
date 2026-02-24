@@ -8,7 +8,7 @@ export default function SceneIndex() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-12">
       <SceneTiles />
-      <div className="rounded-[32px] border border-white/10 bg-white/[0.04] p-8">
+      <div className="rounded-[32px] border border-soft panel p-8">
         <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/70">
           Scene Directory
         </div>
@@ -25,7 +25,7 @@ export default function SceneIndex() {
           <Link
             key={s.slug}
             href={`/scene/${s.slug}`}
-            className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 hover:bg-white/[0.07] transition"
+            className="rounded-3xl border border-soft panel p-6 hover:bg-surface/40 transition"
           >
             <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">
               Scene Hub

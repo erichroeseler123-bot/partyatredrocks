@@ -6,7 +6,7 @@ export default function ZBBEvent() {
       <span className="text-red-700 font-bold tracking-widest uppercase text-base">October 19 & 20, 2026</span>
       <h1 className="text-4xl font-black mt-2 mb-6">Zac Brown Band @ Red Rocks</h1>
       
-      <p className="text-lg text-zinc-200 leading-relaxed mb-8">
+      <p className="text-lg text-strong leading-relaxed mb-8">
         The Zac Brown Band returns to the rocks this October with special guest Grace Potter. 
         Expect cool mountain temperatures (averaging 42°F at night).
       </p>
@@ -14,7 +14,7 @@ export default function ZBBEvent() {
       <div className="grid gap-6">
         <div className="border-b pb-6">
           <h3 className="font-bold text-xl mb-2">Show Intelligence</h3>
-          <p className="text-zinc-200">
+          <p className="text-strong">
             Based on historical data from <a href="https://www.setlist.fm" target="_blank" className="underline">Setlist.fm</a>, 
             expect a 2.5-hour performance. Our shuttle departs 30 minutes after the final encore.
           </p>
@@ -22,7 +22,7 @@ export default function ZBBEvent() {
 
         <div className="border-b pb-6">
           <h3 className="font-bold text-xl mb-2">The "Uber Trap" Warning</h3>
-          <p className="text-zinc-200">
+          <p className="text-strong">
             ZBB is a high-demand show. Expect rideshare surge pricing to exceed $180 post-concert. 
             Our flat-rate $59 shared shuttle locks your price today.
           </p>

@@ -33,7 +33,7 @@ export default function TailgateGuide() {
         <h1 className="text-5xl font-black uppercase italic tracking-tighter">
           2026 <span className="text-red-600">Tailgate</span> vs. Shuttle
         </h1>
-        <p className="mt-4 text-zinc-400 text-xl font-medium">
+        <p className="mt-4 text-muted text-xl font-medium">
           Is driving worth the hassle? Compare the 2026 tailgate rules to our premium shuttle service.
         </p>
       </header>
@@ -42,7 +42,7 @@ export default function TailgateGuide() {
       <div className="grid md:grid-cols-2 gap-8 mb-20">
         <div className="bg-surface-strong p-8 rounded-[2.5rem] border-soft shadow-soft">
           <h3 className="text-red-500 font-black uppercase mb-4 italic">Tailgating Realities</h3>
-          <ul className="space-y-3 text-base text-zinc-400">
+          <ul className="space-y-3 text-base text-muted">
             <li>• Arrive 3-4 hours early to find a spot.</li>
             <li>• No glass, no charcoal, no tents.</li>
             <li>• Post-show traffic can take 60+ minutes to exit.</li>
@@ -50,7 +50,7 @@ export default function TailgateGuide() {
         </div>
         <div className="bg-surface-strong p-8 rounded-[2.5rem] border border-red-600">
           <h3 className="text-green-500 font-black uppercase mb-4 italic">Shuttle Advantage</h3>
-          <ul className="space-y-3 text-base text-zinc-400">
+          <ul className="space-y-3 text-base text-muted">
             <li>• Direct Denver/Golden hotel pickups.</li>
             <li>• Pregame en route (BYOB-friendly).</li>
             <li>• **We Wait For You** post-show at Row 70.</li>
@@ -67,7 +67,7 @@ export default function TailgateGuide() {
               {faq.q}
               <span className="text-red-600 group-open:rotate-45 transition-transform">+</span>
             </summary>
-            <div className="p-6 pt-0 text-zinc-400 text-base leading-relaxed border-t border-white/10/50">
+            <div className="p-6 pt-0 text-muted text-base leading-relaxed border-t border-soft/50">
               {faq.a}
             </div>
           </details>

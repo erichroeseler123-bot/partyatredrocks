@@ -7,7 +7,7 @@ export default function WinterSurvival() {
         Red Rocks <span className="text-blue-500">Winter Survival</span> Guide 2026
       </h1>
       
-      <p className="text-xl text-zinc-400 mb-16 leading-relaxed">
+      <p className="text-xl text-muted mb-16 leading-relaxed">
         March and April at Red Rocks are unpredictable. While Denver might feel like spring, the amphitheater sits at <strong>6,450 feet</strong>—nearly 1,000 feet higher than the city—meaning temperatures drop drastically once the sun dips.
       </p>
 

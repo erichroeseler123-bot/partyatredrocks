@@ -53,20 +53,20 @@ export default async function WeekSearchPage({ searchParams }: Props) {
 
       <header className="mb-8">
         <h1 className="text-4xl font-black">Search Artists</h1>
-        <p className="mt-3 text-zinc-400">
+        <p className="mt-3 text-muted">
           Type a band/artist name and see where they’re playing this week.
         </p>
 
         <div className="mt-5 flex gap-3">
           <Link
             href="/week"
-            className="px-3 py-2 rounded-full border border-white/15 text-xs font-bold uppercase tracking-widest text-white hover:border-white/30"
+            className="px-3 py-2 rounded-full border border-soft text-xs font-bold uppercase tracking-widest text-white hover:border-soft"
           >
             Back to Week
           </Link>
           <Link
             href="/venues"
-            className="px-3 py-2 rounded-full border border-white/15 text-xs font-bold uppercase tracking-widest text-white hover:border-white/30"
+            className="px-3 py-2 rounded-full border border-soft text-xs font-bold uppercase tracking-widest text-white hover:border-soft"
           >
             Venues
           </Link>
