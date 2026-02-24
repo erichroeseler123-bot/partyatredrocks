@@ -77,7 +77,7 @@ export default function HomeSections({
           {VENUE_PILLS.map((v) => (
               <Link
                 key={v.slug}
-                href={`/book?venue=`}
+                href={`/book?venue=${v.slug}`}
                 className="group relative overflow-hidden rounded-full border border-white/12 bg-white/[0.04] px-4 py-2 text-xs font-bold text-white/90 hover:border-white/20 transition"
               >
                 <img
