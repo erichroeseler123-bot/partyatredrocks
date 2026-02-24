@@ -51,8 +51,8 @@ function CardUI({ c }: { c: Card }) {
   return (
     <Link
       href={c.href}
-      className="group block rounded-3xl border border-white/10 bg-white/[0.03] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.35)]
-                 transition hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.05]"
+      className="group block rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.35)]
+                 transition hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.07]"
     >
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
@@ -114,7 +114,7 @@ export default function OtherVenuesPage() {
           ))}
         </div>
 
-        <div className="mt-10 rounded-3xl border border-white/10 bg-white/[0.03] p-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+        <div className="mt-10 rounded-3xl border border-white/10 bg-white/[0.04] p-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
           <h2 className="text-lg font-black uppercase tracking-[0.18em]">Heads up</h2>
           <p className="mt-3 text-zinc-200/90 leading-relaxed">
             For far destinations (like Mishawaka), exact pickup/return timing depends on the show schedule and canyon traffic.

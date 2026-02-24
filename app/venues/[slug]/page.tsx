@@ -415,24 +415,24 @@ export default async function VenuePage({
       />
 
       {/* HERO */}
-      <div className="rounded-[32px] border border-white/10 bg-white/[0.03] p-8 shadow-[0_22px_70px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+      <div className="rounded-[32px] border border-white/10 bg-white/[0.04] p-8 shadow-[0_22px_70px_rgba(0,0,0,0.45)] backdrop-blur-xl">
         <div className="flex flex-wrap items-center gap-2">
           <div className="inline-flex items-center rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white/80">
             Venue Intel
           </div>
 
-          <div className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.03] px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60">
+          <div className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60">
             {city}
           </div>
 
           {v?.kind ? (
-            <div className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.03] px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60">
+            <div className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60">
               {v.kind}
             </div>
           ) : null}
 
           {v?.capacity ? (
-            <div className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.03] px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60">
+            <div className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60">
               ~{v.capacity.toLocaleString()} cap
             </div>
           ) : null}
@@ -582,7 +582,7 @@ export default async function VenuePage({
           </div>
         </section>
       ) : (
-        <div className="mt-10 rounded-3xl border border-white/10 bg-white/[0.03] p-6 text-white/70">
+        <div className="mt-10 rounded-3xl border border-white/10 bg-white/[0.04] p-6 text-white/70">
           <span className="font-black">Upcoming at {name}:</span> Not synced yet. Run{" "}
           <code className="text-white/85">/api/cron/sync</code>.
         </div>
