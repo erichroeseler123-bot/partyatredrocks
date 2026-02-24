@@ -14,6 +14,11 @@ export const DISPLAY = {
   },
 
   images: {
+    marketing: {
+      vipSuv: "/images/marketing/vip-suv.jpg",
+      fleet: "/images/marketing/fleet.jpg",
+      shuttle: "/images/marketing/shuttle.jpg",
+    },
     heroHome: "/hero/hero-home.jpg",
     heroDefaultVenue: "/hero/hero-home.jpg",
 

@@ -1,17 +1,18 @@
 import Image from 'next/image';
+import { DISPLAY } from "@/lib/display";
 
 const images = [
   // root public
-  '/fleet.jpg',
+  DISPLAY.images.marketing.fleet,
   '/shuttle123.jpg',
   '/hero123.jpg',
-  '/Shuttle.jpg',
+  DISPLAY.images.marketing.shuttle,
   '/hi.jpg',
   '/sprintershuttle.jpg',
   '/redrocks-color.jpg',
   '/suburban123.jpg',
   '/redrockssuburban.jpg',
-  '/VIPSUV.jpg',
+  DISPLAY.images.marketing.vipSuv,
 
   // fleet folder
   '/fleet/shuttle.jpg',

@@ -1,4 +1,5 @@
 import React from 'react';
+import { DISPLAY } from "@/lib/display";
 import GlobalSearch from '@/components/GlobalSearch';
 
 export default function ShuttlesPage() {
@@ -15,7 +16,7 @@ export default function ShuttlesPage() {
 
         {/* SECTION C: VISUAL_SYNC_PORTAL */}
         <section className="relative w-full aspect-video lg:aspect-[21/9] bg-surface-strong border border-white/10 rounded-2xl mb-4 flex flex-col items-center justify-center group overflow-hidden shadow-2xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-          <img src="/fleet.jpg" alt="DCC Fleet Operations" className="absolute inset-0 w-full h-full object-cover z-0 opacity-100" />
+          <img src={DISPLAY.images.marketing.fleet} alt="DCC Fleet Operations" className="absolute inset-0 w-full h-full object-cover z-0 opacity-100" />
           <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden opacity-10">
             <div className="w-full h-full bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%]" />
           </div>
@@ -36,7 +37,7 @@ export default function ShuttlesPage() {
           {/* NODE 01: SHARED SHUTTLE */}
           <section className="space-y-6">
             <div className="border border-white/10 rounded-2xl overflow-hidden group hover:border-neon-blue transition-all shadow-2xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-              <img src="/Shuttle.jpg" alt="Shuttle Service" className="w-full h-64 object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+              <img src={DISPLAY.images.marketing.shuttle} alt="Shuttle Service" className="w-full h-64 object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
             </div>
             <div className="space-y-6">
               <div className="border-b border-neon-blue/30 pb-2 flex justify-between items-end">
@@ -56,7 +57,7 @@ export default function ShuttlesPage() {
           {/* NODE 02: VIP SUV (CHEVROLET SUBURBAN) */}
           <section className="space-y-6">
             <div className="border border-white/10 rounded-2xl overflow-hidden group hover:border-matrix-green transition-all shadow-2xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-              <img src="/VIPSUV.jpg" alt="VIP Service" className="w-full h-64 object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+              <img src={DISPLAY.images.marketing.vipSuv} alt="VIP Service" className="w-full h-64 object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
             </div>
             <div className="space-y-6">
               <div className="border-b border-matrix-green/30 pb-2 flex justify-between items-end">
