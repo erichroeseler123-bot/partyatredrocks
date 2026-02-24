@@ -2,7 +2,8 @@
 set -euo pipefail
 
 # Contract: forbid raw "white/zinc" styling leaking into components/pages
-PATTERN='(bg-white/|border-white/|text-zinc-|#00f2ff)'
+# NOTE: we must escape "[" in rg regex, so use bg-white\[
+PATTERN='(bg-white\[\|bg-white/|border-white/|text-zinc-|#00f2ff)'
 
 rg -n \
   --glob '!app/globals.css' \
