@@ -1,25 +1,11 @@
-import Image from "next/image";
 import Link from "next/link";
 
 export const metadata = {
   title: "Red Rocks Guides",
   description:
-    "No fluff. Just what works on show nights: transportation strategy, parking reality, policy traps, and post-encore extraction.",
+    "Transportation strategy, parking reality, venue policies, and show-night execution plans for Red Rocks.",
   alternates: {
     canonical: "/guide",
-  },
-  openGraph: {
-    title: "Red Rocks Guides",
-    description:
-      "No fluff. Just what works on show nights: transportation strategy, parking reality, policy traps, and post-encore extraction.",
-    url: "/guide",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Red Rocks Guides",
-    description:
-      "No fluff. Just what works on show nights: transportation strategy, parking reality, policy traps, and post-encore extraction.",
   },
 };
 
@@ -32,84 +18,66 @@ type Card = {
 
 const featured: Card[] = [
   {
-    title: "All Guides (Index)",
-    desc: "Master list of every authority page. Add pages and they auto-appear.",
+    title: "All Guides",
+    desc: "Master index of every guide, sorted for fast scanning.",
     href: "/guide/all",
-    kicker: "Start here",
+    kicker: "Index",
   },
   {
-    title: "Red Rocks Transportation",
-    desc: "Shuttle vs rideshare, parking reality, and post-show pickup strategy.",
-    href: "/red-rocks/transportation",
-    kicker: "Core hub",
+    title: "Transportation Hub",
+    desc: "Shuttle vs rideshare, surge risks, and post-show extraction.",
+    href: "/guide/transportation",
+    kicker: "Core",
   },
   {
-    title: "Parking Lots",
-    desc: "Where to park, what fills first, and how to avoid the long climb.",
-    href: "/guide/logistics/parking-lots",
+    title: "Parking Reality",
+    desc: "Lot strategy, walking costs, and exit flow tradeoffs.",
+    href: "/guide/parking",
     kicker: "Logistics",
   },
   {
-    title: "Bag Policy",
-    desc: "The practical version: what gets you turned away and what actually works.",
-    href: "/guide/logistics/bag-policy",
+    title: "Policies",
+    desc: "Bag rules, prohibited items, and gate-readiness checklist.",
+    href: "/guide/policies",
     kicker: "Rules",
   },
+];
+
+const deepDive: Card[] = [
   {
-    title: "Sold-Out Survival",
-    desc: "Avoid surge hell, leave smart, and don’t get stranded after the encore.",
-    href: "/guide/logistics/sold-out-survival",
-    kicker: "Strategy",
+    title: "Show-Night Strategy",
+    desc: "Arrival timing, weather pivots, and meetup discipline.",
+    href: "/guide/show-night-strategy",
+    kicker: "Playbook",
   },
   {
-    title: "Zac Brown Band (Example Event Guide)",
-    desc: "Show-night flow, arrival windows, and pickup timing for this event page.",
-    href: "/guide/events/zac-brown-band",
+    title: "Local Pickups",
+    desc: "Denver pickup zones and where groups stage best.",
+    href: "/guide/local/denver-pickups",
+    kicker: "Local",
+  },
+  {
+    title: "Event Guides",
+    desc: "Artist-specific briefings with actionable logistics.",
+    href: "/guide/events/2026-season-preview",
     kicker: "Events",
   },
-];
-
-const authority: Card[] = [
   {
-    title: "Transportation (Authority Hub)",
-    desc: "Shuttle vs rideshare, pricing reality, and the most reliable way out after the encore.",
-    href: "/guide/transportation",
-    kicker: "Authority",
-  },
-  {
-    title: "Parking (Authority Hub)",
-    desc: "Which lots fill first, how to reduce walking, and how to avoid exit gridlock.",
-    href: "/guide/parking",
-    kicker: "Authority",
-  },
-  {
-    title: "Policies (Authority Hub)",
-    desc: "Bag policy, entry rules, and what actually gets enforced at the gate.",
-    href: "/guide/policies",
-    kicker: "Authority",
-  },
-  {
-    title: "Show-Night Strategy (Authority Hub)",
-    desc: "Arrival windows, weather risk, crowd flow, and the exit plan that prevents getting stranded.",
-    href: "/guide/show-night-strategy",
-    kicker: "Authority",
+    title: "Red Rocks Week Calendar",
+    desc: "Live lineup view with direct booking links.",
+    href: "/week/red-rocks",
+    kicker: "Calendar",
   },
 ];
 
-function CardLink({ c }: { c: Card }) {
+function GuideCard({ card }: { card: Card }) {
   return (
-    <Link href={c.href} className="group block p-6 card-premium">
-      {c.kicker ? (
-        <div className="text-[11px] font-black uppercase tracking-[0.25em] text-muted">
-          {c.kicker}
-        </div>
-      ) : null}
-
-      <div className="mt-2 text-2xl font-black leading-tight">{c.title}</div>
-      <p className="mt-3 text-sm text-strong/90 leading-relaxed">{c.desc}</p>
-
-      <div className="mt-5 inline-flex items-center gap-2 text-sm text-strong underline decoration-white/20 group-hover:decoration-white/60">
-        Open <span aria-hidden>→</span>
+    <Link href={card.href} className="comic-panel block">
+      {card.kicker ? <div className="comic-tag">{card.kicker}</div> : null}
+      <h2 className="comic-h3">{card.title}</h2>
+      <p className="comic-copy">{card.desc}</p>
+      <div className="comic-sub" style={{ marginTop: 12 }}>
+        Open guide →
       </div>
     </Link>
   );
@@ -117,147 +85,63 @@ function CardLink({ c }: { c: Card }) {
 
 export default function GuideHub() {
   return (
-    <main className="min-h-screen bg-surface text-white premium-wrap">
-      {/* HERO */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/hero/hero-home.jpg"
-            alt="Red Rocks at night"
-            fill
-            priority
-            className="object-cover opacity-55"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/70 to-black" />
-          <div className="absolute inset-0 bg-[radial-gradient(900px_380px_at_18%_18%,rgba(255,80,80,0.18),transparent_60%),radial-gradient(900px_380px_at_78%_10%,rgba(93,173,255,0.14),transparent_62%)]" />
+    <main className="comic-page pt-24 pb-10">
+      <section className="comic-wrap">
+        <div className="comic-hero">
+          <div className="comic-kicker">Authority Section</div>
+          <h1 className="comic-title">Red Rocks Guide Command</h1>
+          <p className="comic-copy">
+            Deep local intelligence for transportation, policies, venue tactics, and show-night planning.
+          </p>
+          <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <Link className="comic-btn comic-btn-primary" href="/find">
+              Book Ride Now
+            </Link>
+            <Link className="comic-btn comic-btn-secondary" href="/week/red-rocks">
+              Open Live Calendar
+            </Link>
+          </div>
         </div>
 
-        <div className="relative z-10 max-w-6xl mx-auto px-6 pt-16 pb-14">
-          <div className="inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.25em] text-soft">
-            <span className="px-3 py-1 rounded-full pill">
-              Authority Layer
-            </span>
-            <span className="text-muted">Red Rocks</span>
+        <section style={{ marginTop: 16 }}>
+          <div className="comic-tag">Featured Guides</div>
+          <div className="comic-grid">
+            {featured.map((card) => (
+              <GuideCard key={card.href} card={card} />
+            ))}
           </div>
+        </section>
 
-          <h1 className="mt-5 text-5xl md:text-6xl font-black tracking-tight">
-            Red Rocks Guides
-          </h1>
-
-          <p className="mt-4 text-lg text-strong max-w-3xl leading-relaxed">
-            No fluff. Just what works on show nights: transportation strategy,
-            parking reality, policy traps, and post-encore extraction.
-          </p>
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/guide/all" className="btn-primary">
-              Browse everything →
-            </Link>
-
-            <Link
-              href="/book-shuttle"
-              className="inline-flex items-center justify-center px-6 py-3 rounded-full pill hover:pill-soft transition"
-            >
-              Book Shuttle — $59/pp →
-            </Link>
+        <section style={{ marginTop: 16 }}>
+          <div className="comic-tag">Deep Dives</div>
+          <div className="comic-grid">
+            {deepDive.map((card) => (
+              <GuideCard key={card.href} card={card} />
+            ))}
           </div>
+        </section>
 
-          <div className="mt-6 text-sm text-soft/90">
-            Sources worth checking:{" "}
-            <a
-              className="underline decoration-white/25 hover:decoration-white/60"
-              href="https://www.redrocksonline.com"
-              target="_blank"
-              rel="noreferrer"
-            >
-              RedRocksOnline
-            </a>{" "}
-            ·{" "}
-            <a
-              className="underline decoration-white/25 hover:decoration-white/60"
-              href="https://www.cotrip.org"
-              target="_blank"
-              rel="noreferrer"
-            >
+        <section className="comic-panel" style={{ marginTop: 16 }}>
+          <div className="comic-tag">Trusted Sources</div>
+          <div className="comic-copy" style={{ marginTop: 8 }}>
+            Validate venue and road conditions before every show-night decision.
+          </div>
+          <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <a className="comic-btn comic-btn-secondary" href="https://www.redrocksonline.com" target="_blank" rel="noreferrer">
+              Venue Source
+            </a>
+            <a className="comic-btn comic-btn-secondary" href="https://www.cotrip.org" target="_blank" rel="noreferrer">
               COtrip
             </a>
           </div>
+        </section>
+
+        <div className="comic-mobile-cta">
+          <Link className="comic-btn comic-btn-primary" href="/find">
+            Book Ride to Your Show
+          </Link>
         </div>
       </section>
-
-      <div className="max-w-6xl mx-auto px-6 pb-20">
-        {/* Strategy banner */}
-        <section className="banner-premium p-7 mt-8">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <div className="max-w-2xl">
-              <div className="text-[11px] font-black uppercase tracking-[0.25em] text-soft">
-                Strategy → Execution
-              </div>
-              <div className="mt-2 text-2xl font-black">
-                Want the cleanest possible post-show exit?
-              </div>
-              <p className="mt-2 text-strong/90">
-                Guides are intel. Booking is how you avoid “figure it out later.”
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-3">
-              <Link href="/book-shuttle" className="btn-primary">
-                Book Shuttle — $59/pp →
-              </Link>
-              <Link
-                href="/guide/transportation"
-                className="inline-flex items-center justify-center px-6 py-3 rounded-full pill hover:pill-soft transition"
-              >
-                Read Transportation Hub →
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Featured */}
-        <section className="mt-12">
-          <div className="flex items-end justify-between gap-6 flex-wrap">
-            <div>
-              <h2 className="text-3xl font-black">Featured</h2>
-              <p className="mt-2 text-soft/90">
-                Your highest leverage pages — start here.
-              </p>
-            </div>
-            <Link
-              href="/guide/all"
-              className="underline decoration-white/20 hover:decoration-white/60 text-strong"
-            >
-              Browse everything →
-            </Link>
-          </div>
-
-          <div className="mt-6 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {featured.map((c) => (
-              <CardLink key={c.href} c={c} />
-            ))}
-          </div>
-        </section>
-
-        {/* Authority hubs */}
-        <section className="mt-14">
-          <h2 className="text-2xl font-black">Authority Hubs</h2>
-          <p className="mt-2 text-soft/90 max-w-3xl">
-            These are the “pillar” pages Google likes: clean structure, tight intent,
-            and internal links to leaf guides.
-          </p>
-
-          <div className="mt-6 grid md:grid-cols-2 gap-5">
-            {authority.map((c) => (
-              <CardLink key={c.href} c={c} />
-            ))}
-          </div>
-        </section>
-
-        <footer className="mt-16 pt-10 border-t border-soft text-sm text-muted">
-          This is the authority layer: no fluff, no hype — just show-night reality and what works.
-        </footer>
-      </div>
     </main>
   );
 }
