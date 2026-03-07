@@ -2,19 +2,41 @@ import { head, list, put } from "@vercel/blob";
 
 type BlobMeta = { url: string; pathname: string };
 
-async function resolveBlobUrl(pathname: string): Promise<string | null> {
-  // Primary: head(pathname)
+function timeoutMs() {
+  const raw = Number(process.env.BLOB_READ_TIMEOUT_MS ?? 2000);
+  return Number.isFinite(raw) && raw > 0 ? raw : 2000;
+}
+
+async function withTimeout<T>(p: Promise<T>, ms: number): Promise<T | null> {
+  let timer: NodeJS.Timeout | undefined;
   try {
-    const meta = (await head(pathname)) as unknown as BlobMeta;
-    if (meta?.url) return meta.url;
-  } catch {}
+    return await Promise.race([
+      p,
+      new Promise<null>((resolve) => {
+        timer = setTimeout(() => resolve(null), ms);
+      }),
+    ]);
+  } catch {
+    return null;
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}
+
+async function resolveBlobUrl(pathname: string): Promise<string | null> {
+  const ms = timeoutMs();
+
+  // Primary: head(pathname)
+  const meta = (await withTimeout(
+    head(pathname).then((m) => m as unknown as BlobMeta),
+    ms
+  )) as BlobMeta | null;
+  if (meta?.url) return meta.url;
 
   // Fallback: list by prefix and pick exact match
-  try {
-    const res = await list({ prefix: pathname });
-    const exact = res.blobs?.find((b) => b.pathname === pathname);
-    return exact?.url ?? null;
-  } catch {}
+  const res = await withTimeout(list({ prefix: pathname }), ms);
+  const exact = res?.blobs?.find((b) => b.pathname === pathname);
+  if (exact?.url) return exact.url;
 
   return null;
 }
@@ -26,10 +48,14 @@ export async function blobReadJson<T>(
   const url = await resolveBlobUrl(pathname);
   if (!url) return null;
 
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs());
   const res = await fetch(url, {
+    signal: controller.signal,
     next: { revalidate: opts?.revalidateSeconds ?? 300 },
-  });
-  if (!res.ok) return null;
+  }).catch(() => null);
+  clearTimeout(timer);
+  if (!res?.ok) return null;
 
   return (await res.json()) as T;
 }
