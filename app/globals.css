@@ -569,3 +569,77 @@ body { background: var(--surface); color: var(--text); }
     display: none;
   }
 }
+
+/* =========================================================
+   Global Comic Skin Overrides
+   Makes legacy pages visually align with /shuttles styles.
+   ========================================================= */
+
+body,
+.bg-surface {
+  background:
+    radial-gradient(1100px 500px at -10% -10%, rgba(255, 212, 71, 0.1), transparent 50%),
+    radial-gradient(900px 420px at 110% 0%, rgba(46, 107, 255, 0.14), transparent 55%),
+    linear-gradient(180deg, #0b1224 0%, #080d19 100%);
+  color: var(--comic-text);
+}
+
+.bg-surface2,
+.bg-surface-strong {
+  background:
+    radial-gradient(circle at 16% 18%, rgba(255, 255, 255, 0.08) 1.8px, transparent 2px) 0 0 / 11px 11px,
+    linear-gradient(180deg, rgba(20, 26, 42, 0.88), rgba(9, 12, 20, 0.96));
+}
+
+.panel,
+.panel-soft {
+  border: 3px solid rgba(255, 255, 255, 0.16);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 16% 18%, rgba(255, 255, 255, 0.08) 1.8px, transparent 2px) 0 0 / 11px 11px,
+    linear-gradient(180deg, rgba(20, 26, 42, 0.88), rgba(9, 12, 20, 0.96));
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.4);
+  backdrop-filter: none;
+}
+
+.pill,
+.pill-soft {
+  border: 2px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  border: 3px solid #0f1421;
+  text-decoration: none !important;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.74rem;
+  padding: 0.8rem 0.95rem;
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, #ffde5c, #ffc928);
+  color: #12182a !important;
+}
+
+.btn-secondary,
+.btn-ghost {
+  background: linear-gradient(180deg, #3d7aff, #2e6bff);
+  color: #fff !important;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-ghost:hover {
+  transform: translateY(-2px) scale(1.01);
+  filter: saturate(1.08);
+}
