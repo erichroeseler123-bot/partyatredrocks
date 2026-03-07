@@ -91,12 +91,18 @@ export default async function FindPage({
   };
 
   return (
-    <main className="home">
-      <section className="home-wrap home-section">
-        <div className="home-kicker">Find your ride</div>
-        <div className="home-h2">Pick the ride that fits your night</div>
+    <main className="comic-page pt-24 pb-10">
+      <section className="comic-wrap">
+        <div className="comic-hero">
+          <div className="comic-kicker">Ride Match</div>
+          <div className="comic-title">Pick Your Red Rocks Ride</div>
 
-        <p className="home-subhead" style={{ maxWidth: 760 }}>
+          <p className="comic-copy">
+            Compare shared shuttles, private SUVs, vans, and party bus options in one mobile-first flow.
+          </p>
+        </div>
+
+        <p className="comic-copy" style={{ marginTop: 14, maxWidth: 760 }}>
           {date ? (
             <>
               Showing options for <b>{date}</b> ({qty} passenger{qty === "1" ? "" : "s"}).
@@ -107,73 +113,80 @@ export default async function FindPage({
         </p>
 
         {show ? (
-          <div className="card" style={{ marginTop: 14, padding: 16 }}>
-            <div style={{ fontWeight: 1000, fontSize: 18 }}>{headliner(show)}</div>
+          <div className="comic-panel" style={{ marginTop: 14 }}>
+            <div className="comic-tag">Tonight’s Show</div>
+            <div className="comic-h3">{headliner(show)}</div>
 
-            <div style={{ marginTop: 6, opacity: 0.86, fontWeight: 800 }}>
+            <div style={{ marginTop: 6, opacity: 0.86, fontWeight: 800, fontSize: 14 }}>
               {show?.venue ? `${show.venue} • ` : ""}
               {doorsEst ? `Doors (est.) ${fmtTime(doorsEst)} • ` : ""}
               {showStart ? `Show ${fmtTime(showStart)}` : ""}
             </div>
 
-            <div style={{ marginTop: 8, opacity: 0.7, fontSize: 12, fontWeight: 800 }}>
+            <div style={{ marginTop: 8, opacity: 0.74, fontSize: 12, fontWeight: 800 }}>
               Doors time is estimated unless otherwise posted by the venue/ticket.
             </div>
           </div>
         ) : date ? (
-          <div className="card" style={{ marginTop: 14, padding: 16, opacity: 0.85 }}>
+          <div className="comic-panel" style={{ marginTop: 14, opacity: 0.9 }}>
             No Red Rocks show detected for this date yet — still showing ride options.
           </div>
         ) : null}
 
-        <div className="home-vibe-grid" style={{ marginTop: 18 }}>
-          <div className="card home-vibe-card">
-            <div className="home-vibe-top">
-              <div className="home-vibe-title">Shuttle tickets</div>
-              <div className="home-vibe-best">Best for: solo fans & small groups</div>
+        <div className="comic-grid" style={{ marginTop: 18 }}>
+          <div className="comic-panel">
+            <div className="comic-tag">Best Seller</div>
+            <div className="comic-h3">Shuttle Tickets</div>
+            <div className="comic-sub">Best for solo fans and small groups</div>
+            <div className="comic-copy" style={{ marginTop: 10 }}>
+              Easy meetup, fixed pricing, ride there plus guaranteed ride home.
             </div>
-            <div className="home-vibe-copy">
-              Easy meetup, fixed pricing, ride there + guaranteed ride home.
-            </div>
-            <Link className="btn btn-primary" href={href("/shuttles")}>
+            <Link className="comic-btn comic-btn-primary" href={href("/shuttles")}>
               Buy tickets →
             </Link>
           </div>
 
-          <div className="card home-vibe-card">
-            <div className="home-vibe-top">
-              <div className="home-vibe-title">Suburban / SUV</div>
-              <div className="home-vibe-best">Best for: groups of 6 or fewer</div>
+          <div className="comic-panel">
+            <div className="comic-tag">Private</div>
+            <div className="comic-h3">Suburban / SUV</div>
+            <div className="comic-sub">Best for groups of 6 or fewer</div>
+            <div className="comic-copy" style={{ marginTop: 10 }}>
+              Door-to-door. Your schedule, your playlist, your crew.
             </div>
-            <div className="home-vibe-copy">Door-to-door. Your schedule, your playlist, your crew.</div>
-            <Link className="btn btn-secondary" href={href("/suv")}>
+            <Link className="comic-btn comic-btn-secondary" href={href("/suv")}>
               Reserve SUV →
             </Link>
           </div>
 
-          <div className="card home-vibe-card">
-            <div className="home-vibe-top">
-              <div className="home-vibe-title">10–14 passenger vans</div>
-              <div className="home-vibe-best">Best for: the whole squad</div>
+          <div className="comic-panel">
+            <div className="comic-tag">Group Ride</div>
+            <div className="comic-h3">10–14 Passenger Vans</div>
+            <div className="comic-sub">Best for the whole squad</div>
+            <div className="comic-copy" style={{ marginTop: 10 }}>
+              More room, same clean ops. Great for groups rolling together.
             </div>
-            <div className="home-vibe-copy">
-              More room, same clean ops. Great for groups that want to roll together.
-            </div>
-            <Link className="btn btn-secondary" href={href("/private-van")}>
+            <Link className="comic-btn comic-btn-secondary" href={href("/private-van")}>
               Reserve van →
             </Link>
           </div>
 
-          <div className="card home-vibe-card">
-            <div className="home-vibe-top">
-              <div className="home-vibe-title">Party bus</div>
-              <div className="home-vibe-best">Best for: celebrations + big groups</div>
+          <div className="comic-panel">
+            <div className="comic-tag">Big Energy</div>
+            <div className="comic-h3">Party Bus</div>
+            <div className="comic-sub">Best for celebrations and large groups</div>
+            <div className="comic-copy" style={{ marginTop: 10 }}>
+              Turn the ride into the pregame and keep everyone together.
             </div>
-            <div className="home-vibe-copy">Turn the ride into the pregame. Big energy, everyone together.</div>
-            <Link className="btn btn-secondary" href={href("/party-bus")}>
+            <Link className="comic-btn comic-btn-secondary" href={href("/party-bus")}>
               Get a quote →
             </Link>
           </div>
+        </div>
+
+        <div className="comic-mobile-cta">
+          <Link className="comic-btn comic-btn-primary" href={href("/shuttles")}>
+            Book Shuttle Seats
+          </Link>
         </div>
       </section>
     </main>
