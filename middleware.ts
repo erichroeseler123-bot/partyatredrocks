@@ -12,6 +12,35 @@ export function middleware(req: NextRequest) {
   }
   // END LEGACY_MISHAWAKA_CASE
 
+  // LEGACY_WIX_ROUTES
+  // Old Wix blog posts should consolidate to /guide without tracking params.
+  if (pathname.startsWith("/post/")) {
+    const url = req.nextUrl.clone();
+    url.pathname = "/guide";
+    url.search = "";
+    return NextResponse.redirect(url, 308);
+  }
+
+  const legacyRouteMap: Record<string, string> = {
+    "/party-bus-to-red-rocks": "/party-bus",
+    "/sprinter": "/private-van",
+    "/mishawaka-private-transportation": "/venues/mishawaka-amphitheatre",
+    "/general-7": "/",
+    "/la-quinta-fairfield": "/guide/local/denver-pickups",
+    "/upper-north": "/guide/local/denver-pickups",
+    "/tubing": "/guide",
+    "/hiking-at-red-rocks": "/guide",
+  };
+
+  const legacyDestination = legacyRouteMap[pathname];
+  if (legacyDestination) {
+    const url = req.nextUrl.clone();
+    url.pathname = legacyDestination;
+    url.search = "";
+    return NextResponse.redirect(url, 308);
+  }
+  // END LEGACY_WIX_ROUTES
+
   // ✅ Never override cache headers for these (they manage their own caching)
   if (
     pathname === "/robots.txt" ||
