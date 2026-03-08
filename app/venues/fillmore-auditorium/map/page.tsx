@@ -5,11 +5,11 @@ const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks
 export const metadata = {
   title: "Fillmore Auditorium Map | Denver Venue Layout 2026",
   description:
-    "Fillmore Auditorium map overview with stage flow, entry points, bars, and nearby pickup and parking guidance for Denver shows.",
+    "Fillmore Auditorium map showing stage, GA floor, balcony, bars, entrances, and nearby parking or transit for Denver shows.",
   alternates: { canonical: `${SITE}/venues/fillmore-auditorium/map` },
 };
 
-export default function FillmoreMapPage() {
+export default function FillmoreMap() {
   return (
     <main className="comic-page pt-24 pb-10">
       <section className="comic-wrap">
@@ -17,11 +17,11 @@ export default function FillmoreMapPage() {
           <div className="comic-kicker">Denver Venue Guide</div>
           <h1 className="comic-title">Fillmore Auditorium Map</h1>
           <p className="comic-copy">
-            Use this layout overview to plan entry flow, in-venue movement, and your post-show meetup.
+            Classic Denver venue layout - GA floor, balcony, bars, entrances, and nearby parking or transit points.
           </p>
           <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-6 w-full px-4">
             <Link href="/find?venue=fillmore-auditorium&qty=2" className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[200px] text-center">
-              Book Shuttle - Easy Exit Plan
+              Book Shuttle - Easy Arrival
             </Link>
             <Link href="/venues/fillmore-auditorium/best-time-to-arrive" className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[200px] text-center">
               Best Time to Arrive
@@ -32,30 +32,38 @@ export default function FillmoreMapPage() {
         <div className="mt-8 text-center">
           <img
             src="/images/venues/fillmore-auditorium-map.jpg"
-            alt="Fillmore Auditorium Denver map showing entry flow, stage orientation, bars, and nearby pickup guidance"
+            alt="Fillmore Auditorium Denver venue map showing stage, GA floor, balcony seating, bars, entrances, and nearby parking"
             width={800}
             height={600}
             loading="lazy"
             decoding="async"
             className="max-w-full rounded-xl border border-white/20 mx-auto"
           />
-          <p className="comic-copy mt-4 opacity-80">General layout reference only. Verify event-specific instructions on your ticket details.</p>
+          <p className="comic-copy mt-4 opacity-80">
+            General venue layout (not event-specific). Check official site for show-day changes.
+          </p>
         </div>
 
         <section className="comic-panel mt-8">
           <div className="comic-tag">Key Locations</div>
           <ul className="comic-copy mt-4 space-y-3 list-disc pl-6">
             <li>
-              <strong>Main Entry</strong> - East Colfax side flow with security and ticket scan queues.
+              <strong>Main Entrance</strong> - 1510 Clarkson St (front, ticket scan and security).
             </li>
             <li>
-              <strong>Floor and Balcony Zones</strong> - Traffic concentrates near stage approaches during support set transitions.
+              <strong>GA Floor</strong> - Standing room, stage-front access benefits from early arrival.
             </li>
             <li>
-              <strong>Bar Areas</strong> - High-volume points before headliner start and during main breaks.
+              <strong>Balcony</strong> - Limited seating, stairs from main floor.
             </li>
             <li>
-              <strong>Post-Show Pickup Blocks</strong> - Use pre-planned side-street meetup instructions to avoid curb compression.
+              <strong>Bars</strong> - Multiple full bars throughout the venue.
+            </li>
+            <li>
+              <strong>Preferred Parking</strong> - Nearby lots (add-on or on-site depending on show).
+            </li>
+            <li>
+              <strong>Rideshare Pickup</strong> - Side streets are usually cleaner than front-door curb.
             </li>
           </ul>
         </section>

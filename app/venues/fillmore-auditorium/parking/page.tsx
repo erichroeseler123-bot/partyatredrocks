@@ -3,13 +3,13 @@ import Link from "next/link";
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
 export const metadata = {
-  title: "Fillmore Auditorium Parking Guide | Denver Colfax Tips 2026",
+  title: "Fillmore Auditorium Parking Guide | Denver Tips 2026",
   description:
-    "Parking options for Fillmore Auditorium shows in 2026. Lot and garage strategy, street parking constraints, and why pre-booked rides reduce friction.",
+    "Parking near Fillmore Auditorium for 2026 shows. Options, costs, tips to avoid hassle, and why shuttle or rideshare is often easier.",
   alternates: { canonical: `${SITE}/venues/fillmore-auditorium/parking` },
 };
 
-export default function FillmoreParkingPage() {
+export default function FillmoreParking() {
   return (
     <main className="comic-page pt-24 pb-10">
       <section className="comic-wrap">
@@ -17,7 +17,7 @@ export default function FillmoreParkingPage() {
           <div className="comic-kicker">Denver Venue Guide</div>
           <h1 className="comic-title">Fillmore Auditorium Parking Guide</h1>
           <p className="comic-copy">
-            East Colfax parking compresses quickly on concert nights. This guide keeps your arrival predictable and your exit cleaner.
+            Colfax parking tightens fast on big nights. Preferred lot sells out early - here is the 2026 breakdown and better alternatives.
           </p>
           <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-6 w-full px-4">
             <Link href="/find?venue=fillmore-auditorium&qty=2" className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[200px] text-center">
@@ -34,22 +34,20 @@ export default function FillmoreParkingPage() {
             <div className="comic-tag">Parking Options</div>
             <ul className="comic-copy mt-4 space-y-4 list-disc pl-6">
               <li>
-                <strong>Nearby paid lots and garages</strong> - Typical event pricing around Colfax and Capitol Hill corridors. Reserve early when possible.
+                <strong>Preferred Venue Lot</strong> - Typical add-on near show date. Closest option, fills fastest.
               </li>
               <li>
-                <strong>Street parking</strong> - Limited and highly variable. Watch signage, permit zones, and tow restrictions.
+                <strong>Nearby Paid Lots or Garages</strong> - Usually available within a short walk depending on show demand.
               </li>
               <li>
-                <strong>Pre-book options</strong> - Spot-based reservations reduce last-minute circling and arrival drift.
+                <strong>Street Parking</strong> - Limited, and towing or permit enforcement can apply on event nights.
               </li>
             </ul>
           </article>
 
           <article className="comic-panel">
             <div className="comic-tag">Why Shuttle Often Wins</div>
-            <p className="comic-copy mt-4">
-              Fixed pickup, no lot search, and less post-show curb uncertainty on heavy nights.
-            </p>
+            <p className="comic-copy mt-4">No lot hunt, no surge, fixed meetup. Post-show Colfax curb competition is real.</p>
             <div style={{ marginTop: 16 }}>
               <Link href="/find?venue=fillmore-auditorium&qty=2" className="comic-btn comic-btn-primary w-full text-center">
                 Book Shuttle Now
@@ -60,10 +58,10 @@ export default function FillmoreParkingPage() {
           <article className="comic-panel">
             <div className="comic-tag">Pro Tips</div>
             <ul className="comic-copy mt-4 space-y-3 list-disc pl-6">
-              <li>Set your exact parking target before leaving home.</li>
-              <li>Add extra buffer for stacked events in the Colfax corridor.</li>
-              <li>Finalize post-show meetup before the headliner starts.</li>
-              <li>Avoid making pickup decisions at last song close.</li>
+              <li>Pre-book parking when available for headliner nights.</li>
+              <li>Use advance garage reservations when possible.</li>
+              <li>Transit routes can reduce parking friction on high-demand nights.</li>
+              <li>Use side-street pickup instructions instead of venue-front curb waits.</li>
             </ul>
           </article>
         </div>

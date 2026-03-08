@@ -827,7 +827,7 @@ export default async function VenuePage({
               Parking Strategy
             </Link>
             <Link href="/venues/mission-ballroom/transportation" className="comic-btn comic-btn-secondary">
-              Transportation and Rides
+              Transportation & Rides
             </Link>
             <Link href="/venues/mission-ballroom/map" className="comic-btn comic-btn-secondary">
               Venue Map
@@ -853,7 +853,7 @@ export default async function VenuePage({
               Parking Strategy
             </Link>
             <Link href="/venues/ogden-theatre/transportation" className="comic-btn comic-btn-secondary">
-              Transportation and Rides
+              Transportation & Rides
             </Link>
             <Link href="/venues/ogden-theatre/map" className="comic-btn comic-btn-secondary">
               Venue Map
@@ -876,14 +876,14 @@ export default async function VenuePage({
               Parking Strategy
             </Link>
             <Link href="/venues/fillmore-auditorium/transportation" className="comic-btn comic-btn-secondary">
-              Transportation and Rides
+              Transportation & Rides
             </Link>
             <Link href="/venues/fillmore-auditorium/map" className="comic-btn comic-btn-secondary">
               Venue Map
             </Link>
           </div>
           <p className="comic-copy text-center mt-4 opacity-80">
-            Historic Colfax room with dense entry windows and high curb competition after the encore.
+            Historic Denver venue - 3,900 capacity, GA floor + balcony, strong local legacy.
           </p>
         </section>
       ) : null}
