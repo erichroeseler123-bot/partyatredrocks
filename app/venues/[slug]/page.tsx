@@ -816,6 +816,29 @@ export default async function VenuePage({
         </div>
       </section>
 
+      {slug === "mission-ballroom" ? (
+        <section className="comic-panel" style={{ marginTop: 32 }}>
+          <div className="comic-tag">Mission Ballroom Quick Guides</div>
+          <div className="flex flex-wrap gap-3 mt-4 justify-center">
+            <Link href="/venues/mission-ballroom/best-time-to-arrive" className="comic-btn comic-btn-secondary">
+              Best Time to Arrive
+            </Link>
+            <Link href="/venues/mission-ballroom/parking" className="comic-btn comic-btn-secondary">
+              Parking Strategy
+            </Link>
+            <Link href="/venues/mission-ballroom/transportation" className="comic-btn comic-btn-secondary">
+              Transportation and Rides
+            </Link>
+            <Link href="/venues/mission-ballroom/map" className="comic-btn comic-btn-secondary">
+              Venue Map
+            </Link>
+          </div>
+          <p className="comic-copy text-center mt-4 opacity-80">
+            Plan your night at Denver&apos;s premier indoor venue with fast entry and cleaner post-show exits.
+          </p>
+        </section>
+      ) : null}
+
       {/* EVENTS */}
       {events.length > 0 ? (
         <section className="mt-10">
