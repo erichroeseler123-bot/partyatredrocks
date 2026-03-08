@@ -41,6 +41,16 @@ export function middleware(req: NextRequest) {
     });
   }
 
+  // LEGACY_SHOW_NUMERIC_IDS
+  // Old numeric /shows/{sourceId} links should land on a safe modern schedule page.
+  if (pathname.startsWith("/shows/") && /^\/shows\/\d+$/.test(pathname)) {
+    const url = req.nextUrl.clone();
+    url.pathname = "/red-rocks/concerts";
+    url.search = "";
+    return NextResponse.redirect(url, 308);
+  }
+  // END LEGACY_SHOW_NUMERIC_IDS
+
   // LEGACY_MISHAWAKA_CASE
   // Normalize /Mishawaka (and any casing) -> /mishawaka so it doesn't 404.
   if (pathname.toLowerCase() === "/mishawaka" && pathname !== "/mishawaka") {

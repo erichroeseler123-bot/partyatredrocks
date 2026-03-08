@@ -694,7 +694,11 @@ export default async function VenuePage({
         <div className="mt-5">
           <img
             src={venueImage}
-            alt={`${name} venue image`}
+            alt={`${name} venue – ${reference.whatItIs || "live music venue overview"}`}
+            width={760}
+            height={428}
+            loading="lazy"
+            decoding="async"
             style={{ width: "100%", maxWidth: 760, borderRadius: 18, border: "1px solid rgba(255,255,255,.14)" }}
           />
         </div>
@@ -702,17 +706,17 @@ export default async function VenuePage({
           <MusicWave bars={22} />
         </div>
 
-        <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+        <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-6 w-full">
           <Link
             href={`/book?venue=${slug}`}
-            className="inline-flex items-center justify-center rounded-full bg-neon-blue px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-black transition hover:bg-surface/40"
+            className="inline-flex items-center justify-center rounded-full bg-neon-blue px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-black transition hover:bg-surface/40 w-full sm:w-auto min-w-[180px] text-center"
           >
             Book this venue
           </Link>
 
           <Link
             href="/week"
-            className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft"
+            className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft w-full sm:w-auto min-w-[180px] text-center"
           >
             This Week →
           </Link>
@@ -721,7 +725,7 @@ export default async function VenuePage({
             href={dccVenueUrl}
             target="_blank"
             rel="nofollow noopener"
-            className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft"
+            className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft w-full sm:w-auto min-w-[180px] text-center"
             title="Authority intel (DCC)"
           >
             Deep Intel (DCC) →

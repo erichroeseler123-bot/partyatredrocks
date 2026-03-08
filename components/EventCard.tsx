@@ -34,9 +34,12 @@ export default function EventCard({
     <article className="comic-panel">
       <img
         src={event.image}
-        alt={`Event art for ${event.title}`}
+        alt={`${event.title} – ${event.performerName || "upcoming concert"}`}
+        width={320}
+        height={180}
         className="w-full h-44 object-cover rounded-xl border border-white/20"
         loading="lazy"
+        decoding="async"
       />
       <div className="comic-tag" style={{ marginTop: 10 }}>
         {fmtDate(event.datetimeLocal)}
@@ -60,8 +63,11 @@ export default function EventCard({
           <img
             src={event.thumbnail}
             alt={`${event.performerName || "Artist"} thumbnail`}
+            width={32}
+            height={32}
             className="h-8 w-8 rounded-full border border-white/20 object-cover"
             loading="lazy"
+            decoding="async"
           />
           <span className="text-xs text-white/75">Artist thumbnail</span>
         </div>

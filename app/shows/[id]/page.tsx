@@ -406,22 +406,28 @@ export default async function ShowPage({ params }: Props) {
         <div className="mt-5">
           <img
             src={showImage}
-            alt={e?.title ? `${e.title} event image` : "Show image"}
+            alt={`${e?.title || "Red Rocks concert"} – ${
+              (e?.performers ?? []).map((p) => p?.name).filter(Boolean).join(" & ") || "live performance"
+            } at Red Rocks Amphitheatre`}
+            width={720}
+            height={405}
+            loading="lazy"
+            decoding="async"
             style={{ width: "100%", maxWidth: 720, borderRadius: 18, border: "1px solid rgba(255,255,255,.14)" }}
           />
         </div>
 
-        <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+        <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-6 w-full">
           <Link
             href={`/find?date=${encodeURIComponent(e.dateKey)}&qty=2`}
-            className="inline-flex items-center justify-center rounded-full bg-neon-blue px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-black transition hover:bg-surface/40"
+            className="inline-flex items-center justify-center rounded-full bg-neon-blue px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-black transition hover:bg-surface/40 w-full sm:w-auto min-w-[180px] text-center"
           >
             Ride Options
           </Link>
 
           <Link
             href="/week"
-            className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft"
+            className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft w-full sm:w-auto min-w-[180px] text-center"
           >
             This Week →
           </Link>
@@ -431,7 +437,7 @@ export default async function ShowPage({ params }: Props) {
               href={e.url}
               target="_blank"
               rel="nofollow noopener"
-              className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft"
+              className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft w-full sm:w-auto min-w-[180px] text-center"
               title="Tickets"
             >
               Tickets →
