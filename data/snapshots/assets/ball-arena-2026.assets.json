@@ -1,16 +1,12 @@
 {
-  "generatedAt": "2026-03-08T04:04:45.097Z",
+  "generatedAt": "2026-03-08T07:45:52.697Z",
   "year": 2026,
   "events": {
-    "ball-arena-2026-02-18-ricardo-arjona": {
-      "local": null,
-      "remote": null
-    },
     "ball-arena-2026-02-24-bad-omens-with-beartooth-and-president": {
       "local": null,
       "remote": null
     },
-    "ball-arena-2026-03-26-peso-pluma": {
+    "ball-arena-2026-02-18-ricardo-arjona": {
       "local": null,
       "remote": null
     },
@@ -22,11 +18,15 @@
       "local": null,
       "remote": null
     },
+    "ball-arena-2026-07-01-josh-groban-with-jennifer-hudson": {
+      "local": null,
+      "remote": null
+    },
     "ball-arena-2026-05-05-demi-lovato-with-adela": {
       "local": null,
       "remote": null
     },
-    "ball-arena-2026-07-01-josh-groban-with-jennifer-hudson": {
+    "ball-arena-2026-03-26-peso-pluma": {
       "local": null,
       "remote": null
     },
@@ -88,6 +88,10 @@
       "local": null,
       "remote": null
     },
+    "artist-bad-omens": {
+      "local": null,
+      "remote": null
+    },
     "artist-beartooth": {
       "local": null,
       "remote": null
@@ -104,19 +108,11 @@
       "local": null,
       "remote": null
     },
-    "artist-demi-lovato": {
-      "local": null,
-      "remote": null
-    },
-    "artist-bad-omens": {
-      "local": null,
-      "remote": null
-    },
     "artist-cory-asbury": {
       "local": null,
       "remote": null
     },
-    "artist-i-prevail": {
+    "artist-demi-lovato": {
       "local": null,
       "remote": null
     },
@@ -128,7 +124,7 @@
       "local": null,
       "remote": null
     },
-    "artist-jennifer-hudson": {
+    "artist-i-prevail": {
       "local": null,
       "remote": null
     },
@@ -136,7 +132,7 @@
       "local": null,
       "remote": null
     },
-    "artist-megan-moroney": {
+    "artist-jennifer-hudson": {
       "local": null,
       "remote": null
     },
@@ -144,11 +140,11 @@
       "local": null,
       "remote": null
     },
-    "artist-meghan-trainor": {
+    "artist-megan-moroney": {
       "local": null,
       "remote": null
     },
-    "artist-peso-pluma": {
+    "artist-meghan-trainor": {
       "local": null,
       "remote": null
     },
@@ -156,7 +152,7 @@
       "local": null,
       "remote": null
     },
-    "artist-ricardo-arjona": {
+    "artist-peso-pluma": {
       "local": null,
       "remote": null
     },
@@ -164,11 +160,15 @@
       "local": null,
       "remote": null
     },
-    "artist-ryan-trainor": {
+    "artist-ricardo-arjona": {
       "local": null,
       "remote": null
     },
     "artist-rush": {
+      "local": null,
+      "remote": null
+    },
+    "artist-ryan-trainor": {
       "local": null,
       "remote": null
     },

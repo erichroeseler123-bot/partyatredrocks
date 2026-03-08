@@ -1,0 +1,17 @@
+[
+  {
+    "id": "denver-hub-purpose",
+    "question": "What is this Denver concert transportation page for?",
+    "answer": "It is the planning hub that connects venue discovery, ride-type comparison, and booking flow across major Denver-area music venues."
+  },
+  {
+    "id": "best-ride-choice",
+    "question": "How do I choose between shuttle and private options?",
+    "answer": "Shared shuttle is usually best for predictable round trips on budget. Private options are best when your group needs tighter timing control."
+  },
+  {
+    "id": "when-to-lock-pickup-plan",
+    "question": "When should I lock my pickup plan?",
+    "answer": "Set your meetup and fallback points before encore. Last-minute pickup decisions are the most common failure point."
+  }
+]

@@ -108,6 +108,32 @@ export default function WeekClient({
           </div>
         </section>
 
+        <section className="comic-panel" style={{ marginTop: 16 }}>
+          <div className="comic-tag">How Booking + Pickup Works</div>
+          <p className="comic-copy" style={{ marginTop: 8 }}>
+            Search the lineup by artist or month, open the event card, then choose your ride path. Shared shuttle is best
+            when you want predictable return timing. Private options are best when your group needs tighter schedule control.
+          </p>
+          <p className="comic-copy">
+            If you are coordinating a group, set one exact meet point and one fallback before encore to reduce post-show
+            confusion.
+          </p>
+          <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <Link className="comic-btn comic-btn-primary" href="/find">
+              Find Ride Options
+            </Link>
+            <Link className="comic-btn comic-btn-secondary" href="/venues/red-rocks-amphitheatre">
+              Red Rocks Venue Page
+            </Link>
+            <Link className="comic-btn comic-btn-secondary" href="/guide/show-night-strategy/post-show-pickup-plan">
+              Post-Show Pickup Guide
+            </Link>
+            <Link className="comic-btn comic-btn-secondary" href="/guide/logistics/parking-lots">
+              Parking Guide
+            </Link>
+          </div>
+        </section>
+
         <section style={{ marginTop: 16 }}>
           {filtered.length === 0 ? (
             <div className="comic-panel">No events match your current filter.</div>

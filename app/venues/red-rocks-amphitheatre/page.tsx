@@ -6,6 +6,8 @@ import MusicWave from "@/components/MusicWave";
 import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
 import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
 
+const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
+
 type SP = Record<string, string | string[] | undefined>;
 
 function first(sp: SP, key: string) {
@@ -38,6 +40,15 @@ export default async function RedRocksPage({
   const sp = await searchParams;
   const faqRows = await getFaqRowsWithGlobal("venues/red-rocks-amphitheatre.json");
   const faqJsonLd = buildFaqPageJsonLd(faqRows);
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE}/` },
+      { "@type": "ListItem", position: 2, name: "Venues", item: `${SITE}/venues` },
+      { "@type": "ListItem", position: 3, name: "Red Rocks Amphitheatre", item: `${SITE}/venues/red-rocks-amphitheatre` },
+    ],
+  };
 
   const pickup = first(sp, "pickup") || "";
   const date = first(sp, "date") || "";
@@ -57,6 +68,7 @@ export default async function RedRocksPage({
         {faqRows.length > 0 ? (
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
         ) : null}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
         <header className="comic-hero mb-8">
           <h1 className="text-5xl md:text-6xl font-black mb-4 tracking-tight">
   <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary mb-6 inline-flex">
@@ -130,6 +142,29 @@ export default async function RedRocksPage({
         <section>
           <h2 className="text-3xl font-bold mb-8">Upcoming Shows</h2>
           <RedRocksShowsGrid events={events} />
+        </section>
+
+        <section className="comic-grid mt-8">
+          <Link href="/guide/logistics/parking-lots" className="comic-panel block">
+            <div className="comic-tag">Guide</div>
+            <h3 className="comic-h3">Red Rocks Parking Guide</h3>
+            <p className="comic-copy">Lot strategy, walking cost, and exit tradeoffs.</p>
+          </Link>
+          <Link href="/guide/transportation/shuttle-vs-uber" className="comic-panel block">
+            <div className="comic-tag">Guide</div>
+            <h3 className="comic-h3">Shuttle vs Uber</h3>
+            <p className="comic-copy">Side-by-side reliability and post-show risk comparison.</p>
+          </Link>
+          <Link href="/venues/mission-ballroom" className="comic-panel block">
+            <div className="comic-tag">Venue</div>
+            <h3 className="comic-h3">Mission Ballroom</h3>
+            <p className="comic-copy">Compare another high-demand Denver venue logistics profile.</p>
+          </Link>
+          <Link href="/venues/fiddlers-green-amphitheatre" className="comic-panel block">
+            <div className="comic-tag">Venue</div>
+            <h3 className="comic-h3">Fiddler&apos;s Green</h3>
+            <p className="comic-copy">Cross-venue amphitheatre pickup and exit strategy reference.</p>
+          </Link>
         </section>
 
         <FAQBlock title="Red Rocks Venue FAQ" rows={faqRows} />

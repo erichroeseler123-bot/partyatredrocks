@@ -24,9 +24,42 @@ type BookResponse = {
     orderNumber?: string;
     [key: string]: unknown;
   };
+  status?: {
+    orderNumber?: string | null;
+    bookingStatus?: string;
+    paymentStatus?: "paid" | "unpaid" | "partial" | "unknown";
+    totalDue?: number | null;
+    totalPaid?: number | null;
+  };
+  paymentHandoff?: {
+    mode?: "url" | "manual";
+    url?: string;
+    actionLabel?: string;
+    operatorAction?: string;
+  };
   internalOrderId?: string;
   error?: string;
 };
+
+type BookingOutcome =
+  | {
+      kind: "pending_request";
+      title: string;
+      detail: string;
+      nextSteps: string;
+    }
+  | {
+      kind: "request_sent_waiting";
+      title: string;
+      detail: string;
+      nextSteps: string;
+    }
+  | {
+      kind: "paid_confirmed";
+      title: string;
+      detail: string;
+      nextSteps: string;
+    };
 
 export default function RezdySessionPicker({ initialDate = "", initialQty = 2 }: { initialDate?: string; initialQty?: number }) {
   const [products, setProducts] = useState<UiProduct[]>([]);
@@ -35,14 +68,17 @@ export default function RezdySessionPicker({ initialDate = "", initialQty = 2 }:
   const [selectedProduct, setSelectedProduct] = useState("");
   const [selectedSessionKey, setSelectedSessionKey] = useState("");
   const [qty, setQty] = useState(initialQty);
-  const [firstName, setFirstName] = useState("Test");
-  const [lastName, setLastName] = useState("User");
-  const [email, setEmail] = useState("test@example.com");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
   const [allowBooking, setAllowBooking] = useState(false);
   const [loadingProducts, setLoadingProducts] = useState(false);
   const [loadingSessions, setLoadingSessions] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
+  const [outcome, setOutcome] = useState<BookingOutcome | null>(null);
+  const [paymentActionUrl, setPaymentActionUrl] = useState<string | null>(null);
+  const [paymentActionLabel, setPaymentActionLabel] = useState<string>("Complete Payment");
 
   const selectedSession = useMemo(
     () => sessions.find((session) => session.sessionKey === selectedSessionKey) ?? null,
@@ -94,32 +130,33 @@ export default function RezdySessionPicker({ initialDate = "", initialQty = 2 }:
     }
   }
 
-  async function createTestBooking() {
+  async function createBooking() {
     if (!selectedProduct || !selectedSession) {
       setMessage("Select a product and session first.");
       return;
     }
+    if (!firstName.trim() || !lastName.trim() || !email.trim()) {
+      setMessage("Enter first name, last name, and email before booking.");
+      return;
+    }
     if (!allowBooking) {
-      setMessage("Please confirm test booking creation first.");
+      setMessage("Please confirm booking submission first.");
       return;
     }
     setSubmitting(true);
     setMessage(null);
+    setOutcome(null);
+    setPaymentActionUrl(null);
+    setPaymentActionLabel("Complete Payment");
     try {
       const payload = {
         productCode: selectedProduct,
         startTimeLocal: selectedSession.startTimeLocal || undefined,
+        endTimeLocal: selectedSession.endTimeLocal || undefined,
         qty,
         customer: { firstName, lastName, email },
-        payment: {
-          provider: "stripe",
-          paymentIntentId: `pi_test_${Date.now()}`,
-          status: "succeeded",
-          amount: 0,
-          currency: "USD",
-        },
         pickup: {
-          location: "Find flow test",
+          location: "Find flow",
           dateHint: initialDate || null,
         },
         rezdyBooking: { firstName, lastName, email },
@@ -133,7 +170,62 @@ export default function RezdySessionPicker({ initialDate = "", initialQty = 2 }:
       const data = (await response.json()) as BookResponse;
       if (!response.ok) throw new Error(data?.error || "Booking call failed");
       const rezdyRef = data.booking?.bookingCode || data.booking?.orderNumber || "unknown";
-      setMessage(`Booked. Internal order: ${data.internalOrderId || "n/a"} | Rezdy ref: ${rezdyRef}`);
+      const status = data.status;
+      const due = typeof status?.totalDue === "number" ? status.totalDue : null;
+      const paid = typeof status?.totalPaid === "number" ? status.totalPaid : null;
+      const handoff = data.paymentHandoff;
+
+      if (status?.paymentStatus === "unpaid") {
+        if (handoff?.mode === "url" && typeof handoff.url === "string" && handoff.url.trim()) {
+          setPaymentActionUrl(handoff.url);
+          setPaymentActionLabel(handoff.actionLabel || "Complete Payment");
+          setOutcome({
+            kind: "request_sent_waiting",
+            title: "Payment Request Sent / Waiting",
+            detail: `Booking created for order ${status?.orderNumber || rezdyRef}. Amount still due: $${(due ?? 0).toFixed(2)}.`,
+            nextSteps:
+              "Use the payment link below to complete checkout. Your booking is not fully finalized until payment is completed.",
+          });
+          return;
+        }
+        setOutcome({
+          kind: "pending_request",
+          title: "Booking Created, Payment Request Pending",
+          detail: `Booking created for order ${status?.orderNumber || rezdyRef}. Amount still due: $${(due ?? 0).toFixed(2)}.`,
+          nextSteps:
+            "What happens next: our team sends your Rezdy payment request from the dashboard. You will complete payment after that request is sent.",
+        });
+        return;
+      }
+
+      if (status?.paymentStatus === "partial") {
+        if (handoff?.mode === "url" && typeof handoff.url === "string" && handoff.url.trim()) {
+          setPaymentActionUrl(handoff.url);
+          setPaymentActionLabel(handoff.actionLabel || "Complete Payment");
+        }
+        setOutcome({
+          kind: "request_sent_waiting",
+          title: "Payment Request Sent / Waiting",
+          detail: `Booking created for order ${status?.orderNumber || rezdyRef}. Paid: $${(paid ?? 0).toFixed(2)}. Amount still due: $${(due ?? 0).toFixed(2)}.`,
+          nextSteps:
+            "Complete the remaining payment to finish confirmation. If no payment link is shown, our team will send or re-send the Rezdy payment request.",
+        });
+        return;
+      }
+
+      if (status?.paymentStatus === "paid") {
+        setOutcome({
+          kind: "paid_confirmed",
+          title: "Paid and Confirmed",
+          detail: `Order ${status?.orderNumber || rezdyRef} is fully paid. Total paid: $${(paid ?? 0).toFixed(2)}.`,
+          nextSteps: `You are confirmed. Internal order reference: ${data.internalOrderId || "n/a"}.`,
+        });
+        return;
+      }
+
+      setMessage(
+        `Booking submitted. Internal order: ${data.internalOrderId || "n/a"} | Rezdy ref: ${rezdyRef}. Booking status: ${status?.bookingStatus || "unknown"}.`
+      );
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "Booking call failed");
     } finally {
@@ -143,9 +235,9 @@ export default function RezdySessionPicker({ initialDate = "", initialQty = 2 }:
 
   return (
     <section className="comic-panel" style={{ marginTop: 16 }}>
-      <div className="comic-tag">Live Rezdy Sessions (Beta)</div>
+      <div className="comic-tag">Live Rezdy Sessions</div>
       <p className="comic-copy" style={{ marginTop: 8 }}>
-        Load products, fetch live availability, choose a session, and send a test booking payload to `/api/rezdy/book`.
+        Load products, fetch live availability, choose a session, and submit a Rezdy-managed booking request.
       </p>
 
       <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
@@ -235,26 +327,61 @@ export default function RezdySessionPicker({ initialDate = "", initialQty = 2 }:
           onChange={(e) => setAllowBooking(e.target.checked)}
           style={{ marginRight: 8 }}
         />
-        I understand this test action can create a real Rezdy booking.
+        I understand this action submits a real Rezdy booking request.
       </label>
 
       <div style={{ marginTop: 10 }}>
         <button
           type="button"
           className="comic-btn comic-btn-primary"
-          onClick={createTestBooking}
+          onClick={createBooking}
           disabled={submitting || !selectedSession || !selectedProduct}
         >
-          {submitting ? "Creating booking..." : "Create test booking"}
+          {submitting ? "Creating booking..." : "Create booking"}
         </button>
       </div>
+
+      {outcome ? (
+        <div
+          className="comic-panel"
+          style={{
+            marginTop: 10,
+            borderColor:
+              outcome.kind === "paid_confirmed"
+                ? "rgba(16,185,129,.45)"
+                : outcome.kind === "request_sent_waiting"
+                  ? "rgba(56,189,248,.45)"
+                  : "rgba(251,191,36,.45)",
+          }}
+        >
+          <div className="comic-tag">{outcome.title}</div>
+          <p className="comic-copy" style={{ marginTop: 8 }}>
+            {outcome.detail}
+          </p>
+          <p className="comic-copy" style={{ marginTop: 6 }}>
+            {outcome.nextSteps}
+          </p>
+        </div>
+      ) : null}
 
       {message ? (
         <p className="comic-copy" style={{ marginTop: 10 }}>
           {message}
         </p>
       ) : null}
+
+      {paymentActionUrl ? (
+        <div style={{ marginTop: 10 }}>
+          <a
+            href={paymentActionUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="comic-btn comic-btn-primary"
+          >
+            {paymentActionLabel}
+          </a>
+        </div>
+      ) : null}
     </section>
   );
 }
-

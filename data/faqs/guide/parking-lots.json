@@ -1,0 +1,17 @@
+[
+  {
+    "id": "parking-lots-open",
+    "question": "When should I arrive for Red Rocks parking?",
+    "answer": "Arrive early on high-demand nights. Upper lots fill first, and later arrival usually means longer walking and slower ingress."
+  },
+  {
+    "id": "best-lot-first-timers",
+    "question": "What lot is best for first-time visitors?",
+    "answer": "Most first-timers prioritize easier entry over fastest exit. If walking tolerance is low, avoid relying on lower-lot approaches."
+  },
+  {
+    "id": "parking-vs-shuttle",
+    "question": "Is parking or shuttle better for Red Rocks?",
+    "answer": "Parking gives full schedule control but adds driving and lot friction. Shuttle reduces navigation and post-show coordination risk."
+  }
+]

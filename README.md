@@ -17,3 +17,8 @@
 - Compiled layer: `data/snapshots/**`
 - UI layer: pages/components read snapshots only
 - Enrichment layer: provider APIs / Blob may decorate data, never gate build or SSG
+
+## Operations / Freshness
+
+- Monthly checklist: [`docs/monthly-freshness-checklist.md`](docs/monthly-freshness-checklist.md)
+- Use `/internal/orders?view=needs-action` for day-to-day unpaid/manual follow-up.

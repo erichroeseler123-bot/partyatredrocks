@@ -1,0 +1,17 @@
+[
+  {
+    "id": "week-page-purpose",
+    "question": "What is the Week page for?",
+    "answer": "The Week page helps you discover current venue schedules quickly, then route into venue context, lineup detail, and booking."
+  },
+  {
+    "id": "week-to-booking-flow",
+    "question": "How do I go from weekly schedule to booking?",
+    "answer": "Open the venue or lineup page first, confirm show context and pickup strategy, then use /find to select the right ride option."
+  },
+  {
+    "id": "week-best-for-groups",
+    "question": "Is this useful for group planning?",
+    "answer": "Yes. It is useful for groups deciding venue/date first, then aligning one transportation plan and one post-show meetup protocol."
+  }
+]

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { rezdyGetAvailability } from "@/lib/rezdy";
 
 export const metadata = {
   robots: { index: false, follow: true },
@@ -32,6 +33,19 @@ export default async function BookPage({
   searchParams: Promise<SP>;
 }) {
   const sp = await searchParams;
+  const productCode = first(sp, "productCode");
+  let liveAvailabilityNote: string | null = null;
+
+  if (productCode) {
+    try {
+      const query = new URLSearchParams();
+      query.set("productCode", productCode);
+      const sessions = await rezdyGetAvailability(query);
+      liveAvailabilityNote = `Live Rezdy check: ${sessions.length} session${sessions.length === 1 ? "" : "s"} returned for ${productCode}.`;
+    } catch {
+      liveAvailabilityNote = `Live Rezdy check unavailable for ${productCode}.`;
+    }
+  }
 
   const venue = (first(sp, "venue") || "").toLowerCase();
   const venueDisplay = venue.replace(/-/g, " ").replace(/amphitheatre/g, "Amphitheatre").split(" ").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
@@ -69,6 +83,12 @@ export default async function BookPage({
   return (
     <main className="min-h-screen bg-surface text-white px-6 py-24">
       <div className="max-w-6xl mx-auto">
+        {liveAvailabilityNote ? (
+          <section className="panel-soft p-4 mb-8">
+            <div className="text-[11px] font-black uppercase tracking-[.22em] text-white/60">Live Availability</div>
+            <p className="mt-2 text-sm text-white/80">{liveAvailabilityNote}</p>
+          </section>
+        ) : null}
         <header className="text-center mb-20">
           <p className="text-red-500 uppercase tracking-[0.4em] text-xs font-bold mb-4">
             Booking Router

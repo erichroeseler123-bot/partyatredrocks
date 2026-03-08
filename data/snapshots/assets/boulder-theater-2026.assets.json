@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T04:04:45.097Z",
+  "generatedAt": "2026-03-08T07:45:52.697Z",
   "year": 2026,
   "events": {
     "boulder-theater-2026-01-31-fitz-and-the-tantrums": {
@@ -116,11 +116,11 @@
     }
   },
   "artists": {
-    "artist-afi": {
+    "artist-3oh-3": {
       "local": null,
       "remote": null
     },
-    "artist-3oh-3": {
+    "artist-afi": {
       "local": null,
       "remote": null
     },
@@ -128,11 +128,11 @@
       "local": null,
       "remote": null
     },
-    "artist-atmosphere": {
+    "artist-all-them-witches-21": {
       "local": null,
       "remote": null
     },
-    "artist-all-them-witches-21": {
+    "artist-atmosphere": {
       "local": null,
       "remote": null
     },
@@ -140,15 +140,11 @@
       "local": null,
       "remote": null
     },
-    "artist-chris-isaak": {
-      "local": null,
-      "remote": null
-    },
     "artist-choir-boy": {
       "local": null,
       "remote": null
     },
-    "artist-club-90s-heated-rivalry-night-18": {
+    "artist-chris-isaak": {
       "local": null,
       "remote": null
     },
@@ -164,11 +160,11 @@
       "local": null,
       "remote": null
     },
-    "artist-destroyer": {
+    "artist-club-90s-heated-rivalry-night-18": {
       "local": null,
       "remote": null
     },
-    "artist-fitz-and-the-tantrums": {
+    "artist-destroyer": {
       "local": null,
       "remote": null
     },
@@ -176,7 +172,7 @@
       "local": null,
       "remote": null
     },
-    "artist-hail-the-sun": {
+    "artist-fitz-and-the-tantrums": {
       "local": null,
       "remote": null
     },
@@ -184,15 +180,19 @@
       "local": null,
       "remote": null
     },
+    "artist-hail-the-sun": {
+      "local": null,
+      "remote": null
+    },
     "artist-i-am-the-avalanche": {
       "local": null,
       "remote": null
     },
-    "artist-matisyahu": {
+    "artist-laurie-berkner": {
       "local": null,
       "remote": null
     },
-    "artist-laurie-berkner": {
+    "artist-matisyahu": {
       "local": null,
       "remote": null
     },
@@ -216,11 +216,11 @@
       "local": null,
       "remote": null
     },
-    "artist-solas": {
+    "artist-sage-francis": {
       "local": null,
       "remote": null
     },
-    "artist-sage-francis": {
+    "artist-solas": {
       "local": null,
       "remote": null
     },
@@ -228,11 +228,11 @@
       "local": null,
       "remote": null
     },
-    "artist-the-devil-makes-three": {
+    "artist-the-boulder-philharmonic": {
       "local": null,
       "remote": null
     },
-    "artist-the-boulder-philharmonic": {
+    "artist-the-devil-makes-three": {
       "local": null,
       "remote": null
     },

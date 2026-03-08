@@ -1,102 +1,111 @@
 import Link from "next/link";
+import FAQBlock from "@/components/FAQBlock";
+import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
+import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
+
+const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
 export const metadata = {
-  title: "Post-Show Pickup Plan (Don’t Get Stranded)",
-  description: "Where to go, what to text, and how to avoid the post-encore chaos window that strands people.",
+  title: "Best Post-Show Pickup Plan at Red Rocks (2026)",
+  description:
+    "How to avoid getting stranded after Red Rocks: meet-point strategy, timing choices, and fallback plans for sold-out nights.",
+  alternates: {
+    canonical: "/guide/show-night-strategy/post-show-pickup-plan",
+  },
 };
 
-export default function Page() {
+export default async function Page() {
+  const faqRows = await getFaqRowsWithGlobal("guide/post-show-pickup-plan.json");
+  const faqJsonLd = buildFaqPageJsonLd(faqRows);
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE}/` },
+      { "@type": "ListItem", position: 2, name: "Guide", item: `${SITE}/guide` },
+      { "@type": "ListItem", position: 3, name: "Show-Night Strategy", item: `${SITE}/guide/show-night-strategy` },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: "Post-Show Pickup Plan",
+        item: `${SITE}/guide/show-night-strategy/post-show-pickup-plan`,
+      },
+    ],
+  };
+
   return (
-    <main className="min-h-screen bg-surface text-white px-6 py-20">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-[11px] font-black uppercase tracking-[0.25em] text-muted">
-          Strategy • Exit
+    <main className="comic-page pt-24 pb-10">
+      <section className="comic-wrap">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+
+        <div className="comic-hero">
+          <div className="comic-kicker">Exit Strategy</div>
+          <h1 className="comic-title">Post-Show Pickup Plan</h1>
+          <p className="comic-copy">
+            Direct answer: decide your meet point and fallback before encore. The stranded window happens when groups make
+            pickup decisions after the crowd is already moving.
+          </p>
         </div>
 
-        <h1 className="mt-3 text-5xl md:text-6xl font-black tracking-tight">
-          Post-Show Pickup Plan (Don’t Get Stranded)
-        </h1>
-
-        <p className="mt-5 text-lg text-soft leading-relaxed">
-          Where to go, what to text, and how to avoid the post-encore chaos window that strands people.
-        </p>
-
-        <div className="mt-5 text-sm text-muted">
-          Last updated: Feb 11, 2026
+        <div className="comic-panel" style={{ marginTop: 16 }}>
+          <div className="comic-tag">Execution Sequence</div>
+          <ol className="comic-copy" style={{ marginTop: 10, paddingLeft: 18 }}>
+            <li>Pick one specific meet point before the show starts.</li>
+            <li>Share one fallback point if service drops.</li>
+            <li>Text the plan before encore starts.</li>
+            <li>Choose now: full encore vs faster exit.</li>
+          </ol>
         </div>
 
-        <div className="mt-10 rounded-3xl border border-soft bg-surface-strong p-6">
-          <h2 className="text-2xl font-black">What actually matters</h2>
-          <ul className="mt-4 space-y-2 text-soft leading-relaxed list-disc pl-5">
-              <li>Decide: speed exit vs full encore. You can’t optimize both.</li>
-              <li>Pick a meet point that’s specific and easy to describe.</li>
-              <li>Text instructions before the encore starts (service can be unreliable).</li>
-              <li>Have a fallback: warm place, backup pickup, or shuttle plan.</li>
-          </ul>
-        </div>
-
-        <div className="mt-10 flex flex-wrap gap-3">
-          <Link href="/find" className="btn-primary">
-            Book Shuttle — $59/pp →
-          </Link>
-          <Link
-            href="/guide/show-night-strategy"
-            className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-soft pill hover:pill-soft transition"
-          >
-            Back to Strategy →
-          </Link>
-        </div>
-
-        <div className="mt-10">
-          <h2 className="text-2xl font-black">Quick FAQ</h2>
-          <div className="mt-4 space-y-3">
-            <details className="rounded-2xl border border-soft bg-surface-strong p-5">
-              <summary className="cursor-pointer font-black">What’s the #1 mistake people make?</summary>
-              <p className="mt-2 text-soft leading-relaxed">Waiting until after encore to decide where to meet.</p>
-            </details>
-            <details className="rounded-2xl border border-soft bg-surface-strong p-5">
-              <summary className="cursor-pointer font-black">What should I text my driver/friends?</summary>
-              <p className="mt-2 text-soft leading-relaxed">A landmark + ETA + backup meet point.</p>
-            </details>
-            <details className="rounded-2xl border border-soft bg-surface-strong p-5">
-              <summary className="cursor-pointer font-black">How long does it take to get out?</summary>
-              <p className="mt-2 text-soft leading-relaxed">Depends on crowd + weather + enforcement. Assume it takes longer on sold-out nights.</p>
-            </details>
+        <div className="comic-panel" style={{ marginTop: 16 }}>
+          <div className="comic-tag">Next Actions</div>
+          <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <Link className="comic-btn comic-btn-primary" href="/find">
+              Book Ride
+            </Link>
+            <Link className="comic-btn comic-btn-secondary" href="/week/red-rocks">
+              Check This Week
+            </Link>
+            <Link className="comic-btn comic-btn-secondary" href="/guide/transportation/shuttle-vs-uber">
+              Shuttle vs Uber
+            </Link>
+            <Link className="comic-btn comic-btn-secondary" href="/guide/logistics/parking-lots">
+              Parking Guide
+            </Link>
           </div>
         </div>
 
+        <div className="comic-grid" style={{ marginTop: 16 }}>
+          <Link href="/guide/show-night-strategy" className="comic-panel block">
+            <div className="comic-tag">Parent</div>
+            <h2 className="comic-h3">Show-Night Strategy</h2>
+            <p className="comic-copy">Parent strategy page for timing, weather pivots, and operations.</p>
+          </Link>
+          <Link href="/venues/red-rocks-amphitheatre" className="comic-panel block">
+            <div className="comic-tag">Venue</div>
+            <h2 className="comic-h3">Red Rocks Venue Page</h2>
+            <p className="comic-copy">Use current show context to tighten pickup timing.</p>
+          </Link>
+          <Link href="/guide/red-rocks-intelligence-hub" className="comic-panel block">
+            <div className="comic-tag">Hub</div>
+            <h2 className="comic-h3">Red Rocks Intelligence Hub</h2>
+            <p className="comic-copy">Broader venue knowledge that supports better exit planning.</p>
+          </Link>
+          <Link href="/venues/mission-ballroom" className="comic-panel block">
+            <div className="comic-tag">Venue</div>
+            <h2 className="comic-h3">Mission Ballroom</h2>
+            <p className="comic-copy">Use the same pre-encore pickup discipline at major indoor rooms.</p>
+          </Link>
+          <Link href="/venues/fiddlers-green-amphitheatre" className="comic-panel block">
+            <div className="comic-tag">Venue</div>
+            <h2 className="comic-h3">Fiddler&apos;s Green</h2>
+            <p className="comic-copy">Apply this exit sequence to sold-out amphitheatre nights.</p>
+          </Link>
+        </div>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-      {
-        "@type": "Question",
-        "name": 'What’s the #1 mistake people make?',
-        "acceptedAnswer": {"@type":"Answer","text": 'Waiting until after encore to decide where to meet.'}
-      },
-      {
-        "@type": "Question",
-        "name": 'What should I text my driver/friends?',
-        "acceptedAnswer": {"@type":"Answer","text": 'A landmark + ETA + backup meet point.'}
-      },
-      {
-        "@type": "Question",
-        "name": 'How long does it take to get out?',
-        "acceptedAnswer": {"@type":"Answer","text": 'Depends on crowd + weather + enforcement. Assume it takes longer on sold-out nights.'}
-      }
-            ],
-          }),
-        }}
-      />
-
-        <footer className="mt-16 pt-10 border-t border-soft text-sm text-muted">
-          This is the authority layer: no fluff, no hype — just show-night reality and what works.
-        </footer>
-      </div>
+        <FAQBlock title="Post-Show Pickup FAQ" rows={faqRows} />
+      </section>
     </main>
   );
 }

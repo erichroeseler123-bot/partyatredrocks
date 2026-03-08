@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T04:04:45.097Z",
+  "generatedAt": "2026-03-08T07:45:52.697Z",
   "year": 2026,
   "events": {
     "fox-theatre-2026-01-31-josh-teed": {
@@ -56,7 +56,7 @@
     }
   },
   "artists": {
-    "artist-josh-teed": {
+    "artist-jigitz": {
       "local": null,
       "remote": null
     },
@@ -64,7 +64,7 @@
       "local": null,
       "remote": null
     },
-    "artist-jigitz": {
+    "artist-josh-teed": {
       "local": null,
       "remote": null
     },
@@ -92,11 +92,11 @@
       "local": null,
       "remote": null
     },
-    "artist-shadowgrass": {
+    "artist-the-barr-brothers": {
       "local": null,
       "remote": null
     },
-    "artist-the-barr-brothers": {
+    "artist-shadowgrass": {
       "local": null,
       "remote": null
     },

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T04:04:45.097Z",
+  "generatedAt": "2026-03-08T07:45:52.697Z",
   "year": 2026,
   "events": {
     "paramount-theatre-2026-01-29-billy-f-gibbons-and-the-bfg-band": {
@@ -22,10 +22,6 @@
       "local": null,
       "remote": null
     },
-    "paramount-theatre-2026-03-22-gregorian": {
-      "local": null,
-      "remote": null
-    },
     "paramount-theatre-2026-03-27-yolanda-del-rio": {
       "local": null,
       "remote": null
@@ -35,6 +31,10 @@
       "remote": null
     },
     "paramount-theatre-2026-04-03-firefall-with-hazel-miller": {
+      "local": null,
+      "remote": null
+    },
+    "paramount-theatre-2026-03-22-gregorian": {
       "local": null,
       "remote": null
     },
@@ -62,11 +62,11 @@
       "local": null,
       "remote": null
     },
-    "paramount-theatre-2026-05-16-eric-johnson": {
+    "paramount-theatre-2026-05-01-stayin-alive-bee-gees-tribute": {
       "local": null,
       "remote": null
     },
-    "paramount-theatre-2026-05-01-stayin-alive-bee-gees-tribute": {
+    "paramount-theatre-2026-05-16-eric-johnson": {
       "local": null,
       "remote": null
     },
@@ -128,11 +128,11 @@
       "local": null,
       "remote": null
     },
-    "artist-industria-del-amor": {
+    "artist-humbe": {
       "local": null,
       "remote": null
     },
-    "artist-humbe": {
+    "artist-industria-del-amor": {
       "local": null,
       "remote": null
     },
@@ -156,11 +156,11 @@
       "local": null,
       "remote": null
     },
-    "artist-vitamin-string-quartet": {
+    "artist-tommy-emmanuel": {
       "local": null,
       "remote": null
     },
-    "artist-tommy-emmanuel": {
+    "artist-vitamin-string-quartet": {
       "local": null,
       "remote": null
     },

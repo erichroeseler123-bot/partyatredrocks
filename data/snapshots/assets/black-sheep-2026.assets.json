@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T04:04:45.097Z",
+  "generatedAt": "2026-03-08T07:45:52.697Z",
   "year": 2026,
   "events": {
     "black-sheep-2026-02-23-rivers-of-nihil": {
@@ -116,6 +116,10 @@
       "local": null,
       "remote": null
     },
+    "artist-buckethead": {
+      "local": null,
+      "remote": null
+    },
     "artist-cognitive": {
       "local": null,
       "remote": null
@@ -124,7 +128,7 @@
       "local": null,
       "remote": null
     },
-    "artist-buckethead": {
+    "artist-cryptosis": {
       "local": null,
       "remote": null
     },
@@ -132,11 +136,11 @@
       "local": null,
       "remote": null
     },
-    "artist-cryptosis": {
+    "artist-devotchka-aa-tribute-to-the-music-of-little-miss-sunshinea": {
       "local": null,
       "remote": null
     },
-    "artist-devotchka-aa-tribute-to-the-music-of-little-miss-sunshinea": {
+    "artist-enterprise-earth": {
       "local": null,
       "remote": null
     },
@@ -148,10 +152,6 @@
       "local": null,
       "remote": null
     },
-    "artist-i-see-stars": {
-      "local": null,
-      "remote": null
-    },
     "artist-magnolia-park": {
       "local": null,
       "remote": null
@@ -160,7 +160,7 @@
       "local": null,
       "remote": null
     },
-    "artist-enterprise-earth": {
+    "artist-i-see-stars": {
       "local": null,
       "remote": null
     },
@@ -168,19 +168,19 @@
       "local": null,
       "remote": null
     },
-    "artist-nekrogoblikon": {
-      "local": null,
-      "remote": null
-    },
     "artist-obscura": {
       "local": null,
       "remote": null
     },
-    "artist-prayers": {
+    "artist-nekrogoblikon": {
       "local": null,
       "remote": null
     },
     "artist-powerman-5000": {
+      "local": null,
+      "remote": null
+    },
+    "artist-prayers": {
       "local": null,
       "remote": null
     },
@@ -236,11 +236,11 @@
       "local": null,
       "remote": null
     },
-    "artist-unknown-mortal-orchestra": {
+    "artist-undeath": {
       "local": null,
       "remote": null
     },
-    "artist-undeath": {
+    "artist-unknown-mortal-orchestra": {
       "local": null,
       "remote": null
     }

@@ -29,6 +29,15 @@ type VenueRec = {
   postalCode?: string;
 };
 
+type VenueReference = {
+  whatItIs: string;
+  parking: string;
+  pickupDropoff: string;
+  nearby: string[];
+  rideOptions: string;
+  faq: Array<{ q: string; a: string }>;
+};
+
 type VenueCache = {
   generatedAt?: string;
   events: Array<{
@@ -56,6 +65,152 @@ const SITE_KEYWORDS = [
   "concert transportation Denver",
   "party at red rocks",
 ];
+
+const VENUE_REFERENCE_OVERRIDES: Record<string, Partial<VenueReference>> = {
+  "mission-ballroom": {
+    whatItIs:
+      "Mission Ballroom is a large indoor Denver concert room with heavy event-night rideshare pressure and concentrated entry windows.",
+    parking:
+      "Expect paid lots/garages and variable event-night pricing. If you drive, lock in your lot plan early and assume slower outbound movement after sold-out shows.",
+    pickupDropoff:
+      "Use a single, specific meetup point and set it before doors. For groups, pre-assign a fallback point in case cellular service is delayed at close.",
+    nearby: ["RiNo bars and breweries", "Five Points hotels", "Downtown Denver rail/light rail access"],
+    faq: [
+      {
+        q: "How early should I arrive at Mission Ballroom?",
+        a: "Arrive with a buffer for security, ticket scan, and event-night street congestion around the venue.",
+      },
+      {
+        q: "Is rideshare easy after Mission Ballroom shows?",
+        a: "It can compress quickly at close. A clear meetup point and fallback location reduces confusion.",
+      },
+    ],
+  },
+  "fiddlers-green-amphitheatre": {
+    whatItIs:
+      "Fiddler's Green is a high-capacity outdoor amphitheatre in the Greenwood Village corridor with large ingress/egress swings.",
+    parking:
+      "Parking and nearby traffic can bottleneck around show start and finale. Build extra arrival and exit buffer, especially for sold-out nights.",
+    pickupDropoff:
+      "Set your post-show pickup instructions before the encore. Keep one exact meet point and one backup location to avoid post-show drift.",
+    nearby: ["DTC hotels", "Greenwood Village dining", "Belleview transit corridor"],
+    faq: [
+      {
+        q: "What is the biggest mistake at Fiddler's Green?",
+        a: "Waiting until the show ends to coordinate pickup details.",
+      },
+      {
+        q: "Should groups pre-book transportation for Fiddler's Green?",
+        a: "Yes. Pre-booking removes most post-show uncertainty and surge risk.",
+      },
+    ],
+  },
+  "fillmore-auditorium": {
+    whatItIs:
+      "Fillmore Auditorium is a historic Colfax corridor room with dense pre-show arrival windows and fast post-show curb competition.",
+    parking:
+      "Colfax-area lots and nearby garages fill quickly on stacked event nights. If driving, set your exact lot target before departure and expect slower egress after close.",
+    pickupDropoff:
+      "Use one named meetup point off Fillmore's front-door flow and share it with your full group before doors. Keep one backup block in case final-out crowds compress.",
+    nearby: ["Capitol Hill hotels", "East Colfax bars", "16th Street and downtown transit links"],
+    rideOptions:
+      "Shared rides are efficient for standard Fillmore nights; private SUV/van options are better for groups that need tighter timing and single-party control.",
+    faq: [
+      {
+        q: "Is pickup chaotic after Fillmore shows?",
+        a: "It can be if pickup is decided at close on Colfax. Lock your meetup point in before the headliner starts.",
+      },
+      {
+        q: "Should I pre-book transportation to Fillmore?",
+        a: "Yes. Pre-booking removes post-show surge guessing and keeps your group on one exit plan.",
+      },
+    ],
+  },
+  "gothic-theatre": {
+    whatItIs:
+      "Gothic Theatre is a South Broadway anchor venue where event-night curb space is limited and timing discipline matters.",
+    parking:
+      "Street parking around South Broadway and Englewood side streets varies by show size. Build extra arrival time and avoid relying on last-minute circling.",
+    pickupDropoff:
+      "Choose a clear block-level pickup location off South Broadway's busiest curb zone and set a backup point before encore.",
+    nearby: ["South Broadway bars", "Englewood hotels", "light rail + Broadway corridor transit"],
+    rideOptions:
+      "Shared rides work well for Gothic nights with flexible timing; private SUV/van rides reduce uncertainty for coordinated exits.",
+    faq: [
+      {
+        q: "What is the best pickup strategy for Gothic Theatre?",
+        a: "Pre-select a low-friction South Broadway side-street meetup point and send it to everyone before show close.",
+      },
+      {
+        q: "When should we finalize our ride plan for Gothic?",
+        a: "Finalize before doors or at least before encore to avoid post-show drift and split groups.",
+      },
+    ],
+  },
+  "cervantes-masterpiece": {
+    whatItIs:
+      "Cervantes' Masterpiece Ballroom is a multi-room Denver venue where staggered crowd release can create uneven pickup pressure.",
+    parking:
+      "Five Points lot and street conditions shift by lineup and neighboring events. Plan your arrival buffer and avoid improvising parking at the last minute.",
+    pickupDropoff:
+      "Set one designated meetup location and one fallback cross-street, especially for groups splitting between Cervantes and The Other Side.",
+    nearby: ["Five Points nightlife", "RiNo corridor bars", "downtown lodging"],
+    rideOptions:
+      "Shared options fit most Cervantes nights; private rides are strongest when your group needs a hard departure window.",
+    faq: [
+      {
+        q: "Why do groups get split after Cervantes shows?",
+        a: "Different room schedules between Cervantes and The Other Side plus unplanned pickup points cause drift. Use one pre-agreed meetup protocol.",
+      },
+      {
+        q: "Is private transportation better for late Cervantes nights?",
+        a: "For groups prioritizing speed and cohesion, private SUV/van service is usually the cleaner exit.",
+      },
+    ],
+  },
+  "ogden-theatre": {
+    whatItIs:
+      "Ogden Theatre is a Colfax corridor venue with concentrated door times and heavy rideshare competition at close.",
+    parking:
+      "Nearby East Colfax street and paid parking can tighten quickly on sold nights. Plan your lot/garage decision before arriving in the corridor.",
+    pickupDropoff:
+      "Use a single East Colfax meetup block and backup instruction set before the encore to prevent split-party confusion.",
+    nearby: ["Capitol Hill dining", "East Colfax venues", "downtown hotel access"],
+    rideOptions:
+      "Shared rides are efficient for most Ogden showgoers; private rides are ideal for groups that want one vehicle and one timeline.",
+    faq: [
+      {
+        q: "Is post-show rideshare difficult at Ogden Theatre?",
+        a: "It can spike quickly. Pre-booked transportation with a defined meetup point is more reliable.",
+      },
+      {
+        q: "How early should I arrive for Ogden Theatre nights?",
+        a: "Arrive with extra buffer for security line, East Colfax parking friction, and corridor traffic.",
+      },
+    ],
+  },
+  "ball-arena": {
+    whatItIs:
+      "Ball Arena is Denver's major downtown arena where ingress and egress patterns swing dramatically on Nuggets, Avs, and major concert nights.",
+    parking:
+      "Ball Arena lots and downtown garages can bottleneck before and after events. If driving, pre-select your lot and expect phased outbound traffic.",
+    pickupDropoff:
+      "Set exact post-event meetup instructions before the event starts, including a backup point outside peak curb compression near the arena exits.",
+    nearby: ["LoDo hotels", "Union Station rail/transit", "downtown dining and bars"],
+    rideOptions:
+      "Shared options help reduce surge exposure on arena nights; private SUV/van rides are best for larger groups and strict timing needs.",
+    faq: [
+      {
+        q: "What is the biggest transportation risk at Ball Arena?",
+        a: "Waiting until event end to decide pickup. Arena exits compress fast; pre-plan the meetup.",
+      },
+      {
+        q: "Should large groups use private rides for Ball Arena events?",
+        a: "Yes. Private options usually provide cleaner coordination and faster regrouping after high-capacity arena events.",
+      },
+    ],
+  },
+};
 
 function normSlug(s: string) {
   try {
@@ -279,6 +434,12 @@ async function readSnapshotGeneratedAt(year = 2026): Promise<string | null> {
 
 function venueFaqJsonLd(slug: string, v: VenueRec) {
   const name = displayName(slug, v);
+  const ref = getVenueReference(slug, v, name);
+  const overrideFaq = ref.faq.slice(0, 2).map((row) => ({
+    "@type": "Question",
+    name: row.q,
+    acceptedAnswer: { "@type": "Answer", text: row.a },
+  }));
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -319,7 +480,40 @@ function venueFaqJsonLd(slug: string, v: VenueRec) {
             "Yes — private options are available for groups. You’ll see private upgrades during booking if offered for that venue/date.",
         },
       },
+      ...overrideFaq,
     ],
+  };
+}
+
+function getVenueReference(slug: string, v: VenueRec, name: string): VenueReference {
+  const base: VenueReference = {
+    whatItIs: `${name} is a core Front Range music venue with show-night ingress and exit patterns that reward early planning.`,
+    parking:
+      "Parking conditions vary by demand and event type. Plan arrival buffer and avoid deciding your lot strategy at the last minute.",
+    pickupDropoff:
+      "Set one exact pickup point and a fallback point before the show. Send instructions to your group before encore.",
+    nearby: [`${v.city || "Denver"} hotels`, `${v.city || "Denver"} bars`, "Primary transit/arterial corridors"],
+    rideOptions:
+      "Shared shuttles reduce post-show uncertainty; private SUVs/vans are best for groups that need tighter timing and control.",
+    faq: [
+      {
+        q: `What is the best transportation strategy for ${name}?`,
+        a: "Pre-plan arrival and pickup timing. Build a clear meetup protocol before show close.",
+      },
+      {
+        q: `When should I finalize pickup for ${name}?`,
+        a: "Before encore. Last-minute pickup decisions are the most common failure point.",
+      },
+    ],
+  };
+
+  const override = VENUE_REFERENCE_OVERRIDES[slug];
+  if (!override) return base;
+  return {
+    ...base,
+    ...override,
+    nearby: override.nearby ?? base.nearby,
+    faq: override.faq ?? base.faq,
   };
 }
 
@@ -409,6 +603,7 @@ export default async function VenuePage({
   const v = getVenue(slug) ?? {};
   const name = identity.name;
   const city = cityLine(v);
+  const reference = getVenueReference(slug, v, name);
   const dccVenueUrl = `${DCC}/venues/${slug}`;
   const [allEvents, updatedAt] = await Promise.all([
     getEventsCatalog(2026, "all"),
@@ -553,6 +748,42 @@ export default async function VenuePage({
         </div>
       </div>
 
+      {/* VENUE REFERENCE */}
+      <section className="mt-10">
+        <div className="flex items-end justify-between gap-4">
+          <h2 className="text-2xl md:text-3xl font-black">Venue Reference</h2>
+          <div className="text-xs text-white/50">Info-first venue brief</div>
+        </div>
+
+        <div className="mt-6 grid gap-6 md:grid-cols-2">
+          <div className="rounded-3xl border border-soft panel-soft p-6">
+            <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">What It Is</div>
+            <p className="mt-3 text-sm text-white/75">{reference.whatItIs}</p>
+
+            <div className="mt-5 text-[11px] font-black uppercase tracking-[0.22em] text-white/60">Capacity & Area</div>
+            <p className="mt-3 text-sm text-white/75">
+              {v?.capacity ? `Capacity ~${v.capacity.toLocaleString()}. ` : ""}
+              {v?.neighborhood ? `${v.neighborhood} · ` : ""}
+              {city}
+            </p>
+
+            <div className="mt-5 text-[11px] font-black uppercase tracking-[0.22em] text-white/60">Ride Options</div>
+            <p className="mt-3 text-sm text-white/75">{reference.rideOptions}</p>
+          </div>
+
+          <div className="rounded-3xl border border-soft panel-soft p-6">
+            <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">Parking</div>
+            <p className="mt-3 text-sm text-white/75">{reference.parking}</p>
+
+            <div className="mt-5 text-[11px] font-black uppercase tracking-[0.22em] text-white/60">Pickup / Dropoff</div>
+            <p className="mt-3 text-sm text-white/75">{reference.pickupDropoff}</p>
+
+            <div className="mt-5 text-[11px] font-black uppercase tracking-[0.22em] text-white/60">Nearby</div>
+            <p className="mt-3 text-sm text-white/75">{reference.nearby.join(" · ")}</p>
+          </div>
+        </div>
+      </section>
+
       {/* EVENTS */}
       {events.length > 0 ? (
         <section className="mt-10">
@@ -622,6 +853,18 @@ export default async function VenuePage({
           <span className="font-black">Upcoming at {name}:</span> No upcoming events found in the current snapshot.
         </div>
       )}
+
+      <section className="mt-10 rounded-3xl border border-soft panel-soft p-6">
+        <h2 className="text-2xl font-black">Venue FAQ</h2>
+        <div className="mt-4 space-y-3">
+          {reference.faq.map((row) => (
+            <details key={row.q} className="rounded-2xl border border-soft panel p-4">
+              <summary className="cursor-pointer font-black">{row.q}</summary>
+              <p className="mt-2 text-sm text-white/75">{row.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
       </section>
     </main>
   );

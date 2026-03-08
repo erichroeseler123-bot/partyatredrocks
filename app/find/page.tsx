@@ -117,6 +117,32 @@ export default async function FindPage({
           )}
         </p>
 
+        <section className="comic-panel" style={{ marginTop: 16 }}>
+          <div className="comic-tag">How This Page Works</div>
+          <p className="comic-copy" style={{ marginTop: 8 }}>
+            Use this page to match transportation type to your show night: shared shuttle for predictable return, private
+            SUV/van for tighter schedule control, and larger group options when you need one vehicle for everyone.
+          </p>
+          <p className="comic-copy">
+            Best for: first-time Red Rocks visitors, groups coordinating one pickup plan, and travelers avoiding post-show
+            surge uncertainty.
+          </p>
+          <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <Link className="comic-btn comic-btn-secondary" href="/guide/transportation/shuttle-vs-uber">
+              Shuttle vs Uber
+            </Link>
+            <Link className="comic-btn comic-btn-secondary" href="/guide/show-night-strategy/post-show-pickup-plan">
+              Pickup Plan Guide
+            </Link>
+            <Link className="comic-btn comic-btn-secondary" href="/venues/red-rocks-amphitheatre">
+              Red Rocks Venue Intel
+            </Link>
+            <Link className="comic-btn comic-btn-secondary" href="/week/red-rocks">
+              Red Rocks Weekly Lineup
+            </Link>
+          </div>
+        </section>
+
         <RezdySessionPicker initialDate={date} initialQty={Number(qty) || 2} />
 
         {show ? (
@@ -191,6 +217,25 @@ export default async function FindPage({
             </Link>
           </div>
         </div>
+
+        <section className="comic-panel" style={{ marginTop: 16 }}>
+          <div className="comic-tag">Venue Context</div>
+          <p className="comic-copy" style={{ marginTop: 8 }}>
+            Planning beyond Red Rocks? Use venue pages for Mission Ballroom and Fiddler&apos;s Green to align your pickup
+            timing and post-show meetup expectations before booking.
+          </p>
+          <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <Link className="comic-btn comic-btn-secondary" href="/venues/mission-ballroom">
+              Mission Ballroom
+            </Link>
+            <Link className="comic-btn comic-btn-secondary" href="/venues/fiddlers-green-amphitheatre">
+              Fiddler&apos;s Green
+            </Link>
+            <Link className="comic-btn comic-btn-secondary" href="/guide/red-rocks-intelligence-hub">
+              Red Rocks Intelligence Hub
+            </Link>
+          </div>
+        </section>
 
         <div className="comic-mobile-cta">
           <Link className="comic-btn comic-btn-primary" href={href("/shuttles")}>

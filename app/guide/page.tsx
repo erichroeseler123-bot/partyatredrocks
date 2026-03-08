@@ -37,6 +37,12 @@ const featured: Card[] = [
     kicker: "Core",
   },
   {
+    title: "Denver Concert Transportation",
+    desc: "Broad non-Red-Rocks hub connecting major venues, ride types, and booking flow.",
+    href: "/guide/denver-concert-transportation",
+    kicker: "Hub",
+  },
+  {
     title: "Parking Reality",
     desc: "Lot strategy, walking costs, and exit flow tradeoffs.",
     href: "/guide/parking",

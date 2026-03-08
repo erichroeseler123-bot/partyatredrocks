@@ -8,6 +8,13 @@ export type DisplayEvent = {
   url?: string;
   image: string;
   performerName?: string;
+  thumbnail?: string;
+  weather?: {
+    highF: number;
+    lowF: number;
+    precipChance?: number;
+  };
+  setlistPreview?: string[];
   bookHref: string;
 };
 
@@ -22,9 +29,10 @@ function resolveEventImage(event: NormalizedEvent, assets?: RedRocksAssetsSnapsh
 
 export function toDisplayEvent(
   event: NormalizedEvent,
-  opts?: { assets?: RedRocksAssetsSnapshot | null }
+  opts?: { assets?: RedRocksAssetsSnapshot | null; artistThumbnails?: Record<string, string> }
 ): DisplayEvent {
   const eventId = event.sourceId ?? event.id;
+  const artistKey = (event.artistNames[0] ?? "").trim().toLowerCase();
   return {
     id: eventId,
     title: event.name,
@@ -32,6 +40,7 @@ export function toDisplayEvent(
     url: event.ticketUrl ?? undefined,
     image: resolveEventImage(event, opts?.assets),
     performerName: event.artistNames[0] ?? undefined,
+    thumbnail: artistKey ? opts?.artistThumbnails?.[artistKey] : undefined,
     bookHref: `/book?venue=red-rocks-amphitheatre&seatgeek_event=${encodeURIComponent(eventId)}`,
   };
 }

@@ -1,0 +1,17 @@
+[
+  {
+    "id": "pickup-biggest-mistake",
+    "question": "What is the biggest post-show pickup mistake?",
+    "answer": "Waiting until the encore ends to decide the meet point. Make the plan before the show and send it to everyone in advance."
+  },
+  {
+    "id": "what-to-text-before-encore",
+    "question": "What should I text my group before encore?",
+    "answer": "Share one exact meet point, one fallback point, and your expected exit timing so everyone follows the same plan."
+  },
+  {
+    "id": "how-long-exit-takes",
+    "question": "How long does it take to exit after a Red Rocks show?",
+    "answer": "It varies by crowd size, weather, and lot conditions. Sold-out nights usually take longer than expected, so plan buffer time."
+  }
+]

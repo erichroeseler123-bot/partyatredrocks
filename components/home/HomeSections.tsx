@@ -119,11 +119,11 @@ export default function HomeSections({
           </Link>
         </div>
 
-        <div className="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-5 -mx-1 flex gap-4 overflow-x-auto px-1 pb-2 snap-x snap-mandatory md:mx-0 md:grid md:gap-5 md:overflow-visible md:px-0 md:pb-0 md:snap-none md:grid-cols-2 lg:grid-cols-3">
           {(events ?? []).slice(0, 6).map((e) => (
             <div
               key={e.id}
-              className="rounded-3xl border border-soft panel p-6 hover:bg-surface/40 transition"
+              className="min-w-[84%] snap-start rounded-3xl border border-soft panel p-6 hover:bg-surface/40 transition md:min-w-0"
             >
               <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">
                 {new Date(e.datetime_local).toLocaleString("en-US", {
@@ -151,7 +151,7 @@ export default function HomeSections({
           ))}
 
           {(events ?? []).length === 0 ? (
-            <div className="rounded-3xl border border-soft panel p-6 text-white/70">
+            <div className="min-w-[84%] snap-start rounded-3xl border border-soft panel p-6 text-white/70 md:min-w-0">
               No events loaded yet. Wire your events feed into the homepage preview.
             </div>
           ) : null}
@@ -237,9 +237,9 @@ export default function HomeSections({
         <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {[
             ["Parking Reality", "/guide/parking-reality"],
-            ["Sheraton Pickup", "/guide/sheraton-pickup"],
-            ["Post-Encore Strategy", "/guide/post-encore-strategy"],
-            ["Bag Policy 2026", "/guide/bag-policy-2026"],
+            ["Sheraton Pickup", "/guide/local/denver-pickups"],
+            ["Post-Encore Strategy", "/guide/show-night-strategy/post-show-pickup-plan"],
+            ["Bag Policy 2026", "/guide/logistics/bag-policy"],
           ].map(([label, href]) => (
             <Link
               key={href}

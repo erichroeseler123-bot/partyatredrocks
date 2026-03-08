@@ -1,0 +1,17 @@
+[
+  {
+    "id": "rideshare-post-show-risk",
+    "question": "Why does rideshare get harder after Red Rocks shows?",
+    "answer": "Demand spikes at the same time while pickup movement is constrained, which creates delays, surge pricing, and inconsistent match timing."
+  },
+  {
+    "id": "shuttle-value",
+    "question": "When is a shuttle the better option?",
+    "answer": "Shuttle is usually better when your top priority is a predictable return plan and lower post-show uncertainty."
+  },
+  {
+    "id": "group-choice",
+    "question": "What is best for groups: shuttle, Uber, or private vehicle?",
+    "answer": "Shared shuttle fits budget-focused groups, while private vehicles are better when your group wants tighter timing control and comfort."
+  }
+]

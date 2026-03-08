@@ -33,6 +33,32 @@ export default function EventCard({
       </div>
       <h2 className="comic-h3">{event.title}</h2>
       <p className="comic-copy">{event.performerName ? `Headliner: ${event.performerName}` : "Headliner info pending"}</p>
+
+      {event.thumbnail ? (
+        <div className="mt-2 flex items-center gap-2">
+          <img
+            src={event.thumbnail}
+            alt={`${event.performerName || "Artist"} thumbnail`}
+            className="h-8 w-8 rounded-full border border-white/20 object-cover"
+            loading="lazy"
+          />
+          <span className="text-xs text-white/75">Artist thumbnail</span>
+        </div>
+      ) : null}
+
+      {event.weather ? (
+        <p className="comic-copy" style={{ marginTop: 8 }}>
+          Weather (next 7 days): {event.weather.highF}/{event.weather.lowF}F
+          {typeof event.weather.precipChance === "number" ? ` • ${event.weather.precipChance}% precip` : ""}
+        </p>
+      ) : null}
+
+      {event.setlistPreview && event.setlistPreview.length > 0 ? (
+        <p className="comic-copy" style={{ marginTop: 6 }}>
+          Recent setlist: {event.setlistPreview.join(" • ")}
+        </p>
+      ) : null}
+
       <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
         {showBookRide ? (
           <Link className="comic-btn comic-btn-primary" href={event.bookHref}>
