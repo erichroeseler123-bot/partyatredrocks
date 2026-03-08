@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "generatedAt": "2026-03-08T04:04:45.097Z",
   "year": 2026,
   "events": {
     "gothic-theatre-2026-01-24-glaive-16": {
@@ -144,10 +144,6 @@
       "local": null,
       "remote": null
     },
-    "artist-bayli-16": {
-      "local": null,
-      "remote": null
-    },
     "artist-benee": {
       "local": null,
       "remote": null
@@ -160,15 +156,19 @@
       "local": null,
       "remote": null
     },
+    "artist-bayli-16": {
+      "local": null,
+      "remote": null
+    },
     "artist-chris-webby-16": {
       "local": null,
       "remote": null
     },
-    "artist-clipping-16": {
+    "artist-clusterfux": {
       "local": null,
       "remote": null
     },
-    "artist-clusterfux": {
+    "artist-clipping-16": {
       "local": null,
       "remote": null
     },
@@ -200,19 +200,19 @@
       "local": null,
       "remote": null
     },
-    "artist-fcukers-16": {
-      "local": null,
-      "remote": null
-    },
     "artist-eyes-of-salt": {
       "local": null,
       "remote": null
     },
-    "artist-fox-lake": {
+    "artist-fcukers-16": {
       "local": null,
       "remote": null
     },
     "artist-glaive-16": {
+      "local": null,
+      "remote": null
+    },
+    "artist-fox-lake": {
       "local": null,
       "remote": null
     },
@@ -232,11 +232,11 @@
       "local": null,
       "remote": null
     },
-    "artist-obed-padilla": {
+    "artist-north-mississippi-allstars-16": {
       "local": null,
       "remote": null
     },
-    "artist-north-mississippi-allstars-16": {
+    "artist-obed-padilla": {
       "local": null,
       "remote": null
     },
@@ -244,11 +244,11 @@
       "local": null,
       "remote": null
     },
-    "artist-rotting-out": {
+    "artist-shakedown-street-grateful-dead-tribute-16": {
       "local": null,
       "remote": null
     },
-    "artist-shakedown-street-grateful-dead-tribute-16": {
+    "artist-rotting-out": {
       "local": null,
       "remote": null
     },
@@ -264,19 +264,19 @@
       "local": null,
       "remote": null
     },
-    "artist-the-moss": {
-      "local": null,
-      "remote": null
-    },
     "artist-the-early-november-and-hellogoodbye-16": {
       "local": null,
       "remote": null
     },
-    "artist-the-new-pornographers": {
+    "artist-the-moss": {
       "local": null,
       "remote": null
     },
     "artist-the-record-company-16": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-new-pornographers": {
       "local": null,
       "remote": null
     },

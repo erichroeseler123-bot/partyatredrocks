@@ -1,16 +1,12 @@
 {
-  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "generatedAt": "2026-03-08T04:04:45.097Z",
   "year": 2026,
   "events": {
-    "ball-arena-2026-02-24-bad-omens-with-beartooth-and-president": {
-      "local": null,
-      "remote": null
-    },
     "ball-arena-2026-02-18-ricardo-arjona": {
       "local": null,
       "remote": null
     },
-    "ball-arena-2026-04-14-twice": {
+    "ball-arena-2026-02-24-bad-omens-with-beartooth-and-president": {
       "local": null,
       "remote": null
     },
@@ -19,6 +15,10 @@
       "remote": null
     },
     "ball-arena-2026-03-09-cardi-b": {
+      "local": null,
+      "remote": null
+    },
+    "ball-arena-2026-04-14-twice": {
       "local": null,
       "remote": null
     },
@@ -54,11 +54,11 @@
       "local": null,
       "remote": null
     },
-    "ball-arena-2026-08-28-chicago-band": {
+    "ball-arena-2026-08-23-avenged-sevenfold-and-good-charlotte": {
       "local": null,
       "remote": null
     },
-    "ball-arena-2026-08-23-avenged-sevenfold-and-good-charlotte": {
+    "ball-arena-2026-08-28-chicago-band": {
       "local": null,
       "remote": null
     },
@@ -84,7 +84,7 @@
       "local": null,
       "remote": null
     },
-    "artist-bad-omens": {
+    "artist-avenged-sevenfold-and-good-charlotte": {
       "local": null,
       "remote": null
     },
@@ -100,11 +100,15 @@
       "local": null,
       "remote": null
     },
-    "artist-avenged-sevenfold-and-good-charlotte": {
+    "artist-christopher-cross": {
       "local": null,
       "remote": null
     },
-    "artist-christopher-cross": {
+    "artist-demi-lovato": {
+      "local": null,
+      "remote": null
+    },
+    "artist-bad-omens": {
       "local": null,
       "remote": null
     },
@@ -112,7 +116,7 @@
       "local": null,
       "remote": null
     },
-    "artist-demi-lovato": {
+    "artist-i-prevail": {
       "local": null,
       "remote": null
     },
@@ -124,7 +128,7 @@
       "local": null,
       "remote": null
     },
-    "artist-i-prevail": {
+    "artist-jennifer-hudson": {
       "local": null,
       "remote": null
     },
@@ -132,7 +136,7 @@
       "local": null,
       "remote": null
     },
-    "artist-jennifer-hudson": {
+    "artist-megan-moroney": {
       "local": null,
       "remote": null
     },
@@ -140,15 +144,7 @@
       "local": null,
       "remote": null
     },
-    "artist-megan-moroney": {
-      "local": null,
-      "remote": null
-    },
     "artist-meghan-trainor": {
-      "local": null,
-      "remote": null
-    },
-    "artist-olivia-dean": {
       "local": null,
       "remote": null
     },
@@ -156,7 +152,7 @@
       "local": null,
       "remote": null
     },
-    "artist-president": {
+    "artist-olivia-dean": {
       "local": null,
       "remote": null
     },
@@ -164,11 +160,15 @@
       "local": null,
       "remote": null
     },
-    "artist-rush": {
+    "artist-president": {
       "local": null,
       "remote": null
     },
     "artist-ryan-trainor": {
+      "local": null,
+      "remote": null
+    },
+    "artist-rush": {
       "local": null,
       "remote": null
     },

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "generatedAt": "2026-03-08T04:04:45.097Z",
   "year": 2026,
   "events": {
     "ogden-theatre-2026-01-24-kompany": {
@@ -144,15 +144,15 @@
     }
   },
   "artists": {
+    "artist-200-stab-wounds": {
+      "local": null,
+      "remote": null
+    },
     "artist-all-them-witches-16": {
       "local": null,
       "remote": null
     },
     "artist-amber-mark": {
-      "local": null,
-      "remote": null
-    },
-    "artist-200-stab-wounds": {
       "local": null,
       "remote": null
     },
@@ -164,11 +164,11 @@
       "local": null,
       "remote": null
     },
-    "artist-badflower-16": {
+    "artist-biohazard": {
       "local": null,
       "remote": null
     },
-    "artist-biohazard": {
+    "artist-badflower-16": {
       "local": null,
       "remote": null
     },
@@ -216,15 +216,15 @@
       "local": null,
       "remote": null
     },
-    "artist-hannah-jadagu": {
-      "local": null,
-      "remote": null
-    },
     "artist-initiate-16": {
       "local": null,
       "remote": null
     },
     "artist-jeff-tweedy-16": {
+      "local": null,
+      "remote": null
+    },
+    "artist-hannah-jadagu": {
       "local": null,
       "remote": null
     },
@@ -236,19 +236,19 @@
       "local": null,
       "remote": null
     },
-    "artist-kompany": {
-      "local": null,
-      "remote": null
-    },
     "artist-magic-city-hippies-16": {
       "local": null,
       "remote": null
     },
-    "artist-microwave": {
+    "artist-kompany": {
       "local": null,
       "remote": null
     },
     "artist-moe": {
+      "local": null,
+      "remote": null
+    },
+    "artist-microwave": {
       "local": null,
       "remote": null
     },
@@ -268,19 +268,19 @@
       "local": null,
       "remote": null
     },
-    "artist-sepultura": {
-      "local": null,
-      "remote": null
-    },
     "artist-sherwyn-16": {
       "local": null,
       "remote": null
     },
-    "artist-snow-tha-product": {
+    "artist-sepultura": {
       "local": null,
       "remote": null
     },
     "artist-the-devil-makes-three-16": {
+      "local": null,
+      "remote": null
+    },
+    "artist-snow-tha-product": {
       "local": null,
       "remote": null
     },

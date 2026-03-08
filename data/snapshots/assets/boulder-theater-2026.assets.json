@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "generatedAt": "2026-03-08T04:04:45.097Z",
   "year": 2026,
   "events": {
     "boulder-theater-2026-01-31-fitz-and-the-tantrums": {
@@ -106,21 +106,21 @@
       "local": null,
       "remote": null
     },
-    "boulder-theater-2026-08-23-laurie-berkner": {
+    "boulder-theater-2026-05-10-alan-doyle": {
       "local": null,
       "remote": null
     },
-    "boulder-theater-2026-05-10-alan-doyle": {
+    "boulder-theater-2026-08-23-laurie-berkner": {
       "local": null,
       "remote": null
     }
   },
   "artists": {
-    "artist-3oh-3": {
+    "artist-afi": {
       "local": null,
       "remote": null
     },
-    "artist-afi": {
+    "artist-3oh-3": {
       "local": null,
       "remote": null
     },
@@ -128,11 +128,11 @@
       "local": null,
       "remote": null
     },
-    "artist-all-them-witches-21": {
+    "artist-atmosphere": {
       "local": null,
       "remote": null
     },
-    "artist-atmosphere": {
+    "artist-all-them-witches-21": {
       "local": null,
       "remote": null
     },
@@ -140,11 +140,11 @@
       "local": null,
       "remote": null
     },
-    "artist-choir-boy": {
+    "artist-chris-isaak": {
       "local": null,
       "remote": null
     },
-    "artist-chris-isaak": {
+    "artist-choir-boy": {
       "local": null,
       "remote": null
     },
@@ -168,15 +168,11 @@
       "local": null,
       "remote": null
     },
-    "artist-emmet-cohen-presents-miles-and-coltrane-at-100": {
-      "local": null,
-      "remote": null
-    },
     "artist-fitz-and-the-tantrums": {
       "local": null,
       "remote": null
     },
-    "artist-foxy-shazam": {
+    "artist-emmet-cohen-presents-miles-and-coltrane-at-100": {
       "local": null,
       "remote": null
     },
@@ -184,15 +180,19 @@
       "local": null,
       "remote": null
     },
+    "artist-foxy-shazam": {
+      "local": null,
+      "remote": null
+    },
     "artist-i-am-the-avalanche": {
       "local": null,
       "remote": null
     },
-    "artist-laurie-berkner": {
+    "artist-matisyahu": {
       "local": null,
       "remote": null
     },
-    "artist-matisyahu": {
+    "artist-laurie-berkner": {
       "local": null,
       "remote": null
     },
@@ -216,11 +216,11 @@
       "local": null,
       "remote": null
     },
-    "artist-sage-francis": {
+    "artist-solas": {
       "local": null,
       "remote": null
     },
-    "artist-solas": {
+    "artist-sage-francis": {
       "local": null,
       "remote": null
     },
@@ -228,11 +228,11 @@
       "local": null,
       "remote": null
     },
-    "artist-the-boulder-philharmonic": {
+    "artist-the-devil-makes-three": {
       "local": null,
       "remote": null
     },
-    "artist-the-devil-makes-three": {
+    "artist-the-boulder-philharmonic": {
       "local": null,
       "remote": null
     },
@@ -244,11 +244,11 @@
       "local": null,
       "remote": null
     },
-    "artist-the-revivalists": {
+    "artist-the-record-company": {
       "local": null,
       "remote": null
     },
-    "artist-the-record-company": {
+    "artist-the-revivalists": {
       "local": null,
       "remote": null
     },

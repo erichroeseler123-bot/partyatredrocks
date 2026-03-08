@@ -5,6 +5,7 @@ import EventCard from "@/components/EventCard";
 import { toDisplayEvent, type DisplayEvent } from "@/lib/events/presentation";
 import FAQBlock from "@/components/FAQBlock";
 import MusicWave from "@/components/MusicWave";
+import RezdySessionPicker from "@/components/RezdySessionPicker";
 import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
 import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
 
@@ -115,6 +116,8 @@ export default async function FindPage({
             <>Choose a ride option below.</>
           )}
         </p>
+
+        <RezdySessionPicker initialDate={date} initialQty={Number(qty) || 2} />
 
         {show ? (
           <div style={{ marginTop: 16 }}>

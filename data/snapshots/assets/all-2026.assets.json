@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "generatedAt": "2026-03-08T04:04:45.097Z",
   "year": 2026,
   "events": {
     "gothic-theatre-2026-01-24-glaive-16": {
@@ -26,7 +26,7 @@
       "local": null,
       "remote": null
     },
-    "paramount-theatre-2026-01-29-billy-f-gibbons-and-the-bfg-band": {
+    "marquis-theater-2026-01-27-mc-davo": {
       "local": null,
       "remote": null
     },
@@ -34,7 +34,7 @@
       "local": null,
       "remote": null
     },
-    "marquis-theater-2026-01-27-mc-davo": {
+    "paramount-theatre-2026-01-29-billy-f-gibbons-and-the-bfg-band": {
       "local": null,
       "remote": null
     },
@@ -90,11 +90,11 @@
       "local": null,
       "remote": null
     },
-    "marquis-theater-2026-02-01-your-arms-are-my-cocoon": {
+    "ogden-theatre-2026-02-01-the-runarounds-16": {
       "local": null,
       "remote": null
     },
-    "ogden-theatre-2026-02-01-the-runarounds-16": {
+    "marquis-theater-2026-02-01-your-arms-are-my-cocoon": {
       "local": null,
       "remote": null
     },
@@ -126,11 +126,11 @@
       "local": null,
       "remote": null
     },
-    "fox-theatre-2026-02-07-the-ocean-blue": {
+    "ophelias-2026-02-06-mark-farina": {
       "local": null,
       "remote": null
     },
-    "ophelias-2026-02-06-mark-farina": {
+    "fox-theatre-2026-02-07-the-ocean-blue": {
       "local": null,
       "remote": null
     },
@@ -1150,11 +1150,11 @@
       "local": null,
       "remote": null
     },
-    "gothic-theatre-2026-04-17-bleed-from-within": {
+    "mission-ballroom-2026-04-17-cory-wong": {
       "local": null,
       "remote": null
     },
-    "mission-ballroom-2026-04-17-cory-wong": {
+    "gothic-theatre-2026-04-17-bleed-from-within": {
       "local": null,
       "remote": null
     },
@@ -1462,11 +1462,11 @@
       "local": null,
       "remote": null
     },
-    "summit-music-hall-2026-05-05-la-dispute": {
+    "gothic-theatre-2026-05-06-emo-orchestra": {
       "local": null,
       "remote": null
     },
-    "gothic-theatre-2026-05-06-emo-orchestra": {
+    "summit-music-hall-2026-05-05-la-dispute": {
       "local": null,
       "remote": null
     },
@@ -1786,11 +1786,11 @@
       "local": null,
       "remote": null
     },
-    "mishawaka-amphitheatre-2026-06-20-tycho": {
+    "rr-2026-06-20-o-a-r": {
       "local": null,
       "remote": null
     },
-    "rr-2026-06-20-o-a-r": {
+    "mishawaka-amphitheatre-2026-06-20-tycho": {
       "local": null,
       "remote": null
     },
@@ -1894,11 +1894,11 @@
       "local": null,
       "remote": null
     },
-    "boulder-theater-2026-08-23-laurie-berkner": {
+    "ball-arena-2026-08-28-chicago-band": {
       "local": null,
       "remote": null
     },
-    "ball-arena-2026-08-28-chicago-band": {
+    "boulder-theater-2026-08-23-laurie-berkner": {
       "local": null,
       "remote": null
     },
@@ -2348,15 +2348,15 @@
       "local": null,
       "remote": null
     },
+    "artist-cabal": {
+      "local": null,
+      "remote": null
+    },
     "artist-butcher-babies": {
       "local": null,
       "remote": null
     },
     "artist-calum-scott": {
-      "local": null,
-      "remote": null
-    },
-    "artist-cabal": {
       "local": null,
       "remote": null
     },
@@ -2432,11 +2432,11 @@
       "local": null,
       "remote": null
     },
-    "artist-chri-tian-gate": {
+    "artist-chris-cohen": {
       "local": null,
       "remote": null
     },
-    "artist-chris-cohen": {
+    "artist-chri-tian-gate": {
       "local": null,
       "remote": null
     },
@@ -2452,11 +2452,11 @@
       "local": null,
       "remote": null
     },
-    "artist-christopher-cross": {
+    "artist-christian-loffler": {
       "local": null,
       "remote": null
     },
-    "artist-christian-loffler": {
+    "artist-christopher-cross": {
       "local": null,
       "remote": null
     },
@@ -2552,11 +2552,11 @@
       "local": null,
       "remote": null
     },
-    "artist-crowder": {
+    "artist-cryptosis": {
       "local": null,
       "remote": null
     },
-    "artist-cryptosis": {
+    "artist-crowder": {
       "local": null,
       "remote": null
     },
@@ -2580,11 +2580,11 @@
       "local": null,
       "remote": null
     },
-    "artist-daisy-grenade": {
+    "artist-dance": {
       "local": null,
       "remote": null
     },
-    "artist-dance": {
+    "artist-daisy-grenade": {
       "local": null,
       "remote": null
     },
@@ -2664,15 +2664,15 @@
       "local": null,
       "remote": null
     },
-    "artist-destroyer": {
-      "local": null,
-      "remote": null
-    },
     "artist-destruction": {
       "local": null,
       "remote": null
     },
     "artist-dev": {
+      "local": null,
+      "remote": null
+    },
+    "artist-destroyer": {
       "local": null,
       "remote": null
     },
@@ -2696,11 +2696,11 @@
       "local": null,
       "remote": null
     },
-    "artist-dj-bonics": {
+    "artist-dodie-clark": {
       "local": null,
       "remote": null
     },
-    "artist-dodie-clark": {
+    "artist-dj-bonics": {
       "local": null,
       "remote": null
     },
@@ -2844,11 +2844,11 @@
       "local": null,
       "remote": null
     },
-    "artist-exodus": {
+    "artist-eyes-of-salt": {
       "local": null,
       "remote": null
     },
-    "artist-eyes-of-salt": {
+    "artist-exodus": {
       "local": null,
       "remote": null
     },
@@ -2992,15 +2992,15 @@
       "local": null,
       "remote": null
     },
-    "artist-goon": {
-      "local": null,
-      "remote": null
-    },
     "artist-gov-t-mule": {
       "local": null,
       "remote": null
     },
     "artist-graham-good-and-the-painters": {
+      "local": null,
+      "remote": null
+    },
+    "artist-goon": {
       "local": null,
       "remote": null
     },
@@ -3164,11 +3164,11 @@
       "local": null,
       "remote": null
     },
-    "artist-jason-isbell-and-the-400-unit-16": {
+    "artist-jason-isbell-and-the-400-unit": {
       "local": null,
       "remote": null
     },
-    "artist-jason-isbell-and-the-400-unit": {
+    "artist-jason-isbell-and-the-400-unit-16": {
       "local": null,
       "remote": null
     },
@@ -3264,11 +3264,11 @@
       "local": null,
       "remote": null
     },
-    "artist-kaarija": {
+    "artist-jungle-bobby": {
       "local": null,
       "remote": null
     },
-    "artist-jungle-bobby": {
+    "artist-kaarija": {
       "local": null,
       "remote": null
     },
@@ -3368,11 +3368,11 @@
       "local": null,
       "remote": null
     },
-    "artist-lauv": {
+    "artist-left-to-suffer": {
       "local": null,
       "remote": null
     },
-    "artist-left-to-suffer": {
+    "artist-lauv": {
       "local": null,
       "remote": null
     },
@@ -3624,6 +3624,10 @@
       "local": null,
       "remote": null
     },
+    "artist-nathan-evans-and-the-saint-phnx-band": {
+      "local": null,
+      "remote": null
+    },
     "artist-neko-case": {
       "local": null,
       "remote": null
@@ -3633,10 +3637,6 @@
       "remote": null
     },
     "artist-neon-the-bishop": {
-      "local": null,
-      "remote": null
-    },
-    "artist-nathan-evans-and-the-saint-phnx-band": {
       "local": null,
       "remote": null
     },
@@ -3772,11 +3772,11 @@
       "local": null,
       "remote": null
     },
-    "artist-phantom-planet": {
+    "artist-phil-wickham": {
       "local": null,
       "remote": null
     },
-    "artist-phil-wickham": {
+    "artist-phantom-planet": {
       "local": null,
       "remote": null
     },
@@ -3996,11 +3996,11 @@
       "local": null,
       "remote": null
     },
-    "artist-seven-lions": {
+    "artist-sevendust": {
       "local": null,
       "remote": null
     },
-    "artist-sevendust": {
+    "artist-seven-lions": {
       "local": null,
       "remote": null
     },
@@ -4160,19 +4160,19 @@
       "local": null,
       "remote": null
     },
-    "artist-sticky-fingers": {
-      "local": null,
-      "remote": null
-    },
     "artist-subdocta": {
       "local": null,
       "remote": null
     },
-    "artist-sublime": {
+    "artist-sticky-fingers": {
       "local": null,
       "remote": null
     },
     "artist-subhumans": {
+      "local": null,
+      "remote": null
+    },
+    "artist-sublime": {
       "local": null,
       "remote": null
     },
@@ -4256,11 +4256,11 @@
       "local": null,
       "remote": null
     },
-    "artist-the-browning": {
+    "artist-the-boulder-philharmonic": {
       "local": null,
       "remote": null
     },
-    "artist-the-boulder-philharmonic": {
+    "artist-the-browning": {
       "local": null,
       "remote": null
     },
@@ -4320,11 +4320,11 @@
       "local": null,
       "remote": null
     },
-    "artist-the-high-kings": {
+    "artist-the-hip-abduction": {
       "local": null,
       "remote": null
     },
-    "artist-the-hip-abduction": {
+    "artist-the-high-kings": {
       "local": null,
       "remote": null
     },
@@ -4364,11 +4364,11 @@
       "local": null,
       "remote": null
     },
-    "artist-the-new-pornographers": {
+    "artist-the-ocean-blue": {
       "local": null,
       "remote": null
     },
-    "artist-the-ocean-blue": {
+    "artist-the-new-pornographers": {
       "local": null,
       "remote": null
     },
@@ -4452,11 +4452,11 @@
       "local": null,
       "remote": null
     },
-    "artist-three-days-grace": {
+    "artist-thornhill": {
       "local": null,
       "remote": null
     },
-    "artist-thornhill": {
+    "artist-three-days-grace": {
       "local": null,
       "remote": null
     },
@@ -4476,19 +4476,19 @@
       "local": null,
       "remote": null
     },
-    "artist-tokimonsta": {
-      "local": null,
-      "remote": null
-    },
     "artist-tommy-emmanuel": {
       "local": null,
       "remote": null
     },
-    "artist-tori-kelly": {
+    "artist-tokimonsta": {
       "local": null,
       "remote": null
     },
     "artist-toto": {
+      "local": null,
+      "remote": null
+    },
+    "artist-tori-kelly": {
       "local": null,
       "remote": null
     },
@@ -4712,11 +4712,11 @@
       "local": null,
       "remote": null
     },
-    "artist-yolanda-del-rio": {
+    "artist-your-arms-are-my-cocoon": {
       "local": null,
       "remote": null
     },
-    "artist-your-arms-are-my-cocoon": {
+    "artist-yolanda-del-rio": {
       "local": null,
       "remote": null
     },
@@ -4736,11 +4736,11 @@
       "local": null,
       "remote": null
     },
-    "artist-zoh-amba-16": {
+    "artist-zingara-and-level-up": {
       "local": null,
       "remote": null
     },
-    "artist-zingara-and-level-up": {
+    "artist-zoh-amba-16": {
       "local": null,
       "remote": null
     }

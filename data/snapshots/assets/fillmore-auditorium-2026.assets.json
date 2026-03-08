@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "generatedAt": "2026-03-08T04:04:45.097Z",
   "year": 2026,
   "events": {
     "fillmore-auditorium-2026-01-29-aleman-and-gera-mx": {
@@ -26,15 +26,15 @@
       "local": null,
       "remote": null
     },
+    "fillmore-auditorium-2026-03-14-nothing-more-with-catch-your-breath-archers-and-doobie": {
+      "local": null,
+      "remote": null
+    },
     "fillmore-auditorium-2026-03-18-mariah-the-scientist": {
       "local": null,
       "remote": null
     },
     "fillmore-auditorium-2026-03-21-boys-like-girls-with-idkhow-and-arrows-in-action": {
-      "local": null,
-      "remote": null
-    },
-    "fillmore-auditorium-2026-03-14-nothing-more-with-catch-your-breath-archers-and-doobie": {
       "local": null,
       "remote": null
     },
@@ -160,11 +160,11 @@
       "local": null,
       "remote": null
     },
-    "artist-james": {
+    "artist-jade": {
       "local": null,
       "remote": null
     },
-    "artist-jade": {
+    "artist-james": {
       "local": null,
       "remote": null
     },
@@ -204,19 +204,19 @@
       "local": null,
       "remote": null
     },
-    "artist-miguel": {
-      "local": null,
-      "remote": null
-    },
     "artist-melvin-seals-and-jgb": {
       "local": null,
       "remote": null
     },
-    "artist-militarie-gun": {
+    "artist-miguel": {
       "local": null,
       "remote": null
     },
     "artist-nothing": {
+      "local": null,
+      "remote": null
+    },
+    "artist-militarie-gun": {
       "local": null,
       "remote": null
     },

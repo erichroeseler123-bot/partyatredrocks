@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "generatedAt": "2026-03-08T04:04:45.097Z",
   "year": 2026,
   "events": {
     "mission-ballroom-2026-01-24-kitchen-dwellers-with-mountain-grass-unit-16": {
@@ -54,11 +54,11 @@
       "local": null,
       "remote": null
     },
-    "mission-ballroom-2026-03-12-ole-60-with-gabriella-rose": {
+    "mission-ballroom-2026-03-06-black-label-society-with-zakk-sabbath-and-dark-chapel": {
       "local": null,
       "remote": null
     },
-    "mission-ballroom-2026-03-06-black-label-society-with-zakk-sabbath-and-dark-chapel": {
+    "mission-ballroom-2026-03-12-ole-60-with-gabriella-rose": {
       "local": null,
       "remote": null
     },
@@ -86,11 +86,11 @@
       "local": null,
       "remote": null
     },
-    "mission-ballroom-2026-03-28-ashnikko": {
+    "mission-ballroom-2026-04-07-lany": {
       "local": null,
       "remote": null
     },
-    "mission-ballroom-2026-04-07-lany": {
+    "mission-ballroom-2026-03-28-ashnikko": {
       "local": null,
       "remote": null
     },
@@ -216,11 +216,11 @@
       "local": null,
       "remote": null
     },
-    "artist-cross-pollination": {
+    "artist-dark-chapel": {
       "local": null,
       "remote": null
     },
-    "artist-dark-chapel": {
+    "artist-cross-pollination": {
       "local": null,
       "remote": null
     },
@@ -232,11 +232,11 @@
       "local": null,
       "remote": null
     },
-    "artist-dropkick-murphys": {
+    "artist-echo-and-the-bunnymen": {
       "local": null,
       "remote": null
     },
-    "artist-echo-and-the-bunnymen": {
+    "artist-dropkick-murphys": {
       "local": null,
       "remote": null
     },
@@ -328,11 +328,11 @@
       "local": null,
       "remote": null
     },
-    "artist-ray-volpe": {
+    "artist-phantom-planet": {
       "local": null,
       "remote": null
     },
-    "artist-phantom-planet": {
+    "artist-ray-volpe": {
       "local": null,
       "remote": null
     },
@@ -372,19 +372,19 @@
       "local": null,
       "remote": null
     },
-    "artist-the-california-honeydrops": {
-      "local": null,
-      "remote": null
-    },
     "artist-the-floozies-16": {
       "local": null,
       "remote": null
     },
-    "artist-the-format": {
+    "artist-the-california-honeydrops": {
       "local": null,
       "remote": null
     },
     "artist-the-last-dinner-party": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-format": {
       "local": null,
       "remote": null
     },
