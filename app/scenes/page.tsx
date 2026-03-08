@@ -56,6 +56,22 @@ export default async function ScenesLandingPage() {
           </div>
         </div>
 
+        <section className="comic-panel mt-6">
+          <div className="comic-tag">Featured Event</div>
+          <h2 className="comic-h3 mt-3">Phish at Folsom Field: Annual Colorado Run</h2>
+          <p className="comic-copy mt-2">
+            Dedicated planning page for the Boulder run: timing, transport demand spikes, and direct booking flow.
+          </p>
+          <div className="mt-4 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 w-full px-4">
+            <Link href="/phish-folsom" className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[220px] text-center">
+              Open Phish Guide
+            </Link>
+            <Link href="/find?venue=ball-arena&qty=2" className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[220px] text-center">
+              Book Shuttle
+            </Link>
+          </div>
+        </section>
+
         <div className="comic-grid" style={{ marginTop: 32 }}>
           {scenes.map((scene) => {
             const featured = allEvents

@@ -110,6 +110,25 @@ export default async function RedRocksHubPage() {
         </div>
 
         <section className="comic-panel" style={{ marginTop: 16 }}>
+          <div className="comic-tag">Featured Jam Event</div>
+          <h2 className="comic-h3" style={{ marginTop: 10 }}>
+            Phish at Folsom Field 2026
+          </h2>
+          <p className="comic-copy" style={{ marginTop: 8 }}>
+            Multi-night Boulder run planning: dates, transport pressure windows, and pre-booked return strategy for
+            jam crowds.
+          </p>
+          <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <Link href="/phish-folsom" className="comic-btn comic-btn-secondary">
+              View Event Guide
+            </Link>
+            <Link href="/find?venue=ball-arena&qty=2" className="comic-btn comic-btn-primary">
+              Book Ride
+            </Link>
+          </div>
+        </section>
+
+        <section className="comic-panel" style={{ marginTop: 16 }}>
           <div className="comic-tag">How To Use This Hub</div>
           <p className="comic-copy" style={{ marginTop: 8 }}>
             Step one is to lock your date and purpose. Are you coming for a specific show, a daytime hike, or both? Step two is
