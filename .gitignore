@@ -28,3 +28,8 @@ __pycache__/
 # OS/editor
 .DS_Store
 tsconfig.tsbuildinfo
+tsconfig.check.tsbuildinfo
+
+# generated data (ignore new/untracked artifacts)
+data/snapshots/
+data/media/
