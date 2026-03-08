@@ -992,6 +992,32 @@ export default async function VenuePage({
         </section>
       ) : null}
 
+      {slug === "1stbank-center" ? (
+        <section className="comic-panel" style={{ marginTop: 32 }}>
+          <div className="comic-tag">1stBank Center Quick Guides</div>
+          <div className="flex flex-wrap gap-3 mt-4 justify-center">
+            <Link href="/venues/1stbank-center/concerts" className="comic-btn comic-btn-secondary">
+              Concert Schedule
+            </Link>
+            <Link href="/venues/1stbank-center/best-time-to-arrive" className="comic-btn comic-btn-secondary">
+              Best Time to Arrive
+            </Link>
+            <Link href="/venues/1stbank-center/parking" className="comic-btn comic-btn-secondary">
+              Parking Strategy
+            </Link>
+            <Link href="/venues/1stbank-center/transportation" className="comic-btn comic-btn-secondary">
+              Transportation & Rides
+            </Link>
+            <Link href="/venues/1stbank-center/map" className="comic-btn comic-btn-secondary">
+              Venue Map
+            </Link>
+          </div>
+          <p className="comic-copy text-center mt-4 opacity-80">
+            Large Broomfield arena with major tours, ample parking, and strong post-show traffic peaks.
+          </p>
+        </section>
+      ) : null}
+
       {slug === "gothic-theatre" ? (
         <section className="comic-panel" style={{ marginTop: 32 }}>
           <div className="comic-tag">Gothic Theatre Quick Guides</div>

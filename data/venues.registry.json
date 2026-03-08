@@ -1,25 +1,122 @@
 [
-  { "key": "redrocks", "slug": "red-rocks-amphitheatre", "name": "Red Rocks Amphitheatre" },
-  { "key": "mission-ballroom", "slug": "mission-ballroom", "name": "Mission Ballroom" },
-  { "key": "gothic-theatre", "slug": "gothic-theatre", "name": "Gothic Theatre" },
-  { "key": "fillmore-auditorium", "slug": "fillmore-auditorium", "name": "Fillmore Auditorium" },
-  { "key": "ball-arena", "slug": "ball-arena", "name": "Ball Arena" },
-  { "key": "black-sheep", "slug": "black-sheep", "name": "Black Sheep" },
-  { "key": "bluebird-theater", "slug": "bluebird-theater", "name": "Bluebird Theater" },
-  { "key": "boulder-theater", "slug": "boulder-theater", "name": "Boulder Theater" },
-  { "key": "broadmoor-world-arena", "slug": "broadmoor-world-arena", "name": "Broadmoor World Arena" },
-  { "key": "cervantes-masterpiece", "slug": "cervantes-masterpiece", "name": "Cervantes' Masterpiece Ballroom" },
-  { "key": "chautauqua-auditorium", "slug": "chautauqua-auditorium", "name": "Chautauqua Auditorium" },
-  { "key": "fiddlers-green-amphitheatre", "slug": "fiddlers-green-amphitheatre", "name": "Fiddler's Green Amphitheatre" },
-  { "key": "fox-theatre", "slug": "fox-theatre", "name": "Fox Theatre" },
-  { "key": "larimer-lounge", "slug": "larimer-lounge", "name": "Larimer Lounge" },
-  { "key": "marquis-theater", "slug": "marquis-theater", "name": "Marquis Theater" },
-  { "key": "ogden-theatre", "slug": "ogden-theatre", "name": "Ogden Theatre" },
-  { "key": "ophelias", "slug": "ophelias", "name": "Ophelia's Electric Soapbox" },
-  { "key": "paramount-theatre", "slug": "paramount-theatre", "name": "Paramount Theatre" },
-  { "key": "summit-music-hall", "slug": "summit-music-hall", "name": "Summit Music Hall" },
-  { "key": "levitt-pavilion-denver", "slug": "levitt-pavilion-denver", "name": "Levitt Pavilion Denver" },
-  { "key": "macky-auditorium", "slug": "macky-auditorium", "name": "Macky Auditorium" },
-  { "key": "mishawaka-amphitheatre", "slug": "mishawaka-amphitheatre", "name": "Mishawaka Amphitheatre" },
-  { "key": "ford-amphitheater-colorado-springs", "slug": "ford-amphitheater-colorado-springs", "name": "Ford Amphitheater" }
+  {
+    "key": "redrocks",
+    "slug": "red-rocks-amphitheatre",
+    "name": "Red Rocks Amphitheatre"
+  },
+  {
+    "key": "mission-ballroom",
+    "slug": "mission-ballroom",
+    "name": "Mission Ballroom"
+  },
+  {
+    "key": "gothic-theatre",
+    "slug": "gothic-theatre",
+    "name": "Gothic Theatre"
+  },
+  {
+    "key": "fillmore-auditorium",
+    "slug": "fillmore-auditorium",
+    "name": "Fillmore Auditorium"
+  },
+  {
+    "key": "ball-arena",
+    "slug": "ball-arena",
+    "name": "Ball Arena"
+  },
+  {
+    "key": "black-sheep",
+    "slug": "black-sheep",
+    "name": "Black Sheep"
+  },
+  {
+    "key": "bluebird-theater",
+    "slug": "bluebird-theater",
+    "name": "Bluebird Theater"
+  },
+  {
+    "key": "boulder-theater",
+    "slug": "boulder-theater",
+    "name": "Boulder Theater"
+  },
+  {
+    "key": "broadmoor-world-arena",
+    "slug": "broadmoor-world-arena",
+    "name": "Broadmoor World Arena"
+  },
+  {
+    "key": "cervantes-masterpiece",
+    "slug": "cervantes-masterpiece",
+    "name": "Cervantes' Masterpiece Ballroom"
+  },
+  {
+    "key": "chautauqua-auditorium",
+    "slug": "chautauqua-auditorium",
+    "name": "Chautauqua Auditorium"
+  },
+  {
+    "key": "fiddlers-green-amphitheatre",
+    "slug": "fiddlers-green-amphitheatre",
+    "name": "Fiddler's Green Amphitheatre"
+  },
+  {
+    "key": "fox-theatre",
+    "slug": "fox-theatre",
+    "name": "Fox Theatre"
+  },
+  {
+    "key": "larimer-lounge",
+    "slug": "larimer-lounge",
+    "name": "Larimer Lounge"
+  },
+  {
+    "key": "marquis-theater",
+    "slug": "marquis-theater",
+    "name": "Marquis Theater"
+  },
+  {
+    "key": "ogden-theatre",
+    "slug": "ogden-theatre",
+    "name": "Ogden Theatre"
+  },
+  {
+    "key": "ophelias",
+    "slug": "ophelias",
+    "name": "Ophelia's Electric Soapbox"
+  },
+  {
+    "key": "paramount-theatre",
+    "slug": "paramount-theatre",
+    "name": "Paramount Theatre"
+  },
+  {
+    "key": "summit-music-hall",
+    "slug": "summit-music-hall",
+    "name": "Summit Music Hall"
+  },
+  {
+    "key": "levitt-pavilion-denver",
+    "slug": "levitt-pavilion-denver",
+    "name": "Levitt Pavilion Denver"
+  },
+  {
+    "key": "macky-auditorium",
+    "slug": "macky-auditorium",
+    "name": "Macky Auditorium"
+  },
+  {
+    "key": "mishawaka-amphitheatre",
+    "slug": "mishawaka-amphitheatre",
+    "name": "Mishawaka Amphitheatre"
+  },
+  {
+    "key": "ford-amphitheater-colorado-springs",
+    "slug": "ford-amphitheater-colorado-springs",
+    "name": "Ford Amphitheater"
+  },
+  {
+    "key": "1stbank-center",
+    "slug": "1stbank-center",
+    "name": "1stBank Center"
+  }
 ]

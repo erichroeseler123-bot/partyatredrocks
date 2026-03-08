@@ -81,6 +81,10 @@ export async function GET() {
     { loc: `${base}/venues/levitt-pavilion-denver/concerts/june`, lastmod: now, changefreq: "weekly", priority: 0.7 },
     { loc: `${base}/venues/levitt-pavilion-denver/concerts/july`, lastmod: now, changefreq: "weekly", priority: 0.7 },
     { loc: `${base}/venues/levitt-pavilion-denver/concerts/august`, lastmod: now, changefreq: "weekly", priority: 0.7 },
+    { loc: `${base}/venues/1stbank-center/concerts`, lastmod: now, changefreq: "daily", priority: 0.8 },
+    { loc: `${base}/venues/1stbank-center/concerts/june`, lastmod: now, changefreq: "weekly", priority: 0.7 },
+    { loc: `${base}/venues/1stbank-center/concerts/july`, lastmod: now, changefreq: "weekly", priority: 0.7 },
+    { loc: `${base}/venues/1stbank-center/concerts/august`, lastmod: now, changefreq: "weekly", priority: 0.7 },
 
     // scenes (keep if these routes exist)
     { loc: `${base}/scene/jam`, lastmod: now, changefreq: "hourly", priority: 0.8 },

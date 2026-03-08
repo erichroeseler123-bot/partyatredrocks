@@ -7,6 +7,7 @@ export const VENUES = [
   { name: "Bluebird Theater", slug: "bluebird-theater", id: "423" },
   { name: "Gothic Theatre", slug: "gothic-theatre", id: "1218" },
   { name: "Summit Denver", slug: "summit-denver", id: "14757" },
+  { name: "1stBank Center", slug: "1stbank-center", id: "2085" },
   { name: "Cervantes' Masterpiece", slug: "cervantes-masterpiece", id: "10094" },
   { name: "Dillon Amphitheater", slug: "dillon-amphitheater", id: "341857" },
   { name: "Gerald R. Ford Amphitheater", slug: "vail-amp", id: "2795" }, 

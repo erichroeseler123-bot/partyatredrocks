@@ -246,5 +246,15 @@
     "featured": true,
     "seatgeekSlug": "black-sheep",
     "seatgeekVenueId": 763
+  },
+  "1stbank-center": {
+    "slug": "1stbank-center",
+    "name": "1stBank Center",
+    "city": "Broomfield",
+    "state": "CO",
+    "region": "denver",
+    "kind": "arena",
+    "capacity": 6500,
+    "featured": true
   }
 }
