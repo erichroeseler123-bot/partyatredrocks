@@ -33,6 +33,8 @@ export const DISPLAY = {
       indie: "/images/scenes/indie.jpg",
       country: "/images/scenes/country.jpg",
       reggae: "/images/scenes/reggae.jpg",
+      punk: "/images/scenes/punk.jpg",
+      latin: "/images/scenes/latin.jpg",
     },
 
     // venue images keyed by venue slug
@@ -101,6 +103,8 @@ export const DISPLAY = {
       { key: "indie", label: "Indie", href: "/scene/indie" },
       { key: "country", label: "Country", href: "/scene/country" },
       { key: "reggae", label: "Reggae", href: "/scene/reggae" },
+      { key: "punk", label: "Punk", href: "/scene/punk" },
+      { key: "latin", label: "Latin", href: "/scene/latin" },
     ],
   },
 } as const;

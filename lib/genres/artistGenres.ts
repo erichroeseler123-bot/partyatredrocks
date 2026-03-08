@@ -22,6 +22,16 @@ const ARTIST_GENRE_TAGS: Record<string, string[]> = {
   "thy art is murder": ["metal", "deathcore"],
   sepultura: ["metal", "heavy"],
   melvins: ["metal", "heavy", "rock"],
+  "knuckle puck": ["punk", "pop-punk", "emo"],
+  "hot mulligan": ["punk", "pop-punk", "emo"],
+  "origami angel": ["punk", "emo"],
+  "spanish love songs": ["punk", "emo"],
+  "bad bunny": ["latin", "reggaeton"],
+  "karol g": ["latin", "reggaeton"],
+  "j balvin": ["latin", "reggaeton"],
+  shakira: ["latin", "latin-pop"],
+  ozuna: ["latin", "reggaeton"],
+  feid: ["latin", "reggaeton"],
 };
 
 const GENRE_KEYWORDS: Record<string, string[]> = {
@@ -33,10 +43,14 @@ const GENRE_KEYWORDS: Record<string, string[]> = {
   indie: ["indie", "alternative", "post-punk", "rock"],
   country: ["country", "red dirt", "outlaw country", "americana"],
   reggae: ["reggae", "dub", "world", "afrobeat"],
+  punk: ["punk", "post-punk", "hardcore", "emo", "pop punk", "pop-punk", "skate punk"],
+  latin: ["latin", "reggaeton", "salsa", "cumbia", "bachata", "tropical", "latin pop", "latin-pop"],
 };
 
 const SCENE_ALIASES: Record<string, string[]> = {
   hiphop: ["hip-hop", "hip hop", "rap"],
+  punk: ["post-punk", "hardcore", "emo"],
+  latin: ["reggaeton", "salsa"],
 };
 
 const VENUE_HINTS = [
