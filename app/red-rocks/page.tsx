@@ -21,6 +21,7 @@ const clusterLinks = [
   { href: "/red-rocks/trading-post-trail", tag: "Trail Focus", title: "Trading Post Trail", copy: "A practical route profile with pacing notes." },
   { href: "/red-rocks/geology", tag: "Geology", title: "Why the Rocks Are Red", copy: "Fountain Formation and Front Range uplift context." },
   { href: "/red-rocks/wildlife", tag: "Wildlife", title: "Wildlife Guide", copy: "What you may see and how to observe safely." },
+  { href: "/red-rocks/best-time-to-arrive", tag: "Timing", title: "Best Time to Arrive", copy: "Arrival windows by lot, stairs, and show-night flow." },
   { href: "/red-rocks/camping-nearby", tag: "Camping", title: "Camping Nearby", copy: "Where to stay and how to separate lodging from transport." },
   { href: "/red-rocks/transportation", tag: "Transportation", title: "How To Get To Red Rocks", copy: "Ride planning and post-show pickup logic." },
   { href: "/red-rocks/map", tag: "Interactive", title: "Red Rocks Map", copy: "Visual layer for trails, seating, geology, parking, and pickup points." },

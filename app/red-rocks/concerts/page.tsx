@@ -92,7 +92,7 @@ export default async function RedRocksConcertsPage() {
                     <p className="comic-copy" style={{ marginTop: 6 }}>
                       {event.artistNames.map((name, idx) => (
                         <span key={`${event.id}-${name}`}>
-                          <Link href={`/artists/${encodeURIComponent(slugify(name))}`} className="underline">
+                          <Link href={`/artists/${encodeURIComponent(slugify(name))}`} className="underline text-white/90 hover:text-white">
                             {name}
                           </Link>
                           {idx < event.artistNames.length - 1 ? ", " : ""}

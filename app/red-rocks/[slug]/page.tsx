@@ -375,6 +375,9 @@ export default async function RedRocksAuthorityDetailPage({ params }: Props) {
                 <Link href="/red-rocks/map/best-seats" className="comic-btn comic-btn-secondary">
                   Best Seats Marker
                 </Link>
+                <Link href="/red-rocks/best-time-to-arrive" className="comic-btn comic-btn-secondary">
+                  Best Time to Arrive
+                </Link>
                 <Link href="/red-rocks/parking" className="comic-btn comic-btn-secondary">
                   Parking Strategy
                 </Link>
