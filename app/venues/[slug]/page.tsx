@@ -843,6 +843,9 @@ export default async function VenuePage({
         <section className="comic-panel" style={{ marginTop: 32 }}>
           <div className="comic-tag">Ogden Theatre Quick Guides</div>
           <div className="flex flex-wrap gap-3 mt-4 justify-center">
+            <Link href="/venues/ogden-theatre/concerts" className="comic-btn comic-btn-secondary">
+              Concert Schedule
+            </Link>
             <Link href="/venues/ogden-theatre/best-time-to-arrive" className="comic-btn comic-btn-secondary">
               Best Time to Arrive
             </Link>

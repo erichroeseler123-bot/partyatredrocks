@@ -58,6 +58,7 @@ export async function GET() {
     { loc: `${base}/red-rocks/geology`, lastmod: now, changefreq: "weekly", priority: 0.7 },
     { loc: `${base}/red-rocks/wildlife`, lastmod: now, changefreq: "weekly", priority: 0.7 },
     { loc: `${base}/red-rocks/camping-nearby`, lastmod: now, changefreq: "weekly", priority: 0.7 },
+    { loc: `${base}/venues/ogden-theatre/concerts`, lastmod: now, changefreq: "daily", priority: 0.8 },
 
     // scenes (keep if these routes exist)
     { loc: `${base}/scene/jam`, lastmod: now, changefreq: "hourly", priority: 0.8 },
