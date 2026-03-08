@@ -111,6 +111,12 @@ export async function GET() {
       priority: 0.8,
     });
   }
+  urls.push({
+    loc: `${base}/scene/bluegrass/festivals`,
+    lastmod: now,
+    changefreq: "weekly",
+    priority: 0.7,
+  });
 
   // venue detail pages
   for (const slug of VENUE_SLUGS) {
