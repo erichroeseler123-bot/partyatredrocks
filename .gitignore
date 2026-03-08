@@ -33,3 +33,4 @@ tsconfig.check.tsbuildinfo
 # generated data (ignore new/untracked artifacts)
 data/snapshots/
 data/media/
+data/media-index.json
