@@ -31,13 +31,14 @@ const LAYER_COLORS: Record<Layer, string> = {
 
 type Props = {
   points: MapPoint[];
+  initialSelectedId?: string;
 };
 
-export default function RedRocksInteractiveMap({ points }: Props) {
+export default function RedRocksInteractiveMap({ points, initialSelectedId }: Props) {
   const [activeLayers, setActiveLayers] = useState<Set<Layer>>(
     () => new Set<Layer>(["trails", "seating", "geology", "parking", "shuttle"])
   );
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(initialSelectedId ?? null);
 
   function toggleLayer(layer: Layer) {
     setActiveLayers((prev) => {

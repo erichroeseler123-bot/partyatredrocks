@@ -80,6 +80,14 @@ const RED_ROCKS_ENTITY_SEEDS: RedRocksEntitySeed[] = [
     queryIntents: ["how to get to red rocks", "transportation to red rocks", "best way to get to red rocks"],
     sections: [
       {
+        heading: "Quick Answer",
+        paragraphs: [
+          "Best overall: pre-booked shuttle for reliability and simpler return logistics.",
+          "Fastest to book late: rideshare, but expect higher post-show price and wait variability.",
+          "Most independent: self-driving, with parking and exit tradeoffs that need early planning.",
+        ],
+      },
+      {
         heading: "Mode Selection",
         paragraphs: [
           "Driving, rideshare, and shuttle each solve different constraints. Choose by reliability needs, not habit.",
@@ -124,6 +132,14 @@ const RED_ROCKS_ENTITY_SEEDS: RedRocksEntitySeed[] = [
     ],
     queryIntents: ["red rocks shuttle", "shuttle to red rocks", "red rocks shuttle from denver"],
     sections: [
+      {
+        heading: "Shuttle vs Uber vs Driving",
+        paragraphs: [
+          "Shuttle usually wins on post-show predictability because pickup and return flow are set before the encore rush.",
+          "Uber can work on lighter nights, but pricing and pickup timing become volatile right after sold-out shows.",
+          "Driving gives control, but you absorb lot selection, stair effort, and exit congestion yourself.",
+        ],
+      },
       {
         heading: "Why Shuttle Works",
         paragraphs: [
@@ -1577,4 +1593,8 @@ export const RED_ROCKS_MAP_POINTS: RedRocksMapPoint[] = RED_ROCKS_ENTITIES.filte
     y: entity.mapMarker!.y,
     blurb: entity.mapMarker!.blurb,
   })
+);
+
+export const RED_ROCKS_MAP_POINT_BY_ID = new Map(
+  RED_ROCKS_MAP_POINTS.map((point) => [point.id, point] as const)
 );

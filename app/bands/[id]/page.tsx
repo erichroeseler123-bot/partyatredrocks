@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { getArtistById, getArtistsCatalog, getEnrichedArtistById, getEventsCatalog } from "@/lib/events/getCatalog";
 import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
 import MusicWave from "@/components/MusicWave";
+import { getMediaIndex } from "@/lib/media/getMediaIndex";
+import { selectImageByPriority } from "@/lib/media/selectImage";
 
 export const revalidate = 3600;
 
@@ -39,7 +41,11 @@ function dateLabel(iso: string) {
 
 export default async function BandPage({ params }: Props) {
   const { id } = await params;
-  const [artist, enriched] = await Promise.all([getArtistById(id, 2026), getEnrichedArtistById(id, 2026, "all")]);
+  const [artist, enriched, media] = await Promise.all([
+    getArtistById(id, 2026),
+    getEnrichedArtistById(id, 2026, "all"),
+    getMediaIndex(2026),
+  ]);
   if (!artist) notFound();
 
   const [events, allArtists] = await Promise.all([
@@ -55,7 +61,14 @@ export default async function BandPage({ params }: Props) {
     .filter((candidate): candidate is NonNullable<typeof candidate> => Boolean(candidate))
     .slice(0, 24);
   const showCount = artist.showCount ?? mine.length;
-  const heroImage = enriched?.spotifyImage || artist.image || "/images/shows/fallback.jpg";
+  const mediaSources = media?.artistsById?.[artist.id]?.sources;
+  const heroImage = selectImageByPriority({
+    spotifyImage: mediaSources?.spotifyImage ?? enriched?.spotifyImage ?? null,
+    ticketmasterImage: mediaSources?.ticketmasterImage ?? null,
+    seatgeekImage: mediaSources?.seatgeekImage ?? artist.image ?? null,
+    localAsset: mediaSources?.localAsset ?? null,
+    fallback: mediaSources?.fallback ?? "/images/shows/fallback.jpg",
+  });
   const bio = enriched?.lastfmBio || "Enrichment bio not available yet.";
   const genres = (enriched?.genres || []).slice(0, 8);
   const topTracks = (enriched?.topTracks || []).slice(0, 8);

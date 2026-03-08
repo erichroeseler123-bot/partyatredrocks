@@ -1,17 +1,30 @@
 import Link from "next/link";
-import { RED_ROCKS_ENTITIES } from "@/lib/redRocksAuthority";
+import { getEventsCatalog } from "@/lib/events/getCatalog";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
+export const revalidate = 1800;
 
 export const metadata = {
-  title: "Red Rocks Concert Night Guide",
+  title: "Red Rocks Concert Schedule 2026 | Lineup, Dates, Ride Planning",
   description:
-    "How to plan a Red Rocks concert night: entry timing, stairs/seating reality, post-show pickup strategy, and ride options.",
+    "Red Rocks concerts and lineup for 2026. Browse upcoming shows, monthly schedules, and transportation planning links in one page.",
   alternates: { canonical: "/red-rocks/concerts" },
 };
 
-export default function RedRocksConcertsPage() {
-  const concertEntities = RED_ROCKS_ENTITIES.filter((entity) => entity.category === "concerts");
+function monthOf(dateKey: string): number {
+  const month = Number.parseInt(dateKey.split("-")[1] ?? "0", 10);
+  return Number.isFinite(month) ? month : 0;
+}
+
+const MONTH_LINKS: Array<{ month: number; label: string; href: string }> = [
+  { month: 6, label: "June", href: "/red-rocks/concerts/june" },
+  { month: 7, label: "July", href: "/red-rocks/concerts/july" },
+  { month: 8, label: "August", href: "/red-rocks/concerts/august" },
+];
+
+export default async function RedRocksConcertsPage() {
+  const events = (await getEventsCatalog(2026, "redrocks")).sort((a, b) => a.dateKey.localeCompare(b.dateKey));
+  const upcoming = events.slice(0, 24);
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -29,47 +42,67 @@ export default function RedRocksConcertsPage() {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
         <div className="comic-hero">
-          <div className="comic-kicker">Concert Guide</div>
-          <h1 className="comic-title">Red Rocks Concert Night Strategy</h1>
+          <div className="comic-kicker">Concert Calendar</div>
+          <h1 className="comic-title">Red Rocks Concert Schedule 2026</h1>
           <p className="comic-copy">
-            Concert nights are an operations challenge: lot entry, stair effort, weather shifts, and post-encore congestion.
-            The best outcomes come from pre-committed timing and pickup plans.
+            Master lineup page for Red Rocks concerts: upcoming shows, month views, and direct paths to venue planning and ride booking.
           </p>
-        </div>
-
-        <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">High-Impact Decisions</div>
-          <ul style={{ marginTop: 10, paddingLeft: 18 }}>
-            <li className="comic-copy">Arrive earlier than your normal city-venue habit.</li>
-            <li className="comic-copy">Expect stair effort and altitude fatigue, especially for upper sections.</li>
-            <li className="comic-copy">Do not improvise post-show pickup after encore.</li>
-            <li className="comic-copy">Use one known meetup plan for your entire group.</li>
-          </ul>
-        </section>
-
-        <div className="comic-grid" style={{ marginTop: 16 }}>
-          <Link href="/week/red-rocks" className="comic-panel block">
-            <div className="comic-tag">Lineup</div>
-            <h2 className="comic-h3">This Week At Red Rocks</h2>
-          </Link>
-          <Link href="/red-rocks/transportation/post-show-pickup" className="comic-panel block">
-            <div className="comic-tag">Exit</div>
-            <h2 className="comic-h3">Post-Show Pickup Plan</h2>
-          </Link>
-          <Link href="/find" className="comic-panel block">
-            <div className="comic-tag">CTA</div>
-            <h2 className="comic-h3">Book A Red Rocks Ride</h2>
-          </Link>
-        </div>
-
-        <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">Concert Topic Index</div>
-          <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            {concertEntities.map((entity) => (
-              <Link key={entity.slug} href={`/red-rocks/${entity.slug}`} className="comic-btn comic-btn-secondary">
-                {entity.title}
+          <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
+            {MONTH_LINKS.map((row) => (
+              <Link key={row.href} href={row.href} className="comic-btn comic-btn-secondary">
+                {row.label}
               </Link>
             ))}
+            <Link href="/find" className="comic-btn comic-btn-primary">
+              Find a Ride
+            </Link>
+          </div>
+        </div>
+
+        <section className="comic-panel" style={{ marginTop: 16 }}>
+          <div className="comic-tag">Upcoming Shows</div>
+          {upcoming.length ? (
+            <div className="comic-grid" style={{ marginTop: 10 }}>
+              {upcoming.map((event) => (
+                <article key={event.id} className="comic-panel">
+                  <div className="comic-tag">{event.dateKey}</div>
+                  <h2 className="comic-h3" style={{ marginTop: 8 }}>
+                    {event.name}
+                  </h2>
+                  <p className="comic-copy">Month: {monthOf(event.dateKey)}</p>
+                  <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
+                    <Link href={`/shows/${encodeURIComponent(event.id)}`} className="comic-btn comic-btn-secondary">
+                      Show Intel
+                    </Link>
+                    <Link href={`/find?date=${encodeURIComponent(event.dateKey)}&venue=red-rocks-amphitheatre&qty=2`} className="comic-btn comic-btn-primary">
+                      Ride Options
+                    </Link>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <p className="comic-copy" style={{ marginTop: 8 }}>
+              No Red Rocks concerts were found in the current snapshot.
+            </p>
+          )}
+        </section>
+
+        <section className="comic-panel" style={{ marginTop: 16 }}>
+          <div className="comic-tag">Plan Your Visit</div>
+          <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <Link href="/red-rocks/parking" className="comic-btn comic-btn-secondary">
+              Parking Guide
+            </Link>
+            <Link href="/red-rocks/transportation" className="comic-btn comic-btn-secondary">
+              Transportation Guide
+            </Link>
+            <Link href="/red-rocks/map" className="comic-btn comic-btn-secondary">
+              Interactive Map
+            </Link>
+            <Link href="/find" className="comic-btn comic-btn-primary">
+              Find a Ride
+            </Link>
           </div>
         </section>
       </section>

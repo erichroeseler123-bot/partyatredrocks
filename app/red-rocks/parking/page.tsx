@@ -111,6 +111,19 @@ export default async function RedRocksParkingPage() {
           </p>
         </section>
 
+        <section className="comic-panel" style={{ marginTop: 16 }}>
+          <div className="comic-tag">Red Rocks Parking Map</div>
+          <p className="comic-copy" style={{ marginTop: 8 }}>
+            See trail, seating, geology, parking, and pickup layers together to choose a lot strategy that matches your arrival and
+            exit plan.
+          </p>
+          <div style={{ marginTop: 10 }}>
+            <Link href="/red-rocks/map" className="comic-btn comic-btn-secondary">
+              Open Interactive Map
+            </Link>
+          </div>
+        </section>
+
         <div className="comic-grid" style={{ marginTop: 16 }}>
           <Link href="/red-rocks/concert-guide" className="comic-panel block">
             <div className="comic-tag">Related</div>

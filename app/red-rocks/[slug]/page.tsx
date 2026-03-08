@@ -1,10 +1,96 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { RED_ROCKS_ENTITIES, RED_ROCKS_ENTITY_BY_SLUG } from "@/lib/redRocksAuthority";
+import { RED_ROCKS_ENTITIES, RED_ROCKS_ENTITY_BY_SLUG, RED_ROCKS_MAP_POINTS } from "@/lib/redRocksAuthority";
+import TransportComparisonTable from "@/components/redrocks/TransportComparisonTable";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 type Props = { params: Promise<{ slug: string }> };
+const TOPIC_GRAPH_LINKS = [
+  { href: "/red-rocks/concerts", label: "Concerts" },
+  { href: "/red-rocks/hiking-trails", label: "Hiking Trails" },
+  { href: "/red-rocks/geology", label: "Geology" },
+  { href: "/red-rocks/wildlife", label: "Wildlife" },
+  { href: "/red-rocks/transportation", label: "Transportation" },
+  { href: "/red-rocks/parking", label: "Parking" },
+  { href: "/red-rocks/map", label: "Map" },
+  { href: "/red-rocks/visiting-guide", label: "Visiting Guide" },
+] as const;
+
+const TRANSPORT_COMPARISON_BY_SLUG: Record<
+  string,
+  { title: string; rows: Array<{ mode: string; reliability: string; cost: string; bestFor: string }> }
+> = {
+  "red-rocks-shuttle": {
+    title: "Shuttle vs Uber vs Driving",
+    rows: [
+      {
+        mode: "Shuttle",
+        reliability: "High post-show predictability",
+        cost: "Fixed per-seat pricing",
+        bestFor: "Most riders who want simple round-trip flow",
+      },
+      {
+        mode: "Uber/Lyft",
+        reliability: "Variable at peak release",
+        cost: "Can surge significantly",
+        bestFor: "Flexible one-off rides on lighter nights",
+      },
+      {
+        mode: "Driving",
+        reliability: "Depends on lot and exit congestion",
+        cost: "Parking + time tradeoffs",
+        bestFor: "People prioritizing full personal schedule control",
+      },
+    ],
+  },
+  "how-to-get-to-red-rocks": {
+    title: "Best Way To Get There By Situation",
+    rows: [
+      {
+        mode: "Shuttle",
+        reliability: "Most consistent arrival/exit flow",
+        cost: "Known upfront",
+        bestFor: "Concert-first nights where return certainty matters",
+      },
+      {
+        mode: "Uber/Lyft",
+        reliability: "Good outbound, less stable return",
+        cost: "Can increase sharply after encore",
+        bestFor: "Smaller groups with flexible timing",
+      },
+      {
+        mode: "Driving",
+        reliability: "In your control but traffic sensitive",
+        cost: "Parking effort + egress time",
+        bestFor: "Visitors comfortable with lot strategy and walking",
+      },
+    ],
+  },
+  "post-concert-transportation": {
+    title: "Post-Show Exit Mode Comparison",
+    rows: [
+      {
+        mode: "Pre-booked Shuttle",
+        reliability: "Highest when meetup is fixed",
+        cost: "Predictable",
+        bestFor: "Avoiding post-encore decision chaos",
+      },
+      {
+        mode: "On-demand Rideshare",
+        reliability: "Lower at peak release",
+        cost: "Often highest after the show",
+        bestFor: "Backup option with patience for delays",
+      },
+      {
+        mode: "Self-Drive",
+        reliability: "Exit speed varies by lot",
+        cost: "Time-heavy rather than fee-heavy",
+        bestFor: "Groups that accept slower lot egress",
+      },
+    ],
+  },
+};
 
 export function generateStaticParams() {
   return RED_ROCKS_ENTITIES.map((page) => ({ slug: page.slug }));
@@ -188,6 +274,17 @@ export default async function RedRocksAuthorityDetailPage({ params }: Props) {
           </div>
         </section>
 
+        {page.slug === "how-to-get-to-red-rocks" ? (
+          <section className="comic-panel" style={{ marginTop: 16 }}>
+            <div className="comic-tag">Quick Answer</div>
+            <ul style={{ marginTop: 10, paddingLeft: 18 }}>
+              <li className="comic-copy">Shuttle: strongest reliability for arrival and return.</li>
+              <li className="comic-copy">Uber/Lyft: flexible booking, higher post-show variability.</li>
+              <li className="comic-copy">Driving: independence with parking and exit tradeoffs.</li>
+            </ul>
+          </section>
+        ) : null}
+
         <section className="comic-panel" style={{ marginTop: 16 }}>
           <div className="comic-tag">Quick Facts</div>
           <div className="comic-grid" style={{ marginTop: 10 }}>
@@ -212,6 +309,84 @@ export default async function RedRocksAuthorityDetailPage({ params }: Props) {
             ))}
           </section>
         ))}
+
+        {TRANSPORT_COMPARISON_BY_SLUG[page.slug] ? (
+          <TransportComparisonTable
+            title={TRANSPORT_COMPARISON_BY_SLUG[page.slug].title}
+            rows={TRANSPORT_COMPARISON_BY_SLUG[page.slug].rows}
+          />
+        ) : null}
+
+        {page.slug === "seating-chart" ? (
+          <>
+            <section className="comic-panel" style={{ marginTop: 16 }}>
+              <div className="comic-tag">Best Seats By Goal</div>
+              <div className="comic-grid" style={{ marginTop: 10 }}>
+                <article className="comic-panel">
+                  <div className="comic-tag">Balanced View + Effort</div>
+                  <p className="comic-copy" style={{ marginTop: 8 }}>
+                    Mid-bowl sections usually balance stage visibility with less stair load than upper rows.
+                  </p>
+                </article>
+                <article className="comic-panel">
+                  <div className="comic-tag">Maximum View</div>
+                  <p className="comic-copy" style={{ marginTop: 8 }}>
+                    Upper seating offers wide scenic views but requires higher stair effort and more pacing buffer.
+                  </p>
+                </article>
+                <article className="comic-panel">
+                  <div className="comic-tag">Faster Exit Priority</div>
+                  <p className="comic-copy" style={{ marginTop: 8 }}>
+                    If exit speed matters, pair seat choice with a pre-defined pickup plan before encore.
+                  </p>
+                </article>
+                <article className="comic-panel">
+                  <div className="comic-tag">Lower Mobility Strain</div>
+                  <p className="comic-copy" style={{ marginTop: 8 }}>
+                    Choose rows that reduce repeated climbing and add extra transition time between entry and set start.
+                  </p>
+                </article>
+              </div>
+            </section>
+
+            <section className="comic-panel" style={{ marginTop: 16 }}>
+              <div className="comic-tag">Map + Seating Navigation</div>
+              <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
+                <Link href="/red-rocks/map" className="comic-btn comic-btn-secondary">
+                  Interactive Map
+                </Link>
+                <Link href="/red-rocks/map/seating-chart" className="comic-btn comic-btn-secondary">
+                  Seating Marker
+                </Link>
+                <Link href="/red-rocks/map/best-seats" className="comic-btn comic-btn-secondary">
+                  Best Seats Marker
+                </Link>
+                <Link href="/red-rocks/parking" className="comic-btn comic-btn-secondary">
+                  Parking Strategy
+                </Link>
+              </div>
+            </section>
+
+            <section className="comic-panel" style={{ marginTop: 16 }}>
+              <div className="comic-tag">Arrival &amp; Egress Strategy</div>
+              <p className="comic-copy" style={{ marginTop: 8 }}>
+                Seating choice is operational, not just visual. Higher rows need more stair buffer, and late arrival magnifies crowd friction.
+                Lock a post-show meetup point before the headliner, especially if your group sits in split zones.
+              </p>
+              <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
+                <Link href="/red-rocks/transportation/post-show-pickup" className="comic-btn comic-btn-secondary">
+                  Post-Show Pickup Plan
+                </Link>
+                <Link href="/red-rocks/transportation" className="comic-btn comic-btn-secondary">
+                  Transportation Guide
+                </Link>
+                <Link href="/find" className="comic-btn comic-btn-primary">
+                  Find a Ride
+                </Link>
+              </div>
+            </section>
+          </>
+        ) : null}
 
         <section className="comic-panel" style={{ marginTop: 16 }}>
           <div className="comic-tag">Query Intents This Page Targets</div>
@@ -260,6 +435,47 @@ export default async function RedRocksAuthorityDetailPage({ params }: Props) {
             <Link href="/find" className="comic-btn comic-btn-primary">
               Compare Ride Options
             </Link>
+          </div>
+        </section>
+
+        <section className="comic-panel" style={{ marginTop: 16 }}>
+          <div className="comic-tag">Reference Graph</div>
+          <div style={{ marginTop: 10 }}>
+            <p className="comic-copy">Red Rocks Topics</p>
+            <div style={{ marginTop: 8, display: "flex", gap: 8, flexWrap: "wrap" }}>
+              {TOPIC_GRAPH_LINKS.map((item) => (
+                <Link key={item.href} href={item.href} className="comic-btn comic-btn-secondary">
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+          <div style={{ marginTop: 12 }}>
+            <p className="comic-copy">Related Guides</p>
+            <div style={{ marginTop: 8, display: "flex", gap: 8, flexWrap: "wrap" }}>
+              <Link href="/red-rocks/how-to-get-to-red-rocks" className="comic-btn comic-btn-secondary">
+                How To Get To Red Rocks
+              </Link>
+              <Link href="/red-rocks/red-rocks-shuttle" className="comic-btn comic-btn-secondary">
+                Red Rocks Shuttle Guide
+              </Link>
+              <Link href="/red-rocks/parking" className="comic-btn comic-btn-secondary">
+                Red Rocks Parking Strategy
+              </Link>
+              <Link href="/red-rocks/transportation/post-show-pickup" className="comic-btn comic-btn-secondary">
+                Post-Show Pickup Plan
+              </Link>
+            </div>
+          </div>
+          <div style={{ marginTop: 12 }}>
+            <p className="comic-copy">Explore Red Rocks Locations</p>
+            <div style={{ marginTop: 8, display: "flex", gap: 8, flexWrap: "wrap" }}>
+              {RED_ROCKS_MAP_POINTS.slice(0, 8).map((point) => (
+                <Link key={point.id} href={`/red-rocks/map/${encodeURIComponent(point.id)}`} className="comic-btn comic-btn-secondary">
+                  {point.name}
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
       </section>

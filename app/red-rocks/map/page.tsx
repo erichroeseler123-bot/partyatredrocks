@@ -47,6 +47,21 @@ export default function RedRocksMapPage() {
         </div>
 
         <RedRocksInteractiveMap points={RED_ROCKS_MAP_POINTS} />
+
+        <section className="comic-panel" style={{ marginTop: 16 }}>
+          <div className="comic-tag">Explore Red Rocks Locations</div>
+          <div className="comic-grid" style={{ marginTop: 10 }}>
+            {RED_ROCKS_MAP_POINTS.map((point) => (
+              <Link key={point.id} href={`/red-rocks/map/${encodeURIComponent(point.id)}`} className="comic-panel block">
+                <div className="comic-tag">{point.layer}</div>
+                <h2 className="comic-h3" style={{ marginTop: 8 }}>
+                  {point.name}
+                </h2>
+                <p className="comic-copy">{point.blurb}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
       </section>
     </main>
   );

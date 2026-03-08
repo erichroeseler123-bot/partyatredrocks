@@ -8,6 +8,8 @@ import venuesJson from "@/data/venues.json";
 import { getEventsCatalog } from "@/lib/events/getCatalog";
 import { VENUE_LEDGER_BY_SLUG, VENUE_LEDGER_REGISTRY } from "@/lib/venues/ledgerRegistry";
 import MusicWave from "@/components/MusicWave";
+import { getMediaIndex } from "@/lib/media/getMediaIndex";
+import { selectImageByPriority } from "@/lib/media/selectImage";
 
 export const runtime = "nodejs";
 export const revalidate = 300;
@@ -550,6 +552,15 @@ export async function generateMetadata({
   const title = venueTitle(slug, withIdentityName);
   const description = venueDescription(slug, withIdentityName);
   const url = `${SITE}/venues/${slug}`;
+  const media = await getMediaIndex(2026);
+  const venueImage = selectImageByPriority({
+    spotifyImage: media?.venuesById?.[slug]?.sources?.spotifyImage ?? null,
+    ticketmasterImage: media?.venuesById?.[slug]?.sources?.ticketmasterImage ?? null,
+    seatgeekImage: media?.venuesById?.[slug]?.sources?.seatgeekImage ?? null,
+    localAsset: media?.venuesById?.[slug]?.sources?.localAsset ?? null,
+    fallback: media?.venuesById?.[slug]?.sources?.fallback ?? "/og-default.jpg",
+  });
+  const venueImageUrl = venueImage.startsWith("http") ? venueImage : `${SITE}${venueImage}`;
 
   return {
     title,
@@ -564,7 +575,7 @@ export async function generateMetadata({
       type: "website",
       images: [
         {
-          url: `${SITE}/og-default.jpg`,
+          url: venueImageUrl,
           width: 1200,
           height: 630,
           alt: `${displayName(slug, withIdentityName)} venue intel`,
@@ -575,7 +586,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: [`${SITE}/og-default.jpg`],
+      images: [venueImageUrl],
     },
     robots: {
       index: true,
@@ -605,11 +616,19 @@ export default async function VenuePage({
   const city = cityLine(v);
   const reference = getVenueReference(slug, v, name);
   const dccVenueUrl = `${DCC}/venues/${slug}`;
-  const [allEvents, updatedAt] = await Promise.all([
+  const [allEvents, updatedAt, media] = await Promise.all([
     getEventsCatalog(2026, "all"),
     readSnapshotGeneratedAt(2026),
+    getMediaIndex(2026),
   ]);
   const events = toVenueEvents(allEvents, slug);
+  const venueImage = selectImageByPriority({
+    spotifyImage: media?.venuesById?.[slug]?.sources?.spotifyImage ?? null,
+    ticketmasterImage: media?.venuesById?.[slug]?.sources?.ticketmasterImage ?? null,
+    seatgeekImage: media?.venuesById?.[slug]?.sources?.seatgeekImage ?? null,
+    localAsset: media?.venuesById?.[slug]?.sources?.localAsset ?? null,
+    fallback: media?.venuesById?.[slug]?.sources?.fallback ?? "/images/venues/fallback.jpg",
+  });
 
   return (
     <main className="comic-page pt-24 pb-10">
@@ -670,6 +689,13 @@ export default async function VenuePage({
           Upcoming shows, post-show pickup logic, and ride options. We cover Denver, Boulder, and
           Colorado Springs — book a guaranteed ride home after the last song.
         </p>
+        <div className="mt-5">
+          <img
+            src={venueImage}
+            alt={`${name} venue image`}
+            style={{ width: "100%", maxWidth: 760, borderRadius: 18, border: "1px solid rgba(255,255,255,.14)" }}
+          />
+        </div>
         <div className="mt-4">
           <MusicWave bars={22} />
         </div>

@@ -9,6 +9,8 @@ import RezdyWidgets from "@/components/RezdyWidgets";
 import venuesJson from "@/data/venues.json";
 import { getEventsCatalog } from "@/lib/events/getCatalog";
 import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
+import { getMediaIndex } from "@/lib/media/getMediaIndex";
+import { selectImageByPriority } from "@/lib/media/selectImage";
 
 export const runtime = "nodejs";
 export const revalidate = 300;
@@ -244,7 +246,7 @@ async function readShow(id: string): Promise<{ generatedAt?: string; event?: Sho
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id: raw } = await params;
-  const data = await readShow(raw);
+  const [data, media] = await Promise.all([readShow(raw), getMediaIndex(2026)]);
   const e = data?.event ?? null;
 
   const title = pickTitle(e, raw);
@@ -262,6 +264,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ].filter(Boolean))
   );
 
+  const mediaRow =
+    (e ? media?.eventsById?.[e.id] : null) ||
+    (e?.sourceId ? media?.eventsById?.[e.sourceId] : null) ||
+    null;
+  const mediaImage = selectImageByPriority({
+    spotifyImage: mediaRow?.sources?.spotifyImage ?? null,
+    ticketmasterImage: mediaRow?.sources?.ticketmasterImage ?? null,
+    seatgeekImage: mediaRow?.sources?.seatgeekImage ?? null,
+    localAsset: mediaRow?.sources?.localAsset ?? null,
+    fallback: mediaRow?.sources?.fallback ?? "/og-default.jpg",
+  });
+
   return {
     title,
     description,
@@ -275,7 +289,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "website",
       images: [
         {
-          url: `${SITE}/og-default.jpg`,
+          url: mediaImage.startsWith("http") ? mediaImage : `${SITE}${mediaImage}`,
           width: 1200,
           height: 630,
           alt: e?.title ? `${e.title} show intel` : "Show intel",
@@ -286,7 +300,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: "summary_large_image",
       title,
       description,
-      images: [`${SITE}/og-default.jpg`],
+      images: [mediaImage.startsWith("http") ? mediaImage : `${SITE}${mediaImage}`],
     },
     robots: e
       ? { index: true, follow: true }
@@ -296,13 +310,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ShowPage({ params }: Props) {
   const { id: raw } = await params;
-  const data = await readShow(raw);
+  const [data, media] = await Promise.all([readShow(raw), getMediaIndex(2026)]);
   const e = data?.event ?? null;
   if (!e) return notFound();
+
+  const allEvents = await getEventsCatalog(2026, "all");
 
   const venueSlug = e?.venue?.siteSlug;
   const venueName = e?.venue?.siteName || "Venue";
   const updatedAt = data?.generatedAt ?? null;
+  const showMediaRow = media?.eventsById?.[e.id] || (e?.sourceId ? media?.eventsById?.[e.sourceId] : null) || null;
+  const showImage = selectImageByPriority({
+    spotifyImage: showMediaRow?.sources?.spotifyImage ?? null,
+    ticketmasterImage: showMediaRow?.sources?.ticketmasterImage ?? null,
+    seatgeekImage: showMediaRow?.sources?.seatgeekImage ?? null,
+    localAsset: showMediaRow?.sources?.localAsset ?? null,
+    fallback: showMediaRow?.sources?.fallback ?? "/images/shows/fallback.jpg",
+  });
+  const isRedRocksVenue = venueSlug === "red-rocks-amphitheatre" || venueSlug === "redrocks";
+  const relatedShows = allEvents
+    .filter((event) => event.id !== e.id && event.venueId === venueSlug)
+    .sort((a, b) => a.dateKey.localeCompare(b.dateKey))
+    .slice(0, 6);
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-12">
@@ -357,6 +386,13 @@ export default async function ShowPage({ params }: Props) {
         <p className="mt-4 max-w-3xl text-white/70">
           Tickets + ride options with clear meetup logic. Book a guaranteed ride home after the last song.
         </p>
+        <div className="mt-5">
+          <img
+            src={showImage}
+            alt={e?.title ? `${e.title} event image` : "Show image"}
+            style={{ width: "100%", maxWidth: 720, borderRadius: 18, border: "1px solid rgba(255,255,255,.14)" }}
+          />
+        </div>
 
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <Link
@@ -411,6 +447,72 @@ export default async function ShowPage({ params }: Props) {
           </div>
         </div>
       ) : null}
+
+      <div className="mt-8 grid gap-6 md:grid-cols-3">
+        <section className="rounded-3xl border border-soft panel-soft p-6 md:col-span-2">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">Venue Intelligence</div>
+          <p className="mt-3 text-sm text-white/75">
+            First time at {venueName}? Use these guides before show night so arrival and pickup are already decided.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <Link href={venueSlug ? `/venues/${encodeURIComponent(venueSlug)}` : "/venues"} className="comic-btn comic-btn-secondary">
+              Venue Page
+            </Link>
+            <Link
+              href={isRedRocksVenue ? "/red-rocks/parking" : "/guide/parking"}
+              className="comic-btn comic-btn-secondary"
+            >
+              Parking Guide
+            </Link>
+            <Link
+              href={isRedRocksVenue ? "/red-rocks/transportation/shuttle-vs-uber" : "/guide/transportation/shuttle-vs-uber"}
+              className="comic-btn comic-btn-secondary"
+            >
+              Shuttle vs Uber
+            </Link>
+            <Link href={isRedRocksVenue ? "/red-rocks/map" : "/week"} className="comic-btn comic-btn-secondary">
+              {isRedRocksVenue ? "Venue Map" : "Weekly Venue View"}
+            </Link>
+          </div>
+        </section>
+
+        <section className="rounded-3xl border border-soft panel p-6">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">Heading To This Show?</div>
+          <p className="mt-3 text-sm text-white/75">Compare ride options and lock in your return before post-show demand spikes.</p>
+          <div className="mt-4">
+            <Link
+              href={`/find?date=${encodeURIComponent(e.dateKey)}&venue=${encodeURIComponent(venueSlug || "")}&qty=2`}
+              className="comic-btn comic-btn-primary"
+            >
+              Book Shuttle
+            </Link>
+          </div>
+        </section>
+      </div>
+
+      <section className="mt-8 rounded-3xl border border-soft panel-soft p-6">
+        <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">Related Shows</div>
+        {relatedShows.length ? (
+          <div className="mt-4 grid gap-3 md:grid-cols-2">
+            {relatedShows.map((event) => (
+              <article key={event.id} className="rounded-2xl border border-soft panel p-4">
+                <p className="text-xs text-white/55">{event.dateKey}</p>
+                <h3 className="mt-1 text-sm font-extrabold text-white">{event.name}</h3>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <Link href={`/shows/${encodeURIComponent(event.id)}`} className="comic-btn comic-btn-secondary">
+                    Show Page
+                  </Link>
+                  <Link href={`/find?date=${encodeURIComponent(event.dateKey)}&qty=2`} className="comic-btn comic-btn-primary">
+                    Ride Options
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <p className="mt-3 text-sm text-white/70">No additional upcoming shows found for this venue in the current snapshot.</p>
+        )}
+      </section>
 
       {/* EXISTING WIDGETS */}
       <div className="mt-10 space-y-6">
