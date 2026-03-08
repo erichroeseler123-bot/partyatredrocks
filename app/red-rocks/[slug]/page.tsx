@@ -321,6 +321,20 @@ export default async function RedRocksAuthorityDetailPage({ params }: Props) {
           <>
             <section className="comic-panel" style={{ marginTop: 16 }}>
               <div className="comic-tag">Best Seats By Goal</div>
+              <div style={{ marginTop: 12, textAlign: "center" }}>
+                <img
+                  src="/images/venues/red-rocks-amphitheatre.jpg"
+                  alt="Red Rocks Amphitheatre seating bowl overview showing lower, mid, and upper sections with stage view"
+                  width={800}
+                  height={450}
+                  loading="lazy"
+                  decoding="async"
+                  className="max-w-full rounded-xl border border-white/20 mx-auto"
+                />
+                <p className="comic-copy" style={{ marginTop: 8, opacity: 0.8 }}>
+                  General seating layout reference (not event-specific).
+                </p>
+              </div>
               <div className="comic-grid" style={{ marginTop: 10 }}>
                 <article className="comic-panel">
                   <div className="comic-tag">Balanced View + Effort</div>
