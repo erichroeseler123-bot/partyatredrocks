@@ -117,6 +117,12 @@ export async function GET() {
     changefreq: "weekly",
     priority: 0.7,
   });
+  urls.push({
+    loc: `${base}/phish-folsom`,
+    lastmod: now,
+    changefreq: "weekly",
+    priority: 0.8,
+  });
 
   // venue detail pages
   for (const slug of VENUE_SLUGS) {
