@@ -16,14 +16,21 @@ type Row = {
 type Props = {
   initialQ: string;
   rows: Row[];
-  artistIdByName: Record<string, string>;
 };
 
 function norm(s: string) {
   return String(s || "").toLowerCase().trim();
 }
 
-export default function SearchClient({ initialQ, rows, artistIdByName }: Props) {
+function slugify(input: string): string {
+  return input
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+export default function SearchClient({ initialQ, rows }: Props) {
   const [q, setQ] = useState(initialQ || "");
 
   const filtered = useMemo(() => {
@@ -57,14 +64,21 @@ export default function SearchClient({ initialQ, rows, artistIdByName }: Props) 
 
       <div className="comic-grid" style={{ marginTop: 12 }}>
         {filtered.map((row) => {
-          const primaryArtistName = row.artistNames[0] || "";
-          const artistId = artistIdByName[primaryArtistName.toLowerCase()];
           return (
             <article key={row.eventKey} className="comic-panel">
               <div className="comic-h3">{row.title}</div>
               <p className="comic-copy">{row.dateKey}</p>
               <p className="comic-copy">{row.venueName}</p>
-              <p className="comic-copy">{row.artistNames.join(", ")}</p>
+              <p className="comic-copy">
+                {row.artistNames.map((name, idx) => (
+                  <span key={`${row.eventKey}-${name}`}>
+                    <Link className="underline" href={`/artists/${encodeURIComponent(slugify(name))}`}>
+                      {name}
+                    </Link>
+                    {idx < row.artistNames.length - 1 ? ", " : ""}
+                  </span>
+                ))}
+              </p>
               <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
                 <Link className="comic-btn comic-btn-secondary" href={`/shows/${encodeURIComponent(row.eventKey)}`}>
                   Show
@@ -72,11 +86,6 @@ export default function SearchClient({ initialQ, rows, artistIdByName }: Props) 
                 <Link className="comic-btn comic-btn-secondary" href={`/venues/${encodeURIComponent(row.venueId)}`}>
                   Venue
                 </Link>
-                {artistId ? (
-                  <Link className="comic-btn comic-btn-secondary" href={`/bands/${encodeURIComponent(artistId)}`}>
-                    Band
-                  </Link>
-                ) : null}
                 <Link className="comic-btn comic-btn-primary" href={`/find?date=${encodeURIComponent(row.dateKey)}&qty=2`}>
                   Ride
                 </Link>

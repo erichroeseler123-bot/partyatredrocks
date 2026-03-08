@@ -65,7 +65,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${point.name} | Red Rocks Map Guide`,
     description: `${point.name} on the Red Rocks map: overview, arrival strategy, and transportation links for show-night planning.`,
-    alternates: { canonical: `/red-rocks/map/${point.id}` },
+    alternates: { canonical: `${SITE}/red-rocks/map/${point.id}` },
   };
 }
 

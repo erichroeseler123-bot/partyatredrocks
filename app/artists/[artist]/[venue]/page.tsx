@@ -5,6 +5,7 @@ import { getArtistsCatalog, getEventsCatalog } from "@/lib/events/getCatalog";
 import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
 
 export const revalidate = 3600;
+const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
 type Props = { params: Promise<{ artist: string; venue: string }> };
 
@@ -74,7 +75,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${artistName} at ${venueName} | Show Intel & Transport`,
     description: `Upcoming ${artistName} shows at ${venueName}. Get venue intel and compare shuttle options for show night.`,
-    alternates: { canonical: `/artists/${artist}/${venue}` },
+    alternates: { canonical: `${SITE}/artists/${artist}/${venue}` },
   };
 }
 

@@ -9,6 +9,14 @@ export const metadata = {
   alternates: { canonical: "/red-rocks/concerts/august" },
 };
 
+function slugify(input: string): string {
+  return input
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 function monthOf(dateKey: string): number {
   const month = Number.parseInt(dateKey.split("-")[1] ?? "0", 10);
   return Number.isFinite(month) ? month : 0;
@@ -51,6 +59,18 @@ export default async function RedRocksConcertsAugustPage() {
                   <h2 className="comic-h3" style={{ marginTop: 8 }}>
                     {event.name}
                   </h2>
+                  {event.artistNames.length ? (
+                    <p className="comic-copy" style={{ marginTop: 6 }}>
+                      {event.artistNames.map((name, idx) => (
+                        <span key={`${event.id}-${name}`}>
+                          <Link href={`/artists/${encodeURIComponent(slugify(name))}`} className="underline">
+                            {name}
+                          </Link>
+                          {idx < event.artistNames.length - 1 ? ", " : ""}
+                        </span>
+                      ))}
+                    </p>
+                  ) : null}
                   <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
                     <Link href={`/shows/${encodeURIComponent(event.id)}`} className="comic-btn comic-btn-secondary">
                       Show Intel

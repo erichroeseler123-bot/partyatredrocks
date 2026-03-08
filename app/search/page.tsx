@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
-import { getArtistsCatalog } from "@/lib/events/getCatalog";
 import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
 import SearchClient from "./SearchClient";
 
@@ -33,8 +32,7 @@ async function readDocs(year = 2026): Promise<SearchDoc[]> {
 export default async function SearchPage({ searchParams }: Props) {
   const sp = await searchParams;
   const q = (sp.q || "").trim();
-  const [docs, artists] = await Promise.all([readDocs(2026), getArtistsCatalog(2026, "all")]);
-  const artistIdByName = Object.fromEntries(artists.map((artist) => [artist.name.toLowerCase(), artist.id]));
+  const docs = await readDocs(2026);
   const rows = docs.map((doc) => ({
     ...doc,
     venueName: VENUE_LEDGER_BY_SLUG.get(doc.venueId)?.name || doc.venueId,
@@ -60,7 +58,7 @@ export default async function SearchPage({ searchParams }: Props) {
           </div>
         </div>
 
-        <SearchClient initialQ={q} rows={rows} artistIdByName={artistIdByName} />
+        <SearchClient initialQ={q} rows={rows} />
       </section>
     </main>
   );

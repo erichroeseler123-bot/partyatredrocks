@@ -235,10 +235,12 @@ function eventDateTimeLocal(e: { datetime_local: string }) {
   return e.datetime_local;
 }
 
-function parseNumericId(s: string | null | undefined): number | null {
-  if (!s) return null;
-  const n = Number(s);
-  return Number.isFinite(n) ? n : null;
+function slugify(input: string): string {
+  return input
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
 function cityLine(v: VenueRec) {
@@ -837,15 +839,23 @@ export default async function VenuePage({
                 <div className="mt-2 text-lg font-black">{e.title}</div>
 
                 <div className="mt-2 text-sm text-white/70">
-                  {(e.performers ?? []).map((p) => p?.name).filter(Boolean).join(", ")}
+                  {(e.performers ?? [])
+                    .map((p) => p?.name)
+                    .filter((name): name is string => Boolean(name))
+                    .map((name, idx, arr) => (
+                      <span key={`${e.id}-${name}`}>
+                        <Link href={`/artists/${encodeURIComponent(slugify(name))}`} className="text-white/80 underline hover:text-white">
+                          {name}
+                        </Link>
+                        {idx < arr.length - 1 ? ", " : ""}
+                      </span>
+                    ))}
                 </div>
 
                 <div className="mt-4 flex flex-wrap gap-3">
-                  {parseNumericId(e.sourceId) ? (
-                    <Link className="text-neon-blue font-bold" href={`/shows/${parseNumericId(e.sourceId)}`}>
-                      Full Intel →
-                    </Link>
-                  ) : null}
+                  <Link className="text-neon-blue font-bold" href={`/shows/${encodeURIComponent(e.id)}`}>
+                    Full Intel →
+                  </Link>
                   <Link className="text-white/70 underline" href={`/find?date=${encodeURIComponent(e.dateKey)}&qty=2`}>
                     Ride Options
                   </Link>

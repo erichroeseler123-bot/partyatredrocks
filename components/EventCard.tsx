@@ -1,6 +1,14 @@
 import Link from "next/link";
 import type { DisplayEvent } from "@/lib/events/presentation";
 
+function slugify(input: string): string {
+  return input
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 function fmtDate(raw: string) {
   const d = new Date(raw);
   if (Number.isNaN(d.getTime())) return raw;
@@ -20,6 +28,8 @@ export default function EventCard({
   event: DisplayEvent;
   showBookRide?: boolean;
 }) {
+  const artistSlug = event.performerName ? slugify(event.performerName) : "";
+
   return (
     <article className="comic-panel">
       <img
@@ -32,7 +42,18 @@ export default function EventCard({
         {fmtDate(event.datetimeLocal)}
       </div>
       <h2 className="comic-h3">{event.title}</h2>
-      <p className="comic-copy">{event.performerName ? `Headliner: ${event.performerName}` : "Headliner info pending"}</p>
+      <p className="comic-copy">
+        {event.performerName ? (
+          <>
+            Headliner:{" "}
+            <Link href={`/artists/${encodeURIComponent(artistSlug)}`} className="underline text-white/90 hover:text-white">
+              {event.performerName}
+            </Link>
+          </>
+        ) : (
+          "Headliner info pending"
+        )}
+      </p>
 
       {event.thumbnail ? (
         <div className="mt-2 flex items-center gap-2">
@@ -60,6 +81,9 @@ export default function EventCard({
       ) : null}
 
       <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
+        <Link className="comic-btn comic-btn-secondary" href={`/shows/${encodeURIComponent(event.id)}`}>
+          Show Intel
+        </Link>
         {showBookRide ? (
           <Link className="comic-btn comic-btn-primary" href={event.bookHref}>
             Book Ride

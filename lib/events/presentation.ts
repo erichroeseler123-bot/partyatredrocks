@@ -31,7 +31,8 @@ export function toDisplayEvent(
   event: NormalizedEvent,
   opts?: { assets?: RedRocksAssetsSnapshot | null; artistThumbnails?: Record<string, string> }
 ): DisplayEvent {
-  const eventId = event.sourceId ?? event.id;
+  const eventId = event.id;
+  const seatgeekEventId = event.sourceId ?? event.id;
   const artistKey = (event.artistNames[0] ?? "").trim().toLowerCase();
   return {
     id: eventId,
@@ -41,6 +42,6 @@ export function toDisplayEvent(
     image: resolveEventImage(event, opts?.assets),
     performerName: event.artistNames[0] ?? undefined,
     thumbnail: artistKey ? opts?.artistThumbnails?.[artistKey] : undefined,
-    bookHref: `/book?venue=red-rocks-amphitheatre&seatgeek_event=${encodeURIComponent(eventId)}`,
+    bookHref: `/book?venue=red-rocks-amphitheatre&seatgeek_event=${encodeURIComponent(seatgeekEventId)}`,
   };
 }

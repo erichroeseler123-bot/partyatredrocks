@@ -109,7 +109,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: page.title,
     description: page.description,
-    alternates: { canonical: `/red-rocks/${page.slug}` },
+    alternates: { canonical: `${SITE}/red-rocks/${page.slug}` },
   };
 }
 

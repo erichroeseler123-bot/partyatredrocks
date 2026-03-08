@@ -7,6 +7,7 @@ import { selectImageByPriority } from "@/lib/media/selectImage";
 import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
 
 export const revalidate = 3600;
+const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
 type Props = { params: Promise<{ artist: string }> };
 
@@ -75,7 +76,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${data.artist.name} Concerts in Colorado | Shows, Venues, Ride Planning`,
     description: `See upcoming ${data.artist.name} shows, Red Rocks dates, venue intelligence, and ride booking options.`,
-    alternates: { canonical: `/artists/${artist}` },
+    alternates: { canonical: `${SITE}/artists/${artist}` },
   };
 }
 

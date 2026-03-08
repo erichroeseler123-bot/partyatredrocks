@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import TicketButtons from "@/components/TicketButtons";
 import RezdyWidgets from "@/components/RezdyWidgets";
 import venuesJson from "@/data/venues.json";
@@ -58,6 +58,14 @@ function fmtDateTime(raw: string) {
     hour: "numeric",
     minute: "2-digit",
   });
+}
+
+function slugify(input: string): string {
+  return input
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
 function pickTitle(e?: ShowEvent | null, id?: string) {
@@ -251,7 +259,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const title = pickTitle(e, raw);
   const description = pickDescription(e);
-  const url = `${SITE}/shows/${encodeURIComponent(raw)}`;
+  const canonicalId = e?.id ?? raw;
+  const url = `${SITE}/shows/${encodeURIComponent(canonicalId)}`;
 
   const keywords = Array.from(
     new Set([
@@ -312,7 +321,15 @@ export default async function ShowPage({ params }: Props) {
   const { id: raw } = await params;
   const [data, media] = await Promise.all([readShow(raw), getMediaIndex(2026)]);
   const e = data?.event ?? null;
-  if (!e) return notFound();
+  if (!e) {
+    if (/^\d+$/.test(raw)) {
+      redirect("/red-rocks/concerts");
+    }
+    return notFound();
+  }
+  if (raw !== e.id) {
+    redirect(`/shows/${encodeURIComponent(e.id)}`);
+  }
 
   const allEvents = await getEventsCatalog(2026, "all");
 
@@ -441,9 +458,16 @@ export default async function ShowPage({ params }: Props) {
           <div className="mt-3 text-sm text-white/80">
             {e.performers
               .map((p) => p?.name)
-              .filter(Boolean)
+              .filter((name): name is string => Boolean(name))
               .slice(0, 10)
-              .join(" • ")}
+              .map((name, idx, arr) => (
+                <span key={`${e.id}-${name}`}>
+                  <Link href={`/artists/${encodeURIComponent(slugify(name))}`} className="underline text-white/90 hover:text-white">
+                    {name}
+                  </Link>
+                  {idx < arr.length - 1 ? " • " : ""}
+                </span>
+              ))}
           </div>
         </div>
       ) : null}
