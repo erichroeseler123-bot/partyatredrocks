@@ -862,6 +862,29 @@ export default async function VenuePage({
         </section>
       ) : null}
 
+      {slug === "fillmore-auditorium" ? (
+        <section className="comic-panel" style={{ marginTop: 32 }}>
+          <div className="comic-tag">Fillmore Auditorium Quick Guides</div>
+          <div className="flex flex-wrap gap-3 mt-4 justify-center">
+            <Link href="/venues/fillmore-auditorium/best-time-to-arrive" className="comic-btn comic-btn-secondary">
+              Best Time to Arrive
+            </Link>
+            <Link href="/venues/fillmore-auditorium/parking" className="comic-btn comic-btn-secondary">
+              Parking Strategy
+            </Link>
+            <Link href="/venues/fillmore-auditorium/transportation" className="comic-btn comic-btn-secondary">
+              Transportation and Rides
+            </Link>
+            <Link href="/venues/fillmore-auditorium/map" className="comic-btn comic-btn-secondary">
+              Venue Map
+            </Link>
+          </div>
+          <p className="comic-copy text-center mt-4 opacity-80">
+            Historic Colfax room with dense entry windows and high curb competition after the encore.
+          </p>
+        </section>
+      ) : null}
+
       {/* EVENTS */}
       {events.length > 0 ? (
         <section className="mt-10">
