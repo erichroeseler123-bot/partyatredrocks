@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { rezdyGetAvailability } from "@/lib/rezdy";
+import { SHUTTLE_PRICING } from "@/lib/pricing";
 
 export const metadata = {
   robots: { index: false, follow: true },
@@ -132,7 +133,8 @@ export default async function BookPage({
               <li>• Shared mountain shuttle</li>
               <li>• Canyon logistics handled</li>
               <li>• Ideal for sold-out shows</li>
-              <li>• $65 round trip</li>
+              <li>• {SHUTTLE_PRICING.mishawaka.shared}</li>
+              <li>• Private option: {SHUTTLE_PRICING.mishawaka.privateSuburban}</li>
             </ul>
             <div className="text-blue-400 font-bold uppercase tracking-widest text-xs">
               Book Mishawaka Shuttle →
@@ -148,9 +150,9 @@ export default async function BookPage({
             </h2>
             <ul className="text-sm text-soft space-y-2 mb-6">
               <li>• Any venue in Denver or Boulder</li>
-              <li>• $50 per person</li>
-              <li>• $250 minimum total</li>
-              <li>• Cash payment at pickup</li>
+              <li>• {SHUTTLE_PRICING.denverBoulderOtherVenues.suburban}</li>
+              <li>• Private suburban service</li>
+              <li>• Cashless checkout flow</li>
               <li>• One stop each way allowed</li>
             </ul>
             <div className="text-green-400 font-bold uppercase tracking-widest text-xs">

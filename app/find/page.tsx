@@ -8,6 +8,7 @@ import MusicWave from "@/components/MusicWave";
 import RezdySessionPicker from "@/components/RezdySessionPicker";
 import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
 import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
+import { SHUTTLE_PRICING } from "@/lib/pricing";
 
 function qp(searchParams: Record<string, string | string[] | undefined>, k: string) {
   const v = searchParams[k];
@@ -140,6 +141,26 @@ export default async function FindPage({
             <Link className="comic-btn comic-btn-secondary" href="/week/red-rocks">
               Red Rocks Weekly Lineup
             </Link>
+          </div>
+        </section>
+
+        <section className="comic-panel" style={{ marginTop: 16 }}>
+          <div className="comic-tag">Pricing Overview (March 2026)</div>
+          <div className="comic-copy" style={{ marginTop: 8 }}>
+            <b>Red Rocks Amphitheatre</b>: Suburban {SHUTTLE_PRICING.redRocks.suburban}, 10-passenger van{" "}
+            {SHUTTLE_PRICING.redRocks.van10}, 14-passenger van {SHUTTLE_PRICING.redRocks.van14}, 20-passenger bus{" "}
+            {SHUTTLE_PRICING.redRocks.bus20}.
+          </div>
+          <div className="comic-copy">
+            <b>Mishawaka Amphitheatre</b>: Shared shuttle {SHUTTLE_PRICING.mishawaka.shared}. Private suburban{" "}
+            {SHUTTLE_PRICING.mishawaka.privateSuburban}.
+          </div>
+          <div className="comic-copy">
+            <b>Other Denver/Boulder venues</b> (Mission, Ogden, Gothic, Fillmore, Bluebird, Paramount, Summit, Levitt, etc.):{" "}
+            {SHUTTLE_PRICING.denverBoulderOtherVenues.suburban}.
+          </div>
+          <div className="comic-copy" style={{ marginTop: 8 }}>
+            All prices are round-trip (pickup before show plus return after).
           </div>
         </section>
 
