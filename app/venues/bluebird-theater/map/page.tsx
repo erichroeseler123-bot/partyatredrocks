@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { getMediaIndex } from "@/lib/media/getMediaIndex";
+import { selectImageByPriority } from "@/lib/media/selectImage";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
@@ -9,7 +11,15 @@ export const metadata = {
   alternates: { canonical: `${SITE}/venues/bluebird-theater/map` },
 };
 
-export default function BluebirdMapPage() {
+export default async function BluebirdMapPage() {
+  const media = await getMediaIndex(2026);
+  const mapImage = selectImageByPriority({
+    spotifyImage: media?.venuesById?.["bluebird-theater"]?.sources?.spotifyImage ?? null,
+    ticketmasterImage: media?.venuesById?.["bluebird-theater"]?.sources?.ticketmasterImage ?? null,
+    seatgeekImage: media?.venuesById?.["bluebird-theater"]?.sources?.seatgeekImage ?? null,
+    localAsset: media?.venuesById?.["bluebird-theater"]?.sources?.localAsset ?? null,
+    fallback: "/images/venues/bluebird-theater-map.jpg",
+  });
   return (
     <main className="comic-page pt-24 pb-10">
       <section className="comic-wrap">
@@ -29,7 +39,7 @@ export default function BluebirdMapPage() {
 
         <div className="mt-8 text-center">
           <img
-            src="/images/venues/bluebird-theater-map.jpg"
+            src={mapImage}
             alt="Bluebird Theater map showing stage orientation, entry points, bars, and pickup guidance"
             width={800}
             height={600}

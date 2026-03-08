@@ -20,6 +20,12 @@ function slugify(input: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
+const MONTH_LINKS: Array<{ month: number; label: string; href: string }> = [
+  { month: 6, label: "June", href: "/venues/levitt-pavilion-denver/concerts/june" },
+  { month: 7, label: "July", href: "/venues/levitt-pavilion-denver/concerts/july" },
+  { month: 8, label: "August", href: "/venues/levitt-pavilion-denver/concerts/august" },
+];
+
 export default async function LevittConcertsPage() {
   const allEvents = await getEventsCatalog(2026, "all");
   const events = allEvents
@@ -49,6 +55,17 @@ export default async function LevittConcertsPage() {
             </Link>
           </div>
         </div>
+
+        <section className="comic-panel" style={{ marginTop: 16 }}>
+          <div className="comic-tag">Browse by Month</div>
+          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-4 sm:mt-6 w-full px-4">
+            {MONTH_LINKS.map((row) => (
+              <Link key={row.href} href={row.href} className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[180px] text-center">
+                {row.label}
+              </Link>
+            ))}
+          </div>
+        </section>
 
         <section className="comic-panel" style={{ marginTop: 16 }}>
           <div className="comic-tag">Upcoming Shows</div>

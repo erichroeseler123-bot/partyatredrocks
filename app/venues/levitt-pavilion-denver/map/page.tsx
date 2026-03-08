@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { getMediaIndex } from "@/lib/media/getMediaIndex";
+import { selectImageByPriority } from "@/lib/media/selectImage";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
@@ -9,7 +11,15 @@ export const metadata = {
   alternates: { canonical: `${SITE}/venues/levitt-pavilion-denver/map` },
 };
 
-export default function LevittMapPage() {
+export default async function LevittMapPage() {
+  const media = await getMediaIndex(2026);
+  const mapImage = selectImageByPriority({
+    spotifyImage: media?.venuesById?.["levitt-pavilion-denver"]?.sources?.spotifyImage ?? null,
+    ticketmasterImage: media?.venuesById?.["levitt-pavilion-denver"]?.sources?.ticketmasterImage ?? null,
+    seatgeekImage: media?.venuesById?.["levitt-pavilion-denver"]?.sources?.seatgeekImage ?? null,
+    localAsset: media?.venuesById?.["levitt-pavilion-denver"]?.sources?.localAsset ?? null,
+    fallback: "/images/venues/levitt-pavilion-denver-map.jpg",
+  });
   return (
     <main className="comic-page pt-24 pb-10">
       <section className="comic-wrap">
@@ -29,7 +39,7 @@ export default function LevittMapPage() {
 
         <div className="mt-8 text-center">
           <img
-            src="/images/venues/levitt-pavilion-denver-map.jpg"
+            src={mapImage}
             alt="Levitt Pavilion Denver map showing stage orientation, entry points, bars, and pickup guidance"
             width={800}
             height={600}

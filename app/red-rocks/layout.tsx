@@ -9,6 +9,8 @@ const RED_ROCKS_NAV = [
   { href: "/red-rocks/visiting-guide", label: "Visiting Guide" },
   { href: "/red-rocks/transportation", label: "Transportation" },
   { href: "/red-rocks/best-time-to-arrive", label: "Best Time to Arrive" },
+  { href: "/red-rocks/weather", label: "Weather" },
+  { href: "/red-rocks/what-to-wear", label: "What to Wear" },
   { href: "/red-rocks/parking", label: "Parking" },
   { href: "/red-rocks/map", label: "Map" },
 ] as const;

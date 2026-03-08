@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { getMediaIndex } from "@/lib/media/getMediaIndex";
+import { selectImageByPriority } from "@/lib/media/selectImage";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
@@ -9,7 +11,15 @@ export const metadata = {
   alternates: { canonical: `${SITE}/venues/paramount-theatre/map` },
 };
 
-export default function ParamountMapPage() {
+export default async function ParamountMapPage() {
+  const media = await getMediaIndex(2026);
+  const mapImage = selectImageByPriority({
+    spotifyImage: media?.venuesById?.["paramount-theatre"]?.sources?.spotifyImage ?? null,
+    ticketmasterImage: media?.venuesById?.["paramount-theatre"]?.sources?.ticketmasterImage ?? null,
+    seatgeekImage: media?.venuesById?.["paramount-theatre"]?.sources?.seatgeekImage ?? null,
+    localAsset: media?.venuesById?.["paramount-theatre"]?.sources?.localAsset ?? null,
+    fallback: "/images/venues/paramount-theatre-map.jpg",
+  });
   return (
     <main className="comic-page pt-24 pb-10">
       <section className="comic-wrap">
@@ -29,7 +39,7 @@ export default function ParamountMapPage() {
 
         <div className="mt-8 text-center">
           <img
-            src="/images/venues/paramount-theatre-map.jpg"
+            src={mapImage}
             alt="Paramount Theatre map showing stage orientation, entry points, bars, and pickup guidance"
             width={800}
             height={600}

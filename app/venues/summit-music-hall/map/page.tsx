@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { getMediaIndex } from "@/lib/media/getMediaIndex";
+import { selectImageByPriority } from "@/lib/media/selectImage";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
@@ -9,7 +11,15 @@ export const metadata = {
   alternates: { canonical: `${SITE}/venues/summit-music-hall/map` },
 };
 
-export default function SummitMapPage() {
+export default async function SummitMapPage() {
+  const media = await getMediaIndex(2026);
+  const mapImage = selectImageByPriority({
+    spotifyImage: media?.venuesById?.["summit-music-hall"]?.sources?.spotifyImage ?? null,
+    ticketmasterImage: media?.venuesById?.["summit-music-hall"]?.sources?.ticketmasterImage ?? null,
+    seatgeekImage: media?.venuesById?.["summit-music-hall"]?.sources?.seatgeekImage ?? null,
+    localAsset: media?.venuesById?.["summit-music-hall"]?.sources?.localAsset ?? null,
+    fallback: "/images/venues/summit-music-hall-map.jpg",
+  });
   return (
     <main className="comic-page pt-24 pb-10">
       <section className="comic-wrap">
@@ -29,7 +39,7 @@ export default function SummitMapPage() {
 
         <div className="mt-8 text-center">
           <img
-            src="/images/venues/summit-music-hall-map.jpg"
+            src={mapImage}
             alt="Summit Music Hall map showing stage orientation, entry points, bars, and pickup guidance"
             width={800}
             height={600}
