@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { VENUE_SLUGS } from "@/lib/venues";
 import { RED_ROCKS_ENTITIES } from "@/lib/redRocksAuthority";
+import { SCENES } from "@/data/scenes";
 
 type UrlEntry = {
   loc: string;
@@ -98,11 +99,18 @@ export async function GET() {
     { loc: `${base}/venues/ball-arena/concerts/july`, lastmod: now, changefreq: "weekly", priority: 0.7 },
     { loc: `${base}/venues/ball-arena/concerts/august`, lastmod: now, changefreq: "weekly", priority: 0.7 },
 
-    // scenes (keep if these routes exist)
-    { loc: `${base}/scene/jam`, lastmod: now, changefreq: "hourly", priority: 0.8 },
-    { loc: `${base}/scene/edm`, lastmod: now, changefreq: "hourly", priority: 0.8 },
-    { loc: `${base}/scene/hiphop`, lastmod: now, changefreq: "hourly", priority: 0.8 },
+    // scenes
+    { loc: `${base}/scene`, lastmod: now, changefreq: "daily", priority: 0.8 },
   ];
+
+  for (const scene of SCENES) {
+    urls.push({
+      loc: `${base}/scene/${scene.slug}`,
+      lastmod: now,
+      changefreq: "hourly",
+      priority: 0.8,
+    });
+  }
 
   // venue detail pages
   for (const slug of VENUE_SLUGS) {

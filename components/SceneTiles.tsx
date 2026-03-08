@@ -14,7 +14,7 @@ export default function SceneTiles() {
         Explore the Denver Scene
       </div>
 
-      <div className="mt-4 grid gap-4 md:grid-cols-3">
+      <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {tiles.map((t) => (
           <Link
             key={t.key}

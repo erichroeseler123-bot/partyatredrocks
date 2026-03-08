@@ -28,6 +28,11 @@ export const DISPLAY = {
       jam: "/images/scenes/jam.jpg",
       edm: "/images/scenes/edm.jpg",
       hiphop: "/images/scenes/hiphop.jpg",
+      metal: "/images/scenes/metal.jpg",
+      bluegrass: "/images/scenes/bluegrass.jpg",
+      indie: "/images/scenes/indie.jpg",
+      country: "/images/scenes/country.jpg",
+      reggae: "/images/scenes/reggae.jpg",
     },
 
     // venue images keyed by venue slug
@@ -91,6 +96,11 @@ export const DISPLAY = {
       { key: "jam", label: "Jam", href: "/scene/jam" },
       { key: "edm", label: "EDM", href: "/scene/edm" },
       { key: "hiphop", label: "Hip-Hop", href: "/scene/hiphop" },
+      { key: "metal", label: "Metal", href: "/scene/metal" },
+      { key: "bluegrass", label: "Bluegrass", href: "/scene/bluegrass" },
+      { key: "indie", label: "Indie", href: "/scene/indie" },
+      { key: "country", label: "Country", href: "/scene/country" },
+      { key: "reggae", label: "Reggae", href: "/scene/reggae" },
     ],
   },
 } as const;
