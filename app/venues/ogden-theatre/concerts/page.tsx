@@ -24,6 +24,10 @@ const MONTH_LINKS: Array<{ month: number; label: string; href: string }> = [
   { month: 6, label: "June", href: "/venues/ogden-theatre/concerts/june" },
   { month: 7, label: "July", href: "/venues/ogden-theatre/concerts/july" },
   { month: 8, label: "August", href: "/venues/ogden-theatre/concerts/august" },
+  { month: 9, label: "September", href: "/venues/ogden-theatre/concerts/september" },
+  { month: 10, label: "October", href: "/venues/ogden-theatre/concerts/october" },
+  { month: 11, label: "November", href: "/venues/ogden-theatre/concerts/november" },
+  { month: 12, label: "December", href: "/venues/ogden-theatre/concerts/december" },
 ];
 
 export default async function OgdenConcertsPage() {

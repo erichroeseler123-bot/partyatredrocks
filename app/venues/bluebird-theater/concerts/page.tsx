@@ -24,6 +24,10 @@ const MONTH_LINKS: Array<{ month: number; label: string; href: string }> = [
   { month: 6, label: "June", href: "/venues/bluebird-theater/concerts/june" },
   { month: 7, label: "July", href: "/venues/bluebird-theater/concerts/july" },
   { month: 8, label: "August", href: "/venues/bluebird-theater/concerts/august" },
+  { month: 9, label: "September", href: "/venues/bluebird-theater/concerts/september" },
+  { month: 10, label: "October", href: "/venues/bluebird-theater/concerts/october" },
+  { month: 11, label: "November", href: "/venues/bluebird-theater/concerts/november" },
+  { month: 12, label: "December", href: "/venues/bluebird-theater/concerts/december" },
 ];
 
 export default async function BluebirdConcertsPage() {

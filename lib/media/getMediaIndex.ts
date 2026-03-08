@@ -14,6 +14,7 @@ export type MediaIndex = {
       slug: string;
       image: { primary: string; candidates: string[] };
       sources: {
+        blobImage?: string | null;
         spotifyImage: string | null;
         ticketmasterImage: string | null;
         seatgeekImage: string | null;
@@ -34,6 +35,7 @@ export type MediaIndex = {
       venueId: string;
       image: { primary: string; candidates: string[] };
       sources: {
+        blobImage?: string | null;
         spotifyImage: string | null;
         ticketmasterImage: string | null;
         seatgeekImage: string | null;
@@ -53,6 +55,7 @@ export type MediaIndex = {
       name: string;
       image: { primary: string; candidates: string[] };
       sources: {
+        blobImage?: string | null;
         spotifyImage: string | null;
         ticketmasterImage: string | null;
         seatgeekImage: string | null;

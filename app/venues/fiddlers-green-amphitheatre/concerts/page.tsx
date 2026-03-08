@@ -24,6 +24,10 @@ const MONTH_LINKS: Array<{ month: number; label: string; href: string }> = [
   { month: 6, label: "June", href: "/venues/fiddlers-green-amphitheatre/concerts/june" },
   { month: 7, label: "July", href: "/venues/fiddlers-green-amphitheatre/concerts/july" },
   { month: 8, label: "August", href: "/venues/fiddlers-green-amphitheatre/concerts/august" },
+  { month: 9, label: "September", href: "/venues/fiddlers-green-amphitheatre/concerts/september" },
+  { month: 10, label: "October", href: "/venues/fiddlers-green-amphitheatre/concerts/october" },
+  { month: 11, label: "November", href: "/venues/fiddlers-green-amphitheatre/concerts/november" },
+  { month: 12, label: "December", href: "/venues/fiddlers-green-amphitheatre/concerts/december" },
 ];
 
 export default async function FiddlersGreenConcertsPage() {

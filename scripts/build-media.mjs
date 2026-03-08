@@ -89,6 +89,7 @@ async function main() {
         candidates,
       },
       sources: {
+        blobImage: null,
         spotifyImage,
         ticketmasterImage,
         seatgeekImage,
@@ -133,6 +134,7 @@ async function main() {
         candidates,
       },
       sources: {
+        blobImage: null,
         spotifyImage,
         ticketmasterImage,
         seatgeekImage,
@@ -158,6 +160,7 @@ async function main() {
         candidates: [local, "/images/venues/fallback.jpg"],
       },
       sources: {
+        blobImage: null,
         spotifyImage: null,
         ticketmasterImage: null,
         seatgeekImage: null,

@@ -103,11 +103,34 @@ export async function GET() {
     { loc: `${base}/scene`, lastmod: now, changefreq: "daily", priority: 0.8 },
   ];
 
+  const venueConcertMonthSlugs = [
+    "ogden-theatre",
+    "bluebird-theater",
+    "paramount-theatre",
+    "summit-music-hall",
+    "levitt-pavilion-denver",
+    "1stbank-center",
+    "mission-ballroom",
+    "fiddlers-green-amphitheatre",
+    "ball-arena",
+  ];
+  const additionalMonths = ["september", "october", "november", "december"] as const;
+  for (const slug of venueConcertMonthSlugs) {
+    for (const month of additionalMonths) {
+      urls.push({
+        loc: `${base}/venues/${slug}/concerts/${month}`,
+        lastmod: now,
+        changefreq: "monthly",
+        priority: 0.6,
+      });
+    }
+  }
+
   for (const scene of SCENES) {
     urls.push({
       loc: `${base}/scene/${scene.slug}`,
       lastmod: now,
-      changefreq: "hourly",
+      changefreq: "daily",
       priority: 0.8,
     });
   }
@@ -123,13 +146,19 @@ export async function GET() {
     changefreq: "weekly",
     priority: 0.8,
   });
+  urls.push({
+    loc: `${base}/dead-and-company-red-rocks`,
+    lastmod: now,
+    changefreq: "weekly",
+    priority: 0.8,
+  });
 
   // venue detail pages
   for (const slug of VENUE_SLUGS) {
     urls.push({
       loc: `${base}/venues/${slug}`,
       lastmod: now,
-      changefreq: "hourly",
+      changefreq: "daily",
       priority: 0.7,
     });
     urls.push({

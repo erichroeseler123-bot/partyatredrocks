@@ -24,6 +24,10 @@ const MONTH_LINKS: Array<{ month: number; label: string; href: string }> = [
   { month: 6, label: "June", href: "/venues/levitt-pavilion-denver/concerts/june" },
   { month: 7, label: "July", href: "/venues/levitt-pavilion-denver/concerts/july" },
   { month: 8, label: "August", href: "/venues/levitt-pavilion-denver/concerts/august" },
+  { month: 9, label: "September", href: "/venues/levitt-pavilion-denver/concerts/september" },
+  { month: 10, label: "October", href: "/venues/levitt-pavilion-denver/concerts/october" },
+  { month: 11, label: "November", href: "/venues/levitt-pavilion-denver/concerts/november" },
+  { month: 12, label: "December", href: "/venues/levitt-pavilion-denver/concerts/december" },
 ];
 
 export default async function LevittConcertsPage() {

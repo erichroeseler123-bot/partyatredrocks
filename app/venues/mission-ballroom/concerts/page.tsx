@@ -24,6 +24,10 @@ const MONTH_LINKS: Array<{ month: number; label: string; href: string }> = [
   { month: 6, label: "June", href: "/venues/mission-ballroom/concerts/june" },
   { month: 7, label: "July", href: "/venues/mission-ballroom/concerts/july" },
   { month: 8, label: "August", href: "/venues/mission-ballroom/concerts/august" },
+  { month: 9, label: "September", href: "/venues/mission-ballroom/concerts/september" },
+  { month: 10, label: "October", href: "/venues/mission-ballroom/concerts/october" },
+  { month: 11, label: "November", href: "/venues/mission-ballroom/concerts/november" },
+  { month: 12, label: "December", href: "/venues/mission-ballroom/concerts/december" },
 ];
 
 export default async function MissionConcertsPage() {

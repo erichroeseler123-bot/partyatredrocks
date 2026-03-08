@@ -24,6 +24,10 @@ const MONTH_LINKS: Array<{ month: number; label: string; href: string }> = [
   { month: 6, label: "June", href: "/venues/1stbank-center/concerts/june" },
   { month: 7, label: "July", href: "/venues/1stbank-center/concerts/july" },
   { month: 8, label: "August", href: "/venues/1stbank-center/concerts/august" },
+  { month: 9, label: "September", href: "/venues/1stbank-center/concerts/september" },
+  { month: 10, label: "October", href: "/venues/1stbank-center/concerts/october" },
+  { month: 11, label: "November", href: "/venues/1stbank-center/concerts/november" },
+  { month: 12, label: "December", href: "/venues/1stbank-center/concerts/december" },
 ];
 
 export default async function FirstBankConcertsPage() {

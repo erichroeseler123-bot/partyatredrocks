@@ -285,6 +285,15 @@ export default async function SceneHub({ params }: Props) {
               Phish Folsom Guide →
             </Link>
           ) : null}
+
+          {def.slug === "jam" ? (
+            <Link
+              href="/dead-and-company-red-rocks"
+              className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft"
+            >
+              Dead & Company Guide →
+            </Link>
+          ) : null}
         </div>
 
         <div className="mt-4 text-xs text-white/45">

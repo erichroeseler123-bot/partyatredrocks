@@ -24,6 +24,10 @@ const MONTH_LINKS: Array<{ month: number; label: string; href: string }> = [
   { month: 6, label: "June", href: "/venues/ball-arena/concerts/june" },
   { month: 7, label: "July", href: "/venues/ball-arena/concerts/july" },
   { month: 8, label: "August", href: "/venues/ball-arena/concerts/august" },
+  { month: 9, label: "September", href: "/venues/ball-arena/concerts/september" },
+  { month: 10, label: "October", href: "/venues/ball-arena/concerts/october" },
+  { month: 11, label: "November", href: "/venues/ball-arena/concerts/november" },
+  { month: 12, label: "December", href: "/venues/ball-arena/concerts/december" },
 ];
 
 export default async function BallArenaConcertsPage() {

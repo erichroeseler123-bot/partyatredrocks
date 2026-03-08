@@ -122,6 +122,9 @@ export default async function RedRocksHubPage() {
             <Link href="/phish-folsom" className="comic-btn comic-btn-secondary">
               View Event Guide
             </Link>
+            <Link href="/dead-and-company-red-rocks" className="comic-btn comic-btn-secondary">
+              Dead & Company Guide
+            </Link>
             <Link href="/find?venue=ball-arena&qty=2" className="comic-btn comic-btn-primary">
               Book Ride
             </Link>

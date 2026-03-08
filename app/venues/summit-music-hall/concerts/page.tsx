@@ -24,6 +24,10 @@ const MONTH_LINKS: Array<{ month: number; label: string; href: string }> = [
   { month: 6, label: "June", href: "/venues/summit-music-hall/concerts/june" },
   { month: 7, label: "July", href: "/venues/summit-music-hall/concerts/july" },
   { month: 8, label: "August", href: "/venues/summit-music-hall/concerts/august" },
+  { month: 9, label: "September", href: "/venues/summit-music-hall/concerts/september" },
+  { month: 10, label: "October", href: "/venues/summit-music-hall/concerts/october" },
+  { month: 11, label: "November", href: "/venues/summit-music-hall/concerts/november" },
+  { month: 12, label: "December", href: "/venues/summit-music-hall/concerts/december" },
 ];
 
 export default async function SummitConcertsPage() {
