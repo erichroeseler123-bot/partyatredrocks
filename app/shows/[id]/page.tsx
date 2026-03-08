@@ -7,7 +7,7 @@ import { notFound, redirect } from "next/navigation";
 import TicketButtons from "@/components/TicketButtons";
 import RezdyWidgets from "@/components/RezdyWidgets";
 import venuesJson from "@/data/venues.json";
-import { getEventsCatalog } from "@/lib/events/getCatalog";
+import { getArtistsCatalog, getEventsCatalog } from "@/lib/events/getCatalog";
 import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
 import { getMediaIndex } from "@/lib/media/getMediaIndex";
 import { selectImageByPriority } from "@/lib/media/selectImage";
@@ -37,6 +37,9 @@ type ShowEvent = {
     seatgeekVenueId?: number;
   };
 };
+
+type SetlistSong = { name?: string; with?: { name?: string }; cover?: { name?: string } };
+type SetlistDoc = { sets?: { set?: Array<{ song?: SetlistSong[] }> } };
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://partyatredrocks.com";
 const DCC = process.env.NEXT_PUBLIC_DCC_ORIGIN || "https://destinationcommandcenter.com";
@@ -236,6 +239,29 @@ function toShowEvent(event: Awaited<ReturnType<typeof getEventsCatalog>>[number]
   };
 }
 
+async function getSetlist(artistName: string, dateKey: string, venueName: string): Promise<SetlistDoc | null> {
+  const apiKey = process.env.SETLISTFM_API_KEY;
+  if (!apiKey || !artistName || !dateKey) return null;
+  try {
+    const url = new URL("https://api.setlist.fm/rest/1.0/search/setlists");
+    url.searchParams.set("artistName", artistName);
+    url.searchParams.set("date", dateKey.replaceAll("-", ""));
+    if (venueName) url.searchParams.set("venueName", venueName);
+    const response = await fetch(url.toString(), {
+      headers: {
+        "x-api-key": apiKey,
+        Accept: "application/json",
+      },
+      next: { revalidate: 3600 },
+    });
+    if (!response.ok) return null;
+    const payload = (await response.json()) as { setlist?: SetlistDoc[] };
+    return Array.isArray(payload.setlist) ? payload.setlist[0] ?? null : null;
+  } catch {
+    return null;
+  }
+}
+
 async function readShow(id: string): Promise<{ generatedAt?: string; event?: ShowEvent } | null> {
   const all = await getEventsCatalog(2026, "all");
   const selected = all.find((event) => event.id === id || event.sourceId === id);
@@ -278,6 +304,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     (e?.sourceId ? media?.eventsById?.[e.sourceId] : null) ||
     null;
   const mediaImage = selectImageByPriority({
+    blobImage: mediaRow?.sources?.blobImage ?? null,
     spotifyImage: mediaRow?.sources?.spotifyImage ?? null,
     ticketmasterImage: mediaRow?.sources?.ticketmasterImage ?? null,
     seatgeekImage: mediaRow?.sources?.seatgeekImage ?? null,
@@ -331,19 +358,41 @@ export default async function ShowPage({ params }: Props) {
     redirect(`/shows/${encodeURIComponent(e.id)}`);
   }
 
-  const allEvents = await getEventsCatalog(2026, "all");
+  const [allEvents, allArtists] = await Promise.all([getEventsCatalog(2026, "all"), getArtistsCatalog(2026, "all")]);
 
   const venueSlug = e?.venue?.siteSlug;
   const venueName = e?.venue?.siteName || "Venue";
   const updatedAt = data?.generatedAt ?? null;
   const showMediaRow = media?.eventsById?.[e.id] || (e?.sourceId ? media?.eventsById?.[e.sourceId] : null) || null;
   const showImage = selectImageByPriority({
+    blobImage: showMediaRow?.sources?.blobImage ?? null,
     spotifyImage: showMediaRow?.sources?.spotifyImage ?? null,
     ticketmasterImage: showMediaRow?.sources?.ticketmasterImage ?? null,
     seatgeekImage: showMediaRow?.sources?.seatgeekImage ?? null,
     localAsset: showMediaRow?.sources?.localAsset ?? null,
     fallback: showMediaRow?.sources?.fallback ?? "/images/shows/fallback.jpg",
   });
+  const primaryArtist = (e?.performers ?? []).map((p) => p?.name).filter(Boolean)[0] ?? null;
+  const artistRec =
+    (primaryArtist
+      ? allArtists.find((row) => row.id === primaryArtist || slugify(row.name) === slugify(primaryArtist))
+      : null) ?? null;
+  const artistMediaRow = artistRec?.id ? media?.artistsById?.[artistRec.id] ?? null : null;
+  const artistImage = selectImageByPriority({
+    blobImage: artistMediaRow?.sources?.blobImage ?? null,
+    spotifyImage: artistMediaRow?.sources?.spotifyImage ?? null,
+    ticketmasterImage: artistMediaRow?.sources?.ticketmasterImage ?? null,
+    seatgeekImage: artistMediaRow?.sources?.seatgeekImage ?? null,
+    localAsset: artistMediaRow?.sources?.localAsset ?? null,
+    fallback: primaryArtist ? `/images/artists/${slugify(primaryArtist)}.jpg` : "/images/shows/fallback.jpg",
+  });
+  const setlist = primaryArtist ? await getSetlist(primaryArtist, e.dateKey, venueName) : null;
+  const setlistSongs = setlist?.sets?.set?.[0]?.song ?? [];
+  const setlistSearchUrl = primaryArtist
+    ? `https://www.setlist.fm/search?artistName=${encodeURIComponent(primaryArtist)}&query=${encodeURIComponent(
+        `${venueName} ${e.dateKey}`
+      )}`
+    : "https://www.setlist.fm";
   const isRedRocksVenue = venueSlug === "red-rocks-amphitheatre" || venueSlug === "redrocks";
   const relatedShows = allEvents
     .filter((event) => event.id !== e.id && event.venueId === venueSlug)
@@ -406,9 +455,9 @@ export default async function ShowPage({ params }: Props) {
         <div className="mt-5">
           <img
             src={showImage}
-            alt={`${e?.title || "Red Rocks concert"} – ${
+            alt={`${e?.title || "concert"} – ${
               (e?.performers ?? []).map((p) => p?.name).filter(Boolean).join(" & ") || "live performance"
-            } at Red Rocks Amphitheatre`}
+            } at ${venueName}`}
             width={720}
             height={405}
             loading="lazy"
@@ -476,6 +525,51 @@ export default async function ShowPage({ params }: Props) {
               ))}
           </div>
         </div>
+      ) : null}
+
+      {primaryArtist ? (
+        <section className="mt-8 rounded-3xl border border-soft panel-soft p-6">
+          <div className="grid gap-6 md:grid-cols-2">
+            <article>
+              <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">Artist</div>
+              <h2 className="mt-2 text-2xl font-black">{primaryArtist}</h2>
+              <img
+                src={artistImage}
+                alt={`${primaryArtist} performing at ${venueName}`}
+                width={320}
+                height={320}
+                loading="lazy"
+                decoding="async"
+                className="mt-4 w-full max-w-[320px] h-auto rounded-xl border border-white/20 object-cover"
+              />
+            </article>
+            <article>
+              <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">Setlist</div>
+              <h3 className="mt-2 text-xl font-black">Expected / Recent Setlist</h3>
+              {setlistSongs.length ? (
+                <ol className="mt-4 space-y-2 text-white/80 list-decimal pl-5">
+                  {setlistSongs.map((song, index) => (
+                    <li key={`${song?.name ?? "song"}-${index}`}>
+                      {song?.name ?? "Untitled"}
+                      {song?.with?.name ? ` (with ${song.with.name})` : ""}
+                      {song?.cover?.name ? " (cover)" : ""}
+                    </li>
+                  ))}
+                </ol>
+              ) : (
+                <p className="mt-4 text-white/70">Setlist not available yet. Check back after showtime for updates.</p>
+              )}
+              <a
+                href={setlistSearchUrl}
+                target="_blank"
+                rel="nofollow noopener"
+                className="mt-4 inline-block underline text-white/80 hover:text-white"
+              >
+                Open Setlist.fm →
+              </a>
+            </article>
+          </div>
+        </section>
       ) : null}
 
       <div className="mt-8 grid gap-6 md:grid-cols-3">
