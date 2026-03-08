@@ -820,6 +820,9 @@ export default async function VenuePage({
         <section className="comic-panel" style={{ marginTop: 32 }}>
           <div className="comic-tag">Mission Ballroom Quick Guides</div>
           <div className="flex flex-wrap gap-3 mt-4 justify-center">
+            <Link href="/venues/mission-ballroom/concerts" className="comic-btn comic-btn-secondary">
+              Concert Schedule
+            </Link>
             <Link href="/venues/mission-ballroom/best-time-to-arrive" className="comic-btn comic-btn-secondary">
               Best Time to Arrive
             </Link>
