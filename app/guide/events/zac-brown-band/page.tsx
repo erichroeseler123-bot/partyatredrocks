@@ -32,7 +32,7 @@ export default function ZBBEvent() {
       <div className="mt-12 p-8 border rounded-2xl bg-slate-50 flex flex-col items-center hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
         <h3 className="mt-0">Secure Your Transport</h3>
         <p className="text-center mb-6">Pickups at Sheraton Downtown Denver & Trailhead Taphouse Golden.</p>
-        <Link href="/shuttle/shared-shuttle-denver" className="w-full text-center bg-red-700 text-white py-4 rounded-2xl font-bold hover:bg-red-800 transition hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+        <Link href="/find" className="w-full text-center bg-red-700 text-white py-4 rounded-2xl font-bold hover:bg-red-800 transition hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
           Book Zac Brown Shuttle
         </Link>
       </div>

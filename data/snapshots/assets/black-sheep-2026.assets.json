@@ -1,0 +1,248 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "events": {
+    "black-sheep-2026-02-23-rivers-of-nihil": {
+      "local": null,
+      "remote": null
+    },
+    "black-sheep-2026-02-25-the-queers": {
+      "local": null,
+      "remote": null
+    },
+    "black-sheep-2026-03-25-teenage-bottlerocket": {
+      "local": null,
+      "remote": null
+    },
+    "black-sheep-2026-03-28-red-leather": {
+      "local": null,
+      "remote": null
+    },
+    "black-sheep-2026-03-06-nekrogoblikon-with-enterprise-earth": {
+      "local": null,
+      "remote": null
+    },
+    "black-sheep-2026-03-31-obscura-with-allegaeon-cognitive-and-cryptosis": {
+      "local": null,
+      "remote": null
+    },
+    "black-sheep-2026-03-30-i-see-stars": {
+      "local": null,
+      "remote": null
+    },
+    "black-sheep-2026-04-02-subhumans": {
+      "local": null,
+      "remote": null
+    },
+    "black-sheep-2026-04-04-prayers-with-my-life-with-the-thrill-kill-kult": {
+      "local": null,
+      "remote": null
+    },
+    "black-sheep-2026-04-05-magnolia-park-with-silly-goose": {
+      "local": null,
+      "remote": null
+    },
+    "black-sheep-2026-04-09-bit-brigade": {
+      "local": null,
+      "remote": null
+    },
+    "black-sheep-2026-04-11-des-rocs": {
+      "local": null,
+      "remote": null
+    },
+    "black-sheep-2026-04-19-buckethead": {
+      "local": null,
+      "remote": null
+    },
+    "black-sheep-2026-04-20-slomosa": {
+      "local": null,
+      "remote": null
+    },
+    "black-sheep-2026-04-22-cold": {
+      "local": null,
+      "remote": null
+    },
+    "black-sheep-2026-04-23-devotchka-aa-tribute-to-the-music-of-little-miss-sunshinea": {
+      "local": null,
+      "remote": null
+    },
+    "black-sheep-2026-04-29-the-black-dahlia-murder-with-the-acacia-strain": {
+      "local": null,
+      "remote": null
+    },
+    "black-sheep-2026-05-01-lords-of-acid": {
+      "local": null,
+      "remote": null
+    },
+    "black-sheep-2026-05-03-saxsquatch": {
+      "local": null,
+      "remote": null
+    },
+    "black-sheep-2026-05-05-the-spill-canvas": {
+      "local": null,
+      "remote": null
+    },
+    "black-sheep-2026-05-12-unknown-mortal-orchestra": {
+      "local": null,
+      "remote": null
+    },
+    "black-sheep-2026-05-25-powerman-5000": {
+      "local": null,
+      "remote": null
+    },
+    "black-sheep-2026-05-27-archspire-with-undeath": {
+      "local": null,
+      "remote": null
+    },
+    "black-sheep-2026-06-03-alpha-wolf-with-gideon-mugshot-and-resolve": {
+      "local": null,
+      "remote": null
+    }
+  },
+  "artists": {
+    "artist-alpha-wolf": {
+      "local": null,
+      "remote": null
+    },
+    "artist-allegaeon": {
+      "local": null,
+      "remote": null
+    },
+    "artist-archspire": {
+      "local": null,
+      "remote": null
+    },
+    "artist-bit-brigade": {
+      "local": null,
+      "remote": null
+    },
+    "artist-buckethead": {
+      "local": null,
+      "remote": null
+    },
+    "artist-cognitive": {
+      "local": null,
+      "remote": null
+    },
+    "artist-cold": {
+      "local": null,
+      "remote": null
+    },
+    "artist-des-rocs": {
+      "local": null,
+      "remote": null
+    },
+    "artist-devotchka-aa-tribute-to-the-music-of-little-miss-sunshinea": {
+      "local": null,
+      "remote": null
+    },
+    "artist-enterprise-earth": {
+      "local": null,
+      "remote": null
+    },
+    "artist-gideon": {
+      "local": null,
+      "remote": null
+    },
+    "artist-i-see-stars": {
+      "local": null,
+      "remote": null
+    },
+    "artist-lords-of-acid": {
+      "local": null,
+      "remote": null
+    },
+    "artist-magnolia-park": {
+      "local": null,
+      "remote": null
+    },
+    "artist-mugshot": {
+      "local": null,
+      "remote": null
+    },
+    "artist-cryptosis": {
+      "local": null,
+      "remote": null
+    },
+    "artist-my-life": {
+      "local": null,
+      "remote": null
+    },
+    "artist-obscura": {
+      "local": null,
+      "remote": null
+    },
+    "artist-powerman-5000": {
+      "local": null,
+      "remote": null
+    },
+    "artist-nekrogoblikon": {
+      "local": null,
+      "remote": null
+    },
+    "artist-resolve": {
+      "local": null,
+      "remote": null
+    },
+    "artist-prayers": {
+      "local": null,
+      "remote": null
+    },
+    "artist-red-leather": {
+      "local": null,
+      "remote": null
+    },
+    "artist-rivers-of-nihil": {
+      "local": null,
+      "remote": null
+    },
+    "artist-silly-goose": {
+      "local": null,
+      "remote": null
+    },
+    "artist-saxsquatch": {
+      "local": null,
+      "remote": null
+    },
+    "artist-slomosa": {
+      "local": null,
+      "remote": null
+    },
+    "artist-teenage-bottlerocket": {
+      "local": null,
+      "remote": null
+    },
+    "artist-subhumans": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-acacia-strain": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-queers": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-black-dahlia-murder": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-spill-canvas": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-thrill-kill-kult": {
+      "local": null,
+      "remote": null
+    },
+    "artist-undeath": {
+      "local": null,
+      "remote": null
+    },
+    "artist-unknown-mortal-orchestra": {
+      "local": null,
+      "remote": null
+    }
+  }
+}

@@ -1,0 +1,603 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "docs": [
+    {
+      "eventKey": "mission-ballroom-2026-01-24-kitchen-dwellers-with-mountain-grass-unit-16",
+      "title": "Kitchen Dwellers with Mountain Grass Unit (16+)",
+      "artistNames": [
+        "Kitchen Dwellers",
+        "Mountain Grass Unit (16+)"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-01-24",
+      "tags": [
+        "mission-ballroom",
+        "kitchen dwellers",
+        "mountain grass unit (16+)"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-01-24-mountain-grass-unit",
+      "title": "Mountain Grass Unit",
+      "artistNames": [
+        "Mountain Grass Unit"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-01-24",
+      "tags": [
+        "mission-ballroom",
+        "mountain grass unit"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-01-30-ship-wrek-16",
+      "title": "Ship Wrek (16+)",
+      "artistNames": [
+        "Ship Wrek (16+)"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-01-30",
+      "tags": [
+        "mission-ballroom",
+        "ship wrek (16+)"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-01-31-ray-volpe",
+      "title": "Ray Volpe",
+      "artistNames": [
+        "Ray Volpe"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-01-31",
+      "tags": [
+        "mission-ballroom",
+        "ray volpe"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-02-07-chris-lorenzo-16",
+      "title": "Chris Lorenzo (16+)",
+      "artistNames": [
+        "Chris Lorenzo (16+)"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-02-07",
+      "tags": [
+        "mission-ballroom",
+        "chris lorenzo (16+)"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-02-13-the-martinez-brothers-16",
+      "title": "The Martinez Brothers (16+)",
+      "artistNames": [
+        "The Martinez Brothers (16+)"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-02-13",
+      "tags": [
+        "mission-ballroom",
+        "the martinez brothers (16+)"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-02-14-wreckno-and-super-future-16",
+      "title": "Wreckno & Super Future (16+)",
+      "artistNames": [
+        "Wreckno & Super Future (16+)"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-02-14",
+      "tags": [
+        "mission-ballroom",
+        "wreckno & super future (16+)"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-02-15-freya-skye",
+      "title": "Freya Skye",
+      "artistNames": [
+        "Freya Skye"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-02-15",
+      "tags": [
+        "mission-ballroom",
+        "freya skye"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-02-21-sidepiece-16",
+      "title": "Sidepiece (16+)",
+      "artistNames": [
+        "Sidepiece (16+)"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-02-21",
+      "tags": [
+        "mission-ballroom",
+        "sidepiece (16+)"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-02-27-drama-16",
+      "title": "DRAMA (16+)",
+      "artistNames": [
+        "DRAMA (16+)"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-02-27",
+      "tags": [
+        "mission-ballroom",
+        "drama (16+)"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-02-28-maddy-o-neal-with-tokimonsta",
+      "title": "Maddy O'Neal with TOKiMONSTA",
+      "artistNames": [
+        "Maddy O'Neal",
+        "TOKiMONSTA"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-02-28",
+      "tags": [
+        "mission-ballroom",
+        "maddy o'neal",
+        "tokimonsta"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-03-01-dropkick-murphys-with-the-aggrolites-and-haywire-16",
+      "title": "Dropkick Murphys with The Aggrolites and Haywire (16+)",
+      "artistNames": [
+        "Dropkick Murphys",
+        "The Aggrolites",
+        "Haywire (16+)"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-03-01",
+      "tags": [
+        "mission-ballroom",
+        "dropkick murphys",
+        "the aggrolites",
+        "haywire (16+)"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-03-03-artemas-with-isabel-larosa-16",
+      "title": "Artemas with Isabel LaRosa (16+)",
+      "artistNames": [
+        "Artemas",
+        "Isabel LaRosa (16+)"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-03-03",
+      "tags": [
+        "mission-ballroom",
+        "artemas",
+        "isabel larosa (16+)"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-03-06-black-label-society-with-zakk-sabbath-and-dark-chapel",
+      "title": "Black Label Society with Zakk Sabbath and Dark Chapel",
+      "artistNames": [
+        "Black Label Society",
+        "Zakk Sabbath",
+        "Dark Chapel"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-03-06",
+      "tags": [
+        "mission-ballroom",
+        "black label society",
+        "zakk sabbath",
+        "dark chapel"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-03-12-ole-60-with-gabriella-rose",
+      "title": "Ole 60 with Gabriella Rose",
+      "artistNames": [
+        "Ole 60",
+        "Gabriella Rose"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-03-12",
+      "tags": [
+        "mission-ballroom",
+        "ole 60",
+        "gabriella rose"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-03-13-supertask-16",
+      "title": "Supertask (16+)",
+      "artistNames": [
+        "Supertask (16+)"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-03-13",
+      "tags": [
+        "mission-ballroom",
+        "supertask (16+)"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-03-14-max-styler",
+      "title": "Max Styler",
+      "artistNames": [
+        "Max Styler"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-03-14",
+      "tags": [
+        "mission-ballroom",
+        "max styler"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-03-20-the-california-honeydrops",
+      "title": "The California Honeydrops",
+      "artistNames": [
+        "The California Honeydrops"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-03-20",
+      "tags": [
+        "mission-ballroom",
+        "the california honeydrops"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-03-21-the-floozies-16",
+      "title": "The Floozies (16+)",
+      "artistNames": [
+        "The Floozies (16+)"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-03-21",
+      "tags": [
+        "mission-ballroom",
+        "the floozies (16+)"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-03-26-st-paul-and-the-broken-bones",
+      "title": "St. Paul & The Broken Bones",
+      "artistNames": [
+        "St. Paul & The Broken Bones"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-03-26",
+      "tags": [
+        "mission-ballroom",
+        "st. paul & the broken bones"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-03-27-gov-t-mule",
+      "title": "Gov't Mule",
+      "artistNames": [
+        "Gov't Mule"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-03-27",
+      "tags": [
+        "mission-ballroom",
+        "gov't mule"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-03-28-ashnikko",
+      "title": "Ashnikko",
+      "artistNames": [
+        "Ashnikko"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-03-28",
+      "tags": [
+        "mission-ballroom",
+        "ashnikko"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-04-07-lany",
+      "title": "LANY",
+      "artistNames": [
+        "LANY"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-04-07",
+      "tags": [
+        "mission-ballroom",
+        "lany"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-04-08-health-with-carpenter-brut-16",
+      "title": "HEALTH with Carpenter Brut (16+)",
+      "artistNames": [
+        "HEALTH",
+        "Carpenter Brut (16+)"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-04-08",
+      "tags": [
+        "mission-ballroom",
+        "health",
+        "carpenter brut (16+)"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-04-10-the-format-with-phantom-planet-and-limbeck-16",
+      "title": "The Format with Phantom Planet and Limbeck (16+)",
+      "artistNames": [
+        "The Format",
+        "Phantom Planet",
+        "Limbeck (16+)"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-04-10",
+      "tags": [
+        "mission-ballroom",
+        "the format",
+        "phantom planet",
+        "limbeck (16+)"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-04-14-satchvai-band-featuring-joe-satriani-and-steve-vai-16",
+      "title": "SatchVai Band featuring Joe Satriani and Steve Vai (16+)",
+      "artistNames": [
+        "SatchVai Band featuring Joe Satriani and Steve Vai (16+)"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-04-14",
+      "tags": [
+        "mission-ballroom",
+        "satchvai band featuring joe satriani and steve vai (16+)"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-04-15-hatsune-miku",
+      "title": "Hatsune Miku",
+      "artistNames": [
+        "Hatsune Miku"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-04-15",
+      "tags": [
+        "mission-ballroom",
+        "hatsune miku"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-04-16-warren-zeiders-with-lakeview-16",
+      "title": "Warren Zeiders with Lakeview (16+)",
+      "artistNames": [
+        "Warren Zeiders",
+        "Lakeview (16+)"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-04-16",
+      "tags": [
+        "mission-ballroom",
+        "warren zeiders",
+        "lakeview (16+)"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-04-17-cory-wong",
+      "title": "Cory Wong",
+      "artistNames": [
+        "Cory Wong"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-04-17",
+      "tags": [
+        "mission-ballroom",
+        "cory wong"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-04-18-stephen-wilson-jr-16",
+      "title": "Stephen Wilson Jr. (16+)",
+      "artistNames": [
+        "Stephen Wilson Jr. (16+)"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-04-18",
+      "tags": [
+        "mission-ballroom",
+        "stephen wilson jr. (16+)"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-04-23-disclosure-16",
+      "title": "Disclosure (16+)",
+      "artistNames": [
+        "Disclosure (16+)"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-04-23",
+      "tags": [
+        "mission-ballroom",
+        "disclosure (16+)"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-04-24-disclosure-16",
+      "title": "Disclosure (16+)",
+      "artistNames": [
+        "Disclosure (16+)"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-04-24",
+      "tags": [
+        "mission-ballroom",
+        "disclosure (16+)"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-04-25-disclosure-16",
+      "title": "Disclosure (16+)",
+      "artistNames": [
+        "Disclosure (16+)"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-04-25",
+      "tags": [
+        "mission-ballroom",
+        "disclosure (16+)"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-05-01-jason-isbell-and-the-400-unit-16",
+      "title": "Jason Isbell & the 400 Unit (16+)",
+      "artistNames": [
+        "Jason Isbell & the 400 Unit (16+)"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-05-01",
+      "tags": [
+        "mission-ballroom",
+        "jason isbell & the 400 unit (16+)"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-05-03-mac-demarco",
+      "title": "Mac DeMarco",
+      "artistNames": [
+        "Mac DeMarco"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-05-03",
+      "tags": [
+        "mission-ballroom",
+        "mac demarco"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-05-06-the-midnight",
+      "title": "The Midnight",
+      "artistNames": [
+        "The Midnight"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-05-06",
+      "tags": [
+        "mission-ballroom",
+        "the midnight"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-05-11-jose-gonzalez-with-abby-sage-16",
+      "title": "Jose Gonzalez with Abby Sage (16+)",
+      "artistNames": [
+        "Jose Gonzalez",
+        "Abby Sage (16+)"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-05-11",
+      "tags": [
+        "mission-ballroom",
+        "jose gonzalez",
+        "abby sage (16+)"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-05-13-good-kid-with-inoha-16",
+      "title": "Good Kid with INOHA (16+)",
+      "artistNames": [
+        "Good Kid",
+        "INOHA (16+)"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-05-13",
+      "tags": [
+        "mission-ballroom",
+        "good kid",
+        "inoha (16+)"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-05-22-echo-and-the-bunnymen",
+      "title": "Echo & The Bunnymen",
+      "artistNames": [
+        "Echo & The Bunnymen"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-05-22",
+      "tags": [
+        "mission-ballroom",
+        "echo & the bunnymen"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-06-02-the-last-dinner-party-with-automatic",
+      "title": "The Last Dinner Party with Automatic",
+      "artistNames": [
+        "The Last Dinner Party",
+        "Automatic"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-06-02",
+      "tags": [
+        "mission-ballroom",
+        "the last dinner party",
+        "automatic"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-06-13-lane-8-with-cross-pollination-sultan-shepard-and-more-16",
+      "title": "Lane 8 with Cross Pollination, Sultan + Shepard, and more (16+)",
+      "artistNames": [
+        "Lane 8",
+        "Cross Pollination",
+        "Sultan + Shepard",
+        "(16+)"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-06-13",
+      "tags": [
+        "mission-ballroom",
+        "lane 8",
+        "cross pollination",
+        "sultan + shepard",
+        "(16+)"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-08-11-sugar",
+      "title": "Sugar",
+      "artistNames": [
+        "Sugar"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-08-11",
+      "tags": [
+        "mission-ballroom",
+        "sugar"
+      ]
+    },
+    {
+      "eventKey": "mission-ballroom-2026-08-21-courtney-barnett-with-zoh-amba-16",
+      "title": "Courtney Barnett with Zoh Amba (16+)",
+      "artistNames": [
+        "Courtney Barnett",
+        "Zoh Amba (16+)"
+      ],
+      "venueId": "mission-ballroom",
+      "dateKey": "2026-08-21",
+      "tags": [
+        "mission-ballroom",
+        "courtney barnett",
+        "zoh amba (16+)"
+      ]
+    }
+  ]
+}

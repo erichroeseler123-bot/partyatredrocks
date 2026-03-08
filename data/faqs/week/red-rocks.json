@@ -1,0 +1,27 @@
+[
+  {
+    "id": "week-rr-who",
+    "question": "Who is playing Red Rocks this week?",
+    "answer": "The lineup is generated from the current snapshot feed. Use filters and search to isolate artist names and show dates."
+  },
+  {
+    "id": "week-rr-search",
+    "question": "Can I search by artist?",
+    "answer": "Yes. Enter an artist or event title in the search field to narrow the lineup."
+  },
+  {
+    "id": "week-rr-book-date",
+    "question": "Can I book a ride for a specific date?",
+    "answer": "Yes. Open an event card and follow the ride link for that date to start booking."
+  },
+  {
+    "id": "week-rr-times",
+    "question": "Are event times final?",
+    "answer": "Times in the lineup are planning references. Always verify the latest posted time and entry guidance from the venue."
+  },
+  {
+    "id": "week-rr-updates",
+    "question": "Where should I check for official updates?",
+    "answer": "Check official Red Rocks channels for final notices, weather advisories, and policy updates."
+  }
+]

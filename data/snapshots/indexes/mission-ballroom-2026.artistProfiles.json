@@ -1,0 +1,1175 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "byArtistId": {
+    "artist-16": {
+      "id": "artist-16",
+      "name": "(16+)",
+      "eventIds": [
+        "mission-ballroom-2026-06-13-lane-8-with-cross-pollination-sultan-shepard-and-more-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-06-13"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-13",
+      "lastDate": "2026-06-13",
+      "coArtists": [
+        "artist-cross-pollination",
+        "artist-lane-8",
+        "artist-sultan-shepard"
+      ]
+    },
+    "artist-abby-sage-16": {
+      "id": "artist-abby-sage-16",
+      "name": "Abby Sage (16+)",
+      "eventIds": [
+        "mission-ballroom-2026-05-11-jose-gonzalez-with-abby-sage-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-05-11"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-11",
+      "lastDate": "2026-05-11",
+      "coArtists": [
+        "artist-jose-gonzalez"
+      ]
+    },
+    "artist-artemas": {
+      "id": "artist-artemas",
+      "name": "Artemas",
+      "eventIds": [
+        "mission-ballroom-2026-03-03-artemas-with-isabel-larosa-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-03-03"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-03",
+      "lastDate": "2026-03-03",
+      "coArtists": [
+        "artist-isabel-larosa-16"
+      ]
+    },
+    "artist-ashnikko": {
+      "id": "artist-ashnikko",
+      "name": "Ashnikko",
+      "eventIds": [
+        "mission-ballroom-2026-03-28-ashnikko"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-03-28"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-28",
+      "lastDate": "2026-03-28",
+      "coArtists": []
+    },
+    "artist-automatic": {
+      "id": "artist-automatic",
+      "name": "Automatic",
+      "eventIds": [
+        "mission-ballroom-2026-06-02-the-last-dinner-party-with-automatic"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-06-02"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-02",
+      "lastDate": "2026-06-02",
+      "coArtists": [
+        "artist-the-last-dinner-party"
+      ]
+    },
+    "artist-black-label-society": {
+      "id": "artist-black-label-society",
+      "name": "Black Label Society",
+      "eventIds": [
+        "mission-ballroom-2026-03-06-black-label-society-with-zakk-sabbath-and-dark-chapel"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-03-06"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-06",
+      "lastDate": "2026-03-06",
+      "coArtists": [
+        "artist-dark-chapel",
+        "artist-zakk-sabbath"
+      ]
+    },
+    "artist-carpenter-brut-16": {
+      "id": "artist-carpenter-brut-16",
+      "name": "Carpenter Brut (16+)",
+      "eventIds": [
+        "mission-ballroom-2026-04-08-health-with-carpenter-brut-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-04-08"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-08",
+      "lastDate": "2026-04-08",
+      "coArtists": [
+        "artist-health"
+      ]
+    },
+    "artist-chris-lorenzo-16": {
+      "id": "artist-chris-lorenzo-16",
+      "name": "Chris Lorenzo (16+)",
+      "eventIds": [
+        "mission-ballroom-2026-02-07-chris-lorenzo-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-02-07"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-07",
+      "lastDate": "2026-02-07",
+      "coArtists": []
+    },
+    "artist-cory-wong": {
+      "id": "artist-cory-wong",
+      "name": "Cory Wong",
+      "eventIds": [
+        "mission-ballroom-2026-04-17-cory-wong"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-04-17"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-17",
+      "lastDate": "2026-04-17",
+      "coArtists": []
+    },
+    "artist-courtney-barnett": {
+      "id": "artist-courtney-barnett",
+      "name": "Courtney Barnett",
+      "eventIds": [
+        "mission-ballroom-2026-08-21-courtney-barnett-with-zoh-amba-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-08-21"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-08-21",
+      "lastDate": "2026-08-21",
+      "coArtists": [
+        "artist-zoh-amba-16"
+      ]
+    },
+    "artist-cross-pollination": {
+      "id": "artist-cross-pollination",
+      "name": "Cross Pollination",
+      "eventIds": [
+        "mission-ballroom-2026-06-13-lane-8-with-cross-pollination-sultan-shepard-and-more-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-06-13"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-13",
+      "lastDate": "2026-06-13",
+      "coArtists": [
+        "artist-16",
+        "artist-lane-8",
+        "artist-sultan-shepard"
+      ]
+    },
+    "artist-dark-chapel": {
+      "id": "artist-dark-chapel",
+      "name": "Dark Chapel",
+      "eventIds": [
+        "mission-ballroom-2026-03-06-black-label-society-with-zakk-sabbath-and-dark-chapel"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-03-06"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-06",
+      "lastDate": "2026-03-06",
+      "coArtists": [
+        "artist-black-label-society",
+        "artist-zakk-sabbath"
+      ]
+    },
+    "artist-disclosure-16": {
+      "id": "artist-disclosure-16",
+      "name": "Disclosure (16+)",
+      "eventIds": [
+        "mission-ballroom-2026-04-23-disclosure-16",
+        "mission-ballroom-2026-04-24-disclosure-16",
+        "mission-ballroom-2026-04-25-disclosure-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-04-23",
+        "2026-04-24",
+        "2026-04-25"
+      ],
+      "showCount": 3,
+      "firstDate": "2026-04-23",
+      "lastDate": "2026-04-25",
+      "coArtists": []
+    },
+    "artist-drama-16": {
+      "id": "artist-drama-16",
+      "name": "DRAMA (16+)",
+      "eventIds": [
+        "mission-ballroom-2026-02-27-drama-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-02-27"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-27",
+      "lastDate": "2026-02-27",
+      "coArtists": []
+    },
+    "artist-dropkick-murphys": {
+      "id": "artist-dropkick-murphys",
+      "name": "Dropkick Murphys",
+      "eventIds": [
+        "mission-ballroom-2026-03-01-dropkick-murphys-with-the-aggrolites-and-haywire-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-03-01"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-01",
+      "lastDate": "2026-03-01",
+      "coArtists": [
+        "artist-haywire-16",
+        "artist-the-aggrolites"
+      ]
+    },
+    "artist-echo-and-the-bunnymen": {
+      "id": "artist-echo-and-the-bunnymen",
+      "name": "Echo & The Bunnymen",
+      "eventIds": [
+        "mission-ballroom-2026-05-22-echo-and-the-bunnymen"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-05-22"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-22",
+      "lastDate": "2026-05-22",
+      "coArtists": []
+    },
+    "artist-freya-skye": {
+      "id": "artist-freya-skye",
+      "name": "Freya Skye",
+      "eventIds": [
+        "mission-ballroom-2026-02-15-freya-skye"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-02-15"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-15",
+      "lastDate": "2026-02-15",
+      "coArtists": []
+    },
+    "artist-gabriella-rose": {
+      "id": "artist-gabriella-rose",
+      "name": "Gabriella Rose",
+      "eventIds": [
+        "mission-ballroom-2026-03-12-ole-60-with-gabriella-rose"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-03-12"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-12",
+      "lastDate": "2026-03-12",
+      "coArtists": [
+        "artist-ole-60"
+      ]
+    },
+    "artist-good-kid": {
+      "id": "artist-good-kid",
+      "name": "Good Kid",
+      "eventIds": [
+        "mission-ballroom-2026-05-13-good-kid-with-inoha-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-05-13"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-13",
+      "lastDate": "2026-05-13",
+      "coArtists": [
+        "artist-inoha-16"
+      ]
+    },
+    "artist-gov-t-mule": {
+      "id": "artist-gov-t-mule",
+      "name": "Gov't Mule",
+      "eventIds": [
+        "mission-ballroom-2026-03-27-gov-t-mule"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-03-27"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-27",
+      "lastDate": "2026-03-27",
+      "coArtists": []
+    },
+    "artist-hatsune-miku": {
+      "id": "artist-hatsune-miku",
+      "name": "Hatsune Miku",
+      "eventIds": [
+        "mission-ballroom-2026-04-15-hatsune-miku"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-04-15"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-15",
+      "lastDate": "2026-04-15",
+      "coArtists": []
+    },
+    "artist-haywire-16": {
+      "id": "artist-haywire-16",
+      "name": "Haywire (16+)",
+      "eventIds": [
+        "mission-ballroom-2026-03-01-dropkick-murphys-with-the-aggrolites-and-haywire-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-03-01"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-01",
+      "lastDate": "2026-03-01",
+      "coArtists": [
+        "artist-dropkick-murphys",
+        "artist-the-aggrolites"
+      ]
+    },
+    "artist-health": {
+      "id": "artist-health",
+      "name": "HEALTH",
+      "eventIds": [
+        "mission-ballroom-2026-04-08-health-with-carpenter-brut-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-04-08"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-08",
+      "lastDate": "2026-04-08",
+      "coArtists": [
+        "artist-carpenter-brut-16"
+      ]
+    },
+    "artist-inoha-16": {
+      "id": "artist-inoha-16",
+      "name": "INOHA (16+)",
+      "eventIds": [
+        "mission-ballroom-2026-05-13-good-kid-with-inoha-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-05-13"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-13",
+      "lastDate": "2026-05-13",
+      "coArtists": [
+        "artist-good-kid"
+      ]
+    },
+    "artist-isabel-larosa-16": {
+      "id": "artist-isabel-larosa-16",
+      "name": "Isabel LaRosa (16+)",
+      "eventIds": [
+        "mission-ballroom-2026-03-03-artemas-with-isabel-larosa-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-03-03"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-03",
+      "lastDate": "2026-03-03",
+      "coArtists": [
+        "artist-artemas"
+      ]
+    },
+    "artist-jason-isbell-and-the-400-unit-16": {
+      "id": "artist-jason-isbell-and-the-400-unit-16",
+      "name": "Jason Isbell & the 400 Unit (16+)",
+      "eventIds": [
+        "mission-ballroom-2026-05-01-jason-isbell-and-the-400-unit-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-05-01"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-01",
+      "lastDate": "2026-05-01",
+      "coArtists": []
+    },
+    "artist-jose-gonzalez": {
+      "id": "artist-jose-gonzalez",
+      "name": "Jose Gonzalez",
+      "eventIds": [
+        "mission-ballroom-2026-05-11-jose-gonzalez-with-abby-sage-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-05-11"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-11",
+      "lastDate": "2026-05-11",
+      "coArtists": [
+        "artist-abby-sage-16"
+      ]
+    },
+    "artist-kitchen-dwellers": {
+      "id": "artist-kitchen-dwellers",
+      "name": "Kitchen Dwellers",
+      "eventIds": [
+        "mission-ballroom-2026-01-24-kitchen-dwellers-with-mountain-grass-unit-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-01-24"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-01-24",
+      "lastDate": "2026-01-24",
+      "coArtists": [
+        "artist-mountain-grass-unit-16"
+      ]
+    },
+    "artist-lakeview-16": {
+      "id": "artist-lakeview-16",
+      "name": "Lakeview (16+)",
+      "eventIds": [
+        "mission-ballroom-2026-04-16-warren-zeiders-with-lakeview-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-04-16"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-16",
+      "lastDate": "2026-04-16",
+      "coArtists": [
+        "artist-warren-zeiders"
+      ]
+    },
+    "artist-lane-8": {
+      "id": "artist-lane-8",
+      "name": "Lane 8",
+      "eventIds": [
+        "mission-ballroom-2026-06-13-lane-8-with-cross-pollination-sultan-shepard-and-more-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-06-13"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-13",
+      "lastDate": "2026-06-13",
+      "coArtists": [
+        "artist-16",
+        "artist-cross-pollination",
+        "artist-sultan-shepard"
+      ]
+    },
+    "artist-lany": {
+      "id": "artist-lany",
+      "name": "LANY",
+      "eventIds": [
+        "mission-ballroom-2026-04-07-lany"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-04-07"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-07",
+      "lastDate": "2026-04-07",
+      "coArtists": []
+    },
+    "artist-limbeck-16": {
+      "id": "artist-limbeck-16",
+      "name": "Limbeck (16+)",
+      "eventIds": [
+        "mission-ballroom-2026-04-10-the-format-with-phantom-planet-and-limbeck-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-04-10"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-10",
+      "lastDate": "2026-04-10",
+      "coArtists": [
+        "artist-phantom-planet",
+        "artist-the-format"
+      ]
+    },
+    "artist-mac-demarco": {
+      "id": "artist-mac-demarco",
+      "name": "Mac DeMarco",
+      "eventIds": [
+        "mission-ballroom-2026-05-03-mac-demarco"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-05-03"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-03",
+      "lastDate": "2026-05-03",
+      "coArtists": []
+    },
+    "artist-maddy-o-neal": {
+      "id": "artist-maddy-o-neal",
+      "name": "Maddy O'Neal",
+      "eventIds": [
+        "mission-ballroom-2026-02-28-maddy-o-neal-with-tokimonsta"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-02-28"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-28",
+      "lastDate": "2026-02-28",
+      "coArtists": [
+        "artist-tokimonsta"
+      ]
+    },
+    "artist-max-styler": {
+      "id": "artist-max-styler",
+      "name": "Max Styler",
+      "eventIds": [
+        "mission-ballroom-2026-03-14-max-styler"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-03-14"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-14",
+      "lastDate": "2026-03-14",
+      "coArtists": []
+    },
+    "artist-mountain-grass-unit": {
+      "id": "artist-mountain-grass-unit",
+      "name": "Mountain Grass Unit",
+      "eventIds": [
+        "mission-ballroom-2026-01-24-mountain-grass-unit"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-01-24"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-01-24",
+      "lastDate": "2026-01-24",
+      "coArtists": []
+    },
+    "artist-mountain-grass-unit-16": {
+      "id": "artist-mountain-grass-unit-16",
+      "name": "Mountain Grass Unit (16+)",
+      "eventIds": [
+        "mission-ballroom-2026-01-24-kitchen-dwellers-with-mountain-grass-unit-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-01-24"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-01-24",
+      "lastDate": "2026-01-24",
+      "coArtists": [
+        "artist-kitchen-dwellers"
+      ]
+    },
+    "artist-ole-60": {
+      "id": "artist-ole-60",
+      "name": "Ole 60",
+      "eventIds": [
+        "mission-ballroom-2026-03-12-ole-60-with-gabriella-rose"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-03-12"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-12",
+      "lastDate": "2026-03-12",
+      "coArtists": [
+        "artist-gabriella-rose"
+      ]
+    },
+    "artist-phantom-planet": {
+      "id": "artist-phantom-planet",
+      "name": "Phantom Planet",
+      "eventIds": [
+        "mission-ballroom-2026-04-10-the-format-with-phantom-planet-and-limbeck-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-04-10"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-10",
+      "lastDate": "2026-04-10",
+      "coArtists": [
+        "artist-limbeck-16",
+        "artist-the-format"
+      ]
+    },
+    "artist-ray-volpe": {
+      "id": "artist-ray-volpe",
+      "name": "Ray Volpe",
+      "eventIds": [
+        "mission-ballroom-2026-01-31-ray-volpe"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-01-31"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-01-31",
+      "lastDate": "2026-01-31",
+      "coArtists": []
+    },
+    "artist-satchvai-band-featuring-joe-satriani-and-steve-vai-16": {
+      "id": "artist-satchvai-band-featuring-joe-satriani-and-steve-vai-16",
+      "name": "SatchVai Band featuring Joe Satriani and Steve Vai (16+)",
+      "eventIds": [
+        "mission-ballroom-2026-04-14-satchvai-band-featuring-joe-satriani-and-steve-vai-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-04-14"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-14",
+      "lastDate": "2026-04-14",
+      "coArtists": []
+    },
+    "artist-ship-wrek-16": {
+      "id": "artist-ship-wrek-16",
+      "name": "Ship Wrek (16+)",
+      "eventIds": [
+        "mission-ballroom-2026-01-30-ship-wrek-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-01-30"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-01-30",
+      "lastDate": "2026-01-30",
+      "coArtists": []
+    },
+    "artist-sidepiece-16": {
+      "id": "artist-sidepiece-16",
+      "name": "Sidepiece (16+)",
+      "eventIds": [
+        "mission-ballroom-2026-02-21-sidepiece-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-02-21"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-21",
+      "lastDate": "2026-02-21",
+      "coArtists": []
+    },
+    "artist-st-paul-and-the-broken-bones": {
+      "id": "artist-st-paul-and-the-broken-bones",
+      "name": "St. Paul & The Broken Bones",
+      "eventIds": [
+        "mission-ballroom-2026-03-26-st-paul-and-the-broken-bones"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-03-26"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-26",
+      "lastDate": "2026-03-26",
+      "coArtists": []
+    },
+    "artist-stephen-wilson-jr-16": {
+      "id": "artist-stephen-wilson-jr-16",
+      "name": "Stephen Wilson Jr. (16+)",
+      "eventIds": [
+        "mission-ballroom-2026-04-18-stephen-wilson-jr-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-04-18"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-18",
+      "lastDate": "2026-04-18",
+      "coArtists": []
+    },
+    "artist-sugar": {
+      "id": "artist-sugar",
+      "name": "Sugar",
+      "eventIds": [
+        "mission-ballroom-2026-08-11-sugar"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-08-11"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-08-11",
+      "lastDate": "2026-08-11",
+      "coArtists": []
+    },
+    "artist-sultan-shepard": {
+      "id": "artist-sultan-shepard",
+      "name": "Sultan + Shepard",
+      "eventIds": [
+        "mission-ballroom-2026-06-13-lane-8-with-cross-pollination-sultan-shepard-and-more-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-06-13"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-13",
+      "lastDate": "2026-06-13",
+      "coArtists": [
+        "artist-16",
+        "artist-cross-pollination",
+        "artist-lane-8"
+      ]
+    },
+    "artist-supertask-16": {
+      "id": "artist-supertask-16",
+      "name": "Supertask (16+)",
+      "eventIds": [
+        "mission-ballroom-2026-03-13-supertask-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-03-13"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-13",
+      "lastDate": "2026-03-13",
+      "coArtists": []
+    },
+    "artist-the-aggrolites": {
+      "id": "artist-the-aggrolites",
+      "name": "The Aggrolites",
+      "eventIds": [
+        "mission-ballroom-2026-03-01-dropkick-murphys-with-the-aggrolites-and-haywire-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-03-01"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-01",
+      "lastDate": "2026-03-01",
+      "coArtists": [
+        "artist-dropkick-murphys",
+        "artist-haywire-16"
+      ]
+    },
+    "artist-the-california-honeydrops": {
+      "id": "artist-the-california-honeydrops",
+      "name": "The California Honeydrops",
+      "eventIds": [
+        "mission-ballroom-2026-03-20-the-california-honeydrops"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-03-20"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-20",
+      "lastDate": "2026-03-20",
+      "coArtists": []
+    },
+    "artist-the-floozies-16": {
+      "id": "artist-the-floozies-16",
+      "name": "The Floozies (16+)",
+      "eventIds": [
+        "mission-ballroom-2026-03-21-the-floozies-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-03-21"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-21",
+      "lastDate": "2026-03-21",
+      "coArtists": []
+    },
+    "artist-the-format": {
+      "id": "artist-the-format",
+      "name": "The Format",
+      "eventIds": [
+        "mission-ballroom-2026-04-10-the-format-with-phantom-planet-and-limbeck-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-04-10"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-10",
+      "lastDate": "2026-04-10",
+      "coArtists": [
+        "artist-limbeck-16",
+        "artist-phantom-planet"
+      ]
+    },
+    "artist-the-last-dinner-party": {
+      "id": "artist-the-last-dinner-party",
+      "name": "The Last Dinner Party",
+      "eventIds": [
+        "mission-ballroom-2026-06-02-the-last-dinner-party-with-automatic"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-06-02"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-02",
+      "lastDate": "2026-06-02",
+      "coArtists": [
+        "artist-automatic"
+      ]
+    },
+    "artist-the-martinez-brothers-16": {
+      "id": "artist-the-martinez-brothers-16",
+      "name": "The Martinez Brothers (16+)",
+      "eventIds": [
+        "mission-ballroom-2026-02-13-the-martinez-brothers-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-02-13"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-13",
+      "lastDate": "2026-02-13",
+      "coArtists": []
+    },
+    "artist-the-midnight": {
+      "id": "artist-the-midnight",
+      "name": "The Midnight",
+      "eventIds": [
+        "mission-ballroom-2026-05-06-the-midnight"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-05-06"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-06",
+      "lastDate": "2026-05-06",
+      "coArtists": []
+    },
+    "artist-tokimonsta": {
+      "id": "artist-tokimonsta",
+      "name": "TOKiMONSTA",
+      "eventIds": [
+        "mission-ballroom-2026-02-28-maddy-o-neal-with-tokimonsta"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-02-28"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-28",
+      "lastDate": "2026-02-28",
+      "coArtists": [
+        "artist-maddy-o-neal"
+      ]
+    },
+    "artist-warren-zeiders": {
+      "id": "artist-warren-zeiders",
+      "name": "Warren Zeiders",
+      "eventIds": [
+        "mission-ballroom-2026-04-16-warren-zeiders-with-lakeview-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-04-16"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-16",
+      "lastDate": "2026-04-16",
+      "coArtists": [
+        "artist-lakeview-16"
+      ]
+    },
+    "artist-wreckno-and-super-future-16": {
+      "id": "artist-wreckno-and-super-future-16",
+      "name": "Wreckno & Super Future (16+)",
+      "eventIds": [
+        "mission-ballroom-2026-02-14-wreckno-and-super-future-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-02-14"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-14",
+      "lastDate": "2026-02-14",
+      "coArtists": []
+    },
+    "artist-zakk-sabbath": {
+      "id": "artist-zakk-sabbath",
+      "name": "Zakk Sabbath",
+      "eventIds": [
+        "mission-ballroom-2026-03-06-black-label-society-with-zakk-sabbath-and-dark-chapel"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-03-06"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-06",
+      "lastDate": "2026-03-06",
+      "coArtists": [
+        "artist-black-label-society",
+        "artist-dark-chapel"
+      ]
+    },
+    "artist-zoh-amba-16": {
+      "id": "artist-zoh-amba-16",
+      "name": "Zoh Amba (16+)",
+      "eventIds": [
+        "mission-ballroom-2026-08-21-courtney-barnett-with-zoh-amba-16"
+      ],
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "dateKeys": [
+        "2026-08-21"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-08-21",
+      "lastDate": "2026-08-21",
+      "coArtists": [
+        "artist-courtney-barnett"
+      ]
+    }
+  },
+  "artistIdsByShowCountDesc": [
+    "artist-disclosure-16",
+    "artist-16",
+    "artist-abby-sage-16",
+    "artist-artemas",
+    "artist-ashnikko",
+    "artist-automatic",
+    "artist-black-label-society",
+    "artist-carpenter-brut-16",
+    "artist-chris-lorenzo-16",
+    "artist-cory-wong",
+    "artist-courtney-barnett",
+    "artist-cross-pollination",
+    "artist-dark-chapel",
+    "artist-drama-16",
+    "artist-dropkick-murphys",
+    "artist-echo-and-the-bunnymen",
+    "artist-freya-skye",
+    "artist-gabriella-rose",
+    "artist-good-kid",
+    "artist-gov-t-mule",
+    "artist-hatsune-miku",
+    "artist-haywire-16",
+    "artist-health",
+    "artist-inoha-16",
+    "artist-isabel-larosa-16",
+    "artist-jason-isbell-and-the-400-unit-16",
+    "artist-jose-gonzalez",
+    "artist-kitchen-dwellers",
+    "artist-lakeview-16",
+    "artist-lane-8",
+    "artist-lany",
+    "artist-limbeck-16",
+    "artist-mac-demarco",
+    "artist-maddy-o-neal",
+    "artist-max-styler",
+    "artist-mountain-grass-unit",
+    "artist-mountain-grass-unit-16",
+    "artist-ole-60",
+    "artist-phantom-planet",
+    "artist-ray-volpe",
+    "artist-satchvai-band-featuring-joe-satriani-and-steve-vai-16",
+    "artist-ship-wrek-16",
+    "artist-sidepiece-16",
+    "artist-st-paul-and-the-broken-bones",
+    "artist-stephen-wilson-jr-16",
+    "artist-sugar",
+    "artist-sultan-shepard",
+    "artist-supertask-16",
+    "artist-the-aggrolites",
+    "artist-the-california-honeydrops",
+    "artist-the-floozies-16",
+    "artist-the-format",
+    "artist-the-last-dinner-party",
+    "artist-the-martinez-brothers-16",
+    "artist-the-midnight",
+    "artist-tokimonsta",
+    "artist-warren-zeiders",
+    "artist-wreckno-and-super-future-16",
+    "artist-zakk-sabbath",
+    "artist-zoh-amba-16"
+  ]
+}

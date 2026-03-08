@@ -1,0 +1,384 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "docs": [
+    {
+      "eventKey": "boulder-theater-2026-01-31-fitz-and-the-tantrums",
+      "title": "Fitz and the Tantrums",
+      "artistNames": [
+        "Fitz and the Tantrums"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-01-31",
+      "tags": [
+        "boulder-theater",
+        "fitz and the tantrums"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-02-06-stella-cole-with-the-boulder-philharmonic",
+      "title": "Stella Cole with the Boulder Philharmonic",
+      "artistNames": [
+        "Stella Cole",
+        "the Boulder Philharmonic"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-02-06",
+      "tags": [
+        "boulder-theater",
+        "stella cole",
+        "the boulder philharmonic"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-02-10-the-revivalists",
+      "title": "The Revivalists",
+      "artistNames": [
+        "The Revivalists"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-02-10",
+      "tags": [
+        "boulder-theater",
+        "the revivalists"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-02-13-the-record-company",
+      "title": "The Record Company",
+      "artistNames": [
+        "The Record Company"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-02-13",
+      "tags": [
+        "boulder-theater",
+        "the record company"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-02-20-atmosphere-with-sage-francis",
+      "title": "Atmosphere with Sage Francis",
+      "artistNames": [
+        "Atmosphere",
+        "Sage Francis"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-02-20",
+      "tags": [
+        "boulder-theater",
+        "atmosphere",
+        "sage francis"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-02-25-daniel-donato-s-cosmic-country-2-day-pass",
+      "title": "Daniel Donato's Cosmic Country - 2 Day Pass",
+      "artistNames": [
+        "Daniel Donato's Cosmic Country - 2 Day Pass"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-02-25",
+      "tags": [
+        "boulder-theater",
+        "daniel donato's cosmic country - 2 day pass"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-02-25-daniel-donato-s-cosmic-country-night-1",
+      "title": "Daniel Donato's Cosmic Country (Night 1)",
+      "artistNames": [
+        "Daniel Donato's Cosmic Country (Night 1)"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-02-25",
+      "tags": [
+        "boulder-theater",
+        "daniel donato's cosmic country (night 1)"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-02-26-daniel-donato-s-cosmic-country-night-2",
+      "title": "Daniel Donato's Cosmic Country (Night 2)",
+      "artistNames": [
+        "Daniel Donato's Cosmic Country (Night 2)"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-02-26",
+      "tags": [
+        "boulder-theater",
+        "daniel donato's cosmic country (night 2)"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-02-28-all-them-witches-21",
+      "title": "All Them Witches (21+)",
+      "artistNames": [
+        "All Them Witches (21+)"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-02-28",
+      "tags": [
+        "boulder-theater",
+        "all them witches (21+)"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-03-01-the-devil-makes-three",
+      "title": "The Devil Makes Three",
+      "artistNames": [
+        "The Devil Makes Three"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-03-01",
+      "tags": [
+        "boulder-theater",
+        "the devil makes three"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-03-03-3oh-3",
+      "title": "3OH!3",
+      "artistNames": [
+        "3OH!3"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-03-03",
+      "tags": [
+        "boulder-theater",
+        "3oh!3"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-03-04-yacht-rock-revue",
+      "title": "Yacht Rock Revue",
+      "artistNames": [
+        "Yacht Rock Revue"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-03-04",
+      "tags": [
+        "boulder-theater",
+        "yacht rock revue"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-03-07-club-90s-heated-rivalry-night-18",
+      "title": "Club 90s - Heated Rivalry Night (18+)",
+      "artistNames": [
+        "Club 90s - Heated Rivalry Night (18+)"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-03-07",
+      "tags": [
+        "boulder-theater",
+        "club 90s - heated rivalry night (18+)"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-03-10-chris-isaak",
+      "title": "Chris Isaak",
+      "artistNames": [
+        "Chris Isaak"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-03-10",
+      "tags": [
+        "boulder-theater",
+        "chris isaak"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-03-13-pure-prairie-league-with-pablo-cruise",
+      "title": "Pure Prairie League with Pablo Cruise",
+      "artistNames": [
+        "Pure Prairie League",
+        "Pablo Cruise"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-03-13",
+      "tags": [
+        "boulder-theater",
+        "pure prairie league",
+        "pablo cruise"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-03-14-nimino",
+      "title": "Nimino",
+      "artistNames": [
+        "Nimino"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-03-14",
+      "tags": [
+        "boulder-theater",
+        "nimino"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-03-15-neko-case-with-destroyer",
+      "title": "Neko Case with Destroyer",
+      "artistNames": [
+        "Neko Case",
+        "Destroyer"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-03-15",
+      "tags": [
+        "boulder-theater",
+        "neko case",
+        "destroyer"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-03-17-emmet-cohen-presents-miles-and-coltrane-at-100",
+      "title": "Emmet Cohen presents: Miles and Coltrane at 100",
+      "artistNames": [
+        "Emmet Cohen presents: Miles and Coltrane at 100"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-03-17",
+      "tags": [
+        "boulder-theater",
+        "emmet cohen presents: miles and coltrane at 100"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-03-19-matisyahu",
+      "title": "Matisyahu",
+      "artistNames": [
+        "Matisyahu"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-03-19",
+      "tags": [
+        "boulder-theater",
+        "matisyahu"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-03-22-solas",
+      "title": "Solas",
+      "artistNames": [
+        "Solas"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-03-22",
+      "tags": [
+        "boulder-theater",
+        "solas"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-03-25-the-high-kings",
+      "title": "The High Kings",
+      "artistNames": [
+        "The High Kings"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-03-25",
+      "tags": [
+        "boulder-theater",
+        "the high kings"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-03-26-the-menzingers-with-i-am-the-avalanche",
+      "title": "The Menzingers with I Am The Avalanche",
+      "artistNames": [
+        "The Menzingers",
+        "I Am The Avalanche"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-03-26",
+      "tags": [
+        "boulder-theater",
+        "the menzingers",
+        "i am the avalanche"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-04-07-pat-metheny",
+      "title": "Pat Metheny",
+      "artistNames": [
+        "Pat Metheny"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-04-07",
+      "tags": [
+        "boulder-theater",
+        "pat metheny"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-04-09-branford-marsalis",
+      "title": "Branford Marsalis",
+      "artistNames": [
+        "Branford Marsalis"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-04-09",
+      "tags": [
+        "boulder-theater",
+        "branford marsalis"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-04-28-afi-with-choir-boy",
+      "title": "AFI with Choir Boy",
+      "artistNames": [
+        "AFI",
+        "Choir Boy"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-04-28",
+      "tags": [
+        "boulder-theater",
+        "afi",
+        "choir boy"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-05-01-hail-the-sun-with-foxy-shazam",
+      "title": "Hail the Sun with Foxy Shazam",
+      "artistNames": [
+        "Hail the Sun",
+        "Foxy Shazam"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-05-01",
+      "tags": [
+        "boulder-theater",
+        "hail the sun",
+        "foxy shazam"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-05-10-alan-doyle",
+      "title": "Alan Doyle",
+      "artistNames": [
+        "Alan Doyle"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-05-10",
+      "tags": [
+        "boulder-theater",
+        "alan doyle"
+      ]
+    },
+    {
+      "eventKey": "boulder-theater-2026-08-23-laurie-berkner",
+      "title": "Laurie Berkner",
+      "artistNames": [
+        "Laurie Berkner"
+      ],
+      "venueId": "boulder-theater",
+      "dateKey": "2026-08-23",
+      "tags": [
+        "boulder-theater",
+        "laurie berkner"
+      ]
+    }
+  ]
+}

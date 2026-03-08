@@ -1,0 +1,1655 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "artists": [
+    {
+      "id": "artist-age-of-madness",
+      "name": "Age of Madness",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-02-26-jeremy-jordan-with-age-of-madness"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-02-26"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-26",
+      "lastDate": "2026-02-26",
+      "coArtists": [
+        "artist-jeremy-jordan"
+      ]
+    },
+    {
+      "id": "artist-alexsucks",
+      "name": "ALEXSUCKS",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-18-alexsucks"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-18"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-18",
+      "lastDate": "2026-03-18",
+      "coArtists": []
+    },
+    {
+      "id": "artist-all-your-friends-18",
+      "name": "All Your Friends (18+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-02-28-all-your-friends-18"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-02-28"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-28",
+      "lastDate": "2026-02-28",
+      "coArtists": []
+    },
+    {
+      "id": "artist-angel-du-t",
+      "name": "Angel Du$t",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-29-angel-du-t-with-home-front"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-29"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-29",
+      "lastDate": "2026-03-29",
+      "coArtists": [
+        "artist-home-front"
+      ]
+    },
+    {
+      "id": "artist-armand-hammer",
+      "name": "Armand Hammer",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-11-13-armand-hammer"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-11-13"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-11-13",
+      "lastDate": "2026-11-13",
+      "coArtists": []
+    },
+    {
+      "id": "artist-bayymack-18",
+      "name": "Bayymack (18+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-01-30-bayymack-18"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-01-30"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-01-30",
+      "lastDate": "2026-01-30",
+      "coArtists": []
+    },
+    {
+      "id": "artist-beauty-school-dropout",
+      "name": "Beauty School Dropout",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-02-19-beauty-school-dropout"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-02-19"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-19",
+      "lastDate": "2026-02-19",
+      "coArtists": []
+    },
+    {
+      "id": "artist-bentley-robles",
+      "name": "Bentley Robles",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-21-emm-with-bentley-robles"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-21"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-21",
+      "lastDate": "2026-03-21",
+      "coArtists": [
+        "artist-emm"
+      ]
+    },
+    {
+      "id": "artist-bravo-the-bagchaser",
+      "name": "Bravo the Bagchaser",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-02-03-bravo-the-bagchaser-with-lil-maru"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-02-03"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-03",
+      "lastDate": "2026-02-03",
+      "coArtists": [
+        "artist-lil-maru"
+      ]
+    },
+    {
+      "id": "artist-cabal",
+      "name": "Cabal",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-11-siamese-with-cabal"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-11"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-11",
+      "lastDate": "2026-03-11",
+      "coArtists": [
+        "artist-siamese"
+      ]
+    },
+    {
+      "id": "artist-capstan",
+      "name": "Capstan",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-04-capstan-with-in-her-own-words-and-dreamwake"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-04"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-04",
+      "lastDate": "2026-03-04",
+      "coArtists": [
+        "artist-dreamwake",
+        "artist-in-her-own-words"
+      ]
+    },
+    {
+      "id": "artist-chri-tian-gate",
+      "name": "Chri$tian Gate$",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-01-31-chri-tian-gate-with-neon-the-bishop"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-01-31"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-01-31",
+      "lastDate": "2026-01-31",
+      "coArtists": [
+        "artist-neon-the-bishop"
+      ]
+    },
+    {
+      "id": "artist-cold",
+      "name": "Cold",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-04-23-cold"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-04-23"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-23",
+      "lastDate": "2026-04-23",
+      "coArtists": []
+    },
+    {
+      "id": "artist-daisy-grenade",
+      "name": "Daisy Grenade",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-05-26-daisy-grenade-with-vienna-vienna"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-05-26"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-26",
+      "lastDate": "2026-05-26",
+      "coArtists": [
+        "artist-vienna-vienna"
+      ]
+    },
+    {
+      "id": "artist-dark-divine",
+      "name": "Dark Divine",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-17-dark-divine"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-17"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-17",
+      "lastDate": "2026-03-17",
+      "coArtists": []
+    },
+    {
+      "id": "artist-dead-calm",
+      "name": "Dead Calm",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-05-22-dead-calm"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-05-22"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-22",
+      "lastDate": "2026-05-22",
+      "coArtists": []
+    },
+    {
+      "id": "artist-dead-eyes",
+      "name": "Dead Eyes",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-09-the-browning-with-within-destruction-face-yourself-and-dead-eyes"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-09"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-09",
+      "lastDate": "2026-03-09",
+      "coArtists": [
+        "artist-face-yourself",
+        "artist-the-browning",
+        "artist-within-destruction"
+      ]
+    },
+    {
+      "id": "artist-des-rocs",
+      "name": "Des Rocs",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-04-10-des-rocs-with-romes"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-04-10"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-10",
+      "lastDate": "2026-04-10",
+      "coArtists": [
+        "artist-romes"
+      ]
+    },
+    {
+      "id": "artist-destiny-bond",
+      "name": "Destiny Bond",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-13-spiritual-cramp-with-destiny-bond"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-13"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-13",
+      "lastDate": "2026-03-13",
+      "coArtists": [
+        "artist-spiritual-cramp"
+      ]
+    },
+    {
+      "id": "artist-dream-ivory",
+      "name": "Dream, Ivory",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-20-dream-ivory"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-20"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-20",
+      "lastDate": "2026-03-20",
+      "coArtists": []
+    },
+    {
+      "id": "artist-dreamwake",
+      "name": "Dreamwake",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-04-capstan-with-in-her-own-words-and-dreamwake"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-04"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-04",
+      "lastDate": "2026-03-04",
+      "coArtists": [
+        "artist-capstan",
+        "artist-in-her-own-words"
+      ]
+    },
+    {
+      "id": "artist-drugdealer",
+      "name": "Drugdealer",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-04-22-drugdealer"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-04-22"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-22",
+      "lastDate": "2026-04-22",
+      "coArtists": []
+    },
+    {
+      "id": "artist-emily-king",
+      "name": "Emily King",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-22-emily-king"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-22"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-22",
+      "lastDate": "2026-03-22",
+      "coArtists": []
+    },
+    {
+      "id": "artist-emm",
+      "name": "EMM",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-21-emm-with-bentley-robles"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-21"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-21",
+      "lastDate": "2026-03-21",
+      "coArtists": [
+        "artist-bentley-robles"
+      ]
+    },
+    {
+      "id": "artist-face-yourself",
+      "name": "Face Yourself",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-09-the-browning-with-within-destruction-face-yourself-and-dead-eyes"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-09"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-09",
+      "lastDate": "2026-03-09",
+      "coArtists": [
+        "artist-dead-eyes",
+        "artist-the-browning",
+        "artist-within-destruction"
+      ]
+    },
+    {
+      "id": "artist-faetooth",
+      "name": "Faetooth",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-05-07-faetooth"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-05-07"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-07",
+      "lastDate": "2026-05-07",
+      "coArtists": []
+    },
+    {
+      "id": "artist-fr3ak",
+      "name": "Fr3ak",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-02-10-left-to-suffer-with-the-last-ten-seconds-of-life-larcenia-roe-and-fr3ak"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-02-10"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-10",
+      "lastDate": "2026-02-10",
+      "coArtists": [
+        "artist-larcenia-roe",
+        "artist-left-to-suffer",
+        "artist-the-last-ten-seconds-of-life"
+      ]
+    },
+    {
+      "id": "artist-girlpuppy",
+      "name": "girlpuppy",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-04-04-sarah-kinsley-with-girlpuppy"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-04-04"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-04",
+      "lastDate": "2026-04-04",
+      "coArtists": [
+        "artist-sarah-kinsley"
+      ]
+    },
+    {
+      "id": "artist-glitterer",
+      "name": "Glitterer",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-02-27-glitterer"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-02-27"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-27",
+      "lastDate": "2026-02-27",
+      "coArtists": []
+    },
+    {
+      "id": "artist-glixen",
+      "name": "Glixen",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-05-02-glixen-with-trauma-ray"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-05-02"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-02",
+      "lastDate": "2026-05-02",
+      "coArtists": [
+        "artist-trauma-ray"
+      ]
+    },
+    {
+      "id": "artist-goon",
+      "name": "Goon",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-05-19-vundabar-with-goon"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-05-19"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-19",
+      "lastDate": "2026-05-19",
+      "coArtists": [
+        "artist-vundabar"
+      ]
+    },
+    {
+      "id": "artist-hayden-coffman",
+      "name": "Hayden Coffman",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-02-21-hayden-coffman"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-02-21"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-21",
+      "lastDate": "2026-02-21",
+      "coArtists": []
+    },
+    {
+      "id": "artist-home-front",
+      "name": "Home Front",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-29-angel-du-t-with-home-front"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-29"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-29",
+      "lastDate": "2026-03-29",
+      "coArtists": [
+        "artist-angel-du-t"
+      ]
+    },
+    {
+      "id": "artist-in-her-own-words",
+      "name": "In Her Own Words",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-04-capstan-with-in-her-own-words-and-dreamwake"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-04"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-04",
+      "lastDate": "2026-03-04",
+      "coArtists": [
+        "artist-capstan",
+        "artist-dreamwake"
+      ]
+    },
+    {
+      "id": "artist-jeremy-jordan",
+      "name": "Jeremy Jordan",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-02-26-jeremy-jordan-with-age-of-madness"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-02-26"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-26",
+      "lastDate": "2026-02-26",
+      "coArtists": [
+        "artist-age-of-madness"
+      ]
+    },
+    {
+      "id": "artist-larcenia-roe",
+      "name": "Larcenia Roe",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-02-10-left-to-suffer-with-the-last-ten-seconds-of-life-larcenia-roe-and-fr3ak"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-02-10"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-10",
+      "lastDate": "2026-02-10",
+      "coArtists": [
+        "artist-fr3ak",
+        "artist-left-to-suffer",
+        "artist-the-last-ten-seconds-of-life"
+      ]
+    },
+    {
+      "id": "artist-left-to-suffer",
+      "name": "Left To Suffer",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-02-10-left-to-suffer-with-the-last-ten-seconds-of-life-larcenia-roe-and-fr3ak"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-02-10"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-10",
+      "lastDate": "2026-02-10",
+      "coArtists": [
+        "artist-fr3ak",
+        "artist-larcenia-roe",
+        "artist-the-last-ten-seconds-of-life"
+      ]
+    },
+    {
+      "id": "artist-lil-maru",
+      "name": "Lil Maru",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-02-03-bravo-the-bagchaser-with-lil-maru"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-02-03"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-03",
+      "lastDate": "2026-02-03",
+      "coArtists": [
+        "artist-bravo-the-bagchaser"
+      ]
+    },
+    {
+      "id": "artist-lithe",
+      "name": "Lithe",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-19-lithe"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-19"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-19",
+      "lastDate": "2026-03-19",
+      "coArtists": []
+    },
+    {
+      "id": "artist-lou-deezi",
+      "name": "Lou Deezi",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-04-26-lou-deezi"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-04-26"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-26",
+      "lastDate": "2026-04-26",
+      "coArtists": []
+    },
+    {
+      "id": "artist-maro",
+      "name": "Maro",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-04-20-maro"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-04-20"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-20",
+      "lastDate": "2026-04-20",
+      "coArtists": []
+    },
+    {
+      "id": "artist-mat-kerekes",
+      "name": "Mat Kerekes",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-01-mat-kerekes-with-shallow-alcove"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-01"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-01",
+      "lastDate": "2026-03-01",
+      "coArtists": [
+        "artist-shallow-alcove"
+      ]
+    },
+    {
+      "id": "artist-mc-davo",
+      "name": "MC Davo",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-01-27-mc-davo"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-01-27"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-01-27",
+      "lastDate": "2026-01-27",
+      "coArtists": []
+    },
+    {
+      "id": "artist-mclusky",
+      "name": "Mclusky",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-24-mclusky"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-24"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-24",
+      "lastDate": "2026-03-24",
+      "coArtists": []
+    },
+    {
+      "id": "artist-mizmor",
+      "name": "Mizmor",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-06-23-monolord-with-mizmor"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-06-23"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-23",
+      "lastDate": "2026-06-23",
+      "coArtists": [
+        "artist-monolord"
+      ]
+    },
+    {
+      "id": "artist-monolord",
+      "name": "Monolord",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-06-23-monolord-with-mizmor"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-06-23"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-23",
+      "lastDate": "2026-06-23",
+      "coArtists": [
+        "artist-mizmor"
+      ]
+    },
+    {
+      "id": "artist-naika",
+      "name": "Naika",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-31-naika"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-31"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-31",
+      "lastDate": "2026-03-31",
+      "coArtists": []
+    },
+    {
+      "id": "artist-nathan-evans-and-the-saint-phnx-band",
+      "name": "Nathan Evans & The Saint PHNX Band",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-02-22-nathan-evans-and-the-saint-phnx-band"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-02-22"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-22",
+      "lastDate": "2026-02-22",
+      "coArtists": []
+    },
+    {
+      "id": "artist-neon-the-bishop",
+      "name": "Neon The Bishop",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-01-31-chri-tian-gate-with-neon-the-bishop"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-01-31"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-01-31",
+      "lastDate": "2026-01-31",
+      "coArtists": [
+        "artist-chri-tian-gate"
+      ]
+    },
+    {
+      "id": "artist-night-cap",
+      "name": "Night Cap",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-30-night-cap"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-30"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-30",
+      "lastDate": "2026-03-30",
+      "coArtists": []
+    },
+    {
+      "id": "artist-pity-party-girls-club",
+      "name": "Pity Party (Girls Club)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-27-pity-party-girls-club"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-27"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-27",
+      "lastDate": "2026-03-27",
+      "coArtists": []
+    },
+    {
+      "id": "artist-r-a-p-ferreira",
+      "name": "R.A.P. Ferreira",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-04-01-r-a-p-ferreira"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-04-01"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-01",
+      "lastDate": "2026-04-01",
+      "coArtists": []
+    },
+    {
+      "id": "artist-romes",
+      "name": "ROMES",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-04-10-des-rocs-with-romes"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-04-10"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-10",
+      "lastDate": "2026-04-10",
+      "coArtists": [
+        "artist-des-rocs"
+      ]
+    },
+    {
+      "id": "artist-sarah-kinsley",
+      "name": "Sarah Kinsley",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-04-04-sarah-kinsley-with-girlpuppy"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-04-04"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-04",
+      "lastDate": "2026-04-04",
+      "coArtists": [
+        "artist-girlpuppy"
+      ]
+    },
+    {
+      "id": "artist-shallow-alcove",
+      "name": "Shallow Alcove",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-01-mat-kerekes-with-shallow-alcove"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-01"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-01",
+      "lastDate": "2026-03-01",
+      "coArtists": [
+        "artist-mat-kerekes"
+      ]
+    },
+    {
+      "id": "artist-siamese",
+      "name": "Siamese",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-11-siamese-with-cabal"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-11"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-11",
+      "lastDate": "2026-03-11",
+      "coArtists": [
+        "artist-cabal"
+      ]
+    },
+    {
+      "id": "artist-skizzy-mars-rescheduled-from-10-16-2025",
+      "name": "Skizzy Mars (Rescheduled from 10/16/2025)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-04-28-skizzy-mars-rescheduled-from-10-16-2025"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-04-28"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-28",
+      "lastDate": "2026-04-28",
+      "coArtists": []
+    },
+    {
+      "id": "artist-slomosa",
+      "name": "Slomosa",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-04-21-slomosa"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-04-21"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-21",
+      "lastDate": "2026-04-21",
+      "coArtists": []
+    },
+    {
+      "id": "artist-solya",
+      "name": "Solya",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-07-03-solya"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-07-03"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-07-03",
+      "lastDate": "2026-07-03",
+      "coArtists": []
+    },
+    {
+      "id": "artist-soul-blind",
+      "name": "Soul Blind",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-04-18-soul-blind"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-04-18"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-18",
+      "lastDate": "2026-04-18",
+      "coArtists": []
+    },
+    {
+      "id": "artist-spaced",
+      "name": "Spaced",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-04-11-sweet-pill-with-spaced-and-stereosity"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-04-11"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-11",
+      "lastDate": "2026-04-11",
+      "coArtists": [
+        "artist-stereosity",
+        "artist-sweet-pill"
+      ]
+    },
+    {
+      "id": "artist-spiritual-cramp",
+      "name": "Spiritual Cramp",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-13-spiritual-cramp-with-destiny-bond"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-13"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-13",
+      "lastDate": "2026-03-13",
+      "coArtists": [
+        "artist-destiny-bond"
+      ]
+    },
+    {
+      "id": "artist-steinza",
+      "name": "Steinza",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-28-steinza"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-28"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-28",
+      "lastDate": "2026-03-28",
+      "coArtists": []
+    },
+    {
+      "id": "artist-stereosity",
+      "name": "Stereosity",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-04-11-sweet-pill-with-spaced-and-stereosity"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-04-11"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-11",
+      "lastDate": "2026-04-11",
+      "coArtists": [
+        "artist-spaced",
+        "artist-sweet-pill"
+      ]
+    },
+    {
+      "id": "artist-sweet-pill",
+      "name": "Sweet Pill",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-04-11-sweet-pill-with-spaced-and-stereosity"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-04-11"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-11",
+      "lastDate": "2026-04-11",
+      "coArtists": [
+        "artist-spaced",
+        "artist-stereosity"
+      ]
+    },
+    {
+      "id": "artist-the-browning",
+      "name": "The Browning",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-09-the-browning-with-within-destruction-face-yourself-and-dead-eyes"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-09"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-09",
+      "lastDate": "2026-03-09",
+      "coArtists": [
+        "artist-dead-eyes",
+        "artist-face-yourself",
+        "artist-within-destruction"
+      ]
+    },
+    {
+      "id": "artist-the-last-ten-seconds-of-life",
+      "name": "The Last Ten Seconds of Life",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-02-10-left-to-suffer-with-the-last-ten-seconds-of-life-larcenia-roe-and-fr3ak"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-02-10"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-10",
+      "lastDate": "2026-02-10",
+      "coArtists": [
+        "artist-fr3ak",
+        "artist-larcenia-roe",
+        "artist-left-to-suffer"
+      ]
+    },
+    {
+      "id": "artist-the-scratch",
+      "name": "The Scratch",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-05-18-the-scratch"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-05-18"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-18",
+      "lastDate": "2026-05-18",
+      "coArtists": []
+    },
+    {
+      "id": "artist-the-sloppy-boys",
+      "name": "The Sloppy Boys",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-25-the-sloppy-boys"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-25"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-25",
+      "lastDate": "2026-03-25",
+      "coArtists": []
+    },
+    {
+      "id": "artist-trauma-ray",
+      "name": "Trauma Ray",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-05-02-glixen-with-trauma-ray"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-05-02"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-02",
+      "lastDate": "2026-05-02",
+      "coArtists": [
+        "artist-glixen"
+      ]
+    },
+    {
+      "id": "artist-troy-doherty",
+      "name": "Troy Doherty",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-06-05-troy-doherty"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-06-05"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-05",
+      "lastDate": "2026-06-05",
+      "coArtists": []
+    },
+    {
+      "id": "artist-unitytx",
+      "name": "UnityTX",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-16-varials-with-unitytx"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-16"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-16",
+      "lastDate": "2026-03-16",
+      "coArtists": [
+        "artist-varials"
+      ]
+    },
+    {
+      "id": "artist-unprocessed",
+      "name": "Unprocessed",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-04-25-unprocessed"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-04-25"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-25",
+      "lastDate": "2026-04-25",
+      "coArtists": []
+    },
+    {
+      "id": "artist-varials",
+      "name": "Varials",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-16-varials-with-unitytx"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-16"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-16",
+      "lastDate": "2026-03-16",
+      "coArtists": [
+        "artist-unitytx"
+      ]
+    },
+    {
+      "id": "artist-vienna-vienna",
+      "name": "Vienna Vienna",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-05-26-daisy-grenade-with-vienna-vienna"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-05-26"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-26",
+      "lastDate": "2026-05-26",
+      "coArtists": [
+        "artist-daisy-grenade"
+      ]
+    },
+    {
+      "id": "artist-vundabar",
+      "name": "Vundabar",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-05-19-vundabar-with-goon"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-05-19"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-19",
+      "lastDate": "2026-05-19",
+      "coArtists": [
+        "artist-goon"
+      ]
+    },
+    {
+      "id": "artist-white-denim",
+      "name": "White Denim",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-06-03-white-denim"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-06-03"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-03",
+      "lastDate": "2026-06-03",
+      "coArtists": []
+    },
+    {
+      "id": "artist-within-destruction",
+      "name": "Within Destruction",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-09-the-browning-with-within-destruction-face-yourself-and-dead-eyes"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-09"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-09",
+      "lastDate": "2026-03-09",
+      "coArtists": [
+        "artist-dead-eyes",
+        "artist-face-yourself",
+        "artist-the-browning"
+      ]
+    },
+    {
+      "id": "artist-yellow-days",
+      "name": "Yellow Days",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-03-26-yellow-days"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-03-26"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-26",
+      "lastDate": "2026-03-26",
+      "coArtists": []
+    },
+    {
+      "id": "artist-your-arms-are-my-cocoon",
+      "name": "Your Arms Are My Cocoon",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-02-01-your-arms-are-my-cocoon"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-02-01"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-01",
+      "lastDate": "2026-02-01",
+      "coArtists": []
+    },
+    {
+      "id": "artist-yung-bans",
+      "name": "Yung Bans",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "marquis-theater-2026-02-13-yung-bans"
+      ],
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "dateKeys": [
+        "2026-02-13"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-13",
+      "lastDate": "2026-02-13",
+      "coArtists": []
+    }
+  ]
+}

@@ -83,7 +83,7 @@ export default function ShuttleComparison() {
           <h3 className="text-2xl font-bold mb-4 text-slate-900">The "Top Circle" Difference</h3>
           <p className="text-strong leading-relaxed">
             Most competitors drop you in the Upper North Lot. While better than the Lower lots, it still requires a significant hike. 
-            Our <Link href="/shuttle/private-suv" className="text-red-700 underline">private SUV service</Link> is authorized for 
+            Our <Link href="/suv" className="text-red-700 underline">private SUV service</Link> is authorized for 
             Top Circle access, putting you directly at Row 70.
           </p>
         </section>
@@ -93,8 +93,8 @@ export default function ShuttleComparison() {
         <h2 className="text-white text-3xl font-black mb-4">Ready for a Better Experience?</h2>
         <p className="mb-8 text-xl">Stop comparing and start relaxing. Book your 2026 shuttle today.</p>
         <div className="flex flex-col md:flex-row gap-4 justify-center">
-          <Link href="/shuttle/shared-shuttle-denver" className="bg-white text-red-700 px-8 py-4 rounded-full font-black hover:bg-slate-100 transition">Shared Shuttle: $59</Link>
-          <Link href="/shuttle/private-suv" className="bg-surface text-white px-8 py-4 rounded-full font-black hover:bg-surface transition">Private SUV: $499</Link>
+          <Link href="/find" className="bg-white text-red-700 px-8 py-4 rounded-full font-black hover:bg-slate-100 transition">Shared Shuttle: $59</Link>
+          <Link href="/suv" className="bg-surface text-white px-8 py-4 rounded-full font-black hover:bg-surface transition">Private SUV: $499</Link>
         </div>
       </div>
     </div>

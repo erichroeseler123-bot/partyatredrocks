@@ -1,0 +1,80 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "events": [
+    {
+      "id": "ford-amphitheater-colorado-springs-2026-06-18-o-a-r-with-gavin-degraw-and-phantom-planet",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "O.A.R. with Gavin DeGraw and Phantom Planet",
+      "startAt": "2026-06-18T19:00:00",
+      "startLocal": "2026-06-18T19:00:00",
+      "venueId": "ford-amphitheater-colorado-springs",
+      "headliners": [
+        "artist-o-a-r"
+      ],
+      "artists": [
+        "artist-o-a-r",
+        "artist-gavin-degraw",
+        "artist-phantom-planet"
+      ],
+      "artistNames": [
+        "O.A.R.",
+        "Gavin DeGraw",
+        "Phantom Planet"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-06-18",
+      "slug": "2026-06-18-o-a-r-with-gavin-degraw-and-phantom-planet"
+    },
+    {
+      "id": "ford-amphitheater-colorado-springs-2026-08-14-alison-krauss-and-union-station-with-jerry-douglas-and-theo-lawrence",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Alison Krauss & Union Station with Jerry Douglas and Theo Lawrence",
+      "startAt": "2026-08-14T19:00:00",
+      "startLocal": "2026-08-14T19:00:00",
+      "venueId": "ford-amphitheater-colorado-springs",
+      "headliners": [
+        "artist-alison-krauss-and-union-station"
+      ],
+      "artists": [
+        "artist-alison-krauss-and-union-station",
+        "artist-jerry-douglas",
+        "artist-theo-lawrence"
+      ],
+      "artistNames": [
+        "Alison Krauss & Union Station",
+        "Jerry Douglas",
+        "Theo Lawrence"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-08-14",
+      "slug": "2026-08-14-alison-krauss-and-union-station-with-jerry-douglas-and-theo-lawrence"
+    },
+    {
+      "id": "ford-amphitheater-colorado-springs-2026-09-05-brantley-gilbert-rescheduled-from-10-11-25",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Brantley Gilbert (Rescheduled from 10/11/25)",
+      "startAt": "2026-09-05T19:00:00",
+      "startLocal": "2026-09-05T19:00:00",
+      "venueId": "ford-amphitheater-colorado-springs",
+      "headliners": [
+        "artist-brantley-gilbert-rescheduled-from-10-11-25"
+      ],
+      "artists": [
+        "artist-brantley-gilbert-rescheduled-from-10-11-25"
+      ],
+      "artistNames": [
+        "Brantley Gilbert (Rescheduled from 10/11/25)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-09-05",
+      "slug": "2026-09-05-brantley-gilbert-rescheduled-from-10-11-25"
+    }
+  ]
+}

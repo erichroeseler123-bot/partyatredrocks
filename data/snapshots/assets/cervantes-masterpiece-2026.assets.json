@@ -1,0 +1,80 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "events": {
+    "cervantes-masterpiece-2026-02-12-ghostface-killah": {
+      "local": null,
+      "remote": null
+    },
+    "cervantes-masterpiece-2026-02-17-fox-stevenson": {
+      "local": null,
+      "remote": null
+    },
+    "cervantes-masterpiece-2026-02-26-whethan-16": {
+      "local": null,
+      "remote": null
+    },
+    "cervantes-masterpiece-2026-02-27-whethan-16": {
+      "local": null,
+      "remote": null
+    },
+    "cervantes-masterpiece-2026-03-12-cash-cobain": {
+      "local": null,
+      "remote": null
+    },
+    "cervantes-masterpiece-2026-03-20-kwn": {
+      "local": null,
+      "remote": null
+    },
+    "cervantes-masterpiece-2026-03-25-ruel": {
+      "local": null,
+      "remote": null
+    },
+    "cervantes-masterpiece-2026-05-02-sasquatch-16": {
+      "local": null,
+      "remote": null
+    },
+    "cervantes-masterpiece-2026-06-19-iration": {
+      "local": null,
+      "remote": null
+    },
+    "cervantes-masterpiece-2026-06-20-iration": {
+      "local": null,
+      "remote": null
+    }
+  },
+  "artists": {
+    "artist-cash-cobain": {
+      "local": null,
+      "remote": null
+    },
+    "artist-fox-stevenson": {
+      "local": null,
+      "remote": null
+    },
+    "artist-ghostface-killah": {
+      "local": null,
+      "remote": null
+    },
+    "artist-iration": {
+      "local": null,
+      "remote": null
+    },
+    "artist-kwn": {
+      "local": null,
+      "remote": null
+    },
+    "artist-ruel": {
+      "local": null,
+      "remote": null
+    },
+    "artist-sasquatch-16": {
+      "local": null,
+      "remote": null
+    },
+    "artist-whethan-16": {
+      "local": null,
+      "remote": null
+    }
+  }
+}

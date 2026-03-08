@@ -45,7 +45,7 @@ export default function WestracksComparison() {
           The public pilot won't bring you home from the show. We provide the only stress-free, 
           late-night shuttle from the Top Circle directly back to Denver and Golden.
         </p>
-        <Link href="/book-shuttle" className="btn-primary uppercase hover:bg-red-500 transition shadow-xl inline-block">
+        <Link href="/find" className="btn-primary uppercase hover:bg-red-500 transition shadow-xl inline-block">
           Secure Your Ride
         </Link>
       </div>

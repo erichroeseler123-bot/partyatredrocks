@@ -1,0 +1,22 @@
+[
+  {
+    "id": "rr-where",
+    "question": "Where is Red Rocks Amphitheatre?",
+    "answer": "Red Rocks Amphitheatre is in Morrison, Colorado, west of Denver. Travel time can vary significantly on major show nights."
+  },
+  {
+    "id": "rr-best-shuttle",
+    "question": "What is the best shuttle option for Red Rocks?",
+    "answer": "Shared shuttles work well for most riders. Private SUV and van options are better when your group wants flexible pickup and one dedicated vehicle."
+  },
+  {
+    "id": "rr-leave-time",
+    "question": "What time should I leave Denver for a show?",
+    "answer": "Plan to depart with buffer before doors. Departure timing depends on your pickup point, traffic, and whether the event is sold out."
+  },
+  {
+    "id": "rr-weather",
+    "question": "What happens if weather changes?",
+    "answer": "Weather can shift quickly at the venue. Monitor venue alerts, bring layers, and follow operator updates for any pickup or departure adjustments."
+  }
+]

@@ -1,0 +1,152 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "byArtistId": {
+    "artist-alison-krauss-and-union-station": {
+      "id": "artist-alison-krauss-and-union-station",
+      "name": "Alison Krauss & Union Station",
+      "eventIds": [
+        "ford-amphitheater-colorado-springs-2026-08-14-alison-krauss-and-union-station-with-jerry-douglas-and-theo-lawrence"
+      ],
+      "venueIds": [
+        "ford-amphitheater-colorado-springs"
+      ],
+      "dateKeys": [
+        "2026-08-14"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-08-14",
+      "lastDate": "2026-08-14",
+      "coArtists": [
+        "artist-jerry-douglas",
+        "artist-theo-lawrence"
+      ]
+    },
+    "artist-brantley-gilbert-rescheduled-from-10-11-25": {
+      "id": "artist-brantley-gilbert-rescheduled-from-10-11-25",
+      "name": "Brantley Gilbert (Rescheduled from 10/11/25)",
+      "eventIds": [
+        "ford-amphitheater-colorado-springs-2026-09-05-brantley-gilbert-rescheduled-from-10-11-25"
+      ],
+      "venueIds": [
+        "ford-amphitheater-colorado-springs"
+      ],
+      "dateKeys": [
+        "2026-09-05"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-09-05",
+      "lastDate": "2026-09-05",
+      "coArtists": []
+    },
+    "artist-gavin-degraw": {
+      "id": "artist-gavin-degraw",
+      "name": "Gavin DeGraw",
+      "eventIds": [
+        "ford-amphitheater-colorado-springs-2026-06-18-o-a-r-with-gavin-degraw-and-phantom-planet"
+      ],
+      "venueIds": [
+        "ford-amphitheater-colorado-springs"
+      ],
+      "dateKeys": [
+        "2026-06-18"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-18",
+      "lastDate": "2026-06-18",
+      "coArtists": [
+        "artist-o-a-r",
+        "artist-phantom-planet"
+      ]
+    },
+    "artist-jerry-douglas": {
+      "id": "artist-jerry-douglas",
+      "name": "Jerry Douglas",
+      "eventIds": [
+        "ford-amphitheater-colorado-springs-2026-08-14-alison-krauss-and-union-station-with-jerry-douglas-and-theo-lawrence"
+      ],
+      "venueIds": [
+        "ford-amphitheater-colorado-springs"
+      ],
+      "dateKeys": [
+        "2026-08-14"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-08-14",
+      "lastDate": "2026-08-14",
+      "coArtists": [
+        "artist-alison-krauss-and-union-station",
+        "artist-theo-lawrence"
+      ]
+    },
+    "artist-o-a-r": {
+      "id": "artist-o-a-r",
+      "name": "O.A.R.",
+      "eventIds": [
+        "ford-amphitheater-colorado-springs-2026-06-18-o-a-r-with-gavin-degraw-and-phantom-planet"
+      ],
+      "venueIds": [
+        "ford-amphitheater-colorado-springs"
+      ],
+      "dateKeys": [
+        "2026-06-18"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-18",
+      "lastDate": "2026-06-18",
+      "coArtists": [
+        "artist-gavin-degraw",
+        "artist-phantom-planet"
+      ]
+    },
+    "artist-phantom-planet": {
+      "id": "artist-phantom-planet",
+      "name": "Phantom Planet",
+      "eventIds": [
+        "ford-amphitheater-colorado-springs-2026-06-18-o-a-r-with-gavin-degraw-and-phantom-planet"
+      ],
+      "venueIds": [
+        "ford-amphitheater-colorado-springs"
+      ],
+      "dateKeys": [
+        "2026-06-18"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-18",
+      "lastDate": "2026-06-18",
+      "coArtists": [
+        "artist-gavin-degraw",
+        "artist-o-a-r"
+      ]
+    },
+    "artist-theo-lawrence": {
+      "id": "artist-theo-lawrence",
+      "name": "Theo Lawrence",
+      "eventIds": [
+        "ford-amphitheater-colorado-springs-2026-08-14-alison-krauss-and-union-station-with-jerry-douglas-and-theo-lawrence"
+      ],
+      "venueIds": [
+        "ford-amphitheater-colorado-springs"
+      ],
+      "dateKeys": [
+        "2026-08-14"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-08-14",
+      "lastDate": "2026-08-14",
+      "coArtists": [
+        "artist-alison-krauss-and-union-station",
+        "artist-jerry-douglas"
+      ]
+    }
+  },
+  "artistIdsByShowCountDesc": [
+    "artist-alison-krauss-and-union-station",
+    "artist-brantley-gilbert-rescheduled-from-10-11-25",
+    "artist-gavin-degraw",
+    "artist-jerry-douglas",
+    "artist-o-a-r",
+    "artist-phantom-planet",
+    "artist-theo-lawrence"
+  ]
+}

@@ -1,0 +1,836 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "eventsByDate": {
+    "2026-01-24": [
+      "gothic-theatre-2026-01-24-glaive-16",
+      "mission-ballroom-2026-01-24-kitchen-dwellers-with-mountain-grass-unit-16",
+      "mission-ballroom-2026-01-24-mountain-grass-unit",
+      "ogden-theatre-2026-01-24-kompany",
+      "ophelias-2026-01-24-tycho"
+    ],
+    "2026-01-26": [
+      "bluebird-theater-2026-01-26-ruston-kelly-with-verygently-16"
+    ],
+    "2026-01-27": [
+      "marquis-theater-2026-01-27-mc-davo"
+    ],
+    "2026-01-29": [
+      "fillmore-auditorium-2026-01-29-aleman-and-gera-mx",
+      "paramount-theatre-2026-01-29-billy-f-gibbons-and-the-bfg-band"
+    ],
+    "2026-01-30": [
+      "gothic-theatre-2026-01-30-shakedown-street-grateful-dead-tribute-16",
+      "marquis-theater-2026-01-30-bayymack-18",
+      "mission-ballroom-2026-01-30-ship-wrek-16",
+      "ogden-theatre-2026-01-30-chmura",
+      "ophelias-2026-01-30-skiitour"
+    ],
+    "2026-01-31": [
+      "boulder-theater-2026-01-31-fitz-and-the-tantrums",
+      "fox-theatre-2026-01-31-josh-teed",
+      "gothic-theatre-2026-01-31-bane-with-rotting-out-eyes-of-salt-and-warmachine-16",
+      "marquis-theater-2026-01-31-chri-tian-gate-with-neon-the-bishop",
+      "mission-ballroom-2026-01-31-ray-volpe",
+      "ogden-theatre-2026-01-31-dogs-in-a-pile",
+      "ophelias-2026-01-31-david-ramirez",
+      "summit-music-hall-2026-01-31-ghengar"
+    ],
+    "2026-02-01": [
+      "marquis-theater-2026-02-01-your-arms-are-my-cocoon",
+      "ogden-theatre-2026-02-01-the-runarounds-16"
+    ],
+    "2026-02-03": [
+      "marquis-theater-2026-02-03-bravo-the-bagchaser-with-lil-maru",
+      "summit-music-hall-2026-02-03-jessie-j"
+    ],
+    "2026-02-04": [
+      "summit-music-hall-2026-02-04-lord-of-the-lost-with-the-birthday-massacre"
+    ],
+    "2026-02-05": [
+      "bluebird-theater-2026-02-05-briscoe-16",
+      "paramount-theatre-2026-02-05-three-dog-night"
+    ],
+    "2026-02-06": [
+      "boulder-theater-2026-02-06-stella-cole-with-the-boulder-philharmonic",
+      "gothic-theatre-2026-02-06-north-mississippi-allstars-16",
+      "ophelias-2026-02-06-mark-farina"
+    ],
+    "2026-02-07": [
+      "fox-theatre-2026-02-07-the-ocean-blue",
+      "mission-ballroom-2026-02-07-chris-lorenzo-16",
+      "ogden-theatre-2026-02-07-del-water-gap-with-hannah-jadagu",
+      "ophelias-2026-02-07-mark-farina",
+      "rr-2026-02-07-icelantic-s-winter-on-the-rocks",
+      "summit-music-hall-2026-02-07-ydg-with-join-the-resistance-18"
+    ],
+    "2026-02-09": [
+      "fox-theatre-2026-02-09-say-she-she-with-katzu-oso"
+    ],
+    "2026-02-10": [
+      "bluebird-theater-2026-02-10-enjambre-16",
+      "boulder-theater-2026-02-10-the-revivalists",
+      "fillmore-auditorium-2026-02-10-jade",
+      "gothic-theatre-2026-02-10-sudan-archives-16",
+      "marquis-theater-2026-02-10-left-to-suffer-with-the-last-ten-seconds-of-life-larcenia-roe-and-fr3ak"
+    ],
+    "2026-02-11": [
+      "summit-music-hall-2026-02-11-michael-shannon-and-jason-narducy"
+    ],
+    "2026-02-12": [
+      "bluebird-theater-2026-02-12-butcher-babies",
+      "cervantes-masterpiece-2026-02-12-ghostface-killah",
+      "fillmore-auditorium-2026-02-12-snow-strippers"
+    ],
+    "2026-02-13": [
+      "boulder-theater-2026-02-13-the-record-company",
+      "fillmore-auditorium-2026-02-13-dark-star-orchestra",
+      "gothic-theatre-2026-02-13-sons-of-legion-16",
+      "marquis-theater-2026-02-13-yung-bans",
+      "mission-ballroom-2026-02-13-the-martinez-brothers-16",
+      "ogden-theatre-2026-02-13-magic-city-hippies-16",
+      "paramount-theatre-2026-02-13-mania-the-abba-tribute"
+    ],
+    "2026-02-14": [
+      "gothic-theatre-2026-02-14-the-record-company-16",
+      "mission-ballroom-2026-02-14-wreckno-and-super-future-16",
+      "ophelias-2026-02-14-what-the-dance"
+    ],
+    "2026-02-15": [
+      "mission-ballroom-2026-02-15-freya-skye"
+    ],
+    "2026-02-16": [
+      "bluebird-theater-2026-02-16-weval-16"
+    ],
+    "2026-02-17": [
+      "cervantes-masterpiece-2026-02-17-fox-stevenson",
+      "ogden-theatre-2026-02-17-rich-brian-16"
+    ],
+    "2026-02-18": [
+      "ball-arena-2026-02-18-ricardo-arjona",
+      "bluebird-theater-2026-02-18-samm-henshaw",
+      "ophelias-2026-02-18-ga-20",
+      "paramount-theatre-2026-02-18-mac-mcanally"
+    ],
+    "2026-02-19": [
+      "bluebird-theater-2026-02-19-bryce-vine",
+      "marquis-theater-2026-02-19-beauty-school-dropout"
+    ],
+    "2026-02-20": [
+      "bluebird-theater-2026-02-20-hayes-carll-with-ryan-montbleau-16",
+      "boulder-theater-2026-02-20-atmosphere-with-sage-francis",
+      "ophelias-2026-02-20-the-polish-ambassador",
+      "summit-music-hall-2026-02-20-club-90s-heated-rivalrave-18"
+    ],
+    "2026-02-21": [
+      "bluebird-theater-2026-02-21-whitney-hanson",
+      "marquis-theater-2026-02-21-hayden-coffman",
+      "mission-ballroom-2026-02-21-sidepiece-16",
+      "ogden-theatre-2026-02-21-geoff-tate-16",
+      "ophelias-2026-02-21-the-polish-ambassador",
+      "summit-music-hall-2026-02-21-club-90s-heated-rivalrave-18"
+    ],
+    "2026-02-22": [
+      "gothic-theatre-2026-02-22-clipping-16",
+      "marquis-theater-2026-02-22-nathan-evans-and-the-saint-phnx-band",
+      "ophelias-2026-02-22-the-polish-ambassador"
+    ],
+    "2026-02-23": [
+      "black-sheep-2026-02-23-rivers-of-nihil",
+      "gothic-theatre-2026-02-23-black-pistol-fire-16"
+    ],
+    "2026-02-24": [
+      "ball-arena-2026-02-24-bad-omens-with-beartooth-and-president",
+      "paramount-theatre-2026-02-24-vitamin-string-quartet",
+      "summit-music-hall-2026-02-24-monolink-18"
+    ],
+    "2026-02-25": [
+      "black-sheep-2026-02-25-the-queers",
+      "boulder-theater-2026-02-25-daniel-donato-s-cosmic-country-2-day-pass",
+      "boulder-theater-2026-02-25-daniel-donato-s-cosmic-country-night-1",
+      "ogden-theatre-2026-02-25-the-devil-makes-three-16",
+      "summit-music-hall-2026-02-25-lights-with-softcult"
+    ],
+    "2026-02-26": [
+      "boulder-theater-2026-02-26-daniel-donato-s-cosmic-country-night-2",
+      "cervantes-masterpiece-2026-02-26-whethan-16",
+      "marquis-theater-2026-02-26-jeremy-jordan-with-age-of-madness",
+      "ogden-theatre-2026-02-26-badflower-16",
+      "ophelias-2026-02-26-devon-allman-band"
+    ],
+    "2026-02-27": [
+      "bluebird-theater-2026-02-27-kpop-club-night-16",
+      "cervantes-masterpiece-2026-02-27-whethan-16",
+      "fox-theatre-2026-02-27-penelope-road",
+      "gothic-theatre-2026-02-27-denm-with-evening-elephants-and-obed-padilla",
+      "marquis-theater-2026-02-27-glitterer",
+      "mission-ballroom-2026-02-27-drama-16",
+      "ogden-theatre-2026-02-27-gogol-bordello-16",
+      "ophelias-2026-02-27-brett-dennen",
+      "summit-music-hall-2026-02-27-donny-benet"
+    ],
+    "2026-02-28": [
+      "boulder-theater-2026-02-28-all-them-witches-21",
+      "marquis-theater-2026-02-28-all-your-friends-18",
+      "mission-ballroom-2026-02-28-maddy-o-neal-with-tokimonsta",
+      "ogden-theatre-2026-02-28-franc-moody-16",
+      "ophelias-2026-02-28-smells-like-nirvana",
+      "summit-music-hall-2026-02-28-heated-rivalry-night-18"
+    ],
+    "2026-03-01": [
+      "boulder-theater-2026-03-01-the-devil-makes-three",
+      "marquis-theater-2026-03-01-mat-kerekes-with-shallow-alcove",
+      "mission-ballroom-2026-03-01-dropkick-murphys-with-the-aggrolites-and-haywire-16",
+      "ogden-theatre-2026-03-01-all-them-witches-16"
+    ],
+    "2026-03-03": [
+      "bluebird-theater-2026-03-03-alex-sampson",
+      "boulder-theater-2026-03-03-3oh-3",
+      "mission-ballroom-2026-03-03-artemas-with-isabel-larosa-16"
+    ],
+    "2026-03-04": [
+      "boulder-theater-2026-03-04-yacht-rock-revue",
+      "gothic-theatre-2026-03-04-margo-price-with-shannon-mcnally",
+      "marquis-theater-2026-03-04-capstan-with-in-her-own-words-and-dreamwake"
+    ],
+    "2026-03-05": [
+      "bluebird-theater-2026-03-05-volumes-with-notions-and-catsclaw-16",
+      "fillmore-auditorium-2026-03-05-miguel-with-jean-dawson",
+      "summit-music-hall-2026-03-05-colony-house"
+    ],
+    "2026-03-06": [
+      "black-sheep-2026-03-06-nekrogoblikon-with-enterprise-earth",
+      "mission-ballroom-2026-03-06-black-label-society-with-zakk-sabbath-and-dark-chapel",
+      "ophelias-2026-03-06-not-quite-brothers",
+      "summit-music-hall-2026-03-06-emo-nite-21"
+    ],
+    "2026-03-07": [
+      "bluebird-theater-2026-03-07-fia-16",
+      "boulder-theater-2026-03-07-club-90s-heated-rivalry-night-18",
+      "gothic-theatre-2026-03-07-benee-with-bayli-16",
+      "mishawaka-amphitheatre-2026-03-07-graham-good-and-the-painters",
+      "summit-music-hall-2026-03-07-dodie-clark"
+    ],
+    "2026-03-08": [
+      "bluebird-theater-2026-03-08-christian-loffler",
+      "broadmoor-world-arena-2026-03-08-tobymac-with-crowder-and-jeremy-camp",
+      "summit-music-hall-2026-03-08-xaviersobased"
+    ],
+    "2026-03-09": [
+      "ball-arena-2026-03-09-cardi-b",
+      "broadmoor-world-arena-2026-03-09-heart-with-lucinda-williams",
+      "marquis-theater-2026-03-09-the-browning-with-within-destruction-face-yourself-and-dead-eyes",
+      "summit-music-hall-2026-03-09-lil-tony"
+    ],
+    "2026-03-10": [
+      "boulder-theater-2026-03-10-chris-isaak",
+      "fillmore-auditorium-2026-03-10-lauren-spencer-smith",
+      "summit-music-hall-2026-03-10-peaches"
+    ],
+    "2026-03-11": [
+      "larimer-lounge-2026-03-11-ella-red",
+      "marquis-theater-2026-03-11-siamese-with-cabal",
+      "ophelias-2026-03-11-jesse-roper",
+      "summit-music-hall-2026-03-11-zara-larsson-with-amelia-moore"
+    ],
+    "2026-03-12": [
+      "cervantes-masterpiece-2026-03-12-cash-cobain",
+      "fox-theatre-2026-03-12-jigitz",
+      "mission-ballroom-2026-03-12-ole-60-with-gabriella-rose",
+      "summit-music-hall-2026-03-12-hawthorne-heights"
+    ],
+    "2026-03-13": [
+      "boulder-theater-2026-03-13-pure-prairie-league-with-pablo-cruise",
+      "fox-theatre-2026-03-13-the-barr-brothers",
+      "gothic-theatre-2026-03-13-maggie-lindemann-16",
+      "marquis-theater-2026-03-13-spiritual-cramp-with-destiny-bond",
+      "mission-ballroom-2026-03-13-supertask-16",
+      "ogden-theatre-2026-03-13-jeff-tweedy-16",
+      "summit-music-hall-2026-03-13-two-feet"
+    ],
+    "2026-03-14": [
+      "bluebird-theater-2026-03-14-the-barr-brothers",
+      "boulder-theater-2026-03-14-nimino",
+      "fillmore-auditorium-2026-03-14-nothing-more-with-catch-your-breath-archers-and-doobie",
+      "gothic-theatre-2026-03-14-the-strumbellas",
+      "mission-ballroom-2026-03-14-max-styler",
+      "ophelias-2026-03-14-bearracuda",
+      "summit-music-hall-2026-03-14-two-feet"
+    ],
+    "2026-03-15": [
+      "bluebird-theater-2026-03-15-bad-bad-hats",
+      "boulder-theater-2026-03-15-neko-case-with-destroyer",
+      "ogden-theatre-2026-03-15-amber-mark-with-sherwyn-16",
+      "summit-music-hall-2026-03-15-monaleo"
+    ],
+    "2026-03-16": [
+      "gothic-theatre-2026-03-16-indigo-de-souza-16",
+      "marquis-theater-2026-03-16-varials-with-unitytx"
+    ],
+    "2026-03-17": [
+      "boulder-theater-2026-03-17-emmet-cohen-presents-miles-and-coltrane-at-100",
+      "marquis-theater-2026-03-17-dark-divine",
+      "summit-music-hall-2026-03-17-sabrina-claudio-with-dylan-sinclair"
+    ],
+    "2026-03-18": [
+      "fillmore-auditorium-2026-03-18-mariah-the-scientist",
+      "marquis-theater-2026-03-18-alexsucks",
+      "summit-music-hall-2026-03-18-testament-with-overkill-and-destruction"
+    ],
+    "2026-03-19": [
+      "bluebird-theater-2026-03-19-the-thing-16",
+      "boulder-theater-2026-03-19-matisyahu",
+      "marquis-theater-2026-03-19-lithe"
+    ],
+    "2026-03-20": [
+      "bluebird-theater-2026-03-20-grieves-with-blueprint",
+      "cervantes-masterpiece-2026-03-20-kwn",
+      "fox-theatre-2026-03-20-shadowgrass",
+      "marquis-theater-2026-03-20-dream-ivory",
+      "mission-ballroom-2026-03-20-the-california-honeydrops",
+      "ogden-theatre-2026-03-20-distinct-motive-16",
+      "summit-music-hall-2026-03-20-white-reaper-with-drug-church"
+    ],
+    "2026-03-21": [
+      "bluebird-theater-2026-03-21-muzz",
+      "fillmore-auditorium-2026-03-21-boys-like-girls-with-idkhow-and-arrows-in-action",
+      "fox-theatre-2026-03-21-jonah-kagen-16",
+      "gothic-theatre-2026-03-21-eddie-9v-16",
+      "marquis-theater-2026-03-21-emm-with-bentley-robles",
+      "mission-ballroom-2026-03-21-the-floozies-16",
+      "summit-music-hall-2026-03-21-barely-alive-with-tisoki-18"
+    ],
+    "2026-03-22": [
+      "boulder-theater-2026-03-22-solas",
+      "marquis-theater-2026-03-22-emily-king",
+      "paramount-theatre-2026-03-22-gregorian"
+    ],
+    "2026-03-23": [
+      "bluebird-theater-2026-03-23-quarters"
+    ],
+    "2026-03-24": [
+      "marquis-theater-2026-03-24-mclusky"
+    ],
+    "2026-03-25": [
+      "black-sheep-2026-03-25-teenage-bottlerocket",
+      "boulder-theater-2026-03-25-the-high-kings",
+      "cervantes-masterpiece-2026-03-25-ruel",
+      "fillmore-auditorium-2026-03-25-slaughter-to-prevail-with-whitechapel-and-attila-16",
+      "marquis-theater-2026-03-25-the-sloppy-boys"
+    ],
+    "2026-03-26": [
+      "ball-arena-2026-03-26-peso-pluma",
+      "bluebird-theater-2026-03-26-charlie-parr",
+      "boulder-theater-2026-03-26-the-menzingers-with-i-am-the-avalanche",
+      "gothic-theatre-2026-03-26-the-early-november-and-hellogoodbye-16",
+      "marquis-theater-2026-03-26-yellow-days",
+      "mission-ballroom-2026-03-26-st-paul-and-the-broken-bones"
+    ],
+    "2026-03-27": [
+      "fillmore-auditorium-2026-03-27-lamb-of-god-with-kublai-khan-tx-fit-for-an-autopsy-and-sanguisugabogg",
+      "marquis-theater-2026-03-27-pity-party-girls-club",
+      "mission-ballroom-2026-03-27-gov-t-mule",
+      "paramount-theatre-2026-03-27-yolanda-del-rio",
+      "rr-2026-03-27-crankdat",
+      "summit-music-hall-2026-03-27-eidola"
+    ],
+    "2026-03-28": [
+      "black-sheep-2026-03-28-red-leather",
+      "bluebird-theater-2026-03-28-49th-and-main-21",
+      "fillmore-auditorium-2026-03-28-melvin-seals-and-jgb-with-pink-talking-fish",
+      "fox-theatre-2026-03-28-los-amigos-invisibles",
+      "marquis-theater-2026-03-28-steinza",
+      "mission-ballroom-2026-03-28-ashnikko",
+      "rr-2026-03-28-ravenscoon-and-jantsen",
+      "summit-music-hall-2026-03-28-the-devil-wears-prada"
+    ],
+    "2026-03-29": [
+      "fillmore-auditorium-2026-03-29-sticky-fingers-with-ruby-waters",
+      "marquis-theater-2026-03-29-angel-du-t-with-home-front",
+      "ogden-theatre-2026-03-29-the-wonder-years-with-knuckle-puck-and-initiate-16",
+      "paramount-theatre-2026-03-29-humbe"
+    ],
+    "2026-03-30": [
+      "black-sheep-2026-03-30-i-see-stars",
+      "bluebird-theater-2026-03-30-mind-enterprises-16",
+      "fillmore-auditorium-2026-03-30-fka-twigs",
+      "marquis-theater-2026-03-30-night-cap",
+      "ophelias-2026-03-30-westerman",
+      "summit-music-hall-2026-03-30-machine-girl-with-sextile"
+    ],
+    "2026-03-31": [
+      "black-sheep-2026-03-31-obscura-with-allegaeon-cognitive-and-cryptosis",
+      "marquis-theater-2026-03-31-naika",
+      "summit-music-hall-2026-03-31-lacuna-coil-with-escape-the-fate-and-vowws"
+    ],
+    "2026-04-01": [
+      "bluebird-theater-2026-04-01-cass-mccombs-with-chris-cohen",
+      "marquis-theater-2026-04-01-r-a-p-ferreira"
+    ],
+    "2026-04-02": [
+      "black-sheep-2026-04-02-subhumans"
+    ],
+    "2026-04-03": [
+      "bluebird-theater-2026-04-03-voxtrot",
+      "gothic-theatre-2026-04-03-orbit-culture",
+      "ogden-theatre-2026-04-03-the-maine",
+      "paramount-theatre-2026-04-03-firefall-with-hazel-miller",
+      "rr-2026-04-03-inzo",
+      "summit-music-hall-2026-04-03-jstjr-18"
+    ],
+    "2026-04-04": [
+      "black-sheep-2026-04-04-prayers-with-my-life-with-the-thrill-kill-kult",
+      "marquis-theater-2026-04-04-sarah-kinsley-with-girlpuppy",
+      "rr-2026-04-04-it-s-murph-presents-murph-rocks",
+      "summit-music-hall-2026-04-04-currents-with-erra"
+    ],
+    "2026-04-05": [
+      "black-sheep-2026-04-05-magnolia-park-with-silly-goose"
+    ],
+    "2026-04-06": [
+      "fillmore-auditorium-2026-04-06-raye",
+      "summit-music-hall-2026-04-06-drain-with-no-pressure-haywire-and-secret-world"
+    ],
+    "2026-04-07": [
+      "bluebird-theater-2026-04-07-the-red-pears-and-together-pangea-16",
+      "boulder-theater-2026-04-07-pat-metheny",
+      "mission-ballroom-2026-04-07-lany",
+      "ogden-theatre-2026-04-07-microwave-with-anthony-green-16",
+      "summit-music-hall-2026-04-07-dave-rapper"
+    ],
+    "2026-04-08": [
+      "gothic-theatre-2026-04-08-goldford-16",
+      "mission-ballroom-2026-04-08-health-with-carpenter-brut-16",
+      "paramount-theatre-2026-04-08-calum-scott"
+    ],
+    "2026-04-09": [
+      "black-sheep-2026-04-09-bit-brigade",
+      "boulder-theater-2026-04-09-branford-marsalis",
+      "ophelias-2026-04-09-ltj-bukem"
+    ],
+    "2026-04-10": [
+      "marquis-theater-2026-04-10-des-rocs-with-romes",
+      "mission-ballroom-2026-04-10-the-format-with-phantom-planet-and-limbeck-16",
+      "ophelias-2026-04-10-sam-grisman-project",
+      "paramount-theatre-2026-04-10-tommy-emmanuel",
+      "rr-2026-04-10-zingara-and-level-up"
+    ],
+    "2026-04-11": [
+      "black-sheep-2026-04-11-des-rocs",
+      "gothic-theatre-2026-04-11-d-r-i-dirty-rotten-imbeciles-with-clusterfux-and-deathwish-16",
+      "marquis-theater-2026-04-11-sweet-pill-with-spaced-and-stereosity",
+      "ophelias-2026-04-11-sam-grisman-project",
+      "rr-2026-04-11-liquid-stranger",
+      "summit-music-hall-2026-04-11-dance-with-the-dead-with-magic-sword"
+    ],
+    "2026-04-12": [
+      "gothic-theatre-2026-04-12-fcukers-16"
+    ],
+    "2026-04-13": [
+      "bluebird-theater-2026-04-13-ratboys-with-villagerrr-16"
+    ],
+    "2026-04-14": [
+      "ball-arena-2026-04-14-twice",
+      "mission-ballroom-2026-04-14-satchvai-band-featuring-joe-satriani-and-steve-vai-16"
+    ],
+    "2026-04-15": [
+      "mission-ballroom-2026-04-15-hatsune-miku",
+      "paramount-theatre-2026-04-15-colin-hay",
+      "rr-2026-04-15-john-mulaney-mister-whatever",
+      "summit-music-hall-2026-04-15-free-throw"
+    ],
+    "2026-04-16": [
+      "mission-ballroom-2026-04-16-warren-zeiders-with-lakeview-16",
+      "rr-2026-04-16-bbno"
+    ],
+    "2026-04-17": [
+      "bluebird-theater-2026-04-17-pete-yorn-16",
+      "fillmore-auditorium-2026-04-17-bilmuri-with-the-home-team-and-gang",
+      "gothic-theatre-2026-04-17-bleed-from-within",
+      "mission-ballroom-2026-04-17-cory-wong",
+      "ogden-theatre-2026-04-17-know-good",
+      "paramount-theatre-2026-04-17-drew-holcomb",
+      "rr-2026-04-17-sublime"
+    ],
+    "2026-04-18": [
+      "fox-theatre-2026-04-18-pete-yorn-21",
+      "gothic-theatre-2026-04-18-tyler-braden-18",
+      "marquis-theater-2026-04-18-soul-blind",
+      "mishawaka-amphitheatre-2026-04-18-san-holo",
+      "mission-ballroom-2026-04-18-stephen-wilson-jr-16",
+      "ogden-theatre-2026-04-18-ty-segall-16",
+      "rr-2026-04-18-sublime"
+    ],
+    "2026-04-19": [
+      "black-sheep-2026-04-19-buckethead",
+      "gothic-theatre-2026-04-19-chris-webby-16",
+      "rr-2026-04-19-wiz-khalifa"
+    ],
+    "2026-04-20": [
+      "black-sheep-2026-04-20-slomosa",
+      "marquis-theater-2026-04-20-maro",
+      "rr-2026-04-20-ice-cube"
+    ],
+    "2026-04-21": [
+      "marquis-theater-2026-04-21-slomosa",
+      "rr-2026-04-21-ethel-cain"
+    ],
+    "2026-04-22": [
+      "black-sheep-2026-04-22-cold",
+      "fillmore-auditorium-2026-04-22-behemoth-with-deicide",
+      "marquis-theater-2026-04-22-drugdealer",
+      "ogden-theatre-2026-04-22-oklou"
+    ],
+    "2026-04-23": [
+      "black-sheep-2026-04-23-devotchka-aa-tribute-to-the-music-of-little-miss-sunshinea",
+      "marquis-theater-2026-04-23-cold",
+      "mission-ballroom-2026-04-23-disclosure-16",
+      "ogden-theatre-2026-04-23-snow-tha-product",
+      "paramount-theatre-2026-04-23-helloween",
+      "rr-2026-04-23-subtronics-cyclops-rocks-vi-night-1",
+      "summit-music-hall-2026-04-23-shadow-of-intent-with-angelmaker"
+    ],
+    "2026-04-24": [
+      "mission-ballroom-2026-04-24-disclosure-16",
+      "ogden-theatre-2026-04-24-moe",
+      "paramount-theatre-2026-04-24-group-bryndis-with-industria-del-amor-and-guardianes-del-amor",
+      "rr-2026-04-24-subtronics-cyclops-rocks-vi-night-2",
+      "summit-music-hall-2026-04-24-drinkurwater-18"
+    ],
+    "2026-04-25": [
+      "gothic-theatre-2026-04-25-tourist",
+      "marquis-theater-2026-04-25-unprocessed",
+      "mission-ballroom-2026-04-25-disclosure-16",
+      "ogden-theatre-2026-04-25-moe"
+    ],
+    "2026-04-26": [
+      "marquis-theater-2026-04-26-lou-deezi",
+      "rr-2026-04-26-bob-moses-and-cannons"
+    ],
+    "2026-04-28": [
+      "bluebird-theater-2026-04-28-femtanyl-16",
+      "boulder-theater-2026-04-28-afi-with-choir-boy",
+      "fillmore-auditorium-2026-04-28-josiah-queen-with-jervis-campbell",
+      "marquis-theater-2026-04-28-skizzy-mars-rescheduled-from-10-16-2025",
+      "rr-2026-04-28-lewis-capaldi"
+    ],
+    "2026-04-29": [
+      "black-sheep-2026-04-29-the-black-dahlia-murder-with-the-acacia-strain",
+      "bluebird-theater-2026-04-29-powfu",
+      "rr-2026-04-29-lewis-capaldi",
+      "summit-music-hall-2026-04-29-badbadnotgood"
+    ],
+    "2026-04-30": [
+      "fox-theatre-2026-04-30-witchz",
+      "ogden-theatre-2026-04-30-the-growlers",
+      "rr-2026-04-30-electric-callboy"
+    ],
+    "2026-05-01": [
+      "black-sheep-2026-05-01-lords-of-acid",
+      "boulder-theater-2026-05-01-hail-the-sun-with-foxy-shazam",
+      "fox-theatre-2026-05-01-saxsquatch",
+      "gothic-theatre-2026-05-01-witchz",
+      "mishawaka-amphitheatre-2026-05-01-benjamin-tod",
+      "mission-ballroom-2026-05-01-jason-isbell-and-the-400-unit-16",
+      "paramount-theatre-2026-05-01-stayin-alive-bee-gees-tribute",
+      "rr-2026-05-01-two-friends",
+      "summit-music-hall-2026-05-01-sevendust-with-atreyu"
+    ],
+    "2026-05-02": [
+      "bluebird-theater-2026-05-02-langhorne-slim",
+      "cervantes-masterpiece-2026-05-02-sasquatch-16",
+      "fillmore-auditorium-2026-05-02-august-burns-red-and-the-amity-affliction",
+      "marquis-theater-2026-05-02-glixen-with-trauma-ray",
+      "ophelias-2026-05-02-bearracuda",
+      "rr-2026-05-02-jason-isbell-and-the-400-unit"
+    ],
+    "2026-05-03": [
+      "black-sheep-2026-05-03-saxsquatch",
+      "fillmore-auditorium-2026-05-03-bush-with-mammoth-and-james-and-the-cold-gun",
+      "mission-ballroom-2026-05-03-mac-demarco",
+      "rr-2026-05-03-puscifer"
+    ],
+    "2026-05-04": [
+      "fillmore-auditorium-2026-05-04-joyce-manor-with-militarie-gun-teen-mortgage-and-combat"
+    ],
+    "2026-05-05": [
+      "ball-arena-2026-05-05-demi-lovato-with-adela",
+      "black-sheep-2026-05-05-the-spill-canvas",
+      "bluebird-theater-2026-05-05-melrose-avenue-16",
+      "gothic-theatre-2026-05-05-the-new-pornographers-with-will-sheff-16",
+      "summit-music-hall-2026-05-05-la-dispute"
+    ],
+    "2026-05-06": [
+      "gothic-theatre-2026-05-06-emo-orchestra",
+      "mission-ballroom-2026-05-06-the-midnight",
+      "rr-2026-05-06-bright-eyes-21-years-of-wide-awake-and-digital-ash"
+    ],
+    "2026-05-07": [
+      "bluebird-theater-2026-05-07-vana",
+      "marquis-theater-2026-05-07-faetooth",
+      "rr-2026-05-07-alejandro-fern-ndez",
+      "summit-music-hall-2026-05-07-poison-the-well-with-converge-the-armed-and-the-barbarians-of-california"
+    ],
+    "2026-05-08": [
+      "ogden-theatre-2026-05-08-william-black"
+    ],
+    "2026-05-09": [
+      "bluebird-theater-2026-05-09-allie-x",
+      "rr-2026-05-09-cloonee"
+    ],
+    "2026-05-10": [
+      "boulder-theater-2026-05-10-alan-doyle",
+      "fox-theatre-2026-05-10-unknown-mortal-orchestra",
+      "summit-music-hall-2026-05-10-i-speak-machine"
+    ],
+    "2026-05-11": [
+      "mission-ballroom-2026-05-11-jose-gonzalez-with-abby-sage-16",
+      "rr-2026-05-11-yungblud-idols-world-tour",
+      "summit-music-hall-2026-05-11-boulet-brothers-dragula"
+    ],
+    "2026-05-12": [
+      "black-sheep-2026-05-12-unknown-mortal-orchestra",
+      "summit-music-hall-2026-05-12-the-afghan-whigs-with-mercury-rev"
+    ],
+    "2026-05-13": [
+      "mission-ballroom-2026-05-13-good-kid-with-inoha-16",
+      "rr-2026-05-13-russell-dickerson",
+      "summit-music-hall-2026-05-13-chet-faker"
+    ],
+    "2026-05-14": [
+      "bluebird-theater-2026-05-14-newdad",
+      "gothic-theatre-2026-05-14-the-moss"
+    ],
+    "2026-05-16": [
+      "paramount-theatre-2026-05-16-eric-johnson",
+      "rr-2026-05-16-lightcode-by-lsdream-dreamrocks-ii"
+    ],
+    "2026-05-17": [
+      "bluebird-theater-2026-05-17-sports-band",
+      "ogden-theatre-2026-05-17-the-paper-kites-16",
+      "rr-2026-05-17-the-elovaters",
+      "summit-music-hall-2026-05-17-arms-length"
+    ],
+    "2026-05-18": [
+      "marquis-theater-2026-05-18-the-scratch",
+      "rr-2026-05-18-khalid"
+    ],
+    "2026-05-19": [
+      "bluebird-theater-2026-05-19-electric-six",
+      "marquis-theater-2026-05-19-vundabar-with-goon",
+      "rr-2026-05-19-kevin-gates"
+    ],
+    "2026-05-21": [
+      "broadmoor-world-arena-2026-05-21-phil-wickham",
+      "ogden-theatre-2026-05-21-sepultura-with-exodus-biohazard-and-tribal-gaze-16",
+      "rr-2026-05-21-flipturn"
+    ],
+    "2026-05-22": [
+      "marquis-theater-2026-05-22-dead-calm",
+      "mission-ballroom-2026-05-22-echo-and-the-bunnymen",
+      "ogden-theatre-2026-05-22-thy-art-is-murder-with-carnifex-bodysnatcher-200-stab-wounds-and-more",
+      "rr-2026-05-22-seven-lions"
+    ],
+    "2026-05-23": [
+      "gothic-theatre-2026-05-23-cradle-of-filth",
+      "rr-2026-05-23-fisher"
+    ],
+    "2026-05-24": [
+      "rr-2026-05-24-alabama-shakes"
+    ],
+    "2026-05-25": [
+      "black-sheep-2026-05-25-powerman-5000",
+      "rr-2026-05-25-alabama-shakes"
+    ],
+    "2026-05-26": [
+      "gothic-theatre-2026-05-26-thornhill-with-156-silence-fox-lake-and-vianova-16",
+      "marquis-theater-2026-05-26-daisy-grenade-with-vienna-vienna"
+    ],
+    "2026-05-27": [
+      "black-sheep-2026-05-27-archspire-with-undeath",
+      "bluebird-theater-2026-05-27-swervedriver"
+    ],
+    "2026-05-29": [
+      "rr-2026-05-29-michael-franti-and-spearhead"
+    ],
+    "2026-05-30": [
+      "rr-2026-05-30-alan-walker"
+    ],
+    "2026-05-31": [
+      "paramount-theatre-2026-05-31-andres-cepeda"
+    ],
+    "2026-06-02": [
+      "mission-ballroom-2026-06-02-the-last-dinner-party-with-automatic",
+      "rr-2026-06-02-alex-warren",
+      "summit-music-hall-2026-06-02-spite-with-emmure"
+    ],
+    "2026-06-03": [
+      "black-sheep-2026-06-03-alpha-wolf-with-gideon-mugshot-and-resolve",
+      "marquis-theater-2026-06-03-white-denim",
+      "rr-2026-06-03-yo-yo-ma-with-colorado-symphony"
+    ],
+    "2026-06-04": [
+      "rr-2026-06-04-brit-floyd-the-wall"
+    ],
+    "2026-06-05": [
+      "marquis-theater-2026-06-05-troy-doherty",
+      "rr-2026-06-05-brit-floyd-dark-side-of-the-moon"
+    ],
+    "2026-06-06": [
+      "chautauqua-auditorium-2026-06-06-joe-jackson",
+      "rr-2026-06-06-big-head-todd-and-the-monsters"
+    ],
+    "2026-06-09": [
+      "bluebird-theater-2026-06-09-kings-kaleidoscope-16"
+    ],
+    "2026-06-10": [
+      "rr-2026-06-10-lord-huron"
+    ],
+    "2026-06-11": [
+      "fiddlers-green-amphitheatre-2026-06-11-lord-huron"
+    ],
+    "2026-06-13": [
+      "mission-ballroom-2026-06-13-lane-8-with-cross-pollination-sultan-shepard-and-more-16"
+    ],
+    "2026-06-14": [
+      "mishawaka-amphitheatre-2026-06-14-lane-8",
+      "rr-2026-06-14-trevor-hall-thievery-corporation-dirtwire"
+    ],
+    "2026-06-15": [
+      "rr-2026-06-15-rod-stewart"
+    ],
+    "2026-06-16": [
+      "rr-2026-06-16-rod-stewart"
+    ],
+    "2026-06-17": [
+      "gothic-theatre-2026-06-17-amble",
+      "rr-2026-06-17-amyl-and-the-sniffers"
+    ],
+    "2026-06-18": [
+      "ford-amphitheater-colorado-springs-2026-06-18-o-a-r-with-gavin-degraw-and-phantom-planet",
+      "rr-2026-06-18-third-day-30th-anniversary"
+    ],
+    "2026-06-19": [
+      "bluebird-theater-2026-06-19-searows",
+      "cervantes-masterpiece-2026-06-19-iration",
+      "rr-2026-06-19-louis-tomlinson"
+    ],
+    "2026-06-20": [
+      "cervantes-masterpiece-2026-06-20-iration",
+      "mishawaka-amphitheatre-2026-06-20-tycho",
+      "rr-2026-06-20-o-a-r"
+    ],
+    "2026-06-23": [
+      "marquis-theater-2026-06-23-monolord-with-mizmor",
+      "rr-2026-06-23-weird-al-yankovic"
+    ],
+    "2026-06-27": [
+      "summit-music-hall-2026-06-27-bearracuda-18"
+    ],
+    "2026-06-30": [
+      "ogden-theatre-2026-06-30-wolfmother"
+    ],
+    "2026-07-01": [
+      "ball-arena-2026-07-01-josh-groban-with-jennifer-hudson",
+      "rr-2026-07-01-treaty-oak-revival"
+    ],
+    "2026-07-02": [
+      "rr-2026-07-02-deadrocks-xii-zeds-dead"
+    ],
+    "2026-07-03": [
+      "marquis-theater-2026-07-03-solya",
+      "rr-2026-07-03-deadrocks-xii-zeds-dead"
+    ],
+    "2026-07-13": [
+      "ogden-theatre-2026-07-13-chance-pena-16"
+    ],
+    "2026-07-20": [
+      "ball-arena-2026-07-20-forrest-frank-with-tori-kelly-cory-asbury-and-the-figs",
+      "chautauqua-auditorium-2026-07-20-rosanne-cash-with-john-leventhal"
+    ],
+    "2026-07-25": [
+      "ball-arena-2026-07-25-olivia-dean",
+      "fiddlers-green-amphitheatre-2026-07-25-rainbow-kitten-surprise-with-spacey-jane"
+    ],
+    "2026-07-26": [
+      "ball-arena-2026-07-26-olivia-dean"
+    ],
+    "2026-07-28": [
+      "ball-arena-2026-07-28-megan-moroney"
+    ],
+    "2026-08-01": [
+      "ball-arena-2026-08-01-meghan-trainor-with-icona-pop-and-ryan-trainor"
+    ],
+    "2026-08-04": [
+      "ogden-theatre-2026-08-04-audrey-hobert-16"
+    ],
+    "2026-08-11": [
+      "mission-ballroom-2026-08-11-sugar"
+    ],
+    "2026-08-14": [
+      "ford-amphitheater-colorado-springs-2026-08-14-alison-krauss-and-union-station-with-jerry-douglas-and-theo-lawrence"
+    ],
+    "2026-08-15": [
+      "fiddlers-green-amphitheatre-2026-08-15-mt-joy"
+    ],
+    "2026-08-21": [
+      "mission-ballroom-2026-08-21-courtney-barnett-with-zoh-amba-16",
+      "summit-music-hall-2026-08-21-diggy-graves-with-resentvul"
+    ],
+    "2026-08-22": [
+      "ball-arena-2026-08-22-toto-with-christopher-cross-and-the-romantics"
+    ],
+    "2026-08-23": [
+      "ball-arena-2026-08-23-avenged-sevenfold-and-good-charlotte",
+      "boulder-theater-2026-08-23-laurie-berkner"
+    ],
+    "2026-08-28": [
+      "ball-arena-2026-08-28-chicago-band"
+    ],
+    "2026-09-02": [
+      "fiddlers-green-amphitheatre-2026-09-02-jack-johnson-with-lake-street-dive"
+    ],
+    "2026-09-03": [
+      "fiddlers-green-amphitheatre-2026-09-03-jack-johnson-with-lake-street-dive"
+    ],
+    "2026-09-05": [
+      "ford-amphitheater-colorado-springs-2026-09-05-brantley-gilbert-rescheduled-from-10-11-25"
+    ],
+    "2026-09-12": [
+      "fiddlers-green-amphitheatre-2026-09-12-rob-zombie-and-marilyn-manson-with-the-hu-and-orgy"
+    ],
+    "2026-09-14": [
+      "ogden-theatre-2026-09-14-peter-hook-and-the-light-16"
+    ],
+    "2026-09-21": [
+      "bluebird-theater-2026-09-21-aldous-harding-16"
+    ],
+    "2026-09-25": [
+      "paramount-theatre-2026-09-25-the-fab-four-tribute-to-the-beatles-help-and-the-hits"
+    ],
+    "2026-10-05": [
+      "ball-arena-2026-10-05-rush"
+    ],
+    "2026-10-07": [
+      "ball-arena-2026-10-07-rush"
+    ],
+    "2026-10-08": [
+      "ball-arena-2026-10-08-doja-cat"
+    ],
+    "2026-10-11": [
+      "ogden-theatre-2026-10-11-osees-16"
+    ],
+    "2026-11-11": [
+      "ball-arena-2026-11-11-three-days-grace-with-i-prevail-and-the-funeral-portrait"
+    ],
+    "2026-11-13": [
+      "marquis-theater-2026-11-13-armand-hammer"
+    ],
+    "2026-11-14": [
+      "rr-2026-11-14-mike"
+    ],
+    "2026-11-15": [
+      "rr-2026-11-15-mike"
+    ]
+  }
+}

@@ -1,0 +1,736 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "events": [
+    {
+      "id": "gothic-theatre-2026-01-24-glaive-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "glaive (16+)",
+      "startAt": "2026-01-24T19:00:00",
+      "startLocal": "2026-01-24T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-glaive-16"
+      ],
+      "artists": [
+        "artist-glaive-16"
+      ],
+      "artistNames": [
+        "glaive (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-01-24",
+      "slug": "2026-01-24-glaive-16"
+    },
+    {
+      "id": "gothic-theatre-2026-01-30-shakedown-street-grateful-dead-tribute-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Shakedown Street - Grateful Dead Tribute (16+)",
+      "startAt": "2026-01-30T19:00:00",
+      "startLocal": "2026-01-30T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-shakedown-street-grateful-dead-tribute-16"
+      ],
+      "artists": [
+        "artist-shakedown-street-grateful-dead-tribute-16"
+      ],
+      "artistNames": [
+        "Shakedown Street - Grateful Dead Tribute (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-01-30",
+      "slug": "2026-01-30-shakedown-street-grateful-dead-tribute-16"
+    },
+    {
+      "id": "gothic-theatre-2026-01-31-bane-with-rotting-out-eyes-of-salt-and-warmachine-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Bane with Rotting Out, Eyes of Salt, and Warmachine (16+)",
+      "startAt": "2026-01-31T19:00:00",
+      "startLocal": "2026-01-31T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-bane"
+      ],
+      "artists": [
+        "artist-bane",
+        "artist-rotting-out",
+        "artist-eyes-of-salt",
+        "artist-warmachine-16"
+      ],
+      "artistNames": [
+        "Bane",
+        "Rotting Out",
+        "Eyes of Salt",
+        "Warmachine (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-01-31",
+      "slug": "2026-01-31-bane-with-rotting-out-eyes-of-salt-and-warmachine-16"
+    },
+    {
+      "id": "gothic-theatre-2026-02-06-north-mississippi-allstars-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "North Mississippi Allstars (16+)",
+      "startAt": "2026-02-06T19:00:00",
+      "startLocal": "2026-02-06T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-north-mississippi-allstars-16"
+      ],
+      "artists": [
+        "artist-north-mississippi-allstars-16"
+      ],
+      "artistNames": [
+        "North Mississippi Allstars (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-06",
+      "slug": "2026-02-06-north-mississippi-allstars-16"
+    },
+    {
+      "id": "gothic-theatre-2026-02-10-sudan-archives-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Sudan Archives (16+)",
+      "startAt": "2026-02-10T19:00:00",
+      "startLocal": "2026-02-10T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-sudan-archives-16"
+      ],
+      "artists": [
+        "artist-sudan-archives-16"
+      ],
+      "artistNames": [
+        "Sudan Archives (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-10",
+      "slug": "2026-02-10-sudan-archives-16"
+    },
+    {
+      "id": "gothic-theatre-2026-02-13-sons-of-legion-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Sons of Legion (16+)",
+      "startAt": "2026-02-13T19:00:00",
+      "startLocal": "2026-02-13T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-sons-of-legion-16"
+      ],
+      "artists": [
+        "artist-sons-of-legion-16"
+      ],
+      "artistNames": [
+        "Sons of Legion (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-13",
+      "slug": "2026-02-13-sons-of-legion-16"
+    },
+    {
+      "id": "gothic-theatre-2026-02-14-the-record-company-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "The Record Company (16+)",
+      "startAt": "2026-02-14T19:00:00",
+      "startLocal": "2026-02-14T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-the-record-company-16"
+      ],
+      "artists": [
+        "artist-the-record-company-16"
+      ],
+      "artistNames": [
+        "The Record Company (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-14",
+      "slug": "2026-02-14-the-record-company-16"
+    },
+    {
+      "id": "gothic-theatre-2026-02-22-clipping-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Clipping. (16+)",
+      "startAt": "2026-02-22T19:00:00",
+      "startLocal": "2026-02-22T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-clipping-16"
+      ],
+      "artists": [
+        "artist-clipping-16"
+      ],
+      "artistNames": [
+        "Clipping. (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-22",
+      "slug": "2026-02-22-clipping-16"
+    },
+    {
+      "id": "gothic-theatre-2026-02-23-black-pistol-fire-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Black Pistol Fire (16+)",
+      "startAt": "2026-02-23T19:00:00",
+      "startLocal": "2026-02-23T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-black-pistol-fire-16"
+      ],
+      "artists": [
+        "artist-black-pistol-fire-16"
+      ],
+      "artistNames": [
+        "Black Pistol Fire (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-23",
+      "slug": "2026-02-23-black-pistol-fire-16"
+    },
+    {
+      "id": "gothic-theatre-2026-02-27-denm-with-evening-elephants-and-obed-padilla",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "DENM with Evening Elephants and Obed Padilla",
+      "startAt": "2026-02-27T19:00:00",
+      "startLocal": "2026-02-27T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-denm"
+      ],
+      "artists": [
+        "artist-denm",
+        "artist-evening-elephants",
+        "artist-obed-padilla"
+      ],
+      "artistNames": [
+        "DENM",
+        "Evening Elephants",
+        "Obed Padilla"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-27",
+      "slug": "2026-02-27-denm-with-evening-elephants-and-obed-padilla"
+    },
+    {
+      "id": "gothic-theatre-2026-03-04-margo-price-with-shannon-mcnally",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Margo Price with Shannon McNally",
+      "startAt": "2026-03-04T19:00:00",
+      "startLocal": "2026-03-04T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-margo-price"
+      ],
+      "artists": [
+        "artist-margo-price",
+        "artist-shannon-mcnally"
+      ],
+      "artistNames": [
+        "Margo Price",
+        "Shannon McNally"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-04",
+      "slug": "2026-03-04-margo-price-with-shannon-mcnally"
+    },
+    {
+      "id": "gothic-theatre-2026-03-07-benee-with-bayli-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "BENEE with BAYLI (16+)",
+      "startAt": "2026-03-07T19:00:00",
+      "startLocal": "2026-03-07T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-benee"
+      ],
+      "artists": [
+        "artist-benee",
+        "artist-bayli-16"
+      ],
+      "artistNames": [
+        "BENEE",
+        "BAYLI (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-07",
+      "slug": "2026-03-07-benee-with-bayli-16"
+    },
+    {
+      "id": "gothic-theatre-2026-03-13-maggie-lindemann-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Maggie Lindemann (16+)",
+      "startAt": "2026-03-13T19:00:00",
+      "startLocal": "2026-03-13T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-maggie-lindemann-16"
+      ],
+      "artists": [
+        "artist-maggie-lindemann-16"
+      ],
+      "artistNames": [
+        "Maggie Lindemann (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-13",
+      "slug": "2026-03-13-maggie-lindemann-16"
+    },
+    {
+      "id": "gothic-theatre-2026-03-14-the-strumbellas",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "The Strumbellas",
+      "startAt": "2026-03-14T19:00:00",
+      "startLocal": "2026-03-14T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-the-strumbellas"
+      ],
+      "artists": [
+        "artist-the-strumbellas"
+      ],
+      "artistNames": [
+        "The Strumbellas"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-14",
+      "slug": "2026-03-14-the-strumbellas"
+    },
+    {
+      "id": "gothic-theatre-2026-03-16-indigo-de-souza-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Indigo De Souza (16+)",
+      "startAt": "2026-03-16T19:00:00",
+      "startLocal": "2026-03-16T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-indigo-de-souza-16"
+      ],
+      "artists": [
+        "artist-indigo-de-souza-16"
+      ],
+      "artistNames": [
+        "Indigo De Souza (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-16",
+      "slug": "2026-03-16-indigo-de-souza-16"
+    },
+    {
+      "id": "gothic-theatre-2026-03-21-eddie-9v-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Eddie 9V (16+)",
+      "startAt": "2026-03-21T19:00:00",
+      "startLocal": "2026-03-21T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-eddie-9v-16"
+      ],
+      "artists": [
+        "artist-eddie-9v-16"
+      ],
+      "artistNames": [
+        "Eddie 9V (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-21",
+      "slug": "2026-03-21-eddie-9v-16"
+    },
+    {
+      "id": "gothic-theatre-2026-03-26-the-early-november-and-hellogoodbye-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "The Early November and Hellogoodbye (16+)",
+      "startAt": "2026-03-26T19:00:00",
+      "startLocal": "2026-03-26T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-the-early-november-and-hellogoodbye-16"
+      ],
+      "artists": [
+        "artist-the-early-november-and-hellogoodbye-16"
+      ],
+      "artistNames": [
+        "The Early November and Hellogoodbye (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-26",
+      "slug": "2026-03-26-the-early-november-and-hellogoodbye-16"
+    },
+    {
+      "id": "gothic-theatre-2026-04-03-orbit-culture",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Orbit Culture",
+      "startAt": "2026-04-03T19:00:00",
+      "startLocal": "2026-04-03T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-orbit-culture"
+      ],
+      "artists": [
+        "artist-orbit-culture"
+      ],
+      "artistNames": [
+        "Orbit Culture"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-03",
+      "slug": "2026-04-03-orbit-culture"
+    },
+    {
+      "id": "gothic-theatre-2026-04-08-goldford-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "GoldFord (16+)",
+      "startAt": "2026-04-08T19:00:00",
+      "startLocal": "2026-04-08T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-goldford-16"
+      ],
+      "artists": [
+        "artist-goldford-16"
+      ],
+      "artistNames": [
+        "GoldFord (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-08",
+      "slug": "2026-04-08-goldford-16"
+    },
+    {
+      "id": "gothic-theatre-2026-04-11-d-r-i-dirty-rotten-imbeciles-with-clusterfux-and-deathwish-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "D.R.I. - Dirty Rotten Imbeciles with Clusterfux and Deathwish (16+)",
+      "startAt": "2026-04-11T19:00:00",
+      "startLocal": "2026-04-11T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-d-r-i-dirty-rotten-imbeciles"
+      ],
+      "artists": [
+        "artist-d-r-i-dirty-rotten-imbeciles",
+        "artist-clusterfux",
+        "artist-deathwish-16"
+      ],
+      "artistNames": [
+        "D.R.I. - Dirty Rotten Imbeciles",
+        "Clusterfux",
+        "Deathwish (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-11",
+      "slug": "2026-04-11-d-r-i-dirty-rotten-imbeciles-with-clusterfux-and-deathwish-16"
+    },
+    {
+      "id": "gothic-theatre-2026-04-12-fcukers-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Fcukers (16+)",
+      "startAt": "2026-04-12T19:00:00",
+      "startLocal": "2026-04-12T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-fcukers-16"
+      ],
+      "artists": [
+        "artist-fcukers-16"
+      ],
+      "artistNames": [
+        "Fcukers (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-12",
+      "slug": "2026-04-12-fcukers-16"
+    },
+    {
+      "id": "gothic-theatre-2026-04-17-bleed-from-within",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Bleed From Within",
+      "startAt": "2026-04-17T19:00:00",
+      "startLocal": "2026-04-17T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-bleed-from-within"
+      ],
+      "artists": [
+        "artist-bleed-from-within"
+      ],
+      "artistNames": [
+        "Bleed From Within"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-17",
+      "slug": "2026-04-17-bleed-from-within"
+    },
+    {
+      "id": "gothic-theatre-2026-04-18-tyler-braden-18",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Tyler Braden (18+)",
+      "startAt": "2026-04-18T19:00:00",
+      "startLocal": "2026-04-18T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-tyler-braden-18"
+      ],
+      "artists": [
+        "artist-tyler-braden-18"
+      ],
+      "artistNames": [
+        "Tyler Braden (18+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-18",
+      "slug": "2026-04-18-tyler-braden-18"
+    },
+    {
+      "id": "gothic-theatre-2026-04-19-chris-webby-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Chris Webby (16+)",
+      "startAt": "2026-04-19T19:00:00",
+      "startLocal": "2026-04-19T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-chris-webby-16"
+      ],
+      "artists": [
+        "artist-chris-webby-16"
+      ],
+      "artistNames": [
+        "Chris Webby (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-19",
+      "slug": "2026-04-19-chris-webby-16"
+    },
+    {
+      "id": "gothic-theatre-2026-04-25-tourist",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Tourist",
+      "startAt": "2026-04-25T19:00:00",
+      "startLocal": "2026-04-25T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-tourist"
+      ],
+      "artists": [
+        "artist-tourist"
+      ],
+      "artistNames": [
+        "Tourist"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-25",
+      "slug": "2026-04-25-tourist"
+    },
+    {
+      "id": "gothic-theatre-2026-05-01-witchz",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "WITCHZ",
+      "startAt": "2026-05-01T19:00:00",
+      "startLocal": "2026-05-01T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-witchz"
+      ],
+      "artists": [
+        "artist-witchz"
+      ],
+      "artistNames": [
+        "WITCHZ"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-01",
+      "slug": "2026-05-01-witchz"
+    },
+    {
+      "id": "gothic-theatre-2026-05-05-the-new-pornographers-with-will-sheff-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "The New Pornographers with Will Sheff (16+)",
+      "startAt": "2026-05-05T19:00:00",
+      "startLocal": "2026-05-05T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-the-new-pornographers"
+      ],
+      "artists": [
+        "artist-the-new-pornographers",
+        "artist-will-sheff-16"
+      ],
+      "artistNames": [
+        "The New Pornographers",
+        "Will Sheff (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-05",
+      "slug": "2026-05-05-the-new-pornographers-with-will-sheff-16"
+    },
+    {
+      "id": "gothic-theatre-2026-05-06-emo-orchestra",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Emo Orchestra",
+      "startAt": "2026-05-06T19:00:00",
+      "startLocal": "2026-05-06T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-emo-orchestra"
+      ],
+      "artists": [
+        "artist-emo-orchestra"
+      ],
+      "artistNames": [
+        "Emo Orchestra"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-06",
+      "slug": "2026-05-06-emo-orchestra"
+    },
+    {
+      "id": "gothic-theatre-2026-05-14-the-moss",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "The Moss",
+      "startAt": "2026-05-14T19:00:00",
+      "startLocal": "2026-05-14T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-the-moss"
+      ],
+      "artists": [
+        "artist-the-moss"
+      ],
+      "artistNames": [
+        "The Moss"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-14",
+      "slug": "2026-05-14-the-moss"
+    },
+    {
+      "id": "gothic-theatre-2026-05-23-cradle-of-filth",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Cradle of Filth",
+      "startAt": "2026-05-23T19:00:00",
+      "startLocal": "2026-05-23T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-cradle-of-filth"
+      ],
+      "artists": [
+        "artist-cradle-of-filth"
+      ],
+      "artistNames": [
+        "Cradle of Filth"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-23",
+      "slug": "2026-05-23-cradle-of-filth"
+    },
+    {
+      "id": "gothic-theatre-2026-05-26-thornhill-with-156-silence-fox-lake-and-vianova-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Thornhill with 156/Silence, Fox Lake and vianova (16+)",
+      "startAt": "2026-05-26T19:00:00",
+      "startLocal": "2026-05-26T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-thornhill"
+      ],
+      "artists": [
+        "artist-thornhill",
+        "artist-156-silence",
+        "artist-fox-lake",
+        "artist-vianova-16"
+      ],
+      "artistNames": [
+        "Thornhill",
+        "156/Silence",
+        "Fox Lake",
+        "vianova (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-26",
+      "slug": "2026-05-26-thornhill-with-156-silence-fox-lake-and-vianova-16"
+    },
+    {
+      "id": "gothic-theatre-2026-06-17-amble",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Amble",
+      "startAt": "2026-06-17T19:00:00",
+      "startLocal": "2026-06-17T19:00:00",
+      "venueId": "gothic-theatre",
+      "headliners": [
+        "artist-amble"
+      ],
+      "artists": [
+        "artist-amble"
+      ],
+      "artistNames": [
+        "Amble"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-06-17",
+      "slug": "2026-06-17-amble"
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "artistToEvents": {
+    "artist-ricardo-arjona": [
+      "ball-arena-2026-02-18-ricardo-arjona"
+    ],
+    "artist-bad-omens": [
+      "ball-arena-2026-02-24-bad-omens-with-beartooth-and-president"
+    ],
+    "artist-beartooth": [
+      "ball-arena-2026-02-24-bad-omens-with-beartooth-and-president"
+    ],
+    "artist-president": [
+      "ball-arena-2026-02-24-bad-omens-with-beartooth-and-president"
+    ],
+    "artist-cardi-b": [
+      "ball-arena-2026-03-09-cardi-b"
+    ],
+    "artist-peso-pluma": [
+      "ball-arena-2026-03-26-peso-pluma"
+    ],
+    "artist-twice": [
+      "ball-arena-2026-04-14-twice"
+    ],
+    "artist-demi-lovato": [
+      "ball-arena-2026-05-05-demi-lovato-with-adela"
+    ],
+    "artist-adela": [
+      "ball-arena-2026-05-05-demi-lovato-with-adela"
+    ],
+    "artist-josh-groban": [
+      "ball-arena-2026-07-01-josh-groban-with-jennifer-hudson"
+    ],
+    "artist-jennifer-hudson": [
+      "ball-arena-2026-07-01-josh-groban-with-jennifer-hudson"
+    ],
+    "artist-forrest-frank": [
+      "ball-arena-2026-07-20-forrest-frank-with-tori-kelly-cory-asbury-and-the-figs"
+    ],
+    "artist-tori-kelly": [
+      "ball-arena-2026-07-20-forrest-frank-with-tori-kelly-cory-asbury-and-the-figs"
+    ],
+    "artist-cory-asbury": [
+      "ball-arena-2026-07-20-forrest-frank-with-tori-kelly-cory-asbury-and-the-figs"
+    ],
+    "artist-the-figs": [
+      "ball-arena-2026-07-20-forrest-frank-with-tori-kelly-cory-asbury-and-the-figs"
+    ],
+    "artist-olivia-dean": [
+      "ball-arena-2026-07-25-olivia-dean",
+      "ball-arena-2026-07-26-olivia-dean"
+    ],
+    "artist-megan-moroney": [
+      "ball-arena-2026-07-28-megan-moroney"
+    ],
+    "artist-meghan-trainor": [
+      "ball-arena-2026-08-01-meghan-trainor-with-icona-pop-and-ryan-trainor"
+    ],
+    "artist-icona-pop": [
+      "ball-arena-2026-08-01-meghan-trainor-with-icona-pop-and-ryan-trainor"
+    ],
+    "artist-ryan-trainor": [
+      "ball-arena-2026-08-01-meghan-trainor-with-icona-pop-and-ryan-trainor"
+    ],
+    "artist-toto": [
+      "ball-arena-2026-08-22-toto-with-christopher-cross-and-the-romantics"
+    ],
+    "artist-christopher-cross": [
+      "ball-arena-2026-08-22-toto-with-christopher-cross-and-the-romantics"
+    ],
+    "artist-the-romantics": [
+      "ball-arena-2026-08-22-toto-with-christopher-cross-and-the-romantics"
+    ],
+    "artist-avenged-sevenfold-and-good-charlotte": [
+      "ball-arena-2026-08-23-avenged-sevenfold-and-good-charlotte"
+    ],
+    "artist-chicago-band": [
+      "ball-arena-2026-08-28-chicago-band"
+    ],
+    "artist-rush": [
+      "ball-arena-2026-10-05-rush",
+      "ball-arena-2026-10-07-rush"
+    ],
+    "artist-doja-cat": [
+      "ball-arena-2026-10-08-doja-cat"
+    ],
+    "artist-three-days-grace": [
+      "ball-arena-2026-11-11-three-days-grace-with-i-prevail-and-the-funeral-portrait"
+    ],
+    "artist-i-prevail": [
+      "ball-arena-2026-11-11-three-days-grace-with-i-prevail-and-the-funeral-portrait"
+    ],
+    "artist-the-funeral-portrait": [
+      "ball-arena-2026-11-11-three-days-grace-with-i-prevail-and-the-funeral-portrait"
+    ]
+  },
+  "artistIndex": {
+    "ricardo arjona": "artist-ricardo-arjona",
+    "bad omens": "artist-bad-omens",
+    "beartooth": "artist-beartooth",
+    "president": "artist-president",
+    "cardi b": "artist-cardi-b",
+    "peso pluma": "artist-peso-pluma",
+    "twice": "artist-twice",
+    "demi lovato": "artist-demi-lovato",
+    "adela": "artist-adela",
+    "josh groban": "artist-josh-groban",
+    "jennifer hudson": "artist-jennifer-hudson",
+    "forrest frank": "artist-forrest-frank",
+    "tori kelly": "artist-tori-kelly",
+    "cory asbury": "artist-cory-asbury",
+    "the figs": "artist-the-figs",
+    "olivia dean": "artist-olivia-dean",
+    "megan moroney": "artist-megan-moroney",
+    "meghan trainor": "artist-meghan-trainor",
+    "icona pop": "artist-icona-pop",
+    "ryan trainor": "artist-ryan-trainor",
+    "toto": "artist-toto",
+    "christopher cross": "artist-christopher-cross",
+    "the romantics": "artist-the-romantics",
+    "avenged sevenfold and good charlotte": "artist-avenged-sevenfold-and-good-charlotte",
+    "chicago (band)": "artist-chicago-band",
+    "rush": "artist-rush",
+    "doja cat": "artist-doja-cat",
+    "three days grace": "artist-three-days-grace",
+    "i prevail": "artist-i-prevail",
+    "the funeral portrait": "artist-the-funeral-portrait"
+  }
+}

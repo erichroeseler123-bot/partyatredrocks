@@ -1,0 +1,784 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "docs": [
+    {
+      "eventKey": "marquis-theater-2026-01-27-mc-davo",
+      "title": "MC Davo",
+      "artistNames": [
+        "MC Davo"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-01-27",
+      "tags": [
+        "marquis-theater",
+        "mc davo"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-01-30-bayymack-18",
+      "title": "Bayymack (18+)",
+      "artistNames": [
+        "Bayymack (18+)"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-01-30",
+      "tags": [
+        "marquis-theater",
+        "bayymack (18+)"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-01-31-chri-tian-gate-with-neon-the-bishop",
+      "title": "Chri$tian Gate$ with Neon The Bishop",
+      "artistNames": [
+        "Chri$tian Gate$",
+        "Neon The Bishop"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-01-31",
+      "tags": [
+        "marquis-theater",
+        "chri$tian gate$",
+        "neon the bishop"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-02-01-your-arms-are-my-cocoon",
+      "title": "Your Arms Are My Cocoon",
+      "artistNames": [
+        "Your Arms Are My Cocoon"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-02-01",
+      "tags": [
+        "marquis-theater",
+        "your arms are my cocoon"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-02-03-bravo-the-bagchaser-with-lil-maru",
+      "title": "Bravo the Bagchaser with Lil Maru",
+      "artistNames": [
+        "Bravo the Bagchaser",
+        "Lil Maru"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-02-03",
+      "tags": [
+        "marquis-theater",
+        "bravo the bagchaser",
+        "lil maru"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-02-10-left-to-suffer-with-the-last-ten-seconds-of-life-larcenia-roe-and-fr3ak",
+      "title": "Left To Suffer with The Last Ten Seconds of Life, Larcenia Roe, and Fr3ak",
+      "artistNames": [
+        "Left To Suffer",
+        "The Last Ten Seconds of Life",
+        "Larcenia Roe",
+        "Fr3ak"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-02-10",
+      "tags": [
+        "marquis-theater",
+        "left to suffer",
+        "the last ten seconds of life",
+        "larcenia roe",
+        "fr3ak"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-02-13-yung-bans",
+      "title": "Yung Bans",
+      "artistNames": [
+        "Yung Bans"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-02-13",
+      "tags": [
+        "marquis-theater",
+        "yung bans"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-02-19-beauty-school-dropout",
+      "title": "Beauty School Dropout",
+      "artistNames": [
+        "Beauty School Dropout"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-02-19",
+      "tags": [
+        "marquis-theater",
+        "beauty school dropout"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-02-21-hayden-coffman",
+      "title": "Hayden Coffman",
+      "artistNames": [
+        "Hayden Coffman"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-02-21",
+      "tags": [
+        "marquis-theater",
+        "hayden coffman"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-02-22-nathan-evans-and-the-saint-phnx-band",
+      "title": "Nathan Evans & The Saint PHNX Band",
+      "artistNames": [
+        "Nathan Evans & The Saint PHNX Band"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-02-22",
+      "tags": [
+        "marquis-theater",
+        "nathan evans & the saint phnx band"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-02-26-jeremy-jordan-with-age-of-madness",
+      "title": "Jeremy Jordan with Age of Madness",
+      "artistNames": [
+        "Jeremy Jordan",
+        "Age of Madness"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-02-26",
+      "tags": [
+        "marquis-theater",
+        "jeremy jordan",
+        "age of madness"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-02-27-glitterer",
+      "title": "Glitterer",
+      "artistNames": [
+        "Glitterer"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-02-27",
+      "tags": [
+        "marquis-theater",
+        "glitterer"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-02-28-all-your-friends-18",
+      "title": "All Your Friends (18+)",
+      "artistNames": [
+        "All Your Friends (18+)"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-02-28",
+      "tags": [
+        "marquis-theater",
+        "all your friends (18+)"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-03-01-mat-kerekes-with-shallow-alcove",
+      "title": "Mat Kerekes with Shallow Alcove",
+      "artistNames": [
+        "Mat Kerekes",
+        "Shallow Alcove"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-03-01",
+      "tags": [
+        "marquis-theater",
+        "mat kerekes",
+        "shallow alcove"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-03-04-capstan-with-in-her-own-words-and-dreamwake",
+      "title": "Capstan with In Her Own Words and Dreamwake",
+      "artistNames": [
+        "Capstan",
+        "In Her Own Words",
+        "Dreamwake"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-03-04",
+      "tags": [
+        "marquis-theater",
+        "capstan",
+        "in her own words",
+        "dreamwake"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-03-09-the-browning-with-within-destruction-face-yourself-and-dead-eyes",
+      "title": "The Browning with Within Destruction, Face Yourself and Dead Eyes",
+      "artistNames": [
+        "The Browning",
+        "Within Destruction",
+        "Face Yourself",
+        "Dead Eyes"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-03-09",
+      "tags": [
+        "marquis-theater",
+        "the browning",
+        "within destruction",
+        "face yourself",
+        "dead eyes"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-03-11-siamese-with-cabal",
+      "title": "Siamese with Cabal",
+      "artistNames": [
+        "Siamese",
+        "Cabal"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-03-11",
+      "tags": [
+        "marquis-theater",
+        "siamese",
+        "cabal"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-03-13-spiritual-cramp-with-destiny-bond",
+      "title": "Spiritual Cramp with Destiny Bond",
+      "artistNames": [
+        "Spiritual Cramp",
+        "Destiny Bond"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-03-13",
+      "tags": [
+        "marquis-theater",
+        "spiritual cramp",
+        "destiny bond"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-03-16-varials-with-unitytx",
+      "title": "Varials with UnityTX",
+      "artistNames": [
+        "Varials",
+        "UnityTX"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-03-16",
+      "tags": [
+        "marquis-theater",
+        "varials",
+        "unitytx"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-03-17-dark-divine",
+      "title": "Dark Divine",
+      "artistNames": [
+        "Dark Divine"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-03-17",
+      "tags": [
+        "marquis-theater",
+        "dark divine"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-03-18-alexsucks",
+      "title": "ALEXSUCKS",
+      "artistNames": [
+        "ALEXSUCKS"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-03-18",
+      "tags": [
+        "marquis-theater",
+        "alexsucks"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-03-19-lithe",
+      "title": "Lithe",
+      "artistNames": [
+        "Lithe"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-03-19",
+      "tags": [
+        "marquis-theater",
+        "lithe"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-03-20-dream-ivory",
+      "title": "Dream, Ivory",
+      "artistNames": [
+        "Dream, Ivory"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-03-20",
+      "tags": [
+        "marquis-theater",
+        "dream, ivory"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-03-21-emm-with-bentley-robles",
+      "title": "EMM with Bentley Robles",
+      "artistNames": [
+        "EMM",
+        "Bentley Robles"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-03-21",
+      "tags": [
+        "marquis-theater",
+        "emm",
+        "bentley robles"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-03-22-emily-king",
+      "title": "Emily King",
+      "artistNames": [
+        "Emily King"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-03-22",
+      "tags": [
+        "marquis-theater",
+        "emily king"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-03-24-mclusky",
+      "title": "Mclusky",
+      "artistNames": [
+        "Mclusky"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-03-24",
+      "tags": [
+        "marquis-theater",
+        "mclusky"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-03-25-the-sloppy-boys",
+      "title": "The Sloppy Boys",
+      "artistNames": [
+        "The Sloppy Boys"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-03-25",
+      "tags": [
+        "marquis-theater",
+        "the sloppy boys"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-03-26-yellow-days",
+      "title": "Yellow Days",
+      "artistNames": [
+        "Yellow Days"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-03-26",
+      "tags": [
+        "marquis-theater",
+        "yellow days"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-03-27-pity-party-girls-club",
+      "title": "Pity Party (Girls Club)",
+      "artistNames": [
+        "Pity Party (Girls Club)"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-03-27",
+      "tags": [
+        "marquis-theater",
+        "pity party (girls club)"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-03-28-steinza",
+      "title": "Steinza",
+      "artistNames": [
+        "Steinza"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-03-28",
+      "tags": [
+        "marquis-theater",
+        "steinza"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-03-29-angel-du-t-with-home-front",
+      "title": "Angel Du$t with Home Front",
+      "artistNames": [
+        "Angel Du$t",
+        "Home Front"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-03-29",
+      "tags": [
+        "marquis-theater",
+        "angel du$t",
+        "home front"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-03-30-night-cap",
+      "title": "Night Cap",
+      "artistNames": [
+        "Night Cap"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-03-30",
+      "tags": [
+        "marquis-theater",
+        "night cap"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-03-31-naika",
+      "title": "Naika",
+      "artistNames": [
+        "Naika"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-03-31",
+      "tags": [
+        "marquis-theater",
+        "naika"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-04-01-r-a-p-ferreira",
+      "title": "R.A.P. Ferreira",
+      "artistNames": [
+        "R.A.P. Ferreira"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-04-01",
+      "tags": [
+        "marquis-theater",
+        "r.a.p. ferreira"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-04-04-sarah-kinsley-with-girlpuppy",
+      "title": "Sarah Kinsley with girlpuppy",
+      "artistNames": [
+        "Sarah Kinsley",
+        "girlpuppy"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-04-04",
+      "tags": [
+        "marquis-theater",
+        "sarah kinsley",
+        "girlpuppy"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-04-10-des-rocs-with-romes",
+      "title": "Des Rocs with ROMES",
+      "artistNames": [
+        "Des Rocs",
+        "ROMES"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-04-10",
+      "tags": [
+        "marquis-theater",
+        "des rocs",
+        "romes"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-04-11-sweet-pill-with-spaced-and-stereosity",
+      "title": "Sweet Pill with Spaced and Stereosity",
+      "artistNames": [
+        "Sweet Pill",
+        "Spaced",
+        "Stereosity"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-04-11",
+      "tags": [
+        "marquis-theater",
+        "sweet pill",
+        "spaced",
+        "stereosity"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-04-18-soul-blind",
+      "title": "Soul Blind",
+      "artistNames": [
+        "Soul Blind"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-04-18",
+      "tags": [
+        "marquis-theater",
+        "soul blind"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-04-20-maro",
+      "title": "Maro",
+      "artistNames": [
+        "Maro"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-04-20",
+      "tags": [
+        "marquis-theater",
+        "maro"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-04-21-slomosa",
+      "title": "Slomosa",
+      "artistNames": [
+        "Slomosa"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-04-21",
+      "tags": [
+        "marquis-theater",
+        "slomosa"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-04-22-drugdealer",
+      "title": "Drugdealer",
+      "artistNames": [
+        "Drugdealer"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-04-22",
+      "tags": [
+        "marquis-theater",
+        "drugdealer"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-04-23-cold",
+      "title": "Cold",
+      "artistNames": [
+        "Cold"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-04-23",
+      "tags": [
+        "marquis-theater",
+        "cold"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-04-25-unprocessed",
+      "title": "Unprocessed",
+      "artistNames": [
+        "Unprocessed"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-04-25",
+      "tags": [
+        "marquis-theater",
+        "unprocessed"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-04-26-lou-deezi",
+      "title": "Lou Deezi",
+      "artistNames": [
+        "Lou Deezi"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-04-26",
+      "tags": [
+        "marquis-theater",
+        "lou deezi"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-04-28-skizzy-mars-rescheduled-from-10-16-2025",
+      "title": "Skizzy Mars (Rescheduled from 10/16/2025)",
+      "artistNames": [
+        "Skizzy Mars (Rescheduled from 10/16/2025)"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-04-28",
+      "tags": [
+        "marquis-theater",
+        "skizzy mars (rescheduled from 10/16/2025)"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-05-02-glixen-with-trauma-ray",
+      "title": "Glixen with Trauma Ray",
+      "artistNames": [
+        "Glixen",
+        "Trauma Ray"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-05-02",
+      "tags": [
+        "marquis-theater",
+        "glixen",
+        "trauma ray"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-05-07-faetooth",
+      "title": "Faetooth",
+      "artistNames": [
+        "Faetooth"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-05-07",
+      "tags": [
+        "marquis-theater",
+        "faetooth"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-05-18-the-scratch",
+      "title": "The Scratch",
+      "artistNames": [
+        "The Scratch"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-05-18",
+      "tags": [
+        "marquis-theater",
+        "the scratch"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-05-19-vundabar-with-goon",
+      "title": "Vundabar with Goon",
+      "artistNames": [
+        "Vundabar",
+        "Goon"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-05-19",
+      "tags": [
+        "marquis-theater",
+        "vundabar",
+        "goon"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-05-22-dead-calm",
+      "title": "Dead Calm",
+      "artistNames": [
+        "Dead Calm"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-05-22",
+      "tags": [
+        "marquis-theater",
+        "dead calm"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-05-26-daisy-grenade-with-vienna-vienna",
+      "title": "Daisy Grenade with Vienna Vienna",
+      "artistNames": [
+        "Daisy Grenade",
+        "Vienna Vienna"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-05-26",
+      "tags": [
+        "marquis-theater",
+        "daisy grenade",
+        "vienna vienna"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-06-03-white-denim",
+      "title": "White Denim",
+      "artistNames": [
+        "White Denim"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-06-03",
+      "tags": [
+        "marquis-theater",
+        "white denim"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-06-05-troy-doherty",
+      "title": "Troy Doherty",
+      "artistNames": [
+        "Troy Doherty"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-06-05",
+      "tags": [
+        "marquis-theater",
+        "troy doherty"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-06-23-monolord-with-mizmor",
+      "title": "Monolord with Mizmor",
+      "artistNames": [
+        "Monolord",
+        "Mizmor"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-06-23",
+      "tags": [
+        "marquis-theater",
+        "monolord",
+        "mizmor"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-07-03-solya",
+      "title": "Solya",
+      "artistNames": [
+        "Solya"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-07-03",
+      "tags": [
+        "marquis-theater",
+        "solya"
+      ]
+    },
+    {
+      "eventKey": "marquis-theater-2026-11-13-armand-hammer",
+      "title": "Armand Hammer",
+      "artistNames": [
+        "Armand Hammer"
+      ],
+      "venueId": "marquis-theater",
+      "dateKey": "2026-11-13",
+      "tags": [
+        "marquis-theater",
+        "armand hammer"
+      ]
+    }
+  ]
+}

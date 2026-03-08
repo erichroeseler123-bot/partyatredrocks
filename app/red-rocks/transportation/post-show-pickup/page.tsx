@@ -46,7 +46,7 @@ export default function Page() {
         </section>
 
         <div className="mt-12">
-          <Link href="/book-shuttle" className="btn-primary">
+          <Link href="/find" className="btn-primary">
             Guaranteed return — Book the shuttle →
           </Link>
         </div>

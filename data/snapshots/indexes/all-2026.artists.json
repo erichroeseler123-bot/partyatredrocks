@@ -1,0 +1,2825 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "artistToEvents": {
+    "artist-glaive-16": [
+      "gothic-theatre-2026-01-24-glaive-16"
+    ],
+    "artist-kitchen-dwellers": [
+      "mission-ballroom-2026-01-24-kitchen-dwellers-with-mountain-grass-unit-16"
+    ],
+    "artist-mountain-grass-unit-16": [
+      "mission-ballroom-2026-01-24-kitchen-dwellers-with-mountain-grass-unit-16"
+    ],
+    "artist-mountain-grass-unit": [
+      "mission-ballroom-2026-01-24-mountain-grass-unit"
+    ],
+    "artist-kompany": [
+      "ogden-theatre-2026-01-24-kompany"
+    ],
+    "artist-tycho": [
+      "ophelias-2026-01-24-tycho",
+      "mishawaka-amphitheatre-2026-06-20-tycho"
+    ],
+    "artist-ruston-kelly": [
+      "bluebird-theater-2026-01-26-ruston-kelly-with-verygently-16"
+    ],
+    "artist-verygently-16": [
+      "bluebird-theater-2026-01-26-ruston-kelly-with-verygently-16"
+    ],
+    "artist-mc-davo": [
+      "marquis-theater-2026-01-27-mc-davo"
+    ],
+    "artist-aleman-and-gera-mx": [
+      "fillmore-auditorium-2026-01-29-aleman-and-gera-mx"
+    ],
+    "artist-billy-f-gibbons-and-the-bfg-band": [
+      "paramount-theatre-2026-01-29-billy-f-gibbons-and-the-bfg-band"
+    ],
+    "artist-shakedown-street-grateful-dead-tribute-16": [
+      "gothic-theatre-2026-01-30-shakedown-street-grateful-dead-tribute-16"
+    ],
+    "artist-bayymack-18": [
+      "marquis-theater-2026-01-30-bayymack-18"
+    ],
+    "artist-ship-wrek-16": [
+      "mission-ballroom-2026-01-30-ship-wrek-16"
+    ],
+    "artist-chmura": [
+      "ogden-theatre-2026-01-30-chmura"
+    ],
+    "artist-skiitour": [
+      "ophelias-2026-01-30-skiitour"
+    ],
+    "artist-fitz-and-the-tantrums": [
+      "boulder-theater-2026-01-31-fitz-and-the-tantrums"
+    ],
+    "artist-josh-teed": [
+      "fox-theatre-2026-01-31-josh-teed"
+    ],
+    "artist-bane": [
+      "gothic-theatre-2026-01-31-bane-with-rotting-out-eyes-of-salt-and-warmachine-16"
+    ],
+    "artist-rotting-out": [
+      "gothic-theatre-2026-01-31-bane-with-rotting-out-eyes-of-salt-and-warmachine-16"
+    ],
+    "artist-eyes-of-salt": [
+      "gothic-theatre-2026-01-31-bane-with-rotting-out-eyes-of-salt-and-warmachine-16"
+    ],
+    "artist-warmachine-16": [
+      "gothic-theatre-2026-01-31-bane-with-rotting-out-eyes-of-salt-and-warmachine-16"
+    ],
+    "artist-chri-tian-gate": [
+      "marquis-theater-2026-01-31-chri-tian-gate-with-neon-the-bishop"
+    ],
+    "artist-neon-the-bishop": [
+      "marquis-theater-2026-01-31-chri-tian-gate-with-neon-the-bishop"
+    ],
+    "artist-ray-volpe": [
+      "mission-ballroom-2026-01-31-ray-volpe"
+    ],
+    "artist-dogs-in-a-pile": [
+      "ogden-theatre-2026-01-31-dogs-in-a-pile"
+    ],
+    "artist-david-ramirez": [
+      "ophelias-2026-01-31-david-ramirez"
+    ],
+    "artist-ghengar": [
+      "summit-music-hall-2026-01-31-ghengar"
+    ],
+    "artist-your-arms-are-my-cocoon": [
+      "marquis-theater-2026-02-01-your-arms-are-my-cocoon"
+    ],
+    "artist-the-runarounds-16": [
+      "ogden-theatre-2026-02-01-the-runarounds-16"
+    ],
+    "artist-bravo-the-bagchaser": [
+      "marquis-theater-2026-02-03-bravo-the-bagchaser-with-lil-maru"
+    ],
+    "artist-lil-maru": [
+      "marquis-theater-2026-02-03-bravo-the-bagchaser-with-lil-maru"
+    ],
+    "artist-jessie-j": [
+      "summit-music-hall-2026-02-03-jessie-j"
+    ],
+    "artist-lord-of-the-lost": [
+      "summit-music-hall-2026-02-04-lord-of-the-lost-with-the-birthday-massacre"
+    ],
+    "artist-the-birthday-massacre": [
+      "summit-music-hall-2026-02-04-lord-of-the-lost-with-the-birthday-massacre"
+    ],
+    "artist-briscoe-16": [
+      "bluebird-theater-2026-02-05-briscoe-16"
+    ],
+    "artist-three-dog-night": [
+      "paramount-theatre-2026-02-05-three-dog-night"
+    ],
+    "artist-stella-cole": [
+      "boulder-theater-2026-02-06-stella-cole-with-the-boulder-philharmonic"
+    ],
+    "artist-the-boulder-philharmonic": [
+      "boulder-theater-2026-02-06-stella-cole-with-the-boulder-philharmonic"
+    ],
+    "artist-north-mississippi-allstars-16": [
+      "gothic-theatre-2026-02-06-north-mississippi-allstars-16"
+    ],
+    "artist-mark-farina": [
+      "ophelias-2026-02-06-mark-farina",
+      "ophelias-2026-02-07-mark-farina"
+    ],
+    "artist-the-ocean-blue": [
+      "fox-theatre-2026-02-07-the-ocean-blue"
+    ],
+    "artist-chris-lorenzo-16": [
+      "mission-ballroom-2026-02-07-chris-lorenzo-16"
+    ],
+    "artist-del-water-gap": [
+      "ogden-theatre-2026-02-07-del-water-gap-with-hannah-jadagu"
+    ],
+    "artist-hannah-jadagu": [
+      "ogden-theatre-2026-02-07-del-water-gap-with-hannah-jadagu"
+    ],
+    "artist-icelantic-s-winter-on-the-rocks": [
+      "rr-2026-02-07-icelantic-s-winter-on-the-rocks"
+    ],
+    "artist-bigxthaplug": [
+      "rr-2026-02-07-icelantic-s-winter-on-the-rocks"
+    ],
+    "artist-smino": [
+      "rr-2026-02-07-icelantic-s-winter-on-the-rocks"
+    ],
+    "artist-mick-jenkins": [
+      "rr-2026-02-07-icelantic-s-winter-on-the-rocks"
+    ],
+    "artist-pawpaw-rod": [
+      "rr-2026-02-07-icelantic-s-winter-on-the-rocks"
+    ],
+    "artist-ydg": [
+      "summit-music-hall-2026-02-07-ydg-with-join-the-resistance-18"
+    ],
+    "artist-join-the-resistance-18": [
+      "summit-music-hall-2026-02-07-ydg-with-join-the-resistance-18"
+    ],
+    "artist-say-she-she": [
+      "fox-theatre-2026-02-09-say-she-she-with-katzu-oso"
+    ],
+    "artist-katzu-oso": [
+      "fox-theatre-2026-02-09-say-she-she-with-katzu-oso"
+    ],
+    "artist-enjambre-16": [
+      "bluebird-theater-2026-02-10-enjambre-16"
+    ],
+    "artist-the-revivalists": [
+      "boulder-theater-2026-02-10-the-revivalists"
+    ],
+    "artist-jade": [
+      "fillmore-auditorium-2026-02-10-jade"
+    ],
+    "artist-sudan-archives-16": [
+      "gothic-theatre-2026-02-10-sudan-archives-16"
+    ],
+    "artist-left-to-suffer": [
+      "marquis-theater-2026-02-10-left-to-suffer-with-the-last-ten-seconds-of-life-larcenia-roe-and-fr3ak"
+    ],
+    "artist-the-last-ten-seconds-of-life": [
+      "marquis-theater-2026-02-10-left-to-suffer-with-the-last-ten-seconds-of-life-larcenia-roe-and-fr3ak"
+    ],
+    "artist-larcenia-roe": [
+      "marquis-theater-2026-02-10-left-to-suffer-with-the-last-ten-seconds-of-life-larcenia-roe-and-fr3ak"
+    ],
+    "artist-fr3ak": [
+      "marquis-theater-2026-02-10-left-to-suffer-with-the-last-ten-seconds-of-life-larcenia-roe-and-fr3ak"
+    ],
+    "artist-michael-shannon-and-jason-narducy": [
+      "summit-music-hall-2026-02-11-michael-shannon-and-jason-narducy"
+    ],
+    "artist-butcher-babies": [
+      "bluebird-theater-2026-02-12-butcher-babies"
+    ],
+    "artist-ghostface-killah": [
+      "cervantes-masterpiece-2026-02-12-ghostface-killah"
+    ],
+    "artist-snow-strippers": [
+      "fillmore-auditorium-2026-02-12-snow-strippers"
+    ],
+    "artist-the-record-company": [
+      "boulder-theater-2026-02-13-the-record-company"
+    ],
+    "artist-dark-star-orchestra": [
+      "fillmore-auditorium-2026-02-13-dark-star-orchestra"
+    ],
+    "artist-sons-of-legion-16": [
+      "gothic-theatre-2026-02-13-sons-of-legion-16"
+    ],
+    "artist-yung-bans": [
+      "marquis-theater-2026-02-13-yung-bans"
+    ],
+    "artist-the-martinez-brothers-16": [
+      "mission-ballroom-2026-02-13-the-martinez-brothers-16"
+    ],
+    "artist-magic-city-hippies-16": [
+      "ogden-theatre-2026-02-13-magic-city-hippies-16"
+    ],
+    "artist-mania-the-abba-tribute": [
+      "paramount-theatre-2026-02-13-mania-the-abba-tribute"
+    ],
+    "artist-the-record-company-16": [
+      "gothic-theatre-2026-02-14-the-record-company-16"
+    ],
+    "artist-wreckno-and-super-future-16": [
+      "mission-ballroom-2026-02-14-wreckno-and-super-future-16"
+    ],
+    "artist-what-the-dance": [
+      "ophelias-2026-02-14-what-the-dance"
+    ],
+    "artist-freya-skye": [
+      "mission-ballroom-2026-02-15-freya-skye"
+    ],
+    "artist-weval-16": [
+      "bluebird-theater-2026-02-16-weval-16"
+    ],
+    "artist-fox-stevenson": [
+      "cervantes-masterpiece-2026-02-17-fox-stevenson"
+    ],
+    "artist-rich-brian-16": [
+      "ogden-theatre-2026-02-17-rich-brian-16"
+    ],
+    "artist-ricardo-arjona": [
+      "ball-arena-2026-02-18-ricardo-arjona"
+    ],
+    "artist-samm-henshaw": [
+      "bluebird-theater-2026-02-18-samm-henshaw"
+    ],
+    "artist-ga-20": [
+      "ophelias-2026-02-18-ga-20"
+    ],
+    "artist-mac-mcanally": [
+      "paramount-theatre-2026-02-18-mac-mcanally"
+    ],
+    "artist-bryce-vine": [
+      "bluebird-theater-2026-02-19-bryce-vine"
+    ],
+    "artist-beauty-school-dropout": [
+      "marquis-theater-2026-02-19-beauty-school-dropout"
+    ],
+    "artist-hayes-carll": [
+      "bluebird-theater-2026-02-20-hayes-carll-with-ryan-montbleau-16"
+    ],
+    "artist-ryan-montbleau-16": [
+      "bluebird-theater-2026-02-20-hayes-carll-with-ryan-montbleau-16"
+    ],
+    "artist-atmosphere": [
+      "boulder-theater-2026-02-20-atmosphere-with-sage-francis"
+    ],
+    "artist-sage-francis": [
+      "boulder-theater-2026-02-20-atmosphere-with-sage-francis"
+    ],
+    "artist-the-polish-ambassador": [
+      "ophelias-2026-02-20-the-polish-ambassador",
+      "ophelias-2026-02-21-the-polish-ambassador",
+      "ophelias-2026-02-22-the-polish-ambassador"
+    ],
+    "artist-club-90s-heated-rivalrave-18": [
+      "summit-music-hall-2026-02-20-club-90s-heated-rivalrave-18",
+      "summit-music-hall-2026-02-21-club-90s-heated-rivalrave-18"
+    ],
+    "artist-whitney-hanson": [
+      "bluebird-theater-2026-02-21-whitney-hanson"
+    ],
+    "artist-hayden-coffman": [
+      "marquis-theater-2026-02-21-hayden-coffman"
+    ],
+    "artist-sidepiece-16": [
+      "mission-ballroom-2026-02-21-sidepiece-16"
+    ],
+    "artist-geoff-tate-16": [
+      "ogden-theatre-2026-02-21-geoff-tate-16"
+    ],
+    "artist-clipping-16": [
+      "gothic-theatre-2026-02-22-clipping-16"
+    ],
+    "artist-nathan-evans-and-the-saint-phnx-band": [
+      "marquis-theater-2026-02-22-nathan-evans-and-the-saint-phnx-band"
+    ],
+    "artist-rivers-of-nihil": [
+      "black-sheep-2026-02-23-rivers-of-nihil"
+    ],
+    "artist-black-pistol-fire-16": [
+      "gothic-theatre-2026-02-23-black-pistol-fire-16"
+    ],
+    "artist-bad-omens": [
+      "ball-arena-2026-02-24-bad-omens-with-beartooth-and-president"
+    ],
+    "artist-beartooth": [
+      "ball-arena-2026-02-24-bad-omens-with-beartooth-and-president"
+    ],
+    "artist-president": [
+      "ball-arena-2026-02-24-bad-omens-with-beartooth-and-president"
+    ],
+    "artist-vitamin-string-quartet": [
+      "paramount-theatre-2026-02-24-vitamin-string-quartet"
+    ],
+    "artist-monolink-18": [
+      "summit-music-hall-2026-02-24-monolink-18"
+    ],
+    "artist-the-queers": [
+      "black-sheep-2026-02-25-the-queers"
+    ],
+    "artist-daniel-donato-s-cosmic-country-2-day-pass": [
+      "boulder-theater-2026-02-25-daniel-donato-s-cosmic-country-2-day-pass"
+    ],
+    "artist-daniel-donato-s-cosmic-country-night-1": [
+      "boulder-theater-2026-02-25-daniel-donato-s-cosmic-country-night-1"
+    ],
+    "artist-the-devil-makes-three-16": [
+      "ogden-theatre-2026-02-25-the-devil-makes-three-16"
+    ],
+    "artist-lights": [
+      "summit-music-hall-2026-02-25-lights-with-softcult"
+    ],
+    "artist-softcult": [
+      "summit-music-hall-2026-02-25-lights-with-softcult"
+    ],
+    "artist-daniel-donato-s-cosmic-country-night-2": [
+      "boulder-theater-2026-02-26-daniel-donato-s-cosmic-country-night-2"
+    ],
+    "artist-whethan-16": [
+      "cervantes-masterpiece-2026-02-26-whethan-16",
+      "cervantes-masterpiece-2026-02-27-whethan-16"
+    ],
+    "artist-jeremy-jordan": [
+      "marquis-theater-2026-02-26-jeremy-jordan-with-age-of-madness"
+    ],
+    "artist-age-of-madness": [
+      "marquis-theater-2026-02-26-jeremy-jordan-with-age-of-madness"
+    ],
+    "artist-badflower-16": [
+      "ogden-theatre-2026-02-26-badflower-16"
+    ],
+    "artist-devon-allman-band": [
+      "ophelias-2026-02-26-devon-allman-band"
+    ],
+    "artist-kpop-club-night-16": [
+      "bluebird-theater-2026-02-27-kpop-club-night-16"
+    ],
+    "artist-penelope-road": [
+      "fox-theatre-2026-02-27-penelope-road"
+    ],
+    "artist-denm": [
+      "gothic-theatre-2026-02-27-denm-with-evening-elephants-and-obed-padilla"
+    ],
+    "artist-evening-elephants": [
+      "gothic-theatre-2026-02-27-denm-with-evening-elephants-and-obed-padilla"
+    ],
+    "artist-obed-padilla": [
+      "gothic-theatre-2026-02-27-denm-with-evening-elephants-and-obed-padilla"
+    ],
+    "artist-glitterer": [
+      "marquis-theater-2026-02-27-glitterer"
+    ],
+    "artist-drama-16": [
+      "mission-ballroom-2026-02-27-drama-16"
+    ],
+    "artist-gogol-bordello-16": [
+      "ogden-theatre-2026-02-27-gogol-bordello-16"
+    ],
+    "artist-brett-dennen": [
+      "ophelias-2026-02-27-brett-dennen"
+    ],
+    "artist-donny-benet": [
+      "summit-music-hall-2026-02-27-donny-benet"
+    ],
+    "artist-all-them-witches-21": [
+      "boulder-theater-2026-02-28-all-them-witches-21"
+    ],
+    "artist-all-your-friends-18": [
+      "marquis-theater-2026-02-28-all-your-friends-18"
+    ],
+    "artist-maddy-o-neal": [
+      "mission-ballroom-2026-02-28-maddy-o-neal-with-tokimonsta"
+    ],
+    "artist-tokimonsta": [
+      "mission-ballroom-2026-02-28-maddy-o-neal-with-tokimonsta"
+    ],
+    "artist-franc-moody-16": [
+      "ogden-theatre-2026-02-28-franc-moody-16"
+    ],
+    "artist-smells-like-nirvana": [
+      "ophelias-2026-02-28-smells-like-nirvana"
+    ],
+    "artist-heated-rivalry-night-18": [
+      "summit-music-hall-2026-02-28-heated-rivalry-night-18"
+    ],
+    "artist-the-devil-makes-three": [
+      "boulder-theater-2026-03-01-the-devil-makes-three"
+    ],
+    "artist-mat-kerekes": [
+      "marquis-theater-2026-03-01-mat-kerekes-with-shallow-alcove"
+    ],
+    "artist-shallow-alcove": [
+      "marquis-theater-2026-03-01-mat-kerekes-with-shallow-alcove"
+    ],
+    "artist-dropkick-murphys": [
+      "mission-ballroom-2026-03-01-dropkick-murphys-with-the-aggrolites-and-haywire-16"
+    ],
+    "artist-the-aggrolites": [
+      "mission-ballroom-2026-03-01-dropkick-murphys-with-the-aggrolites-and-haywire-16"
+    ],
+    "artist-haywire-16": [
+      "mission-ballroom-2026-03-01-dropkick-murphys-with-the-aggrolites-and-haywire-16"
+    ],
+    "artist-all-them-witches-16": [
+      "ogden-theatre-2026-03-01-all-them-witches-16"
+    ],
+    "artist-alex-sampson": [
+      "bluebird-theater-2026-03-03-alex-sampson"
+    ],
+    "artist-3oh-3": [
+      "boulder-theater-2026-03-03-3oh-3"
+    ],
+    "artist-artemas": [
+      "mission-ballroom-2026-03-03-artemas-with-isabel-larosa-16"
+    ],
+    "artist-isabel-larosa-16": [
+      "mission-ballroom-2026-03-03-artemas-with-isabel-larosa-16"
+    ],
+    "artist-yacht-rock-revue": [
+      "boulder-theater-2026-03-04-yacht-rock-revue"
+    ],
+    "artist-margo-price": [
+      "gothic-theatre-2026-03-04-margo-price-with-shannon-mcnally"
+    ],
+    "artist-shannon-mcnally": [
+      "gothic-theatre-2026-03-04-margo-price-with-shannon-mcnally"
+    ],
+    "artist-capstan": [
+      "marquis-theater-2026-03-04-capstan-with-in-her-own-words-and-dreamwake"
+    ],
+    "artist-in-her-own-words": [
+      "marquis-theater-2026-03-04-capstan-with-in-her-own-words-and-dreamwake"
+    ],
+    "artist-dreamwake": [
+      "marquis-theater-2026-03-04-capstan-with-in-her-own-words-and-dreamwake"
+    ],
+    "artist-volumes": [
+      "bluebird-theater-2026-03-05-volumes-with-notions-and-catsclaw-16"
+    ],
+    "artist-notions": [
+      "bluebird-theater-2026-03-05-volumes-with-notions-and-catsclaw-16"
+    ],
+    "artist-catsclaw-16": [
+      "bluebird-theater-2026-03-05-volumes-with-notions-and-catsclaw-16"
+    ],
+    "artist-miguel": [
+      "fillmore-auditorium-2026-03-05-miguel-with-jean-dawson"
+    ],
+    "artist-jean-dawson": [
+      "fillmore-auditorium-2026-03-05-miguel-with-jean-dawson"
+    ],
+    "artist-colony-house": [
+      "summit-music-hall-2026-03-05-colony-house"
+    ],
+    "artist-nekrogoblikon": [
+      "black-sheep-2026-03-06-nekrogoblikon-with-enterprise-earth"
+    ],
+    "artist-enterprise-earth": [
+      "black-sheep-2026-03-06-nekrogoblikon-with-enterprise-earth"
+    ],
+    "artist-black-label-society": [
+      "mission-ballroom-2026-03-06-black-label-society-with-zakk-sabbath-and-dark-chapel"
+    ],
+    "artist-zakk-sabbath": [
+      "mission-ballroom-2026-03-06-black-label-society-with-zakk-sabbath-and-dark-chapel"
+    ],
+    "artist-dark-chapel": [
+      "mission-ballroom-2026-03-06-black-label-society-with-zakk-sabbath-and-dark-chapel"
+    ],
+    "artist-not-quite-brothers": [
+      "ophelias-2026-03-06-not-quite-brothers"
+    ],
+    "artist-emo-nite-21": [
+      "summit-music-hall-2026-03-06-emo-nite-21"
+    ],
+    "artist-fia-16": [
+      "bluebird-theater-2026-03-07-fia-16"
+    ],
+    "artist-club-90s-heated-rivalry-night-18": [
+      "boulder-theater-2026-03-07-club-90s-heated-rivalry-night-18"
+    ],
+    "artist-benee": [
+      "gothic-theatre-2026-03-07-benee-with-bayli-16"
+    ],
+    "artist-bayli-16": [
+      "gothic-theatre-2026-03-07-benee-with-bayli-16"
+    ],
+    "artist-graham-good-and-the-painters": [
+      "mishawaka-amphitheatre-2026-03-07-graham-good-and-the-painters"
+    ],
+    "artist-dodie-clark": [
+      "summit-music-hall-2026-03-07-dodie-clark"
+    ],
+    "artist-christian-loffler": [
+      "bluebird-theater-2026-03-08-christian-loffler"
+    ],
+    "artist-tobymac": [
+      "broadmoor-world-arena-2026-03-08-tobymac-with-crowder-and-jeremy-camp"
+    ],
+    "artist-crowder": [
+      "broadmoor-world-arena-2026-03-08-tobymac-with-crowder-and-jeremy-camp"
+    ],
+    "artist-jeremy-camp": [
+      "broadmoor-world-arena-2026-03-08-tobymac-with-crowder-and-jeremy-camp"
+    ],
+    "artist-xaviersobased": [
+      "summit-music-hall-2026-03-08-xaviersobased"
+    ],
+    "artist-cardi-b": [
+      "ball-arena-2026-03-09-cardi-b"
+    ],
+    "artist-heart": [
+      "broadmoor-world-arena-2026-03-09-heart-with-lucinda-williams"
+    ],
+    "artist-lucinda-williams": [
+      "broadmoor-world-arena-2026-03-09-heart-with-lucinda-williams"
+    ],
+    "artist-the-browning": [
+      "marquis-theater-2026-03-09-the-browning-with-within-destruction-face-yourself-and-dead-eyes"
+    ],
+    "artist-within-destruction": [
+      "marquis-theater-2026-03-09-the-browning-with-within-destruction-face-yourself-and-dead-eyes"
+    ],
+    "artist-face-yourself": [
+      "marquis-theater-2026-03-09-the-browning-with-within-destruction-face-yourself-and-dead-eyes"
+    ],
+    "artist-dead-eyes": [
+      "marquis-theater-2026-03-09-the-browning-with-within-destruction-face-yourself-and-dead-eyes"
+    ],
+    "artist-lil-tony": [
+      "summit-music-hall-2026-03-09-lil-tony"
+    ],
+    "artist-chris-isaak": [
+      "boulder-theater-2026-03-10-chris-isaak"
+    ],
+    "artist-lauren-spencer-smith": [
+      "fillmore-auditorium-2026-03-10-lauren-spencer-smith"
+    ],
+    "artist-peaches": [
+      "summit-music-hall-2026-03-10-peaches"
+    ],
+    "artist-ella-red": [
+      "larimer-lounge-2026-03-11-ella-red"
+    ],
+    "artist-siamese": [
+      "marquis-theater-2026-03-11-siamese-with-cabal"
+    ],
+    "artist-cabal": [
+      "marquis-theater-2026-03-11-siamese-with-cabal"
+    ],
+    "artist-jesse-roper": [
+      "ophelias-2026-03-11-jesse-roper"
+    ],
+    "artist-zara-larsson": [
+      "summit-music-hall-2026-03-11-zara-larsson-with-amelia-moore"
+    ],
+    "artist-amelia-moore": [
+      "summit-music-hall-2026-03-11-zara-larsson-with-amelia-moore"
+    ],
+    "artist-cash-cobain": [
+      "cervantes-masterpiece-2026-03-12-cash-cobain"
+    ],
+    "artist-jigitz": [
+      "fox-theatre-2026-03-12-jigitz"
+    ],
+    "artist-ole-60": [
+      "mission-ballroom-2026-03-12-ole-60-with-gabriella-rose"
+    ],
+    "artist-gabriella-rose": [
+      "mission-ballroom-2026-03-12-ole-60-with-gabriella-rose"
+    ],
+    "artist-hawthorne-heights": [
+      "summit-music-hall-2026-03-12-hawthorne-heights"
+    ],
+    "artist-pure-prairie-league": [
+      "boulder-theater-2026-03-13-pure-prairie-league-with-pablo-cruise"
+    ],
+    "artist-pablo-cruise": [
+      "boulder-theater-2026-03-13-pure-prairie-league-with-pablo-cruise"
+    ],
+    "artist-the-barr-brothers": [
+      "fox-theatre-2026-03-13-the-barr-brothers",
+      "bluebird-theater-2026-03-14-the-barr-brothers"
+    ],
+    "artist-maggie-lindemann-16": [
+      "gothic-theatre-2026-03-13-maggie-lindemann-16"
+    ],
+    "artist-spiritual-cramp": [
+      "marquis-theater-2026-03-13-spiritual-cramp-with-destiny-bond"
+    ],
+    "artist-destiny-bond": [
+      "marquis-theater-2026-03-13-spiritual-cramp-with-destiny-bond"
+    ],
+    "artist-supertask-16": [
+      "mission-ballroom-2026-03-13-supertask-16"
+    ],
+    "artist-jeff-tweedy-16": [
+      "ogden-theatre-2026-03-13-jeff-tweedy-16"
+    ],
+    "artist-two-feet": [
+      "summit-music-hall-2026-03-13-two-feet",
+      "summit-music-hall-2026-03-14-two-feet"
+    ],
+    "artist-nimino": [
+      "boulder-theater-2026-03-14-nimino"
+    ],
+    "artist-nothing": [
+      "fillmore-auditorium-2026-03-14-nothing-more-with-catch-your-breath-archers-and-doobie"
+    ],
+    "artist-catch-your-breath": [
+      "fillmore-auditorium-2026-03-14-nothing-more-with-catch-your-breath-archers-and-doobie"
+    ],
+    "artist-archers": [
+      "fillmore-auditorium-2026-03-14-nothing-more-with-catch-your-breath-archers-and-doobie"
+    ],
+    "artist-doobie": [
+      "fillmore-auditorium-2026-03-14-nothing-more-with-catch-your-breath-archers-and-doobie"
+    ],
+    "artist-the-strumbellas": [
+      "gothic-theatre-2026-03-14-the-strumbellas"
+    ],
+    "artist-max-styler": [
+      "mission-ballroom-2026-03-14-max-styler"
+    ],
+    "artist-bearracuda": [
+      "ophelias-2026-03-14-bearracuda",
+      "ophelias-2026-05-02-bearracuda"
+    ],
+    "artist-bad-bad-hats": [
+      "bluebird-theater-2026-03-15-bad-bad-hats"
+    ],
+    "artist-neko-case": [
+      "boulder-theater-2026-03-15-neko-case-with-destroyer"
+    ],
+    "artist-destroyer": [
+      "boulder-theater-2026-03-15-neko-case-with-destroyer"
+    ],
+    "artist-amber-mark": [
+      "ogden-theatre-2026-03-15-amber-mark-with-sherwyn-16"
+    ],
+    "artist-sherwyn-16": [
+      "ogden-theatre-2026-03-15-amber-mark-with-sherwyn-16"
+    ],
+    "artist-monaleo": [
+      "summit-music-hall-2026-03-15-monaleo"
+    ],
+    "artist-indigo-de-souza-16": [
+      "gothic-theatre-2026-03-16-indigo-de-souza-16"
+    ],
+    "artist-varials": [
+      "marquis-theater-2026-03-16-varials-with-unitytx"
+    ],
+    "artist-unitytx": [
+      "marquis-theater-2026-03-16-varials-with-unitytx"
+    ],
+    "artist-emmet-cohen-presents-miles-and-coltrane-at-100": [
+      "boulder-theater-2026-03-17-emmet-cohen-presents-miles-and-coltrane-at-100"
+    ],
+    "artist-dark-divine": [
+      "marquis-theater-2026-03-17-dark-divine"
+    ],
+    "artist-sabrina-claudio": [
+      "summit-music-hall-2026-03-17-sabrina-claudio-with-dylan-sinclair"
+    ],
+    "artist-dylan-sinclair": [
+      "summit-music-hall-2026-03-17-sabrina-claudio-with-dylan-sinclair"
+    ],
+    "artist-mariah-the-scientist": [
+      "fillmore-auditorium-2026-03-18-mariah-the-scientist"
+    ],
+    "artist-alexsucks": [
+      "marquis-theater-2026-03-18-alexsucks"
+    ],
+    "artist-testament": [
+      "summit-music-hall-2026-03-18-testament-with-overkill-and-destruction"
+    ],
+    "artist-overkill": [
+      "summit-music-hall-2026-03-18-testament-with-overkill-and-destruction"
+    ],
+    "artist-destruction": [
+      "summit-music-hall-2026-03-18-testament-with-overkill-and-destruction"
+    ],
+    "artist-the-thing-16": [
+      "bluebird-theater-2026-03-19-the-thing-16"
+    ],
+    "artist-matisyahu": [
+      "boulder-theater-2026-03-19-matisyahu"
+    ],
+    "artist-lithe": [
+      "marquis-theater-2026-03-19-lithe"
+    ],
+    "artist-grieves": [
+      "bluebird-theater-2026-03-20-grieves-with-blueprint"
+    ],
+    "artist-blueprint": [
+      "bluebird-theater-2026-03-20-grieves-with-blueprint"
+    ],
+    "artist-kwn": [
+      "cervantes-masterpiece-2026-03-20-kwn"
+    ],
+    "artist-shadowgrass": [
+      "fox-theatre-2026-03-20-shadowgrass"
+    ],
+    "artist-dream-ivory": [
+      "marquis-theater-2026-03-20-dream-ivory"
+    ],
+    "artist-the-california-honeydrops": [
+      "mission-ballroom-2026-03-20-the-california-honeydrops"
+    ],
+    "artist-distinct-motive-16": [
+      "ogden-theatre-2026-03-20-distinct-motive-16"
+    ],
+    "artist-white-reaper": [
+      "summit-music-hall-2026-03-20-white-reaper-with-drug-church"
+    ],
+    "artist-drug-church": [
+      "summit-music-hall-2026-03-20-white-reaper-with-drug-church"
+    ],
+    "artist-muzz": [
+      "bluebird-theater-2026-03-21-muzz"
+    ],
+    "artist-boys-like-girls": [
+      "fillmore-auditorium-2026-03-21-boys-like-girls-with-idkhow-and-arrows-in-action"
+    ],
+    "artist-idkhow": [
+      "fillmore-auditorium-2026-03-21-boys-like-girls-with-idkhow-and-arrows-in-action"
+    ],
+    "artist-arrows-in-action": [
+      "fillmore-auditorium-2026-03-21-boys-like-girls-with-idkhow-and-arrows-in-action"
+    ],
+    "artist-jonah-kagen-16": [
+      "fox-theatre-2026-03-21-jonah-kagen-16"
+    ],
+    "artist-eddie-9v-16": [
+      "gothic-theatre-2026-03-21-eddie-9v-16"
+    ],
+    "artist-emm": [
+      "marquis-theater-2026-03-21-emm-with-bentley-robles"
+    ],
+    "artist-bentley-robles": [
+      "marquis-theater-2026-03-21-emm-with-bentley-robles"
+    ],
+    "artist-the-floozies-16": [
+      "mission-ballroom-2026-03-21-the-floozies-16"
+    ],
+    "artist-barely-alive": [
+      "summit-music-hall-2026-03-21-barely-alive-with-tisoki-18"
+    ],
+    "artist-tisoki-18": [
+      "summit-music-hall-2026-03-21-barely-alive-with-tisoki-18"
+    ],
+    "artist-solas": [
+      "boulder-theater-2026-03-22-solas"
+    ],
+    "artist-emily-king": [
+      "marquis-theater-2026-03-22-emily-king"
+    ],
+    "artist-gregorian": [
+      "paramount-theatre-2026-03-22-gregorian"
+    ],
+    "artist-quarters": [
+      "bluebird-theater-2026-03-23-quarters"
+    ],
+    "artist-mclusky": [
+      "marquis-theater-2026-03-24-mclusky"
+    ],
+    "artist-teenage-bottlerocket": [
+      "black-sheep-2026-03-25-teenage-bottlerocket"
+    ],
+    "artist-the-high-kings": [
+      "boulder-theater-2026-03-25-the-high-kings"
+    ],
+    "artist-ruel": [
+      "cervantes-masterpiece-2026-03-25-ruel"
+    ],
+    "artist-slaughter-to-prevail": [
+      "fillmore-auditorium-2026-03-25-slaughter-to-prevail-with-whitechapel-and-attila-16"
+    ],
+    "artist-whitechapel": [
+      "fillmore-auditorium-2026-03-25-slaughter-to-prevail-with-whitechapel-and-attila-16"
+    ],
+    "artist-attila-16": [
+      "fillmore-auditorium-2026-03-25-slaughter-to-prevail-with-whitechapel-and-attila-16"
+    ],
+    "artist-the-sloppy-boys": [
+      "marquis-theater-2026-03-25-the-sloppy-boys"
+    ],
+    "artist-peso-pluma": [
+      "ball-arena-2026-03-26-peso-pluma"
+    ],
+    "artist-charlie-parr": [
+      "bluebird-theater-2026-03-26-charlie-parr"
+    ],
+    "artist-the-menzingers": [
+      "boulder-theater-2026-03-26-the-menzingers-with-i-am-the-avalanche"
+    ],
+    "artist-i-am-the-avalanche": [
+      "boulder-theater-2026-03-26-the-menzingers-with-i-am-the-avalanche"
+    ],
+    "artist-the-early-november-and-hellogoodbye-16": [
+      "gothic-theatre-2026-03-26-the-early-november-and-hellogoodbye-16"
+    ],
+    "artist-yellow-days": [
+      "marquis-theater-2026-03-26-yellow-days"
+    ],
+    "artist-st-paul-and-the-broken-bones": [
+      "mission-ballroom-2026-03-26-st-paul-and-the-broken-bones"
+    ],
+    "artist-lamb-of-god": [
+      "fillmore-auditorium-2026-03-27-lamb-of-god-with-kublai-khan-tx-fit-for-an-autopsy-and-sanguisugabogg"
+    ],
+    "artist-kublai-khan-tx": [
+      "fillmore-auditorium-2026-03-27-lamb-of-god-with-kublai-khan-tx-fit-for-an-autopsy-and-sanguisugabogg"
+    ],
+    "artist-fit-for-an-autopsy": [
+      "fillmore-auditorium-2026-03-27-lamb-of-god-with-kublai-khan-tx-fit-for-an-autopsy-and-sanguisugabogg"
+    ],
+    "artist-sanguisugabogg": [
+      "fillmore-auditorium-2026-03-27-lamb-of-god-with-kublai-khan-tx-fit-for-an-autopsy-and-sanguisugabogg"
+    ],
+    "artist-pity-party-girls-club": [
+      "marquis-theater-2026-03-27-pity-party-girls-club"
+    ],
+    "artist-gov-t-mule": [
+      "mission-ballroom-2026-03-27-gov-t-mule"
+    ],
+    "artist-yolanda-del-rio": [
+      "paramount-theatre-2026-03-27-yolanda-del-rio"
+    ],
+    "artist-crankdat": [
+      "rr-2026-03-27-crankdat"
+    ],
+    "artist-dr-fresch": [
+      "rr-2026-03-27-crankdat"
+    ],
+    "artist-smoakland": [
+      "rr-2026-03-27-crankdat"
+    ],
+    "artist-capochino": [
+      "rr-2026-03-27-crankdat"
+    ],
+    "artist-hershe": [
+      "rr-2026-03-27-crankdat"
+    ],
+    "artist-eidola": [
+      "summit-music-hall-2026-03-27-eidola"
+    ],
+    "artist-red-leather": [
+      "black-sheep-2026-03-28-red-leather"
+    ],
+    "artist-49th-and-main-21": [
+      "bluebird-theater-2026-03-28-49th-and-main-21"
+    ],
+    "artist-melvin-seals-and-jgb": [
+      "fillmore-auditorium-2026-03-28-melvin-seals-and-jgb-with-pink-talking-fish"
+    ],
+    "artist-pink-talking-fish": [
+      "fillmore-auditorium-2026-03-28-melvin-seals-and-jgb-with-pink-talking-fish"
+    ],
+    "artist-los-amigos-invisibles": [
+      "fox-theatre-2026-03-28-los-amigos-invisibles"
+    ],
+    "artist-steinza": [
+      "marquis-theater-2026-03-28-steinza"
+    ],
+    "artist-ashnikko": [
+      "mission-ballroom-2026-03-28-ashnikko"
+    ],
+    "artist-ravenscoon-and-jantsen": [
+      "rr-2026-03-28-ravenscoon-and-jantsen"
+    ],
+    "artist-jason-leech": [
+      "rr-2026-03-28-ravenscoon-and-jantsen"
+    ],
+    "artist-chozen-b2b-noetika": [
+      "rr-2026-03-28-ravenscoon-and-jantsen"
+    ],
+    "artist-dev": [
+      "rr-2026-03-28-ravenscoon-and-jantsen"
+    ],
+    "artist-the-devil-wears-prada": [
+      "summit-music-hall-2026-03-28-the-devil-wears-prada"
+    ],
+    "artist-sticky-fingers": [
+      "fillmore-auditorium-2026-03-29-sticky-fingers-with-ruby-waters"
+    ],
+    "artist-ruby-waters": [
+      "fillmore-auditorium-2026-03-29-sticky-fingers-with-ruby-waters"
+    ],
+    "artist-angel-du-t": [
+      "marquis-theater-2026-03-29-angel-du-t-with-home-front"
+    ],
+    "artist-home-front": [
+      "marquis-theater-2026-03-29-angel-du-t-with-home-front"
+    ],
+    "artist-the-wonder-years": [
+      "ogden-theatre-2026-03-29-the-wonder-years-with-knuckle-puck-and-initiate-16"
+    ],
+    "artist-knuckle-puck": [
+      "ogden-theatre-2026-03-29-the-wonder-years-with-knuckle-puck-and-initiate-16"
+    ],
+    "artist-initiate-16": [
+      "ogden-theatre-2026-03-29-the-wonder-years-with-knuckle-puck-and-initiate-16"
+    ],
+    "artist-humbe": [
+      "paramount-theatre-2026-03-29-humbe"
+    ],
+    "artist-i-see-stars": [
+      "black-sheep-2026-03-30-i-see-stars"
+    ],
+    "artist-mind-enterprises-16": [
+      "bluebird-theater-2026-03-30-mind-enterprises-16"
+    ],
+    "artist-fka-twigs": [
+      "fillmore-auditorium-2026-03-30-fka-twigs"
+    ],
+    "artist-night-cap": [
+      "marquis-theater-2026-03-30-night-cap"
+    ],
+    "artist-westerman": [
+      "ophelias-2026-03-30-westerman"
+    ],
+    "artist-machine-girl": [
+      "summit-music-hall-2026-03-30-machine-girl-with-sextile"
+    ],
+    "artist-sextile": [
+      "summit-music-hall-2026-03-30-machine-girl-with-sextile"
+    ],
+    "artist-obscura": [
+      "black-sheep-2026-03-31-obscura-with-allegaeon-cognitive-and-cryptosis"
+    ],
+    "artist-allegaeon": [
+      "black-sheep-2026-03-31-obscura-with-allegaeon-cognitive-and-cryptosis"
+    ],
+    "artist-cognitive": [
+      "black-sheep-2026-03-31-obscura-with-allegaeon-cognitive-and-cryptosis"
+    ],
+    "artist-cryptosis": [
+      "black-sheep-2026-03-31-obscura-with-allegaeon-cognitive-and-cryptosis"
+    ],
+    "artist-naika": [
+      "marquis-theater-2026-03-31-naika"
+    ],
+    "artist-lacuna-coil": [
+      "summit-music-hall-2026-03-31-lacuna-coil-with-escape-the-fate-and-vowws"
+    ],
+    "artist-escape-the-fate": [
+      "summit-music-hall-2026-03-31-lacuna-coil-with-escape-the-fate-and-vowws"
+    ],
+    "artist-vowws": [
+      "summit-music-hall-2026-03-31-lacuna-coil-with-escape-the-fate-and-vowws"
+    ],
+    "artist-cass-mccombs": [
+      "bluebird-theater-2026-04-01-cass-mccombs-with-chris-cohen"
+    ],
+    "artist-chris-cohen": [
+      "bluebird-theater-2026-04-01-cass-mccombs-with-chris-cohen"
+    ],
+    "artist-r-a-p-ferreira": [
+      "marquis-theater-2026-04-01-r-a-p-ferreira"
+    ],
+    "artist-subhumans": [
+      "black-sheep-2026-04-02-subhumans"
+    ],
+    "artist-voxtrot": [
+      "bluebird-theater-2026-04-03-voxtrot"
+    ],
+    "artist-orbit-culture": [
+      "gothic-theatre-2026-04-03-orbit-culture"
+    ],
+    "artist-the-maine": [
+      "ogden-theatre-2026-04-03-the-maine"
+    ],
+    "artist-firefall": [
+      "paramount-theatre-2026-04-03-firefall-with-hazel-miller"
+    ],
+    "artist-hazel-miller": [
+      "paramount-theatre-2026-04-03-firefall-with-hazel-miller"
+    ],
+    "artist-inzo": [
+      "rr-2026-04-03-inzo"
+    ],
+    "artist-what-so-not": [
+      "rr-2026-04-03-inzo"
+    ],
+    "artist-lumasi": [
+      "rr-2026-04-03-inzo"
+    ],
+    "artist-daggz": [
+      "rr-2026-04-03-inzo"
+    ],
+    "artist-common-creation": [
+      "rr-2026-04-03-inzo"
+    ],
+    "artist-spenny": [
+      "rr-2026-04-03-inzo"
+    ],
+    "artist-jstjr-18": [
+      "summit-music-hall-2026-04-03-jstjr-18"
+    ],
+    "artist-prayers": [
+      "black-sheep-2026-04-04-prayers-with-my-life-with-the-thrill-kill-kult"
+    ],
+    "artist-my-life": [
+      "black-sheep-2026-04-04-prayers-with-my-life-with-the-thrill-kill-kult"
+    ],
+    "artist-the-thrill-kill-kult": [
+      "black-sheep-2026-04-04-prayers-with-my-life-with-the-thrill-kill-kult"
+    ],
+    "artist-sarah-kinsley": [
+      "marquis-theater-2026-04-04-sarah-kinsley-with-girlpuppy"
+    ],
+    "artist-girlpuppy": [
+      "marquis-theater-2026-04-04-sarah-kinsley-with-girlpuppy"
+    ],
+    "artist-it-s-murph-presents-murph-rocks": [
+      "rr-2026-04-04-it-s-murph-presents-murph-rocks"
+    ],
+    "artist-d-o-d": [
+      "rr-2026-04-04-it-s-murph-presents-murph-rocks"
+    ],
+    "artist-oskar-med-k": [
+      "rr-2026-04-04-it-s-murph-presents-murph-rocks"
+    ],
+    "artist-me-n": [
+      "rr-2026-04-04-it-s-murph-presents-murph-rocks"
+    ],
+    "artist-currents": [
+      "summit-music-hall-2026-04-04-currents-with-erra"
+    ],
+    "artist-erra": [
+      "summit-music-hall-2026-04-04-currents-with-erra"
+    ],
+    "artist-magnolia-park": [
+      "black-sheep-2026-04-05-magnolia-park-with-silly-goose"
+    ],
+    "artist-silly-goose": [
+      "black-sheep-2026-04-05-magnolia-park-with-silly-goose"
+    ],
+    "artist-raye": [
+      "fillmore-auditorium-2026-04-06-raye"
+    ],
+    "artist-drain": [
+      "summit-music-hall-2026-04-06-drain-with-no-pressure-haywire-and-secret-world"
+    ],
+    "artist-no-pressure": [
+      "summit-music-hall-2026-04-06-drain-with-no-pressure-haywire-and-secret-world"
+    ],
+    "artist-haywire": [
+      "summit-music-hall-2026-04-06-drain-with-no-pressure-haywire-and-secret-world"
+    ],
+    "artist-secret-world": [
+      "summit-music-hall-2026-04-06-drain-with-no-pressure-haywire-and-secret-world"
+    ],
+    "artist-the-red-pears-and-together-pangea-16": [
+      "bluebird-theater-2026-04-07-the-red-pears-and-together-pangea-16"
+    ],
+    "artist-pat-metheny": [
+      "boulder-theater-2026-04-07-pat-metheny"
+    ],
+    "artist-lany": [
+      "mission-ballroom-2026-04-07-lany"
+    ],
+    "artist-microwave": [
+      "ogden-theatre-2026-04-07-microwave-with-anthony-green-16"
+    ],
+    "artist-anthony-green-16": [
+      "ogden-theatre-2026-04-07-microwave-with-anthony-green-16"
+    ],
+    "artist-dave-rapper": [
+      "summit-music-hall-2026-04-07-dave-rapper"
+    ],
+    "artist-goldford-16": [
+      "gothic-theatre-2026-04-08-goldford-16"
+    ],
+    "artist-health": [
+      "mission-ballroom-2026-04-08-health-with-carpenter-brut-16"
+    ],
+    "artist-carpenter-brut-16": [
+      "mission-ballroom-2026-04-08-health-with-carpenter-brut-16"
+    ],
+    "artist-calum-scott": [
+      "paramount-theatre-2026-04-08-calum-scott"
+    ],
+    "artist-bit-brigade": [
+      "black-sheep-2026-04-09-bit-brigade"
+    ],
+    "artist-branford-marsalis": [
+      "boulder-theater-2026-04-09-branford-marsalis"
+    ],
+    "artist-ltj-bukem": [
+      "ophelias-2026-04-09-ltj-bukem"
+    ],
+    "artist-des-rocs": [
+      "marquis-theater-2026-04-10-des-rocs-with-romes",
+      "black-sheep-2026-04-11-des-rocs"
+    ],
+    "artist-romes": [
+      "marquis-theater-2026-04-10-des-rocs-with-romes"
+    ],
+    "artist-the-format": [
+      "mission-ballroom-2026-04-10-the-format-with-phantom-planet-and-limbeck-16"
+    ],
+    "artist-phantom-planet": [
+      "mission-ballroom-2026-04-10-the-format-with-phantom-planet-and-limbeck-16",
+      "ford-amphitheater-colorado-springs-2026-06-18-o-a-r-with-gavin-degraw-and-phantom-planet",
+      "rr-2026-06-20-o-a-r"
+    ],
+    "artist-limbeck-16": [
+      "mission-ballroom-2026-04-10-the-format-with-phantom-planet-and-limbeck-16"
+    ],
+    "artist-sam-grisman-project": [
+      "ophelias-2026-04-10-sam-grisman-project",
+      "ophelias-2026-04-11-sam-grisman-project"
+    ],
+    "artist-tommy-emmanuel": [
+      "paramount-theatre-2026-04-10-tommy-emmanuel"
+    ],
+    "artist-zingara-and-level-up": [
+      "rr-2026-04-10-zingara-and-level-up"
+    ],
+    "artist-saka": [
+      "rr-2026-04-10-zingara-and-level-up"
+    ],
+    "artist-subdocta": [
+      "rr-2026-04-10-zingara-and-level-up"
+    ],
+    "artist-slang-dogs": [
+      "rr-2026-04-10-zingara-and-level-up"
+    ],
+    "artist-d-r-i-dirty-rotten-imbeciles": [
+      "gothic-theatre-2026-04-11-d-r-i-dirty-rotten-imbeciles-with-clusterfux-and-deathwish-16"
+    ],
+    "artist-clusterfux": [
+      "gothic-theatre-2026-04-11-d-r-i-dirty-rotten-imbeciles-with-clusterfux-and-deathwish-16"
+    ],
+    "artist-deathwish-16": [
+      "gothic-theatre-2026-04-11-d-r-i-dirty-rotten-imbeciles-with-clusterfux-and-deathwish-16"
+    ],
+    "artist-sweet-pill": [
+      "marquis-theater-2026-04-11-sweet-pill-with-spaced-and-stereosity"
+    ],
+    "artist-spaced": [
+      "marquis-theater-2026-04-11-sweet-pill-with-spaced-and-stereosity"
+    ],
+    "artist-stereosity": [
+      "marquis-theater-2026-04-11-sweet-pill-with-spaced-and-stereosity"
+    ],
+    "artist-liquid-stranger": [
+      "rr-2026-04-11-liquid-stranger"
+    ],
+    "artist-tvboo-b2b-ahee": [
+      "rr-2026-04-11-liquid-stranger"
+    ],
+    "artist-avello": [
+      "rr-2026-04-11-liquid-stranger"
+    ],
+    "artist-dance": [
+      "summit-music-hall-2026-04-11-dance-with-the-dead-with-magic-sword"
+    ],
+    "artist-the-dead": [
+      "summit-music-hall-2026-04-11-dance-with-the-dead-with-magic-sword"
+    ],
+    "artist-magic-sword": [
+      "summit-music-hall-2026-04-11-dance-with-the-dead-with-magic-sword"
+    ],
+    "artist-fcukers-16": [
+      "gothic-theatre-2026-04-12-fcukers-16"
+    ],
+    "artist-ratboys": [
+      "bluebird-theater-2026-04-13-ratboys-with-villagerrr-16"
+    ],
+    "artist-villagerrr-16": [
+      "bluebird-theater-2026-04-13-ratboys-with-villagerrr-16"
+    ],
+    "artist-twice": [
+      "ball-arena-2026-04-14-twice"
+    ],
+    "artist-satchvai-band-featuring-joe-satriani-and-steve-vai-16": [
+      "mission-ballroom-2026-04-14-satchvai-band-featuring-joe-satriani-and-steve-vai-16"
+    ],
+    "artist-hatsune-miku": [
+      "mission-ballroom-2026-04-15-hatsune-miku"
+    ],
+    "artist-colin-hay": [
+      "paramount-theatre-2026-04-15-colin-hay"
+    ],
+    "artist-john-mulaney-mister-whatever": [
+      "rr-2026-04-15-john-mulaney-mister-whatever"
+    ],
+    "artist-free-throw": [
+      "summit-music-hall-2026-04-15-free-throw"
+    ],
+    "artist-warren-zeiders": [
+      "mission-ballroom-2026-04-16-warren-zeiders-with-lakeview-16"
+    ],
+    "artist-lakeview-16": [
+      "mission-ballroom-2026-04-16-warren-zeiders-with-lakeview-16"
+    ],
+    "artist-bbno": [
+      "rr-2026-04-16-bbno"
+    ],
+    "artist-oliver-tree": [
+      "rr-2026-04-16-bbno"
+    ],
+    "artist-kaarija": [
+      "rr-2026-04-16-bbno"
+    ],
+    "artist-yng-martyr": [
+      "rr-2026-04-16-bbno"
+    ],
+    "artist-jungle-bobby": [
+      "rr-2026-04-16-bbno"
+    ],
+    "artist-pete-yorn-16": [
+      "bluebird-theater-2026-04-17-pete-yorn-16"
+    ],
+    "artist-bilmuri": [
+      "fillmore-auditorium-2026-04-17-bilmuri-with-the-home-team-and-gang"
+    ],
+    "artist-the-home-team": [
+      "fillmore-auditorium-2026-04-17-bilmuri-with-the-home-team-and-gang"
+    ],
+    "artist-gang": [
+      "fillmore-auditorium-2026-04-17-bilmuri-with-the-home-team-and-gang"
+    ],
+    "artist-bleed-from-within": [
+      "gothic-theatre-2026-04-17-bleed-from-within"
+    ],
+    "artist-cory-wong": [
+      "mission-ballroom-2026-04-17-cory-wong"
+    ],
+    "artist-know-good": [
+      "ogden-theatre-2026-04-17-know-good"
+    ],
+    "artist-drew-holcomb": [
+      "paramount-theatre-2026-04-17-drew-holcomb"
+    ],
+    "artist-sublime": [
+      "rr-2026-04-17-sublime",
+      "rr-2026-04-18-sublime"
+    ],
+    "artist-common-kings": [
+      "rr-2026-04-17-sublime"
+    ],
+    "artist-bumpin-uglies": [
+      "rr-2026-04-17-sublime"
+    ],
+    "artist-pete-yorn-21": [
+      "fox-theatre-2026-04-18-pete-yorn-21"
+    ],
+    "artist-tyler-braden-18": [
+      "gothic-theatre-2026-04-18-tyler-braden-18"
+    ],
+    "artist-soul-blind": [
+      "marquis-theater-2026-04-18-soul-blind"
+    ],
+    "artist-san-holo": [
+      "mishawaka-amphitheatre-2026-04-18-san-holo"
+    ],
+    "artist-stephen-wilson-jr-16": [
+      "mission-ballroom-2026-04-18-stephen-wilson-jr-16"
+    ],
+    "artist-ty-segall-16": [
+      "ogden-theatre-2026-04-18-ty-segall-16"
+    ],
+    "artist-pepper": [
+      "rr-2026-04-18-sublime"
+    ],
+    "artist-codefendants": [
+      "rr-2026-04-18-sublime"
+    ],
+    "artist-buckethead": [
+      "black-sheep-2026-04-19-buckethead"
+    ],
+    "artist-chris-webby-16": [
+      "gothic-theatre-2026-04-19-chris-webby-16"
+    ],
+    "artist-wiz-khalifa": [
+      "rr-2026-04-19-wiz-khalifa"
+    ],
+    "artist-2-chainz": [
+      "rr-2026-04-19-wiz-khalifa"
+    ],
+    "artist-berner": [
+      "rr-2026-04-19-wiz-khalifa"
+    ],
+    "artist-the-underachievers": [
+      "rr-2026-04-19-wiz-khalifa"
+    ],
+    "artist-chevy-woods": [
+      "rr-2026-04-19-wiz-khalifa"
+    ],
+    "artist-dj-bonics": [
+      "rr-2026-04-19-wiz-khalifa"
+    ],
+    "artist-slomosa": [
+      "black-sheep-2026-04-20-slomosa",
+      "marquis-theater-2026-04-21-slomosa"
+    ],
+    "artist-maro": [
+      "marquis-theater-2026-04-20-maro"
+    ],
+    "artist-ice-cube": [
+      "rr-2026-04-20-ice-cube"
+    ],
+    "artist-big-boi": [
+      "rr-2026-04-20-ice-cube"
+    ],
+    "artist-czarface": [
+      "rr-2026-04-20-ice-cube"
+    ],
+    "artist-ethel-cain": [
+      "rr-2026-04-21-ethel-cain"
+    ],
+    "artist-9million": [
+      "rr-2026-04-21-ethel-cain"
+    ],
+    "artist-cold": [
+      "black-sheep-2026-04-22-cold",
+      "marquis-theater-2026-04-23-cold"
+    ],
+    "artist-behemoth": [
+      "fillmore-auditorium-2026-04-22-behemoth-with-deicide"
+    ],
+    "artist-deicide": [
+      "fillmore-auditorium-2026-04-22-behemoth-with-deicide"
+    ],
+    "artist-drugdealer": [
+      "marquis-theater-2026-04-22-drugdealer"
+    ],
+    "artist-oklou": [
+      "ogden-theatre-2026-04-22-oklou"
+    ],
+    "artist-devotchka-aa-tribute-to-the-music-of-little-miss-sunshinea": [
+      "black-sheep-2026-04-23-devotchka-aa-tribute-to-the-music-of-little-miss-sunshinea"
+    ],
+    "artist-disclosure-16": [
+      "mission-ballroom-2026-04-23-disclosure-16",
+      "mission-ballroom-2026-04-24-disclosure-16",
+      "mission-ballroom-2026-04-25-disclosure-16"
+    ],
+    "artist-snow-tha-product": [
+      "ogden-theatre-2026-04-23-snow-tha-product"
+    ],
+    "artist-helloween": [
+      "paramount-theatre-2026-04-23-helloween"
+    ],
+    "artist-subtronics-cyclops-rocks-vi-night-1": [
+      "rr-2026-04-23-subtronics-cyclops-rocks-vi-night-1"
+    ],
+    "artist-shadow-of-intent": [
+      "summit-music-hall-2026-04-23-shadow-of-intent-with-angelmaker"
+    ],
+    "artist-angelmaker": [
+      "summit-music-hall-2026-04-23-shadow-of-intent-with-angelmaker"
+    ],
+    "artist-moe": [
+      "ogden-theatre-2026-04-24-moe",
+      "ogden-theatre-2026-04-25-moe"
+    ],
+    "artist-group-bryndis": [
+      "paramount-theatre-2026-04-24-group-bryndis-with-industria-del-amor-and-guardianes-del-amor"
+    ],
+    "artist-industria-del-amor": [
+      "paramount-theatre-2026-04-24-group-bryndis-with-industria-del-amor-and-guardianes-del-amor"
+    ],
+    "artist-guardianes-del-amor": [
+      "paramount-theatre-2026-04-24-group-bryndis-with-industria-del-amor-and-guardianes-del-amor"
+    ],
+    "artist-subtronics-cyclops-rocks-vi-night-2": [
+      "rr-2026-04-24-subtronics-cyclops-rocks-vi-night-2"
+    ],
+    "artist-drinkurwater-18": [
+      "summit-music-hall-2026-04-24-drinkurwater-18"
+    ],
+    "artist-tourist": [
+      "gothic-theatre-2026-04-25-tourist"
+    ],
+    "artist-unprocessed": [
+      "marquis-theater-2026-04-25-unprocessed"
+    ],
+    "artist-lou-deezi": [
+      "marquis-theater-2026-04-26-lou-deezi"
+    ],
+    "artist-bob-moses-and-cannons": [
+      "rr-2026-04-26-bob-moses-and-cannons"
+    ],
+    "artist-femtanyl-16": [
+      "bluebird-theater-2026-04-28-femtanyl-16"
+    ],
+    "artist-afi": [
+      "boulder-theater-2026-04-28-afi-with-choir-boy"
+    ],
+    "artist-choir-boy": [
+      "boulder-theater-2026-04-28-afi-with-choir-boy"
+    ],
+    "artist-josiah-queen": [
+      "fillmore-auditorium-2026-04-28-josiah-queen-with-jervis-campbell"
+    ],
+    "artist-jervis-campbell": [
+      "fillmore-auditorium-2026-04-28-josiah-queen-with-jervis-campbell"
+    ],
+    "artist-skizzy-mars-rescheduled-from-10-16-2025": [
+      "marquis-theater-2026-04-28-skizzy-mars-rescheduled-from-10-16-2025"
+    ],
+    "artist-lewis-capaldi": [
+      "rr-2026-04-28-lewis-capaldi",
+      "rr-2026-04-29-lewis-capaldi"
+    ],
+    "artist-joy-crookes": [
+      "rr-2026-04-28-lewis-capaldi",
+      "rr-2026-04-29-lewis-capaldi"
+    ],
+    "artist-the-black-dahlia-murder": [
+      "black-sheep-2026-04-29-the-black-dahlia-murder-with-the-acacia-strain"
+    ],
+    "artist-the-acacia-strain": [
+      "black-sheep-2026-04-29-the-black-dahlia-murder-with-the-acacia-strain"
+    ],
+    "artist-powfu": [
+      "bluebird-theater-2026-04-29-powfu"
+    ],
+    "artist-badbadnotgood": [
+      "summit-music-hall-2026-04-29-badbadnotgood"
+    ],
+    "artist-witchz": [
+      "fox-theatre-2026-04-30-witchz",
+      "gothic-theatre-2026-05-01-witchz"
+    ],
+    "artist-the-growlers": [
+      "ogden-theatre-2026-04-30-the-growlers"
+    ],
+    "artist-electric-callboy": [
+      "rr-2026-04-30-electric-callboy"
+    ],
+    "artist-polaris": [
+      "rr-2026-04-30-electric-callboy"
+    ],
+    "artist-scene-queen": [
+      "rr-2026-04-30-electric-callboy"
+    ],
+    "artist-lords-of-acid": [
+      "black-sheep-2026-05-01-lords-of-acid"
+    ],
+    "artist-hail-the-sun": [
+      "boulder-theater-2026-05-01-hail-the-sun-with-foxy-shazam"
+    ],
+    "artist-foxy-shazam": [
+      "boulder-theater-2026-05-01-hail-the-sun-with-foxy-shazam"
+    ],
+    "artist-saxsquatch": [
+      "fox-theatre-2026-05-01-saxsquatch",
+      "black-sheep-2026-05-03-saxsquatch"
+    ],
+    "artist-benjamin-tod": [
+      "mishawaka-amphitheatre-2026-05-01-benjamin-tod"
+    ],
+    "artist-jason-isbell-and-the-400-unit-16": [
+      "mission-ballroom-2026-05-01-jason-isbell-and-the-400-unit-16"
+    ],
+    "artist-stayin-alive-bee-gees-tribute": [
+      "paramount-theatre-2026-05-01-stayin-alive-bee-gees-tribute"
+    ],
+    "artist-two-friends": [
+      "rr-2026-05-01-two-friends"
+    ],
+    "artist-sevendust": [
+      "summit-music-hall-2026-05-01-sevendust-with-atreyu"
+    ],
+    "artist-atreyu": [
+      "summit-music-hall-2026-05-01-sevendust-with-atreyu"
+    ],
+    "artist-langhorne-slim": [
+      "bluebird-theater-2026-05-02-langhorne-slim"
+    ],
+    "artist-sasquatch-16": [
+      "cervantes-masterpiece-2026-05-02-sasquatch-16"
+    ],
+    "artist-august-burns-red-and-the-amity-affliction": [
+      "fillmore-auditorium-2026-05-02-august-burns-red-and-the-amity-affliction"
+    ],
+    "artist-glixen": [
+      "marquis-theater-2026-05-02-glixen-with-trauma-ray"
+    ],
+    "artist-trauma-ray": [
+      "marquis-theater-2026-05-02-glixen-with-trauma-ray"
+    ],
+    "artist-jason-isbell-and-the-400-unit": [
+      "rr-2026-05-02-jason-isbell-and-the-400-unit"
+    ],
+    "artist-gillian-welch-and-david-rawlings": [
+      "rr-2026-05-02-jason-isbell-and-the-400-unit"
+    ],
+    "artist-bush": [
+      "fillmore-auditorium-2026-05-03-bush-with-mammoth-and-james-and-the-cold-gun"
+    ],
+    "artist-mammoth": [
+      "fillmore-auditorium-2026-05-03-bush-with-mammoth-and-james-and-the-cold-gun"
+    ],
+    "artist-james": [
+      "fillmore-auditorium-2026-05-03-bush-with-mammoth-and-james-and-the-cold-gun"
+    ],
+    "artist-the-cold-gun": [
+      "fillmore-auditorium-2026-05-03-bush-with-mammoth-and-james-and-the-cold-gun"
+    ],
+    "artist-mac-demarco": [
+      "mission-ballroom-2026-05-03-mac-demarco"
+    ],
+    "artist-puscifer": [
+      "rr-2026-05-03-puscifer"
+    ],
+    "artist-dave-hill": [
+      "rr-2026-05-03-puscifer"
+    ],
+    "artist-joyce-manor": [
+      "fillmore-auditorium-2026-05-04-joyce-manor-with-militarie-gun-teen-mortgage-and-combat"
+    ],
+    "artist-militarie-gun": [
+      "fillmore-auditorium-2026-05-04-joyce-manor-with-militarie-gun-teen-mortgage-and-combat"
+    ],
+    "artist-teen-mortgage": [
+      "fillmore-auditorium-2026-05-04-joyce-manor-with-militarie-gun-teen-mortgage-and-combat"
+    ],
+    "artist-combat": [
+      "fillmore-auditorium-2026-05-04-joyce-manor-with-militarie-gun-teen-mortgage-and-combat"
+    ],
+    "artist-demi-lovato": [
+      "ball-arena-2026-05-05-demi-lovato-with-adela"
+    ],
+    "artist-adela": [
+      "ball-arena-2026-05-05-demi-lovato-with-adela"
+    ],
+    "artist-the-spill-canvas": [
+      "black-sheep-2026-05-05-the-spill-canvas"
+    ],
+    "artist-melrose-avenue-16": [
+      "bluebird-theater-2026-05-05-melrose-avenue-16"
+    ],
+    "artist-the-new-pornographers": [
+      "gothic-theatre-2026-05-05-the-new-pornographers-with-will-sheff-16"
+    ],
+    "artist-will-sheff-16": [
+      "gothic-theatre-2026-05-05-the-new-pornographers-with-will-sheff-16"
+    ],
+    "artist-la-dispute": [
+      "summit-music-hall-2026-05-05-la-dispute"
+    ],
+    "artist-emo-orchestra": [
+      "gothic-theatre-2026-05-06-emo-orchestra"
+    ],
+    "artist-the-midnight": [
+      "mission-ballroom-2026-05-06-the-midnight"
+    ],
+    "artist-bright-eyes-21-years-of-wide-awake-and-digital-ash": [
+      "rr-2026-05-06-bright-eyes-21-years-of-wide-awake-and-digital-ash"
+    ],
+    "artist-vana": [
+      "bluebird-theater-2026-05-07-vana"
+    ],
+    "artist-faetooth": [
+      "marquis-theater-2026-05-07-faetooth"
+    ],
+    "artist-alejandro-fern-ndez": [
+      "rr-2026-05-07-alejandro-fern-ndez"
+    ],
+    "artist-camila-fern-ndez": [
+      "rr-2026-05-07-alejandro-fern-ndez"
+    ],
+    "artist-poison-the-well": [
+      "summit-music-hall-2026-05-07-poison-the-well-with-converge-the-armed-and-the-barbarians-of-california"
+    ],
+    "artist-converge": [
+      "summit-music-hall-2026-05-07-poison-the-well-with-converge-the-armed-and-the-barbarians-of-california"
+    ],
+    "artist-the-armed": [
+      "summit-music-hall-2026-05-07-poison-the-well-with-converge-the-armed-and-the-barbarians-of-california"
+    ],
+    "artist-the-barbarians-of-california": [
+      "summit-music-hall-2026-05-07-poison-the-well-with-converge-the-armed-and-the-barbarians-of-california"
+    ],
+    "artist-william-black": [
+      "ogden-theatre-2026-05-08-william-black"
+    ],
+    "artist-allie-x": [
+      "bluebird-theater-2026-05-09-allie-x"
+    ],
+    "artist-cloonee": [
+      "rr-2026-05-09-cloonee"
+    ],
+    "artist-kettama": [
+      "rr-2026-05-09-cloonee"
+    ],
+    "artist-omar": [
+      "rr-2026-05-09-cloonee"
+    ],
+    "artist-cole-knight": [
+      "rr-2026-05-09-cloonee"
+    ],
+    "artist-alan-doyle": [
+      "boulder-theater-2026-05-10-alan-doyle"
+    ],
+    "artist-unknown-mortal-orchestra": [
+      "fox-theatre-2026-05-10-unknown-mortal-orchestra",
+      "black-sheep-2026-05-12-unknown-mortal-orchestra"
+    ],
+    "artist-i-speak-machine": [
+      "summit-music-hall-2026-05-10-i-speak-machine"
+    ],
+    "artist-jose-gonzalez": [
+      "mission-ballroom-2026-05-11-jose-gonzalez-with-abby-sage-16"
+    ],
+    "artist-abby-sage-16": [
+      "mission-ballroom-2026-05-11-jose-gonzalez-with-abby-sage-16"
+    ],
+    "artist-yungblud-idols-world-tour": [
+      "rr-2026-05-11-yungblud-idols-world-tour"
+    ],
+    "artist-boulet-brothers-dragula": [
+      "summit-music-hall-2026-05-11-boulet-brothers-dragula"
+    ],
+    "artist-the-afghan-whigs": [
+      "summit-music-hall-2026-05-12-the-afghan-whigs-with-mercury-rev"
+    ],
+    "artist-mercury-rev": [
+      "summit-music-hall-2026-05-12-the-afghan-whigs-with-mercury-rev"
+    ],
+    "artist-good-kid": [
+      "mission-ballroom-2026-05-13-good-kid-with-inoha-16"
+    ],
+    "artist-inoha-16": [
+      "mission-ballroom-2026-05-13-good-kid-with-inoha-16"
+    ],
+    "artist-russell-dickerson": [
+      "rr-2026-05-13-russell-dickerson"
+    ],
+    "artist-niko-moon": [
+      "rr-2026-05-13-russell-dickerson"
+    ],
+    "artist-chet-faker": [
+      "summit-music-hall-2026-05-13-chet-faker"
+    ],
+    "artist-newdad": [
+      "bluebird-theater-2026-05-14-newdad"
+    ],
+    "artist-the-moss": [
+      "gothic-theatre-2026-05-14-the-moss"
+    ],
+    "artist-eric-johnson": [
+      "paramount-theatre-2026-05-16-eric-johnson"
+    ],
+    "artist-lightcode-by-lsdream-dreamrocks-ii": [
+      "rr-2026-05-16-lightcode-by-lsdream-dreamrocks-ii"
+    ],
+    "artist-sports-band": [
+      "bluebird-theater-2026-05-17-sports-band"
+    ],
+    "artist-the-paper-kites-16": [
+      "ogden-theatre-2026-05-17-the-paper-kites-16"
+    ],
+    "artist-the-elovaters": [
+      "rr-2026-05-17-the-elovaters"
+    ],
+    "artist-collie-buddz": [
+      "rr-2026-05-17-the-elovaters"
+    ],
+    "artist-the-hip-abduction": [
+      "rr-2026-05-17-the-elovaters"
+    ],
+    "artist-protoje": [
+      "rr-2026-05-17-the-elovaters"
+    ],
+    "artist-donavon-frankenreiter": [
+      "rr-2026-05-17-the-elovaters"
+    ],
+    "artist-arms-length": [
+      "summit-music-hall-2026-05-17-arms-length"
+    ],
+    "artist-the-scratch": [
+      "marquis-theater-2026-05-18-the-scratch"
+    ],
+    "artist-khalid": [
+      "rr-2026-05-18-khalid"
+    ],
+    "artist-lauv": [
+      "rr-2026-05-18-khalid"
+    ],
+    "artist-electric-six": [
+      "bluebird-theater-2026-05-19-electric-six"
+    ],
+    "artist-vundabar": [
+      "marquis-theater-2026-05-19-vundabar-with-goon"
+    ],
+    "artist-goon": [
+      "marquis-theater-2026-05-19-vundabar-with-goon"
+    ],
+    "artist-kevin-gates": [
+      "rr-2026-05-19-kevin-gates"
+    ],
+    "artist-shoreline-mafia": [
+      "rr-2026-05-19-kevin-gates"
+    ],
+    "artist-ty-dolla-ign": [
+      "rr-2026-05-19-kevin-gates"
+    ],
+    "artist-phil-wickham": [
+      "broadmoor-world-arena-2026-05-21-phil-wickham"
+    ],
+    "artist-sepultura": [
+      "ogden-theatre-2026-05-21-sepultura-with-exodus-biohazard-and-tribal-gaze-16"
+    ],
+    "artist-exodus": [
+      "ogden-theatre-2026-05-21-sepultura-with-exodus-biohazard-and-tribal-gaze-16"
+    ],
+    "artist-biohazard": [
+      "ogden-theatre-2026-05-21-sepultura-with-exodus-biohazard-and-tribal-gaze-16"
+    ],
+    "artist-tribal-gaze-16": [
+      "ogden-theatre-2026-05-21-sepultura-with-exodus-biohazard-and-tribal-gaze-16"
+    ],
+    "artist-flipturn": [
+      "rr-2026-05-21-flipturn"
+    ],
+    "artist-richy-mitch-and-the-coal-miners": [
+      "rr-2026-05-21-flipturn"
+    ],
+    "artist-dead-calm": [
+      "marquis-theater-2026-05-22-dead-calm"
+    ],
+    "artist-echo-and-the-bunnymen": [
+      "mission-ballroom-2026-05-22-echo-and-the-bunnymen"
+    ],
+    "artist-thy-art-is-murder": [
+      "ogden-theatre-2026-05-22-thy-art-is-murder-with-carnifex-bodysnatcher-200-stab-wounds-and-more"
+    ],
+    "artist-carnifex": [
+      "ogden-theatre-2026-05-22-thy-art-is-murder-with-carnifex-bodysnatcher-200-stab-wounds-and-more"
+    ],
+    "artist-bodysnatcher": [
+      "ogden-theatre-2026-05-22-thy-art-is-murder-with-carnifex-bodysnatcher-200-stab-wounds-and-more"
+    ],
+    "artist-200-stab-wounds": [
+      "ogden-theatre-2026-05-22-thy-art-is-murder-with-carnifex-bodysnatcher-200-stab-wounds-and-more"
+    ],
+    "artist-seven-lions": [
+      "rr-2026-05-22-seven-lions"
+    ],
+    "artist-trivecta": [
+      "rr-2026-05-22-seven-lions"
+    ],
+    "artist-cradle-of-filth": [
+      "gothic-theatre-2026-05-23-cradle-of-filth"
+    ],
+    "artist-fisher": [
+      "rr-2026-05-23-fisher"
+    ],
+    "artist-alabama-shakes": [
+      "rr-2026-05-24-alabama-shakes",
+      "rr-2026-05-25-alabama-shakes"
+    ],
+    "artist-powerman-5000": [
+      "black-sheep-2026-05-25-powerman-5000"
+    ],
+    "artist-thornhill": [
+      "gothic-theatre-2026-05-26-thornhill-with-156-silence-fox-lake-and-vianova-16"
+    ],
+    "artist-156-silence": [
+      "gothic-theatre-2026-05-26-thornhill-with-156-silence-fox-lake-and-vianova-16"
+    ],
+    "artist-fox-lake": [
+      "gothic-theatre-2026-05-26-thornhill-with-156-silence-fox-lake-and-vianova-16"
+    ],
+    "artist-vianova-16": [
+      "gothic-theatre-2026-05-26-thornhill-with-156-silence-fox-lake-and-vianova-16"
+    ],
+    "artist-daisy-grenade": [
+      "marquis-theater-2026-05-26-daisy-grenade-with-vienna-vienna"
+    ],
+    "artist-vienna-vienna": [
+      "marquis-theater-2026-05-26-daisy-grenade-with-vienna-vienna"
+    ],
+    "artist-archspire": [
+      "black-sheep-2026-05-27-archspire-with-undeath"
+    ],
+    "artist-undeath": [
+      "black-sheep-2026-05-27-archspire-with-undeath"
+    ],
+    "artist-swervedriver": [
+      "bluebird-theater-2026-05-27-swervedriver"
+    ],
+    "artist-michael-franti-and-spearhead": [
+      "rr-2026-05-29-michael-franti-and-spearhead"
+    ],
+    "artist-the-original-wailers": [
+      "rr-2026-05-29-michael-franti-and-spearhead"
+    ],
+    "artist-alan-walker": [
+      "rr-2026-05-30-alan-walker"
+    ],
+    "artist-andres-cepeda": [
+      "paramount-theatre-2026-05-31-andres-cepeda"
+    ],
+    "artist-the-last-dinner-party": [
+      "mission-ballroom-2026-06-02-the-last-dinner-party-with-automatic"
+    ],
+    "artist-automatic": [
+      "mission-ballroom-2026-06-02-the-last-dinner-party-with-automatic"
+    ],
+    "artist-alex-warren": [
+      "rr-2026-06-02-alex-warren"
+    ],
+    "artist-spite": [
+      "summit-music-hall-2026-06-02-spite-with-emmure"
+    ],
+    "artist-emmure": [
+      "summit-music-hall-2026-06-02-spite-with-emmure"
+    ],
+    "artist-alpha-wolf": [
+      "black-sheep-2026-06-03-alpha-wolf-with-gideon-mugshot-and-resolve"
+    ],
+    "artist-gideon": [
+      "black-sheep-2026-06-03-alpha-wolf-with-gideon-mugshot-and-resolve"
+    ],
+    "artist-mugshot": [
+      "black-sheep-2026-06-03-alpha-wolf-with-gideon-mugshot-and-resolve"
+    ],
+    "artist-resolve": [
+      "black-sheep-2026-06-03-alpha-wolf-with-gideon-mugshot-and-resolve"
+    ],
+    "artist-white-denim": [
+      "marquis-theater-2026-06-03-white-denim"
+    ],
+    "artist-yo-yo-ma": [
+      "rr-2026-06-03-yo-yo-ma-with-colorado-symphony"
+    ],
+    "artist-colorado-symphony": [
+      "rr-2026-06-03-yo-yo-ma-with-colorado-symphony"
+    ],
+    "artist-brit-floyd-the-wall": [
+      "rr-2026-06-04-brit-floyd-the-wall"
+    ],
+    "artist-troy-doherty": [
+      "marquis-theater-2026-06-05-troy-doherty"
+    ],
+    "artist-brit-floyd-dark-side-of-the-moon": [
+      "rr-2026-06-05-brit-floyd-dark-side-of-the-moon"
+    ],
+    "artist-joe-jackson": [
+      "chautauqua-auditorium-2026-06-06-joe-jackson"
+    ],
+    "artist-big-head-todd-and-the-monsters": [
+      "rr-2026-06-06-big-head-todd-and-the-monsters"
+    ],
+    "artist-4-non-blondes": [
+      "rr-2026-06-06-big-head-todd-and-the-monsters"
+    ],
+    "artist-kings-kaleidoscope-16": [
+      "bluebird-theater-2026-06-09-kings-kaleidoscope-16"
+    ],
+    "artist-lord-huron": [
+      "rr-2026-06-10-lord-huron",
+      "fiddlers-green-amphitheatre-2026-06-11-lord-huron"
+    ],
+    "artist-lane-8": [
+      "mission-ballroom-2026-06-13-lane-8-with-cross-pollination-sultan-shepard-and-more-16",
+      "mishawaka-amphitheatre-2026-06-14-lane-8"
+    ],
+    "artist-cross-pollination": [
+      "mission-ballroom-2026-06-13-lane-8-with-cross-pollination-sultan-shepard-and-more-16"
+    ],
+    "artist-sultan-shepard": [
+      "mission-ballroom-2026-06-13-lane-8-with-cross-pollination-sultan-shepard-and-more-16"
+    ],
+    "artist-16": [
+      "mission-ballroom-2026-06-13-lane-8-with-cross-pollination-sultan-shepard-and-more-16"
+    ],
+    "artist-trevor-hall-thievery-corporation-dirtwire": [
+      "rr-2026-06-14-trevor-hall-thievery-corporation-dirtwire"
+    ],
+    "artist-rod-stewart": [
+      "rr-2026-06-15-rod-stewart",
+      "rr-2026-06-16-rod-stewart"
+    ],
+    "artist-amble": [
+      "gothic-theatre-2026-06-17-amble"
+    ],
+    "artist-amyl-and-the-sniffers": [
+      "rr-2026-06-17-amyl-and-the-sniffers"
+    ],
+    "artist-l7": [
+      "rr-2026-06-17-amyl-and-the-sniffers"
+    ],
+    "artist-party-dozen": [
+      "rr-2026-06-17-amyl-and-the-sniffers"
+    ],
+    "artist-o-a-r": [
+      "ford-amphitheater-colorado-springs-2026-06-18-o-a-r-with-gavin-degraw-and-phantom-planet",
+      "rr-2026-06-20-o-a-r"
+    ],
+    "artist-gavin-degraw": [
+      "ford-amphitheater-colorado-springs-2026-06-18-o-a-r-with-gavin-degraw-and-phantom-planet",
+      "rr-2026-06-20-o-a-r"
+    ],
+    "artist-third-day-30th-anniversary": [
+      "rr-2026-06-18-third-day-30th-anniversary"
+    ],
+    "artist-searows": [
+      "bluebird-theater-2026-06-19-searows"
+    ],
+    "artist-iration": [
+      "cervantes-masterpiece-2026-06-19-iration",
+      "cervantes-masterpiece-2026-06-20-iration"
+    ],
+    "artist-louis-tomlinson": [
+      "rr-2026-06-19-louis-tomlinson"
+    ],
+    "artist-the-aces": [
+      "rr-2026-06-19-louis-tomlinson"
+    ],
+    "artist-monolord": [
+      "marquis-theater-2026-06-23-monolord-with-mizmor"
+    ],
+    "artist-mizmor": [
+      "marquis-theater-2026-06-23-monolord-with-mizmor"
+    ],
+    "artist-weird-al-yankovic": [
+      "rr-2026-06-23-weird-al-yankovic"
+    ],
+    "artist-puddles-pity-party": [
+      "rr-2026-06-23-weird-al-yankovic"
+    ],
+    "artist-bearracuda-18": [
+      "summit-music-hall-2026-06-27-bearracuda-18"
+    ],
+    "artist-wolfmother": [
+      "ogden-theatre-2026-06-30-wolfmother"
+    ],
+    "artist-josh-groban": [
+      "ball-arena-2026-07-01-josh-groban-with-jennifer-hudson"
+    ],
+    "artist-jennifer-hudson": [
+      "ball-arena-2026-07-01-josh-groban-with-jennifer-hudson"
+    ],
+    "artist-treaty-oak-revival": [
+      "rr-2026-07-01-treaty-oak-revival"
+    ],
+    "artist-deadrocks-xii-zeds-dead": [
+      "rr-2026-07-02-deadrocks-xii-zeds-dead",
+      "rr-2026-07-03-deadrocks-xii-zeds-dead"
+    ],
+    "artist-solya": [
+      "marquis-theater-2026-07-03-solya"
+    ],
+    "artist-chance-pena-16": [
+      "ogden-theatre-2026-07-13-chance-pena-16"
+    ],
+    "artist-forrest-frank": [
+      "ball-arena-2026-07-20-forrest-frank-with-tori-kelly-cory-asbury-and-the-figs"
+    ],
+    "artist-tori-kelly": [
+      "ball-arena-2026-07-20-forrest-frank-with-tori-kelly-cory-asbury-and-the-figs"
+    ],
+    "artist-cory-asbury": [
+      "ball-arena-2026-07-20-forrest-frank-with-tori-kelly-cory-asbury-and-the-figs"
+    ],
+    "artist-the-figs": [
+      "ball-arena-2026-07-20-forrest-frank-with-tori-kelly-cory-asbury-and-the-figs"
+    ],
+    "artist-rosanne-cash": [
+      "chautauqua-auditorium-2026-07-20-rosanne-cash-with-john-leventhal"
+    ],
+    "artist-john-leventhal": [
+      "chautauqua-auditorium-2026-07-20-rosanne-cash-with-john-leventhal"
+    ],
+    "artist-olivia-dean": [
+      "ball-arena-2026-07-25-olivia-dean",
+      "ball-arena-2026-07-26-olivia-dean"
+    ],
+    "artist-rainbow-kitten-surprise": [
+      "fiddlers-green-amphitheatre-2026-07-25-rainbow-kitten-surprise-with-spacey-jane"
+    ],
+    "artist-spacey-jane": [
+      "fiddlers-green-amphitheatre-2026-07-25-rainbow-kitten-surprise-with-spacey-jane"
+    ],
+    "artist-megan-moroney": [
+      "ball-arena-2026-07-28-megan-moroney"
+    ],
+    "artist-meghan-trainor": [
+      "ball-arena-2026-08-01-meghan-trainor-with-icona-pop-and-ryan-trainor"
+    ],
+    "artist-icona-pop": [
+      "ball-arena-2026-08-01-meghan-trainor-with-icona-pop-and-ryan-trainor"
+    ],
+    "artist-ryan-trainor": [
+      "ball-arena-2026-08-01-meghan-trainor-with-icona-pop-and-ryan-trainor"
+    ],
+    "artist-audrey-hobert-16": [
+      "ogden-theatre-2026-08-04-audrey-hobert-16"
+    ],
+    "artist-sugar": [
+      "mission-ballroom-2026-08-11-sugar"
+    ],
+    "artist-alison-krauss-and-union-station": [
+      "ford-amphitheater-colorado-springs-2026-08-14-alison-krauss-and-union-station-with-jerry-douglas-and-theo-lawrence"
+    ],
+    "artist-jerry-douglas": [
+      "ford-amphitheater-colorado-springs-2026-08-14-alison-krauss-and-union-station-with-jerry-douglas-and-theo-lawrence"
+    ],
+    "artist-theo-lawrence": [
+      "ford-amphitheater-colorado-springs-2026-08-14-alison-krauss-and-union-station-with-jerry-douglas-and-theo-lawrence"
+    ],
+    "artist-mt-joy": [
+      "fiddlers-green-amphitheatre-2026-08-15-mt-joy"
+    ],
+    "artist-courtney-barnett": [
+      "mission-ballroom-2026-08-21-courtney-barnett-with-zoh-amba-16"
+    ],
+    "artist-zoh-amba-16": [
+      "mission-ballroom-2026-08-21-courtney-barnett-with-zoh-amba-16"
+    ],
+    "artist-diggy-graves": [
+      "summit-music-hall-2026-08-21-diggy-graves-with-resentvul"
+    ],
+    "artist-resentvul": [
+      "summit-music-hall-2026-08-21-diggy-graves-with-resentvul"
+    ],
+    "artist-toto": [
+      "ball-arena-2026-08-22-toto-with-christopher-cross-and-the-romantics"
+    ],
+    "artist-christopher-cross": [
+      "ball-arena-2026-08-22-toto-with-christopher-cross-and-the-romantics"
+    ],
+    "artist-the-romantics": [
+      "ball-arena-2026-08-22-toto-with-christopher-cross-and-the-romantics"
+    ],
+    "artist-avenged-sevenfold-and-good-charlotte": [
+      "ball-arena-2026-08-23-avenged-sevenfold-and-good-charlotte"
+    ],
+    "artist-laurie-berkner": [
+      "boulder-theater-2026-08-23-laurie-berkner"
+    ],
+    "artist-chicago-band": [
+      "ball-arena-2026-08-28-chicago-band"
+    ],
+    "artist-jack-johnson": [
+      "fiddlers-green-amphitheatre-2026-09-02-jack-johnson-with-lake-street-dive",
+      "fiddlers-green-amphitheatre-2026-09-03-jack-johnson-with-lake-street-dive"
+    ],
+    "artist-lake-street-dive": [
+      "fiddlers-green-amphitheatre-2026-09-02-jack-johnson-with-lake-street-dive",
+      "fiddlers-green-amphitheatre-2026-09-03-jack-johnson-with-lake-street-dive"
+    ],
+    "artist-brantley-gilbert-rescheduled-from-10-11-25": [
+      "ford-amphitheater-colorado-springs-2026-09-05-brantley-gilbert-rescheduled-from-10-11-25"
+    ],
+    "artist-rob-zombie-and-marilyn-manson": [
+      "fiddlers-green-amphitheatre-2026-09-12-rob-zombie-and-marilyn-manson-with-the-hu-and-orgy"
+    ],
+    "artist-the-hu": [
+      "fiddlers-green-amphitheatre-2026-09-12-rob-zombie-and-marilyn-manson-with-the-hu-and-orgy"
+    ],
+    "artist-orgy": [
+      "fiddlers-green-amphitheatre-2026-09-12-rob-zombie-and-marilyn-manson-with-the-hu-and-orgy"
+    ],
+    "artist-peter-hook-and-the-light-16": [
+      "ogden-theatre-2026-09-14-peter-hook-and-the-light-16"
+    ],
+    "artist-aldous-harding-16": [
+      "bluebird-theater-2026-09-21-aldous-harding-16"
+    ],
+    "artist-the-fab-four-tribute-to-the-beatles-help-and-the-hits": [
+      "paramount-theatre-2026-09-25-the-fab-four-tribute-to-the-beatles-help-and-the-hits"
+    ],
+    "artist-rush": [
+      "ball-arena-2026-10-05-rush",
+      "ball-arena-2026-10-07-rush"
+    ],
+    "artist-doja-cat": [
+      "ball-arena-2026-10-08-doja-cat"
+    ],
+    "artist-osees-16": [
+      "ogden-theatre-2026-10-11-osees-16"
+    ],
+    "artist-three-days-grace": [
+      "ball-arena-2026-11-11-three-days-grace-with-i-prevail-and-the-funeral-portrait"
+    ],
+    "artist-i-prevail": [
+      "ball-arena-2026-11-11-three-days-grace-with-i-prevail-and-the-funeral-portrait"
+    ],
+    "artist-the-funeral-portrait": [
+      "ball-arena-2026-11-11-three-days-grace-with-i-prevail-and-the-funeral-portrait"
+    ],
+    "artist-armand-hammer": [
+      "marquis-theater-2026-11-13-armand-hammer"
+    ],
+    "artist-mike": [
+      "rr-2026-11-14-mike",
+      "rr-2026-11-15-mike"
+    ]
+  },
+  "artistIndex": {
+    "glaive (16+)": "artist-glaive-16",
+    "kitchen dwellers": "artist-kitchen-dwellers",
+    "mountain grass unit (16+)": "artist-mountain-grass-unit-16",
+    "mountain grass unit": "artist-mountain-grass-unit",
+    "kompany": "artist-kompany",
+    "tycho": "artist-tycho",
+    "ruston kelly": "artist-ruston-kelly",
+    "verygently (16+)": "artist-verygently-16",
+    "mc davo": "artist-mc-davo",
+    "aleman and gera mx": "artist-aleman-and-gera-mx",
+    "billy f gibbons and the bfg band": "artist-billy-f-gibbons-and-the-bfg-band",
+    "shakedown street - grateful dead tribute (16+)": "artist-shakedown-street-grateful-dead-tribute-16",
+    "bayymack (18+)": "artist-bayymack-18",
+    "ship wrek (16+)": "artist-ship-wrek-16",
+    "chmura": "artist-chmura",
+    "skiitour": "artist-skiitour",
+    "fitz and the tantrums": "artist-fitz-and-the-tantrums",
+    "josh teed": "artist-josh-teed",
+    "bane": "artist-bane",
+    "rotting out": "artist-rotting-out",
+    "eyes of salt": "artist-eyes-of-salt",
+    "warmachine (16+)": "artist-warmachine-16",
+    "chri$tian gate$": "artist-chri-tian-gate",
+    "neon the bishop": "artist-neon-the-bishop",
+    "ray volpe": "artist-ray-volpe",
+    "dogs in a pile": "artist-dogs-in-a-pile",
+    "david ramirez": "artist-david-ramirez",
+    "ghengar": "artist-ghengar",
+    "your arms are my cocoon": "artist-your-arms-are-my-cocoon",
+    "the runarounds (16+)": "artist-the-runarounds-16",
+    "bravo the bagchaser": "artist-bravo-the-bagchaser",
+    "lil maru": "artist-lil-maru",
+    "jessie j": "artist-jessie-j",
+    "lord of the lost": "artist-lord-of-the-lost",
+    "the birthday massacre": "artist-the-birthday-massacre",
+    "briscoe (16+)": "artist-briscoe-16",
+    "three dog night": "artist-three-dog-night",
+    "stella cole": "artist-stella-cole",
+    "the boulder philharmonic": "artist-the-boulder-philharmonic",
+    "north mississippi allstars (16+)": "artist-north-mississippi-allstars-16",
+    "mark farina": "artist-mark-farina",
+    "the ocean blue": "artist-the-ocean-blue",
+    "chris lorenzo (16+)": "artist-chris-lorenzo-16",
+    "del water gap": "artist-del-water-gap",
+    "hannah jadagu": "artist-hannah-jadagu",
+    "icelantic’s winter on the rocks": "artist-icelantic-s-winter-on-the-rocks",
+    "bigxthaplug": "artist-bigxthaplug",
+    "smino": "artist-smino",
+    "mick jenkins": "artist-mick-jenkins",
+    "pawpaw rod": "artist-pawpaw-rod",
+    "ydg": "artist-ydg",
+    "join the resistance (18+)": "artist-join-the-resistance-18",
+    "say she she": "artist-say-she-she",
+    "katzu oso": "artist-katzu-oso",
+    "enjambre (16+)": "artist-enjambre-16",
+    "the revivalists": "artist-the-revivalists",
+    "jade": "artist-jade",
+    "sudan archives (16+)": "artist-sudan-archives-16",
+    "left to suffer": "artist-left-to-suffer",
+    "the last ten seconds of life": "artist-the-last-ten-seconds-of-life",
+    "larcenia roe": "artist-larcenia-roe",
+    "fr3ak": "artist-fr3ak",
+    "michael shannon & jason narducy": "artist-michael-shannon-and-jason-narducy",
+    "butcher babies": "artist-butcher-babies",
+    "ghostface killah": "artist-ghostface-killah",
+    "snow strippers": "artist-snow-strippers",
+    "the record company": "artist-the-record-company",
+    "dark star orchestra": "artist-dark-star-orchestra",
+    "sons of legion (16+)": "artist-sons-of-legion-16",
+    "yung bans": "artist-yung-bans",
+    "the martinez brothers (16+)": "artist-the-martinez-brothers-16",
+    "magic city hippies (16+)": "artist-magic-city-hippies-16",
+    "mania: the abba tribute": "artist-mania-the-abba-tribute",
+    "the record company (16+)": "artist-the-record-company-16",
+    "wreckno & super future (16+)": "artist-wreckno-and-super-future-16",
+    "what the dance": "artist-what-the-dance",
+    "freya skye": "artist-freya-skye",
+    "weval (16+)": "artist-weval-16",
+    "fox stevenson": "artist-fox-stevenson",
+    "rich brian (16+)": "artist-rich-brian-16",
+    "ricardo arjona": "artist-ricardo-arjona",
+    "samm henshaw": "artist-samm-henshaw",
+    "ga-20": "artist-ga-20",
+    "mac mcanally": "artist-mac-mcanally",
+    "bryce vine": "artist-bryce-vine",
+    "beauty school dropout": "artist-beauty-school-dropout",
+    "hayes carll": "artist-hayes-carll",
+    "ryan montbleau (16+)": "artist-ryan-montbleau-16",
+    "atmosphere": "artist-atmosphere",
+    "sage francis": "artist-sage-francis",
+    "the polish ambassador": "artist-the-polish-ambassador",
+    "club 90s - heated rivalrave (18+)": "artist-club-90s-heated-rivalrave-18",
+    "whitney hanson": "artist-whitney-hanson",
+    "hayden coffman": "artist-hayden-coffman",
+    "sidepiece (16+)": "artist-sidepiece-16",
+    "geoff tate (16+)": "artist-geoff-tate-16",
+    "clipping. (16+)": "artist-clipping-16",
+    "nathan evans & the saint phnx band": "artist-nathan-evans-and-the-saint-phnx-band",
+    "rivers of nihil": "artist-rivers-of-nihil",
+    "black pistol fire (16+)": "artist-black-pistol-fire-16",
+    "bad omens": "artist-bad-omens",
+    "beartooth": "artist-beartooth",
+    "president": "artist-president",
+    "vitamin string quartet": "artist-vitamin-string-quartet",
+    "monolink (18+)": "artist-monolink-18",
+    "the queers": "artist-the-queers",
+    "daniel donato's cosmic country - 2 day pass": "artist-daniel-donato-s-cosmic-country-2-day-pass",
+    "daniel donato's cosmic country (night 1)": "artist-daniel-donato-s-cosmic-country-night-1",
+    "the devil makes three (16+)": "artist-the-devil-makes-three-16",
+    "lights": "artist-lights",
+    "softcult": "artist-softcult",
+    "daniel donato's cosmic country (night 2)": "artist-daniel-donato-s-cosmic-country-night-2",
+    "whethan (16+)": "artist-whethan-16",
+    "jeremy jordan": "artist-jeremy-jordan",
+    "age of madness": "artist-age-of-madness",
+    "badflower (16+)": "artist-badflower-16",
+    "devon allman band": "artist-devon-allman-band",
+    "kpop club night (16+)": "artist-kpop-club-night-16",
+    "penelope road": "artist-penelope-road",
+    "denm": "artist-denm",
+    "evening elephants": "artist-evening-elephants",
+    "obed padilla": "artist-obed-padilla",
+    "glitterer": "artist-glitterer",
+    "drama (16+)": "artist-drama-16",
+    "gogol bordello (16+)": "artist-gogol-bordello-16",
+    "brett dennen": "artist-brett-dennen",
+    "donny benet": "artist-donny-benet",
+    "all them witches (21+)": "artist-all-them-witches-21",
+    "all your friends (18+)": "artist-all-your-friends-18",
+    "maddy o'neal": "artist-maddy-o-neal",
+    "tokimonsta": "artist-tokimonsta",
+    "franc moody (16+)": "artist-franc-moody-16",
+    "smells like nirvana": "artist-smells-like-nirvana",
+    "heated rivalry night (18+)": "artist-heated-rivalry-night-18",
+    "the devil makes three": "artist-the-devil-makes-three",
+    "mat kerekes": "artist-mat-kerekes",
+    "shallow alcove": "artist-shallow-alcove",
+    "dropkick murphys": "artist-dropkick-murphys",
+    "the aggrolites": "artist-the-aggrolites",
+    "haywire (16+)": "artist-haywire-16",
+    "all them witches (16+)": "artist-all-them-witches-16",
+    "alex sampson": "artist-alex-sampson",
+    "3oh!3": "artist-3oh-3",
+    "artemas": "artist-artemas",
+    "isabel larosa (16+)": "artist-isabel-larosa-16",
+    "yacht rock revue": "artist-yacht-rock-revue",
+    "margo price": "artist-margo-price",
+    "shannon mcnally": "artist-shannon-mcnally",
+    "capstan": "artist-capstan",
+    "in her own words": "artist-in-her-own-words",
+    "dreamwake": "artist-dreamwake",
+    "volumes": "artist-volumes",
+    "notions": "artist-notions",
+    "catsclaw (16+)": "artist-catsclaw-16",
+    "miguel": "artist-miguel",
+    "jean dawson": "artist-jean-dawson",
+    "colony house": "artist-colony-house",
+    "nekrogoblikon": "artist-nekrogoblikon",
+    "enterprise earth": "artist-enterprise-earth",
+    "black label society": "artist-black-label-society",
+    "zakk sabbath": "artist-zakk-sabbath",
+    "dark chapel": "artist-dark-chapel",
+    "not quite brothers": "artist-not-quite-brothers",
+    "emo nite -  (21+)": "artist-emo-nite-21",
+    "fia (16+)": "artist-fia-16",
+    "club 90s - heated rivalry night (18+)": "artist-club-90s-heated-rivalry-night-18",
+    "benee": "artist-benee",
+    "bayli (16+)": "artist-bayli-16",
+    "graham good & the painters": "artist-graham-good-and-the-painters",
+    "dodie clark": "artist-dodie-clark",
+    "christian loffler": "artist-christian-loffler",
+    "tobymac": "artist-tobymac",
+    "crowder": "artist-crowder",
+    "jeremy camp": "artist-jeremy-camp",
+    "xaviersobased": "artist-xaviersobased",
+    "cardi b": "artist-cardi-b",
+    "heart": "artist-heart",
+    "lucinda williams": "artist-lucinda-williams",
+    "the browning": "artist-the-browning",
+    "within destruction": "artist-within-destruction",
+    "face yourself": "artist-face-yourself",
+    "dead eyes": "artist-dead-eyes",
+    "lil tony": "artist-lil-tony",
+    "chris isaak": "artist-chris-isaak",
+    "lauren spencer smith": "artist-lauren-spencer-smith",
+    "peaches": "artist-peaches",
+    "ella red": "artist-ella-red",
+    "siamese": "artist-siamese",
+    "cabal": "artist-cabal",
+    "jesse roper": "artist-jesse-roper",
+    "zara larsson": "artist-zara-larsson",
+    "amelia moore": "artist-amelia-moore",
+    "cash cobain": "artist-cash-cobain",
+    "jigitz": "artist-jigitz",
+    "ole 60": "artist-ole-60",
+    "gabriella rose": "artist-gabriella-rose",
+    "hawthorne heights": "artist-hawthorne-heights",
+    "pure prairie league": "artist-pure-prairie-league",
+    "pablo cruise": "artist-pablo-cruise",
+    "the barr brothers": "artist-the-barr-brothers",
+    "maggie lindemann (16+)": "artist-maggie-lindemann-16",
+    "spiritual cramp": "artist-spiritual-cramp",
+    "destiny bond": "artist-destiny-bond",
+    "supertask (16+)": "artist-supertask-16",
+    "jeff tweedy (16+)": "artist-jeff-tweedy-16",
+    "two feet": "artist-two-feet",
+    "nimino": "artist-nimino",
+    "nothing": "artist-nothing",
+    "catch your breath": "artist-catch-your-breath",
+    "archers": "artist-archers",
+    "doobie": "artist-doobie",
+    "the strumbellas": "artist-the-strumbellas",
+    "max styler": "artist-max-styler",
+    "bearracuda": "artist-bearracuda",
+    "bad bad hats": "artist-bad-bad-hats",
+    "neko case": "artist-neko-case",
+    "destroyer": "artist-destroyer",
+    "amber mark": "artist-amber-mark",
+    "sherwyn (16+)": "artist-sherwyn-16",
+    "monaleo": "artist-monaleo",
+    "indigo de souza (16+)": "artist-indigo-de-souza-16",
+    "varials": "artist-varials",
+    "unitytx": "artist-unitytx",
+    "emmet cohen presents: miles and coltrane at 100": "artist-emmet-cohen-presents-miles-and-coltrane-at-100",
+    "dark divine": "artist-dark-divine",
+    "sabrina claudio": "artist-sabrina-claudio",
+    "dylan sinclair": "artist-dylan-sinclair",
+    "mariah the scientist": "artist-mariah-the-scientist",
+    "alexsucks": "artist-alexsucks",
+    "testament": "artist-testament",
+    "overkill": "artist-overkill",
+    "destruction": "artist-destruction",
+    "the thing (16+)": "artist-the-thing-16",
+    "matisyahu": "artist-matisyahu",
+    "lithe": "artist-lithe",
+    "grieves": "artist-grieves",
+    "blueprint": "artist-blueprint",
+    "kwn": "artist-kwn",
+    "shadowgrass": "artist-shadowgrass",
+    "dream, ivory": "artist-dream-ivory",
+    "the california honeydrops": "artist-the-california-honeydrops",
+    "distinct motive (16+)": "artist-distinct-motive-16",
+    "white reaper": "artist-white-reaper",
+    "drug church": "artist-drug-church",
+    "muzz": "artist-muzz",
+    "boys like girls": "artist-boys-like-girls",
+    "idkhow": "artist-idkhow",
+    "arrows in action": "artist-arrows-in-action",
+    "jonah kagen (16+)": "artist-jonah-kagen-16",
+    "eddie 9v (16+)": "artist-eddie-9v-16",
+    "emm": "artist-emm",
+    "bentley robles": "artist-bentley-robles",
+    "the floozies (16+)": "artist-the-floozies-16",
+    "barely alive": "artist-barely-alive",
+    "tisoki (18+)": "artist-tisoki-18",
+    "solas": "artist-solas",
+    "emily king": "artist-emily-king",
+    "gregorian": "artist-gregorian",
+    "quarters": "artist-quarters",
+    "mclusky": "artist-mclusky",
+    "teenage bottlerocket": "artist-teenage-bottlerocket",
+    "the high kings": "artist-the-high-kings",
+    "ruel": "artist-ruel",
+    "slaughter to prevail": "artist-slaughter-to-prevail",
+    "whitechapel": "artist-whitechapel",
+    "attila (16+)": "artist-attila-16",
+    "the sloppy boys": "artist-the-sloppy-boys",
+    "peso pluma": "artist-peso-pluma",
+    "charlie parr": "artist-charlie-parr",
+    "the menzingers": "artist-the-menzingers",
+    "i am the avalanche": "artist-i-am-the-avalanche",
+    "the early november and hellogoodbye (16+)": "artist-the-early-november-and-hellogoodbye-16",
+    "yellow days": "artist-yellow-days",
+    "st. paul & the broken bones": "artist-st-paul-and-the-broken-bones",
+    "lamb of god": "artist-lamb-of-god",
+    "kublai khan tx": "artist-kublai-khan-tx",
+    "fit for an autopsy": "artist-fit-for-an-autopsy",
+    "sanguisugabogg": "artist-sanguisugabogg",
+    "pity party (girls club)": "artist-pity-party-girls-club",
+    "gov't mule": "artist-gov-t-mule",
+    "yolanda del rio": "artist-yolanda-del-rio",
+    "crankdat": "artist-crankdat",
+    "dr. fresch": "artist-dr-fresch",
+    "smoakland": "artist-smoakland",
+    "capochino": "artist-capochino",
+    "hershe": "artist-hershe",
+    "eidola": "artist-eidola",
+    "red leather": "artist-red-leather",
+    "49th and main (21+)": "artist-49th-and-main-21",
+    "melvin seals & jgb": "artist-melvin-seals-and-jgb",
+    "pink talking fish": "artist-pink-talking-fish",
+    "los amigos invisibles": "artist-los-amigos-invisibles",
+    "steinza": "artist-steinza",
+    "ashnikko": "artist-ashnikko",
+    "ravenscoon & jantsen": "artist-ravenscoon-and-jantsen",
+    "jason leech": "artist-jason-leech",
+    "chozen b2b noetika": "artist-chozen-b2b-noetika",
+    "dev": "artist-dev",
+    "the devil wears prada": "artist-the-devil-wears-prada",
+    "sticky fingers": "artist-sticky-fingers",
+    "ruby waters": "artist-ruby-waters",
+    "angel du$t": "artist-angel-du-t",
+    "home front": "artist-home-front",
+    "the wonder years": "artist-the-wonder-years",
+    "knuckle puck": "artist-knuckle-puck",
+    "initiate (16+)": "artist-initiate-16",
+    "humbe": "artist-humbe",
+    "i see stars": "artist-i-see-stars",
+    "mind enterprises (16+)": "artist-mind-enterprises-16",
+    "fka twigs": "artist-fka-twigs",
+    "night cap": "artist-night-cap",
+    "westerman": "artist-westerman",
+    "machine girl": "artist-machine-girl",
+    "sextile": "artist-sextile",
+    "obscura": "artist-obscura",
+    "allegaeon": "artist-allegaeon",
+    "cognitive": "artist-cognitive",
+    "cryptosis": "artist-cryptosis",
+    "naika": "artist-naika",
+    "lacuna coil": "artist-lacuna-coil",
+    "escape the fate": "artist-escape-the-fate",
+    "vowws": "artist-vowws",
+    "cass mccombs": "artist-cass-mccombs",
+    "chris cohen": "artist-chris-cohen",
+    "r.a.p. ferreira": "artist-r-a-p-ferreira",
+    "subhumans": "artist-subhumans",
+    "voxtrot": "artist-voxtrot",
+    "orbit culture": "artist-orbit-culture",
+    "the maine": "artist-the-maine",
+    "firefall": "artist-firefall",
+    "hazel miller": "artist-hazel-miller",
+    "inzo": "artist-inzo",
+    "what so not": "artist-what-so-not",
+    "lumasi": "artist-lumasi",
+    "daggz": "artist-daggz",
+    "common creation": "artist-common-creation",
+    "spenny": "artist-spenny",
+    "jstjr (18+)": "artist-jstjr-18",
+    "prayers": "artist-prayers",
+    "my life": "artist-my-life",
+    "the thrill kill kult": "artist-the-thrill-kill-kult",
+    "sarah kinsley": "artist-sarah-kinsley",
+    "girlpuppy": "artist-girlpuppy",
+    "it’s murph presents murph rocks": "artist-it-s-murph-presents-murph-rocks",
+    "d.o.d": "artist-d-o-d",
+    "oskar med k": "artist-oskar-med-k",
+    "me n ü": "artist-me-n",
+    "currents": "artist-currents",
+    "erra": "artist-erra",
+    "magnolia park": "artist-magnolia-park",
+    "silly goose": "artist-silly-goose",
+    "raye": "artist-raye",
+    "drain": "artist-drain",
+    "no pressure": "artist-no-pressure",
+    "haywire": "artist-haywire",
+    "secret world": "artist-secret-world",
+    "the red pears and together pangea (16+)": "artist-the-red-pears-and-together-pangea-16",
+    "pat metheny": "artist-pat-metheny",
+    "lany": "artist-lany",
+    "microwave": "artist-microwave",
+    "anthony green (16+)": "artist-anthony-green-16",
+    "dave - rapper": "artist-dave-rapper",
+    "goldford (16+)": "artist-goldford-16",
+    "health": "artist-health",
+    "carpenter brut (16+)": "artist-carpenter-brut-16",
+    "calum scott": "artist-calum-scott",
+    "bit brigade": "artist-bit-brigade",
+    "branford marsalis": "artist-branford-marsalis",
+    "ltj bukem": "artist-ltj-bukem",
+    "des rocs": "artist-des-rocs",
+    "romes": "artist-romes",
+    "the format": "artist-the-format",
+    "phantom planet": "artist-phantom-planet",
+    "limbeck (16+)": "artist-limbeck-16",
+    "sam grisman project": "artist-sam-grisman-project",
+    "tommy emmanuel": "artist-tommy-emmanuel",
+    "zingara & level up": "artist-zingara-and-level-up",
+    "saka": "artist-saka",
+    "subdocta": "artist-subdocta",
+    "slang dogs": "artist-slang-dogs",
+    "d.r.i. - dirty rotten imbeciles": "artist-d-r-i-dirty-rotten-imbeciles",
+    "clusterfux": "artist-clusterfux",
+    "deathwish (16+)": "artist-deathwish-16",
+    "sweet pill": "artist-sweet-pill",
+    "spaced": "artist-spaced",
+    "stereosity": "artist-stereosity",
+    "liquid stranger": "artist-liquid-stranger",
+    "tvboo b2b ahee": "artist-tvboo-b2b-ahee",
+    "avello": "artist-avello",
+    "dance": "artist-dance",
+    "the dead": "artist-the-dead",
+    "magic sword": "artist-magic-sword",
+    "fcukers (16+)": "artist-fcukers-16",
+    "ratboys": "artist-ratboys",
+    "villagerrr (16+)": "artist-villagerrr-16",
+    "twice": "artist-twice",
+    "satchvai band featuring joe satriani and steve vai (16+)": "artist-satchvai-band-featuring-joe-satriani-and-steve-vai-16",
+    "hatsune miku": "artist-hatsune-miku",
+    "colin hay": "artist-colin-hay",
+    "john mulaney: mister whatever": "artist-john-mulaney-mister-whatever",
+    "free throw": "artist-free-throw",
+    "warren zeiders": "artist-warren-zeiders",
+    "lakeview (16+)": "artist-lakeview-16",
+    "bbno$": "artist-bbno",
+    "oliver tree": "artist-oliver-tree",
+    "kaarija": "artist-kaarija",
+    "yng martyr": "artist-yng-martyr",
+    "jungle bobby": "artist-jungle-bobby",
+    "pete yorn (16+)": "artist-pete-yorn-16",
+    "bilmuri": "artist-bilmuri",
+    "the home team": "artist-the-home-team",
+    "gang!": "artist-gang",
+    "bleed from within": "artist-bleed-from-within",
+    "cory wong": "artist-cory-wong",
+    "know good": "artist-know-good",
+    "drew holcomb": "artist-drew-holcomb",
+    "sublime": "artist-sublime",
+    "common kings": "artist-common-kings",
+    "bumpin uglies": "artist-bumpin-uglies",
+    "pete yorn (21+)": "artist-pete-yorn-21",
+    "tyler braden (18+)": "artist-tyler-braden-18",
+    "soul blind": "artist-soul-blind",
+    "san holo": "artist-san-holo",
+    "stephen wilson jr. (16+)": "artist-stephen-wilson-jr-16",
+    "ty segall (16+)": "artist-ty-segall-16",
+    "pepper": "artist-pepper",
+    "codefendants": "artist-codefendants",
+    "buckethead": "artist-buckethead",
+    "chris webby (16+)": "artist-chris-webby-16",
+    "wiz khalifa": "artist-wiz-khalifa",
+    "2 chainz": "artist-2-chainz",
+    "berner": "artist-berner",
+    "the underachievers": "artist-the-underachievers",
+    "chevy woods": "artist-chevy-woods",
+    "dj bonics": "artist-dj-bonics",
+    "slomosa": "artist-slomosa",
+    "maro": "artist-maro",
+    "ice cube": "artist-ice-cube",
+    "big boi": "artist-big-boi",
+    "czarface": "artist-czarface",
+    "ethel cain": "artist-ethel-cain",
+    "9million": "artist-9million",
+    "cold": "artist-cold",
+    "behemoth": "artist-behemoth",
+    "deicide": "artist-deicide",
+    "drugdealer": "artist-drugdealer",
+    "oklou": "artist-oklou",
+    "devotchka - aa tribute to the music of little miss sunshinea": "artist-devotchka-aa-tribute-to-the-music-of-little-miss-sunshinea",
+    "disclosure (16+)": "artist-disclosure-16",
+    "snow tha product": "artist-snow-tha-product",
+    "helloween": "artist-helloween",
+    "subtronics – cyclops rocks vi (night 1)": "artist-subtronics-cyclops-rocks-vi-night-1",
+    "shadow of intent": "artist-shadow-of-intent",
+    "angelmaker": "artist-angelmaker",
+    "moe.": "artist-moe",
+    "group bryndis": "artist-group-bryndis",
+    "industria del amor": "artist-industria-del-amor",
+    "guardianes del amor": "artist-guardianes-del-amor",
+    "subtronics – cyclops rocks vi (night 2)": "artist-subtronics-cyclops-rocks-vi-night-2",
+    "drinkurwater (18+)": "artist-drinkurwater-18",
+    "tourist": "artist-tourist",
+    "unprocessed": "artist-unprocessed",
+    "lou deezi": "artist-lou-deezi",
+    "bob moses & cannons": "artist-bob-moses-and-cannons",
+    "femtanyl (16+)": "artist-femtanyl-16",
+    "afi": "artist-afi",
+    "choir boy": "artist-choir-boy",
+    "josiah queen": "artist-josiah-queen",
+    "jervis campbell": "artist-jervis-campbell",
+    "skizzy mars (rescheduled from 10/16/2025)": "artist-skizzy-mars-rescheduled-from-10-16-2025",
+    "lewis capaldi": "artist-lewis-capaldi",
+    "joy crookes": "artist-joy-crookes",
+    "the black dahlia murder": "artist-the-black-dahlia-murder",
+    "the acacia strain": "artist-the-acacia-strain",
+    "powfu": "artist-powfu",
+    "badbadnotgood": "artist-badbadnotgood",
+    "witchz": "artist-witchz",
+    "the growlers": "artist-the-growlers",
+    "electric callboy": "artist-electric-callboy",
+    "polaris": "artist-polaris",
+    "scene queen": "artist-scene-queen",
+    "lords of acid": "artist-lords-of-acid",
+    "hail the sun": "artist-hail-the-sun",
+    "foxy shazam": "artist-foxy-shazam",
+    "saxsquatch": "artist-saxsquatch",
+    "benjamin tod": "artist-benjamin-tod",
+    "jason isbell & the 400 unit (16+)": "artist-jason-isbell-and-the-400-unit-16",
+    "stayin alive - bee gees tribute": "artist-stayin-alive-bee-gees-tribute",
+    "two friends": "artist-two-friends",
+    "sevendust": "artist-sevendust",
+    "atreyu": "artist-atreyu",
+    "langhorne slim": "artist-langhorne-slim",
+    "sasquatch (16+)": "artist-sasquatch-16",
+    "august burns red and the amity affliction": "artist-august-burns-red-and-the-amity-affliction",
+    "glixen": "artist-glixen",
+    "trauma ray": "artist-trauma-ray",
+    "jason isbell and the 400 unit": "artist-jason-isbell-and-the-400-unit",
+    "gillian welch & david rawlings": "artist-gillian-welch-and-david-rawlings",
+    "bush": "artist-bush",
+    "mammoth": "artist-mammoth",
+    "james": "artist-james",
+    "the cold gun": "artist-the-cold-gun",
+    "mac demarco": "artist-mac-demarco",
+    "puscifer": "artist-puscifer",
+    "dave hill": "artist-dave-hill",
+    "joyce manor": "artist-joyce-manor",
+    "militarie gun": "artist-militarie-gun",
+    "teen mortgage": "artist-teen-mortgage",
+    "combat": "artist-combat",
+    "demi lovato": "artist-demi-lovato",
+    "adela": "artist-adela",
+    "the spill canvas": "artist-the-spill-canvas",
+    "melrose avenue (16+)": "artist-melrose-avenue-16",
+    "the new pornographers": "artist-the-new-pornographers",
+    "will sheff (16+)": "artist-will-sheff-16",
+    "la dispute": "artist-la-dispute",
+    "emo orchestra": "artist-emo-orchestra",
+    "the midnight": "artist-the-midnight",
+    "bright eyes – 21 years of wide awake & digital ash": "artist-bright-eyes-21-years-of-wide-awake-and-digital-ash",
+    "vana": "artist-vana",
+    "faetooth": "artist-faetooth",
+    "alejandro fernández": "artist-alejandro-fern-ndez",
+    "camila fernández": "artist-camila-fern-ndez",
+    "poison the well": "artist-poison-the-well",
+    "converge": "artist-converge",
+    "the armed": "artist-the-armed",
+    "the barbarians of california": "artist-the-barbarians-of-california",
+    "william black": "artist-william-black",
+    "allie x": "artist-allie-x",
+    "cloonee": "artist-cloonee",
+    "kettama": "artist-kettama",
+    "omar+": "artist-omar",
+    "cole knight": "artist-cole-knight",
+    "alan doyle": "artist-alan-doyle",
+    "unknown mortal orchestra": "artist-unknown-mortal-orchestra",
+    "i speak machine": "artist-i-speak-machine",
+    "jose gonzalez": "artist-jose-gonzalez",
+    "abby sage (16+)": "artist-abby-sage-16",
+    "yungblud – idols world tour": "artist-yungblud-idols-world-tour",
+    "boulet brothers dragula": "artist-boulet-brothers-dragula",
+    "the afghan whigs": "artist-the-afghan-whigs",
+    "mercury rev": "artist-mercury-rev",
+    "good kid": "artist-good-kid",
+    "inoha (16+)": "artist-inoha-16",
+    "russell dickerson": "artist-russell-dickerson",
+    "niko moon": "artist-niko-moon",
+    "chet faker": "artist-chet-faker",
+    "newdad": "artist-newdad",
+    "the moss": "artist-the-moss",
+    "eric johnson": "artist-eric-johnson",
+    "lightcode by lsdream / dreamrocks ii": "artist-lightcode-by-lsdream-dreamrocks-ii",
+    "sports (band)": "artist-sports-band",
+    "the paper kites (16+)": "artist-the-paper-kites-16",
+    "the elovaters": "artist-the-elovaters",
+    "collie buddz": "artist-collie-buddz",
+    "the hip abduction": "artist-the-hip-abduction",
+    "protoje": "artist-protoje",
+    "donavon frankenreiter": "artist-donavon-frankenreiter",
+    "arms length": "artist-arms-length",
+    "the scratch": "artist-the-scratch",
+    "khalid": "artist-khalid",
+    "lauv": "artist-lauv",
+    "electric six": "artist-electric-six",
+    "vundabar": "artist-vundabar",
+    "goon": "artist-goon",
+    "kevin gates": "artist-kevin-gates",
+    "shoreline mafia": "artist-shoreline-mafia",
+    "ty dolla $ign": "artist-ty-dolla-ign",
+    "phil wickham": "artist-phil-wickham",
+    "sepultura": "artist-sepultura",
+    "exodus": "artist-exodus",
+    "biohazard": "artist-biohazard",
+    "tribal gaze (16+)": "artist-tribal-gaze-16",
+    "flipturn": "artist-flipturn",
+    "richy mitch & the coal miners": "artist-richy-mitch-and-the-coal-miners",
+    "dead calm": "artist-dead-calm",
+    "echo & the bunnymen": "artist-echo-and-the-bunnymen",
+    "thy art is murder": "artist-thy-art-is-murder",
+    "carnifex": "artist-carnifex",
+    "bodysnatcher": "artist-bodysnatcher",
+    "200 stab wounds": "artist-200-stab-wounds",
+    "seven lions": "artist-seven-lions",
+    "trivecta": "artist-trivecta",
+    "cradle of filth": "artist-cradle-of-filth",
+    "fisher": "artist-fisher",
+    "alabama shakes": "artist-alabama-shakes",
+    "powerman 5000": "artist-powerman-5000",
+    "thornhill": "artist-thornhill",
+    "156/silence": "artist-156-silence",
+    "fox lake": "artist-fox-lake",
+    "vianova (16+)": "artist-vianova-16",
+    "daisy grenade": "artist-daisy-grenade",
+    "vienna vienna": "artist-vienna-vienna",
+    "archspire": "artist-archspire",
+    "undeath": "artist-undeath",
+    "swervedriver": "artist-swervedriver",
+    "michael franti & spearhead": "artist-michael-franti-and-spearhead",
+    "the original wailers": "artist-the-original-wailers",
+    "alan walker": "artist-alan-walker",
+    "andres cepeda": "artist-andres-cepeda",
+    "the last dinner party": "artist-the-last-dinner-party",
+    "automatic": "artist-automatic",
+    "alex warren": "artist-alex-warren",
+    "spite": "artist-spite",
+    "emmure": "artist-emmure",
+    "alpha wolf": "artist-alpha-wolf",
+    "gideon": "artist-gideon",
+    "mugshot": "artist-mugshot",
+    "resolve": "artist-resolve",
+    "white denim": "artist-white-denim",
+    "yo-yo ma": "artist-yo-yo-ma",
+    "colorado symphony": "artist-colorado-symphony",
+    "brit floyd – the wall": "artist-brit-floyd-the-wall",
+    "troy doherty": "artist-troy-doherty",
+    "brit floyd – dark side of the moon": "artist-brit-floyd-dark-side-of-the-moon",
+    "joe jackson": "artist-joe-jackson",
+    "big head todd and the monsters": "artist-big-head-todd-and-the-monsters",
+    "4 non blondes": "artist-4-non-blondes",
+    "kings kaleidoscope (16+)": "artist-kings-kaleidoscope-16",
+    "lord huron": "artist-lord-huron",
+    "lane 8": "artist-lane-8",
+    "cross pollination": "artist-cross-pollination",
+    "sultan + shepard": "artist-sultan-shepard",
+    "(16+)": "artist-16",
+    "trevor hall / thievery corporation / dirtwire": "artist-trevor-hall-thievery-corporation-dirtwire",
+    "rod stewart": "artist-rod-stewart",
+    "amble": "artist-amble",
+    "amyl and the sniffers": "artist-amyl-and-the-sniffers",
+    "l7": "artist-l7",
+    "party dozen": "artist-party-dozen",
+    "o.a.r.": "artist-o-a-r",
+    "gavin degraw": "artist-gavin-degraw",
+    "third day – 30th anniversary": "artist-third-day-30th-anniversary",
+    "searows": "artist-searows",
+    "iration": "artist-iration",
+    "louis tomlinson": "artist-louis-tomlinson",
+    "the aces": "artist-the-aces",
+    "monolord": "artist-monolord",
+    "mizmor": "artist-mizmor",
+    "weird al yankovic": "artist-weird-al-yankovic",
+    "puddles pity party": "artist-puddles-pity-party",
+    "bearracuda (18+)": "artist-bearracuda-18",
+    "wolfmother": "artist-wolfmother",
+    "josh groban": "artist-josh-groban",
+    "jennifer hudson": "artist-jennifer-hudson",
+    "treaty oak revival": "artist-treaty-oak-revival",
+    "deadrocks xii – zeds dead": "artist-deadrocks-xii-zeds-dead",
+    "solya": "artist-solya",
+    "chance pena (16+)": "artist-chance-pena-16",
+    "forrest frank": "artist-forrest-frank",
+    "tori kelly": "artist-tori-kelly",
+    "cory asbury": "artist-cory-asbury",
+    "the figs": "artist-the-figs",
+    "rosanne cash": "artist-rosanne-cash",
+    "john leventhal": "artist-john-leventhal",
+    "olivia dean": "artist-olivia-dean",
+    "rainbow kitten surprise": "artist-rainbow-kitten-surprise",
+    "spacey jane": "artist-spacey-jane",
+    "megan moroney": "artist-megan-moroney",
+    "meghan trainor": "artist-meghan-trainor",
+    "icona pop": "artist-icona-pop",
+    "ryan trainor": "artist-ryan-trainor",
+    "audrey hobert (16+)": "artist-audrey-hobert-16",
+    "sugar": "artist-sugar",
+    "alison krauss & union station": "artist-alison-krauss-and-union-station",
+    "jerry douglas": "artist-jerry-douglas",
+    "theo lawrence": "artist-theo-lawrence",
+    "mt. joy": "artist-mt-joy",
+    "courtney barnett": "artist-courtney-barnett",
+    "zoh amba (16+)": "artist-zoh-amba-16",
+    "diggy graves": "artist-diggy-graves",
+    "resentvul": "artist-resentvul",
+    "toto": "artist-toto",
+    "christopher cross": "artist-christopher-cross",
+    "the romantics": "artist-the-romantics",
+    "avenged sevenfold and good charlotte": "artist-avenged-sevenfold-and-good-charlotte",
+    "laurie berkner": "artist-laurie-berkner",
+    "chicago (band)": "artist-chicago-band",
+    "jack johnson": "artist-jack-johnson",
+    "lake street dive": "artist-lake-street-dive",
+    "brantley gilbert (rescheduled from 10/11/25)": "artist-brantley-gilbert-rescheduled-from-10-11-25",
+    "rob zombie and marilyn manson": "artist-rob-zombie-and-marilyn-manson",
+    "the hu": "artist-the-hu",
+    "orgy": "artist-orgy",
+    "peter hook & the light (16+)": "artist-peter-hook-and-the-light-16",
+    "aldous harding (16+)": "artist-aldous-harding-16",
+    "the fab four: tribute to the beatles' \"help!\" and the hits": "artist-the-fab-four-tribute-to-the-beatles-help-and-the-hits",
+    "rush": "artist-rush",
+    "doja cat": "artist-doja-cat",
+    "osees (16+)": "artist-osees-16",
+    "three days grace": "artist-three-days-grace",
+    "i prevail": "artist-i-prevail",
+    "the funeral portrait": "artist-the-funeral-portrait",
+    "armand hammer": "artist-armand-hammer",
+    "mike.": "artist-mike"
+  }
+}

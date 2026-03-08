@@ -1,0 +1,28 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "events": {
+    "chautauqua-auditorium-2026-06-06-joe-jackson": {
+      "local": null,
+      "remote": null
+    },
+    "chautauqua-auditorium-2026-07-20-rosanne-cash-with-john-leventhal": {
+      "local": null,
+      "remote": null
+    }
+  },
+  "artists": {
+    "artist-joe-jackson": {
+      "local": null,
+      "remote": null
+    },
+    "artist-john-leventhal": {
+      "local": null,
+      "remote": null
+    },
+    "artist-rosanne-cash": {
+      "local": null,
+      "remote": null
+    }
+  }
+}

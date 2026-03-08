@@ -1,0 +1,306 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "byArtistId": {
+    "artist-bearracuda": {
+      "id": "artist-bearracuda",
+      "name": "Bearracuda",
+      "eventIds": [
+        "ophelias-2026-03-14-bearracuda",
+        "ophelias-2026-05-02-bearracuda"
+      ],
+      "venueIds": [
+        "ophelias"
+      ],
+      "dateKeys": [
+        "2026-03-14",
+        "2026-05-02"
+      ],
+      "showCount": 2,
+      "firstDate": "2026-03-14",
+      "lastDate": "2026-05-02",
+      "coArtists": []
+    },
+    "artist-brett-dennen": {
+      "id": "artist-brett-dennen",
+      "name": "Brett Dennen",
+      "eventIds": [
+        "ophelias-2026-02-27-brett-dennen"
+      ],
+      "venueIds": [
+        "ophelias"
+      ],
+      "dateKeys": [
+        "2026-02-27"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-27",
+      "lastDate": "2026-02-27",
+      "coArtists": []
+    },
+    "artist-david-ramirez": {
+      "id": "artist-david-ramirez",
+      "name": "David Ramirez",
+      "eventIds": [
+        "ophelias-2026-01-31-david-ramirez"
+      ],
+      "venueIds": [
+        "ophelias"
+      ],
+      "dateKeys": [
+        "2026-01-31"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-01-31",
+      "lastDate": "2026-01-31",
+      "coArtists": []
+    },
+    "artist-devon-allman-band": {
+      "id": "artist-devon-allman-band",
+      "name": "Devon Allman Band",
+      "eventIds": [
+        "ophelias-2026-02-26-devon-allman-band"
+      ],
+      "venueIds": [
+        "ophelias"
+      ],
+      "dateKeys": [
+        "2026-02-26"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-26",
+      "lastDate": "2026-02-26",
+      "coArtists": []
+    },
+    "artist-ga-20": {
+      "id": "artist-ga-20",
+      "name": "GA-20",
+      "eventIds": [
+        "ophelias-2026-02-18-ga-20"
+      ],
+      "venueIds": [
+        "ophelias"
+      ],
+      "dateKeys": [
+        "2026-02-18"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-18",
+      "lastDate": "2026-02-18",
+      "coArtists": []
+    },
+    "artist-jesse-roper": {
+      "id": "artist-jesse-roper",
+      "name": "Jesse Roper",
+      "eventIds": [
+        "ophelias-2026-03-11-jesse-roper"
+      ],
+      "venueIds": [
+        "ophelias"
+      ],
+      "dateKeys": [
+        "2026-03-11"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-11",
+      "lastDate": "2026-03-11",
+      "coArtists": []
+    },
+    "artist-ltj-bukem": {
+      "id": "artist-ltj-bukem",
+      "name": "LTJ Bukem",
+      "eventIds": [
+        "ophelias-2026-04-09-ltj-bukem"
+      ],
+      "venueIds": [
+        "ophelias"
+      ],
+      "dateKeys": [
+        "2026-04-09"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-09",
+      "lastDate": "2026-04-09",
+      "coArtists": []
+    },
+    "artist-mark-farina": {
+      "id": "artist-mark-farina",
+      "name": "Mark Farina",
+      "eventIds": [
+        "ophelias-2026-02-06-mark-farina",
+        "ophelias-2026-02-07-mark-farina"
+      ],
+      "venueIds": [
+        "ophelias"
+      ],
+      "dateKeys": [
+        "2026-02-06",
+        "2026-02-07"
+      ],
+      "showCount": 2,
+      "firstDate": "2026-02-06",
+      "lastDate": "2026-02-07",
+      "coArtists": []
+    },
+    "artist-not-quite-brothers": {
+      "id": "artist-not-quite-brothers",
+      "name": "Not Quite Brothers",
+      "eventIds": [
+        "ophelias-2026-03-06-not-quite-brothers"
+      ],
+      "venueIds": [
+        "ophelias"
+      ],
+      "dateKeys": [
+        "2026-03-06"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-06",
+      "lastDate": "2026-03-06",
+      "coArtists": []
+    },
+    "artist-sam-grisman-project": {
+      "id": "artist-sam-grisman-project",
+      "name": "Sam Grisman Project",
+      "eventIds": [
+        "ophelias-2026-04-10-sam-grisman-project",
+        "ophelias-2026-04-11-sam-grisman-project"
+      ],
+      "venueIds": [
+        "ophelias"
+      ],
+      "dateKeys": [
+        "2026-04-10",
+        "2026-04-11"
+      ],
+      "showCount": 2,
+      "firstDate": "2026-04-10",
+      "lastDate": "2026-04-11",
+      "coArtists": []
+    },
+    "artist-skiitour": {
+      "id": "artist-skiitour",
+      "name": "SkiiTour",
+      "eventIds": [
+        "ophelias-2026-01-30-skiitour"
+      ],
+      "venueIds": [
+        "ophelias"
+      ],
+      "dateKeys": [
+        "2026-01-30"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-01-30",
+      "lastDate": "2026-01-30",
+      "coArtists": []
+    },
+    "artist-smells-like-nirvana": {
+      "id": "artist-smells-like-nirvana",
+      "name": "Smells Like Nirvana",
+      "eventIds": [
+        "ophelias-2026-02-28-smells-like-nirvana"
+      ],
+      "venueIds": [
+        "ophelias"
+      ],
+      "dateKeys": [
+        "2026-02-28"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-28",
+      "lastDate": "2026-02-28",
+      "coArtists": []
+    },
+    "artist-the-polish-ambassador": {
+      "id": "artist-the-polish-ambassador",
+      "name": "The Polish Ambassador",
+      "eventIds": [
+        "ophelias-2026-02-20-the-polish-ambassador",
+        "ophelias-2026-02-21-the-polish-ambassador",
+        "ophelias-2026-02-22-the-polish-ambassador"
+      ],
+      "venueIds": [
+        "ophelias"
+      ],
+      "dateKeys": [
+        "2026-02-20",
+        "2026-02-21",
+        "2026-02-22"
+      ],
+      "showCount": 3,
+      "firstDate": "2026-02-20",
+      "lastDate": "2026-02-22",
+      "coArtists": []
+    },
+    "artist-tycho": {
+      "id": "artist-tycho",
+      "name": "Tycho",
+      "eventIds": [
+        "ophelias-2026-01-24-tycho"
+      ],
+      "venueIds": [
+        "ophelias"
+      ],
+      "dateKeys": [
+        "2026-01-24"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-01-24",
+      "lastDate": "2026-01-24",
+      "coArtists": []
+    },
+    "artist-westerman": {
+      "id": "artist-westerman",
+      "name": "Westerman",
+      "eventIds": [
+        "ophelias-2026-03-30-westerman"
+      ],
+      "venueIds": [
+        "ophelias"
+      ],
+      "dateKeys": [
+        "2026-03-30"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-30",
+      "lastDate": "2026-03-30",
+      "coArtists": []
+    },
+    "artist-what-the-dance": {
+      "id": "artist-what-the-dance",
+      "name": "What The Dance",
+      "eventIds": [
+        "ophelias-2026-02-14-what-the-dance"
+      ],
+      "venueIds": [
+        "ophelias"
+      ],
+      "dateKeys": [
+        "2026-02-14"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-14",
+      "lastDate": "2026-02-14",
+      "coArtists": []
+    }
+  },
+  "artistIdsByShowCountDesc": [
+    "artist-the-polish-ambassador",
+    "artist-bearracuda",
+    "artist-mark-farina",
+    "artist-sam-grisman-project",
+    "artist-brett-dennen",
+    "artist-david-ramirez",
+    "artist-devon-allman-band",
+    "artist-ga-20",
+    "artist-jesse-roper",
+    "artist-ltj-bukem",
+    "artist-not-quite-brothers",
+    "artist-skiitour",
+    "artist-smells-like-nirvana",
+    "artist-tycho",
+    "artist-westerman",
+    "artist-what-the-dance"
+  ]
+}

@@ -1,5 +1,4 @@
-import { RED_ROCKS_2026 } from "@/data/redrocks-2026";
-import seatgeek from "@/public/data/redrocks-events.json";
+import { getRedRocksEvents as getNormalizedEvents } from "@/lib/events/getRedRocksEvents";
 
 export type RedRocksEvent = {
   id: string;
@@ -10,38 +9,14 @@ export type RedRocksEvent = {
   url?: string | null;
 };
 
-export function getRedRocksEvents(): RedRocksEvent[] {
-  const byDate = new Map<string, RedRocksEvent>();
-
-  // 1️⃣ Seed ALL known shows (your full master list)
-  for (const show of RED_ROCKS_2026) {
-    byDate.set(show.date, {
-      id: show.date,
-      date: show.date,
-      title: show.title,          // ✅ FIXED
-      support: show.support,
-      image: null,
-      url: null,
-    });
-  }
-
-  // 2️⃣ Merge SeatGeek data where available (images + URLs)
-  for (const sg of seatgeek as any[]) {
-    const date = sg.datetime?.slice(0, 10);
-    if (!date) continue;
-
-    const existing = byDate.get(date);
-    if (!existing) continue;
-
-    byDate.set(date, {
-      ...existing,
-      image: sg.image ?? null,
-      url: sg.url ?? null,
-    });
-  }
-
-  // 3️⃣ Return sorted list
-  return Array.from(byDate.values()).sort((a, b) =>
-    a.date.localeCompare(b.date)
-  );
+export async function getRedRocksEvents(year = 2026): Promise<RedRocksEvent[]> {
+  const events = await getNormalizedEvents(year);
+  return events.map((ev) => ({
+    id: ev.id,
+    date: ev.dateKey,
+    title: ev.name,
+    support: ev.artistNames.slice(1).join(", ") || undefined,
+    image: ev.image,
+    url: ev.ticketUrl,
+  }));
 }

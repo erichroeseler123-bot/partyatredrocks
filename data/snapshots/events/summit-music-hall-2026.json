@@ -1,0 +1,1158 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "events": [
+    {
+      "id": "summit-music-hall-2026-01-31-ghengar",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "GHENGAR",
+      "startAt": "2026-01-31T19:00:00",
+      "startLocal": "2026-01-31T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-ghengar"
+      ],
+      "artists": [
+        "artist-ghengar"
+      ],
+      "artistNames": [
+        "GHENGAR"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-01-31",
+      "slug": "2026-01-31-ghengar"
+    },
+    {
+      "id": "summit-music-hall-2026-02-03-jessie-j",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Jessie J",
+      "startAt": "2026-02-03T19:00:00",
+      "startLocal": "2026-02-03T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-jessie-j"
+      ],
+      "artists": [
+        "artist-jessie-j"
+      ],
+      "artistNames": [
+        "Jessie J"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-03",
+      "slug": "2026-02-03-jessie-j"
+    },
+    {
+      "id": "summit-music-hall-2026-02-04-lord-of-the-lost-with-the-birthday-massacre",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Lord of the Lost with The Birthday Massacre",
+      "startAt": "2026-02-04T19:00:00",
+      "startLocal": "2026-02-04T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-lord-of-the-lost"
+      ],
+      "artists": [
+        "artist-lord-of-the-lost",
+        "artist-the-birthday-massacre"
+      ],
+      "artistNames": [
+        "Lord of the Lost",
+        "The Birthday Massacre"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-04",
+      "slug": "2026-02-04-lord-of-the-lost-with-the-birthday-massacre"
+    },
+    {
+      "id": "summit-music-hall-2026-02-07-ydg-with-join-the-resistance-18",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "YDG with Join the Resistance (18+)",
+      "startAt": "2026-02-07T19:00:00",
+      "startLocal": "2026-02-07T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-ydg"
+      ],
+      "artists": [
+        "artist-ydg",
+        "artist-join-the-resistance-18"
+      ],
+      "artistNames": [
+        "YDG",
+        "Join the Resistance (18+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-07",
+      "slug": "2026-02-07-ydg-with-join-the-resistance-18"
+    },
+    {
+      "id": "summit-music-hall-2026-02-11-michael-shannon-and-jason-narducy",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Michael Shannon & Jason Narducy",
+      "startAt": "2026-02-11T19:00:00",
+      "startLocal": "2026-02-11T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-michael-shannon-and-jason-narducy"
+      ],
+      "artists": [
+        "artist-michael-shannon-and-jason-narducy"
+      ],
+      "artistNames": [
+        "Michael Shannon & Jason Narducy"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-11",
+      "slug": "2026-02-11-michael-shannon-and-jason-narducy"
+    },
+    {
+      "id": "summit-music-hall-2026-02-20-club-90s-heated-rivalrave-18",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Club 90s - Heated RivalRave (18+)",
+      "startAt": "2026-02-20T19:00:00",
+      "startLocal": "2026-02-20T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-club-90s-heated-rivalrave-18"
+      ],
+      "artists": [
+        "artist-club-90s-heated-rivalrave-18"
+      ],
+      "artistNames": [
+        "Club 90s - Heated RivalRave (18+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-20",
+      "slug": "2026-02-20-club-90s-heated-rivalrave-18"
+    },
+    {
+      "id": "summit-music-hall-2026-02-21-club-90s-heated-rivalrave-18",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Club 90s - Heated RivalRave (18+)",
+      "startAt": "2026-02-21T19:00:00",
+      "startLocal": "2026-02-21T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-club-90s-heated-rivalrave-18"
+      ],
+      "artists": [
+        "artist-club-90s-heated-rivalrave-18"
+      ],
+      "artistNames": [
+        "Club 90s - Heated RivalRave (18+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-21",
+      "slug": "2026-02-21-club-90s-heated-rivalrave-18"
+    },
+    {
+      "id": "summit-music-hall-2026-02-24-monolink-18",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Monolink (18+)",
+      "startAt": "2026-02-24T19:00:00",
+      "startLocal": "2026-02-24T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-monolink-18"
+      ],
+      "artists": [
+        "artist-monolink-18"
+      ],
+      "artistNames": [
+        "Monolink (18+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-24",
+      "slug": "2026-02-24-monolink-18"
+    },
+    {
+      "id": "summit-music-hall-2026-02-25-lights-with-softcult",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Lights with Softcult",
+      "startAt": "2026-02-25T19:00:00",
+      "startLocal": "2026-02-25T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-lights"
+      ],
+      "artists": [
+        "artist-lights",
+        "artist-softcult"
+      ],
+      "artistNames": [
+        "Lights",
+        "Softcult"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-25",
+      "slug": "2026-02-25-lights-with-softcult"
+    },
+    {
+      "id": "summit-music-hall-2026-02-27-donny-benet",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Donny Benet",
+      "startAt": "2026-02-27T19:00:00",
+      "startLocal": "2026-02-27T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-donny-benet"
+      ],
+      "artists": [
+        "artist-donny-benet"
+      ],
+      "artistNames": [
+        "Donny Benet"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-27",
+      "slug": "2026-02-27-donny-benet"
+    },
+    {
+      "id": "summit-music-hall-2026-02-28-heated-rivalry-night-18",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Heated Rivalry Night (18+)",
+      "startAt": "2026-02-28T19:00:00",
+      "startLocal": "2026-02-28T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-heated-rivalry-night-18"
+      ],
+      "artists": [
+        "artist-heated-rivalry-night-18"
+      ],
+      "artistNames": [
+        "Heated Rivalry Night (18+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-28",
+      "slug": "2026-02-28-heated-rivalry-night-18"
+    },
+    {
+      "id": "summit-music-hall-2026-03-05-colony-house",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Colony House",
+      "startAt": "2026-03-05T19:00:00",
+      "startLocal": "2026-03-05T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-colony-house"
+      ],
+      "artists": [
+        "artist-colony-house"
+      ],
+      "artistNames": [
+        "Colony House"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-05",
+      "slug": "2026-03-05-colony-house"
+    },
+    {
+      "id": "summit-music-hall-2026-03-06-emo-nite-21",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Emo Nite -  (21+)",
+      "startAt": "2026-03-06T19:00:00",
+      "startLocal": "2026-03-06T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-emo-nite-21"
+      ],
+      "artists": [
+        "artist-emo-nite-21"
+      ],
+      "artistNames": [
+        "Emo Nite -  (21+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-06",
+      "slug": "2026-03-06-emo-nite-21"
+    },
+    {
+      "id": "summit-music-hall-2026-03-07-dodie-clark",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Dodie Clark",
+      "startAt": "2026-03-07T19:00:00",
+      "startLocal": "2026-03-07T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-dodie-clark"
+      ],
+      "artists": [
+        "artist-dodie-clark"
+      ],
+      "artistNames": [
+        "Dodie Clark"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-07",
+      "slug": "2026-03-07-dodie-clark"
+    },
+    {
+      "id": "summit-music-hall-2026-03-08-xaviersobased",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Xaviersobased",
+      "startAt": "2026-03-08T19:00:00",
+      "startLocal": "2026-03-08T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-xaviersobased"
+      ],
+      "artists": [
+        "artist-xaviersobased"
+      ],
+      "artistNames": [
+        "Xaviersobased"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-08",
+      "slug": "2026-03-08-xaviersobased"
+    },
+    {
+      "id": "summit-music-hall-2026-03-09-lil-tony",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Lil Tony",
+      "startAt": "2026-03-09T19:00:00",
+      "startLocal": "2026-03-09T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-lil-tony"
+      ],
+      "artists": [
+        "artist-lil-tony"
+      ],
+      "artistNames": [
+        "Lil Tony"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-09",
+      "slug": "2026-03-09-lil-tony"
+    },
+    {
+      "id": "summit-music-hall-2026-03-10-peaches",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Peaches",
+      "startAt": "2026-03-10T19:00:00",
+      "startLocal": "2026-03-10T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-peaches"
+      ],
+      "artists": [
+        "artist-peaches"
+      ],
+      "artistNames": [
+        "Peaches"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-10",
+      "slug": "2026-03-10-peaches"
+    },
+    {
+      "id": "summit-music-hall-2026-03-11-zara-larsson-with-amelia-moore",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Zara Larsson with Amelia Moore",
+      "startAt": "2026-03-11T19:00:00",
+      "startLocal": "2026-03-11T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-zara-larsson"
+      ],
+      "artists": [
+        "artist-zara-larsson",
+        "artist-amelia-moore"
+      ],
+      "artistNames": [
+        "Zara Larsson",
+        "Amelia Moore"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-11",
+      "slug": "2026-03-11-zara-larsson-with-amelia-moore"
+    },
+    {
+      "id": "summit-music-hall-2026-03-12-hawthorne-heights",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Hawthorne Heights",
+      "startAt": "2026-03-12T19:00:00",
+      "startLocal": "2026-03-12T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-hawthorne-heights"
+      ],
+      "artists": [
+        "artist-hawthorne-heights"
+      ],
+      "artistNames": [
+        "Hawthorne Heights"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-12",
+      "slug": "2026-03-12-hawthorne-heights"
+    },
+    {
+      "id": "summit-music-hall-2026-03-13-two-feet",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Two Feet",
+      "startAt": "2026-03-13T19:00:00",
+      "startLocal": "2026-03-13T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-two-feet"
+      ],
+      "artists": [
+        "artist-two-feet"
+      ],
+      "artistNames": [
+        "Two Feet"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-13",
+      "slug": "2026-03-13-two-feet"
+    },
+    {
+      "id": "summit-music-hall-2026-03-14-two-feet",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Two Feet",
+      "startAt": "2026-03-14T19:00:00",
+      "startLocal": "2026-03-14T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-two-feet"
+      ],
+      "artists": [
+        "artist-two-feet"
+      ],
+      "artistNames": [
+        "Two Feet"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-14",
+      "slug": "2026-03-14-two-feet"
+    },
+    {
+      "id": "summit-music-hall-2026-03-15-monaleo",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Monaleo",
+      "startAt": "2026-03-15T19:00:00",
+      "startLocal": "2026-03-15T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-monaleo"
+      ],
+      "artists": [
+        "artist-monaleo"
+      ],
+      "artistNames": [
+        "Monaleo"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-15",
+      "slug": "2026-03-15-monaleo"
+    },
+    {
+      "id": "summit-music-hall-2026-03-17-sabrina-claudio-with-dylan-sinclair",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Sabrina Claudio with Dylan Sinclair",
+      "startAt": "2026-03-17T19:00:00",
+      "startLocal": "2026-03-17T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-sabrina-claudio"
+      ],
+      "artists": [
+        "artist-sabrina-claudio",
+        "artist-dylan-sinclair"
+      ],
+      "artistNames": [
+        "Sabrina Claudio",
+        "Dylan Sinclair"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-17",
+      "slug": "2026-03-17-sabrina-claudio-with-dylan-sinclair"
+    },
+    {
+      "id": "summit-music-hall-2026-03-18-testament-with-overkill-and-destruction",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Testament with Overkill and Destruction",
+      "startAt": "2026-03-18T19:00:00",
+      "startLocal": "2026-03-18T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-testament"
+      ],
+      "artists": [
+        "artist-testament",
+        "artist-overkill",
+        "artist-destruction"
+      ],
+      "artistNames": [
+        "Testament",
+        "Overkill",
+        "Destruction"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-18",
+      "slug": "2026-03-18-testament-with-overkill-and-destruction"
+    },
+    {
+      "id": "summit-music-hall-2026-03-20-white-reaper-with-drug-church",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "White Reaper with Drug Church",
+      "startAt": "2026-03-20T19:00:00",
+      "startLocal": "2026-03-20T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-white-reaper"
+      ],
+      "artists": [
+        "artist-white-reaper",
+        "artist-drug-church"
+      ],
+      "artistNames": [
+        "White Reaper",
+        "Drug Church"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-20",
+      "slug": "2026-03-20-white-reaper-with-drug-church"
+    },
+    {
+      "id": "summit-music-hall-2026-03-21-barely-alive-with-tisoki-18",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Barely Alive with Tisoki (18+)",
+      "startAt": "2026-03-21T19:00:00",
+      "startLocal": "2026-03-21T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-barely-alive"
+      ],
+      "artists": [
+        "artist-barely-alive",
+        "artist-tisoki-18"
+      ],
+      "artistNames": [
+        "Barely Alive",
+        "Tisoki (18+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-21",
+      "slug": "2026-03-21-barely-alive-with-tisoki-18"
+    },
+    {
+      "id": "summit-music-hall-2026-03-27-eidola",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Eidola",
+      "startAt": "2026-03-27T19:00:00",
+      "startLocal": "2026-03-27T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-eidola"
+      ],
+      "artists": [
+        "artist-eidola"
+      ],
+      "artistNames": [
+        "Eidola"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-27",
+      "slug": "2026-03-27-eidola"
+    },
+    {
+      "id": "summit-music-hall-2026-03-28-the-devil-wears-prada",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "The Devil Wears Prada",
+      "startAt": "2026-03-28T19:00:00",
+      "startLocal": "2026-03-28T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-the-devil-wears-prada"
+      ],
+      "artists": [
+        "artist-the-devil-wears-prada"
+      ],
+      "artistNames": [
+        "The Devil Wears Prada"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-28",
+      "slug": "2026-03-28-the-devil-wears-prada"
+    },
+    {
+      "id": "summit-music-hall-2026-03-30-machine-girl-with-sextile",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Machine Girl with Sextile",
+      "startAt": "2026-03-30T19:00:00",
+      "startLocal": "2026-03-30T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-machine-girl"
+      ],
+      "artists": [
+        "artist-machine-girl",
+        "artist-sextile"
+      ],
+      "artistNames": [
+        "Machine Girl",
+        "Sextile"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-30",
+      "slug": "2026-03-30-machine-girl-with-sextile"
+    },
+    {
+      "id": "summit-music-hall-2026-03-31-lacuna-coil-with-escape-the-fate-and-vowws",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Lacuna Coil with Escape the Fate and VOWWS",
+      "startAt": "2026-03-31T19:00:00",
+      "startLocal": "2026-03-31T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-lacuna-coil"
+      ],
+      "artists": [
+        "artist-lacuna-coil",
+        "artist-escape-the-fate",
+        "artist-vowws"
+      ],
+      "artistNames": [
+        "Lacuna Coil",
+        "Escape the Fate",
+        "VOWWS"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-31",
+      "slug": "2026-03-31-lacuna-coil-with-escape-the-fate-and-vowws"
+    },
+    {
+      "id": "summit-music-hall-2026-04-03-jstjr-18",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "JSTJR (18+)",
+      "startAt": "2026-04-03T19:00:00",
+      "startLocal": "2026-04-03T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-jstjr-18"
+      ],
+      "artists": [
+        "artist-jstjr-18"
+      ],
+      "artistNames": [
+        "JSTJR (18+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-03",
+      "slug": "2026-04-03-jstjr-18"
+    },
+    {
+      "id": "summit-music-hall-2026-04-04-currents-with-erra",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Currents with ERRA",
+      "startAt": "2026-04-04T19:00:00",
+      "startLocal": "2026-04-04T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-currents"
+      ],
+      "artists": [
+        "artist-currents",
+        "artist-erra"
+      ],
+      "artistNames": [
+        "Currents",
+        "ERRA"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-04",
+      "slug": "2026-04-04-currents-with-erra"
+    },
+    {
+      "id": "summit-music-hall-2026-04-06-drain-with-no-pressure-haywire-and-secret-world",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Drain with No Pressure, Haywire and Secret World",
+      "startAt": "2026-04-06T19:00:00",
+      "startLocal": "2026-04-06T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-drain"
+      ],
+      "artists": [
+        "artist-drain",
+        "artist-no-pressure",
+        "artist-haywire",
+        "artist-secret-world"
+      ],
+      "artistNames": [
+        "Drain",
+        "No Pressure",
+        "Haywire",
+        "Secret World"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-06",
+      "slug": "2026-04-06-drain-with-no-pressure-haywire-and-secret-world"
+    },
+    {
+      "id": "summit-music-hall-2026-04-07-dave-rapper",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Dave - Rapper",
+      "startAt": "2026-04-07T19:00:00",
+      "startLocal": "2026-04-07T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-dave-rapper"
+      ],
+      "artists": [
+        "artist-dave-rapper"
+      ],
+      "artistNames": [
+        "Dave - Rapper"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-07",
+      "slug": "2026-04-07-dave-rapper"
+    },
+    {
+      "id": "summit-music-hall-2026-04-11-dance-with-the-dead-with-magic-sword",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Dance With The Dead with Magic Sword",
+      "startAt": "2026-04-11T19:00:00",
+      "startLocal": "2026-04-11T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-dance"
+      ],
+      "artists": [
+        "artist-dance",
+        "artist-the-dead",
+        "artist-magic-sword"
+      ],
+      "artistNames": [
+        "Dance",
+        "The Dead",
+        "Magic Sword"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-11",
+      "slug": "2026-04-11-dance-with-the-dead-with-magic-sword"
+    },
+    {
+      "id": "summit-music-hall-2026-04-15-free-throw",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Free Throw",
+      "startAt": "2026-04-15T19:00:00",
+      "startLocal": "2026-04-15T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-free-throw"
+      ],
+      "artists": [
+        "artist-free-throw"
+      ],
+      "artistNames": [
+        "Free Throw"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-15",
+      "slug": "2026-04-15-free-throw"
+    },
+    {
+      "id": "summit-music-hall-2026-04-23-shadow-of-intent-with-angelmaker",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Shadow Of Intent with AngelMaker",
+      "startAt": "2026-04-23T19:00:00",
+      "startLocal": "2026-04-23T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-shadow-of-intent"
+      ],
+      "artists": [
+        "artist-shadow-of-intent",
+        "artist-angelmaker"
+      ],
+      "artistNames": [
+        "Shadow Of Intent",
+        "AngelMaker"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-23",
+      "slug": "2026-04-23-shadow-of-intent-with-angelmaker"
+    },
+    {
+      "id": "summit-music-hall-2026-04-24-drinkurwater-18",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Drinkurwater (18+)",
+      "startAt": "2026-04-24T19:00:00",
+      "startLocal": "2026-04-24T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-drinkurwater-18"
+      ],
+      "artists": [
+        "artist-drinkurwater-18"
+      ],
+      "artistNames": [
+        "Drinkurwater (18+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-24",
+      "slug": "2026-04-24-drinkurwater-18"
+    },
+    {
+      "id": "summit-music-hall-2026-04-29-badbadnotgood",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "BADBADNOTGOOD",
+      "startAt": "2026-04-29T19:00:00",
+      "startLocal": "2026-04-29T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-badbadnotgood"
+      ],
+      "artists": [
+        "artist-badbadnotgood"
+      ],
+      "artistNames": [
+        "BADBADNOTGOOD"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-29",
+      "slug": "2026-04-29-badbadnotgood"
+    },
+    {
+      "id": "summit-music-hall-2026-05-01-sevendust-with-atreyu",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Sevendust with Atreyu",
+      "startAt": "2026-05-01T19:00:00",
+      "startLocal": "2026-05-01T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-sevendust"
+      ],
+      "artists": [
+        "artist-sevendust",
+        "artist-atreyu"
+      ],
+      "artistNames": [
+        "Sevendust",
+        "Atreyu"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-01",
+      "slug": "2026-05-01-sevendust-with-atreyu"
+    },
+    {
+      "id": "summit-music-hall-2026-05-05-la-dispute",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "La Dispute",
+      "startAt": "2026-05-05T19:00:00",
+      "startLocal": "2026-05-05T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-la-dispute"
+      ],
+      "artists": [
+        "artist-la-dispute"
+      ],
+      "artistNames": [
+        "La Dispute"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-05",
+      "slug": "2026-05-05-la-dispute"
+    },
+    {
+      "id": "summit-music-hall-2026-05-07-poison-the-well-with-converge-the-armed-and-the-barbarians-of-california",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Poison The Well with Converge, The Armed, and The Barbarians of California",
+      "startAt": "2026-05-07T19:00:00",
+      "startLocal": "2026-05-07T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-poison-the-well"
+      ],
+      "artists": [
+        "artist-poison-the-well",
+        "artist-converge",
+        "artist-the-armed",
+        "artist-the-barbarians-of-california"
+      ],
+      "artistNames": [
+        "Poison The Well",
+        "Converge",
+        "The Armed",
+        "The Barbarians of California"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-07",
+      "slug": "2026-05-07-poison-the-well-with-converge-the-armed-and-the-barbarians-of-califor"
+    },
+    {
+      "id": "summit-music-hall-2026-05-10-i-speak-machine",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "I Speak Machine",
+      "startAt": "2026-05-10T19:00:00",
+      "startLocal": "2026-05-10T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-i-speak-machine"
+      ],
+      "artists": [
+        "artist-i-speak-machine"
+      ],
+      "artistNames": [
+        "I Speak Machine"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-10",
+      "slug": "2026-05-10-i-speak-machine"
+    },
+    {
+      "id": "summit-music-hall-2026-05-11-boulet-brothers-dragula",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Boulet Brothers Dragula",
+      "startAt": "2026-05-11T19:00:00",
+      "startLocal": "2026-05-11T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-boulet-brothers-dragula"
+      ],
+      "artists": [
+        "artist-boulet-brothers-dragula"
+      ],
+      "artistNames": [
+        "Boulet Brothers Dragula"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-11",
+      "slug": "2026-05-11-boulet-brothers-dragula"
+    },
+    {
+      "id": "summit-music-hall-2026-05-12-the-afghan-whigs-with-mercury-rev",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "The Afghan Whigs with Mercury Rev",
+      "startAt": "2026-05-12T19:00:00",
+      "startLocal": "2026-05-12T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-the-afghan-whigs"
+      ],
+      "artists": [
+        "artist-the-afghan-whigs",
+        "artist-mercury-rev"
+      ],
+      "artistNames": [
+        "The Afghan Whigs",
+        "Mercury Rev"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-12",
+      "slug": "2026-05-12-the-afghan-whigs-with-mercury-rev"
+    },
+    {
+      "id": "summit-music-hall-2026-05-13-chet-faker",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Chet Faker",
+      "startAt": "2026-05-13T19:00:00",
+      "startLocal": "2026-05-13T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-chet-faker"
+      ],
+      "artists": [
+        "artist-chet-faker"
+      ],
+      "artistNames": [
+        "Chet Faker"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-13",
+      "slug": "2026-05-13-chet-faker"
+    },
+    {
+      "id": "summit-music-hall-2026-05-17-arms-length",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Arms Length",
+      "startAt": "2026-05-17T19:00:00",
+      "startLocal": "2026-05-17T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-arms-length"
+      ],
+      "artists": [
+        "artist-arms-length"
+      ],
+      "artistNames": [
+        "Arms Length"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-17",
+      "slug": "2026-05-17-arms-length"
+    },
+    {
+      "id": "summit-music-hall-2026-06-02-spite-with-emmure",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Spite with Emmure",
+      "startAt": "2026-06-02T19:00:00",
+      "startLocal": "2026-06-02T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-spite"
+      ],
+      "artists": [
+        "artist-spite",
+        "artist-emmure"
+      ],
+      "artistNames": [
+        "Spite",
+        "Emmure"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-06-02",
+      "slug": "2026-06-02-spite-with-emmure"
+    },
+    {
+      "id": "summit-music-hall-2026-06-27-bearracuda-18",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Bearracuda (18+)",
+      "startAt": "2026-06-27T19:00:00",
+      "startLocal": "2026-06-27T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-bearracuda-18"
+      ],
+      "artists": [
+        "artist-bearracuda-18"
+      ],
+      "artistNames": [
+        "Bearracuda (18+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-06-27",
+      "slug": "2026-06-27-bearracuda-18"
+    },
+    {
+      "id": "summit-music-hall-2026-08-21-diggy-graves-with-resentvul",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Diggy Graves with Resentvul",
+      "startAt": "2026-08-21T19:00:00",
+      "startLocal": "2026-08-21T19:00:00",
+      "venueId": "summit-music-hall",
+      "headliners": [
+        "artist-diggy-graves"
+      ],
+      "artists": [
+        "artist-diggy-graves",
+        "artist-resentvul"
+      ],
+      "artistNames": [
+        "Diggy Graves",
+        "Resentvul"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-08-21",
+      "slug": "2026-08-21-diggy-graves-with-resentvul"
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "artists": [
+    {
+      "id": "artist-crowder",
+      "name": "Crowder",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "broadmoor-world-arena-2026-03-08-tobymac-with-crowder-and-jeremy-camp"
+      ],
+      "venueIds": [
+        "broadmoor-world-arena"
+      ],
+      "dateKeys": [
+        "2026-03-08"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-08",
+      "lastDate": "2026-03-08",
+      "coArtists": [
+        "artist-jeremy-camp",
+        "artist-tobymac"
+      ]
+    },
+    {
+      "id": "artist-heart",
+      "name": "Heart",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "broadmoor-world-arena-2026-03-09-heart-with-lucinda-williams"
+      ],
+      "venueIds": [
+        "broadmoor-world-arena"
+      ],
+      "dateKeys": [
+        "2026-03-09"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-09",
+      "lastDate": "2026-03-09",
+      "coArtists": [
+        "artist-lucinda-williams"
+      ]
+    },
+    {
+      "id": "artist-jeremy-camp",
+      "name": "Jeremy Camp",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "broadmoor-world-arena-2026-03-08-tobymac-with-crowder-and-jeremy-camp"
+      ],
+      "venueIds": [
+        "broadmoor-world-arena"
+      ],
+      "dateKeys": [
+        "2026-03-08"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-08",
+      "lastDate": "2026-03-08",
+      "coArtists": [
+        "artist-crowder",
+        "artist-tobymac"
+      ]
+    },
+    {
+      "id": "artist-lucinda-williams",
+      "name": "Lucinda Williams",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "broadmoor-world-arena-2026-03-09-heart-with-lucinda-williams"
+      ],
+      "venueIds": [
+        "broadmoor-world-arena"
+      ],
+      "dateKeys": [
+        "2026-03-09"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-09",
+      "lastDate": "2026-03-09",
+      "coArtists": [
+        "artist-heart"
+      ]
+    },
+    {
+      "id": "artist-phil-wickham",
+      "name": "Phil Wickham",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "broadmoor-world-arena-2026-05-21-phil-wickham"
+      ],
+      "venueIds": [
+        "broadmoor-world-arena"
+      ],
+      "dateKeys": [
+        "2026-05-21"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-21",
+      "lastDate": "2026-05-21",
+      "coArtists": []
+    },
+    {
+      "id": "artist-tobymac",
+      "name": "TobyMac",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "broadmoor-world-arena-2026-03-08-tobymac-with-crowder-and-jeremy-camp"
+      ],
+      "venueIds": [
+        "broadmoor-world-arena"
+      ],
+      "dateKeys": [
+        "2026-03-08"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-08",
+      "lastDate": "2026-03-08",
+      "coArtists": [
+        "artist-crowder",
+        "artist-jeremy-camp"
+      ]
+    }
+  ]
+}

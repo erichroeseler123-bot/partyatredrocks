@@ -101,7 +101,7 @@ export default function AllGuidesIndex() {
             >
               Back to Guide Hub →
             </Link>
-            <Link href="/book-shuttle" className="btn-primary">
+            <Link href="/find" className="btn-primary">
               Book Red Rocks Shuttle — $59/pp →
             </Link>
           </div>

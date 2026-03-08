@@ -43,7 +43,7 @@ export default function WinterSurvival() {
         <p className="text-lg mb-16">
           Don't wait 90 minutes in a frozen lot for an Uber. Our heated Sprinters wait at the Top Circle 30 minutes post-encore.
         </p>
-        <Link href="/book-shuttle" className="inline-block bg-white text-blue-600 px-10 py-4 rounded-full font-black uppercase hover:bg-zinc-100 transition shadow-lg">
+        <Link href="/find" className="inline-block bg-white text-blue-600 px-10 py-4 rounded-full font-black uppercase hover:bg-zinc-100 transition shadow-lg">
           Book Your Warm Ride
         </Link>
       </div>

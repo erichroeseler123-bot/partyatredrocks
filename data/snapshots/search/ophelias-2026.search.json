@@ -1,0 +1,279 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "docs": [
+    {
+      "eventKey": "ophelias-2026-01-24-tycho",
+      "title": "Tycho",
+      "artistNames": [
+        "Tycho"
+      ],
+      "venueId": "ophelias",
+      "dateKey": "2026-01-24",
+      "tags": [
+        "ophelias",
+        "tycho"
+      ]
+    },
+    {
+      "eventKey": "ophelias-2026-01-30-skiitour",
+      "title": "SkiiTour",
+      "artistNames": [
+        "SkiiTour"
+      ],
+      "venueId": "ophelias",
+      "dateKey": "2026-01-30",
+      "tags": [
+        "ophelias",
+        "skiitour"
+      ]
+    },
+    {
+      "eventKey": "ophelias-2026-01-31-david-ramirez",
+      "title": "David Ramirez",
+      "artistNames": [
+        "David Ramirez"
+      ],
+      "venueId": "ophelias",
+      "dateKey": "2026-01-31",
+      "tags": [
+        "ophelias",
+        "david ramirez"
+      ]
+    },
+    {
+      "eventKey": "ophelias-2026-02-06-mark-farina",
+      "title": "Mark Farina",
+      "artistNames": [
+        "Mark Farina"
+      ],
+      "venueId": "ophelias",
+      "dateKey": "2026-02-06",
+      "tags": [
+        "ophelias",
+        "mark farina"
+      ]
+    },
+    {
+      "eventKey": "ophelias-2026-02-07-mark-farina",
+      "title": "Mark Farina",
+      "artistNames": [
+        "Mark Farina"
+      ],
+      "venueId": "ophelias",
+      "dateKey": "2026-02-07",
+      "tags": [
+        "ophelias",
+        "mark farina"
+      ]
+    },
+    {
+      "eventKey": "ophelias-2026-02-14-what-the-dance",
+      "title": "What The Dance",
+      "artistNames": [
+        "What The Dance"
+      ],
+      "venueId": "ophelias",
+      "dateKey": "2026-02-14",
+      "tags": [
+        "ophelias",
+        "what the dance"
+      ]
+    },
+    {
+      "eventKey": "ophelias-2026-02-18-ga-20",
+      "title": "GA-20",
+      "artistNames": [
+        "GA-20"
+      ],
+      "venueId": "ophelias",
+      "dateKey": "2026-02-18",
+      "tags": [
+        "ophelias",
+        "ga-20"
+      ]
+    },
+    {
+      "eventKey": "ophelias-2026-02-20-the-polish-ambassador",
+      "title": "The Polish Ambassador",
+      "artistNames": [
+        "The Polish Ambassador"
+      ],
+      "venueId": "ophelias",
+      "dateKey": "2026-02-20",
+      "tags": [
+        "ophelias",
+        "the polish ambassador"
+      ]
+    },
+    {
+      "eventKey": "ophelias-2026-02-21-the-polish-ambassador",
+      "title": "The Polish Ambassador",
+      "artistNames": [
+        "The Polish Ambassador"
+      ],
+      "venueId": "ophelias",
+      "dateKey": "2026-02-21",
+      "tags": [
+        "ophelias",
+        "the polish ambassador"
+      ]
+    },
+    {
+      "eventKey": "ophelias-2026-02-22-the-polish-ambassador",
+      "title": "The Polish Ambassador",
+      "artistNames": [
+        "The Polish Ambassador"
+      ],
+      "venueId": "ophelias",
+      "dateKey": "2026-02-22",
+      "tags": [
+        "ophelias",
+        "the polish ambassador"
+      ]
+    },
+    {
+      "eventKey": "ophelias-2026-02-26-devon-allman-band",
+      "title": "Devon Allman Band",
+      "artistNames": [
+        "Devon Allman Band"
+      ],
+      "venueId": "ophelias",
+      "dateKey": "2026-02-26",
+      "tags": [
+        "ophelias",
+        "devon allman band"
+      ]
+    },
+    {
+      "eventKey": "ophelias-2026-02-27-brett-dennen",
+      "title": "Brett Dennen",
+      "artistNames": [
+        "Brett Dennen"
+      ],
+      "venueId": "ophelias",
+      "dateKey": "2026-02-27",
+      "tags": [
+        "ophelias",
+        "brett dennen"
+      ]
+    },
+    {
+      "eventKey": "ophelias-2026-02-28-smells-like-nirvana",
+      "title": "Smells Like Nirvana",
+      "artistNames": [
+        "Smells Like Nirvana"
+      ],
+      "venueId": "ophelias",
+      "dateKey": "2026-02-28",
+      "tags": [
+        "ophelias",
+        "smells like nirvana"
+      ]
+    },
+    {
+      "eventKey": "ophelias-2026-03-06-not-quite-brothers",
+      "title": "Not Quite Brothers",
+      "artistNames": [
+        "Not Quite Brothers"
+      ],
+      "venueId": "ophelias",
+      "dateKey": "2026-03-06",
+      "tags": [
+        "ophelias",
+        "not quite brothers"
+      ]
+    },
+    {
+      "eventKey": "ophelias-2026-03-11-jesse-roper",
+      "title": "Jesse Roper",
+      "artistNames": [
+        "Jesse Roper"
+      ],
+      "venueId": "ophelias",
+      "dateKey": "2026-03-11",
+      "tags": [
+        "ophelias",
+        "jesse roper"
+      ]
+    },
+    {
+      "eventKey": "ophelias-2026-03-14-bearracuda",
+      "title": "Bearracuda",
+      "artistNames": [
+        "Bearracuda"
+      ],
+      "venueId": "ophelias",
+      "dateKey": "2026-03-14",
+      "tags": [
+        "ophelias",
+        "bearracuda"
+      ]
+    },
+    {
+      "eventKey": "ophelias-2026-03-30-westerman",
+      "title": "Westerman",
+      "artistNames": [
+        "Westerman"
+      ],
+      "venueId": "ophelias",
+      "dateKey": "2026-03-30",
+      "tags": [
+        "ophelias",
+        "westerman"
+      ]
+    },
+    {
+      "eventKey": "ophelias-2026-04-09-ltj-bukem",
+      "title": "LTJ Bukem",
+      "artistNames": [
+        "LTJ Bukem"
+      ],
+      "venueId": "ophelias",
+      "dateKey": "2026-04-09",
+      "tags": [
+        "ophelias",
+        "ltj bukem"
+      ]
+    },
+    {
+      "eventKey": "ophelias-2026-04-10-sam-grisman-project",
+      "title": "Sam Grisman Project",
+      "artistNames": [
+        "Sam Grisman Project"
+      ],
+      "venueId": "ophelias",
+      "dateKey": "2026-04-10",
+      "tags": [
+        "ophelias",
+        "sam grisman project"
+      ]
+    },
+    {
+      "eventKey": "ophelias-2026-04-11-sam-grisman-project",
+      "title": "Sam Grisman Project",
+      "artistNames": [
+        "Sam Grisman Project"
+      ],
+      "venueId": "ophelias",
+      "dateKey": "2026-04-11",
+      "tags": [
+        "ophelias",
+        "sam grisman project"
+      ]
+    },
+    {
+      "eventKey": "ophelias-2026-05-02-bearracuda",
+      "title": "Bearracuda",
+      "artistNames": [
+        "Bearracuda"
+      ],
+      "venueId": "ophelias",
+      "dateKey": "2026-05-02",
+      "tags": [
+        "ophelias",
+        "bearracuda"
+      ]
+    }
+  ]
+}

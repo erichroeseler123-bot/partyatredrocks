@@ -54,7 +54,7 @@ export default function SoldOutSurvival() {
         <p className="text-lg mb-16 max-w-xl mx-auto">
           Our shared $59 shuttles are surge-proof. We drop at the <strong>Top Circle (Row 70)</strong>, bypassing the Lower South &quot;Stair Tax.&quot;
         </p>
-        <Link href="/book-shuttle" className="inline-block bg-white text-red-700 px-10 py-4 rounded-full font-black text-xl hover:bg-slate-100 transition shadow-lg">
+        <Link href="/find" className="inline-block bg-white text-red-700 px-10 py-4 rounded-full font-black text-xl hover:bg-slate-100 transition shadow-lg">
           Guarantee My Seat
         </Link>
       </div>

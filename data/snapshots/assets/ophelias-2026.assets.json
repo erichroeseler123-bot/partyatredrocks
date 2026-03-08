@@ -1,0 +1,156 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "events": {
+    "ophelias-2026-01-24-tycho": {
+      "local": null,
+      "remote": null
+    },
+    "ophelias-2026-01-30-skiitour": {
+      "local": null,
+      "remote": null
+    },
+    "ophelias-2026-01-31-david-ramirez": {
+      "local": null,
+      "remote": null
+    },
+    "ophelias-2026-02-06-mark-farina": {
+      "local": null,
+      "remote": null
+    },
+    "ophelias-2026-02-07-mark-farina": {
+      "local": null,
+      "remote": null
+    },
+    "ophelias-2026-02-14-what-the-dance": {
+      "local": null,
+      "remote": null
+    },
+    "ophelias-2026-02-18-ga-20": {
+      "local": null,
+      "remote": null
+    },
+    "ophelias-2026-02-20-the-polish-ambassador": {
+      "local": null,
+      "remote": null
+    },
+    "ophelias-2026-02-21-the-polish-ambassador": {
+      "local": null,
+      "remote": null
+    },
+    "ophelias-2026-02-22-the-polish-ambassador": {
+      "local": null,
+      "remote": null
+    },
+    "ophelias-2026-02-26-devon-allman-band": {
+      "local": null,
+      "remote": null
+    },
+    "ophelias-2026-02-27-brett-dennen": {
+      "local": null,
+      "remote": null
+    },
+    "ophelias-2026-02-28-smells-like-nirvana": {
+      "local": null,
+      "remote": null
+    },
+    "ophelias-2026-03-06-not-quite-brothers": {
+      "local": null,
+      "remote": null
+    },
+    "ophelias-2026-03-11-jesse-roper": {
+      "local": null,
+      "remote": null
+    },
+    "ophelias-2026-03-14-bearracuda": {
+      "local": null,
+      "remote": null
+    },
+    "ophelias-2026-03-30-westerman": {
+      "local": null,
+      "remote": null
+    },
+    "ophelias-2026-04-09-ltj-bukem": {
+      "local": null,
+      "remote": null
+    },
+    "ophelias-2026-04-10-sam-grisman-project": {
+      "local": null,
+      "remote": null
+    },
+    "ophelias-2026-04-11-sam-grisman-project": {
+      "local": null,
+      "remote": null
+    },
+    "ophelias-2026-05-02-bearracuda": {
+      "local": null,
+      "remote": null
+    }
+  },
+  "artists": {
+    "artist-bearracuda": {
+      "local": null,
+      "remote": null
+    },
+    "artist-brett-dennen": {
+      "local": null,
+      "remote": null
+    },
+    "artist-david-ramirez": {
+      "local": null,
+      "remote": null
+    },
+    "artist-devon-allman-band": {
+      "local": null,
+      "remote": null
+    },
+    "artist-ga-20": {
+      "local": null,
+      "remote": null
+    },
+    "artist-jesse-roper": {
+      "local": null,
+      "remote": null
+    },
+    "artist-ltj-bukem": {
+      "local": null,
+      "remote": null
+    },
+    "artist-mark-farina": {
+      "local": null,
+      "remote": null
+    },
+    "artist-not-quite-brothers": {
+      "local": null,
+      "remote": null
+    },
+    "artist-sam-grisman-project": {
+      "local": null,
+      "remote": null
+    },
+    "artist-skiitour": {
+      "local": null,
+      "remote": null
+    },
+    "artist-smells-like-nirvana": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-polish-ambassador": {
+      "local": null,
+      "remote": null
+    },
+    "artist-tycho": {
+      "local": null,
+      "remote": null
+    },
+    "artist-westerman": {
+      "local": null,
+      "remote": null
+    },
+    "artist-what-the-dance": {
+      "local": null,
+      "remote": null
+    }
+  }
+}

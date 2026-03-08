@@ -17,7 +17,7 @@ export default function Page() {
         </div>
 
         <div className="mt-14">
-          <Link href="/book-shuttle" className="btn-primary">Book Red Rocks Shuttle — $59/pp →</Link>
+          <Link href="/find" className="btn-primary">Book Red Rocks Shuttle — $59/pp →</Link>
           <div className="mt-3 text-sm text-soft">
             Seats fill fast on sold-out shows. Lock it in now.
           </div>

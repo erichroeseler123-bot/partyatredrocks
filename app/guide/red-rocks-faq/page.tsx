@@ -38,7 +38,7 @@ export default function RedRocksFAQ() {
             <Link href="/private-suburban" className="btn-primary">
               Book Suburban — $499
             </Link>
-            <Link href="/book-shuttle" className="btn-ghost">
+            <Link href="/find" className="btn-ghost">
               Book Shuttle Seats
             </Link>
             <Link href="/" className="btn-ghost">
@@ -83,7 +83,7 @@ export default function RedRocksFAQ() {
             </div>
 
             <div className="mt-6 flex flex-col sm:flex-row gap-3">
-              <Link href="/book-shuttle" className="btn-primary">
+              <Link href="/find" className="btn-primary">
                 Pick a date — book seats
               </Link>
               <Link href="/private-suburban" className="btn-ghost">

@@ -168,7 +168,7 @@ Filesystem-based inventory — no guesses.
 ## data/
 - `data/jamFestivals.ts` (1,424 bytes)
 - `data/jamSeeds.ts` (448 bytes)
-- `data/redrocks-2026.ts` (5,451 bytes)
+- `data/shows/redrocks/2026.json` (canonical show ledger)
 - `data/scenes.ts` (3,509 bytes)
 - `data/seo_master.json` (541 bytes)
 - `data/shows.ts` (186 bytes)

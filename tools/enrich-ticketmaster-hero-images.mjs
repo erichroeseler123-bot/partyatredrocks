@@ -7,7 +7,7 @@ const INDEX_PATH = path.join(OUT_DIR, "index.json");
 
 // CHANGE THIS if your shows file is elsewhere:
 const SHOWS_MODULE_PATH = path.resolve("shows-2026.js"); // or "app/shows-2026.js"
-const TM_API_KEY = process.env.TM_API_KEY;
+const TM_API_KEY = process.env.TICKETMASTER_API_KEY || process.env.TM_API_KEY;
 
 function slugify(s = "") {
   return s
@@ -63,7 +63,7 @@ async function fetchTicketmasterEvent(id) {
 
 async function main() {
   if (!TM_API_KEY) {
-    console.error("❌ Missing TM_API_KEY in .env.local");
+    console.error("❌ Missing TICKETMASTER_API_KEY or TM_API_KEY in .env.local");
     process.exit(1);
   }
 

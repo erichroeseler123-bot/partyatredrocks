@@ -1,0 +1,162 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "artists": [
+    {
+      "id": "artist-cash-cobain",
+      "name": "Cash Cobain",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "cervantes-masterpiece-2026-03-12-cash-cobain"
+      ],
+      "venueIds": [
+        "cervantes-masterpiece"
+      ],
+      "dateKeys": [
+        "2026-03-12"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-12",
+      "lastDate": "2026-03-12",
+      "coArtists": []
+    },
+    {
+      "id": "artist-fox-stevenson",
+      "name": "Fox Stevenson",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "cervantes-masterpiece-2026-02-17-fox-stevenson"
+      ],
+      "venueIds": [
+        "cervantes-masterpiece"
+      ],
+      "dateKeys": [
+        "2026-02-17"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-17",
+      "lastDate": "2026-02-17",
+      "coArtists": []
+    },
+    {
+      "id": "artist-ghostface-killah",
+      "name": "Ghostface Killah",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "cervantes-masterpiece-2026-02-12-ghostface-killah"
+      ],
+      "venueIds": [
+        "cervantes-masterpiece"
+      ],
+      "dateKeys": [
+        "2026-02-12"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-12",
+      "lastDate": "2026-02-12",
+      "coArtists": []
+    },
+    {
+      "id": "artist-iration",
+      "name": "Iration",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "cervantes-masterpiece-2026-06-19-iration",
+        "cervantes-masterpiece-2026-06-20-iration"
+      ],
+      "venueIds": [
+        "cervantes-masterpiece"
+      ],
+      "dateKeys": [
+        "2026-06-19",
+        "2026-06-20"
+      ],
+      "showCount": 2,
+      "firstDate": "2026-06-19",
+      "lastDate": "2026-06-20",
+      "coArtists": []
+    },
+    {
+      "id": "artist-kwn",
+      "name": "kwn",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "cervantes-masterpiece-2026-03-20-kwn"
+      ],
+      "venueIds": [
+        "cervantes-masterpiece"
+      ],
+      "dateKeys": [
+        "2026-03-20"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-20",
+      "lastDate": "2026-03-20",
+      "coArtists": []
+    },
+    {
+      "id": "artist-ruel",
+      "name": "Ruel",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "cervantes-masterpiece-2026-03-25-ruel"
+      ],
+      "venueIds": [
+        "cervantes-masterpiece"
+      ],
+      "dateKeys": [
+        "2026-03-25"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-25",
+      "lastDate": "2026-03-25",
+      "coArtists": []
+    },
+    {
+      "id": "artist-sasquatch-16",
+      "name": "Sasquatch (16+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "cervantes-masterpiece-2026-05-02-sasquatch-16"
+      ],
+      "venueIds": [
+        "cervantes-masterpiece"
+      ],
+      "dateKeys": [
+        "2026-05-02"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-02",
+      "lastDate": "2026-05-02",
+      "coArtists": []
+    },
+    {
+      "id": "artist-whethan-16",
+      "name": "Whethan (16+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "cervantes-masterpiece-2026-02-26-whethan-16",
+        "cervantes-masterpiece-2026-02-27-whethan-16"
+      ],
+      "venueIds": [
+        "cervantes-masterpiece"
+      ],
+      "dateKeys": [
+        "2026-02-26",
+        "2026-02-27"
+      ],
+      "showCount": 2,
+      "firstDate": "2026-02-26",
+      "lastDate": "2026-02-27",
+      "coArtists": []
+    }
+  ]
+}

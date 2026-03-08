@@ -55,7 +55,7 @@ export default function ProhibitedItems() {
           If security rejects an item, a rideshare leaves you stranded. Our shuttle drivers provide 
           a final check and allow you to leave gear safely in our locked vehicles during the show.
         </p>
-        <Link href="/book-shuttle" className="btn-primary uppercase hover:bg-red-500 transition shadow-lg inline-block">
+        <Link href="/find" className="btn-primary uppercase hover:bg-red-500 transition shadow-lg inline-block">
           Book Your 2026 Ride
         </Link>
       </div>

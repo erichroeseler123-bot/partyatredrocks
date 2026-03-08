@@ -47,7 +47,7 @@ export default function TrailheadHub() {
 
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
-            href="/book-shuttle"
+            href="/find"
             className="btn-primary"
           >
             Book Shuttle → $59
@@ -122,7 +122,7 @@ export default function TrailheadHub() {
       <ShuttleCTA
         title="Golden Pickup → Red Rocks"
         blurb="Depart from Trailhead Taphouse. $59 per-person. Direct Red Rocks drop-off and guaranteed post-show return."
-        href="/book-shuttle"
+        href="/find"
         button="Book Golden Shuttle → $59"
       />
 

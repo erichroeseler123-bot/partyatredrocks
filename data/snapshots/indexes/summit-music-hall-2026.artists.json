@@ -1,0 +1,306 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "artistToEvents": {
+    "artist-ghengar": [
+      "summit-music-hall-2026-01-31-ghengar"
+    ],
+    "artist-jessie-j": [
+      "summit-music-hall-2026-02-03-jessie-j"
+    ],
+    "artist-lord-of-the-lost": [
+      "summit-music-hall-2026-02-04-lord-of-the-lost-with-the-birthday-massacre"
+    ],
+    "artist-the-birthday-massacre": [
+      "summit-music-hall-2026-02-04-lord-of-the-lost-with-the-birthday-massacre"
+    ],
+    "artist-ydg": [
+      "summit-music-hall-2026-02-07-ydg-with-join-the-resistance-18"
+    ],
+    "artist-join-the-resistance-18": [
+      "summit-music-hall-2026-02-07-ydg-with-join-the-resistance-18"
+    ],
+    "artist-michael-shannon-and-jason-narducy": [
+      "summit-music-hall-2026-02-11-michael-shannon-and-jason-narducy"
+    ],
+    "artist-club-90s-heated-rivalrave-18": [
+      "summit-music-hall-2026-02-20-club-90s-heated-rivalrave-18",
+      "summit-music-hall-2026-02-21-club-90s-heated-rivalrave-18"
+    ],
+    "artist-monolink-18": [
+      "summit-music-hall-2026-02-24-monolink-18"
+    ],
+    "artist-lights": [
+      "summit-music-hall-2026-02-25-lights-with-softcult"
+    ],
+    "artist-softcult": [
+      "summit-music-hall-2026-02-25-lights-with-softcult"
+    ],
+    "artist-donny-benet": [
+      "summit-music-hall-2026-02-27-donny-benet"
+    ],
+    "artist-heated-rivalry-night-18": [
+      "summit-music-hall-2026-02-28-heated-rivalry-night-18"
+    ],
+    "artist-colony-house": [
+      "summit-music-hall-2026-03-05-colony-house"
+    ],
+    "artist-emo-nite-21": [
+      "summit-music-hall-2026-03-06-emo-nite-21"
+    ],
+    "artist-dodie-clark": [
+      "summit-music-hall-2026-03-07-dodie-clark"
+    ],
+    "artist-xaviersobased": [
+      "summit-music-hall-2026-03-08-xaviersobased"
+    ],
+    "artist-lil-tony": [
+      "summit-music-hall-2026-03-09-lil-tony"
+    ],
+    "artist-peaches": [
+      "summit-music-hall-2026-03-10-peaches"
+    ],
+    "artist-zara-larsson": [
+      "summit-music-hall-2026-03-11-zara-larsson-with-amelia-moore"
+    ],
+    "artist-amelia-moore": [
+      "summit-music-hall-2026-03-11-zara-larsson-with-amelia-moore"
+    ],
+    "artist-hawthorne-heights": [
+      "summit-music-hall-2026-03-12-hawthorne-heights"
+    ],
+    "artist-two-feet": [
+      "summit-music-hall-2026-03-13-two-feet",
+      "summit-music-hall-2026-03-14-two-feet"
+    ],
+    "artist-monaleo": [
+      "summit-music-hall-2026-03-15-monaleo"
+    ],
+    "artist-sabrina-claudio": [
+      "summit-music-hall-2026-03-17-sabrina-claudio-with-dylan-sinclair"
+    ],
+    "artist-dylan-sinclair": [
+      "summit-music-hall-2026-03-17-sabrina-claudio-with-dylan-sinclair"
+    ],
+    "artist-testament": [
+      "summit-music-hall-2026-03-18-testament-with-overkill-and-destruction"
+    ],
+    "artist-overkill": [
+      "summit-music-hall-2026-03-18-testament-with-overkill-and-destruction"
+    ],
+    "artist-destruction": [
+      "summit-music-hall-2026-03-18-testament-with-overkill-and-destruction"
+    ],
+    "artist-white-reaper": [
+      "summit-music-hall-2026-03-20-white-reaper-with-drug-church"
+    ],
+    "artist-drug-church": [
+      "summit-music-hall-2026-03-20-white-reaper-with-drug-church"
+    ],
+    "artist-barely-alive": [
+      "summit-music-hall-2026-03-21-barely-alive-with-tisoki-18"
+    ],
+    "artist-tisoki-18": [
+      "summit-music-hall-2026-03-21-barely-alive-with-tisoki-18"
+    ],
+    "artist-eidola": [
+      "summit-music-hall-2026-03-27-eidola"
+    ],
+    "artist-the-devil-wears-prada": [
+      "summit-music-hall-2026-03-28-the-devil-wears-prada"
+    ],
+    "artist-machine-girl": [
+      "summit-music-hall-2026-03-30-machine-girl-with-sextile"
+    ],
+    "artist-sextile": [
+      "summit-music-hall-2026-03-30-machine-girl-with-sextile"
+    ],
+    "artist-lacuna-coil": [
+      "summit-music-hall-2026-03-31-lacuna-coil-with-escape-the-fate-and-vowws"
+    ],
+    "artist-escape-the-fate": [
+      "summit-music-hall-2026-03-31-lacuna-coil-with-escape-the-fate-and-vowws"
+    ],
+    "artist-vowws": [
+      "summit-music-hall-2026-03-31-lacuna-coil-with-escape-the-fate-and-vowws"
+    ],
+    "artist-jstjr-18": [
+      "summit-music-hall-2026-04-03-jstjr-18"
+    ],
+    "artist-currents": [
+      "summit-music-hall-2026-04-04-currents-with-erra"
+    ],
+    "artist-erra": [
+      "summit-music-hall-2026-04-04-currents-with-erra"
+    ],
+    "artist-drain": [
+      "summit-music-hall-2026-04-06-drain-with-no-pressure-haywire-and-secret-world"
+    ],
+    "artist-no-pressure": [
+      "summit-music-hall-2026-04-06-drain-with-no-pressure-haywire-and-secret-world"
+    ],
+    "artist-haywire": [
+      "summit-music-hall-2026-04-06-drain-with-no-pressure-haywire-and-secret-world"
+    ],
+    "artist-secret-world": [
+      "summit-music-hall-2026-04-06-drain-with-no-pressure-haywire-and-secret-world"
+    ],
+    "artist-dave-rapper": [
+      "summit-music-hall-2026-04-07-dave-rapper"
+    ],
+    "artist-dance": [
+      "summit-music-hall-2026-04-11-dance-with-the-dead-with-magic-sword"
+    ],
+    "artist-the-dead": [
+      "summit-music-hall-2026-04-11-dance-with-the-dead-with-magic-sword"
+    ],
+    "artist-magic-sword": [
+      "summit-music-hall-2026-04-11-dance-with-the-dead-with-magic-sword"
+    ],
+    "artist-free-throw": [
+      "summit-music-hall-2026-04-15-free-throw"
+    ],
+    "artist-shadow-of-intent": [
+      "summit-music-hall-2026-04-23-shadow-of-intent-with-angelmaker"
+    ],
+    "artist-angelmaker": [
+      "summit-music-hall-2026-04-23-shadow-of-intent-with-angelmaker"
+    ],
+    "artist-drinkurwater-18": [
+      "summit-music-hall-2026-04-24-drinkurwater-18"
+    ],
+    "artist-badbadnotgood": [
+      "summit-music-hall-2026-04-29-badbadnotgood"
+    ],
+    "artist-sevendust": [
+      "summit-music-hall-2026-05-01-sevendust-with-atreyu"
+    ],
+    "artist-atreyu": [
+      "summit-music-hall-2026-05-01-sevendust-with-atreyu"
+    ],
+    "artist-la-dispute": [
+      "summit-music-hall-2026-05-05-la-dispute"
+    ],
+    "artist-poison-the-well": [
+      "summit-music-hall-2026-05-07-poison-the-well-with-converge-the-armed-and-the-barbarians-of-california"
+    ],
+    "artist-converge": [
+      "summit-music-hall-2026-05-07-poison-the-well-with-converge-the-armed-and-the-barbarians-of-california"
+    ],
+    "artist-the-armed": [
+      "summit-music-hall-2026-05-07-poison-the-well-with-converge-the-armed-and-the-barbarians-of-california"
+    ],
+    "artist-the-barbarians-of-california": [
+      "summit-music-hall-2026-05-07-poison-the-well-with-converge-the-armed-and-the-barbarians-of-california"
+    ],
+    "artist-i-speak-machine": [
+      "summit-music-hall-2026-05-10-i-speak-machine"
+    ],
+    "artist-boulet-brothers-dragula": [
+      "summit-music-hall-2026-05-11-boulet-brothers-dragula"
+    ],
+    "artist-the-afghan-whigs": [
+      "summit-music-hall-2026-05-12-the-afghan-whigs-with-mercury-rev"
+    ],
+    "artist-mercury-rev": [
+      "summit-music-hall-2026-05-12-the-afghan-whigs-with-mercury-rev"
+    ],
+    "artist-chet-faker": [
+      "summit-music-hall-2026-05-13-chet-faker"
+    ],
+    "artist-arms-length": [
+      "summit-music-hall-2026-05-17-arms-length"
+    ],
+    "artist-spite": [
+      "summit-music-hall-2026-06-02-spite-with-emmure"
+    ],
+    "artist-emmure": [
+      "summit-music-hall-2026-06-02-spite-with-emmure"
+    ],
+    "artist-bearracuda-18": [
+      "summit-music-hall-2026-06-27-bearracuda-18"
+    ],
+    "artist-diggy-graves": [
+      "summit-music-hall-2026-08-21-diggy-graves-with-resentvul"
+    ],
+    "artist-resentvul": [
+      "summit-music-hall-2026-08-21-diggy-graves-with-resentvul"
+    ]
+  },
+  "artistIndex": {
+    "ghengar": "artist-ghengar",
+    "jessie j": "artist-jessie-j",
+    "lord of the lost": "artist-lord-of-the-lost",
+    "the birthday massacre": "artist-the-birthday-massacre",
+    "ydg": "artist-ydg",
+    "join the resistance (18+)": "artist-join-the-resistance-18",
+    "michael shannon & jason narducy": "artist-michael-shannon-and-jason-narducy",
+    "club 90s - heated rivalrave (18+)": "artist-club-90s-heated-rivalrave-18",
+    "monolink (18+)": "artist-monolink-18",
+    "lights": "artist-lights",
+    "softcult": "artist-softcult",
+    "donny benet": "artist-donny-benet",
+    "heated rivalry night (18+)": "artist-heated-rivalry-night-18",
+    "colony house": "artist-colony-house",
+    "emo nite -  (21+)": "artist-emo-nite-21",
+    "dodie clark": "artist-dodie-clark",
+    "xaviersobased": "artist-xaviersobased",
+    "lil tony": "artist-lil-tony",
+    "peaches": "artist-peaches",
+    "zara larsson": "artist-zara-larsson",
+    "amelia moore": "artist-amelia-moore",
+    "hawthorne heights": "artist-hawthorne-heights",
+    "two feet": "artist-two-feet",
+    "monaleo": "artist-monaleo",
+    "sabrina claudio": "artist-sabrina-claudio",
+    "dylan sinclair": "artist-dylan-sinclair",
+    "testament": "artist-testament",
+    "overkill": "artist-overkill",
+    "destruction": "artist-destruction",
+    "white reaper": "artist-white-reaper",
+    "drug church": "artist-drug-church",
+    "barely alive": "artist-barely-alive",
+    "tisoki (18+)": "artist-tisoki-18",
+    "eidola": "artist-eidola",
+    "the devil wears prada": "artist-the-devil-wears-prada",
+    "machine girl": "artist-machine-girl",
+    "sextile": "artist-sextile",
+    "lacuna coil": "artist-lacuna-coil",
+    "escape the fate": "artist-escape-the-fate",
+    "vowws": "artist-vowws",
+    "jstjr (18+)": "artist-jstjr-18",
+    "currents": "artist-currents",
+    "erra": "artist-erra",
+    "drain": "artist-drain",
+    "no pressure": "artist-no-pressure",
+    "haywire": "artist-haywire",
+    "secret world": "artist-secret-world",
+    "dave - rapper": "artist-dave-rapper",
+    "dance": "artist-dance",
+    "the dead": "artist-the-dead",
+    "magic sword": "artist-magic-sword",
+    "free throw": "artist-free-throw",
+    "shadow of intent": "artist-shadow-of-intent",
+    "angelmaker": "artist-angelmaker",
+    "drinkurwater (18+)": "artist-drinkurwater-18",
+    "badbadnotgood": "artist-badbadnotgood",
+    "sevendust": "artist-sevendust",
+    "atreyu": "artist-atreyu",
+    "la dispute": "artist-la-dispute",
+    "poison the well": "artist-poison-the-well",
+    "converge": "artist-converge",
+    "the armed": "artist-the-armed",
+    "the barbarians of california": "artist-the-barbarians-of-california",
+    "i speak machine": "artist-i-speak-machine",
+    "boulet brothers dragula": "artist-boulet-brothers-dragula",
+    "the afghan whigs": "artist-the-afghan-whigs",
+    "mercury rev": "artist-mercury-rev",
+    "chet faker": "artist-chet-faker",
+    "arms length": "artist-arms-length",
+    "spite": "artist-spite",
+    "emmure": "artist-emmure",
+    "bearracuda (18+)": "artist-bearracuda-18",
+    "diggy graves": "artist-diggy-graves",
+    "resentvul": "artist-resentvul"
+  }
+}

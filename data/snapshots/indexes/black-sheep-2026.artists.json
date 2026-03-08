@@ -1,0 +1,152 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "artistToEvents": {
+    "artist-rivers-of-nihil": [
+      "black-sheep-2026-02-23-rivers-of-nihil"
+    ],
+    "artist-the-queers": [
+      "black-sheep-2026-02-25-the-queers"
+    ],
+    "artist-nekrogoblikon": [
+      "black-sheep-2026-03-06-nekrogoblikon-with-enterprise-earth"
+    ],
+    "artist-enterprise-earth": [
+      "black-sheep-2026-03-06-nekrogoblikon-with-enterprise-earth"
+    ],
+    "artist-teenage-bottlerocket": [
+      "black-sheep-2026-03-25-teenage-bottlerocket"
+    ],
+    "artist-red-leather": [
+      "black-sheep-2026-03-28-red-leather"
+    ],
+    "artist-i-see-stars": [
+      "black-sheep-2026-03-30-i-see-stars"
+    ],
+    "artist-obscura": [
+      "black-sheep-2026-03-31-obscura-with-allegaeon-cognitive-and-cryptosis"
+    ],
+    "artist-allegaeon": [
+      "black-sheep-2026-03-31-obscura-with-allegaeon-cognitive-and-cryptosis"
+    ],
+    "artist-cognitive": [
+      "black-sheep-2026-03-31-obscura-with-allegaeon-cognitive-and-cryptosis"
+    ],
+    "artist-cryptosis": [
+      "black-sheep-2026-03-31-obscura-with-allegaeon-cognitive-and-cryptosis"
+    ],
+    "artist-subhumans": [
+      "black-sheep-2026-04-02-subhumans"
+    ],
+    "artist-prayers": [
+      "black-sheep-2026-04-04-prayers-with-my-life-with-the-thrill-kill-kult"
+    ],
+    "artist-my-life": [
+      "black-sheep-2026-04-04-prayers-with-my-life-with-the-thrill-kill-kult"
+    ],
+    "artist-the-thrill-kill-kult": [
+      "black-sheep-2026-04-04-prayers-with-my-life-with-the-thrill-kill-kult"
+    ],
+    "artist-magnolia-park": [
+      "black-sheep-2026-04-05-magnolia-park-with-silly-goose"
+    ],
+    "artist-silly-goose": [
+      "black-sheep-2026-04-05-magnolia-park-with-silly-goose"
+    ],
+    "artist-bit-brigade": [
+      "black-sheep-2026-04-09-bit-brigade"
+    ],
+    "artist-des-rocs": [
+      "black-sheep-2026-04-11-des-rocs"
+    ],
+    "artist-buckethead": [
+      "black-sheep-2026-04-19-buckethead"
+    ],
+    "artist-slomosa": [
+      "black-sheep-2026-04-20-slomosa"
+    ],
+    "artist-cold": [
+      "black-sheep-2026-04-22-cold"
+    ],
+    "artist-devotchka-aa-tribute-to-the-music-of-little-miss-sunshinea": [
+      "black-sheep-2026-04-23-devotchka-aa-tribute-to-the-music-of-little-miss-sunshinea"
+    ],
+    "artist-the-black-dahlia-murder": [
+      "black-sheep-2026-04-29-the-black-dahlia-murder-with-the-acacia-strain"
+    ],
+    "artist-the-acacia-strain": [
+      "black-sheep-2026-04-29-the-black-dahlia-murder-with-the-acacia-strain"
+    ],
+    "artist-lords-of-acid": [
+      "black-sheep-2026-05-01-lords-of-acid"
+    ],
+    "artist-saxsquatch": [
+      "black-sheep-2026-05-03-saxsquatch"
+    ],
+    "artist-the-spill-canvas": [
+      "black-sheep-2026-05-05-the-spill-canvas"
+    ],
+    "artist-unknown-mortal-orchestra": [
+      "black-sheep-2026-05-12-unknown-mortal-orchestra"
+    ],
+    "artist-powerman-5000": [
+      "black-sheep-2026-05-25-powerman-5000"
+    ],
+    "artist-archspire": [
+      "black-sheep-2026-05-27-archspire-with-undeath"
+    ],
+    "artist-undeath": [
+      "black-sheep-2026-05-27-archspire-with-undeath"
+    ],
+    "artist-alpha-wolf": [
+      "black-sheep-2026-06-03-alpha-wolf-with-gideon-mugshot-and-resolve"
+    ],
+    "artist-gideon": [
+      "black-sheep-2026-06-03-alpha-wolf-with-gideon-mugshot-and-resolve"
+    ],
+    "artist-mugshot": [
+      "black-sheep-2026-06-03-alpha-wolf-with-gideon-mugshot-and-resolve"
+    ],
+    "artist-resolve": [
+      "black-sheep-2026-06-03-alpha-wolf-with-gideon-mugshot-and-resolve"
+    ]
+  },
+  "artistIndex": {
+    "rivers of nihil": "artist-rivers-of-nihil",
+    "the queers": "artist-the-queers",
+    "nekrogoblikon": "artist-nekrogoblikon",
+    "enterprise earth": "artist-enterprise-earth",
+    "teenage bottlerocket": "artist-teenage-bottlerocket",
+    "red leather": "artist-red-leather",
+    "i see stars": "artist-i-see-stars",
+    "obscura": "artist-obscura",
+    "allegaeon": "artist-allegaeon",
+    "cognitive": "artist-cognitive",
+    "cryptosis": "artist-cryptosis",
+    "subhumans": "artist-subhumans",
+    "prayers": "artist-prayers",
+    "my life": "artist-my-life",
+    "the thrill kill kult": "artist-the-thrill-kill-kult",
+    "magnolia park": "artist-magnolia-park",
+    "silly goose": "artist-silly-goose",
+    "bit brigade": "artist-bit-brigade",
+    "des rocs": "artist-des-rocs",
+    "buckethead": "artist-buckethead",
+    "slomosa": "artist-slomosa",
+    "cold": "artist-cold",
+    "devotchka - aa tribute to the music of little miss sunshinea": "artist-devotchka-aa-tribute-to-the-music-of-little-miss-sunshinea",
+    "the black dahlia murder": "artist-the-black-dahlia-murder",
+    "the acacia strain": "artist-the-acacia-strain",
+    "lords of acid": "artist-lords-of-acid",
+    "saxsquatch": "artist-saxsquatch",
+    "the spill canvas": "artist-the-spill-canvas",
+    "unknown mortal orchestra": "artist-unknown-mortal-orchestra",
+    "powerman 5000": "artist-powerman-5000",
+    "archspire": "artist-archspire",
+    "undeath": "artist-undeath",
+    "alpha wolf": "artist-alpha-wolf",
+    "gideon": "artist-gideon",
+    "mugshot": "artist-mugshot",
+    "resolve": "artist-resolve"
+  }
+}

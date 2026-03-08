@@ -1,9 +1,13 @@
 // app/venues/[slug]/page.tsx
 import type { Metadata } from "next";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import venuesJson from "@/data/venues.json";
-import { blobReadJson } from "@/lib/blobJson";
+import { getEventsCatalog } from "@/lib/events/getCatalog";
+import { VENUE_LEDGER_BY_SLUG, VENUE_LEDGER_REGISTRY } from "@/lib/venues/ledgerRegistry";
+import MusicWave from "@/components/MusicWave";
 
 export const runtime = "nodejs";
 export const revalidate = 300;
@@ -26,16 +30,13 @@ type VenueRec = {
 };
 
 type VenueCache = {
-  generatedAt: string;
-  venue: {
-    siteSlug: string;
-    siteName: string;
-    seatgeekVenueId?: number;
-  };
+  generatedAt?: string;
   events: Array<{
-    id: number;
+    id: string;
     title: string;
     datetime_local: string;
+    dateKey: string;
+    sourceId: string | null;
     url?: string;
     performers?: Array<{ name?: string; image?: string }>;
     venue?: { siteSlug?: string; siteName?: string };
@@ -44,6 +45,7 @@ type VenueCache = {
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 const DCC = process.env.NEXT_PUBLIC_DCC_ORIGIN || "https://destinationcommandcenter.com";
+const EVENTS_SNAPSHOT_DIR = path.join(process.cwd(), "data", "snapshots", "events");
 
 const SITE_KEYWORDS = [
   "Red Rocks shuttle",
@@ -70,6 +72,16 @@ function getVenue(slug: string): VenueRec | null {
 
 function displayName(slug: string, v: VenueRec) {
   return v?.name ?? slug.replace(/-/g, " ");
+}
+
+function eventDateTimeLocal(e: { datetime_local: string }) {
+  return e.datetime_local;
+}
+
+function parseNumericId(s: string | null | undefined): number | null {
+  if (!s) return null;
+  const n = Number(s);
+  return Number.isFinite(n) ? n : null;
 }
 
 function cityLine(v: VenueRec) {
@@ -217,13 +229,52 @@ function eventsItemListJsonLd(slug: string, v: VenueRec, events: VenueCache["eve
         offers: {
           "@type": "Offer",
           name: "Shuttle Ride Options",
-          url: `${SITE}/book?venue=${slug}&event=${e.id}`,
+          url: `${SITE}/find?date=${encodeURIComponent(e.dateKey)}&qty=2`,
           priceCurrency: "USD",
           availability: "https://schema.org/InStock",
         },
       },
     })),
   };
+}
+
+function toVenueEvents(
+  allEvents: Awaited<ReturnType<typeof getEventsCatalog>>,
+  venueSlug: string
+): VenueCache["events"] {
+  const now = new Date();
+  const rows = allEvents
+    .filter((event) => event.venueId === venueSlug)
+    .map((event) => {
+      const datetime_local = event.startLocal ?? event.startAt ?? `${event.dateKey}T19:00:00`;
+      return {
+        id: event.id,
+        title: event.name,
+        datetime_local,
+        dateKey: event.dateKey,
+        sourceId: event.sourceId,
+        url: event.ticketUrl ?? undefined,
+        performers: event.artistNames.map((name) => ({ name })),
+        venue: { siteSlug: venueSlug, siteName: venueSlug },
+      };
+    })
+    .filter((event) => {
+      const dt = safeDate(event.datetime_local);
+      return dt && dt >= now;
+    })
+    .sort((a, b) => eventDateTimeLocal(a).localeCompare(eventDateTimeLocal(b)));
+
+  return rows.slice(0, 24);
+}
+
+async function readSnapshotGeneratedAt(year = 2026): Promise<string | null> {
+  try {
+    const raw = await readFile(path.join(EVENTS_SNAPSHOT_DIR, `all-${year}.json`), "utf8");
+    const parsed = JSON.parse(raw) as { generatedAt?: string };
+    return typeof parsed.generatedAt === "string" ? parsed.generatedAt : null;
+  } catch {
+    return null;
+  }
 }
 
 function venueFaqJsonLd(slug: string, v: VenueRec) {
@@ -273,7 +324,10 @@ function venueFaqJsonLd(slug: string, v: VenueRec) {
 }
 
 export async function generateStaticParams() {
-  return Object.keys(venuesJson as Record<string, any>).map((slug) => ({ slug }));
+  const fromVenueData = Object.keys(venuesJson as Record<string, any>);
+  const fromLedgerRegistry = VENUE_LEDGER_REGISTRY.map((venue) => venue.slug);
+  const slugs = Array.from(new Set([...fromVenueData, ...fromLedgerRegistry]));
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -283,9 +337,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug: rawSlug } = await params;
   const slug = normSlug(rawSlug);
-  const v = getVenue(slug);
+  const identity = VENUE_LEDGER_BY_SLUG.get(slug);
+  const v = getVenue(slug) ?? {};
 
-  if (!v) {
+  if (!identity && !getVenue(slug)) {
     return {
       title: "Venue | Party at Red Rocks",
       description:
@@ -294,14 +349,18 @@ export async function generateMetadata({
     };
   }
 
-  const title = venueTitle(slug, v);
-  const description = venueDescription(slug, v);
+  const withIdentityName = {
+    ...v,
+    name: identity?.name ?? v.name,
+  };
+  const title = venueTitle(slug, withIdentityName);
+  const description = venueDescription(slug, withIdentityName);
   const url = `${SITE}/venues/${slug}`;
 
   return {
     title,
     description,
-    keywords: venueKeywords(slug, v),
+    keywords: venueKeywords(slug, withIdentityName),
     alternates: { canonical: url },
     openGraph: {
       title,
@@ -314,7 +373,7 @@ export async function generateMetadata({
           url: `${SITE}/og-default.jpg`,
           width: 1200,
           height: 630,
-          alt: `${displayName(slug, v)} venue intel`,
+          alt: `${displayName(slug, withIdentityName)} venue intel`,
         },
       ],
     },
@@ -345,49 +404,20 @@ export default async function VenuePage({
 }) {
   const { slug: rawSlug } = await params;
   const slug = normSlug(rawSlug);
-  const v = getVenue(slug);
-  if (!v) return notFound();
-
-  let cache: VenueCache | null = null;
-  try {
-    cache = await blobReadJson<VenueCache>(`cache/venues/${slug}.json`, {
-      revalidateSeconds: 300,
-    });
-  } catch {
-    cache = null;
-  }
-
-  const name = displayName(slug, v);
+  const identity = VENUE_LEDGER_BY_SLUG.get(slug);
+  if (!identity) return notFound();
+  const v = getVenue(slug) ?? {};
+  const name = identity.name;
   const city = cityLine(v);
   const dccVenueUrl = `${DCC}/venues/${slug}`;
-
-  const now = new Date();
-
-  // clean + stable: upcoming only, dedupe, sort asc
-  const events = (() => {
-    const seen = new Set<number>();
-    const list = (cache?.events ?? [])
-      .filter((e) => Number.isFinite(Number(e?.id)) && !!e?.datetime_local)
-      .map((e) => ({ e, dt: safeDate(e.datetime_local) }))
-      .filter(({ dt }) => dt && dt >= now)
-      .sort((a, b) => (a.dt!.getTime() - b.dt!.getTime()))
-      .map(({ e }) => e);
-
-    const out: VenueCache["events"] = [];
-    for (const e of list) {
-      const id = Number(e.id);
-      if (seen.has(id)) continue;
-      seen.add(id);
-      out.push(e);
-      if (out.length >= 24) break;
-    }
-    return out;
-  })();
-
-  const updatedAt = cache?.generatedAt ?? null;
+  const [allEvents, updatedAt] = await Promise.all([
+    getEventsCatalog(2026, "all"),
+    readSnapshotGeneratedAt(2026),
+  ]);
+  const events = toVenueEvents(allEvents, slug);
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-12">
+    <main className="comic-page pt-24 pb-10">
       {/* JSON-LD (high impact for SEO + GEO) */}
       <script
         type="application/ld+json"
@@ -413,9 +443,10 @@ export default async function VenuePage({
           __html: JSON.stringify(venueFaqJsonLd(slug, v)),
         }}
       />
+      <section className="comic-wrap">
 
       {/* HERO */}
-      <div className="rounded-[32px] border border-soft panel p-8 shadow-[0_22px_70px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+      <div className="comic-hero rounded-[32px] border border-soft panel p-8 shadow-[0_22px_70px_rgba(0,0,0,0.45)] backdrop-blur-xl">
         <div className="flex flex-wrap items-center gap-2">
           <div className="inline-flex items-center rounded-full pill px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white/80">
             Venue Intel
@@ -444,6 +475,9 @@ export default async function VenuePage({
           Upcoming shows, post-show pickup logic, and ride options. We cover Denver, Boulder, and
           Colorado Springs — book a guaranteed ride home after the last song.
         </p>
+        <div className="mt-4">
+          <MusicWave bars={22} />
+        </div>
 
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <Link
@@ -550,10 +584,12 @@ export default async function VenuePage({
                 </div>
 
                 <div className="mt-4 flex flex-wrap gap-3">
-                  <Link className="text-neon-blue font-bold" href={`/shows/${e.id}`}>
-                    Full Intel →
-                  </Link>
-                  <Link className="text-white/70 underline" href={`/book?event=${e.id}&venue=${slug}`}>
+                  {parseNumericId(e.sourceId) ? (
+                    <Link className="text-neon-blue font-bold" href={`/shows/${parseNumericId(e.sourceId)}`}>
+                      Full Intel →
+                    </Link>
+                  ) : null}
+                  <Link className="text-white/70 underline" href={`/find?date=${encodeURIComponent(e.dateKey)}&qty=2`}>
                     Ride Options
                   </Link>
                   {e.url ? (
@@ -583,10 +619,10 @@ export default async function VenuePage({
         </section>
       ) : (
         <div className="mt-10 rounded-3xl border border-soft panel p-6 text-white/70">
-          <span className="font-black">Upcoming at {name}:</span> Not synced yet. Run{" "}
-          <code className="text-white/85">/api/cron/sync</code>.
+          <span className="font-black">Upcoming at {name}:</span> No upcoming events found in the current snapshot.
         </div>
       )}
+      </section>
     </main>
   );
 }

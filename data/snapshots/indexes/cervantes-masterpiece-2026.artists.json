@@ -1,0 +1,42 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "artistToEvents": {
+    "artist-ghostface-killah": [
+      "cervantes-masterpiece-2026-02-12-ghostface-killah"
+    ],
+    "artist-fox-stevenson": [
+      "cervantes-masterpiece-2026-02-17-fox-stevenson"
+    ],
+    "artist-whethan-16": [
+      "cervantes-masterpiece-2026-02-26-whethan-16",
+      "cervantes-masterpiece-2026-02-27-whethan-16"
+    ],
+    "artist-cash-cobain": [
+      "cervantes-masterpiece-2026-03-12-cash-cobain"
+    ],
+    "artist-kwn": [
+      "cervantes-masterpiece-2026-03-20-kwn"
+    ],
+    "artist-ruel": [
+      "cervantes-masterpiece-2026-03-25-ruel"
+    ],
+    "artist-sasquatch-16": [
+      "cervantes-masterpiece-2026-05-02-sasquatch-16"
+    ],
+    "artist-iration": [
+      "cervantes-masterpiece-2026-06-19-iration",
+      "cervantes-masterpiece-2026-06-20-iration"
+    ]
+  },
+  "artistIndex": {
+    "ghostface killah": "artist-ghostface-killah",
+    "fox stevenson": "artist-fox-stevenson",
+    "whethan (16+)": "artist-whethan-16",
+    "cash cobain": "artist-cash-cobain",
+    "kwn": "artist-kwn",
+    "ruel": "artist-ruel",
+    "sasquatch (16+)": "artist-sasquatch-16",
+    "iration": "artist-iration"
+  }
+}

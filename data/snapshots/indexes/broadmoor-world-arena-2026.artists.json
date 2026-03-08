@@ -1,0 +1,32 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "artistToEvents": {
+    "artist-tobymac": [
+      "broadmoor-world-arena-2026-03-08-tobymac-with-crowder-and-jeremy-camp"
+    ],
+    "artist-crowder": [
+      "broadmoor-world-arena-2026-03-08-tobymac-with-crowder-and-jeremy-camp"
+    ],
+    "artist-jeremy-camp": [
+      "broadmoor-world-arena-2026-03-08-tobymac-with-crowder-and-jeremy-camp"
+    ],
+    "artist-heart": [
+      "broadmoor-world-arena-2026-03-09-heart-with-lucinda-williams"
+    ],
+    "artist-lucinda-williams": [
+      "broadmoor-world-arena-2026-03-09-heart-with-lucinda-williams"
+    ],
+    "artist-phil-wickham": [
+      "broadmoor-world-arena-2026-05-21-phil-wickham"
+    ]
+  },
+  "artistIndex": {
+    "tobymac": "artist-tobymac",
+    "crowder": "artist-crowder",
+    "jeremy camp": "artist-jeremy-camp",
+    "heart": "artist-heart",
+    "lucinda williams": "artist-lucinda-williams",
+    "phil wickham": "artist-phil-wickham"
+  }
+}

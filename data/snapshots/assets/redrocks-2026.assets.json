@@ -1,0 +1,720 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "events": {
+    "rr-2026-02-07-icelantic-s-winter-on-the-rocks": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-03-27-crankdat": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-03-28-ravenscoon-and-jantsen": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-04-03-inzo": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-04-04-it-s-murph-presents-murph-rocks": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-04-10-zingara-and-level-up": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-04-11-liquid-stranger": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-04-15-john-mulaney-mister-whatever": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-04-16-bbno": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-04-17-sublime": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-04-18-sublime": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-04-19-wiz-khalifa": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-04-20-ice-cube": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-04-21-ethel-cain": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-04-23-subtronics-cyclops-rocks-vi-night-1": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-04-24-subtronics-cyclops-rocks-vi-night-2": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-04-26-bob-moses-and-cannons": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-04-28-lewis-capaldi": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-04-29-lewis-capaldi": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-04-30-electric-callboy": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-05-01-two-friends": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-05-02-jason-isbell-and-the-400-unit": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-05-03-puscifer": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-05-06-bright-eyes-21-years-of-wide-awake-and-digital-ash": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-05-07-alejandro-fern-ndez": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-05-09-cloonee": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-05-11-yungblud-idols-world-tour": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-05-13-russell-dickerson": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-05-16-lightcode-by-lsdream-dreamrocks-ii": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-05-17-the-elovaters": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-05-18-khalid": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-05-19-kevin-gates": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-05-21-flipturn": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-05-22-seven-lions": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-05-23-fisher": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-05-24-alabama-shakes": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-05-25-alabama-shakes": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-05-29-michael-franti-and-spearhead": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-05-30-alan-walker": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-06-02-alex-warren": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-06-03-yo-yo-ma-with-colorado-symphony": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-06-04-brit-floyd-the-wall": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-06-05-brit-floyd-dark-side-of-the-moon": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-06-06-big-head-todd-and-the-monsters": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-06-10-lord-huron": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-06-14-trevor-hall-thievery-corporation-dirtwire": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-06-15-rod-stewart": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-06-16-rod-stewart": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-06-17-amyl-and-the-sniffers": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-06-18-third-day-30th-anniversary": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-06-19-louis-tomlinson": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-06-20-o-a-r": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-06-23-weird-al-yankovic": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-07-01-treaty-oak-revival": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-07-02-deadrocks-xii-zeds-dead": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-07-03-deadrocks-xii-zeds-dead": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-11-14-mike": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-11-15-mike": {
+      "local": null,
+      "remote": null
+    }
+  },
+  "artists": {
+    "artist-2-chainz": {
+      "local": null,
+      "remote": null
+    },
+    "artist-4-non-blondes": {
+      "local": null,
+      "remote": null
+    },
+    "artist-9million": {
+      "local": null,
+      "remote": null
+    },
+    "artist-alabama-shakes": {
+      "local": null,
+      "remote": null
+    },
+    "artist-alan-walker": {
+      "local": null,
+      "remote": null
+    },
+    "artist-alejandro-fern-ndez": {
+      "local": null,
+      "remote": null
+    },
+    "artist-alex-warren": {
+      "local": null,
+      "remote": null
+    },
+    "artist-amyl-and-the-sniffers": {
+      "local": null,
+      "remote": null
+    },
+    "artist-avello": {
+      "local": null,
+      "remote": null
+    },
+    "artist-berner": {
+      "local": null,
+      "remote": null
+    },
+    "artist-bbno": {
+      "local": null,
+      "remote": null
+    },
+    "artist-big-boi": {
+      "local": null,
+      "remote": null
+    },
+    "artist-big-head-todd-and-the-monsters": {
+      "local": null,
+      "remote": null
+    },
+    "artist-bigxthaplug": {
+      "local": null,
+      "remote": null
+    },
+    "artist-bob-moses-and-cannons": {
+      "local": null,
+      "remote": null
+    },
+    "artist-bright-eyes-21-years-of-wide-awake-and-digital-ash": {
+      "local": null,
+      "remote": null
+    },
+    "artist-brit-floyd-dark-side-of-the-moon": {
+      "local": null,
+      "remote": null
+    },
+    "artist-brit-floyd-the-wall": {
+      "local": null,
+      "remote": null
+    },
+    "artist-bumpin-uglies": {
+      "local": null,
+      "remote": null
+    },
+    "artist-camila-fern-ndez": {
+      "local": null,
+      "remote": null
+    },
+    "artist-capochino": {
+      "local": null,
+      "remote": null
+    },
+    "artist-chevy-woods": {
+      "local": null,
+      "remote": null
+    },
+    "artist-chozen-b2b-noetika": {
+      "local": null,
+      "remote": null
+    },
+    "artist-cloonee": {
+      "local": null,
+      "remote": null
+    },
+    "artist-codefendants": {
+      "local": null,
+      "remote": null
+    },
+    "artist-cole-knight": {
+      "local": null,
+      "remote": null
+    },
+    "artist-collie-buddz": {
+      "local": null,
+      "remote": null
+    },
+    "artist-colorado-symphony": {
+      "local": null,
+      "remote": null
+    },
+    "artist-common-creation": {
+      "local": null,
+      "remote": null
+    },
+    "artist-common-kings": {
+      "local": null,
+      "remote": null
+    },
+    "artist-crankdat": {
+      "local": null,
+      "remote": null
+    },
+    "artist-czarface": {
+      "local": null,
+      "remote": null
+    },
+    "artist-d-o-d": {
+      "local": null,
+      "remote": null
+    },
+    "artist-daggz": {
+      "local": null,
+      "remote": null
+    },
+    "artist-dave-hill": {
+      "local": null,
+      "remote": null
+    },
+    "artist-deadrocks-xii-zeds-dead": {
+      "local": null,
+      "remote": null
+    },
+    "artist-dev": {
+      "local": null,
+      "remote": null
+    },
+    "artist-dj-bonics": {
+      "local": null,
+      "remote": null
+    },
+    "artist-donavon-frankenreiter": {
+      "local": null,
+      "remote": null
+    },
+    "artist-dr-fresch": {
+      "local": null,
+      "remote": null
+    },
+    "artist-ethel-cain": {
+      "local": null,
+      "remote": null
+    },
+    "artist-electric-callboy": {
+      "local": null,
+      "remote": null
+    },
+    "artist-fisher": {
+      "local": null,
+      "remote": null
+    },
+    "artist-flipturn": {
+      "local": null,
+      "remote": null
+    },
+    "artist-gavin-degraw": {
+      "local": null,
+      "remote": null
+    },
+    "artist-gillian-welch-and-david-rawlings": {
+      "local": null,
+      "remote": null
+    },
+    "artist-hershe": {
+      "local": null,
+      "remote": null
+    },
+    "artist-ice-cube": {
+      "local": null,
+      "remote": null
+    },
+    "artist-icelantic-s-winter-on-the-rocks": {
+      "local": null,
+      "remote": null
+    },
+    "artist-inzo": {
+      "local": null,
+      "remote": null
+    },
+    "artist-it-s-murph-presents-murph-rocks": {
+      "local": null,
+      "remote": null
+    },
+    "artist-jason-isbell-and-the-400-unit": {
+      "local": null,
+      "remote": null
+    },
+    "artist-jason-leech": {
+      "local": null,
+      "remote": null
+    },
+    "artist-john-mulaney-mister-whatever": {
+      "local": null,
+      "remote": null
+    },
+    "artist-joy-crookes": {
+      "local": null,
+      "remote": null
+    },
+    "artist-jungle-bobby": {
+      "local": null,
+      "remote": null
+    },
+    "artist-kaarija": {
+      "local": null,
+      "remote": null
+    },
+    "artist-kettama": {
+      "local": null,
+      "remote": null
+    },
+    "artist-kevin-gates": {
+      "local": null,
+      "remote": null
+    },
+    "artist-khalid": {
+      "local": null,
+      "remote": null
+    },
+    "artist-l7": {
+      "local": null,
+      "remote": null
+    },
+    "artist-lauv": {
+      "local": null,
+      "remote": null
+    },
+    "artist-lewis-capaldi": {
+      "local": null,
+      "remote": null
+    },
+    "artist-lightcode-by-lsdream-dreamrocks-ii": {
+      "local": null,
+      "remote": null
+    },
+    "artist-liquid-stranger": {
+      "local": null,
+      "remote": null
+    },
+    "artist-lord-huron": {
+      "local": null,
+      "remote": null
+    },
+    "artist-louis-tomlinson": {
+      "local": null,
+      "remote": null
+    },
+    "artist-lumasi": {
+      "local": null,
+      "remote": null
+    },
+    "artist-me-n": {
+      "local": null,
+      "remote": null
+    },
+    "artist-michael-franti-and-spearhead": {
+      "local": null,
+      "remote": null
+    },
+    "artist-mick-jenkins": {
+      "local": null,
+      "remote": null
+    },
+    "artist-mike": {
+      "local": null,
+      "remote": null
+    },
+    "artist-niko-moon": {
+      "local": null,
+      "remote": null
+    },
+    "artist-o-a-r": {
+      "local": null,
+      "remote": null
+    },
+    "artist-oliver-tree": {
+      "local": null,
+      "remote": null
+    },
+    "artist-omar": {
+      "local": null,
+      "remote": null
+    },
+    "artist-oskar-med-k": {
+      "local": null,
+      "remote": null
+    },
+    "artist-party-dozen": {
+      "local": null,
+      "remote": null
+    },
+    "artist-pawpaw-rod": {
+      "local": null,
+      "remote": null
+    },
+    "artist-pepper": {
+      "local": null,
+      "remote": null
+    },
+    "artist-phantom-planet": {
+      "local": null,
+      "remote": null
+    },
+    "artist-polaris": {
+      "local": null,
+      "remote": null
+    },
+    "artist-protoje": {
+      "local": null,
+      "remote": null
+    },
+    "artist-puddles-pity-party": {
+      "local": null,
+      "remote": null
+    },
+    "artist-puscifer": {
+      "local": null,
+      "remote": null
+    },
+    "artist-ravenscoon-and-jantsen": {
+      "local": null,
+      "remote": null
+    },
+    "artist-richy-mitch-and-the-coal-miners": {
+      "local": null,
+      "remote": null
+    },
+    "artist-rod-stewart": {
+      "local": null,
+      "remote": null
+    },
+    "artist-russell-dickerson": {
+      "local": null,
+      "remote": null
+    },
+    "artist-saka": {
+      "local": null,
+      "remote": null
+    },
+    "artist-scene-queen": {
+      "local": null,
+      "remote": null
+    },
+    "artist-seven-lions": {
+      "local": null,
+      "remote": null
+    },
+    "artist-shoreline-mafia": {
+      "local": null,
+      "remote": null
+    },
+    "artist-slang-dogs": {
+      "local": null,
+      "remote": null
+    },
+    "artist-smino": {
+      "local": null,
+      "remote": null
+    },
+    "artist-smoakland": {
+      "local": null,
+      "remote": null
+    },
+    "artist-spenny": {
+      "local": null,
+      "remote": null
+    },
+    "artist-subdocta": {
+      "local": null,
+      "remote": null
+    },
+    "artist-sublime": {
+      "local": null,
+      "remote": null
+    },
+    "artist-subtronics-cyclops-rocks-vi-night-1": {
+      "local": null,
+      "remote": null
+    },
+    "artist-subtronics-cyclops-rocks-vi-night-2": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-aces": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-elovaters": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-hip-abduction": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-original-wailers": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-underachievers": {
+      "local": null,
+      "remote": null
+    },
+    "artist-third-day-30th-anniversary": {
+      "local": null,
+      "remote": null
+    },
+    "artist-treaty-oak-revival": {
+      "local": null,
+      "remote": null
+    },
+    "artist-trevor-hall-thievery-corporation-dirtwire": {
+      "local": null,
+      "remote": null
+    },
+    "artist-trivecta": {
+      "local": null,
+      "remote": null
+    },
+    "artist-tvboo-b2b-ahee": {
+      "local": null,
+      "remote": null
+    },
+    "artist-two-friends": {
+      "local": null,
+      "remote": null
+    },
+    "artist-ty-dolla-ign": {
+      "local": null,
+      "remote": null
+    },
+    "artist-weird-al-yankovic": {
+      "local": null,
+      "remote": null
+    },
+    "artist-what-so-not": {
+      "local": null,
+      "remote": null
+    },
+    "artist-wiz-khalifa": {
+      "local": null,
+      "remote": null
+    },
+    "artist-yng-martyr": {
+      "local": null,
+      "remote": null
+    },
+    "artist-yo-yo-ma": {
+      "local": null,
+      "remote": null
+    },
+    "artist-yungblud-idols-world-tour": {
+      "local": null,
+      "remote": null
+    },
+    "artist-zingara-and-level-up": {
+      "local": null,
+      "remote": null
+    }
+  }
+}

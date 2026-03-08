@@ -1,5 +1,4 @@
 import Link from "next/link";
-import SiteFooter from "@/components/SiteFooter";
 
 export const metadata = {
   title: "Other Venues + Mishawaka | Party at Red Rocks",
@@ -127,8 +126,6 @@ export default function OtherVenuesPage() {
           </div>
         </div>
       </section>
-
-      <SiteFooter />
     </main>
   );
 }

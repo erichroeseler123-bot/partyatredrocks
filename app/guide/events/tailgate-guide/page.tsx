@@ -81,7 +81,7 @@ export default function TailgateGuide() {
           Lock in your 2026 shuttle spot today. Shared rides for $59, 
           private Suburbans from $299. No surges, no stress.
         </p>
-        <Link href="/book-shuttle" className="bg-white text-red-600 px-12 py-5 rounded-full font-black uppercase hover:bg-zinc-100 transition shadow-lg inline-block">
+        <Link href="/find" className="bg-white text-red-600 px-12 py-5 rounded-full font-black uppercase hover:bg-zinc-100 transition shadow-lg inline-block">
           Book Your 2026 Shuttle
         </Link>
       </div>

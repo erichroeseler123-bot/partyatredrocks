@@ -1,0 +1,448 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "docs": [
+    {
+      "eventKey": "gothic-theatre-2026-01-24-glaive-16",
+      "title": "glaive (16+)",
+      "artistNames": [
+        "glaive (16+)"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-01-24",
+      "tags": [
+        "gothic-theatre",
+        "glaive (16+)"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-01-30-shakedown-street-grateful-dead-tribute-16",
+      "title": "Shakedown Street - Grateful Dead Tribute (16+)",
+      "artistNames": [
+        "Shakedown Street - Grateful Dead Tribute (16+)"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-01-30",
+      "tags": [
+        "gothic-theatre",
+        "shakedown street - grateful dead tribute (16+)"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-01-31-bane-with-rotting-out-eyes-of-salt-and-warmachine-16",
+      "title": "Bane with Rotting Out, Eyes of Salt, and Warmachine (16+)",
+      "artistNames": [
+        "Bane",
+        "Rotting Out",
+        "Eyes of Salt",
+        "Warmachine (16+)"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-01-31",
+      "tags": [
+        "gothic-theatre",
+        "bane",
+        "rotting out",
+        "eyes of salt",
+        "warmachine (16+)"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-02-06-north-mississippi-allstars-16",
+      "title": "North Mississippi Allstars (16+)",
+      "artistNames": [
+        "North Mississippi Allstars (16+)"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-02-06",
+      "tags": [
+        "gothic-theatre",
+        "north mississippi allstars (16+)"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-02-10-sudan-archives-16",
+      "title": "Sudan Archives (16+)",
+      "artistNames": [
+        "Sudan Archives (16+)"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-02-10",
+      "tags": [
+        "gothic-theatre",
+        "sudan archives (16+)"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-02-13-sons-of-legion-16",
+      "title": "Sons of Legion (16+)",
+      "artistNames": [
+        "Sons of Legion (16+)"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-02-13",
+      "tags": [
+        "gothic-theatre",
+        "sons of legion (16+)"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-02-14-the-record-company-16",
+      "title": "The Record Company (16+)",
+      "artistNames": [
+        "The Record Company (16+)"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-02-14",
+      "tags": [
+        "gothic-theatre",
+        "the record company (16+)"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-02-22-clipping-16",
+      "title": "Clipping. (16+)",
+      "artistNames": [
+        "Clipping. (16+)"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-02-22",
+      "tags": [
+        "gothic-theatre",
+        "clipping. (16+)"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-02-23-black-pistol-fire-16",
+      "title": "Black Pistol Fire (16+)",
+      "artistNames": [
+        "Black Pistol Fire (16+)"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-02-23",
+      "tags": [
+        "gothic-theatre",
+        "black pistol fire (16+)"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-02-27-denm-with-evening-elephants-and-obed-padilla",
+      "title": "DENM with Evening Elephants and Obed Padilla",
+      "artistNames": [
+        "DENM",
+        "Evening Elephants",
+        "Obed Padilla"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-02-27",
+      "tags": [
+        "gothic-theatre",
+        "denm",
+        "evening elephants",
+        "obed padilla"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-03-04-margo-price-with-shannon-mcnally",
+      "title": "Margo Price with Shannon McNally",
+      "artistNames": [
+        "Margo Price",
+        "Shannon McNally"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-03-04",
+      "tags": [
+        "gothic-theatre",
+        "margo price",
+        "shannon mcnally"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-03-07-benee-with-bayli-16",
+      "title": "BENEE with BAYLI (16+)",
+      "artistNames": [
+        "BENEE",
+        "BAYLI (16+)"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-03-07",
+      "tags": [
+        "gothic-theatre",
+        "benee",
+        "bayli (16+)"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-03-13-maggie-lindemann-16",
+      "title": "Maggie Lindemann (16+)",
+      "artistNames": [
+        "Maggie Lindemann (16+)"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-03-13",
+      "tags": [
+        "gothic-theatre",
+        "maggie lindemann (16+)"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-03-14-the-strumbellas",
+      "title": "The Strumbellas",
+      "artistNames": [
+        "The Strumbellas"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-03-14",
+      "tags": [
+        "gothic-theatre",
+        "the strumbellas"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-03-16-indigo-de-souza-16",
+      "title": "Indigo De Souza (16+)",
+      "artistNames": [
+        "Indigo De Souza (16+)"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-03-16",
+      "tags": [
+        "gothic-theatre",
+        "indigo de souza (16+)"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-03-21-eddie-9v-16",
+      "title": "Eddie 9V (16+)",
+      "artistNames": [
+        "Eddie 9V (16+)"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-03-21",
+      "tags": [
+        "gothic-theatre",
+        "eddie 9v (16+)"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-03-26-the-early-november-and-hellogoodbye-16",
+      "title": "The Early November and Hellogoodbye (16+)",
+      "artistNames": [
+        "The Early November and Hellogoodbye (16+)"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-03-26",
+      "tags": [
+        "gothic-theatre",
+        "the early november and hellogoodbye (16+)"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-04-03-orbit-culture",
+      "title": "Orbit Culture",
+      "artistNames": [
+        "Orbit Culture"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-04-03",
+      "tags": [
+        "gothic-theatre",
+        "orbit culture"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-04-08-goldford-16",
+      "title": "GoldFord (16+)",
+      "artistNames": [
+        "GoldFord (16+)"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-04-08",
+      "tags": [
+        "gothic-theatre",
+        "goldford (16+)"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-04-11-d-r-i-dirty-rotten-imbeciles-with-clusterfux-and-deathwish-16",
+      "title": "D.R.I. - Dirty Rotten Imbeciles with Clusterfux and Deathwish (16+)",
+      "artistNames": [
+        "D.R.I. - Dirty Rotten Imbeciles",
+        "Clusterfux",
+        "Deathwish (16+)"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-04-11",
+      "tags": [
+        "gothic-theatre",
+        "d.r.i. - dirty rotten imbeciles",
+        "clusterfux",
+        "deathwish (16+)"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-04-12-fcukers-16",
+      "title": "Fcukers (16+)",
+      "artistNames": [
+        "Fcukers (16+)"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-04-12",
+      "tags": [
+        "gothic-theatre",
+        "fcukers (16+)"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-04-17-bleed-from-within",
+      "title": "Bleed From Within",
+      "artistNames": [
+        "Bleed From Within"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-04-17",
+      "tags": [
+        "gothic-theatre",
+        "bleed from within"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-04-18-tyler-braden-18",
+      "title": "Tyler Braden (18+)",
+      "artistNames": [
+        "Tyler Braden (18+)"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-04-18",
+      "tags": [
+        "gothic-theatre",
+        "tyler braden (18+)"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-04-19-chris-webby-16",
+      "title": "Chris Webby (16+)",
+      "artistNames": [
+        "Chris Webby (16+)"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-04-19",
+      "tags": [
+        "gothic-theatre",
+        "chris webby (16+)"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-04-25-tourist",
+      "title": "Tourist",
+      "artistNames": [
+        "Tourist"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-04-25",
+      "tags": [
+        "gothic-theatre",
+        "tourist"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-05-01-witchz",
+      "title": "WITCHZ",
+      "artistNames": [
+        "WITCHZ"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-05-01",
+      "tags": [
+        "gothic-theatre",
+        "witchz"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-05-05-the-new-pornographers-with-will-sheff-16",
+      "title": "The New Pornographers with Will Sheff (16+)",
+      "artistNames": [
+        "The New Pornographers",
+        "Will Sheff (16+)"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-05-05",
+      "tags": [
+        "gothic-theatre",
+        "the new pornographers",
+        "will sheff (16+)"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-05-06-emo-orchestra",
+      "title": "Emo Orchestra",
+      "artistNames": [
+        "Emo Orchestra"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-05-06",
+      "tags": [
+        "gothic-theatre",
+        "emo orchestra"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-05-14-the-moss",
+      "title": "The Moss",
+      "artistNames": [
+        "The Moss"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-05-14",
+      "tags": [
+        "gothic-theatre",
+        "the moss"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-05-23-cradle-of-filth",
+      "title": "Cradle of Filth",
+      "artistNames": [
+        "Cradle of Filth"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-05-23",
+      "tags": [
+        "gothic-theatre",
+        "cradle of filth"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-05-26-thornhill-with-156-silence-fox-lake-and-vianova-16",
+      "title": "Thornhill with 156/Silence, Fox Lake and vianova (16+)",
+      "artistNames": [
+        "Thornhill",
+        "156/Silence",
+        "Fox Lake",
+        "vianova (16+)"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-05-26",
+      "tags": [
+        "gothic-theatre",
+        "thornhill",
+        "156/silence",
+        "fox lake",
+        "vianova (16+)"
+      ]
+    },
+    {
+      "eventKey": "gothic-theatre-2026-06-17-amble",
+      "title": "Amble",
+      "artistNames": [
+        "Amble"
+      ],
+      "venueId": "gothic-theatre",
+      "dateKey": "2026-06-17",
+      "tags": [
+        "gothic-theatre",
+        "amble"
+      ]
+    }
+  ]
+}

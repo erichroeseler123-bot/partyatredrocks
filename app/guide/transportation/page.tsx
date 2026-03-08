@@ -36,7 +36,7 @@ export default function Page() {
         </div>
 
         <div className="mt-10 flex flex-wrap gap-3">
-          <Link href="/book-shuttle" className="btn-primary">
+          <Link href="/find" className="btn-primary">
             Book Shuttle — $59/pp →
           </Link>
           <Link

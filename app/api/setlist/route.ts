@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const artist = searchParams.get('artist');
-  const apiKey = process.env.SETLIST_API_KEY;
+  const apiKey = process.env.SETLIST_FM_API_KEY || process.env.SETLIST_API_KEY;
 
   if (!artist || !apiKey) {
     return NextResponse.json({ error: 'Missing Required Intelligence' }, { status: 400 });

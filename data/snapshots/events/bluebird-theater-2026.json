@@ -1,0 +1,922 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "events": [
+    {
+      "id": "bluebird-theater-2026-01-26-ruston-kelly-with-verygently-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Ruston Kelly with verygently (16+)",
+      "startAt": "2026-01-26T19:00:00",
+      "startLocal": "2026-01-26T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-ruston-kelly"
+      ],
+      "artists": [
+        "artist-ruston-kelly",
+        "artist-verygently-16"
+      ],
+      "artistNames": [
+        "Ruston Kelly",
+        "verygently (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-01-26",
+      "slug": "2026-01-26-ruston-kelly-with-verygently-16"
+    },
+    {
+      "id": "bluebird-theater-2026-02-05-briscoe-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Briscoe (16+)",
+      "startAt": "2026-02-05T19:00:00",
+      "startLocal": "2026-02-05T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-briscoe-16"
+      ],
+      "artists": [
+        "artist-briscoe-16"
+      ],
+      "artistNames": [
+        "Briscoe (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-05",
+      "slug": "2026-02-05-briscoe-16"
+    },
+    {
+      "id": "bluebird-theater-2026-02-10-enjambre-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Enjambre (16+)",
+      "startAt": "2026-02-10T19:00:00",
+      "startLocal": "2026-02-10T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-enjambre-16"
+      ],
+      "artists": [
+        "artist-enjambre-16"
+      ],
+      "artistNames": [
+        "Enjambre (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-10",
+      "slug": "2026-02-10-enjambre-16"
+    },
+    {
+      "id": "bluebird-theater-2026-02-12-butcher-babies",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Butcher Babies",
+      "startAt": "2026-02-12T19:00:00",
+      "startLocal": "2026-02-12T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-butcher-babies"
+      ],
+      "artists": [
+        "artist-butcher-babies"
+      ],
+      "artistNames": [
+        "Butcher Babies"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-12",
+      "slug": "2026-02-12-butcher-babies"
+    },
+    {
+      "id": "bluebird-theater-2026-02-16-weval-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Weval (16+)",
+      "startAt": "2026-02-16T19:00:00",
+      "startLocal": "2026-02-16T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-weval-16"
+      ],
+      "artists": [
+        "artist-weval-16"
+      ],
+      "artistNames": [
+        "Weval (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-16",
+      "slug": "2026-02-16-weval-16"
+    },
+    {
+      "id": "bluebird-theater-2026-02-18-samm-henshaw",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Samm Henshaw",
+      "startAt": "2026-02-18T19:00:00",
+      "startLocal": "2026-02-18T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-samm-henshaw"
+      ],
+      "artists": [
+        "artist-samm-henshaw"
+      ],
+      "artistNames": [
+        "Samm Henshaw"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-18",
+      "slug": "2026-02-18-samm-henshaw"
+    },
+    {
+      "id": "bluebird-theater-2026-02-19-bryce-vine",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Bryce Vine",
+      "startAt": "2026-02-19T19:00:00",
+      "startLocal": "2026-02-19T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-bryce-vine"
+      ],
+      "artists": [
+        "artist-bryce-vine"
+      ],
+      "artistNames": [
+        "Bryce Vine"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-19",
+      "slug": "2026-02-19-bryce-vine"
+    },
+    {
+      "id": "bluebird-theater-2026-02-20-hayes-carll-with-ryan-montbleau-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Hayes Carll with Ryan Montbleau (16+)",
+      "startAt": "2026-02-20T19:00:00",
+      "startLocal": "2026-02-20T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-hayes-carll"
+      ],
+      "artists": [
+        "artist-hayes-carll",
+        "artist-ryan-montbleau-16"
+      ],
+      "artistNames": [
+        "Hayes Carll",
+        "Ryan Montbleau (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-20",
+      "slug": "2026-02-20-hayes-carll-with-ryan-montbleau-16"
+    },
+    {
+      "id": "bluebird-theater-2026-02-21-whitney-hanson",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Whitney Hanson",
+      "startAt": "2026-02-21T19:00:00",
+      "startLocal": "2026-02-21T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-whitney-hanson"
+      ],
+      "artists": [
+        "artist-whitney-hanson"
+      ],
+      "artistNames": [
+        "Whitney Hanson"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-21",
+      "slug": "2026-02-21-whitney-hanson"
+    },
+    {
+      "id": "bluebird-theater-2026-02-27-kpop-club-night-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "KPop Club Night (16+)",
+      "startAt": "2026-02-27T19:00:00",
+      "startLocal": "2026-02-27T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-kpop-club-night-16"
+      ],
+      "artists": [
+        "artist-kpop-club-night-16"
+      ],
+      "artistNames": [
+        "KPop Club Night (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-27",
+      "slug": "2026-02-27-kpop-club-night-16"
+    },
+    {
+      "id": "bluebird-theater-2026-03-03-alex-sampson",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Alex Sampson",
+      "startAt": "2026-03-03T19:00:00",
+      "startLocal": "2026-03-03T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-alex-sampson"
+      ],
+      "artists": [
+        "artist-alex-sampson"
+      ],
+      "artistNames": [
+        "Alex Sampson"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-03",
+      "slug": "2026-03-03-alex-sampson"
+    },
+    {
+      "id": "bluebird-theater-2026-03-05-volumes-with-notions-and-catsclaw-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Volumes with Notions and Catsclaw (16+)",
+      "startAt": "2026-03-05T19:00:00",
+      "startLocal": "2026-03-05T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-volumes"
+      ],
+      "artists": [
+        "artist-volumes",
+        "artist-notions",
+        "artist-catsclaw-16"
+      ],
+      "artistNames": [
+        "Volumes",
+        "Notions",
+        "Catsclaw (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-05",
+      "slug": "2026-03-05-volumes-with-notions-and-catsclaw-16"
+    },
+    {
+      "id": "bluebird-theater-2026-03-07-fia-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Fia (16+)",
+      "startAt": "2026-03-07T19:00:00",
+      "startLocal": "2026-03-07T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-fia-16"
+      ],
+      "artists": [
+        "artist-fia-16"
+      ],
+      "artistNames": [
+        "Fia (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-07",
+      "slug": "2026-03-07-fia-16"
+    },
+    {
+      "id": "bluebird-theater-2026-03-08-christian-loffler",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Christian Loffler",
+      "startAt": "2026-03-08T19:00:00",
+      "startLocal": "2026-03-08T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-christian-loffler"
+      ],
+      "artists": [
+        "artist-christian-loffler"
+      ],
+      "artistNames": [
+        "Christian Loffler"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-08",
+      "slug": "2026-03-08-christian-loffler"
+    },
+    {
+      "id": "bluebird-theater-2026-03-14-the-barr-brothers",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "The Barr Brothers",
+      "startAt": "2026-03-14T19:00:00",
+      "startLocal": "2026-03-14T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-the-barr-brothers"
+      ],
+      "artists": [
+        "artist-the-barr-brothers"
+      ],
+      "artistNames": [
+        "The Barr Brothers"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-14",
+      "slug": "2026-03-14-the-barr-brothers"
+    },
+    {
+      "id": "bluebird-theater-2026-03-15-bad-bad-hats",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Bad Bad Hats",
+      "startAt": "2026-03-15T19:00:00",
+      "startLocal": "2026-03-15T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-bad-bad-hats"
+      ],
+      "artists": [
+        "artist-bad-bad-hats"
+      ],
+      "artistNames": [
+        "Bad Bad Hats"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-15",
+      "slug": "2026-03-15-bad-bad-hats"
+    },
+    {
+      "id": "bluebird-theater-2026-03-19-the-thing-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "The Thing (16+)",
+      "startAt": "2026-03-19T19:00:00",
+      "startLocal": "2026-03-19T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-the-thing-16"
+      ],
+      "artists": [
+        "artist-the-thing-16"
+      ],
+      "artistNames": [
+        "The Thing (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-19",
+      "slug": "2026-03-19-the-thing-16"
+    },
+    {
+      "id": "bluebird-theater-2026-03-20-grieves-with-blueprint",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Grieves with Blueprint",
+      "startAt": "2026-03-20T19:00:00",
+      "startLocal": "2026-03-20T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-grieves"
+      ],
+      "artists": [
+        "artist-grieves",
+        "artist-blueprint"
+      ],
+      "artistNames": [
+        "Grieves",
+        "Blueprint"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-20",
+      "slug": "2026-03-20-grieves-with-blueprint"
+    },
+    {
+      "id": "bluebird-theater-2026-03-21-muzz",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "MUZZ",
+      "startAt": "2026-03-21T19:00:00",
+      "startLocal": "2026-03-21T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-muzz"
+      ],
+      "artists": [
+        "artist-muzz"
+      ],
+      "artistNames": [
+        "MUZZ"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-21",
+      "slug": "2026-03-21-muzz"
+    },
+    {
+      "id": "bluebird-theater-2026-03-23-quarters",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Quarters",
+      "startAt": "2026-03-23T19:00:00",
+      "startLocal": "2026-03-23T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-quarters"
+      ],
+      "artists": [
+        "artist-quarters"
+      ],
+      "artistNames": [
+        "Quarters"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-23",
+      "slug": "2026-03-23-quarters"
+    },
+    {
+      "id": "bluebird-theater-2026-03-26-charlie-parr",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Charlie Parr",
+      "startAt": "2026-03-26T19:00:00",
+      "startLocal": "2026-03-26T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-charlie-parr"
+      ],
+      "artists": [
+        "artist-charlie-parr"
+      ],
+      "artistNames": [
+        "Charlie Parr"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-26",
+      "slug": "2026-03-26-charlie-parr"
+    },
+    {
+      "id": "bluebird-theater-2026-03-28-49th-and-main-21",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "49th and Main (21+)",
+      "startAt": "2026-03-28T19:00:00",
+      "startLocal": "2026-03-28T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-49th-and-main-21"
+      ],
+      "artists": [
+        "artist-49th-and-main-21"
+      ],
+      "artistNames": [
+        "49th and Main (21+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-28",
+      "slug": "2026-03-28-49th-and-main-21"
+    },
+    {
+      "id": "bluebird-theater-2026-03-30-mind-enterprises-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Mind Enterprises (16+)",
+      "startAt": "2026-03-30T19:00:00",
+      "startLocal": "2026-03-30T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-mind-enterprises-16"
+      ],
+      "artists": [
+        "artist-mind-enterprises-16"
+      ],
+      "artistNames": [
+        "Mind Enterprises (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-30",
+      "slug": "2026-03-30-mind-enterprises-16"
+    },
+    {
+      "id": "bluebird-theater-2026-04-01-cass-mccombs-with-chris-cohen",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Cass McCombs with Chris Cohen",
+      "startAt": "2026-04-01T19:00:00",
+      "startLocal": "2026-04-01T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-cass-mccombs"
+      ],
+      "artists": [
+        "artist-cass-mccombs",
+        "artist-chris-cohen"
+      ],
+      "artistNames": [
+        "Cass McCombs",
+        "Chris Cohen"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-01",
+      "slug": "2026-04-01-cass-mccombs-with-chris-cohen"
+    },
+    {
+      "id": "bluebird-theater-2026-04-03-voxtrot",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Voxtrot",
+      "startAt": "2026-04-03T19:00:00",
+      "startLocal": "2026-04-03T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-voxtrot"
+      ],
+      "artists": [
+        "artist-voxtrot"
+      ],
+      "artistNames": [
+        "Voxtrot"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-03",
+      "slug": "2026-04-03-voxtrot"
+    },
+    {
+      "id": "bluebird-theater-2026-04-07-the-red-pears-and-together-pangea-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "The Red Pears and Together Pangea (16+)",
+      "startAt": "2026-04-07T19:00:00",
+      "startLocal": "2026-04-07T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-the-red-pears-and-together-pangea-16"
+      ],
+      "artists": [
+        "artist-the-red-pears-and-together-pangea-16"
+      ],
+      "artistNames": [
+        "The Red Pears and Together Pangea (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-07",
+      "slug": "2026-04-07-the-red-pears-and-together-pangea-16"
+    },
+    {
+      "id": "bluebird-theater-2026-04-13-ratboys-with-villagerrr-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Ratboys with villagerrr (16+)",
+      "startAt": "2026-04-13T19:00:00",
+      "startLocal": "2026-04-13T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-ratboys"
+      ],
+      "artists": [
+        "artist-ratboys",
+        "artist-villagerrr-16"
+      ],
+      "artistNames": [
+        "Ratboys",
+        "villagerrr (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-13",
+      "slug": "2026-04-13-ratboys-with-villagerrr-16"
+    },
+    {
+      "id": "bluebird-theater-2026-04-17-pete-yorn-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Pete Yorn (16+)",
+      "startAt": "2026-04-17T19:00:00",
+      "startLocal": "2026-04-17T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-pete-yorn-16"
+      ],
+      "artists": [
+        "artist-pete-yorn-16"
+      ],
+      "artistNames": [
+        "Pete Yorn (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-17",
+      "slug": "2026-04-17-pete-yorn-16"
+    },
+    {
+      "id": "bluebird-theater-2026-04-28-femtanyl-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "femtanyl (16+)",
+      "startAt": "2026-04-28T19:00:00",
+      "startLocal": "2026-04-28T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-femtanyl-16"
+      ],
+      "artists": [
+        "artist-femtanyl-16"
+      ],
+      "artistNames": [
+        "femtanyl (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-28",
+      "slug": "2026-04-28-femtanyl-16"
+    },
+    {
+      "id": "bluebird-theater-2026-04-29-powfu",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Powfu",
+      "startAt": "2026-04-29T19:00:00",
+      "startLocal": "2026-04-29T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-powfu"
+      ],
+      "artists": [
+        "artist-powfu"
+      ],
+      "artistNames": [
+        "Powfu"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-29",
+      "slug": "2026-04-29-powfu"
+    },
+    {
+      "id": "bluebird-theater-2026-05-02-langhorne-slim",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Langhorne Slim",
+      "startAt": "2026-05-02T19:00:00",
+      "startLocal": "2026-05-02T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-langhorne-slim"
+      ],
+      "artists": [
+        "artist-langhorne-slim"
+      ],
+      "artistNames": [
+        "Langhorne Slim"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-02",
+      "slug": "2026-05-02-langhorne-slim"
+    },
+    {
+      "id": "bluebird-theater-2026-05-05-melrose-avenue-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Melrose Avenue (16+)",
+      "startAt": "2026-05-05T19:00:00",
+      "startLocal": "2026-05-05T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-melrose-avenue-16"
+      ],
+      "artists": [
+        "artist-melrose-avenue-16"
+      ],
+      "artistNames": [
+        "Melrose Avenue (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-05",
+      "slug": "2026-05-05-melrose-avenue-16"
+    },
+    {
+      "id": "bluebird-theater-2026-05-07-vana",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Vana",
+      "startAt": "2026-05-07T19:00:00",
+      "startLocal": "2026-05-07T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-vana"
+      ],
+      "artists": [
+        "artist-vana"
+      ],
+      "artistNames": [
+        "Vana"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-07",
+      "slug": "2026-05-07-vana"
+    },
+    {
+      "id": "bluebird-theater-2026-05-09-allie-x",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Allie X",
+      "startAt": "2026-05-09T19:00:00",
+      "startLocal": "2026-05-09T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-allie-x"
+      ],
+      "artists": [
+        "artist-allie-x"
+      ],
+      "artistNames": [
+        "Allie X"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-09",
+      "slug": "2026-05-09-allie-x"
+    },
+    {
+      "id": "bluebird-theater-2026-05-14-newdad",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "NewDad",
+      "startAt": "2026-05-14T19:00:00",
+      "startLocal": "2026-05-14T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-newdad"
+      ],
+      "artists": [
+        "artist-newdad"
+      ],
+      "artistNames": [
+        "NewDad"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-14",
+      "slug": "2026-05-14-newdad"
+    },
+    {
+      "id": "bluebird-theater-2026-05-17-sports-band",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Sports (Band)",
+      "startAt": "2026-05-17T19:00:00",
+      "startLocal": "2026-05-17T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-sports-band"
+      ],
+      "artists": [
+        "artist-sports-band"
+      ],
+      "artistNames": [
+        "Sports (Band)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-17",
+      "slug": "2026-05-17-sports-band"
+    },
+    {
+      "id": "bluebird-theater-2026-05-19-electric-six",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Electric Six",
+      "startAt": "2026-05-19T19:00:00",
+      "startLocal": "2026-05-19T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-electric-six"
+      ],
+      "artists": [
+        "artist-electric-six"
+      ],
+      "artistNames": [
+        "Electric Six"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-19",
+      "slug": "2026-05-19-electric-six"
+    },
+    {
+      "id": "bluebird-theater-2026-05-27-swervedriver",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Swervedriver",
+      "startAt": "2026-05-27T19:00:00",
+      "startLocal": "2026-05-27T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-swervedriver"
+      ],
+      "artists": [
+        "artist-swervedriver"
+      ],
+      "artistNames": [
+        "Swervedriver"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-27",
+      "slug": "2026-05-27-swervedriver"
+    },
+    {
+      "id": "bluebird-theater-2026-06-09-kings-kaleidoscope-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Kings Kaleidoscope (16+)",
+      "startAt": "2026-06-09T19:00:00",
+      "startLocal": "2026-06-09T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-kings-kaleidoscope-16"
+      ],
+      "artists": [
+        "artist-kings-kaleidoscope-16"
+      ],
+      "artistNames": [
+        "Kings Kaleidoscope (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-06-09",
+      "slug": "2026-06-09-kings-kaleidoscope-16"
+    },
+    {
+      "id": "bluebird-theater-2026-06-19-searows",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Searows",
+      "startAt": "2026-06-19T19:00:00",
+      "startLocal": "2026-06-19T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-searows"
+      ],
+      "artists": [
+        "artist-searows"
+      ],
+      "artistNames": [
+        "Searows"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-06-19",
+      "slug": "2026-06-19-searows"
+    },
+    {
+      "id": "bluebird-theater-2026-09-21-aldous-harding-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Aldous Harding (16+)",
+      "startAt": "2026-09-21T19:00:00",
+      "startLocal": "2026-09-21T19:00:00",
+      "venueId": "bluebird-theater",
+      "headliners": [
+        "artist-aldous-harding-16"
+      ],
+      "artists": [
+        "artist-aldous-harding-16"
+      ],
+      "artistNames": [
+        "Aldous Harding (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-09-21",
+      "slug": "2026-09-21-aldous-harding-16"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "eventsByMonth": {
+    "2026-01": [
+      "ophelias-2026-01-24-tycho",
+      "ophelias-2026-01-30-skiitour",
+      "ophelias-2026-01-31-david-ramirez"
+    ],
+    "2026-02": [
+      "ophelias-2026-02-06-mark-farina",
+      "ophelias-2026-02-07-mark-farina",
+      "ophelias-2026-02-14-what-the-dance",
+      "ophelias-2026-02-18-ga-20",
+      "ophelias-2026-02-20-the-polish-ambassador",
+      "ophelias-2026-02-21-the-polish-ambassador",
+      "ophelias-2026-02-22-the-polish-ambassador",
+      "ophelias-2026-02-26-devon-allman-band",
+      "ophelias-2026-02-27-brett-dennen",
+      "ophelias-2026-02-28-smells-like-nirvana"
+    ],
+    "2026-03": [
+      "ophelias-2026-03-06-not-quite-brothers",
+      "ophelias-2026-03-11-jesse-roper",
+      "ophelias-2026-03-14-bearracuda",
+      "ophelias-2026-03-30-westerman"
+    ],
+    "2026-04": [
+      "ophelias-2026-04-09-ltj-bukem",
+      "ophelias-2026-04-10-sam-grisman-project",
+      "ophelias-2026-04-11-sam-grisman-project"
+    ],
+    "2026-05": [
+      "ophelias-2026-05-02-bearracuda"
+    ]
+  }
+}

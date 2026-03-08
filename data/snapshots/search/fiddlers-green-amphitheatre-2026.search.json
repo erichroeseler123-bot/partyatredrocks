@@ -1,0 +1,94 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "docs": [
+    {
+      "eventKey": "fiddlers-green-amphitheatre-2026-06-11-lord-huron",
+      "title": "Lord Huron",
+      "artistNames": [
+        "Lord Huron"
+      ],
+      "venueId": "fiddlers-green-amphitheatre",
+      "dateKey": "2026-06-11",
+      "tags": [
+        "fiddlers-green-amphitheatre",
+        "lord huron"
+      ]
+    },
+    {
+      "eventKey": "fiddlers-green-amphitheatre-2026-07-25-rainbow-kitten-surprise-with-spacey-jane",
+      "title": "Rainbow Kitten Surprise with Spacey Jane",
+      "artistNames": [
+        "Rainbow Kitten Surprise",
+        "Spacey Jane"
+      ],
+      "venueId": "fiddlers-green-amphitheatre",
+      "dateKey": "2026-07-25",
+      "tags": [
+        "fiddlers-green-amphitheatre",
+        "rainbow kitten surprise",
+        "spacey jane"
+      ]
+    },
+    {
+      "eventKey": "fiddlers-green-amphitheatre-2026-08-15-mt-joy",
+      "title": "Mt. Joy",
+      "artistNames": [
+        "Mt. Joy"
+      ],
+      "venueId": "fiddlers-green-amphitheatre",
+      "dateKey": "2026-08-15",
+      "tags": [
+        "fiddlers-green-amphitheatre",
+        "mt. joy"
+      ]
+    },
+    {
+      "eventKey": "fiddlers-green-amphitheatre-2026-09-02-jack-johnson-with-lake-street-dive",
+      "title": "Jack Johnson with Lake Street Dive",
+      "artistNames": [
+        "Jack Johnson",
+        "Lake Street Dive"
+      ],
+      "venueId": "fiddlers-green-amphitheatre",
+      "dateKey": "2026-09-02",
+      "tags": [
+        "fiddlers-green-amphitheatre",
+        "jack johnson",
+        "lake street dive"
+      ]
+    },
+    {
+      "eventKey": "fiddlers-green-amphitheatre-2026-09-03-jack-johnson-with-lake-street-dive",
+      "title": "Jack Johnson with Lake Street Dive",
+      "artistNames": [
+        "Jack Johnson",
+        "Lake Street Dive"
+      ],
+      "venueId": "fiddlers-green-amphitheatre",
+      "dateKey": "2026-09-03",
+      "tags": [
+        "fiddlers-green-amphitheatre",
+        "jack johnson",
+        "lake street dive"
+      ]
+    },
+    {
+      "eventKey": "fiddlers-green-amphitheatre-2026-09-12-rob-zombie-and-marilyn-manson-with-the-hu-and-orgy",
+      "title": "Rob Zombie and Marilyn Manson with The Hu and Orgy",
+      "artistNames": [
+        "Rob Zombie and Marilyn Manson",
+        "The Hu",
+        "Orgy"
+      ],
+      "venueId": "fiddlers-green-amphitheatre",
+      "dateKey": "2026-09-12",
+      "tags": [
+        "fiddlers-green-amphitheatre",
+        "rob zombie and marilyn manson",
+        "the hu",
+        "orgy"
+      ]
+    }
+  ]
+}

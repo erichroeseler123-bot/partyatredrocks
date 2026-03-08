@@ -1,0 +1,250 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "artistToEvents": {
+    "artist-kitchen-dwellers": [
+      "mission-ballroom-2026-01-24-kitchen-dwellers-with-mountain-grass-unit-16"
+    ],
+    "artist-mountain-grass-unit-16": [
+      "mission-ballroom-2026-01-24-kitchen-dwellers-with-mountain-grass-unit-16"
+    ],
+    "artist-mountain-grass-unit": [
+      "mission-ballroom-2026-01-24-mountain-grass-unit"
+    ],
+    "artist-ship-wrek-16": [
+      "mission-ballroom-2026-01-30-ship-wrek-16"
+    ],
+    "artist-ray-volpe": [
+      "mission-ballroom-2026-01-31-ray-volpe"
+    ],
+    "artist-chris-lorenzo-16": [
+      "mission-ballroom-2026-02-07-chris-lorenzo-16"
+    ],
+    "artist-the-martinez-brothers-16": [
+      "mission-ballroom-2026-02-13-the-martinez-brothers-16"
+    ],
+    "artist-wreckno-and-super-future-16": [
+      "mission-ballroom-2026-02-14-wreckno-and-super-future-16"
+    ],
+    "artist-freya-skye": [
+      "mission-ballroom-2026-02-15-freya-skye"
+    ],
+    "artist-sidepiece-16": [
+      "mission-ballroom-2026-02-21-sidepiece-16"
+    ],
+    "artist-drama-16": [
+      "mission-ballroom-2026-02-27-drama-16"
+    ],
+    "artist-maddy-o-neal": [
+      "mission-ballroom-2026-02-28-maddy-o-neal-with-tokimonsta"
+    ],
+    "artist-tokimonsta": [
+      "mission-ballroom-2026-02-28-maddy-o-neal-with-tokimonsta"
+    ],
+    "artist-dropkick-murphys": [
+      "mission-ballroom-2026-03-01-dropkick-murphys-with-the-aggrolites-and-haywire-16"
+    ],
+    "artist-the-aggrolites": [
+      "mission-ballroom-2026-03-01-dropkick-murphys-with-the-aggrolites-and-haywire-16"
+    ],
+    "artist-haywire-16": [
+      "mission-ballroom-2026-03-01-dropkick-murphys-with-the-aggrolites-and-haywire-16"
+    ],
+    "artist-artemas": [
+      "mission-ballroom-2026-03-03-artemas-with-isabel-larosa-16"
+    ],
+    "artist-isabel-larosa-16": [
+      "mission-ballroom-2026-03-03-artemas-with-isabel-larosa-16"
+    ],
+    "artist-black-label-society": [
+      "mission-ballroom-2026-03-06-black-label-society-with-zakk-sabbath-and-dark-chapel"
+    ],
+    "artist-zakk-sabbath": [
+      "mission-ballroom-2026-03-06-black-label-society-with-zakk-sabbath-and-dark-chapel"
+    ],
+    "artist-dark-chapel": [
+      "mission-ballroom-2026-03-06-black-label-society-with-zakk-sabbath-and-dark-chapel"
+    ],
+    "artist-ole-60": [
+      "mission-ballroom-2026-03-12-ole-60-with-gabriella-rose"
+    ],
+    "artist-gabriella-rose": [
+      "mission-ballroom-2026-03-12-ole-60-with-gabriella-rose"
+    ],
+    "artist-supertask-16": [
+      "mission-ballroom-2026-03-13-supertask-16"
+    ],
+    "artist-max-styler": [
+      "mission-ballroom-2026-03-14-max-styler"
+    ],
+    "artist-the-california-honeydrops": [
+      "mission-ballroom-2026-03-20-the-california-honeydrops"
+    ],
+    "artist-the-floozies-16": [
+      "mission-ballroom-2026-03-21-the-floozies-16"
+    ],
+    "artist-st-paul-and-the-broken-bones": [
+      "mission-ballroom-2026-03-26-st-paul-and-the-broken-bones"
+    ],
+    "artist-gov-t-mule": [
+      "mission-ballroom-2026-03-27-gov-t-mule"
+    ],
+    "artist-ashnikko": [
+      "mission-ballroom-2026-03-28-ashnikko"
+    ],
+    "artist-lany": [
+      "mission-ballroom-2026-04-07-lany"
+    ],
+    "artist-health": [
+      "mission-ballroom-2026-04-08-health-with-carpenter-brut-16"
+    ],
+    "artist-carpenter-brut-16": [
+      "mission-ballroom-2026-04-08-health-with-carpenter-brut-16"
+    ],
+    "artist-the-format": [
+      "mission-ballroom-2026-04-10-the-format-with-phantom-planet-and-limbeck-16"
+    ],
+    "artist-phantom-planet": [
+      "mission-ballroom-2026-04-10-the-format-with-phantom-planet-and-limbeck-16"
+    ],
+    "artist-limbeck-16": [
+      "mission-ballroom-2026-04-10-the-format-with-phantom-planet-and-limbeck-16"
+    ],
+    "artist-satchvai-band-featuring-joe-satriani-and-steve-vai-16": [
+      "mission-ballroom-2026-04-14-satchvai-band-featuring-joe-satriani-and-steve-vai-16"
+    ],
+    "artist-hatsune-miku": [
+      "mission-ballroom-2026-04-15-hatsune-miku"
+    ],
+    "artist-warren-zeiders": [
+      "mission-ballroom-2026-04-16-warren-zeiders-with-lakeview-16"
+    ],
+    "artist-lakeview-16": [
+      "mission-ballroom-2026-04-16-warren-zeiders-with-lakeview-16"
+    ],
+    "artist-cory-wong": [
+      "mission-ballroom-2026-04-17-cory-wong"
+    ],
+    "artist-stephen-wilson-jr-16": [
+      "mission-ballroom-2026-04-18-stephen-wilson-jr-16"
+    ],
+    "artist-disclosure-16": [
+      "mission-ballroom-2026-04-23-disclosure-16",
+      "mission-ballroom-2026-04-24-disclosure-16",
+      "mission-ballroom-2026-04-25-disclosure-16"
+    ],
+    "artist-jason-isbell-and-the-400-unit-16": [
+      "mission-ballroom-2026-05-01-jason-isbell-and-the-400-unit-16"
+    ],
+    "artist-mac-demarco": [
+      "mission-ballroom-2026-05-03-mac-demarco"
+    ],
+    "artist-the-midnight": [
+      "mission-ballroom-2026-05-06-the-midnight"
+    ],
+    "artist-jose-gonzalez": [
+      "mission-ballroom-2026-05-11-jose-gonzalez-with-abby-sage-16"
+    ],
+    "artist-abby-sage-16": [
+      "mission-ballroom-2026-05-11-jose-gonzalez-with-abby-sage-16"
+    ],
+    "artist-good-kid": [
+      "mission-ballroom-2026-05-13-good-kid-with-inoha-16"
+    ],
+    "artist-inoha-16": [
+      "mission-ballroom-2026-05-13-good-kid-with-inoha-16"
+    ],
+    "artist-echo-and-the-bunnymen": [
+      "mission-ballroom-2026-05-22-echo-and-the-bunnymen"
+    ],
+    "artist-the-last-dinner-party": [
+      "mission-ballroom-2026-06-02-the-last-dinner-party-with-automatic"
+    ],
+    "artist-automatic": [
+      "mission-ballroom-2026-06-02-the-last-dinner-party-with-automatic"
+    ],
+    "artist-lane-8": [
+      "mission-ballroom-2026-06-13-lane-8-with-cross-pollination-sultan-shepard-and-more-16"
+    ],
+    "artist-cross-pollination": [
+      "mission-ballroom-2026-06-13-lane-8-with-cross-pollination-sultan-shepard-and-more-16"
+    ],
+    "artist-sultan-shepard": [
+      "mission-ballroom-2026-06-13-lane-8-with-cross-pollination-sultan-shepard-and-more-16"
+    ],
+    "artist-16": [
+      "mission-ballroom-2026-06-13-lane-8-with-cross-pollination-sultan-shepard-and-more-16"
+    ],
+    "artist-sugar": [
+      "mission-ballroom-2026-08-11-sugar"
+    ],
+    "artist-courtney-barnett": [
+      "mission-ballroom-2026-08-21-courtney-barnett-with-zoh-amba-16"
+    ],
+    "artist-zoh-amba-16": [
+      "mission-ballroom-2026-08-21-courtney-barnett-with-zoh-amba-16"
+    ]
+  },
+  "artistIndex": {
+    "kitchen dwellers": "artist-kitchen-dwellers",
+    "mountain grass unit (16+)": "artist-mountain-grass-unit-16",
+    "mountain grass unit": "artist-mountain-grass-unit",
+    "ship wrek (16+)": "artist-ship-wrek-16",
+    "ray volpe": "artist-ray-volpe",
+    "chris lorenzo (16+)": "artist-chris-lorenzo-16",
+    "the martinez brothers (16+)": "artist-the-martinez-brothers-16",
+    "wreckno & super future (16+)": "artist-wreckno-and-super-future-16",
+    "freya skye": "artist-freya-skye",
+    "sidepiece (16+)": "artist-sidepiece-16",
+    "drama (16+)": "artist-drama-16",
+    "maddy o'neal": "artist-maddy-o-neal",
+    "tokimonsta": "artist-tokimonsta",
+    "dropkick murphys": "artist-dropkick-murphys",
+    "the aggrolites": "artist-the-aggrolites",
+    "haywire (16+)": "artist-haywire-16",
+    "artemas": "artist-artemas",
+    "isabel larosa (16+)": "artist-isabel-larosa-16",
+    "black label society": "artist-black-label-society",
+    "zakk sabbath": "artist-zakk-sabbath",
+    "dark chapel": "artist-dark-chapel",
+    "ole 60": "artist-ole-60",
+    "gabriella rose": "artist-gabriella-rose",
+    "supertask (16+)": "artist-supertask-16",
+    "max styler": "artist-max-styler",
+    "the california honeydrops": "artist-the-california-honeydrops",
+    "the floozies (16+)": "artist-the-floozies-16",
+    "st. paul & the broken bones": "artist-st-paul-and-the-broken-bones",
+    "gov't mule": "artist-gov-t-mule",
+    "ashnikko": "artist-ashnikko",
+    "lany": "artist-lany",
+    "health": "artist-health",
+    "carpenter brut (16+)": "artist-carpenter-brut-16",
+    "the format": "artist-the-format",
+    "phantom planet": "artist-phantom-planet",
+    "limbeck (16+)": "artist-limbeck-16",
+    "satchvai band featuring joe satriani and steve vai (16+)": "artist-satchvai-band-featuring-joe-satriani-and-steve-vai-16",
+    "hatsune miku": "artist-hatsune-miku",
+    "warren zeiders": "artist-warren-zeiders",
+    "lakeview (16+)": "artist-lakeview-16",
+    "cory wong": "artist-cory-wong",
+    "stephen wilson jr. (16+)": "artist-stephen-wilson-jr-16",
+    "disclosure (16+)": "artist-disclosure-16",
+    "jason isbell & the 400 unit (16+)": "artist-jason-isbell-and-the-400-unit-16",
+    "mac demarco": "artist-mac-demarco",
+    "the midnight": "artist-the-midnight",
+    "jose gonzalez": "artist-jose-gonzalez",
+    "abby sage (16+)": "artist-abby-sage-16",
+    "good kid": "artist-good-kid",
+    "inoha (16+)": "artist-inoha-16",
+    "echo & the bunnymen": "artist-echo-and-the-bunnymen",
+    "the last dinner party": "artist-the-last-dinner-party",
+    "automatic": "artist-automatic",
+    "lane 8": "artist-lane-8",
+    "cross pollination": "artist-cross-pollination",
+    "sultan + shepard": "artist-sultan-shepard",
+    "(16+)": "artist-16",
+    "sugar": "artist-sugar",
+    "courtney barnett": "artist-courtney-barnett",
+    "zoh amba (16+)": "artist-zoh-amba-16"
+  }
+}

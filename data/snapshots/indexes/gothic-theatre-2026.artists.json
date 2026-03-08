@@ -1,0 +1,188 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "artistToEvents": {
+    "artist-glaive-16": [
+      "gothic-theatre-2026-01-24-glaive-16"
+    ],
+    "artist-shakedown-street-grateful-dead-tribute-16": [
+      "gothic-theatre-2026-01-30-shakedown-street-grateful-dead-tribute-16"
+    ],
+    "artist-bane": [
+      "gothic-theatre-2026-01-31-bane-with-rotting-out-eyes-of-salt-and-warmachine-16"
+    ],
+    "artist-rotting-out": [
+      "gothic-theatre-2026-01-31-bane-with-rotting-out-eyes-of-salt-and-warmachine-16"
+    ],
+    "artist-eyes-of-salt": [
+      "gothic-theatre-2026-01-31-bane-with-rotting-out-eyes-of-salt-and-warmachine-16"
+    ],
+    "artist-warmachine-16": [
+      "gothic-theatre-2026-01-31-bane-with-rotting-out-eyes-of-salt-and-warmachine-16"
+    ],
+    "artist-north-mississippi-allstars-16": [
+      "gothic-theatre-2026-02-06-north-mississippi-allstars-16"
+    ],
+    "artist-sudan-archives-16": [
+      "gothic-theatre-2026-02-10-sudan-archives-16"
+    ],
+    "artist-sons-of-legion-16": [
+      "gothic-theatre-2026-02-13-sons-of-legion-16"
+    ],
+    "artist-the-record-company-16": [
+      "gothic-theatre-2026-02-14-the-record-company-16"
+    ],
+    "artist-clipping-16": [
+      "gothic-theatre-2026-02-22-clipping-16"
+    ],
+    "artist-black-pistol-fire-16": [
+      "gothic-theatre-2026-02-23-black-pistol-fire-16"
+    ],
+    "artist-denm": [
+      "gothic-theatre-2026-02-27-denm-with-evening-elephants-and-obed-padilla"
+    ],
+    "artist-evening-elephants": [
+      "gothic-theatre-2026-02-27-denm-with-evening-elephants-and-obed-padilla"
+    ],
+    "artist-obed-padilla": [
+      "gothic-theatre-2026-02-27-denm-with-evening-elephants-and-obed-padilla"
+    ],
+    "artist-margo-price": [
+      "gothic-theatre-2026-03-04-margo-price-with-shannon-mcnally"
+    ],
+    "artist-shannon-mcnally": [
+      "gothic-theatre-2026-03-04-margo-price-with-shannon-mcnally"
+    ],
+    "artist-benee": [
+      "gothic-theatre-2026-03-07-benee-with-bayli-16"
+    ],
+    "artist-bayli-16": [
+      "gothic-theatre-2026-03-07-benee-with-bayli-16"
+    ],
+    "artist-maggie-lindemann-16": [
+      "gothic-theatre-2026-03-13-maggie-lindemann-16"
+    ],
+    "artist-the-strumbellas": [
+      "gothic-theatre-2026-03-14-the-strumbellas"
+    ],
+    "artist-indigo-de-souza-16": [
+      "gothic-theatre-2026-03-16-indigo-de-souza-16"
+    ],
+    "artist-eddie-9v-16": [
+      "gothic-theatre-2026-03-21-eddie-9v-16"
+    ],
+    "artist-the-early-november-and-hellogoodbye-16": [
+      "gothic-theatre-2026-03-26-the-early-november-and-hellogoodbye-16"
+    ],
+    "artist-orbit-culture": [
+      "gothic-theatre-2026-04-03-orbit-culture"
+    ],
+    "artist-goldford-16": [
+      "gothic-theatre-2026-04-08-goldford-16"
+    ],
+    "artist-d-r-i-dirty-rotten-imbeciles": [
+      "gothic-theatre-2026-04-11-d-r-i-dirty-rotten-imbeciles-with-clusterfux-and-deathwish-16"
+    ],
+    "artist-clusterfux": [
+      "gothic-theatre-2026-04-11-d-r-i-dirty-rotten-imbeciles-with-clusterfux-and-deathwish-16"
+    ],
+    "artist-deathwish-16": [
+      "gothic-theatre-2026-04-11-d-r-i-dirty-rotten-imbeciles-with-clusterfux-and-deathwish-16"
+    ],
+    "artist-fcukers-16": [
+      "gothic-theatre-2026-04-12-fcukers-16"
+    ],
+    "artist-bleed-from-within": [
+      "gothic-theatre-2026-04-17-bleed-from-within"
+    ],
+    "artist-tyler-braden-18": [
+      "gothic-theatre-2026-04-18-tyler-braden-18"
+    ],
+    "artist-chris-webby-16": [
+      "gothic-theatre-2026-04-19-chris-webby-16"
+    ],
+    "artist-tourist": [
+      "gothic-theatre-2026-04-25-tourist"
+    ],
+    "artist-witchz": [
+      "gothic-theatre-2026-05-01-witchz"
+    ],
+    "artist-the-new-pornographers": [
+      "gothic-theatre-2026-05-05-the-new-pornographers-with-will-sheff-16"
+    ],
+    "artist-will-sheff-16": [
+      "gothic-theatre-2026-05-05-the-new-pornographers-with-will-sheff-16"
+    ],
+    "artist-emo-orchestra": [
+      "gothic-theatre-2026-05-06-emo-orchestra"
+    ],
+    "artist-the-moss": [
+      "gothic-theatre-2026-05-14-the-moss"
+    ],
+    "artist-cradle-of-filth": [
+      "gothic-theatre-2026-05-23-cradle-of-filth"
+    ],
+    "artist-thornhill": [
+      "gothic-theatre-2026-05-26-thornhill-with-156-silence-fox-lake-and-vianova-16"
+    ],
+    "artist-156-silence": [
+      "gothic-theatre-2026-05-26-thornhill-with-156-silence-fox-lake-and-vianova-16"
+    ],
+    "artist-fox-lake": [
+      "gothic-theatre-2026-05-26-thornhill-with-156-silence-fox-lake-and-vianova-16"
+    ],
+    "artist-vianova-16": [
+      "gothic-theatre-2026-05-26-thornhill-with-156-silence-fox-lake-and-vianova-16"
+    ],
+    "artist-amble": [
+      "gothic-theatre-2026-06-17-amble"
+    ]
+  },
+  "artistIndex": {
+    "glaive (16+)": "artist-glaive-16",
+    "shakedown street - grateful dead tribute (16+)": "artist-shakedown-street-grateful-dead-tribute-16",
+    "bane": "artist-bane",
+    "rotting out": "artist-rotting-out",
+    "eyes of salt": "artist-eyes-of-salt",
+    "warmachine (16+)": "artist-warmachine-16",
+    "north mississippi allstars (16+)": "artist-north-mississippi-allstars-16",
+    "sudan archives (16+)": "artist-sudan-archives-16",
+    "sons of legion (16+)": "artist-sons-of-legion-16",
+    "the record company (16+)": "artist-the-record-company-16",
+    "clipping. (16+)": "artist-clipping-16",
+    "black pistol fire (16+)": "artist-black-pistol-fire-16",
+    "denm": "artist-denm",
+    "evening elephants": "artist-evening-elephants",
+    "obed padilla": "artist-obed-padilla",
+    "margo price": "artist-margo-price",
+    "shannon mcnally": "artist-shannon-mcnally",
+    "benee": "artist-benee",
+    "bayli (16+)": "artist-bayli-16",
+    "maggie lindemann (16+)": "artist-maggie-lindemann-16",
+    "the strumbellas": "artist-the-strumbellas",
+    "indigo de souza (16+)": "artist-indigo-de-souza-16",
+    "eddie 9v (16+)": "artist-eddie-9v-16",
+    "the early november and hellogoodbye (16+)": "artist-the-early-november-and-hellogoodbye-16",
+    "orbit culture": "artist-orbit-culture",
+    "goldford (16+)": "artist-goldford-16",
+    "d.r.i. - dirty rotten imbeciles": "artist-d-r-i-dirty-rotten-imbeciles",
+    "clusterfux": "artist-clusterfux",
+    "deathwish (16+)": "artist-deathwish-16",
+    "fcukers (16+)": "artist-fcukers-16",
+    "bleed from within": "artist-bleed-from-within",
+    "tyler braden (18+)": "artist-tyler-braden-18",
+    "chris webby (16+)": "artist-chris-webby-16",
+    "tourist": "artist-tourist",
+    "witchz": "artist-witchz",
+    "the new pornographers": "artist-the-new-pornographers",
+    "will sheff (16+)": "artist-will-sheff-16",
+    "emo orchestra": "artist-emo-orchestra",
+    "the moss": "artist-the-moss",
+    "cradle of filth": "artist-cradle-of-filth",
+    "thornhill": "artist-thornhill",
+    "156/silence": "artist-156-silence",
+    "fox lake": "artist-fox-lake",
+    "vianova (16+)": "artist-vianova-16",
+    "amble": "artist-amble"
+  }
+}

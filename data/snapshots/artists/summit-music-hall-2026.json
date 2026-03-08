@@ -1,0 +1,1531 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "artists": [
+    {
+      "id": "artist-amelia-moore",
+      "name": "Amelia Moore",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-11-zara-larsson-with-amelia-moore"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-11"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-11",
+      "lastDate": "2026-03-11",
+      "coArtists": [
+        "artist-zara-larsson"
+      ]
+    },
+    {
+      "id": "artist-angelmaker",
+      "name": "AngelMaker",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-04-23-shadow-of-intent-with-angelmaker"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-04-23"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-23",
+      "lastDate": "2026-04-23",
+      "coArtists": [
+        "artist-shadow-of-intent"
+      ]
+    },
+    {
+      "id": "artist-arms-length",
+      "name": "Arms Length",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-05-17-arms-length"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-05-17"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-17",
+      "lastDate": "2026-05-17",
+      "coArtists": []
+    },
+    {
+      "id": "artist-atreyu",
+      "name": "Atreyu",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-05-01-sevendust-with-atreyu"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-05-01"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-01",
+      "lastDate": "2026-05-01",
+      "coArtists": [
+        "artist-sevendust"
+      ]
+    },
+    {
+      "id": "artist-badbadnotgood",
+      "name": "BADBADNOTGOOD",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-04-29-badbadnotgood"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-04-29"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-29",
+      "lastDate": "2026-04-29",
+      "coArtists": []
+    },
+    {
+      "id": "artist-barely-alive",
+      "name": "Barely Alive",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-21-barely-alive-with-tisoki-18"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-21"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-21",
+      "lastDate": "2026-03-21",
+      "coArtists": [
+        "artist-tisoki-18"
+      ]
+    },
+    {
+      "id": "artist-bearracuda-18",
+      "name": "Bearracuda (18+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-06-27-bearracuda-18"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-06-27"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-27",
+      "lastDate": "2026-06-27",
+      "coArtists": []
+    },
+    {
+      "id": "artist-boulet-brothers-dragula",
+      "name": "Boulet Brothers Dragula",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-05-11-boulet-brothers-dragula"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-05-11"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-11",
+      "lastDate": "2026-05-11",
+      "coArtists": []
+    },
+    {
+      "id": "artist-chet-faker",
+      "name": "Chet Faker",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-05-13-chet-faker"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-05-13"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-13",
+      "lastDate": "2026-05-13",
+      "coArtists": []
+    },
+    {
+      "id": "artist-club-90s-heated-rivalrave-18",
+      "name": "Club 90s - Heated RivalRave (18+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-02-20-club-90s-heated-rivalrave-18",
+        "summit-music-hall-2026-02-21-club-90s-heated-rivalrave-18"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-02-20",
+        "2026-02-21"
+      ],
+      "showCount": 2,
+      "firstDate": "2026-02-20",
+      "lastDate": "2026-02-21",
+      "coArtists": []
+    },
+    {
+      "id": "artist-colony-house",
+      "name": "Colony House",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-05-colony-house"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-05"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-05",
+      "lastDate": "2026-03-05",
+      "coArtists": []
+    },
+    {
+      "id": "artist-converge",
+      "name": "Converge",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-05-07-poison-the-well-with-converge-the-armed-and-the-barbarians-of-california"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-05-07"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-07",
+      "lastDate": "2026-05-07",
+      "coArtists": [
+        "artist-poison-the-well",
+        "artist-the-armed",
+        "artist-the-barbarians-of-california"
+      ]
+    },
+    {
+      "id": "artist-currents",
+      "name": "Currents",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-04-04-currents-with-erra"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-04-04"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-04",
+      "lastDate": "2026-04-04",
+      "coArtists": [
+        "artist-erra"
+      ]
+    },
+    {
+      "id": "artist-dance",
+      "name": "Dance",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-04-11-dance-with-the-dead-with-magic-sword"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-04-11"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-11",
+      "lastDate": "2026-04-11",
+      "coArtists": [
+        "artist-magic-sword",
+        "artist-the-dead"
+      ]
+    },
+    {
+      "id": "artist-dave-rapper",
+      "name": "Dave - Rapper",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-04-07-dave-rapper"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-04-07"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-07",
+      "lastDate": "2026-04-07",
+      "coArtists": []
+    },
+    {
+      "id": "artist-destruction",
+      "name": "Destruction",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-18-testament-with-overkill-and-destruction"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-18"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-18",
+      "lastDate": "2026-03-18",
+      "coArtists": [
+        "artist-overkill",
+        "artist-testament"
+      ]
+    },
+    {
+      "id": "artist-diggy-graves",
+      "name": "Diggy Graves",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-08-21-diggy-graves-with-resentvul"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-08-21"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-08-21",
+      "lastDate": "2026-08-21",
+      "coArtists": [
+        "artist-resentvul"
+      ]
+    },
+    {
+      "id": "artist-dodie-clark",
+      "name": "Dodie Clark",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-07-dodie-clark"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-07"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-07",
+      "lastDate": "2026-03-07",
+      "coArtists": []
+    },
+    {
+      "id": "artist-donny-benet",
+      "name": "Donny Benet",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-02-27-donny-benet"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-02-27"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-27",
+      "lastDate": "2026-02-27",
+      "coArtists": []
+    },
+    {
+      "id": "artist-drain",
+      "name": "Drain",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-04-06-drain-with-no-pressure-haywire-and-secret-world"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-04-06"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-06",
+      "lastDate": "2026-04-06",
+      "coArtists": [
+        "artist-haywire",
+        "artist-no-pressure",
+        "artist-secret-world"
+      ]
+    },
+    {
+      "id": "artist-drinkurwater-18",
+      "name": "Drinkurwater (18+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-04-24-drinkurwater-18"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-04-24"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-24",
+      "lastDate": "2026-04-24",
+      "coArtists": []
+    },
+    {
+      "id": "artist-drug-church",
+      "name": "Drug Church",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-20-white-reaper-with-drug-church"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-20"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-20",
+      "lastDate": "2026-03-20",
+      "coArtists": [
+        "artist-white-reaper"
+      ]
+    },
+    {
+      "id": "artist-dylan-sinclair",
+      "name": "Dylan Sinclair",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-17-sabrina-claudio-with-dylan-sinclair"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-17"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-17",
+      "lastDate": "2026-03-17",
+      "coArtists": [
+        "artist-sabrina-claudio"
+      ]
+    },
+    {
+      "id": "artist-eidola",
+      "name": "Eidola",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-27-eidola"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-27"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-27",
+      "lastDate": "2026-03-27",
+      "coArtists": []
+    },
+    {
+      "id": "artist-emmure",
+      "name": "Emmure",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-06-02-spite-with-emmure"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-06-02"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-02",
+      "lastDate": "2026-06-02",
+      "coArtists": [
+        "artist-spite"
+      ]
+    },
+    {
+      "id": "artist-emo-nite-21",
+      "name": "Emo Nite -  (21+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-06-emo-nite-21"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-06"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-06",
+      "lastDate": "2026-03-06",
+      "coArtists": []
+    },
+    {
+      "id": "artist-erra",
+      "name": "ERRA",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-04-04-currents-with-erra"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-04-04"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-04",
+      "lastDate": "2026-04-04",
+      "coArtists": [
+        "artist-currents"
+      ]
+    },
+    {
+      "id": "artist-escape-the-fate",
+      "name": "Escape the Fate",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-31-lacuna-coil-with-escape-the-fate-and-vowws"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-31"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-31",
+      "lastDate": "2026-03-31",
+      "coArtists": [
+        "artist-lacuna-coil",
+        "artist-vowws"
+      ]
+    },
+    {
+      "id": "artist-free-throw",
+      "name": "Free Throw",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-04-15-free-throw"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-04-15"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-15",
+      "lastDate": "2026-04-15",
+      "coArtists": []
+    },
+    {
+      "id": "artist-ghengar",
+      "name": "GHENGAR",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-01-31-ghengar"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-01-31"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-01-31",
+      "lastDate": "2026-01-31",
+      "coArtists": []
+    },
+    {
+      "id": "artist-hawthorne-heights",
+      "name": "Hawthorne Heights",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-12-hawthorne-heights"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-12"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-12",
+      "lastDate": "2026-03-12",
+      "coArtists": []
+    },
+    {
+      "id": "artist-haywire",
+      "name": "Haywire",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-04-06-drain-with-no-pressure-haywire-and-secret-world"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-04-06"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-06",
+      "lastDate": "2026-04-06",
+      "coArtists": [
+        "artist-drain",
+        "artist-no-pressure",
+        "artist-secret-world"
+      ]
+    },
+    {
+      "id": "artist-heated-rivalry-night-18",
+      "name": "Heated Rivalry Night (18+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-02-28-heated-rivalry-night-18"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-02-28"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-28",
+      "lastDate": "2026-02-28",
+      "coArtists": []
+    },
+    {
+      "id": "artist-i-speak-machine",
+      "name": "I Speak Machine",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-05-10-i-speak-machine"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-05-10"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-10",
+      "lastDate": "2026-05-10",
+      "coArtists": []
+    },
+    {
+      "id": "artist-jessie-j",
+      "name": "Jessie J",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-02-03-jessie-j"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-02-03"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-03",
+      "lastDate": "2026-02-03",
+      "coArtists": []
+    },
+    {
+      "id": "artist-join-the-resistance-18",
+      "name": "Join the Resistance (18+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-02-07-ydg-with-join-the-resistance-18"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-02-07"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-07",
+      "lastDate": "2026-02-07",
+      "coArtists": [
+        "artist-ydg"
+      ]
+    },
+    {
+      "id": "artist-jstjr-18",
+      "name": "JSTJR (18+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-04-03-jstjr-18"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-04-03"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-03",
+      "lastDate": "2026-04-03",
+      "coArtists": []
+    },
+    {
+      "id": "artist-la-dispute",
+      "name": "La Dispute",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-05-05-la-dispute"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-05-05"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-05",
+      "lastDate": "2026-05-05",
+      "coArtists": []
+    },
+    {
+      "id": "artist-lacuna-coil",
+      "name": "Lacuna Coil",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-31-lacuna-coil-with-escape-the-fate-and-vowws"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-31"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-31",
+      "lastDate": "2026-03-31",
+      "coArtists": [
+        "artist-escape-the-fate",
+        "artist-vowws"
+      ]
+    },
+    {
+      "id": "artist-lights",
+      "name": "Lights",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-02-25-lights-with-softcult"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-02-25"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-25",
+      "lastDate": "2026-02-25",
+      "coArtists": [
+        "artist-softcult"
+      ]
+    },
+    {
+      "id": "artist-lil-tony",
+      "name": "Lil Tony",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-09-lil-tony"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-09"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-09",
+      "lastDate": "2026-03-09",
+      "coArtists": []
+    },
+    {
+      "id": "artist-lord-of-the-lost",
+      "name": "Lord of the Lost",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-02-04-lord-of-the-lost-with-the-birthday-massacre"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-02-04"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-04",
+      "lastDate": "2026-02-04",
+      "coArtists": [
+        "artist-the-birthday-massacre"
+      ]
+    },
+    {
+      "id": "artist-machine-girl",
+      "name": "Machine Girl",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-30-machine-girl-with-sextile"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-30"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-30",
+      "lastDate": "2026-03-30",
+      "coArtists": [
+        "artist-sextile"
+      ]
+    },
+    {
+      "id": "artist-magic-sword",
+      "name": "Magic Sword",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-04-11-dance-with-the-dead-with-magic-sword"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-04-11"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-11",
+      "lastDate": "2026-04-11",
+      "coArtists": [
+        "artist-dance",
+        "artist-the-dead"
+      ]
+    },
+    {
+      "id": "artist-mercury-rev",
+      "name": "Mercury Rev",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-05-12-the-afghan-whigs-with-mercury-rev"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-05-12"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-12",
+      "lastDate": "2026-05-12",
+      "coArtists": [
+        "artist-the-afghan-whigs"
+      ]
+    },
+    {
+      "id": "artist-michael-shannon-and-jason-narducy",
+      "name": "Michael Shannon & Jason Narducy",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-02-11-michael-shannon-and-jason-narducy"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-02-11"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-11",
+      "lastDate": "2026-02-11",
+      "coArtists": []
+    },
+    {
+      "id": "artist-monaleo",
+      "name": "Monaleo",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-15-monaleo"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-15"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-15",
+      "lastDate": "2026-03-15",
+      "coArtists": []
+    },
+    {
+      "id": "artist-monolink-18",
+      "name": "Monolink (18+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-02-24-monolink-18"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-02-24"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-24",
+      "lastDate": "2026-02-24",
+      "coArtists": []
+    },
+    {
+      "id": "artist-no-pressure",
+      "name": "No Pressure",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-04-06-drain-with-no-pressure-haywire-and-secret-world"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-04-06"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-06",
+      "lastDate": "2026-04-06",
+      "coArtists": [
+        "artist-drain",
+        "artist-haywire",
+        "artist-secret-world"
+      ]
+    },
+    {
+      "id": "artist-overkill",
+      "name": "Overkill",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-18-testament-with-overkill-and-destruction"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-18"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-18",
+      "lastDate": "2026-03-18",
+      "coArtists": [
+        "artist-destruction",
+        "artist-testament"
+      ]
+    },
+    {
+      "id": "artist-peaches",
+      "name": "Peaches",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-10-peaches"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-10"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-10",
+      "lastDate": "2026-03-10",
+      "coArtists": []
+    },
+    {
+      "id": "artist-poison-the-well",
+      "name": "Poison The Well",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-05-07-poison-the-well-with-converge-the-armed-and-the-barbarians-of-california"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-05-07"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-07",
+      "lastDate": "2026-05-07",
+      "coArtists": [
+        "artist-converge",
+        "artist-the-armed",
+        "artist-the-barbarians-of-california"
+      ]
+    },
+    {
+      "id": "artist-resentvul",
+      "name": "Resentvul",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-08-21-diggy-graves-with-resentvul"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-08-21"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-08-21",
+      "lastDate": "2026-08-21",
+      "coArtists": [
+        "artist-diggy-graves"
+      ]
+    },
+    {
+      "id": "artist-sabrina-claudio",
+      "name": "Sabrina Claudio",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-17-sabrina-claudio-with-dylan-sinclair"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-17"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-17",
+      "lastDate": "2026-03-17",
+      "coArtists": [
+        "artist-dylan-sinclair"
+      ]
+    },
+    {
+      "id": "artist-secret-world",
+      "name": "Secret World",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-04-06-drain-with-no-pressure-haywire-and-secret-world"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-04-06"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-06",
+      "lastDate": "2026-04-06",
+      "coArtists": [
+        "artist-drain",
+        "artist-haywire",
+        "artist-no-pressure"
+      ]
+    },
+    {
+      "id": "artist-sevendust",
+      "name": "Sevendust",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-05-01-sevendust-with-atreyu"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-05-01"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-01",
+      "lastDate": "2026-05-01",
+      "coArtists": [
+        "artist-atreyu"
+      ]
+    },
+    {
+      "id": "artist-sextile",
+      "name": "Sextile",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-30-machine-girl-with-sextile"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-30"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-30",
+      "lastDate": "2026-03-30",
+      "coArtists": [
+        "artist-machine-girl"
+      ]
+    },
+    {
+      "id": "artist-shadow-of-intent",
+      "name": "Shadow Of Intent",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-04-23-shadow-of-intent-with-angelmaker"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-04-23"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-23",
+      "lastDate": "2026-04-23",
+      "coArtists": [
+        "artist-angelmaker"
+      ]
+    },
+    {
+      "id": "artist-softcult",
+      "name": "Softcult",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-02-25-lights-with-softcult"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-02-25"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-25",
+      "lastDate": "2026-02-25",
+      "coArtists": [
+        "artist-lights"
+      ]
+    },
+    {
+      "id": "artist-spite",
+      "name": "Spite",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-06-02-spite-with-emmure"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-06-02"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-02",
+      "lastDate": "2026-06-02",
+      "coArtists": [
+        "artist-emmure"
+      ]
+    },
+    {
+      "id": "artist-testament",
+      "name": "Testament",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-18-testament-with-overkill-and-destruction"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-18"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-18",
+      "lastDate": "2026-03-18",
+      "coArtists": [
+        "artist-destruction",
+        "artist-overkill"
+      ]
+    },
+    {
+      "id": "artist-the-afghan-whigs",
+      "name": "The Afghan Whigs",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-05-12-the-afghan-whigs-with-mercury-rev"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-05-12"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-12",
+      "lastDate": "2026-05-12",
+      "coArtists": [
+        "artist-mercury-rev"
+      ]
+    },
+    {
+      "id": "artist-the-armed",
+      "name": "The Armed",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-05-07-poison-the-well-with-converge-the-armed-and-the-barbarians-of-california"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-05-07"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-07",
+      "lastDate": "2026-05-07",
+      "coArtists": [
+        "artist-converge",
+        "artist-poison-the-well",
+        "artist-the-barbarians-of-california"
+      ]
+    },
+    {
+      "id": "artist-the-barbarians-of-california",
+      "name": "The Barbarians of California",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-05-07-poison-the-well-with-converge-the-armed-and-the-barbarians-of-california"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-05-07"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-07",
+      "lastDate": "2026-05-07",
+      "coArtists": [
+        "artist-converge",
+        "artist-poison-the-well",
+        "artist-the-armed"
+      ]
+    },
+    {
+      "id": "artist-the-birthday-massacre",
+      "name": "The Birthday Massacre",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-02-04-lord-of-the-lost-with-the-birthday-massacre"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-02-04"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-04",
+      "lastDate": "2026-02-04",
+      "coArtists": [
+        "artist-lord-of-the-lost"
+      ]
+    },
+    {
+      "id": "artist-the-dead",
+      "name": "The Dead",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-04-11-dance-with-the-dead-with-magic-sword"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-04-11"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-11",
+      "lastDate": "2026-04-11",
+      "coArtists": [
+        "artist-dance",
+        "artist-magic-sword"
+      ]
+    },
+    {
+      "id": "artist-the-devil-wears-prada",
+      "name": "The Devil Wears Prada",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-28-the-devil-wears-prada"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-28"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-28",
+      "lastDate": "2026-03-28",
+      "coArtists": []
+    },
+    {
+      "id": "artist-tisoki-18",
+      "name": "Tisoki (18+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-21-barely-alive-with-tisoki-18"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-21"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-21",
+      "lastDate": "2026-03-21",
+      "coArtists": [
+        "artist-barely-alive"
+      ]
+    },
+    {
+      "id": "artist-two-feet",
+      "name": "Two Feet",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-13-two-feet",
+        "summit-music-hall-2026-03-14-two-feet"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-13",
+        "2026-03-14"
+      ],
+      "showCount": 2,
+      "firstDate": "2026-03-13",
+      "lastDate": "2026-03-14",
+      "coArtists": []
+    },
+    {
+      "id": "artist-vowws",
+      "name": "VOWWS",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-31-lacuna-coil-with-escape-the-fate-and-vowws"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-31"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-31",
+      "lastDate": "2026-03-31",
+      "coArtists": [
+        "artist-escape-the-fate",
+        "artist-lacuna-coil"
+      ]
+    },
+    {
+      "id": "artist-white-reaper",
+      "name": "White Reaper",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-20-white-reaper-with-drug-church"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-20"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-20",
+      "lastDate": "2026-03-20",
+      "coArtists": [
+        "artist-drug-church"
+      ]
+    },
+    {
+      "id": "artist-xaviersobased",
+      "name": "Xaviersobased",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-08-xaviersobased"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-08"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-08",
+      "lastDate": "2026-03-08",
+      "coArtists": []
+    },
+    {
+      "id": "artist-ydg",
+      "name": "YDG",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-02-07-ydg-with-join-the-resistance-18"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-02-07"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-07",
+      "lastDate": "2026-02-07",
+      "coArtists": [
+        "artist-join-the-resistance-18"
+      ]
+    },
+    {
+      "id": "artist-zara-larsson",
+      "name": "Zara Larsson",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "summit-music-hall-2026-03-11-zara-larsson-with-amelia-moore"
+      ],
+      "venueIds": [
+        "summit-music-hall"
+      ],
+      "dateKeys": [
+        "2026-03-11"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-11",
+      "lastDate": "2026-03-11",
+      "coArtists": [
+        "artist-amelia-moore"
+      ]
+    }
+  ]
+}

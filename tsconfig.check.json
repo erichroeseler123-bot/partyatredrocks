@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "app_backup_20260211_1252",
+    "app_backup_post_bg_replace_20260211_1140",
+    "_backups",
+    "_parked",
+    "**/*.bak",
+    "**/*.bak_*",
+    "**/*.bak.*",
+    "**/*.BROKEN",
+    "**/*.STARTOVER*"
+  ]
+}

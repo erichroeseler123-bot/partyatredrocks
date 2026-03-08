@@ -1,0 +1,294 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "events": [
+    {
+      "id": "fox-theatre-2026-01-31-josh-teed",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Josh Teed",
+      "startAt": "2026-01-31T19:00:00",
+      "startLocal": "2026-01-31T19:00:00",
+      "venueId": "fox-theatre",
+      "headliners": [
+        "artist-josh-teed"
+      ],
+      "artists": [
+        "artist-josh-teed"
+      ],
+      "artistNames": [
+        "Josh Teed"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-01-31",
+      "slug": "2026-01-31-josh-teed"
+    },
+    {
+      "id": "fox-theatre-2026-02-07-the-ocean-blue",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "The Ocean Blue",
+      "startAt": "2026-02-07T19:00:00",
+      "startLocal": "2026-02-07T19:00:00",
+      "venueId": "fox-theatre",
+      "headliners": [
+        "artist-the-ocean-blue"
+      ],
+      "artists": [
+        "artist-the-ocean-blue"
+      ],
+      "artistNames": [
+        "The Ocean Blue"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-07",
+      "slug": "2026-02-07-the-ocean-blue"
+    },
+    {
+      "id": "fox-theatre-2026-02-09-say-she-she-with-katzu-oso",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Say She She with Katzu Oso",
+      "startAt": "2026-02-09T19:00:00",
+      "startLocal": "2026-02-09T19:00:00",
+      "venueId": "fox-theatre",
+      "headliners": [
+        "artist-say-she-she"
+      ],
+      "artists": [
+        "artist-say-she-she",
+        "artist-katzu-oso"
+      ],
+      "artistNames": [
+        "Say She She",
+        "Katzu Oso"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-09",
+      "slug": "2026-02-09-say-she-she-with-katzu-oso"
+    },
+    {
+      "id": "fox-theatre-2026-02-27-penelope-road",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Penelope Road",
+      "startAt": "2026-02-27T19:00:00",
+      "startLocal": "2026-02-27T19:00:00",
+      "venueId": "fox-theatre",
+      "headliners": [
+        "artist-penelope-road"
+      ],
+      "artists": [
+        "artist-penelope-road"
+      ],
+      "artistNames": [
+        "Penelope Road"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-27",
+      "slug": "2026-02-27-penelope-road"
+    },
+    {
+      "id": "fox-theatre-2026-03-12-jigitz",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Jigitz",
+      "startAt": "2026-03-12T19:00:00",
+      "startLocal": "2026-03-12T19:00:00",
+      "venueId": "fox-theatre",
+      "headliners": [
+        "artist-jigitz"
+      ],
+      "artists": [
+        "artist-jigitz"
+      ],
+      "artistNames": [
+        "Jigitz"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-12",
+      "slug": "2026-03-12-jigitz"
+    },
+    {
+      "id": "fox-theatre-2026-03-13-the-barr-brothers",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "The Barr Brothers",
+      "startAt": "2026-03-13T19:00:00",
+      "startLocal": "2026-03-13T19:00:00",
+      "venueId": "fox-theatre",
+      "headliners": [
+        "artist-the-barr-brothers"
+      ],
+      "artists": [
+        "artist-the-barr-brothers"
+      ],
+      "artistNames": [
+        "The Barr Brothers"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-13",
+      "slug": "2026-03-13-the-barr-brothers"
+    },
+    {
+      "id": "fox-theatre-2026-03-20-shadowgrass",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "ShadowGrass",
+      "startAt": "2026-03-20T19:00:00",
+      "startLocal": "2026-03-20T19:00:00",
+      "venueId": "fox-theatre",
+      "headliners": [
+        "artist-shadowgrass"
+      ],
+      "artists": [
+        "artist-shadowgrass"
+      ],
+      "artistNames": [
+        "ShadowGrass"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-20",
+      "slug": "2026-03-20-shadowgrass"
+    },
+    {
+      "id": "fox-theatre-2026-03-21-jonah-kagen-16",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Jonah Kagen (16+)",
+      "startAt": "2026-03-21T19:00:00",
+      "startLocal": "2026-03-21T19:00:00",
+      "venueId": "fox-theatre",
+      "headliners": [
+        "artist-jonah-kagen-16"
+      ],
+      "artists": [
+        "artist-jonah-kagen-16"
+      ],
+      "artistNames": [
+        "Jonah Kagen (16+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-21",
+      "slug": "2026-03-21-jonah-kagen-16"
+    },
+    {
+      "id": "fox-theatre-2026-03-28-los-amigos-invisibles",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Los Amigos Invisibles",
+      "startAt": "2026-03-28T19:00:00",
+      "startLocal": "2026-03-28T19:00:00",
+      "venueId": "fox-theatre",
+      "headliners": [
+        "artist-los-amigos-invisibles"
+      ],
+      "artists": [
+        "artist-los-amigos-invisibles"
+      ],
+      "artistNames": [
+        "Los Amigos Invisibles"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-28",
+      "slug": "2026-03-28-los-amigos-invisibles"
+    },
+    {
+      "id": "fox-theatre-2026-04-18-pete-yorn-21",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Pete Yorn (21+)",
+      "startAt": "2026-04-18T19:00:00",
+      "startLocal": "2026-04-18T19:00:00",
+      "venueId": "fox-theatre",
+      "headliners": [
+        "artist-pete-yorn-21"
+      ],
+      "artists": [
+        "artist-pete-yorn-21"
+      ],
+      "artistNames": [
+        "Pete Yorn (21+)"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-18",
+      "slug": "2026-04-18-pete-yorn-21"
+    },
+    {
+      "id": "fox-theatre-2026-04-30-witchz",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "WITCHZ",
+      "startAt": "2026-04-30T19:00:00",
+      "startLocal": "2026-04-30T19:00:00",
+      "venueId": "fox-theatre",
+      "headliners": [
+        "artist-witchz"
+      ],
+      "artists": [
+        "artist-witchz"
+      ],
+      "artistNames": [
+        "WITCHZ"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-30",
+      "slug": "2026-04-30-witchz"
+    },
+    {
+      "id": "fox-theatre-2026-05-01-saxsquatch",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Saxsquatch",
+      "startAt": "2026-05-01T19:00:00",
+      "startLocal": "2026-05-01T19:00:00",
+      "venueId": "fox-theatre",
+      "headliners": [
+        "artist-saxsquatch"
+      ],
+      "artists": [
+        "artist-saxsquatch"
+      ],
+      "artistNames": [
+        "Saxsquatch"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-01",
+      "slug": "2026-05-01-saxsquatch"
+    },
+    {
+      "id": "fox-theatre-2026-05-10-unknown-mortal-orchestra",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Unknown Mortal Orchestra",
+      "startAt": "2026-05-10T19:00:00",
+      "startLocal": "2026-05-10T19:00:00",
+      "venueId": "fox-theatre",
+      "headliners": [
+        "artist-unknown-mortal-orchestra"
+      ],
+      "artists": [
+        "artist-unknown-mortal-orchestra"
+      ],
+      "artistNames": [
+        "Unknown Mortal Orchestra"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-10",
+      "slug": "2026-05-10-unknown-mortal-orchestra"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "docs": [
+    {
+      "eventKey": "broadmoor-world-arena-2026-03-08-tobymac-with-crowder-and-jeremy-camp",
+      "title": "TobyMac with Crowder and Jeremy Camp",
+      "artistNames": [
+        "TobyMac",
+        "Crowder",
+        "Jeremy Camp"
+      ],
+      "venueId": "broadmoor-world-arena",
+      "dateKey": "2026-03-08",
+      "tags": [
+        "broadmoor-world-arena",
+        "tobymac",
+        "crowder",
+        "jeremy camp"
+      ]
+    },
+    {
+      "eventKey": "broadmoor-world-arena-2026-03-09-heart-with-lucinda-williams",
+      "title": "Heart with Lucinda Williams",
+      "artistNames": [
+        "Heart",
+        "Lucinda Williams"
+      ],
+      "venueId": "broadmoor-world-arena",
+      "dateKey": "2026-03-09",
+      "tags": [
+        "broadmoor-world-arena",
+        "heart",
+        "lucinda williams"
+      ]
+    },
+    {
+      "eventKey": "broadmoor-world-arena-2026-05-21-phil-wickham",
+      "title": "Phil Wickham",
+      "artistNames": [
+        "Phil Wickham"
+      ],
+      "venueId": "broadmoor-world-arena",
+      "dateKey": "2026-05-21",
+      "tags": [
+        "broadmoor-world-arena",
+        "phil wickham"
+      ]
+    }
+  ]
+}

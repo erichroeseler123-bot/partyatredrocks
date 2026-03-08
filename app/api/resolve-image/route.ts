@@ -21,7 +21,7 @@ export async function GET(req: Request) {
   const sgRes = await fetch(
     `https://api.seatgeek.com/2/performers?q=${encodeURIComponent(
       artist
-    )}&client_id=${process.env.seatgeekclientid}`
+    )}&client_id=${process.env.SEATGEEK_CLIENT_ID || process.env.NEXT_PUBLIC_SEATGEEK_CLIENT_ID}`
   );
 
   if (!sgRes.ok) {

@@ -60,7 +60,7 @@ export default function SafetyAndLegitimacy() {
       </div>
 
       <div className="mt-16 text-center border-t border-zinc-900 pt-10">
-        <Link href="/book-shuttle" className="btn-primary uppercase tracking-widest transition shadow-xl inline-block">
+        <Link href="/find" className="btn-primary uppercase tracking-widest transition shadow-xl inline-block">
           Book With a Verified Professional
         </Link>
       </div>

@@ -1,0 +1,48 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "events": {
+    "ford-amphitheater-colorado-springs-2026-06-18-o-a-r-with-gavin-degraw-and-phantom-planet": {
+      "local": null,
+      "remote": null
+    },
+    "ford-amphitheater-colorado-springs-2026-08-14-alison-krauss-and-union-station-with-jerry-douglas-and-theo-lawrence": {
+      "local": null,
+      "remote": null
+    },
+    "ford-amphitheater-colorado-springs-2026-09-05-brantley-gilbert-rescheduled-from-10-11-25": {
+      "local": null,
+      "remote": null
+    }
+  },
+  "artists": {
+    "artist-alison-krauss-and-union-station": {
+      "local": null,
+      "remote": null
+    },
+    "artist-gavin-degraw": {
+      "local": null,
+      "remote": null
+    },
+    "artist-brantley-gilbert-rescheduled-from-10-11-25": {
+      "local": null,
+      "remote": null
+    },
+    "artist-jerry-douglas": {
+      "local": null,
+      "remote": null
+    },
+    "artist-o-a-r": {
+      "local": null,
+      "remote": null
+    },
+    "artist-phantom-planet": {
+      "local": null,
+      "remote": null
+    },
+    "artist-theo-lawrence": {
+      "local": null,
+      "remote": null
+    }
+  }
+}

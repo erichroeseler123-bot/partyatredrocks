@@ -1,0 +1,116 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "events": {
+    "fox-theatre-2026-01-31-josh-teed": {
+      "local": null,
+      "remote": null
+    },
+    "fox-theatre-2026-02-07-the-ocean-blue": {
+      "local": null,
+      "remote": null
+    },
+    "fox-theatre-2026-02-09-say-she-she-with-katzu-oso": {
+      "local": null,
+      "remote": null
+    },
+    "fox-theatre-2026-02-27-penelope-road": {
+      "local": null,
+      "remote": null
+    },
+    "fox-theatre-2026-03-12-jigitz": {
+      "local": null,
+      "remote": null
+    },
+    "fox-theatre-2026-03-13-the-barr-brothers": {
+      "local": null,
+      "remote": null
+    },
+    "fox-theatre-2026-03-20-shadowgrass": {
+      "local": null,
+      "remote": null
+    },
+    "fox-theatre-2026-03-21-jonah-kagen-16": {
+      "local": null,
+      "remote": null
+    },
+    "fox-theatre-2026-03-28-los-amigos-invisibles": {
+      "local": null,
+      "remote": null
+    },
+    "fox-theatre-2026-04-18-pete-yorn-21": {
+      "local": null,
+      "remote": null
+    },
+    "fox-theatre-2026-04-30-witchz": {
+      "local": null,
+      "remote": null
+    },
+    "fox-theatre-2026-05-01-saxsquatch": {
+      "local": null,
+      "remote": null
+    },
+    "fox-theatre-2026-05-10-unknown-mortal-orchestra": {
+      "local": null,
+      "remote": null
+    }
+  },
+  "artists": {
+    "artist-jigitz": {
+      "local": null,
+      "remote": null
+    },
+    "artist-jonah-kagen-16": {
+      "local": null,
+      "remote": null
+    },
+    "artist-josh-teed": {
+      "local": null,
+      "remote": null
+    },
+    "artist-katzu-oso": {
+      "local": null,
+      "remote": null
+    },
+    "artist-los-amigos-invisibles": {
+      "local": null,
+      "remote": null
+    },
+    "artist-penelope-road": {
+      "local": null,
+      "remote": null
+    },
+    "artist-pete-yorn-21": {
+      "local": null,
+      "remote": null
+    },
+    "artist-saxsquatch": {
+      "local": null,
+      "remote": null
+    },
+    "artist-say-she-she": {
+      "local": null,
+      "remote": null
+    },
+    "artist-shadowgrass": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-barr-brothers": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-ocean-blue": {
+      "local": null,
+      "remote": null
+    },
+    "artist-unknown-mortal-orchestra": {
+      "local": null,
+      "remote": null
+    },
+    "artist-witchz": {
+      "local": null,
+      "remote": null
+    }
+  }
+}

@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { getRedRocksEvents } from "@/lib/redrocksEvents";
 import RedRocksShowsGrid from "@/components/RedRocksShowsGrid";
+import FAQBlock from "@/components/FAQBlock";
+import MusicWave from "@/components/MusicWave";
+import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
+import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
 
 type SP = Record<string, string | string[] | undefined>;
 
@@ -32,6 +36,8 @@ export default async function RedRocksPage({
   searchParams: Promise<SP>;
 }) {
   const sp = await searchParams;
+  const faqRows = await getFaqRowsWithGlobal("venues/red-rocks-amphitheatre.json");
+  const faqJsonLd = buildFaqPageJsonLd(faqRows);
 
   const pickup = first(sp, "pickup") || "";
   const date = first(sp, "date") || "";
@@ -39,18 +45,21 @@ export default async function RedRocksPage({
 
   const qs = buildQs(sp);
 
-  const events = getRedRocksEvents();
+  const events = await getRedRocksEvents(2026);
 
   // NOTE: pick the real booking endpoint you want.
   // If /book-shuttle exists and is the actual Red Rocks booking flow, use it:
   const bookTarget = `/book-shuttle${qs}`;
 
   return (
-    <main className="min-h-screen bg-surface text-white px-6 py-20">
-      <div className="max-w-6xl mx-auto">
-        <header className="mb-8">
+    <main className="comic-page pt-24 pb-10">
+      <div className="comic-wrap">
+        {faqRows.length > 0 ? (
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+        ) : null}
+        <header className="comic-hero mb-8">
           <h1 className="text-5xl md:text-6xl font-black mb-4 tracking-tight">
-  <Link href="/book?venue=red-rocks-amphitheatre" className="btn-primary text-2xl px-10 py-5 mb-8 inline-block">
+  <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary mb-6 inline-flex">
     Book Shuttle to This Venue →
   </Link>
             Red Rocks Amphitheatre
@@ -58,11 +67,14 @@ export default async function RedRocksPage({
           <p className="text-muted max-w-2xl">
             Morrison, CO · Live events pulled from SeatGeek · Venue ID 196
           </p>
+          <div style={{ marginTop: 18 }}>
+            <MusicWave bars={24} />
+          </div>
         </header>
 
         {/* Prefill banner (only shows when params exist) */}
         {(pickup || date || qty) ? (
-          <section className="panel-soft p-6 mb-10">
+          <section className="comic-panel p-6 mb-8">
             <div className="text-[11px] font-black uppercase tracking-[.22em] text-white/60">
               Booking Prefill
             </div>
@@ -86,10 +98,10 @@ export default async function RedRocksPage({
             </div>
 
             <div className="mt-5 flex flex-wrap gap-3">
-              <Link className="btn-primary" href={bookTarget}>
+              <Link className="comic-btn comic-btn-primary" href={bookTarget}>
                 Continue to booking
               </Link>
-              <Link className="btn-secondary" href="/book?venue=red-rocks">
+              <Link className="comic-btn comic-btn-secondary" href="/book?venue=red-rocks">
                 Change destination
               </Link>
             </div>
@@ -100,15 +112,15 @@ export default async function RedRocksPage({
             </div>
           </section>
         ) : (
-          <section className="panel-soft p-6 mb-10">
+          <section className="comic-panel p-6 mb-8">
             <div className="text-[11px] font-black uppercase tracking-[.22em] text-white/60">
               Booking
             </div>
             <div className="mt-4 flex flex-wrap gap-3">
-              <Link className="btn-primary" href="/book?venue=red-rocks">
+              <Link className="comic-btn comic-btn-primary" href="/book?venue=red-rocks">
                 Start booking
               </Link>
-              <Link className="btn-secondary" href="/week">
+              <Link className="comic-btn comic-btn-secondary" href="/week">
                 See events this week
               </Link>
             </div>
@@ -119,6 +131,8 @@ export default async function RedRocksPage({
           <h2 className="text-3xl font-bold mb-8">Upcoming Shows</h2>
           <RedRocksShowsGrid events={events} />
         </section>
+
+        <FAQBlock title="Red Rocks Venue FAQ" rows={faqRows} />
       </div>
     </main>
   );

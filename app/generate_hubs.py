@@ -15,7 +15,7 @@ export default function HubPage() {{
       {/* Sub-pages grid will go here - add links to leaf pages later */}
 
       <div className="mt-12 text-center">
-        <Link href="/book-shuttle" className="btn-primary">
+        <Link href="/find" className="btn-primary">
           Book Your Ride →
         </Link>
       </div>

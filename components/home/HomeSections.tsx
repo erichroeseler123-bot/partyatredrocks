@@ -24,39 +24,40 @@ export default function HomeSections({
   venues?: VenuePreview[];
 }) {
   return (
-    <main className="mx-auto max-w-6xl px-4 py-10 md:py-14">
+    <main className="comic-page pt-24 pb-10">
+      <section className="comic-wrap">
       {/* 1) HERO */}
-      <section className="rounded-[36px] border border-soft panel p-8 md:p-12 shadow-[0_22px_70px_rgba(0,0,0,0.45)] backdrop-blur-xl">
-        <div className="inline-flex items-center gap-2 rounded-full pill px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white/80">
+      <section className="comic-hero rounded-[36px] border border-soft p-8 md:p-12 shadow-[0_22px_70px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+        <div className="comic-kicker">
           {DISPLAY.ui.home.badge}
         </div>
 
-        <h1 className="mt-4 text-4xl md:text-6xl font-black tracking-tight">
+        <h1 className="comic-title">
           {DISPLAY.ui.home.headline}
         </h1>
 
-        <p className="mt-4 max-w-3xl text-white/75 text-base md:text-lg">
+        <p className="comic-copy max-w-3xl">
           {DISPLAY.ui.home.subhead}
         </p>
 
         <div className="mt-7 flex flex-col gap-3 sm:flex-row">
           <Link
             href="/book"
-            className="inline-flex items-center justify-center rounded-full bg-neon-blue px-8 py-4 text-[12px] font-black uppercase tracking-[0.22em] text-black hover:bg-surface/40 transition"
+            className="comic-btn comic-btn-primary"
           >
             Book Shuttle
           </Link>
 
           <Link
             href="/week"
-            className="inline-flex items-center justify-center rounded-full pill px-8 py-4 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 hover:pill-soft transition"
+            className="comic-btn comic-btn-secondary"
           >
             This Week →
           </Link>
 
           <Link
             href="/private-suburban"
-            className="inline-flex items-center justify-center rounded-full pill px-8 py-4 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 hover:pill-soft transition"
+            className="comic-btn comic-btn-secondary"
           >
             Private SUVs →
           </Link>
@@ -287,11 +288,12 @@ export default function HomeSections({
           </div>
           <Link
             href="/book"
-            className="inline-flex items-center justify-center rounded-full bg-neon-blue px-8 py-4 text-[12px] font-black uppercase tracking-[0.22em] text-black hover:bg-surface/40 transition"
+            className="comic-btn comic-btn-primary"
           >
             Book Shuttle
           </Link>
         </div>
+      </section>
       </section>
     </main>
   );

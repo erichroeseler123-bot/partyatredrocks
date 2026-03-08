@@ -1,0 +1,53 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "docs": [
+    {
+      "eventKey": "ford-amphitheater-colorado-springs-2026-06-18-o-a-r-with-gavin-degraw-and-phantom-planet",
+      "title": "O.A.R. with Gavin DeGraw and Phantom Planet",
+      "artistNames": [
+        "O.A.R.",
+        "Gavin DeGraw",
+        "Phantom Planet"
+      ],
+      "venueId": "ford-amphitheater-colorado-springs",
+      "dateKey": "2026-06-18",
+      "tags": [
+        "ford-amphitheater-colorado-springs",
+        "o.a.r.",
+        "gavin degraw",
+        "phantom planet"
+      ]
+    },
+    {
+      "eventKey": "ford-amphitheater-colorado-springs-2026-08-14-alison-krauss-and-union-station-with-jerry-douglas-and-theo-lawrence",
+      "title": "Alison Krauss & Union Station with Jerry Douglas and Theo Lawrence",
+      "artistNames": [
+        "Alison Krauss & Union Station",
+        "Jerry Douglas",
+        "Theo Lawrence"
+      ],
+      "venueId": "ford-amphitheater-colorado-springs",
+      "dateKey": "2026-08-14",
+      "tags": [
+        "ford-amphitheater-colorado-springs",
+        "alison krauss & union station",
+        "jerry douglas",
+        "theo lawrence"
+      ]
+    },
+    {
+      "eventKey": "ford-amphitheater-colorado-springs-2026-09-05-brantley-gilbert-rescheduled-from-10-11-25",
+      "title": "Brantley Gilbert (Rescheduled from 10/11/25)",
+      "artistNames": [
+        "Brantley Gilbert (Rescheduled from 10/11/25)"
+      ],
+      "venueId": "ford-amphitheater-colorado-springs",
+      "dateKey": "2026-09-05",
+      "tags": [
+        "ford-amphitheater-colorado-springs",
+        "brantley gilbert (rescheduled from 10/11/25)"
+      ]
+    }
+  ]
+}

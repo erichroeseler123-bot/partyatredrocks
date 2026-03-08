@@ -1,0 +1,12 @@
+[
+  {
+    "id": "faq-data-source",
+    "question": "Where does show information come from?",
+    "answer": "Show listings are compiled from venue-year ledgers and snapshot indexes. Confirm final timing and policies with the venue before departure."
+  },
+  {
+    "id": "faq-booking-confirmation",
+    "question": "What happens after I book?",
+    "answer": "You receive confirmation details for pickup timing, meeting instructions, and return logistics so your group can exit smoothly after the show."
+  }
+]

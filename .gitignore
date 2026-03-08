@@ -19,6 +19,7 @@ NEXT_DISABLE_TURBOPACK=1
 # local edit backups
 *.bak
 *.bak_*
+*.bak.*
 
 # Python
 __pycache__/

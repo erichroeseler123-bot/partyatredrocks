@@ -1,0 +1,25 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "artists": [
+    {
+      "id": "artist-ella-red",
+      "name": "Ella Red",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "larimer-lounge-2026-03-11-ella-red"
+      ],
+      "venueIds": [
+        "larimer-lounge"
+      ],
+      "dateKeys": [
+        "2026-03-11"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-11",
+      "lastDate": "2026-03-11",
+      "coArtists": []
+    }
+  ]
+}

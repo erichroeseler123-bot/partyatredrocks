@@ -1,0 +1,558 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "events": [
+    {
+      "id": "black-sheep-2026-02-23-rivers-of-nihil",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Rivers Of Nihil",
+      "startAt": "2026-02-23T19:00:00",
+      "startLocal": "2026-02-23T19:00:00",
+      "venueId": "black-sheep",
+      "headliners": [
+        "artist-rivers-of-nihil"
+      ],
+      "artists": [
+        "artist-rivers-of-nihil"
+      ],
+      "artistNames": [
+        "Rivers Of Nihil"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-23",
+      "slug": "2026-02-23-rivers-of-nihil"
+    },
+    {
+      "id": "black-sheep-2026-02-25-the-queers",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "The Queers",
+      "startAt": "2026-02-25T19:00:00",
+      "startLocal": "2026-02-25T19:00:00",
+      "venueId": "black-sheep",
+      "headliners": [
+        "artist-the-queers"
+      ],
+      "artists": [
+        "artist-the-queers"
+      ],
+      "artistNames": [
+        "The Queers"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-02-25",
+      "slug": "2026-02-25-the-queers"
+    },
+    {
+      "id": "black-sheep-2026-03-06-nekrogoblikon-with-enterprise-earth",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Nekrogoblikon with Enterprise Earth",
+      "startAt": "2026-03-06T19:00:00",
+      "startLocal": "2026-03-06T19:00:00",
+      "venueId": "black-sheep",
+      "headliners": [
+        "artist-nekrogoblikon"
+      ],
+      "artists": [
+        "artist-nekrogoblikon",
+        "artist-enterprise-earth"
+      ],
+      "artistNames": [
+        "Nekrogoblikon",
+        "Enterprise Earth"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-06",
+      "slug": "2026-03-06-nekrogoblikon-with-enterprise-earth"
+    },
+    {
+      "id": "black-sheep-2026-03-25-teenage-bottlerocket",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Teenage Bottlerocket",
+      "startAt": "2026-03-25T19:00:00",
+      "startLocal": "2026-03-25T19:00:00",
+      "venueId": "black-sheep",
+      "headliners": [
+        "artist-teenage-bottlerocket"
+      ],
+      "artists": [
+        "artist-teenage-bottlerocket"
+      ],
+      "artistNames": [
+        "Teenage Bottlerocket"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-25",
+      "slug": "2026-03-25-teenage-bottlerocket"
+    },
+    {
+      "id": "black-sheep-2026-03-28-red-leather",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Red Leather",
+      "startAt": "2026-03-28T19:00:00",
+      "startLocal": "2026-03-28T19:00:00",
+      "venueId": "black-sheep",
+      "headliners": [
+        "artist-red-leather"
+      ],
+      "artists": [
+        "artist-red-leather"
+      ],
+      "artistNames": [
+        "Red Leather"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-28",
+      "slug": "2026-03-28-red-leather"
+    },
+    {
+      "id": "black-sheep-2026-03-30-i-see-stars",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "I See Stars",
+      "startAt": "2026-03-30T19:00:00",
+      "startLocal": "2026-03-30T19:00:00",
+      "venueId": "black-sheep",
+      "headliners": [
+        "artist-i-see-stars"
+      ],
+      "artists": [
+        "artist-i-see-stars"
+      ],
+      "artistNames": [
+        "I See Stars"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-30",
+      "slug": "2026-03-30-i-see-stars"
+    },
+    {
+      "id": "black-sheep-2026-03-31-obscura-with-allegaeon-cognitive-and-cryptosis",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Obscura with Allegaeon, Cognitive, and Cryptosis",
+      "startAt": "2026-03-31T19:00:00",
+      "startLocal": "2026-03-31T19:00:00",
+      "venueId": "black-sheep",
+      "headliners": [
+        "artist-obscura"
+      ],
+      "artists": [
+        "artist-obscura",
+        "artist-allegaeon",
+        "artist-cognitive",
+        "artist-cryptosis"
+      ],
+      "artistNames": [
+        "Obscura",
+        "Allegaeon",
+        "Cognitive",
+        "Cryptosis"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-03-31",
+      "slug": "2026-03-31-obscura-with-allegaeon-cognitive-and-cryptosis"
+    },
+    {
+      "id": "black-sheep-2026-04-02-subhumans",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Subhumans",
+      "startAt": "2026-04-02T19:00:00",
+      "startLocal": "2026-04-02T19:00:00",
+      "venueId": "black-sheep",
+      "headliners": [
+        "artist-subhumans"
+      ],
+      "artists": [
+        "artist-subhumans"
+      ],
+      "artistNames": [
+        "Subhumans"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-02",
+      "slug": "2026-04-02-subhumans"
+    },
+    {
+      "id": "black-sheep-2026-04-04-prayers-with-my-life-with-the-thrill-kill-kult",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Prayers with My Life With The Thrill Kill Kult",
+      "startAt": "2026-04-04T19:00:00",
+      "startLocal": "2026-04-04T19:00:00",
+      "venueId": "black-sheep",
+      "headliners": [
+        "artist-prayers"
+      ],
+      "artists": [
+        "artist-prayers",
+        "artist-my-life",
+        "artist-the-thrill-kill-kult"
+      ],
+      "artistNames": [
+        "Prayers",
+        "My Life",
+        "The Thrill Kill Kult"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-04",
+      "slug": "2026-04-04-prayers-with-my-life-with-the-thrill-kill-kult"
+    },
+    {
+      "id": "black-sheep-2026-04-05-magnolia-park-with-silly-goose",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Magnolia Park with Silly Goose",
+      "startAt": "2026-04-05T19:00:00",
+      "startLocal": "2026-04-05T19:00:00",
+      "venueId": "black-sheep",
+      "headliners": [
+        "artist-magnolia-park"
+      ],
+      "artists": [
+        "artist-magnolia-park",
+        "artist-silly-goose"
+      ],
+      "artistNames": [
+        "Magnolia Park",
+        "Silly Goose"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-05",
+      "slug": "2026-04-05-magnolia-park-with-silly-goose"
+    },
+    {
+      "id": "black-sheep-2026-04-09-bit-brigade",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Bit Brigade",
+      "startAt": "2026-04-09T19:00:00",
+      "startLocal": "2026-04-09T19:00:00",
+      "venueId": "black-sheep",
+      "headliners": [
+        "artist-bit-brigade"
+      ],
+      "artists": [
+        "artist-bit-brigade"
+      ],
+      "artistNames": [
+        "Bit Brigade"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-09",
+      "slug": "2026-04-09-bit-brigade"
+    },
+    {
+      "id": "black-sheep-2026-04-11-des-rocs",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Des Rocs",
+      "startAt": "2026-04-11T19:00:00",
+      "startLocal": "2026-04-11T19:00:00",
+      "venueId": "black-sheep",
+      "headliners": [
+        "artist-des-rocs"
+      ],
+      "artists": [
+        "artist-des-rocs"
+      ],
+      "artistNames": [
+        "Des Rocs"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-11",
+      "slug": "2026-04-11-des-rocs"
+    },
+    {
+      "id": "black-sheep-2026-04-19-buckethead",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Buckethead",
+      "startAt": "2026-04-19T19:00:00",
+      "startLocal": "2026-04-19T19:00:00",
+      "venueId": "black-sheep",
+      "headliners": [
+        "artist-buckethead"
+      ],
+      "artists": [
+        "artist-buckethead"
+      ],
+      "artistNames": [
+        "Buckethead"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-19",
+      "slug": "2026-04-19-buckethead"
+    },
+    {
+      "id": "black-sheep-2026-04-20-slomosa",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Slomosa",
+      "startAt": "2026-04-20T19:00:00",
+      "startLocal": "2026-04-20T19:00:00",
+      "venueId": "black-sheep",
+      "headliners": [
+        "artist-slomosa"
+      ],
+      "artists": [
+        "artist-slomosa"
+      ],
+      "artistNames": [
+        "Slomosa"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-20",
+      "slug": "2026-04-20-slomosa"
+    },
+    {
+      "id": "black-sheep-2026-04-22-cold",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Cold",
+      "startAt": "2026-04-22T19:00:00",
+      "startLocal": "2026-04-22T19:00:00",
+      "venueId": "black-sheep",
+      "headliners": [
+        "artist-cold"
+      ],
+      "artists": [
+        "artist-cold"
+      ],
+      "artistNames": [
+        "Cold"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-22",
+      "slug": "2026-04-22-cold"
+    },
+    {
+      "id": "black-sheep-2026-04-23-devotchka-aa-tribute-to-the-music-of-little-miss-sunshinea",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Devotchka - AA Tribute To the Music of Little Miss Sunshinea",
+      "startAt": "2026-04-23T19:00:00",
+      "startLocal": "2026-04-23T19:00:00",
+      "venueId": "black-sheep",
+      "headliners": [
+        "artist-devotchka-aa-tribute-to-the-music-of-little-miss-sunshinea"
+      ],
+      "artists": [
+        "artist-devotchka-aa-tribute-to-the-music-of-little-miss-sunshinea"
+      ],
+      "artistNames": [
+        "Devotchka - AA Tribute To the Music of Little Miss Sunshinea"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-23",
+      "slug": "2026-04-23-devotchka-aa-tribute-to-the-music-of-little-miss-sunshinea"
+    },
+    {
+      "id": "black-sheep-2026-04-29-the-black-dahlia-murder-with-the-acacia-strain",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "The Black Dahlia Murder with The Acacia Strain",
+      "startAt": "2026-04-29T19:00:00",
+      "startLocal": "2026-04-29T19:00:00",
+      "venueId": "black-sheep",
+      "headliners": [
+        "artist-the-black-dahlia-murder"
+      ],
+      "artists": [
+        "artist-the-black-dahlia-murder",
+        "artist-the-acacia-strain"
+      ],
+      "artistNames": [
+        "The Black Dahlia Murder",
+        "The Acacia Strain"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-04-29",
+      "slug": "2026-04-29-the-black-dahlia-murder-with-the-acacia-strain"
+    },
+    {
+      "id": "black-sheep-2026-05-01-lords-of-acid",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Lords Of Acid",
+      "startAt": "2026-05-01T19:00:00",
+      "startLocal": "2026-05-01T19:00:00",
+      "venueId": "black-sheep",
+      "headliners": [
+        "artist-lords-of-acid"
+      ],
+      "artists": [
+        "artist-lords-of-acid"
+      ],
+      "artistNames": [
+        "Lords Of Acid"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-01",
+      "slug": "2026-05-01-lords-of-acid"
+    },
+    {
+      "id": "black-sheep-2026-05-03-saxsquatch",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Saxsquatch",
+      "startAt": "2026-05-03T19:00:00",
+      "startLocal": "2026-05-03T19:00:00",
+      "venueId": "black-sheep",
+      "headliners": [
+        "artist-saxsquatch"
+      ],
+      "artists": [
+        "artist-saxsquatch"
+      ],
+      "artistNames": [
+        "Saxsquatch"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-03",
+      "slug": "2026-05-03-saxsquatch"
+    },
+    {
+      "id": "black-sheep-2026-05-05-the-spill-canvas",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "The Spill Canvas",
+      "startAt": "2026-05-05T19:00:00",
+      "startLocal": "2026-05-05T19:00:00",
+      "venueId": "black-sheep",
+      "headliners": [
+        "artist-the-spill-canvas"
+      ],
+      "artists": [
+        "artist-the-spill-canvas"
+      ],
+      "artistNames": [
+        "The Spill Canvas"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-05",
+      "slug": "2026-05-05-the-spill-canvas"
+    },
+    {
+      "id": "black-sheep-2026-05-12-unknown-mortal-orchestra",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Unknown Mortal Orchestra",
+      "startAt": "2026-05-12T19:00:00",
+      "startLocal": "2026-05-12T19:00:00",
+      "venueId": "black-sheep",
+      "headliners": [
+        "artist-unknown-mortal-orchestra"
+      ],
+      "artists": [
+        "artist-unknown-mortal-orchestra"
+      ],
+      "artistNames": [
+        "Unknown Mortal Orchestra"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-12",
+      "slug": "2026-05-12-unknown-mortal-orchestra"
+    },
+    {
+      "id": "black-sheep-2026-05-25-powerman-5000",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Powerman 5000",
+      "startAt": "2026-05-25T19:00:00",
+      "startLocal": "2026-05-25T19:00:00",
+      "venueId": "black-sheep",
+      "headliners": [
+        "artist-powerman-5000"
+      ],
+      "artists": [
+        "artist-powerman-5000"
+      ],
+      "artistNames": [
+        "Powerman 5000"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-25",
+      "slug": "2026-05-25-powerman-5000"
+    },
+    {
+      "id": "black-sheep-2026-05-27-archspire-with-undeath",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Archspire with Undeath",
+      "startAt": "2026-05-27T19:00:00",
+      "startLocal": "2026-05-27T19:00:00",
+      "venueId": "black-sheep",
+      "headliners": [
+        "artist-archspire"
+      ],
+      "artists": [
+        "artist-archspire",
+        "artist-undeath"
+      ],
+      "artistNames": [
+        "Archspire",
+        "Undeath"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-05-27",
+      "slug": "2026-05-27-archspire-with-undeath"
+    },
+    {
+      "id": "black-sheep-2026-06-03-alpha-wolf-with-gideon-mugshot-and-resolve",
+      "source": "snapshot",
+      "sourceId": null,
+      "name": "Alpha Wolf with Gideon, Mugshot and Resolve",
+      "startAt": "2026-06-03T19:00:00",
+      "startLocal": "2026-06-03T19:00:00",
+      "venueId": "black-sheep",
+      "headliners": [
+        "artist-alpha-wolf"
+      ],
+      "artists": [
+        "artist-alpha-wolf",
+        "artist-gideon",
+        "artist-mugshot",
+        "artist-resolve"
+      ],
+      "artistNames": [
+        "Alpha Wolf",
+        "Gideon",
+        "Mugshot",
+        "Resolve"
+      ],
+      "image": null,
+      "ticketUrl": null,
+      "dateKey": "2026-06-03",
+      "slug": "2026-06-03-alpha-wolf-with-gideon-mugshot-and-resolve"
+    }
+  ]
+}

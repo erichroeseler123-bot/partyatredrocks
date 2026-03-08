@@ -56,7 +56,7 @@ export default function DenverPickups() {
 
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
-            href="/book-shuttle"
+            href="/find"
             className="btn-primary"
           >
             Book Shuttle → $59
@@ -130,7 +130,7 @@ export default function DenverPickups() {
       <ShuttleCTA
         title="Denver Pickup → Red Rocks"
         blurb="Board in Downtown Denver. $59 per-person. No parking stress, no surge pricing, guaranteed post-show return."
-        href="/book-shuttle"
+        href="/find"
         button="Book Denver Shuttle → $59"
       />
 

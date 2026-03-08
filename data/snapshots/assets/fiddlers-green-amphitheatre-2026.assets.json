@@ -1,0 +1,68 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "events": {
+    "fiddlers-green-amphitheatre-2026-06-11-lord-huron": {
+      "local": null,
+      "remote": null
+    },
+    "fiddlers-green-amphitheatre-2026-07-25-rainbow-kitten-surprise-with-spacey-jane": {
+      "local": null,
+      "remote": null
+    },
+    "fiddlers-green-amphitheatre-2026-08-15-mt-joy": {
+      "local": null,
+      "remote": null
+    },
+    "fiddlers-green-amphitheatre-2026-09-02-jack-johnson-with-lake-street-dive": {
+      "local": null,
+      "remote": null
+    },
+    "fiddlers-green-amphitheatre-2026-09-03-jack-johnson-with-lake-street-dive": {
+      "local": null,
+      "remote": null
+    },
+    "fiddlers-green-amphitheatre-2026-09-12-rob-zombie-and-marilyn-manson-with-the-hu-and-orgy": {
+      "local": null,
+      "remote": null
+    }
+  },
+  "artists": {
+    "artist-jack-johnson": {
+      "local": null,
+      "remote": null
+    },
+    "artist-lake-street-dive": {
+      "local": null,
+      "remote": null
+    },
+    "artist-lord-huron": {
+      "local": null,
+      "remote": null
+    },
+    "artist-mt-joy": {
+      "local": null,
+      "remote": null
+    },
+    "artist-orgy": {
+      "local": null,
+      "remote": null
+    },
+    "artist-rainbow-kitten-surprise": {
+      "local": null,
+      "remote": null
+    },
+    "artist-rob-zombie-and-marilyn-manson": {
+      "local": null,
+      "remote": null
+    },
+    "artist-spacey-jane": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-hu": {
+      "local": null,
+      "remote": null
+    }
+  }
+}

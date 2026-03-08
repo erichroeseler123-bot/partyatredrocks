@@ -1,0 +1,504 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "events": {
+    "summit-music-hall-2026-01-31-ghengar": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-02-03-jessie-j": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-02-04-lord-of-the-lost-with-the-birthday-massacre": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-02-07-ydg-with-join-the-resistance-18": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-02-11-michael-shannon-and-jason-narducy": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-02-20-club-90s-heated-rivalrave-18": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-02-21-club-90s-heated-rivalrave-18": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-02-24-monolink-18": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-02-25-lights-with-softcult": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-02-27-donny-benet": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-02-28-heated-rivalry-night-18": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-03-05-colony-house": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-03-06-emo-nite-21": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-03-07-dodie-clark": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-03-08-xaviersobased": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-03-09-lil-tony": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-03-10-peaches": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-03-11-zara-larsson-with-amelia-moore": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-03-12-hawthorne-heights": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-03-13-two-feet": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-03-14-two-feet": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-03-15-monaleo": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-03-17-sabrina-claudio-with-dylan-sinclair": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-03-18-testament-with-overkill-and-destruction": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-03-20-white-reaper-with-drug-church": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-03-21-barely-alive-with-tisoki-18": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-03-27-eidola": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-03-28-the-devil-wears-prada": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-03-30-machine-girl-with-sextile": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-03-31-lacuna-coil-with-escape-the-fate-and-vowws": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-04-03-jstjr-18": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-04-04-currents-with-erra": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-04-06-drain-with-no-pressure-haywire-and-secret-world": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-04-07-dave-rapper": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-04-11-dance-with-the-dead-with-magic-sword": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-04-15-free-throw": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-04-23-shadow-of-intent-with-angelmaker": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-04-24-drinkurwater-18": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-04-29-badbadnotgood": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-05-01-sevendust-with-atreyu": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-05-05-la-dispute": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-05-07-poison-the-well-with-converge-the-armed-and-the-barbarians-of-california": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-05-10-i-speak-machine": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-05-11-boulet-brothers-dragula": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-05-12-the-afghan-whigs-with-mercury-rev": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-05-13-chet-faker": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-05-17-arms-length": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-06-02-spite-with-emmure": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-06-27-bearracuda-18": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-08-21-diggy-graves-with-resentvul": {
+      "local": null,
+      "remote": null
+    }
+  },
+  "artists": {
+    "artist-amelia-moore": {
+      "local": null,
+      "remote": null
+    },
+    "artist-angelmaker": {
+      "local": null,
+      "remote": null
+    },
+    "artist-arms-length": {
+      "local": null,
+      "remote": null
+    },
+    "artist-atreyu": {
+      "local": null,
+      "remote": null
+    },
+    "artist-badbadnotgood": {
+      "local": null,
+      "remote": null
+    },
+    "artist-barely-alive": {
+      "local": null,
+      "remote": null
+    },
+    "artist-bearracuda-18": {
+      "local": null,
+      "remote": null
+    },
+    "artist-boulet-brothers-dragula": {
+      "local": null,
+      "remote": null
+    },
+    "artist-chet-faker": {
+      "local": null,
+      "remote": null
+    },
+    "artist-club-90s-heated-rivalrave-18": {
+      "local": null,
+      "remote": null
+    },
+    "artist-colony-house": {
+      "local": null,
+      "remote": null
+    },
+    "artist-converge": {
+      "local": null,
+      "remote": null
+    },
+    "artist-currents": {
+      "local": null,
+      "remote": null
+    },
+    "artist-dance": {
+      "local": null,
+      "remote": null
+    },
+    "artist-dave-rapper": {
+      "local": null,
+      "remote": null
+    },
+    "artist-destruction": {
+      "local": null,
+      "remote": null
+    },
+    "artist-diggy-graves": {
+      "local": null,
+      "remote": null
+    },
+    "artist-dodie-clark": {
+      "local": null,
+      "remote": null
+    },
+    "artist-donny-benet": {
+      "local": null,
+      "remote": null
+    },
+    "artist-drain": {
+      "local": null,
+      "remote": null
+    },
+    "artist-drinkurwater-18": {
+      "local": null,
+      "remote": null
+    },
+    "artist-drug-church": {
+      "local": null,
+      "remote": null
+    },
+    "artist-dylan-sinclair": {
+      "local": null,
+      "remote": null
+    },
+    "artist-eidola": {
+      "local": null,
+      "remote": null
+    },
+    "artist-emmure": {
+      "local": null,
+      "remote": null
+    },
+    "artist-emo-nite-21": {
+      "local": null,
+      "remote": null
+    },
+    "artist-erra": {
+      "local": null,
+      "remote": null
+    },
+    "artist-escape-the-fate": {
+      "local": null,
+      "remote": null
+    },
+    "artist-free-throw": {
+      "local": null,
+      "remote": null
+    },
+    "artist-ghengar": {
+      "local": null,
+      "remote": null
+    },
+    "artist-hawthorne-heights": {
+      "local": null,
+      "remote": null
+    },
+    "artist-haywire": {
+      "local": null,
+      "remote": null
+    },
+    "artist-i-speak-machine": {
+      "local": null,
+      "remote": null
+    },
+    "artist-jessie-j": {
+      "local": null,
+      "remote": null
+    },
+    "artist-heated-rivalry-night-18": {
+      "local": null,
+      "remote": null
+    },
+    "artist-join-the-resistance-18": {
+      "local": null,
+      "remote": null
+    },
+    "artist-jstjr-18": {
+      "local": null,
+      "remote": null
+    },
+    "artist-la-dispute": {
+      "local": null,
+      "remote": null
+    },
+    "artist-lacuna-coil": {
+      "local": null,
+      "remote": null
+    },
+    "artist-lights": {
+      "local": null,
+      "remote": null
+    },
+    "artist-lil-tony": {
+      "local": null,
+      "remote": null
+    },
+    "artist-lord-of-the-lost": {
+      "local": null,
+      "remote": null
+    },
+    "artist-machine-girl": {
+      "local": null,
+      "remote": null
+    },
+    "artist-magic-sword": {
+      "local": null,
+      "remote": null
+    },
+    "artist-mercury-rev": {
+      "local": null,
+      "remote": null
+    },
+    "artist-michael-shannon-and-jason-narducy": {
+      "local": null,
+      "remote": null
+    },
+    "artist-monaleo": {
+      "local": null,
+      "remote": null
+    },
+    "artist-monolink-18": {
+      "local": null,
+      "remote": null
+    },
+    "artist-no-pressure": {
+      "local": null,
+      "remote": null
+    },
+    "artist-overkill": {
+      "local": null,
+      "remote": null
+    },
+    "artist-peaches": {
+      "local": null,
+      "remote": null
+    },
+    "artist-poison-the-well": {
+      "local": null,
+      "remote": null
+    },
+    "artist-resentvul": {
+      "local": null,
+      "remote": null
+    },
+    "artist-sabrina-claudio": {
+      "local": null,
+      "remote": null
+    },
+    "artist-secret-world": {
+      "local": null,
+      "remote": null
+    },
+    "artist-sevendust": {
+      "local": null,
+      "remote": null
+    },
+    "artist-sextile": {
+      "local": null,
+      "remote": null
+    },
+    "artist-shadow-of-intent": {
+      "local": null,
+      "remote": null
+    },
+    "artist-softcult": {
+      "local": null,
+      "remote": null
+    },
+    "artist-spite": {
+      "local": null,
+      "remote": null
+    },
+    "artist-testament": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-afghan-whigs": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-armed": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-barbarians-of-california": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-birthday-massacre": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-dead": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-devil-wears-prada": {
+      "local": null,
+      "remote": null
+    },
+    "artist-tisoki-18": {
+      "local": null,
+      "remote": null
+    },
+    "artist-two-feet": {
+      "local": null,
+      "remote": null
+    },
+    "artist-vowws": {
+      "local": null,
+      "remote": null
+    },
+    "artist-white-reaper": {
+      "local": null,
+      "remote": null
+    },
+    "artist-xaviersobased": {
+      "local": null,
+      "remote": null
+    },
+    "artist-ydg": {
+      "local": null,
+      "remote": null
+    },
+    "artist-zara-larsson": {
+      "local": null,
+      "remote": null
+    }
+  }
+}

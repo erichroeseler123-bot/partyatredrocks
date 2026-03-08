@@ -1,0 +1,916 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "artists": [
+    {
+      "id": "artist-200-stab-wounds",
+      "name": "200 Stab Wounds",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-05-22-thy-art-is-murder-with-carnifex-bodysnatcher-200-stab-wounds-and-more"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-05-22"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-22",
+      "lastDate": "2026-05-22",
+      "coArtists": [
+        "artist-bodysnatcher",
+        "artist-carnifex",
+        "artist-thy-art-is-murder"
+      ]
+    },
+    {
+      "id": "artist-all-them-witches-16",
+      "name": "All Them Witches (16+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-03-01-all-them-witches-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-03-01"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-01",
+      "lastDate": "2026-03-01",
+      "coArtists": []
+    },
+    {
+      "id": "artist-amber-mark",
+      "name": "Amber Mark",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-03-15-amber-mark-with-sherwyn-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-03-15"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-15",
+      "lastDate": "2026-03-15",
+      "coArtists": [
+        "artist-sherwyn-16"
+      ]
+    },
+    {
+      "id": "artist-anthony-green-16",
+      "name": "Anthony Green (16+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-04-07-microwave-with-anthony-green-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-04-07"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-07",
+      "lastDate": "2026-04-07",
+      "coArtists": [
+        "artist-microwave"
+      ]
+    },
+    {
+      "id": "artist-audrey-hobert-16",
+      "name": "Audrey Hobert (16+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-08-04-audrey-hobert-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-08-04"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-08-04",
+      "lastDate": "2026-08-04",
+      "coArtists": []
+    },
+    {
+      "id": "artist-badflower-16",
+      "name": "Badflower (16+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-02-26-badflower-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-02-26"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-26",
+      "lastDate": "2026-02-26",
+      "coArtists": []
+    },
+    {
+      "id": "artist-biohazard",
+      "name": "Biohazard",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-05-21-sepultura-with-exodus-biohazard-and-tribal-gaze-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-05-21"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-21",
+      "lastDate": "2026-05-21",
+      "coArtists": [
+        "artist-exodus",
+        "artist-sepultura",
+        "artist-tribal-gaze-16"
+      ]
+    },
+    {
+      "id": "artist-bodysnatcher",
+      "name": "Bodysnatcher",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-05-22-thy-art-is-murder-with-carnifex-bodysnatcher-200-stab-wounds-and-more"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-05-22"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-22",
+      "lastDate": "2026-05-22",
+      "coArtists": [
+        "artist-200-stab-wounds",
+        "artist-carnifex",
+        "artist-thy-art-is-murder"
+      ]
+    },
+    {
+      "id": "artist-carnifex",
+      "name": "Carnifex",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-05-22-thy-art-is-murder-with-carnifex-bodysnatcher-200-stab-wounds-and-more"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-05-22"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-22",
+      "lastDate": "2026-05-22",
+      "coArtists": [
+        "artist-200-stab-wounds",
+        "artist-bodysnatcher",
+        "artist-thy-art-is-murder"
+      ]
+    },
+    {
+      "id": "artist-chance-pena-16",
+      "name": "Chance Pena (16+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-07-13-chance-pena-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-07-13"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-07-13",
+      "lastDate": "2026-07-13",
+      "coArtists": []
+    },
+    {
+      "id": "artist-chmura",
+      "name": "Chmura",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-01-30-chmura"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-01-30"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-01-30",
+      "lastDate": "2026-01-30",
+      "coArtists": []
+    },
+    {
+      "id": "artist-del-water-gap",
+      "name": "Del Water Gap",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-02-07-del-water-gap-with-hannah-jadagu"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-02-07"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-07",
+      "lastDate": "2026-02-07",
+      "coArtists": [
+        "artist-hannah-jadagu"
+      ]
+    },
+    {
+      "id": "artist-distinct-motive-16",
+      "name": "Distinct Motive (16+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-03-20-distinct-motive-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-03-20"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-20",
+      "lastDate": "2026-03-20",
+      "coArtists": []
+    },
+    {
+      "id": "artist-dogs-in-a-pile",
+      "name": "Dogs In A Pile",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-01-31-dogs-in-a-pile"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-01-31"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-01-31",
+      "lastDate": "2026-01-31",
+      "coArtists": []
+    },
+    {
+      "id": "artist-exodus",
+      "name": "Exodus",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-05-21-sepultura-with-exodus-biohazard-and-tribal-gaze-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-05-21"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-21",
+      "lastDate": "2026-05-21",
+      "coArtists": [
+        "artist-biohazard",
+        "artist-sepultura",
+        "artist-tribal-gaze-16"
+      ]
+    },
+    {
+      "id": "artist-franc-moody-16",
+      "name": "Franc Moody (16+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-02-28-franc-moody-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-02-28"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-28",
+      "lastDate": "2026-02-28",
+      "coArtists": []
+    },
+    {
+      "id": "artist-geoff-tate-16",
+      "name": "Geoff Tate (16+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-02-21-geoff-tate-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-02-21"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-21",
+      "lastDate": "2026-02-21",
+      "coArtists": []
+    },
+    {
+      "id": "artist-gogol-bordello-16",
+      "name": "Gogol Bordello (16+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-02-27-gogol-bordello-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-02-27"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-27",
+      "lastDate": "2026-02-27",
+      "coArtists": []
+    },
+    {
+      "id": "artist-hannah-jadagu",
+      "name": "Hannah Jadagu",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-02-07-del-water-gap-with-hannah-jadagu"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-02-07"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-07",
+      "lastDate": "2026-02-07",
+      "coArtists": [
+        "artist-del-water-gap"
+      ]
+    },
+    {
+      "id": "artist-initiate-16",
+      "name": "Initiate (16+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-03-29-the-wonder-years-with-knuckle-puck-and-initiate-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-03-29"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-29",
+      "lastDate": "2026-03-29",
+      "coArtists": [
+        "artist-knuckle-puck",
+        "artist-the-wonder-years"
+      ]
+    },
+    {
+      "id": "artist-jeff-tweedy-16",
+      "name": "Jeff Tweedy (16+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-03-13-jeff-tweedy-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-03-13"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-13",
+      "lastDate": "2026-03-13",
+      "coArtists": []
+    },
+    {
+      "id": "artist-know-good",
+      "name": "Know Good",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-04-17-know-good"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-04-17"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-17",
+      "lastDate": "2026-04-17",
+      "coArtists": []
+    },
+    {
+      "id": "artist-knuckle-puck",
+      "name": "Knuckle Puck",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-03-29-the-wonder-years-with-knuckle-puck-and-initiate-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-03-29"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-29",
+      "lastDate": "2026-03-29",
+      "coArtists": [
+        "artist-initiate-16",
+        "artist-the-wonder-years"
+      ]
+    },
+    {
+      "id": "artist-kompany",
+      "name": "Kompany",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-01-24-kompany"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-01-24"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-01-24",
+      "lastDate": "2026-01-24",
+      "coArtists": []
+    },
+    {
+      "id": "artist-magic-city-hippies-16",
+      "name": "Magic City Hippies (16+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-02-13-magic-city-hippies-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-02-13"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-13",
+      "lastDate": "2026-02-13",
+      "coArtists": []
+    },
+    {
+      "id": "artist-microwave",
+      "name": "Microwave",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-04-07-microwave-with-anthony-green-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-04-07"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-07",
+      "lastDate": "2026-04-07",
+      "coArtists": [
+        "artist-anthony-green-16"
+      ]
+    },
+    {
+      "id": "artist-moe",
+      "name": "moe.",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-04-24-moe",
+        "ogden-theatre-2026-04-25-moe"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-04-24",
+        "2026-04-25"
+      ],
+      "showCount": 2,
+      "firstDate": "2026-04-24",
+      "lastDate": "2026-04-25",
+      "coArtists": []
+    },
+    {
+      "id": "artist-oklou",
+      "name": "Oklou",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-04-22-oklou"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-04-22"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-22",
+      "lastDate": "2026-04-22",
+      "coArtists": []
+    },
+    {
+      "id": "artist-osees-16",
+      "name": "Osees (16+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-10-11-osees-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-10-11"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-10-11",
+      "lastDate": "2026-10-11",
+      "coArtists": []
+    },
+    {
+      "id": "artist-peter-hook-and-the-light-16",
+      "name": "Peter Hook & The Light (16+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-09-14-peter-hook-and-the-light-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-09-14"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-09-14",
+      "lastDate": "2026-09-14",
+      "coArtists": []
+    },
+    {
+      "id": "artist-rich-brian-16",
+      "name": "Rich Brian (16+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-02-17-rich-brian-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-02-17"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-17",
+      "lastDate": "2026-02-17",
+      "coArtists": []
+    },
+    {
+      "id": "artist-sepultura",
+      "name": "Sepultura",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-05-21-sepultura-with-exodus-biohazard-and-tribal-gaze-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-05-21"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-21",
+      "lastDate": "2026-05-21",
+      "coArtists": [
+        "artist-biohazard",
+        "artist-exodus",
+        "artist-tribal-gaze-16"
+      ]
+    },
+    {
+      "id": "artist-sherwyn-16",
+      "name": "Sherwyn (16+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-03-15-amber-mark-with-sherwyn-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-03-15"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-15",
+      "lastDate": "2026-03-15",
+      "coArtists": [
+        "artist-amber-mark"
+      ]
+    },
+    {
+      "id": "artist-snow-tha-product",
+      "name": "Snow Tha Product",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-04-23-snow-tha-product"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-04-23"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-23",
+      "lastDate": "2026-04-23",
+      "coArtists": []
+    },
+    {
+      "id": "artist-the-devil-makes-three-16",
+      "name": "The Devil Makes Three (16+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-02-25-the-devil-makes-three-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-02-25"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-25",
+      "lastDate": "2026-02-25",
+      "coArtists": []
+    },
+    {
+      "id": "artist-the-growlers",
+      "name": "The Growlers",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-04-30-the-growlers"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-04-30"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-30",
+      "lastDate": "2026-04-30",
+      "coArtists": []
+    },
+    {
+      "id": "artist-the-maine",
+      "name": "The Maine",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-04-03-the-maine"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-04-03"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-03",
+      "lastDate": "2026-04-03",
+      "coArtists": []
+    },
+    {
+      "id": "artist-the-paper-kites-16",
+      "name": "The Paper Kites (16+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-05-17-the-paper-kites-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-05-17"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-17",
+      "lastDate": "2026-05-17",
+      "coArtists": []
+    },
+    {
+      "id": "artist-the-runarounds-16",
+      "name": "The Runarounds (16+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-02-01-the-runarounds-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-02-01"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-01",
+      "lastDate": "2026-02-01",
+      "coArtists": []
+    },
+    {
+      "id": "artist-the-wonder-years",
+      "name": "The Wonder Years",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-03-29-the-wonder-years-with-knuckle-puck-and-initiate-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-03-29"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-29",
+      "lastDate": "2026-03-29",
+      "coArtists": [
+        "artist-initiate-16",
+        "artist-knuckle-puck"
+      ]
+    },
+    {
+      "id": "artist-thy-art-is-murder",
+      "name": "Thy Art Is Murder",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-05-22-thy-art-is-murder-with-carnifex-bodysnatcher-200-stab-wounds-and-more"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-05-22"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-22",
+      "lastDate": "2026-05-22",
+      "coArtists": [
+        "artist-200-stab-wounds",
+        "artist-bodysnatcher",
+        "artist-carnifex"
+      ]
+    },
+    {
+      "id": "artist-tribal-gaze-16",
+      "name": "Tribal Gaze (16+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-05-21-sepultura-with-exodus-biohazard-and-tribal-gaze-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-05-21"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-21",
+      "lastDate": "2026-05-21",
+      "coArtists": [
+        "artist-biohazard",
+        "artist-exodus",
+        "artist-sepultura"
+      ]
+    },
+    {
+      "id": "artist-ty-segall-16",
+      "name": "Ty Segall (16+)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-04-18-ty-segall-16"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-04-18"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-18",
+      "lastDate": "2026-04-18",
+      "coArtists": []
+    },
+    {
+      "id": "artist-william-black",
+      "name": "William Black",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-05-08-william-black"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-05-08"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-08",
+      "lastDate": "2026-05-08",
+      "coArtists": []
+    },
+    {
+      "id": "artist-wolfmother",
+      "name": "Wolfmother",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "ogden-theatre-2026-06-30-wolfmother"
+      ],
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "dateKeys": [
+        "2026-06-30"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-30",
+      "lastDate": "2026-06-30",
+      "coArtists": []
+    }
+  ]
+}

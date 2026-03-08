@@ -8,8 +8,7 @@ export default function GlobalSearch() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    // Pushes the search term to the URL like ?search=bus
-    router.push(`/?search=${encodeURIComponent(query)}`);
+    router.push(`/search?q=${encodeURIComponent(query)}`);
   };
 
   return (

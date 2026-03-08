@@ -1,0 +1,48 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "events": {
+    "mishawaka-amphitheatre-2026-04-18-san-holo": {
+      "local": null,
+      "remote": null
+    },
+    "mishawaka-amphitheatre-2026-03-07-graham-good-and-the-painters": {
+      "local": null,
+      "remote": null
+    },
+    "mishawaka-amphitheatre-2026-05-01-benjamin-tod": {
+      "local": null,
+      "remote": null
+    },
+    "mishawaka-amphitheatre-2026-06-14-lane-8": {
+      "local": null,
+      "remote": null
+    },
+    "mishawaka-amphitheatre-2026-06-20-tycho": {
+      "local": null,
+      "remote": null
+    }
+  },
+  "artists": {
+    "artist-benjamin-tod": {
+      "local": null,
+      "remote": null
+    },
+    "artist-graham-good-and-the-painters": {
+      "local": null,
+      "remote": null
+    },
+    "artist-lane-8": {
+      "local": null,
+      "remote": null
+    },
+    "artist-san-holo": {
+      "local": null,
+      "remote": null
+    },
+    "artist-tycho": {
+      "local": null,
+      "remote": null
+    }
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "docs": [
+    {
+      "eventKey": "fox-theatre-2026-01-31-josh-teed",
+      "title": "Josh Teed",
+      "artistNames": [
+        "Josh Teed"
+      ],
+      "venueId": "fox-theatre",
+      "dateKey": "2026-01-31",
+      "tags": [
+        "fox-theatre",
+        "josh teed"
+      ]
+    },
+    {
+      "eventKey": "fox-theatre-2026-02-07-the-ocean-blue",
+      "title": "The Ocean Blue",
+      "artistNames": [
+        "The Ocean Blue"
+      ],
+      "venueId": "fox-theatre",
+      "dateKey": "2026-02-07",
+      "tags": [
+        "fox-theatre",
+        "the ocean blue"
+      ]
+    },
+    {
+      "eventKey": "fox-theatre-2026-02-09-say-she-she-with-katzu-oso",
+      "title": "Say She She with Katzu Oso",
+      "artistNames": [
+        "Say She She",
+        "Katzu Oso"
+      ],
+      "venueId": "fox-theatre",
+      "dateKey": "2026-02-09",
+      "tags": [
+        "fox-theatre",
+        "say she she",
+        "katzu oso"
+      ]
+    },
+    {
+      "eventKey": "fox-theatre-2026-02-27-penelope-road",
+      "title": "Penelope Road",
+      "artistNames": [
+        "Penelope Road"
+      ],
+      "venueId": "fox-theatre",
+      "dateKey": "2026-02-27",
+      "tags": [
+        "fox-theatre",
+        "penelope road"
+      ]
+    },
+    {
+      "eventKey": "fox-theatre-2026-03-12-jigitz",
+      "title": "Jigitz",
+      "artistNames": [
+        "Jigitz"
+      ],
+      "venueId": "fox-theatre",
+      "dateKey": "2026-03-12",
+      "tags": [
+        "fox-theatre",
+        "jigitz"
+      ]
+    },
+    {
+      "eventKey": "fox-theatre-2026-03-13-the-barr-brothers",
+      "title": "The Barr Brothers",
+      "artistNames": [
+        "The Barr Brothers"
+      ],
+      "venueId": "fox-theatre",
+      "dateKey": "2026-03-13",
+      "tags": [
+        "fox-theatre",
+        "the barr brothers"
+      ]
+    },
+    {
+      "eventKey": "fox-theatre-2026-03-20-shadowgrass",
+      "title": "ShadowGrass",
+      "artistNames": [
+        "ShadowGrass"
+      ],
+      "venueId": "fox-theatre",
+      "dateKey": "2026-03-20",
+      "tags": [
+        "fox-theatre",
+        "shadowgrass"
+      ]
+    },
+    {
+      "eventKey": "fox-theatre-2026-03-21-jonah-kagen-16",
+      "title": "Jonah Kagen (16+)",
+      "artistNames": [
+        "Jonah Kagen (16+)"
+      ],
+      "venueId": "fox-theatre",
+      "dateKey": "2026-03-21",
+      "tags": [
+        "fox-theatre",
+        "jonah kagen (16+)"
+      ]
+    },
+    {
+      "eventKey": "fox-theatre-2026-03-28-los-amigos-invisibles",
+      "title": "Los Amigos Invisibles",
+      "artistNames": [
+        "Los Amigos Invisibles"
+      ],
+      "venueId": "fox-theatre",
+      "dateKey": "2026-03-28",
+      "tags": [
+        "fox-theatre",
+        "los amigos invisibles"
+      ]
+    },
+    {
+      "eventKey": "fox-theatre-2026-04-18-pete-yorn-21",
+      "title": "Pete Yorn (21+)",
+      "artistNames": [
+        "Pete Yorn (21+)"
+      ],
+      "venueId": "fox-theatre",
+      "dateKey": "2026-04-18",
+      "tags": [
+        "fox-theatre",
+        "pete yorn (21+)"
+      ]
+    },
+    {
+      "eventKey": "fox-theatre-2026-04-30-witchz",
+      "title": "WITCHZ",
+      "artistNames": [
+        "WITCHZ"
+      ],
+      "venueId": "fox-theatre",
+      "dateKey": "2026-04-30",
+      "tags": [
+        "fox-theatre",
+        "witchz"
+      ]
+    },
+    {
+      "eventKey": "fox-theatre-2026-05-01-saxsquatch",
+      "title": "Saxsquatch",
+      "artistNames": [
+        "Saxsquatch"
+      ],
+      "venueId": "fox-theatre",
+      "dateKey": "2026-05-01",
+      "tags": [
+        "fox-theatre",
+        "saxsquatch"
+      ]
+    },
+    {
+      "eventKey": "fox-theatre-2026-05-10-unknown-mortal-orchestra",
+      "title": "Unknown Mortal Orchestra",
+      "artistNames": [
+        "Unknown Mortal Orchestra"
+      ],
+      "venueId": "fox-theatre",
+      "dateKey": "2026-05-10",
+      "tags": [
+        "fox-theatre",
+        "unknown mortal orchestra"
+      ]
+    }
+  ]
+}

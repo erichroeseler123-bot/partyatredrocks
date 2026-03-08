@@ -1,0 +1,200 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "artistToEvents": {
+    "artist-ruston-kelly": [
+      "bluebird-theater-2026-01-26-ruston-kelly-with-verygently-16"
+    ],
+    "artist-verygently-16": [
+      "bluebird-theater-2026-01-26-ruston-kelly-with-verygently-16"
+    ],
+    "artist-briscoe-16": [
+      "bluebird-theater-2026-02-05-briscoe-16"
+    ],
+    "artist-enjambre-16": [
+      "bluebird-theater-2026-02-10-enjambre-16"
+    ],
+    "artist-butcher-babies": [
+      "bluebird-theater-2026-02-12-butcher-babies"
+    ],
+    "artist-weval-16": [
+      "bluebird-theater-2026-02-16-weval-16"
+    ],
+    "artist-samm-henshaw": [
+      "bluebird-theater-2026-02-18-samm-henshaw"
+    ],
+    "artist-bryce-vine": [
+      "bluebird-theater-2026-02-19-bryce-vine"
+    ],
+    "artist-hayes-carll": [
+      "bluebird-theater-2026-02-20-hayes-carll-with-ryan-montbleau-16"
+    ],
+    "artist-ryan-montbleau-16": [
+      "bluebird-theater-2026-02-20-hayes-carll-with-ryan-montbleau-16"
+    ],
+    "artist-whitney-hanson": [
+      "bluebird-theater-2026-02-21-whitney-hanson"
+    ],
+    "artist-kpop-club-night-16": [
+      "bluebird-theater-2026-02-27-kpop-club-night-16"
+    ],
+    "artist-alex-sampson": [
+      "bluebird-theater-2026-03-03-alex-sampson"
+    ],
+    "artist-volumes": [
+      "bluebird-theater-2026-03-05-volumes-with-notions-and-catsclaw-16"
+    ],
+    "artist-notions": [
+      "bluebird-theater-2026-03-05-volumes-with-notions-and-catsclaw-16"
+    ],
+    "artist-catsclaw-16": [
+      "bluebird-theater-2026-03-05-volumes-with-notions-and-catsclaw-16"
+    ],
+    "artist-fia-16": [
+      "bluebird-theater-2026-03-07-fia-16"
+    ],
+    "artist-christian-loffler": [
+      "bluebird-theater-2026-03-08-christian-loffler"
+    ],
+    "artist-the-barr-brothers": [
+      "bluebird-theater-2026-03-14-the-barr-brothers"
+    ],
+    "artist-bad-bad-hats": [
+      "bluebird-theater-2026-03-15-bad-bad-hats"
+    ],
+    "artist-the-thing-16": [
+      "bluebird-theater-2026-03-19-the-thing-16"
+    ],
+    "artist-grieves": [
+      "bluebird-theater-2026-03-20-grieves-with-blueprint"
+    ],
+    "artist-blueprint": [
+      "bluebird-theater-2026-03-20-grieves-with-blueprint"
+    ],
+    "artist-muzz": [
+      "bluebird-theater-2026-03-21-muzz"
+    ],
+    "artist-quarters": [
+      "bluebird-theater-2026-03-23-quarters"
+    ],
+    "artist-charlie-parr": [
+      "bluebird-theater-2026-03-26-charlie-parr"
+    ],
+    "artist-49th-and-main-21": [
+      "bluebird-theater-2026-03-28-49th-and-main-21"
+    ],
+    "artist-mind-enterprises-16": [
+      "bluebird-theater-2026-03-30-mind-enterprises-16"
+    ],
+    "artist-cass-mccombs": [
+      "bluebird-theater-2026-04-01-cass-mccombs-with-chris-cohen"
+    ],
+    "artist-chris-cohen": [
+      "bluebird-theater-2026-04-01-cass-mccombs-with-chris-cohen"
+    ],
+    "artist-voxtrot": [
+      "bluebird-theater-2026-04-03-voxtrot"
+    ],
+    "artist-the-red-pears-and-together-pangea-16": [
+      "bluebird-theater-2026-04-07-the-red-pears-and-together-pangea-16"
+    ],
+    "artist-ratboys": [
+      "bluebird-theater-2026-04-13-ratboys-with-villagerrr-16"
+    ],
+    "artist-villagerrr-16": [
+      "bluebird-theater-2026-04-13-ratboys-with-villagerrr-16"
+    ],
+    "artist-pete-yorn-16": [
+      "bluebird-theater-2026-04-17-pete-yorn-16"
+    ],
+    "artist-femtanyl-16": [
+      "bluebird-theater-2026-04-28-femtanyl-16"
+    ],
+    "artist-powfu": [
+      "bluebird-theater-2026-04-29-powfu"
+    ],
+    "artist-langhorne-slim": [
+      "bluebird-theater-2026-05-02-langhorne-slim"
+    ],
+    "artist-melrose-avenue-16": [
+      "bluebird-theater-2026-05-05-melrose-avenue-16"
+    ],
+    "artist-vana": [
+      "bluebird-theater-2026-05-07-vana"
+    ],
+    "artist-allie-x": [
+      "bluebird-theater-2026-05-09-allie-x"
+    ],
+    "artist-newdad": [
+      "bluebird-theater-2026-05-14-newdad"
+    ],
+    "artist-sports-band": [
+      "bluebird-theater-2026-05-17-sports-band"
+    ],
+    "artist-electric-six": [
+      "bluebird-theater-2026-05-19-electric-six"
+    ],
+    "artist-swervedriver": [
+      "bluebird-theater-2026-05-27-swervedriver"
+    ],
+    "artist-kings-kaleidoscope-16": [
+      "bluebird-theater-2026-06-09-kings-kaleidoscope-16"
+    ],
+    "artist-searows": [
+      "bluebird-theater-2026-06-19-searows"
+    ],
+    "artist-aldous-harding-16": [
+      "bluebird-theater-2026-09-21-aldous-harding-16"
+    ]
+  },
+  "artistIndex": {
+    "ruston kelly": "artist-ruston-kelly",
+    "verygently (16+)": "artist-verygently-16",
+    "briscoe (16+)": "artist-briscoe-16",
+    "enjambre (16+)": "artist-enjambre-16",
+    "butcher babies": "artist-butcher-babies",
+    "weval (16+)": "artist-weval-16",
+    "samm henshaw": "artist-samm-henshaw",
+    "bryce vine": "artist-bryce-vine",
+    "hayes carll": "artist-hayes-carll",
+    "ryan montbleau (16+)": "artist-ryan-montbleau-16",
+    "whitney hanson": "artist-whitney-hanson",
+    "kpop club night (16+)": "artist-kpop-club-night-16",
+    "alex sampson": "artist-alex-sampson",
+    "volumes": "artist-volumes",
+    "notions": "artist-notions",
+    "catsclaw (16+)": "artist-catsclaw-16",
+    "fia (16+)": "artist-fia-16",
+    "christian loffler": "artist-christian-loffler",
+    "the barr brothers": "artist-the-barr-brothers",
+    "bad bad hats": "artist-bad-bad-hats",
+    "the thing (16+)": "artist-the-thing-16",
+    "grieves": "artist-grieves",
+    "blueprint": "artist-blueprint",
+    "muzz": "artist-muzz",
+    "quarters": "artist-quarters",
+    "charlie parr": "artist-charlie-parr",
+    "49th and main (21+)": "artist-49th-and-main-21",
+    "mind enterprises (16+)": "artist-mind-enterprises-16",
+    "cass mccombs": "artist-cass-mccombs",
+    "chris cohen": "artist-chris-cohen",
+    "voxtrot": "artist-voxtrot",
+    "the red pears and together pangea (16+)": "artist-the-red-pears-and-together-pangea-16",
+    "ratboys": "artist-ratboys",
+    "villagerrr (16+)": "artist-villagerrr-16",
+    "pete yorn (16+)": "artist-pete-yorn-16",
+    "femtanyl (16+)": "artist-femtanyl-16",
+    "powfu": "artist-powfu",
+    "langhorne slim": "artist-langhorne-slim",
+    "melrose avenue (16+)": "artist-melrose-avenue-16",
+    "vana": "artist-vana",
+    "allie x": "artist-allie-x",
+    "newdad": "artist-newdad",
+    "sports (band)": "artist-sports-band",
+    "electric six": "artist-electric-six",
+    "swervedriver": "artist-swervedriver",
+    "kings kaleidoscope (16+)": "artist-kings-kaleidoscope-16",
+    "searows": "artist-searows",
+    "aldous harding (16+)": "artist-aldous-harding-16"
+  }
+}

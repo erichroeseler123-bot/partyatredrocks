@@ -1,0 +1,77 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "artistToEvents": {
+    "artist-tycho": [
+      "ophelias-2026-01-24-tycho"
+    ],
+    "artist-skiitour": [
+      "ophelias-2026-01-30-skiitour"
+    ],
+    "artist-david-ramirez": [
+      "ophelias-2026-01-31-david-ramirez"
+    ],
+    "artist-mark-farina": [
+      "ophelias-2026-02-06-mark-farina",
+      "ophelias-2026-02-07-mark-farina"
+    ],
+    "artist-what-the-dance": [
+      "ophelias-2026-02-14-what-the-dance"
+    ],
+    "artist-ga-20": [
+      "ophelias-2026-02-18-ga-20"
+    ],
+    "artist-the-polish-ambassador": [
+      "ophelias-2026-02-20-the-polish-ambassador",
+      "ophelias-2026-02-21-the-polish-ambassador",
+      "ophelias-2026-02-22-the-polish-ambassador"
+    ],
+    "artist-devon-allman-band": [
+      "ophelias-2026-02-26-devon-allman-band"
+    ],
+    "artist-brett-dennen": [
+      "ophelias-2026-02-27-brett-dennen"
+    ],
+    "artist-smells-like-nirvana": [
+      "ophelias-2026-02-28-smells-like-nirvana"
+    ],
+    "artist-not-quite-brothers": [
+      "ophelias-2026-03-06-not-quite-brothers"
+    ],
+    "artist-jesse-roper": [
+      "ophelias-2026-03-11-jesse-roper"
+    ],
+    "artist-bearracuda": [
+      "ophelias-2026-03-14-bearracuda",
+      "ophelias-2026-05-02-bearracuda"
+    ],
+    "artist-westerman": [
+      "ophelias-2026-03-30-westerman"
+    ],
+    "artist-ltj-bukem": [
+      "ophelias-2026-04-09-ltj-bukem"
+    ],
+    "artist-sam-grisman-project": [
+      "ophelias-2026-04-10-sam-grisman-project",
+      "ophelias-2026-04-11-sam-grisman-project"
+    ]
+  },
+  "artistIndex": {
+    "tycho": "artist-tycho",
+    "skiitour": "artist-skiitour",
+    "david ramirez": "artist-david-ramirez",
+    "mark farina": "artist-mark-farina",
+    "what the dance": "artist-what-the-dance",
+    "ga-20": "artist-ga-20",
+    "the polish ambassador": "artist-the-polish-ambassador",
+    "devon allman band": "artist-devon-allman-band",
+    "brett dennen": "artist-brett-dennen",
+    "smells like nirvana": "artist-smells-like-nirvana",
+    "not quite brothers": "artist-not-quite-brothers",
+    "jesse roper": "artist-jesse-roper",
+    "bearracuda": "artist-bearracuda",
+    "westerman": "artist-westerman",
+    "ltj bukem": "artist-ltj-bukem",
+    "sam grisman project": "artist-sam-grisman-project"
+  }
+}

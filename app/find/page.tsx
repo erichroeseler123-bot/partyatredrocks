@@ -1,14 +1,12 @@
 import Link from "next/link";
-
-type TMEvent = {
-  id: string;
-  name: string;
-  url: string | null;
-  startLocal: string | null; // "YYYY-MM-DD HH:MM:SS"
-  venue: string | null;
-  attractions: { name: string }[];
-  image: string | null;
-};
+import { getRedRocksAssets } from "@/lib/events/getRedRocksAssets";
+import { getRedRocksEvents } from "@/lib/events/getRedRocksEvents";
+import EventCard from "@/components/EventCard";
+import { toDisplayEvent, type DisplayEvent } from "@/lib/events/presentation";
+import FAQBlock from "@/components/FAQBlock";
+import MusicWave from "@/components/MusicWave";
+import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
+import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
 
 function qp(searchParams: Record<string, string | string[] | undefined>, k: string) {
   const v = searchParams[k];
@@ -35,8 +33,8 @@ function fmtTime(d: Date) {
   return `${h12}:${mm} ${suffix}`;
 }
 
-function headliner(e: TMEvent) {
-  return e.attractions?.[0]?.name || e.name;
+function headliner(e: DisplayEvent) {
+  return e.performerName || e.title;
 }
 
 function toKey(d: Date) {
@@ -45,18 +43,16 @@ function toKey(d: Date) {
   return `${d.getFullYear()}-${mm}-${dd}`;
 }
 
-async function fetchShowForDate(dateYYYYMMDD: string): Promise<TMEvent | null> {
+async function fetchShowForDate(dateYYYYMMDD: string): Promise<DisplayEvent | null> {
   const year = dateYYYYMMDD.slice(0, 4);
-
-  const r = await fetch(`/api/redrocks/events?year=${encodeURIComponent(year)}`, {
-    cache: "no-store",
-  });
-
-  const j = await r.json().catch(() => null);
-  const events: TMEvent[] = (j?.events ?? []) as TMEvent[];
+  const [normalized, assets] = await Promise.all([
+    getRedRocksEvents(Number(year)),
+    getRedRocksAssets(Number(year)),
+  ]);
+  const events: DisplayEvent[] = normalized.map((event) => toDisplayEvent(event, { assets }));
 
   const matches = events
-    .map((e) => ({ e, d: parseStartLocal(e.startLocal) }))
+    .map((e) => ({ e, d: parseStartLocal(e.datetimeLocal) }))
     .filter(({ d }) => (d ? toKey(d) === dateYYYYMMDD : false))
     .sort((a, b) => a.d!.getTime() - b.d!.getTime());
 
@@ -74,11 +70,13 @@ export default async function FindPage({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const sp = await searchParams;
+  const faqRows = await getFaqRowsWithGlobal("shuttles/find.json");
+  const faqJsonLd = buildFaqPageJsonLd(faqRows);
   const date = qp(sp, "date") || "";
   const qty = qp(sp, "qty") || "2";
 
   const show = date ? await fetchShowForDate(date).catch(() => null) : null;
-  const showStart = show ? parseStartLocal(show.startLocal) : null;
+  const showStart = show ? parseStartLocal(show.datetimeLocal) : null;
   const doorsEst = showStart ? new Date(showStart.getTime() - 90 * 60 * 1000) : null;
 
   const base = new URLSearchParams();
@@ -93,6 +91,9 @@ export default async function FindPage({
   return (
     <main className="comic-page pt-24 pb-10">
       <section className="comic-wrap">
+        {faqRows.length > 0 ? (
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+        ) : null}
         <div className="comic-hero">
           <div className="comic-kicker">Ride Match</div>
           <div className="comic-title">Pick Your Red Rocks Ride</div>
@@ -100,9 +101,12 @@ export default async function FindPage({
           <p className="comic-copy">
             Compare shared shuttles, private SUVs, vans, and party bus options in one mobile-first flow.
           </p>
+          <div style={{ marginTop: 18 }}>
+            <MusicWave bars={24} />
+          </div>
         </div>
 
-        <p className="comic-copy" style={{ marginTop: 14, maxWidth: 760 }}>
+        <p className="comic-copy" style={{ marginTop: 16, maxWidth: 760 }}>
           {date ? (
             <>
               Showing options for <b>{date}</b> ({qty} passenger{qty === "1" ? "" : "s"}).
@@ -113,27 +117,29 @@ export default async function FindPage({
         </p>
 
         {show ? (
-          <div className="comic-panel" style={{ marginTop: 14 }}>
+          <div style={{ marginTop: 16 }}>
             <div className="comic-tag">Tonight’s Show</div>
-            <div className="comic-h3">{headliner(show)}</div>
-
-            <div style={{ marginTop: 6, opacity: 0.86, fontWeight: 800, fontSize: 14 }}>
-              {show?.venue ? `${show.venue} • ` : ""}
-              {doorsEst ? `Doors (est.) ${fmtTime(doorsEst)} • ` : ""}
+            <div className="comic-h3" style={{ marginTop: 8 }}>
+              {headliner(show)}
+            </div>
+            <div style={{ marginTop: 10 }}>
+              <EventCard event={show} showBookRide={false} />
+            </div>
+            <div style={{ marginTop: 8, opacity: 0.86, fontWeight: 800, fontSize: 14 }}>
+              Red Rocks Amphitheatre • {doorsEst ? `Doors (est.) ${fmtTime(doorsEst)} • ` : ""}
               {showStart ? `Show ${fmtTime(showStart)}` : ""}
             </div>
-
             <div style={{ marginTop: 8, opacity: 0.74, fontSize: 12, fontWeight: 800 }}>
               Doors time is estimated unless otherwise posted by the venue/ticket.
             </div>
           </div>
         ) : date ? (
-          <div className="comic-panel" style={{ marginTop: 14, opacity: 0.9 }}>
+          <div className="comic-panel" style={{ marginTop: 16, opacity: 0.9 }}>
             No Red Rocks show detected for this date yet — still showing ride options.
           </div>
         ) : null}
 
-        <div className="comic-grid" style={{ marginTop: 18 }}>
+        <div className="comic-grid" style={{ marginTop: 16 }}>
           <div className="comic-panel">
             <div className="comic-tag">Best Seller</div>
             <div className="comic-h3">Shuttle Tickets</div>
@@ -188,6 +194,8 @@ export default async function FindPage({
             Book Shuttle Seats
           </Link>
         </div>
+
+        <FAQBlock title="Find Ride FAQ" rows={faqRows} />
       </section>
     </main>
   );

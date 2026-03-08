@@ -1,9 +1,9 @@
 import "dotenv/config";
 import fs from "fs";
 
-const API_KEY = process.env.TM_API_KEY;
+const API_KEY = process.env.TICKETMASTER_API_KEY || process.env.TM_API_KEY;
 if (!API_KEY) {
-  console.error("Missing TM_API_KEY");
+  console.error("Missing TICKETMASTER_API_KEY or TM_API_KEY");
   process.exit(1);
 }
 

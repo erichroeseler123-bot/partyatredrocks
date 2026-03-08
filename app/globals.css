@@ -9,6 +9,7 @@
   --accent:#FF3B3B;
   --accent2:#4CC9F0;
   --glow:rgba(76,201,240,0.28);
+  --radius-pill:9999px;
   --heroOverlay:linear-gradient(180deg, rgba(7,10,18,0.10) 0%, rgba(7,10,18,0.72) 55%, rgba(7,10,18,0.92) 100%);
 }
 
@@ -394,179 +395,227 @@ body { background: var(--surface); color: var(--text); }
 /* NOTE: do not add PANEL_PROOF / neon debug styles here; use local dev only. */
 
 /* =========================================================
-   Comic Theme (Phase 1)
+   Guide-aligned comic system
    ========================================================= */
 
-:root {
-  --comic-bg: #0a0f1f;
-  --comic-ink: #101522;
-  --comic-paper: #f7f8ff;
-  --comic-text: #e9f0ff;
-  --comic-muted: rgba(233, 240, 255, 0.78);
-  --comic-red: #ff3b30;
-  --comic-blue: #2e6bff;
-  --comic-yellow: #ffd447;
-}
-
-.comic-page {
-  min-height: 100vh;
+.comic-page{
+  min-height:100vh;
   background:
-    radial-gradient(1100px 500px at -10% -10%, rgba(255, 212, 71, 0.12), transparent 50%),
-    radial-gradient(900px 420px at 110% 0%, rgba(46, 107, 255, 0.16), transparent 55%),
-    linear-gradient(180deg, #0b1224 0%, #080d19 100%);
-  color: var(--comic-text);
+    radial-gradient(circle at 20% 10%, rgba(56,189,248,.12), transparent 28%),
+    radial-gradient(circle at 80% 0%, rgba(168,85,247,.10), transparent 26%),
+    linear-gradient(180deg, #070A12 0%, #0B1020 48%, #0A0F1D 100%);
+  color: rgba(248,250,252,.96);
 }
 
-.comic-wrap {
-  width: min(1120px, 100% - 2rem);
-  margin: 0 auto;
+.comic-wrap{
+  width:min(1180px, calc(100% - 24px));
+  margin:0 auto;
 }
 
-.comic-hero {
-  border: 3px solid rgba(255, 255, 255, 0.16);
-  border-radius: 28px;
-  padding: 1.1rem;
+.comic-hero{
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:28px;
+  padding:22px;
   background:
-    radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.1) 2px, transparent 2.2px) 0 0 / 13px 13px,
-    linear-gradient(140deg, rgba(255, 59, 48, 0.22), rgba(46, 107, 255, 0.16) 55%, rgba(0, 0, 0, 0.28));
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.44);
+    linear-gradient(180deg, rgba(8,12,24,.92), rgba(10,15,29,.86)),
+    radial-gradient(circle at top left, rgba(56,189,248,.14), transparent 30%);
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.42),
+    inset 0 1px 0 rgba(255,255,255,.05);
+  backdrop-filter: blur(8px);
 }
 
-.comic-kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.35rem 0.7rem;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 999px;
-  background: rgba(16, 21, 34, 0.65);
-  font-size: 0.64rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
+.comic-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.24em;
+  color:rgba(224,242,254,.96);
+  background:rgba(56,189,248,.12);
+  border:1px solid rgba(56,189,248,.22);
 }
 
-.comic-title {
-  margin-top: 0.75rem;
-  font-size: clamp(2rem, 5vw, 3.6rem);
-  line-height: 0.92;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
+.comic-title{
+  margin-top:14px;
+  font-size:clamp(2.3rem, 5vw, 4.6rem);
+  line-height:.95;
+  font-weight:950;
+  letter-spacing:-.04em;
+  color:#F8FAFC;
+  text-shadow:0 6px 24px rgba(0,0,0,.35);
 }
 
-.comic-copy {
-  margin-top: 0.8rem;
-  color: var(--comic-muted);
-  font-size: clamp(0.97rem, 2.6vw, 1.12rem);
-  line-height: 1.5;
+.comic-copy{
+  margin-top:10px;
+  max-width:760px;
+  color:rgba(226,232,240,.78);
+  font-size:15px;
+  line-height:1.65;
 }
 
-.comic-grid {
-  margin-top: 1.2rem;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.95rem;
-}
-
-.comic-panel {
-  border: 3px solid rgba(255, 255, 255, 0.16);
-  border-radius: 22px;
+.comic-panel{
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:24px;
+  padding:18px;
   background:
-    radial-gradient(circle at 16% 18%, rgba(255, 255, 255, 0.08) 1.8px, transparent 2px) 0 0 / 11px 11px,
-    linear-gradient(180deg, rgba(20, 26, 42, 0.88), rgba(9, 12, 20, 0.96));
-  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.4);
-  padding: 1rem;
+    linear-gradient(180deg, rgba(13,18,34,.92), rgba(11,16,30,.88));
+  box-shadow:
+    0 18px 50px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.04);
 }
 
-.comic-tag {
-  display: inline-flex;
-  align-items: center;
-  border: 2px solid rgba(255, 255, 255, 0.16);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
-  padding: 0.25rem 0.55rem;
-  font-size: 0.66rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  font-weight: 900;
-  color: rgba(255, 255, 255, 0.9);
+.comic-h3{
+  font-size:1.18rem;
+  line-height:1.15;
+  font-weight:900;
+  color:#F8FAFC;
 }
 
-.comic-h3 {
-  margin-top: 0.7rem;
-  font-size: 1.34rem;
-  line-height: 1.05;
-  text-transform: uppercase;
-  font-weight: 900;
-  letter-spacing: -0.02em;
+.comic-tag{
+  display:inline-flex;
+  align-items:center;
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:rgba(186,230,253,.95);
+  background:rgba(56,189,248,.10);
+  border:1px solid rgba(56,189,248,.20);
 }
 
-.comic-sub {
-  margin-top: 0.4rem;
-  font-size: 0.82rem;
-  color: rgba(233, 240, 255, 0.8);
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-weight: 800;
+.comic-grid{
+  display:grid;
+  gap:14px;
+  grid-template-columns:repeat(1,minmax(0,1fr));
 }
 
-.comic-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 14px;
-  border: 3px solid #0f1421;
-  text-decoration: none !important;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.74rem;
-  padding: 0.8rem 0.95rem;
-  transition: transform 0.18s ease, filter 0.18s ease;
+@media (min-width: 820px){
+  .comic-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
 }
 
-.comic-btn:hover {
-  transform: translateY(-2px) scale(1.01);
-  filter: saturate(1.08);
+.comic-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  padding:0 16px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease, background .16s ease;
 }
 
-.comic-btn-primary {
-  background: linear-gradient(180deg, #ffde5c, #ffc928);
-  color: #12182a !important;
+.comic-btn:hover{
+  transform:translateY(-1px);
 }
 
-.comic-btn-secondary {
-  background: linear-gradient(180deg, #3d7aff, #2e6bff);
-  color: #fff !important;
+.comic-btn-primary{
+  color:#1A1302;
+  border:2px solid rgba(26,19,2,.35);
+  background:
+    radial-gradient(circle at 22% 20%, rgba(255,255,255,.35) 0 2px, transparent 2px) 0 0/12px 12px,
+    linear-gradient(180deg, #FFE066 0%, #FFC936 100%);
+  box-shadow:0 10px 0 rgba(120,78,0,.42), 0 16px 28px rgba(255,201,54,.28);
 }
 
-.comic-mobile-cta {
-  position: sticky;
-  bottom: 0;
-  z-index: 40;
-  margin-top: 1rem;
-  padding: 0.75rem;
-  background: linear-gradient(180deg, rgba(8, 13, 25, 0), rgba(8, 13, 25, 0.95) 38%);
+.comic-btn-secondary{
+  color:#F1F6FF;
+  border:2px solid rgba(139,188,255,.5);
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255,255,255,.2) 0 2px, transparent 2px) 0 0/12px 12px,
+    linear-gradient(180deg, #2F6DFF 0%, #1E49C9 100%);
+  box-shadow:0 10px 0 rgba(18,42,120,.46), 0 16px 28px rgba(47,109,255,.28);
+}
+
+.comic-mobile-cta{
+  position:sticky;
+  bottom:10px;
+  z-index:20;
+  margin-top:16px;
+  display:flex;
+  justify-content:center;
 }
 
 .comic-mobile-cta .comic-btn {
   width: 100%;
-  min-height: 52px;
 }
 
-@media (min-width: 780px) {
-  .comic-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-  }
+/* subtle scanlines */
+.comic-hero::after,
+.comic-panel::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,.03) 0px,
+      rgba(255,255,255,0) 2px,
+      rgba(255,255,255,0) 6px
+    );
+  opacity:.15;
+  mix-blend-mode:screen;
+}
 
-  .comic-hero {
-    padding: 1.5rem;
-  }
+/* ===== Animated music wave ===== */
+.music-wave{
+  display:flex;
+  align-items:flex-end;
+  gap:6px;
+  height:86px;
+  width:100%;
+  max-width:520px;
+  padding:10px 12px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.10);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+}
 
-  .comic-mobile-cta {
-    display: none;
+.music-wave-bar{
+  flex:1 1 0;
+  min-width:4px;
+  height:var(--h, 24px);
+  border-radius:999px;
+  background:linear-gradient(180deg, #67E8F9 0%, #38BDF8 45%, #A855F7 100%);
+  opacity:.92;
+  transform-origin:center bottom;
+  animation: musicWavePulse var(--dur, 1.2s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  box-shadow:0 0 10px rgba(56,189,248,.35);
+}
+
+@keyframes musicWavePulse{
+  0%   { transform:scaleY(.35); opacity:.55; }
+  20%  { transform:scaleY(1); opacity:1; }
+  40%  { transform:scaleY(.55); opacity:.72; }
+  60%  { transform:scaleY(.9); opacity:.95; }
+  80%  { transform:scaleY(.4); opacity:.62; }
+  100% { transform:scaleY(.35); opacity:.55; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .music-wave-bar {
+    animation: none;
+    transform: scaleY(0.75);
+    opacity: 0.9;
   }
 }
 
@@ -581,7 +630,7 @@ body,
     radial-gradient(1100px 500px at -10% -10%, rgba(255, 212, 71, 0.1), transparent 50%),
     radial-gradient(900px 420px at 110% 0%, rgba(46, 107, 255, 0.14), transparent 55%),
     linear-gradient(180deg, #0b1224 0%, #080d19 100%);
-  color: var(--comic-text);
+  color: rgba(248, 250, 252, 0.96);
 }
 
 .bg-surface2,

@@ -37,7 +37,7 @@ export default function ParkingLots() {
       <div className="mt-12 bg-surface text-white p-8 rounded-2xl text-center hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
         <h2 className="text-white mt-0">Don't Deal with the Hike</h2>
         <p className="text-slate-300">Our shared shuttles start at $50 per person. Private SUVs from $499.</p>
-        <Link href="/book-shuttle" className="inline-block bg-red-700 text-white px-8 py-3 rounded-full font-bold hover:bg-red-800 transition no-underline">
+        <Link href="/find" className="inline-block bg-red-700 text-white px-8 py-3 rounded-full font-bold hover:bg-red-800 transition no-underline">
           Book Top Circle Drop-off
         </Link>
       </div>

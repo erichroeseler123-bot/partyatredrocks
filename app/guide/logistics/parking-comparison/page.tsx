@@ -31,7 +31,7 @@ export default function ParkingComparison() {
       <div className="mt-10 bg-red-700 text-white p-6 rounded-lg text-center">
         <h2 className="text-white mt-0">Skip the Parking Nightmare</h2>
         <p>Book a per-person shuttle from Denver or Golden for just $59.</p>
-        <Link href="/book-shuttle" className="bg-white text-red-700 px-6 py-2 rounded font-bold hover:bg-gray-100 no-underline">
+        <Link href="/find" className="bg-white text-red-700 px-6 py-2 rounded font-bold hover:bg-gray-100 no-underline">
           Reserve My Seat
         </Link>
       </div>

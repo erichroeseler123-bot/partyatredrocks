@@ -1,0 +1,71 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "docs": [
+    {
+      "eventKey": "mishawaka-amphitheatre-2026-03-07-graham-good-and-the-painters",
+      "title": "Graham Good & The Painters",
+      "artistNames": [
+        "Graham Good & The Painters"
+      ],
+      "venueId": "mishawaka-amphitheatre",
+      "dateKey": "2026-03-07",
+      "tags": [
+        "mishawaka-amphitheatre",
+        "graham good & the painters"
+      ]
+    },
+    {
+      "eventKey": "mishawaka-amphitheatre-2026-04-18-san-holo",
+      "title": "San Holo",
+      "artistNames": [
+        "San Holo"
+      ],
+      "venueId": "mishawaka-amphitheatre",
+      "dateKey": "2026-04-18",
+      "tags": [
+        "mishawaka-amphitheatre",
+        "san holo"
+      ]
+    },
+    {
+      "eventKey": "mishawaka-amphitheatre-2026-05-01-benjamin-tod",
+      "title": "Benjamin Tod",
+      "artistNames": [
+        "Benjamin Tod"
+      ],
+      "venueId": "mishawaka-amphitheatre",
+      "dateKey": "2026-05-01",
+      "tags": [
+        "mishawaka-amphitheatre",
+        "benjamin tod"
+      ]
+    },
+    {
+      "eventKey": "mishawaka-amphitheatre-2026-06-14-lane-8",
+      "title": "Lane 8",
+      "artistNames": [
+        "Lane 8"
+      ],
+      "venueId": "mishawaka-amphitheatre",
+      "dateKey": "2026-06-14",
+      "tags": [
+        "mishawaka-amphitheatre",
+        "lane 8"
+      ]
+    },
+    {
+      "eventKey": "mishawaka-amphitheatre-2026-06-20-tycho",
+      "title": "Tycho",
+      "artistNames": [
+        "Tycho"
+      ],
+      "venueId": "mishawaka-amphitheatre",
+      "dateKey": "2026-06-20",
+      "tags": [
+        "mishawaka-amphitheatre",
+        "tycho"
+      ]
+    }
+  ]
+}

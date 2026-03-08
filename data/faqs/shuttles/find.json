@@ -1,0 +1,22 @@
+[
+  {
+    "id": "find-choose-ride",
+    "question": "How do I choose the right ride option?",
+    "answer": "Use shuttle seats for solo or small groups, SUVs for up to 6, vans for larger crews, and party bus options when you want one shared vehicle for the whole group."
+  },
+  {
+    "id": "find-arrival-time",
+    "question": "How early should I be ready?",
+    "answer": "Be ready before your scheduled pickup window. Show-night traffic and venue ingress can stack up quickly, especially for sold-out dates."
+  },
+  {
+    "id": "find-return-after-show",
+    "question": "Can I ride back after the show?",
+    "answer": "Yes. Return coverage is part of the plan, with a designated meetup process after the concert."
+  },
+  {
+    "id": "find-plan-changes",
+    "question": "What if my plans change?",
+    "answer": "Use your confirmation details to contact support as soon as possible so your reservation can be adjusted based on availability and policy."
+  }
+]

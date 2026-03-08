@@ -1,0 +1,189 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "artistToEvents": {
+    "artist-kompany": [
+      "ogden-theatre-2026-01-24-kompany"
+    ],
+    "artist-chmura": [
+      "ogden-theatre-2026-01-30-chmura"
+    ],
+    "artist-dogs-in-a-pile": [
+      "ogden-theatre-2026-01-31-dogs-in-a-pile"
+    ],
+    "artist-the-runarounds-16": [
+      "ogden-theatre-2026-02-01-the-runarounds-16"
+    ],
+    "artist-del-water-gap": [
+      "ogden-theatre-2026-02-07-del-water-gap-with-hannah-jadagu"
+    ],
+    "artist-hannah-jadagu": [
+      "ogden-theatre-2026-02-07-del-water-gap-with-hannah-jadagu"
+    ],
+    "artist-magic-city-hippies-16": [
+      "ogden-theatre-2026-02-13-magic-city-hippies-16"
+    ],
+    "artist-rich-brian-16": [
+      "ogden-theatre-2026-02-17-rich-brian-16"
+    ],
+    "artist-geoff-tate-16": [
+      "ogden-theatre-2026-02-21-geoff-tate-16"
+    ],
+    "artist-the-devil-makes-three-16": [
+      "ogden-theatre-2026-02-25-the-devil-makes-three-16"
+    ],
+    "artist-badflower-16": [
+      "ogden-theatre-2026-02-26-badflower-16"
+    ],
+    "artist-gogol-bordello-16": [
+      "ogden-theatre-2026-02-27-gogol-bordello-16"
+    ],
+    "artist-franc-moody-16": [
+      "ogden-theatre-2026-02-28-franc-moody-16"
+    ],
+    "artist-all-them-witches-16": [
+      "ogden-theatre-2026-03-01-all-them-witches-16"
+    ],
+    "artist-jeff-tweedy-16": [
+      "ogden-theatre-2026-03-13-jeff-tweedy-16"
+    ],
+    "artist-amber-mark": [
+      "ogden-theatre-2026-03-15-amber-mark-with-sherwyn-16"
+    ],
+    "artist-sherwyn-16": [
+      "ogden-theatre-2026-03-15-amber-mark-with-sherwyn-16"
+    ],
+    "artist-distinct-motive-16": [
+      "ogden-theatre-2026-03-20-distinct-motive-16"
+    ],
+    "artist-the-wonder-years": [
+      "ogden-theatre-2026-03-29-the-wonder-years-with-knuckle-puck-and-initiate-16"
+    ],
+    "artist-knuckle-puck": [
+      "ogden-theatre-2026-03-29-the-wonder-years-with-knuckle-puck-and-initiate-16"
+    ],
+    "artist-initiate-16": [
+      "ogden-theatre-2026-03-29-the-wonder-years-with-knuckle-puck-and-initiate-16"
+    ],
+    "artist-the-maine": [
+      "ogden-theatre-2026-04-03-the-maine"
+    ],
+    "artist-microwave": [
+      "ogden-theatre-2026-04-07-microwave-with-anthony-green-16"
+    ],
+    "artist-anthony-green-16": [
+      "ogden-theatre-2026-04-07-microwave-with-anthony-green-16"
+    ],
+    "artist-know-good": [
+      "ogden-theatre-2026-04-17-know-good"
+    ],
+    "artist-ty-segall-16": [
+      "ogden-theatre-2026-04-18-ty-segall-16"
+    ],
+    "artist-oklou": [
+      "ogden-theatre-2026-04-22-oklou"
+    ],
+    "artist-snow-tha-product": [
+      "ogden-theatre-2026-04-23-snow-tha-product"
+    ],
+    "artist-moe": [
+      "ogden-theatre-2026-04-24-moe",
+      "ogden-theatre-2026-04-25-moe"
+    ],
+    "artist-the-growlers": [
+      "ogden-theatre-2026-04-30-the-growlers"
+    ],
+    "artist-william-black": [
+      "ogden-theatre-2026-05-08-william-black"
+    ],
+    "artist-the-paper-kites-16": [
+      "ogden-theatre-2026-05-17-the-paper-kites-16"
+    ],
+    "artist-sepultura": [
+      "ogden-theatre-2026-05-21-sepultura-with-exodus-biohazard-and-tribal-gaze-16"
+    ],
+    "artist-exodus": [
+      "ogden-theatre-2026-05-21-sepultura-with-exodus-biohazard-and-tribal-gaze-16"
+    ],
+    "artist-biohazard": [
+      "ogden-theatre-2026-05-21-sepultura-with-exodus-biohazard-and-tribal-gaze-16"
+    ],
+    "artist-tribal-gaze-16": [
+      "ogden-theatre-2026-05-21-sepultura-with-exodus-biohazard-and-tribal-gaze-16"
+    ],
+    "artist-thy-art-is-murder": [
+      "ogden-theatre-2026-05-22-thy-art-is-murder-with-carnifex-bodysnatcher-200-stab-wounds-and-more"
+    ],
+    "artist-carnifex": [
+      "ogden-theatre-2026-05-22-thy-art-is-murder-with-carnifex-bodysnatcher-200-stab-wounds-and-more"
+    ],
+    "artist-bodysnatcher": [
+      "ogden-theatre-2026-05-22-thy-art-is-murder-with-carnifex-bodysnatcher-200-stab-wounds-and-more"
+    ],
+    "artist-200-stab-wounds": [
+      "ogden-theatre-2026-05-22-thy-art-is-murder-with-carnifex-bodysnatcher-200-stab-wounds-and-more"
+    ],
+    "artist-wolfmother": [
+      "ogden-theatre-2026-06-30-wolfmother"
+    ],
+    "artist-chance-pena-16": [
+      "ogden-theatre-2026-07-13-chance-pena-16"
+    ],
+    "artist-audrey-hobert-16": [
+      "ogden-theatre-2026-08-04-audrey-hobert-16"
+    ],
+    "artist-peter-hook-and-the-light-16": [
+      "ogden-theatre-2026-09-14-peter-hook-and-the-light-16"
+    ],
+    "artist-osees-16": [
+      "ogden-theatre-2026-10-11-osees-16"
+    ]
+  },
+  "artistIndex": {
+    "kompany": "artist-kompany",
+    "chmura": "artist-chmura",
+    "dogs in a pile": "artist-dogs-in-a-pile",
+    "the runarounds (16+)": "artist-the-runarounds-16",
+    "del water gap": "artist-del-water-gap",
+    "hannah jadagu": "artist-hannah-jadagu",
+    "magic city hippies (16+)": "artist-magic-city-hippies-16",
+    "rich brian (16+)": "artist-rich-brian-16",
+    "geoff tate (16+)": "artist-geoff-tate-16",
+    "the devil makes three (16+)": "artist-the-devil-makes-three-16",
+    "badflower (16+)": "artist-badflower-16",
+    "gogol bordello (16+)": "artist-gogol-bordello-16",
+    "franc moody (16+)": "artist-franc-moody-16",
+    "all them witches (16+)": "artist-all-them-witches-16",
+    "jeff tweedy (16+)": "artist-jeff-tweedy-16",
+    "amber mark": "artist-amber-mark",
+    "sherwyn (16+)": "artist-sherwyn-16",
+    "distinct motive (16+)": "artist-distinct-motive-16",
+    "the wonder years": "artist-the-wonder-years",
+    "knuckle puck": "artist-knuckle-puck",
+    "initiate (16+)": "artist-initiate-16",
+    "the maine": "artist-the-maine",
+    "microwave": "artist-microwave",
+    "anthony green (16+)": "artist-anthony-green-16",
+    "know good": "artist-know-good",
+    "ty segall (16+)": "artist-ty-segall-16",
+    "oklou": "artist-oklou",
+    "snow tha product": "artist-snow-tha-product",
+    "moe.": "artist-moe",
+    "the growlers": "artist-the-growlers",
+    "william black": "artist-william-black",
+    "the paper kites (16+)": "artist-the-paper-kites-16",
+    "sepultura": "artist-sepultura",
+    "exodus": "artist-exodus",
+    "biohazard": "artist-biohazard",
+    "tribal gaze (16+)": "artist-tribal-gaze-16",
+    "thy art is murder": "artist-thy-art-is-murder",
+    "carnifex": "artist-carnifex",
+    "bodysnatcher": "artist-bodysnatcher",
+    "200 stab wounds": "artist-200-stab-wounds",
+    "wolfmother": "artist-wolfmother",
+    "chance pena (16+)": "artist-chance-pena-16",
+    "audrey hobert (16+)": "artist-audrey-hobert-16",
+    "peter hook & the light (16+)": "artist-peter-hook-and-the-light-16",
+    "osees (16+)": "artist-osees-16"
+  }
+}

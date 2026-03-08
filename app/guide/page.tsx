@@ -1,4 +1,5 @@
 import Link from "next/link";
+import MusicWave from "@/components/MusicWave";
 
 export const metadata = {
   title: "Red Rocks Guides",
@@ -17,6 +18,12 @@ type Card = {
 };
 
 const featured: Card[] = [
+  {
+    title: "Red Rocks Intelligence Hub",
+    desc: "History, geology, trails, elevation, and visiting facts in one authority page.",
+    href: "/guide/red-rocks-intelligence-hub",
+    kicker: "Hub",
+  },
   {
     title: "All Guides",
     desc: "Master index of every guide, sorted for fast scanning.",
@@ -101,9 +108,12 @@ export default function GuideHub() {
               Open Live Calendar
             </Link>
           </div>
+          <div style={{ marginTop: 18 }}>
+            <MusicWave />
+          </div>
         </div>
 
-        <section style={{ marginTop: 16 }}>
+        <section style={{ marginTop: 18 }}>
           <div className="comic-tag">Featured Guides</div>
           <div className="comic-grid">
             {featured.map((card) => (
@@ -112,7 +122,7 @@ export default function GuideHub() {
           </div>
         </section>
 
-        <section style={{ marginTop: 16 }}>
+        <section style={{ marginTop: 18 }}>
           <div className="comic-tag">Deep Dives</div>
           <div className="comic-grid">
             {deepDive.map((card) => (
@@ -121,7 +131,7 @@ export default function GuideHub() {
           </div>
         </section>
 
-        <section className="comic-panel" style={{ marginTop: 16 }}>
+        <section className="comic-panel" style={{ marginTop: 18 }}>
           <div className="comic-tag">Trusted Sources</div>
           <div className="comic-copy" style={{ marginTop: 8 }}>
             Validate venue and road conditions before every show-night decision.

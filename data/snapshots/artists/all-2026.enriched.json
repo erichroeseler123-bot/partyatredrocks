@@ -1,0 +1,769 @@
+{
+  "generatedAt": "2026-03-08T02:19:51.113Z",
+  "year": 2026,
+  "scope": "all",
+  "source": "snapshot-enrichment",
+  "artists": [
+    {
+      "id": "artist-16",
+      "name": "(16+)",
+      "showCount": 1,
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "eventIds": [
+        "mission-ballroom-2026-06-13-lane-8-with-cross-pollination-sultan-shepard-and-more-16"
+      ],
+      "firstDate": "2026-06-13",
+      "lastDate": "2026-06-13",
+      "nextDate": "2026-06-13",
+      "coArtists": [
+        "artist-cross-pollination",
+        "artist-lane-8",
+        "artist-sultan-shepard"
+      ],
+      "spotifyId": null,
+      "spotifyImage": null,
+      "genres": [],
+      "lastfmBio": null,
+      "topTracks": [],
+      "officialLinks": [],
+      "providerErrors": {
+        "topTracks": "fetch failed",
+        "spotify": "spotify token unavailable",
+        "lastfm": "fetch failed",
+        "musicbrainz": "fetch failed",
+        "setlistFm": "fetch failed",
+        "gemini": "fetch failed"
+      }
+    },
+    {
+      "id": "artist-156-silence",
+      "name": "156/Silence",
+      "showCount": 1,
+      "venueIds": [
+        "gothic-theatre"
+      ],
+      "eventIds": [
+        "gothic-theatre-2026-05-26-thornhill-with-156-silence-fox-lake-and-vianova-16"
+      ],
+      "firstDate": "2026-05-26",
+      "lastDate": "2026-05-26",
+      "nextDate": "2026-05-26",
+      "coArtists": [
+        "artist-fox-lake",
+        "artist-thornhill",
+        "artist-vianova-16"
+      ],
+      "spotifyId": null,
+      "spotifyImage": null,
+      "genres": [],
+      "lastfmBio": null,
+      "topTracks": [],
+      "officialLinks": [],
+      "providerErrors": {
+        "topTracks": "fetch failed",
+        "spotify": "spotify token unavailable",
+        "lastfm": "fetch failed",
+        "musicbrainz": "fetch failed",
+        "setlistFm": "fetch failed",
+        "gemini": "fetch failed"
+      }
+    },
+    {
+      "id": "artist-2-chainz",
+      "name": "2 Chainz",
+      "showCount": 1,
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "eventIds": [
+        "rr-2026-04-19-wiz-khalifa"
+      ],
+      "firstDate": "2026-04-19",
+      "lastDate": "2026-04-19",
+      "nextDate": "2026-04-19",
+      "coArtists": [
+        "artist-berner",
+        "artist-chevy-woods",
+        "artist-dj-bonics",
+        "artist-the-underachievers",
+        "artist-wiz-khalifa"
+      ],
+      "spotifyId": null,
+      "spotifyImage": null,
+      "genres": [],
+      "lastfmBio": null,
+      "topTracks": [],
+      "officialLinks": [],
+      "providerErrors": {
+        "topTracks": "fetch failed",
+        "spotify": "spotify token unavailable",
+        "lastfm": "fetch failed",
+        "musicbrainz": "fetch failed",
+        "setlistFm": "fetch failed",
+        "gemini": "fetch failed"
+      }
+    },
+    {
+      "id": "artist-200-stab-wounds",
+      "name": "200 Stab Wounds",
+      "showCount": 1,
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "eventIds": [
+        "ogden-theatre-2026-05-22-thy-art-is-murder-with-carnifex-bodysnatcher-200-stab-wounds-and-more"
+      ],
+      "firstDate": "2026-05-22",
+      "lastDate": "2026-05-22",
+      "nextDate": "2026-05-22",
+      "coArtists": [
+        "artist-bodysnatcher",
+        "artist-carnifex",
+        "artist-thy-art-is-murder"
+      ],
+      "spotifyId": null,
+      "spotifyImage": null,
+      "genres": [],
+      "lastfmBio": null,
+      "topTracks": [],
+      "officialLinks": [],
+      "providerErrors": {
+        "topTracks": "fetch failed",
+        "spotify": "spotify token unavailable",
+        "lastfm": "fetch failed",
+        "musicbrainz": "fetch failed",
+        "setlistFm": "fetch failed",
+        "gemini": "fetch failed"
+      }
+    },
+    {
+      "id": "artist-3oh-3",
+      "name": "3OH!3",
+      "showCount": 1,
+      "venueIds": [
+        "boulder-theater"
+      ],
+      "eventIds": [
+        "boulder-theater-2026-03-03-3oh-3"
+      ],
+      "firstDate": "2026-03-03",
+      "lastDate": "2026-03-03",
+      "nextDate": null,
+      "coArtists": [],
+      "spotifyId": null,
+      "spotifyImage": null,
+      "genres": [],
+      "lastfmBio": null,
+      "topTracks": [],
+      "officialLinks": [],
+      "providerErrors": {
+        "topTracks": "fetch failed",
+        "spotify": "spotify token unavailable",
+        "lastfm": "fetch failed",
+        "musicbrainz": "fetch failed",
+        "setlistFm": "fetch failed",
+        "gemini": "fetch failed"
+      }
+    },
+    {
+      "id": "artist-4-non-blondes",
+      "name": "4 Non Blondes",
+      "showCount": 1,
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "eventIds": [
+        "rr-2026-06-06-big-head-todd-and-the-monsters"
+      ],
+      "firstDate": "2026-06-06",
+      "lastDate": "2026-06-06",
+      "nextDate": "2026-06-06",
+      "coArtists": [
+        "artist-big-head-todd-and-the-monsters"
+      ],
+      "spotifyId": null,
+      "spotifyImage": null,
+      "genres": [],
+      "lastfmBio": null,
+      "topTracks": [],
+      "officialLinks": [],
+      "providerErrors": {
+        "topTracks": "fetch failed",
+        "spotify": "spotify token unavailable",
+        "lastfm": "fetch failed",
+        "musicbrainz": "fetch failed",
+        "setlistFm": "fetch failed",
+        "gemini": "fetch failed"
+      }
+    },
+    {
+      "id": "artist-49th-and-main-21",
+      "name": "49th and Main (21+)",
+      "showCount": 1,
+      "venueIds": [
+        "bluebird-theater"
+      ],
+      "eventIds": [
+        "bluebird-theater-2026-03-28-49th-and-main-21"
+      ],
+      "firstDate": "2026-03-28",
+      "lastDate": "2026-03-28",
+      "nextDate": "2026-03-28",
+      "coArtists": [],
+      "spotifyId": null,
+      "spotifyImage": null,
+      "genres": [],
+      "lastfmBio": null,
+      "topTracks": [],
+      "officialLinks": [],
+      "providerErrors": {
+        "topTracks": "fetch failed",
+        "spotify": "spotify token unavailable",
+        "lastfm": "fetch failed",
+        "musicbrainz": "fetch failed",
+        "setlistFm": "fetch failed",
+        "gemini": "fetch failed"
+      }
+    },
+    {
+      "id": "artist-9million",
+      "name": "9Million",
+      "showCount": 1,
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "eventIds": [
+        "rr-2026-04-21-ethel-cain"
+      ],
+      "firstDate": "2026-04-21",
+      "lastDate": "2026-04-21",
+      "nextDate": "2026-04-21",
+      "coArtists": [
+        "artist-ethel-cain"
+      ],
+      "spotifyId": null,
+      "spotifyImage": null,
+      "genres": [],
+      "lastfmBio": null,
+      "topTracks": [],
+      "officialLinks": [],
+      "providerErrors": {
+        "topTracks": "fetch failed",
+        "spotify": "spotify token unavailable",
+        "lastfm": "fetch failed",
+        "musicbrainz": "fetch failed",
+        "setlistFm": "fetch failed",
+        "gemini": "fetch failed"
+      }
+    },
+    {
+      "id": "artist-abby-sage-16",
+      "name": "Abby Sage (16+)",
+      "showCount": 1,
+      "venueIds": [
+        "mission-ballroom"
+      ],
+      "eventIds": [
+        "mission-ballroom-2026-05-11-jose-gonzalez-with-abby-sage-16"
+      ],
+      "firstDate": "2026-05-11",
+      "lastDate": "2026-05-11",
+      "nextDate": "2026-05-11",
+      "coArtists": [
+        "artist-jose-gonzalez"
+      ],
+      "spotifyId": null,
+      "spotifyImage": null,
+      "genres": [],
+      "lastfmBio": null,
+      "topTracks": [],
+      "officialLinks": [],
+      "providerErrors": {
+        "topTracks": "fetch failed",
+        "spotify": "spotify token unavailable",
+        "lastfm": "fetch failed",
+        "musicbrainz": "fetch failed",
+        "setlistFm": "fetch failed",
+        "gemini": "fetch failed"
+      }
+    },
+    {
+      "id": "artist-adela",
+      "name": "Adela",
+      "showCount": 1,
+      "venueIds": [
+        "ball-arena"
+      ],
+      "eventIds": [
+        "ball-arena-2026-05-05-demi-lovato-with-adela"
+      ],
+      "firstDate": "2026-05-05",
+      "lastDate": "2026-05-05",
+      "nextDate": "2026-05-05",
+      "coArtists": [
+        "artist-demi-lovato"
+      ],
+      "spotifyId": null,
+      "spotifyImage": null,
+      "genres": [],
+      "lastfmBio": null,
+      "topTracks": [],
+      "officialLinks": [],
+      "providerErrors": {
+        "topTracks": "fetch failed",
+        "spotify": "spotify token unavailable",
+        "lastfm": "fetch failed",
+        "musicbrainz": "fetch failed",
+        "setlistFm": "fetch failed",
+        "gemini": "fetch failed"
+      }
+    },
+    {
+      "id": "artist-afi",
+      "name": "AFI",
+      "showCount": 1,
+      "venueIds": [
+        "boulder-theater"
+      ],
+      "eventIds": [
+        "boulder-theater-2026-04-28-afi-with-choir-boy"
+      ],
+      "firstDate": "2026-04-28",
+      "lastDate": "2026-04-28",
+      "nextDate": "2026-04-28",
+      "coArtists": [
+        "artist-choir-boy"
+      ],
+      "spotifyId": null,
+      "spotifyImage": null,
+      "genres": [],
+      "lastfmBio": null,
+      "topTracks": [],
+      "officialLinks": [],
+      "providerErrors": {
+        "topTracks": "fetch failed",
+        "spotify": "spotify token unavailable",
+        "lastfm": "fetch failed",
+        "musicbrainz": "fetch failed",
+        "setlistFm": "fetch failed",
+        "gemini": "fetch failed"
+      }
+    },
+    {
+      "id": "artist-age-of-madness",
+      "name": "Age of Madness",
+      "showCount": 1,
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "eventIds": [
+        "marquis-theater-2026-02-26-jeremy-jordan-with-age-of-madness"
+      ],
+      "firstDate": "2026-02-26",
+      "lastDate": "2026-02-26",
+      "nextDate": null,
+      "coArtists": [
+        "artist-jeremy-jordan"
+      ],
+      "spotifyId": null,
+      "spotifyImage": null,
+      "genres": [],
+      "lastfmBio": null,
+      "topTracks": [],
+      "officialLinks": [],
+      "providerErrors": {
+        "topTracks": "fetch failed",
+        "spotify": "spotify token unavailable",
+        "lastfm": "fetch failed",
+        "musicbrainz": "fetch failed",
+        "setlistFm": "fetch failed",
+        "gemini": "fetch failed"
+      }
+    },
+    {
+      "id": "artist-alabama-shakes",
+      "name": "Alabama Shakes",
+      "showCount": 2,
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "eventIds": [
+        "rr-2026-05-24-alabama-shakes",
+        "rr-2026-05-25-alabama-shakes"
+      ],
+      "firstDate": "2026-05-24",
+      "lastDate": "2026-05-25",
+      "nextDate": "2026-05-24",
+      "coArtists": [],
+      "spotifyId": null,
+      "spotifyImage": null,
+      "genres": [],
+      "lastfmBio": null,
+      "topTracks": [],
+      "officialLinks": [],
+      "providerErrors": {
+        "topTracks": "fetch failed",
+        "spotify": "spotify token unavailable",
+        "lastfm": "fetch failed",
+        "musicbrainz": "fetch failed",
+        "setlistFm": "fetch failed",
+        "gemini": "fetch failed"
+      }
+    },
+    {
+      "id": "artist-alan-doyle",
+      "name": "Alan Doyle",
+      "showCount": 1,
+      "venueIds": [
+        "boulder-theater"
+      ],
+      "eventIds": [
+        "boulder-theater-2026-05-10-alan-doyle"
+      ],
+      "firstDate": "2026-05-10",
+      "lastDate": "2026-05-10",
+      "nextDate": "2026-05-10",
+      "coArtists": [],
+      "spotifyId": null,
+      "spotifyImage": null,
+      "genres": [],
+      "lastfmBio": null,
+      "topTracks": [],
+      "officialLinks": [],
+      "providerErrors": {
+        "topTracks": "fetch failed",
+        "spotify": "spotify token unavailable",
+        "lastfm": "fetch failed",
+        "musicbrainz": "fetch failed",
+        "setlistFm": "fetch failed",
+        "gemini": "fetch failed"
+      }
+    },
+    {
+      "id": "artist-alan-walker",
+      "name": "Alan Walker",
+      "showCount": 1,
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "eventIds": [
+        "rr-2026-05-30-alan-walker"
+      ],
+      "firstDate": "2026-05-30",
+      "lastDate": "2026-05-30",
+      "nextDate": "2026-05-30",
+      "coArtists": [],
+      "spotifyId": null,
+      "spotifyImage": null,
+      "genres": [],
+      "lastfmBio": null,
+      "topTracks": [],
+      "officialLinks": [],
+      "providerErrors": {
+        "topTracks": "fetch failed",
+        "spotify": "spotify token unavailable",
+        "lastfm": "fetch failed",
+        "musicbrainz": "fetch failed",
+        "setlistFm": "fetch failed",
+        "gemini": "fetch failed"
+      }
+    },
+    {
+      "id": "artist-aldous-harding-16",
+      "name": "Aldous Harding (16+)",
+      "showCount": 1,
+      "venueIds": [
+        "bluebird-theater"
+      ],
+      "eventIds": [
+        "bluebird-theater-2026-09-21-aldous-harding-16"
+      ],
+      "firstDate": "2026-09-21",
+      "lastDate": "2026-09-21",
+      "nextDate": "2026-09-21",
+      "coArtists": [],
+      "spotifyId": null,
+      "spotifyImage": null,
+      "genres": [],
+      "lastfmBio": null,
+      "topTracks": [],
+      "officialLinks": [],
+      "providerErrors": {
+        "topTracks": "fetch failed",
+        "spotify": "spotify token unavailable",
+        "lastfm": "fetch failed",
+        "musicbrainz": "fetch failed",
+        "setlistFm": "fetch failed",
+        "gemini": "fetch failed"
+      }
+    },
+    {
+      "id": "artist-alejandro-fern-ndez",
+      "name": "Alejandro Fernández",
+      "showCount": 1,
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "eventIds": [
+        "rr-2026-05-07-alejandro-fern-ndez"
+      ],
+      "firstDate": "2026-05-07",
+      "lastDate": "2026-05-07",
+      "nextDate": "2026-05-07",
+      "coArtists": [
+        "artist-camila-fern-ndez"
+      ],
+      "spotifyId": null,
+      "spotifyImage": null,
+      "genres": [],
+      "lastfmBio": null,
+      "topTracks": [],
+      "officialLinks": [],
+      "providerErrors": {
+        "topTracks": "fetch failed",
+        "spotify": "spotify token unavailable",
+        "lastfm": "fetch failed",
+        "musicbrainz": "fetch failed",
+        "setlistFm": "fetch failed",
+        "gemini": "fetch failed"
+      }
+    },
+    {
+      "id": "artist-aleman-and-gera-mx",
+      "name": "Aleman and Gera MX",
+      "showCount": 1,
+      "venueIds": [
+        "fillmore-auditorium"
+      ],
+      "eventIds": [
+        "fillmore-auditorium-2026-01-29-aleman-and-gera-mx"
+      ],
+      "firstDate": "2026-01-29",
+      "lastDate": "2026-01-29",
+      "nextDate": null,
+      "coArtists": [],
+      "spotifyId": null,
+      "spotifyImage": null,
+      "genres": [],
+      "lastfmBio": null,
+      "topTracks": [],
+      "officialLinks": [],
+      "providerErrors": {
+        "topTracks": "fetch failed",
+        "spotify": "spotify token unavailable",
+        "lastfm": "fetch failed",
+        "musicbrainz": "fetch failed",
+        "setlistFm": "fetch failed",
+        "gemini": "fetch failed"
+      }
+    },
+    {
+      "id": "artist-alex-sampson",
+      "name": "Alex Sampson",
+      "showCount": 1,
+      "venueIds": [
+        "bluebird-theater"
+      ],
+      "eventIds": [
+        "bluebird-theater-2026-03-03-alex-sampson"
+      ],
+      "firstDate": "2026-03-03",
+      "lastDate": "2026-03-03",
+      "nextDate": null,
+      "coArtists": [],
+      "spotifyId": null,
+      "spotifyImage": null,
+      "genres": [],
+      "lastfmBio": null,
+      "topTracks": [],
+      "officialLinks": [],
+      "providerErrors": {
+        "topTracks": "fetch failed",
+        "spotify": "spotify token unavailable",
+        "lastfm": "fetch failed",
+        "musicbrainz": "fetch failed",
+        "setlistFm": "fetch failed",
+        "gemini": "fetch failed"
+      }
+    },
+    {
+      "id": "artist-alex-warren",
+      "name": "Alex Warren",
+      "showCount": 1,
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "eventIds": [
+        "rr-2026-06-02-alex-warren"
+      ],
+      "firstDate": "2026-06-02",
+      "lastDate": "2026-06-02",
+      "nextDate": "2026-06-02",
+      "coArtists": [],
+      "spotifyId": null,
+      "spotifyImage": null,
+      "genres": [],
+      "lastfmBio": null,
+      "topTracks": [],
+      "officialLinks": [],
+      "providerErrors": {
+        "topTracks": "fetch failed",
+        "spotify": "spotify token unavailable",
+        "lastfm": "fetch failed",
+        "musicbrainz": "fetch failed",
+        "setlistFm": "fetch failed",
+        "gemini": "fetch failed"
+      }
+    },
+    {
+      "id": "artist-alexsucks",
+      "name": "ALEXSUCKS",
+      "showCount": 1,
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "eventIds": [
+        "marquis-theater-2026-03-18-alexsucks"
+      ],
+      "firstDate": "2026-03-18",
+      "lastDate": "2026-03-18",
+      "nextDate": "2026-03-18",
+      "coArtists": [],
+      "spotifyId": null,
+      "spotifyImage": null,
+      "genres": [],
+      "lastfmBio": null,
+      "topTracks": [],
+      "officialLinks": [],
+      "providerErrors": {
+        "topTracks": "fetch failed",
+        "spotify": "spotify token unavailable",
+        "lastfm": "fetch failed",
+        "musicbrainz": "fetch failed",
+        "setlistFm": "fetch failed",
+        "gemini": "fetch failed"
+      }
+    },
+    {
+      "id": "artist-alison-krauss-and-union-station",
+      "name": "Alison Krauss & Union Station",
+      "showCount": 1,
+      "venueIds": [
+        "ford-amphitheater-colorado-springs"
+      ],
+      "eventIds": [
+        "ford-amphitheater-colorado-springs-2026-08-14-alison-krauss-and-union-station-with-jerry-douglas-and-theo-lawrence"
+      ],
+      "firstDate": "2026-08-14",
+      "lastDate": "2026-08-14",
+      "nextDate": "2026-08-14",
+      "coArtists": [
+        "artist-jerry-douglas",
+        "artist-theo-lawrence"
+      ],
+      "spotifyId": null,
+      "spotifyImage": null,
+      "genres": [],
+      "lastfmBio": null,
+      "topTracks": [],
+      "officialLinks": [],
+      "providerErrors": {
+        "topTracks": "fetch failed",
+        "spotify": "spotify token unavailable",
+        "lastfm": "fetch failed",
+        "musicbrainz": "fetch failed",
+        "setlistFm": "fetch failed",
+        "gemini": "fetch failed"
+      }
+    },
+    {
+      "id": "artist-all-them-witches-16",
+      "name": "All Them Witches (16+)",
+      "showCount": 1,
+      "venueIds": [
+        "ogden-theatre"
+      ],
+      "eventIds": [
+        "ogden-theatre-2026-03-01-all-them-witches-16"
+      ],
+      "firstDate": "2026-03-01",
+      "lastDate": "2026-03-01",
+      "nextDate": null,
+      "coArtists": [],
+      "spotifyId": null,
+      "spotifyImage": null,
+      "genres": [],
+      "lastfmBio": null,
+      "topTracks": [],
+      "officialLinks": [],
+      "providerErrors": {
+        "topTracks": "fetch failed",
+        "spotify": "spotify token unavailable",
+        "lastfm": "fetch failed",
+        "musicbrainz": "fetch failed",
+        "setlistFm": "fetch failed",
+        "gemini": "fetch failed"
+      }
+    },
+    {
+      "id": "artist-all-them-witches-21",
+      "name": "All Them Witches (21+)",
+      "showCount": 1,
+      "venueIds": [
+        "boulder-theater"
+      ],
+      "eventIds": [
+        "boulder-theater-2026-02-28-all-them-witches-21"
+      ],
+      "firstDate": "2026-02-28",
+      "lastDate": "2026-02-28",
+      "nextDate": null,
+      "coArtists": [],
+      "spotifyId": null,
+      "spotifyImage": null,
+      "genres": [],
+      "lastfmBio": null,
+      "topTracks": [],
+      "officialLinks": [],
+      "providerErrors": {
+        "topTracks": "fetch failed",
+        "spotify": "spotify token unavailable",
+        "lastfm": "fetch failed",
+        "musicbrainz": "fetch failed",
+        "setlistFm": "fetch failed",
+        "gemini": "fetch failed"
+      }
+    },
+    {
+      "id": "artist-all-your-friends-18",
+      "name": "All Your Friends (18+)",
+      "showCount": 1,
+      "venueIds": [
+        "marquis-theater"
+      ],
+      "eventIds": [
+        "marquis-theater-2026-02-28-all-your-friends-18"
+      ],
+      "firstDate": "2026-02-28",
+      "lastDate": "2026-02-28",
+      "nextDate": null,
+      "coArtists": [],
+      "spotifyId": null,
+      "spotifyImage": null,
+      "genres": [],
+      "lastfmBio": null,
+      "topTracks": [],
+      "officialLinks": [],
+      "providerErrors": {
+        "topTracks": "fetch failed",
+        "spotify": "spotify token unavailable",
+        "lastfm": "fetch failed",
+        "musicbrainz": "fetch failed",
+        "setlistFm": "fetch failed",
+        "gemini": "fetch failed"
+      }
+    }
+  ]
+}

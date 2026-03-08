@@ -29,7 +29,7 @@ export default function HomePage() {
 
           <div className="mt-10 flex flex-wrap gap-4">
             <Link
-              href="/book-shuttle"
+              href="/find"
               className="btn-primary"
             >
               Book Shuttle — $59
@@ -57,7 +57,7 @@ export default function HomePage() {
         
         <div className="flex flex-wrap justify-center gap-x-12 gap-y-4 text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 mb-12">
            <Link href="/guide" className="hover:text-red-600 transition">Venue Intelligence</Link>
-           <Link href="/book-shuttle" className="hover:text-red-600 transition">Shuttle Booking</Link>
+           <Link href="/find" className="hover:text-red-600 transition">Shuttle Booking</Link>
            <Link href="/private-suburban" className="hover:text-red-600 transition">Private SUV</Link>
            <Link href="/venues/red-rocks-amphitheatre" className="hover:text-red-600 transition">Upcoming Shows</Link>
         </div>

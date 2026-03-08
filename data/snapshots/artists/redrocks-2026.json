@@ -1,0 +1,2663 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "artists": [
+    {
+      "id": "artist-2-chainz",
+      "name": "2 Chainz",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-19-wiz-khalifa"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-19"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-19",
+      "lastDate": "2026-04-19",
+      "coArtists": [
+        "artist-berner",
+        "artist-chevy-woods",
+        "artist-dj-bonics",
+        "artist-the-underachievers",
+        "artist-wiz-khalifa"
+      ]
+    },
+    {
+      "id": "artist-4-non-blondes",
+      "name": "4 Non Blondes",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-06-06-big-head-todd-and-the-monsters"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-06-06"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-06",
+      "lastDate": "2026-06-06",
+      "coArtists": [
+        "artist-big-head-todd-and-the-monsters"
+      ]
+    },
+    {
+      "id": "artist-9million",
+      "name": "9Million",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-21-ethel-cain"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-21"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-21",
+      "lastDate": "2026-04-21",
+      "coArtists": [
+        "artist-ethel-cain"
+      ]
+    },
+    {
+      "id": "artist-alabama-shakes",
+      "name": "Alabama Shakes",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-24-alabama-shakes",
+        "rr-2026-05-25-alabama-shakes"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-24",
+        "2026-05-25"
+      ],
+      "showCount": 2,
+      "firstDate": "2026-05-24",
+      "lastDate": "2026-05-25",
+      "coArtists": []
+    },
+    {
+      "id": "artist-alan-walker",
+      "name": "Alan Walker",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-30-alan-walker"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-30"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-30",
+      "lastDate": "2026-05-30",
+      "coArtists": []
+    },
+    {
+      "id": "artist-alejandro-fern-ndez",
+      "name": "Alejandro Fernández",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-07-alejandro-fern-ndez"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-07"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-07",
+      "lastDate": "2026-05-07",
+      "coArtists": [
+        "artist-camila-fern-ndez"
+      ]
+    },
+    {
+      "id": "artist-alex-warren",
+      "name": "Alex Warren",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-06-02-alex-warren"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-06-02"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-02",
+      "lastDate": "2026-06-02",
+      "coArtists": []
+    },
+    {
+      "id": "artist-amyl-and-the-sniffers",
+      "name": "Amyl and The Sniffers",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-06-17-amyl-and-the-sniffers"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-06-17"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-17",
+      "lastDate": "2026-06-17",
+      "coArtists": [
+        "artist-l7",
+        "artist-party-dozen"
+      ]
+    },
+    {
+      "id": "artist-avello",
+      "name": "AVELLO",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-11-liquid-stranger"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-11"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-11",
+      "lastDate": "2026-04-11",
+      "coArtists": [
+        "artist-liquid-stranger",
+        "artist-tvboo-b2b-ahee"
+      ]
+    },
+    {
+      "id": "artist-bbno",
+      "name": "bbno$",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-16-bbno"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-16"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-16",
+      "lastDate": "2026-04-16",
+      "coArtists": [
+        "artist-jungle-bobby",
+        "artist-kaarija",
+        "artist-oliver-tree",
+        "artist-yng-martyr"
+      ]
+    },
+    {
+      "id": "artist-berner",
+      "name": "Berner",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-19-wiz-khalifa"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-19"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-19",
+      "lastDate": "2026-04-19",
+      "coArtists": [
+        "artist-2-chainz",
+        "artist-chevy-woods",
+        "artist-dj-bonics",
+        "artist-the-underachievers",
+        "artist-wiz-khalifa"
+      ]
+    },
+    {
+      "id": "artist-big-boi",
+      "name": "Big Boi",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-20-ice-cube"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-20"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-20",
+      "lastDate": "2026-04-20",
+      "coArtists": [
+        "artist-czarface",
+        "artist-ice-cube"
+      ]
+    },
+    {
+      "id": "artist-big-head-todd-and-the-monsters",
+      "name": "Big Head Todd and the Monsters",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-06-06-big-head-todd-and-the-monsters"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-06-06"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-06",
+      "lastDate": "2026-06-06",
+      "coArtists": [
+        "artist-4-non-blondes"
+      ]
+    },
+    {
+      "id": "artist-bigxthaplug",
+      "name": "BigXthaPlug",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-02-07-icelantic-s-winter-on-the-rocks"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-02-07"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-07",
+      "lastDate": "2026-02-07",
+      "coArtists": [
+        "artist-icelantic-s-winter-on-the-rocks",
+        "artist-mick-jenkins",
+        "artist-pawpaw-rod",
+        "artist-smino"
+      ]
+    },
+    {
+      "id": "artist-bob-moses-and-cannons",
+      "name": "Bob Moses & Cannons",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-26-bob-moses-and-cannons"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-26"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-26",
+      "lastDate": "2026-04-26",
+      "coArtists": []
+    },
+    {
+      "id": "artist-bright-eyes-21-years-of-wide-awake-and-digital-ash",
+      "name": "Bright Eyes – 21 Years of Wide Awake & Digital Ash",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-06-bright-eyes-21-years-of-wide-awake-and-digital-ash"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-06"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-06",
+      "lastDate": "2026-05-06",
+      "coArtists": []
+    },
+    {
+      "id": "artist-brit-floyd-dark-side-of-the-moon",
+      "name": "Brit Floyd – Dark Side of the Moon",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-06-05-brit-floyd-dark-side-of-the-moon"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-06-05"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-05",
+      "lastDate": "2026-06-05",
+      "coArtists": []
+    },
+    {
+      "id": "artist-brit-floyd-the-wall",
+      "name": "Brit Floyd – The Wall",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-06-04-brit-floyd-the-wall"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-06-04"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-04",
+      "lastDate": "2026-06-04",
+      "coArtists": []
+    },
+    {
+      "id": "artist-bumpin-uglies",
+      "name": "Bumpin Uglies",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-17-sublime"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-17"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-17",
+      "lastDate": "2026-04-17",
+      "coArtists": [
+        "artist-common-kings",
+        "artist-sublime"
+      ]
+    },
+    {
+      "id": "artist-camila-fern-ndez",
+      "name": "Camila Fernández",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-07-alejandro-fern-ndez"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-07"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-07",
+      "lastDate": "2026-05-07",
+      "coArtists": [
+        "artist-alejandro-fern-ndez"
+      ]
+    },
+    {
+      "id": "artist-capochino",
+      "name": "Capochino",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-03-27-crankdat"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-03-27"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-27",
+      "lastDate": "2026-03-27",
+      "coArtists": [
+        "artist-crankdat",
+        "artist-dr-fresch",
+        "artist-hershe",
+        "artist-smoakland"
+      ]
+    },
+    {
+      "id": "artist-chevy-woods",
+      "name": "Chevy Woods",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-19-wiz-khalifa"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-19"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-19",
+      "lastDate": "2026-04-19",
+      "coArtists": [
+        "artist-2-chainz",
+        "artist-berner",
+        "artist-dj-bonics",
+        "artist-the-underachievers",
+        "artist-wiz-khalifa"
+      ]
+    },
+    {
+      "id": "artist-chozen-b2b-noetika",
+      "name": "CHOZEN b2b Noetika",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-03-28-ravenscoon-and-jantsen"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-03-28"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-28",
+      "lastDate": "2026-03-28",
+      "coArtists": [
+        "artist-dev",
+        "artist-jason-leech",
+        "artist-ravenscoon-and-jantsen"
+      ]
+    },
+    {
+      "id": "artist-cloonee",
+      "name": "Cloonee",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-09-cloonee"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-09"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-09",
+      "lastDate": "2026-05-09",
+      "coArtists": [
+        "artist-cole-knight",
+        "artist-kettama",
+        "artist-omar"
+      ]
+    },
+    {
+      "id": "artist-codefendants",
+      "name": "Codefendants",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-18-sublime"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-18"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-18",
+      "lastDate": "2026-04-18",
+      "coArtists": [
+        "artist-pepper",
+        "artist-sublime"
+      ]
+    },
+    {
+      "id": "artist-cole-knight",
+      "name": "Cole Knight",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-09-cloonee"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-09"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-09",
+      "lastDate": "2026-05-09",
+      "coArtists": [
+        "artist-cloonee",
+        "artist-kettama",
+        "artist-omar"
+      ]
+    },
+    {
+      "id": "artist-collie-buddz",
+      "name": "Collie Buddz",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-17-the-elovaters"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-17"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-17",
+      "lastDate": "2026-05-17",
+      "coArtists": [
+        "artist-donavon-frankenreiter",
+        "artist-protoje",
+        "artist-the-elovaters",
+        "artist-the-hip-abduction"
+      ]
+    },
+    {
+      "id": "artist-colorado-symphony",
+      "name": "Colorado Symphony",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-06-03-yo-yo-ma-with-colorado-symphony"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-06-03"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-03",
+      "lastDate": "2026-06-03",
+      "coArtists": [
+        "artist-yo-yo-ma"
+      ]
+    },
+    {
+      "id": "artist-common-creation",
+      "name": "Common Creation",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-03-inzo"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-03"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-03",
+      "lastDate": "2026-04-03",
+      "coArtists": [
+        "artist-daggz",
+        "artist-inzo",
+        "artist-lumasi",
+        "artist-spenny",
+        "artist-what-so-not"
+      ]
+    },
+    {
+      "id": "artist-common-kings",
+      "name": "Common Kings",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-17-sublime"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-17"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-17",
+      "lastDate": "2026-04-17",
+      "coArtists": [
+        "artist-bumpin-uglies",
+        "artist-sublime"
+      ]
+    },
+    {
+      "id": "artist-crankdat",
+      "name": "CRANKDAT",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-03-27-crankdat"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-03-27"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-27",
+      "lastDate": "2026-03-27",
+      "coArtists": [
+        "artist-capochino",
+        "artist-dr-fresch",
+        "artist-hershe",
+        "artist-smoakland"
+      ]
+    },
+    {
+      "id": "artist-czarface",
+      "name": "Czarface",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-20-ice-cube"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-20"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-20",
+      "lastDate": "2026-04-20",
+      "coArtists": [
+        "artist-big-boi",
+        "artist-ice-cube"
+      ]
+    },
+    {
+      "id": "artist-d-o-d",
+      "name": "D.O.D",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-04-it-s-murph-presents-murph-rocks"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-04"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-04",
+      "lastDate": "2026-04-04",
+      "coArtists": [
+        "artist-it-s-murph-presents-murph-rocks",
+        "artist-me-n",
+        "artist-oskar-med-k"
+      ]
+    },
+    {
+      "id": "artist-daggz",
+      "name": "Daggz",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-03-inzo"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-03"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-03",
+      "lastDate": "2026-04-03",
+      "coArtists": [
+        "artist-common-creation",
+        "artist-inzo",
+        "artist-lumasi",
+        "artist-spenny",
+        "artist-what-so-not"
+      ]
+    },
+    {
+      "id": "artist-dave-hill",
+      "name": "Dave Hill",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-03-puscifer"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-03"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-03",
+      "lastDate": "2026-05-03",
+      "coArtists": [
+        "artist-puscifer"
+      ]
+    },
+    {
+      "id": "artist-deadrocks-xii-zeds-dead",
+      "name": "DEADROCKS XII – Zeds Dead",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-07-02-deadrocks-xii-zeds-dead",
+        "rr-2026-07-03-deadrocks-xii-zeds-dead"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-07-02",
+        "2026-07-03"
+      ],
+      "showCount": 2,
+      "firstDate": "2026-07-02",
+      "lastDate": "2026-07-03",
+      "coArtists": []
+    },
+    {
+      "id": "artist-dev",
+      "name": "DEV",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-03-28-ravenscoon-and-jantsen"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-03-28"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-28",
+      "lastDate": "2026-03-28",
+      "coArtists": [
+        "artist-chozen-b2b-noetika",
+        "artist-jason-leech",
+        "artist-ravenscoon-and-jantsen"
+      ]
+    },
+    {
+      "id": "artist-dj-bonics",
+      "name": "DJ Bonics",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-19-wiz-khalifa"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-19"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-19",
+      "lastDate": "2026-04-19",
+      "coArtists": [
+        "artist-2-chainz",
+        "artist-berner",
+        "artist-chevy-woods",
+        "artist-the-underachievers",
+        "artist-wiz-khalifa"
+      ]
+    },
+    {
+      "id": "artist-donavon-frankenreiter",
+      "name": "Donavon Frankenreiter",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-17-the-elovaters"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-17"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-17",
+      "lastDate": "2026-05-17",
+      "coArtists": [
+        "artist-collie-buddz",
+        "artist-protoje",
+        "artist-the-elovaters",
+        "artist-the-hip-abduction"
+      ]
+    },
+    {
+      "id": "artist-dr-fresch",
+      "name": "Dr. Fresch",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-03-27-crankdat"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-03-27"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-27",
+      "lastDate": "2026-03-27",
+      "coArtists": [
+        "artist-capochino",
+        "artist-crankdat",
+        "artist-hershe",
+        "artist-smoakland"
+      ]
+    },
+    {
+      "id": "artist-electric-callboy",
+      "name": "Electric Callboy",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-30-electric-callboy"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-30"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-30",
+      "lastDate": "2026-04-30",
+      "coArtists": [
+        "artist-polaris",
+        "artist-scene-queen"
+      ]
+    },
+    {
+      "id": "artist-ethel-cain",
+      "name": "Ethel Cain",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-21-ethel-cain"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-21"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-21",
+      "lastDate": "2026-04-21",
+      "coArtists": [
+        "artist-9million"
+      ]
+    },
+    {
+      "id": "artist-fisher",
+      "name": "FISHER",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-23-fisher"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-23"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-23",
+      "lastDate": "2026-05-23",
+      "coArtists": []
+    },
+    {
+      "id": "artist-flipturn",
+      "name": "flipturn",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-21-flipturn"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-21"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-21",
+      "lastDate": "2026-05-21",
+      "coArtists": [
+        "artist-richy-mitch-and-the-coal-miners"
+      ]
+    },
+    {
+      "id": "artist-gavin-degraw",
+      "name": "Gavin DeGraw",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-06-20-o-a-r"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-06-20"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-20",
+      "lastDate": "2026-06-20",
+      "coArtists": [
+        "artist-o-a-r",
+        "artist-phantom-planet"
+      ]
+    },
+    {
+      "id": "artist-gillian-welch-and-david-rawlings",
+      "name": "Gillian Welch & David Rawlings",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-02-jason-isbell-and-the-400-unit"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-02"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-02",
+      "lastDate": "2026-05-02",
+      "coArtists": [
+        "artist-jason-isbell-and-the-400-unit"
+      ]
+    },
+    {
+      "id": "artist-hershe",
+      "name": "HerShe",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-03-27-crankdat"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-03-27"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-27",
+      "lastDate": "2026-03-27",
+      "coArtists": [
+        "artist-capochino",
+        "artist-crankdat",
+        "artist-dr-fresch",
+        "artist-smoakland"
+      ]
+    },
+    {
+      "id": "artist-ice-cube",
+      "name": "Ice Cube",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-20-ice-cube"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-20"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-20",
+      "lastDate": "2026-04-20",
+      "coArtists": [
+        "artist-big-boi",
+        "artist-czarface"
+      ]
+    },
+    {
+      "id": "artist-icelantic-s-winter-on-the-rocks",
+      "name": "Icelantic’s Winter on the Rocks",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-02-07-icelantic-s-winter-on-the-rocks"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-02-07"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-07",
+      "lastDate": "2026-02-07",
+      "coArtists": [
+        "artist-bigxthaplug",
+        "artist-mick-jenkins",
+        "artist-pawpaw-rod",
+        "artist-smino"
+      ]
+    },
+    {
+      "id": "artist-inzo",
+      "name": "INZO",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-03-inzo"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-03"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-03",
+      "lastDate": "2026-04-03",
+      "coArtists": [
+        "artist-common-creation",
+        "artist-daggz",
+        "artist-lumasi",
+        "artist-spenny",
+        "artist-what-so-not"
+      ]
+    },
+    {
+      "id": "artist-it-s-murph-presents-murph-rocks",
+      "name": "it’s murph presents Murph Rocks",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-04-it-s-murph-presents-murph-rocks"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-04"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-04",
+      "lastDate": "2026-04-04",
+      "coArtists": [
+        "artist-d-o-d",
+        "artist-me-n",
+        "artist-oskar-med-k"
+      ]
+    },
+    {
+      "id": "artist-jason-isbell-and-the-400-unit",
+      "name": "Jason Isbell and the 400 Unit",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-02-jason-isbell-and-the-400-unit"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-02"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-02",
+      "lastDate": "2026-05-02",
+      "coArtists": [
+        "artist-gillian-welch-and-david-rawlings"
+      ]
+    },
+    {
+      "id": "artist-jason-leech",
+      "name": "Jason Leech",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-03-28-ravenscoon-and-jantsen"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-03-28"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-28",
+      "lastDate": "2026-03-28",
+      "coArtists": [
+        "artist-chozen-b2b-noetika",
+        "artist-dev",
+        "artist-ravenscoon-and-jantsen"
+      ]
+    },
+    {
+      "id": "artist-john-mulaney-mister-whatever",
+      "name": "John Mulaney: Mister Whatever",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-15-john-mulaney-mister-whatever"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-15"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-15",
+      "lastDate": "2026-04-15",
+      "coArtists": []
+    },
+    {
+      "id": "artist-joy-crookes",
+      "name": "Joy Crookes",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-28-lewis-capaldi",
+        "rr-2026-04-29-lewis-capaldi"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-28",
+        "2026-04-29"
+      ],
+      "showCount": 2,
+      "firstDate": "2026-04-28",
+      "lastDate": "2026-04-29",
+      "coArtists": [
+        "artist-lewis-capaldi"
+      ]
+    },
+    {
+      "id": "artist-jungle-bobby",
+      "name": "Jungle Bobby",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-16-bbno"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-16"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-16",
+      "lastDate": "2026-04-16",
+      "coArtists": [
+        "artist-bbno",
+        "artist-kaarija",
+        "artist-oliver-tree",
+        "artist-yng-martyr"
+      ]
+    },
+    {
+      "id": "artist-kaarija",
+      "name": "Kaarija",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-16-bbno"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-16"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-16",
+      "lastDate": "2026-04-16",
+      "coArtists": [
+        "artist-bbno",
+        "artist-jungle-bobby",
+        "artist-oliver-tree",
+        "artist-yng-martyr"
+      ]
+    },
+    {
+      "id": "artist-kettama",
+      "name": "KETTAMA",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-09-cloonee"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-09"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-09",
+      "lastDate": "2026-05-09",
+      "coArtists": [
+        "artist-cloonee",
+        "artist-cole-knight",
+        "artist-omar"
+      ]
+    },
+    {
+      "id": "artist-kevin-gates",
+      "name": "Kevin Gates",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-19-kevin-gates"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-19"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-19",
+      "lastDate": "2026-05-19",
+      "coArtists": [
+        "artist-shoreline-mafia",
+        "artist-ty-dolla-ign"
+      ]
+    },
+    {
+      "id": "artist-khalid",
+      "name": "Khalid",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-18-khalid"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-18"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-18",
+      "lastDate": "2026-05-18",
+      "coArtists": [
+        "artist-lauv"
+      ]
+    },
+    {
+      "id": "artist-l7",
+      "name": "L7",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-06-17-amyl-and-the-sniffers"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-06-17"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-17",
+      "lastDate": "2026-06-17",
+      "coArtists": [
+        "artist-amyl-and-the-sniffers",
+        "artist-party-dozen"
+      ]
+    },
+    {
+      "id": "artist-lauv",
+      "name": "Lauv",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-18-khalid"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-18"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-18",
+      "lastDate": "2026-05-18",
+      "coArtists": [
+        "artist-khalid"
+      ]
+    },
+    {
+      "id": "artist-lewis-capaldi",
+      "name": "Lewis Capaldi",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-28-lewis-capaldi",
+        "rr-2026-04-29-lewis-capaldi"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-28",
+        "2026-04-29"
+      ],
+      "showCount": 2,
+      "firstDate": "2026-04-28",
+      "lastDate": "2026-04-29",
+      "coArtists": [
+        "artist-joy-crookes"
+      ]
+    },
+    {
+      "id": "artist-lightcode-by-lsdream-dreamrocks-ii",
+      "name": "LIGHTCODE BY LSDREAM / DREAMROCKS II",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-16-lightcode-by-lsdream-dreamrocks-ii"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-16"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-16",
+      "lastDate": "2026-05-16",
+      "coArtists": []
+    },
+    {
+      "id": "artist-liquid-stranger",
+      "name": "Liquid Stranger",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-11-liquid-stranger"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-11"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-11",
+      "lastDate": "2026-04-11",
+      "coArtists": [
+        "artist-avello",
+        "artist-tvboo-b2b-ahee"
+      ]
+    },
+    {
+      "id": "artist-lord-huron",
+      "name": "Lord Huron",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-06-10-lord-huron"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-06-10"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-10",
+      "lastDate": "2026-06-10",
+      "coArtists": []
+    },
+    {
+      "id": "artist-louis-tomlinson",
+      "name": "Louis Tomlinson",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-06-19-louis-tomlinson"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-06-19"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-19",
+      "lastDate": "2026-06-19",
+      "coArtists": [
+        "artist-the-aces"
+      ]
+    },
+    {
+      "id": "artist-lumasi",
+      "name": "Lumasi",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-03-inzo"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-03"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-03",
+      "lastDate": "2026-04-03",
+      "coArtists": [
+        "artist-common-creation",
+        "artist-daggz",
+        "artist-inzo",
+        "artist-spenny",
+        "artist-what-so-not"
+      ]
+    },
+    {
+      "id": "artist-me-n",
+      "name": "me n ü",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-04-it-s-murph-presents-murph-rocks"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-04"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-04",
+      "lastDate": "2026-04-04",
+      "coArtists": [
+        "artist-d-o-d",
+        "artist-it-s-murph-presents-murph-rocks",
+        "artist-oskar-med-k"
+      ]
+    },
+    {
+      "id": "artist-michael-franti-and-spearhead",
+      "name": "Michael Franti & Spearhead",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-29-michael-franti-and-spearhead"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-29"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-29",
+      "lastDate": "2026-05-29",
+      "coArtists": [
+        "artist-the-original-wailers"
+      ]
+    },
+    {
+      "id": "artist-mick-jenkins",
+      "name": "Mick Jenkins",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-02-07-icelantic-s-winter-on-the-rocks"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-02-07"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-07",
+      "lastDate": "2026-02-07",
+      "coArtists": [
+        "artist-bigxthaplug",
+        "artist-icelantic-s-winter-on-the-rocks",
+        "artist-pawpaw-rod",
+        "artist-smino"
+      ]
+    },
+    {
+      "id": "artist-mike",
+      "name": "mike.",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-11-14-mike",
+        "rr-2026-11-15-mike"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-11-14",
+        "2026-11-15"
+      ],
+      "showCount": 2,
+      "firstDate": "2026-11-14",
+      "lastDate": "2026-11-15",
+      "coArtists": []
+    },
+    {
+      "id": "artist-niko-moon",
+      "name": "Niko Moon",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-13-russell-dickerson"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-13"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-13",
+      "lastDate": "2026-05-13",
+      "coArtists": [
+        "artist-russell-dickerson"
+      ]
+    },
+    {
+      "id": "artist-o-a-r",
+      "name": "O.A.R.",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-06-20-o-a-r"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-06-20"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-20",
+      "lastDate": "2026-06-20",
+      "coArtists": [
+        "artist-gavin-degraw",
+        "artist-phantom-planet"
+      ]
+    },
+    {
+      "id": "artist-oliver-tree",
+      "name": "Oliver Tree",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-16-bbno"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-16"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-16",
+      "lastDate": "2026-04-16",
+      "coArtists": [
+        "artist-bbno",
+        "artist-jungle-bobby",
+        "artist-kaarija",
+        "artist-yng-martyr"
+      ]
+    },
+    {
+      "id": "artist-omar",
+      "name": "Omar+",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-09-cloonee"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-09"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-09",
+      "lastDate": "2026-05-09",
+      "coArtists": [
+        "artist-cloonee",
+        "artist-cole-knight",
+        "artist-kettama"
+      ]
+    },
+    {
+      "id": "artist-oskar-med-k",
+      "name": "oskar med k",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-04-it-s-murph-presents-murph-rocks"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-04"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-04",
+      "lastDate": "2026-04-04",
+      "coArtists": [
+        "artist-d-o-d",
+        "artist-it-s-murph-presents-murph-rocks",
+        "artist-me-n"
+      ]
+    },
+    {
+      "id": "artist-party-dozen",
+      "name": "PARTY DOZEN",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-06-17-amyl-and-the-sniffers"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-06-17"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-17",
+      "lastDate": "2026-06-17",
+      "coArtists": [
+        "artist-amyl-and-the-sniffers",
+        "artist-l7"
+      ]
+    },
+    {
+      "id": "artist-pawpaw-rod",
+      "name": "PawPaw Rod",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-02-07-icelantic-s-winter-on-the-rocks"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-02-07"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-07",
+      "lastDate": "2026-02-07",
+      "coArtists": [
+        "artist-bigxthaplug",
+        "artist-icelantic-s-winter-on-the-rocks",
+        "artist-mick-jenkins",
+        "artist-smino"
+      ]
+    },
+    {
+      "id": "artist-pepper",
+      "name": "Pepper",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-18-sublime"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-18"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-18",
+      "lastDate": "2026-04-18",
+      "coArtists": [
+        "artist-codefendants",
+        "artist-sublime"
+      ]
+    },
+    {
+      "id": "artist-phantom-planet",
+      "name": "Phantom Planet",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-06-20-o-a-r"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-06-20"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-20",
+      "lastDate": "2026-06-20",
+      "coArtists": [
+        "artist-gavin-degraw",
+        "artist-o-a-r"
+      ]
+    },
+    {
+      "id": "artist-polaris",
+      "name": "Polaris",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-30-electric-callboy"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-30"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-30",
+      "lastDate": "2026-04-30",
+      "coArtists": [
+        "artist-electric-callboy",
+        "artist-scene-queen"
+      ]
+    },
+    {
+      "id": "artist-protoje",
+      "name": "Protoje",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-17-the-elovaters"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-17"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-17",
+      "lastDate": "2026-05-17",
+      "coArtists": [
+        "artist-collie-buddz",
+        "artist-donavon-frankenreiter",
+        "artist-the-elovaters",
+        "artist-the-hip-abduction"
+      ]
+    },
+    {
+      "id": "artist-puddles-pity-party",
+      "name": "Puddles Pity Party",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-06-23-weird-al-yankovic"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-06-23"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-23",
+      "lastDate": "2026-06-23",
+      "coArtists": [
+        "artist-weird-al-yankovic"
+      ]
+    },
+    {
+      "id": "artist-puscifer",
+      "name": "Puscifer",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-03-puscifer"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-03"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-03",
+      "lastDate": "2026-05-03",
+      "coArtists": [
+        "artist-dave-hill"
+      ]
+    },
+    {
+      "id": "artist-ravenscoon-and-jantsen",
+      "name": "Ravenscoon & Jantsen",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-03-28-ravenscoon-and-jantsen"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-03-28"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-28",
+      "lastDate": "2026-03-28",
+      "coArtists": [
+        "artist-chozen-b2b-noetika",
+        "artist-dev",
+        "artist-jason-leech"
+      ]
+    },
+    {
+      "id": "artist-richy-mitch-and-the-coal-miners",
+      "name": "Richy Mitch & The Coal Miners",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-21-flipturn"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-21"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-21",
+      "lastDate": "2026-05-21",
+      "coArtists": [
+        "artist-flipturn"
+      ]
+    },
+    {
+      "id": "artist-rod-stewart",
+      "name": "Rod Stewart",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-06-15-rod-stewart",
+        "rr-2026-06-16-rod-stewart"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-06-15",
+        "2026-06-16"
+      ],
+      "showCount": 2,
+      "firstDate": "2026-06-15",
+      "lastDate": "2026-06-16",
+      "coArtists": []
+    },
+    {
+      "id": "artist-russell-dickerson",
+      "name": "Russell Dickerson",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-13-russell-dickerson"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-13"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-13",
+      "lastDate": "2026-05-13",
+      "coArtists": [
+        "artist-niko-moon"
+      ]
+    },
+    {
+      "id": "artist-saka",
+      "name": "Saka",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-10-zingara-and-level-up"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-10"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-10",
+      "lastDate": "2026-04-10",
+      "coArtists": [
+        "artist-slang-dogs",
+        "artist-subdocta",
+        "artist-zingara-and-level-up"
+      ]
+    },
+    {
+      "id": "artist-scene-queen",
+      "name": "Scene Queen",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-30-electric-callboy"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-30"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-30",
+      "lastDate": "2026-04-30",
+      "coArtists": [
+        "artist-electric-callboy",
+        "artist-polaris"
+      ]
+    },
+    {
+      "id": "artist-seven-lions",
+      "name": "Seven Lions",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-22-seven-lions"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-22"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-22",
+      "lastDate": "2026-05-22",
+      "coArtists": [
+        "artist-trivecta"
+      ]
+    },
+    {
+      "id": "artist-shoreline-mafia",
+      "name": "Shoreline Mafia",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-19-kevin-gates"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-19"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-19",
+      "lastDate": "2026-05-19",
+      "coArtists": [
+        "artist-kevin-gates",
+        "artist-ty-dolla-ign"
+      ]
+    },
+    {
+      "id": "artist-slang-dogs",
+      "name": "Slang Dogs",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-10-zingara-and-level-up"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-10"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-10",
+      "lastDate": "2026-04-10",
+      "coArtists": [
+        "artist-saka",
+        "artist-subdocta",
+        "artist-zingara-and-level-up"
+      ]
+    },
+    {
+      "id": "artist-smino",
+      "name": "Smino",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-02-07-icelantic-s-winter-on-the-rocks"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-02-07"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-02-07",
+      "lastDate": "2026-02-07",
+      "coArtists": [
+        "artist-bigxthaplug",
+        "artist-icelantic-s-winter-on-the-rocks",
+        "artist-mick-jenkins",
+        "artist-pawpaw-rod"
+      ]
+    },
+    {
+      "id": "artist-smoakland",
+      "name": "Smoakland",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-03-27-crankdat"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-03-27"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-03-27",
+      "lastDate": "2026-03-27",
+      "coArtists": [
+        "artist-capochino",
+        "artist-crankdat",
+        "artist-dr-fresch",
+        "artist-hershe"
+      ]
+    },
+    {
+      "id": "artist-spenny",
+      "name": "Spenny",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-03-inzo"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-03"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-03",
+      "lastDate": "2026-04-03",
+      "coArtists": [
+        "artist-common-creation",
+        "artist-daggz",
+        "artist-inzo",
+        "artist-lumasi",
+        "artist-what-so-not"
+      ]
+    },
+    {
+      "id": "artist-subdocta",
+      "name": "SubDocta",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-10-zingara-and-level-up"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-10"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-10",
+      "lastDate": "2026-04-10",
+      "coArtists": [
+        "artist-saka",
+        "artist-slang-dogs",
+        "artist-zingara-and-level-up"
+      ]
+    },
+    {
+      "id": "artist-sublime",
+      "name": "Sublime",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-17-sublime",
+        "rr-2026-04-18-sublime"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-17",
+        "2026-04-18"
+      ],
+      "showCount": 2,
+      "firstDate": "2026-04-17",
+      "lastDate": "2026-04-18",
+      "coArtists": [
+        "artist-bumpin-uglies",
+        "artist-codefendants",
+        "artist-common-kings",
+        "artist-pepper"
+      ]
+    },
+    {
+      "id": "artist-subtronics-cyclops-rocks-vi-night-1",
+      "name": "Subtronics – Cyclops Rocks VI (Night 1)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-23-subtronics-cyclops-rocks-vi-night-1"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-23"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-23",
+      "lastDate": "2026-04-23",
+      "coArtists": []
+    },
+    {
+      "id": "artist-subtronics-cyclops-rocks-vi-night-2",
+      "name": "Subtronics – Cyclops Rocks VI (Night 2)",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-24-subtronics-cyclops-rocks-vi-night-2"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-24"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-24",
+      "lastDate": "2026-04-24",
+      "coArtists": []
+    },
+    {
+      "id": "artist-the-aces",
+      "name": "The Aces",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-06-19-louis-tomlinson"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-06-19"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-19",
+      "lastDate": "2026-06-19",
+      "coArtists": [
+        "artist-louis-tomlinson"
+      ]
+    },
+    {
+      "id": "artist-the-elovaters",
+      "name": "THE ELOVATERS",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-17-the-elovaters"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-17"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-17",
+      "lastDate": "2026-05-17",
+      "coArtists": [
+        "artist-collie-buddz",
+        "artist-donavon-frankenreiter",
+        "artist-protoje",
+        "artist-the-hip-abduction"
+      ]
+    },
+    {
+      "id": "artist-the-hip-abduction",
+      "name": "The Hip Abduction",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-17-the-elovaters"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-17"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-17",
+      "lastDate": "2026-05-17",
+      "coArtists": [
+        "artist-collie-buddz",
+        "artist-donavon-frankenreiter",
+        "artist-protoje",
+        "artist-the-elovaters"
+      ]
+    },
+    {
+      "id": "artist-the-original-wailers",
+      "name": "The Original Wailers",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-29-michael-franti-and-spearhead"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-29"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-29",
+      "lastDate": "2026-05-29",
+      "coArtists": [
+        "artist-michael-franti-and-spearhead"
+      ]
+    },
+    {
+      "id": "artist-the-underachievers",
+      "name": "The Underachievers",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-19-wiz-khalifa"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-19"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-19",
+      "lastDate": "2026-04-19",
+      "coArtists": [
+        "artist-2-chainz",
+        "artist-berner",
+        "artist-chevy-woods",
+        "artist-dj-bonics",
+        "artist-wiz-khalifa"
+      ]
+    },
+    {
+      "id": "artist-third-day-30th-anniversary",
+      "name": "THIRD DAY – 30th Anniversary",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-06-18-third-day-30th-anniversary"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-06-18"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-18",
+      "lastDate": "2026-06-18",
+      "coArtists": []
+    },
+    {
+      "id": "artist-treaty-oak-revival",
+      "name": "Treaty Oak Revival",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-07-01-treaty-oak-revival"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-07-01"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-07-01",
+      "lastDate": "2026-07-01",
+      "coArtists": []
+    },
+    {
+      "id": "artist-trevor-hall-thievery-corporation-dirtwire",
+      "name": "Trevor Hall / Thievery Corporation / Dirtwire",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-06-14-trevor-hall-thievery-corporation-dirtwire"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-06-14"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-14",
+      "lastDate": "2026-06-14",
+      "coArtists": []
+    },
+    {
+      "id": "artist-trivecta",
+      "name": "Trivecta",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-22-seven-lions"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-22"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-22",
+      "lastDate": "2026-05-22",
+      "coArtists": [
+        "artist-seven-lions"
+      ]
+    },
+    {
+      "id": "artist-tvboo-b2b-ahee",
+      "name": "TVBOO b2b AHEE",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-11-liquid-stranger"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-11"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-11",
+      "lastDate": "2026-04-11",
+      "coArtists": [
+        "artist-avello",
+        "artist-liquid-stranger"
+      ]
+    },
+    {
+      "id": "artist-two-friends",
+      "name": "Two Friends",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-01-two-friends"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-01"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-01",
+      "lastDate": "2026-05-01",
+      "coArtists": []
+    },
+    {
+      "id": "artist-ty-dolla-ign",
+      "name": "Ty Dolla $ign",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-19-kevin-gates"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-19"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-19",
+      "lastDate": "2026-05-19",
+      "coArtists": [
+        "artist-kevin-gates",
+        "artist-shoreline-mafia"
+      ]
+    },
+    {
+      "id": "artist-weird-al-yankovic",
+      "name": "Weird Al Yankovic",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-06-23-weird-al-yankovic"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-06-23"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-23",
+      "lastDate": "2026-06-23",
+      "coArtists": [
+        "artist-puddles-pity-party"
+      ]
+    },
+    {
+      "id": "artist-what-so-not",
+      "name": "What So Not",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-03-inzo"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-03"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-03",
+      "lastDate": "2026-04-03",
+      "coArtists": [
+        "artist-common-creation",
+        "artist-daggz",
+        "artist-inzo",
+        "artist-lumasi",
+        "artist-spenny"
+      ]
+    },
+    {
+      "id": "artist-wiz-khalifa",
+      "name": "Wiz Khalifa",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-19-wiz-khalifa"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-19"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-19",
+      "lastDate": "2026-04-19",
+      "coArtists": [
+        "artist-2-chainz",
+        "artist-berner",
+        "artist-chevy-woods",
+        "artist-dj-bonics",
+        "artist-the-underachievers"
+      ]
+    },
+    {
+      "id": "artist-yng-martyr",
+      "name": "YNG Martyr",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-16-bbno"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-16"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-16",
+      "lastDate": "2026-04-16",
+      "coArtists": [
+        "artist-bbno",
+        "artist-jungle-bobby",
+        "artist-kaarija",
+        "artist-oliver-tree"
+      ]
+    },
+    {
+      "id": "artist-yo-yo-ma",
+      "name": "Yo-Yo Ma",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-06-03-yo-yo-ma-with-colorado-symphony"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-06-03"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-06-03",
+      "lastDate": "2026-06-03",
+      "coArtists": [
+        "artist-colorado-symphony"
+      ]
+    },
+    {
+      "id": "artist-yungblud-idols-world-tour",
+      "name": "YUNGBLUD – IDOLS World Tour",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-05-11-yungblud-idols-world-tour"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-05-11"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-05-11",
+      "lastDate": "2026-05-11",
+      "coArtists": []
+    },
+    {
+      "id": "artist-zingara-and-level-up",
+      "name": "ZINGARA & LEVEL UP",
+      "image": null,
+      "links": {},
+      "eventIds": [
+        "rr-2026-04-10-zingara-and-level-up"
+      ],
+      "venueIds": [
+        "red-rocks-amphitheatre"
+      ],
+      "dateKeys": [
+        "2026-04-10"
+      ],
+      "showCount": 1,
+      "firstDate": "2026-04-10",
+      "lastDate": "2026-04-10",
+      "coArtists": [
+        "artist-saka",
+        "artist-slang-dogs",
+        "artist-subdocta"
+      ]
+    }
+  ]
+}

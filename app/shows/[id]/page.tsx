@@ -1,10 +1,14 @@
 // app/shows/[id]/page.tsx
 import type { Metadata } from "next";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import TicketButtons from "@/components/TicketButtons";
 import RezdyWidgets from "@/components/RezdyWidgets";
-import { blobReadJson } from "@/lib/blobJson";
+import venuesJson from "@/data/venues.json";
+import { getEventsCatalog } from "@/lib/events/getCatalog";
+import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
 
 export const runtime = "nodejs";
 export const revalidate = 300;
@@ -12,9 +16,11 @@ export const revalidate = 300;
 type Props = { params: Promise<{ id: string }> };
 
 type ShowEvent = {
-  id: number;
+  id: string;
   title: string;
   datetime_local: string; // ISO-ish
+  dateKey: string;
+  sourceId: string | null;
   url?: string; // ticket URL (SeatGeek, etc.)
   performers?: Array<{ name?: string; image?: string }>;
   venue?: {
@@ -30,20 +36,9 @@ type ShowEvent = {
   };
 };
 
-type ShowCache =
-  | {
-      generatedAt?: string;
-      event?: ShowEvent;
-    }
-  | ShowEvent;
-
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://partyatredrocks.com";
 const DCC = process.env.NEXT_PUBLIC_DCC_ORIGIN || "https://destinationcommandcenter.com";
-
-function normId(s: string) {
-  const n = Number(s);
-  return Number.isFinite(n) ? n : null;
-}
+const EVENTS_SNAPSHOT_DIR = path.join(process.cwd(), "data", "snapshots", "events");
 
 function safeDate(raw?: string) {
   if (!raw) return null;
@@ -76,7 +71,7 @@ function pickDescription(e?: ShowEvent | null) {
   return `${e.title}${venue}${when}. Tickets + shuttle ride options — book a guaranteed ride home after the show.`;
 }
 
-function breadcrumbJsonLd(e: ShowEvent | null, id: number) {
+function breadcrumbJsonLd(e: ShowEvent | null, id: string) {
   const showName = e?.title || `Show ${id}`;
   const venueName = e?.venue?.siteName || "Venue";
   const venueSlug = e?.venue?.siteSlug;
@@ -115,7 +110,7 @@ function breadcrumbJsonLd(e: ShowEvent | null, id: number) {
   };
 }
 
-function musicEventJsonLd(e: ShowEvent, id: number) {
+function musicEventJsonLd(e: ShowEvent, id: string) {
   const venueName = e.venue?.siteName || "Venue";
   const venueSlug = e.venue?.siteSlug;
   const venueUrl = venueSlug ? `${SITE}/venues/${venueSlug}` : undefined;
@@ -161,7 +156,7 @@ function musicEventJsonLd(e: ShowEvent, id: number) {
   offers.push({
     "@type": "Offer",
     name: "Shuttle Ride Options",
-    url: `${SITE}/book?event=${id}${venueSlug ? `&venue=${encodeURIComponent(venueSlug)}` : ""}`,
+    url: `${SITE}/find?date=${encodeURIComponent(e.dateKey)}&qty=2`,
     priceCurrency: "USD",
     availability: "https://schema.org/InStock",
     seller: { "@id": `${SITE}/#organization` },
@@ -184,63 +179,77 @@ function musicEventJsonLd(e: ShowEvent, id: number) {
     sameAs: [`${DCC}/shows/${id}`],
     identifier: [
       { "@type": "PropertyValue", name: "dccShowId", value: `dcc:show:${id}` },
-      { "@type": "PropertyValue", name: "seatgeekEventId", value: String(id) },
+      ...(e.sourceId ? [{ "@type": "PropertyValue", name: "seatgeekEventId", value: e.sourceId }] : []),
     ],
   };
 }
 
-function normalizeShow(raw: any): { generatedAt?: string; event?: ShowEvent } | null {
-  if (!raw) return null;
+type VenueRec = {
+  city?: string;
+  state?: string;
+  address1?: string;
+  postalCode?: string;
+  lat?: number;
+  lon?: number;
+  seatgeekVenueId?: number;
+};
 
-  // wrapper shape
-  if (raw?.event && typeof raw.event === "object") {
-    return { generatedAt: raw.generatedAt, event: raw.event as ShowEvent };
-  }
-
-  // direct event shape
-  if (typeof raw?.id !== "undefined" && typeof raw?.title === "string") {
-    return { generatedAt: raw.generatedAt, event: raw as ShowEvent };
-  }
-
-  return null;
+function getVenueRec(slug: string): VenueRec {
+  const row = (venuesJson as Record<string, any>)[slug];
+  if (!row || typeof row !== "object") return {};
+  return row as VenueRec;
 }
 
-async function readShow(idNum: number) {
-  const keys = [
-    `cache/shows/${idNum}.json`,
-    `cache/show/${idNum}.json`,
-    `cache/events/${idNum}.json`,
-  ];
+function toShowEvent(event: Awaited<ReturnType<typeof getEventsCatalog>>[number]): ShowEvent {
+  const venueSlug = event.venueId;
+  const venueIdentity = VENUE_LEDGER_BY_SLUG.get(venueSlug);
+  const venueMeta = getVenueRec(venueSlug);
+  return {
+    id: event.id,
+    title: event.name,
+    datetime_local: event.startLocal ?? event.startAt ?? `${event.dateKey}T19:00:00`,
+    dateKey: event.dateKey,
+    sourceId: event.sourceId,
+    url: event.ticketUrl ?? undefined,
+    performers: event.artistNames.map((name) => ({ name })),
+    venue: {
+      siteSlug: venueSlug,
+      siteName: venueIdentity?.name ?? venueSlug,
+      city: venueMeta.city,
+      state: venueMeta.state,
+      address1: venueMeta.address1,
+      postalCode: venueMeta.postalCode,
+      lat: venueMeta.lat,
+      lon: venueMeta.lon,
+      seatgeekVenueId: venueMeta.seatgeekVenueId,
+    },
+  };
+}
 
-  for (const key of keys) {
-    try {
-      const raw = await blobReadJson<ShowCache>(key, { revalidateSeconds: 300 });
-      const norm = normalizeShow(raw);
-      if (norm?.event) return norm;
-    } catch {
-      // try next key
-    }
+async function readShow(id: string): Promise<{ generatedAt?: string; event?: ShowEvent } | null> {
+  const all = await getEventsCatalog(2026, "all");
+  const selected = all.find((event) => event.id === id || event.sourceId === id);
+  if (!selected) return null;
+
+  let generatedAt: string | undefined;
+  try {
+    const raw = await readFile(path.join(EVENTS_SNAPSHOT_DIR, "all-2026.json"), "utf8");
+    const parsed = JSON.parse(raw) as { generatedAt?: string };
+    generatedAt = typeof parsed.generatedAt === "string" ? parsed.generatedAt : undefined;
+  } catch {
+    generatedAt = undefined;
   }
-  return null;
+  return { generatedAt, event: toShowEvent(selected) };
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id: raw } = await params;
-  const idNum = normId(raw);
-  if (!idNum) {
-    return {
-      title: "Show | Party at Red Rocks",
-      description: "Concert shuttle options and venue intel across Colorado.",
-      robots: { index: false, follow: false },
-    };
-  }
-
-  const data = await readShow(idNum);
+  const data = await readShow(raw);
   const e = data?.event ?? null;
 
-  const title = pickTitle(e, String(idNum));
+  const title = pickTitle(e, raw);
   const description = pickDescription(e);
-  const url = `${SITE}/shows/${idNum}`;
+  const url = `${SITE}/shows/${encodeURIComponent(raw)}`;
 
   const keywords = Array.from(
     new Set([
@@ -287,14 +296,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ShowPage({ params }: Props) {
   const { id: raw } = await params;
-  const idNum = normId(raw);
-  if (!idNum) return notFound();
-
-  const data = await readShow(idNum);
+  const data = await readShow(raw);
   const e = data?.event ?? null;
+  if (!e) return notFound();
 
-  // If the show doesn’t exist in cache yet, render a controlled “not ready” page (not 404),
-  // but metadata will noindex it until synced.
   const venueSlug = e?.venue?.siteSlug;
   const venueName = e?.venue?.siteName || "Venue";
   const updatedAt = data?.generatedAt ?? null;
@@ -305,14 +310,14 @@ export default async function ShowPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbJsonLd(e, idNum)),
+          __html: JSON.stringify(breadcrumbJsonLd(e, e.id)),
         }}
       />
       {e ? (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(musicEventJsonLd(e, idNum)),
+            __html: JSON.stringify(musicEventJsonLd(e, e.id)),
           }}
         />
       ) : null}
@@ -346,18 +351,16 @@ export default async function ShowPage({ params }: Props) {
         </div>
 
         <h1 className="mt-5 text-4xl md:text-6xl font-black tracking-tight">
-          {e?.title ? e.title : `Event ${idNum}`}
+          {e?.title ? e.title : `Event ${e.id}`}
         </h1>
 
         <p className="mt-4 max-w-3xl text-white/70">
-          {e
-            ? "Tickets + ride options with clear meetup logic. Book a guaranteed ride home after the last song."
-            : "This show hasn’t synced yet. Run the sync and refresh."}
+          Tickets + ride options with clear meetup logic. Book a guaranteed ride home after the last song.
         </p>
 
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <Link
-            href={`/book?event=${idNum}${venueSlug ? `&venue=${encodeURIComponent(venueSlug)}` : ""}`}
+            href={`/find?date=${encodeURIComponent(e.dateKey)}&qty=2`}
             className="inline-flex items-center justify-center rounded-full bg-neon-blue px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-black transition hover:bg-surface/40"
           >
             Ride Options
@@ -384,14 +387,11 @@ export default async function ShowPage({ params }: Props) {
         </div>
 
         <div className="mt-4 text-xs text-white/45">
-          Feed updated:{" "}
+          Snapshot generated:{" "}
           {updatedAt ? (
             <time dateTime={updatedAt}>{updatedAt}</time>
           ) : (
-            <>
-              not synced yet (run{" "}
-              <code className="text-white/80">/api/cron/sync?secret=...</code>)
-            </>
+            <>unknown</>
           )}
         </div>
       </div>

@@ -1,0 +1,364 @@
+{
+  "generatedAt": "2026-03-08T03:27:26.054Z",
+  "year": 2026,
+  "events": {
+    "bluebird-theater-2026-01-26-ruston-kelly-with-verygently-16": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-02-05-briscoe-16": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-02-10-enjambre-16": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-02-12-butcher-babies": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-02-16-weval-16": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-02-18-samm-henshaw": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-02-19-bryce-vine": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-02-20-hayes-carll-with-ryan-montbleau-16": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-02-21-whitney-hanson": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-02-27-kpop-club-night-16": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-03-03-alex-sampson": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-03-05-volumes-with-notions-and-catsclaw-16": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-03-07-fia-16": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-03-08-christian-loffler": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-03-14-the-barr-brothers": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-03-15-bad-bad-hats": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-03-19-the-thing-16": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-03-21-muzz": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-03-20-grieves-with-blueprint": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-03-23-quarters": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-03-26-charlie-parr": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-03-28-49th-and-main-21": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-03-30-mind-enterprises-16": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-04-01-cass-mccombs-with-chris-cohen": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-04-03-voxtrot": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-04-07-the-red-pears-and-together-pangea-16": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-04-13-ratboys-with-villagerrr-16": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-04-17-pete-yorn-16": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-04-28-femtanyl-16": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-04-29-powfu": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-05-02-langhorne-slim": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-05-05-melrose-avenue-16": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-05-07-vana": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-05-09-allie-x": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-05-14-newdad": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-05-17-sports-band": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-05-19-electric-six": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-05-27-swervedriver": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-06-09-kings-kaleidoscope-16": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-06-19-searows": {
+      "local": null,
+      "remote": null
+    },
+    "bluebird-theater-2026-09-21-aldous-harding-16": {
+      "local": null,
+      "remote": null
+    }
+  },
+  "artists": {
+    "artist-49th-and-main-21": {
+      "local": null,
+      "remote": null
+    },
+    "artist-aldous-harding-16": {
+      "local": null,
+      "remote": null
+    },
+    "artist-alex-sampson": {
+      "local": null,
+      "remote": null
+    },
+    "artist-allie-x": {
+      "local": null,
+      "remote": null
+    },
+    "artist-bad-bad-hats": {
+      "local": null,
+      "remote": null
+    },
+    "artist-blueprint": {
+      "local": null,
+      "remote": null
+    },
+    "artist-briscoe-16": {
+      "local": null,
+      "remote": null
+    },
+    "artist-bryce-vine": {
+      "local": null,
+      "remote": null
+    },
+    "artist-butcher-babies": {
+      "local": null,
+      "remote": null
+    },
+    "artist-cass-mccombs": {
+      "local": null,
+      "remote": null
+    },
+    "artist-charlie-parr": {
+      "local": null,
+      "remote": null
+    },
+    "artist-chris-cohen": {
+      "local": null,
+      "remote": null
+    },
+    "artist-catsclaw-16": {
+      "local": null,
+      "remote": null
+    },
+    "artist-christian-loffler": {
+      "local": null,
+      "remote": null
+    },
+    "artist-electric-six": {
+      "local": null,
+      "remote": null
+    },
+    "artist-enjambre-16": {
+      "local": null,
+      "remote": null
+    },
+    "artist-femtanyl-16": {
+      "local": null,
+      "remote": null
+    },
+    "artist-fia-16": {
+      "local": null,
+      "remote": null
+    },
+    "artist-grieves": {
+      "local": null,
+      "remote": null
+    },
+    "artist-hayes-carll": {
+      "local": null,
+      "remote": null
+    },
+    "artist-kings-kaleidoscope-16": {
+      "local": null,
+      "remote": null
+    },
+    "artist-kpop-club-night-16": {
+      "local": null,
+      "remote": null
+    },
+    "artist-langhorne-slim": {
+      "local": null,
+      "remote": null
+    },
+    "artist-melrose-avenue-16": {
+      "local": null,
+      "remote": null
+    },
+    "artist-mind-enterprises-16": {
+      "local": null,
+      "remote": null
+    },
+    "artist-muzz": {
+      "local": null,
+      "remote": null
+    },
+    "artist-newdad": {
+      "local": null,
+      "remote": null
+    },
+    "artist-notions": {
+      "local": null,
+      "remote": null
+    },
+    "artist-pete-yorn-16": {
+      "local": null,
+      "remote": null
+    },
+    "artist-powfu": {
+      "local": null,
+      "remote": null
+    },
+    "artist-quarters": {
+      "local": null,
+      "remote": null
+    },
+    "artist-ratboys": {
+      "local": null,
+      "remote": null
+    },
+    "artist-ruston-kelly": {
+      "local": null,
+      "remote": null
+    },
+    "artist-ryan-montbleau-16": {
+      "local": null,
+      "remote": null
+    },
+    "artist-samm-henshaw": {
+      "local": null,
+      "remote": null
+    },
+    "artist-searows": {
+      "local": null,
+      "remote": null
+    },
+    "artist-sports-band": {
+      "local": null,
+      "remote": null
+    },
+    "artist-swervedriver": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-barr-brothers": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-red-pears-and-together-pangea-16": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-thing-16": {
+      "local": null,
+      "remote": null
+    },
+    "artist-vana": {
+      "local": null,
+      "remote": null
+    },
+    "artist-verygently-16": {
+      "local": null,
+      "remote": null
+    },
+    "artist-villagerrr-16": {
+      "local": null,
+      "remote": null
+    },
+    "artist-volumes": {
+      "local": null,
+      "remote": null
+    },
+    "artist-voxtrot": {
+      "local": null,
+      "remote": null
+    },
+    "artist-weval-16": {
+      "local": null,
+      "remote": null
+    },
+    "artist-whitney-hanson": {
+      "local": null,
+      "remote": null
+    }
+  }
+}

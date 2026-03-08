@@ -4,11 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build-events": "node scripts/build-events.mjs",
+    "build-artist-enrichment": "node scripts/build-artist-enrichment.mjs",
+    "build": "node scripts/build-events.mjs && next build",
     "start": "next start",
     "sync": "node sync.js",
     "sync:publish": "node sync.js && git add public/data/shows-2026.js && git commit -m \"Update 2026 show data\" && git push",
-    "style:check": "bash scripts/style_leaks_no_globals.sh"
+    "style:check": "bash scripts/style_leaks_no_globals.sh",
+    "typecheck": "tsc --noEmit -p tsconfig.check.json"
   },
   "dependencies": {
     "@next/third-parties": "^16.1.6",
