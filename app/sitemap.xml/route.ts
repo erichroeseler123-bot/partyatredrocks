@@ -89,6 +89,10 @@ export async function GET() {
     { loc: `${base}/venues/mission-ballroom/concerts/june`, lastmod: now, changefreq: "weekly", priority: 0.7 },
     { loc: `${base}/venues/mission-ballroom/concerts/july`, lastmod: now, changefreq: "weekly", priority: 0.7 },
     { loc: `${base}/venues/mission-ballroom/concerts/august`, lastmod: now, changefreq: "weekly", priority: 0.7 },
+    { loc: `${base}/venues/fiddlers-green-amphitheatre/concerts`, lastmod: now, changefreq: "daily", priority: 0.8 },
+    { loc: `${base}/venues/fiddlers-green-amphitheatre/concerts/june`, lastmod: now, changefreq: "weekly", priority: 0.7 },
+    { loc: `${base}/venues/fiddlers-green-amphitheatre/concerts/july`, lastmod: now, changefreq: "weekly", priority: 0.7 },
+    { loc: `${base}/venues/fiddlers-green-amphitheatre/concerts/august`, lastmod: now, changefreq: "weekly", priority: 0.7 },
 
     // scenes (keep if these routes exist)
     { loc: `${base}/scene/jam`, lastmod: now, changefreq: "hourly", priority: 0.8 },

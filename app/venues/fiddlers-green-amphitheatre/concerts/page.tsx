@@ -1,0 +1,124 @@
+import Link from "next/link";
+import { getEventsCatalog } from "@/lib/events/getCatalog";
+
+const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
+
+export const revalidate = 1800;
+
+export const metadata = {
+  title: "Fiddler's Green Amphitheatre Concert Schedule 2026 | Greenwood Village Shows and Rides",
+  description:
+    "Full 2026 concert lineup at Fiddler's Green Amphitheatre in Greenwood Village. Browse dates, artist info, and book shuttle rides directly from the schedule.",
+  alternates: { canonical: `${SITE}/venues/fiddlers-green-amphitheatre/concerts` },
+};
+
+function slugify(input: string): string {
+  return input
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+const MONTH_LINKS: Array<{ month: number; label: string; href: string }> = [
+  { month: 6, label: "June", href: "/venues/fiddlers-green-amphitheatre/concerts/june" },
+  { month: 7, label: "July", href: "/venues/fiddlers-green-amphitheatre/concerts/july" },
+  { month: 8, label: "August", href: "/venues/fiddlers-green-amphitheatre/concerts/august" },
+];
+
+export default async function FiddlersGreenConcertsPage() {
+  const allEvents = await getEventsCatalog(2026, "all");
+  const fgEvents = allEvents
+    .filter((event) => event.venueId === "fiddlers-green-amphitheatre")
+    .sort((a, b) => a.dateKey.localeCompare(b.dateKey));
+
+  const upcoming = fgEvents.slice(0, 30);
+
+  return (
+    <main className="comic-page pt-24 pb-10">
+      <section className="comic-wrap">
+        <div className="comic-hero">
+          <div className="comic-kicker">Greenwood Village Venue Guide</div>
+          <h1 className="comic-title">Fiddler's Green Amphitheatre Concert Schedule 2026</h1>
+          <p className="comic-copy">
+            Major amphitheatre lineup for 2026. Browse upcoming shows, plan arrival timing, and book shuttle rides before post-show traffic surge.
+          </p>
+          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-6 w-full px-4">
+            <Link href="/find?venue=fiddlers-green-amphitheatre&qty=2" className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[200px] text-center">
+              Book Shuttle
+            </Link>
+            <Link href="/venues/fiddlers-green-amphitheatre/best-time-to-arrive" className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[200px] text-center">
+              Best Arrival Time
+            </Link>
+          </div>
+        </div>
+
+        <section className="comic-panel" style={{ marginTop: 24 }}>
+          <div className="comic-tag">Browse by Month</div>
+          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-4 sm:mt-6 w-full px-4">
+            {MONTH_LINKS.map((row) => (
+              <Link key={row.href} href={row.href} className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[180px] text-center">
+                {row.label}
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section className="comic-panel" style={{ marginTop: 24 }}>
+          <div className="comic-tag">Upcoming Shows at Fiddler's Green Amphitheatre</div>
+          {upcoming.length ? (
+            <div className="comic-grid" style={{ marginTop: 12 }}>
+              {upcoming.map((event) => (
+                <article key={event.id} className="comic-panel">
+                  <div className="comic-tag">{event.dateKey}</div>
+                  <h2 className="comic-h3" style={{ marginTop: 8 }}>
+                    {event.name}
+                  </h2>
+                  {event.artistNames?.length > 0 ? (
+                    <p className="comic-copy" style={{ marginTop: 6 }}>
+                      {event.artistNames.map((name, idx) => (
+                        <span key={`${event.id}-${name}`}>
+                          <Link href={`/artists/${encodeURIComponent(slugify(name))}`} className="underline text-white/90 hover:text-white">
+                            {name}
+                          </Link>
+                          {idx < event.artistNames.length - 1 ? ", " : ""}
+                        </span>
+                      ))}
+                    </p>
+                  ) : null}
+                  <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
+                    <Link href={`/shows/${encodeURIComponent(event.id)}`} className="comic-btn comic-btn-secondary">
+                      Show Intel
+                    </Link>
+                    <Link href={`/find?date=${encodeURIComponent(event.dateKey)}&venue=fiddlers-green-amphitheatre&qty=2`} className="comic-btn comic-btn-primary">
+                      Book Ride
+                    </Link>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <p className="comic-copy" style={{ marginTop: 8 }}>
+              No Fiddler's Green Amphitheatre events found in the current 2026 snapshot.
+            </p>
+          )}
+        </section>
+
+        <section className="comic-panel" style={{ marginTop: 24 }}>
+          <div className="comic-tag">Plan Your Night</div>
+          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-6 w-full px-4">
+            <Link href="/venues/fiddlers-green-amphitheatre/parking" className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[180px] text-center">
+              Parking Strategy
+            </Link>
+            <Link href="/venues/fiddlers-green-amphitheatre/transportation" className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[180px] text-center">
+              Transportation Guide
+            </Link>
+            <Link href="/venues/fiddlers-green-amphitheatre/map" className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[180px] text-center">
+              Venue Map
+            </Link>
+          </div>
+        </section>
+      </section>
+    </main>
+  );
+}

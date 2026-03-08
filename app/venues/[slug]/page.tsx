@@ -842,6 +842,32 @@ export default async function VenuePage({
         </section>
       ) : null}
 
+      {slug === "fiddlers-green-amphitheatre" ? (
+        <section className="comic-panel" style={{ marginTop: 32 }}>
+          <div className="comic-tag">Fiddler&apos;s Green Quick Guides</div>
+          <div className="flex flex-wrap gap-3 mt-4 justify-center">
+            <Link href="/venues/fiddlers-green-amphitheatre/concerts" className="comic-btn comic-btn-secondary">
+              Concert Schedule
+            </Link>
+            <Link href="/venues/fiddlers-green-amphitheatre/best-time-to-arrive" className="comic-btn comic-btn-secondary">
+              Best Time to Arrive
+            </Link>
+            <Link href="/venues/fiddlers-green-amphitheatre/parking" className="comic-btn comic-btn-secondary">
+              Parking Strategy
+            </Link>
+            <Link href="/venues/fiddlers-green-amphitheatre/transportation" className="comic-btn comic-btn-secondary">
+              Transportation & Rides
+            </Link>
+            <Link href="/venues/fiddlers-green-amphitheatre/map" className="comic-btn comic-btn-secondary">
+              Venue Map
+            </Link>
+          </div>
+          <p className="comic-copy text-center mt-4 opacity-80">
+            Large outdoor amphitheatre in Greenwood Village with lawn plus reserved seating and major Denver metro draw.
+          </p>
+        </section>
+      ) : null}
+
       {slug === "ogden-theatre" ? (
         <section className="comic-panel" style={{ marginTop: 32 }}>
           <div className="comic-tag">Ogden Theatre Quick Guides</div>
