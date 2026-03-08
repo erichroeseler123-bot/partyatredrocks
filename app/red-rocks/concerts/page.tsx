@@ -55,17 +55,28 @@ export default async function RedRocksConcertsPage() {
           <p className="comic-copy">
             Master lineup page for Red Rocks concerts: upcoming shows, month views, and direct paths to venue planning and ride booking.
           </p>
-          <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
+          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-4 sm:mt-6 w-full px-4">
             {MONTH_LINKS.map((row) => (
-              <Link key={row.href} href={row.href} className="comic-btn comic-btn-secondary">
+              <Link key={row.href} href={row.href} className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[180px] text-center">
                 {row.label}
               </Link>
             ))}
-            <Link href="/find" className="comic-btn comic-btn-primary">
-              Find a Ride
+            <Link href="/find" className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[180px] text-center">
+              Find a Ride →
             </Link>
           </div>
         </div>
+
+        <section className="comic-panel" style={{ marginTop: 16 }}>
+          <div className="comic-tag">Browse by Month</div>
+          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-4 sm:mt-6 w-full px-4">
+            {MONTH_LINKS.map((row) => (
+              <Link key={`month-${row.href}`} href={row.href} className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[180px] text-center">
+                {row.label} Shows
+              </Link>
+            ))}
+          </div>
+        </section>
 
         <section className="comic-panel" style={{ marginTop: 16 }}>
           <div className="comic-tag">Upcoming Shows</div>
@@ -88,7 +99,11 @@ export default async function RedRocksConcertsPage() {
                         </span>
                       ))}
                     </p>
-                  ) : null}
+                  ) : (
+                    <p className="comic-copy" style={{ marginTop: 6 }}>
+                      Artists TBA
+                    </p>
+                  )}
                   <p className="comic-copy">Month: {monthOf(event.dateKey)}</p>
                   <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
                     <Link href={`/shows/${encodeURIComponent(event.id)}`} className="comic-btn comic-btn-secondary">
@@ -110,18 +125,18 @@ export default async function RedRocksConcertsPage() {
 
         <section className="comic-panel" style={{ marginTop: 16 }}>
           <div className="comic-tag">Plan Your Visit</div>
-          <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link href="/red-rocks/parking" className="comic-btn comic-btn-secondary">
+          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-4 sm:mt-6 w-full px-4">
+            <Link href="/red-rocks/parking" className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[180px] text-center">
               Parking Guide
             </Link>
-            <Link href="/red-rocks/transportation" className="comic-btn comic-btn-secondary">
+            <Link href="/red-rocks/transportation" className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[180px] text-center">
               Transportation Guide
             </Link>
-            <Link href="/red-rocks/map" className="comic-btn comic-btn-secondary">
+            <Link href="/red-rocks/map" className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[180px] text-center">
               Interactive Map
             </Link>
-            <Link href="/find" className="comic-btn comic-btn-primary">
-              Find a Ride
+            <Link href="/find" className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[180px] text-center">
+              Find a Ride →
             </Link>
           </div>
         </section>
