@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T07:45:52.697Z",
+  "generatedAt": "2026-03-08T17:54:34.109Z",
   "year": 2026,
   "events": {
     "gothic-theatre-2026-01-24-glaive-16": {
@@ -94,11 +94,11 @@
       "local": null,
       "remote": null
     },
-    "ogden-theatre-2026-02-01-the-runarounds-16": {
+    "marquis-theater-2026-02-03-bravo-the-bagchaser-with-lil-maru": {
       "local": null,
       "remote": null
     },
-    "marquis-theater-2026-02-03-bravo-the-bagchaser-with-lil-maru": {
+    "ogden-theatre-2026-02-01-the-runarounds-16": {
       "local": null,
       "remote": null
     },
@@ -222,15 +222,15 @@
       "local": null,
       "remote": null
     },
+    "gothic-theatre-2026-02-14-the-record-company-16": {
+      "local": null,
+      "remote": null
+    },
     "mission-ballroom-2026-02-14-wreckno-and-super-future-16": {
       "local": null,
       "remote": null
     },
     "ophelias-2026-02-14-what-the-dance": {
-      "local": null,
-      "remote": null
-    },
-    "gothic-theatre-2026-02-14-the-record-company-16": {
       "local": null,
       "remote": null
     },
@@ -454,6 +454,10 @@
       "local": null,
       "remote": null
     },
+    "mission-ballroom-2026-03-01-dropkick-murphys-with-the-aggrolites-and-haywire-16": {
+      "local": null,
+      "remote": null
+    },
     "ogden-theatre-2026-03-01-all-them-witches-16": {
       "local": null,
       "remote": null
@@ -474,10 +478,6 @@
       "local": null,
       "remote": null
     },
-    "mission-ballroom-2026-03-01-dropkick-murphys-with-the-aggrolites-and-haywire-16": {
-      "local": null,
-      "remote": null
-    },
     "gothic-theatre-2026-03-04-margo-price-with-shannon-mcnally": {
       "local": null,
       "remote": null
@@ -494,11 +494,11 @@
       "local": null,
       "remote": null
     },
-    "black-sheep-2026-03-06-nekrogoblikon-with-enterprise-earth": {
+    "summit-music-hall-2026-03-05-colony-house": {
       "local": null,
       "remote": null
     },
-    "summit-music-hall-2026-03-05-colony-house": {
+    "black-sheep-2026-03-06-nekrogoblikon-with-enterprise-earth": {
       "local": null,
       "remote": null
     },
@@ -530,11 +530,11 @@
       "local": null,
       "remote": null
     },
-    "bluebird-theater-2026-03-08-christian-loffler": {
+    "summit-music-hall-2026-03-07-dodie-clark": {
       "local": null,
       "remote": null
     },
-    "summit-music-hall-2026-03-07-dodie-clark": {
+    "bluebird-theater-2026-03-08-christian-loffler": {
       "local": null,
       "remote": null
     },
@@ -566,11 +566,11 @@
       "local": null,
       "remote": null
     },
-    "summit-music-hall-2026-03-10-peaches": {
+    "fillmore-auditorium-2026-03-10-lauren-spencer-smith": {
       "local": null,
       "remote": null
     },
-    "fillmore-auditorium-2026-03-10-lauren-spencer-smith": {
+    "summit-music-hall-2026-03-10-peaches": {
       "local": null,
       "remote": null
     },
@@ -606,15 +606,15 @@
       "local": null,
       "remote": null
     },
+    "fox-theatre-2026-03-13-the-barr-brothers": {
+      "local": null,
+      "remote": null
+    },
     "boulder-theater-2026-03-13-pure-prairie-league-with-pablo-cruise": {
       "local": null,
       "remote": null
     },
     "gothic-theatre-2026-03-13-maggie-lindemann-16": {
-      "local": null,
-      "remote": null
-    },
-    "fox-theatre-2026-03-13-the-barr-brothers": {
       "local": null,
       "remote": null
     },
@@ -646,11 +646,11 @@
       "local": null,
       "remote": null
     },
-    "mission-ballroom-2026-03-14-max-styler": {
+    "gothic-theatre-2026-03-14-the-strumbellas": {
       "local": null,
       "remote": null
     },
-    "gothic-theatre-2026-03-14-the-strumbellas": {
+    "mission-ballroom-2026-03-14-max-styler": {
       "local": null,
       "remote": null
     },
@@ -682,11 +682,11 @@
       "local": null,
       "remote": null
     },
-    "boulder-theater-2026-03-17-emmet-cohen-presents-miles-and-coltrane-at-100": {
+    "marquis-theater-2026-03-16-varials-with-unitytx": {
       "local": null,
       "remote": null
     },
-    "marquis-theater-2026-03-16-varials-with-unitytx": {
+    "boulder-theater-2026-03-17-emmet-cohen-presents-miles-and-coltrane-at-100": {
       "local": null,
       "remote": null
     },
@@ -702,11 +702,11 @@
       "local": null,
       "remote": null
     },
-    "summit-music-hall-2026-03-18-testament-with-overkill-and-destruction": {
+    "marquis-theater-2026-03-18-alexsucks": {
       "local": null,
       "remote": null
     },
-    "marquis-theater-2026-03-18-alexsucks": {
+    "summit-music-hall-2026-03-18-testament-with-overkill-and-destruction": {
       "local": null,
       "remote": null
     },
@@ -726,11 +726,11 @@
       "local": null,
       "remote": null
     },
-    "fox-theatre-2026-03-20-shadowgrass": {
+    "cervantes-masterpiece-2026-03-20-kwn": {
       "local": null,
       "remote": null
     },
-    "cervantes-masterpiece-2026-03-20-kwn": {
+    "fox-theatre-2026-03-20-shadowgrass": {
       "local": null,
       "remote": null
     },
@@ -762,11 +762,11 @@
       "local": null,
       "remote": null
     },
-    "marquis-theater-2026-03-21-emm-with-bentley-robles": {
+    "gothic-theatre-2026-03-21-eddie-9v-16": {
       "local": null,
       "remote": null
     },
-    "gothic-theatre-2026-03-21-eddie-9v-16": {
+    "marquis-theater-2026-03-21-emm-with-bentley-robles": {
       "local": null,
       "remote": null
     },
@@ -814,11 +814,11 @@
       "local": null,
       "remote": null
     },
-    "ball-arena-2026-03-26-peso-pluma": {
+    "marquis-theater-2026-03-25-the-sloppy-boys": {
       "local": null,
       "remote": null
     },
-    "marquis-theater-2026-03-25-the-sloppy-boys": {
+    "ball-arena-2026-03-26-peso-pluma": {
       "local": null,
       "remote": null
     },
@@ -894,15 +894,15 @@
       "local": null,
       "remote": null
     },
-    "summit-music-hall-2026-03-28-the-devil-wears-prada": {
-      "local": null,
-      "remote": null
-    },
     "fillmore-auditorium-2026-03-29-sticky-fingers-with-ruby-waters": {
       "local": null,
       "remote": null
     },
     "marquis-theater-2026-03-29-angel-du-t-with-home-front": {
+      "local": null,
+      "remote": null
+    },
+    "summit-music-hall-2026-03-28-the-devil-wears-prada": {
       "local": null,
       "remote": null
     },
@@ -1018,11 +1018,11 @@
       "local": null,
       "remote": null
     },
-    "boulder-theater-2026-04-07-pat-metheny": {
+    "mission-ballroom-2026-04-07-lany": {
       "local": null,
       "remote": null
     },
-    "mission-ballroom-2026-04-07-lany": {
+    "boulder-theater-2026-04-07-pat-metheny": {
       "local": null,
       "remote": null
     },
@@ -1078,11 +1078,11 @@
       "local": null,
       "remote": null
     },
-    "black-sheep-2026-04-11-des-rocs": {
+    "gothic-theatre-2026-04-11-d-r-i-dirty-rotten-imbeciles-with-clusterfux-and-deathwish-16": {
       "local": null,
       "remote": null
     },
-    "gothic-theatre-2026-04-11-d-r-i-dirty-rotten-imbeciles-with-clusterfux-and-deathwish-16": {
+    "black-sheep-2026-04-11-des-rocs": {
       "local": null,
       "remote": null
     },
@@ -1162,11 +1162,11 @@
       "local": null,
       "remote": null
     },
-    "paramount-theatre-2026-04-17-drew-holcomb": {
+    "rr-2026-04-17-sublime": {
       "local": null,
       "remote": null
     },
-    "rr-2026-04-17-sublime": {
+    "paramount-theatre-2026-04-17-drew-holcomb": {
       "local": null,
       "remote": null
     },
@@ -1374,11 +1374,11 @@
       "local": null,
       "remote": null
     },
-    "fox-theatre-2026-05-01-saxsquatch": {
+    "gothic-theatre-2026-05-01-witchz": {
       "local": null,
       "remote": null
     },
-    "gothic-theatre-2026-05-01-witchz": {
+    "fox-theatre-2026-05-01-saxsquatch": {
       "local": null,
       "remote": null
     },
@@ -1694,11 +1694,11 @@
       "local": null,
       "remote": null
     },
-    "marquis-theater-2026-06-03-white-denim": {
+    "rr-2026-06-03-yo-yo-ma-with-colorado-symphony": {
       "local": null,
       "remote": null
     },
-    "rr-2026-06-03-yo-yo-ma-with-colorado-symphony": {
+    "marquis-theater-2026-06-03-white-denim": {
       "local": null,
       "remote": null
     },
@@ -1730,11 +1730,11 @@
       "local": null,
       "remote": null
     },
-    "fiddlers-green-amphitheatre-2026-06-11-lord-huron": {
+    "mission-ballroom-2026-06-13-lane-8-with-cross-pollination-sultan-shepard-and-more-16": {
       "local": null,
       "remote": null
     },
-    "mission-ballroom-2026-06-13-lane-8-with-cross-pollination-sultan-shepard-and-more-16": {
+    "fiddlers-green-amphitheatre-2026-06-11-lord-huron": {
       "local": null,
       "remote": null
     },
@@ -1742,11 +1742,11 @@
       "local": null,
       "remote": null
     },
-    "rr-2026-06-15-rod-stewart": {
+    "rr-2026-06-14-trevor-hall-thievery-corporation-dirtwire": {
       "local": null,
       "remote": null
     },
-    "rr-2026-06-14-trevor-hall-thievery-corporation-dirtwire": {
+    "rr-2026-06-15-rod-stewart": {
       "local": null,
       "remote": null
     },
@@ -1838,11 +1838,11 @@
       "local": null,
       "remote": null
     },
-    "chautauqua-auditorium-2026-07-20-rosanne-cash-with-john-leventhal": {
+    "ball-arena-2026-07-25-olivia-dean": {
       "local": null,
       "remote": null
     },
-    "ball-arena-2026-07-25-olivia-dean": {
+    "chautauqua-auditorium-2026-07-20-rosanne-cash-with-john-leventhal": {
       "local": null,
       "remote": null
     },
@@ -1858,11 +1858,11 @@
       "local": null,
       "remote": null
     },
-    "ball-arena-2026-08-01-meghan-trainor-with-icona-pop-and-ryan-trainor": {
+    "ogden-theatre-2026-08-04-audrey-hobert-16": {
       "local": null,
       "remote": null
     },
-    "ogden-theatre-2026-08-04-audrey-hobert-16": {
+    "ball-arena-2026-08-01-meghan-trainor-with-icona-pop-and-ryan-trainor": {
       "local": null,
       "remote": null
     },
@@ -1910,11 +1910,11 @@
       "local": null,
       "remote": null
     },
-    "ford-amphitheater-colorado-springs-2026-09-05-brantley-gilbert-rescheduled-from-10-11-25": {
+    "fiddlers-green-amphitheatre-2026-09-12-rob-zombie-and-marilyn-manson-with-the-hu-and-orgy": {
       "local": null,
       "remote": null
     },
-    "fiddlers-green-amphitheatre-2026-09-12-rob-zombie-and-marilyn-manson-with-the-hu-and-orgy": {
+    "ford-amphitheater-colorado-springs-2026-09-05-brantley-gilbert-rescheduled-from-10-11-25": {
       "local": null,
       "remote": null
     },
@@ -1968,10 +1968,6 @@
       "local": null,
       "remote": null
     },
-    "artist-156-silence": {
-      "local": null,
-      "remote": null
-    },
     "artist-2-chainz": {
       "local": null,
       "remote": null
@@ -1988,6 +1984,10 @@
       "local": null,
       "remote": null
     },
+    "artist-156-silence": {
+      "local": null,
+      "remote": null
+    },
     "artist-49th-and-main-21": {
       "local": null,
       "remote": null
@@ -1996,11 +1996,11 @@
       "local": null,
       "remote": null
     },
-    "artist-abby-sage-16": {
+    "artist-adela": {
       "local": null,
       "remote": null
     },
-    "artist-adela": {
+    "artist-abby-sage-16": {
       "local": null,
       "remote": null
     },
@@ -2012,11 +2012,11 @@
       "local": null,
       "remote": null
     },
-    "artist-alabama-shakes": {
+    "artist-alan-doyle": {
       "local": null,
       "remote": null
     },
-    "artist-alan-doyle": {
+    "artist-alabama-shakes": {
       "local": null,
       "remote": null
     },
@@ -2328,11 +2328,11 @@
       "local": null,
       "remote": null
     },
-    "artist-brit-floyd-the-wall": {
+    "artist-bryce-vine": {
       "local": null,
       "remote": null
     },
-    "artist-bryce-vine": {
+    "artist-brit-floyd-the-wall": {
       "local": null,
       "remote": null
     },
@@ -2432,11 +2432,11 @@
       "local": null,
       "remote": null
     },
-    "artist-chri-tian-gate": {
+    "artist-chris-cohen": {
       "local": null,
       "remote": null
     },
-    "artist-chris-cohen": {
+    "artist-chri-tian-gate": {
       "local": null,
       "remote": null
     },
@@ -2700,11 +2700,11 @@
       "local": null,
       "remote": null
     },
-    "artist-dodie-clark": {
+    "artist-dogs-in-a-pile": {
       "local": null,
       "remote": null
     },
-    "artist-dogs-in-a-pile": {
+    "artist-dodie-clark": {
       "local": null,
       "remote": null
     },
@@ -2720,11 +2720,11 @@
       "local": null,
       "remote": null
     },
-    "artist-doobie": {
+    "artist-dr-fresch": {
       "local": null,
       "remote": null
     },
-    "artist-dr-fresch": {
+    "artist-doobie": {
       "local": null,
       "remote": null
     },
@@ -2852,15 +2852,15 @@
       "local": null,
       "remote": null
     },
-    "artist-face-yourself": {
-      "local": null,
-      "remote": null
-    },
     "artist-faetooth": {
       "local": null,
       "remote": null
     },
     "artist-fcukers-16": {
+      "local": null,
+      "remote": null
+    },
+    "artist-face-yourself": {
       "local": null,
       "remote": null
     },
@@ -2904,11 +2904,11 @@
       "local": null,
       "remote": null
     },
-    "artist-fox-stevenson": {
+    "artist-foxy-shazam": {
       "local": null,
       "remote": null
     },
-    "artist-foxy-shazam": {
+    "artist-fox-stevenson": {
       "local": null,
       "remote": null
     },
@@ -3232,11 +3232,11 @@
       "local": null,
       "remote": null
     },
-    "artist-jonah-kagen-16": {
+    "artist-jose-gonzalez": {
       "local": null,
       "remote": null
     },
-    "artist-jose-gonzalez": {
+    "artist-jonah-kagen-16": {
       "local": null,
       "remote": null
     },
@@ -3260,10 +3260,6 @@
       "local": null,
       "remote": null
     },
-    "artist-jstjr-18": {
-      "local": null,
-      "remote": null
-    },
     "artist-jungle-bobby": {
       "local": null,
       "remote": null
@@ -3276,15 +3272,19 @@
       "local": null,
       "remote": null
     },
+    "artist-jstjr-18": {
+      "local": null,
+      "remote": null
+    },
     "artist-kettama": {
       "local": null,
       "remote": null
     },
-    "artist-kevin-gates": {
+    "artist-khalid": {
       "local": null,
       "remote": null
     },
-    "artist-khalid": {
+    "artist-kevin-gates": {
       "local": null,
       "remote": null
     },
@@ -3444,10 +3444,6 @@
       "local": null,
       "remote": null
     },
-    "artist-mac-demarco": {
-      "local": null,
-      "remote": null
-    },
     "artist-mac-mcanally": {
       "local": null,
       "remote": null
@@ -3485,6 +3481,10 @@
       "remote": null
     },
     "artist-margo-price": {
+      "local": null,
+      "remote": null
+    },
+    "artist-mac-demarco": {
       "local": null,
       "remote": null
     },
@@ -3752,11 +3752,11 @@
       "local": null,
       "remote": null
     },
-    "artist-pepper": {
+    "artist-peso-pluma": {
       "local": null,
       "remote": null
     },
-    "artist-peso-pluma": {
+    "artist-pepper": {
       "local": null,
       "remote": null
     },
@@ -3824,11 +3824,11 @@
       "local": null,
       "remote": null
     },
-    "artist-puscifer": {
+    "artist-quarters": {
       "local": null,
       "remote": null
     },
-    "artist-quarters": {
+    "artist-puscifer": {
       "local": null,
       "remote": null
     },
@@ -4072,15 +4072,15 @@
       "local": null,
       "remote": null
     },
-    "artist-smells-like-nirvana": {
-      "local": null,
-      "remote": null
-    },
     "artist-smino": {
       "local": null,
       "remote": null
     },
     "artist-smoakland": {
+      "local": null,
+      "remote": null
+    },
+    "artist-smells-like-nirvana": {
       "local": null,
       "remote": null
     },
@@ -4188,11 +4188,11 @@
       "local": null,
       "remote": null
     },
-    "artist-sugar": {
+    "artist-sultan-shepard": {
       "local": null,
       "remote": null
     },
-    "artist-sultan-shepard": {
+    "artist-sugar": {
       "local": null,
       "remote": null
     },
@@ -4372,15 +4372,11 @@
       "local": null,
       "remote": null
     },
-    "artist-the-original-wailers": {
-      "local": null,
-      "remote": null
-    },
     "artist-the-paper-kites-16": {
       "local": null,
       "remote": null
     },
-    "artist-the-polish-ambassador": {
+    "artist-the-original-wailers": {
       "local": null,
       "remote": null
     },
@@ -4388,11 +4384,11 @@
       "local": null,
       "remote": null
     },
-    "artist-the-record-company": {
+    "artist-the-record-company-16": {
       "local": null,
       "remote": null
     },
-    "artist-the-record-company-16": {
+    "artist-the-polish-ambassador": {
       "local": null,
       "remote": null
     },
@@ -4480,11 +4476,11 @@
       "local": null,
       "remote": null
     },
-    "artist-tommy-emmanuel": {
+    "artist-tori-kelly": {
       "local": null,
       "remote": null
     },
-    "artist-tori-kelly": {
+    "artist-tommy-emmanuel": {
       "local": null,
       "remote": null
     },
@@ -4528,11 +4524,11 @@
       "local": null,
       "remote": null
     },
-    "artist-two-feet": {
+    "artist-two-friends": {
       "local": null,
       "remote": null
     },
-    "artist-two-friends": {
+    "artist-two-feet": {
       "local": null,
       "remote": null
     },
@@ -4716,11 +4712,11 @@
       "local": null,
       "remote": null
     },
-    "artist-your-arms-are-my-cocoon": {
+    "artist-yung-bans": {
       "local": null,
       "remote": null
     },
-    "artist-yung-bans": {
+    "artist-your-arms-are-my-cocoon": {
       "local": null,
       "remote": null
     },
@@ -4741,6 +4737,10 @@
       "remote": null
     },
     "artist-zoh-amba-16": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-record-company": {
       "local": null,
       "remote": null
     }

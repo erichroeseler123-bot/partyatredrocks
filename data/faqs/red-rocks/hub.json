@@ -1,0 +1,32 @@
+[
+  {
+    "id": "rr-hub-what-is",
+    "question": "What is the Red Rocks hub page for?",
+    "answer": "The hub is the central planning page that links geology, hiking, concerts, parking, transportation, and FAQ guides so visitors can plan one complete Red Rocks trip."
+  },
+  {
+    "id": "rr-hub-first-stop",
+    "question": "If I am going to my first Red Rocks show, where should I start?",
+    "answer": "Start with the visiting guide and parking pages, then review transportation and post-show pickup planning before show day."
+  },
+  {
+    "id": "rr-hub-hike-show",
+    "question": "Can I use this hub for both daytime hiking and concert planning?",
+    "answer": "Yes. It includes trail pages for daytime recreation and separate logistics pages for show-night arrival, parking, and rides."
+  },
+  {
+    "id": "rr-hub-trip-time",
+    "question": "How much time should I budget for a Red Rocks trip?",
+    "answer": "For concerts, budget extra time for traffic, stairs, and entry lines. For daytime visits, add buffer for weather and elevation breaks."
+  },
+  {
+    "id": "rr-hub-booking",
+    "question": "Where do I book transportation after reading the guides?",
+    "answer": "Use the ride match flow at /find after you review venue logistics and pickup timing."
+  },
+  {
+    "id": "rr-hub-season",
+    "question": "Does the hub stay relevant all season?",
+    "answer": "Yes. The cluster is designed as a reference system and is updated with current-year transportation, weather, and planning context."
+  }
+]

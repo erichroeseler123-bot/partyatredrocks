@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T07:45:52.697Z",
+  "generatedAt": "2026-03-08T17:54:34.109Z",
   "year": 2026,
   "events": {
     "black-sheep-2026-02-23-rivers-of-nihil": {
@@ -74,11 +74,11 @@
       "local": null,
       "remote": null
     },
-    "black-sheep-2026-05-03-saxsquatch": {
+    "black-sheep-2026-05-05-the-spill-canvas": {
       "local": null,
       "remote": null
     },
-    "black-sheep-2026-05-05-the-spill-canvas": {
+    "black-sheep-2026-05-03-saxsquatch": {
       "local": null,
       "remote": null
     },
@@ -148,6 +148,10 @@
       "local": null,
       "remote": null
     },
+    "artist-i-see-stars": {
+      "local": null,
+      "remote": null
+    },
     "artist-lords-of-acid": {
       "local": null,
       "remote": null
@@ -160,19 +164,15 @@
       "local": null,
       "remote": null
     },
-    "artist-i-see-stars": {
-      "local": null,
-      "remote": null
-    },
     "artist-my-life": {
       "local": null,
       "remote": null
     },
-    "artist-obscura": {
+    "artist-nekrogoblikon": {
       "local": null,
       "remote": null
     },
-    "artist-nekrogoblikon": {
+    "artist-obscura": {
       "local": null,
       "remote": null
     },
@@ -216,19 +216,19 @@
       "local": null,
       "remote": null
     },
-    "artist-the-acacia-strain": {
-      "local": null,
-      "remote": null
-    },
     "artist-the-black-dahlia-murder": {
       "local": null,
       "remote": null
     },
-    "artist-the-queers": {
+    "artist-the-spill-canvas": {
       "local": null,
       "remote": null
     },
-    "artist-the-spill-canvas": {
+    "artist-the-acacia-strain": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-queers": {
       "local": null,
       "remote": null
     },

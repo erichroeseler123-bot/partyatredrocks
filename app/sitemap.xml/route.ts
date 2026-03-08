@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { VENUE_SLUGS } from "@/lib/venues";
+import { RED_ROCKS_ENTITIES } from "@/lib/redRocksAuthority";
 
 type UrlEntry = {
   loc: string;
@@ -43,6 +44,20 @@ export async function GET() {
     { loc: `${base}/`, lastmod: now, changefreq: "daily", priority: 1.0 },
     { loc: `${base}/week`, lastmod: now, changefreq: "hourly", priority: 0.9 },
     { loc: `${base}/venues`, lastmod: now, changefreq: "daily", priority: 0.8 },
+    { loc: `${base}/find`, lastmod: now, changefreq: "daily", priority: 0.9 },
+    { loc: `${base}/red-rocks`, lastmod: now, changefreq: "daily", priority: 0.9 },
+    { loc: `${base}/red-rocks/transportation`, lastmod: now, changefreq: "daily", priority: 0.9 },
+    { loc: `${base}/red-rocks/parking`, lastmod: now, changefreq: "daily", priority: 0.8 },
+    { loc: `${base}/red-rocks/faq`, lastmod: now, changefreq: "daily", priority: 0.8 },
+    { loc: `${base}/month/red-rocks`, lastmod: now, changefreq: "daily", priority: 0.8 },
+    { loc: `${base}/2026/red-rocks-concerts`, lastmod: now, changefreq: "daily", priority: 0.8 },
+    { loc: `${base}/red-rocks/concert-guide`, lastmod: now, changefreq: "daily", priority: 0.8 },
+    { loc: `${base}/red-rocks/concerts`, lastmod: now, changefreq: "daily", priority: 0.8 },
+    { loc: `${base}/red-rocks/visiting-guide`, lastmod: now, changefreq: "weekly", priority: 0.7 },
+    { loc: `${base}/red-rocks/hiking-trails`, lastmod: now, changefreq: "weekly", priority: 0.7 },
+    { loc: `${base}/red-rocks/geology`, lastmod: now, changefreq: "weekly", priority: 0.7 },
+    { loc: `${base}/red-rocks/wildlife`, lastmod: now, changefreq: "weekly", priority: 0.7 },
+    { loc: `${base}/red-rocks/camping-nearby`, lastmod: now, changefreq: "weekly", priority: 0.7 },
 
     // scenes (keep if these routes exist)
     { loc: `${base}/scene/jam`, lastmod: now, changefreq: "hourly", priority: 0.8 },
@@ -57,6 +72,16 @@ export async function GET() {
       lastmod: now,
       changefreq: "hourly",
       priority: 0.7,
+    });
+  }
+
+  // programmatic red rocks authority pages
+  for (const page of RED_ROCKS_ENTITIES) {
+    urls.push({
+      loc: `${base}/red-rocks/${page.slug}`,
+      lastmod: now,
+      changefreq: "weekly",
+      priority: page.category === "transportation" ? 0.9 : 0.7,
     });
   }
 

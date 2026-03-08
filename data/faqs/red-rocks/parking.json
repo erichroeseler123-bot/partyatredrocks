@@ -1,0 +1,27 @@
+[
+  {
+    "id": "rr-parking-best-lot",
+    "question": "What is the best lot at Red Rocks?",
+    "answer": "There is no single best lot. You are balancing easier entry, walking effort, and post-show exit speed based on your goals."
+  },
+  {
+    "id": "rr-parking-when-arrive",
+    "question": "How early should I arrive for parking?",
+    "answer": "Earlier is safer on high-demand shows because lot fill pace and entrance traffic can change quickly."
+  },
+  {
+    "id": "rr-parking-stairs",
+    "question": "Do lot choices affect how many stairs I climb?",
+    "answer": "Yes. Some parking choices reduce pre-show stair load while others may add walking effort but improve exit flow."
+  },
+  {
+    "id": "rr-parking-exit",
+    "question": "What causes long delays leaving Red Rocks?",
+    "answer": "Large crowds leave at once, road capacity is limited, and many guests request rides simultaneously after encore."
+  },
+  {
+    "id": "rr-parking-alt-plan",
+    "question": "Is there a better alternative than driving myself?",
+    "answer": "For many visitors, a planned shuttle or private ride reduces stress and avoids post-show parking-lot gridlock."
+  }
+]

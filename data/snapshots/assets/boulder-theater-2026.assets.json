@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T07:45:52.697Z",
+  "generatedAt": "2026-03-08T17:54:34.109Z",
   "year": 2026,
   "events": {
     "boulder-theater-2026-01-31-fitz-and-the-tantrums": {
@@ -14,11 +14,11 @@
       "local": null,
       "remote": null
     },
-    "boulder-theater-2026-02-13-the-record-company": {
+    "boulder-theater-2026-02-20-atmosphere-with-sage-francis": {
       "local": null,
       "remote": null
     },
-    "boulder-theater-2026-02-20-atmosphere-with-sage-francis": {
+    "boulder-theater-2026-02-13-the-record-company": {
       "local": null,
       "remote": null
     },
@@ -58,11 +58,11 @@
       "local": null,
       "remote": null
     },
-    "boulder-theater-2026-03-13-pure-prairie-league-with-pablo-cruise": {
+    "boulder-theater-2026-03-14-nimino": {
       "local": null,
       "remote": null
     },
-    "boulder-theater-2026-03-14-nimino": {
+    "boulder-theater-2026-03-13-pure-prairie-league-with-pablo-cruise": {
       "local": null,
       "remote": null
     },
@@ -144,6 +144,10 @@
       "local": null,
       "remote": null
     },
+    "artist-club-90s-heated-rivalry-night-18": {
+      "local": null,
+      "remote": null
+    },
     "artist-chris-isaak": {
       "local": null,
       "remote": null
@@ -156,15 +160,11 @@
       "local": null,
       "remote": null
     },
-    "artist-daniel-donato-s-cosmic-country-night-2": {
-      "local": null,
-      "remote": null
-    },
-    "artist-club-90s-heated-rivalry-night-18": {
-      "local": null,
-      "remote": null
-    },
     "artist-destroyer": {
+      "local": null,
+      "remote": null
+    },
+    "artist-daniel-donato-s-cosmic-country-night-2": {
       "local": null,
       "remote": null
     },

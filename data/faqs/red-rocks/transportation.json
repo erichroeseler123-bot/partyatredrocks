@@ -1,0 +1,27 @@
+[
+  {
+    "id": "rr-transport-best",
+    "question": "What is the most reliable way to get to Red Rocks on sold-out nights?",
+    "answer": "A pre-arranged shuttle or private ride with a fixed pickup plan is usually more reliable than improvising rideshare after the encore."
+  },
+  {
+    "id": "rr-transport-uber",
+    "question": "Why do rideshare plans fail after Red Rocks shows?",
+    "answer": "Post-show demand spikes at once, drivers are limited, and meeting zones are crowded, which causes long waits and pickup confusion."
+  },
+  {
+    "id": "rr-transport-pickup",
+    "question": "When should I decide my pickup plan?",
+    "answer": "Set pickup details before doors open so your group has one meeting point and one timing plan before the crowd exits."
+  },
+  {
+    "id": "rr-transport-private-vs-shared",
+    "question": "Should I pick shared shuttle or private ride?",
+    "answer": "Shared shuttle is often best for individuals and couples; private options are better for groups that need custom timing or door-to-door service."
+  },
+  {
+    "id": "rr-transport-arrival",
+    "question": "How early should transportation arrive at Red Rocks?",
+    "answer": "Arrive earlier than your normal city-venue routine because traffic and entry at Red Rocks can slow down quickly near showtime."
+  }
+]

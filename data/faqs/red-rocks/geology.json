@@ -1,0 +1,27 @@
+[
+  {
+    "id": "rr-geo-red",
+    "question": "Why are Red Rocks red?",
+    "answer": "The red tone comes mainly from iron oxide in sandstone layers of the Fountain Formation."
+  },
+  {
+    "id": "rr-geo-age",
+    "question": "How old are the rocks at Red Rocks?",
+    "answer": "The sandstone sequence tied to the Fountain Formation dates back roughly 290 to 300 million years."
+  },
+  {
+    "id": "rr-geo-formation",
+    "question": "How did the amphitheatre shape form?",
+    "answer": "Uplift and erosion exposed and sculpted tilted sandstone layers into the natural bowl and monolith forms."
+  },
+  {
+    "id": "rr-geo-landmarks",
+    "question": "What are the key formations near the stage?",
+    "answer": "Creation Rock and Ship Rock are the iconic sandstone monoliths that frame the amphitheatre."
+  },
+  {
+    "id": "rr-geo-nearby",
+    "question": "Where can I see related geology nearby?",
+    "answer": "Dinosaur Ridge, Garden of the Gods, and the Boulder Flatirons all provide context for Front Range sedimentary history."
+  }
+]

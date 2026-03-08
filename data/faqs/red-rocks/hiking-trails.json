@@ -1,0 +1,27 @@
+[
+  {
+    "id": "rr-hike-first",
+    "question": "What is the best first trail at Red Rocks?",
+    "answer": "Trading Post Trail is often the best first route because it is scenic, moderate, and easy to plan around."
+  },
+  {
+    "id": "rr-hike-difficulty",
+    "question": "Are Red Rocks trails harder than they look?",
+    "answer": "Often yes, especially for visitors not acclimated to elevation, sun exposure, and uneven terrain."
+  },
+  {
+    "id": "rr-hike-water",
+    "question": "How much water should I bring?",
+    "answer": "Bring more than you expect to need, particularly in warm months when dry air and sun accelerate dehydration."
+  },
+  {
+    "id": "rr-hike-showday",
+    "question": "Can I hike and attend a show the same day?",
+    "answer": "Yes, but keep the hike moderate and preserve energy for evening stairs, lines, and weather shifts."
+  },
+  {
+    "id": "rr-hike-trail-safe",
+    "question": "What are key safety tips for trails?",
+    "answer": "Stay on marked routes, watch weather timing, and avoid pushing pace at altitude if symptoms of fatigue appear."
+  }
+]

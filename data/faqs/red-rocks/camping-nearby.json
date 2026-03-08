@@ -1,0 +1,27 @@
+[
+  {
+    "id": "rr-camp-inside",
+    "question": "Can you camp inside Red Rocks Park?",
+    "answer": "No. Overnight camping is not allowed inside Red Rocks Park."
+  },
+  {
+    "id": "rr-camp-near",
+    "question": "Where can I camp near Red Rocks?",
+    "answer": "Many visitors check options near Golden Gate Canyon, Bear Creek Lake, and other regional campgrounds."
+  },
+  {
+    "id": "rr-camp-transport",
+    "question": "Should I treat camping and concert transportation as separate plans?",
+    "answer": "Yes. Lodging and campground decisions should be separate from your show-night pickup and return logistics."
+  },
+  {
+    "id": "rr-camp-checkin",
+    "question": "What should I verify before booking a nearby campground?",
+    "answer": "Confirm check-in timing, quiet-hour rules, drive distance, and late-night return expectations before committing."
+  },
+  {
+    "id": "rr-camp-lastmile",
+    "question": "What creates risk after a show when camping nearby?",
+    "answer": "The main risk is late-night transport friction and fatigue, so lock your return plan before the event starts."
+  }
+]

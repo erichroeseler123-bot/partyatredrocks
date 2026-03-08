@@ -1,0 +1,32 @@
+[
+  {
+    "id": "rr-faq-red",
+    "question": "Why are Red Rocks red?",
+    "answer": "The red color is mostly due to iron oxide in the sandstone layers."
+  },
+  {
+    "id": "rr-faq-seats",
+    "question": "How many seats does Red Rocks have?",
+    "answer": "Capacity is commonly listed around 9,525."
+  },
+  {
+    "id": "rr-faq-hike",
+    "question": "Can I visit and hike without a concert ticket?",
+    "answer": "Yes, daytime park visits and trail use are generally available when event operations do not restrict access."
+  },
+  {
+    "id": "rr-faq-camp",
+    "question": "Can I camp inside Red Rocks Park?",
+    "answer": "No. Camping is not allowed inside the park boundaries."
+  },
+  {
+    "id": "rr-faq-arrive",
+    "question": "How early should I arrive for a show?",
+    "answer": "Earlier than you would for many indoor venues, especially on sold-out or weather-sensitive nights."
+  },
+  {
+    "id": "rr-faq-ride",
+    "question": "What is the safest transport strategy?",
+    "answer": "Choose transportation in advance and set a clear post-show meeting plan before the concert begins."
+  }
+]

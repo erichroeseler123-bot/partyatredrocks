@@ -1,7 +1,45 @@
 import { NextRequest, NextResponse } from "next/server";
 
+function parseBasicAuth(header: string | null): { user: string; pass: string } | null {
+  if (!header || !header.startsWith("Basic ")) return null;
+  const encoded = header.slice("Basic ".length).trim();
+  if (!encoded) return null;
+  try {
+    const decoded = atob(encoded);
+    const separatorIndex = decoded.indexOf(":");
+    if (separatorIndex < 0) return null;
+    return {
+      user: decoded.slice(0, separatorIndex),
+      pass: decoded.slice(separatorIndex + 1),
+    };
+  } catch {
+    return null;
+  }
+}
+
+function isInternalOpsAuthorized(req: NextRequest): boolean {
+  const expectedUser = process.env.INTERNAL_OPS_USER;
+  const expectedPass = process.env.INTERNAL_OPS_PASS;
+  if (!expectedUser || !expectedPass) return true;
+  const auth = parseBasicAuth(req.headers.get("authorization"));
+  return Boolean(auth && auth.user === expectedUser && auth.pass === expectedPass);
+}
+
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
+
+  const isInternalOpsPath =
+    pathname === "/internal/orders" || pathname.startsWith("/api/internal/orders/");
+  if (isInternalOpsPath && !isInternalOpsAuthorized(req)) {
+    const isApi = pathname.startsWith("/api/");
+    if (isApi) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    return new NextResponse("Authentication required", {
+      status: 401,
+      headers: { "WWW-Authenticate": 'Basic realm="Internal Ops", charset="UTF-8"' },
+    });
+  }
 
   // LEGACY_MISHAWAKA_CASE
   // Normalize /Mishawaka (and any casing) -> /mishawaka so it doesn't 404.

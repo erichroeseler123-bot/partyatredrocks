@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T07:45:52.697Z",
+  "generatedAt": "2026-03-08T17:54:34.109Z",
   "year": 2026,
   "events": {
     "mission-ballroom-2026-01-24-kitchen-dwellers-with-mountain-grass-unit-16": {
@@ -10,11 +10,11 @@
       "local": null,
       "remote": null
     },
-    "mission-ballroom-2026-01-30-ship-wrek-16": {
+    "mission-ballroom-2026-01-31-ray-volpe": {
       "local": null,
       "remote": null
     },
-    "mission-ballroom-2026-01-31-ray-volpe": {
+    "mission-ballroom-2026-01-30-ship-wrek-16": {
       "local": null,
       "remote": null
     },
@@ -34,11 +34,11 @@
       "local": null,
       "remote": null
     },
-    "mission-ballroom-2026-02-21-sidepiece-16": {
+    "mission-ballroom-2026-02-27-drama-16": {
       "local": null,
       "remote": null
     },
-    "mission-ballroom-2026-02-27-drama-16": {
+    "mission-ballroom-2026-02-21-sidepiece-16": {
       "local": null,
       "remote": null
     },
@@ -50,11 +50,11 @@
       "local": null,
       "remote": null
     },
-    "mission-ballroom-2026-03-06-black-label-society-with-zakk-sabbath-and-dark-chapel": {
+    "mission-ballroom-2026-03-03-artemas-with-isabel-larosa-16": {
       "local": null,
       "remote": null
     },
-    "mission-ballroom-2026-03-03-artemas-with-isabel-larosa-16": {
+    "mission-ballroom-2026-03-06-black-label-society-with-zakk-sabbath-and-dark-chapel": {
       "local": null,
       "remote": null
     },
@@ -66,10 +66,6 @@
       "local": null,
       "remote": null
     },
-    "mission-ballroom-2026-03-14-max-styler": {
-      "local": null,
-      "remote": null
-    },
     "mission-ballroom-2026-03-20-the-california-honeydrops": {
       "local": null,
       "remote": null
@@ -78,11 +74,11 @@
       "local": null,
       "remote": null
     },
-    "mission-ballroom-2026-03-26-st-paul-and-the-broken-bones": {
+    "mission-ballroom-2026-03-27-gov-t-mule": {
       "local": null,
       "remote": null
     },
-    "mission-ballroom-2026-03-27-gov-t-mule": {
+    "mission-ballroom-2026-03-26-st-paul-and-the-broken-bones": {
       "local": null,
       "remote": null
     },
@@ -91,6 +87,10 @@
       "remote": null
     },
     "mission-ballroom-2026-04-07-lany": {
+      "local": null,
+      "remote": null
+    },
+    "mission-ballroom-2026-03-14-max-styler": {
       "local": null,
       "remote": null
     },
@@ -176,19 +176,19 @@
     }
   },
   "artists": {
-    "artist-16": {
-      "local": null,
-      "remote": null
-    },
     "artist-abby-sage-16": {
       "local": null,
       "remote": null
     },
-    "artist-artemas": {
+    "artist-16": {
       "local": null,
       "remote": null
     },
     "artist-ashnikko": {
+      "local": null,
+      "remote": null
+    },
+    "artist-artemas": {
       "local": null,
       "remote": null
     },
@@ -236,11 +236,11 @@
       "local": null,
       "remote": null
     },
-    "artist-echo-and-the-bunnymen": {
+    "artist-freya-skye": {
       "local": null,
       "remote": null
     },
-    "artist-freya-skye": {
+    "artist-echo-and-the-bunnymen": {
       "local": null,
       "remote": null
     },

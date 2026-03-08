@@ -1,0 +1,27 @@
+[
+  {
+    "id": "rr-wildlife-animals",
+    "question": "What animals can you see at Red Rocks?",
+    "answer": "Common sightings include mule deer, coyotes, foxes, hawks, and seasonal reptiles."
+  },
+  {
+    "id": "rr-wildlife-time",
+    "question": "When is wildlife most active?",
+    "answer": "Activity is often higher during cooler, lower-traffic hours such as early morning and evening."
+  },
+  {
+    "id": "rr-wildlife-safe",
+    "question": "How close should I get to wildlife?",
+    "answer": "Keep distance and never feed wildlife; observe from trails and give animals space to move naturally."
+  },
+  {
+    "id": "rr-wildlife-birds",
+    "question": "Is Red Rocks good for birdwatching?",
+    "answer": "Yes, the ridge and open-sky conditions can support strong raptor and songbird viewing opportunities."
+  },
+  {
+    "id": "rr-wildlife-show",
+    "question": "Does concert traffic affect wildlife behavior?",
+    "answer": "High crowd and vehicle activity can shift wildlife movement, which is why off-peak observation windows are best."
+  }
+]

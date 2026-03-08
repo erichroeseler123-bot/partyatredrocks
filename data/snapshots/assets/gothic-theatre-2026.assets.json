@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T07:45:52.697Z",
+  "generatedAt": "2026-03-08T17:54:34.109Z",
   "year": 2026,
   "events": {
     "gothic-theatre-2026-01-24-glaive-16": {
@@ -140,11 +140,11 @@
       "local": null,
       "remote": null
     },
-    "artist-bane": {
+    "artist-bayli-16": {
       "local": null,
       "remote": null
     },
-    "artist-bayli-16": {
+    "artist-bane": {
       "local": null,
       "remote": null
     },
@@ -216,10 +216,6 @@
       "local": null,
       "remote": null
     },
-    "artist-goldford-16": {
-      "local": null,
-      "remote": null
-    },
     "artist-indigo-de-souza-16": {
       "local": null,
       "remote": null
@@ -229,6 +225,10 @@
       "remote": null
     },
     "artist-margo-price": {
+      "local": null,
+      "remote": null
+    },
+    "artist-goldford-16": {
       "local": null,
       "remote": null
     },
@@ -280,15 +280,15 @@
       "local": null,
       "remote": null
     },
+    "artist-tourist": {
+      "local": null,
+      "remote": null
+    },
     "artist-the-strumbellas": {
       "local": null,
       "remote": null
     },
     "artist-thornhill": {
-      "local": null,
-      "remote": null
-    },
-    "artist-tourist": {
       "local": null,
       "remote": null
     },

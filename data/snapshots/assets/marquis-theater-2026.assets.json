@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T07:45:52.697Z",
+  "generatedAt": "2026-03-08T17:54:34.109Z",
   "year": 2026,
   "events": {
     "marquis-theater-2026-01-27-mc-davo": {
@@ -150,11 +150,11 @@
       "local": null,
       "remote": null
     },
-    "marquis-theater-2026-04-18-soul-blind": {
+    "marquis-theater-2026-04-20-maro": {
       "local": null,
       "remote": null
     },
-    "marquis-theater-2026-04-20-maro": {
+    "marquis-theater-2026-04-18-soul-blind": {
       "local": null,
       "remote": null
     },
@@ -328,11 +328,11 @@
       "local": null,
       "remote": null
     },
-    "artist-faetooth": {
+    "artist-fr3ak": {
       "local": null,
       "remote": null
     },
-    "artist-fr3ak": {
+    "artist-faetooth": {
       "local": null,
       "remote": null
     },
@@ -364,10 +364,6 @@
       "local": null,
       "remote": null
     },
-    "artist-jeremy-jordan": {
-      "local": null,
-      "remote": null
-    },
     "artist-larcenia-roe": {
       "local": null,
       "remote": null
@@ -376,11 +372,11 @@
       "local": null,
       "remote": null
     },
-    "artist-lithe": {
+    "artist-lil-maru": {
       "local": null,
       "remote": null
     },
-    "artist-lil-maru": {
+    "artist-lithe": {
       "local": null,
       "remote": null
     },
@@ -484,11 +480,11 @@
       "local": null,
       "remote": null
     },
-    "artist-sweet-pill": {
+    "artist-the-browning": {
       "local": null,
       "remote": null
     },
-    "artist-the-browning": {
+    "artist-sweet-pill": {
       "local": null,
       "remote": null
     },
@@ -516,11 +512,11 @@
       "local": null,
       "remote": null
     },
-    "artist-unprocessed": {
+    "artist-varials": {
       "local": null,
       "remote": null
     },
-    "artist-varials": {
+    "artist-unprocessed": {
       "local": null,
       "remote": null
     },
@@ -549,6 +545,10 @@
       "remote": null
     },
     "artist-yung-bans": {
+      "local": null,
+      "remote": null
+    },
+    "artist-jeremy-jordan": {
       "local": null,
       "remote": null
     }

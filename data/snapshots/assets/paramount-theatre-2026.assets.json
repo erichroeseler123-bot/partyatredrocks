@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T07:45:52.697Z",
+  "generatedAt": "2026-03-08T17:54:34.109Z",
   "year": 2026,
   "events": {
     "paramount-theatre-2026-01-29-billy-f-gibbons-and-the-bfg-band": {
@@ -22,6 +22,10 @@
       "local": null,
       "remote": null
     },
+    "paramount-theatre-2026-03-22-gregorian": {
+      "local": null,
+      "remote": null
+    },
     "paramount-theatre-2026-03-27-yolanda-del-rio": {
       "local": null,
       "remote": null
@@ -31,10 +35,6 @@
       "remote": null
     },
     "paramount-theatre-2026-04-03-firefall-with-hazel-miller": {
-      "local": null,
-      "remote": null
-    },
-    "paramount-theatre-2026-03-22-gregorian": {
       "local": null,
       "remote": null
     },
@@ -80,11 +80,11 @@
     }
   },
   "artists": {
-    "artist-andres-cepeda": {
+    "artist-billy-f-gibbons-and-the-bfg-band": {
       "local": null,
       "remote": null
     },
-    "artist-billy-f-gibbons-and-the-bfg-band": {
+    "artist-andres-cepeda": {
       "local": null,
       "remote": null
     },
@@ -116,11 +116,11 @@
       "local": null,
       "remote": null
     },
-    "artist-guardianes-del-amor": {
+    "artist-hazel-miller": {
       "local": null,
       "remote": null
     },
-    "artist-hazel-miller": {
+    "artist-guardianes-del-amor": {
       "local": null,
       "remote": null
     },

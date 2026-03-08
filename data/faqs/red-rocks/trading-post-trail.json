@@ -1,0 +1,27 @@
+[
+  {
+    "id": "rr-tp-distance",
+    "question": "How long is Trading Post Trail?",
+    "answer": "It is commonly described as about a 1.4-mile loop through classic Red Rocks terrain."
+  },
+  {
+    "id": "rr-tp-difficulty",
+    "question": "Is Trading Post Trail beginner friendly?",
+    "answer": "It is moderate for most visitors and is usually the best first trail for orientation and scenery."
+  },
+  {
+    "id": "rr-tp-time",
+    "question": "How long does the loop usually take?",
+    "answer": "Most visitors complete it in roughly 45 to 90 minutes depending on pace, stops, and photo breaks."
+  },
+  {
+    "id": "rr-tp-when",
+    "question": "What time of day is best for this trail?",
+    "answer": "Early morning or late afternoon is often more comfortable than peak midday heat in summer months."
+  },
+  {
+    "id": "rr-tp-show",
+    "question": "Can I do Trading Post before a concert?",
+    "answer": "Yes, if you finish early enough to rest, hydrate, and transition into your concert arrival plan."
+  }
+]

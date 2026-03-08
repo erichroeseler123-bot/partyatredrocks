@@ -1,0 +1,27 @@
+[
+  {
+    "id": "rr-concert-capacity",
+    "question": "How many people can Red Rocks hold?",
+    "answer": "Capacity is commonly listed around 9,525, which creates a large but still steep and movement-intensive concert environment."
+  },
+  {
+    "id": "rr-concert-arrival",
+    "question": "When should I arrive for a Red Rocks concert?",
+    "answer": "Plan earlier arrival than a typical indoor venue, especially on sold-out nights and weather-risk evenings."
+  },
+  {
+    "id": "rr-concert-weather",
+    "question": "How much does weather affect show planning?",
+    "answer": "Weather is a major factor at Red Rocks because the venue is open-air at elevation, so temperature and storm shifts can feel abrupt."
+  },
+  {
+    "id": "rr-concert-stairs",
+    "question": "Are the stairs physically demanding?",
+    "answer": "Yes for many visitors. Elevation, incline, and repeated stair movement can feel harder than expected."
+  },
+  {
+    "id": "rr-concert-pickup",
+    "question": "What is the biggest mistake after a show?",
+    "answer": "Waiting until the encore ends to decide transportation. Pick your return plan and meeting instructions before the show starts."
+  }
+]
