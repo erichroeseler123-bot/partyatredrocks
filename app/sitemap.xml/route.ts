@@ -96,6 +96,24 @@ export async function GET() {
       changefreq: "hourly",
       priority: 0.7,
     });
+    urls.push({
+      loc: `${base}/venues/${slug}/best-time-to-arrive`,
+      lastmod: now,
+      changefreq: "weekly",
+      priority: 0.7,
+    });
+    urls.push({
+      loc: `${base}/venues/${slug}/what-to-wear`,
+      lastmod: now,
+      changefreq: "weekly",
+      priority: 0.7,
+    });
+    urls.push({
+      loc: `${base}/venues/${slug}/transportation`,
+      lastmod: now,
+      changefreq: "weekly",
+      priority: 0.7,
+    });
   }
 
   // programmatic red rocks authority pages
