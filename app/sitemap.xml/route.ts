@@ -63,6 +63,10 @@ export async function GET() {
     { loc: `${base}/venues/ogden-theatre/concerts/july`, lastmod: now, changefreq: "daily", priority: 0.7 },
     { loc: `${base}/venues/ogden-theatre/concerts/august`, lastmod: now, changefreq: "daily", priority: 0.7 },
     { loc: `${base}/venues/gothic-theatre/concerts`, lastmod: now, changefreq: "daily", priority: 0.8 },
+    { loc: `${base}/venues/bluebird-theater/concerts`, lastmod: now, changefreq: "daily", priority: 0.8 },
+    { loc: `${base}/venues/paramount-theatre/concerts`, lastmod: now, changefreq: "daily", priority: 0.8 },
+    { loc: `${base}/venues/summit-music-hall/concerts`, lastmod: now, changefreq: "daily", priority: 0.8 },
+    { loc: `${base}/venues/levitt-pavilion-denver/concerts`, lastmod: now, changefreq: "daily", priority: 0.8 },
 
     // scenes (keep if these routes exist)
     { loc: `${base}/scene/jam`, lastmod: now, changefreq: "hourly", priority: 0.8 },

@@ -888,6 +888,110 @@ export default async function VenuePage({
         </section>
       ) : null}
 
+      {slug === "bluebird-theater" ? (
+        <section className="comic-panel" style={{ marginTop: 32 }}>
+          <div className="comic-tag">Bluebird Theater Quick Guides</div>
+          <div className="flex flex-wrap gap-3 mt-4 justify-center">
+            <Link href="/venues/bluebird-theater/concerts" className="comic-btn comic-btn-secondary">
+              Concert Schedule
+            </Link>
+            <Link href="/venues/bluebird-theater/best-time-to-arrive" className="comic-btn comic-btn-secondary">
+              Best Time to Arrive
+            </Link>
+            <Link href="/venues/bluebird-theater/parking" className="comic-btn comic-btn-secondary">
+              Parking Strategy
+            </Link>
+            <Link href="/venues/bluebird-theater/transportation" className="comic-btn comic-btn-secondary">
+              Transportation & Rides
+            </Link>
+            <Link href="/venues/bluebird-theater/map" className="comic-btn comic-btn-secondary">
+              Venue Map
+            </Link>
+          </div>
+          <p className="comic-copy text-center mt-4 opacity-80">
+            East Colfax venue with fast door windows and high curb competition at close.
+          </p>
+        </section>
+      ) : null}
+
+      {slug === "paramount-theatre" ? (
+        <section className="comic-panel" style={{ marginTop: 32 }}>
+          <div className="comic-tag">Paramount Theatre Quick Guides</div>
+          <div className="flex flex-wrap gap-3 mt-4 justify-center">
+            <Link href="/venues/paramount-theatre/concerts" className="comic-btn comic-btn-secondary">
+              Concert Schedule
+            </Link>
+            <Link href="/venues/paramount-theatre/best-time-to-arrive" className="comic-btn comic-btn-secondary">
+              Best Time to Arrive
+            </Link>
+            <Link href="/venues/paramount-theatre/parking" className="comic-btn comic-btn-secondary">
+              Parking Strategy
+            </Link>
+            <Link href="/venues/paramount-theatre/transportation" className="comic-btn comic-btn-secondary">
+              Transportation & Rides
+            </Link>
+            <Link href="/venues/paramount-theatre/map" className="comic-btn comic-btn-secondary">
+              Venue Map
+            </Link>
+          </div>
+          <p className="comic-copy text-center mt-4 opacity-80">
+            Downtown theatre with larger exit waves and strong post-show rideshare pressure.
+          </p>
+        </section>
+      ) : null}
+
+      {slug === "summit-music-hall" ? (
+        <section className="comic-panel" style={{ marginTop: 32 }}>
+          <div className="comic-tag">Summit Music Hall Quick Guides</div>
+          <div className="flex flex-wrap gap-3 mt-4 justify-center">
+            <Link href="/venues/summit-music-hall/concerts" className="comic-btn comic-btn-secondary">
+              Concert Schedule
+            </Link>
+            <Link href="/venues/summit-music-hall/best-time-to-arrive" className="comic-btn comic-btn-secondary">
+              Best Time to Arrive
+            </Link>
+            <Link href="/venues/summit-music-hall/parking" className="comic-btn comic-btn-secondary">
+              Parking Strategy
+            </Link>
+            <Link href="/venues/summit-music-hall/transportation" className="comic-btn comic-btn-secondary">
+              Transportation & Rides
+            </Link>
+            <Link href="/venues/summit-music-hall/map" className="comic-btn comic-btn-secondary">
+              Venue Map
+            </Link>
+          </div>
+          <p className="comic-copy text-center mt-4 opacity-80">
+            LoDo room with quick crowd turnover and curb competition after headliners.
+          </p>
+        </section>
+      ) : null}
+
+      {slug === "levitt-pavilion-denver" ? (
+        <section className="comic-panel" style={{ marginTop: 32 }}>
+          <div className="comic-tag">Levitt Pavilion Denver Quick Guides</div>
+          <div className="flex flex-wrap gap-3 mt-4 justify-center">
+            <Link href="/venues/levitt-pavilion-denver/concerts" className="comic-btn comic-btn-secondary">
+              Concert Schedule
+            </Link>
+            <Link href="/venues/levitt-pavilion-denver/best-time-to-arrive" className="comic-btn comic-btn-secondary">
+              Best Time to Arrive
+            </Link>
+            <Link href="/venues/levitt-pavilion-denver/parking" className="comic-btn comic-btn-secondary">
+              Parking Strategy
+            </Link>
+            <Link href="/venues/levitt-pavilion-denver/transportation" className="comic-btn comic-btn-secondary">
+              Transportation & Rides
+            </Link>
+            <Link href="/venues/levitt-pavilion-denver/map" className="comic-btn comic-btn-secondary">
+              Venue Map
+            </Link>
+          </div>
+          <p className="comic-copy text-center mt-4 opacity-80">
+            Outdoor Denver amphitheatre where post-show exit timing heavily affects pickup ease.
+          </p>
+        </section>
+      ) : null}
+
       {slug === "gothic-theatre" ? (
         <section className="comic-panel" style={{ marginTop: 32 }}>
           <div className="comic-tag">Gothic Theatre Quick Guides</div>

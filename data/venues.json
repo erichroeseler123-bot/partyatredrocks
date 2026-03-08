@@ -93,6 +93,16 @@
     "seatgeekSlug": "summit-music-hall-denver",
     "seatgeekVenueId": 2882
   },
+  "levitt-pavilion-denver": {
+    "slug": "levitt-pavilion-denver",
+    "name": "Levitt Pavilion Denver",
+    "city": "Denver",
+    "state": "CO",
+    "region": "denver",
+    "kind": "outdoor amphitheatre",
+    "capacity": 7500,
+    "featured": true
+  },
   "gothic-theatre": {
     "slug": "gothic-theatre",
     "name": "Gothic Theatre",
