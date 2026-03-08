@@ -32,6 +32,10 @@ export default function PrivateVanPage() {
             src={DISPLAY.images.marketing.fleet}
             alt="Private group van transportation"
             className="w-full h-52 object-cover rounded-xl border border-white/20"
+            loading="lazy"
+            decoding="async"
+            width={640}
+            height={416}
           />
           <div className="comic-grid">
             <div className="comic-panel">

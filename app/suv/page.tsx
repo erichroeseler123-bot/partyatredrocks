@@ -35,6 +35,10 @@ export default function SuvPage() {
             src={DISPLAY.images.marketing.vipSuv}
             alt="Private suburban SUV transportation"
             className="w-full h-52 object-cover rounded-xl border border-white/20"
+            loading="lazy"
+            decoding="async"
+            width={640}
+            height={416}
           />
           <div className="comic-grid">
             <div className="comic-panel">

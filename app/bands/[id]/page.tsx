@@ -87,6 +87,10 @@ export default async function BandPage({ params }: Props) {
             <img
               src={heroImage}
               alt={artist.name}
+              loading="lazy"
+              decoding="async"
+              width={160}
+              height={160}
               style={{ width: 160, height: 160, borderRadius: 16, objectFit: "cover", border: "1px solid rgba(255,255,255,.2)" }}
             />
           </div>

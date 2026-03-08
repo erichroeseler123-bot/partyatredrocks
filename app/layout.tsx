@@ -59,6 +59,12 @@ export const metadata: Metadata = {
       "Fixed pricing, professional drivers, and guaranteed post-show return. Shuttle seats from $59/pp or Private Suburban from $499.",
     images: ["/hero/hero-home.jpg"],
   },
+
+  icons: {
+    icon: "/favicon.svg",
+    apple: "/apple-touch-icon.svg",
+  },
+  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

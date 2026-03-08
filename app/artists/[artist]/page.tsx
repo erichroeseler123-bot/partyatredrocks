@@ -104,6 +104,8 @@ export default async function ArtistPage({ params }: Props) {
               alt={`${artistRow.name} artist photo`}
               width={320}
               height={320}
+              loading="lazy"
+              decoding="async"
               style={{ borderRadius: 16, objectFit: "cover", border: "1px solid rgba(255,255,255,.2)", maxWidth: "100%", height: "auto" }}
             />
           </div>

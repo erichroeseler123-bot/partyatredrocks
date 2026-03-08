@@ -23,6 +23,10 @@ export default function ShuttlesPage() {
               src={DISPLAY.images.marketing.shuttle}
               alt="Shared shuttle ride to Red Rocks"
               className="w-full h-44 object-cover rounded-xl border border-white/20"
+              loading="lazy"
+              decoding="async"
+              width={640}
+              height={352}
             />
             <div className="comic-tag" style={{ marginTop: 10 }}>
               Shared Ride
@@ -44,6 +48,10 @@ export default function ShuttlesPage() {
               src={DISPLAY.images.marketing.vipSuv}
               alt="Private suburban SUV service"
               className="w-full h-44 object-cover rounded-xl border border-white/20"
+              loading="lazy"
+              decoding="async"
+              width={640}
+              height={352}
             />
             <div className="comic-tag" style={{ marginTop: 10 }}>
               Private
