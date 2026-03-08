@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T17:54:34.109Z",
+  "generatedAt": "2026-03-08T18:38:45.067Z",
   "year": 2026,
   "events": {
     "black-sheep-2026-02-23-rivers-of-nihil": {
@@ -50,10 +50,6 @@
       "local": null,
       "remote": null
     },
-    "black-sheep-2026-04-19-buckethead": {
-      "local": null,
-      "remote": null
-    },
     "black-sheep-2026-04-20-slomosa": {
       "local": null,
       "remote": null
@@ -66,7 +62,15 @@
       "local": null,
       "remote": null
     },
+    "black-sheep-2026-04-19-buckethead": {
+      "local": null,
+      "remote": null
+    },
     "black-sheep-2026-04-29-the-black-dahlia-murder-with-the-acacia-strain": {
+      "local": null,
+      "remote": null
+    },
+    "black-sheep-2026-05-03-saxsquatch": {
       "local": null,
       "remote": null
     },
@@ -75,10 +79,6 @@
       "remote": null
     },
     "black-sheep-2026-05-05-the-spill-canvas": {
-      "local": null,
-      "remote": null
-    },
-    "black-sheep-2026-05-03-saxsquatch": {
       "local": null,
       "remote": null
     },
@@ -216,19 +216,19 @@
       "local": null,
       "remote": null
     },
-    "artist-the-black-dahlia-murder": {
-      "local": null,
-      "remote": null
-    },
-    "artist-the-spill-canvas": {
-      "local": null,
-      "remote": null
-    },
     "artist-the-acacia-strain": {
       "local": null,
       "remote": null
     },
     "artist-the-queers": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-black-dahlia-murder": {
+      "local": null,
+      "remote": null
+    },
+    "artist-the-spill-canvas": {
       "local": null,
       "remote": null
     },

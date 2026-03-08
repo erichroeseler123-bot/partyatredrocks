@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T17:54:34.109Z",
+  "generatedAt": "2026-03-08T18:38:45.067Z",
   "year": 2026,
   "events": {
     "ophelias-2026-01-24-tycho": {
@@ -62,11 +62,11 @@
       "local": null,
       "remote": null
     },
-    "ophelias-2026-03-14-bearracuda": {
+    "ophelias-2026-03-30-westerman": {
       "local": null,
       "remote": null
     },
-    "ophelias-2026-03-30-westerman": {
+    "ophelias-2026-03-14-bearracuda": {
       "local": null,
       "remote": null
     },
@@ -112,11 +112,11 @@
       "local": null,
       "remote": null
     },
-    "artist-mark-farina": {
+    "artist-ltj-bukem": {
       "local": null,
       "remote": null
     },
-    "artist-ltj-bukem": {
+    "artist-mark-farina": {
       "local": null,
       "remote": null
     },
@@ -136,15 +136,15 @@
       "local": null,
       "remote": null
     },
+    "artist-the-polish-ambassador": {
+      "local": null,
+      "remote": null
+    },
     "artist-tycho": {
       "local": null,
       "remote": null
     },
     "artist-westerman": {
-      "local": null,
-      "remote": null
-    },
-    "artist-the-polish-ambassador": {
       "local": null,
       "remote": null
     },

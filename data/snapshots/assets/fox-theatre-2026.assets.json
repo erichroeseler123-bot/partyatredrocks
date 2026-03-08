@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T17:54:34.109Z",
+  "generatedAt": "2026-03-08T18:38:45.067Z",
   "year": 2026,
   "events": {
     "fox-theatre-2026-01-31-josh-teed": {
@@ -38,11 +38,11 @@
       "local": null,
       "remote": null
     },
-    "fox-theatre-2026-04-30-witchz": {
+    "fox-theatre-2026-04-18-pete-yorn-21": {
       "local": null,
       "remote": null
     },
-    "fox-theatre-2026-04-18-pete-yorn-21": {
+    "fox-theatre-2026-04-30-witchz": {
       "local": null,
       "remote": null
     },
@@ -56,15 +56,15 @@
     }
   },
   "artists": {
+    "artist-jigitz": {
+      "local": null,
+      "remote": null
+    },
     "artist-jonah-kagen-16": {
       "local": null,
       "remote": null
     },
     "artist-josh-teed": {
-      "local": null,
-      "remote": null
-    },
-    "artist-jigitz": {
       "local": null,
       "remote": null
     },
@@ -80,11 +80,11 @@
       "local": null,
       "remote": null
     },
-    "artist-pete-yorn-21": {
+    "artist-saxsquatch": {
       "local": null,
       "remote": null
     },
-    "artist-saxsquatch": {
+    "artist-pete-yorn-21": {
       "local": null,
       "remote": null
     },

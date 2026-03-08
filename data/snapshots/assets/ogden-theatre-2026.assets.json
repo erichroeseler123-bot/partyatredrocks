@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-03-08T17:54:34.109Z",
+  "generatedAt": "2026-03-08T18:38:45.067Z",
   "year": 2026,
   "events": {
     "ogden-theatre-2026-01-24-kompany": {
       "local": null,
       "remote": null
     },
-    "ogden-theatre-2026-01-30-chmura": {
+    "ogden-theatre-2026-01-31-dogs-in-a-pile": {
       "local": null,
       "remote": null
     },
-    "ogden-theatre-2026-01-31-dogs-in-a-pile": {
+    "ogden-theatre-2026-01-30-chmura": {
       "local": null,
       "remote": null
     },
@@ -70,11 +70,11 @@
       "local": null,
       "remote": null
     },
-    "ogden-theatre-2026-04-07-microwave-with-anthony-green-16": {
+    "ogden-theatre-2026-04-03-the-maine": {
       "local": null,
       "remote": null
     },
-    "ogden-theatre-2026-04-03-the-maine": {
+    "ogden-theatre-2026-04-07-microwave-with-anthony-green-16": {
       "local": null,
       "remote": null
     },
@@ -130,15 +130,15 @@
       "local": null,
       "remote": null
     },
+    "ogden-theatre-2026-08-04-audrey-hobert-16": {
+      "local": null,
+      "remote": null
+    },
     "ogden-theatre-2026-09-14-peter-hook-and-the-light-16": {
       "local": null,
       "remote": null
     },
     "ogden-theatre-2026-10-11-osees-16": {
-      "local": null,
-      "remote": null
-    },
-    "ogden-theatre-2026-08-04-audrey-hobert-16": {
       "local": null,
       "remote": null
     }
@@ -152,15 +152,15 @@
       "local": null,
       "remote": null
     },
+    "artist-amber-mark": {
+      "local": null,
+      "remote": null
+    },
     "artist-anthony-green-16": {
       "local": null,
       "remote": null
     },
     "artist-audrey-hobert-16": {
-      "local": null,
-      "remote": null
-    },
-    "artist-amber-mark": {
       "local": null,
       "remote": null
     },

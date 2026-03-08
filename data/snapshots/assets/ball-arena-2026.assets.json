@@ -1,11 +1,7 @@
 {
-  "generatedAt": "2026-03-08T17:54:34.109Z",
+  "generatedAt": "2026-03-08T18:38:45.067Z",
   "year": 2026,
   "events": {
-    "ball-arena-2026-02-18-ricardo-arjona": {
-      "local": null,
-      "remote": null
-    },
     "ball-arena-2026-02-24-bad-omens-with-beartooth-and-president": {
       "local": null,
       "remote": null
@@ -18,11 +14,11 @@
       "local": null,
       "remote": null
     },
-    "ball-arena-2026-04-14-twice": {
+    "ball-arena-2026-02-18-ricardo-arjona": {
       "local": null,
       "remote": null
     },
-    "ball-arena-2026-05-05-demi-lovato-with-adela": {
+    "ball-arena-2026-04-14-twice": {
       "local": null,
       "remote": null
     },
@@ -30,15 +26,19 @@
       "local": null,
       "remote": null
     },
+    "ball-arena-2026-05-05-demi-lovato-with-adela": {
+      "local": null,
+      "remote": null
+    },
     "ball-arena-2026-07-20-forrest-frank-with-tori-kelly-cory-asbury-and-the-figs": {
       "local": null,
       "remote": null
     },
-    "ball-arena-2026-07-25-olivia-dean": {
+    "ball-arena-2026-07-26-olivia-dean": {
       "local": null,
       "remote": null
     },
-    "ball-arena-2026-07-26-olivia-dean": {
+    "ball-arena-2026-07-25-olivia-dean": {
       "local": null,
       "remote": null
     },
@@ -96,11 +96,11 @@
       "local": null,
       "remote": null
     },
-    "artist-chicago-band": {
+    "artist-cardi-b": {
       "local": null,
       "remote": null
     },
-    "artist-cardi-b": {
+    "artist-chicago-band": {
       "local": null,
       "remote": null
     },
@@ -180,11 +180,11 @@
       "local": null,
       "remote": null
     },
-    "artist-three-days-grace": {
+    "artist-the-romantics": {
       "local": null,
       "remote": null
     },
-    "artist-the-romantics": {
+    "artist-three-days-grace": {
       "local": null,
       "remote": null
     },

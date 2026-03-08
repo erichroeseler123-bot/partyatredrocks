@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T17:54:34.109Z",
+  "generatedAt": "2026-03-08T18:38:45.067Z",
   "year": 2026,
   "events": {
     "fillmore-auditorium-2026-01-29-aleman-and-gera-mx": {
@@ -74,11 +74,11 @@
       "local": null,
       "remote": null
     },
-    "fillmore-auditorium-2026-05-03-bush-with-mammoth-and-james-and-the-cold-gun": {
+    "fillmore-auditorium-2026-05-02-august-burns-red-and-the-amity-affliction": {
       "local": null,
       "remote": null
     },
-    "fillmore-auditorium-2026-05-02-august-burns-red-and-the-amity-affliction": {
+    "fillmore-auditorium-2026-05-03-bush-with-mammoth-and-james-and-the-cold-gun": {
       "local": null,
       "remote": null
     },
@@ -88,11 +88,11 @@
     }
   },
   "artists": {
-    "artist-aleman-and-gera-mx": {
+    "artist-archers": {
       "local": null,
       "remote": null
     },
-    "artist-archers": {
+    "artist-aleman-and-gera-mx": {
       "local": null,
       "remote": null
     },
@@ -116,10 +116,6 @@
       "local": null,
       "remote": null
     },
-    "artist-boys-like-girls": {
-      "local": null,
-      "remote": null
-    },
     "artist-bush": {
       "local": null,
       "remote": null
@@ -129,6 +125,10 @@
       "remote": null
     },
     "artist-combat": {
+      "local": null,
+      "remote": null
+    },
+    "artist-boys-like-girls": {
       "local": null,
       "remote": null
     },
@@ -144,15 +144,15 @@
       "local": null,
       "remote": null
     },
+    "artist-fit-for-an-autopsy": {
+      "local": null,
+      "remote": null
+    },
     "artist-fka-twigs": {
       "local": null,
       "remote": null
     },
     "artist-gang": {
-      "local": null,
-      "remote": null
-    },
-    "artist-fit-for-an-autopsy": {
       "local": null,
       "remote": null
     },

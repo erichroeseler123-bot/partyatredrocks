@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T17:54:34.109Z",
+  "generatedAt": "2026-03-08T18:38:45.067Z",
   "year": 2026,
   "events": {
     "rr-2026-02-07-icelantic-s-winter-on-the-rocks": {
@@ -42,6 +42,10 @@
       "local": null,
       "remote": null
     },
+    "rr-2026-04-18-sublime": {
+      "local": null,
+      "remote": null
+    },
     "rr-2026-04-19-wiz-khalifa": {
       "local": null,
       "remote": null
@@ -62,7 +66,7 @@
       "local": null,
       "remote": null
     },
-    "rr-2026-04-18-sublime": {
+    "rr-2026-04-26-bob-moses-and-cannons": {
       "local": null,
       "remote": null
     },
@@ -78,7 +82,7 @@
       "local": null,
       "remote": null
     },
-    "rr-2026-05-01-two-friends": {
+    "rr-2026-05-03-puscifer": {
       "local": null,
       "remote": null
     },
@@ -86,19 +90,19 @@
       "local": null,
       "remote": null
     },
-    "rr-2026-05-03-puscifer": {
-      "local": null,
-      "remote": null
-    },
-    "rr-2026-04-26-bob-moses-and-cannons": {
-      "local": null,
-      "remote": null
-    },
     "rr-2026-05-06-bright-eyes-21-years-of-wide-awake-and-digital-ash": {
       "local": null,
       "remote": null
     },
+    "rr-2026-05-01-two-friends": {
+      "local": null,
+      "remote": null
+    },
     "rr-2026-05-07-alejandro-fern-ndez": {
+      "local": null,
+      "remote": null
+    },
+    "rr-2026-05-09-cloonee": {
       "local": null,
       "remote": null
     },
@@ -107,10 +111,6 @@
       "remote": null
     },
     "rr-2026-05-13-russell-dickerson": {
-      "local": null,
-      "remote": null
-    },
-    "rr-2026-05-09-cloonee": {
       "local": null,
       "remote": null
     },
@@ -126,11 +126,11 @@
       "local": null,
       "remote": null
     },
-    "rr-2026-05-19-kevin-gates": {
+    "rr-2026-05-21-flipturn": {
       "local": null,
       "remote": null
     },
-    "rr-2026-05-21-flipturn": {
+    "rr-2026-05-19-kevin-gates": {
       "local": null,
       "remote": null
     },
@@ -138,11 +138,11 @@
       "local": null,
       "remote": null
     },
-    "rr-2026-05-24-alabama-shakes": {
+    "rr-2026-05-23-fisher": {
       "local": null,
       "remote": null
     },
-    "rr-2026-05-23-fisher": {
+    "rr-2026-05-24-alabama-shakes": {
       "local": null,
       "remote": null
     },
@@ -186,11 +186,11 @@
       "local": null,
       "remote": null
     },
-    "rr-2026-06-16-rod-stewart": {
+    "rr-2026-06-15-rod-stewart": {
       "local": null,
       "remote": null
     },
-    "rr-2026-06-15-rod-stewart": {
+    "rr-2026-06-16-rod-stewart": {
       "local": null,
       "remote": null
     },
@@ -226,17 +226,17 @@
       "local": null,
       "remote": null
     },
-    "rr-2026-11-14-mike": {
+    "rr-2026-11-15-mike": {
       "local": null,
       "remote": null
     },
-    "rr-2026-11-15-mike": {
+    "rr-2026-11-14-mike": {
       "local": null,
       "remote": null
     }
   },
   "artists": {
-    "artist-9million": {
+    "artist-2-chainz": {
       "local": null,
       "remote": null
     },
@@ -244,7 +244,7 @@
       "local": null,
       "remote": null
     },
-    "artist-2-chainz": {
+    "artist-9million": {
       "local": null,
       "remote": null
     },
@@ -292,11 +292,11 @@
       "local": null,
       "remote": null
     },
-    "artist-bob-moses-and-cannons": {
+    "artist-bright-eyes-21-years-of-wide-awake-and-digital-ash": {
       "local": null,
       "remote": null
     },
-    "artist-bright-eyes-21-years-of-wide-awake-and-digital-ash": {
+    "artist-bob-moses-and-cannons": {
       "local": null,
       "remote": null
     },
@@ -356,11 +356,11 @@
       "local": null,
       "remote": null
     },
-    "artist-crankdat": {
+    "artist-czarface": {
       "local": null,
       "remote": null
     },
-    "artist-czarface": {
+    "artist-crankdat": {
       "local": null,
       "remote": null
     },
@@ -424,11 +424,11 @@
       "local": null,
       "remote": null
     },
-    "artist-icelantic-s-winter-on-the-rocks": {
+    "artist-ice-cube": {
       "local": null,
       "remote": null
     },
-    "artist-ice-cube": {
+    "artist-icelantic-s-winter-on-the-rocks": {
       "local": null,
       "remote": null
     },
@@ -448,11 +448,11 @@
       "local": null,
       "remote": null
     },
-    "artist-joy-crookes": {
+    "artist-john-mulaney-mister-whatever": {
       "local": null,
       "remote": null
     },
-    "artist-john-mulaney-mister-whatever": {
+    "artist-joy-crookes": {
       "local": null,
       "remote": null
     },
@@ -492,11 +492,11 @@
       "local": null,
       "remote": null
     },
-    "artist-lord-huron": {
+    "artist-liquid-stranger": {
       "local": null,
       "remote": null
     },
-    "artist-liquid-stranger": {
+    "artist-lord-huron": {
       "local": null,
       "remote": null
     },
@@ -504,11 +504,11 @@
       "local": null,
       "remote": null
     },
-    "artist-me-n": {
+    "artist-lumasi": {
       "local": null,
       "remote": null
     },
-    "artist-lumasi": {
+    "artist-me-n": {
       "local": null,
       "remote": null
     },
@@ -628,15 +628,15 @@
       "local": null,
       "remote": null
     },
+    "artist-sublime": {
+      "local": null,
+      "remote": null
+    },
     "artist-subtronics-cyclops-rocks-vi-night-1": {
       "local": null,
       "remote": null
     },
     "artist-subtronics-cyclops-rocks-vi-night-2": {
-      "local": null,
-      "remote": null
-    },
-    "artist-sublime": {
       "local": null,
       "remote": null
     },
@@ -656,11 +656,11 @@
       "local": null,
       "remote": null
     },
-    "artist-third-day-30th-anniversary": {
+    "artist-the-underachievers": {
       "local": null,
       "remote": null
     },
-    "artist-the-underachievers": {
+    "artist-third-day-30th-anniversary": {
       "local": null,
       "remote": null
     },

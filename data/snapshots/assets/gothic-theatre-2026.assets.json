@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T17:54:34.109Z",
+  "generatedAt": "2026-03-08T18:38:45.067Z",
   "year": 2026,
   "events": {
     "gothic-theatre-2026-01-24-glaive-16": {
@@ -132,19 +132,19 @@
     }
   },
   "artists": {
-    "artist-156-silence": {
-      "local": null,
-      "remote": null
-    },
     "artist-amble": {
       "local": null,
       "remote": null
     },
-    "artist-bayli-16": {
+    "artist-156-silence": {
       "local": null,
       "remote": null
     },
     "artist-bane": {
+      "local": null,
+      "remote": null
+    },
+    "artist-bayli-16": {
       "local": null,
       "remote": null
     },
@@ -212,6 +212,10 @@
       "local": null,
       "remote": null
     },
+    "artist-goldford-16": {
+      "local": null,
+      "remote": null
+    },
     "artist-glaive-16": {
       "local": null,
       "remote": null
@@ -225,10 +229,6 @@
       "remote": null
     },
     "artist-margo-price": {
-      "local": null,
-      "remote": null
-    },
-    "artist-goldford-16": {
       "local": null,
       "remote": null
     },
@@ -280,15 +280,15 @@
       "local": null,
       "remote": null
     },
-    "artist-tourist": {
-      "local": null,
-      "remote": null
-    },
     "artist-the-strumbellas": {
       "local": null,
       "remote": null
     },
     "artist-thornhill": {
+      "local": null,
+      "remote": null
+    },
+    "artist-tourist": {
       "local": null,
       "remote": null
     },

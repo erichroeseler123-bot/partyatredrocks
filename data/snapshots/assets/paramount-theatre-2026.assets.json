@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T17:54:34.109Z",
+  "generatedAt": "2026-03-08T18:38:45.067Z",
   "year": 2026,
   "events": {
     "paramount-theatre-2026-01-29-billy-f-gibbons-and-the-bfg-band": {
@@ -14,11 +14,11 @@
       "local": null,
       "remote": null
     },
-    "paramount-theatre-2026-02-18-mac-mcanally": {
+    "paramount-theatre-2026-02-24-vitamin-string-quartet": {
       "local": null,
       "remote": null
     },
-    "paramount-theatre-2026-02-24-vitamin-string-quartet": {
+    "paramount-theatre-2026-02-18-mac-mcanally": {
       "local": null,
       "remote": null
     },
@@ -34,11 +34,11 @@
       "local": null,
       "remote": null
     },
-    "paramount-theatre-2026-04-03-firefall-with-hazel-miller": {
+    "paramount-theatre-2026-04-08-calum-scott": {
       "local": null,
       "remote": null
     },
-    "paramount-theatre-2026-04-08-calum-scott": {
+    "paramount-theatre-2026-04-03-firefall-with-hazel-miller": {
       "local": null,
       "remote": null
     },
@@ -80,11 +80,11 @@
     }
   },
   "artists": {
-    "artist-billy-f-gibbons-and-the-bfg-band": {
+    "artist-andres-cepeda": {
       "local": null,
       "remote": null
     },
-    "artist-andres-cepeda": {
+    "artist-billy-f-gibbons-and-the-bfg-band": {
       "local": null,
       "remote": null
     },
@@ -116,11 +116,11 @@
       "local": null,
       "remote": null
     },
-    "artist-hazel-miller": {
+    "artist-guardianes-del-amor": {
       "local": null,
       "remote": null
     },
-    "artist-guardianes-del-amor": {
+    "artist-hazel-miller": {
       "local": null,
       "remote": null
     },

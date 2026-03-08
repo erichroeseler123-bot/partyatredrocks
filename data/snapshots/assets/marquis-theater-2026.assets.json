@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-08T17:54:34.109Z",
+  "generatedAt": "2026-03-08T18:38:45.067Z",
   "year": 2026,
   "events": {
     "marquis-theater-2026-01-27-mc-davo": {
@@ -150,11 +150,11 @@
       "local": null,
       "remote": null
     },
-    "marquis-theater-2026-04-20-maro": {
+    "marquis-theater-2026-04-18-soul-blind": {
       "local": null,
       "remote": null
     },
-    "marquis-theater-2026-04-18-soul-blind": {
+    "marquis-theater-2026-04-20-maro": {
       "local": null,
       "remote": null
     },
@@ -244,11 +244,11 @@
       "local": null,
       "remote": null
     },
-    "artist-armand-hammer": {
+    "artist-bayymack-18": {
       "local": null,
       "remote": null
     },
-    "artist-bayymack-18": {
+    "artist-armand-hammer": {
       "local": null,
       "remote": null
     },
@@ -276,10 +276,6 @@
       "local": null,
       "remote": null
     },
-    "artist-cold": {
-      "local": null,
-      "remote": null
-    },
     "artist-daisy-grenade": {
       "local": null,
       "remote": null
@@ -289,6 +285,10 @@
       "remote": null
     },
     "artist-dead-calm": {
+      "local": null,
+      "remote": null
+    },
+    "artist-cold": {
       "local": null,
       "remote": null
     },
@@ -328,11 +328,11 @@
       "local": null,
       "remote": null
     },
-    "artist-fr3ak": {
+    "artist-faetooth": {
       "local": null,
       "remote": null
     },
-    "artist-faetooth": {
+    "artist-fr3ak": {
       "local": null,
       "remote": null
     },
@@ -361,6 +361,10 @@
       "remote": null
     },
     "artist-in-her-own-words": {
+      "local": null,
+      "remote": null
+    },
+    "artist-jeremy-jordan": {
       "local": null,
       "remote": null
     },
@@ -480,11 +484,11 @@
       "local": null,
       "remote": null
     },
-    "artist-the-browning": {
+    "artist-sweet-pill": {
       "local": null,
       "remote": null
     },
-    "artist-sweet-pill": {
+    "artist-the-browning": {
       "local": null,
       "remote": null
     },
@@ -512,11 +516,11 @@
       "local": null,
       "remote": null
     },
-    "artist-varials": {
+    "artist-unprocessed": {
       "local": null,
       "remote": null
     },
-    "artist-unprocessed": {
+    "artist-varials": {
       "local": null,
       "remote": null
     },
@@ -545,10 +549,6 @@
       "remote": null
     },
     "artist-yung-bans": {
-      "local": null,
-      "remote": null
-    },
-    "artist-jeremy-jordan": {
       "local": null,
       "remote": null
     }
