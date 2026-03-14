@@ -41,28 +41,34 @@ const FOOTER_GROUPS = [
 
 export default function SiteFooter() {
   return (
-    <footer className="mt-16 border-t border-white/10 bg-[#070A12]/78 backdrop-blur-xl">
+    <footer className="mt-16 border-t border-white/10 bg-[#070A12]">
       <div className="comic-wrap py-12">
-        <div className="comic-panel !p-6 md:!p-8">
-          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-10">
+        <div className="px-1 md:px-0">
+          <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-md">
-              <div className="comic-kicker">
+              <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white">
                 Party at Red Rocks
               </div>
-              <div className="mt-3 text-sm text-muted">
+              <div className="mt-3 text-sm text-white/62">
                 Built for show-night execution: clear pickups, fixed pricing, and a guaranteed ride back
                 after the encore.
               </div>
-              <div className="mt-5 h-2 max-w-[360px] rounded-full opacity-70 bg-[repeating-linear-gradient(90deg,rgba(103,232,249,0.65)_0_8px,rgba(168,85,247,0.6)_8px_16px,rgba(255,255,255,0.2)_16px_22px)]" />
+              <div className="mt-5 h-px max-w-[360px] bg-white/12" />
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
               {FOOTER_GROUPS.map((group) => (
                 <div key={group.title}>
-                  <div className="comic-tag">{group.title}</div>
+                  <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/48">
+                    {group.title}
+                  </div>
                   <div className="mt-3 flex flex-col gap-2">
                     {group.links.map((link) => (
-                      <Link key={link.href} className="comic-btn comic-btn-secondary !justify-start !min-h-[38px]" href={link.href}>
+                      <Link
+                        key={link.href}
+                        className="text-sm text-white/70 no-underline transition hover:text-white"
+                        href={link.href}
+                      >
                         {link.label}
                       </Link>
                     ))}
@@ -73,16 +79,16 @@ export default function SiteFooter() {
           </div>
 
           <div
-            className="mt-8 h-2 rounded-full opacity-70"
+            className="mt-8 h-px opacity-70"
             aria-hidden="true"
             style={{
               background:
-                "repeating-linear-gradient(90deg, rgba(103,232,249,0.65) 0 8px, rgba(168,85,247,0.6) 8px 16px, rgba(255,255,255,0.2) 16px 22px)",
+                "linear-gradient(90deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04), rgba(255,255,255,0.12))",
             }}
           />
 
           <div className="mt-6 pt-4 border-t border-white/10 text-xs text-muted flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-            <div className="comic-kicker">
+            <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/42">
               Control Deck Active
             </div>
             <div>© {new Date().getFullYear()} Party at Red Rocks. All rights reserved.</div>
