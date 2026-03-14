@@ -41,22 +41,22 @@ const venuePhotoMap: Record<string, string> = {
 const benefits = [
   {
     title: "Fixed Pricing",
-    body: "No surge, no surprises, no mystery total when the encore ends.",
+    body: "Pay what you see with clear pricing from the start.",
     icon: DollarSign,
   },
   {
     title: "Guaranteed Return",
-    body: "Clear meetup point, clean post-show exit, guaranteed ride home.",
+    body: "Clear meetup point, clean exit, and your ride back handled.",
     icon: Clock3,
   },
   {
-    title: "Skip Parking Hell",
-    body: "No lot roulette, no stair gamble, no trying to summon a ride in chaos.",
+    title: "Pro Drivers + Group Rides",
+    body: "Friendly, experienced drivers and a better fit for the whole crew.",
     icon: MapPinned,
   },
   {
-    title: "Group-Friendly + Safe",
-    body: "Professional drivers, support on speed dial, easier nights out for the whole crew.",
+    title: "Real-Time Support",
+    body: "Text or call anytime and get help from people who know the flow.",
     icon: ShieldCheck,
   },
 ];
@@ -156,12 +156,12 @@ export default function HomeSections({
               </div>
 
               <h1 className="mt-5 max-w-3xl text-[2.35rem] font-black uppercase leading-[0.94] tracking-[-0.04em] text-white sm:text-[3.9rem] lg:text-[5.35rem]">
-                Stress-Free Rides to Red Rocks
+                The Best Way to Red Rocks
               </h1>
 
               <p className="mt-5 max-w-xl text-[15px] leading-7 text-white/78 sm:max-w-2xl sm:text-lg">
-                Fixed-price shuttles from Denver. No surge pricing. Guaranteed return ride.
-                Pro drivers and real support when the night gets loud.
+                Fixed-price shuttles from Denver. Guaranteed return ride. Pro drivers.
+                Group vibes. Text support anytime.
               </p>
 
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
@@ -169,7 +169,7 @@ export default function HomeSections({
                   href="/find"
                   className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#ff5b2e] px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#ff7148] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffb07c] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a1020]"
                 >
-                  Reserve Spot Now
+                  Book Your Shuttle Now
                 </Link>
                 <Link
                   href="/week"
@@ -220,11 +220,10 @@ export default function HomeSections({
                   Fast Booking
                 </div>
                 <div className="mt-3 text-2xl font-black leading-tight text-white">
-                  This is the easiest way to do Red Rocks without parking hell.
+                  Premium shuttles built for the night.
                 </div>
                 <div className="mt-3 text-sm leading-6 text-white/72">
-                  Book seats fast, go private for your group, or start with this week&apos;s lineup and
-                  tap Ride Options.
+                  Book seats fast, go private for your group, or start with this week&apos;s lineup and tap Ride Options.
                 </div>
                 <div className="mt-5 grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
                   <Link
@@ -384,7 +383,7 @@ export default function HomeSections({
               Why Choose Us
             </div>
             <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">
-              The smoothest show-night logistics on the page.
+              Why Our Shuttles Win
             </h2>
 
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -432,7 +431,7 @@ export default function HomeSections({
                   Fewer unknowns on the way in. Zero guessing on the way out.
                 </div>
                 <p className="mt-3 max-w-lg text-sm leading-6 text-white/74">
-                  Skip the uncertainty, keep the energy, and leave with a cleaner plan than rideshare roulette.
+                  The right ride should feel easy, polished, and built for a great night out from start to finish.
                 </p>
               </div>
             </div>
@@ -551,7 +550,7 @@ export default function HomeSections({
                 Clear meetup plan. Text or call support. Real professional drivers.
               </h2>
               <p className="mt-3 max-w-2xl text-sm leading-6 text-white/68">
-                Spots fill fast. Keep the confidence signals obvious and the booking path one tap away.
+                Spots fill fast. Keep the booking path obvious and the ride plan locked in early.
               </p>
 
               <div className="mt-6 grid gap-4 md:grid-cols-3">
