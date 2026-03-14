@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowRight, CalendarDays, MapPinned, Sparkles } from "lucide-react";
 import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
 import { getEventsCatalog } from "@/lib/events/getCatalog";
 import FAQBlock from "@/components/FAQBlock";
@@ -32,6 +33,14 @@ function buildVenueSchedules(events: Awaited<ReturnType<typeof getEventsCatalog>
   return Array.from(counts.values()).sort((a, b) => a.venueName.localeCompare(b.venueName));
 }
 
+function nextDateLabel(raw: string | null) {
+  if (!raw) return "Dates updating";
+  return new Date(`${raw}T12:00:00`).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  });
+}
+
 export default async function WeekPage() {
   const events = await getEventsCatalog(2026, "all");
   const schedules = buildVenueSchedules(events);
@@ -39,60 +48,90 @@ export default async function WeekPage() {
   const faqJsonLd = buildFaqPageJsonLd(faqRows);
 
   return (
-    <main className="comic-page pt-24 pb-10">
-      <section className="comic-wrap">
+    <main className="bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
+      <section className="mx-auto flex max-w-[1440px] flex-col gap-8">
         {faqRows.length > 0 ? (
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
         ) : null}
-        <div className="comic-hero">
-          <div className="comic-kicker">Weekly Radar</div>
-          <h1 className="comic-title">Venue Schedules</h1>
-          <p className="comic-copy">Compiled schedules from snapshot data. Add venue ledgers under <code>data/shows/&lt;venue&gt;/2026.json</code> to expand coverage.</p>
-        </div>
 
-        <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">What This Page Does</div>
-          <p className="comic-copy" style={{ marginTop: 8 }}>
-            This page is the weekly venue discovery layer. It helps you decide where to go first, then route into venue
-            pages, lineup pages, and ride booking.
-          </p>
-          <p className="comic-copy">
-            Booking flow: pick venue schedule → open venue/event context → finalize pickup strategy on <code>/find</code>.
-          </p>
-          <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-primary" href="/find">
-              Find Ride Options
-            </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/week/red-rocks">
-              Red Rocks Lineup
-            </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/guide">
-              Guide Hub
-            </Link>
+        <section className="relative overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(9,15,31,0.96),rgba(7,11,25,0.96))] p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] sm:p-10 lg:p-12">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,91,46,0.18),transparent_28%),radial-gradient(circle_at_top_right,rgba(143,208,255,0.14),transparent_28%)]" />
+          <div className="relative max-w-3xl">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
+              <Sparkles className="h-3.5 w-3.5" />
+              Weekly Radar
+            </div>
+            <h1 className="mt-5 text-[2.5rem] font-black uppercase leading-[0.94] tracking-[-0.04em] sm:text-[4rem] lg:text-[5rem]">
+              This Week
+            </h1>
+            <p className="mt-5 max-w-2xl text-[15px] leading-7 text-white/74 sm:text-lg">
+              Start with the venue, jump into the lineup, and move straight into the right ride flow for the week ahead.
+            </p>
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/find"
+                className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#ff5b2e] px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#ff7148]"
+              >
+                Find Ride Options
+              </Link>
+              <Link
+                href="/week/red-rocks"
+                className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
+              >
+                Red Rocks Lineup
+              </Link>
+              <Link
+                href="/guide"
+                className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
+              >
+                Guide Hub
+              </Link>
+            </div>
           </div>
         </section>
 
-        <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">All Venues</div>
+        <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(8,13,26,0.96),rgba(6,9,18,0.96))] p-6 sm:p-8">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
+            Venue Schedules
+          </div>
+          <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">
+            Pick your venue and move.
+          </h2>
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-white/70">
+            This is the weekly discovery layer. Open a venue, check the lineup, then route into the booking flow that fits the night.
+          </p>
+
           {schedules.length === 0 ? (
-            <p className="comic-copy" style={{ marginTop: 10 }}>
+            <div className="mt-6 rounded-[24px] border border-white/10 bg-[#0b1224] p-6 text-white/68">
               No venue schedules found yet.
-            </p>
+            </div>
           ) : (
-            <div className="comic-grid" style={{ marginTop: 12 }}>
+            <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
               {schedules.map((schedule) => (
-                <article key={schedule.venueId} className="comic-panel">
-                  <div className="comic-h3">{schedule.venueName}</div>
-                  <p className="comic-copy" style={{ marginTop: 8 }}>
-                    {schedule.total} show{schedule.total === 1 ? "" : "s"}
+                <article
+                  key={schedule.venueId}
+                  className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
+                >
+                  <div className="flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
+                    <CalendarDays className="h-3.5 w-3.5" />
+                    Next {nextDateLabel(schedule.nextDate)}
+                  </div>
+                  <h3 className="mt-3 text-2xl font-black text-white">{schedule.venueName}</h3>
+                  <p className="mt-2 text-sm leading-6 text-white/70">
+                    {schedule.total} show{schedule.total === 1 ? "" : "s"} on the board right now.
                   </p>
-                  {schedule.nextDate ? <p className="comic-copy">Next: {schedule.nextDate}</p> : null}
-                  <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-                    <Link className="comic-btn comic-btn-primary" href={`/venues/${encodeURIComponent(schedule.venueId)}`}>
+                  <div className="mt-5 flex flex-wrap gap-3">
+                    <Link
+                      href={`/venues/${encodeURIComponent(schedule.venueId)}`}
+                      className="inline-flex min-h-11 items-center rounded-full bg-[#ff5b2e] px-4 text-xs font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#ff7148]"
+                    >
                       Venue Page
                     </Link>
                     {schedule.venueId === "red-rocks-amphitheatre" ? (
-                      <Link className="comic-btn comic-btn-secondary" href="/week/red-rocks">
+                      <Link
+                        href="/week/red-rocks"
+                        className="inline-flex min-h-11 items-center rounded-full border border-white/12 bg-white/6 px-4 text-xs font-black uppercase tracking-[0.16em] text-white/88 transition hover:bg-white/10"
+                      >
                         Red Rocks Lineup
                       </Link>
                     ) : null}
@@ -103,24 +142,25 @@ export default async function WeekPage() {
           )}
         </section>
 
-        <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">High-Intent Venue Links</div>
-          <p className="comic-copy" style={{ marginTop: 8 }}>
-            Use venue reference pages for parking, pickup logistics, and local context before booking.
-          </p>
-          <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-secondary" href="/venues/red-rocks-amphitheatre">
-              Red Rocks
-            </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/venues/mission-ballroom">
-              Mission Ballroom
-            </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/venues/fiddlers-green-amphitheatre">
-              Fiddler&apos;s Green
-            </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/guide/transportation/shuttle-vs-uber">
-              Shuttle vs Uber
-            </Link>
+        <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(17,11,18,0.96),rgba(10,9,20,0.96))] p-6 sm:p-8">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
+            High-Intent Links
+          </div>
+          <div className="mt-5 flex flex-wrap gap-3">
+            {[
+              { href: "/venues/red-rocks-amphitheatre", label: "Red Rocks" },
+              { href: "/venues/mission-ballroom", label: "Mission Ballroom" },
+              { href: "/venues/fiddlers-green-amphitheatre", label: "Fiddler's Green" },
+              { href: "/guide/transportation/shuttle-vs-uber", label: "Shuttle vs Uber" },
+            ].map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="inline-flex min-h-11 items-center rounded-full border border-white/12 bg-white/6 px-4 text-xs font-black uppercase tracking-[0.16em] text-white/88 transition hover:bg-white/10"
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
         </section>
 
