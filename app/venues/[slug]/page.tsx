@@ -633,7 +633,7 @@ export default async function VenuePage({
   });
 
   return (
-    <main className="comic-page pt-24 pb-10">
+    <main className="bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
       {/* JSON-LD (high impact for SEO + GEO) */}
       <script
         type="application/ld+json"
@@ -662,34 +662,35 @@ export default async function VenuePage({
       <section className="comic-wrap">
 
       {/* HERO */}
-      <div className="comic-hero rounded-[32px] border border-soft panel p-8 shadow-[0_22px_70px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+      <div className="comic-hero rounded-[32px] border border-white/10 p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:p-10 lg:p-12">
         <div className="flex flex-wrap items-center gap-2">
-          <div className="inline-flex items-center rounded-full pill px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white/80">
+          <div className="inline-flex items-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
             Venue Intel
           </div>
 
-          <div className="inline-flex items-center rounded-full border border-soft panel px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60">
+          <div className="inline-flex items-center rounded-full border border-white/12 bg-white/6 px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/72">
             {city}
           </div>
 
           {v?.kind ? (
-            <div className="inline-flex items-center rounded-full border border-soft panel px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60">
+            <div className="inline-flex items-center rounded-full border border-white/12 bg-white/6 px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/72">
               {v.kind}
             </div>
           ) : null}
 
           {v?.capacity ? (
-            <div className="inline-flex items-center rounded-full border border-soft panel px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60">
+            <div className="inline-flex items-center rounded-full border border-white/12 bg-white/6 px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/72">
               ~{v.capacity.toLocaleString()} cap
             </div>
           ) : null}
         </div>
 
-        <h1 className="mt-5 text-4xl md:text-6xl font-black tracking-tight">{name}</h1>
+        <h1 className="mt-5 text-[2.5rem] font-black uppercase leading-[0.94] tracking-[-0.04em] sm:text-[4rem] lg:text-[5rem]">
+          {name}
+        </h1>
 
-        <p className="mt-4 max-w-3xl text-white/70">
-          Upcoming shows, post-show pickup logic, and ride options. We cover Denver, Boulder, and
-          Colorado Springs — book a guaranteed ride home after the last song.
+        <p className="mt-5 max-w-3xl text-[15px] leading-7 text-white/74 sm:text-lg">
+          Upcoming shows, venue intel, and ride options built for a smoother concert night from first pickup to the ride back home.
         </p>
         <div className="mt-5">
           <img
@@ -706,17 +707,17 @@ export default async function VenuePage({
           <MusicWave bars={22} />
         </div>
 
-        <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-6 w-full">
+        <div className="mt-7 flex w-full flex-col flex-wrap items-center justify-center gap-3 sm:flex-row sm:gap-4">
           <Link
             href={`/book?venue=${slug}`}
-            className="inline-flex items-center justify-center rounded-full bg-neon-blue px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-black transition hover:bg-surface/40 w-full sm:w-auto min-w-[180px] text-center"
+            className="inline-flex min-h-12 w-full min-w-[180px] items-center justify-center rounded-full bg-[#ff5b2e] px-7 py-3 text-center text-[12px] font-black uppercase tracking-[0.22em] text-white transition hover:bg-[#ff7148] sm:w-auto"
           >
             Book this venue
           </Link>
 
           <Link
             href="/week"
-            className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft w-full sm:w-auto min-w-[180px] text-center"
+            className="inline-flex min-h-12 w-full min-w-[180px] items-center justify-center rounded-full border border-white/14 bg-white/6 px-7 py-3 text-center text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:bg-white/10 sm:w-auto"
           >
             This Week →
           </Link>
@@ -725,7 +726,7 @@ export default async function VenuePage({
             href={dccVenueUrl}
             target="_blank"
             rel="nofollow noopener"
-            className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft w-full sm:w-auto min-w-[180px] text-center"
+            className="inline-flex min-h-12 w-full min-w-[180px] items-center justify-center rounded-full border border-white/14 bg-white/6 px-7 py-3 text-center text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:bg-white/10 sm:w-auto"
             title="Authority intel (DCC)"
           >
             Deep Intel (DCC) →
@@ -747,34 +748,32 @@ export default async function VenuePage({
 
       {/* 3-CARD INTEL */}
       <div className="mt-8 grid gap-6 md:grid-cols-3">
-        <div className="rounded-3xl border border-soft panel-soft p-6">
-          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">
-            Pickup Strategy
+        <div className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
+            Arrival Flow
           </div>
-          <p className="mt-3 text-sm text-white/75">
-            Pre-show arrival buffer, meetup clarity, and a clean staging plan so you’re not stuck in
-            last-minute surge chaos.
+          <p className="mt-3 text-sm leading-6 text-white/75">
+            Dial in the arrival window, dropoff plan, and meetup timing so the night starts clean and on pace.
           </p>
         </div>
 
-        <div className="rounded-3xl border border-soft panel-soft p-6">
-          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">
+        <div className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
             Return Plan
           </div>
-          <p className="mt-3 text-sm text-white/75">
-            Post-show waiting + a meet-up protocol built for fast exits and predictable departures.
+          <p className="mt-3 text-sm leading-6 text-white/75">
+            Know where to regroup, when to move, and how the ride back home is handled after the encore.
           </p>
         </div>
 
-        <div className="rounded-3xl border border-soft panel-soft p-6">
-          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">
+        <div className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
             Options
           </div>
-          <p className="mt-3 text-sm text-white/75">
-            Shared seats + private upgrades depending on show night demand. See ride options on the
-            event page.
+          <p className="mt-3 text-sm leading-6 text-white/75">
+            Shared seats and private upgrades depending on the night. Pick the ride style that fits your crew.
           </p>
-          <Link href="/venues" className="mt-4 inline-flex text-sm font-bold text-white/80 hover:text-white">
+          <Link href="/venues" className="mt-4 inline-flex text-sm font-bold text-[#ffb07c] hover:text-white">
             Browse all venues →
           </Link>
         </div>
@@ -783,35 +782,35 @@ export default async function VenuePage({
       {/* VENUE REFERENCE */}
       <section className="mt-10">
         <div className="flex items-end justify-between gap-4">
-          <h2 className="text-2xl md:text-3xl font-black">Venue Reference</h2>
-          <div className="text-xs text-white/50">Info-first venue brief</div>
+          <h2 className="text-2xl md:text-3xl font-black uppercase tracking-[-0.03em]">Venue Reference</h2>
+          <div className="text-xs uppercase tracking-[0.18em] text-white/50">Info-first venue brief</div>
         </div>
 
         <div className="mt-6 grid gap-6 md:grid-cols-2">
-          <div className="rounded-3xl border border-soft panel-soft p-6">
-            <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">What It Is</div>
-            <p className="mt-3 text-sm text-white/75">{reference.whatItIs}</p>
+          <div className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)]">
+            <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">What It Is</div>
+            <p className="mt-3 text-sm leading-6 text-white/75">{reference.whatItIs}</p>
 
-            <div className="mt-5 text-[11px] font-black uppercase tracking-[0.22em] text-white/60">Capacity & Area</div>
-            <p className="mt-3 text-sm text-white/75">
+            <div className="mt-5 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">Capacity & Area</div>
+            <p className="mt-3 text-sm leading-6 text-white/75">
               {v?.capacity ? `Capacity ~${v.capacity.toLocaleString()}. ` : ""}
               {v?.neighborhood ? `${v.neighborhood} · ` : ""}
               {city}
             </p>
 
-            <div className="mt-5 text-[11px] font-black uppercase tracking-[0.22em] text-white/60">Ride Options</div>
-            <p className="mt-3 text-sm text-white/75">{reference.rideOptions}</p>
+            <div className="mt-5 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">Ride Options</div>
+            <p className="mt-3 text-sm leading-6 text-white/75">{reference.rideOptions}</p>
           </div>
 
-          <div className="rounded-3xl border border-soft panel-soft p-6">
-            <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">Parking</div>
-            <p className="mt-3 text-sm text-white/75">{reference.parking}</p>
+          <div className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)]">
+            <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">Parking</div>
+            <p className="mt-3 text-sm leading-6 text-white/75">{reference.parking}</p>
 
-            <div className="mt-5 text-[11px] font-black uppercase tracking-[0.22em] text-white/60">Pickup / Dropoff</div>
-            <p className="mt-3 text-sm text-white/75">{reference.pickupDropoff}</p>
+            <div className="mt-5 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">Pickup / Dropoff</div>
+            <p className="mt-3 text-sm leading-6 text-white/75">{reference.pickupDropoff}</p>
 
-            <div className="mt-5 text-[11px] font-black uppercase tracking-[0.22em] text-white/60">Nearby</div>
-            <p className="mt-3 text-sm text-white/75">{reference.nearby.join(" · ")}</p>
+            <div className="mt-5 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">Nearby</div>
+            <p className="mt-3 text-sm leading-6 text-white/75">{reference.nearby.join(" · ")}</p>
           </div>
         </div>
       </section>
@@ -1111,9 +1110,9 @@ export default async function VenuePage({
             {events.slice(0, 10).map((e) => (
               <div
                 key={e.id}
-                className="rounded-3xl border border-soft panel-soft p-5 hover:bg-surface/40 transition"
+                className="rounded-[26px] border border-white/10 bg-[#0b1224] p-5 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
               >
-                <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">
+                <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
                   {new Date(e.datetime_local).toLocaleString("en-US", {
                     weekday: "short",
                     month: "short",
@@ -1123,9 +1122,9 @@ export default async function VenuePage({
                   })}
                 </div>
 
-                <div className="mt-2 text-lg font-black">{e.title}</div>
+                <div className="mt-2 text-lg font-black text-white">{e.title}</div>
 
-                <div className="mt-2 text-sm text-white/70">
+                <div className="mt-2 text-sm leading-6 text-white/70">
                   {(e.performers ?? [])
                     .map((p) => p?.name)
                     .filter((name): name is string => Boolean(name))
@@ -1140,14 +1139,14 @@ export default async function VenuePage({
                 </div>
 
                 <div className="mt-4 flex flex-wrap gap-3">
-                  <Link className="text-neon-blue font-bold" href={`/shows/${encodeURIComponent(e.id)}`}>
+                  <Link className="font-bold text-[#ffb07c] hover:text-white" href={`/shows/${encodeURIComponent(e.id)}`}>
                     Full Intel →
                   </Link>
-                  <Link className="text-white/70 underline" href={`/find?date=${encodeURIComponent(e.dateKey)}&qty=2`}>
+                  <Link className="text-white/70 underline hover:text-white" href={`/find?date=${encodeURIComponent(e.dateKey)}&qty=2`}>
                     Ride Options
                   </Link>
                   {e.url ? (
-                    <a className="text-white/70 underline" href={e.url} target="_blank" rel="nofollow noopener">
+                    <a className="text-white/70 underline hover:text-white" href={e.url} target="_blank" rel="nofollow noopener">
                       Tickets →
                     </a>
                   ) : null}
@@ -1159,31 +1158,31 @@ export default async function VenuePage({
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/shuttles/all-venue"
-              className="inline-flex items-center justify-center rounded-full pill px-6 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft"
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:bg-white/10"
             >
               All-Venue Shuttle
             </Link>
             <Link
               href={`/book?venue=${slug}`}
-              className="inline-flex items-center justify-center rounded-full bg-neon-blue px-6 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-black transition hover:bg-surface/40"
+              className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#ff5b2e] px-6 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white transition hover:bg-[#ff7148]"
             >
               Book Now
             </Link>
           </div>
         </section>
       ) : (
-        <div className="mt-10 rounded-3xl border border-soft panel p-6 text-white/70">
+        <div className="mt-10 rounded-[26px] border border-white/10 bg-[#0b1224] p-6 text-white/70 shadow-[0_18px_60px_rgba(0,0,0,0.35)]">
           <span className="font-black">Upcoming at {name}:</span> No upcoming events found in the current snapshot.
         </div>
       )}
 
-      <section className="mt-10 rounded-3xl border border-soft panel-soft p-6">
-        <h2 className="text-2xl font-black">Venue FAQ</h2>
+      <section className="mt-10 rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(8,13,24,0.98),rgba(6,9,18,0.98))] p-6">
+        <h2 className="text-2xl font-black uppercase tracking-[-0.03em]">Venue FAQ</h2>
         <div className="mt-4 space-y-3">
           {reference.faq.map((row) => (
-            <details key={row.q} className="rounded-2xl border border-soft panel p-4">
+            <details key={row.q} className="rounded-[22px] border border-white/10 bg-[#0b1224] p-4">
               <summary className="cursor-pointer font-black">{row.q}</summary>
-              <p className="mt-2 text-sm text-white/75">{row.a}</p>
+              <p className="mt-2 text-sm leading-6 text-white/75">{row.a}</p>
             </details>
           ))}
         </div>
