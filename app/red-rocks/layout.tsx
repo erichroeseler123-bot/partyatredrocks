@@ -23,12 +23,10 @@ export default function RedRocksLayout({ children }: { children: ReactNode }) {
           <div className="comic-panel" style={{ padding: 10 }}>
             <nav
               aria-label="Red Rocks categories"
-              className="rr-nav-scroll flex flex-wrap justify-center gap-3 sm:gap-4 px-4 max-w-full"
+              className="flex max-w-full flex-wrap justify-center gap-3 px-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:gap-4"
               style={{
                 overflowX: "auto",
                 WebkitOverflowScrolling: "touch",
-                scrollbarWidth: "none",
-                msOverflowStyle: "none",
               }}
             >
               {RED_ROCKS_NAV.map((item) => (
@@ -41,11 +39,6 @@ export default function RedRocksLayout({ children }: { children: ReactNode }) {
                 </Link>
               ))}
             </nav>
-            <style jsx>{`
-              .rr-nav-scroll::-webkit-scrollbar {
-                display: none;
-              }
-            `}</style>
           </div>
           <div className="comic-panel" style={{ marginTop: 8, padding: 10 }}>
             <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-2 w-full">
