@@ -55,20 +55,7 @@ async function getHomeEvents() {
     .slice(0, 6);
 }
 
-function getHomeVenuesFromEvents(
-  events: Awaited<ReturnType<typeof getHomeEvents>>
-) {
-  const map = new Map<string, { slug: string; name: string; area?: string }>();
-  for (const e of events) {
-    const slug = e.venue?.siteSlug;
-    const name = e.venue?.siteName;
-    if (slug && name && !map.has(slug)) map.set(slug, { slug, name });
-  }
-  return Array.from(map.values()).slice(0, 9);
-}
-
 export default async function HomePage() {
   const events = await getHomeEvents();
-  const venues = getHomeVenuesFromEvents(events);
-  return <HomeSections events={events} venues={venues} />;
+  return <HomeSections events={events} />;
 }

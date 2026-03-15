@@ -5,15 +5,14 @@ import Link from "next/link";
 import {
   ArrowRight,
   CalendarDays,
-  CarFront,
   Clock3,
   DollarSign,
-  MapPinned,
+  Headphones,
   ShieldCheck,
   Sparkles,
   Ticket,
 } from "lucide-react";
-import { DISPLAY, SCENE_PILLS, VENUE_PILLS } from "@/lib/display";
+import { DISPLAY } from "@/lib/display";
 
 type EventPreview = {
   id: number;
@@ -21,12 +20,6 @@ type EventPreview = {
   datetime_local: string;
   performers?: Array<{ name?: string; image?: string }>;
   venue?: { siteSlug?: string; siteName?: string };
-};
-
-type VenuePreview = {
-  slug: string;
-  name: string;
-  area?: string;
 };
 
 const venuePhotoMap: Record<string, string> = {
@@ -52,12 +45,12 @@ const benefits = [
   {
     title: "Pro Drivers + Group Rides",
     body: "Friendly, experienced drivers and a better fit for the whole crew.",
-    icon: MapPinned,
+    icon: ShieldCheck,
   },
   {
     title: "Real-Time Support",
     body: "Text or call anytime and get help from people who know the flow.",
-    icon: ShieldCheck,
+    icon: Headphones,
   },
 ];
 
@@ -108,28 +101,12 @@ function eventImage(event: EventPreview) {
   return "/hero/hero-home.jpg";
 }
 
-function venueImage(slug: string) {
-  return venuePhotoMap[slug] || "/hero/hero-guides.jpg";
-}
-
-function venueTagline(slug: string, name: string) {
-  if (slug === "red-rocks-amphitheatre") return "The headline route. Biggest demand, biggest parking pain, easiest win.";
-  if (slug === "mission-ballroom") return "Fast city nights without the parking search or post-show scramble.";
-  if (slug === "fiddlers-green-amphitheatre") return "Large outdoor crowds, simple ride plans, cleaner exits.";
-  if (slug === "fillmore-auditorium") return "Classic Denver venue with a better arrival and a guaranteed ride home.";
-  if (slug === "gothic-theatre") return "Smaller-room energy without needing a designated driver.";
-  return `${name} with cleaner logistics, clearer pickup, and less show-night friction.`;
-}
-
 export default function HomeSections({
   events = [],
-  venues = [],
 }: {
   events?: EventPreview[];
-  venues?: VenuePreview[];
 }) {
-  const featuredEvents = (events ?? []).slice(0, 4);
-  const featuredVenues = (venues ?? []).slice(0, 6);
+  const featuredEvents = (events ?? []).slice(0, 3);
 
   return (
     <main className="bg-[#050816] text-white">
@@ -148,56 +125,31 @@ export default function HomeSections({
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,22,0.15)_0%,rgba(5,8,22,0.62)_48%,rgba(5,8,22,0.94)_100%)]" />
           </div>
 
-          <div className="relative grid min-h-[64vh] gap-8 px-5 py-8 sm:min-h-[72vh] sm:px-8 sm:py-10 lg:min-h-[80vh] lg:grid-cols-[minmax(0,1.2fr)_360px] lg:px-12 lg:py-14">
-            <div className="max-w-3xl">
+          <div className="relative flex min-h-[58vh] flex-col justify-center px-5 py-8 text-center sm:min-h-[64vh] sm:px-8 sm:py-10 lg:min-h-[68vh] lg:px-12 lg:py-14">
+            <div className="mx-auto max-w-3xl">
               <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/20 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white/80 backdrop-blur">
                 <Sparkles className="h-3.5 w-3.5 text-[#ff8a3d]" />
                 {DISPLAY.ui.home.badge}
               </div>
 
-              <h1 className="mt-5 max-w-3xl text-[2.35rem] font-black uppercase leading-[0.94] tracking-[-0.04em] text-white sm:text-[3.9rem] lg:text-[5.35rem]">
+              <h1 className="mt-5 text-[2.35rem] font-black uppercase leading-[0.94] tracking-[-0.04em] text-white sm:text-[3.9rem] lg:text-[5.35rem]">
                 The Best Way to Red Rocks
               </h1>
 
-              <p className="mt-5 max-w-xl text-[15px] leading-7 text-white/78 sm:max-w-2xl sm:text-lg">
-                Fixed-price shuttles from Denver. Guaranteed return ride. Pro drivers.
-                Group vibes. Text support anytime.
+              <p className="mt-5 text-[15px] leading-7 text-white/78 sm:text-lg">
+                Fixed $59 shuttle seats from Denver. No surge. Guaranteed return. Professional drivers and real text support on show night.
               </p>
 
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
                 <Link
                   href="/book"
                   className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#ff5b2e] px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#ff7148] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffb07c] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a1020]"
                 >
-                  Book Your Shuttle Now
-                </Link>
-                <Link
-                  href="/week"
-                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/15 bg-white/8 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/14 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a1020]"
-                >
-                  Hot Shows This Week
-                </Link>
-                <Link
-                  href="/private-suburban"
-                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/15 bg-black/20 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-black/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a1020]"
-                >
-                  Private SUVs
+                  Start Booking
                 </Link>
               </div>
 
-              <div className="mt-7 flex flex-wrap gap-2">
-                {VENUE_PILLS.map((v) => (
-                  <Link
-                    key={v.slug}
-                    href={`/book?venue=${v.slug}`}
-                    className="rounded-full border border-white/15 bg-black/20 px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-white/85 transition hover:border-white/30 hover:bg-black/35"
-                  >
-                    {v.name}
-                  </Link>
-                ))}
-              </div>
-
-              <div className="mt-4 flex flex-wrap gap-2">
+              <div className="mt-6 flex flex-wrap justify-center gap-2">
                 {[
                   "$59 seats",
                   "No surge",
@@ -213,91 +165,43 @@ export default function HomeSections({
                 ))}
               </div>
             </div>
-
-            <div className="grid gap-4 self-end">
-              <div className="rounded-[28px] border border-white/12 bg-[linear-gradient(180deg,rgba(7,12,26,0.88),rgba(7,12,26,0.72))] p-5 backdrop-blur">
-                <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
-                  Fast Booking
-                </div>
-                <div className="mt-3 text-2xl font-black leading-tight text-white">
-                  Premium shuttles built for the night.
-                </div>
-                <div className="mt-3 text-sm leading-6 text-white/72">
-                  Book seats fast, go private for your group, or start with this week&apos;s lineup and tap Ride Options.
-                </div>
-                <div className="mt-5 grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-                  <Link
-                    href="/book"
-                    className="rounded-2xl border border-white/10 bg-white/6 px-4 py-3 text-sm font-bold text-white/90 transition hover:-translate-y-0.5 hover:bg-white/10"
-                  >
-                    Book Shuttle
-                  </Link>
-                  <Link
-                    href="/week"
-                    className="rounded-2xl border border-white/10 bg-white/6 px-4 py-3 text-sm font-bold text-white/90 transition hover:-translate-y-0.5 hover:bg-white/10"
-                  >
-                    Browse This Week
-                  </Link>
-                  <Link
-                    href="/guide/transportation/shuttle-vs-uber"
-                    className="rounded-2xl border border-white/10 bg-white/6 px-4 py-3 text-sm font-bold text-white/90 transition hover:-translate-y-0.5 hover:bg-white/10"
-                  >
-                    Shuttle vs Rideshare
-                  </Link>
-                </div>
-              </div>
-            </div>
           </div>
         </section>
 
-        <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(9,15,31,0.96),rgba(7,11,25,0.96))] px-5 py-8 sm:px-8">
+        <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(9,15,31,0.96),rgba(7,11,25,0.96))] px-5 py-7 sm:px-8">
           <div className="flex items-end justify-between gap-4">
             <div>
-              <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
-                Book in 10 Seconds
-              </div>
+              <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">Why Riders Trust It</div>
               <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">
-                Quick Picks for Your Night
+                The basics should be obvious.
               </h2>
             </div>
-            <Link href="/book" className="hidden text-sm font-bold text-[#8fd0ff] md:inline-flex">
-              Start Booking <ArrowRight className="ml-1 h-4 w-4" />
+            <Link href="/about" className="hidden text-sm font-bold text-[#8fd0ff] md:inline-flex">
+              Why trust GoSno LLC? <ArrowRight className="ml-1 h-4 w-4" />
             </Link>
           </div>
 
-          <div className="-mx-1 mt-5 flex snap-x snap-mandatory gap-2 overflow-x-auto px-1 pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:flex-wrap sm:overflow-visible sm:px-0">
-            {VENUE_PILLS.map((v) => (
-              <Link
-                key={v.slug}
-                href={`/book?venue=${v.slug}`}
-                className="inline-flex min-h-11 snap-start items-center whitespace-nowrap rounded-full border border-white/12 bg-white/6 px-4 text-xs font-black uppercase tracking-[0.16em] text-white/88 transition hover:border-white/25 hover:bg-white/12"
-              >
-                {v.name}
-              </Link>
-            ))}
-            <Link
-              href="/venues"
-              className="inline-flex min-h-11 snap-start items-center whitespace-nowrap rounded-full border border-[#8fd0ff]/20 bg-[#8fd0ff]/10 px-4 text-xs font-black uppercase tracking-[0.16em] text-[#8fd0ff] transition hover:bg-[#8fd0ff]/16"
-            >
-              More Venues
-            </Link>
+          <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {benefits.map((benefit) => {
+              const Icon = benefit.icon;
+              return (
+                <div
+                  key={benefit.title}
+                  className="rounded-[24px] border border-white/10 bg-[#0b1224] p-5 shadow-[0_18px_60px_rgba(0,0,0,0.35)]"
+                >
+                  <div className="inline-flex rounded-2xl border border-[#ff8a3d]/25 bg-[#ff8a3d]/10 p-3 text-[#ffb07c]">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <div className="mt-4 text-lg font-black text-white">{benefit.title}</div>
+                  <p className="mt-2 text-sm leading-6 text-white/68">{benefit.body}</p>
+                </div>
+              );
+            })}
           </div>
 
-          <div className="mt-3 flex flex-wrap gap-2">
-            {SCENE_PILLS.map((s) => (
-              <Link
-                key={s.key}
-                href={s.href}
-                className="rounded-full border border-white/10 bg-black/20 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-white/68 transition hover:text-white/90"
-              >
-                {s.label}
-              </Link>
-            ))}
-          </div>
-
-          <div className="mt-4 text-sm text-white/58">
-            Tip: browse <Link className="font-bold text-[#8fd0ff]" href="/week">This Week</Link> and tap Ride Options on the show you want.
-          </div>
+          <Link href="/about" className="mt-5 inline-flex text-sm font-bold text-[#8fd0ff] md:hidden">
+            Why trust GoSno LLC? <ArrowRight className="ml-1 h-4 w-4" />
+          </Link>
         </section>
 
         <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(7,10,24,0.98),rgba(9,14,28,0.95))] px-5 py-7 sm:px-8">
@@ -307,7 +211,7 @@ export default function HomeSections({
                 This Week
               </div>
               <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">
-                Upcoming This Week. Secure Your Ride.
+                Upcoming Shows. Tap In Fast.
               </h2>
             </div>
             <Link href="/week" className="hidden text-sm font-bold text-[#8fd0ff] md:inline-flex">
@@ -315,7 +219,7 @@ export default function HomeSections({
             </Link>
           </div>
 
-          <div className="mt-6 grid gap-4 md:grid-cols-2 2xl:grid-cols-4">
+          <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {featuredEvents.map((event) => (
               <article
                 key={event.id}
@@ -377,138 +281,17 @@ export default function HomeSections({
           </Link>
         </section>
 
-        <section className="grid gap-4 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
-          <div className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(15,21,38,0.96),rgba(8,12,24,0.96))] px-5 py-7 sm:px-8">
-            <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
-              Why Choose Us
-            </div>
-            <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">
-              Why Our Shuttles Win
-            </h2>
-
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              {benefits.map((benefit) => {
-                const Icon = benefit.icon;
-                return (
-                  <div
-                    key={benefit.title}
-                    className="rounded-[24px] border border-white/10 bg-white/[0.04] p-5"
-                  >
-                    <div className="inline-flex rounded-2xl border border-[#ff8a3d]/25 bg-[#ff8a3d]/10 p-3 text-[#ffb07c]">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <div className="mt-4 text-lg font-black text-white">{benefit.title}</div>
-                    <p className="mt-2 text-sm leading-6 text-white/68">{benefit.body}</p>
-                  </div>
-                );
-              })}
-            </div>
-
-            <Link
-              href="/guide/parking-reality"
-              className="mt-6 inline-flex text-sm font-bold text-[#8fd0ff]"
-            >
-              Read the Full Parking Reality Guide <ArrowRight className="ml-1 h-4 w-4" />
-            </Link>
-          </div>
-
-          <div className="overflow-hidden rounded-[30px] border border-white/10 bg-[#091120]">
-            <div className="relative min-h-[320px] h-full">
-              <Image
-                src="/hero/hero-guides.jpg"
-                alt="Concert crowd and Red Rocks strategy vibe"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 40vw"
-              />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,12,24,0.12),rgba(8,12,24,0.68)_54%,rgba(8,12,24,0.96)_100%)]" />
-              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/20 px-3 py-2 text-[11px] font-black uppercase tracking-[0.2em] text-white/82">
-                  <CarFront className="h-3.5 w-3.5 text-[#ff8a3d]" />
-                  Why shuttle beats rideshare
-                </div>
-                <div className="mt-3 text-2xl font-black leading-tight text-white">
-                  Fewer unknowns on the way in. Zero guessing on the way out.
-                </div>
-                <p className="mt-3 max-w-lg text-sm leading-6 text-white/74">
-                  The right ride should feel easy, polished, and built for a great night out from start to finish.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(7,10,24,0.98),rgba(10,14,28,0.95))] px-5 py-7 sm:px-8">
-          <div className="flex items-end justify-between gap-4">
-            <div>
-              <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
-                Popular Colorado Venues
-              </div>
-              <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">
-                Venue intel, rebuilt as cards instead of a wall of links.
-              </h2>
-            </div>
-            <Link href="/venues" className="hidden text-sm font-bold text-[#8fd0ff] md:inline-flex">
-              View All Venues <ArrowRight className="ml-1 h-4 w-4" />
-            </Link>
-          </div>
-
-          <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {featuredVenues.map((venue) => (
-              <Link
-                key={venue.slug}
-                href={`/venues/${venue.slug}`}
-                className="group overflow-hidden rounded-[26px] border border-white/10 bg-[#0b1224] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
-              >
-                <div className="relative h-44">
-                  <Image
-                    src={venueImage(venue.slug)}
-                    alt={venue.name}
-                    fill
-                    className="object-cover transition duration-500 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,18,0.08),rgba(5,8,18,0.82)_84%,rgba(5,8,18,0.94)_100%)]" />
-                  <div className="absolute left-4 top-4 rounded-full border border-white/15 bg-black/30 px-3 py-1 text-[11px] font-black uppercase tracking-[0.18em] text-white/88">
-                    Venue Intel
-                  </div>
-                </div>
-                <div className="p-5">
-                  <div className="text-xl font-black text-white">{venue.name}</div>
-                  {venue.area ? <div className="mt-1 text-sm text-white/58">{venue.area}</div> : null}
-                  <p className="mt-3 text-sm leading-6 text-white/68">
-                    {venueTagline(venue.slug, venue.name)}
-                  </p>
-                  <div className="mt-5 inline-flex items-center text-sm font-bold text-[#8fd0ff]">
-                    Shuttle Details <ArrowRight className="ml-1 h-4 w-4" />
-                  </div>
-                </div>
-              </Link>
-            ))}
-
-            {featuredVenues.length === 0 ? (
-              <div className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 text-white/68">
-                Venue cards will appear here when homepage venue data is available.
-              </div>
-            ) : null}
-          </div>
-
-          <Link href="/venues" className="mt-5 inline-flex text-sm font-bold text-[#8fd0ff] md:hidden">
-            View All Venues <ArrowRight className="ml-1 h-4 w-4" />
-          </Link>
-        </section>
-
         <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(17,11,18,0.96),rgba(10,9,20,0.96))] px-5 py-7 sm:px-8">
           <div className="flex items-end justify-between gap-4">
             <div>
               <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
-                Level Up Your Night
+                Get Ready for Show Night
               </div>
               <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">
-                Keep the zine feel. Drop the info-dump feeling.
+                Three guides, then the rest lives in the hub.
               </h2>
               <p className="mt-3 max-w-2xl text-sm leading-6 text-white/68">
-                Parking reality, pickup hubs, what-to-bring, and the don&apos;t-get-stranded plan, now framed as featured guide cards.
+                Parking reality, ride comparisons, and show-night rules without turning the homepage into a wall of logistics.
               </p>
             </div>
             <Link href="/guide" className="hidden text-sm font-bold text-[#ffb07c] md:inline-flex">
@@ -516,8 +299,8 @@ export default function HomeSections({
             </Link>
           </div>
 
-          <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {guideCards.map((guide) => (
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {guideCards.slice(0, 3).map((guide) => (
               <Link
                 key={guide.href}
                 href={guide.href}
@@ -544,28 +327,28 @@ export default function HomeSections({
           <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
             <div>
               <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
-                Trust + Support
+                Final Check
               </div>
               <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">
-                Clear meetup plan. Text or call support. Real professional drivers.
+                Ready for your Red Rocks night?
               </h2>
               <p className="mt-3 max-w-2xl text-sm leading-6 text-white/68">
-                Spots fill fast. Keep the booking path obvious and the ride plan locked in early.
+                Operated by GoSno LLC with hosted secure checkout, real support, and a booking flow that gets you from venue choice to final product fast.
               </p>
 
               <div className="mt-6 grid gap-4 md:grid-cols-3">
                 {[
                   {
-                    title: "Clear Meetup Plan",
-                    body: "Simple pickup instructions and a return plan that doesn&apos;t require guesswork.",
+                    title: "Colorado-Based Operator",
+                    body: "A real transportation brand, not just a generic lead form dropped on a concert page.",
                   },
                   {
-                    title: "Text / Call Support",
-                    body: "Help finding the shuttle, handling changes, or getting the group back together.",
+                    title: "Hosted Secure Checkout",
+                    body: "Rezdy powers the final booking pages so payment and availability stay stable.",
                   },
                   {
-                    title: "Real Pro Drivers",
-                    body: "Consistent, professional transportation instead of rolling the dice after the show.",
+                    title: "Support + Policies",
+                    body: "Read how it works, then book with the right expectations before show night starts.",
                   },
                 ].map((item) => (
                   <div
@@ -580,20 +363,20 @@ export default function HomeSections({
             </div>
 
             <div className="flex flex-col gap-3 lg:min-w-[220px]">
-              <Link
-                href="/book"
-                className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#ff5b2e] px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#ff7148]"
-              >
-                Book Shuttle
-              </Link>
-              <Link
-                href="/private-suburban"
-                className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/12 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white/88 transition hover:bg-white/10"
-              >
-                Private SUVs
-              </Link>
+                <Link
+                  href="/book"
+                  className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#ff5b2e] px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#ff7148]"
+                >
+                  Book Your Shuttle Now
+                </Link>
+                <Link
+                  href="/about"
+                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/12 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white/88 transition hover:bg-white/10"
+                >
+                  About GoSno
+                </Link>
+              </div>
             </div>
-          </div>
         </section>
       </section>
     </main>
