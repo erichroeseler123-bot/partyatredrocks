@@ -32,7 +32,38 @@ const venuePhotoMap: Record<string, string> = {
   "cervantes-masterpiece": "/hero/hero-guides.jpg",
 };
 
-const benefits = [
+const rideOptions = [
+  {
+    title: "Shared Shuttle",
+    body: "Shared shuttle seats are available from Denver and Golden. Choose your departure location and reserve seats for the show.",
+    bullets: [
+      "$59 seats from Denver and Golden",
+      "Clear departure times and return ride after the show",
+      "Best fit for solo riders, couples, and small groups",
+    ],
+    href: "/book/red-rocks-amphitheatre/shared",
+    cta: "View Shuttle Departures",
+    icon: DollarSign,
+  },
+  {
+    title: "Private Door-to-Door Service",
+    body: "Door-to-door pickup. Upper North limo-lane access. The full Red Rocks night.",
+    bullets: [
+      "Pickup at your home, hotel, or Airbnb",
+      "Time to tailgate before the show",
+      "One vehicle for the full night and return ride after the concert",
+      "Private SUV — $499",
+      "10 Passenger Van — $599",
+      "14 Passenger Sprinter — $799",
+      "24 Passenger Party Bus — $1199",
+    ],
+    href: "/book/red-rocks-amphitheatre/private",
+    cta: "Book Private Service",
+    icon: ShieldCheck,
+  },
+];
+
+const supportPoints = [
   {
     title: "Fixed Pricing",
     body: "Pay what you see with clear pricing from the start.",
@@ -44,14 +75,14 @@ const benefits = [
     icon: Clock3,
   },
   {
-    title: "Pro Drivers + Group Rides",
-    body: "Friendly, experienced drivers and a better fit for the whole crew.",
-    icon: ShieldCheck,
-  },
-  {
     title: "Real-Time Support",
     body: "Text or call anytime and get help from people who know the flow.",
     icon: Headphones,
+  },
+  {
+    title: "Group-Friendly Options",
+    body: "Shared seats for most riders, private vehicles for groups that want one plan all night.",
+    icon: ShieldCheck,
   },
 ];
 
@@ -134,11 +165,11 @@ export default function HomeSections({
               </div>
 
               <h1 className="mt-5 text-[2.35rem] font-black uppercase leading-[0.94] tracking-[-0.04em] text-white sm:text-[3.9rem] lg:text-[5.35rem]">
-                The Best Way to Red Rocks
+                Red Rocks Shuttle & Private Rides
               </h1>
 
               <p className="mt-5 text-[15px] leading-7 text-white/78 sm:text-lg">
-                Fixed $59 shuttle seats from Denver. No surge. Guaranteed return. Professional drivers and real text support on show night.
+                Shared shuttles from Denver and Golden, or private door-to-door service to Red Rocks Amphitheatre.
               </p>
 
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
@@ -153,7 +184,7 @@ export default function HomeSections({
               <div className="mt-6 flex flex-wrap justify-center gap-2">
                 {[
                   "$59 seats",
-                  "No surge",
+                  "Denver + Golden",
                   "Guaranteed return",
                   "Text support",
                 ].map((item) => (
@@ -172,9 +203,9 @@ export default function HomeSections({
         <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(9,15,31,0.96),rgba(7,11,25,0.96))] px-5 py-7 sm:px-8">
           <div className="flex items-end justify-between gap-4">
             <div>
-              <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">Why Riders Book</div>
+              <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">Ride Options</div>
               <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">
-                What riders need most.
+                Choose the ride that fits your night.
               </h2>
             </div>
             <Link href="/about" className="hidden text-sm font-bold text-[#8fd0ff] md:inline-flex">
@@ -182,19 +213,49 @@ export default function HomeSections({
             </Link>
           </div>
 
-          <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {benefits.map((benefit) => {
-              const Icon = benefit.icon;
+          <div className="mt-6 grid gap-4 xl:grid-cols-2">
+            {rideOptions.map((ride) => {
+              const Icon = ride.icon;
               return (
                 <div
-                  key={benefit.title}
-                  className="rounded-[24px] border border-white/10 bg-[#0b1224] p-5 shadow-[0_18px_60px_rgba(0,0,0,0.35)]"
+                  key={ride.title}
+                  className="rounded-[24px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)]"
                 >
                   <div className="inline-flex rounded-2xl border border-[#ff8a3d]/25 bg-[#ff8a3d]/10 p-3 text-[#ffb07c]">
                     <Icon className="h-5 w-5" />
                   </div>
-                  <div className="mt-4 text-lg font-black text-white">{benefit.title}</div>
-                  <p className="mt-2 text-sm leading-6 text-white/68">{benefit.body}</p>
+                  <div className="mt-4 text-lg font-black text-white">{ride.title}</div>
+                  <p className="mt-2 text-sm leading-6 text-white/68">{ride.body}</p>
+                  <ul className="mt-4 space-y-2 text-sm leading-6 text-white/76">
+                    {ride.bullets.map((bullet) => (
+                      <li key={bullet} className="flex gap-2">
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#ffb07c]/80" />
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Link href={ride.href} className="mt-5 inline-flex items-center text-sm font-bold text-[#ffb07c]">
+                    {ride.cta}
+                    <ArrowRight className="ml-1 h-4 w-4" />
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {supportPoints.map((point) => {
+              const Icon = point.icon;
+              return (
+                <div
+                  key={point.title}
+                  className="rounded-[24px] border border-white/10 bg-[#09101f] p-5 shadow-[0_18px_60px_rgba(0,0,0,0.24)]"
+                >
+                  <div className="inline-flex rounded-2xl border border-[#8fd0ff]/20 bg-[#8fd0ff]/10 p-3 text-[#8fd0ff]">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <div className="mt-4 text-base font-black text-white">{point.title}</div>
+                  <p className="mt-2 text-sm leading-6 text-white/68">{point.body}</p>
                 </div>
               );
             })}
