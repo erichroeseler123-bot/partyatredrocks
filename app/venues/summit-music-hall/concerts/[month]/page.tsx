@@ -47,7 +47,7 @@ export async function generateMetadata({
 
   return {
     title: `Summit Music Hall ${month.label} 2026 Concerts | Denver Show Schedule`,
-    description: `Summit Music Hall ${month.label} 2026 schedule with artist links, show intel, and direct ride booking options.`,
+    description: `Summit Music Hall ${month.label} 2026 schedule with artist links, show details, and ride options.`,
     alternates: { canonical: `${SITE}/venues/summit-music-hall/concerts/${month.slug}` },
   };
 }
@@ -72,13 +72,13 @@ export default async function SummitMonthPage({
         <div className="comic-hero">
           <div className="comic-kicker">Summit Music Hall Month View</div>
           <h1 className="comic-title">Summit Music Hall {month.label} 2026 Concerts</h1>
-          <p className="comic-copy">Monthly schedule for Summit Music Hall in {month.label}. Drill into artist pages and book rides per show date.</p>
+          <p className="comic-copy">Monthly schedule for Summit Music Hall in {month.label}. Open show details and plan your ride before show night.</p>
           <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-6 w-full px-4">
             <Link href="/venues/summit-music-hall/concerts" className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[180px] text-center">
               Full 2026 Schedule
             </Link>
-            <Link href="/find?venue=summit-music-hall&qty=2" className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[180px] text-center">
-              Find a Ride
+            <Link href="/book?venue=summit-music-hall" className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[180px] text-center">
+              Book a Ride
             </Link>
           </div>
         </div>
@@ -105,10 +105,10 @@ export default async function SummitMonthPage({
                   ) : null}
                   <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
                     <Link href={`/shows/${encodeURIComponent(event.id)}`} className="comic-btn comic-btn-secondary">
-                      Show Intel
+                      Show Details
                     </Link>
-                    <Link href={`/find?date=${encodeURIComponent(event.dateKey)}&venue=summit-music-hall&qty=2`} className="comic-btn comic-btn-primary">
-                      Ride Options
+                    <Link href="/book?venue=summit-music-hall" className="comic-btn comic-btn-primary">
+                      Get a Ride
                     </Link>
                   </div>
                 </article>

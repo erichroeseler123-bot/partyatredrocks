@@ -59,20 +59,20 @@ export default async function WeekPage() {
           <div className="relative max-w-3xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
               <Sparkles className="h-3.5 w-3.5" />
-              Weekly Radar
+              Upcoming Shows
             </div>
             <h1 className="mt-5 text-[2.5rem] font-black uppercase leading-[0.94] tracking-[-0.04em] sm:text-[4rem] lg:text-[5rem]">
               This Week
             </h1>
             <p className="mt-5 max-w-2xl text-[15px] leading-7 text-white/74 sm:text-lg">
-              Start with the venue, jump into the lineup, and move straight into the right ride flow for the week ahead.
+              Browse venues and upcoming shows, then move into the right ride for the night.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/book"
                 className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#ff5b2e] px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#ff7148]"
               >
-                Start Booking
+                Book a Ride
               </Link>
               <Link
                 href="/week/red-rocks"
@@ -84,7 +84,7 @@ export default async function WeekPage() {
                 href="/guide"
                 className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
               >
-                Guide Hub
+                Guides
               </Link>
             </div>
           </div>
@@ -95,10 +95,10 @@ export default async function WeekPage() {
             Venue Schedules
           </div>
           <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">
-            Pick your venue and move.
+            Pick a venue and plan your ride.
           </h2>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-white/70">
-            This is the weekly discovery layer. Open a venue, check the lineup, then route into the booking flow that fits the night.
+            Open a venue, check the lineup, and move into ride options when you are ready.
           </p>
 
           {schedules.length === 0 ? (
@@ -122,10 +122,16 @@ export default async function WeekPage() {
                   </p>
                   <div className="mt-5 flex flex-wrap gap-3">
                     <Link
-                      href={`/venues/${encodeURIComponent(schedule.venueId)}`}
-                      className="inline-flex min-h-11 items-center rounded-full bg-[#ff5b2e] px-4 text-xs font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#ff7148]"
+                      href={`/book?venue=${encodeURIComponent(schedule.venueId)}`}
+                      className="inline-flex min-h-11 items-center rounded-full bg-[#3df3ff] px-4 text-xs font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
                     >
-                      Venue Page
+                      Get a Ride
+                    </Link>
+                    <Link
+                      href={`/venues/${encodeURIComponent(schedule.venueId)}`}
+                      className="inline-flex min-h-11 items-center rounded-full border border-white/12 bg-white/6 px-4 text-xs font-black uppercase tracking-[0.16em] text-white/88 transition hover:bg-white/10"
+                    >
+                      Venue Details
                     </Link>
                     {schedule.venueId === "red-rocks-amphitheatre" ? (
                       <Link

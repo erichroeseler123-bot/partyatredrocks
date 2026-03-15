@@ -67,17 +67,17 @@ export default function WeekClient({
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
         ) : null}
         <div className="comic-hero">
-          <div className="comic-kicker">Live Calendar</div>
+          <div className="comic-kicker">Upcoming Shows</div>
           <h1 className="comic-title">Red Rocks Lineup</h1>
           <p className="comic-copy">
-            Search by artist, filter by month, and book your ride directly from each event card.
+            Already have tickets? Search by artist, filter by month, and plan your ride before show night.
           </p>
           <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-primary" href="/find">
-              Find Ride Options
+            <Link className="comic-btn comic-btn-primary" href="/book">
+              Book a Ride
             </Link>
             <Link className="comic-btn comic-btn-secondary" href="/guide">
-              Open Guide Hub
+              Guides
             </Link>
           </div>
           <div style={{ marginTop: 18 }}>
@@ -109,24 +109,22 @@ export default function WeekClient({
         </section>
 
         <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">How Booking + Pickup Works</div>
+          <div className="comic-tag">Before Show Night</div>
           <p className="comic-copy" style={{ marginTop: 8 }}>
-            Search the lineup by artist or month, open the event card, then choose your ride path. Shared shuttle is best
-            when you want predictable return timing. Private options are best when your group needs tighter schedule control.
+            Search the lineup by artist or month, open the show page, then choose the ride that fits the night.
           </p>
           <p className="comic-copy">
-            If you are coordinating a group, set one exact meet point and one fallback before encore to reduce post-show
-            confusion.
+            Round-trip rides cover the full concert night, and pickup details are sent before the show.
           </p>
           <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-primary" href="/find">
-              Find Ride Options
+            <Link className="comic-btn comic-btn-primary" href="/book">
+              Book a Ride
             </Link>
             <Link className="comic-btn comic-btn-secondary" href="/venues/red-rocks-amphitheatre">
-              Red Rocks Venue Page
+              Venue Details
             </Link>
             <Link className="comic-btn comic-btn-secondary" href="/guide/show-night-strategy/post-show-pickup-plan">
-              Post-Show Pickup Guide
+              Pickup Guide
             </Link>
             <Link className="comic-btn comic-btn-secondary" href="/guide/logistics/parking-lots">
               Parking Guide
@@ -147,9 +145,9 @@ export default function WeekClient({
         </section>
 
         <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">Authority Note</div>
+          <div className="comic-tag">Before You Go</div>
           <p className="comic-copy" style={{ marginTop: 8 }}>
-            Use this lineup for discovery, then validate venue notices and weather before departure.
+            Check venue notices and road conditions before you leave for the show.
           </p>
           <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
             <a className="comic-btn comic-btn-secondary" href="https://www.redrocksonline.com" target="_blank" rel="noreferrer">
@@ -162,8 +160,8 @@ export default function WeekClient({
         </section>
 
         <div className="comic-mobile-cta">
-          <Link className="comic-btn comic-btn-primary" href="/find">
-            Book Your Show-Night Ride
+          <Link className="comic-btn comic-btn-primary" href="/book">
+            Book a Ride
           </Link>
         </div>
 
