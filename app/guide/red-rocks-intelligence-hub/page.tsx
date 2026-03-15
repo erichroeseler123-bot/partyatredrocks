@@ -2,7 +2,7 @@ import Link from "next/link";
 import MusicWave from "@/components/MusicWave";
 
 export const metadata = {
-  title: "Red Rocks Intelligence Hub",
+  title: "Red Rocks Visiting Guide",
   description:
     "Complete Red Rocks guide: history, geology, elevation, trails, visiting rules, and show-night planning links.",
   alternates: {
@@ -86,14 +86,13 @@ export default function RedRocksIntelHubPage() {
     <main className="comic-page pt-24 pb-10">
       <section className="comic-wrap">
         <div className="comic-hero">
-          <div className="comic-kicker">Authority Guide</div>
-          <h1 className="comic-title">Red Rocks Intelligence Hub</h1>
+          <div className="comic-kicker">Visiting Guide</div>
+          <h1 className="comic-title">Red Rocks Visiting Guide</h1>
           <p className="comic-copy">
-            One page with the core Red Rocks facts, geology context, visiting rules, and practical
-            show-night planning context. Use this as your briefing before any concert week.
+            One page with the core Red Rocks facts, geology, visiting rules, and practical planning basics before show night.
           </p>
           <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-primary" href="/find">
+            <Link className="comic-btn comic-btn-primary" href="/shuttles">
               Book Ride
             </Link>
             <Link className="comic-btn comic-btn-secondary" href="/week/red-rocks">
@@ -129,9 +128,9 @@ export default function RedRocksIntelHubPage() {
         </section>
 
         <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">High-Intent Questions</div>
+          <div className="comic-tag">Common Questions</div>
           <h2 className="comic-h3" style={{ marginTop: 10 }}>
-            FAQ Topics To Answer Directly
+            Questions People Ask First
           </h2>
           <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
             {faqRows.map((q) => (
@@ -145,12 +144,11 @@ export default function RedRocksIntelHubPage() {
         <section className="comic-panel" style={{ marginTop: 16 }}>
           <div className="comic-tag">Next Step</div>
           <p className="comic-copy" style={{ marginTop: 10 }}>
-            Once your venue brief is locked, switch to weekly lineup + ride options and pick your
-            date-specific transport plan.
+            Once you know your date and plan for the venue, choose your ride option and book before show night.
           </p>
           <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-primary" href="/find">
-              Compare Ride Options
+            <Link className="comic-btn comic-btn-primary" href="/shuttles">
+              See Shuttle Options
             </Link>
             <Link className="comic-btn comic-btn-secondary" href="/week/red-rocks">
               Search This Week

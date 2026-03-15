@@ -74,7 +74,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${artistName} at ${venueName} | Show Intel & Transport`,
-    description: `Upcoming ${artistName} shows at ${venueName}. Get venue intel and compare shuttle options for show night.`,
+    description: `Upcoming ${artistName} shows at ${venueName}. Get venue details and compare shuttle options for show night.`,
     alternates: { canonical: `${SITE}/artists/${artist}/${venue}` },
   };
 }

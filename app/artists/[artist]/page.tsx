@@ -75,7 +75,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${data.artist.name} Concerts in Colorado | Shows, Venues, Ride Planning`,
-    description: `See upcoming ${data.artist.name} shows, Red Rocks dates, venue intelligence, and ride booking options.`,
+    description: `See upcoming ${data.artist.name} shows, Red Rocks dates, venue details, and ride booking options.`,
     alternates: { canonical: `${SITE}/artists/${artist}` },
   };
 }

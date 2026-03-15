@@ -17,7 +17,7 @@ export default function VenuesPage() {
               Shuttle Destinations
             </h1>
             <p className="mt-5 max-w-2xl text-[15px] leading-7 text-white/74 sm:text-lg">
-              Browse the venues we cover, jump into venue intel, and move straight to the right ride or show-night plan.
+              Browse the venues we cover, open venue details, and move straight to the right ride or show-night plan.
             </p>
           </div>
         </section>
@@ -39,7 +39,7 @@ export default function VenuesPage() {
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,18,0.14),rgba(5,8,18,0.8)_78%,rgba(5,8,18,0.94)_100%)]" />
               <div className="relative z-10">
                 <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
-                  Venue Intel
+                  Venue Guide
                 </div>
                 <h2 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white">
                   {v.name}

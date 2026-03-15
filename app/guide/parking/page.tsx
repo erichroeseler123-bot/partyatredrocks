@@ -30,13 +30,13 @@ export default function Page() {
           <ul className="mt-4 space-y-2 text-soft leading-relaxed list-disc pl-5">
               <li>Lots fill by time, not by good intentions—earlier arrival changes everything.</li>
               <li>The best ‘experience’ lot isn’t always the best ‘exit’ lot.</li>
-              <li>Leave strategy beats parking strategy on sold-out nights.</li>
+              <li>Your way out matters as much as where you park on sold-out nights.</li>
               <li>If you want a fast exit, park with your departure route in mind.</li>
           </ul>
         </div>
 
         <div className="mt-10 flex flex-wrap gap-3">
-          <Link href="/find" className="btn-primary">
+          <Link href="/book" className="btn-primary">
             Book Shuttle — $59/pp →
           </Link>
           <Link
@@ -94,7 +94,7 @@ export default function Page() {
       />
 
         <footer className="mt-16 pt-10 border-t border-soft text-sm text-muted">
-          This is the authority layer: no fluff, no hype — just show-night reality and what works.
+          Use this guide to decide whether parking or a shuttle makes more sense for your night.
         </footer>
       </div>
     </main>

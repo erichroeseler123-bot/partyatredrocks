@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Show-Night Strategy Guide",
-  description: "Arrival windows, crowd flow, weather risk, and the exit plan that prevents ‘stuck at Red Rocks’ syndrome.",
+  title: "Show-Night Planning Guide",
+  description: "Arrival windows, weather risk, and the exit plan that keeps the night moving smoothly.",
 };
 
 export default function Page() {
@@ -10,15 +10,15 @@ export default function Page() {
     <main className="min-h-screen bg-surface text-white px-6 py-20">
       <div className="max-w-4xl mx-auto">
         <div className="text-[11px] font-black uppercase tracking-[0.25em] text-muted">
-          Strategy
+          Planning
         </div>
 
         <h1 className="mt-3 text-5xl md:text-6xl font-black tracking-tight">
-          Show-Night Strategy Guide
+          Show-Night Planning Guide
         </h1>
 
         <p className="mt-5 text-lg text-soft leading-relaxed">
-          Arrival windows, crowd flow, weather risk, and the exit plan that prevents ‘stuck at Red Rocks’ syndrome.
+          Arrival windows, weather risk, and the exit plan that keeps the night moving smoothly.
         </p>
 
         <div className="mt-5 text-sm text-muted">
@@ -28,7 +28,7 @@ export default function Page() {
         <div className="mt-10 rounded-3xl border border-soft bg-surface-strong p-6">
           <h2 className="text-2xl font-black">What actually matters</h2>
           <ul className="mt-4 space-y-2 text-soft leading-relaxed list-disc pl-5">
-              <li>The show-night ‘pain’ is predictable: arrival congestion + post-show extraction.</li>
+              <li>The busiest points of the night are arrival congestion and the ride home after the encore.</li>
               <li>Weather and temperature swings are the silent killers of comfort.</li>
               <li>Have a meeting point and backup plan before the show starts.</li>
               <li>Leaving smart matters more than arriving smart on packed nights.</li>
@@ -36,7 +36,7 @@ export default function Page() {
         </div>
 
         <div className="mt-10 flex flex-wrap gap-3">
-          <Link href="/find" className="btn-primary">
+          <Link href="/book" className="btn-primary">
             Book Shuttle — $59/pp →
           </Link>
           <Link
@@ -94,7 +94,7 @@ export default function Page() {
       />
 
         <footer className="mt-16 pt-10 border-t border-soft text-sm text-muted">
-          This is the authority layer: no fluff, no hype — just show-night reality and what works.
+          Use this guide to set a clear arrival, meetup, and ride-home plan before the show starts.
         </footer>
       </div>
     </main>
