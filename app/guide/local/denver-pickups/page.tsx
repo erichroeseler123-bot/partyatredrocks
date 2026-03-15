@@ -3,14 +3,14 @@ import type { Metadata } from "next";
 import ShuttleCTA from "@/components/cta/ShuttleCTA";
 
 export const metadata: Metadata = {
-  title: "Denver Shuttle Hub: Sheraton Downtown | Party at Red Rocks",
+  title: "Denver Shuttle Pickup: Sheraton Downtown | Party at Red Rocks",
   description:
-    "Official Downtown Denver pickup hub for Party at Red Rocks. Meet at the Sheraton Denver Downtown and ride a $59 per-person shuttle to Red Rocks with a guaranteed post-show return.",
+    "Downtown Denver pickup location for Party at Red Rocks. Meet at the Sheraton Denver Downtown and ride a $59 per-person shuttle to Red Rocks with a guaranteed post-show return.",
   alternates: {
     canonical: "https://www.partyatredrocks.com/guide/local/denver-pickups",
   },
   openGraph: {
-    title: "Denver Shuttle Hub: Sheraton Downtown | Party at Red Rocks",
+    title: "Denver Shuttle Pickup: Sheraton Downtown | Party at Red Rocks",
     description:
       "Official Downtown Denver pickup hub. $59 per-person Red Rocks shuttle with guaranteed post-show return.",
     url: "https://www.partyatredrocks.com/guide/local/denver-pickups",
@@ -46,12 +46,12 @@ export default function DenverPickups() {
 
       <header className="mb-16">
         <h1 className="text-4xl font-black mb-4 uppercase italic tracking-tighter">
-          Denver Shuttle Hub: Sheraton Downtown
+          Denver Shuttle Pickup: Sheraton Downtown
         </h1>
 
         <p className="text-lg text-muted leading-relaxed italic">
-          The primary Downtown Denver pickup hub for Party at Red Rocks riders. Check in, rally, and roll —
-          no parking stress, no surge pricing, guaranteed post-show return.
+          Downtown Denver pickup for Party at Red Rocks riders. Check in, meet your group, and ride out to the show
+          with a return ride already planned.
         </p>
 
         <div className="mt-6 flex flex-wrap gap-3">
@@ -73,10 +73,10 @@ export default function DenverPickups() {
       <section className="grid md:grid-cols-2 gap-10 mb-16 border border-soft rounded-[2.5rem] overflow-hidden bg-surface-strong/30 p-8 shadow-2xl">
         <div>
           <h2 className="mb-4 text-xl font-bold uppercase tracking-tight text-[#4cc9f0]">
-            Pre-Concert Strategy
+            Before Departure
           </h2>
           <p className="text-muted text-base mb-6 leading-relaxed">
-            Located at <strong>1550 Court Pl</strong>, the Sheraton is our central Denver basecamp.
+            Located at <strong>1550 Court Pl</strong>, the Sheraton is our main Downtown Denver pickup point.
             We recommend arriving <strong>45 minutes prior to departure</strong> so you can check in and settle.
           </p>
 

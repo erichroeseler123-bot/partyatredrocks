@@ -833,7 +833,7 @@ export default async function VenuePage({
             </Link>
           </div>
           <p className="comic-copy text-center mt-4 opacity-80">
-            Plan your night at Denver&apos;s premier indoor venue with fast entry and cleaner post-show exits.
+            Plan your night at Mission Ballroom with faster entry planning and a clearer ride home.
           </p>
         </section>
       ) : null}

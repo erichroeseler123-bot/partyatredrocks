@@ -4,7 +4,7 @@ const STEPS = [
   {
     n: "1",
     title: "Choose your ride",
-    sub: "Shuttle seats (best value) or upgrade to a private Suburban.",
+    sub: "Choose shuttle seats or private door-to-door service.",
     href: "/book-shuttle",
   },
   {
