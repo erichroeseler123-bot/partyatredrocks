@@ -2,13 +2,18 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getArtistsCatalog, getEventsCatalog } from "@/lib/events/getCatalog";
+import type { HandoffSearchParams } from "@/lib/parrHandoff";
+import { buildBookingHref } from "@/lib/parrHandoff";
 import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
 import { normalizeVenueSlug } from "@/lib/parrHandoff";
 
 export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
-type Props = { params: Promise<{ artist: string; venue: string }> };
+type Props = {
+  params: Promise<{ artist: string; venue: string }>;
+  searchParams: Promise<HandoffSearchParams>;
+};
 
 function slugify(input: string): string {
   return input
@@ -80,8 +85,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function ArtistVenuePage({ params }: Props) {
+export default async function ArtistVenuePage({ params, searchParams }: Props) {
   const { artist, venue } = await params;
+  const sp = await searchParams;
   const [events, artists] = await Promise.all([getEventsCatalog(2026, "all"), getArtistsCatalog(2026, "all")]);
   const shows = events
     .filter((event) => event.venueId === venue && event.artistNames.some((name) => slugify(name) === artist))
@@ -114,7 +120,15 @@ export default async function ArtistVenuePage({ params }: Props) {
             <Link href={`/venues/${encodeURIComponent(venue)}`} className="comic-btn comic-btn-secondary">
               Venue Page
             </Link>
-            <Link href={`/book?venue=${encodeURIComponent(venue)}`} className="comic-btn comic-btn-primary">
+            <Link
+              href={buildBookingHref({
+                target: "book",
+                venue,
+                searchParams: sp,
+                overrides: { artist: artistName },
+              })}
+              className="comic-btn comic-btn-primary"
+            >
               See Ride Options
             </Link>
           </div>
@@ -133,7 +147,19 @@ export default async function ArtistVenuePage({ params }: Props) {
                   <Link href={`/shows/${encodeURIComponent(show.id)}`} className="comic-btn comic-btn-secondary">
                     Show Details
                   </Link>
-                  <Link href={`/book?venue=${encodeURIComponent(venue)}`} className="comic-btn comic-btn-primary">
+                  <Link
+                    href={buildBookingHref({
+                      target: "book",
+                      venue,
+                      searchParams: sp,
+                      overrides: {
+                        artist: artistName,
+                        event: show.name,
+                        date: show.dateKey,
+                      },
+                    })}
+                    className="comic-btn comic-btn-primary"
+                  >
                     Get a Ride
                   </Link>
                 </div>

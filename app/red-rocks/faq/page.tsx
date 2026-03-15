@@ -2,6 +2,8 @@ import Link from "next/link";
 import FAQBlock from "@/components/FAQBlock";
 import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
 import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
+import type { HandoffSearchParams } from "@/lib/parrHandoff";
+import { buildBookingHref } from "@/lib/parrHandoff";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
@@ -12,7 +14,12 @@ export const metadata = {
   alternates: { canonical: "/red-rocks/faq" },
 };
 
-export default async function RedRocksFaqPage() {
+export default async function RedRocksFaqPage({
+  searchParams,
+}: {
+  searchParams: Promise<HandoffSearchParams>;
+}) {
+  const sp = await searchParams;
   const faqRows = await getFaqRowsWithGlobal("red-rocks/faq.json");
   const faqJsonLd = buildFaqPageJsonLd(faqRows);
 
@@ -43,7 +50,14 @@ export default async function RedRocksFaqPage() {
             If you are planning for a group, this is a good place to start before everyone heads to the venue.
           </p>
           <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-primary" href="/book?venue=red-rocks-amphitheatre">
+            <Link
+              className="comic-btn comic-btn-primary"
+              href={buildBookingHref({
+                target: "book",
+                venue: "red-rocks-amphitheatre",
+                searchParams: sp,
+              })}
+            >
               Book a Ride
             </Link>
             <Link className="comic-btn comic-btn-secondary" href="/red-rocks/concert-guide">
@@ -84,7 +98,14 @@ export default async function RedRocksFaqPage() {
               <h2 className="comic-h3">Parking Guide</h2>
               <p className="comic-copy">Lot tradeoffs, timing windows, and egress expectations.</p>
             </Link>
-            <Link href="/book?venue=red-rocks-amphitheatre" className="comic-panel block">
+            <Link
+              href={buildBookingHref({
+                target: "book",
+                venue: "red-rocks-amphitheatre",
+                searchParams: sp,
+              })}
+              className="comic-panel block"
+            >
               <div className="comic-tag">Book</div>
               <h2 className="comic-h3">See Ride Options</h2>
               <p className="comic-copy">Shared shuttle seats and private rides for Red Rocks concerts.</p>

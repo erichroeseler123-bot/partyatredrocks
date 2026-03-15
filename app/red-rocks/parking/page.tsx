@@ -2,6 +2,8 @@ import Link from "next/link";
 import FAQBlock from "@/components/FAQBlock";
 import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
 import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
+import type { HandoffSearchParams } from "@/lib/parrHandoff";
+import { buildBookingHref } from "@/lib/parrHandoff";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
@@ -19,7 +21,12 @@ const coreLinks = [
   { href: "/red-rocks/faq", label: "FAQ" },
 ] as const;
 
-export default async function RedRocksParkingPage() {
+export default async function RedRocksParkingPage({
+  searchParams,
+}: {
+  searchParams: Promise<HandoffSearchParams>;
+}) {
+  const sp = await searchParams;
   const faqRows = await getFaqRowsWithGlobal("red-rocks/parking.json");
   const faqJsonLd = buildFaqPageJsonLd(faqRows);
 
@@ -53,7 +60,14 @@ export default async function RedRocksParkingPage() {
             timing change can mean a longer walk, more stairs, and a slower exit once the crowd heads out.
           </p>
           <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-primary" href="/book?venue=red-rocks-amphitheatre">
+            <Link
+              className="comic-btn comic-btn-primary"
+              href={buildBookingHref({
+                target: "book",
+                venue: "red-rocks-amphitheatre",
+                searchParams: sp,
+              })}
+            >
               Book a Ride
             </Link>
             <Link className="comic-btn comic-btn-secondary" href="/red-rocks/transportation">
@@ -134,7 +148,14 @@ export default async function RedRocksParkingPage() {
             <h2 className="comic-h3">Parking Reality</h2>
             <p className="comic-copy">Detailed breakdown of flow constraints and pickup alternatives.</p>
           </Link>
-          <Link href="/book?venue=red-rocks-amphitheatre" className="comic-panel block">
+          <Link
+            href={buildBookingHref({
+              target: "book",
+              venue: "red-rocks-amphitheatre",
+              searchParams: sp,
+            })}
+            className="comic-panel block"
+          >
             <div className="comic-tag">Alternative</div>
             <h2 className="comic-h3">See Ride Options</h2>
             <p className="comic-copy">See shuttle and private options aligned to your group size.</p>

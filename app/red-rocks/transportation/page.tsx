@@ -2,6 +2,8 @@ import Link from "next/link";
 import FAQBlock from "@/components/FAQBlock";
 import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
 import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
+import type { HandoffSearchParams } from "@/lib/parrHandoff";
+import { buildBookingHref } from "@/lib/parrHandoff";
 import { RED_ROCKS_ENTITIES } from "@/lib/redRocksAuthority";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
@@ -20,7 +22,12 @@ const coreLinks = [
   { href: "/red-rocks/faq", label: "FAQ" },
 ] as const;
 
-export default async function RedRocksTransportationPage() {
+export default async function RedRocksTransportationPage({
+  searchParams,
+}: {
+  searchParams: Promise<HandoffSearchParams>;
+}) {
+  const sp = await searchParams;
   const transportationEntities = RED_ROCKS_ENTITIES.filter((entity) => entity.category === "transportation");
   const faqRows = await getFaqRowsWithGlobal("red-rocks/transportation.json");
   const faqJsonLd = buildFaqPageJsonLd(faqRows);
@@ -56,7 +63,14 @@ export default async function RedRocksTransportationPage() {
             the encore happens fast. If you know how you are getting in and out before show night, the whole evening is easier.
           </p>
           <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-primary" href="/book?venue=red-rocks-amphitheatre">
+            <Link
+              className="comic-btn comic-btn-primary"
+              href={buildBookingHref({
+                target: "book",
+                venue: "red-rocks-amphitheatre",
+                searchParams: sp,
+              })}
+            >
               Book a Ride
             </Link>
             <Link className="comic-btn comic-btn-secondary" href="/week/red-rocks">

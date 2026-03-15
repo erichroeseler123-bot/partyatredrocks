@@ -2,6 +2,8 @@ import Link from "next/link";
 import FAQBlock from "@/components/FAQBlock";
 import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
 import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
+import type { HandoffSearchParams } from "@/lib/parrHandoff";
+import { buildBookingHref } from "@/lib/parrHandoff";
 import { RED_ROCKS_ENTITIES } from "@/lib/redRocksAuthority";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
@@ -37,7 +39,12 @@ const CATEGORY_META = {
   visiting: { label: "Visiting", copy: "General planning pages including timing, weather, and nearby camping." },
 } as const;
 
-export default async function RedRocksHubPage() {
+export default async function RedRocksHubPage({
+  searchParams,
+}: {
+  searchParams: Promise<HandoffSearchParams>;
+}) {
+  const sp = await searchParams;
   const faqRows = await getFaqRowsWithGlobal("red-rocks/hub.json");
   const faqJsonLd = buildFaqPageJsonLd(faqRows);
 
@@ -89,7 +96,14 @@ export default async function RedRocksHubPage() {
             start with trails, geology, and timing.
           </p>
           <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-primary" href="/book">
+            <Link
+              className="comic-btn comic-btn-primary"
+              href={buildBookingHref({
+                target: "book",
+                venue: "red-rocks-amphitheatre",
+                searchParams: sp,
+              })}
+            >
               Book Shuttle
             </Link>
             <Link className="comic-btn comic-btn-secondary" href="/week/red-rocks">
@@ -116,7 +130,14 @@ export default async function RedRocksHubPage() {
             <Link href="/dead-and-company-red-rocks" className="comic-btn comic-btn-secondary">
               Dead & Company Guide
             </Link>
-            <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary">
+            <Link
+              href={buildBookingHref({
+                target: "book",
+                venue: "red-rocks-amphitheatre",
+                searchParams: sp,
+              })}
+              className="comic-btn comic-btn-primary"
+            >
               Book Ride
             </Link>
           </div>

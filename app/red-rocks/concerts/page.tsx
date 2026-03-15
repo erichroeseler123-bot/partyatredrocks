@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { getEventsCatalog } from "@/lib/events/getCatalog";
+import type { HandoffSearchParams } from "@/lib/parrHandoff";
+import { buildBookingHref } from "@/lib/parrHandoff";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 export const revalidate = 1800;
@@ -30,7 +32,12 @@ const MONTH_LINKS: Array<{ month: number; label: string; href: string }> = [
   { month: 8, label: "August", href: "/red-rocks/concerts/august" },
 ];
 
-export default async function RedRocksConcertsPage() {
+export default async function RedRocksConcertsPage({
+  searchParams,
+}: {
+  searchParams: Promise<HandoffSearchParams>;
+}) {
+  const sp = await searchParams;
   const events = (await getEventsCatalog(2026, "redrocks")).sort((a, b) => a.dateKey.localeCompare(b.dateKey));
   const upcoming = events.slice(0, 24);
 
@@ -61,7 +68,14 @@ export default async function RedRocksConcertsPage() {
                 {row.label}
               </Link>
             ))}
-            <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[180px] text-center">
+            <Link
+              href={buildBookingHref({
+                target: "book",
+                venue: "red-rocks-amphitheatre",
+                searchParams: sp,
+              })}
+              className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[180px] text-center"
+            >
               Book a Ride →
             </Link>
           </div>
@@ -109,7 +123,19 @@ export default async function RedRocksConcertsPage() {
                     <Link href={`/shows/${encodeURIComponent(event.id)}`} className="comic-btn comic-btn-secondary">
                       Show Details
                     </Link>
-                    <Link href={`/book?venue=red-rocks-amphitheatre&date=${encodeURIComponent(event.dateKey)}&qty=2`} className="comic-btn comic-btn-primary">
+                    <Link
+                      href={buildBookingHref({
+                        target: "book",
+                        venue: "red-rocks-amphitheatre",
+                        searchParams: sp,
+                        overrides: {
+                          event: event.name,
+                          date: event.dateKey,
+                          qty: 2,
+                        },
+                      })}
+                      className="comic-btn comic-btn-primary"
+                    >
                       Get a Ride
                     </Link>
                   </div>
@@ -135,7 +161,14 @@ export default async function RedRocksConcertsPage() {
             <Link href="/red-rocks/map" className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[180px] text-center">
               Interactive Map
             </Link>
-            <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[180px] text-center">
+            <Link
+              href={buildBookingHref({
+                target: "book",
+                venue: "red-rocks-amphitheatre",
+                searchParams: sp,
+              })}
+              className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[180px] text-center"
+            >
               Book a Ride →
             </Link>
           </div>

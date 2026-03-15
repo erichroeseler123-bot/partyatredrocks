@@ -1,4 +1,6 @@
 import Link from "next/link";
+import type { HandoffSearchParams } from "@/lib/parrHandoff";
+import { buildBookingHref } from "@/lib/parrHandoff";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
@@ -9,7 +11,12 @@ export const metadata = {
   alternates: { canonical: `${SITE}/red-rocks/best-time-to-arrive` },
 };
 
-export default function BestTimeToArrivePage() {
+export default async function BestTimeToArrivePage({
+  searchParams,
+}: {
+  searchParams: Promise<HandoffSearchParams>;
+}) {
+  const sp = await searchParams;
   return (
     <main className="comic-page pt-24 pb-10">
       <section className="comic-wrap">
@@ -21,7 +28,14 @@ export default function BestTimeToArrivePage() {
             you choose a better arrival window for the full night.
           </p>
           <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-4 sm:mt-6 w-full px-4">
-            <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[180px] text-center">
+            <Link
+              href={buildBookingHref({
+                target: "book",
+                venue: "red-rocks-amphitheatre",
+                searchParams: sp,
+              })}
+              className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[180px] text-center"
+            >
               Book a Ride
             </Link>
             <Link href="/red-rocks/parking" className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[180px] text-center">
@@ -73,7 +87,14 @@ export default function BestTimeToArrivePage() {
               Round-trip rides can make the end of the night much easier.
             </p>
             <div style={{ marginTop: 16 }}>
-              <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary w-full text-center">
+              <Link
+                href={buildBookingHref({
+                  target: "book",
+                  venue: "red-rocks-amphitheatre",
+                  searchParams: sp,
+                })}
+                className="comic-btn comic-btn-primary w-full text-center"
+              >
                 See Ride Options
               </Link>
             </div>

@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { getEventsCatalog } from "@/lib/events/getCatalog";
+import type { HandoffSearchParams } from "@/lib/parrHandoff";
+import { buildBookingHref } from "@/lib/parrHandoff";
 
 export const revalidate = 1800;
 
@@ -22,7 +24,12 @@ function monthOf(dateKey: string): number {
   return Number.isFinite(month) ? month : 0;
 }
 
-export default async function RedRocksConcertsJulyPage() {
+export default async function RedRocksConcertsJulyPage({
+  searchParams,
+}: {
+  searchParams: Promise<HandoffSearchParams>;
+}) {
+  const sp = await searchParams;
   const events = (await getEventsCatalog(2026, "redrocks"))
     .filter((event) => monthOf(event.dateKey) === 7)
     .sort((a, b) => a.dateKey.localeCompare(b.dateKey));
@@ -43,7 +50,14 @@ export default async function RedRocksConcertsJulyPage() {
             <Link href="/red-rocks/concerts/august" className="comic-btn comic-btn-secondary">
               August
             </Link>
-            <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary">
+            <Link
+              href={buildBookingHref({
+                target: "book",
+                venue: "red-rocks-amphitheatre",
+                searchParams: sp,
+              })}
+              className="comic-btn comic-btn-primary"
+            >
               Book a Ride
             </Link>
           </div>
@@ -75,7 +89,19 @@ export default async function RedRocksConcertsJulyPage() {
                     <Link href={`/shows/${encodeURIComponent(event.id)}`} className="comic-btn comic-btn-secondary">
                       Show Details
                     </Link>
-                    <Link href={`/book?venue=red-rocks-amphitheatre&date=${encodeURIComponent(event.dateKey)}&qty=2`} className="comic-btn comic-btn-primary">
+                    <Link
+                      href={buildBookingHref({
+                        target: "book",
+                        venue: "red-rocks-amphitheatre",
+                        searchParams: sp,
+                        overrides: {
+                          event: event.name,
+                          date: event.dateKey,
+                          qty: 2,
+                        },
+                      })}
+                      className="comic-btn comic-btn-primary"
+                    >
                       Get a Ride
                     </Link>
                   </div>

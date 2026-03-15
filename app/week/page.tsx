@@ -5,6 +5,8 @@ import { getEventsCatalog } from "@/lib/events/getCatalog";
 import FAQBlock from "@/components/FAQBlock";
 import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
 import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
+import type { HandoffSearchParams } from "@/lib/parrHandoff";
+import { buildBookingHref } from "@/lib/parrHandoff";
 
 export const revalidate = 3600;
 
@@ -41,7 +43,12 @@ function nextDateLabel(raw: string | null) {
   });
 }
 
-export default async function WeekPage() {
+export default async function WeekPage({
+  searchParams,
+}: {
+  searchParams: Promise<HandoffSearchParams>;
+}) {
+  const sp = await searchParams;
   const events = await getEventsCatalog(2026, "all");
   const schedules = buildVenueSchedules(events);
   const faqRows = await getFaqRowsWithGlobal("week/index.json");
@@ -122,7 +129,11 @@ export default async function WeekPage() {
                   </p>
                   <div className="mt-5 flex flex-wrap gap-3">
                     <Link
-                      href={`/book?venue=${encodeURIComponent(schedule.venueId)}`}
+                      href={buildBookingHref({
+                        target: "book",
+                        venue: schedule.venueId,
+                        searchParams: sp,
+                      })}
                       className="inline-flex min-h-11 items-center rounded-full bg-[#3df3ff] px-4 text-xs font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
                     >
                       Get a Ride
