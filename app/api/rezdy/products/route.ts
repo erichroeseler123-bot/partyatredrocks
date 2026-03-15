@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { rezdyListProducts } from "@/lib/rezdy";
 
 export const runtime = "nodejs";
-const DEFAULT_REZDY_CATALOG_ID = process.env.REZDY_REDROCKS_CATALOG_ID ?? "541037";
+const DEFAULT_REZDY_CATALOG_ID = process.env.REZDY_REDROCKS_CATALOG_ID ?? "617787";
 
 type UiProduct = {
   productCode: string;

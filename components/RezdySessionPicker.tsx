@@ -10,7 +10,7 @@ type UiProduct = {
   maxPrice: number | null;
 };
 
-const DEFAULT_REZDY_CATALOG_ID = "541037";
+const DEFAULT_REZDY_CATALOG_ID = "617787";
 
 type UiSession = {
   sessionKey: string;
