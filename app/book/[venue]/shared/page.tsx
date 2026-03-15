@@ -3,7 +3,9 @@ import Script from "next/script";
 import { notFound } from "next/navigation";
 import venuesJson from "@/data/venues.json";
 import { RecentBookingToast } from "@/components/RecentBookingToast";
+import { PlanningLinks } from "@/components/booking/PlanningLinks";
 import { rezdyListProducts } from "@/lib/rezdy";
+import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
 import { TrustStrip } from "@/components/TrustStrip";
 
 export const runtime = "nodejs";
@@ -40,10 +42,13 @@ function priceLabel(product: RezdyProductRow) {
 
 export default async function SharedOptionsPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ venue: string }>;
+  searchParams: Promise<HandoffSearchParams>;
 }) {
   const { venue } = await params;
+  const sp = await searchParams;
   if (venue !== "red-rocks-amphitheatre") notFound();
   const row = getVenue(venue);
   if (!row?.name) notFound();
@@ -70,17 +75,26 @@ export default async function SharedOptionsPage({
             Round-trip service for the full concert night. Pickup details are sent before show night.
           </p>
           <div className="mt-6">
-            <Link href={`/book/${venue}`} className="text-sm font-bold text-[#ffb07c] hover:text-white">
+            <Link
+              href={buildBookingHref({ target: "venue", venue, searchParams: sp })}
+              className="text-sm font-bold text-[#ffb07c] hover:text-white"
+            >
               ← Back to ride types
             </Link>
           </div>
+          <PlanningLinks venue={venue} className="mt-6" />
         </section>
 
         <section className="grid gap-4 lg:grid-cols-2">
           {products.map((product, index) => (
             <Link
               key={product.productCode}
-              href={`/book/${venue}/shared/${encodeURIComponent(product.productCode || "")}`}
+              href={buildBookingHref({
+                target: "shared-product",
+                venue,
+                productCode: product.productCode || "",
+                searchParams: sp,
+              })}
               className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
             >
               <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
@@ -106,7 +120,7 @@ export default async function SharedOptionsPage({
               No shared shuttle products are loading right now. Use the live shuttle checkout below instead.
               <div className="mt-5">
                 <Link
-                  href="/find"
+                  href={buildBookingHref({ target: "book", venue, searchParams: sp })}
                   className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#3df3ff] px-5 text-xs font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
                 >
                   Open Shuttle Checkout

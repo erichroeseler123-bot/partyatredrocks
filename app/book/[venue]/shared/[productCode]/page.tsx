@@ -3,7 +3,9 @@ import Script from "next/script";
 import { notFound } from "next/navigation";
 import venuesJson from "@/data/venues.json";
 import { RecentBookingToast } from "@/components/RecentBookingToast";
+import { PlanningLinks } from "@/components/booking/PlanningLinks";
 import { rezdyListProducts } from "@/lib/rezdy";
+import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
 import { TrustStrip } from "@/components/TrustStrip";
 
 export const runtime = "nodejs";
@@ -53,10 +55,13 @@ function bookingHref(widgetUrl: string) {
 
 export default async function SharedProductPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ venue: string; productCode: string }>;
+  searchParams: Promise<HandoffSearchParams>;
 }) {
   const { venue, productCode } = await params;
+  const sp = await searchParams;
   if (venue !== "red-rocks-amphitheatre") notFound();
   const row = getVenue(venue);
   if (!row?.name) notFound();
@@ -96,12 +101,13 @@ export default async function SharedProductPage({
               Book Online Now
             </a>
             <Link
-              href={`/book/${venue}/shared`}
+              href={buildBookingHref({ target: "shared", venue, searchParams: sp })}
               className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
             >
               Back to Shuttle Options
             </Link>
           </div>
+          <PlanningLinks venue={venue} className="mt-6" />
         </section>
 
         <section className="rounded-[30px] border border-white/10 bg-[#0b1224] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.42)] sm:p-6">

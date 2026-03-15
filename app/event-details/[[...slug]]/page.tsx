@@ -1,4 +1,5 @@
 import { permanentRedirect } from "next/navigation";
+import { buildBookingHref } from "@/lib/parrHandoff";
 
 function extractDate(parts: string[]): string | null {
   const s = parts.join("-");
@@ -16,7 +17,13 @@ export default async function LegacyEventDetailsPage({
   const date = extractDate(parts);
 
   if (date) {
-    permanentRedirect(`/find?date=${encodeURIComponent(date)}&qty=2`);
+    permanentRedirect(
+      buildBookingHref({
+        target: "book",
+        venue: "red-rocks-amphitheatre",
+        overrides: { date, qty: "2" },
+      }),
+    );
   }
-  permanentRedirect("/find");
+  permanentRedirect(buildBookingHref({ target: "book", venue: "red-rocks-amphitheatre" }));
 }

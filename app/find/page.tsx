@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation";
-
-function qp(searchParams: Record<string, string | string[] | undefined>, key: string) {
-  const value = searchParams[key];
-  return Array.isArray(value) ? value[0] : value;
-}
+import {
+  buildBookingHref,
+  normalizeVenueSlug,
+  type HandoffSearchParams,
+} from "@/lib/parrHandoff";
 
 export const metadata = {
   title: "Find Your Ride | Party at Red Rocks",
@@ -17,17 +17,11 @@ export const metadata = {
 export default async function FindPage({
   searchParams,
 }: {
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
+  searchParams: Promise<HandoffSearchParams>;
 }) {
   const sp = await searchParams;
-  const params = new URLSearchParams();
-  params.set("venue", "red-rocks-amphitheatre");
+  const rawVenue = Array.isArray(sp.venue) ? sp.venue[0] : sp.venue;
+  const venue = normalizeVenueSlug(rawVenue) || "red-rocks-amphitheatre";
 
-  const date = qp(sp, "date");
-  const qty = qp(sp, "qty");
-
-  if (date) params.set("date", date);
-  if (qty) params.set("qty", qty);
-
-  redirect(`/book?${params.toString()}`);
+  redirect(buildBookingHref({ target: "book", venue, searchParams: sp }));
 }

@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import ServedVenueSections from "@/components/venues/ServedVenueSections";
+import {
+  buildBookingHref,
+  normalizeVenueSlug,
+  type HandoffSearchParams,
+} from "@/lib/parrHandoff";
 
 export const metadata = {
   robots: { index: false, follow: true },
@@ -8,37 +13,18 @@ export const metadata = {
   description: "Start by picking your venue, then choose shared or private ride options.",
 };
 
-type SP = Record<string, string | string[] | undefined>;
-function first(sp: SP, key: string) {
-  const v = sp[key];
-  return Array.isArray(v) ? v[0] : v;
-}
-
-function buildQs(sp: SP) {
-  const qs = new URLSearchParams();
-  const pickup = first(sp, "pickup");
-  const date = first(sp, "date");
-  const qty = first(sp, "qty");
-
-  if (pickup) qs.set("pickup", pickup);
-  if (date) qs.set("date", date);
-  if (qty) qs.set("qty", qty);
-
-  const query = qs.toString();
-  return query ? `?${query}` : "";
-}
-
 export default async function BookPage({
   searchParams,
 }: {
-  searchParams: Promise<SP>;
+  searchParams: Promise<HandoffSearchParams>;
 }) {
   const sp = await searchParams;
-  const venue = first(sp, "venue");
-  const qs = buildQs(sp);
+  const venue = normalizeVenueSlug(
+    Array.isArray(sp.venue) ? sp.venue[0] : sp.venue,
+  );
 
   if (venue) {
-    redirect(`/book/${venue}${qs}`);
+    redirect(buildBookingHref({ target: "venue", venue, searchParams: sp }));
   }
 
   return (
@@ -64,7 +50,7 @@ export default async function BookPage({
                 Explore Venues
               </Link>
               <Link
-                href="/shuttles"
+                href={buildBookingHref({ target: "shuttles", searchParams: sp })}
                 className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
               >
                 Ride Options
@@ -73,7 +59,7 @@ export default async function BookPage({
           </div>
         </section>
 
-        <ServedVenueSections mode="book" querySuffix={qs} />
+        <ServedVenueSections mode="book" searchParams={sp} />
       </section>
     </main>
   );

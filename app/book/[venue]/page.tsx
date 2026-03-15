@@ -4,6 +4,12 @@ import { notFound } from "next/navigation";
 import venuesJson from "@/data/venues.json";
 import { RecentBookingToast } from "@/components/RecentBookingToast";
 import { TrustStrip } from "@/components/TrustStrip";
+import { PlanningLinks } from "@/components/booking/PlanningLinks";
+import {
+  buildBookingHref,
+  buildVenueRequestHref,
+  type HandoffSearchParams,
+} from "@/lib/parrHandoff";
 
 type VenueRow = {
   slug?: string;
@@ -22,10 +28,13 @@ const RED_ROCKS_PRIVATE_CATALOG_WIDGET_URL =
 
 export default async function VenueBookingPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ venue: string }>;
+  searchParams: Promise<HandoffSearchParams>;
 }) {
   const { venue } = await params;
+  const sp = await searchParams;
   const row = getVenue(venue);
   if (!row?.slug || !row?.name) notFound();
 
@@ -50,12 +59,17 @@ export default async function VenueBookingPage({
             <div className="mt-6 text-sm font-bold text-white/68">
               {[row.city, row.state].filter(Boolean).join(", ")}
             </div>
+            <PlanningLinks venue={venue} className="mt-6" />
           </div>
         </section>
 
         <section className="grid gap-4 lg:grid-cols-2">
           <Link
-            href={isRedRocks ? `/book/${venue}/shared` : "/find"}
+            href={
+              isRedRocks
+                ? buildBookingHref({ target: "shared", venue, searchParams: sp })
+                : buildVenueRequestHref({ venue, searchParams: sp })
+            }
             className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
           >
             <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
@@ -75,7 +89,11 @@ export default async function VenueBookingPage({
           </Link>
 
           <Link
-            href={isRedRocks ? `/book/${venue}/private` : "/book-all-venue"}
+            href={
+              isRedRocks
+                ? buildBookingHref({ target: "private", venue, searchParams: sp })
+                : buildVenueRequestHref({ venue, searchParams: sp })
+            }
             className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
           >
             <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">

@@ -2,14 +2,19 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { venueImage } from "@/lib/display";
 import { getServedVenueGroups } from "@/lib/servedVenues";
+import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
 
 type Props = {
   mode: "book" | "venues";
-  querySuffix?: string;
+  searchParams?: HandoffSearchParams;
 };
 
-function venueHref(slug: string, mode: "book" | "venues", querySuffix: string) {
-  if (mode === "book") return `/book/${slug}${querySuffix}`;
+function venueHref(
+  slug: string,
+  mode: "book" | "venues",
+  searchParams?: HandoffSearchParams,
+) {
+  if (mode === "book") return buildBookingHref({ target: "venue", venue: slug, searchParams });
   return `/venues/${slug}`;
 }
 
@@ -21,7 +26,7 @@ function kindLabel(kind?: string) {
   return (kind || "venue").replace(/(^\w|\s\w)/g, (match) => match.toUpperCase());
 }
 
-export default function ServedVenueSections({ mode, querySuffix = "" }: Props) {
+export default function ServedVenueSections({ mode, searchParams }: Props) {
   const groups = getServedVenueGroups();
 
   return (
@@ -40,7 +45,7 @@ export default function ServedVenueSections({ mode, querySuffix = "" }: Props) {
             {group.venues.map((venue) => (
               <Link
                 key={venue.slug}
-                href={venueHref(venue.slug, mode, querySuffix)}
+                href={venueHref(venue.slug, mode, searchParams)}
                 className="group relative overflow-hidden rounded-[26px] border border-white/10 bg-[#0b1224] p-7 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
               >
                 <img

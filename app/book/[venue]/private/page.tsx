@@ -2,6 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import venuesJson from "@/data/venues.json";
 import { RecentBookingToast } from "@/components/RecentBookingToast";
+import { PlanningLinks } from "@/components/booking/PlanningLinks";
+import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
 import { TrustStrip } from "@/components/TrustStrip";
 
 type VenueRow = {
@@ -50,10 +52,13 @@ function getVenue(slug: string): VenueRow | null {
 
 export default async function PrivateOptionsPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ venue: string }>;
+  searchParams: Promise<HandoffSearchParams>;
 }) {
   const { venue } = await params;
+  const sp = await searchParams;
   if (venue !== "red-rocks-amphitheatre") notFound();
   const row = getVenue(venue);
   if (!row?.name) notFound();
@@ -76,17 +81,26 @@ export default async function PrivateOptionsPage({
             One vehicle for your group for the full night. Pickup details are sent before your ride.
           </p>
           <div className="mt-6">
-            <Link href={`/book/${venue}`} className="text-sm font-bold text-[#ffb07c] hover:text-white">
+            <Link
+              href={buildBookingHref({ target: "venue", venue, searchParams: sp })}
+              className="text-sm font-bold text-[#ffb07c] hover:text-white"
+            >
               ← Back to ride types
             </Link>
           </div>
+          <PlanningLinks venue={venue} className="mt-6" />
         </section>
 
         <section className="grid gap-4 lg:grid-cols-2 xl:grid-cols-4">
           {privateOptions.map((option) => (
             <Link
               key={option.slug}
-              href={`/book/${venue}/private/${option.slug}`}
+              href={buildBookingHref({
+                target: "private-option",
+                venue,
+                option: option.slug,
+                searchParams: sp,
+              })}
               className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
             >
               <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
