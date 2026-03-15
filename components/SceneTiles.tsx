@@ -11,7 +11,7 @@ export default function SceneTiles() {
   return (
     <section className="mt-8 rounded-3xl border border-soft panel p-6">
       <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">
-        Explore the Denver Scene
+        Explore Colorado music scenes
       </div>
 
       <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -37,10 +37,10 @@ export default function SceneTiles() {
                 {t.label}
               </div>
               <div className="mt-2 text-lg font-black text-white/95">
-                Upcoming shows + intel →
+                Artists, venues, and shows
               </div>
               <div className="mt-2 text-sm text-white/70">
-                Tap in → find events → hit Ride Options → book.
+                Browse upcoming shows and see where this scene is playing.
               </div>
             </div>
           </Link>

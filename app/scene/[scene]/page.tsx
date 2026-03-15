@@ -77,9 +77,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // If invalid slug: let the page 404, but metadata should still be sane.
   if (!def) {
     return {
-      title: "Scene Hub | Party at Red Rocks",
+      title: "Music Scene Guide | Party at Red Rocks",
       description:
-        "Denver, Boulder & Colorado Springs concert shuttles, venue guides, and weekly show intel.",
+        "Browse Colorado music scenes, upcoming shows, and venues connected to Red Rocks and Denver concerts.",
       robots: { index: false, follow: true },
     };
   }
@@ -141,7 +141,7 @@ function sceneJsonLd(def: SceneDef, pageUrl: string, events: SceneEvent[]) {
     "@type": "CollectionPage",
     "@id": `${pageUrl}#collection`,
     url: pageUrl,
-    name: `${def.title} — Upcoming Shows & Shuttle Intel`,
+    name: `${def.title} — Upcoming Shows`,
     description: def.description || def.tagline,
     isPartOf: { "@id": `${SITE}/#website` },
     publisher: { "@id": `${SITE}/#organization` },
@@ -183,7 +183,7 @@ function sceneJsonLd(def: SceneDef, pageUrl: string, events: SceneEvent[]) {
               .map((name) => ({ "@type": "MusicGroup", name })),
             offers: {
               "@type": "Offer",
-              name: "Shuttle Ride Options",
+              name: "Shuttle booking",
               url: `${SITE}/book?event=${e.id}&scene=${def.slug}`,
               priceCurrency: "USD",
               availability: "https://schema.org/InStock",
@@ -230,7 +230,7 @@ export default async function SceneHub({ params }: Props) {
           className="inline-flex items-center gap-2 rounded-full pill px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white/80"
           style={def.accentColor ? { borderColor: def.accentColor } : undefined}
         >
-          Scene Hub • {def.emoji ? <span>{def.emoji}</span> : null} {def.slug}
+          Scene guide • {def.emoji ? <span>{def.emoji}</span> : null} {def.slug}
         </div>
 
         <h1 className="mt-4 text-4xl font-black tracking-tight md:text-6xl">
@@ -248,7 +248,7 @@ export default async function SceneHub({ params }: Props) {
             href={`/book?scene=${def.slug}`}
             className="inline-flex items-center justify-center rounded-full bg-neon-blue px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-black transition hover:bg-surface/40"
           >
-            Book Shuttle
+            See ride options
           </Link>
 
           <Link
@@ -263,9 +263,9 @@ export default async function SceneHub({ params }: Props) {
             target="_blank"
             rel="nofollow noopener"
             className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft"
-            title="Authority intel (DCC)"
+            title="More scene guides"
           >
-            Deep Intel (DCC) →
+            More Scene Guides →
           </a>
 
           {def.slug === "bluegrass" ? (
@@ -297,14 +297,13 @@ export default async function SceneHub({ params }: Props) {
         </div>
 
         <div className="mt-4 text-xs text-white/45">
-          Feed updated: {payload?.generatedAt ?? "not synced yet"} (run /api/cron/sync)
+          Updated: {payload?.generatedAt ?? "not synced yet"}
         </div>
       </div>
 
       {events.length === 0 ? (
         <div className="mt-10 rounded-3xl border border-soft panel p-8 text-white/70">
-          No upcoming shows found for this scene yet. Run <span className="text-white/90">/api/cron/sync</span>{" "}
-          to refresh the feed.
+          No upcoming shows are listed for this scene yet.
         </div>
       ) : (
         <section className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -330,7 +329,7 @@ export default async function SceneHub({ params }: Props) {
                   <span className="text-white/50">
                     •{" "}
                     <Link className="underline" href={`/venues/${e.venue.siteSlug}`}>
-                      Venue intel
+                      Venue page
                     </Link>
                   </span>
                 ) : null}
@@ -342,7 +341,7 @@ export default async function SceneHub({ params }: Props) {
 
               <div className="mt-5 flex flex-wrap gap-3">
                 <Link className="font-bold text-neon-blue" href={`/shows/${e.id}`}>
-                  Full Intel →
+                  Show Details →
                 </Link>
 
                 {e.url ? (
@@ -357,7 +356,7 @@ export default async function SceneHub({ params }: Props) {
                 ) : null}
 
                 <Link className="text-white/70 underline" href={`/book?event=${e.id}&scene=${def.slug}`}>
-                  Ride Options
+                  Ride Options →
                 </Link>
               </div>
             </div>

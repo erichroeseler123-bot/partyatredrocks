@@ -5,7 +5,7 @@ const FOOTER_GROUPS = [
     title: "Rides",
     links: [
       { href: "/book-shuttle", label: "Book Shuttle" },
-      { href: "/private-suburban", label: "Private Suburban" },
+      { href: "/private-suburban", label: "Private SUV" },
       { href: "/private-van", label: "Private Van" },
       { href: "/party-bus", label: "Party Bus" },
     ],
@@ -33,8 +33,8 @@ const FOOTER_GROUPS = [
     links: [
       { href: "/guide", label: "Guide Hub" },
       { href: "/guide/red-rocks-faq", label: "Red Rocks FAQ" },
-      { href: "/about", label: "How It Works" },
-      { href: "/book", label: "Book Flow" },
+      { href: "/about", label: "About" },
+      { href: "/book", label: "Book Shuttle" },
     ],
   },
 ] as const;
@@ -50,8 +50,7 @@ export default function SiteFooter() {
                 Party at Red Rocks
               </div>
               <div className="mt-3 text-sm text-white/62">
-                Built for show-night execution: clear pickups, fixed pricing, and a guaranteed ride back
-                after the encore.
+                Shared shuttles and private rides for Red Rocks show nights, with clear pickup details and a ride back after the show.
               </div>
               <div className="mt-5 h-px max-w-[360px] bg-white/12" />
             </div>
@@ -89,7 +88,7 @@ export default function SiteFooter() {
 
           <div className="mt-6 pt-4 border-t border-white/10 text-xs text-muted flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
             <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/42">
-              Control Deck Active
+              Party at Red Rocks
             </div>
             <div>© {new Date().getFullYear()} Party at Red Rocks. All rights reserved.</div>
           </div>
