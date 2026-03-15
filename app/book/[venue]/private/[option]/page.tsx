@@ -27,8 +27,8 @@ const optionMeta = {
   "party-bus": {
     title: "Party Bus",
     body: "Online booking for a party bus.",
-    iframeUrl: PRIVATE_CATALOG_WIDGET_URL,
-    ctaLabel: "Open Private Vehicle Checkout",
+    iframeUrl: "https://gosnotransportation58.rezdy.com/689909/bus-24-passenger?iframe=true",
+    ctaLabel: "Open Party Bus Booking",
   },
 } as const;
 
