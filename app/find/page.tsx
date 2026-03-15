@@ -91,7 +91,7 @@ export default async function FindPage({
   };
 
   return (
-    <main className="comic-page pt-24 pb-10">
+    <main className="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(255,91,46,0.08),transparent_20%),radial-gradient(circle_at_top_right,rgba(143,208,255,0.08),transparent_24%),linear-gradient(180deg,#02040a_0%,#050816_42%,#040711_100%)] pt-24 pb-10 text-white">
       <section className="comic-wrap">
         {faqRows.length > 0 ? (
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />

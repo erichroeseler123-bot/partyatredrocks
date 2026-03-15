@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { getBookingUrl } from "@/lib/rezdy";
 
 type UiProduct = {
   productCode: string;
@@ -81,11 +82,16 @@ export default function RezdySessionPicker({ initialDate = "", initialQty = 2 }:
   const [outcome, setOutcome] = useState<BookingOutcome | null>(null);
   const [paymentActionUrl, setPaymentActionUrl] = useState<string | null>(null);
   const [paymentActionLabel, setPaymentActionLabel] = useState<string>("Complete Payment");
+  const onlineCheckoutUrl = getBookingUrl("shuttle");
 
   const selectedSession = useMemo(
     () => sessions.find((session) => session.sessionKey === selectedSessionKey) ?? null,
     [sessions, selectedSessionKey]
   );
+
+  useEffect(() => {
+    void loadProducts();
+  }, []);
 
   async function loadProducts() {
     setLoadingProducts(true);
@@ -242,14 +248,37 @@ export default function RezdySessionPicker({ initialDate = "", initialQty = 2 }:
     <section className="comic-panel" style={{ marginTop: 16 }}>
       <div className="comic-tag">Live Rezdy Sessions</div>
       <p className="comic-copy" style={{ marginTop: 8 }}>
-        Load products, fetch live availability, choose a session, and submit a Rezdy-managed booking request.
+        Open the hosted shuttle checkout for direct online booking, or use the fallback request flow below if you need us to handle it manually.
       </p>
+
+      <div
+        className="rounded-[24px] border border-[rgba(255,91,46,.24)] bg-[linear-gradient(180deg,rgba(20,12,18,.96),rgba(12,10,20,.96))] p-5"
+        style={{ marginTop: 12 }}
+      >
+        <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">Direct Online Checkout</div>
+        <p className="comic-copy" style={{ marginTop: 8 }}>
+          Use the live Rezdy shuttle checkout to book online right now.
+        </p>
+        <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
+          <a
+            href={onlineCheckoutUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="comic-btn comic-btn-primary"
+          >
+            Book Online Now
+          </a>
+          <button type="button" className="comic-btn comic-btn-secondary" onClick={loadAvailability} disabled={loadingSessions || !productsLoaded || !selectedProduct}>
+            {loadingSessions ? "Loading sessions..." : "Check live availability first"}
+          </button>
+        </div>
+      </div>
 
       <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
         <button type="button" className="comic-btn comic-btn-secondary" onClick={loadProducts} disabled={loadingProducts}>
-          {loadingProducts ? "Loading products..." : "Load products"}
+          {loadingProducts ? "Loading products..." : productsLoaded ? "Reload products" : "Load products"}
         </button>
-        <button type="button" className="comic-btn comic-btn-primary" onClick={loadAvailability} disabled={loadingSessions || !productsLoaded}>
+        <button type="button" className="comic-btn comic-btn-secondary" onClick={loadAvailability} disabled={loadingSessions || !productsLoaded || !selectedProduct}>
           {loadingSessions ? "Loading sessions..." : "Load availability"}
         </button>
       </div>
@@ -332,17 +361,17 @@ export default function RezdySessionPicker({ initialDate = "", initialQty = 2 }:
           onChange={(e) => setAllowBooking(e.target.checked)}
           style={{ marginRight: 8 }}
         />
-        I understand this action submits a real Rezdy booking request.
+        I understand this is the fallback request flow, not the direct online checkout.
       </label>
 
       <div style={{ marginTop: 10 }}>
         <button
           type="button"
-          className="comic-btn comic-btn-primary"
+          className="comic-btn comic-btn-secondary"
           onClick={createBooking}
           disabled={submitting || !selectedSession || !selectedProduct}
         >
-          {submitting ? "Creating booking..." : "Create booking"}
+          {submitting ? "Creating fallback booking..." : "Submit fallback request"}
         </button>
       </div>
 
