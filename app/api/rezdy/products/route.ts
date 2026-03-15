@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { rezdyListProducts } from "@/lib/rezdy";
 
 export const runtime = "nodejs";
+const DEFAULT_REZDY_CATALOG_ID = process.env.REZDY_REDROCKS_CATALOG_ID ?? "541037";
 
 type UiProduct = {
   productCode: string;
@@ -55,7 +56,7 @@ function isRedRocksProduct(product: Record<string, unknown>, allowedCodes: Set<s
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const catalogId = searchParams.get("catalogId") || process.env.REZDY_REDROCKS_CATALOG_ID || "";
+  const catalogId = searchParams.get("catalogId") || DEFAULT_REZDY_CATALOG_ID;
   const allowedCodes = parseAllowedCodes(process.env.REZDY_REDROCKS_PRODUCT_CODES);
 
   try {
@@ -64,7 +65,7 @@ export async function GET(request: Request) {
 
     const products = await rezdyListProducts(query);
     const narrowed =
-      catalogId && catalogId === "541037"
+      catalogId === DEFAULT_REZDY_CATALOG_ID
         ? products.filter((product) => isRedRocksProduct(product as Record<string, unknown>, allowedCodes))
         : products;
     const productRows = narrowed.length > 0 ? narrowed : products;
@@ -100,7 +101,7 @@ export async function GET(request: Request) {
     return NextResponse.json({
       products: finalProducts,
       catalogIdApplied: catalogId || null,
-      catalogFilterFallback: catalogId === "541037" ? narrowed.length === 0 : false,
+      catalogFilterFallback: catalogId === DEFAULT_REZDY_CATALOG_ID ? narrowed.length === 0 : false,
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Failed to fetch Rezdy products";

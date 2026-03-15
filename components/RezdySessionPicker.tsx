@@ -10,6 +10,8 @@ type UiProduct = {
   maxPrice: number | null;
 };
 
+const DEFAULT_REZDY_CATALOG_ID = "541037";
+
 type UiSession = {
   sessionKey: string;
   startTimeLocal: string | null;
@@ -89,7 +91,10 @@ export default function RezdySessionPicker({ initialDate = "", initialQty = 2 }:
     setLoadingProducts(true);
     setMessage(null);
     try {
-      const response = await fetch("/api/rezdy/products", { method: "GET", cache: "no-store" });
+      const response = await fetch(`/api/rezdy/products?catalogId=${DEFAULT_REZDY_CATALOG_ID}`, {
+        method: "GET",
+        cache: "no-store",
+      });
       const data = (await response.json()) as { products?: UiProduct[]; error?: string };
       if (!response.ok) throw new Error(data?.error || "Failed to load products");
       const rows = Array.isArray(data.products) ? data.products : [];
