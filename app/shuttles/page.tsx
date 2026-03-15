@@ -148,26 +148,21 @@ export default function ShuttlesPage() {
             ))}
           </div>
           <p className="mt-5 max-w-3xl text-sm leading-6 text-white/70">
-            Choose between shared shuttle seats and private rides, then move into the booking steps for Red Rocks.
+            Choose shared shuttle seats or a private ride, then complete booking online for your Red Rocks night.
           </p>
         </section>
 
         <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(8,13,24,0.98),rgba(6,9,18,0.98))] p-6 sm:p-8">
           <div className="flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
             <ShieldCheck className="h-4 w-4" />
-            Booking Notes
+            Before Show Night
           </div>
           <div className="mt-4 max-w-4xl space-y-4 text-sm leading-7 text-white/72">
             <p>
-              Shared shuttle seats and private rides book online through Rezdy. Availability and payment details are handled there.
+              Shared shuttle seats and private rides can be booked online.
             </p>
             <p>
-              To book:
-              <code className="mx-1 rounded bg-white/8 px-1.5 py-0.5 text-white">/book</code>,
-              pick <code className="mx-1 rounded bg-white/8 px-1.5 py-0.5 text-white">Red Rocks</code>,
-              choose <code className="mx-1 rounded bg-white/8 px-1.5 py-0.5 text-white">Shared</code> or
-              <code className="mx-1 rounded bg-white/8 px-1.5 py-0.5 text-white">Private</code>,
-              then complete booking on the final page.
+              Pickup details are sent before show night, and your return ride is covered after the show.
             </p>
           </div>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
@@ -181,7 +176,7 @@ export default function ShuttlesPage() {
               href="/about"
               className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
             >
-              How It Works
+              About The Service
             </Link>
           </div>
         </section>
