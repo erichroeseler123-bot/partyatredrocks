@@ -17,16 +17,16 @@ const rideCards = [
     title: "Shared Shuttle",
     price: "$59 / seat",
     copy:
-      "The fastest path for most riders. Fixed-price seats, clear meetup flow, and the cleanest way into online checkout.",
+      "Round-trip shuttle seats for most riders. Fixed price, clear pickup, and a set ride home after the show.",
     href: "/book/red-rocks-amphitheatre/shared",
-    cta: "Browse Shared Shuttles",
+    cta: "Book Shared Seats",
     icon: Ticket,
   },
   {
     title: "Private SUV",
     price: "Private group",
     copy:
-      "Best for small groups that want one vehicle, one pickup window, and direct control over the night.",
+      "Best for small groups that want one vehicle, one pickup window, and a direct ride to and from Red Rocks.",
     href: "/book/red-rocks-amphitheatre/private/suv",
     cta: "Book Private SUV",
     icon: CarFront,
@@ -35,9 +35,9 @@ const rideCards = [
     title: "Private Van",
     price: "10-14 guests",
     copy:
-      "Built for full crews that want to stay together from departure through the return ride.",
+      "Built for full crews that want to stay together from departure through the ride home.",
     href: "/book/red-rocks-amphitheatre/private/van",
-    cta: "View Van Options",
+    cta: "Book Private Van",
     icon: Bus,
   },
 ];
@@ -64,7 +64,7 @@ export default function ShuttlesPage() {
               Red Rocks Shuttle From Denver
             </h1>
             <p className="mt-5 max-w-2xl text-[15px] leading-7 text-white/74 sm:text-lg">
-              Shared seats from $59, private SUVs and vans for groups, and online booking for the night that fits your plan.
+              Shared seats from $59. Private rides for groups. Book online and get pickup details before show night.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Link
@@ -129,7 +129,7 @@ export default function ShuttlesPage() {
 
         <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(17,11,18,0.96),rgba(10,9,20,0.96))] p-6 sm:p-8">
           <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
-            Booking Details
+            How Booking Works
           </div>
           <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {proofPoints.map((point) => (
