@@ -82,7 +82,7 @@ export default async function VenueBookingPage({
               Private Ride
             </div>
             <h2 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white">
-              {isRedRocks ? "SUV, Van, or Party Bus" : "Private Vehicle Service"}
+              {isRedRocks ? "SUV, Van, Sprinter, or Party Bus" : "Private Vehicle Service"}
             </h2>
             <p className="mt-3 text-sm leading-6 text-white/70">
               {isRedRocks

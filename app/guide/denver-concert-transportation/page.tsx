@@ -37,12 +37,12 @@ const rideRows = [
     tradeoff: "Higher upfront price",
   },
   {
-    rideType: "Private Van",
+    rideType: "10 Passenger Van",
     bestFor: "Mid-size groups moving together",
     tradeoff: "Best when booked ahead",
   },
   {
-    rideType: "Party Bus",
+    rideType: "24 Passenger Party Bus",
     bestFor: "Large group celebration nights",
     tradeoff: "Works best when reserved early",
   },
@@ -140,7 +140,7 @@ export default async function DenverConcertTransportationGuidePage() {
           <article className="rounded-3xl border border-soft bg-surface-strong p-6">
             <h2 className="text-2xl font-black tracking-tight">Group of 7+</h2>
             <p className="mt-3 text-soft leading-relaxed">
-              A private van or party bus keeps everyone together from pickup to return.
+              A 10 passenger van, 14 passenger Sprinter, or 24 passenger party bus keeps everyone together from pickup to return.
             </p>
           </article>
         </section>

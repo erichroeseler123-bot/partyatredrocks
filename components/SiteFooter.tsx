@@ -6,8 +6,8 @@ const FOOTER_GROUPS = [
     links: [
       { href: "/book", label: "Book a Ride" },
       { href: "/private-suburban", label: "Private SUV" },
-      { href: "/private-van", label: "Private Van" },
-      { href: "/party-bus", label: "Party Bus" },
+      { href: "/private-van", label: "10 Passenger Van" },
+      { href: "/party-bus", label: "24 Passenger Party Bus" },
     ],
   },
   {

@@ -2,9 +2,9 @@ import Link from "next/link";
 import { DISPLAY } from "@/lib/display";
 
 export const metadata = {
-  title: "Party Bus to Red Rocks",
+  title: "24 Passenger Party Bus to Red Rocks",
   description:
-    "Party bus group transportation to Red Rocks with coordinated departure and return planning.",
+    "24 passenger party bus transportation to Red Rocks with coordinated departure and return planning.",
 };
 
 export default function PartyBusPage() {
@@ -13,7 +13,7 @@ export default function PartyBusPage() {
       <section className="comic-wrap">
         <div className="comic-hero">
           <div className="comic-kicker">Big Group Energy</div>
-          <h1 className="comic-title">Party Bus Booking</h1>
+          <h1 className="comic-title">24 Passenger Party Bus</h1>
           <p className="comic-copy">
             Turn the ride into the pregame while keeping your group synced from pickup to final drop-off.
           </p>
@@ -40,7 +40,7 @@ export default function PartyBusPage() {
           <div className="comic-grid">
             <div className="comic-panel">
               <div className="comic-tag">Best For</div>
-              <div className="comic-h3">Large Celebrations</div>
+              <div className="comic-h3">Up to 24 Passengers</div>
               <p className="comic-copy">Great for birthdays, bachelor and bachelorette parties, and reunions.</p>
             </div>
             <div className="comic-panel">

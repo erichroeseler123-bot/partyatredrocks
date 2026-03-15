@@ -2,9 +2,9 @@ import Link from "next/link";
 import { DISPLAY } from "@/lib/display";
 
 export const metadata = {
-  title: "Private Van to Red Rocks",
+  title: "10 Passenger Van to Red Rocks",
   description:
-    "10-14 passenger private van options for Red Rocks show nights with group pickup and coordinated return.",
+    "10 passenger van service for Red Rocks show nights with group pickup and coordinated return.",
 };
 
 export default function PrivateVanPage() {
@@ -13,7 +13,7 @@ export default function PrivateVanPage() {
       <section className="comic-wrap">
         <div className="comic-hero">
           <div className="comic-kicker">Group Transport</div>
-          <h1 className="comic-title">Private Van Service</h1>
+          <h1 className="comic-title">10 Passenger Van Service</h1>
           <p className="comic-copy">
             Keep your full group together with one vehicle, one timeline, and one post-show pickup plan.
           </p>
@@ -40,7 +40,7 @@ export default function PrivateVanPage() {
           <div className="comic-grid">
             <div className="comic-panel">
               <div className="comic-tag">Capacity</div>
-              <div className="comic-h3">10 to 14 Passengers</div>
+              <div className="comic-h3">Up to 10 Passengers</div>
               <p className="comic-copy">Ideal for birthday groups, team nights, and alumni crews.</p>
             </div>
             <div className="comic-panel">

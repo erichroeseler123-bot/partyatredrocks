@@ -25,13 +25,13 @@ const privateOptions = [
   {
     slug: "sprinter",
     title: "14 Passenger Sprinter",
-    eyebrow: "Up to 14 Guests",
+    eyebrow: "$799 • Up to 14 Guests",
     body: "Best for larger groups that want more space, limo-lane access, and one vehicle for the full night.",
   },
   {
     slug: "party-bus",
-    title: "Party Bus",
-    eyebrow: "24 Passengers",
+    title: "24 Passenger Party Bus",
+    eyebrow: "$1199 • Up to 24 Guests",
     body: "Best for larger groups who want to tailgate, stay together, and make the ride part of the night.",
   },
 ] as const;

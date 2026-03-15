@@ -27,14 +27,14 @@ const optionMeta = {
   sprinter: {
     title: "14 Passenger Sprinter",
     body: "Best for larger groups that want more room, limo-lane access, and one vehicle for the full night.",
-    price: "Up to 14 guests",
+    price: "$799",
     iframeUrl: "https://gosnotransportation58.rezdy.com/745684/sprinter-van-14-passenger?iframe=true",
     ctaLabel: "Open Sprinter Booking",
   },
   "party-bus": {
-    title: "Party Bus",
+    title: "24 Passenger Party Bus",
     body: "Best for bigger groups that want to tailgate, stay together, and make the ride part of the night.",
-    price: "24 passengers",
+    price: "$1199",
     iframeUrl: "https://gosnotransportation58.rezdy.com/689909/bus-24-passenger?iframe=true",
     ctaLabel: "Open Party Bus Booking",
   },

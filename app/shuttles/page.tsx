@@ -42,11 +42,20 @@ const rideCards = [
   },
   {
     title: "14 Passenger Sprinter",
-    price: "Up to 14 guests",
+    price: "$799",
     copy:
       "Best for larger groups that want more room, limo-lane access, and one vehicle for the full night.",
     href: "/book/red-rocks-amphitheatre/private/sprinter",
     cta: "Book Sprinter Van",
+    icon: Bus,
+  },
+  {
+    title: "24 Passenger Party Bus",
+    price: "$1199",
+    copy:
+      "Best for bigger groups who want to tailgate, stay together, and make the ride part of the night.",
+    href: "/book/red-rocks-amphitheatre/private/party-bus",
+    cta: "Book Party Bus",
     icon: Bus,
   },
 ];
@@ -108,7 +117,7 @@ export default function ShuttlesPage() {
           <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">
             Shared if you want speed. Private if you want control.
           </h2>
-          <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {rideCards.map((ride) => {
               const Icon = ride.icon;
               return (
