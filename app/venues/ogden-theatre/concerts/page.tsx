@@ -8,7 +8,7 @@ export const revalidate = 1800;
 export const metadata = {
   title: "Ogden Theatre Concert Schedule 2026 | Dates, Lineup, Ride Planning",
   description:
-    "Ogden Theatre concerts for 2026. Browse upcoming shows, artist links, and transportation planning in one master schedule page.",
+    "Ogden Theatre concerts for 2026. Browse upcoming shows, show details, and ride options in one master schedule page.",
   alternates: { canonical: `${SITE}/venues/ogden-theatre/concerts` },
 };
 
@@ -58,11 +58,11 @@ export default async function OgdenConcertsPage() {
           <div className="comic-kicker">Ogden Theatre</div>
           <h1 className="comic-title">Ogden Theatre Concert Schedule 2026</h1>
           <p className="comic-copy">
-            Master schedule for upcoming Ogden Theatre shows with artist drill-down and direct ride-booking links.
+            Master schedule for upcoming Ogden Theatre shows. Open show details and plan your ride before show night.
           </p>
           <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-6 w-full px-4">
             <Link href="/venues/ogden-theatre" className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[180px] text-center">
-              Venue Hub
+              Venue Details
             </Link>
             <Link href="/venues/ogden-theatre/parking" className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[180px] text-center">
               Parking Guide
@@ -70,8 +70,8 @@ export default async function OgdenConcertsPage() {
             <Link href="/venues/ogden-theatre/transportation" className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[180px] text-center">
               Transportation
             </Link>
-            <Link href="/find?venue=ogden-theatre&qty=2" className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[180px] text-center">
-              Find a Ride
+            <Link href="/book?venue=ogden-theatre" className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[180px] text-center">
+              Book a Ride
             </Link>
           </div>
         </div>
@@ -120,13 +120,13 @@ export default async function OgdenConcertsPage() {
 
                   <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
                     <Link href={`/shows/${encodeURIComponent(event.id)}`} className="comic-btn comic-btn-secondary">
-                      Show Intel
+                      Show Details
                     </Link>
                     <Link
-                      href={`/find?date=${encodeURIComponent(event.dateKey)}&venue=ogden-theatre&qty=2`}
+                      href="/book?venue=ogden-theatre"
                       className="comic-btn comic-btn-primary"
                     >
-                      Ride Options
+                      Get a Ride
                     </Link>
                   </div>
                 </article>

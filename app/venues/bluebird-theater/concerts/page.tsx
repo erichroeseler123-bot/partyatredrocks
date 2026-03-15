@@ -8,7 +8,7 @@ export const revalidate = 1800;
 export const metadata = {
   title: "Bluebird Theater Concert Schedule 2026 | Denver Shows & Rides",
   description:
-    "Full 2026 lineup at Bluebird Theater. Browse upcoming dates, artist links, and pre-filled ride booking options.",
+    "Full 2026 lineup at Bluebird Theater. Browse upcoming dates, show details, and ride options for the night.",
   alternates: { canonical: `${SITE}/venues/bluebird-theater/concerts` },
 };
 
@@ -45,11 +45,11 @@ export default async function BluebirdConcertsPage() {
           <div className="comic-kicker">Denver Venue Guide</div>
           <h1 className="comic-title">Bluebird Theater Concert Schedule 2026</h1>
           <p className="comic-copy">
-            Historic East Colfax lineup for 2026 with artist drill-down and direct ride-booking links.
+            Historic East Colfax lineup for 2026. Browse upcoming shows, open show details, and plan your ride before show night.
           </p>
           <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-6 w-full px-4">
-            <Link href="/find?venue=bluebird-theater&qty=2" className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[180px] text-center">
-              Find a Ride
+            <Link href="/book?venue=bluebird-theater" className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[180px] text-center">
+              Book a Ride
             </Link>
             <Link href="/venues/bluebird-theater/best-time-to-arrive" className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[180px] text-center">
               Best Arrival Time
@@ -101,10 +101,10 @@ export default async function BluebirdConcertsPage() {
 
                   <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
                     <Link href={`/shows/${encodeURIComponent(event.id)}`} className="comic-btn comic-btn-secondary">
-                      Show Intel
+                      Show Details
                     </Link>
-                    <Link href={`/find?date=${encodeURIComponent(event.dateKey)}&venue=bluebird-theater&qty=2`} className="comic-btn comic-btn-primary">
-                      Ride Options
+                    <Link href="/book?venue=bluebird-theater" className="comic-btn comic-btn-primary">
+                      Get a Ride
                     </Link>
                   </div>
                 </article>

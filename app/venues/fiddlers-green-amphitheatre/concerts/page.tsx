@@ -8,7 +8,7 @@ export const revalidate = 1800;
 export const metadata = {
   title: "Fiddler's Green Amphitheatre Concert Schedule 2026 | Greenwood Village Shows and Rides",
   description:
-    "Full 2026 concert lineup at Fiddler's Green Amphitheatre in Greenwood Village. Browse dates, artist info, and book shuttle rides directly from the schedule.",
+    "Full 2026 concert lineup at Fiddler's Green Amphitheatre in Greenwood Village. Browse dates, show details, and ride options for the night.",
   alternates: { canonical: `${SITE}/venues/fiddlers-green-amphitheatre/concerts` },
 };
 
@@ -45,11 +45,11 @@ export default async function FiddlersGreenConcertsPage() {
           <div className="comic-kicker">Greenwood Village Venue Guide</div>
           <h1 className="comic-title">Fiddler's Green Amphitheatre Concert Schedule 2026</h1>
           <p className="comic-copy">
-            Major amphitheatre lineup for 2026. Browse upcoming shows, plan arrival timing, and book shuttle rides before post-show traffic surge.
+            Major amphitheatre lineup for 2026. Browse upcoming shows, open show details, and plan your ride before show night.
           </p>
           <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-6 w-full px-4">
-            <Link href="/find?venue=fiddlers-green-amphitheatre&qty=2" className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[200px] text-center">
-              Book Shuttle
+            <Link href="/book?venue=fiddlers-green-amphitheatre" className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[200px] text-center">
+              Book a Ride
             </Link>
             <Link href="/venues/fiddlers-green-amphitheatre/best-time-to-arrive" className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[200px] text-center">
               Best Arrival Time
@@ -92,10 +92,10 @@ export default async function FiddlersGreenConcertsPage() {
                   ) : null}
                   <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
                     <Link href={`/shows/${encodeURIComponent(event.id)}`} className="comic-btn comic-btn-secondary">
-                      Show Intel
+                      Show Details
                     </Link>
-                    <Link href={`/find?date=${encodeURIComponent(event.dateKey)}&venue=fiddlers-green-amphitheatre&qty=2`} className="comic-btn comic-btn-primary">
-                      Book Ride
+                    <Link href="/book?venue=fiddlers-green-amphitheatre" className="comic-btn comic-btn-primary">
+                      Get a Ride
                     </Link>
                   </div>
                 </article>
