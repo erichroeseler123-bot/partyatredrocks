@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getArtistsCatalog, getEventsCatalog } from "@/lib/events/getCatalog";
 import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
+import { normalizeVenueSlug } from "@/lib/parrHandoff";
 
 export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
@@ -91,7 +92,7 @@ export default async function ArtistVenuePage({ params }: Props) {
   const artistName = shows[0].artistNames.find((name) => slugify(name) === artist) ?? titleCaseSlug(artist);
   const artistId = artists.find((row) => slugify(row.name) === artist)?.id ?? null;
   const venueName = VENUE_LEDGER_BY_SLUG.get(venue)?.name ?? titleCaseSlug(venue);
-  const isRedRocks = venue === "red-rocks-amphitheatre" || venue === "redrocks";
+  const isRedRocks = normalizeVenueSlug(venue) === "red-rocks-amphitheatre";
 
   return (
     <main className="comic-page pt-24 pb-10">

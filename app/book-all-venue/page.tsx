@@ -1,6 +1,6 @@
 import { ALL_VENUES } from "@/lib/venues/registry";
-import { getParrDccVenueEntry } from "@/lib/parrVenueMap";
 import { normalizeVenueSlug, type HandoffSearchParams } from "@/lib/parrHandoff";
+import { CROSS_SITE_VENUE_MAP } from "@/lib/crossSiteMap";
 
 function firstValue(searchParams: HandoffSearchParams, key: string) {
   const value = searchParams[key];
@@ -18,7 +18,7 @@ export default async function BookAllVenue({
   const date = firstValue(sp, "date");
   const event = firstValue(sp, "event");
   const artist = firstValue(sp, "artist");
-  const dccEntry = getParrDccVenueEntry(venueSlug);
+  const dccEntry = venueSlug ? CROSS_SITE_VENUE_MAP[venueSlug] : undefined;
 
   return (
     <main className="min-h-screen bg-surface text-white flex flex-col items-center justify-center px-6">

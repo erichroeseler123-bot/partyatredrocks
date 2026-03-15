@@ -5,31 +5,15 @@ import FAQBlock from "@/components/FAQBlock";
 import MusicWave from "@/components/MusicWave";
 import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
 import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
+import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
-type SP = Record<string, string | string[] | undefined>;
+type SP = HandoffSearchParams;
 
 function first(sp: SP, key: string) {
   const v = sp[key];
   return Array.isArray(v) ? v[0] : v;
-}
-
-function buildQs(sp: SP) {
-  const qs = new URLSearchParams();
-  const pickup = first(sp, "pickup");
-  const date = first(sp, "date");
-  const qty = first(sp, "qty");
-  const venue = first(sp, "venue");
-
-
-  if (pickup) qs.set("pickup", pickup);
-  if (date) qs.set("date", date);
-  if (qty) qs.set("qty", qty);
-  if (venue) qs.set("venue", venue);
-
-  const q = qs.toString();
-  return q ? `?${q}` : "";
 }
 
 export default async function RedRocksPage({
@@ -53,14 +37,12 @@ export default async function RedRocksPage({
   const pickup = first(sp, "pickup") || "";
   const date = first(sp, "date") || "";
   const qty = first(sp, "qty") || "";
-
-  const qs = buildQs(sp);
-
   const events = await getRedRocksEvents(2026);
-
-  // NOTE: pick the real booking endpoint you want.
-  // If /book-shuttle exists and is the actual Red Rocks booking flow, use it:
-  const bookTarget = `/book-shuttle${qs}`;
+  const bookTarget = buildBookingHref({
+    target: "book",
+    venue: "red-rocks-amphitheatre",
+    searchParams: sp,
+  });
 
   return (
     <main className="comic-page pt-24 pb-10">
@@ -113,7 +95,7 @@ export default async function RedRocksPage({
               <Link className="comic-btn comic-btn-primary" href={bookTarget}>
                 Continue to booking
               </Link>
-              <Link className="comic-btn comic-btn-secondary" href="/book?venue=red-rocks">
+              <Link className="comic-btn comic-btn-secondary" href="/book?venue=red-rocks-amphitheatre">
                 Change destination
               </Link>
             </div>
@@ -129,7 +111,7 @@ export default async function RedRocksPage({
               Booking
             </div>
             <div className="mt-4 flex flex-wrap gap-3">
-              <Link className="comic-btn comic-btn-primary" href="/book?venue=red-rocks">
+              <Link className="comic-btn comic-btn-primary" href="/book?venue=red-rocks-amphitheatre">
                 Start booking
               </Link>
               <Link className="comic-btn comic-btn-secondary" href="/week">

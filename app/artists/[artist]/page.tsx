@@ -5,6 +5,7 @@ import { getArtistsCatalog, getEventsCatalog } from "@/lib/events/getCatalog";
 import { getMediaIndex } from "@/lib/media/getMediaIndex";
 import { selectImageByPriority } from "@/lib/media/selectImage";
 import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
+import { normalizeVenueSlug } from "@/lib/parrHandoff";
 
 export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
@@ -28,7 +29,7 @@ function prettySlug(slug: string): string {
 }
 
 function isRedRocksVenue(venueId: string): boolean {
-  return venueId === "red-rocks-amphitheatre" || venueId === "redrocks";
+  return normalizeVenueSlug(venueId) === "red-rocks-amphitheatre";
 }
 
 function dateLabel(dateKey: string): string {
