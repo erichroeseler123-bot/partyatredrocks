@@ -107,7 +107,7 @@ export default async function SharedOptionsPage({
               <div className="mt-5">
                 <Link
                   href="/find"
-                  className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#ff5b2e] px-5 text-xs font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#ff7148]"
+                  className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#3df3ff] px-5 text-xs font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
                 >
                   Open Shuttle Checkout
                 </Link>

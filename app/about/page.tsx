@@ -70,7 +70,7 @@ export default function AboutPage() {
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/book"
-                className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#ff5b2e] px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#ff7148]"
+                className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
               >
                 Start Booking
               </Link>

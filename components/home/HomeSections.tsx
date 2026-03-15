@@ -144,7 +144,7 @@ export default function HomeSections({
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
                 <Link
                   href="/book"
-                  className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#ff5b2e] px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#ff7148] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffb07c] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a1020]"
+                  className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffb07c] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a1020]"
                 >
                   Start Booking
                 </Link>
@@ -255,7 +255,7 @@ export default function HomeSections({
                   <div className="mt-5 flex flex-wrap gap-3">
                     <Link
                       href={`/book?event=${event.id}`}
-                      className="inline-flex min-h-11 items-center rounded-full bg-[#ff5b2e] px-4 text-xs font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#ff7148]"
+                      className="inline-flex min-h-11 items-center rounded-full bg-[#3df3ff] px-4 text-xs font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
                     >
                       Ride Options
                     </Link>
@@ -368,7 +368,7 @@ export default function HomeSections({
             <div className="flex flex-col gap-3 lg:min-w-[220px]">
                 <Link
                   href="/book"
-                  className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#ff5b2e] px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#ff7148]"
+                  className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
                 >
                   Book Your Shuttle Now
                 </Link>

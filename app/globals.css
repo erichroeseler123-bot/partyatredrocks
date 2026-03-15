@@ -2,13 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 :root{
-  --surface:#070A12;
-  --surface2:#0B1020;
-  --text:#E8EEF9;
-  --muted:rgba(232,238,249,0.72);
-  --accent:#4CC9F0;
+  --surface:#050816;
+  --surface2:#0B1224;
+  --text:#ffffff;
+  --muted:rgba(255,255,255,0.74);
+  --accent:#3DF3FF;
+  --accentHover:#62F6FF;
+  --accentText:#07111D;
   --accent2:#FFB07C;
-  --glow:rgba(76,201,240,0.28);
+  --accentCool:#8FD0FF;
+  --glow:rgba(61,243,255,0.28);
   --radius-pill:9999px;
   --heroOverlay:linear-gradient(180deg, rgba(7,10,18,0.10) 0%, rgba(7,10,18,0.72) 55%, rgba(7,10,18,0.92) 100%);
 }
@@ -20,13 +23,16 @@ a:hover { text-decoration: underline; }
 a:visited { color: var(--accent2); }
 
 :root{
-  --surface:#070A12;
-  --surface2:#0B1020;
-  --text:#E8EEF9;
-  --muted:rgba(232,238,249,0.72);
-  --accent:#4CC9F0;
+  --surface:#050816;
+  --surface2:#0B1224;
+  --text:#ffffff;
+  --muted:rgba(255,255,255,0.74);
+  --accent:#3DF3FF;
+  --accentHover:#62F6FF;
+  --accentText:#07111D;
   --accent2:#FFB07C;
-  --glow:rgba(76,201,240,0.28);
+  --accentCool:#8FD0FF;
+  --glow:rgba(61,243,255,0.28);
   --heroOverlay:linear-gradient(180deg, rgba(7,10,18,0.10) 0%, rgba(7,10,18,0.72) 55%, rgba(7,10,18,0.92) 100%);
 }
 
@@ -37,13 +43,16 @@ a:hover { text-decoration: underline; }
 a:visited { color: var(--accent2); }
 
 :root{
-  --surface: #070A12;
-  --surface2: #0B1020;
-  --text: #E8EEF9;
-  --muted: rgba(232,238,249,0.72);
-  --accent: #4CC9F0;
+  --surface: #050816;
+  --surface2: #0B1224;
+  --text: #ffffff;
+  --muted: rgba(255,255,255,0.74);
+  --accent: #3DF3FF;
+  --accentHover: #62F6FF;
+  --accentText: #07111D;
   --accent2: #FFB07C;
-  --glow: rgba(76,201,240,0.28);
+  --accentCool: #8FD0FF;
+  --glow: rgba(61,243,255,0.28);
   --heroOverlay: linear-gradient(180deg, rgba(7,10,18,0.10) 0%, rgba(7,10,18,0.72) 55%, rgba(7,10,18,0.92) 100%);
 }
 
@@ -242,8 +251,13 @@ footer{
 
 
 .btn-primary {
-  @apply text-white font-black uppercase tracking-wide px-8 py-4 rounded-full transition shadow-xl inline-block hover:shadow-2xl hover:scale-[1.03] active:scale-95;
-  background: linear-gradient(180deg, #3df3ff, #1dbfd3);
+  @apply font-black uppercase tracking-wide px-8 py-4 rounded-full transition shadow-xl inline-block hover:shadow-2xl hover:scale-[1.03] active:scale-95;
+  color: var(--accentText);
+  background: linear-gradient(180deg, var(--accent), #21c6da);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(180deg, var(--accentHover), #33d7ea);
 }
 
 /* Base defaults */
