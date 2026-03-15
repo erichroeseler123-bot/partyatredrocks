@@ -1,7 +1,5 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { venueImage } from "@/lib/display";
-import { VENUES } from "@/lib/venues";
+import ServedVenueSections from "@/components/venues/ServedVenueSections";
 
 export default function VenuesPage() {
   return (
@@ -11,46 +9,32 @@ export default function VenuesPage() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,91,46,0.18),transparent_28%),radial-gradient(circle_at_top_right,rgba(143,208,255,0.14),transparent_28%)]" />
           <div className="relative max-w-3xl">
             <div className="inline-flex items-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
-              Venue Index
+              Venue guide
             </div>
             <h1 className="mt-5 text-[2.5rem] font-black uppercase leading-[0.94] tracking-[-0.04em] sm:text-[4rem] lg:text-[5rem]">
-              Shuttle Destinations
+              Choose Your Venue
             </h1>
             <p className="mt-5 max-w-2xl text-[15px] leading-7 text-white/74 sm:text-lg">
-              Browse the venues we cover, open venue details, and move straight to the right ride or show-night plan.
+              Browse the Colorado venues we cover, then open venue details or go straight into booking.
             </p>
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/book"
+                className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#ff5b2e] px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#ff7148]"
+              >
+                Book a Ride
+              </Link>
+              <Link
+                href="/week"
+                className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
+              >
+                Shows This Week
+              </Link>
+            </div>
           </div>
         </section>
 
-        <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {VENUES.map((v) => (
-            <Link
-              key={v.slug}
-              href={`/venues/${v.slug}`}
-              className="group relative overflow-hidden rounded-[26px] border border-white/10 bg-[#0b1224] p-7 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
-            >
-              <img
-                src={venueImage(v.slug)}
-                alt={v.name}
-                className="absolute inset-0 h-full w-full object-cover opacity-20 transition duration-500 group-hover:scale-105 group-hover:opacity-28"
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,18,0.14),rgba(5,8,18,0.8)_78%,rgba(5,8,18,0.94)_100%)]" />
-              <div className="relative z-10">
-                <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
-                  Venue Guide
-                </div>
-                <h2 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white">
-                  {v.name}
-                </h2>
-                <div className="mt-5 inline-flex items-center text-sm font-bold text-white/88">
-                  View shuttles & shows <ArrowRight className="ml-1 h-4 w-4" />
-                </div>
-              </div>
-            </Link>
-          ))}
-        </section>
+        <ServedVenueSections mode="venues" />
       </section>
     </main>
   );
