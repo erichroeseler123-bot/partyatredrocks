@@ -77,7 +77,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // If invalid slug: let the page 404, but metadata should still be sane.
   if (!def) {
     return {
-      title: "Music Scene Guide | Party at Red Rocks",
+      title: "Music Scenes | Party at Red Rocks",
       description:
         "Browse Colorado music scenes, upcoming shows, and venues connected to Red Rocks and Denver concerts.",
       robots: { index: false, follow: true },
@@ -230,32 +230,46 @@ export default async function SceneHub({ params }: Props) {
           className="inline-flex items-center gap-2 rounded-full pill px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white/80"
           style={def.accentColor ? { borderColor: def.accentColor } : undefined}
         >
-          Scene guide • {def.emoji ? <span>{def.emoji}</span> : null} {def.slug}
+          Music scene • {def.emoji ? <span>{def.emoji}</span> : null} {def.slug}
         </div>
 
         <h1 className="mt-4 text-4xl font-black tracking-tight md:text-6xl">
           {def.title}
         </h1>
 
-        <p className="mt-4 max-w-3xl text-white/70">{def.tagline}</p>
+        <p className="mt-4 max-w-3xl text-white/70">
+          {def.description || def.tagline}
+        </p>
 
-        {def.description ? (
-          <p className="mt-3 max-w-3xl text-sm text-white/55">{def.description}</p>
-        ) : null}
+        <div className="mt-6 rounded-[24px] border border-white/10 bg-[#0b1224] p-5">
+          <div className="text-sm font-semibold text-white/88">
+            Need a ride to Red Rocks?
+          </div>
+          <p className="mt-2 text-sm leading-6 text-white/68">
+            See shuttle options for Red Rocks show nights.
+          </p>
+          <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+            <Link
+              href="/shuttles"
+              className="inline-flex items-center justify-center rounded-full bg-neon-blue px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-black transition hover:bg-surface/40"
+            >
+              See Shuttle Options
+            </Link>
+            <Link
+              href="/venues"
+              className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft"
+            >
+              Browse Venues →
+            </Link>
+          </div>
+        </div>
 
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <Link
-            href={`/book?scene=${def.slug}`}
-            className="inline-flex items-center justify-center rounded-full bg-neon-blue px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-black transition hover:bg-surface/40"
-          >
-            See ride options
-          </Link>
-
-          <Link
-            href="/venues"
+            href="/artists"
             className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft"
           >
-            Browse Venues →
+            Artists →
           </Link>
 
           <a
@@ -265,7 +279,7 @@ export default async function SceneHub({ params }: Props) {
             className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft"
             title="More scene guides"
           >
-            More Scene Guides →
+            More Guides →
           </a>
 
           {def.slug === "bluegrass" ? (
@@ -306,7 +320,17 @@ export default async function SceneHub({ params }: Props) {
           No upcoming shows are listed for this scene yet.
         </div>
       ) : (
-        <section className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <section className="mt-10">
+          <div className="mb-6">
+            <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">
+              Upcoming shows
+            </div>
+            <h2 className="mt-2 text-3xl font-black tracking-tight text-white">
+              Upcoming Shows
+            </h2>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {events.map((e) => (
             <div
               key={e.id}
@@ -355,12 +379,13 @@ export default async function SceneHub({ params }: Props) {
                   </a>
                 ) : null}
 
-                <Link className="text-white/70 underline" href={`/book?event=${e.id}&scene=${def.slug}`}>
-                  Ride Options →
+                <Link className="text-white/70 underline" href="/shuttles">
+                  Shuttle Options →
                 </Link>
               </div>
             </div>
           ))}
+          </div>
         </section>
       )}
     </main>

@@ -2,9 +2,9 @@ import Link from "next/link";
 
 const FOOTER_GROUPS = [
   {
-    title: "Rides",
+    title: "Ride Options",
     links: [
-      { href: "/book-shuttle", label: "Book Shuttle" },
+      { href: "/book-shuttle", label: "Book a Ride" },
       { href: "/private-suburban", label: "Private SUV" },
       { href: "/private-van", label: "Private Van" },
       { href: "/party-bus", label: "Party Bus" },
@@ -20,21 +20,21 @@ const FOOTER_GROUPS = [
     ],
   },
   {
-    title: "Bands",
+    title: "Artists",
     links: [
-      { href: "/bands", label: "Artist Index" },
-      { href: "/search", label: "Season Search" },
-      { href: "/week/red-rocks", label: "Red Rocks Week" },
+      { href: "/bands", label: "Artists" },
+      { href: "/week/red-rocks", label: "Shows This Week" },
       { href: "/calendar", label: "Calendar" },
+      { href: "/scene", label: "Scenes" },
     ],
   },
   {
     title: "Help",
     links: [
-      { href: "/guide", label: "Guide Hub" },
+      { href: "/guide", label: "Guides" },
       { href: "/guide/red-rocks-faq", label: "Red Rocks FAQ" },
       { href: "/about", label: "About" },
-      { href: "/book", label: "Book Shuttle" },
+      { href: "/book", label: "Pickup Details" },
     ],
   },
 ] as const;
@@ -50,7 +50,7 @@ export default function SiteFooter() {
                 Party at Red Rocks
               </div>
               <div className="mt-3 text-sm text-white/62">
-                Shared shuttles and private rides for Red Rocks show nights, with clear pickup details and a ride back after the show.
+                Shared shuttle seats and private rides for Red Rocks concerts, with pickup points in Denver and return rides after the show.
               </div>
               <div className="mt-5 h-px max-w-[360px] bg-white/12" />
             </div>

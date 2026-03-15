@@ -9,13 +9,13 @@ export default function SceneIndex() {
     <main className="mx-auto max-w-6xl px-4 py-12">
       <div className="rounded-[32px] border border-soft panel p-8">
         <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/70">
-          Music scenes
+          Browse scenes
         </div>
         <h1 className="mt-4 text-4xl md:text-6xl font-black tracking-tight">
-          Discover shows by scene
+          Music Scenes Around Red Rocks
         </h1>
         <p className="mt-4 max-w-3xl text-white/70">
-          Browse artists, venues, and upcoming shows connected to each Colorado music scene.
+          Browse artists, venues, and upcoming shows connected to the music scenes around Red Rocks and Denver.
         </p>
       </div>
 
@@ -29,7 +29,7 @@ export default function SceneIndex() {
             className="rounded-3xl border border-soft panel p-6 hover:bg-surface/40 transition"
           >
             <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">
-              Scene guide
+              Scene
             </div>
             <div className="mt-2 text-2xl font-black">
               {s.emoji ? <span className="mr-2">{s.emoji}</span> : null}
