@@ -82,7 +82,7 @@ export default async function PrivateOptionPage({
           </div>
         </section>
 
-        <section className="rounded-[30px] border border-white/10 bg-[#0b1224] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.42)] sm:p-6">
+        <section className="overflow-visible rounded-[30px] border border-white/10 bg-[#0b1224] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.42)] sm:p-6">
           <div className="mb-4 text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
             Book Online
           </div>
@@ -90,9 +90,10 @@ export default async function PrivateOptionPage({
           <iframe
             src={meta.iframeUrl}
             width="100%"
-            height="960"
+            height="1560"
             frameBorder="0"
-            className="w-full rounded-[20px] bg-white"
+            className="w-full overflow-visible rounded-[20px] border-0 bg-white"
+            style={{ minHeight: "1560px" }}
             title={`${meta.title} booking widget`}
           />
         </section>
