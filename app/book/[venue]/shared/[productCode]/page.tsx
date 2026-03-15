@@ -1,8 +1,9 @@
 import Link from "next/link";
+import Script from "next/script";
 import { notFound } from "next/navigation";
 import venuesJson from "@/data/venues.json";
 import { RecentBookingToast } from "@/components/RecentBookingToast";
-import { getBookingUrl, rezdyListProducts } from "@/lib/rezdy";
+import { rezdyListProducts } from "@/lib/rezdy";
 import { TrustStrip } from "@/components/TrustStrip";
 
 export const runtime = "nodejs";
@@ -21,7 +22,9 @@ type RezdyProductRow = {
 };
 
 const SHARED_CATALOG_ID = "617787";
-const SHARED_WIDGET_URL = "https://gosnotransportation58.rezdy.com/catalog/617787?iframe=true";
+const SHARED_WIDGET_URL = "https://gosnotransportation58.rezdy.com/catalog/617787/shuttles?iframe=true";
+const DENVER_SHUTTLE_WIDGET_URL = "https://gosnotransportation58.rezdy.com/714441/denver-to-red-rocks-shuttle?iframe=true";
+const GOLDEN_SHUTTLE_WIDGET_URL = "https://gosnotransportation58.rezdy.com/714885/golden-to-red-rocks-shuttle?iframe=true";
 
 function getVenue(slug: string): VenueRow | null {
   return (venuesJson as Record<string, VenueRow>)[slug] ?? null;
@@ -35,6 +38,17 @@ function priceLabel(product: RezdyProductRow) {
   const min = Math.min(...prices);
   const max = Math.max(...prices);
   return min === max ? `$${min.toFixed(0)}` : `$${min.toFixed(0)}-$${max.toFixed(0)}`;
+}
+
+function resolveWidgetUrl(product: RezdyProductRow) {
+  const text = `${product.name || ""} ${product.description || ""}`.toLowerCase();
+  if (text.includes("golden") || text.includes("trailhead")) return GOLDEN_SHUTTLE_WIDGET_URL;
+  if (text.includes("denver") || text.includes("sheraton")) return DENVER_SHUTTLE_WIDGET_URL;
+  return SHARED_WIDGET_URL;
+}
+
+function bookingHref(widgetUrl: string) {
+  return widgetUrl.replace("?iframe=true", "");
 }
 
 export default async function SharedProductPage({
@@ -52,6 +66,7 @@ export default async function SharedProductPage({
   const products = (await rezdyListProducts(query).catch(() => [])) as RezdyProductRow[];
   const product = products.find((item) => item.productCode === productCode);
   if (!product) notFound();
+  const widgetUrl = resolveWidgetUrl(product);
 
   return (
     <main className="min-h-screen bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
@@ -73,7 +88,7 @@ export default async function SharedProductPage({
           <div className="mt-4 text-sm font-bold text-[#ffb07c]">{priceLabel(product)}</div>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <a
-              href={getBookingUrl("shuttle")}
+              href={bookingHref(widgetUrl)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#ff5b2e] px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#ff7148]"
@@ -90,6 +105,7 @@ export default async function SharedProductPage({
         </section>
 
         <section className="rounded-[30px] border border-white/10 bg-[#0b1224] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.42)] sm:p-6">
+          <Script src="https://gosnotransportation58.rezdy.com/pluginJs" strategy="afterInteractive" />
           <div className="mb-4 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
             Book Online
           </div>
@@ -98,11 +114,12 @@ export default async function SharedProductPage({
             If this option is not selected automatically, choose <span className="font-bold text-white">{product.name || product.productCode}</span> in the booking form.
           </p>
           <iframe
-            src={SHARED_WIDGET_URL}
+            seamless
+            src={widgetUrl}
             width="100%"
-            height="960"
+            height="1000"
             frameBorder="0"
-            className="w-full rounded-[20px] bg-white"
+            className="rezdy w-full rounded-[20px] border-0 bg-white"
             title={`${product.name || product.productCode} checkout`}
           />
         </section>
