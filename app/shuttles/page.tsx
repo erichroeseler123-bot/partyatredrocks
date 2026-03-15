@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, BadgeCheck, Bus, CarFront, ShieldCheck, Ticket } from "lucide-react";
 import { ReviewBlock } from "@/components/ReviewBlock";
+import { RecentBookingToast } from "@/components/RecentBookingToast";
 
 export const metadata = {
   title: "Red Rocks Shuttle from Denver | $59 Seats + Private Options",
@@ -51,6 +52,7 @@ const proofPoints = [
 export default function ShuttlesPage() {
   return (
     <main className="bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
+      <RecentBookingToast />
       <section className="mx-auto flex max-w-[1440px] flex-col gap-8">
         <section className="relative overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(9,15,31,0.96),rgba(7,11,25,0.96))] p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] sm:p-10 lg:p-12">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,91,46,0.18),transparent_28%),radial-gradient(circle_at_top_right,rgba(143,208,255,0.14),transparent_28%)]" />
