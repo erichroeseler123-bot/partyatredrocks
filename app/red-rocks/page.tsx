@@ -97,7 +97,7 @@ export default async function RedRocksHubPage() {
             shorter daytime route that preserves energy for evening stairs and venue movement.
           </p>
           <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-primary" href="/find">
+            <Link className="comic-btn comic-btn-primary" href="/book">
               Book Shuttle
             </Link>
             <Link className="comic-btn comic-btn-secondary" href="/week/red-rocks">
@@ -125,7 +125,7 @@ export default async function RedRocksHubPage() {
             <Link href="/dead-and-company-red-rocks" className="comic-btn comic-btn-secondary">
               Dead & Company Guide
             </Link>
-            <Link href="/find?venue=ball-arena&qty=2" className="comic-btn comic-btn-primary">
+            <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary">
               Book Ride
             </Link>
           </div>
@@ -204,8 +204,8 @@ export default async function RedRocksHubPage() {
             If your group does not agree on those five items in advance, post-show chaos usually decides for you.
           </p>
           <p className="comic-copy">
-            When you are ready to convert planning into action, use /find to choose the ride model that fits your group size,
-            budget, and control requirements.
+            When you are ready to convert planning into action, start with /book to choose your venue, ride type,
+            and final checkout path.
           </p>
         </section>
 

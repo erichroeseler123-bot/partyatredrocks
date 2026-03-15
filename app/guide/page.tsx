@@ -123,10 +123,10 @@ export default function GuideHub() {
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/find"
+                href="/book"
                 className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#ff5b2e] px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#ff7148]"
               >
-                Book Ride Now
+                Start Booking
               </Link>
               <Link
                 href="/week/red-rocks"

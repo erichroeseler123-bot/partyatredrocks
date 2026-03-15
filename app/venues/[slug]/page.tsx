@@ -1142,7 +1142,7 @@ export default async function VenuePage({
                   <Link className="font-bold text-[#ffb07c] hover:text-white" href={`/shows/${encodeURIComponent(e.id)}`}>
                     Full Intel →
                   </Link>
-                  <Link className="text-white/70 underline hover:text-white" href={`/find?date=${encodeURIComponent(e.dateKey)}&qty=2`}>
+                  <Link className="text-white/70 underline hover:text-white" href={`/book?venue=${encodeURIComponent(slug)}`}>
                     Ride Options
                   </Link>
                   {e.url ? (

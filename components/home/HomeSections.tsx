@@ -166,7 +166,7 @@ export default function HomeSections({
 
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                 <Link
-                  href="/find"
+                  href="/book"
                   className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#ff5b2e] px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#ff7148] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffb07c] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a1020]"
                 >
                   Book Your Shuttle Now
@@ -260,8 +260,8 @@ export default function HomeSections({
                 Quick Picks for Your Night
               </h2>
             </div>
-            <Link href="/find" className="hidden text-sm font-bold text-[#8fd0ff] md:inline-flex">
-              Open Ride Finder <ArrowRight className="ml-1 h-4 w-4" />
+            <Link href="/book" className="hidden text-sm font-bold text-[#8fd0ff] md:inline-flex">
+              Start Booking <ArrowRight className="ml-1 h-4 w-4" />
             </Link>
           </div>
 

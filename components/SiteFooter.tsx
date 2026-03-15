@@ -33,7 +33,7 @@ const FOOTER_GROUPS = [
     links: [
       { href: "/guide", label: "Guide Hub" },
       { href: "/guide/red-rocks-faq", label: "Red Rocks FAQ" },
-      { href: "/find", label: "Find Ride" },
+      { href: "/about", label: "How It Works" },
       { href: "/book", label: "Book Flow" },
     ],
   },

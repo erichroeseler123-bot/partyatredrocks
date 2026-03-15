@@ -69,10 +69,10 @@ export default async function WeekPage() {
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/find"
+                href="/book"
                 className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#ff5b2e] px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#ff7148]"
               >
-                Find Ride Options
+                Start Booking
               </Link>
               <Link
                 href="/week/red-rocks"
