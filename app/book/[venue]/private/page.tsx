@@ -58,6 +58,9 @@ export default async function PrivateOptionsPage({
           <p className="mt-5 max-w-2xl text-[15px] leading-7 text-white/74 sm:text-lg">
             Pick the private vehicle that fits your group, then move to the booking page.
           </p>
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-white/68 sm:text-[15px]">
+            One vehicle for your group for the full night. Pickup details are sent before your ride.
+          </p>
           <div className="mt-6">
             <Link href={`/book/${venue}`} className="text-sm font-bold text-[#ffb07c] hover:text-white">
               ← Back to ride types

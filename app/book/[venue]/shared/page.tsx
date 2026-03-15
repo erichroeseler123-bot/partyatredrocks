@@ -62,7 +62,10 @@ export default async function SharedOptionsPage({
             Shared Shuttle Options
           </h1>
           <p className="mt-5 max-w-2xl text-[15px] leading-7 text-white/74 sm:text-lg">
-            Pick the shuttle option that fits your night, then move to the final booking page.
+            Choose your shuttle seat, then move to the booking page.
+          </p>
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-white/68 sm:text-[15px]">
+            Round-trip service for the full concert night. Pickup details are sent before show night.
           </p>
           <div className="mt-6">
             <Link href={`/book/${venue}`} className="text-sm font-bold text-[#ffb07c] hover:text-white">
@@ -72,7 +75,7 @@ export default async function SharedOptionsPage({
         </section>
 
         <section className="grid gap-4 lg:grid-cols-2">
-          {products.map((product) => (
+          {products.map((product, index) => (
             <Link
               key={product.productCode}
               href={`/book/${venue}/shared/${encodeURIComponent(product.productCode || "")}`}
@@ -81,6 +84,11 @@ export default async function SharedOptionsPage({
               <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
                 {priceLabel(product)}
               </div>
+              {index === 0 ? (
+                <div className="mt-2 inline-flex items-center rounded-full border border-[#ffb07c]/25 bg-[#ffb07c]/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-[#ffb07c]">
+                  Most Popular
+                </div>
+              ) : null}
               <h2 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white">
                 {product.name || product.productCode}
               </h2>
