@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import venuesJson from "@/data/venues.json";
+import { TrustStrip } from "@/components/TrustStrip";
 
 type VenueRow = {
   slug?: string;
@@ -80,6 +81,7 @@ export default async function PrivateOptionPage({
           <div className="mb-4 text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
             Hosted Booking Widget
           </div>
+          <TrustStrip className="mb-4" />
           <iframe
             src={meta.iframeUrl}
             width="100%"

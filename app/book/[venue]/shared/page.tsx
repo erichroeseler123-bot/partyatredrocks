@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import venuesJson from "@/data/venues.json";
 import { rezdyListProducts } from "@/lib/rezdy";
+import { TrustStrip } from "@/components/TrustStrip";
 
 export const runtime = "nodejs";
 export const revalidate = 300;
@@ -102,6 +103,8 @@ export default async function SharedOptionsPage({
             </div>
           ) : null}
         </section>
+
+        <TrustStrip />
       </section>
     </main>
   );

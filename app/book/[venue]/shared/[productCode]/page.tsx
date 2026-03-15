@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import venuesJson from "@/data/venues.json";
 import { getBookingUrl, rezdyListProducts } from "@/lib/rezdy";
+import { TrustStrip } from "@/components/TrustStrip";
 
 export const runtime = "nodejs";
 export const revalidate = 300;
@@ -87,6 +88,7 @@ export default async function SharedProductPage({
           <div className="mb-4 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
             Hosted Checkout Widget
           </div>
+          <TrustStrip className="mb-4" />
           <p className="mb-4 text-sm leading-6 text-white/70">
             If the widget doesn&apos;t preselect this exact product, choose <span className="font-bold text-white">{product.name || product.productCode}</span> inside the checkout.
           </p>

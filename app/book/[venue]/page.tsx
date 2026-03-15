@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import venuesJson from "@/data/venues.json";
+import { TrustStrip } from "@/components/TrustStrip";
 
 type VenueRow = {
   slug?: string;
@@ -87,6 +88,8 @@ export default async function VenueBookingPage({
             </div>
           </Link>
         </section>
+
+        <TrustStrip />
       </section>
     </main>
   );
