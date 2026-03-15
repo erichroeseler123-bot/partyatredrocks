@@ -7,34 +7,34 @@ import { RED_ROCKS_ENTITIES } from "@/lib/redRocksAuthority";
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
 export const metadata = {
-  title: "Red Rocks Authority Hub: Visiting, Concerts, Trails, Geology, Transportation",
+  title: "Red Rocks Guide: Visiting, Concerts, Trails, Geology, Transportation",
   description:
-    "Canonical Red Rocks hub with long-form planning guidance for parking, concerts, trails, geology, wildlife, camping alternatives, and transportation.",
+    "Red Rocks visiting and concert guide with parking, trails, transportation, geology, wildlife, and planning basics.",
   alternates: { canonical: "/red-rocks" },
 };
 
 const clusterLinks = [
   { href: "/red-rocks/visiting-guide", tag: "Visit", title: "Visiting Guide", copy: "Hours, timing, weather, and what to bring." },
-  { href: "/red-rocks/parking", tag: "Parking", title: "Parking Strategy", copy: "Lot tradeoffs, stair effort, and exit timing." },
-  { href: "/red-rocks/concert-guide", tag: "Concerts", title: "Concert Guide", copy: "Capacity, movement, and show-night logistics." },
+  { href: "/red-rocks/parking", tag: "Parking", title: "Parking Guide", copy: "Lot tradeoffs, stair effort, and exit timing." },
+  { href: "/red-rocks/concert-guide", tag: "Concerts", title: "Concert Guide", copy: "Capacity, movement, and show-night basics." },
   { href: "/red-rocks/hiking-trails", tag: "Trails", title: "Hiking Trails", copy: "Route planning for first-time and repeat visitors." },
   { href: "/red-rocks/trading-post-trail", tag: "Trail Focus", title: "Trading Post Trail", copy: "A practical route profile with pacing notes." },
   { href: "/red-rocks/geology", tag: "Geology", title: "Why the Rocks Are Red", copy: "Fountain Formation and Front Range uplift context." },
   { href: "/red-rocks/wildlife", tag: "Wildlife", title: "Wildlife Guide", copy: "What you may see and how to observe safely." },
-  { href: "/red-rocks/best-time-to-arrive", tag: "Timing", title: "Best Time to Arrive", copy: "Arrival windows by lot, stairs, and show-night flow." },
+  { href: "/red-rocks/best-time-to-arrive", tag: "Timing", title: "Best Time to Arrive", copy: "Arrival windows by lot, stairs, and show-night timing." },
   { href: "/red-rocks/camping-nearby", tag: "Camping", title: "Camping Nearby", copy: "Where to stay and how to separate lodging from transport." },
-  { href: "/red-rocks/transportation", tag: "Transportation", title: "How To Get To Red Rocks", copy: "Ride planning and post-show pickup logic." },
-  { href: "/red-rocks/map", tag: "Interactive", title: "Red Rocks Map", copy: "Visual layer for trails, seating, geology, parking, and pickup points." },
+  { href: "/red-rocks/transportation", tag: "Transportation", title: "How To Get To Red Rocks", copy: "Ride planning and post-show pickup details." },
+  { href: "/red-rocks/map", tag: "Interactive", title: "Red Rocks Map", copy: "Trails, seating, geology, parking, and pickup points." },
   { href: "/red-rocks/faq", tag: "FAQ", title: "Red Rocks FAQ", copy: "High-intent answers for planning and logistics." },
 ] as const;
 
 const CATEGORY_META = {
-  transportation: { label: "Transportation", copy: "Money pages and conversion-intent transport planning." },
-  concerts: { label: "Concerts", copy: "Show-night planning, seating, and experience optimization pages." },
-  hiking: { label: "Hiking", copy: "Route-level trail pages with pacing and planning notes." },
-  geology: { label: "Geology", copy: "Formation and history pages answering high-intent educational queries." },
-  wildlife: { label: "Wildlife", copy: "Nature-focused long-tail pages for birds, plants, and safety intent." },
-  visiting: { label: "Visiting", copy: "Trip-planning pages including camping-adjacent and best-time guidance." },
+  transportation: { label: "Transportation", copy: "Getting there, pickup planning, and the ride back after the show." },
+  concerts: { label: "Concerts", copy: "Show-night planning, seating, and concert basics." },
+  hiking: { label: "Hiking", copy: "Trail pages with route notes and planning basics." },
+  geology: { label: "Geology", copy: "Formation and history pages for Red Rocks." },
+  wildlife: { label: "Wildlife", copy: "Nature pages covering birds, plants, and safety basics." },
+  visiting: { label: "Visiting", copy: "General planning pages including timing, weather, and nearby camping." },
 } as const;
 
 export default async function RedRocksHubPage() {
@@ -75,26 +75,18 @@ export default async function RedRocksHubPage() {
         ) : null}
 
         <div className="comic-hero">
-          <div className="comic-kicker">Red Rocks Authority Hub</div>
-          <h1 className="comic-title">The Complete Red Rocks Planning Hub</h1>
+          <div className="comic-kicker">Red Rocks guide</div>
+          <h1 className="comic-title">Plan Your Red Rocks Night</h1>
           <p className="comic-copy">
-            Red Rocks planning works best when you treat it as a full trip system, not just a concert ticket. This hub is the
-            central map for that system. It connects daytime visit planning, geology and trail context, show-night timing,
-            transportation choices, parking tradeoffs, and post-encore pickup execution. If you are building one dependable plan
-            for your group, this is where every piece ties together.
+            Use this page to plan parking, timing, transportation, trails, and the rest of your Red Rocks visit in one place.
           </p>
           <p className="comic-copy">
-            Most visitors search one question at a time: what time should I arrive, where do I park, can I hike before the show,
-            or why do rides get chaotic at close. Those are all connected decisions. Arrival timing changes lot options. Lot
-            options change stair effort. Stair effort changes energy and pacing. Pacing changes whether your post-show pickup plan
-            succeeds. This hub is designed to make those dependencies clear so you can avoid the common failure pattern of
-            improvising at the busiest point of the night.
+            Most visitors start with one question: when to arrive, where to park, what to bring, or how to get home after the show.
+            The pages below cover those decisions directly.
           </p>
           <p className="comic-copy">
-            Use the navigation cards below as a cluster, not as isolated articles. Start with your intent. If your goal is a day
-            visit, begin with hiking and geology and then confirm weather and park timing. If your goal is a concert night, begin
-            with parking, concert logistics, and transportation in that order. If your goal is both, use the trail pages to plan a
-            shorter daytime route that preserves energy for evening stairs and venue movement.
+            If you are coming for a concert, start with parking, transportation, and concert planning. If you are visiting during the day,
+            start with trails, geology, and timing.
           </p>
           <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
             <Link className="comic-btn comic-btn-primary" href="/book">
@@ -115,8 +107,7 @@ export default async function RedRocksHubPage() {
             Phish at Folsom Field 2026
           </h2>
           <p className="comic-copy" style={{ marginTop: 8 }}>
-            Multi-night Boulder run planning: dates, transport pressure windows, and pre-booked return strategy for
-            jam crowds.
+            Dates, transportation options, and planning details for the Boulder run.
           </p>
           <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
             <Link href="/phish-folsom" className="comic-btn comic-btn-secondary">
@@ -132,22 +123,16 @@ export default async function RedRocksHubPage() {
         </section>
 
         <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">How To Use This Hub</div>
+          <div className="comic-tag">How To Use This Guide</div>
           <p className="comic-copy" style={{ marginTop: 8 }}>
-            Step one is to lock your date and purpose. Are you coming for a specific show, a daytime hike, or both? Step two is
-            to select your operational constraints: who is in your group, how much stair effort is realistic, and how much time
-            buffer you can add before doors. Step three is to choose your outbound and return transportation path before you are on
-            property. That single decision removes most post-show friction.
+            Pick the pages that match your trip. Concert nights usually start with parking, transportation, and timing. Daytime visits
+            usually start with trails, geology, and weather.
           </p>
           <p className="comic-copy">
-            This cluster intentionally includes both authority content and commercial planning links. Authority content helps you
-            understand the venue and environment. Planning links help you execute the trip. When both layers are in one system,
-            you do not need to open ten browser tabs and reconcile conflicting advice.
+            If you are riding instead of driving, book before show night so pickup details and the return ride are already covered.
           </p>
           <p className="comic-copy">
-            If you are coordinating family or friends, send this hub first. Let everyone review the same baseline assumptions.
-            Shared assumptions around arrival, pickup location, and post-show regrouping are what prevent group fragmentation when
-            crowds peak.
+            If you are coordinating a group, share the same arrival and pickup plan with everyone before the show.
           </p>
         </section>
 
@@ -166,9 +151,9 @@ export default async function RedRocksHubPage() {
         </div>
 
         <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">Authority Pages By Category</div>
+          <div className="comic-tag">Pages By Category</div>
           <p className="comic-copy" style={{ marginTop: 8 }}>
-            These generated long-tail pages target precise search intent and funnel readers into transportation planning.
+            Browse the Red Rocks pages by topic.
           </p>
           <div style={{ marginTop: 10, display: "grid", gap: 12 }}>
             {Object.entries(CATEGORY_META).map(([category, meta]) => {
@@ -195,17 +180,14 @@ export default async function RedRocksHubPage() {
         <section className="comic-panel" style={{ marginTop: 16 }}>
           <div className="comic-tag">Planning Priorities</div>
           <p className="comic-copy" style={{ marginTop: 8 }}>
-            Priority one is timing. Red Rocks flow degrades quickly near peak arrival and peak exit windows. Priority two is route
-            design: parking and pickup paths are not interchangeable, and every option has tradeoffs between walking effort and
-            departure speed. Priority three is weather and altitude readiness, which affects both comfort and movement pace.
+            Start with timing. Arrival time affects parking, walking distance, and how rushed the night feels. Then decide whether you
+            are driving or riding, and plan for weather after sunset.
           </p>
           <p className="comic-copy">
-            Keep your plan explicit: departure time, arrival target, regroup point, return trigger, and backup communication method.
-            If your group does not agree on those five items in advance, post-show chaos usually decides for you.
+            Make sure your group knows when to leave, where to regroup, and how you are getting home after the show.
           </p>
           <p className="comic-copy">
-            When you are ready to convert planning into action, start with /book to choose your venue, ride type,
-            and final checkout path.
+            When you are ready to book a ride, start with the shuttle page or go straight into booking.
           </p>
         </section>
 

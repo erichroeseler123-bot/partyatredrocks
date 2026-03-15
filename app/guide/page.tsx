@@ -5,7 +5,7 @@ import MusicWave from "@/components/MusicWave";
 export const metadata = {
   title: "Red Rocks Guides",
   description:
-    "Transportation strategy, parking reality, venue policies, and show-night execution plans for Red Rocks.",
+    "Parking, transportation, venue policies, and show-night planning guides for Red Rocks.",
   alternates: {
     canonical: "/guide",
   },
@@ -20,10 +20,10 @@ type Card = {
 
 const featured: Card[] = [
   {
-    title: "Red Rocks Intelligence Hub",
-    desc: "History, geology, trails, elevation, and visiting facts in one authority page.",
+    title: "Red Rocks Visiting Guide",
+    desc: "History, geology, trails, elevation, and visiting basics in one page.",
     href: "/guide/red-rocks-intelligence-hub",
-    kicker: "Hub",
+    kicker: "Visit",
   },
   {
     title: "All Guides",
@@ -32,20 +32,20 @@ const featured: Card[] = [
     kicker: "Index",
   },
   {
-    title: "Transportation Hub",
-    desc: "Shuttle vs rideshare, surge risks, and post-show extraction.",
+    title: "Transportation Guide",
+    desc: "Shuttle vs rideshare, timing, and getting home after the show.",
     href: "/guide/transportation",
-    kicker: "Core",
+    kicker: "Transportation",
   },
   {
     title: "Denver Concert Transportation",
-    desc: "Broad non-Red-Rocks hub connecting major venues, ride types, and booking flow.",
+    desc: "Concert transportation options across Denver venues.",
     href: "/guide/denver-concert-transportation",
-    kicker: "Hub",
+    kicker: "Denver",
   },
   {
     title: "Parking Reality",
-    desc: "Lot strategy, walking costs, and exit flow tradeoffs.",
+    desc: "Lot choices, walking distance, and getting out after the show.",
     href: "/guide/parking",
     kicker: "Logistics",
   },
@@ -60,9 +60,9 @@ const featured: Card[] = [
 const deepDive: Card[] = [
   {
     title: "Show-Night Strategy",
-    desc: "Arrival timing, weather pivots, and meetup discipline.",
+    desc: "Arrival timing, weather planning, and pickup timing.",
     href: "/guide/show-night-strategy",
-    kicker: "Playbook",
+    kicker: "Timing",
   },
   {
     title: "Local Pickups",
@@ -113,13 +113,13 @@ export default function GuideHub() {
           <div className="relative max-w-3xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
               <Ticket className="h-3.5 w-3.5" />
-              Authority Section
+              Red Rocks guides
             </div>
             <h1 className="mt-5 text-[2.5rem] font-black uppercase leading-[0.94] tracking-[-0.04em] sm:text-[4rem] lg:text-[5rem]">
-              Red Rocks Guide Command
+              Red Rocks Guides
             </h1>
             <p className="mt-5 max-w-2xl text-[15px] leading-7 text-white/74 sm:text-lg">
-              Deep local intelligence for transportation, venue tactics, weather pivots, and better show-night execution.
+              Parking, transportation, venue policies, and show-night planning for Red Rocks.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Link
@@ -132,7 +132,7 @@ export default function GuideHub() {
                 href="/week/red-rocks"
                 className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
               >
-                Open Live Calendar
+                See This Week
               </Link>
             </div>
             <div className="mt-6 max-w-[280px] opacity-80">
