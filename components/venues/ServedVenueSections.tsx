@@ -14,7 +14,7 @@ function venueHref(slug: string, mode: "book" | "venues", querySuffix: string) {
 }
 
 function venueCta(mode: "book" | "venues") {
-  return mode === "book" ? "Choose venue" : "View venue";
+  return mode === "book" ? "Choose venue" : "Venue Details";
 }
 
 function kindLabel(kind?: string) {

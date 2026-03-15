@@ -256,14 +256,14 @@ function safeDate(raw?: string): Date | null {
 }
 
 function venueTitle(slug: string, v: VenueRec) {
-  return `${displayName(slug, v)} | Venue Intel + Shuttle Options | Party at Red Rocks`;
+  return `${displayName(slug, v)} | Venue Guide + Ride Options | Party at Red Rocks`;
 }
 
 function venueDescription(slug: string, v: VenueRec) {
   const name = displayName(slug, v);
   const city = cityLine(v);
   const cap = v?.capacity ? `Capacity ~${v.capacity.toLocaleString()}. ` : "";
-  return `${name} in ${city}. ${cap}Upcoming shows, venue intel, and shuttle/ride options across Denver, Boulder & Colorado Springs — book a guaranteed ride home after the show.`;
+  return `${name} in ${city}. ${cap}Upcoming shows, venue details, and ride options across Denver, Boulder, and Colorado venues — book your ride before show night.`;
 }
 
 function venueKeywords(slug: string, v: VenueRec): string[] {
@@ -387,8 +387,8 @@ function eventsItemListJsonLd(slug: string, v: VenueRec, events: VenueCache["eve
           .map((n) => ({ "@type": "MusicGroup", name: n })),
         offers: {
           "@type": "Offer",
-          name: "Shuttle Ride Options",
-          url: `${SITE}/find?date=${encodeURIComponent(e.dateKey)}&qty=2`,
+          name: "Ride Options",
+          url: `${SITE}/book?venue=${encodeURIComponent(slug)}&date=${encodeURIComponent(e.dateKey)}&qty=2`,
           priceCurrency: "USD",
           availability: "https://schema.org/InStock",
         },
@@ -542,7 +542,7 @@ export async function generateMetadata({
     return {
       title: "Venue | Party at Red Rocks",
       description:
-        "Denver, Boulder & Colorado Springs concert shuttles, venue guides, and weekly show intel.",
+        "Denver, Boulder, and Colorado concert shuttles, venue guides, and weekly show details.",
       robots: { index: true, follow: true },
     };
   }
@@ -580,7 +580,7 @@ export async function generateMetadata({
           url: venueImageUrl,
           width: 1200,
           height: 630,
-          alt: `${displayName(slug, withIdentityName)} venue intel`,
+          alt: `${displayName(slug, withIdentityName)} venue guide`,
         },
       ],
     },
@@ -665,7 +665,7 @@ export default async function VenuePage({
       <div className="comic-hero rounded-[32px] border border-white/10 p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:p-10 lg:p-12">
         <div className="flex flex-wrap items-center gap-2">
           <div className="inline-flex items-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
-            Venue Intel
+            Venue Guide
           </div>
 
           <div className="inline-flex items-center rounded-full border border-white/12 bg-white/6 px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/72">
@@ -690,7 +690,7 @@ export default async function VenuePage({
         </h1>
 
         <p className="mt-5 max-w-3xl text-[15px] leading-7 text-white/74 sm:text-lg">
-          Upcoming shows, venue intel, and ride options built for a smoother concert night from first pickup to the ride back home.
+          Upcoming shows, venue details, and ride options for a smoother concert night from pickup to the ride home.
         </p>
         <div className="mt-5">
           <img
@@ -727,9 +727,9 @@ export default async function VenuePage({
             target="_blank"
             rel="nofollow noopener"
             className="inline-flex min-h-12 w-full min-w-[180px] items-center justify-center rounded-full border border-white/14 bg-white/6 px-7 py-3 text-center text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:bg-white/10 sm:w-auto"
-            title="Authority intel (DCC)"
+            title="Open venue details on DCC"
           >
-            Deep Intel (DCC) →
+            More Venue Details →
           </a>
         </div>
 
@@ -738,10 +738,7 @@ export default async function VenuePage({
           {updatedAt ? (
             <time dateTime={updatedAt}>{updatedAt}</time>
           ) : (
-            <>
-              not synced yet (run{" "}
-              <code className="text-white/80">/api/cron/sync?secret=...</code>)
-            </>
+            "Update pending"
           )}
         </div>
       </div>

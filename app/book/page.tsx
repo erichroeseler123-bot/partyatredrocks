@@ -64,10 +64,10 @@ export default async function BookPage({
                 Explore Venues
               </Link>
               <Link
-                href="/find"
+                href="/shuttles"
                 className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
               >
-                Ride Finder
+                Ride Options
               </Link>
             </div>
           </div>

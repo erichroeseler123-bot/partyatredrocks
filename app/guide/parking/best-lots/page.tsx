@@ -36,7 +36,7 @@ export default function Page() {
         </div>
 
         <div className="mt-10 flex flex-wrap gap-3">
-          <Link href="/find" className="btn-primary">
+          <Link href="/book" className="btn-primary">
             Book Shuttle — $59/pp →
           </Link>
           <Link
@@ -93,8 +93,8 @@ export default function Page() {
         }}
       />
 
-        <footer className="mt-16 pt-10 border-t border-soft text-sm text-muted">
-          This is the authority layer: no fluff, no hype — just show-night reality and what works.
+        <footer className="mt-16 border-t border-soft pt-10 text-sm text-muted">
+          Parking changes by show size, arrival time, and exit route. Plan ahead or book a ride before show night.
         </footer>
       </div>
     </main>

@@ -4,7 +4,7 @@ const FOOTER_GROUPS = [
   {
     title: "Ride Options",
     links: [
-      { href: "/book-shuttle", label: "Book a Ride" },
+      { href: "/book", label: "Book a Ride" },
       { href: "/private-suburban", label: "Private SUV" },
       { href: "/private-van", label: "Private Van" },
       { href: "/party-bus", label: "Party Bus" },

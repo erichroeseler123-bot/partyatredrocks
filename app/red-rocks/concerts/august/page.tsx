@@ -5,7 +5,7 @@ export const revalidate = 1800;
 
 export const metadata = {
   title: "Red Rocks Concerts in August 2026",
-  description: "August 2026 lineup at Red Rocks with direct links to show intel and ride booking.",
+  description: "August 2026 lineup at Red Rocks with direct links to show details and ride booking.",
   alternates: { canonical: "/red-rocks/concerts/august" },
 };
 
@@ -34,7 +34,7 @@ export default async function RedRocksConcertsAugustPage() {
           <div className="comic-kicker">Concert Calendar</div>
           <h1 className="comic-title">Red Rocks Concerts: August 2026</h1>
           <p className="comic-copy">
-            Full August event view for Red Rocks. Open show intel pages, then lock transport before high-demand nights.
+            Full August event view for Red Rocks. See show details, then book your ride before high-demand nights.
           </p>
           <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
             <Link href="/red-rocks/concerts/june" className="comic-btn comic-btn-secondary">
@@ -43,8 +43,8 @@ export default async function RedRocksConcertsAugustPage() {
             <Link href="/red-rocks/concerts/july" className="comic-btn comic-btn-secondary">
               July
             </Link>
-            <Link href="/find" className="comic-btn comic-btn-primary">
-              Find a Ride
+            <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary">
+              Book a Ride
             </Link>
           </div>
         </div>
@@ -73,10 +73,10 @@ export default async function RedRocksConcertsAugustPage() {
                   ) : null}
                   <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
                     <Link href={`/shows/${encodeURIComponent(event.id)}`} className="comic-btn comic-btn-secondary">
-                      Show Intel
+                      Show Details
                     </Link>
-                    <Link href={`/find?date=${encodeURIComponent(event.dateKey)}&venue=red-rocks-amphitheatre&qty=2`} className="comic-btn comic-btn-primary">
-                      Book Ride
+                    <Link href={`/book?venue=red-rocks-amphitheatre&date=${encodeURIComponent(event.dateKey)}&qty=2`} className="comic-btn comic-btn-primary">
+                      Get a Ride
                     </Link>
                   </div>
                 </article>
