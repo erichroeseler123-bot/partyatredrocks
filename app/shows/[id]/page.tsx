@@ -63,6 +63,16 @@ function fmtDateTime(raw: string) {
   });
 }
 
+function fmtDate(raw: string) {
+  const d = safeDate(raw);
+  if (!d) return raw;
+  return d.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+}
+
 function slugify(input: string): string {
   return input
     .toLowerCase()
@@ -71,8 +81,16 @@ function slugify(input: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
+function bookingUrlForEvent(e?: ShowEvent | null) {
+  const venueSlug = e?.venue?.siteSlug;
+  return venueSlug ? `${SITE}/book?venue=${encodeURIComponent(venueSlug)}` : `${SITE}/book`;
+}
+
 function pickTitle(e?: ShowEvent | null, id?: string) {
-  return e?.title ? `${e.title} | Shuttle Options & Show Details | Party at Red Rocks` : `Event ${id} | Party at Red Rocks`;
+  if (!e) return `Event ${id} | Party at Red Rocks`;
+  const venue = e.venue?.siteName ? ` at ${e.venue.siteName}` : "";
+  const date = e.datetime_local ? ` | ${fmtDate(e.datetime_local)}` : "";
+  return `${e.title}${venue}${date} | Shuttle Options`;
 }
 
 function pickDescription(e?: ShowEvent | null) {
@@ -80,8 +98,8 @@ function pickDescription(e?: ShowEvent | null) {
     return "Concert shuttle options, venue details, and weekly show guides across Denver, Boulder, and Colorado Springs.";
   }
   const venue = e.venue?.siteName ? ` at ${e.venue.siteName}` : "";
-  const when = e.datetime_local ? ` (${fmtDateTime(e.datetime_local)})` : "";
-  return `${e.title}${venue}${when}. Already have tickets? Plan your ride and book a guaranteed trip home after the show.`;
+  const when = e.datetime_local ? ` on ${fmtDate(e.datetime_local)}` : "";
+  return `Shuttle options for ${e.title}${venue}${when}. Already have tickets? Plan your ride to Red Rocks or the venue and book your return trip before show night.`;
 }
 
 function breadcrumbJsonLd(e: ShowEvent | null, id: string) {
@@ -169,7 +187,7 @@ function musicEventJsonLd(e: ShowEvent, id: string) {
   offers.push({
     "@type": "Offer",
     name: "Shuttle Ride Options",
-    url: `${SITE}/find?date=${encodeURIComponent(e.dateKey)}&qty=2`,
+    url: bookingUrlForEvent(e),
     priceCurrency: "USD",
     availability: "https://schema.org/InStock",
     seller: { "@id": `${SITE}/#organization` },
@@ -323,12 +341,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url,
       siteName: "Party at Red Rocks",
       type: "website",
-      images: [
+          images: [
         {
           url: mediaImage.startsWith("http") ? mediaImage : `${SITE}${mediaImage}`,
           width: 1200,
           height: 630,
-          alt: e?.title ? `${e.title} show intel` : "Show intel",
+          alt: e?.title ? `${e.title} shuttle options and show details` : "Concert shuttle options",
         },
       ],
     },
@@ -394,6 +412,7 @@ export default async function ShowPage({ params }: Props) {
       )}`
     : "https://www.setlist.fm";
   const isRedRocksVenue = venueSlug === "red-rocks-amphitheatre" || venueSlug === "redrocks";
+  const rideHref = venueSlug ? `/book?venue=${encodeURIComponent(venueSlug)}` : "/book";
   const relatedShows = allEvents
     .filter((event) => event.id !== e.id && event.venueId === venueSlug)
     .sort((a, b) => a.dateKey.localeCompare(b.dateKey))
@@ -434,7 +453,7 @@ export default async function ShowPage({ params }: Props) {
             <Link
               href={`/venues/${venueSlug}`}
               className="inline-flex items-center rounded-full border border-soft panel px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60 hover:bg-surface/40"
-              title="Venue intel"
+              title="Venue details"
             >
               {venueName} →
             </Link>
@@ -449,8 +468,17 @@ export default async function ShowPage({ params }: Props) {
           {e?.title ? e.title : `Event ${e.id}`}
         </h1>
 
+        {e?.datetime_local ? (
+          <p className="mt-3 text-sm font-black uppercase tracking-[0.18em] text-[#ffb07c]">
+            {fmtDate(e.datetime_local)} at {venueName}
+          </p>
+        ) : null}
+
         <p className="mt-4 max-w-3xl text-white/70">
-          Already have tickets? Plan your ride, pickup, and trip home before show night.
+          Already have tickets? Plan your ride to {venueName} before show night.
+        </p>
+        <p className="mt-2 max-w-3xl text-sm text-white/60">
+          Round-trip rides for the full concert night. Pickup details are sent before the show.
         </p>
         <div className="mt-5">
           <img
@@ -468,7 +496,7 @@ export default async function ShowPage({ params }: Props) {
 
         <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-6 w-full">
           <Link
-            href={`/book?venue=${encodeURIComponent(venueSlug || "")}`}
+            href={rideHref}
             className="inline-flex items-center justify-center rounded-full bg-neon-blue px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-black transition hover:bg-surface/40 w-full sm:w-auto min-w-[180px] text-center"
           >
             Get a Ride
@@ -605,7 +633,7 @@ export default async function ShowPage({ params }: Props) {
           <p className="mt-3 text-sm text-white/75">Compare ride options and lock in your return before post-show demand spikes.</p>
           <div className="mt-4">
             <Link
-              href={`/book?venue=${encodeURIComponent(venueSlug || "")}`}
+              href={rideHref}
               className="comic-btn comic-btn-primary"
             >
               Get a Ride
@@ -626,7 +654,7 @@ export default async function ShowPage({ params }: Props) {
                   <Link href={`/shows/${encodeURIComponent(event.id)}`} className="comic-btn comic-btn-secondary">
                     Show Details
                   </Link>
-                  <Link href={`/book?venue=${encodeURIComponent(venueSlug || "")}`} className="comic-btn comic-btn-primary">
+                  <Link href={rideHref} className="comic-btn comic-btn-primary">
                     Get a Ride
                   </Link>
                 </div>
