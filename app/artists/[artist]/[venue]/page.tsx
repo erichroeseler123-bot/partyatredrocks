@@ -102,7 +102,7 @@ export default async function ArtistVenuePage({ params }: Props) {
             {artistName} at {venueName}
           </h1>
           <p className="comic-copy">
-            Artist search to show night planning: upcoming dates, venue intelligence, transportation strategy, and booking path.
+            Upcoming dates, venue details, transportation options, and booking links for show night.
           </p>
           <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
             {artistId ? (
