@@ -14,8 +14,8 @@ export default function PrivateSuburbanPage() {
             <a href="#book" className="comic-btn comic-btn-primary">
               Book Private Suburban
             </a>
-            <a href="/find" className="comic-btn comic-btn-secondary">
-              Compare All Rides
+            <a href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-secondary">
+              Start With Venue
             </a>
           </div>
         </div>

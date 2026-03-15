@@ -18,10 +18,10 @@ export default function PrivateVanPage() {
             Keep your full group together with one vehicle, one timeline, and one post-show pickup plan.
           </p>
           <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-primary" href="/find">
+            <Link className="comic-btn comic-btn-primary" href="/book/red-rocks-amphitheatre/private/van">
               Get Van Options
             </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/book?type=van">
+            <Link className="comic-btn comic-btn-secondary" href="/book?venue=red-rocks-amphitheatre">
               Start Booking
             </Link>
           </div>
@@ -52,7 +52,7 @@ export default function PrivateVanPage() {
         </article>
 
         <div className="comic-mobile-cta">
-          <Link className="comic-btn comic-btn-primary" href="/find">
+          <Link className="comic-btn comic-btn-primary" href="/book/red-rocks-amphitheatre/private/van">
             Find Van Availability
           </Link>
         </div>
