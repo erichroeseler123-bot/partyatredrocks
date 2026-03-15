@@ -66,6 +66,9 @@ export default function ShuttlesPage() {
             <p className="mt-5 max-w-2xl text-[15px] leading-7 text-white/74 sm:text-lg">
               Shared seats from $59. Private rides for groups. Book online and get pickup details before show night.
             </p>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-white/68 sm:text-[15px]">
+              Your return ride is covered after the show.
+            </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/book?venue=red-rocks-amphitheatre"
