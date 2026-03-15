@@ -2,6 +2,8 @@ import Link from "next/link";
 import { ArrowRight, BadgeCheck, Bus, CarFront, ShieldCheck, Ticket } from "lucide-react";
 import { ReviewBlock } from "@/components/ReviewBlock";
 import { RecentBookingToast } from "@/components/RecentBookingToast";
+import { PlanningLinks } from "@/components/booking/PlanningLinks";
+import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
 
 export const metadata = {
   title: "Red Rocks Shuttle from Denver | $59 Seats + Private Options",
@@ -18,7 +20,7 @@ const rideCards = [
     price: "$59 / seat",
     copy:
       "Round-trip shuttle seats for most riders. Fixed price, clear pickup, and a set ride home after the show.",
-    href: "/book/red-rocks-amphitheatre/shared",
+    target: "shared" as const,
     cta: "Book Shared Seats",
     icon: Ticket,
   },
@@ -27,7 +29,8 @@ const rideCards = [
     price: "$499",
     copy:
       "Best for small groups that want one vehicle, Upper North limo-lane access, and time to tailgate before the show.",
-    href: "/book/red-rocks-amphitheatre/private/suv",
+    target: "private-option" as const,
+    option: "suv",
     cta: "Book Private SUV",
     icon: CarFront,
   },
@@ -36,7 +39,8 @@ const rideCards = [
     price: "$599",
     copy:
       "Built for groups that want to stay together, use the limo lane, and tailgate before heading in.",
-    href: "/book/red-rocks-amphitheatre/private/van",
+    target: "private-option" as const,
+    option: "van",
     cta: "Book 10 Passenger Van",
     icon: Bus,
   },
@@ -45,7 +49,8 @@ const rideCards = [
     price: "$799",
     copy:
       "Best for larger groups that want more room, limo-lane access, and one vehicle for the full night.",
-    href: "/book/red-rocks-amphitheatre/private/sprinter",
+    target: "private-option" as const,
+    option: "sprinter",
     cta: "Book Sprinter Van",
     icon: Bus,
   },
@@ -54,7 +59,8 @@ const rideCards = [
     price: "$1199",
     copy:
       "Best for bigger groups who want to tailgate, stay together, and make the ride part of the night.",
-    href: "/book/red-rocks-amphitheatre/private/party-bus",
+    target: "private-option" as const,
+    option: "party-bus",
     cta: "Book Party Bus",
     icon: Bus,
   },
@@ -67,7 +73,14 @@ const proofPoints = [
   "Pickup details before show night",
 ];
 
-export default function ShuttlesPage() {
+export default async function ShuttlesPage({
+  searchParams,
+}: {
+  searchParams: Promise<HandoffSearchParams>;
+}) {
+  const sp = await searchParams;
+  const source = Array.isArray(sp.source) ? sp.source[0] : sp.source;
+
   return (
     <main className="bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
       <RecentBookingToast />
@@ -89,24 +102,37 @@ export default function ShuttlesPage() {
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/book?venue=red-rocks-amphitheatre"
+                href={buildBookingHref({
+                  target: "book",
+                  venue: "red-rocks-amphitheatre",
+                  searchParams: sp,
+                })}
                 className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
               >
                 Start Booking
               </Link>
               <Link
-                href="/book/red-rocks-amphitheatre/shared"
+                href={buildBookingHref({
+                  target: "shared",
+                  venue: "red-rocks-amphitheatre",
+                  searchParams: sp,
+                })}
                 className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
               >
                 Shared Shuttle
               </Link>
               <Link
-                href="/book/red-rocks-amphitheatre/private"
+                href={buildBookingHref({
+                  target: "private",
+                  venue: "red-rocks-amphitheatre",
+                  searchParams: sp,
+                })}
                 className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
               >
                 Private Rides
               </Link>
             </div>
+            <PlanningLinks venue="red-rocks-amphitheatre" source={source} className="mt-6" />
           </div>
         </section>
 
@@ -134,7 +160,12 @@ export default function ShuttlesPage() {
                   </h3>
                   <p className="mt-3 text-sm leading-6 text-white/70">{ride.copy}</p>
                   <Link
-                    href={ride.href}
+                    href={buildBookingHref({
+                      target: ride.target,
+                      venue: "red-rocks-amphitheatre",
+                      option: "option" in ride ? ride.option : undefined,
+                      searchParams: sp,
+                    })}
                     className="mt-5 inline-flex items-center text-sm font-bold text-[#ffb07c]"
                   >
                     {ride.cta}
@@ -158,7 +189,11 @@ export default function ShuttlesPage() {
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Link
-              href="/book/red-rocks-amphitheatre/private"
+              href={buildBookingHref({
+                target: "private",
+                venue: "red-rocks-amphitheatre",
+                searchParams: sp,
+              })}
               className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
             >
               Book Private Service
@@ -211,7 +246,11 @@ export default function ShuttlesPage() {
           </div>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Link
-              href="/book?venue=red-rocks-amphitheatre"
+              href={buildBookingHref({
+                target: "book",
+                venue: "red-rocks-amphitheatre",
+                searchParams: sp,
+              })}
               className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
             >
               Book Red Rocks Shuttle

@@ -59,7 +59,11 @@ export default async function VenueBookingPage({
             <div className="mt-6 text-sm font-bold text-white/68">
               {[row.city, row.state].filter(Boolean).join(", ")}
             </div>
-            <PlanningLinks venue={venue} className="mt-6" />
+            <PlanningLinks
+              venue={venue}
+              source={Array.isArray(sp.source) ? sp.source[0] : sp.source}
+              className="mt-6"
+            />
           </div>
         </section>
 

@@ -115,7 +115,11 @@ export default async function PrivateOptionPage({
               Tailgating Guide
             </Link>
           </div>
-          <PlanningLinks venue={venue} className="mt-6" />
+          <PlanningLinks
+            venue={venue}
+            source={Array.isArray(sp.source) ? sp.source[0] : sp.source}
+            className="mt-6"
+          />
         </section>
 
         <section className="overflow-visible rounded-[30px] border border-white/10 bg-[#0b1224] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.42)] sm:p-6">

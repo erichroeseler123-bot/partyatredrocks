@@ -11,7 +11,12 @@ import MusicWave from "@/components/MusicWave";
 import { getMediaIndex } from "@/lib/media/getMediaIndex";
 import { selectImageByPriority } from "@/lib/media/selectImage";
 import { DCC_ORIGIN } from "@/lib/parrHandoff";
+import {
+  buildBookingHref,
+  type HandoffSearchParams,
+} from "@/lib/parrHandoff";
 import { getCrossSiteVenue } from "@/lib/crossSiteMap";
+import { PlanningLinks } from "@/components/booking/PlanningLinks";
 
 export const runtime = "nodejs";
 export const revalidate = 300;
@@ -608,10 +613,13 @@ export async function generateMetadata({
 
 export default async function VenuePage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<HandoffSearchParams>;
 }) {
   const { slug: rawSlug } = await params;
+  const sp = await searchParams;
   const slug = normSlug(rawSlug);
   const identity = VENUE_LEDGER_BY_SLUG.get(slug);
   if (!identity) return notFound();
@@ -712,7 +720,7 @@ export default async function VenuePage({
 
         <div className="mt-7 flex w-full flex-col flex-wrap items-center justify-center gap-3 sm:flex-row sm:gap-4">
           <Link
-            href={`/book?venue=${slug}`}
+            href={buildBookingHref({ target: "book", venue: slug, searchParams: sp })}
             className="inline-flex min-h-12 w-full min-w-[180px] items-center justify-center rounded-full bg-[#ff5b2e] px-7 py-3 text-center text-[12px] font-black uppercase tracking-[0.22em] text-white transition hover:bg-[#ff7148] sm:w-auto"
           >
             Book this venue
@@ -725,25 +733,14 @@ export default async function VenuePage({
             This Week →
           </Link>
 
-          <a
-            href={dccVenueUrl}
-            target="_blank"
-            rel="nofollow noopener"
-            className="inline-flex min-h-12 w-full min-w-[180px] items-center justify-center rounded-full border border-white/14 bg-white/6 px-7 py-3 text-center text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:bg-white/10 sm:w-auto"
-            title="Open venue details on DCC"
-          >
-            More Venue Details →
-          </a>
         </div>
 
-        <div className="mt-5 max-w-2xl rounded-[24px] border border-white/10 bg-white/5 px-5 py-4 text-left">
-          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
-            Planning Your Night?
-          </div>
-          <p className="mt-2 text-sm leading-6 text-white/72">
-            See venue details, parking, and transportation guidance on Destination Command Center.
-          </p>
-        </div>
+        <PlanningLinks
+          venue={slug}
+          source={Array.isArray(sp.source) ? sp.source[0] : sp.source}
+          lead="Planning your night?"
+          className="mt-5"
+        />
 
         <div className="mt-4 text-xs text-white/45">
           Feed updated:{" "}
@@ -1151,7 +1148,10 @@ export default async function VenuePage({
                   <Link className="font-bold text-[#ffb07c] hover:text-white" href={`/shows/${encodeURIComponent(e.id)}`}>
                     Full Intel →
                   </Link>
-                  <Link className="text-white/70 underline hover:text-white" href={`/book?venue=${encodeURIComponent(slug)}`}>
+                  <Link
+                    className="text-white/70 underline hover:text-white"
+                    href={buildBookingHref({ target: "book", venue: slug, searchParams: sp })}
+                  >
                     Ride Options
                   </Link>
                   {e.url ? (
@@ -1172,7 +1172,7 @@ export default async function VenuePage({
               All-Venue Shuttle
             </Link>
             <Link
-              href={`/book?venue=${slug}`}
+              href={buildBookingHref({ target: "book", venue: slug, searchParams: sp })}
               className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#ff5b2e] px-6 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white transition hover:bg-[#ff7148]"
             >
               Book Now

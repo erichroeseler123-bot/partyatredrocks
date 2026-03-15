@@ -88,7 +88,11 @@ export default async function PrivateOptionsPage({
               ← Back to ride types
             </Link>
           </div>
-          <PlanningLinks venue={venue} className="mt-6" />
+          <PlanningLinks
+            venue={venue}
+            source={Array.isArray(sp.source) ? sp.source[0] : sp.source}
+            className="mt-6"
+          />
         </section>
 
         <section className="grid gap-4 lg:grid-cols-2 xl:grid-cols-4">
