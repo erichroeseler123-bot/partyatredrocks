@@ -35,14 +35,14 @@ export default function RedRocksFAQ() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/book/red-rocks-amphitheatre/private/suv" className="btn-primary">
-              Book Private SUV
+            <Link href="/book" className="btn-primary">
+              Book a Ride
             </Link>
             <Link href="/book/red-rocks-amphitheatre/shared" className="btn-ghost">
               Book Shuttle Seats
             </Link>
-            <Link href="/guide" className="btn-ghost">
-              Back to Guides
+            <Link href="/book/red-rocks-amphitheatre/private/suv" className="btn-ghost">
+              Private SUV
             </Link>
           </div>
         </div>
@@ -83,11 +83,11 @@ export default function RedRocksFAQ() {
             </div>
 
             <div className="mt-6 flex flex-col sm:flex-row gap-3">
-              <Link href="/book/red-rocks-amphitheatre/shared" className="btn-primary">
-                Book Shuttle Seats
+              <Link href="/book" className="btn-primary">
+                Book a Ride
               </Link>
-              <Link href="/book/red-rocks-amphitheatre/private/suv" className="btn-ghost">
-                Book Private SUV
+              <Link href="/book/red-rocks-amphitheatre/shared" className="btn-ghost">
+                Book Shuttle Seats
               </Link>
             </div>
           </div>

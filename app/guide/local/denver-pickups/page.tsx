@@ -136,7 +136,7 @@ export default function DenverPickups() {
 
       <footer className="mt-20 pt-10 border-t border-zinc-900 text-center">
         <p className="text-faint text-[10px] font-black uppercase tracking-[0.4em]">
-          Party at Red Rocks | Colorado&apos;s Premier Concert Logistics
+          Party at Red Rocks | Denver pickup details for Red Rocks show nights
         </p>
       </footer>
     </main>
