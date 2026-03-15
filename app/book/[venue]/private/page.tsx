@@ -13,19 +13,25 @@ const privateOptions = [
   {
     slug: "suv",
     title: "Private SUV",
-    eyebrow: "Up to 6 Guests",
+    eyebrow: "$499 • Up to 6 Guests",
     body: "Private ride for smaller groups that want limo-lane access and time to tailgate before the show.",
   },
   {
     slug: "van",
-    title: "Private Van",
-    eyebrow: "10 to 14 Guests",
-    body: "One vehicle, one pickup plan, limo-lane access, and one return timeline for the full crew.",
+    title: "10 Passenger Van",
+    eyebrow: "$599 • Up to 10 Guests",
+    body: "One vehicle, one pickup plan, limo-lane access, and one return timeline for groups that need more room.",
+  },
+  {
+    slug: "sprinter",
+    title: "14 Passenger Sprinter",
+    eyebrow: "Up to 14 Guests",
+    body: "Best for larger groups that want more space, limo-lane access, and one vehicle for the full night.",
   },
   {
     slug: "party-bus",
     title: "Party Bus",
-    eyebrow: "Large Group",
+    eyebrow: "24 Passengers",
     body: "Best for larger groups who want to tailgate, stay together, and make the ride part of the night.",
   },
 ] as const;
@@ -76,7 +82,7 @@ export default async function PrivateOptionsPage({
           </div>
         </section>
 
-        <section className="grid gap-4 lg:grid-cols-3">
+        <section className="grid gap-4 lg:grid-cols-2 xl:grid-cols-4">
           {privateOptions.map((option) => (
             <Link
               key={option.slug}

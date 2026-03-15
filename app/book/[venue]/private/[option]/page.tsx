@@ -9,24 +9,32 @@ type VenueRow = {
   name?: string;
 };
 
-const PRIVATE_CATALOG_WIDGET_URL = "https://gosnotransportation58.rezdy.com/catalog/541037?iframe=true";
-
 const optionMeta = {
   suv: {
     title: "Private SUV",
     body: "Best for small groups that want Upper North limo-lane access, time to tailgate, and one vehicle for the full night.",
+    price: "$499",
     iframeUrl: "https://gosnotransportation58.rezdy.com/596193/suburban?iframe=true",
     ctaLabel: "Open SUV Booking",
   },
   van: {
-    title: "Private Van",
-    body: "Best for larger groups that want limo-lane access, time to tailgate, and one van for the full night.",
+    title: "10 Passenger Van",
+    body: "Best for groups that want limo-lane access, time to tailgate, and one van for the full night.",
+    price: "$599",
     iframeUrl: "https://gosnotransportation58.rezdy.com/630812/van-10-passenger?iframe=true",
     ctaLabel: "Open Van Booking",
+  },
+  sprinter: {
+    title: "14 Passenger Sprinter",
+    body: "Best for larger groups that want more room, limo-lane access, and one vehicle for the full night.",
+    price: "Up to 14 guests",
+    iframeUrl: "https://gosnotransportation58.rezdy.com/745684/sprinter-van-14-passenger?iframe=true",
+    ctaLabel: "Open Sprinter Booking",
   },
   "party-bus": {
     title: "Party Bus",
     body: "Best for bigger groups that want to tailgate, stay together, and make the ride part of the night.",
+    price: "24 passengers",
     iframeUrl: "https://gosnotransportation58.rezdy.com/689909/bus-24-passenger?iframe=true",
     ctaLabel: "Open Party Bus Booking",
   },
@@ -69,6 +77,7 @@ export default async function PrivateOptionPage({
           <p className="mt-4 max-w-2xl text-[15px] leading-7 text-white/74 sm:text-lg">
             {meta.body}
           </p>
+          <div className="mt-4 text-sm font-bold text-[#ffb07c]">{meta.price}</div>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-white/68 sm:text-[15px]">
             Pickup details are sent before your ride. Your group rides together for the full night.
           </p>

@@ -24,7 +24,7 @@ const rideCards = [
   },
   {
     title: "Private SUV",
-    price: "Private group",
+    price: "$499",
     copy:
       "Best for small groups that want one vehicle, Upper North limo-lane access, and time to tailgate before the show.",
     href: "/book/red-rocks-amphitheatre/private/suv",
@@ -32,12 +32,21 @@ const rideCards = [
     icon: CarFront,
   },
   {
-    title: "Private Van",
-    price: "10-14 guests",
+    title: "10 Passenger Van",
+    price: "$599",
     copy:
-      "Built for full crews that want to stay together, use the limo lane, and tailgate before heading in.",
+      "Built for groups that want to stay together, use the limo lane, and tailgate before heading in.",
     href: "/book/red-rocks-amphitheatre/private/van",
-    cta: "Book Private Van",
+    cta: "Book 10 Passenger Van",
+    icon: Bus,
+  },
+  {
+    title: "14 Passenger Sprinter",
+    price: "Up to 14 guests",
+    copy:
+      "Best for larger groups that want more room, limo-lane access, and one vehicle for the full night.",
+    href: "/book/red-rocks-amphitheatre/private/sprinter",
+    cta: "Book Sprinter Van",
     icon: Bus,
   },
 ];
