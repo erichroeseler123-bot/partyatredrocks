@@ -8,7 +8,7 @@ const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks
 export const metadata = {
   title: "Red Rocks FAQ",
   description:
-    "Long-form Red Rocks FAQ covering geology, concerts, hiking, parking, transportation, and practical trip planning.",
+    "Red Rocks FAQ covering concerts, hiking, parking, transportation, and practical trip planning.",
   alternates: { canonical: "/red-rocks/faq" },
 };
 
@@ -34,39 +34,45 @@ export default async function RedRocksFaqPage() {
 
         <div className="comic-hero">
           <div className="comic-kicker">FAQ</div>
-          <h1 className="comic-title">Red Rocks FAQ: Fast Answers With Real Planning Context</h1>
+          <h1 className="comic-title">Red Rocks FAQ</h1>
           <p className="comic-copy">
-            This FAQ page is designed for high-intent planning. It answers the questions people ask most before a Red Rocks trip,
-            but it also points to deeper pages when a short answer is not enough. Use this page as your quick decision layer, then
-            jump into detailed guides for parking, transportation, hiking, geology, or full visit planning.
+            This page answers common questions about visiting Red Rocks, including parking, transportation, hiking, weather, and
+            concert nights. If you need more detail, you can jump into the related guides below.
           </p>
           <p className="comic-copy">
-            If you are coordinating a group, send this page first. It creates shared baseline assumptions around arrival timing,
-            stairs, weather, and post-show movement, which prevents confusion later.
+            If you are planning for a group, this is a good place to start before everyone heads to the venue.
           </p>
+          <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <Link className="comic-btn comic-btn-primary" href="/book?venue=red-rocks-amphitheatre">
+              Book a Ride
+            </Link>
+            <Link className="comic-btn comic-btn-secondary" href="/red-rocks/concert-guide">
+              Concert Guide
+            </Link>
+          </div>
         </div>
 
         <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">How To Use This FAQ</div>
+          <div className="comic-tag">Planning Tip</div>
           <p className="comic-copy" style={{ marginTop: 8 }}>
-            Start with your immediate question, but check adjacent topics before finalizing plans. For example, if you are asking
-            about parking, also review transportation and post-show pickup strategy. If you are asking about hiking, also check
-            weather and same-day concert pacing. Red Rocks decisions are connected and work best when planned together.
+            Start with your immediate question, then check the related guide if you need to make a parking, transportation, or
+            timing decision before show night.
           </p>
           <p className="comic-copy">
-            For the most accurate trip planning, combine this FAQ with the Red Rocks guide and your event-week planning pages.
+            The smoothest Red Rocks nights usually come from deciding the ride, arrival time, and meeting point before the day of
+            the show.
           </p>
         </section>
 
         <FAQBlock title="Red Rocks FAQ" rows={faqRows} />
 
         <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">Go Deeper</div>
+          <div className="comic-tag">More Red Rocks Guides</div>
           <div className="comic-grid" style={{ marginTop: 10 }}>
             <Link href="/red-rocks" className="comic-panel block">
-              <div className="comic-tag">Hub</div>
-              <h2 className="comic-h3">Red Rocks Hub</h2>
-              <p className="comic-copy">Full cluster navigation across all major planning topics.</p>
+              <div className="comic-tag">Guide</div>
+              <h2 className="comic-h3">Red Rocks Guide</h2>
+              <p className="comic-copy">Venue basics, planning help, and show-night details.</p>
             </Link>
             <Link href="/red-rocks/transportation" className="comic-panel block">
               <div className="comic-tag">Transport</div>
@@ -80,8 +86,8 @@ export default async function RedRocksFaqPage() {
             </Link>
             <Link href="/book?venue=red-rocks-amphitheatre" className="comic-panel block">
               <div className="comic-tag">Book</div>
-              <h2 className="comic-h3">Ride Match</h2>
-              <p className="comic-copy">Convert planning into a confirmed transport plan.</p>
+              <h2 className="comic-h3">See Ride Options</h2>
+              <p className="comic-copy">Shared shuttle seats and private rides for Red Rocks concerts.</p>
             </Link>
           </div>
         </section>

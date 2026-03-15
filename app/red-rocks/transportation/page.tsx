@@ -9,12 +9,12 @@ const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks
 export const metadata = {
   title: "Red Rocks Transportation Guide",
   description:
-    "Long-form transportation guide for Red Rocks: shuttle vs rideshare, parking constraints, pickup timing, and return planning.",
+    "Red Rocks transportation guide with shuttle, rideshare, parking, pickup timing, and return planning for concert nights.",
   alternates: { canonical: "/red-rocks/transportation" },
 };
 
 const coreLinks = [
-  { href: "/red-rocks", label: "Hub" },
+  { href: "/red-rocks", label: "Red Rocks Guide" },
   { href: "/red-rocks/transportation", label: "Transportation" },
   { href: "/red-rocks/parking", label: "Parking" },
   { href: "/red-rocks/faq", label: "FAQ" },
@@ -45,62 +45,57 @@ export default async function RedRocksTransportationPage() {
 
         <div className="comic-hero">
           <div className="comic-kicker">Transportation</div>
-          <h1 className="comic-title">How To Get To Red Rocks Without Breaking Your Night</h1>
+          <h1 className="comic-title">How To Get To Red Rocks</h1>
           <p className="comic-copy">
-            Direct answer: transportation is the highest-risk operational decision for Red Rocks. People focus on tickets and set
-            times, but the breakdown usually happens in parking ingress, post-show pickup coordination, or last-minute rideshare
-            dependence. A strong plan starts before arrival, with one route in and one route out that your whole group can execute.
+            Red Rocks transportation usually comes down to three choices: drive and park, use rideshare, or book a shuttle or
+            private ride in advance. The best option depends on your group size, timing, and how much certainty you want after
+            the show.
           </p>
           <p className="comic-copy">
-            Red Rocks behaves differently from dense city venues. Vehicle routes narrow near event peaks, stair movement takes real
-            energy at elevation, and crowd release happens in a short window after encore. If you wait to decide on transportation
-            until the end of the show, you are solving a complex logistics problem in the worst possible moment.
+            Red Rocks is different from a downtown arena. Traffic builds before doors, walking can be steep, and the rush after
+            the encore happens fast. If you know how you are getting in and out before show night, the whole evening is easier.
           </p>
           <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
             <Link className="comic-btn comic-btn-primary" href="/book?venue=red-rocks-amphitheatre">
               Book a Ride
             </Link>
             <Link className="comic-btn comic-btn-secondary" href="/week/red-rocks">
-              Match Plan To This Week
+              Shows This Week
             </Link>
           </div>
         </div>
 
         <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">The Three Transportation Models</div>
+          <div className="comic-tag">Your Main Options</div>
           <p className="comic-copy" style={{ marginTop: 8 }}>
-            Model one is self-driving and parking. It offers independence, but your night depends on lot selection, arrival timing,
-            and your tolerance for delayed exit. Model two is rideshare on demand. It can work on lower-demand nights but has the
-            highest volatility after sold-out shows because supply and demand become disconnected exactly when everyone requests a
-            ride at once. Model three is pre-planned transport, such as shuttle or private service, where pickup terms are known
-            in advance and your group follows a fixed return sequence.
+            Driving gives you full control, but it also means dealing with parking, stairs, and post-show traffic yourself.
+            Rideshare can work on lighter nights, but it is the least predictable option once a sold-out crowd heads out at the
+            same time. Pre-booked shuttle or private rides give you the clearest pickup and return plan before the night starts.
           </p>
           <p className="comic-copy">
-            The right model is not universal. Couples with flexible timing may prefer shared service. Groups needing control over
-            departure windows may prefer private options. Visitors who prioritize lowest direct cost may still choose parking, but
-            should do it with realistic expectations about egress and walking effort.
+            Shared shuttle seats work well for couples, friends, and smaller groups who want a round-trip option without driving.
+            Private rides are better when your group wants one vehicle for the full night. Parking can still make sense if you are
+            prepared for the walk in and the slower exit after the show.
           </p>
           <p className="comic-copy">
-            In all models, success comes from pre-commitment: agree on the meeting point, communication fallback, and departure
-            trigger before entering the venue.
+            Whatever you choose, decide before show night. The easiest Red Rocks nights are the ones where everyone already knows
+            the meeting point, timing, and return plan.
           </p>
         </section>
 
         <section className="comic-panel" style={{ marginTop: 16 }}>
           <div className="comic-tag">Arrival and Return Timing</div>
           <p className="comic-copy" style={{ marginTop: 8 }}>
-            Arrival timing at Red Rocks should be earlier than your city-venue instinct. Last-minute arrivals compress stress:
-            vehicle queueing, longer walks from less favorable parking zones, and less margin for security lines. Earlier arrival
-            protects against those compounding delays and gives your group time to settle before performance start.
+            Red Rocks usually rewards earlier arrival. Late arrival can mean more traffic, less favorable parking, and a more
+            rushed walk to the venue. Giving yourself extra time makes security, stairs, and seat-finding much easier.
           </p>
           <p className="comic-copy">
-            Return timing deserves equal planning. The common mistake is assuming you can "figure it out after the encore." In
-            practice, that is when decision quality drops. Design your return trigger now: leave at a planned point in the set,
-            or wait at a pre-agreed regroup location until your ride is in position.
+            The return trip matters just as much. If you wait until the encore ends to decide what to do, that is when the venue
+            is most crowded and the options are least clear. Have one regroup point and one return plan before the show starts.
           </p>
           <p className="comic-copy">
-            If your group includes older guests or anyone sensitive to stairs and altitude, include extra transition time both
-            pre-show and post-show. Physical pacing is logistics, not an afterthought.
+            If anyone in your group is sensitive to stairs, altitude, or weather, build extra walking and transition time into the
+            night.
           </p>
         </section>
 
@@ -123,18 +118,18 @@ export default async function RedRocksTransportationPage() {
         </div>
 
         <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">Operational Checklist</div>
+          <div className="comic-tag">Before Show Night</div>
           <ul style={{ marginTop: 10, paddingLeft: 18 }}>
-            <li className="comic-copy">Choose transport mode at least one day before the event.</li>
-            <li className="comic-copy">Set a primary and backup meeting location.</li>
-            <li className="comic-copy">Share one contact thread for all riders.</li>
-            <li className="comic-copy">Confirm departure timing and expected walk distance.</li>
-            <li className="comic-copy">Keep weather and altitude pace in the plan.</li>
+            <li className="comic-copy">Decide how your group is getting to Red Rocks before the day of the show.</li>
+            <li className="comic-copy">Set one meeting point for the ride in and one meeting point for the ride back.</li>
+            <li className="comic-copy">Keep everyone on the same text thread.</li>
+            <li className="comic-copy">Allow extra time for traffic, stairs, and security.</li>
+            <li className="comic-copy">Check the weather and bring layers that match the walk in and out.</li>
           </ul>
         </section>
 
         <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">Cluster Navigation</div>
+          <div className="comic-tag">More Red Rocks Guides</div>
           <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
             {coreLinks.map((item) => (
               <Link key={item.href} href={item.href} className="comic-btn comic-btn-secondary">
@@ -145,7 +140,7 @@ export default async function RedRocksTransportationPage() {
         </section>
 
         <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">Transportation Topic Index</div>
+          <div className="comic-tag">More Transportation Topics</div>
           <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
             {transportationEntities.map((entity) => (
               <Link key={entity.slug} href={`/red-rocks/${entity.slug}`} className="comic-btn comic-btn-secondary">

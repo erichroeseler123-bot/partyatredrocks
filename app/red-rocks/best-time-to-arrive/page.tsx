@@ -17,18 +17,18 @@ export default function BestTimeToArrivePage() {
           <div className="comic-kicker">Show Night Logistics</div>
           <h1 className="comic-title">Best Time to Arrive at Red Rocks</h1>
           <p className="comic-copy">
-            Timing is everything at Red Rocks. Arrive too late and you fight parking plus stairs; too early and you wait in the
-            cold. Use this practical 2026 timing guide.
+            Arrive too late and you deal with more traffic, more stairs, and less margin before the music starts. This guide helps
+            you choose a better arrival window for the full night.
           </p>
           <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-4 sm:mt-6 w-full px-4">
             <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[180px] text-center">
-              Book Shuttle - Lock Return
+              Book a Ride
             </Link>
             <Link href="/red-rocks/parking" className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[180px] text-center">
               Parking Guide
             </Link>
             <Link href="/red-rocks/transportation" className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[180px] text-center">
-              Shuttle and Rideshare
+              Transportation Guide
             </Link>
           </div>
         </div>
@@ -70,11 +70,11 @@ export default function BestTimeToArrivePage() {
               peaks in the next 15 to 30 minutes.
             </p>
             <p className="comic-copy" style={{ marginTop: 12, fontWeight: 700 }}>
-              Best move: pre-book return transportation.
+              Round-trip rides can make the end of the night much easier.
             </p>
             <div style={{ marginTop: 16 }}>
               <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary w-full text-center">
-                Book Return Ride
+                See Ride Options
               </Link>
             </div>
           </article>
@@ -93,7 +93,7 @@ export default function BestTimeToArrivePage() {
               Interactive Map
             </Link>
             <Link href="/red-rocks/transportation" className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[180px] text-center">
-              Shuttle vs Uber vs Driving
+              Shuttle vs Uber
             </Link>
           </div>
         </section>

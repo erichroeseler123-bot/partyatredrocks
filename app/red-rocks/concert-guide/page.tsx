@@ -8,12 +8,12 @@ const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks
 export const metadata = {
   title: "Red Rocks Concert Guide",
   description:
-    "Long-form Red Rocks concert planning guide covering arrival timing, stairs, weather, seat movement, and pickup strategy.",
+    "Red Rocks concert guide covering arrival timing, stairs, weather, seat movement, and pickup strategy.",
   alternates: { canonical: "/red-rocks/concert-guide" },
 };
 
 const coreLinks = [
-  { href: "/red-rocks", label: "Hub" },
+  { href: "/red-rocks", label: "Red Rocks Guide" },
   { href: "/red-rocks/transportation", label: "Transportation" },
   { href: "/red-rocks/parking", label: "Parking" },
   { href: "/red-rocks/faq", label: "FAQ" },
@@ -43,24 +43,21 @@ export default async function RedRocksConcertGuidePage() {
 
         <div className="comic-hero">
           <div className="comic-kicker">Concert Guide</div>
-          <h1 className="comic-title">Red Rocks Concert Planning, End To End</h1>
+          <h1 className="comic-title">Red Rocks Concert Guide</h1>
           <p className="comic-copy">
-            Direct answer: Red Rocks show planning is about movement and timing as much as music. Capacity is significant, the
-            venue is open-air, and stair effort at elevation is real. A strong plan covers arrival, weather, seat movement,
-            regrouping, and return transport before doors open.
+            Red Rocks concerts go more smoothly when you plan the basics before show night: when to leave, what to bring, how the
+            weather looks, and how your group is getting back after the encore.
           </p>
           <p className="comic-copy">
-            Many first-time visitors plan Red Rocks like an indoor arena. That mismatch creates stress. In an arena, weather has
-            low impact and surface movement is relatively flat. At Red Rocks, temperature, wind, rain risk, and steep transitions
-            all affect comfort and pacing. The people who have the best experience usually front-load decisions rather than trying
-            to optimize in real time.
+            The venue is open-air, the stairs are real, and movement takes longer than most first-time visitors expect. A little
+            planning ahead makes the night feel much easier.
           </p>
           <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-primary" href="/week/red-rocks">
-              Browse This Week
+            <Link className="comic-btn comic-btn-primary" href="/book?venue=red-rocks-amphitheatre">
+              Book a Ride
             </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/book?venue=red-rocks-amphitheatre">
-              Lock Your Ride
+            <Link className="comic-btn comic-btn-secondary" href="/week/red-rocks">
+              Shows This Week
             </Link>
           </div>
         </div>
@@ -68,48 +65,45 @@ export default async function RedRocksConcertGuidePage() {
         <section className="comic-panel" style={{ marginTop: 16 }}>
           <div className="comic-tag">Before You Leave Home</div>
           <p className="comic-copy" style={{ marginTop: 8 }}>
-            Build your pre-show checklist around timing certainty, not best-case speed. Set departure target, confirm who is riding
-            together, decide what each person carries, and agree on backup communication if phone service degrades in crowd load.
-            Keep your bag and layer choices aligned with venue policy and forecast rather than habit.
+            Set your departure time, confirm who is riding together, and make sure everyone knows the plan for getting in and out.
+            Keep your bag and layers aligned with the venue rules and the forecast.
           </p>
           <p className="comic-copy">
-            If your group includes out-of-state guests, mention altitude and stair effort in advance. That single expectation reset
-            can prevent pace splits later in the night.
+            If your group includes first-time visitors, mention the stairs and altitude before you leave. That small heads-up helps
+            everyone pace the night better.
           </p>
           <p className="comic-copy">
-            For high-interest shows, treat timing like an operations plan. Build a buffer window and protect it.
+            For busier shows, add extra time instead of trying to cut it close.
           </p>
         </section>
 
         <section className="comic-panel" style={{ marginTop: 16 }}>
           <div className="comic-tag">Arrival, Entry, and Seat Movement</div>
           <p className="comic-copy" style={{ marginTop: 8 }}>
-            Arrival should be early enough to absorb traffic variability without panic. Entry is smoother when your group is
-            physically and logistically ready on approach: tickets accessible, bag policy understood, and regroup point chosen.
+            Arrive early enough to handle traffic, security, and the walk to your seats without rushing. Keep tickets ready, know
+            the bag rules, and choose a regroup point before the music starts.
           </p>
           <p className="comic-copy">
-            Inside, avoid unnecessary seat migration early in the show. Stair transitions in crowded aisles are where time and
-            energy disappear. If you want merchandise, food, or photos, choose controlled windows instead of repeatedly breaking
-            flow.
+            Inside the venue, extra movement takes more time than people expect. If you want food, merchandise, or photos, pick a
+            controlled window instead of constantly going up and down the stairs.
           </p>
           <p className="comic-copy">
-            Keep hydration steady and pace realistic. The best Red Rocks nights come from sustainable movement, not rushed movement.
+            Stay hydrated and keep a steady pace. Red Rocks is usually better with fewer rushed decisions.
           </p>
         </section>
 
         <section className="comic-panel" style={{ marginTop: 16 }}>
           <div className="comic-tag">Post-Show Exit and Pickup</div>
           <p className="comic-copy" style={{ marginTop: 8 }}>
-            The highest friction window starts at close. Everyone exits in similar time bands, and transport demand spikes at once.
-            If your group has no pre-set return protocol, you lose time in duplicate texting, mismatched location assumptions, and
-            repeated direction changes.
+            The busiest part of the night starts when the show ends. Everyone leaves in the same window, and that is when parking
+            exits and pickup areas get crowded fast.
           </p>
           <p className="comic-copy">
-            Set a clear rule: one meeting location, one timeline, one fallback. If your ride is scheduled, align your departure
-            rhythm to that schedule. If you are driving, align your movement to your lot strategy and traffic expectations.
+            Use one meeting point, one return timeline, and one text thread. If your ride is booked, follow that plan instead of
+            trying to improvise after the encore.
           </p>
           <p className="comic-copy">
-            If your plan is still "we will decide after the encore," you do not yet have a plan.
+            Your return ride is easier when everyone knows the plan before the lights come up.
           </p>
         </section>
 
@@ -125,7 +119,7 @@ export default async function RedRocksConcertGuidePage() {
         </section>
 
         <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">Cluster Navigation</div>
+          <div className="comic-tag">More Red Rocks Guides</div>
           <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
             {coreLinks.map((item) => (
               <Link key={item.href} href={item.href} className="comic-btn comic-btn-secondary">
