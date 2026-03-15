@@ -6,9 +6,9 @@ import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
 export const metadata = {
-  title: "Denver Concert Transportation Hub (2026)",
+  title: "Denver Concert Transportation Guide",
   description:
-    "Plan Denver concert transportation across major venues: compare ride options, follow booking flow, and route into venue pages, weekly schedules, and guide intel.",
+    "Plan concert transportation across Denver and Red Rocks: compare ride options, review venue guides, and book the right ride for the night.",
   alternates: {
     canonical: "/guide/denver-concert-transportation",
   },
@@ -23,9 +23,32 @@ const venueLinks = [
   { href: "/venues/cervantes-masterpiece", label: "Cervantes' Masterpiece Ballroom" },
   { href: "/venues/ogden-theatre", label: "Ogden Theatre" },
   { href: "/venues/ball-arena", label: "Ball Arena" },
-];
+] as const;
 
-export default async function DenverConcertTransportationHubPage() {
+const rideRows = [
+  {
+    rideType: "Shared Shuttle",
+    bestFor: "Predictable round-trip service",
+    tradeoff: "Less flexibility on departure timing",
+  },
+  {
+    rideType: "Private SUV",
+    bestFor: "Small groups with tighter schedule control",
+    tradeoff: "Higher upfront price",
+  },
+  {
+    rideType: "Private Van",
+    bestFor: "Mid-size groups moving together",
+    tradeoff: "Best when booked ahead",
+  },
+  {
+    rideType: "Party Bus",
+    bestFor: "Large group celebration nights",
+    tradeoff: "Works best when reserved early",
+  },
+] as const;
+
+export default async function DenverConcertTransportationGuidePage() {
   const faqRows = await getFaqRowsWithGlobal("guide/denver-concert-transportation.json");
   const faqJsonLd = buildFaqPageJsonLd(faqRows);
   const breadcrumbJsonLd = {
@@ -39,124 +62,87 @@ export default async function DenverConcertTransportationHubPage() {
   };
 
   return (
-    <main className="comic-page pt-24 pb-10">
-      <section className="comic-wrap">
+    <main className="min-h-screen bg-surface px-6 py-20 text-white">
+      <section className="mx-auto max-w-5xl">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
-        <div className="comic-hero">
-          <div className="comic-kicker">Denver Transportation Hub</div>
-          <h1 className="comic-title">Denver Concert Transportation</h1>
-          <p className="comic-copy">
-            Direct answer: this hub helps you move from venue discovery to a clean pickup plan across Denver and Front
-            Range concert nights.
+        <div className="rounded-3xl border border-soft bg-surface-strong p-8 md:p-10">
+          <div className="text-[11px] font-black uppercase tracking-[0.25em] text-muted">
+            Denver Transportation
+          </div>
+          <h1 className="mt-3 text-5xl font-black tracking-tight md:text-6xl">
+            Denver Concert Transportation
+          </h1>
+          <p className="mt-5 max-w-3xl text-lg leading-relaxed text-soft">
+            Review major venues, compare ride types, and choose the best way to get to and from concert nights around
+            Denver and Red Rocks.
           </p>
-          <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-primary" href="/find">
-              Find Ride Options
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link className="btn-primary" href="/book">
+              Book a Ride
             </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/week">
-              Weekly Venue Schedules
+            <Link className="btn-ghost" href="/week">
+              Upcoming Shows
             </Link>
           </div>
         </div>
 
-        <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">Major Venue Links</div>
-          <div className="comic-grid" style={{ marginTop: 10 }}>
+        <section className="mt-10 rounded-3xl border border-soft bg-surface-strong p-6 md:p-8">
+          <h2 className="text-2xl font-black tracking-tight">Venue guides</h2>
+          <div className="mt-5 grid gap-4 md:grid-cols-2">
             {venueLinks.map((v) => (
-              <Link key={v.href} href={v.href} className="comic-panel block">
-                <h2 className="comic-h3">{v.label}</h2>
-                <p className="comic-copy">Venue intel, upcoming shows, pickup strategy, and ride paths.</p>
+              <Link key={v.href} href={v.href} className="rounded-3xl border border-soft bg-surface/30 p-6 no-underline transition hover:-translate-y-1 hover:border-white/20">
+                <h3 className="text-xl font-black tracking-tight text-strong">{v.label}</h3>
+                <p className="mt-3 text-soft leading-relaxed">Venue details, upcoming shows, and ride links.</p>
               </Link>
             ))}
           </div>
         </section>
 
-        <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">Ride Type Comparison</div>
-          <div className="overflow-x-auto" style={{ marginTop: 10 }}>
-            <table className="w-full text-left text-sm">
+        <section className="mt-10 rounded-3xl border border-soft bg-surface-strong p-6 md:p-8">
+          <h2 className="text-2xl font-black tracking-tight">Ride options</h2>
+          <div className="mt-5 overflow-x-auto">
+            <table className="w-full min-w-[620px] text-left text-sm text-soft">
               <thead>
-                <tr className="border-b border-white/10">
-                  <th className="py-2 pr-3">Ride Type</th>
-                  <th className="py-2 pr-3">Best For</th>
-                  <th className="py-2 pr-3">Main Tradeoff</th>
+                <tr className="border-b border-soft text-strong">
+                  <th className="py-2 pr-3 font-black">Ride type</th>
+                  <th className="py-2 pr-3 font-black">Best for</th>
+                  <th className="py-2 pr-3 font-black">Main tradeoff</th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b border-white/5">
-                  <td className="py-2 pr-3 font-semibold">Shared Shuttle</td>
-                  <td className="py-2 pr-3">Predictable round-trip logistics</td>
-                  <td className="py-2 pr-3">Less inbound timing flexibility</td>
-                </tr>
-                <tr className="border-b border-white/5">
-                  <td className="py-2 pr-3 font-semibold">Private SUV</td>
-                  <td className="py-2 pr-3">Small groups with tight schedule control</td>
-                  <td className="py-2 pr-3">Higher upfront price</td>
-                </tr>
-                <tr className="border-b border-white/5">
-                  <td className="py-2 pr-3 font-semibold">Private Van</td>
-                  <td className="py-2 pr-3">Mid-size groups moving together</td>
-                  <td className="py-2 pr-3">Requires earlier planning for best availability</td>
-                </tr>
-                <tr className="border-b border-white/5">
-                  <td className="py-2 pr-3 font-semibold">Party Bus</td>
-                  <td className="py-2 pr-3">Large groups / celebration nights</td>
-                  <td className="py-2 pr-3">Best when booked ahead for specific events</td>
-                </tr>
+                {rideRows.map((row) => (
+                  <tr key={row.rideType} className="border-b border-white/5">
+                    <td className="py-3 pr-3 font-semibold text-strong">{row.rideType}</td>
+                    <td className="py-3 pr-3">{row.bestFor}</td>
+                    <td className="py-3 pr-3">{row.tradeoff}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
         </section>
 
-        <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">How Booking Works</div>
-          <ol className="comic-copy" style={{ marginTop: 10, paddingLeft: 18 }}>
-            <li>Pick your venue and date.</li>
-            <li>Review venue-specific parking and pickup logistics.</li>
-            <li>Choose your ride type on <code>/find</code>.</li>
-            <li>Confirm one clear meetup and fallback point before show close.</li>
-          </ol>
-        </section>
-
-        <section className="comic-grid" style={{ marginTop: 16 }}>
-          <article className="comic-panel">
-            <div className="comic-tag">Best by Scenario</div>
-            <h2 className="comic-h3">Solo / Pair</h2>
-            <p className="comic-copy">Shared shuttle is usually the best default for budget + reliability.</p>
+        <section className="mt-10 grid gap-4 md:grid-cols-3">
+          <article className="rounded-3xl border border-soft bg-surface-strong p-6">
+            <h2 className="text-2xl font-black tracking-tight">Solo or pair</h2>
+            <p className="mt-3 text-soft leading-relaxed">
+              Shared shuttle seats are usually the best mix of price and reliability.
+            </p>
           </article>
-          <article className="comic-panel">
-            <div className="comic-tag">Best by Scenario</div>
-            <h2 className="comic-h3">Group of 4–6</h2>
-            <p className="comic-copy">Private SUV gives cleaner timing control and one coordinated return plan.</p>
+          <article className="rounded-3xl border border-soft bg-surface-strong p-6">
+            <h2 className="text-2xl font-black tracking-tight">Group of 4–6</h2>
+            <p className="mt-3 text-soft leading-relaxed">
+              A private SUV gives your group one vehicle and one return plan for the night.
+            </p>
           </article>
-          <article className="comic-panel">
-            <div className="comic-tag">Best by Scenario</div>
-            <h2 className="comic-h3">Group of 7+</h2>
-            <p className="comic-copy">Private van or party bus keeps the entire group together for ingress and exit.</p>
+          <article className="rounded-3xl border border-soft bg-surface-strong p-6">
+            <h2 className="text-2xl font-black tracking-tight">Group of 7+</h2>
+            <p className="mt-3 text-soft leading-relaxed">
+              A private van or party bus keeps everyone together from pickup to return.
+            </p>
           </article>
-        </section>
-
-        <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">Key Planning Links</div>
-          <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-primary" href="/find">
-              Compare & Book
-            </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/week">
-              Weekly Discovery
-            </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/week/red-rocks">
-              Red Rocks Week
-            </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/guide/transportation/shuttle-vs-uber">
-              Shuttle vs Uber
-            </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/guide/show-night-strategy/post-show-pickup-plan">
-              Pickup Strategy
-            </Link>
-          </div>
         </section>
 
         <FAQBlock title="Denver Concert Transportation FAQ" rows={faqRows} />

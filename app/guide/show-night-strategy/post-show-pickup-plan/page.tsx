@@ -14,6 +14,41 @@ export const metadata = {
   },
 };
 
+const actionLinks = [
+  { href: "/book", label: "Book a Ride" },
+  { href: "/week/red-rocks", label: "This Week at Red Rocks" },
+  { href: "/guide/transportation/shuttle-vs-uber", label: "Shuttle vs Uber" },
+  { href: "/guide/parking", label: "Parking Guide" },
+] as const;
+
+const relatedLinks = [
+  {
+    href: "/guide/show-night-strategy",
+    title: "Show-Night Strategy",
+    body: "See timing, weather, and arrival planning for Red Rocks nights.",
+  },
+  {
+    href: "/venues/red-rocks-amphitheatre",
+    title: "Red Rocks Venue Guide",
+    body: "Use the venue page to line up your timing, show details, and ride options.",
+  },
+  {
+    href: "/guide/red-rocks-intelligence-hub",
+    title: "Red Rocks Visiting Guide",
+    body: "Review venue basics before you lock in your ride home.",
+  },
+  {
+    href: "/venues/mission-ballroom",
+    title: "Mission Ballroom",
+    body: "Apply the same pre-show pickup planning to major indoor rooms.",
+  },
+  {
+    href: "/venues/fiddlers-green-amphitheatre",
+    title: "Fiddler's Green",
+    body: "Use the same ride-home planning on sold-out amphitheatre nights.",
+  },
+] as const;
+
 export default async function Page() {
   const faqRows = await getFaqRowsWithGlobal("guide/post-show-pickup-plan.json");
   const faqJsonLd = buildFaqPageJsonLd(faqRows);
@@ -34,75 +69,49 @@ export default async function Page() {
   };
 
   return (
-    <main className="comic-page pt-24 pb-10">
-      <section className="comic-wrap">
+    <main className="min-h-screen bg-surface px-6 py-20 text-white">
+      <section className="mx-auto max-w-5xl">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
-        <div className="comic-hero">
-          <div className="comic-kicker">Exit Strategy</div>
-          <h1 className="comic-title">Post-Show Pickup Plan</h1>
-          <p className="comic-copy">
-            Direct answer: decide your meet point and fallback before encore. The stranded window happens when groups make
-            pickup decisions after the crowd is already moving.
+        <div className="rounded-3xl border border-soft bg-surface-strong p-8 md:p-10">
+          <div className="text-[11px] font-black uppercase tracking-[0.25em] text-muted">
+            Pickup Planning
+          </div>
+          <h1 className="mt-3 text-5xl font-black tracking-tight md:text-6xl">
+            Post-Show Pickup Plan
+          </h1>
+          <p className="mt-5 max-w-3xl text-lg leading-relaxed text-soft">
+            Choose your meet point and backup plan before the encore. The toughest part of Red Rocks transportation usually
+            starts when groups wait until the crowd is already moving.
           </p>
         </div>
 
-        <div className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">Execution Sequence</div>
-          <ol className="comic-copy" style={{ marginTop: 10, paddingLeft: 18 }}>
+        <section className="mt-10 rounded-3xl border border-soft bg-surface-strong p-6 md:p-8">
+          <h2 className="text-2xl font-black tracking-tight">Before the encore</h2>
+          <ol className="mt-5 list-decimal space-y-2 pl-5 text-soft leading-relaxed">
             <li>Pick one specific meet point before the show starts.</li>
-            <li>Share one fallback point if service drops.</li>
-            <li>Text the plan before encore starts.</li>
-            <li>Choose now: full encore vs faster exit.</li>
+            <li>Choose one fallback point in case service drops.</li>
+            <li>Text the plan to everyone before the encore starts.</li>
+            <li>Decide ahead of time if you are staying for the full encore or leaving early.</li>
           </ol>
-        </div>
-
-        <div className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">Next Actions</div>
-          <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-primary" href="/find">
-              Book Ride
-            </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/week/red-rocks">
-              Check This Week
-            </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/guide/transportation/shuttle-vs-uber">
-              Shuttle vs Uber
-            </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/guide/logistics/parking-lots">
-              Parking Guide
-            </Link>
+          <div className="mt-6 flex flex-wrap gap-3">
+            {actionLinks.map((item) => (
+              <Link key={item.href} className={item.label === "Book a Ride" ? "btn-primary" : "btn-ghost"} href={item.href}>
+                {item.label}
+              </Link>
+            ))}
           </div>
-        </div>
+        </section>
 
-        <div className="comic-grid" style={{ marginTop: 16 }}>
-          <Link href="/guide/show-night-strategy" className="comic-panel block">
-            <div className="comic-tag">Parent</div>
-            <h2 className="comic-h3">Show-Night Strategy</h2>
-            <p className="comic-copy">Parent strategy page for timing, weather pivots, and operations.</p>
-          </Link>
-          <Link href="/venues/red-rocks-amphitheatre" className="comic-panel block">
-            <div className="comic-tag">Venue</div>
-            <h2 className="comic-h3">Red Rocks Venue Page</h2>
-            <p className="comic-copy">Use current show context to tighten pickup timing.</p>
-          </Link>
-          <Link href="/guide/red-rocks-intelligence-hub" className="comic-panel block">
-            <div className="comic-tag">Hub</div>
-            <h2 className="comic-h3">Red Rocks Intelligence Hub</h2>
-            <p className="comic-copy">Broader venue knowledge that supports better exit planning.</p>
-          </Link>
-          <Link href="/venues/mission-ballroom" className="comic-panel block">
-            <div className="comic-tag">Venue</div>
-            <h2 className="comic-h3">Mission Ballroom</h2>
-            <p className="comic-copy">Use the same pre-encore pickup discipline at major indoor rooms.</p>
-          </Link>
-          <Link href="/venues/fiddlers-green-amphitheatre" className="comic-panel block">
-            <div className="comic-tag">Venue</div>
-            <h2 className="comic-h3">Fiddler&apos;s Green</h2>
-            <p className="comic-copy">Apply this exit sequence to sold-out amphitheatre nights.</p>
-          </Link>
-        </div>
+        <section className="mt-10 grid gap-4 md:grid-cols-2">
+          {relatedLinks.map((item) => (
+            <Link key={item.href} href={item.href} className="rounded-3xl border border-soft bg-surface-strong p-6 no-underline transition hover:-translate-y-1 hover:border-white/20">
+              <h2 className="text-2xl font-black tracking-tight text-strong">{item.title}</h2>
+              <p className="mt-3 text-soft leading-relaxed">{item.body}</p>
+            </Link>
+          ))}
+        </section>
 
         <FAQBlock title="Post-Show Pickup FAQ" rows={faqRows} />
       </section>

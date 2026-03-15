@@ -1,10 +1,9 @@
 import Link from "next/link";
-import MusicWave from "@/components/MusicWave";
 
 export const metadata = {
   title: "Red Rocks Visiting Guide",
   description:
-    "Complete Red Rocks guide: history, geology, elevation, trails, visiting rules, and show-night planning links.",
+    "Core Red Rocks facts, visiting rules, trails, elevation, and practical planning basics before show night.",
   alternates: {
     canonical: "/guide/red-rocks-intelligence-hub",
   },
@@ -13,59 +12,59 @@ export const metadata = {
 const sections = [
   {
     kicker: "Basic Facts",
-    title: "Red Rocks At A Glance",
+    title: "Red Rocks at a glance",
     bullets: [
       "Location: near Morrison, Colorado, roughly 10 miles west of Denver.",
-      "Elevation: about 6,435 ft above sea level.",
+      "Elevation: about 6,435 feet above sea level.",
       "Capacity: about 9,525 seats.",
-      "Opened as amphitheatre: 1941.",
-      "Owner: City and County of Denver (Denver Mountain Parks).",
+      "Opened as an amphitheatre: 1941.",
+      "Owner: City and County of Denver.",
     ],
   },
   {
     kicker: "Geology",
-    title: "Why The Rocks Are Red",
+    title: "Why the rocks are red",
     bullets: [
       "The rocks are part of the Fountain Formation, built from ancient sediment deposits.",
-      "Red coloration mainly comes from iron oxide in the sandstone.",
-      "Comparable Front Range formations appear at Garden of the Gods and the Flatirons.",
+      "The red color mainly comes from iron oxide in the sandstone.",
+      "Similar Front Range formations appear at Garden of the Gods and the Flatirons.",
     ],
   },
   {
     kicker: "Formation",
-    title: "How The Amphitheater Works Naturally",
+    title: "How the amphitheatre works naturally",
     bullets: [
       "The bowl shape is a result of uplift and erosion over millions of years.",
-      "Key formations include Creation Rock, Ship Rock, and Stage Rock.",
-      "The monoliths form a natural acoustic shell that amplifies and reflects sound.",
+      "The best-known formations are Creation Rock, Ship Rock, and Stage Rock.",
+      "The monoliths create the natural acoustic shell that makes the venue famous.",
     ],
   },
   {
     kicker: "Visiting",
-    title: "Park Access And Timing",
+    title: "Park access and timing",
     bullets: [
       "Park access is typically available from one hour before sunrise to one hour after sunset.",
-      "On event days, amphitheatre areas may close in the afternoon for show prep.",
+      "On event days, amphitheatre areas may close in the afternoon for show preparation.",
       "Daytime park admission is usually free when no ticketed event restrictions apply.",
     ],
   },
   {
     kicker: "Trails",
-    title: "Most Useful Trails",
+    title: "Most useful trails",
     bullets: [
       "Trading Post Trail: short scenic loop through formations and meadows.",
       "Red Rocks Trail: multi-use route that connects with adjacent park systems.",
       "Funicular Trail: steeper route following the old incline alignment.",
-      "Geologic Overlook Trail: short path to viewpoint and interpretive markers.",
+      "Geologic Overlook Trail: short path to a viewpoint and interpretive markers.",
     ],
   },
   {
     kicker: "Practical",
-    title: "Altitude And Show-Night Reality",
+    title: "Altitude and show-night reality",
     bullets: [
       "At this elevation, stairs feel harder and fatigue sets in faster.",
       "Sun exposure and dry air are stronger than many visitors expect.",
-      "Hydration, layering, and a clean transport plan reduce show-night stress.",
+      "Hydration, layers, and a clear ride plan make the night smoother.",
     ],
   },
 ] as const;
@@ -78,80 +77,74 @@ const faqRows = [
   "How many stairs are in the amphitheatre workout route?",
   "What should I plan for weather and altitude?",
   "Is camping allowed inside Red Rocks Park?",
-  "What is the fastest post-show exit strategy?",
+  "What is the fastest way out after a show?",
 ];
 
 export default function RedRocksIntelHubPage() {
   return (
-    <main className="comic-page pt-24 pb-10">
-      <section className="comic-wrap">
-        <div className="comic-hero">
-          <div className="comic-kicker">Visiting Guide</div>
-          <h1 className="comic-title">Red Rocks Visiting Guide</h1>
-          <p className="comic-copy">
-            One page with the core Red Rocks facts, geology, visiting rules, and practical planning basics before show night.
+    <main className="min-h-screen bg-surface px-6 py-20 text-white">
+      <section className="mx-auto max-w-5xl">
+        <div className="rounded-3xl border border-soft bg-surface-strong p-8 md:p-10">
+          <div className="text-[11px] font-black uppercase tracking-[0.25em] text-muted">
+            Visiting Guide
+          </div>
+          <h1 className="mt-3 text-5xl font-black tracking-tight md:text-6xl">
+            Red Rocks Visiting Guide
+          </h1>
+          <p className="mt-5 max-w-3xl text-lg leading-relaxed text-soft">
+            Core Red Rocks facts, visiting rules, trails, and practical planning basics before show night.
           </p>
-          <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-primary" href="/shuttles">
-              Book Ride
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link className="btn-primary" href="/shuttles">
+              See Shuttle Options
             </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/week/red-rocks">
+            <Link className="btn-ghost" href="/week/red-rocks">
               Live Lineup
             </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/guide/red-rocks-faq">
+            <Link className="btn-ghost" href="/guide/red-rocks-faq">
               Venue FAQ
             </Link>
           </div>
-          <div style={{ marginTop: 18 }}>
-            <MusicWave bars={24} />
-          </div>
         </div>
 
-        <section style={{ marginTop: 16 }}>
-          <div className="comic-grid">
-            {sections.map((section) => (
-              <article key={section.title} className="comic-panel">
-                <div className="comic-tag">{section.kicker}</div>
-                <h2 className="comic-h3" style={{ marginTop: 10 }}>
-                  {section.title}
-                </h2>
-                <ul style={{ marginTop: 10, paddingLeft: 18 }}>
-                  {section.bullets.map((bullet) => (
-                    <li key={bullet} className="comic-copy" style={{ marginTop: 6 }}>
-                      {bullet}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
+        <section className="mt-10 grid gap-4 md:grid-cols-2">
+          {sections.map((section) => (
+            <article key={section.title} className="rounded-3xl border border-soft bg-surface-strong p-6">
+              <div className="text-[11px] font-black uppercase tracking-[0.25em] text-[#ffb07c]">
+                {section.kicker}
+              </div>
+              <h2 className="mt-3 text-2xl font-black tracking-tight">{section.title}</h2>
+              <ul className="mt-4 list-disc space-y-2 pl-5 text-soft leading-relaxed">
+                {section.bullets.map((bullet) => (
+                  <li key={bullet}>{bullet}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
         </section>
 
-        <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">Common Questions</div>
-          <h2 className="comic-h3" style={{ marginTop: 10 }}>
-            Questions People Ask First
-          </h2>
-          <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
+        <section className="mt-10 rounded-3xl border border-soft bg-surface-strong p-6 md:p-8">
+          <h2 className="text-2xl font-black tracking-tight">Questions people ask first</h2>
+          <div className="mt-5 grid gap-3">
             {faqRows.map((q) => (
-              <div key={q} className="comic-btn comic-btn-secondary !justify-start">
+              <div key={q} className="rounded-2xl border border-soft bg-surface/30 p-5 text-base font-black tracking-tight text-strong">
                 {q}
               </div>
             ))}
           </div>
         </section>
 
-        <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">Next Step</div>
-          <p className="comic-copy" style={{ marginTop: 10 }}>
-            Once you know your date and plan for the venue, choose your ride option and book before show night.
+        <section className="mt-10 rounded-3xl border border-soft bg-surface-strong p-6 md:p-8">
+          <h2 className="text-2xl font-black tracking-tight">Before show night</h2>
+          <p className="mt-4 text-soft leading-relaxed">
+            Once you know your date and venue plan, choose your ride option and book before show night.
           </p>
-          <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-primary" href="/shuttles">
-              See Shuttle Options
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link className="btn-primary" href="/book">
+              Book a Ride
             </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/week/red-rocks">
-              Search This Week
+            <Link className="btn-ghost" href="/week/red-rocks">
+              Upcoming Shows
             </Link>
           </div>
         </section>

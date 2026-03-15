@@ -14,6 +14,57 @@ export const metadata = {
   },
 };
 
+const comparisonRows = [
+  {
+    option: "Uber/Lyft",
+    strongestUse: "Inbound flexibility",
+    primaryRisk: "Post-encore surge and pickup friction",
+  },
+  {
+    option: "Shared Shuttle",
+    strongestUse: "Reliable round trip",
+    primaryRisk: "You need to match the departure timing",
+  },
+  {
+    option: "Private SUV/Van",
+    strongestUse: "Control and comfort for your group",
+    primaryRisk: "Higher upfront cost",
+  },
+] as const;
+
+const relatedLinks = [
+  {
+    href: "/guide/transportation",
+    title: "Transportation Guide",
+    body: "Compare ride options and choose what fits your show night.",
+  },
+  {
+    href: "/guide/show-night-strategy/post-show-pickup-plan",
+    title: "Post-Show Pickup Plan",
+    body: "See how to handle the ride home after the encore.",
+  },
+  {
+    href: "/venues/red-rocks-amphitheatre",
+    title: "Red Rocks Venue Guide",
+    body: "Venue details, upcoming shows, and ride links for Red Rocks.",
+  },
+  {
+    href: "/guide/red-rocks-intelligence-hub",
+    title: "Red Rocks Visiting Guide",
+    body: "Get the basics on altitude, trails, timing, and venue access.",
+  },
+  {
+    href: "/venues/mission-ballroom",
+    title: "Mission Ballroom",
+    body: "Use the same ride-planning approach for major Denver venue nights.",
+  },
+  {
+    href: "/venues/fiddlers-green-amphitheatre",
+    title: "Fiddler's Green",
+    body: "Compare how pickup and exit timing changes at another large amphitheatre.",
+  },
+] as const;
+
 export default async function Page() {
   const faqRows = await getFaqRowsWithGlobal("guide/shuttle-vs-uber.json");
   const faqJsonLd = buildFaqPageJsonLd(faqRows);
@@ -29,92 +80,64 @@ export default async function Page() {
   };
 
   return (
-    <main className="comic-page pt-24 pb-10">
-      <section className="comic-wrap">
+    <main className="min-h-screen bg-surface px-6 py-20 text-white">
+      <section className="mx-auto max-w-5xl">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
-        <div className="comic-hero">
-          <div className="comic-kicker">Transportation Comparison</div>
-          <h1 className="comic-title">Shuttle vs Uber to Red Rocks</h1>
-          <p className="comic-copy">
-            Direct answer: rideshare is flexible inbound but unpredictable outbound. Shuttle is less flexible inbound but
-            materially better for guaranteed post-show return.
-          </p>
-        </div>
-
-        <div className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">Decision Grid</div>
-          <div className="overflow-x-auto" style={{ marginTop: 10 }}>
-            <table className="w-full text-left text-sm">
-              <thead>
-                <tr className="border-b border-white/10">
-                  <th className="py-2 pr-3">Option</th>
-                  <th className="py-2 pr-3">Strongest Use</th>
-                  <th className="py-2 pr-3">Primary Risk</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-b border-white/5">
-                  <td className="py-2 pr-3 font-semibold">Uber/Lyft</td>
-                  <td className="py-2 pr-3">Inbound flexibility</td>
-                  <td className="py-2 pr-3">Post-encore surge + pickup friction</td>
-                </tr>
-                <tr className="border-b border-white/5">
-                  <td className="py-2 pr-3 font-semibold">Shared Shuttle</td>
-                  <td className="py-2 pr-3">Reliable round trip</td>
-                  <td className="py-2 pr-3">Must align with departure timing</td>
-                </tr>
-                <tr className="border-b border-white/5">
-                  <td className="py-2 pr-3 font-semibold">Private SUV/Van</td>
-                  <td className="py-2 pr-3">Control + comfort</td>
-                  <td className="py-2 pr-3">Higher upfront cost</td>
-                </tr>
-              </tbody>
-            </table>
+        <div className="rounded-3xl border border-soft bg-surface-strong p-8 md:p-10">
+          <div className="text-[11px] font-black uppercase tracking-[0.25em] text-muted">
+            Transportation Comparison
           </div>
-          <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-primary" href="/find">
-              Compare Ride Options
+          <h1 className="mt-3 text-5xl font-black tracking-tight md:text-6xl">
+            Shuttle vs Uber to Red Rocks
+          </h1>
+          <p className="mt-5 max-w-3xl text-lg leading-relaxed text-soft">
+            Rideshare is flexible on the way in but less predictable after the show. A scheduled shuttle is less flexible
+            on timing, but much stronger for the ride home.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link className="btn-primary" href="/book">
+              Book a Ride
             </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/week/red-rocks">
+            <Link className="btn-ghost" href="/week/red-rocks">
               Red Rocks This Week
             </Link>
           </div>
         </div>
 
-        <div className="comic-grid" style={{ marginTop: 16 }}>
-          <Link href="/guide/transportation" className="comic-panel block">
-            <div className="comic-tag">Hub</div>
-            <h2 className="comic-h3">Transportation Hub</h2>
-            <p className="comic-copy">Parent guide for all Red Rocks transport planning.</p>
-          </Link>
-          <Link href="/guide/show-night-strategy/post-show-pickup-plan" className="comic-panel block">
-            <div className="comic-tag">After Show</div>
-            <h2 className="comic-h3">Post-Show Pickup Plan</h2>
-            <p className="comic-copy">Detailed extraction strategy once the encore ends.</p>
-          </Link>
-          <Link href="/venues/red-rocks-amphitheatre" className="comic-panel block">
-            <div className="comic-tag">Venue</div>
-            <h2 className="comic-h3">Red Rocks Venue Page</h2>
-            <p className="comic-copy">Venue context and show schedule from snapshots.</p>
-          </Link>
-          <Link href="/guide/red-rocks-intelligence-hub" className="comic-panel block">
-            <div className="comic-tag">Context</div>
-            <h2 className="comic-h3">Red Rocks Intelligence Hub</h2>
-            <p className="comic-copy">High-authority venue context that supports this comparison.</p>
-          </Link>
-          <Link href="/venues/mission-ballroom" className="comic-panel block">
-            <div className="comic-tag">Venue</div>
-            <h2 className="comic-h3">Mission Ballroom</h2>
-            <p className="comic-copy">Apply the same return-risk framework to downtown venue nights.</p>
-          </Link>
-          <Link href="/venues/fiddlers-green-amphitheatre" className="comic-panel block">
-            <div className="comic-tag">Venue</div>
-            <h2 className="comic-h3">Fiddler&apos;s Green</h2>
-            <p className="comic-copy">Compare surge/pickup behavior for another high-capacity amphitheatre.</p>
-          </Link>
-        </div>
+        <section className="mt-10 rounded-3xl border border-soft bg-surface-strong p-6 md:p-8">
+          <h2 className="text-2xl font-black tracking-tight">What matters most</h2>
+          <div className="mt-5 overflow-x-auto">
+            <table className="w-full min-w-[620px] text-left text-sm text-soft">
+              <thead>
+                <tr className="border-b border-soft text-strong">
+                  <th className="py-2 pr-3 font-black">Option</th>
+                  <th className="py-2 pr-3 font-black">Strongest use</th>
+                  <th className="py-2 pr-3 font-black">Primary risk</th>
+                </tr>
+              </thead>
+              <tbody>
+                {comparisonRows.map((row) => (
+                  <tr key={row.option} className="border-b border-white/5">
+                    <td className="py-3 pr-3 font-semibold text-strong">{row.option}</td>
+                    <td className="py-3 pr-3">{row.strongestUse}</td>
+                    <td className="py-3 pr-3">{row.primaryRisk}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section className="mt-10 grid gap-4 md:grid-cols-2">
+          {relatedLinks.map((item) => (
+            <Link key={item.href} href={item.href} className="rounded-3xl border border-soft bg-surface-strong p-6 no-underline transition hover:-translate-y-1 hover:border-white/20">
+              <h2 className="text-2xl font-black tracking-tight text-strong">{item.title}</h2>
+              <p className="mt-3 text-soft leading-relaxed">{item.body}</p>
+            </Link>
+          ))}
+        </section>
 
         <FAQBlock title="Shuttle vs Uber FAQ" rows={faqRows} />
       </section>

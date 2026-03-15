@@ -97,7 +97,7 @@ function GuideCard({ card }: { card: Card }) {
       ) : null}
       <h2 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white">{card.title}</h2>
       <p className="mt-3 text-sm leading-6 text-white/70">{card.desc}</p>
-      <div className="mt-5 inline-flex items-center text-sm font-bold text-[#ffb07c]">
+      <div className="mt-5 inline-flex items-center text-sm font-bold text-[#3df3ff]">
         Open guide <ArrowRight className="ml-1 h-4 w-4" />
       </div>
     </Link>
@@ -124,7 +124,7 @@ export default function GuideHub() {
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/book"
-                className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#ff5b2e] px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#ff7148]"
+                className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
               >
                 Start Booking
               </Link>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Red Rocks Info + FAQ | Party at Red Rocks",
+  title: "Red Rocks FAQ | Party at Red Rocks",
   description:
     "Everything people actually need: pickup timing, return plan, what to bring, cancellation rules, and common questions.",
 };
@@ -19,38 +19,38 @@ function FAQ({ q, a }: { q: string; a: string }) {
 
 export default function RedRocksFAQ() {
   return (
-    <main className="text-white">
-      <section className="pt-24 pb-10 px-6">
-        <div className="max-w-5xl mx-auto">
-          <p className="text-white/55 text-[10px] font-black uppercase tracking-[0.35em]">
+    <main className="min-h-screen bg-surface px-6 py-20 text-white">
+      <section>
+        <div className="mx-auto max-w-5xl">
+          <p className="text-[11px] font-black uppercase tracking-[0.25em] text-muted">
             Red Rocks Essentials
           </p>
 
-          <h1 className="mt-3 text-5xl md:text-7xl font-black italic uppercase tracking-tight">
-            Red Rocks Info + FAQ
+          <h1 className="mt-3 text-5xl font-black tracking-tight md:text-6xl">
+            Red Rocks FAQ
           </h1>
 
-          <p className="mt-4 max-w-2xl text-white/70">
-            The stuff that actually matters: pickup reality, how the return works, what to bring, and policy answers.
+          <p className="mt-5 max-w-3xl text-lg leading-relaxed text-soft">
+            Pickup timing, return rides, what to bring, cancellation rules, and the questions people usually ask first.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/private-suburban" className="btn-primary">
-              Book Suburban — $499
+            <Link href="/book/red-rocks-amphitheatre/private/suv" className="btn-primary">
+              Book Private SUV
             </Link>
-            <Link href="/find" className="btn-ghost">
+            <Link href="/book/red-rocks-amphitheatre/shared" className="btn-ghost">
               Book Shuttle Seats
             </Link>
-            <Link href="/" className="btn-ghost">
-              Back home
+            <Link href="/guide" className="btn-ghost">
+              Back to Guides
             </Link>
           </div>
         </div>
       </section>
 
-      <section className="section section-alt">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="rounded-3xl border border-soft panel p-6 md:p-8 shadow-soft hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+      <section className="mt-10">
+        <div className="mx-auto max-w-5xl">
+          <div className="rounded-3xl border border-soft bg-surface-strong p-6 md:p-8">
             <h2 className="text-2xl md:text-3xl font-black tracking-tight">
               Quick answers
             </h2>
@@ -83,11 +83,11 @@ export default function RedRocksFAQ() {
             </div>
 
             <div className="mt-6 flex flex-col sm:flex-row gap-3">
-              <Link href="/find" className="btn-primary">
-                Pick a date — book seats
+              <Link href="/book/red-rocks-amphitheatre/shared" className="btn-primary">
+                Book Shuttle Seats
               </Link>
-              <Link href="/private-suburban" className="btn-ghost">
-                Private Suburban booking →
+              <Link href="/book/red-rocks-amphitheatre/private/suv" className="btn-ghost">
+                Book Private SUV
               </Link>
             </div>
           </div>
