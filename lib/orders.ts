@@ -19,6 +19,7 @@ export type InternalOrderRow = {
   sessionKey?: string | null;
   customer?: Record<string, unknown> | null;
   booking?: Record<string, unknown> | null;
+  rezdyBookingPayload?: Record<string, unknown> | null;
   payment?: Record<string, unknown> | null;
   notes?: string | null;
   followUpStatus?: FollowUpStatus | null;
@@ -383,6 +384,7 @@ export async function listInternalOrders(): Promise<InternalOrderRow[]> {
           productCode,
           sessionKey,
           bookingJson,
+          rezdyBookingPayloadJson,
           paymentJson,
           customerJson,
           bookingStatus,
@@ -426,6 +428,7 @@ export async function listInternalOrders(): Promise<InternalOrderRow[]> {
         sessionKey: typeof row.sessionKey === "string" ? row.sessionKey : null,
         customer: customer ?? null,
         booking: booking ?? null,
+        rezdyBookingPayload: parseJson(row.rezdyBookingPayloadJson) ?? null,
         payment: payment ?? null,
         notes: typeof row.notes === "string" ? row.notes : null,
         followUpStatus: asFollowUpStatus(row.followUpStatus),
@@ -465,6 +468,7 @@ export async function listInternalOrders(): Promise<InternalOrderRow[]> {
       sessionKey: typeof row.sessionKey === "string" ? row.sessionKey : null,
       customer: readRecord(row.customer) ?? null,
       booking: readRecord(row.booking) ?? null,
+      rezdyBookingPayload: readRecord(row.rezdyBookingPayload) ?? null,
       payment: readRecord(row.payment) ?? null,
       notes: typeof row.notes === "string" ? row.notes : null,
       followUpStatus: asFollowUpStatus(row.followUpStatus),
@@ -473,6 +477,63 @@ export async function listInternalOrders(): Promise<InternalOrderRow[]> {
         typeof row.paymentRequestSentAt === "string" ? row.paymentRequestSentAt : null,
     }))
     .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+}
+
+export async function getInternalOrderByBookingReference(
+  rezdyBookingReference: string
+): Promise<InternalOrderRow | null> {
+  const bookingRef = rezdyBookingReference.trim();
+  if (!bookingRef) return null;
+
+  const db = openDb();
+  try {
+    const row = db
+      .prepare(
+        `SELECT
+          internalOrderId,
+          createdAt,
+          lastTouchedAt,
+          rezdyBookingReference,
+          productCode,
+          sessionKey,
+          bookingJson,
+          rezdyBookingPayloadJson,
+          paymentJson,
+          customerJson,
+          notes,
+          followUpStatus,
+          operatorPaymentStep,
+          paymentRequestSentAt
+        FROM orders
+        WHERE rezdyBookingReference = ?
+        ORDER BY createdAt DESC
+        LIMIT 1`
+      )
+      .get(bookingRef) as Record<string, unknown> | undefined;
+
+    if (!row) return null;
+
+    return {
+      internalOrderId: String(row.internalOrderId),
+      createdAt: String(row.createdAt),
+      lastTouchedAt: typeof row.lastTouchedAt === "string" ? row.lastTouchedAt : null,
+      rezdyBookingReference:
+        typeof row.rezdyBookingReference === "string" ? row.rezdyBookingReference : null,
+      productCode: typeof row.productCode === "string" ? row.productCode : undefined,
+      sessionKey: typeof row.sessionKey === "string" ? row.sessionKey : null,
+      customer: parseJson(row.customerJson) ?? null,
+      booking: parseJson(row.bookingJson) ?? null,
+      rezdyBookingPayload: parseJson(row.rezdyBookingPayloadJson) ?? null,
+      payment: parseJson(row.paymentJson) ?? null,
+      notes: typeof row.notes === "string" ? row.notes : null,
+      followUpStatus: asFollowUpStatus(row.followUpStatus),
+      operatorPaymentStep: asOperatorPaymentStep(row.operatorPaymentStep),
+      paymentRequestSentAt:
+        typeof row.paymentRequestSentAt === "string" ? row.paymentRequestSentAt : null,
+    };
+  } finally {
+    db.close();
+  }
 }
 
 export async function updateInternalOrderOps(
