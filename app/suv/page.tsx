@@ -4,7 +4,7 @@ import { DISPLAY } from "@/lib/display";
 export const metadata = {
   title: "SUV Ride to Red Rocks",
   description:
-    "Private SUV transportation to Red Rocks with door-to-door pickup and guaranteed return.",
+    "Private SUV transportation to Red Rocks with door-to-door pickup and a planned ride home after the show.",
   alternates: {
     canonical: "/private-suburban",
   },
@@ -18,7 +18,7 @@ export default function SuvPage() {
           <div className="comic-kicker">Private Ride</div>
           <h1 className="comic-title">SUV to Red Rocks</h1>
           <p className="comic-copy">
-            Premium Suburban service for groups up to 6. Door-to-door routing with a locked-in ride home.
+            Private SUV service for groups up to 6. Door-to-door pickup with a planned ride home after the show.
           </p>
           <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
             <Link className="comic-btn comic-btn-primary" href="/private-suburban#book">

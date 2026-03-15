@@ -5,14 +5,14 @@ import ShuttleCTA from "@/components/cta/ShuttleCTA";
 export const metadata: Metadata = {
   title: "Denver Shuttle Pickup: Sheraton Downtown | Party at Red Rocks",
   description:
-    "Downtown Denver pickup location for Party at Red Rocks. Meet at the Sheraton Denver Downtown and ride a $59 per-person shuttle to Red Rocks with a guaranteed post-show return.",
+    "Downtown Denver pickup location for Party at Red Rocks. Meet at the Sheraton Denver Downtown and ride a $59 per-person shuttle to Red Rocks with a return plan after the show.",
   alternates: {
     canonical: "https://www.partyatredrocks.com/guide/local/denver-pickups",
   },
   openGraph: {
     title: "Denver Shuttle Pickup: Sheraton Downtown | Party at Red Rocks",
     description:
-      "Official Downtown Denver pickup hub. $59 per-person Red Rocks shuttle with guaranteed post-show return.",
+      "Downtown Denver pickup location. $59 per-person Red Rocks shuttle with a return plan after the show.",
     url: "https://www.partyatredrocks.com/guide/local/denver-pickups",
     type: "article",
   },
@@ -129,7 +129,7 @@ export default function DenverPickups() {
 
       <ShuttleCTA
         title="Denver Pickup → Red Rocks"
-        blurb="Board in Downtown Denver. $59 per-person. No parking stress, no surge pricing, guaranteed post-show return."
+        blurb="Board in Downtown Denver. $59 per-person. No parking stress, clear departure timing, and a return ride after the show."
         href="/book"
         button="Book Denver Shuttle → $59"
       />

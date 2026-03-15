@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "Book reliable Red Rocks shuttle transportation from Denver. Fixed pricing, pro drivers, and guaranteed post-show return. Shuttle seats from $59/pp or Private Suburban from $499.",
+    "Book Red Rocks shuttle transportation from Denver and Golden. Fixed pricing, pickup details before the ride, and a return plan after the show. Shuttle seats from $59/pp or Private SUV from $499.",
 
   alternates: { canonical: "/" },
 
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     siteName: "Party at Red Rocks",
     title: "Red Rocks Shuttle from Denver | $59 Seats + Private SUVs",
     description:
-      "Fixed pricing, professional drivers, and guaranteed post-show return. Shuttle seats from $59/pp or Private Suburban from $499.",
+      "Fixed pricing, pickup details before the ride, and a return plan after the show. Shuttle seats from $59/pp or Private SUV from $499.",
     images: [
       { url: "/hero/hero-home.jpg", width: 1200, height: 630, alt: "Red Rocks shuttle transportation" },
     ],
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Red Rocks Shuttle from Denver | $59 Seats + Private SUVs",
     description:
-      "Fixed pricing, professional drivers, and guaranteed post-show return. Shuttle seats from $59/pp or Private Suburban from $499.",
+      "Fixed pricing, pickup details before the ride, and a return plan after the show. Shuttle seats from $59/pp or Private SUV from $499.",
     images: ["/hero/hero-home.jpg"],
   },
 

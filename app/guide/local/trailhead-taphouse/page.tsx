@@ -3,16 +3,16 @@ import type { Metadata } from "next";
 import ShuttleCTA from "@/components/cta/ShuttleCTA";
 
 export const metadata: Metadata = {
-  title: "Golden Shuttle Hub: Trailhead Taphouse | Party at Red Rocks",
+  title: "Golden Shuttle Pickup: Trailhead Taphouse | Party at Red Rocks",
   description:
-    "Official Golden pickup location for Party at Red Rocks. Meet at Trailhead Taphouse, then ride a $59 per-person shuttle to Red Rocks with a guaranteed post-show return.",
+    "Golden pickup location for Party at Red Rocks. Meet at Trailhead Taphouse, then ride a $59 per-person shuttle to Red Rocks with a return plan after the show.",
   alternates: {
     canonical: "https://www.partyatredrocks.com/guide/local/trailhead-taphouse",
   },
   openGraph: {
-    title: "Golden Shuttle Hub: Trailhead Taphouse | Party at Red Rocks",
+    title: "Golden Shuttle Pickup: Trailhead Taphouse | Party at Red Rocks",
     description:
-      "Official Golden pickup location. $59 per-person Red Rocks shuttle with guaranteed post-show return.",
+      "Golden pickup location. $59 per-person Red Rocks shuttle with a return plan after the show.",
     url: "https://www.partyatredrocks.com/guide/local/trailhead-taphouse",
     type: "article",
   },
@@ -38,11 +38,11 @@ export default function TrailheadHub() {
 
       <header className="mb-10">
         <h1 className="text-4xl font-black mb-4 uppercase italic tracking-tighter">
-          Golden Shuttle Hub: Trailhead Taphouse
+          Golden Shuttle Pickup: Trailhead Taphouse
         </h1>
         <p className="text-lg text-muted leading-relaxed italic">
-          This is the <strong>official Golden pickup location</strong> for Party at Red Rocks riders.
-          Grab a drink, meet the crew, then roll to Red Rocks with a guaranteed post-show return.
+          Golden pickup for Party at Red Rocks riders.
+          Grab a drink, meet the crew, then roll to Red Rocks with your return ride already planned.
         </p>
 
         <div className="mt-6 flex flex-wrap gap-3">
@@ -64,12 +64,12 @@ export default function TrailheadHub() {
       <section className="grid md:grid-cols-2 gap-10 items-center border border-soft rounded-[2.5rem] overflow-hidden bg-surface-strong/30 p-8 shadow-2xl">
         <div>
           <h2 className="text-xl font-bold mb-4 text-[#4cc9f0] uppercase tracking-tight">
-            Pre-Concert Strategy
+            Before Departure
           </h2>
 
           <p className="text-muted text-base leading-relaxed mb-6">
-            Trailhead Taphouse is the easiest Golden meet-up point before Red Rocks.
-            Arrive early, check in, and you’re locked.
+            Trailhead Taphouse is a simple Golden meet-up point before Red Rocks.
+            Arrive early, check in, and settle in before departure.
           </p>
 
           <ul className="space-y-4 text-base text-soft font-medium">
@@ -88,7 +88,7 @@ export default function TrailheadHub() {
             <li className="flex gap-2">
               <span>🚌</span>
               <span>
-                <strong>Service:</strong> $59 per-person, direct access, guaranteed return
+                <strong>Service:</strong> $59 per-person, clear departure timing, return ride after the show
               </span>
             </li>
             <li>
@@ -121,7 +121,7 @@ export default function TrailheadHub() {
 
       <ShuttleCTA
         title="Golden Pickup → Red Rocks"
-        blurb="Depart from Trailhead Taphouse. $59 per-person. Direct Red Rocks drop-off and guaranteed post-show return."
+        blurb="Depart from Trailhead Taphouse. $59 per-person. Direct Red Rocks drop-off with a return ride planned after the show."
         href="/book"
         button="Book Golden Shuttle → $59"
       />

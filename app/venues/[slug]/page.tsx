@@ -454,7 +454,7 @@ function venueFaqJsonLd(slug: string, v: VenueRec) {
         acceptedAnswer: {
           "@type": "Answer",
           text:
-            "Yes — we cover Denver, Boulder, and Colorado Springs venues. Choose your show and book a guaranteed ride home (no surge, clear meetup plan).",
+            "Yes — we cover Denver, Boulder, and Colorado Springs venues. Choose your show and book a ride with clear pickup details and a return plan after the show.",
         },
       },
       {

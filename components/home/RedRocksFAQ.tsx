@@ -1,7 +1,7 @@
 const FAQ = [
   {
     q: "Do you return after the show?",
-    a: "Yes — guaranteed post-show return. Drivers stay staged and leave after the encore window.",
+    a: "Yes. Drivers stay staged and leave after the encore window for the return ride.",
   },
   {
     q: "Is this round-trip?",

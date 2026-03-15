@@ -5,7 +5,7 @@ export default function SafetyAndLegitimacy() {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Party at Red Rocks",
-    "description": "Verified luxury transportation provider for Red Rocks and Denver venues. Fully vetted drivers and commercial insurance compliance.",
+    "description": "Transportation provider for Red Rocks and Denver venues with vetted drivers and commercial insurance coverage.",
     "areaServed": ["Denver", "Boulder", "Morrison"],
     "telephone": "+17203696292"
   };
