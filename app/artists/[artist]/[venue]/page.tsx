@@ -73,7 +73,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const venueName = VENUE_LEDGER_BY_SLUG.get(venue)?.name ?? titleCaseSlug(venue);
 
   return {
-    title: `${artistName} at ${venueName} | Show Intel & Transport`,
+    title: `${artistName} at ${venueName} | Show Details & Ride Options`,
     description: `Upcoming ${artistName} shows at ${venueName}. Get venue details and compare shuttle options for show night.`,
     alternates: { canonical: `${SITE}/artists/${artist}/${venue}` },
   };
@@ -113,8 +113,8 @@ export default async function ArtistVenuePage({ params }: Props) {
             <Link href={`/venues/${encodeURIComponent(venue)}`} className="comic-btn comic-btn-secondary">
               Venue Page
             </Link>
-            <Link href={`/find?venue=${encodeURIComponent(venue)}&qty=2`} className="comic-btn comic-btn-primary">
-              Find a Ride
+            <Link href={`/book?venue=${encodeURIComponent(venue)}`} className="comic-btn comic-btn-primary">
+              See Ride Options
             </Link>
           </div>
         </div>
@@ -130,10 +130,10 @@ export default async function ArtistVenuePage({ params }: Props) {
                 </h2>
                 <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
                   <Link href={`/shows/${encodeURIComponent(show.id)}`} className="comic-btn comic-btn-secondary">
-                    Show Page
+                    Show Details
                   </Link>
-                  <Link href={`/find?date=${encodeURIComponent(show.dateKey)}&venue=${encodeURIComponent(venue)}&qty=2`} className="comic-btn comic-btn-primary">
-                    Book Ride
+                  <Link href={`/book?venue=${encodeURIComponent(venue)}`} className="comic-btn comic-btn-primary">
+                    Get a Ride
                   </Link>
                 </div>
               </article>

@@ -93,10 +93,10 @@ export default async function ArtistPage({ params }: Props) {
     <main className="comic-page pt-24 pb-10">
       <section className="comic-wrap">
         <div className="comic-hero">
-          <div className="comic-kicker">Artist Intelligence</div>
+          <div className="comic-kicker">Upcoming Shows</div>
           <h1 className="comic-title">{artistRow.name}</h1>
           <p className="comic-copy">
-            Upcoming Colorado shows, venue context, and direct transportation planning for concert nights.
+            Upcoming Colorado shows, venue details, and ride options for concert nights.
           </p>
           <div style={{ marginTop: 10 }}>
             <img
@@ -116,8 +116,8 @@ export default async function ArtistPage({ params }: Props) {
             <Link href="/red-rocks/concerts" className="comic-btn comic-btn-secondary">
               Red Rocks Schedule
             </Link>
-            <Link href="/find" className="comic-btn comic-btn-primary">
-              Find a Ride
+            <Link href="/book" className="comic-btn comic-btn-primary">
+              See Ride Options
             </Link>
           </div>
         </div>
@@ -134,13 +134,13 @@ export default async function ArtistPage({ params }: Props) {
                   </h2>
                   <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
                     <Link href={`/shows/${encodeURIComponent(event.id)}`} className="comic-btn comic-btn-secondary">
-                      Show Intel
+                      Show Details
                     </Link>
                     <Link
-                      href={`/find?date=${encodeURIComponent(event.dateKey)}&venue=red-rocks-amphitheatre&qty=2`}
+                      href="/book?venue=red-rocks-amphitheatre"
                       className="comic-btn comic-btn-primary"
                     >
-                      Book Ride
+                      Get a Ride
                     </Link>
                   </div>
                 </article>
@@ -170,10 +170,10 @@ export default async function ArtistPage({ params }: Props) {
                         Artist x Venue
                       </Link>
                       <Link href={`/shows/${encodeURIComponent(event.id)}`} className="comic-btn comic-btn-secondary">
-                        Show Page
+                        Show Details
                       </Link>
-                      <Link href={`/find?date=${encodeURIComponent(event.dateKey)}&venue=${encodeURIComponent(event.venueId)}&qty=2`} className="comic-btn comic-btn-primary">
-                        Ride Options
+                      <Link href={`/book?venue=${encodeURIComponent(event.venueId)}`} className="comic-btn comic-btn-primary">
+                        Get a Ride
                       </Link>
                     </div>
                   </article>

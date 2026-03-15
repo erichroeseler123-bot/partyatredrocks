@@ -72,16 +72,16 @@ function slugify(input: string): string {
 }
 
 function pickTitle(e?: ShowEvent | null, id?: string) {
-  return e?.title ? `${e.title} | Shuttle & Venue Intel | Party at Red Rocks` : `Event ${id} | Party at Red Rocks`;
+  return e?.title ? `${e.title} | Shuttle Options & Show Details | Party at Red Rocks` : `Event ${id} | Party at Red Rocks`;
 }
 
 function pickDescription(e?: ShowEvent | null) {
   if (!e) {
-    return "Concert shuttle options, venue intel, and weekly show guides across Denver, Boulder & Colorado Springs.";
+    return "Concert shuttle options, venue details, and weekly show guides across Denver, Boulder, and Colorado Springs.";
   }
   const venue = e.venue?.siteName ? ` at ${e.venue.siteName}` : "";
   const when = e.datetime_local ? ` (${fmtDateTime(e.datetime_local)})` : "";
-  return `${e.title}${venue}${when}. Tickets + shuttle ride options — book a guaranteed ride home after the show.`;
+  return `${e.title}${venue}${when}. Already have tickets? Plan your ride and book a guaranteed trip home after the show.`;
 }
 
 function breadcrumbJsonLd(e: ShowEvent | null, id: string) {
@@ -421,7 +421,7 @@ export default async function ShowPage({ params }: Props) {
       <div className="rounded-[32px] border border-soft panel p-8 shadow-[0_22px_70px_rgba(0,0,0,0.45)] backdrop-blur-xl">
         <div className="flex flex-wrap items-center gap-2">
           <div className="inline-flex items-center rounded-full pill px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white/80">
-            Show Intel
+            Show Details
           </div>
 
           {e?.datetime_local ? (
@@ -450,7 +450,7 @@ export default async function ShowPage({ params }: Props) {
         </h1>
 
         <p className="mt-4 max-w-3xl text-white/70">
-          Tickets + ride options with clear meetup logic. Book a guaranteed ride home after the last song.
+          Already have tickets? Plan your ride, pickup, and trip home before show night.
         </p>
         <div className="mt-5">
           <img
@@ -468,10 +468,10 @@ export default async function ShowPage({ params }: Props) {
 
         <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-6 w-full">
           <Link
-            href={`/find?date=${encodeURIComponent(e.dateKey)}&qty=2`}
+            href={`/book?venue=${encodeURIComponent(venueSlug || "")}`}
             className="inline-flex items-center justify-center rounded-full bg-neon-blue px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-black transition hover:bg-surface/40 w-full sm:w-auto min-w-[180px] text-center"
           >
-            Ride Options
+            Get a Ride
           </Link>
 
           <Link
@@ -574,7 +574,7 @@ export default async function ShowPage({ params }: Props) {
 
       <div className="mt-8 grid gap-6 md:grid-cols-3">
         <section className="rounded-3xl border border-soft panel-soft p-6 md:col-span-2">
-          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">Venue Intelligence</div>
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">Venue Details</div>
           <p className="mt-3 text-sm text-white/75">
             First time at {venueName}? Use these guides before show night so arrival and pickup are already decided.
           </p>
@@ -605,10 +605,10 @@ export default async function ShowPage({ params }: Props) {
           <p className="mt-3 text-sm text-white/75">Compare ride options and lock in your return before post-show demand spikes.</p>
           <div className="mt-4">
             <Link
-              href={`/find?date=${encodeURIComponent(e.dateKey)}&venue=${encodeURIComponent(venueSlug || "")}&qty=2`}
+              href={`/book?venue=${encodeURIComponent(venueSlug || "")}`}
               className="comic-btn comic-btn-primary"
             >
-              Book Shuttle
+              Get a Ride
             </Link>
           </div>
         </section>
@@ -624,10 +624,10 @@ export default async function ShowPage({ params }: Props) {
                 <h3 className="mt-1 text-sm font-extrabold text-white">{event.name}</h3>
                 <div className="mt-3 flex flex-wrap gap-2">
                   <Link href={`/shows/${encodeURIComponent(event.id)}`} className="comic-btn comic-btn-secondary">
-                    Show Page
+                    Show Details
                   </Link>
-                  <Link href={`/find?date=${encodeURIComponent(event.dateKey)}&qty=2`} className="comic-btn comic-btn-primary">
-                    Ride Options
+                  <Link href={`/book?venue=${encodeURIComponent(venueSlug || "")}`} className="comic-btn comic-btn-primary">
+                    Get a Ride
                   </Link>
                 </div>
               </article>

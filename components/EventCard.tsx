@@ -87,14 +87,14 @@ export default function EventCard({
       ) : null}
 
       <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-        <Link className="comic-btn comic-btn-secondary" href={`/shows/${encodeURIComponent(event.id)}`}>
-          Show Intel
-        </Link>
         {showBookRide ? (
           <Link className="comic-btn comic-btn-primary" href={event.bookHref}>
-            Book Ride
+            Get a Ride
           </Link>
         ) : null}
+        <Link className="comic-btn comic-btn-secondary" href={`/shows/${encodeURIComponent(event.id)}`}>
+          Show Details
+        </Link>
         {event.url ? (
           <a className="comic-btn comic-btn-secondary" href={event.url} target="_blank" rel="noreferrer">
             Tickets

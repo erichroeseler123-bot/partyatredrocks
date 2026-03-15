@@ -68,7 +68,7 @@ export default function VenueEventsGrid({ events, venueSlug }: Props) {
 
               {/* Subtle affordance */}
               <div className="mt-3 inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/55">
-                Ride Options <span aria-hidden>→</span>
+                Get a Ride <span aria-hidden>→</span>
               </div>
             </div>
           </Link>
