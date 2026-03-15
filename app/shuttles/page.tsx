@@ -43,10 +43,10 @@ const rideCards = [
 ];
 
 const proofPoints = [
-  "Venue-first booking flow",
-  "Hosted Rezdy checkout on final product pages",
-  "Shared and private options in one system",
-  "Guides, venue intel, and weekly lineup tied into booking",
+  "Shared shuttle seats from Denver",
+  "Private rides for groups",
+  "Secure online booking",
+  "Pickup details before show night",
 ];
 
 export default function ShuttlesPage() {
@@ -58,14 +58,13 @@ export default function ShuttlesPage() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,91,46,0.18),transparent_28%),radial-gradient(circle_at_top_right,rgba(143,208,255,0.14),transparent_28%)]" />
           <div className="relative max-w-3xl">
             <div className="inline-flex items-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
-              Canonical Shuttle Page
+              Red Rocks Rides
             </div>
             <h1 className="mt-5 text-[2.5rem] font-black uppercase leading-[0.94] tracking-[-0.04em] sm:text-[4rem] lg:text-[5rem]">
               Red Rocks Shuttle From Denver
             </h1>
             <p className="mt-5 max-w-2xl text-[15px] leading-7 text-white/74 sm:text-lg">
-              Shared seats from $59, private SUVs and vans for groups, and a cleaner booking path that starts with
-              venue, then ride type, then the final online checkout.
+              Shared seats from $59, private SUVs and vans for groups, and online booking for the night that fits your plan.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Link
@@ -130,7 +129,7 @@ export default function ShuttlesPage() {
 
         <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(17,11,18,0.96),rgba(10,9,20,0.96))] p-6 sm:p-8">
           <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
-            Why This Page Exists
+            Booking Details
           </div>
           <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {proofPoints.map((point) => (
@@ -146,9 +145,7 @@ export default function ShuttlesPage() {
             ))}
           </div>
           <p className="mt-5 max-w-3xl text-sm leading-6 text-white/70">
-            This is the commercial page that should rank for Red Rocks shuttle intent. It keeps the value prop simple,
-            shows the ride types clearly, and pushes users into the venue-first booking funnel instead of forcing a generic
-            finder tool as the main step.
+            Choose between shared shuttle seats and private rides, then move into the booking steps for Red Rocks.
           </p>
         </section>
 
@@ -159,16 +156,15 @@ export default function ShuttlesPage() {
           </div>
           <div className="mt-4 max-w-4xl space-y-4 text-sm leading-7 text-white/72">
             <p>
-              Shared shuttle seats and private ride options ultimately book through hosted Rezdy pages and widgets. That is
-              the most reliable checkout path right now and it keeps final availability and payment handling stable.
+              Shared shuttle seats and private rides book online through Rezdy. Availability and payment details are handled there.
             </p>
             <p>
-              If you already know you want Red Rocks transportation, the shortest route is:
+              To book:
               <code className="mx-1 rounded bg-white/8 px-1.5 py-0.5 text-white">/book</code>,
               pick <code className="mx-1 rounded bg-white/8 px-1.5 py-0.5 text-white">Red Rocks</code>,
               choose <code className="mx-1 rounded bg-white/8 px-1.5 py-0.5 text-white">Shared</code> or
               <code className="mx-1 rounded bg-white/8 px-1.5 py-0.5 text-white">Private</code>,
-              then book on the final product page.
+              then complete booking on the final page.
             </p>
           </div>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">

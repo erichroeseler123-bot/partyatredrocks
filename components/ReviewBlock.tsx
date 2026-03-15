@@ -5,16 +5,16 @@ const GOOGLE_REVIEW_URL = "https://g.page/r/CUj1yszU_RHbEAE/review";
 
 const reviews = [
   {
-    title: "Driver feedback",
-    body: "Read what riders say about professionalism, communication, and show-night execution.",
+    title: "Drivers",
+    body: "Read recent feedback about timing, communication, and the ride back after the show.",
   },
   {
-    title: "Pickup clarity",
-    body: "See recent comments about meetup instructions, timing, and how the return ride feels after the encore.",
+    title: "Pickup details",
+    body: "See what riders say about meetup instructions, departure timing, and post-show pickup.",
   },
   {
-    title: "Group bookings",
-    body: "Open the Google reviews and scan how groups describe the private and shared ride experience.",
+    title: "Groups",
+    body: "See how riders describe shared shuttle seats, private rides, and group nights at Red Rocks.",
   },
 ];
 
@@ -33,13 +33,13 @@ export function ReviewBlock({ className = "" }: { className?: string }) {
       ].join(" ").trim()}
     >
       <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
-        Google Review Signals
+        Google Reviews
       </div>
       <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] text-white sm:text-3xl">
-        Real riders, visible in one place.
+        What riders say
       </h2>
       <p className="mt-3 max-w-2xl text-sm leading-6 text-white/70">
-        The fastest trust check is the public Google review trail. Open the profile, read what riders say, and then move into booking.
+        Recent feedback from Red Rocks shuttle riders.
       </p>
 
       <div className="mt-5 flex flex-wrap items-center gap-3 rounded-[22px] border border-white/10 bg-[#0b1224] px-5 py-4">
@@ -52,7 +52,7 @@ export function ReviewBlock({ className = "" }: { className?: string }) {
           rel="noreferrer"
           className="inline-flex text-xs font-black uppercase tracking-[0.16em] text-[#8fd0ff] hover:text-white"
         >
-          Open Review Profile
+          See Google Reviews
         </Link>
       </div>
 

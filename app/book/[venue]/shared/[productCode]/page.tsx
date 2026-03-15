@@ -65,7 +65,7 @@ export default async function SharedProductPage({
             {product.name || product.productCode}
           </h1>
           <p className="mt-4 max-w-2xl text-[15px] leading-7 text-white/74 sm:text-lg">
-            {product.description || "Hosted shuttle checkout for this Red Rocks shared product."}
+            {product.description || "Online booking for this Red Rocks shared shuttle option."}
           </p>
           <div className="mt-4 text-sm font-bold text-[#ffb07c]">{priceLabel(product)}</div>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
@@ -88,11 +88,11 @@ export default async function SharedProductPage({
 
         <section className="rounded-[30px] border border-white/10 bg-[#0b1224] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.42)] sm:p-6">
           <div className="mb-4 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
-            Hosted Checkout Widget
+            Book Online
           </div>
           <TrustStrip className="mb-4" />
           <p className="mb-4 text-sm leading-6 text-white/70">
-            If the widget doesn&apos;t preselect this exact product, choose <span className="font-bold text-white">{product.name || product.productCode}</span> inside the checkout.
+            If this option is not selected automatically, choose <span className="font-bold text-white">{product.name || product.productCode}</span> in the booking form.
           </p>
           <iframe
             src={SHARED_WIDGET_URL}

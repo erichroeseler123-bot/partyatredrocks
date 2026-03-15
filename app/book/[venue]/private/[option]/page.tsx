@@ -14,19 +14,19 @@ const PRIVATE_CATALOG_WIDGET_URL = "https://gosnotransportation58.rezdy.com/cata
 const optionMeta = {
   suv: {
     title: "Private SUV",
-    body: "Use the dedicated private SUV booking flow for the fastest checkout.",
+    body: "Online booking for a private SUV.",
     iframeUrl: "https://gosnotransportation58.rezdy.com/596193/suburban?iframe=true",
     ctaLabel: "Open SUV Booking",
   },
   van: {
     title: "Private Van",
-    body: "Hosted private vehicle checkout. Choose the van-sized option inside the widget.",
+    body: "Online booking for a private van.",
     iframeUrl: PRIVATE_CATALOG_WIDGET_URL,
     ctaLabel: "Open Private Vehicle Checkout",
   },
   "party-bus": {
     title: "Party Bus",
-    body: "Hosted private vehicle checkout. Choose the party bus option inside the widget.",
+    body: "Online booking for a party bus.",
     iframeUrl: PRIVATE_CATALOG_WIDGET_URL,
     ctaLabel: "Open Private Vehicle Checkout",
   },
@@ -81,7 +81,7 @@ export default async function PrivateOptionPage({
 
         <section className="rounded-[30px] border border-white/10 bg-[#0b1224] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.42)] sm:p-6">
           <div className="mb-4 text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
-            Hosted Booking Widget
+            Book Online
           </div>
           <TrustStrip className="mb-4" />
           <iframe

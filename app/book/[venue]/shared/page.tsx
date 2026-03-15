@@ -62,7 +62,7 @@ export default async function SharedOptionsPage({
             Shared Shuttle Options
           </h1>
           <p className="mt-5 max-w-2xl text-[15px] leading-7 text-white/74 sm:text-lg">
-            Pick the shuttle product that fits your night, then land on the final booking page with the hosted checkout widget.
+            Pick the shuttle option that fits your night, then move to the final booking page.
           </p>
           <div className="mt-6">
             <Link href={`/book/${venue}`} className="text-sm font-bold text-[#ffb07c] hover:text-white">
@@ -85,7 +85,7 @@ export default async function SharedOptionsPage({
                 {product.name || product.productCode}
               </h2>
               <p className="mt-3 text-sm leading-6 text-white/70">
-                {product.description || "Open the final booking page and complete checkout in the hosted shuttle widget."}
+                {product.description || "Open the final page to review details and book online."}
               </p>
               <div className="mt-5 text-sm font-bold text-[#ffb07c]">Open product page →</div>
             </Link>

@@ -62,8 +62,8 @@ export default async function VenueBookingPage({
             </h2>
             <p className="mt-3 text-sm leading-6 text-white/70">
               {isRedRocks
-                ? "Seat-based shuttle options with round-trip booking and a hosted online checkout."
-                : "Open the ride finder for the current shared availability and venue-specific options."}
+                ? "Seat-based shuttle options with round-trip service and online booking."
+                : "Open the ride finder for current shared availability and venue options."}
             </p>
             <div className="mt-5 text-sm font-bold text-[#ffb07c]">
               {isRedRocks ? "Choose shared shuttle →" : "Open ride finder →"}
@@ -82,7 +82,7 @@ export default async function VenueBookingPage({
             </h2>
             <p className="mt-3 text-sm leading-6 text-white/70">
               {isRedRocks
-                ? "Private vehicle options for couples, crews, and larger groups with hosted Rezdy booking pages."
+                ? "Private vehicle options for couples, crews, and larger groups with online booking."
                 : "Private venue transport for Denver and Boulder nights where one vehicle for the whole group makes more sense."}
             </p>
             <div className="mt-5 text-sm font-bold text-[#ffb07c]">

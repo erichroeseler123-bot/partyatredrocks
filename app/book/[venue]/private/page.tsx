@@ -14,7 +14,7 @@ const privateOptions = [
     slug: "suv",
     title: "Private SUV",
     eyebrow: "Up to 6 Guests",
-    body: "Door-to-door private ride with the cleanest booking path for smaller groups.",
+    body: "Door-to-door private ride for smaller groups.",
   },
   {
     slug: "van",
@@ -56,7 +56,7 @@ export default async function PrivateOptionsPage({
             Private Ride Options
           </h1>
           <p className="mt-5 max-w-2xl text-[15px] leading-7 text-white/74 sm:text-lg">
-            Pick the private vehicle style that matches your group, then move to the final booking page.
+            Pick the private vehicle that fits your group, then move to the booking page.
           </p>
           <div className="mt-6">
             <Link href={`/book/${venue}`} className="text-sm font-bold text-[#ffb07c] hover:text-white">
