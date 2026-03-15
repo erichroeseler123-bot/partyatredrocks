@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, BadgeCheck, Bus, CarFront, ShieldCheck, Ticket } from "lucide-react";
+import { ReviewBlock } from "@/components/ReviewBlock";
 
 export const metadata = {
   title: "Red Rocks Shuttle from Denver | $59 Seats + Private Options",
@@ -122,6 +123,8 @@ export default function ShuttlesPage() {
             })}
           </div>
         </section>
+
+        <ReviewBlock />
 
         <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(17,11,18,0.96),rgba(10,9,20,0.96))] p-6 sm:p-8">
           <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">

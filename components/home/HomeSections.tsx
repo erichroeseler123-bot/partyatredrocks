@@ -13,6 +13,7 @@ import {
   Ticket,
 } from "lucide-react";
 import { DISPLAY } from "@/lib/display";
+import { ReviewBlock } from "@/components/ReviewBlock";
 
 type EventPreview = {
   id: number;
@@ -322,6 +323,8 @@ export default function HomeSections({
             Open Full Guides Hub <ArrowRight className="ml-1 h-4 w-4" />
           </Link>
         </section>
+
+        <ReviewBlock />
 
         <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(8,13,24,0.98),rgba(6,9,18,0.98))] px-5 py-7 sm:px-8">
           <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
