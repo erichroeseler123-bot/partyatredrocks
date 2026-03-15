@@ -14,21 +14,29 @@ const privateOptions = [
     slug: "suv",
     title: "Private SUV",
     eyebrow: "Up to 6 Guests",
-    body: "Door-to-door private ride for smaller groups.",
+    body: "Private ride for smaller groups that want limo-lane access and time to tailgate before the show.",
   },
   {
     slug: "van",
     title: "Private Van",
     eyebrow: "10 to 14 Guests",
-    body: "One vehicle, one pickup plan, one return timeline for the full crew.",
+    body: "One vehicle, one pickup plan, limo-lane access, and one return timeline for the full crew.",
   },
   {
     slug: "party-bus",
     title: "Party Bus",
     eyebrow: "Large Group",
-    body: "Best for celebration nights where the ride is part of the event.",
+    body: "Best for larger groups who want to tailgate, stay together, and make the ride part of the night.",
   },
 ] as const;
+
+const privateBenefits = [
+  "Upper North limo-lane access",
+  "Best fit for groups that want to tailgate before the show",
+  "One vehicle for the full night",
+  "Pickup details sent before your ride",
+  "Return ride handled after the show",
+];
 
 function getVenue(slug: string): VenueRow | null {
   return (venuesJson as Record<string, VenueRow>)[slug] ?? null;
@@ -85,6 +93,33 @@ export default async function PrivateOptionsPage({
               <div className="mt-5 text-sm font-bold text-[#ffb07c]">Open option →</div>
             </Link>
           ))}
+        </section>
+
+        <section className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 sm:p-8">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
+            Private Ride Benefits
+          </div>
+          <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {privateBenefits.map((item) => (
+              <div key={item} className="rounded-[24px] border border-white/10 bg-[#09101f] p-5 text-sm font-bold leading-6 text-white">
+                {item}
+              </div>
+            ))}
+          </div>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <Link
+              href="/guide/tailgating"
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
+            >
+              Tailgating Guide
+            </Link>
+            <Link
+              href="/guide/tailgate-faq"
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
+            >
+              Tailgate FAQ
+            </Link>
+          </div>
         </section>
 
         <TrustStrip />

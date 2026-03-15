@@ -71,6 +71,12 @@ const deepDive: Card[] = [
     kicker: "Local",
   },
   {
+    title: "Tailgating Guide",
+    desc: "Arrival timing, lot expectations, and when private service is the better fit.",
+    href: "/guide/tailgating",
+    kicker: "Tailgate",
+  },
+  {
     title: "Event Guides",
     desc: "Artist-specific briefings with actionable logistics.",
     href: "/guide/events/2026-season-preview",

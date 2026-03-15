@@ -26,7 +26,7 @@ const rideCards = [
     title: "Private SUV",
     price: "Private group",
     copy:
-      "Best for small groups that want one vehicle, one pickup window, and a direct ride to and from Red Rocks.",
+      "Best for small groups that want one vehicle, Upper North limo-lane access, and time to tailgate before the show.",
     href: "/book/red-rocks-amphitheatre/private/suv",
     cta: "Book Private SUV",
     icon: CarFront,
@@ -35,7 +35,7 @@ const rideCards = [
     title: "Private Van",
     price: "10-14 guests",
     copy:
-      "Built for full crews that want to stay together from departure through the ride home.",
+      "Built for full crews that want to stay together, use the limo lane, and tailgate before heading in.",
     href: "/book/red-rocks-amphitheatre/private/van",
     cta: "Book Private Van",
     icon: Bus,
@@ -125,6 +125,32 @@ export default function ShuttlesPage() {
                 </article>
               );
             })}
+          </div>
+        </section>
+
+        <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(9,15,31,0.96),rgba(7,11,25,0.96))] p-6 sm:p-8">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
+            Private Ride Benefits
+          </div>
+          <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">
+            Best for groups that want Upper North limo-lane access and time to tailgate
+          </h2>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-white/70">
+            Private rides use the Upper North limo lane and are the best option for groups who want to tailgate before the show.
+          </p>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <Link
+              href="/book/red-rocks-amphitheatre/private"
+              className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
+            >
+              Book Private Service
+            </Link>
+            <Link
+              href="/guide/tailgating"
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
+            >
+              Tailgating Guide
+            </Link>
           </div>
         </section>
 

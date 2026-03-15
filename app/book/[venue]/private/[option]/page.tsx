@@ -14,23 +14,31 @@ const PRIVATE_CATALOG_WIDGET_URL = "https://gosnotransportation58.rezdy.com/cata
 const optionMeta = {
   suv: {
     title: "Private SUV",
-    body: "Online booking for a private SUV.",
+    body: "Best for small groups that want Upper North limo-lane access, time to tailgate, and one vehicle for the full night.",
     iframeUrl: "https://gosnotransportation58.rezdy.com/596193/suburban?iframe=true",
     ctaLabel: "Open SUV Booking",
   },
   van: {
     title: "Private Van",
-    body: "Online booking for a private van.",
+    body: "Best for larger groups that want limo-lane access, time to tailgate, and one van for the full night.",
     iframeUrl: "https://gosnotransportation58.rezdy.com/630812/van-10-passenger?iframe=true",
     ctaLabel: "Open Van Booking",
   },
   "party-bus": {
     title: "Party Bus",
-    body: "Online booking for a party bus.",
+    body: "Best for bigger groups that want to tailgate, stay together, and make the ride part of the night.",
     iframeUrl: "https://gosnotransportation58.rezdy.com/689909/bus-24-passenger?iframe=true",
     ctaLabel: "Open Party Bus Booking",
   },
 } as const;
+
+const privateBenefits = [
+  "Upper North limo-lane access",
+  "Better fit for groups who want to tailgate before the show",
+  "One vehicle for the full night",
+  "Pickup details sent before your ride",
+  "Return ride handled after the show",
+];
 
 function getVenue(slug: string): VenueRow | null {
   return (venuesJson as Record<string, VenueRow>)[slug] ?? null;
@@ -64,6 +72,13 @@ export default async function PrivateOptionPage({
           <p className="mt-3 max-w-2xl text-sm leading-6 text-white/68 sm:text-[15px]">
             Pickup details are sent before your ride. Your group rides together for the full night.
           </p>
+          <div className="mt-5 grid gap-3 md:grid-cols-2">
+            {privateBenefits.map((item) => (
+              <div key={item} className="rounded-[20px] border border-white/10 bg-[#0b1224] px-4 py-3 text-sm font-bold text-white/88">
+                {item}
+              </div>
+            ))}
+          </div>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <a
               href={meta.iframeUrl.replace("?iframe=true", "")}
@@ -78,6 +93,12 @@ export default async function PrivateOptionPage({
               className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
             >
               Back to Private Options
+            </Link>
+            <Link
+              href="/guide/tailgating"
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
+            >
+              Tailgating Guide
             </Link>
           </div>
         </section>
