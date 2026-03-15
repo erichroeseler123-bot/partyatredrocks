@@ -18,7 +18,7 @@ export default function SeasonPreview() {
       {/* ================= HEADER ================= */}
 
       <h1 className="text-5xl font-black mb-8 uppercase italic tracking-tighter leading-tight">
-        2026 <span className="text-red-600">Season</span> Lineup Intelligence
+        2026 <span className="text-[#4cc9f0]">Season</span> Lineup Guide
       </h1>
 
       <p className="text-muted text-xl mb-12 leading-relaxed font-medium">
@@ -37,10 +37,10 @@ export default function SeasonPreview() {
             <Link
               key={show.slug}
               href={`/guide/events/${show.slug}`}
-              className="p-8 panel rounded-[2.5rem] hover:border-red-600 transition-all group shadow-xl"
+              className="group p-8 panel rounded-[2.5rem] shadow-xl transition-all hover:border-[#4cc9f0]"
             >
 
-              <span className="text-red-600 font-bold uppercase text-base tracking-widest font-mono">
+              <span className="font-mono text-base font-bold uppercase tracking-widest text-[#ffb07c]">
                 {date.toLocaleDateString("en-US", {
                   month: "long",
                   day: "numeric",
@@ -48,7 +48,7 @@ export default function SeasonPreview() {
                 })}
               </span>
 
-              <h3 className="text-2xl font-black mt-2 uppercase italic tracking-tight group-hover:text-red-500 transition-colors">
+              <h3 className="mt-2 text-2xl font-black uppercase italic tracking-tight transition-colors group-hover:text-[#4cc9f0]">
                 {show.artist}
               </h3>
 

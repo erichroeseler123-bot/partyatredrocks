@@ -18,8 +18,8 @@ export default function BagPolicy() {
           </ul>
         </div>
 
-        <div className="border-l-4 border-red-500 pl-6">
-          <h3 className="text-xl font-bold text-red-700">What IS NOT Allowed:</h3>
+        <div className="border-l-4 border-[#4cc9f0] pl-6">
+          <h3 className="text-xl font-bold text-[#4cc9f0]">What IS NOT Allowed:</h3>
           <ul className="list-disc ml-5 text-strong">
             <li>Any bag with multiple pockets (backpacks, camelbaks with storage)</li>
             <li>Hard-sided coolers</li>
@@ -33,10 +33,10 @@ export default function BagPolicy() {
         <a href="https://www.redrocksonline.com/plan-your-visit/permitted-prohibited-items/" target="_blank" className="underline font-bold">Official Red Rocks Rules</a>.
       </p>
 
-      <div className="mt-12 bg-red-700 text-white p-8 rounded-2xl text-center shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+      <div className="mt-12 rounded-2xl border border-[#3df3ff]/30 bg-[linear-gradient(180deg,rgba(61,243,255,0.18),rgba(29,191,211,0.16))] p-8 text-center text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
         <h2 className="text-white text-2xl mb-4">Need to store your "Prohibited" gear?</h2>
-        <p className="mb-6 text-red-100">Our private SUV service allows you to keep your non-permitted items safely locked in the vehicle while you enjoy the show.</p>
-        <button className="bg-white text-red-700 px-8 py-3 rounded-full font-bold">View SUV Options</button>
+        <p className="mb-6 text-white/82">Our private SUV service allows you to keep your non-permitted items safely locked in the vehicle while you enjoy the show.</p>
+        <button className="rounded-full bg-[#3df3ff] px-8 py-3 font-bold text-[#08111e]">View SUV Options</button>
       </div>
     </div>
   );

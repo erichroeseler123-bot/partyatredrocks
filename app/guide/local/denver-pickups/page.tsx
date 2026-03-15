@@ -56,7 +56,7 @@ export default function DenverPickups() {
 
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
-            href="/find"
+            href="/book"
             className="btn-primary"
           >
             Book Shuttle → $59
@@ -72,7 +72,7 @@ export default function DenverPickups() {
 
       <section className="grid md:grid-cols-2 gap-10 mb-16 border border-soft rounded-[2.5rem] overflow-hidden bg-surface-strong/30 p-8 shadow-2xl">
         <div>
-          <h2 className="font-bold text-xl mb-4 text-red-600 uppercase tracking-tight">
+          <h2 className="mb-4 text-xl font-bold uppercase tracking-tight text-[#4cc9f0]">
             Pre-Concert Strategy
           </h2>
           <p className="text-muted text-base mb-6 leading-relaxed">
@@ -105,7 +105,7 @@ export default function DenverPickups() {
                 href="https://www.marriott.com/en-us/hotels/dencc-sheraton-denver-downtown-hotel/overview/"
                 target="_blank"
                 rel="noreferrer"
-                className="text-red-500 hover:underline transition"
+                className="text-[#4cc9f0] hover:underline transition"
               >
                 Sheraton Details
               </a>
@@ -130,7 +130,7 @@ export default function DenverPickups() {
       <ShuttleCTA
         title="Denver Pickup → Red Rocks"
         blurb="Board in Downtown Denver. $59 per-person. No parking stress, no surge pricing, guaranteed post-show return."
-        href="/find"
+        href="/book"
         button="Book Denver Shuttle → $59"
       />
 

@@ -45,11 +45,11 @@ export default function ShuttleComparison() {
               <td className="p-5 font-bold">Round-Trip Rate</td>
               <td className="p-5 text-green-700 font-bold">$59 Fixed</td>
               <td className="p-5">$65 - $85</td>
-              <td className="p-5 text-red-600">Surge: $120 - $250</td>
+              <td className="p-5 text-[#ffb07c]">Surge: $120 - $250</td>
             </tr>
             <tr className="border-b bg-slate-50">
               <td className="p-5 font-bold">Drop-off Location</td>
-              <td className="p-5 font-bold text-red-700 underline">Top Circle (Row 70)</td>
+              <td className="p-5 font-bold text-[#4cc9f0] underline">Top Circle (Row 70)</td>
               <td className="p-5">Upper North Lot</td>
               <td className="p-5">Jurassic Lot (1 mile hike)</td>
             </tr>
@@ -83,17 +83,17 @@ export default function ShuttleComparison() {
           <h3 className="text-2xl font-bold mb-4 text-slate-900">The "Top Circle" Difference</h3>
           <p className="text-strong leading-relaxed">
             Most competitors drop you in the Upper North Lot. While better than the Lower lots, it still requires a significant hike. 
-            Our <Link href="/suv" className="text-red-700 underline">private SUV service</Link> is authorized for 
+            Our <Link href="/suv" className="text-[#4cc9f0] underline">private SUV service</Link> is authorized for 
             Top Circle access, putting you directly at Row 70.
           </p>
         </section>
       </div>
 
-      <div className="mt-16 bg-red-700 text-white p-12 rounded-3xl text-center shadow-2xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+      <div className="mt-16 rounded-3xl border border-[#3df3ff]/30 bg-[linear-gradient(180deg,rgba(61,243,255,0.18),rgba(29,191,211,0.16))] p-12 text-center text-white shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
         <h2 className="text-white text-3xl font-black mb-4">Ready for a Better Experience?</h2>
         <p className="mb-8 text-xl">Stop comparing and start relaxing. Book your 2026 shuttle today.</p>
         <div className="flex flex-col md:flex-row gap-4 justify-center">
-          <Link href="/find" className="bg-white text-red-700 px-8 py-4 rounded-full font-black hover:bg-slate-100 transition">Shared Shuttle: $59</Link>
+          <Link href="/book" className="rounded-full bg-[#3df3ff] px-8 py-4 font-black text-[#08111e] transition hover:bg-[#62f6ff]">Shared Shuttle: $59</Link>
           <Link href="/suv" className="bg-surface text-white px-8 py-4 rounded-full font-black hover:bg-surface transition">Private SUV: $499</Link>
         </div>
       </div>

@@ -5,7 +5,7 @@ export default function SafetyStandards() {
       <p className="text-lg mb-8">
         Party at Red Rocks (Party at Red Rocks) isn't just a transport service; we are a 
         <strong>Licensed Luxury Limousine Carrier</strong> regulated by the 
-        <a href="https://puc.colorado.gov/trans" target="_blank" className="mx-1 underline text-red-700">Colorado PUC</a>.
+        <a href="https://puc.colorado.gov/trans" target="_blank" className="mx-1 underline text-[#4cc9f0]">Colorado PUC</a>.
       </p>
 
       <div className="space-y-8">

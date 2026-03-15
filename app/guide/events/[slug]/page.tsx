@@ -90,7 +90,7 @@ export default async function EventPage({ params }: Props) {
   return (
     <main className="min-h-screen bg-surface text-white py-24 px-6">
       <div className="max-w-5xl mx-auto">
-        <header className="mb-12 border-l-4 border-red-600 pl-8">
+        <header className="mb-12 border-l-4 border-[#4cc9f0] pl-8">
           <h1 className="text-5xl md:text-7xl font-black uppercase italic tracking-tighter leading-tight">
             {show.title}
           </h1>

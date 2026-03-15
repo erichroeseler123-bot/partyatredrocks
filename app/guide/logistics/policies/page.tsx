@@ -30,7 +30,7 @@ export default function VenuePolicies() {
       <h1 className="text-4xl font-black mb-6">Red Rocks Rules: The Insider FAQ</h1>
       
       <section className="mb-16">
-        <h2 className="text-2xl font-bold mb-4 text-red-700">Alcohol & Tailgating</h2>
+        <h2 className="mb-4 text-2xl font-bold text-[#4cc9f0]">Alcohol & Tailgating</h2>
         <p className="mb-4">You can bring <strong>beer and wine</strong> into the parking lots for tailgating, but <strong>no glass</strong> and <strong>no kegs</strong>. Once you hit the gate, all alcohol must stay behind. You are allowed one factory-sealed non-alcoholic beverage (32oz or less) per person.</p>
       </section>
 

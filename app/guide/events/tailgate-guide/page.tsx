@@ -29,9 +29,9 @@ export default function TailgateGuide() {
         }}
       />
 
-      <header className="mb-16 border-l-4 border-red-600 pl-8">
+      <header className="mb-16 border-l-4 border-[#4cc9f0] pl-8">
         <h1 className="text-5xl font-black uppercase italic tracking-tighter">
-          2026 <span className="text-red-600">Tailgate</span> vs. Shuttle
+          2026 <span className="text-[#4cc9f0]">Tailgate</span> vs. Shuttle
         </h1>
         <p className="mt-4 text-muted text-xl font-medium">
           Is driving worth the hassle? Compare the 2026 tailgate rules to our premium shuttle service.
@@ -41,14 +41,14 @@ export default function TailgateGuide() {
       {/* Benefits Grid */}
       <div className="grid md:grid-cols-2 gap-8 mb-20">
         <div className="bg-surface-strong p-8 rounded-[2.5rem] border-soft shadow-soft">
-          <h3 className="text-red-500 font-black uppercase mb-4 italic">Tailgating Realities</h3>
+          <h3 className="mb-4 font-black uppercase italic text-[#ffb07c]">Tailgating Realities</h3>
           <ul className="space-y-3 text-base text-muted">
             <li>• Arrive 3-4 hours early to find a spot.</li>
             <li>• No glass, no charcoal, no tents.</li>
             <li>• Post-show traffic can take 60+ minutes to exit.</li>
           </ul>
         </div>
-        <div className="bg-surface-strong p-8 rounded-[2.5rem] border border-red-600">
+        <div className="rounded-[2.5rem] border border-[#3df3ff]/35 bg-surface-strong p-8">
           <h3 className="text-green-500 font-black uppercase mb-4 italic">Shuttle Advantage</h3>
           <ul className="space-y-3 text-base text-muted">
             <li>• Direct Denver/Golden hotel pickups.</li>
@@ -62,10 +62,10 @@ export default function TailgateGuide() {
       <section className="space-y-4 mb-20">
         <h2 className="text-3xl font-black uppercase mb-8 italic">Red Rocks Tailgate FAQs</h2>
         {faqs.map((faq, index) => (
-          <details key={index} className="group bg-surface-strong rounded-3xl border-soft shadow-soft hover:border-red-600 transition overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+          <details key={index} className="group overflow-hidden rounded-3xl border-soft bg-surface-strong shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-[#4cc9f0] hover:shadow-2xl">
             <summary className="p-6 cursor-pointer font-bold text-white flex justify-between items-center list-none uppercase tracking-tighter">
               {faq.q}
-              <span className="text-red-600 group-open:rotate-45 transition-transform">+</span>
+              <span className="text-[#4cc9f0] transition-transform group-open:rotate-45">+</span>
             </summary>
             <div className="p-6 pt-0 text-muted text-base leading-relaxed border-t border-soft/50">
               {faq.a}
@@ -77,11 +77,11 @@ export default function TailgateGuide() {
       {/* Final Conversion CTA */}
       <div className="btn-primary">
         <h2 className="text-3xl font-black mb-4 uppercase italic">Skip the Parking Search</h2>
-        <p className="text-xl mb-8 text-red-100 font-medium">
+        <p className="mb-8 text-xl font-medium text-white/82">
           Lock in your 2026 shuttle spot today. Shared rides for $59, 
           private Suburbans from $299. No surges, no stress.
         </p>
-        <Link href="/find" className="bg-white text-red-600 px-12 py-5 rounded-full font-black uppercase hover:bg-zinc-100 transition shadow-lg inline-block">
+        <Link href="/book" className="inline-block rounded-full bg-[#3df3ff] px-12 py-5 font-black uppercase text-[#08111e] transition hover:bg-[#62f6ff] shadow-lg">
           Book Your 2026 Shuttle
         </Link>
       </div>

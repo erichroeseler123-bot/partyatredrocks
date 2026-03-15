@@ -10,9 +10,9 @@ export default function ProhibitedItems() {
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-20 bg-surface text-white text-left">
-      <header className="mb-16 border-l-4 border-red-600 pl-8">
+      <header className="mb-16 border-l-4 border-[#4cc9f0] pl-8">
         <h1 className="text-5xl font-black uppercase italic tracking-tighter">
-          2026 <span className="text-red-600">Prohibited</span> Items Deep Dive
+          2026 <span className="text-[#4cc9f0]">Prohibited</span> Items Deep Dive
         </h1>
         <p className="mt-4 text-muted text-xl font-medium max-w-2xl">
           Don&apos;t get sent back to the lot. Security at the East Terrace and North ramps is utilizing 
@@ -24,7 +24,7 @@ export default function ProhibitedItems() {
       <div className="grid gap-6 mb-16">
         {items.map((item, i) => (
           <div key={i} className="bg-surface-strong/50 border-soft shadow-soft p-8 rounded-[2rem]">
-            <h3 className="text-red-500 font-black uppercase mb-2 italic text-2xl">{item.name}</h3>
+            <h3 className="mb-2 text-2xl font-black uppercase italic text-[#ffb07c]">{item.name}</h3>
             <p className="text-white font-bold mb-4">{item.rule}</p>
             <div className="bg-surface/40 p-4 rounded-2xl border-soft shadow-soft text-muted text-base italic hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
               Pro Tip: {item.tip}
@@ -38,7 +38,7 @@ export default function ProhibitedItems() {
         <h3 className="text-2xl font-black mb-6 uppercase italic text-white">Related Intelligence</h3>
         <div className="grid sm:grid-cols-2 gap-6">
           <Link href="/guide/logistics/bag-policy" className="group">
-            <h4 className="text-strong font-bold group-hover:text-red-500 transition">2026 Bag Rules →</h4>
+            <h4 className="text-strong font-bold transition group-hover:text-[#4cc9f0]">2026 Bag Rules →</h4>
             <p className="text-muted text-base mt-1">Detailed sizing for fanny packs and purses.</p>
           </Link>
           <Link href="/guide/logistics/winter-survival" className="group">
@@ -55,7 +55,7 @@ export default function ProhibitedItems() {
           If security rejects an item, a rideshare leaves you stranded. Our shuttle drivers provide 
           a final check and allow you to leave gear safely in our locked vehicles during the show.
         </p>
-        <Link href="/find" className="btn-primary uppercase hover:bg-red-500 transition shadow-lg inline-block">
+        <Link href="/book" className="btn-primary uppercase transition shadow-lg inline-block">
           Book Your 2026 Ride
         </Link>
       </div>

@@ -3,7 +3,7 @@ import Link from 'next/link';
 export default function ZBBEvent() {
   return (
     <div className="max-w-4xl mx-auto px-6 py-16">
-      <span className="text-red-700 font-bold tracking-widest uppercase text-base">October 19 & 20, 2026</span>
+      <span className="text-base font-bold uppercase tracking-widest text-[#ffb07c]">October 19 & 20, 2026</span>
       <h1 className="text-4xl font-black mt-2 mb-6">Zac Brown Band @ Red Rocks</h1>
       
       <p className="text-lg text-strong leading-relaxed mb-8">
@@ -32,7 +32,7 @@ export default function ZBBEvent() {
       <div className="mt-12 p-8 border rounded-2xl bg-slate-50 flex flex-col items-center hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
         <h3 className="mt-0">Secure Your Transport</h3>
         <p className="text-center mb-6">Pickups at Sheraton Downtown Denver & Trailhead Taphouse Golden.</p>
-        <Link href="/find" className="w-full text-center bg-red-700 text-white py-4 rounded-2xl font-bold hover:bg-red-800 transition hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+        <Link href="/book" className="w-full rounded-2xl bg-[#3df3ff] py-4 text-center font-bold text-[#08111e] transition-all duration-300 hover:-translate-y-1 hover:bg-[#62f6ff] hover:shadow-2xl">
           Book Zac Brown Shuttle
         </Link>
       </div>

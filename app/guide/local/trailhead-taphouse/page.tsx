@@ -47,7 +47,7 @@ export default function TrailheadHub() {
 
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
-            href="/find"
+            href="/book"
             className="btn-primary"
           >
             Book Shuttle → $59
@@ -63,7 +63,7 @@ export default function TrailheadHub() {
 
       <section className="grid md:grid-cols-2 gap-10 items-center border border-soft rounded-[2.5rem] overflow-hidden bg-surface-strong/30 p-8 shadow-2xl">
         <div>
-          <h2 className="text-xl font-bold mb-4 text-red-600 uppercase tracking-tight">
+          <h2 className="text-xl font-bold mb-4 text-[#4cc9f0] uppercase tracking-tight">
             Pre-Concert Strategy
           </h2>
 
@@ -97,7 +97,7 @@ export default function TrailheadHub() {
                 href="https://trailheadtaphouse.com/"
                 target="_blank"
                 rel="noreferrer"
-                className="text-red-500 hover:underline transition"
+                className="text-[#4cc9f0] hover:underline transition"
               >
                 Trailhead Taphouse Website
               </a>
@@ -122,7 +122,7 @@ export default function TrailheadHub() {
       <ShuttleCTA
         title="Golden Pickup → Red Rocks"
         blurb="Depart from Trailhead Taphouse. $59 per-person. Direct Red Rocks drop-off and guaranteed post-show return."
-        href="/find"
+        href="/book"
         button="Book Golden Shuttle → $59"
       />
 

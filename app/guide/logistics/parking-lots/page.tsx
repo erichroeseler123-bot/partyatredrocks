@@ -8,7 +8,7 @@ const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks
 export const metadata = {
   title: "Red Rocks Parking Guide (2026): Lots, Walking Cost, Exit Strategy",
   description:
-    "Red Rocks parking guide with lot tradeoffs, hike reality, and post-show exit planning. Includes direct links to venue intel, weekly lineup, and ride booking.",
+    "Red Rocks parking guide with lot tradeoffs, hike reality, and post-show exit planning. Includes direct links to venue details, weekly lineup, and ride booking.",
   alternates: {
     canonical: "/guide/logistics/parking-lots",
   },
@@ -29,31 +29,38 @@ export default async function ParkingLots() {
   };
 
   return (
-    <main className="comic-page pt-24 pb-10">
-      <section className="comic-wrap">
+    <main className="min-h-screen bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
+      <section className="mx-auto flex max-w-[1240px] flex-col gap-8">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
-        <div className="comic-hero">
-          <div className="comic-kicker">Red Rocks Parking</div>
-          <h1 className="comic-title">Which Lot Is Best at Red Rocks?</h1>
-          <p className="comic-copy">
+        <section className="relative overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,16,32,0.98),rgba(6,9,18,0.96))] p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] sm:p-10 lg:p-12">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(76,201,240,0.16),transparent_30%),radial-gradient(circle_at_top_right,rgba(255,176,124,0.14),transparent_28%)]" />
+          <div className="relative max-w-3xl">
+          <div className="inline-flex items-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#4cc9f0]">
+            Red Rocks Parking
+          </div>
+          <h1 className="mt-5 text-[2.5rem] font-black uppercase leading-[0.94] tracking-[-0.04em] sm:text-[4rem] lg:text-[5rem]">
+            Which Lot Is Best at Red Rocks?
+          </h1>
+          <p className="mt-5 max-w-3xl text-[15px] leading-7 text-white/74 sm:text-lg">
             Direct answer: the best lot depends on whether you optimize for easier entry or faster exit. Most first-timers
             underestimate the stair and elevation cost from lower lots.
           </p>
-          <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-primary" href="/find">
-              Find Ride Options
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+            <Link className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#08111e] transition hover:bg-[#62f6ff]" href="/book?venue=red-rocks-amphitheatre">
+              Book a Ride
             </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/week/red-rocks">
+            <Link className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10" href="/week/red-rocks">
               This Week at Red Rocks
             </Link>
           </div>
-        </div>
+          </div>
+        </section>
 
-        <div className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">Lot Tradeoffs</div>
-          <div className="overflow-x-auto" style={{ marginTop: 10 }}>
+        <section className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] sm:p-8">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#4cc9f0]">Lot Tradeoffs</div>
+          <div className="mt-4 overflow-x-auto">
             <table className="w-full text-left text-sm">
               <thead>
                 <tr className="border-b border-white/10">
@@ -76,47 +83,47 @@ export default async function ParkingLots() {
               </tbody>
             </table>
           </div>
-          <p className="comic-copy" style={{ marginTop: 10 }}>
+          <p className="mt-4 text-sm leading-6 text-white/74">
             Validate lot timing with the{" "}
             <a href="https://www.redrocksonline.com/plan-your-visit/getting-here/" target="_blank" rel="noreferrer">
               official venue parking guidance
             </a>{" "}
             before show night.
           </p>
-        </div>
+        </section>
 
-        <div className="comic-grid" style={{ marginTop: 16 }}>
-          <Link href="/guide/red-rocks-intelligence-hub" className="comic-panel block">
-            <div className="comic-tag">Hub</div>
-            <h2 className="comic-h3">Red Rocks Intelligence Hub</h2>
-            <p className="comic-copy">Full venue context: elevation, layout, day-visit details, and planning links.</p>
+        <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <Link href="/guide/red-rocks-intelligence-hub" className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]">
+            <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">Guide</div>
+            <h2 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white">Red Rocks Guide</h2>
+            <p className="mt-3 text-sm leading-6 text-white/70">Full venue context: elevation, layout, day-visit details, and planning links.</p>
           </Link>
-          <Link href="/venues/red-rocks-amphitheatre" className="comic-panel block">
-            <div className="comic-tag">Venue</div>
-            <h2 className="comic-h3">Red Rocks Venue Page</h2>
-            <p className="comic-copy">Upcoming shows, venue details, and logistics in one place.</p>
+          <Link href="/venues/red-rocks-amphitheatre" className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]">
+            <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">Venue</div>
+            <h2 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white">Red Rocks Venue Page</h2>
+            <p className="mt-3 text-sm leading-6 text-white/70">Upcoming shows, venue details, and logistics in one place.</p>
           </Link>
-          <Link href="/guide/show-night-strategy/post-show-pickup-plan" className="comic-panel block">
-            <div className="comic-tag">Exit</div>
-            <h2 className="comic-h3">Post-Show Pickup Plan</h2>
-            <p className="comic-copy">How to avoid the stranded window after encore.</p>
+          <Link href="/guide/show-night-strategy/post-show-pickup-plan" className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]">
+            <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">Exit Plan</div>
+            <h2 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white">Post-Show Pickup Plan</h2>
+            <p className="mt-3 text-sm leading-6 text-white/70">How to avoid the stranded window after encore.</p>
           </Link>
-          <Link href="/guide/transportation/shuttle-vs-uber" className="comic-panel block">
-            <div className="comic-tag">Compare</div>
-            <h2 className="comic-h3">Shuttle vs Uber</h2>
-            <p className="comic-copy">Reliability and post-show risk comparison for Red Rocks transportation.</p>
+          <Link href="/guide/transportation/shuttle-vs-uber" className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]">
+            <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">Compare</div>
+            <h2 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white">Shuttle vs Uber</h2>
+            <p className="mt-3 text-sm leading-6 text-white/70">Reliability and post-show risk comparison for Red Rocks transportation.</p>
           </Link>
-          <Link href="/venues/mission-ballroom" className="comic-panel block">
-            <div className="comic-tag">Venue</div>
-            <h2 className="comic-h3">Mission Ballroom</h2>
-            <p className="comic-copy">Use the same parking + pickup framework on dense urban venue nights.</p>
+          <Link href="/venues/mission-ballroom" className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]">
+            <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">Venue</div>
+            <h2 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white">Mission Ballroom</h2>
+            <p className="mt-3 text-sm leading-6 text-white/70">Use the same parking and pickup framework on dense urban venue nights.</p>
           </Link>
-          <Link href="/venues/fiddlers-green-amphitheatre" className="comic-panel block">
-            <div className="comic-tag">Venue</div>
-            <h2 className="comic-h3">Fiddler&apos;s Green</h2>
-            <p className="comic-copy">Outdoor amphitheatre exit and pickup planning with similar show-night surges.</p>
+          <Link href="/venues/fiddlers-green-amphitheatre" className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]">
+            <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">Venue</div>
+            <h2 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white">Fiddler&apos;s Green</h2>
+            <p className="mt-3 text-sm leading-6 text-white/70">Outdoor amphitheatre exit and pickup planning with similar show-night surges.</p>
           </Link>
-        </div>
+        </section>
 
         <FAQBlock title="Red Rocks Parking FAQ" rows={faqRows} />
       </section>

@@ -24,24 +24,24 @@ export default function SafetyAndLegitimacy() {
       </p>
 
       <section className="panel rounded-[2.5rem] p-8 mb-16 shadow-2xl">
-        <h2 className="text-2xl font-black mb-6 uppercase italic text-red-600">Our 2026 Standards</h2>
+        <h2 className="mb-6 text-2xl font-black uppercase italic text-[#4cc9f0]">Our 2026 Standards</h2>
         <ul className="space-y-6">
           <li className="flex gap-4">
-            <span className="text-red-500 font-bold">01.</span>
+            <span className="font-bold text-[#ffb07c]">01.</span>
             <div>
               <strong className="block text-white uppercase tracking-wide">Professional Vetting</strong>
               <p className="text-muted text-base mt-1">Every driver undergoes mandatory fingerprint-based criminal background checks—a standard we never compromise.</p>
             </div>
           </li>
           <li className="flex gap-4">
-            <span className="text-red-500 font-bold">02.</span>
+            <span className="font-bold text-[#ffb07c]">02.</span>
             <div>
               <strong className="block text-white uppercase tracking-wide">Commercial Coverage</strong>
               <p className="text-muted text-base mt-1">We maintain comprehensive commercial insurance that exceeds all state requirements for luxury passenger transport.</p>
             </div>
           </li>
           <li className="flex gap-4">
-            <span className="text-red-500 font-bold">03.</span>
+            <span className="font-bold text-[#ffb07c]">03.</span>
             <div>
               <strong className="block text-white uppercase tracking-wide">Fixed-Rate Integrity</strong>
               <p className="text-muted text-base mt-1">We never utilize surge pricing. Your $250 group minimum or $59 seat is locked in the moment you book.</p>
@@ -60,7 +60,7 @@ export default function SafetyAndLegitimacy() {
       </div>
 
       <div className="mt-16 text-center border-t border-zinc-900 pt-10">
-        <Link href="/find" className="btn-primary uppercase tracking-widest transition shadow-xl inline-block">
+        <Link href="/book" className="btn-primary uppercase tracking-widest transition shadow-xl inline-block">
           Book With a Verified Professional
         </Link>
       </div>
