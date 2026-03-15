@@ -99,3 +99,7 @@ export const CROSS_SITE_VENUE_MAP: Record<string, CrossSiteVenueMapEntry> = {
     dccAuthorityPath: `${DCC_ORIGIN}/venues/fox-theatre`,
   },
 } as const;
+
+export function getCrossSiteVenue(slug: string) {
+  return CROSS_SITE_VENUE_MAP[slug] ?? null;
+}

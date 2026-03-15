@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { DCC_ORIGIN, normalizeVenueSlug } from "@/lib/parrHandoff";
-import { CROSS_SITE_VENUE_MAP } from "@/lib/crossSiteMap";
+import { getCrossSiteVenue } from "@/lib/crossSiteMap";
 
 type Props = {
   venue: string;
@@ -8,7 +8,7 @@ type Props = {
 };
 
 export function PlanningLinks({ venue, className = "" }: Props) {
-  const entry = CROSS_SITE_VENUE_MAP[normalizeVenueSlug(venue) || ""];
+  const entry = getCrossSiteVenue(normalizeVenueSlug(venue) || "");
   const links =
     entry?.slug === "red-rocks-amphitheatre"
       ? [

@@ -10,6 +10,8 @@ import { VENUE_LEDGER_BY_SLUG, VENUE_LEDGER_REGISTRY } from "@/lib/venues/ledger
 import MusicWave from "@/components/MusicWave";
 import { getMediaIndex } from "@/lib/media/getMediaIndex";
 import { selectImageByPriority } from "@/lib/media/selectImage";
+import { DCC_ORIGIN } from "@/lib/parrHandoff";
+import { getCrossSiteVenue } from "@/lib/crossSiteMap";
 
 export const runtime = "nodejs";
 export const revalidate = 300;
@@ -55,7 +57,6 @@ type VenueCache = {
 };
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
-const DCC = process.env.NEXT_PUBLIC_DCC_ORIGIN || "https://destinationcommandcenter.com";
 const EVENTS_SNAPSHOT_DIR = path.join(process.cwd(), "data", "snapshots", "events");
 
 const SITE_KEYWORDS = [
@@ -304,7 +305,8 @@ function placeJsonLd(slug: string, v: VenueRec) {
   const state = v?.state ?? "CO";
 
   const dccVenueId = `dcc:venue:us-${state.toLowerCase()}:${slug}`;
-  const dccVenueUrl = `${DCC}/venues/${slug}`;
+  const crossSiteVenue = getCrossSiteVenue(slug);
+  const dccVenueUrl = crossSiteVenue?.dccAuthorityPath || `${DCC_ORIGIN}/venues/${slug}`;
 
   const seatgeekSameAs =
     v?.seatgeekSlug ? [`https://seatgeek.com/venues/${v.seatgeekSlug}`] : [];
@@ -617,7 +619,8 @@ export default async function VenuePage({
   const name = identity.name;
   const city = cityLine(v);
   const reference = getVenueReference(slug, v, name);
-  const dccVenueUrl = `${DCC}/venues/${slug}`;
+  const crossSiteVenue = getCrossSiteVenue(slug);
+  const dccVenueUrl = crossSiteVenue?.dccAuthorityPath || `${DCC_ORIGIN}/venues/${slug}`;
   const [allEvents, updatedAt, media] = await Promise.all([
     getEventsCatalog(2026, "all"),
     readSnapshotGeneratedAt(2026),
@@ -731,6 +734,15 @@ export default async function VenuePage({
           >
             More Venue Details →
           </a>
+        </div>
+
+        <div className="mt-5 max-w-2xl rounded-[24px] border border-white/10 bg-white/5 px-5 py-4 text-left">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
+            Planning Your Night?
+          </div>
+          <p className="mt-2 text-sm leading-6 text-white/72">
+            See venue details, parking, and transportation guidance on Destination Command Center.
+          </p>
         </div>
 
         <div className="mt-4 text-xs text-white/45">
