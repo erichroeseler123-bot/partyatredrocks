@@ -21,8 +21,8 @@ const optionMeta = {
   van: {
     title: "Private Van",
     body: "Online booking for a private van.",
-    iframeUrl: PRIVATE_CATALOG_WIDGET_URL,
-    ctaLabel: "Open Private Vehicle Checkout",
+    iframeUrl: "https://gosnotransportation58.rezdy.com/630812/van-10-passenger?iframe=true",
+    ctaLabel: "Open Van Booking",
   },
   "party-bus": {
     title: "Party Bus",
