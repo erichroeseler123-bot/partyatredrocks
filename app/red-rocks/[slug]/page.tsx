@@ -3,9 +3,14 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { RED_ROCKS_ENTITIES, RED_ROCKS_ENTITY_BY_SLUG, RED_ROCKS_MAP_POINTS } from "@/lib/redRocksAuthority";
 import TransportComparisonTable from "@/components/redrocks/TransportComparisonTable";
+import type { HandoffSearchParams } from "@/lib/parrHandoff";
+import { buildBookingHref } from "@/lib/parrHandoff";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
-type Props = { params: Promise<{ slug: string }> };
+type Props = {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<HandoffSearchParams>;
+};
 const TOPIC_GRAPH_LINKS = [
   { href: "/red-rocks/concerts", label: "Concerts" },
   { href: "/red-rocks/hiking-trails", label: "Hiking Trails" },
@@ -113,8 +118,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function RedRocksAuthorityDetailPage({ params }: Props) {
+export default async function RedRocksAuthorityDetailPage({ params, searchParams }: Props) {
   const { slug } = await params;
+  const sp = await searchParams;
   const page = RED_ROCKS_ENTITY_BY_SLUG.get(slug);
   if (!page) notFound();
 
@@ -245,7 +251,10 @@ export default async function RedRocksAuthorityDetailPage({ params }: Props) {
             <Link className="comic-btn comic-btn-secondary" href="/red-rocks/faq">
               FAQ
             </Link>
-            <Link className="comic-btn comic-btn-primary" href="/book?venue=red-rocks-amphitheatre">
+            <Link
+              className="comic-btn comic-btn-primary"
+              href={buildBookingHref({ target: "book", venue: "red-rocks-amphitheatre", searchParams: sp })}
+            >
               {page.ctaText}
             </Link>
           </div>
@@ -397,7 +406,10 @@ export default async function RedRocksAuthorityDetailPage({ params }: Props) {
                 <Link href="/red-rocks/transportation" className="comic-btn comic-btn-secondary">
                   Transportation Guide
                 </Link>
-                <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary">
+                <Link
+                  href={buildBookingHref({ target: "book", venue: "red-rocks-amphitheatre", searchParams: sp })}
+                  className="comic-btn comic-btn-primary"
+                >
                   Book a Ride
                 </Link>
               </div>
@@ -449,7 +461,10 @@ export default async function RedRocksAuthorityDetailPage({ params }: Props) {
                 </Link>
               );
             })}
-            <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary">
+            <Link
+              href={buildBookingHref({ target: "book", venue: "red-rocks-amphitheatre", searchParams: sp })}
+              className="comic-btn comic-btn-primary"
+            >
               Compare Ride Options
             </Link>
           </div>

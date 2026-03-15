@@ -53,7 +53,7 @@ export default async function RedRocksPage({
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
         <header className="comic-hero mb-8">
           <h1 className="text-5xl md:text-6xl font-black mb-4 tracking-tight">
-  <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary mb-6 inline-flex">
+  <Link href={bookTarget} className="comic-btn comic-btn-primary mb-6 inline-flex">
     Book Shuttle to This Venue →
   </Link>
             Red Rocks Amphitheatre
@@ -95,7 +95,7 @@ export default async function RedRocksPage({
               <Link className="comic-btn comic-btn-primary" href={bookTarget}>
                 Continue to booking
               </Link>
-              <Link className="comic-btn comic-btn-secondary" href="/book?venue=red-rocks-amphitheatre">
+              <Link className="comic-btn comic-btn-secondary" href={bookTarget}>
                 Change destination
               </Link>
             </div>
@@ -111,7 +111,7 @@ export default async function RedRocksPage({
               Booking
             </div>
             <div className="mt-4 flex flex-wrap gap-3">
-              <Link className="comic-btn comic-btn-primary" href="/book?venue=red-rocks-amphitheatre">
+              <Link className="comic-btn comic-btn-primary" href={bookTarget}>
                 Start booking
               </Link>
               <Link className="comic-btn comic-btn-secondary" href="/week">

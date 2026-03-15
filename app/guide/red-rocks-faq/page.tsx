@@ -1,4 +1,6 @@
 import Link from "next/link";
+import type { HandoffSearchParams } from "@/lib/parrHandoff";
+import { buildBookingHref } from "@/lib/parrHandoff";
 
 export const metadata = {
   title: "Red Rocks FAQ | Party at Red Rocks",
@@ -17,7 +19,12 @@ function FAQ({ q, a }: { q: string; a: string }) {
   );
 }
 
-export default function RedRocksFAQ() {
+export default async function RedRocksFAQ({
+  searchParams,
+}: {
+  searchParams: Promise<HandoffSearchParams>;
+}) {
+  const sp = await searchParams;
   return (
     <main className="min-h-screen bg-surface px-6 py-20 text-white">
       <section>
@@ -38,10 +45,10 @@ export default function RedRocksFAQ() {
             <Link href="/book" className="btn-primary">
               Book a Ride
             </Link>
-            <Link href="/book/red-rocks-amphitheatre/shared" className="btn-ghost">
+            <Link href={buildBookingHref({ target: "shared", venue: "red-rocks-amphitheatre", searchParams: sp })} className="btn-ghost">
               Book Shuttle Seats
             </Link>
-            <Link href="/book/red-rocks-amphitheatre/private/suv" className="btn-ghost">
+            <Link href={buildBookingHref({ target: "private-option", venue: "red-rocks-amphitheatre", option: "suv", searchParams: sp })} className="btn-ghost">
               Private SUV
             </Link>
           </div>
@@ -86,7 +93,7 @@ export default function RedRocksFAQ() {
               <Link href="/book" className="btn-primary">
                 Book a Ride
               </Link>
-              <Link href="/book/red-rocks-amphitheatre/shared" className="btn-ghost">
+              <Link href={buildBookingHref({ target: "shared", venue: "red-rocks-amphitheatre", searchParams: sp })} className="btn-ghost">
                 Book Shuttle Seats
               </Link>
             </div>

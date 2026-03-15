@@ -1,5 +1,7 @@
 import Link from "next/link";
 import FAQBlock from "@/components/FAQBlock";
+import type { HandoffSearchParams } from "@/lib/parrHandoff";
+import { buildBookingHref } from "@/lib/parrHandoff";
 
 export const metadata = {
   title: "Red Rocks Tailgate FAQ",
@@ -55,7 +57,12 @@ const rows = [
   },
 ];
 
-export default function TailgateFaqPage() {
+export default async function TailgateFaqPage({
+  searchParams,
+}: {
+  searchParams: Promise<HandoffSearchParams>;
+}) {
+  const sp = await searchParams;
   return (
     <main className="bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
       <section className="mx-auto flex max-w-[1440px] flex-col gap-8">
@@ -77,7 +84,7 @@ export default function TailgateFaqPage() {
               Tailgating Guide
             </Link>
             <Link
-              href="/book/red-rocks-amphitheatre/private"
+              href={buildBookingHref({ target: "private", venue: "red-rocks-amphitheatre", searchParams: sp })}
               className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
             >
               Book a Private Ride

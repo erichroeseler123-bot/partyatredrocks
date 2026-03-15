@@ -395,7 +395,11 @@ function eventsItemListJsonLd(slug: string, v: VenueRec, events: VenueCache["eve
         offers: {
           "@type": "Offer",
           name: "Ride Options",
-          url: `${SITE}/book?venue=${encodeURIComponent(slug)}&date=${encodeURIComponent(e.dateKey)}&qty=2`,
+          url: `${SITE}${buildBookingHref({
+            target: "book",
+            venue: slug,
+            overrides: { date: e.dateKey, qty: 2 },
+          })}`,
           priceCurrency: "USD",
           availability: "https://schema.org/InStock",
         },

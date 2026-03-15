@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { CarFront, MapPin, ShieldCheck } from "lucide-react";
+import type { HandoffSearchParams } from "@/lib/parrHandoff";
+import { buildBookingHref } from "@/lib/parrHandoff";
 
 export const metadata = {
   title: "Red Rocks Tailgating Guide",
@@ -25,7 +27,12 @@ const privateBenefits = [
   "Return ride covered after the encore",
 ];
 
-export default function TailgatingGuidePage() {
+export default async function TailgatingGuidePage({
+  searchParams,
+}: {
+  searchParams: Promise<HandoffSearchParams>;
+}) {
+  const sp = await searchParams;
   return (
     <main className="bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
       <section className="mx-auto flex max-w-[1440px] flex-col gap-8">
@@ -45,7 +52,7 @@ export default function TailgatingGuidePage() {
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/book/red-rocks-amphitheatre/private"
+                href={buildBookingHref({ target: "private", venue: "red-rocks-amphitheatre", searchParams: sp })}
                 className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
               >
                 Book a Private Ride
@@ -115,7 +122,7 @@ export default function TailgatingGuidePage() {
           </div>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Link
-              href="/book/red-rocks-amphitheatre/private"
+              href={buildBookingHref({ target: "private", venue: "red-rocks-amphitheatre", searchParams: sp })}
               className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
             >
               Book Private Service

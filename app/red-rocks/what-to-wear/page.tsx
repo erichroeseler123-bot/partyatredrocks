@@ -1,4 +1,6 @@
 import Link from "next/link";
+import type { HandoffSearchParams } from "@/lib/parrHandoff";
+import { buildBookingHref } from "@/lib/parrHandoff";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
@@ -9,7 +11,12 @@ export const metadata = {
   alternates: { canonical: `${SITE}/red-rocks/what-to-wear` },
 };
 
-export default function RedRocksWhatToWearPage() {
+export default async function RedRocksWhatToWearPage({
+  searchParams,
+}: {
+  searchParams: Promise<HandoffSearchParams>;
+}) {
+  const sp = await searchParams;
   return (
     <main className="comic-page pt-24 pb-10">
       <section className="comic-wrap max-w-4xl mx-auto">
@@ -21,7 +28,7 @@ export default function RedRocksWhatToWearPage() {
             and fall shows.
           </p>
           <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 mt-8">
-            <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary min-w-[220px] text-center">
+            <Link href={buildBookingHref({ target: "book", venue: "red-rocks-amphitheatre", searchParams: sp })} className="comic-btn comic-btn-primary min-w-[220px] text-center">
               Book Shuttle Ride →
             </Link>
           </div>
@@ -92,7 +99,7 @@ export default function RedRocksWhatToWearPage() {
             keeps your night simple.
           </p>
           <div className="flex justify-center mt-6">
-            <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary">
+            <Link href={buildBookingHref({ target: "book", venue: "red-rocks-amphitheatre", searchParams: sp })} className="comic-btn comic-btn-primary">
               Book Weather-Proof Shuttle →
             </Link>
           </div>
@@ -107,7 +114,7 @@ export default function RedRocksWhatToWearPage() {
             <Link href="/red-rocks/weather" className="comic-btn comic-btn-secondary min-w-[240px]">
               Back to Weather Guide →
             </Link>
-            <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary min-w-[240px]">
+            <Link href={buildBookingHref({ target: "book", venue: "red-rocks-amphitheatre", searchParams: sp })} className="comic-btn comic-btn-primary min-w-[240px]">
               Book Ride Now →
             </Link>
           </div>

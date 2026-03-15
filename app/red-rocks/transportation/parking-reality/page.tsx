@@ -1,4 +1,6 @@
 import Link from "next/link";
+import type { HandoffSearchParams } from "@/lib/parrHandoff";
+import { buildBookingHref } from "@/lib/parrHandoff";
 
 export const metadata = {
   title: "Red Rocks Parking Reality",
@@ -6,7 +8,12 @@ export const metadata = {
     "Arrival timing, overflow lots, and what actually happens on busy nights.",
 };
 
-export default function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<HandoffSearchParams>;
+}) {
+  const sp = await searchParams;
   return (
     <main className="min-h-screen bg-surface text-white px-6 py-24">
       <div className="max-w-4xl mx-auto">
@@ -46,7 +53,7 @@ export default function Page() {
         </section>
 
         <div className="mt-12">
-          <Link href="/book?venue=red-rocks-amphitheatre" className="btn-primary">
+          <Link href={buildBookingHref({ target: "book", venue: "red-rocks-amphitheatre", searchParams: sp })} className="btn-primary">
             Skip parking — Book the $59 shuttle →
           </Link>
         </div>
