@@ -172,13 +172,13 @@ export default function HomeSections({
         <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(9,15,31,0.96),rgba(7,11,25,0.96))] px-5 py-7 sm:px-8">
           <div className="flex items-end justify-between gap-4">
             <div>
-              <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">Why Riders Trust It</div>
+              <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">Why Riders Book</div>
               <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">
-                The basics should be obvious.
+                What riders need most.
               </h2>
             </div>
             <Link href="/about" className="hidden text-sm font-bold text-[#8fd0ff] md:inline-flex">
-              Why trust GoSno LLC? <ArrowRight className="ml-1 h-4 w-4" />
+              About GoSno <ArrowRight className="ml-1 h-4 w-4" />
             </Link>
           </div>
 
@@ -201,7 +201,7 @@ export default function HomeSections({
           </div>
 
           <Link href="/about" className="mt-5 inline-flex text-sm font-bold text-[#8fd0ff] md:hidden">
-            Why trust GoSno LLC? <ArrowRight className="ml-1 h-4 w-4" />
+            About GoSno <ArrowRight className="ml-1 h-4 w-4" />
           </Link>
         </section>
 
@@ -212,7 +212,7 @@ export default function HomeSections({
                 This Week
               </div>
               <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">
-                Upcoming Shows. Tap In Fast.
+                Upcoming Shows
               </h2>
             </div>
             <Link href="/week" className="hidden text-sm font-bold text-[#8fd0ff] md:inline-flex">
@@ -289,14 +289,14 @@ export default function HomeSections({
                 Get Ready for Show Night
               </div>
               <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">
-                Three guides, then the rest lives in the hub.
+                Start with these guides.
               </h2>
               <p className="mt-3 max-w-2xl text-sm leading-6 text-white/68">
                 Parking reality, ride comparisons, and show-night rules without turning the homepage into a wall of logistics.
               </p>
             </div>
             <Link href="/guide" className="hidden text-sm font-bold text-[#ffb07c] md:inline-flex">
-              Open Full Guides Hub <ArrowRight className="ml-1 h-4 w-4" />
+              More Guides <ArrowRight className="ml-1 h-4 w-4" />
             </Link>
           </div>
 
@@ -320,7 +320,7 @@ export default function HomeSections({
           </div>
 
           <Link href="/guide" className="mt-5 inline-flex text-sm font-bold text-[#ffb07c] md:hidden">
-            Open Full Guides Hub <ArrowRight className="ml-1 h-4 w-4" />
+            More Guides <ArrowRight className="ml-1 h-4 w-4" />
           </Link>
         </section>
 
@@ -336,22 +336,22 @@ export default function HomeSections({
                 Ready for your Red Rocks night?
               </h2>
               <p className="mt-3 max-w-2xl text-sm leading-6 text-white/68">
-                Operated by GoSno LLC with hosted secure checkout, real support, and a booking flow that gets you from venue choice to final product fast.
+                Operated by GoSno LLC with secure online booking, real support, and clear ride options before show night.
               </p>
 
               <div className="mt-6 grid gap-4 md:grid-cols-3">
                 {[
                   {
                     title: "Colorado-Based Operator",
-                    body: "A real transportation brand, not just a generic lead form dropped on a concert page.",
+                    body: "Local transportation for Red Rocks and Colorado concert nights.",
                   },
                   {
-                    title: "Hosted Secure Checkout",
-                    body: "Rezdy powers the final booking pages so payment and availability stay stable.",
+                    title: "Secure Online Booking",
+                    body: "Book online, get your details, and head into show night with a clear plan.",
                   },
                   {
                     title: "Support + Policies",
-                    body: "Read how it works, then book with the right expectations before show night starts.",
+                    body: "Read the details, then book with the right expectations before the show.",
                   },
                 ].map((item) => (
                   <div
