@@ -21,7 +21,7 @@ export default function RedRocksWhatToWearPage() {
             and fall shows.
           </p>
           <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 mt-8">
-            <Link href="/find" className="comic-btn comic-btn-primary min-w-[220px] text-center">
+            <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary min-w-[220px] text-center">
               Book Shuttle Ride →
             </Link>
           </div>
@@ -92,7 +92,7 @@ export default function RedRocksWhatToWearPage() {
             keeps your night simple.
           </p>
           <div className="flex justify-center mt-6">
-            <Link href="/find" className="comic-btn comic-btn-primary">
+            <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary">
               Book Weather-Proof Shuttle →
             </Link>
           </div>
@@ -107,7 +107,7 @@ export default function RedRocksWhatToWearPage() {
             <Link href="/red-rocks/weather" className="comic-btn comic-btn-secondary min-w-[240px]">
               Back to Weather Guide →
             </Link>
-            <Link href="/find" className="comic-btn comic-btn-primary min-w-[240px]">
+            <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary min-w-[240px]">
               Book Ride Now →
             </Link>
           </div>

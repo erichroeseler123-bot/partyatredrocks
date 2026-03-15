@@ -104,8 +104,8 @@ export default async function RedRocksMapLocationPage({ params }: Props) {
             <Link href="/red-rocks/parking" className="comic-btn comic-btn-secondary">
               Parking Guide
             </Link>
-            <Link href="/find" className="comic-btn comic-btn-primary">
-              Find a Ride
+            <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary">
+              Book a Ride
             </Link>
           </div>
         </div>

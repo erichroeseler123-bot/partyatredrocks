@@ -53,7 +53,7 @@ export default function RedRocksHistoryPage() {
             <div className="comic-tag">Related</div>
             <h2 className="comic-h3">Visiting Guide</h2>
           </Link>
-          <Link href="/find" className="comic-panel block">
+          <Link href="/book?venue=red-rocks-amphitheatre" className="comic-panel block">
             <div className="comic-tag">CTA</div>
             <h2 className="comic-h3">Book Concert Transportation</h2>
           </Link>

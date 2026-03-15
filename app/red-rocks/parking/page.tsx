@@ -135,7 +135,7 @@ export default async function RedRocksParkingPage() {
             <h2 className="comic-h3">Parking Reality</h2>
             <p className="comic-copy">Detailed breakdown of flow constraints and pickup alternatives.</p>
           </Link>
-          <Link href="/find" className="comic-panel block">
+          <Link href="/book?venue=red-rocks-amphitheatre" className="comic-panel block">
             <div className="comic-tag">Alternative</div>
             <h2 className="comic-h3">Skip Driving, Compare Rides</h2>
             <p className="comic-copy">See shuttle and private options aligned to your group size.</p>

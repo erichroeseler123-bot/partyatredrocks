@@ -67,7 +67,7 @@ export default function RedRocksCampingPage() {
             <div className="comic-tag">Related</div>
             <h2 className="comic-h3">Concert Logistics</h2>
           </Link>
-          <Link href="/find" className="comic-panel block">
+          <Link href="/book?venue=red-rocks-amphitheatre" className="comic-panel block">
             <div className="comic-tag">CTA</div>
             <h2 className="comic-h3">Book Show Transportation</h2>
           </Link>

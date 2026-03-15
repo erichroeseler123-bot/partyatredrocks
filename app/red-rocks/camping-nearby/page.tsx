@@ -101,7 +101,7 @@ export default async function CampingNearbyPage() {
             <h2 className="comic-h3">Visiting Guide</h2>
             <p className="comic-copy">Weather, timing, and what to carry for day and show plans.</p>
           </Link>
-          <Link href="/find" className="comic-panel block">
+          <Link href="/book?venue=red-rocks-amphitheatre" className="comic-panel block">
             <div className="comic-tag">CTA</div>
             <h2 className="comic-h3">Book Show Transportation</h2>
             <p className="comic-copy">Choose transport mode after camping details are set.</p>

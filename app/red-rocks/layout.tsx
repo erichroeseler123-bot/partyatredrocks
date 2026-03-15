@@ -43,10 +43,10 @@ export default function RedRocksLayout({ children }: { children: ReactNode }) {
           <div className="comic-panel" style={{ marginTop: 8, padding: 10 }}>
             <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-2 w-full">
               <Link
-                href="/find"
+                href="/book?venue=red-rocks-amphitheatre"
                 className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[180px] text-center"
               >
-                Find a Ride →
+                Book a Ride →
               </Link>
               <Link
                 href="/red-rocks/transportation"

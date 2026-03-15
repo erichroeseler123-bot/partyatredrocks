@@ -108,7 +108,7 @@ export default async function TradingPostTrailPage() {
             <h2 className="comic-h3">Visiting Guide</h2>
             <p className="comic-copy">Weather, altitude, and overall day-visit strategy.</p>
           </Link>
-          <Link href="/find" className="comic-panel block">
+          <Link href="/book?venue=red-rocks-amphitheatre" className="comic-panel block">
             <div className="comic-tag">CTA</div>
             <h2 className="comic-h3">Show Transportation Options</h2>
             <p className="comic-copy">Lock evening transportation after trail planning.</p>

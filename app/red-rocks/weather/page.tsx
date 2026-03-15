@@ -21,7 +21,7 @@ export default function RedRocksWeatherPage() {
             how it affects arrival and parking, and why pre-booked shuttle rides are the smart move.
           </p>
           <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 mt-8">
-            <Link href="/find" className="comic-btn comic-btn-primary min-w-[220px] text-center">
+            <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary min-w-[220px] text-center">
               Book Shuttle Ride →
             </Link>
           </div>
@@ -83,7 +83,7 @@ export default function RedRocksWeatherPage() {
             </li>
           </ul>
           <div className="mt-6 text-center">
-            <Link href="/find" className="comic-btn comic-btn-primary">
+            <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary">
               Book Weather-Proof Shuttle Ride →
             </Link>
           </div>
@@ -95,7 +95,7 @@ export default function RedRocksWeatherPage() {
             Check forecast 24-48 hours before your show and secure transport early to avoid weather and parking stress.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 mt-6">
-            <Link href="/find" className="comic-btn comic-btn-primary min-w-[240px]">
+            <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary min-w-[240px]">
               Book Ride Now →
             </Link>
             <Link href="/red-rocks/what-to-wear" className="comic-btn comic-btn-secondary min-w-[240px]">

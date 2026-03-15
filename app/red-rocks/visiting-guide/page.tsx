@@ -57,7 +57,7 @@ export default function RedRocksVisitingGuidePage() {
             <div className="comic-tag">Concerts</div>
             <h2 className="comic-h3">Concert Night Guide</h2>
           </Link>
-          <Link href="/find" className="comic-panel block">
+          <Link href="/book?venue=red-rocks-amphitheatre" className="comic-panel block">
             <div className="comic-tag">CTA</div>
             <h2 className="comic-h3">Avoid Parking Chaos: Book Shuttle</h2>
           </Link>

@@ -21,7 +21,7 @@ export default function BestTimeToArrivePage() {
             cold. Use this practical 2026 timing guide.
           </p>
           <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-4 sm:mt-6 w-full px-4">
-            <Link href="/find" className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[180px] text-center">
+            <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[180px] text-center">
               Book Shuttle - Lock Return
             </Link>
             <Link href="/red-rocks/parking" className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[180px] text-center">
@@ -73,7 +73,7 @@ export default function BestTimeToArrivePage() {
               Best move: pre-book return transportation.
             </p>
             <div style={{ marginTop: 16 }}>
-              <Link href="/find" className="comic-btn comic-btn-primary w-full text-center">
+              <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary w-full text-center">
                 Book Return Ride
               </Link>
             </div>
@@ -101,4 +101,3 @@ export default function BestTimeToArrivePage() {
     </main>
   );
 }
-

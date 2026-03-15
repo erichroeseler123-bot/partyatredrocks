@@ -46,7 +46,7 @@ export default function Page() {
         </section>
 
         <div className="mt-12">
-          <Link href="/find" className="btn-primary">
+          <Link href="/book?venue=red-rocks-amphitheatre" className="btn-primary">
             Guaranteed return — Book the shuttle →
           </Link>
         </div>

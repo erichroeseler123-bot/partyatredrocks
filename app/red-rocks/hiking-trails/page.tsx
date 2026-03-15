@@ -126,7 +126,7 @@ export default async function RedRocksHikingTrailsPage() {
             <h2 className="comic-h3">Visiting Guide</h2>
             <p className="comic-copy">Weather, altitude, and day-planning fundamentals.</p>
           </Link>
-          <Link href="/find" className="comic-panel block">
+          <Link href="/book?venue=red-rocks-amphitheatre" className="comic-panel block">
             <div className="comic-tag">CTA</div>
             <h2 className="comic-h3">Going to a Show? Book a Ride</h2>
             <p className="comic-copy">Lock return logistics after your daytime route plan is set.</p>

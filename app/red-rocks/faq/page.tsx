@@ -54,7 +54,7 @@ export default async function RedRocksFaqPage() {
             weather and same-day concert pacing. Red Rocks decisions are connected and work best when planned together.
           </p>
           <p className="comic-copy">
-            For the most accurate trip execution, combine this FAQ with the Red Rocks hub and your event-week planning pages.
+            For the most accurate trip planning, combine this FAQ with the Red Rocks guide and your event-week planning pages.
           </p>
         </section>
 
@@ -78,7 +78,7 @@ export default async function RedRocksFaqPage() {
               <h2 className="comic-h3">Parking Guide</h2>
               <p className="comic-copy">Lot tradeoffs, timing windows, and egress expectations.</p>
             </Link>
-            <Link href="/find" className="comic-panel block">
+            <Link href="/book?venue=red-rocks-amphitheatre" className="comic-panel block">
               <div className="comic-tag">Book</div>
               <h2 className="comic-h3">Ride Match</h2>
               <p className="comic-copy">Convert planning into a confirmed transport plan.</p>

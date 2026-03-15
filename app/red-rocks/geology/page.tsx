@@ -118,7 +118,7 @@ export default async function RedRocksGeologyPage() {
             <h2 className="comic-h3">Visiting Guide</h2>
             <p className="comic-copy">Pair terrain understanding with weather and timing guidance.</p>
           </Link>
-          <Link href="/find" className="comic-panel block">
+          <Link href="/book?venue=red-rocks-amphitheatre" className="comic-panel block">
             <div className="comic-tag">Ride</div>
             <h2 className="comic-h3">Going To A Show?</h2>
             <p className="comic-copy">Use ride matching after route and timing are locked.</p>

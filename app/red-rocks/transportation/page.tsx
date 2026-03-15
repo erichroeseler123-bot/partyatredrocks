@@ -57,8 +57,8 @@ export default async function RedRocksTransportationPage() {
             until the end of the show, you are solving a complex logistics problem in the worst possible moment.
           </p>
           <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-primary" href="/find">
-              Compare Ride Options
+            <Link className="comic-btn comic-btn-primary" href="/book?venue=red-rocks-amphitheatre">
+              Book a Ride
             </Link>
             <Link className="comic-btn comic-btn-secondary" href="/week/red-rocks">
               Match Plan To This Week

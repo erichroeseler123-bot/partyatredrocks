@@ -59,7 +59,7 @@ export default async function RedRocksConcertGuidePage() {
             <Link className="comic-btn comic-btn-primary" href="/week/red-rocks">
               Browse This Week
             </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/find">
+            <Link className="comic-btn comic-btn-secondary" href="/book?venue=red-rocks-amphitheatre">
               Lock Your Ride
             </Link>
           </div>

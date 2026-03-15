@@ -104,7 +104,7 @@ export default async function RedRocksWildlifePage() {
             <h2 className="comic-h3">Visiting Guide</h2>
             <p className="comic-copy">Align wildlife timing with weather and day planning.</p>
           </Link>
-          <Link href="/find" className="comic-panel block">
+          <Link href="/book?venue=red-rocks-amphitheatre" className="comic-panel block">
             <div className="comic-tag">CTA</div>
             <h2 className="comic-h3">Concert Night Ride Planning</h2>
             <p className="comic-copy">Book transport after daytime route decisions are set.</p>

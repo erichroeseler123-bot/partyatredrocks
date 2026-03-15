@@ -245,7 +245,7 @@ export default async function RedRocksAuthorityDetailPage({ params }: Props) {
             <Link className="comic-btn comic-btn-secondary" href="/red-rocks/faq">
               FAQ
             </Link>
-            <Link className="comic-btn comic-btn-primary" href="/find">
+            <Link className="comic-btn comic-btn-primary" href="/book?venue=red-rocks-amphitheatre">
               {page.ctaText}
             </Link>
           </div>
@@ -397,8 +397,8 @@ export default async function RedRocksAuthorityDetailPage({ params }: Props) {
                 <Link href="/red-rocks/transportation" className="comic-btn comic-btn-secondary">
                   Transportation Guide
                 </Link>
-                <Link href="/find" className="comic-btn comic-btn-primary">
-                  Find a Ride
+                <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary">
+                  Book a Ride
                 </Link>
               </div>
             </section>
@@ -433,7 +433,7 @@ export default async function RedRocksAuthorityDetailPage({ params }: Props) {
               );
             })}
             <Link href={page.referenceLinks.actionPage} className="comic-btn comic-btn-primary">
-              Find a Ride
+              Book a Ride
             </Link>
           </div>
         </section>
@@ -449,7 +449,7 @@ export default async function RedRocksAuthorityDetailPage({ params }: Props) {
                 </Link>
               );
             })}
-            <Link href="/find" className="comic-btn comic-btn-primary">
+            <Link href="/book?venue=red-rocks-amphitheatre" className="comic-btn comic-btn-primary">
               Compare Ride Options
             </Link>
           </div>

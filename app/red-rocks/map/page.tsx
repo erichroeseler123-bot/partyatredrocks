@@ -40,7 +40,7 @@ export default function RedRocksMapPage() {
             <Link className="comic-btn comic-btn-secondary" href="/red-rocks/transportation">
               Transportation
             </Link>
-            <Link className="comic-btn comic-btn-primary" href="/find">
+            <Link className="comic-btn comic-btn-primary" href="/book?venue=red-rocks-amphitheatre">
               Book Ride
             </Link>
           </div>
