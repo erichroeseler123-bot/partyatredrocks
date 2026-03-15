@@ -22,55 +22,16 @@ function buildQuery(searchParams: URLSearchParams): URLSearchParams {
   return out;
 }
 
-function toLowerString(value: unknown): string {
-  return typeof value === "string" ? value.toLowerCase() : "";
-}
-
-function parseAllowedCodes(raw: string | undefined): Set<string> {
-  if (!raw) return new Set<string>();
-  return new Set(
-    raw
-      .split(",")
-      .map((v) => v.trim().toUpperCase())
-      .filter(Boolean)
-  );
-}
-
-function isRedRocksProduct(product: Record<string, unknown>, allowedCodes: Set<string>): boolean {
-  const code = typeof product.productCode === "string" ? product.productCode.toUpperCase() : "";
-  if (code && allowedCodes.has(code)) return true;
-
-  const name = toLowerString(product.name);
-  const description = toLowerString(product.description);
-  const additionalInfo = toLowerString(product.additionalInformation);
-  const seo = Array.isArray(product.productSeoTags) ? JSON.stringify(product.productSeoTags).toLowerCase() : "";
-
-  return (
-    name.includes("red rocks") ||
-    description.includes("red rocks") ||
-    additionalInfo.includes("red rocks") ||
-    seo.includes("red-rocks") ||
-    seo.includes("partyatredrocks")
-  );
-}
-
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const catalogId = searchParams.get("catalogId") || DEFAULT_REZDY_CATALOG_ID;
-  const allowedCodes = parseAllowedCodes(process.env.REZDY_REDROCKS_PRODUCT_CODES);
 
   try {
     const query = buildQuery(searchParams);
     if (catalogId) query.set("catalogId", catalogId);
 
     const products = await rezdyListProducts(query);
-    const narrowed =
-      catalogId === DEFAULT_REZDY_CATALOG_ID
-        ? products.filter((product) => isRedRocksProduct(product as Record<string, unknown>, allowedCodes))
-        : products;
-    const productRows = narrowed.length > 0 ? narrowed : products;
-
-    const uiProducts: UiProduct[] = products
+    const finalProducts: UiProduct[] = products
       .map((product) => {
         const code = typeof product.productCode === "string" ? product.productCode : "";
         const name = typeof product.name === "string" ? product.name : "";
@@ -93,15 +54,9 @@ export async function GET(request: Request) {
       })
       .filter((row) => row.productCode && row.name);
 
-    const finalProducts =
-      productRows === products
-        ? uiProducts
-        : uiProducts.filter((row) => productRows.some((product) => product.productCode === row.productCode));
-
     return NextResponse.json({
       products: finalProducts,
       catalogIdApplied: catalogId || null,
-      catalogFilterFallback: catalogId === DEFAULT_REZDY_CATALOG_ID ? narrowed.length === 0 : false,
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Failed to fetch Rezdy products";
