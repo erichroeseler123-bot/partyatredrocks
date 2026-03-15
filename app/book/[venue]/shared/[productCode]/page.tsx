@@ -67,6 +67,9 @@ export default async function SharedProductPage({
           <p className="mt-4 max-w-2xl text-[15px] leading-7 text-white/74 sm:text-lg">
             {product.description || "Online booking for this Red Rocks shared shuttle option."}
           </p>
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-white/68 sm:text-[15px]">
+            Pickup details are sent before show night. Your return ride is covered after the show.
+          </p>
           <div className="mt-4 text-sm font-bold text-[#ffb07c]">{priceLabel(product)}</div>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <a

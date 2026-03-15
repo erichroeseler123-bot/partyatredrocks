@@ -61,6 +61,9 @@ export default async function PrivateOptionPage({
           <p className="mt-4 max-w-2xl text-[15px] leading-7 text-white/74 sm:text-lg">
             {meta.body}
           </p>
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-white/68 sm:text-[15px]">
+            Pickup details are sent before your ride. Your group rides together for the full night.
+          </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <a
               href={meta.iframeUrl.replace("?iframe=true", "")}
