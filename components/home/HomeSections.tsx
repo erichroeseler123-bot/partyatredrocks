@@ -4,323 +4,366 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
-  DollarSign,
+  Bus,
+  Clock3,
   Headphones,
+  MapPinned,
   ShieldCheck,
   Sparkles,
-  Clock3,
+  Stars,
 } from "lucide-react";
 import { DISPLAY } from "@/lib/display";
 import { ReviewBlock } from "@/components/ReviewBlock";
 import { buildBookingHref } from "@/lib/parrHandoff";
 
-const rideOptions = [
+const heroMoments = [
   {
-    title: "Shared Shuttle",
-    body: "Shared shuttle seats are available from Denver and Golden. Choose your departure location and reserve seats for the show.",
-    bullets: [
-      "$59 seats from Denver and Golden",
-      "Clear departure times and return ride after the show",
-      "Best fit for solo riders, couples, and small groups",
-    ],
-    href: buildBookingHref({ target: "shared", venue: "red-rocks-amphitheatre" }),
-    cta: "View Shuttle Departures",
-    icon: DollarSign,
-    image: "/images/marketing/shuttle.jpg",
-    imageAlt: "Concert riders smiling on a shuttle ride to Red Rocks",
+    src: "/hero/hero-home.jpg",
+    alt: "Red Rocks at night packed with concert energy",
+    label: "Red Rocks after dark",
   },
   {
-    title: "Private Door-to-Door Service",
-    body: "Door-to-door pickup. Upper North limo-lane access. The full Red Rocks night.",
-    bullets: [
-      "Pickup at your home, hotel, or Airbnb",
-      "Time to tailgate before the show",
-      "One vehicle for the full night and return ride after the concert",
-      "Private SUV — $499",
-      "10 Passenger Van — $599",
-      "14 Passenger Sprinter — $799",
-      "24 Passenger Party Bus — $1199",
-    ],
-    href: buildBookingHref({ target: "private", venue: "red-rocks-amphitheatre" }),
-    cta: "Book Private Service",
-    icon: ShieldCheck,
-    image: "/images/marketing/vip-suv.jpg",
-    imageAlt: "Private SUV ride setup for a Red Rocks concert group",
+    src: "/images/marketing/shuttle.jpg",
+    alt: "Concert crowd smiling on a shuttle ride",
+    label: "Fixed-price shuttle energy",
+  },
+  {
+    src: "/images/marketing/vip-suv.jpg",
+    alt: "Private SUV setup for a premium concert ride",
+    label: "Private arrival, clean exit",
   },
 ];
 
-const supportPoints = [
+const rideCards = [
   {
-    title: "Fixed Pricing",
-    body: "Pay what you see with clear pricing from the start.",
-    icon: DollarSign,
+    title: "Shared Shuttle",
+    subtitle: "$59 fixed per seat",
+    copy: "For couples, friend pairs, and solo riders who want the easiest Red Rocks plan without surge pricing.",
+    bullets: [
+      "Denver + Golden departures",
+      "Guaranteed return ride after the show",
+      "Best value for most concert nights",
+    ],
+    href: buildBookingHref({ target: "shared", venue: "red-rocks-amphitheatre" }),
+    cta: "Secure Shared Seats",
+    image: "/images/marketing/shuttle.jpg",
+    alt: "Concert shuttle with riders heading to Red Rocks",
+  },
+  {
+    title: "Private Fleet",
+    subtitle: "$499 SUV to $1199 party bus",
+    copy: "For groups who want one vehicle, tailgate time, and a premium concert-night experience from pickup to dropoff.",
+    bullets: [
+      "SUV, van, sprinter, and party bus options",
+      "Upper North limo-lane access on qualifying rides",
+      "One driver and one group plan all night",
+    ],
+    href: buildBookingHref({ target: "private", venue: "red-rocks-amphitheatre" }),
+    cta: "View Private Fleet",
+    image: "/fleet/fleet-sprinter.jpg",
+    alt: "Premium sprinter and private fleet option for Red Rocks",
+  },
+];
+
+const premiumSignals = [
+  {
+    title: "No Surge Pricing",
+    body: "The fixed-rate promise people wish Uber made after the encore.",
+    icon: Stars,
   },
   {
     title: "Guaranteed Return",
-    body: "Clear meetup point, clean exit, and your ride back handled.",
+    body: "Your ride home is already handled before the show starts.",
     icon: Clock3,
   },
   {
-    title: "Real-Time Support",
-    body: "Text or call anytime and get help from people who know the flow.",
-    icon: Headphones,
+    title: "Colorado-Based Team",
+    body: "Local operator, venue-aware planning, and actual Red Rocks experience.",
+    icon: MapPinned,
   },
   {
-    title: "Group-Friendly Options",
-    body: "Shared seats for most riders, private vehicles for groups that want one plan all night.",
-    icon: ShieldCheck,
+    title: "Real Text Support",
+    body: "Show-night help from humans who know the venue flow and pickup reality.",
+    icon: Headphones,
   },
 ];
 
-const vibeGallery = [
+const fleetTiles = [
   {
-    src: "/images/marketing/shuttle.jpg",
-    alt: "High-energy shuttle ride with concert crowd heading to Red Rocks",
-    title: "Shuttle energy",
-    copy: "Big show crowd, fixed-price seat, simple ride home.",
+    title: "Private SUV",
+    detail: "Up to 6 guests",
+    image: "/images/marketing/vip-suv.jpg",
+    alt: "Private SUV option for Red Rocks transportation",
   },
   {
-    src: "/hero/hero-home.jpg",
-    alt: "Red Rocks concert atmosphere at night",
-    title: "Night-venue vibe",
-    copy: "The venue atmosphere people actually want, without the parking drag.",
+    title: "10 Passenger Van",
+    detail: "Cleaner group logistics",
+    image: "/images/marketing/shuttle.jpg",
+    alt: "Passenger van option for Red Rocks group transportation",
   },
   {
-    src: "/fleet/fleet-sprinter.jpg",
-    alt: "Sprinter transportation option for larger concert groups",
-    title: "Group-night upgrade",
-    copy: "Sprinters, private SUVs, and party-night transport for crews.",
+    title: "14 Passenger Sprinter",
+    detail: "Ambient, roomy, premium",
+    image: "/fleet/fleet-sprinter.jpg",
+    alt: "Sprinter van option for premium Red Rocks transportation",
+  },
+  {
+    title: "24 Passenger Party Bus",
+    detail: "Rolling lounge energy",
+    image: "/hero/hero-home.jpg",
+    alt: "Party bus concert-night energy for Red Rocks groups",
   },
 ];
 
 export default function HomeSections() {
   return (
-    <main className="bg-[#050816] text-white">
-      <section className="mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-4 pb-12 pt-16 sm:px-6 sm:pt-20 lg:px-8">
-        <section className="relative overflow-hidden rounded-[32px] border border-white/10 bg-[#0a1020] shadow-[0_40px_120px_rgba(0,0,0,0.45)]">
+    <main className="bg-[#090909] text-[#f8f4ed]">
+      <section className="mx-auto flex w-full max-w-[1500px] flex-col gap-10 px-4 pb-24 pt-16 sm:px-6 sm:pt-20 lg:px-8">
+        <section className="relative overflow-hidden rounded-[36px] border border-[#f5c66c]/20 bg-[#12100e] shadow-[0_40px_120px_rgba(0,0,0,0.58)]">
           <div className="absolute inset-0">
             <Image
               src="/hero/hero-home.jpg"
-              alt="Red Rocks concert crowd at night"
+              alt="Nighttime Red Rocks crowd and venue lights"
               fill
               priority
-              className="object-cover object-[center_35%]"
+              className="object-cover object-center"
               sizes="100vw"
             />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,98,0,0.28),transparent_32%),linear-gradient(120deg,rgba(5,8,22,0.2),rgba(5,8,22,0.82)_45%,rgba(5,8,22,0.96)_100%)]" />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,22,0.15)_0%,rgba(5,8,22,0.62)_48%,rgba(5,8,22,0.94)_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(9,9,9,0.86)_0%,rgba(9,9,9,0.58)_45%,rgba(9,9,9,0.88)_100%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(245,198,108,0.28),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.1),transparent_22%)]" />
           </div>
 
-          <div className="relative flex min-h-[58vh] flex-col justify-center px-5 py-8 text-center sm:min-h-[64vh] sm:px-8 sm:py-10 lg:min-h-[68vh] lg:px-12 lg:py-14">
-            <div className="mx-auto max-w-3xl">
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/20 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white/80 backdrop-blur">
-                <Sparkles className="h-3.5 w-3.5 text-[#ff8a3d]" />
+          <div className="relative grid gap-8 px-6 py-10 sm:px-8 sm:py-12 lg:grid-cols-[minmax(0,1.15fr)_420px] lg:px-12 lg:py-14">
+            <div className="max-w-4xl">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-black/30 px-4 py-2 text-[11px] font-black uppercase tracking-[0.24em] text-[#f5c66c] backdrop-blur">
+                <Sparkles className="h-3.5 w-3.5" />
                 {DISPLAY.ui.home.badge}
               </div>
 
-              <h1 className="mt-5 text-[2.35rem] font-black uppercase leading-[0.94] tracking-[-0.04em] text-white sm:text-[3.9rem] lg:text-[5.35rem]">
-                Red Rocks Shuttle & Private Rides
-              </h1>
-
-              <p className="mt-5 text-[15px] leading-7 text-white/78 sm:text-lg">
-                Shared shuttles from Denver and Golden, or private door-to-door service to Red Rocks Amphitheatre.
+              <p className="mt-6 font-accent text-xl italic text-[#efe5d3] sm:text-2xl">
+                Colorado concert transport with a premium, no-chaos finish.
               </p>
 
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
+              <h1 className="mt-4 max-w-5xl text-[2.7rem] font-black uppercase leading-[0.92] tracking-[-0.05em] text-white sm:text-[4.3rem] lg:text-[5.8rem]">
+                Elevate Your
+                <span className="block text-[#f5c66c]">Red Rocks Night</span>
+              </h1>
+
+              <p className="mt-5 max-w-3xl text-base leading-8 text-white/78 sm:text-lg">
+                Fixed $59 shuttle seats, private SUVs, sprinters, and party buses for groups that want a cleaner arrival, a guaranteed return, and less post-show chaos.
+              </p>
+
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link
                   href="/book"
-                  className="inline-flex min-h-14 items-center justify-center rounded-full bg-[#3df3ff] px-7 text-base font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffb07c] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a1020] sm:min-h-12 sm:text-sm"
+                  className="inline-flex min-h-14 items-center justify-center rounded-full bg-[#f5c66c] px-8 text-base font-black uppercase tracking-[0.16em] text-[#120f0b] transition hover:bg-[#ffd989] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
                 >
-                  Start Booking
+                  Secure Your Ride Now
                 </Link>
                 <Link
                   href="/shuttles"
-                  className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/14 bg-white/8 px-7 text-base font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/12 sm:min-h-12 sm:text-sm"
+                  className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/16 bg-black/20 px-8 text-base font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
                 >
-                  See Ride Options
+                  Explore Fleet Options
                 </Link>
               </div>
 
-              <div className="mt-6 flex flex-wrap justify-center gap-2">
+              <div className="mt-8 grid gap-4 sm:grid-cols-3">
                 {[
-                  "$59 seats",
-                  "Denver + Golden",
-                  "Guaranteed return",
-                  "Text support",
-                ].map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full border border-[#ff8a3d]/30 bg-[#ff8a3d]/12 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-[#ffd0b4]"
+                  { label: "Shared Seats", value: "$59 fixed" },
+                  { label: "Private Fleet", value: "$499-$1199" },
+                  { label: "Return Promise", value: "Always handled" },
+                ].map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="rounded-[24px] border border-white/10 bg-black/28 px-5 py-4 backdrop-blur"
                   >
-                    {item}
-                  </span>
+                    <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/52">{stat.label}</div>
+                    <div className="mt-2 text-xl font-black text-[#f5c66c]">{stat.value}</div>
+                  </div>
                 ))}
               </div>
+            </div>
+
+            <div className="grid gap-4 lg:self-end">
+              {heroMoments.map((moment, index) => (
+                <article
+                  key={moment.label}
+                  className={`gold-ring relative overflow-hidden rounded-[28px] border border-white/10 bg-[#181512] ${index === 1 ? "premium-float" : ""}`}
+                >
+                  <div className="relative h-44">
+                    <Image
+                      src={moment.src}
+                      alt={moment.alt}
+                      fill
+                      className="object-cover"
+                      sizes="420px"
+                    />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,9,9,0.08),rgba(9,9,9,0.84)_100%)]" />
+                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                      <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#f5c66c]">{moment.label}</div>
+                    </div>
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
         </section>
 
-        <section className="grid gap-4 lg:grid-cols-3">
-          {vibeGallery.map((item) => (
+        <section className="grid gap-4 lg:grid-cols-4">
+          {premiumSignals.map((item) => {
+            const Icon = item.icon;
+            return (
+              <article
+                key={item.title}
+                className="rounded-[28px] border border-[#f5c66c]/14 bg-[linear-gradient(180deg,rgba(25,21,18,0.95),rgba(13,13,13,0.98))] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
+              >
+                <div className="inline-flex rounded-2xl border border-[#f5c66c]/22 bg-[#f5c66c]/10 p-3 text-[#f5c66c]">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <h2 className="mt-4 text-lg font-black uppercase tracking-[-0.03em] text-white">{item.title}</h2>
+                <p className="mt-3 text-sm leading-6 text-white/68">{item.body}</p>
+              </article>
+            );
+          })}
+        </section>
+
+        <section className="grid gap-5 xl:grid-cols-2">
+          {rideCards.map((ride) => (
             <article
-              key={item.title}
-              className="group relative overflow-hidden rounded-[28px] border border-white/10 bg-[#0b1224] shadow-[0_24px_80px_rgba(0,0,0,0.32)]"
+              key={ride.title}
+              className="overflow-hidden rounded-[32px] border border-[#f5c66c]/14 bg-[linear-gradient(180deg,rgba(19,17,15,0.98),rgba(10,10,10,0.98))] shadow-[0_30px_100px_rgba(0,0,0,0.48)]"
             >
               <div className="relative h-72">
-                <Image
-                  src={item.src}
-                  alt={item.alt}
-                  fill
-                  className="object-cover transition duration-500 group-hover:scale-105"
-                  sizes="(min-width: 1280px) 33vw, 100vw"
-                />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,22,0.08),rgba(5,8,22,0.82)_88%)]" />
-                <div className="absolute inset-x-0 bottom-0 p-5">
-                  <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">{item.title}</div>
-                  <p className="mt-2 max-w-sm text-sm leading-6 text-white/84">{item.copy}</p>
+                <Image src={ride.image} alt={ride.alt} fill className="object-cover" sizes="(min-width: 1280px) 720px, 100vw" />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,9,9,0.12),rgba(9,9,9,0.84)_100%)]" />
+                <div className="absolute left-6 top-6 rounded-full border border-white/12 bg-black/35 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#f5c66c] backdrop-blur">
+                  {ride.subtitle}
                 </div>
+              </div>
+              <div className="p-6 sm:p-8">
+                <h2 className="text-[2rem] font-black uppercase tracking-[-0.04em] text-white sm:text-[2.4rem]">{ride.title}</h2>
+                <p className="mt-4 max-w-2xl text-[15px] leading-7 text-white/74">{ride.copy}</p>
+                <ul className="mt-5 space-y-3">
+                  {ride.bullets.map((bullet) => (
+                    <li key={bullet} className="flex items-start gap-3 text-sm leading-6 text-white/82">
+                      <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#f5c66c]" />
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href={ride.href}
+                  className="mt-7 inline-flex min-h-14 items-center justify-center rounded-full bg-[#f5c66c] px-8 text-sm font-black uppercase tracking-[0.16em] text-[#120f0b] transition hover:bg-[#ffd989]"
+                >
+                  {ride.cta}
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
               </div>
             </article>
           ))}
         </section>
 
-        <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(9,15,31,0.96),rgba(7,11,25,0.96))] px-5 py-7 sm:px-8">
-          <div className="flex items-end justify-between gap-4">
-            <div>
-              <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">Ride Options</div>
-              <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">
-                Choose the ride that fits your night.
+        <section className="rounded-[34px] border border-[#f5c66c]/14 bg-[linear-gradient(180deg,rgba(17,15,14,0.98),rgba(10,10,10,0.98))] px-6 py-8 shadow-[0_30px_100px_rgba(0,0,0,0.48)] sm:px-8">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-3xl">
+              <div className="text-[11px] font-black uppercase tracking-[0.24em] text-[#f5c66c]">Fleet Showcase</div>
+              <h2 className="mt-3 text-[2.2rem] font-black uppercase tracking-[-0.04em] text-white sm:text-[3rem]">
+                Premium fleet, party-night mindset
               </h2>
+              <p className="mt-3 text-sm leading-7 text-white/70 sm:text-[15px]">
+                The fleet mix is built around the actual Red Rocks night: cooler space, group coordination, cleaner arrival, and less friction after the encore.
+              </p>
             </div>
-            <Link href="/about" className="hidden text-sm font-bold text-[#8fd0ff] md:inline-flex">
-              About GoSno <ArrowRight className="ml-1 h-4 w-4" />
+            <Link
+              href={buildBookingHref({ target: "private", venue: "red-rocks-amphitheatre" })}
+              className="inline-flex min-h-12 items-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
+            >
+              Compare Private Options
             </Link>
           </div>
 
-          <div className="mt-6 grid gap-4 xl:grid-cols-2">
-            {rideOptions.map((ride) => {
-              const Icon = ride.icon;
-              return (
-                <div
-                  key={ride.title}
-                  className="rounded-[24px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)]"
-                >
-                  <div className="relative mb-5 h-48 overflow-hidden rounded-[20px] border border-white/10">
-                    <Image
-                      src={ride.image}
-                      alt={ride.imageAlt}
-                      fill
-                      className="object-cover"
-                      sizes="(min-width: 1280px) 50vw, 100vw"
-                    />
-                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,22,0.1),rgba(5,8,22,0.56)_100%)]" />
-                  </div>
-                  <div className="inline-flex rounded-2xl border border-[#ff8a3d]/25 bg-[#ff8a3d]/10 p-3 text-[#ffb07c]">
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <div className="mt-4 text-lg font-black text-white">{ride.title}</div>
-                  <p className="mt-2 text-sm leading-6 text-white/68">{ride.body}</p>
-                  <ul className="mt-4 space-y-2 text-sm leading-6 text-white/76">
-                    {ride.bullets.map((bullet) => (
-                      <li key={bullet} className="flex gap-2">
-                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#ffb07c]/80" />
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Link
-                    href={ride.href}
-                    className="mt-5 inline-flex min-h-12 items-center rounded-full bg-white/6 px-5 text-sm font-black uppercase tracking-[0.16em] text-[#ffb07c] transition hover:bg-white/10"
-                  >
-                    {ride.cta}
-                    <ArrowRight className="ml-1 h-4 w-4" />
-                  </Link>
+          <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {fleetTiles.map((tile) => (
+              <article
+                key={tile.title}
+                className="overflow-hidden rounded-[26px] border border-white/10 bg-[#171412] shadow-[0_20px_70px_rgba(0,0,0,0.4)]"
+              >
+                <div className="relative h-56">
+                  <Image src={tile.image} alt={tile.alt} fill className="object-cover" sizes="(min-width: 1280px) 25vw, 50vw" />
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,10,0.08),rgba(10,10,10,0.84)_100%)]" />
                 </div>
-              );
-            })}
-          </div>
-
-          <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {supportPoints.map((point) => {
-              const Icon = point.icon;
-              return (
-                <div
-                  key={point.title}
-                  className="rounded-[24px] border border-white/10 bg-[#09101f] p-5 shadow-[0_18px_60px_rgba(0,0,0,0.24)]"
-                >
-                  <div className="inline-flex rounded-2xl border border-[#8fd0ff]/20 bg-[#8fd0ff]/10 p-3 text-[#8fd0ff]">
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <div className="mt-4 text-base font-black text-white">{point.title}</div>
-                  <p className="mt-2 text-sm leading-6 text-white/68">{point.body}</p>
+                <div className="p-5">
+                  <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#f5c66c]">{tile.detail}</div>
+                  <div className="mt-2 text-lg font-black uppercase tracking-[-0.03em] text-white">{tile.title}</div>
                 </div>
-              );
-            })}
+              </article>
+            ))}
           </div>
-
-          <Link href="/about" className="mt-5 inline-flex text-sm font-bold text-[#8fd0ff] md:hidden">
-            About GoSno <ArrowRight className="ml-1 h-4 w-4" />
-          </Link>
         </section>
 
         <ReviewBlock />
 
-        <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(8,13,24,0.98),rgba(6,9,18,0.98))] px-5 py-7 sm:px-8">
-          <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+        <section className="rounded-[34px] border border-[#f5c66c]/16 bg-[linear-gradient(120deg,rgba(20,16,12,0.98),rgba(10,10,10,1))] px-6 py-8 shadow-[0_30px_100px_rgba(0,0,0,0.5)] sm:px-8">
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-center">
             <div>
-              <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
-                Final Check
-              </div>
-              <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">
-                Ready for your Red Rocks night?
+              <div className="text-[11px] font-black uppercase tracking-[0.24em] text-[#f5c66c]">VIP Finish</div>
+              <h2 className="mt-3 text-[2.1rem] font-black uppercase tracking-[-0.04em] text-white sm:text-[3rem]">
+                No surge. Guaranteed return. Book once.
               </h2>
-              <p className="mt-3 max-w-2xl text-sm leading-6 text-white/68">
-                Operated by GoSno LLC with secure online booking, real support, and clear ride options before show night.
+              <p className="mt-4 max-w-3xl text-sm leading-7 text-white/72 sm:text-[15px]">
+                Party at Red Rocks is built for the exact moment other transport options fall apart. Your route, pricing, and ride home are handled before the show even starts.
               </p>
-
-              <div className="mt-6 grid gap-4 md:grid-cols-3">
-                {[
-                  {
-                    title: "Colorado-Based Operator",
-                    body: "Local transportation for Red Rocks and Colorado concert nights.",
-                  },
-                  {
-                    title: "Secure Online Booking",
-                    body: "Book online, get your details, and head into show night with a clear plan.",
-                  },
-                  {
-                    title: "Support + Policies",
-                    body: "Read the details, then book with the right expectations before the show.",
-                  },
-                ].map((item) => (
-                  <div
-                    key={item.title}
-                    className="rounded-[24px] border border-white/10 bg-white/[0.04] p-5"
-                  >
-                    <div className="text-lg font-black text-white">{item.title}</div>
-                    <p className="mt-2 text-sm leading-6 text-white/68">{item.body}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-3 lg:min-w-[220px]">
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <Link
                   href="/book"
-                  className="inline-flex min-h-14 items-center justify-center rounded-full bg-[#3df3ff] px-7 text-base font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff] sm:min-h-12 sm:text-sm"
+                  className="inline-flex min-h-14 items-center justify-center rounded-full bg-[#f5c66c] px-8 text-base font-black uppercase tracking-[0.16em] text-[#120f0b] transition hover:bg-[#ffd989]"
                 >
-                  Book Your Shuttle Now
+                  Start Booking
                 </Link>
                 <Link
                   href="/about"
-                  className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/12 bg-white/6 px-7 text-base font-black uppercase tracking-[0.16em] text-white/88 transition hover:bg-white/10 sm:min-h-12 sm:text-sm"
+                  className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/14 bg-white/6 px-8 text-base font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
                 >
-                  About GoSno
+                  See How It Works
                 </Link>
               </div>
             </div>
+
+            <div className="rounded-[28px] border border-white/10 bg-black/24 p-6 backdrop-blur">
+              <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/50">Premium Promise</div>
+              <ul className="mt-4 space-y-4">
+                {[
+                  "Colorado owned and operated",
+                  "Straight pricing with no surprise surge",
+                  "One-tap booking path on mobile",
+                  "Shared seats and premium private fleet",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm leading-6 text-white/82">
+                    <Bus className="mt-0.5 h-4 w-4 shrink-0 text-[#f5c66c]" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </section>
       </section>
+
+      <div className="fixed inset-x-0 bottom-4 z-40 px-4 lg:hidden">
+        <div className="mx-auto flex max-w-xl items-center justify-between gap-3 rounded-full border border-[#f5c66c]/24 bg-[rgba(10,10,10,0.88)] px-4 py-3 shadow-[0_20px_80px_rgba(0,0,0,0.55)] backdrop-blur">
+          <div>
+            <div className="text-[10px] font-black uppercase tracking-[0.22em] text-white/52">Red Rocks Shuttle</div>
+            <div className="text-sm font-black text-[#f5c66c]">$59 fixed seats + private fleet</div>
+          </div>
+          <Link
+            href="/book"
+            className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#f5c66c] px-5 text-xs font-black uppercase tracking-[0.16em] text-[#120f0b]"
+          >
+            Book Now
+          </Link>
+        </div>
+      </div>
     </main>
   );
 }

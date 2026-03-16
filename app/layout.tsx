@@ -1,9 +1,24 @@
 import type { Metadata } from "next";
+import { Montserrat, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import SiteNav from "@/components/SiteNav";
 import DisplayTheme from "@/components/DisplayTheme";
 import FloatingBook from "@/components/FloatingBook";
 import SiteFooter from "@/components/SiteFooter";
+
+const headingFont = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  weight: ["600", "700", "800", "900"],
+  display: "swap",
+});
+
+const bodyAccentFont = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-accent",
+  weight: ["600", "700"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.partyatredrocks.com"),
@@ -70,7 +85,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="bg-surface text-default">
+      <body className={`${headingFont.variable} ${bodyAccentFont.variable} bg-surface text-default`}>
         <DisplayTheme />
         <SiteNav />
         {children}

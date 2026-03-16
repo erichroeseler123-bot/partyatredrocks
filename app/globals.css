@@ -249,6 +249,61 @@ footer{
   background: rgba(6,7,12,0.65);
 }
 
+:root {
+  --surface: #090909;
+  --surface2: #151515;
+  --surface3: #1d1b19;
+  --text: #f8f4ed;
+  --muted: rgba(248, 244, 237, 0.72);
+  --accent: #f5c66c;
+  --accentHover: #ffd989;
+  --accentText: #120f0b;
+  --accent2: #d29a3a;
+  --accentCool: #efe5d3;
+  --glow: rgba(245, 198, 108, 0.2);
+  --heroOverlay: linear-gradient(180deg, rgba(9, 9, 9, 0.18) 0%, rgba(9, 9, 9, 0.78) 58%, rgba(9, 9, 9, 0.96) 100%);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(circle at top left, rgba(210, 154, 58, 0.16), transparent 28%),
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.05), transparent 24%),
+    linear-gradient(180deg, #0b0b0b 0%, #090909 100%);
+  color: var(--text);
+  font-family: var(--font-heading), "Avenir Next", "Segoe UI", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading), "Avenir Next", "Segoe UI", sans-serif;
+}
+
+.font-accent {
+  font-family: var(--font-accent), Georgia, serif;
+}
+
+.text-muted {
+  color: var(--muted);
+}
+
+.gold-ring {
+  box-shadow:
+    0 0 0 1px rgba(245, 198, 108, 0.2),
+    0 18px 60px rgba(0, 0, 0, 0.45);
+}
+
+@keyframes premium-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.premium-float {
+  animation: premium-float 7s ease-in-out infinite;
+}
+
 
 .btn-primary {
   @apply font-black uppercase tracking-wide px-8 py-4 rounded-full transition shadow-xl inline-block hover:shadow-2xl hover:scale-[1.03] active:scale-95;
