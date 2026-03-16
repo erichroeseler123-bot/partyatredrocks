@@ -74,8 +74,6 @@ export const DISPLAY = {
   nav: {
     links: [
       { label: "Book", href: "/book" },
-      { label: "This Week", href: "/week" },
-      { label: "Venues", href: "/venues" },
       { label: "Guides", href: "/guide" },
       { label: "Shuttles", href: "/shuttles" },
       { label: "Scene", href: "/scene" },
