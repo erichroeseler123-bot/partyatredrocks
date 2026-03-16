@@ -1,10 +1,13 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BookingVisualHero } from "@/components/booking/BookingVisualHero";
 import venuesJson from "@/data/venues.json";
 import { RecentBookingToast } from "@/components/RecentBookingToast";
 import { PlanningLinks } from "@/components/booking/PlanningLinks";
 import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
 import { TrustStrip } from "@/components/TrustStrip";
+import { bookingVisuals } from "@/lib/bookingVisuals";
 
 type VenueRow = {
   slug?: string;
@@ -67,6 +70,14 @@ export default async function PrivateOptionsPage({
     <main className="min-h-screen bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
       <RecentBookingToast />
       <section className="mx-auto flex max-w-[1240px] flex-col gap-8">
+        <BookingVisualHero
+          eyebrow={bookingVisuals.private.eyebrow}
+          title={bookingVisuals.private.title}
+          copy={bookingVisuals.private.copy}
+          imageSrc={bookingVisuals.private.imageSrc}
+          imageAlt={bookingVisuals.private.imageAlt}
+        />
+
         <section className="rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,16,32,0.98),rgba(6,9,18,0.96))] p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] sm:p-10 lg:p-12">
           <div className="inline-flex items-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
             Step 3
@@ -107,6 +118,16 @@ export default async function PrivateOptionsPage({
               })}
               className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
             >
+              <div className="relative mb-5 h-40 overflow-hidden rounded-[20px] border border-white/10">
+                <Image
+                  src={bookingVisuals.privateOptions[option.slug].imageSrc}
+                  alt={bookingVisuals.privateOptions[option.slug].imageAlt}
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1280px) 280px, (min-width: 1024px) 50vw, 100vw"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,22,0.1),rgba(5,8,22,0.62)_100%)]" />
+              </div>
               <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
                 {option.eyebrow}
               </div>

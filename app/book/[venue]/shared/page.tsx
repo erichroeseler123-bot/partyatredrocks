@@ -1,7 +1,9 @@
+import { BookingVisualHero } from "@/components/booking/BookingVisualHero";
 import Script from "next/script";
 import { notFound } from "next/navigation";
 import venuesJson from "@/data/venues.json";
 import { RecentBookingToast } from "@/components/RecentBookingToast";
+import { bookingVisuals } from "@/lib/bookingVisuals";
 
 export const runtime = "nodejs";
 export const revalidate = 300;
@@ -31,6 +33,14 @@ export default async function SharedOptionsPage({
     <main className="min-h-screen bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
       <RecentBookingToast />
       <section className="mx-auto flex max-w-[1240px] flex-col gap-8">
+        <BookingVisualHero
+          eyebrow={bookingVisuals.shared.eyebrow}
+          title={bookingVisuals.shared.title}
+          copy={bookingVisuals.shared.copy}
+          imageSrc={bookingVisuals.shared.imageSrc}
+          imageAlt={bookingVisuals.shared.imageAlt}
+        />
+
         <section className="overflow-visible rounded-[30px] border border-white/10 bg-[#0b1224] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.42)] sm:p-6">
           <Script src="https://gosnotransportation58.rezdy.com/pluginJs" strategy="afterInteractive" />
           <div className="mb-4 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
