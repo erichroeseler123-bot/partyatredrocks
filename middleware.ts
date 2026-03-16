@@ -78,6 +78,11 @@ export function middleware(req: NextRequest) {
     "/upper-north": "/guide/local/denver-pickups",
     "/tubing": "/guide",
     "/hiking-at-red-rocks": "/guide",
+    "/guide/post-encore-strategy": "/guide/show-night-strategy/post-show-pickup-plan",
+    "/guide/bag-policy-2026": "/guide/logistics/bag-policy",
+    "/guide/sheraton-pickup": "/guide/local/denver-pickups",
+    "/concert-guide": "/red-rocks/concert-guide",
+    "/red-rocks-concert-guide": "/red-rocks/concert-guide",
   };
 
   const legacyDestination = legacyRouteMap[pathname];

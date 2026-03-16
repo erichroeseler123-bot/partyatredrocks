@@ -26,6 +26,8 @@ const rideOptions = [
     href: buildBookingHref({ target: "shared", venue: "red-rocks-amphitheatre" }),
     cta: "View Shuttle Departures",
     icon: DollarSign,
+    image: "/images/marketing/shuttle.jpg",
+    imageAlt: "Concert riders smiling on a shuttle ride to Red Rocks",
   },
   {
     title: "Private Door-to-Door Service",
@@ -42,6 +44,8 @@ const rideOptions = [
     href: buildBookingHref({ target: "private", venue: "red-rocks-amphitheatre" }),
     cta: "Book Private Service",
     icon: ShieldCheck,
+    image: "/images/marketing/vip-suv.jpg",
+    imageAlt: "Private SUV ride setup for a Red Rocks concert group",
   },
 ];
 
@@ -65,6 +69,27 @@ const supportPoints = [
     title: "Group-Friendly Options",
     body: "Shared seats for most riders, private vehicles for groups that want one plan all night.",
     icon: ShieldCheck,
+  },
+];
+
+const vibeGallery = [
+  {
+    src: "/images/marketing/shuttle.jpg",
+    alt: "High-energy shuttle ride with concert crowd heading to Red Rocks",
+    title: "Shuttle energy",
+    copy: "Big show crowd, fixed-price seat, simple ride home.",
+  },
+  {
+    src: "/hero/hero-home.jpg",
+    alt: "Red Rocks concert atmosphere at night",
+    title: "Night-venue vibe",
+    copy: "The venue atmosphere people actually want, without the parking drag.",
+  },
+  {
+    src: "/fleet/fleet-sprinter.jpg",
+    alt: "Sprinter transportation option for larger concert groups",
+    title: "Group-night upgrade",
+    copy: "Sprinters, private SUVs, and party-night transport for crews.",
   },
 ];
 
@@ -104,9 +129,15 @@ export default function HomeSections() {
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center">
                 <Link
                   href="/book"
-                  className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffb07c] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a1020]"
+                  className="inline-flex min-h-14 items-center justify-center rounded-full bg-[#3df3ff] px-7 text-base font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ffb07c] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a1020] sm:min-h-12 sm:text-sm"
                 >
                   Start Booking
+                </Link>
+                <Link
+                  href="/shuttles"
+                  className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/14 bg-white/8 px-7 text-base font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/12 sm:min-h-12 sm:text-sm"
+                >
+                  See Ride Options
                 </Link>
               </div>
 
@@ -127,6 +158,30 @@ export default function HomeSections() {
               </div>
             </div>
           </div>
+        </section>
+
+        <section className="grid gap-4 lg:grid-cols-3">
+          {vibeGallery.map((item) => (
+            <article
+              key={item.title}
+              className="group relative overflow-hidden rounded-[28px] border border-white/10 bg-[#0b1224] shadow-[0_24px_80px_rgba(0,0,0,0.32)]"
+            >
+              <div className="relative h-72">
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  fill
+                  className="object-cover transition duration-500 group-hover:scale-105"
+                  sizes="(min-width: 1280px) 33vw, 100vw"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,22,0.08),rgba(5,8,22,0.82)_88%)]" />
+                <div className="absolute inset-x-0 bottom-0 p-5">
+                  <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">{item.title}</div>
+                  <p className="mt-2 max-w-sm text-sm leading-6 text-white/84">{item.copy}</p>
+                </div>
+              </div>
+            </article>
+          ))}
         </section>
 
         <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(9,15,31,0.96),rgba(7,11,25,0.96))] px-5 py-7 sm:px-8">
@@ -150,6 +205,16 @@ export default function HomeSections() {
                   key={ride.title}
                   className="rounded-[24px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)]"
                 >
+                  <div className="relative mb-5 h-48 overflow-hidden rounded-[20px] border border-white/10">
+                    <Image
+                      src={ride.image}
+                      alt={ride.imageAlt}
+                      fill
+                      className="object-cover"
+                      sizes="(min-width: 1280px) 50vw, 100vw"
+                    />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,22,0.1),rgba(5,8,22,0.56)_100%)]" />
+                  </div>
                   <div className="inline-flex rounded-2xl border border-[#ff8a3d]/25 bg-[#ff8a3d]/10 p-3 text-[#ffb07c]">
                     <Icon className="h-5 w-5" />
                   </div>
@@ -163,7 +228,10 @@ export default function HomeSections() {
                       </li>
                     ))}
                   </ul>
-                  <Link href={ride.href} className="mt-5 inline-flex items-center text-sm font-bold text-[#ffb07c]">
+                  <Link
+                    href={ride.href}
+                    className="mt-5 inline-flex min-h-12 items-center rounded-full bg-white/6 px-5 text-sm font-black uppercase tracking-[0.16em] text-[#ffb07c] transition hover:bg-white/10"
+                  >
                     {ride.cta}
                     <ArrowRight className="ml-1 h-4 w-4" />
                   </Link>
@@ -239,13 +307,13 @@ export default function HomeSections() {
             <div className="flex flex-col gap-3 lg:min-w-[220px]">
                 <Link
                   href="/book"
-                  className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
+                  className="inline-flex min-h-14 items-center justify-center rounded-full bg-[#3df3ff] px-7 text-base font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff] sm:min-h-12 sm:text-sm"
                 >
                   Book Your Shuttle Now
                 </Link>
                 <Link
                   href="/about"
-                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/12 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white/88 transition hover:bg-white/10"
+                  className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/12 bg-white/6 px-7 text-base font-black uppercase tracking-[0.16em] text-white/88 transition hover:bg-white/10 sm:min-h-12 sm:text-sm"
                 >
                   About GoSno
                 </Link>
