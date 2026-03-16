@@ -31,7 +31,7 @@ export default function Page() {
         />
 
         <div className="mt-10">
-          <GuideLocalInfo />
+          <GuideLocalInfo variant="show-night" />
         </div>
 
         <div className="mt-10 rounded-3xl border border-soft bg-surface-strong p-6">

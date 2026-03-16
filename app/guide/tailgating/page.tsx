@@ -60,7 +60,7 @@ export default async function TailgatingGuidePage({
           }
         />
 
-        <GuideLocalInfo />
+        <GuideLocalInfo variant="tailgating" />
 
         <section className="grid gap-4 lg:grid-cols-2">
           <article className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 sm:p-8">

@@ -139,7 +139,7 @@ export default function GuideHub() {
           <MusicWave />
         </div>
 
-        <GuideLocalInfo />
+        <GuideLocalInfo variant="general" />
 
         <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(8,13,26,0.96),rgba(6,9,18,0.96))] p-6 sm:p-8">
           <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
