@@ -1,6 +1,9 @@
 import Link from "next/link";
-import { ArrowRight, Ticket } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { GuideLocalInfo } from "@/components/guide/GuideLocalInfo";
+import { GuideVisualHero } from "@/components/guide/GuideVisualHero";
 import MusicWave from "@/components/MusicWave";
+import { guideVisuals } from "@/lib/guideVisuals";
 
 export const metadata = {
   title: "Red Rocks Guides",
@@ -114,38 +117,29 @@ export default function GuideHub() {
   return (
     <main className="bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
       <section className="mx-auto flex max-w-[1440px] flex-col gap-8">
-        <section className="relative overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(17,11,18,0.96),rgba(10,9,20,0.96))] p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] sm:p-10 lg:p-12">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,176,124,0.18),transparent_28%),radial-gradient(circle_at_top_right,rgba(143,208,255,0.12),transparent_28%)]" />
-          <div className="relative max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
-              <Ticket className="h-3.5 w-3.5" />
-              Red Rocks guides
-            </div>
-            <h1 className="mt-5 text-[2.5rem] font-black uppercase leading-[0.94] tracking-[-0.04em] sm:text-[4rem] lg:text-[5rem]">
-              Red Rocks Guides
-            </h1>
-            <p className="mt-5 max-w-2xl text-[15px] leading-7 text-white/74 sm:text-lg">
-              Parking, transportation, venue policies, and show-night planning for Red Rocks.
-            </p>
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <Link
-                href="/book"
-                className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
-              >
+        <GuideVisualHero
+          eyebrow={guideVisuals.general.eyebrow}
+          title="Red Rocks Guides"
+          copy="Parking, transportation, venue policies, show-night timing, and local planning context for Red Rocks nights."
+          imageSrc={guideVisuals.general.imageSrc}
+          imageAlt={guideVisuals.general.imageAlt}
+          actions={
+            <>
+              <Link href="/book" className="btn-primary">
                 Start Booking
               </Link>
-              <Link
-                href="/week/red-rocks"
-                className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
-              >
+              <Link href="/week/red-rocks" className="btn-ghost">
                 See This Week
               </Link>
-            </div>
-            <div className="mt-6 max-w-[280px] opacity-80">
-              <MusicWave />
-            </div>
-          </div>
-        </section>
+            </>
+          }
+        />
+
+        <div className="max-w-[280px] opacity-80">
+          <MusicWave />
+        </div>
+
+        <GuideLocalInfo />
 
         <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(8,13,26,0.96),rgba(6,9,18,0.96))] p-6 sm:p-8">
           <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">

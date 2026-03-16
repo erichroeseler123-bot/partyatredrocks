@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { GuideLocalInfo } from "@/components/guide/GuideLocalInfo";
+import { GuideVisualHero } from "@/components/guide/GuideVisualHero";
+import { guideVisuals } from "@/lib/guideVisuals";
 
 export const metadata = {
   title: "Red Rocks Policies Guide",
@@ -9,20 +12,26 @@ export default function Page() {
   return (
     <main className="min-h-screen bg-surface text-white px-6 py-20">
       <div className="max-w-4xl mx-auto">
-        <div className="text-[11px] font-black uppercase tracking-[0.25em] text-muted">
-          Policies
-        </div>
+        <GuideVisualHero
+          eyebrow={guideVisuals.policy.eyebrow}
+          title="Red Rocks Policies Guide"
+          copy="Bag policy, entry rules, and the practical version of what actually gets enforced at the gate."
+          imageSrc={guideVisuals.policy.imageSrc}
+          imageAlt={guideVisuals.policy.imageAlt}
+          actions={
+            <>
+              <Link href="/book" className="btn-primary">
+                Book a Ride
+              </Link>
+              <Link href="/guide" className="btn-ghost">
+                Back to Guides →
+              </Link>
+            </>
+          }
+        />
 
-        <h1 className="mt-3 text-5xl md:text-6xl font-black tracking-tight">
-          Red Rocks Policies Guide
-        </h1>
-
-        <p className="mt-5 text-lg text-soft leading-relaxed">
-          Bag policy, entry rules, and the practical version of what actually gets enforced at the gate.
-        </p>
-
-        <div className="mt-5 text-sm text-muted">
-          Last updated: Feb 11, 2026
+        <div className="mt-10">
+          <GuideLocalInfo />
         </div>
 
         <div className="mt-10 rounded-3xl border border-soft bg-surface-strong p-6">
@@ -33,18 +42,6 @@ export default function Page() {
               <li>Anything that slows screening increases your chance of being turned back.</li>
               <li>If you’re unsure, don’t bring it.</li>
           </ul>
-        </div>
-
-        <div className="mt-10 flex flex-wrap gap-3">
-          <Link href="/book" className="btn-primary">
-            Book a Ride
-          </Link>
-          <Link
-            href="/guide"
-            className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-soft pill hover:pill-soft transition"
-          >
-            Back to Guides →
-          </Link>
         </div>
 
         <div className="mt-10">

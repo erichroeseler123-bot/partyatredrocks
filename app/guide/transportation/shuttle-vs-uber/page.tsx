@@ -1,7 +1,9 @@
 import Link from "next/link";
 import FAQBlock from "@/components/FAQBlock";
+import { GuideVisualHero } from "@/components/guide/GuideVisualHero";
 import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
 import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
+import { guideVisuals } from "@/lib/guideVisuals";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
@@ -85,26 +87,23 @@ export default async function Page() {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
-        <div className="rounded-3xl border border-soft bg-surface-strong p-8 md:p-10">
-          <div className="text-[11px] font-black uppercase tracking-[0.25em] text-muted">
-            Transportation Comparison
-          </div>
-          <h1 className="mt-3 text-5xl font-black tracking-tight md:text-6xl">
-            Shuttle vs Uber to Red Rocks
-          </h1>
-          <p className="mt-5 max-w-3xl text-lg leading-relaxed text-soft">
-            Rideshare is flexible on the way in but less predictable after the show. A scheduled shuttle is less flexible
-            on timing, but much stronger for the ride home.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link className="btn-primary" href="/book">
-              Book a Ride
-            </Link>
-            <Link className="btn-ghost" href="/week/red-rocks">
-              Red Rocks This Week
-            </Link>
-          </div>
-        </div>
+        <GuideVisualHero
+          eyebrow={guideVisuals.transportation.eyebrow}
+          title="Shuttle vs Uber to Red Rocks"
+          copy="Rideshare is flexible on the way in but less predictable after the show. A scheduled shuttle is less flexible on timing, but much stronger for the ride home."
+          imageSrc={guideVisuals.transportation.imageSrc}
+          imageAlt={guideVisuals.transportation.imageAlt}
+          actions={
+            <>
+              <Link className="btn-primary" href="/book">
+                Book a Ride
+              </Link>
+              <Link className="btn-ghost" href="/week/red-rocks">
+                Red Rocks This Week
+              </Link>
+            </>
+          }
+        />
 
         <section className="mt-10 rounded-3xl border border-soft bg-surface-strong p-6 md:p-8">
           <h2 className="text-2xl font-black tracking-tight">What matters most</h2>
