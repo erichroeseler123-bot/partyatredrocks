@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { DISPLAY } from "@/lib/display";
+import { buildBookingHref } from "@/lib/parrHandoff";
+import { PrivatePromoBanner } from "@/components/booking/PrivatePromoBanner";
 
 export const metadata = {
   title: "10 Passenger Van to Red Rocks",
@@ -8,6 +10,9 @@ export const metadata = {
 };
 
 export default function PrivateVanPage() {
+  const vanHref = buildBookingHref({ target: "private-option", venue: "red-rocks-amphitheatre", option: "van" });
+  const bookingHref = buildBookingHref({ target: "book", venue: "red-rocks-amphitheatre" });
+
   return (
     <main className="comic-page pt-24 pb-10">
       <section className="comic-wrap">
@@ -18,14 +23,16 @@ export default function PrivateVanPage() {
             Keep your full group together with one vehicle, one timeline, and one post-show pickup plan.
           </p>
           <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-primary" href="/book/red-rocks-amphitheatre/private/van">
+            <Link className="comic-btn comic-btn-primary" href={vanHref}>
               Get Van Options
             </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/book?venue=red-rocks-amphitheatre">
+            <Link className="comic-btn comic-btn-secondary" href={bookingHref}>
               Start Booking
             </Link>
           </div>
         </div>
+
+        <PrivatePromoBanner className="mt-4" />
 
         <article className="comic-panel" style={{ marginTop: 14 }}>
           <img
@@ -52,7 +59,7 @@ export default function PrivateVanPage() {
         </article>
 
         <div className="comic-mobile-cta">
-          <Link className="comic-btn comic-btn-primary" href="/book/red-rocks-amphitheatre/private/van">
+          <Link className="comic-btn comic-btn-primary" href={vanHref}>
             Find Van Availability
           </Link>
         </div>

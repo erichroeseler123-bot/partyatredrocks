@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { buildBookingHref } from "@/lib/parrHandoff";
+import { PRIVATE_TRANSPORT_PROMO } from "@/lib/privateTransportPromo";
 
 type Service = {
   title: string;
@@ -31,7 +33,7 @@ const SERVICES: Service[] = [
     price: "$799",
     note: "flat rate",
     bullets: ["More room + more comfort", "Ideal for larger groups", "Direct pickup + direct return"],
-    href: "/book/red-rocks-amphitheatre/private/sprinter",
+    href: buildBookingHref({ target: "private-option", venue: "red-rocks-amphitheatre", option: "sprinter" }),
     tag: "Sprinter",
   },
   {
@@ -39,7 +41,7 @@ const SERVICES: Service[] = [
     price: "$1199",
     note: "flat rate",
     bullets: ["Big groups, one vehicle", "Great for corporate / birthdays", "Direct pickup + direct return"],
-    href: "/book/red-rocks-amphitheatre/private/party-bus",
+    href: buildBookingHref({ target: "private-option", venue: "red-rocks-amphitheatre", option: "party-bus" }),
     tag: "Bus",
   },
 ];
@@ -123,6 +125,12 @@ export default function HomeServicesGrid() {
               </div>
             </Link>
           ))}
+        </div>
+
+        <div className="mt-6 rounded-2xl border border-emerald-400/25 bg-emerald-500/10 px-5 py-4 text-sm leading-6 text-emerald-50">
+          <span className="font-black uppercase tracking-[0.18em] text-emerald-200">April promo</span>{" "}
+          {PRIVATE_TRANSPORT_PROMO.headline} Use code{" "}
+          <span className="font-black text-white">{PRIVATE_TRANSPORT_PROMO.code}</span>.
         </div>
 
         {/* keep this tiny + blue link */}

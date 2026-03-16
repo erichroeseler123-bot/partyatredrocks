@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { buildBookingHref } from "@/lib/parrHandoff";
+import { PRIVATE_TRANSPORT_PROMO } from "@/lib/privateTransportPromo";
 
 type Card = {
   group: "Red Rocks";
@@ -39,7 +41,7 @@ const CARDS: Card[] = [
     price: "$799",
     note: "flat rate",
     bullets: ["More room + more comfort", "Ideal for larger groups", "Direct pickup + direct return"],
-    href: "/book/red-rocks-amphitheatre/private/sprinter",
+    href: buildBookingHref({ target: "private-option", venue: "red-rocks-amphitheatre", option: "sprinter" }),
     cta: "Book Sprinter",
     tone: "sprinter",
   },
@@ -49,7 +51,7 @@ const CARDS: Card[] = [
     price: "$1199",
     note: "flat rate",
     bullets: ["Big groups, one vehicle", "Best for corporate / birthdays", "Direct pickup + direct return"],
-    href: "/book/red-rocks-amphitheatre/private/party-bus",
+    href: buildBookingHref({ target: "private-option", venue: "red-rocks-amphitheatre", option: "party-bus" }),
     cta: "Book Party Bus",
     tone: "bus",
   },
@@ -126,6 +128,12 @@ export default function FeaturedServices() {
         </div>
 
         <div className="mt-10">
+          <div className="rounded-2xl border border-emerald-400/25 bg-emerald-500/10 px-5 py-4 text-sm leading-6 text-emerald-50">
+            <span className="font-black uppercase tracking-[0.18em] text-emerald-200">April promo</span>{" "}
+            {PRIVATE_TRANSPORT_PROMO.headline} Use code{" "}
+            <span className="font-black text-white">{PRIVATE_TRANSPORT_PROMO.code}</span>.
+          </div>
+
           <div className="flex items-center justify-between gap-4">
             <h3 className="text-sm font-black uppercase tracking-[0.28em] text-muted">Red Rocks</h3>
             <Link href="/book" className="text-xs font-black uppercase tracking-[0.28em] text-soft hover:text-white">

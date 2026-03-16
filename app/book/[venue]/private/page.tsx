@@ -5,6 +5,7 @@ import { BookingVisualHero } from "@/components/booking/BookingVisualHero";
 import venuesJson from "@/data/venues.json";
 import { RecentBookingToast } from "@/components/RecentBookingToast";
 import { PlanningLinks } from "@/components/booking/PlanningLinks";
+import { PrivatePromoBanner } from "@/components/booking/PrivatePromoBanner";
 import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
 import { TrustStrip } from "@/components/TrustStrip";
 import { bookingVisuals } from "@/lib/bookingVisuals";
@@ -105,6 +106,8 @@ export default async function PrivateOptionsPage({
             className="mt-6"
           />
         </section>
+
+        <PrivatePromoBanner />
 
         <section className="grid gap-4 lg:grid-cols-2 xl:grid-cols-4">
           {privateOptions.map((option) => (

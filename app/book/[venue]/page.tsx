@@ -5,6 +5,7 @@ import venuesJson from "@/data/venues.json";
 import { RecentBookingToast } from "@/components/RecentBookingToast";
 import { TrustStrip } from "@/components/TrustStrip";
 import { PlanningLinks } from "@/components/booking/PlanningLinks";
+import { PrivatePromoBanner } from "@/components/booking/PrivatePromoBanner";
 import {
   buildBookingHref,
   buildVenueRequestHref,
@@ -116,6 +117,8 @@ export default async function VenueBookingPage({
             </div>
           </Link>
         </section>
+
+        {isRedRocks ? <PrivatePromoBanner /> : null}
 
         {isRedRocks ? (
           <section className="overflow-visible rounded-[30px] border border-white/10 bg-[#0b1224] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.42)] sm:p-6">

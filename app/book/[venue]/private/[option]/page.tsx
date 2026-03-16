@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import venuesJson from "@/data/venues.json";
 import { RecentBookingToast } from "@/components/RecentBookingToast";
 import { PlanningLinks } from "@/components/booking/PlanningLinks";
+import { PrivatePromoBanner } from "@/components/booking/PrivatePromoBanner";
 import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
 import { TrustStrip } from "@/components/TrustStrip";
 
@@ -121,6 +122,8 @@ export default async function PrivateOptionPage({
             className="mt-6"
           />
         </section>
+
+        <PrivatePromoBanner />
 
         <section className="overflow-visible rounded-[30px] border border-white/10 bg-[#0b1224] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.42)] sm:p-6">
           <div className="mb-4 text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">

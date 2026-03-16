@@ -15,6 +15,7 @@ import {
 import { DISPLAY } from "@/lib/display";
 import { ReviewBlock } from "@/components/ReviewBlock";
 import { buildBookingHref } from "@/lib/parrHandoff";
+import { PRIVATE_TRANSPORT_PROMO } from "@/lib/privateTransportPromo";
 
 const heroMoments = [
   {
@@ -166,6 +167,16 @@ export default function HomeSections() {
                 >
                   Explore Fleet Options
                 </Link>
+              </div>
+
+              <div className="mt-6 max-w-3xl rounded-[24px] border border-emerald-400/25 bg-emerald-500/10 px-5 py-4 text-sm leading-6 text-emerald-50 backdrop-blur">
+                <div className="text-[11px] font-black uppercase tracking-[0.22em] text-emerald-200">
+                  April private ride promo
+                </div>
+                <p className="mt-2">
+                  {PRIVATE_TRANSPORT_PROMO.headline} Use code{" "}
+                  <span className="font-black text-white">{PRIVATE_TRANSPORT_PROMO.code}</span>.
+                </p>
               </div>
 
               <div className="mt-8 grid gap-4 sm:grid-cols-3">

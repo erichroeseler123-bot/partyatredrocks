@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { DISPLAY } from "@/lib/display";
+import { buildBookingHref } from "@/lib/parrHandoff";
+import { PrivatePromoBanner } from "@/components/booking/PrivatePromoBanner";
 
 export const metadata = {
   title: "24 Passenger Party Bus to Red Rocks",
@@ -8,6 +10,9 @@ export const metadata = {
 };
 
 export default function PartyBusPage() {
+  const partyBusHref = buildBookingHref({ target: "private-option", venue: "red-rocks-amphitheatre", option: "party-bus" });
+  const bookingHref = buildBookingHref({ target: "book", venue: "red-rocks-amphitheatre" });
+
   return (
     <main className="comic-page pt-24 pb-10">
       <section className="comic-wrap">
@@ -18,14 +23,16 @@ export default function PartyBusPage() {
             Turn the ride into the pregame while keeping your group synced from pickup to final drop-off.
           </p>
           <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-primary" href="/book/red-rocks-amphitheatre/private/party-bus">
+            <Link className="comic-btn comic-btn-primary" href={partyBusHref}>
               Get Party Bus Quote
             </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/book?venue=red-rocks-amphitheatre">
+            <Link className="comic-btn comic-btn-secondary" href={bookingHref}>
               Start Group Booking
             </Link>
           </div>
         </div>
+
+        <PrivatePromoBanner className="mt-4" />
 
         <article className="comic-panel" style={{ marginTop: 14 }}>
           <img
@@ -52,7 +59,7 @@ export default function PartyBusPage() {
         </article>
 
         <div className="comic-mobile-cta">
-          <Link className="comic-btn comic-btn-primary" href="/book/red-rocks-amphitheatre/private/party-bus">
+          <Link className="comic-btn comic-btn-primary" href={partyBusHref}>
             Request Party Bus Pricing
           </Link>
         </div>

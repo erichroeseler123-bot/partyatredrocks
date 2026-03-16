@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { DISPLAY } from "@/lib/display";
+import { PrivatePromoBanner } from "@/components/booking/PrivatePromoBanner";
 
 export const metadata = {
   title: "SUV Ride to Red Rocks",
@@ -29,6 +30,8 @@ export default function SuvPage() {
             </Link>
           </div>
         </div>
+
+        <PrivatePromoBanner className="mt-4" />
 
         <article className="comic-panel" style={{ marginTop: 14 }}>
           <img
