@@ -19,19 +19,19 @@ import { PRIVATE_TRANSPORT_PROMO } from "@/lib/privateTransportPromo";
 
 const heroMoments = [
   {
-    src: "/hero/hero-home.jpg",
-    alt: "Red Rocks at night packed with concert energy",
-    label: "Red Rocks after dark",
+    src: "/hero/arrival.jpg",
+    alt: "Guests arriving for a Red Rocks concert night",
+    label: "Arrivals",
   },
   {
-    src: "/images/marketing/shuttle.jpg",
-    alt: "Concert crowd smiling on a shuttle ride",
-    label: "Fixed-price shuttle energy",
+    src: "/hero/price.jpg",
+    alt: "Pricing-focused transportation message for Red Rocks rides",
+    label: "Value",
   },
   {
-    src: "/images/marketing/vip-suv.jpg",
-    alt: "Private SUV setup for a premium concert ride",
-    label: "Private arrival, clean exit",
+    src: "/hero/afterdark.jpg",
+    alt: "After-dark Red Rocks concert transportation atmosphere",
+    label: "After Dark",
   },
 ];
 
@@ -47,8 +47,8 @@ const rideCards = [
     ],
     href: buildBookingHref({ target: "shared", venue: "red-rocks-amphitheatre" }),
     cta: "Secure Shared Seats",
-    image: "/images/marketing/shuttle.jpg",
-    alt: "Concert shuttle with riders heading to Red Rocks",
+    image: "/fleet/fleet-sprinter.jpg",
+    alt: "Private fleet vehicle option for Red Rocks transportation",
   },
   {
     title: "Private Fleet",
@@ -61,8 +61,8 @@ const rideCards = [
     ],
     href: buildBookingHref({ target: "private", venue: "red-rocks-amphitheatre" }),
     cta: "View Private Fleet",
-    image: "/fleet/fleet-sprinter.jpg",
-    alt: "Premium sprinter and private fleet option for Red Rocks",
+    image: "/images/marketing/shuttle.jpg",
+    alt: "Concert shuttle with riders heading to Red Rocks",
   },
 ];
 
