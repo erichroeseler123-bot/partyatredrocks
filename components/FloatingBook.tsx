@@ -1,10 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { DISPLAY } from "@/lib/display";
 
 export default function FloatingBook() {
-  // show on mobile only
+  const pathname = usePathname();
+  if (pathname === "/") return null;
+
   return (
     <div className="fixed bottom-4 left-0 right-0 z-[60] px-4 md:hidden">
       <Link
