@@ -4,33 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
-  CalendarDays,
-  Clock3,
   DollarSign,
   Headphones,
   ShieldCheck,
   Sparkles,
-  Ticket,
+  Clock3,
 } from "lucide-react";
 import { DISPLAY } from "@/lib/display";
 import { ReviewBlock } from "@/components/ReviewBlock";
-
-type EventPreview = {
-  id: number;
-  title: string;
-  datetime_local: string;
-  performers?: Array<{ name?: string; image?: string }>;
-  venue?: { siteSlug?: string; siteName?: string };
-};
-
-const venuePhotoMap: Record<string, string> = {
-  "red-rocks-amphitheatre": "/hero/hero-home.jpg",
-  "mission-ballroom": "/venues/missionsite.jpg",
-  "fiddlers-green-amphitheatre": "/hero/hero-guides.jpg",
-  "fillmore-auditorium": "/hero/hero-guides.jpg",
-  "gothic-theatre": "/hero/hero-guides.jpg",
-  "cervantes-masterpiece": "/hero/hero-guides.jpg",
-};
+import { buildBookingHref } from "@/lib/parrHandoff";
 
 const rideOptions = [
   {
@@ -41,7 +23,7 @@ const rideOptions = [
       "Clear departure times and return ride after the show",
       "Best fit for solo riders, couples, and small groups",
     ],
-    href: "/book/red-rocks-amphitheatre/shared",
+    href: buildBookingHref({ target: "shared", venue: "red-rocks-amphitheatre" }),
     cta: "View Shuttle Departures",
     icon: DollarSign,
   },
@@ -57,7 +39,7 @@ const rideOptions = [
       "14 Passenger Sprinter — $799",
       "24 Passenger Party Bus — $1199",
     ],
-    href: "/book/red-rocks-amphitheatre/private",
+    href: buildBookingHref({ target: "private", venue: "red-rocks-amphitheatre" }),
     cta: "Book Private Service",
     icon: ShieldCheck,
   },
@@ -86,60 +68,7 @@ const supportPoints = [
   },
 ];
 
-const guideCards = [
-  {
-    title: "Red Rocks Concert Guide",
-    href: "/red-rocks/concert-guide",
-    copy: "The big-picture playbook for arrivals, timing, seats, weather, and exits.",
-  },
-  {
-    title: "Shuttle vs Rideshare",
-    href: "/guide/transportation/shuttle-vs-uber",
-    copy: "The cleanest answer to cost, reliability, and post-encore pickup pain.",
-  },
-  {
-    title: "Post-Show Pickup Plan",
-    href: "/guide/show-night-strategy/post-show-pickup-plan",
-    copy: "How to avoid the stranded, dead-phone, wrong-lot disaster after the show.",
-  },
-  {
-    title: "Bag Policy + Show-Night Rules",
-    href: "/guide/logistics/bag-policy",
-    copy: "What to bring, what gets flagged, and how to avoid gate friction.",
-  },
-];
-
-function eventDateLabel(dateString: string) {
-  return new Date(dateString).toLocaleString("en-US", {
-    weekday: "short",
-    month: "short",
-    day: "numeric",
-  });
-}
-
-function eventTimeLabel(dateString: string) {
-  return new Date(dateString).toLocaleString("en-US", {
-    hour: "numeric",
-    minute: "2-digit",
-  });
-}
-
-function eventImage(event: EventPreview) {
-  const performerImage = event.performers?.find((p) => p?.image)?.image;
-  if (performerImage) return performerImage;
-  if (event.venue?.siteSlug && venuePhotoMap[event.venue.siteSlug]) {
-    return venuePhotoMap[event.venue.siteSlug];
-  }
-  return "/hero/hero-home.jpg";
-}
-
-export default function HomeSections({
-  events = [],
-}: {
-  events?: EventPreview[];
-}) {
-  const featuredEvents = (events ?? []).slice(0, 3);
-
+export default function HomeSections() {
   return (
     <main className="bg-[#050816] text-white">
       <section className="mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-4 pb-12 pt-16 sm:px-6 sm:pt-20 lg:px-8">
@@ -263,125 +192,6 @@ export default function HomeSections({
 
           <Link href="/about" className="mt-5 inline-flex text-sm font-bold text-[#8fd0ff] md:hidden">
             About GoSno <ArrowRight className="ml-1 h-4 w-4" />
-          </Link>
-        </section>
-
-        <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(7,10,24,0.98),rgba(9,14,28,0.95))] px-5 py-7 sm:px-8">
-          <div className="flex items-end justify-between gap-4">
-            <div>
-              <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
-                This Week
-              </div>
-              <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">
-                Upcoming Shows
-              </h2>
-            </div>
-            <Link href="/week" className="hidden text-sm font-bold text-[#8fd0ff] md:inline-flex">
-              See All Upcoming <ArrowRight className="ml-1 h-4 w-4" />
-            </Link>
-          </div>
-
-          <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {featuredEvents.map((event) => (
-              <article
-                key={event.id}
-                className="group overflow-hidden rounded-[26px] border border-white/10 bg-[#0b1224] shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
-              >
-                <div className="relative h-52 overflow-hidden sm:h-56">
-                  <img
-                    src={eventImage(event)}
-                    alt={event.title}
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,10,20,0.12),rgba(6,10,20,0.76)_78%,rgba(6,10,20,0.9)_100%)]" />
-                  <div className="absolute left-4 top-4 rounded-full border border-white/15 bg-black/35 px-3 py-1 text-[11px] font-black uppercase tracking-[0.18em] text-white/88">
-                    {eventDateLabel(event.datetime_local)}
-                  </div>
-                </div>
-
-                <div className="p-5">
-                  <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-[#8fd0ff]">
-                    <CalendarDays className="h-3.5 w-3.5" />
-                    {eventTimeLabel(event.datetime_local)}
-                  </div>
-                  <h3 className="mt-3 text-xl font-black leading-tight text-white">
-                    {event.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-6 text-white/68">
-                    {event.venue?.siteName ?? "Colorado venue"} ride options, fixed pricing, and a cleaner exit plan.
-                  </p>
-
-                  <div className="mt-5 flex flex-wrap gap-3">
-                    <Link
-                      href={`/book?event=${event.id}`}
-                      className="inline-flex min-h-11 items-center rounded-full bg-[#3df3ff] px-4 text-xs font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
-                    >
-                      Ride Options
-                    </Link>
-                    <Link
-                      href={`/shows/${event.id}`}
-                      className="inline-flex min-h-11 items-center rounded-full border border-white/12 bg-white/6 px-4 text-xs font-black uppercase tracking-[0.16em] text-white/85 transition hover:bg-white/10"
-                    >
-                      Show Details
-                    </Link>
-                  </div>
-                </div>
-              </article>
-            ))}
-
-            {featuredEvents.length === 0 ? (
-              <div className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 text-white/68">
-                No event cards are available yet. The section is ready once the events feed populates.
-              </div>
-            ) : null}
-          </div>
-
-          <Link href="/week" className="mt-5 inline-flex text-sm font-bold text-[#8fd0ff] md:hidden">
-            See All Upcoming <ArrowRight className="ml-1 h-4 w-4" />
-          </Link>
-        </section>
-
-        <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(17,11,18,0.96),rgba(10,9,20,0.96))] px-5 py-7 sm:px-8">
-          <div className="flex items-end justify-between gap-4">
-            <div>
-              <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
-                Get Ready for Show Night
-              </div>
-              <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">
-                Start with these guides.
-              </h2>
-              <p className="mt-3 max-w-2xl text-sm leading-6 text-white/68">
-                Parking reality, ride comparisons, and show-night rules without turning the homepage into a wall of logistics.
-              </p>
-            </div>
-            <Link href="/guide" className="hidden text-sm font-bold text-[#ffb07c] md:inline-flex">
-              More Guides <ArrowRight className="ml-1 h-4 w-4" />
-            </Link>
-          </div>
-
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
-            {guideCards.slice(0, 3).map((guide) => (
-              <Link
-                key={guide.href}
-                href={guide.href}
-                className="rounded-[24px] border border-white/10 bg-white/[0.04] p-5 transition hover:bg-white/[0.07]"
-              >
-                <div className="inline-flex rounded-2xl border border-[#ffb07c]/25 bg-[#ffb07c]/10 p-3 text-[#ffd0b4]">
-                  <Ticket className="h-5 w-5" />
-                </div>
-                <div className="mt-4 text-lg font-black text-white">{guide.title}</div>
-                <p className="mt-2 text-sm leading-6 text-white/68">{guide.copy}</p>
-                <div className="mt-5 inline-flex items-center text-sm font-bold text-[#ffb07c]">
-                  Read Guide <ArrowRight className="ml-1 h-4 w-4" />
-                </div>
-              </Link>
-            ))}
-          </div>
-
-          <Link href="/guide" className="mt-5 inline-flex text-sm font-bold text-[#ffb07c] md:hidden">
-            More Guides <ArrowRight className="ml-1 h-4 w-4" />
           </Link>
         </section>
 
