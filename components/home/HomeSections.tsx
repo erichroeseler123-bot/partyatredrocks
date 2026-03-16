@@ -17,24 +17,6 @@ import { ReviewBlock } from "@/components/ReviewBlock";
 import { buildBookingHref } from "@/lib/parrHandoff";
 import { PRIVATE_TRANSPORT_PROMO } from "@/lib/privateTransportPromo";
 
-const heroMoments = [
-  {
-    src: "/hero/arrival.jpg",
-    alt: "Guests arriving for a Red Rocks concert night",
-    label: "Arrivals",
-  },
-  {
-    src: "/hero/price.jpg",
-    alt: "Pricing-focused transportation message for Red Rocks rides",
-    label: "Value",
-  },
-  {
-    src: "/hero/afterdark.jpg",
-    alt: "After-dark Red Rocks concert transportation atmosphere",
-    label: "After Dark",
-  },
-];
-
 const rideCards = [
   {
     title: "Shared Shuttle",
@@ -134,7 +116,7 @@ export default function HomeSections() {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(245,198,108,0.28),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.1),transparent_22%)]" />
           </div>
 
-          <div className="relative grid gap-8 px-6 py-10 sm:px-8 sm:py-12 lg:grid-cols-[minmax(0,1.15fr)_420px] lg:px-12 lg:py-14">
+          <div className="relative px-6 py-10 sm:px-8 sm:py-12 lg:px-12 lg:py-14">
             <div className="max-w-4xl">
               <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-black/30 px-4 py-2 text-[11px] font-black uppercase tracking-[0.24em] text-[#f5c66c] backdrop-blur">
                 <Sparkles className="h-3.5 w-3.5" />
@@ -194,29 +176,6 @@ export default function HomeSections() {
                   </div>
                 ))}
               </div>
-            </div>
-
-            <div className="grid gap-4 lg:self-end">
-              {heroMoments.map((moment, index) => (
-                <article
-                  key={moment.label}
-                  className={`gold-ring relative overflow-hidden rounded-[28px] border border-white/10 bg-[#181512] ${index === 1 ? "premium-float" : ""}`}
-                >
-                  <div className="relative h-44">
-                    <Image
-                      src={moment.src}
-                      alt={moment.alt}
-                      fill
-                      className="object-cover"
-                      sizes="420px"
-                    />
-                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,9,9,0.08),rgba(9,9,9,0.84)_100%)]" />
-                    <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#f5c66c]">{moment.label}</div>
-                    </div>
-                  </div>
-                </article>
-              ))}
             </div>
           </div>
         </section>
