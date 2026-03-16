@@ -1,7 +1,10 @@
 import Link from "next/link";
-import { CarFront, MapPin, ShieldCheck } from "lucide-react";
+import { CarFront, ShieldCheck } from "lucide-react";
+import { GuideLocalInfo } from "@/components/guide/GuideLocalInfo";
+import { GuideVisualHero } from "@/components/guide/GuideVisualHero";
 import type { HandoffSearchParams } from "@/lib/parrHandoff";
 import { buildBookingHref } from "@/lib/parrHandoff";
+import { guideVisuals } from "@/lib/guideVisuals";
 
 export const metadata = {
   title: "Red Rocks Tailgating Guide",
@@ -36,36 +39,28 @@ export default async function TailgatingGuidePage({
   return (
     <main className="bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
       <section className="mx-auto flex max-w-[1440px] flex-col gap-8">
-        <section className="relative overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(17,11,18,0.96),rgba(10,9,20,0.96))] p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] sm:p-10 lg:p-12">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,176,124,0.18),transparent_28%),radial-gradient(circle_at_top_right,rgba(143,208,255,0.12),transparent_28%)]" />
-          <div className="relative max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
-              <MapPin className="h-3.5 w-3.5" />
-              Red Rocks Tailgating
-            </div>
-            <h1 className="mt-5 text-[2.5rem] font-black uppercase leading-[0.94] tracking-[-0.04em] sm:text-[4rem] lg:text-[5rem]">
-              Red Rocks Tailgating Guide
-            </h1>
-            <p className="mt-5 max-w-2xl text-[15px] leading-7 text-white/74 sm:text-lg">
-              Tailgating at Red Rocks can be a great part of the night, but it works best when you plan your arrival, parking,
-              and walk in ahead of time.
-            </p>
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+        <GuideVisualHero
+          eyebrow={guideVisuals.tailgating.eyebrow}
+          title="Red Rocks Tailgating Guide"
+          copy="Tailgating at Red Rocks can be a great part of the night, but it works best when you plan your arrival, parking, and walk in ahead of time."
+          imageSrc={guideVisuals.tailgating.imageSrc}
+          imageAlt={guideVisuals.tailgating.imageAlt}
+          actions={
+            <>
               <Link
                 href={buildBookingHref({ target: "private", venue: "red-rocks-amphitheatre", searchParams: sp })}
-                className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
+                className="btn-primary"
               >
                 Book a Private Ride
               </Link>
-              <Link
-                href="/guide/tailgate-faq"
-                className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
-              >
+              <Link href="/guide/tailgate-faq" className="btn-ghost">
                 Tailgate FAQ
               </Link>
-            </div>
-          </div>
-        </section>
+            </>
+          }
+        />
+
+        <GuideLocalInfo />
 
         <section className="grid gap-4 lg:grid-cols-2">
           <article className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 sm:p-8">

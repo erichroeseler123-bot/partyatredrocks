@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { GuideLocalInfo } from "@/components/guide/GuideLocalInfo";
+import { GuideVisualHero } from "@/components/guide/GuideVisualHero";
+import { guideVisuals } from "@/lib/guideVisuals";
 
 export const metadata = {
   title: "Red Rocks Visiting Guide",
@@ -84,28 +87,30 @@ export default function RedRocksIntelHubPage() {
   return (
     <main className="min-h-screen bg-surface px-6 py-20 text-white">
       <section className="mx-auto max-w-5xl">
-        <div className="rounded-3xl border border-soft bg-surface-strong p-8 md:p-10">
-          <div className="text-[11px] font-black uppercase tracking-[0.25em] text-muted">
-            Visiting Guide
-          </div>
-          <h1 className="mt-3 text-5xl font-black tracking-tight md:text-6xl">
-            Red Rocks Visiting Guide
-          </h1>
-          <p className="mt-5 max-w-3xl text-lg leading-relaxed text-soft">
-            Core Red Rocks facts, visiting rules, trails, and practical planning basics before show night.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link className="btn-primary" href="/shuttles">
-              See Shuttle Options
-            </Link>
-            <Link className="btn-ghost" href="/week/red-rocks">
-              Live Lineup
-            </Link>
-            <Link className="btn-ghost" href="/guide/red-rocks-faq">
-              Venue FAQ
-            </Link>
-          </div>
-        </div>
+        <GuideVisualHero
+          eyebrow={guideVisuals.general.eyebrow}
+          title="Red Rocks Visiting Guide"
+          copy="Core Red Rocks facts, visiting rules, trails, and practical planning basics before show night."
+          imageSrc={guideVisuals.general.imageSrc}
+          imageAlt={guideVisuals.general.imageAlt}
+          actions={
+            <>
+              <Link className="btn-primary" href="/shuttles">
+                See Shuttle Options
+              </Link>
+              <Link className="btn-ghost" href="/week/red-rocks">
+                Live Lineup
+              </Link>
+              <Link className="btn-ghost" href="/guide/red-rocks-faq">
+                Venue FAQ
+              </Link>
+            </>
+          }
+        />
+
+        <section className="mt-10">
+          <GuideLocalInfo />
+        </section>
 
         <section className="mt-10 grid gap-4 md:grid-cols-2">
           {sections.map((section) => (

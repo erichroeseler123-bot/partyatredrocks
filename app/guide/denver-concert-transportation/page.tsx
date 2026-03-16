@@ -1,7 +1,10 @@
 import Link from "next/link";
 import FAQBlock from "@/components/FAQBlock";
+import { GuideLocalInfo } from "@/components/guide/GuideLocalInfo";
+import { GuideVisualHero } from "@/components/guide/GuideVisualHero";
 import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
 import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
+import { guideVisuals } from "@/lib/guideVisuals";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
@@ -67,26 +70,27 @@ export default async function DenverConcertTransportationGuidePage() {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
-        <div className="rounded-3xl border border-soft bg-surface-strong p-8 md:p-10">
-          <div className="text-[11px] font-black uppercase tracking-[0.25em] text-muted">
-            Denver Transportation
-          </div>
-          <h1 className="mt-3 text-5xl font-black tracking-tight md:text-6xl">
-            Denver Concert Transportation
-          </h1>
-          <p className="mt-5 max-w-3xl text-lg leading-relaxed text-soft">
-            Review major venues, compare ride types, and choose the best way to get to and from concert nights around
-            Denver and Red Rocks.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link className="btn-primary" href="/book">
-              Book a Ride
-            </Link>
-            <Link className="btn-ghost" href="/week">
-              Upcoming Shows
-            </Link>
-          </div>
-        </div>
+        <GuideVisualHero
+          eyebrow={guideVisuals.transportation.eyebrow}
+          title="Denver Concert Transportation"
+          copy="Review major venues, compare ride types, and choose the best way to get to and from concert nights around Denver and Red Rocks."
+          imageSrc={guideVisuals.transportation.imageSrc}
+          imageAlt={guideVisuals.transportation.imageAlt}
+          actions={
+            <>
+              <Link className="btn-primary" href="/book">
+                Book a Ride
+              </Link>
+              <Link className="btn-ghost" href="/week">
+                Upcoming Shows
+              </Link>
+            </>
+          }
+        />
+
+        <section className="mt-10">
+          <GuideLocalInfo />
+        </section>
 
         <section className="mt-10 rounded-3xl border border-soft bg-surface-strong p-6 md:p-8">
           <h2 className="text-2xl font-black tracking-tight">Venue guides</h2>
