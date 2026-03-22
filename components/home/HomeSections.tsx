@@ -10,9 +10,9 @@ import {
 } from "lucide-react";
 import { DISPLAY } from "@/lib/display";
 import { ReviewBlock } from "@/components/ReviewBlock";
-import { buildBookingHref } from "@/lib/parrHandoff";
 import { PRIVATE_TRANSPORT_PROMO } from "@/lib/privateTransportPromo";
-import { getVenueCardImage } from "@/data/media";
+
+const BOOK_RED_ROCKS = "/book/red-rocks-amphitheatre";
 
 const rideCards = [
   {
@@ -24,7 +24,7 @@ const rideCards = [
       "Return ride handled after the show",
       "Best value for most concert nights",
     ],
-    href: buildBookingHref({ target: "shared", venue: "red-rocks-amphitheatre" }),
+    href: BOOK_RED_ROCKS,
     cta: "Secure Shared Seats",
     image: "/fleet/fleet-sprinter.webp",
     alt: "Shared shuttle option for Red Rocks transportation",
@@ -38,57 +38,12 @@ const rideCards = [
       "Upper North limo-lane access on qualifying rides",
       "One driver and one group plan all night",
     ],
-    href: buildBookingHref({ target: "private", venue: "red-rocks-amphitheatre" }),
+    href: BOOK_RED_ROCKS,
     cta: "View Private Vehicles",
     image: "/images/marketing/shuttle.webp",
     alt: "Private vehicle option for Red Rocks transportation",
   },
 ];
-
-const venueServiceTiles = [
-  {
-    slug: "mishawaka-amphitheatre",
-    title: "Mishawaka",
-    detail: "Foothills nights and canyon runs",
-    href: "/venues/mishawaka-amphitheatre",
-    alt: "Mishawaka Amphitheatre canyon-stage setting",
-  },
-  {
-    slug: "mission-ballroom",
-    title: "Mission Ballroom",
-    detail: "RiNo pickups and clean group moves",
-    href: "/venues/mission-ballroom",
-    alt: "Mission Ballroom exterior in Denver",
-  },
-  {
-    slug: "ball-arena",
-    title: "Ball Arena",
-    detail: "Big-room show nights without the scramble",
-    href: "/venues/ball-arena",
-    alt: "Downtown Denver night atmosphere for Ball Arena event planning",
-  },
-  {
-    slug: "empower-field-at-mile-high",
-    title: "Mile High",
-    detail: "Stadium nights and citywide planning",
-    href: "/guide/denver-concert-transportation",
-    alt: "Denver stadium-night transportation and arrival planning",
-  },
-  {
-    slug: "fillmore-auditorium",
-    title: "Fillmore",
-    detail: "Colfax nights and cleaner pickup planning",
-    href: "/venues/fillmore-auditorium",
-    alt: "Fillmore Auditorium exterior in Denver",
-  },
-  {
-    slug: "all-venues",
-    title: "All Venues We Serve",
-    detail: "See the full Denver and Boulder venue list",
-    href: "/venues",
-    alt: "Denver and Boulder venue network planning map",
-  },
-].map((tile) => ({ ...tile, image: getVenueCardImage(tile.slug) }));
 
 export default function HomeSections() {
   return (
@@ -117,7 +72,7 @@ export default function HomeSections() {
               </div>
 
               <p className="mt-6 font-accent text-xl italic text-[#efe5d3] sm:text-2xl">
-                Colorado concert transport with a premium, no-chaos finish.
+                Red Rocks ride planning with a premium, no-chaos finish.
               </p>
 
               <h1 className="mt-4 max-w-5xl text-[2.7rem] font-black uppercase leading-[0.92] tracking-[-0.05em] text-white sm:text-[4.3rem] lg:text-[5.8rem]">
@@ -131,22 +86,22 @@ export default function HomeSections() {
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link
-                  href={buildBookingHref({ target: "shared", venue: "red-rocks-amphitheatre" })}
+                  href={BOOK_RED_ROCKS}
                   className="inline-flex min-h-14 items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-8 text-base font-black uppercase tracking-[0.16em] text-[#fff4de] shadow-[0_18px_42px_rgba(141,79,32,0.3)] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#fff4de]/60"
                 >
-                  Book Shuttle
+                  Start Booking
                 </Link>
                 <Link
-                  href="/week/red-rocks"
+                  href={BOOK_RED_ROCKS}
                   className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/16 bg-black/20 px-8 text-base font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
                 >
-                  See Upcoming Shows
+                  Shared or Private
                 </Link>
                 <Link
-                  href="/quick-red-rocks"
+                  href={BOOK_RED_ROCKS}
                   className="inline-flex min-h-14 items-center justify-center rounded-full border border-[#8fd0ff]/40 bg-[#0f1b31]/90 px-8 text-base font-black uppercase tracking-[0.16em] text-[#cde8ff] transition hover:bg-[#12223d]"
                 >
-                  Quick Ride Wizard
+                  Open Booking Wizard
                 </Link>
               </div>
 
@@ -190,7 +145,7 @@ export default function HomeSections() {
                       </div>
 
                       <Link
-                        href={buildBookingHref({ target: "private", venue: "red-rocks-amphitheatre" })}
+                        href={BOOK_RED_ROCKS}
                         className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-5 text-xs font-black uppercase tracking-[0.18em] text-[#fff4de] shadow-[0_16px_36px_rgba(141,79,32,0.28)] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
                       >
                         Claim Private Ride Deal
@@ -252,42 +207,38 @@ export default function HomeSections() {
           <div className="max-w-4xl">
             <div className="text-[11px] font-black uppercase tracking-[0.24em] text-[#f5c66c]">Start Here</div>
             <h2 className="mt-3 text-[1.45rem] font-black uppercase tracking-[-0.06em] text-white sm:text-[1.9rem] lg:text-[2.15rem] xl:text-[2.25rem]">
-              We cover all the Denver/Boulder venue chaos
+              Red Rocks Shuttle & Private Rides
             </h2>
             <p className="mt-3 text-[13px] leading-6 text-white/70 sm:text-[14px] lg:text-[13px]">
-              Mishawaka canyon runs, Mission Ballroom nights, Ball Arena crowds, Mile High traffic, plus the full venue map in one place.
+              Shared seats and private vehicles from Denver, with the return ride covered.
             </p>
           </div>
 
-          <div className="mx-auto mt-8 grid max-w-7xl grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-6">
-            {venueServiceTiles.map((tile) => (
-              <Link
-                key={tile.title}
-                href={tile.href}
-                className="flex flex-col rounded-[28px] border border-[#9fe6df]/16 bg-[linear-gradient(180deg,rgba(17,60,66,0.96),rgba(10,29,36,0.98))] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.38)] transition hover:-translate-y-1 hover:border-[#9fe6df]/38"
-              >
-                <div className="relative mb-4 aspect-[16/10] overflow-hidden rounded-[20px] border border-white/10">
-                  <Image
-                    src={tile.image}
-                    alt={tile.alt}
-                    fill
-                    sizes="(max-width: 767px) 50vw, (max-width: 1279px) 33vw, 16vw"
-                    className="object-cover"
-                    quality={85}
-                  />
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,9,9,0.08),rgba(9,9,9,0.36))]" />
-                </div>
-                <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#f5c66c]">Venue Service</div>
-                <h3 className="mt-3 text-[1.2rem] font-black uppercase tracking-[-0.04em] text-white md:text-[1.3rem]">
-                  {tile.title}
-                </h3>
-                <p className="mt-3 text-sm leading-6 text-white/72">{tile.detail}</p>
-                <div className="mt-auto pt-5 inline-flex items-center text-sm font-black uppercase tracking-[0.16em] text-[#f5c66c]">
-                  Open Page
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </div>
-              </Link>
-            ))}
+          <div className="mx-auto mt-8 grid max-w-7xl gap-4 sm:grid-cols-3">
+            <article className="rounded-[28px] border border-[#9fe6df]/16 bg-[linear-gradient(180deg,rgba(17,60,66,0.96),rgba(10,29,36,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)]">
+              <div className="text-[10px] font-black uppercase tracking-[0.18em] text-[#f5c66c]">Step 1</div>
+              <h3 className="mt-2 text-[1.2rem] font-black uppercase tracking-[-0.04em] text-white">Choose your date</h3>
+              <p className="mt-3 text-sm leading-6 text-white/72">Pick your show night and lock the right trip timing first.</p>
+            </article>
+            <article className="rounded-[28px] border border-[#9fe6df]/16 bg-[linear-gradient(180deg,rgba(17,60,66,0.96),rgba(10,29,36,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)]">
+              <div className="text-[10px] font-black uppercase tracking-[0.18em] text-[#f5c66c]">Step 2</div>
+              <h3 className="mt-2 text-[1.2rem] font-black uppercase tracking-[-0.04em] text-white">Pick your ride</h3>
+              <p className="mt-3 text-sm leading-6 text-white/72">Choose shared seats or a private vehicle for your group.</p>
+            </article>
+            <article className="rounded-[28px] border border-[#9fe6df]/16 bg-[linear-gradient(180deg,rgba(17,60,66,0.96),rgba(10,29,36,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)]">
+              <div className="text-[10px] font-black uppercase tracking-[0.18em] text-[#f5c66c]">Step 3</div>
+              <h3 className="mt-2 text-[1.2rem] font-black uppercase tracking-[-0.04em] text-white">Get it locked in</h3>
+              <p className="mt-3 text-sm leading-6 text-white/72">Submit checkout once and your return ride is covered.</p>
+            </article>
+          </div>
+          <div className="mt-8">
+            <Link
+              href={BOOK_RED_ROCKS}
+              className="inline-flex min-h-14 items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-8 text-sm font-black uppercase tracking-[0.16em] text-[#fff4de] shadow-[0_18px_42px_rgba(141,79,32,0.28)] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
+            >
+              Open Booking Wizard
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
           </div>
         </section>
       </section>
