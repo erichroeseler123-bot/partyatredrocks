@@ -1,0 +1,46 @@
+{
+  "red-rocks-visiting-guide": {
+    "manualImage": "/images/venues/red-rocks-amphitheatre.webp",
+    "fallbackImage": "/hero/hero-guides.webp"
+  },
+  "all-guides": {
+    "manualImage": "/images/venues/all-venues-collage.webp",
+    "fallbackImage": "/hero/hero-guides.webp"
+  },
+  "transportation-guide": {
+    "manualImage": "/images/marketing/shuttle.webp",
+    "fallbackImage": "/hero/hero-guides.webp"
+  },
+  "denver-concert-transportation": {
+    "manualImage": "/images/venues/mission-ballroom.webp",
+    "fallbackImage": "/hero/hero-guides.webp"
+  },
+  "parking-reality": {
+    "manualImage": "/assets/venue/red-rocks/red-rocks-arrival.webp",
+    "fallbackImage": "/hero/hero-guides.webp"
+  },
+  "policies": {
+    "manualImage": "/images/venues/fillmore-auditorium.webp",
+    "fallbackImage": "/hero/hero-guides.webp"
+  },
+  "show-night-strategy": {
+    "manualImage": "/images/marketing/vip-suv.webp",
+    "fallbackImage": "/hero/hero-guides.webp"
+  },
+  "local-pickups": {
+    "manualImage": "/hero/afterdark.jpg",
+    "fallbackImage": "/hero/hero-guides.webp"
+  },
+  "tailgating-guide": {
+    "manualImage": "/fleet/fleet-sprinter.webp",
+    "fallbackImage": "/hero/hero-guides.webp"
+  },
+  "event-guides": {
+    "manualImage": "/images/venues/ball-arena.webp",
+    "fallbackImage": "/hero/hero-guides.webp"
+  },
+  "red-rocks-week-calendar": {
+    "manualImage": "/images/venues/empower-field.webp",
+    "fallbackImage": "/hero/hero-guides.webp"
+  }
+}
