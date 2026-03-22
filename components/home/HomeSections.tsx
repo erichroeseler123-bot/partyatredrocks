@@ -17,6 +17,8 @@ import { ReviewBlock } from "@/components/ReviewBlock";
 import { PRIVATE_TRANSPORT_PROMO } from "@/lib/privateTransportPromo";
 
 const BOOK_RED_ROCKS = "/book/red-rocks-amphitheatre";
+const PRIMARY_CTA_CLASS =
+  "inline-flex min-h-12 items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-5 text-xs font-black uppercase tracking-[0.18em] text-[#fff4de] shadow-[0_16px_36px_rgba(141,79,32,0.28)] transition hover:-translate-y-0.5 hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]";
 
 const rideCards = [
   {
@@ -143,7 +145,7 @@ export default function HomeSections() {
 
                       <Link
                         href={BOOK_RED_ROCKS}
-                        className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-5 text-xs font-black uppercase tracking-[0.18em] text-[#fff4de] shadow-[0_16px_36px_rgba(141,79,32,0.28)] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
+                        className={PRIMARY_CTA_CLASS}
                       >
                         Claim Private Ride Deal
                       </Link>
@@ -152,11 +154,52 @@ export default function HomeSections() {
                 </div>
               </div>
 
+              <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                <article className="overflow-hidden rounded-[24px] border border-white/14 bg-[rgba(7,7,8,0.58)] shadow-[0_18px_48px_rgba(0,0,0,0.35)]">
+                  <div className="relative h-36">
+                    <Image
+                      src="/images/marketing/vip-suv.webp"
+                      alt="Private SUV arrival at Red Rocks"
+                      fill
+                      sizes="(min-width: 640px) 50vw, 100vw"
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,20,0.05),rgba(5,8,20,0.68))]" />
+                  </div>
+                  <div className="p-4">
+                    <div className="text-[10px] font-black uppercase tracking-[0.2em] text-[#f5c66c]">Private Arrival</div>
+                    <p className="mt-2 text-sm leading-6 text-white/78">
+                      Branded professional pickup flow, clean arrival, and one driver plan from first stop to post-show return.
+                    </p>
+                  </div>
+                </article>
+                <article className="overflow-hidden rounded-[24px] border border-white/14 bg-[rgba(7,7,8,0.58)] shadow-[0_18px_48px_rgba(0,0,0,0.35)]">
+                  <div className="relative h-36">
+                    <Image
+                      src="/assets/venue/red-rocks/red-rocks-arrival.webp"
+                      alt="Riders arriving relaxed at Red Rocks"
+                      fill
+                      sizes="(min-width: 640px) 50vw, 100vw"
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,20,0.05),rgba(5,8,20,0.68))]" />
+                  </div>
+                  <div className="p-4">
+                    <div className="text-[10px] font-black uppercase tracking-[0.2em] text-[#f5c66c]">Show-Night Energy</div>
+                    <p className="mt-2 text-sm leading-6 text-white/78">
+                      Groups get to focus on the night, not parking logistics, surge pricing, or late-night pickup uncertainty.
+                    </p>
+                  </div>
+                </article>
+              </div>
+
             </div>
           </div>
         </section>
 
-        <section className="rounded-[34px] border border-[#9fe6df]/22 bg-[linear-gradient(135deg,rgba(12,41,46,0.98),rgba(8,26,34,0.98)_52%,rgba(7,11,18,0.98)_100%)] px-6 py-8 shadow-[0_30px_100px_rgba(0,0,0,0.48)] sm:px-8">
+        <div className="h-px w-full bg-[linear-gradient(90deg,rgba(245,198,108,0.18),rgba(245,198,108,0.03),rgba(245,198,108,0.18))]" />
+
+        <section className="rounded-[34px] border border-[#f5c66c]/22 bg-[linear-gradient(135deg,rgba(50,29,12,0.98),rgba(23,14,8,0.98)_52%,rgba(8,7,7,0.98)_100%)] px-6 py-8 shadow-[0_30px_100px_rgba(0,0,0,0.48)] sm:px-8">
           <div className="max-w-4xl">
             <div className="text-[11px] font-black uppercase tracking-[0.24em] text-[#f5c66c]">Start Here</div>
             <h2 className="mt-3 text-[1.45rem] font-black uppercase tracking-[-0.06em] text-white sm:text-[1.9rem] lg:text-[2.15rem] xl:text-[2.25rem]">
@@ -168,7 +211,7 @@ export default function HomeSections() {
           </div>
 
           <div className="mx-auto mt-8 grid max-w-7xl gap-4 sm:grid-cols-3">
-            <article className="rounded-[28px] border border-[#9fe6df]/16 bg-[linear-gradient(180deg,rgba(17,60,66,0.96),rgba(10,29,36,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5">
+            <article className="rounded-[28px] border border-[#f5c66c]/16 bg-[linear-gradient(180deg,rgba(53,33,16,0.96),rgba(24,16,12,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5">
               <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/16 bg-white/8">
                 <CalendarDays className="h-4 w-4 text-[#f5c66c]" />
               </div>
@@ -176,7 +219,7 @@ export default function HomeSections() {
               <h3 className="mt-2 text-[1.2rem] font-black uppercase tracking-[-0.04em] text-white">Choose your date</h3>
               <p className="mt-3 text-sm leading-6 text-white/72">Pick your show night and lock the right trip timing first.</p>
             </article>
-            <article className="rounded-[28px] border border-[#9fe6df]/16 bg-[linear-gradient(180deg,rgba(17,60,66,0.96),rgba(10,29,36,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5">
+            <article className="rounded-[28px] border border-[#f5c66c]/16 bg-[linear-gradient(180deg,rgba(53,33,16,0.96),rgba(24,16,12,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5">
               <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/16 bg-white/8">
                 <CarFront className="h-4 w-4 text-[#f5c66c]" />
               </div>
@@ -184,7 +227,7 @@ export default function HomeSections() {
               <h3 className="mt-2 text-[1.2rem] font-black uppercase tracking-[-0.04em] text-white">Pick your ride</h3>
               <p className="mt-3 text-sm leading-6 text-white/72">Choose shared seats or a private vehicle for your group.</p>
             </article>
-            <article className="rounded-[28px] border border-[#9fe6df]/16 bg-[linear-gradient(180deg,rgba(17,60,66,0.96),rgba(10,29,36,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5">
+            <article className="rounded-[28px] border border-[#f5c66c]/16 bg-[linear-gradient(180deg,rgba(53,33,16,0.96),rgba(24,16,12,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5">
               <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/16 bg-white/8">
                 <CreditCard className="h-4 w-4 text-[#f5c66c]" />
               </div>
@@ -194,6 +237,8 @@ export default function HomeSections() {
             </article>
           </div>
         </section>
+
+        <div className="h-px w-full bg-[linear-gradient(90deg,rgba(245,198,108,0.18),rgba(245,198,108,0.03),rgba(245,198,108,0.18))]" />
 
         <section className="grid gap-5 xl:grid-cols-2">
           {rideCards.map((ride) => (
@@ -227,7 +272,7 @@ export default function HomeSections() {
                 </ul>
                 <Link
                   href={ride.href}
-                  className="mt-7 inline-flex min-h-14 items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-8 text-sm font-black uppercase tracking-[0.16em] text-[#fff4de] shadow-[0_18px_42px_rgba(141,79,32,0.28)] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
+                  className="mt-7 inline-flex min-h-14 items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-8 text-sm font-black uppercase tracking-[0.16em] text-[#fff4de] shadow-[0_18px_42px_rgba(141,79,32,0.28)] transition hover:-translate-y-0.5 hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
                 >
                   {ride.cta}
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -236,6 +281,8 @@ export default function HomeSections() {
             </article>
           ))}
         </section>
+
+        <div className="h-px w-full bg-[linear-gradient(90deg,rgba(245,198,108,0.18),rgba(245,198,108,0.03),rgba(245,198,108,0.18))]" />
 
         <ReviewBlock />
       </section>
