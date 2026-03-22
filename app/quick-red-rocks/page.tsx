@@ -336,15 +336,18 @@ export default function QuickRedRocksPage() {
                   ) : null}
                 </div>
 
-                <div className="mt-5">
+                <div className="mt-6">
                   <label className="text-[11px] font-black uppercase tracking-[0.2em] text-[#8fd0ff]" htmlFor="quick-requests">
-                    Special requests (optional)
+                    Special requests or lay out your plan (optional)
                   </label>
+                  <p className="mt-2 text-xs leading-5 text-white/60">
+                    Put the details here if you want to map the night out in advance.
+                  </p>
                   <textarea
                     id="quick-requests"
                     value={specialRequests}
                     onChange={(event) => setSpecialRequests(event.target.value)}
-                    placeholder="Pickup notes, timing preferences, group details..."
+                    placeholder="Example: 2 Suburbans, split pickup in RiNo + LoDo, 4:30 PM departure, tailgate stop, post-show regroup at Upper North."
                     className="mt-3 min-h-28 w-full rounded-2xl border border-white/12 bg-black/25 px-4 py-3 text-sm text-white outline-none transition placeholder:text-white/40 focus:border-[#f5c66c]/40"
                   />
                 </div>
