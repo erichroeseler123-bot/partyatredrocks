@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, useState } from "react";
 import { getBookingVenueImage } from "@/data/media";
 import { upcomingRedRocksShows, type RedRocksShow } from "@/data/red-rocks-events";
+import RezdySessionPicker from "@/components/RezdySessionPicker";
 
 type TransportMode = "shared" | "suv" | "van" | "sprinter" | "party-bus";
 
@@ -64,11 +65,18 @@ function isoToDate(isoDate: string) {
 }
 
 export default function QuickRedRocksPage() {
+  const today = useMemo(() => new Date(), []);
+  const todayIso = useMemo(
+    () =>
+      `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`,
+    [today],
+  );
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [selectedShow, setSelectedShow] = useState<RedRocksShow | null>(null);
   const [transportMode, setTransportMode] = useState<TransportMode | null>(null);
   const [qty, setQty] = useState(2);
   const [specialRequests, setSpecialRequests] = useState("");
+  const [checkoutReady, setCheckoutReady] = useState(false);
 
   const hero = getBookingVenueImage("red-rocks-amphitheatre");
 
@@ -87,7 +95,17 @@ export default function QuickRedRocksPage() {
     return Array.from(unique.values()).sort((a, b) => a.getTime() - b.getTime());
   }, [sortedShows]);
 
-  const [calendarMonthIndex, setCalendarMonthIndex] = useState(0);
+  const initialCalendarMonthIndex = useMemo(() => {
+    if (!monthStarts.length) return 0;
+    const sameMonth = monthStarts.findIndex(
+      (month) => month.getFullYear() === today.getFullYear() && month.getMonth() === today.getMonth(),
+    );
+    if (sameMonth >= 0) return sameMonth;
+    const nextMonth = monthStarts.findIndex((month) => month.getTime() >= new Date(today.getFullYear(), today.getMonth(), 1).getTime());
+    return nextMonth >= 0 ? nextMonth : 0;
+  }, [monthStarts]);
+
+  const [calendarMonthIndex, setCalendarMonthIndex] = useState(initialCalendarMonthIndex);
   const activeMonth = monthStarts[calendarMonthIndex] || new Date();
 
   const showsByDate = useMemo(() => {
@@ -132,6 +150,25 @@ export default function QuickRedRocksPage() {
     params.set("vehicle", transportMode);
     params.set("vehicle_qty", String(qty));
     return `/book/red-rocks-amphitheatre/private?${params.toString()}`;
+  }, [qty, selectedShow, specialRequests, transportMode]);
+
+  const privateCheckoutHref = useMemo(() => {
+    if (!selectedShow || !transportMode || transportMode === "shared") return "";
+    const productByMode: Record<Exclude<TransportMode, "shared">, string> = {
+      suv: "parr-suburban",
+      van: "parr-van-10",
+      sprinter: "parr-sprinter-14",
+      "party-bus": "parr-party-bus-24",
+    };
+    const params = new URLSearchParams({
+      route: "parr-private",
+      product: productByMode[transportMode],
+      qty: String(qty),
+      date: selectedShow.isoDate,
+      artist: selectedShow.artist,
+      notes: specialRequests.trim(),
+    });
+    return `https://www.destinationcommandcenter.com/book?${params.toString()}`;
   }, [qty, selectedShow, specialRequests, transportMode]);
 
   return (
@@ -191,6 +228,15 @@ export default function QuickRedRocksPage() {
                     Next
                   </button>
                 </div>
+                <div className="mb-4 flex justify-end">
+                  <button
+                    type="button"
+                    onClick={() => setCalendarMonthIndex(initialCalendarMonthIndex)}
+                    className="rounded-full border border-[#8fd0ff]/35 bg-[#8fd0ff]/10 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.16em] text-[#8fd0ff] transition hover:bg-[#8fd0ff]/18"
+                  >
+                    Jump to today
+                  </button>
+                </div>
 
                 <div className="grid grid-cols-7 gap-2">
                   {weekdayLabels.map((label) => (
@@ -209,22 +255,25 @@ export default function QuickRedRocksPage() {
                     const dayShows = showsByDate.get(isoDate) || [];
                     const hasShow = dayShows.length > 0;
                     const firstShow = dayShows[0];
+                    const isToday = isoDate === todayIso;
 
                     return (
                       <button
                         key={isoDate}
                         type="button"
                         disabled={!hasShow}
-                        onClick={() => {
-                          if (!firstShow) return;
-                          setSelectedShow(firstShow);
-                          setStep(2);
-                        }}
+                    onClick={() => {
+                      if (!firstShow) return;
+                      setSelectedShow(firstShow);
+                      setCheckoutReady(false);
+                      setStep(2);
+                    }}
                         className={[
                           "h-16 rounded-xl border p-2 text-left transition",
                           hasShow
                             ? "border-[#f5c66c]/45 bg-[#1b160f] hover:-translate-y-[1px] hover:border-[#f5c66c]/75"
                             : "cursor-not-allowed border-white/8 bg-white/[0.03] opacity-55",
+                          isToday ? "ring-1 ring-[#8fd0ff]/65 ring-offset-0" : "",
                         ].join(" ")}
                       >
                         <div className="text-xs font-black text-white">{day}</div>
@@ -245,6 +294,7 @@ export default function QuickRedRocksPage() {
                         type="button"
                         onClick={() => {
                           setSelectedShow(show);
+                          setCheckoutReady(false);
                           setStep(2);
                         }}
                         className="rounded-full border border-white/14 bg-black/25 px-3 py-1.5 text-xs font-bold text-white/88 transition hover:border-[#f5c66c]/50"
@@ -282,6 +332,7 @@ export default function QuickRedRocksPage() {
                     onClick={() => {
                       setTransportMode(option.key);
                       setQty(option.key === "shared" ? 2 : 1);
+                      setCheckoutReady(false);
                       setStep(3);
                     }}
                     className="rounded-2xl border border-white/12 bg-white/5 p-5 text-left transition hover:-translate-y-[1px] hover:border-[#f5c66c]/40 hover:bg-white/[0.08]"
@@ -356,16 +407,54 @@ export default function QuickRedRocksPage() {
                   type="button"
                   onClick={() => {
                     if (!checkoutHref) return;
-                    window.location.assign(checkoutHref);
+                    setCheckoutReady(true);
                   }}
                   className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#fff4de] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
                 >
-                  Go to checkout
+                  Continue to checkout
                 </button>
               </div>
             </motion.section>
           ) : null}
         </AnimatePresence>
+
+        {checkoutReady && selectedShow && transportMode ? (
+          <section className="mt-8 rounded-[28px] border border-[#f5c66c]/24 bg-[linear-gradient(180deg,rgba(10,16,32,0.98),rgba(6,9,18,0.96))] p-5 sm:p-6">
+            <div className="text-[11px] font-black uppercase tracking-[0.2em] text-[#f5c66c]">Checkout on this page</div>
+            <h3 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white">Booking for {selectedShow.artist}</h3>
+            <p className="mt-2 text-sm leading-6 text-white/76">
+              {selectedShow.formattedDate} · {transportOptions.find((option) => option.key === transportMode)?.title}
+              {isPrivateMode ? ` · ${qty} vehicle${qty === 1 ? "" : "s"}` : ` · ${qty} rider${qty === 1 ? "" : "s"}`}
+            </p>
+
+            {transportMode === "shared" ? (
+              <div className="mt-6">
+                <RezdySessionPicker initialDate={selectedShow.isoDate} initialQty={qty} />
+              </div>
+            ) : (
+              <div className="mt-6 rounded-2xl border border-white/10 bg-[#0b1224] p-5">
+                <p className="text-sm leading-6 text-white/78">
+                  Private checkout stays here below. If the embedded checkout fails to load, use the fallback button.
+                </p>
+                <div className="mt-4 overflow-hidden rounded-2xl border border-white/10 bg-white">
+                  <iframe
+                    title="Private checkout"
+                    src={privateCheckoutHref}
+                    className="h-[840px] w-full border-0"
+                  />
+                </div>
+                <a
+                  href={privateCheckoutHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-flex min-h-12 items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#fff4de] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
+                >
+                  Open private checkout in new tab
+                </a>
+              </div>
+            )}
+          </section>
+        ) : null}
       </section>
     </main>
   );
