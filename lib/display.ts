@@ -73,7 +73,6 @@ export const DISPLAY = {
 
   nav: {
     links: [
-      { label: "Home", href: "/" },
       { label: "Schedule", href: "/schedule" },
       { label: "Guides", href: "/guide" },
       { label: "Scene", href: "/scenes" },

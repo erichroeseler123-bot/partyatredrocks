@@ -90,18 +90,6 @@ export default function HomeSections() {
                 >
                   Start Booking
                 </Link>
-                <Link
-                  href={BOOK_RED_ROCKS}
-                  className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/16 bg-black/20 px-8 text-base font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
-                >
-                  Shared or Private
-                </Link>
-                <Link
-                  href={BOOK_RED_ROCKS}
-                  className="inline-flex min-h-14 items-center justify-center rounded-full border border-[#8fd0ff]/40 bg-[#0f1b31]/90 px-8 text-base font-black uppercase tracking-[0.16em] text-[#cde8ff] transition hover:bg-[#12223d]"
-                >
-                  Open Booking Wizard
-                </Link>
               </div>
 
               <div className="mt-6 max-w-3xl overflow-hidden rounded-[30px] border border-amber-100/55 bg-[linear-gradient(135deg,rgba(255,227,163,0.36)_0%,rgba(255,156,64,0.38)_32%,rgba(122,40,8,0.5)_58%,rgba(18,12,8,0.98)_100%)] shadow-[0_28px_110px_rgba(255,132,45,0.42)] ring-1 ring-amber-200/20 backdrop-blur">
@@ -226,18 +214,9 @@ export default function HomeSections() {
             </article>
             <article className="rounded-[28px] border border-[#9fe6df]/16 bg-[linear-gradient(180deg,rgba(17,60,66,0.96),rgba(10,29,36,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)]">
               <div className="text-[10px] font-black uppercase tracking-[0.18em] text-[#f5c66c]">Step 3</div>
-              <h3 className="mt-2 text-[1.2rem] font-black uppercase tracking-[-0.04em] text-white">Get it locked in</h3>
+              <h3 className="mt-2 text-[1.2rem] font-black uppercase tracking-[-0.04em] text-white">Checkout</h3>
               <p className="mt-3 text-sm leading-6 text-white/72">Submit checkout once and your return ride is covered.</p>
             </article>
-          </div>
-          <div className="mt-8">
-            <Link
-              href={BOOK_RED_ROCKS}
-              className="inline-flex min-h-14 items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-8 text-sm font-black uppercase tracking-[0.16em] text-[#fff4de] shadow-[0_18px_42px_rgba(141,79,32,0.28)] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
-            >
-              Open Booking Wizard
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
           </div>
         </section>
       </section>

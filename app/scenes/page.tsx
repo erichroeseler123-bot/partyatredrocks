@@ -1,22 +1,47 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { getMediaIndex } from "@/lib/media/getMediaIndex";
-import { selectImageByPriority } from "@/lib/media/selectImage";
+import { ArrowRight, Music2, CalendarDays, MapPin } from "lucide-react";
 import { getEventsCatalog } from "@/lib/events/getCatalog";
 import { SCENES } from "@/data/scenes";
-import { DISPLAY } from "@/lib/display";
 import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
 import { eventMatchesGenre } from "@/lib/genres/artistGenres";
+import { normalizeImageSrc } from "@/lib/media/proxyImage";
+import { getSceneMedia } from "@/data/media";
+import { seatgeekEventsByVenueId } from "@/lib/seatgeek";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
+const RED_ROCKS_SEATGEEK_VENUE_ID = 196;
 
 export const revalidate = 1800;
 
 export const metadata: Metadata = {
   title: "Denver & Colorado Music Scenes 2026 | Concerts & Shuttle Rides",
   description:
-    "Explore Denver's top music scenes: metal, hip-hop, EDM, jam, bluegrass, indie, country, reggae and more. See featured upcoming shows and book shuttle rides.",
+    "Explore Denver's top music scenes with upcoming shows and direct ride-booking links across Colorado venues.",
   alternates: { canonical: `${SITE}/scenes` },
+  openGraph: {
+    title: "Colorado Music Scenes 2026",
+    description:
+      "Find upcoming shows by scene and jump straight into show pages and ride booking.",
+    url: `${SITE}/scenes`,
+    siteName: "Party at Red Rocks",
+    images: [
+      {
+        url: `${SITE}/images/scenes/jam.webp`,
+        width: 1200,
+        height: 630,
+        alt: "Colorado music scenes",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Colorado Music Scenes 2026",
+    description: "Upcoming Colorado concerts by genre with direct booking links.",
+    images: [`${SITE}/images/scenes/jam.webp`],
+  },
 };
 
 function slugifyArtist(input: string): string {
@@ -36,135 +61,197 @@ function venueName(venueId: string): string {
   return VENUE_LEDGER_BY_SLUG.get(venueId)?.name ?? venueId;
 }
 
+function hashString(input: string) {
+  let hash = 0;
+  for (let index = 0; index < input.length; index += 1) {
+    hash = (hash * 31 + input.charCodeAt(index)) >>> 0;
+  }
+  return hash;
+}
+
+async function getSceneApiImagePool() {
+  try {
+    const events = await seatgeekEventsByVenueId(RED_ROCKS_SEATGEEK_VENUE_ID);
+    const seen = new Set<string>();
+    const images: string[] = [];
+
+    for (const event of events) {
+      for (const performer of event.performers || []) {
+        if (!performer.image) continue;
+        const normalized = normalizeImageSrc(performer.image);
+        if (seen.has(normalized)) continue;
+        seen.add(normalized);
+        images.push(normalized);
+      }
+    }
+
+    return images;
+  } catch {
+    return [];
+  }
+}
+
+function getSceneImage(sceneSlug: string, apiImages: string[]) {
+  if (apiImages.length) {
+    return apiImages[hashString(sceneSlug) % apiImages.length];
+  }
+  return getSceneMedia(sceneSlug).primary;
+}
+
+function formatDate(dateKey: string) {
+  return new Date(`${dateKey}T12:00:00`).toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+  });
+}
+
 export default async function ScenesLandingPage() {
-  const [media, allEvents] = await Promise.all([getMediaIndex(2026), getEventsCatalog(2026, "all")]);
+  const allEvents = await getEventsCatalog(2026, "all");
   const scenes = SCENES.slice().sort((a, b) => (a.priority ?? 999) - (b.priority ?? 999));
+  const sceneApiImages = await getSceneApiImagePool();
+
+  const totalShows = scenes.reduce((count, scene) => {
+    return count + allEvents.filter((event) => eventMatchesGenre(event, scene.slug)).length;
+  }, 0);
 
   return (
-    <main className="comic-page pt-24 pb-10">
-      <section className="comic-wrap">
-        <div className="comic-hero">
-          <div className="comic-kicker">Denver Music Scenes</div>
-          <h1 className="comic-title">Explore Colorado&apos;s Music Scenes 2026</h1>
-          <p className="comic-copy">
-            From heavy riffs at Red Rocks to hip-hop at Mission Ballroom, jam nights at Ogden, and bluegrass across Denver, find your scene and book shuttle rides to beat post-show chaos.
-          </p>
-          <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-6 w-full px-4">
-            <Link href="/find" className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[200px] text-center">
-              Find Shuttle Ride →
-            </Link>
+    <main className="min-h-screen bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
+      <section className="mx-auto flex w-full max-w-[1400px] flex-col gap-8">
+        <section className="relative overflow-hidden rounded-[32px] border border-white/12 bg-[#0b1224]">
+          <div className="absolute inset-0">
+            <Image
+              src="/assets/venue/red-rocks/red-rocks-hero.webp"
+              alt="Colorado concert night crowd"
+              fill
+              className="object-cover object-center opacity-35"
+              priority
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(5,8,22,0.92),rgba(5,8,22,0.66),rgba(5,8,22,0.92))]" />
           </div>
-        </div>
 
-        <section className="comic-panel mt-6">
-          <div className="comic-tag">Featured Event</div>
-          <h2 className="comic-h3 mt-3">Phish at Folsom Field: Annual Colorado Run</h2>
-          <p className="comic-copy mt-2">
-            Dedicated planning page for the Boulder run: timing, transport demand spikes, and direct booking flow.
-          </p>
-          <div className="mt-4 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 w-full px-4">
-            <Link href="/phish-folsom" className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[220px] text-center">
-              Open Phish Guide
-            </Link>
-            <Link href="/find?venue=ball-arena&qty=2" className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[220px] text-center">
-              Book Shuttle
-            </Link>
+          <div className="relative px-6 py-10 sm:px-10 sm:py-12 lg:px-12 lg:py-14">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/30 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
+              <Music2 className="h-3.5 w-3.5" />
+              Scene Finder
+            </div>
+            <h1 className="mt-5 max-w-5xl text-[2.2rem] font-black uppercase leading-[0.92] tracking-[-0.04em] sm:text-[3.3rem] lg:text-[4.4rem]">
+              Colorado Music Scenes, Rebuilt
+            </h1>
+            <p className="mt-4 max-w-3xl text-sm leading-7 text-white/78 sm:text-[15px]">
+              Browse each scene with cleaner visuals, upcoming shows, and direct links into show pages and booking flow.
+            </p>
+
+            <div className="mt-6 grid gap-3 sm:grid-cols-3">
+              <div className="rounded-2xl border border-white/14 bg-black/25 p-4">
+                <div className="text-[10px] font-black uppercase tracking-[0.2em] text-[#f5c66c]">Scenes</div>
+                <div className="mt-1 text-2xl font-black text-white">{scenes.length}</div>
+              </div>
+              <div className="rounded-2xl border border-white/14 bg-black/25 p-4">
+                <div className="text-[10px] font-black uppercase tracking-[0.2em] text-[#f5c66c]">Shows Matched</div>
+                <div className="mt-1 text-2xl font-black text-white">{totalShows}</div>
+              </div>
+              <div className="rounded-2xl border border-white/14 bg-black/25 p-4">
+                <div className="text-[10px] font-black uppercase tracking-[0.2em] text-[#f5c66c]">Booking Path</div>
+                <div className="mt-1 text-sm font-black uppercase tracking-[0.14em] text-white">Red Rocks Wizard</div>
+              </div>
+            </div>
           </div>
         </section>
 
-        <div className="comic-grid" style={{ marginTop: 32 }}>
+        <div className="space-y-5">
           {scenes.map((scene) => {
             const featured = allEvents
               .filter((event) => eventMatchesGenre(event, scene.slug))
               .sort((a, b) => a.dateKey.localeCompare(b.dateKey))
               .slice(0, 3);
-            const tileImage = selectImageByPriority({
-              spotifyImage: (media as any)?.genres?.[scene.slug]?.sources?.spotifyImage ?? null,
-              ticketmasterImage: (media as any)?.genres?.[scene.slug]?.sources?.ticketmasterImage ?? null,
-              seatgeekImage: (media as any)?.genres?.[scene.slug]?.sources?.seatgeekImage ?? null,
-              localAsset: (media as any)?.genres?.[scene.slug]?.sources?.localAsset ?? null,
-              fallback: (DISPLAY.images.sceneTiles as Record<string, string>)[scene.slug] ?? `/images/scenes/${scene.slug}.jpg`,
-            });
+            const image = getSceneImage(scene.slug, sceneApiImages);
 
             return (
-              <article key={scene.slug} className="comic-panel flex flex-col">
-                <img
-                  src={tileImage}
-                  alt={`${scene.title} scene — upcoming Denver and Colorado concerts`}
-                  width={640}
-                  height={360}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-48 object-cover rounded-xl border border-white/20"
-                />
+              <article
+                key={scene.slug}
+                className="overflow-hidden rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(11,18,36,0.95),rgba(8,12,24,0.98))] shadow-[0_22px_70px_rgba(0,0,0,0.32)]"
+              >
+                <div className="grid gap-0 lg:grid-cols-[360px_minmax(0,1fr)]">
+                  <div className="relative h-56 border-b border-white/10 lg:h-full lg:border-b-0 lg:border-r">
+                    <Image
+                      src={image}
+                      alt={`${scene.title} scene image`}
+                      fill
+                      className="object-cover"
+                      sizes="(min-width: 1024px) 360px, 100vw"
+                    />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,20,0.08),rgba(5,8,20,0.56))]" />
+                  </div>
 
-                <h2 className="comic-h3 mt-4">{scene.title}</h2>
-                <p className="comic-copy mt-2">{scene.description}</p>
+                  <div className="p-6 sm:p-7">
+                    <div className="text-[11px] font-black uppercase tracking-[0.2em] text-[#8fd0ff]">{sceneLabel(scene.slug)}</div>
+                    <h2 className="mt-2 text-[1.8rem] font-black uppercase tracking-[-0.03em] text-white sm:text-[2.2rem]">
+                      {scene.title}
+                    </h2>
+                    <p className="mt-3 max-w-4xl text-sm leading-6 text-white/74">{scene.description}</p>
 
-                <div className="mt-4">
-                  <div className="comic-tag">Featured Upcoming {sceneLabel(scene.slug)} Shows</div>
-                  {featured.length ? (
-                    <div className="mt-3 space-y-3">
-                      {featured.map((event) => (
-                        <div key={event.id} className="border-t border-white/20 pt-3">
-                          <p className="comic-copy font-semibold">
-                            {event.dateKey} - {event.name}
-                          </p>
-                          {event.artistNames.length ? (
-                            <p className="comic-copy text-white/75">
-                              {event.artistNames.map((name, idx) => (
-                                <span key={`${event.id}-${name}`}>
-                                  <Link href={`/artists/${encodeURIComponent(slugifyArtist(name))}`} className="underline">
-                                    {name}
-                                  </Link>
-                                  {idx < event.artistNames.length - 1 ? ", " : ""}
-                                </span>
-                              ))}
+                    <div className="mt-5 grid gap-3 md:grid-cols-3">
+                      {featured.length ? (
+                        featured.map((event) => (
+                          <div key={event.id} className="rounded-2xl border border-white/12 bg-white/5 p-4">
+                            <div className="inline-flex items-center gap-1 text-[11px] font-black uppercase tracking-[0.16em] text-[#f5c66c]">
+                              <CalendarDays className="h-3.5 w-3.5" />
+                              {formatDate(event.dateKey)}
+                            </div>
+                            <p className="mt-2 text-sm font-black text-white">{event.name}</p>
+                            <p className="mt-1 inline-flex items-center gap-1 text-xs text-white/62">
+                              <MapPin className="h-3.5 w-3.5" />
+                              {venueName(event.venueId)}
                             </p>
-                          ) : null}
-                          <p className="comic-copy text-white/60">{venueName(event.venueId)}</p>
-                          <div className="mt-2 flex gap-3 flex-wrap">
-                            <Link href={`/shows/${encodeURIComponent(event.id)}`} className="comic-btn comic-btn-secondary">
-                              Show Intel
-                            </Link>
-                            <Link
-                              href={`/find?date=${encodeURIComponent(event.dateKey)}&venue=${encodeURIComponent(event.venueId)}&qty=2`}
-                              className="comic-btn comic-btn-primary"
-                            >
-                              Book Ride
-                            </Link>
+                            {event.artistNames.length ? (
+                              <p className="mt-2 text-xs leading-5 text-white/70">
+                                {event.artistNames.slice(0, 2).map((name, idx) => (
+                                  <span key={`${event.id}-${name}`}>
+                                    <Link href={`/artists/${encodeURIComponent(slugifyArtist(name))}`} className="underline">
+                                      {name}
+                                    </Link>
+                                    {idx < Math.min(event.artistNames.length, 2) - 1 ? ", " : ""}
+                                  </span>
+                                ))}
+                              </p>
+                            ) : null}
+                            <div className="mt-3">
+                              <Link href={`/shows/${encodeURIComponent(event.id)}`} className="text-xs font-black uppercase tracking-[0.14em] text-[#cde8ff] underline">
+                                Show Intel
+                              </Link>
+                            </div>
                           </div>
+                        ))
+                      ) : (
+                        <div className="md:col-span-3 rounded-2xl border border-white/12 bg-white/5 p-4 text-sm text-white/70">
+                          No upcoming matches in the current snapshot.
                         </div>
-                      ))}
+                      )}
                     </div>
-                  ) : (
-                    <p className="comic-copy mt-2 text-white/70">
-                      No upcoming matches in the current snapshot.
-                    </p>
-                  )}
-                </div>
 
-                <div className="mt-5">
-                  <Link href={`/scene/${scene.slug}`} className="comic-btn comic-btn-secondary w-full text-center">
-                    Explore {sceneLabel(scene.slug)} →
-                  </Link>
+                    <div className="mt-5 flex flex-wrap gap-3">
+                      <Link
+                        href={`/scene/${scene.slug}`}
+                        className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/18 bg-white/6 px-5 text-xs font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
+                      >
+                        Explore {sceneLabel(scene.slug)}
+                      </Link>
+                      <Link
+                        href="/book/red-rocks-amphitheatre"
+                        className="inline-flex min-h-11 items-center justify-center rounded-full border border-[#ffd6a3]/26 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-5 text-xs font-black uppercase tracking-[0.16em] text-[#fff4de] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
+                      >
+                        Start Booking
+                        <ArrowRight className="ml-2 h-3.5 w-3.5" />
+                      </Link>
+                    </div>
+                  </div>
                 </div>
               </article>
             );
           })}
         </div>
-
-        <section className="comic-panel mt-12">
-          <div className="comic-tag">Why Shuttle for Your Scene Night?</div>
-          <p className="comic-copy mt-4">
-            No parking hunt, no surge pricing, guaranteed return. Whether it&apos;s metal at Red Rocks, hip-hop at Mission, jam at Ogden, or bluegrass across Denver, book round-trip shuttle rides that beat the chaos.
-          </p>
-          <div className="flex justify-center mt-6">
-            <Link href="/find" className="comic-btn comic-btn-primary">
-              Find Your Ride Now →
-            </Link>
-          </div>
-        </section>
       </section>
     </main>
   );
