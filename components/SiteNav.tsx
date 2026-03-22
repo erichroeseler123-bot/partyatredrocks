@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import MusicWave from "@/components/MusicWave";
 import { DISPLAY, NAV_LINKS } from "@/lib/display";
 
 function isActive(pathname: string, href: string) {
@@ -14,14 +13,14 @@ export default function SiteNav() {
   const pathname = usePathname();
   const brand = DISPLAY.ui.brand;
   const cta = DISPLAY.ui.cta.primary;
-  const mobileLinks = NAV_LINKS.filter((l) => l.href !== "/book").slice(0, 4);
+  const mobileLinks = NAV_LINKS;
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#070A12]/92 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-[#f5c66c]/18 bg-[rgba(52,33,13,0.94)] backdrop-blur">
       <div className="comic-wrap py-3">
         <div className="flex items-center justify-between gap-3">
           <Link href="/" className="flex items-center gap-2 no-underline">
-            <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white">
+            <div className="text-[12px] font-black uppercase tracking-[0.2em] text-[#fff4de]">
               {brand}
             </div>
           </Link>
@@ -34,8 +33,8 @@ export default function SiteNav() {
                   key={l.href}
                   href={l.href}
                   className={[
-                    "text-[11px] font-black uppercase tracking-[0.18em] no-underline transition",
-                    active ? "text-white" : "text-white/62 hover:text-white/88",
+                    "text-[12px] font-black uppercase tracking-[0.16em] no-underline transition",
+                    active ? "text-[#fff4de]" : "text-[#fff4de]/82 hover:text-[#fff4de]",
                   ].join(" ")}
                 >
                   {l.label}
@@ -44,14 +43,10 @@ export default function SiteNav() {
             })}
           </nav>
 
-          <div className="hidden lg:block w-[120px] opacity-70">
-            <MusicWave bars={10} className="!h-[32px] !max-w-none !px-1 !py-1 !gap-[4px]" />
-          </div>
-
           <div className="flex items-center gap-2">
             <Link
-              href="/book"
-              className="inline-flex min-h-[40px] items-center justify-center rounded-full border border-white/14 px-4 text-[11px] font-black uppercase tracking-[0.18em] text-white no-underline transition hover:border-white/28 hover:bg-white/6"
+              href="/book/red-rocks-amphitheatre"
+              className="inline-flex min-h-[42px] items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-4 text-[12px] font-black uppercase tracking-[0.16em] text-[#fff4de] no-underline shadow-[0_12px_28px_rgba(141,79,32,0.24)] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
             >
               {cta}
             </Link>
@@ -66,8 +61,8 @@ export default function SiteNav() {
                 key={l.href}
                 href={l.href}
                 className={[
-                  "shrink-0 text-[11px] font-black uppercase tracking-[0.18em] no-underline transition",
-                  active ? "text-white" : "text-white/62 hover:text-white/88",
+                  "shrink-0 text-[12px] font-black uppercase tracking-[0.16em] no-underline transition",
+                  active ? "text-[#fff4de]" : "text-[#fff4de]/82 hover:text-[#fff4de]",
                 ].join(" ")}
               >
                 {l.label}

@@ -73,10 +73,9 @@ export const DISPLAY = {
 
   nav: {
     links: [
-      { label: "Book", href: "/book" },
-      { label: "Quick Ride", href: "/quick-red-rocks" },
+      { label: "Home", href: "/" },
+      { label: "Ride", href: "/quick-red-rocks" },
       { label: "Guides", href: "/guide" },
-      { label: "Shuttles", href: "/shuttles" },
       { label: "Scene", href: "/scenes" },
     ],
   },
