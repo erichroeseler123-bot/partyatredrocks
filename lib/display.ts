@@ -75,6 +75,7 @@ export const DISPLAY = {
     links: [
       { label: "Home", href: "/" },
       { label: "Ride", href: "/quick-red-rocks" },
+      { label: "Schedule", href: "/schedule" },
       { label: "Guides", href: "/guide" },
       { label: "Scene", href: "/scenes" },
     ],
