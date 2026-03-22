@@ -32,34 +32,34 @@ type SocialProofRegistryEntry = {
 export const MEDIA = {
   scenes: {
     jam: {
-      primary: "/images/scenes/jam.webp",
+      primary: "/assets/venue/red-rocks/red-rocks-hero.webp",
     },
     edm: {
-      primary: "/images/scenes/edm.webp",
+      primary: "/assets/venue/red-rocks/red-rocks-arrival.webp",
     },
     hiphop: {
-      primary: "/images/scenes/hiphop.webp",
+      primary: "/images/marketing/shuttle.webp",
     },
     metal: {
-      primary: "/images/venues/fillmore-auditorium.webp",
+      primary: "/images/venues/ball-arena.webp",
     },
     bluegrass: {
-      primary: "/venues/mishsite.webp",
+      primary: "/venues/mishsite.jpg",
     },
     indie: {
-      primary: "/images/venues/gothic-theatre.webp",
+      primary: "/venues/missionsite.jpg",
     },
     country: {
-      primary: "/images/venues/fiddlers-green-amphitheatre.webp",
+      primary: "/images/venues/empower-field.webp",
     },
     reggae: {
-      primary: "/images/venues/cervantes-masterpiece.webp",
+      primary: "/images/marketing/fleet.webp",
     },
     punk: {
-      primary: "/images/venues/mission-ballroom.webp",
+      primary: "/images/venues/all-venues-collage.webp",
     },
     latin: {
-      primary: "/images/venues/red-rocks-amphitheatre.webp",
+      primary: "/images/venues/all-venues-summary.svg",
     },
   },
 } as const;
