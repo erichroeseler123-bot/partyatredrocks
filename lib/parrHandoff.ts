@@ -10,12 +10,21 @@ export const PARR_CANONICAL_HANDOFFS = {
 } as const;
 
 export const DCC_HANDOFF_QUERY_KEYS = [
+  "dcc_handoff_id",
+  "dcc_return",
   "venue",
   "date",
   "event",
   "artist",
   "qty",
   "source",
+  "source_slug",
+  "source_page",
+  "topic",
+  "satellite",
+  "partner_satellite",
+  "partner_reason",
+  "partner_handoff_id",
 ] as const;
 
 export type DccHandoffQueryKey = (typeof DCC_HANDOFF_QUERY_KEYS)[number];
