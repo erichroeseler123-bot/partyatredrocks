@@ -58,8 +58,9 @@ const dccProductMap = {
 
 const SITE = "https://www.partyatredrocks.com";
 
-function buildDccCheckoutHref(product: keyof typeof dccProductMap) {
-  return `https://www.destinationcommandcenter.com/book?route=parr-private&product=${dccProductMap[product]}`;
+function buildDccCheckoutHref(product: keyof typeof dccProductMap, quantity = 1) {
+  const qty = Number.isFinite(quantity) && quantity > 0 ? Math.floor(quantity) : 1;
+  return `https://www.destinationcommandcenter.com/book?route=parr-private&product=${dccProductMap[product]}&qty=${qty}`;
 }
 
 const privateBenefits = [
@@ -130,6 +131,8 @@ export default async function PrivateOptionsPage({
   if (venue !== "red-rocks-amphitheatre") notFound();
   const row = getVenue(venue);
   if (!row?.name) notFound();
+  const qtyRaw = firstValue(sp, "qty");
+  const vehicleQty = qtyRaw ? Math.max(1, Number(qtyRaw) || 1) : 1;
   const artist = firstValue(sp, "artist");
   const dateRaw = firstValue(sp, "date");
   const dateLabel = dateRaw
@@ -177,7 +180,7 @@ export default async function PrivateOptionsPage({
         "@type": "Offer",
         priceCurrency: "USD",
         price: option.eyebrow.split(" • ")[0].replace("$", ""),
-        url: buildDccCheckoutHref(option.slug),
+        url: buildDccCheckoutHref(option.slug, vehicleQty),
         itemOffered: {
           "@type": "Service",
           name: option.title,
@@ -344,7 +347,7 @@ export default async function PrivateOptionsPage({
           {privateOptions.map((option) => (
             <Link
               key={option.slug}
-              href={buildDccCheckoutHref(option.slug)}
+              href={buildDccCheckoutHref(option.slug, vehicleQty)}
               className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
             >
               <div className="relative mb-5 h-40 overflow-hidden rounded-[20px] border border-white/10">

@@ -13,26 +13,26 @@
   },
   "mission-ballroom": {
     "wikiTitle": "Mission Ballroom",
-    "manualImage": null,
-    "resolvedImage": "https://upload.wikimedia.org/wikipedia/commons/f/f0/MissionBlrm_Den_Edited5.jpg",
+    "manualImage": "/images/venues/mission-ballroom.webp",
+    "resolvedImage": null,
     "fallbackImage": "/images/venues/fallback.webp"
   },
   "ball-arena": {
     "wikiTitle": "Ball Arena",
-    "manualImage": null,
-    "resolvedImage": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Ball_Arena_exterior_2022.jpg",
+    "manualImage": "/images/venues/ball-arena.webp",
+    "resolvedImage": null,
     "fallbackImage": "/images/venues/fallback.webp"
   },
   "empower-field-at-mile-high": {
     "wikiTitle": "Empower Field at Mile High",
-    "manualImage": null,
-    "resolvedImage": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Empower_Field_at_Mile_High_20241001.jpg",
+    "manualImage": "/images/venues/empower-field.webp",
+    "resolvedImage": null,
     "fallbackImage": "/images/venues/fallback.webp"
   },
   "fillmore-auditorium": {
     "wikiTitle": "Fillmore Auditorium (Denver)",
-    "manualImage": null,
-    "resolvedImage": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Fillmore_Auditorium_Denver.jpg",
+    "manualImage": "/images/venues/fillmore-auditorium.webp",
+    "resolvedImage": null,
     "fallbackImage": "/images/venues/fallback.webp"
   },
   "fiddlers-green-amphitheatre": {

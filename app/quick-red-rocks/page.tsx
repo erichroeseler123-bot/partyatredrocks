@@ -46,6 +46,8 @@ const transportOptions: Array<{
   },
 ];
 
+const weekdayLabels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
 function StepDone({ children }: { children: string }) {
   return (
     <div className="flex items-center gap-3 rounded-2xl border border-emerald-400/25 bg-emerald-500/10 p-4">
@@ -57,13 +59,60 @@ function StepDone({ children }: { children: string }) {
   );
 }
 
+function isoToDate(isoDate: string) {
+  return new Date(`${isoDate}T12:00:00`);
+}
+
 export default function QuickRedRocksPage() {
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [selectedShow, setSelectedShow] = useState<RedRocksShow | null>(null);
   const [transportMode, setTransportMode] = useState<TransportMode | null>(null);
   const [qty, setQty] = useState(2);
   const [specialRequests, setSpecialRequests] = useState("");
+
   const hero = getBookingVenueImage("red-rocks-amphitheatre");
+
+  const sortedShows = useMemo(
+    () => [...upcomingRedRocksShows].sort((a, b) => a.isoDate.localeCompare(b.isoDate)),
+    [],
+  );
+
+  const monthStarts = useMemo(() => {
+    const unique = new Map<string, Date>();
+    for (const show of sortedShows) {
+      const date = isoToDate(show.isoDate);
+      const key = `${date.getFullYear()}-${date.getMonth()}`;
+      if (!unique.has(key)) unique.set(key, new Date(date.getFullYear(), date.getMonth(), 1));
+    }
+    return Array.from(unique.values()).sort((a, b) => a.getTime() - b.getTime());
+  }, [sortedShows]);
+
+  const [calendarMonthIndex, setCalendarMonthIndex] = useState(0);
+  const activeMonth = monthStarts[calendarMonthIndex] || new Date();
+
+  const showsByDate = useMemo(() => {
+    const map = new Map<string, RedRocksShow[]>();
+    for (const show of sortedShows) {
+      const bucket = map.get(show.isoDate) || [];
+      bucket.push(show);
+      map.set(show.isoDate, bucket);
+    }
+    return map;
+  }, [sortedShows]);
+
+  const activeMonthShows = useMemo(
+    () =>
+      sortedShows.filter((show) => {
+        const date = isoToDate(show.isoDate);
+        return date.getFullYear() === activeMonth.getFullYear() && date.getMonth() === activeMonth.getMonth();
+      }),
+    [activeMonth, sortedShows],
+  );
+
+  const firstWeekday = new Date(activeMonth.getFullYear(), activeMonth.getMonth(), 1).getDay();
+  const daysInMonth = new Date(activeMonth.getFullYear(), activeMonth.getMonth() + 1, 0).getDate();
+
+  const isPrivateMode = transportMode !== null && transportMode !== "shared";
 
   const checkoutHref = useMemo(() => {
     if (!selectedShow || !transportMode) return "";
@@ -81,6 +130,7 @@ export default function QuickRedRocksPage() {
     }
 
     params.set("vehicle", transportMode);
+    params.set("vehicle_qty", String(qty));
     return `/book/red-rocks-amphitheatre/private?${params.toString()}`;
   }, [qty, selectedShow, specialRequests, transportMode]);
 
@@ -97,7 +147,7 @@ export default function QuickRedRocksPage() {
             Your Red Rocks Ride in 60 Seconds
           </h1>
           <p className="mt-3 max-w-3xl text-sm leading-6 text-white/78 sm:text-[15px]">
-            One question at a time. Pick your show, choose your ride, and launch straight into checkout.
+            Pick your date from the calendar, choose your ride, and launch straight into checkout.
           </p>
         </div>
       </section>
@@ -116,31 +166,95 @@ export default function QuickRedRocksPage() {
               exit={{ opacity: 0, y: -18 }}
               transition={{ duration: 0.28 }}
             >
-              <h2 className="text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">
-                Which show are you catching?
-              </h2>
-              <p className="mt-2 text-sm text-white/72">
-                Select your night first so the booking pages preload the right artist and date.
-              </p>
+              <h2 className="text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">Choose your show date</h2>
+              <p className="mt-2 text-sm text-white/72">Tap a highlighted day to select that Red Rocks show.</p>
 
-              <div className="mt-6 grid gap-3">
-                {upcomingRedRocksShows.map((show) => (
+              <div className="mt-6 rounded-[24px] border border-white/10 bg-[#0b1224] p-4 sm:p-5">
+                <div className="mb-4 flex items-center justify-between gap-3">
                   <button
-                    key={`${show.isoDate}-${show.artist}`}
                     type="button"
-                    onClick={() => {
-                      setSelectedShow(show);
-                      setStep(2);
-                    }}
-                    className="rounded-2xl border border-white/12 bg-white/5 p-5 text-left transition hover:-translate-y-[1px] hover:border-[#f5c66c]/40 hover:bg-white/[0.08]"
+                    onClick={() => setCalendarMonthIndex((current) => Math.max(0, current - 1))}
+                    disabled={calendarMonthIndex === 0}
+                    className="rounded-full border border-white/14 bg-white/6 px-3 py-1.5 text-xs font-black uppercase tracking-[0.14em] text-white transition disabled:cursor-not-allowed disabled:opacity-35"
                   >
-                    <div className="text-[11px] font-black uppercase tracking-[0.18em] text-[#8fd0ff]">{show.formattedDate}</div>
-                    <div className="mt-2 text-xl font-black uppercase tracking-[-0.02em] text-white">{show.artist}</div>
-                    <div className="mt-2 text-sm leading-6 text-white/72">{show.support}</div>
-                    <div className="mt-1 text-xs text-white/55">Show time: {show.time}</div>
+                    Prev
                   </button>
-                ))}
+                  <div className="text-sm font-black uppercase tracking-[0.16em] text-[#8fd0ff] sm:text-base">
+                    {activeMonth.toLocaleDateString("en-US", { month: "long", year: "numeric" })}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setCalendarMonthIndex((current) => Math.min(monthStarts.length - 1, current + 1))}
+                    disabled={calendarMonthIndex >= monthStarts.length - 1}
+                    className="rounded-full border border-white/14 bg-white/6 px-3 py-1.5 text-xs font-black uppercase tracking-[0.14em] text-white transition disabled:cursor-not-allowed disabled:opacity-35"
+                  >
+                    Next
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-7 gap-2">
+                  {weekdayLabels.map((label) => (
+                    <div key={label} className="text-center text-[10px] font-black uppercase tracking-[0.18em] text-white/48">
+                      {label}
+                    </div>
+                  ))}
+
+                  {Array.from({ length: firstWeekday }).map((_, index) => (
+                    <div key={`blank-${index}`} className="h-16 rounded-xl border border-transparent" />
+                  ))}
+
+                  {Array.from({ length: daysInMonth }).map((_, index) => {
+                    const day = index + 1;
+                    const isoDate = `${activeMonth.getFullYear()}-${String(activeMonth.getMonth() + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+                    const dayShows = showsByDate.get(isoDate) || [];
+                    const hasShow = dayShows.length > 0;
+                    const firstShow = dayShows[0];
+
+                    return (
+                      <button
+                        key={isoDate}
+                        type="button"
+                        disabled={!hasShow}
+                        onClick={() => {
+                          if (!firstShow) return;
+                          setSelectedShow(firstShow);
+                          setStep(2);
+                        }}
+                        className={[
+                          "h-16 rounded-xl border p-2 text-left transition",
+                          hasShow
+                            ? "border-[#f5c66c]/45 bg-[#1b160f] hover:-translate-y-[1px] hover:border-[#f5c66c]/75"
+                            : "cursor-not-allowed border-white/8 bg-white/[0.03] opacity-55",
+                        ].join(" ")}
+                      >
+                        <div className="text-xs font-black text-white">{day}</div>
+                        <div className="mt-1 line-clamp-2 text-[10px] leading-4 text-[#ffcc8a]">{firstShow ? firstShow.artist : ""}</div>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
+
+              {activeMonthShows.length ? (
+                <div className="mt-4 rounded-2xl border border-white/10 bg-white/5 p-4">
+                  <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/55">Shows this month</div>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {activeMonthShows.map((show) => (
+                      <button
+                        key={`${show.isoDate}-chip`}
+                        type="button"
+                        onClick={() => {
+                          setSelectedShow(show);
+                          setStep(2);
+                        }}
+                        className="rounded-full border border-white/14 bg-black/25 px-3 py-1.5 text-xs font-bold text-white/88 transition hover:border-[#f5c66c]/50"
+                      >
+                        {show.formattedDate} - {show.artist}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
             </motion.section>
           ) : null}
 
@@ -153,7 +267,7 @@ export default function QuickRedRocksPage() {
               transition={{ duration: 0.28 }}
               className="space-y-6"
             >
-              <StepDone>{`${selectedShow.formattedDate} • ${selectedShow.artist}`}</StepDone>
+              <StepDone>{`${selectedShow.formattedDate} - ${selectedShow.artist}`}</StepDone>
 
               <div>
                 <h2 className="text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">How do you want to roll?</h2>
@@ -167,6 +281,7 @@ export default function QuickRedRocksPage() {
                     type="button"
                     onClick={() => {
                       setTransportMode(option.key);
+                      setQty(option.key === "shared" ? 2 : 1);
                       setStep(3);
                     }}
                     className="rounded-2xl border border-white/12 bg-white/5 p-5 text-left transition hover:-translate-y-[1px] hover:border-[#f5c66c]/40 hover:bg-white/[0.08]"
@@ -189,14 +304,16 @@ export default function QuickRedRocksPage() {
               transition={{ duration: 0.28 }}
               className="space-y-6"
             >
-              <StepDone>{`${selectedShow.formattedDate} • ${selectedShow.artist}`}</StepDone>
+              <StepDone>{`${selectedShow.formattedDate} - ${selectedShow.artist}`}</StepDone>
               <StepDone>{transportOptions.find((option) => option.key === transportMode)?.title || transportMode}</StepDone>
 
               <div className="rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,16,32,0.98),rgba(6,9,18,0.96))] p-5 sm:p-6">
                 <h2 className="text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">Final details</h2>
 
                 <div className="mt-5">
-                  <div className="text-[11px] font-black uppercase tracking-[0.2em] text-[#8fd0ff]">Group size</div>
+                  <div className="text-[11px] font-black uppercase tracking-[0.2em] text-[#8fd0ff]">
+                    {isPrivateMode ? "Number of vehicles" : "Number of riders"}
+                  </div>
                   <div className="mt-3 inline-flex items-center gap-3 rounded-full border border-white/12 bg-black/25 p-2">
                     <button
                       type="button"
@@ -208,12 +325,15 @@ export default function QuickRedRocksPage() {
                     <div className="min-w-10 text-center text-lg font-black">{qty}</div>
                     <button
                       type="button"
-                      onClick={() => setQty((current) => Math.min(24, current + 1))}
+                      onClick={() => setQty((current) => Math.min(isPrivateMode ? 8 : 24, current + 1))}
                       className="h-10 w-10 rounded-full border border-white/14 bg-white/6 text-xl font-black text-white transition hover:bg-white/12"
                     >
                       +
                     </button>
                   </div>
+                  {isPrivateMode ? (
+                    <p className="mt-2 text-xs text-white/58">This value is vehicle count (Suburbans, vans, Sprinters, or party buses).</p>
+                  ) : null}
                 </div>
 
                 <div className="mt-5">
