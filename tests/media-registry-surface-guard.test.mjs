@@ -48,6 +48,33 @@ test("booking registry has required venue-specific entries", () => {
   }
 });
 
+test("homepage venue-row registry entries stay venue-specific", () => {
+  const venueRegistryPath = path.join(ROOT, "data/venue-media.registry.json");
+  const venueRegistry = JSON.parse(fs.readFileSync(venueRegistryPath, "utf8"));
+
+  const homepageVenueSlugs = [
+    "mission-ballroom",
+    "fillmore-auditorium",
+    "ball-arena",
+    "empower-field-at-mile-high",
+    "all-venues",
+  ];
+
+  const bannedPatterns = [/\/images\/marketing\//i, /\/hero\//i, /afterdark\.jpg/i, /arrival\.jpg/i];
+
+  for (const slug of homepageVenueSlugs) {
+    const entry = venueRegistry[slug];
+    assert.ok(entry, `venue registry missing ${slug}`);
+
+    const imageRef = entry.manualImage || entry.resolvedImage || entry.fallbackImage || "";
+    assert.ok(imageRef, `${slug} missing active image reference`);
+
+    for (const pattern of bannedPatterns) {
+      assert.equal(pattern.test(imageRef), false, `${slug} should not use transport/generic image: ${imageRef}`);
+    }
+  }
+});
+
 test("social-proof registry covers seeded post ids", () => {
   const socialProofPath = path.join(ROOT, "data/social-proof.registry.json");
   const ugcPath = path.join(ROOT, "data/social/ugc-posts.ts");

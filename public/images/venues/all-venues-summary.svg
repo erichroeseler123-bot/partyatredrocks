@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Denver Venue Coverage Summary</title>
+  <desc id="desc">Stylized map summary showing coverage across key Denver concert venues.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1f2a"/>
+      <stop offset="55%" stop-color="#123544"/>
+      <stop offset="100%" stop-color="#08141d"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f6d289" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#f6d289" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .route { stroke: #6fc8d8; stroke-opacity: 0.55; stroke-width: 3; fill: none; stroke-dasharray: 7 9; }
+      .hub { fill: #f6d289; stroke: #fff3cf; stroke-width: 2; }
+      .label { fill: #f8f4ed; font-family: "Helvetica Neue", Arial, sans-serif; font-size: 26px; font-weight: 700; }
+      .small { fill: #a8d8e1; font-family: "Helvetica Neue", Arial, sans-serif; font-size: 16px; letter-spacing: 1.4px; text-transform: uppercase; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <ellipse cx="780" cy="450" rx="520" ry="300" fill="url(#glow)"/>
+
+  <path class="route" d="M390 560 C560 490, 700 470, 835 445"/>
+  <path class="route" d="M835 445 C980 420, 1110 380, 1250 320"/>
+  <path class="route" d="M835 445 C980 510, 1120 560, 1270 620"/>
+  <path class="route" d="M835 445 C760 340, 700 260, 640 190"/>
+
+  <circle class="hub" cx="835" cy="445" r="13"/>
+  <circle class="hub" cx="1250" cy="320" r="11"/>
+  <circle class="hub" cx="1270" cy="620" r="11"/>
+  <circle class="hub" cx="640" cy="190" r="11"/>
+  <circle class="hub" cx="390" cy="560" r="11"/>
+
+  <text class="small" x="90" y="120">Party At Red Rocks</text>
+  <text class="label" x="90" y="168">Denver Venue Coverage</text>
+  <text class="small" x="90" y="208">Mission · Fillmore · Ball Arena · Empower Field · Red Rocks</text>
+
+  <text class="label" x="870" y="438">Red Rocks</text>
+  <text class="label" x="1070" y="300">Ball Arena</text>
+  <text class="label" x="1080" y="662">Empower Field</text>
+  <text class="label" x="470" y="175">Mission Ballroom</text>
+  <text class="label" x="150" y="600">Fillmore Auditorium</text>
+</svg>
