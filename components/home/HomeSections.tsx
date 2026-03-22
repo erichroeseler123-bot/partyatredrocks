@@ -4,6 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
+  BadgeCheck,
+  CalendarDays,
+  CarFront,
+  CreditCard,
+  PhoneCall,
   ShieldCheck,
   Sparkles,
   TicketPercent,
@@ -83,6 +88,20 @@ export default function HomeSections() {
                 Fixed $59 shuttle seats, private SUVs, sprinters, and party buses for groups that want a cleaner arrival, a guaranteed return, and less post-show chaos.
               </p>
 
+              <div className="mt-6 flex flex-wrap gap-2">
+                <div className="inline-flex min-h-10 items-center rounded-full border border-white/14 bg-white/7 px-4 text-[11px] font-black uppercase tracking-[0.16em] text-white/88">
+                  Operated by GoSno LLC
+                </div>
+                <div className="inline-flex min-h-10 items-center gap-2 rounded-full border border-white/14 bg-white/7 px-4 text-[11px] font-black uppercase tracking-[0.16em] text-white/88">
+                  <BadgeCheck className="h-3.5 w-3.5 text-[#8fd0ff]" />
+                  Secure booking
+                </div>
+                <div className="inline-flex min-h-10 items-center gap-2 rounded-full border border-white/14 bg-white/7 px-4 text-[11px] font-black uppercase tracking-[0.16em] text-white/88">
+                  <PhoneCall className="h-3.5 w-3.5 text-[#f5c66c]" />
+                  720-369-6292
+                </div>
+              </div>
+
               <div className="mt-6 max-w-3xl overflow-hidden rounded-[30px] border border-amber-100/55 bg-[linear-gradient(135deg,rgba(255,227,163,0.36)_0%,rgba(255,156,64,0.38)_32%,rgba(122,40,8,0.5)_58%,rgba(18,12,8,0.98)_100%)] shadow-[0_28px_110px_rgba(255,132,45,0.42)] ring-1 ring-amber-200/20 backdrop-blur">
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 w-2 bg-[linear-gradient(180deg,#fff0bf_0%,#ff9c40_100%)]" />
@@ -149,17 +168,26 @@ export default function HomeSections() {
           </div>
 
           <div className="mx-auto mt-8 grid max-w-7xl gap-4 sm:grid-cols-3">
-            <article className="rounded-[28px] border border-[#9fe6df]/16 bg-[linear-gradient(180deg,rgba(17,60,66,0.96),rgba(10,29,36,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)]">
+            <article className="rounded-[28px] border border-[#9fe6df]/16 bg-[linear-gradient(180deg,rgba(17,60,66,0.96),rgba(10,29,36,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5">
+              <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/16 bg-white/8">
+                <CalendarDays className="h-4 w-4 text-[#f5c66c]" />
+              </div>
               <div className="text-[10px] font-black uppercase tracking-[0.18em] text-[#f5c66c]">Step 1</div>
               <h3 className="mt-2 text-[1.2rem] font-black uppercase tracking-[-0.04em] text-white">Choose your date</h3>
               <p className="mt-3 text-sm leading-6 text-white/72">Pick your show night and lock the right trip timing first.</p>
             </article>
-            <article className="rounded-[28px] border border-[#9fe6df]/16 bg-[linear-gradient(180deg,rgba(17,60,66,0.96),rgba(10,29,36,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)]">
+            <article className="rounded-[28px] border border-[#9fe6df]/16 bg-[linear-gradient(180deg,rgba(17,60,66,0.96),rgba(10,29,36,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5">
+              <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/16 bg-white/8">
+                <CarFront className="h-4 w-4 text-[#f5c66c]" />
+              </div>
               <div className="text-[10px] font-black uppercase tracking-[0.18em] text-[#f5c66c]">Step 2</div>
               <h3 className="mt-2 text-[1.2rem] font-black uppercase tracking-[-0.04em] text-white">Pick your ride</h3>
               <p className="mt-3 text-sm leading-6 text-white/72">Choose shared seats or a private vehicle for your group.</p>
             </article>
-            <article className="rounded-[28px] border border-[#9fe6df]/16 bg-[linear-gradient(180deg,rgba(17,60,66,0.96),rgba(10,29,36,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)]">
+            <article className="rounded-[28px] border border-[#9fe6df]/16 bg-[linear-gradient(180deg,rgba(17,60,66,0.96),rgba(10,29,36,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5">
+              <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/16 bg-white/8">
+                <CreditCard className="h-4 w-4 text-[#f5c66c]" />
+              </div>
               <div className="text-[10px] font-black uppercase tracking-[0.18em] text-[#f5c66c]">Step 3</div>
               <h3 className="mt-2 text-[1.2rem] font-black uppercase tracking-[-0.04em] text-white">Checkout</h3>
               <p className="mt-3 text-sm leading-6 text-white/72">Submit checkout once and your return ride is covered.</p>
@@ -171,7 +199,7 @@ export default function HomeSections() {
           {rideCards.map((ride) => (
             <article
               key={ride.title}
-              className="overflow-hidden rounded-[32px] border border-[#f5c66c]/14 bg-[linear-gradient(180deg,rgba(19,17,15,0.98),rgba(10,10,10,0.98))] shadow-[0_30px_100px_rgba(0,0,0,0.48)]"
+              className="overflow-hidden rounded-[32px] border border-[#f5c66c]/14 bg-[linear-gradient(180deg,rgba(19,17,15,0.98),rgba(10,10,10,0.98))] shadow-[0_30px_100px_rgba(0,0,0,0.48)] transition hover:-translate-y-0.5"
             >
               <div className="relative h-72">
                 <Image
