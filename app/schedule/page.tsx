@@ -5,10 +5,18 @@ import { ArrowRight, CalendarDays, Clock3, Ticket } from "lucide-react";
 import { getBookingVenueImage } from "@/data/media";
 import { getEventsCatalog } from "@/lib/events/getCatalog";
 import { buildBookingHref } from "@/lib/parrHandoff";
+import { seatgeekEventsByVenueId } from "@/lib/seatgeek";
+import { getMediaIndex } from "@/lib/media/getMediaIndex";
+import { selectImageByPriority } from "@/lib/media/selectImage";
 
 export const revalidate = 3600;
 
 const SITE = "https://www.partyatredrocks.com";
+const RED_ROCKS_SEATGEEK_VENUE_ID = 196;
+const SHOW_FALLBACK = "/images/shows/fallback.webp";
+
+type CatalogEvent = Awaited<ReturnType<typeof getEventsCatalog>>[number];
+type SeatGeekEvent = Awaited<ReturnType<typeof seatgeekEventsByVenueId>>[number];
 
 export const metadata: Metadata = {
   title: "Red Rocks Amphitheatre 2026 Full Concert Schedule | Party at Red Rocks Shuttle",
@@ -23,8 +31,6 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
-
-type CatalogEvent = Awaited<ReturnType<typeof getEventsCatalog>>[number];
 
 function toTimeLabel(event: CatalogEvent) {
   const raw = event.startLocal || event.startAt;
@@ -50,6 +56,69 @@ function dateLabel(dateKey: string) {
   });
 }
 
+function normalizeComparable(value: string | null | undefined) {
+  return (value || "")
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function buildSeatGeekByDate(events: SeatGeekEvent[]) {
+  const map = new Map<string, SeatGeekEvent[]>();
+  for (const event of events) {
+    const dateKey = event.datetime_local?.slice(0, 10);
+    if (!dateKey) continue;
+    const list = map.get(dateKey) || [];
+    list.push(event);
+    map.set(dateKey, list);
+  }
+  return map;
+}
+
+function scoreSeatGeekMatch(event: CatalogEvent, seatGeekEvent: SeatGeekEvent) {
+  const catalogName = normalizeComparable(event.name);
+  const catalogHeadliner = normalizeComparable(event.artistNames[0] || "");
+  const sgTitle = normalizeComparable(seatGeekEvent.title);
+  const sgHeadliner = normalizeComparable(seatGeekEvent.performers?.[0]?.name || "");
+
+  let score = 0;
+
+  if (catalogName && sgTitle && catalogName === sgTitle) score += 8;
+  if (catalogName && sgTitle && (catalogName.includes(sgTitle) || sgTitle.includes(catalogName))) score += 5;
+
+  if (catalogHeadliner && sgHeadliner && catalogHeadliner === sgHeadliner) score += 6;
+  if (
+    catalogHeadliner &&
+    (catalogHeadliner === sgTitle || sgTitle.includes(catalogHeadliner) || catalogHeadliner.includes(sgTitle))
+  ) {
+    score += 4;
+  }
+
+  if (event.dateKey === seatGeekEvent.datetime_local?.slice(0, 10)) score += 2;
+
+  return score;
+}
+
+function findSeatGeekMatch(event: CatalogEvent, byDate: Map<string, SeatGeekEvent[]>) {
+  const candidates = byDate.get(event.dateKey) || [];
+  if (!candidates.length) return null;
+
+  let best: SeatGeekEvent | null = null;
+  let bestScore = -1;
+
+  for (const candidate of candidates) {
+    const score = scoreSeatGeekMatch(event, candidate);
+    if (score > bestScore) {
+      bestScore = score;
+      best = candidate;
+    }
+  }
+
+  return bestScore >= 6 ? best : null;
+}
+
 export default async function SchedulePage() {
   const hero = getBookingVenueImage("red-rocks-amphitheatre");
   const events = (await getEventsCatalog(2026, "redrocks"))
@@ -58,6 +127,16 @@ export default async function SchedulePage() {
       if (a.dateKey !== b.dateKey) return a.dateKey.localeCompare(b.dateKey);
       return a.name.localeCompare(b.name);
     });
+
+  const mediaIndex = await getMediaIndex(2026);
+
+  let seatGeekByDate = new Map<string, SeatGeekEvent[]>();
+  try {
+    const seatGeekEvents = await seatgeekEventsByVenueId(RED_ROCKS_SEATGEEK_VENUE_ID);
+    seatGeekByDate = buildSeatGeekByDate(seatGeekEvents);
+  } catch {
+    // Keep schedule rendering if SeatGeek key is missing or API is unavailable.
+  }
 
   const grouped = events.reduce<Record<string, CatalogEvent[]>>((acc, event) => {
     const key = monthLabel(event.dateKey);
@@ -136,42 +215,70 @@ export default async function SchedulePage() {
                     },
                   });
 
+                  const mediaRow = mediaIndex?.eventsById?.[event.id];
+                  const mediaSnapshotImage = mediaRow
+                    ? selectImageByPriority({
+                        seatgeekImage: mediaRow.sources?.seatgeekImage,
+                        ticketmasterImage: mediaRow.sources?.ticketmasterImage,
+                        blobImage: mediaRow.sources?.blobImage,
+                        localAsset: mediaRow.sources?.localAsset,
+                        fallback: mediaRow.sources?.fallback,
+                      })
+                    : null;
+
+                  const seatGeekMatch = findSeatGeekMatch(event, seatGeekByDate);
+                  const seatGeekImage = seatGeekMatch?.performers?.find((performer) => performer.image)?.image || null;
+                  const eventImage = seatGeekImage || event.image || mediaSnapshotImage || SHOW_FALLBACK;
+
                   return (
                     <article
                       key={event.id}
-                      className="rounded-[24px] border border-white/12 bg-[linear-gradient(180deg,rgba(14,20,38,0.96),rgba(8,12,24,0.98))] p-5 shadow-[0_22px_70px_rgba(0,0,0,0.38)]"
+                      className="overflow-hidden rounded-[24px] border border-white/12 bg-[linear-gradient(180deg,rgba(14,20,38,0.96),rgba(8,12,24,0.98))] shadow-[0_22px_70px_rgba(0,0,0,0.38)]"
                     >
                       <Link href={showHref} className="no-underline">
-                        <h3 className="text-lg font-black uppercase tracking-[-0.02em] text-white sm:text-xl">
-                          {event.name}
-                        </h3>
-                        <p className="mt-2 text-sm font-semibold text-[#8fd0ff]">{dateLabel(event.dateKey)}</p>
-                        <div className="mt-2 flex flex-wrap gap-3 text-xs text-white/64">
-                          {time ? (
-                            <span className="inline-flex items-center gap-1">
-                              <Clock3 className="h-3.5 w-3.5" />
-                              {time}
-                            </span>
-                          ) : null}
-                          <span className="inline-flex items-center gap-1">
-                            <Ticket className="h-3.5 w-3.5" />
-                            Show page
-                          </span>
+                        <div className="relative h-44 w-full border-b border-white/10 bg-black/20">
+                          <Image
+                            src={eventImage}
+                            alt={`${event.name} show artwork`}
+                            fill
+                            className="object-cover"
+                            sizes="(min-width: 1280px) 380px, (min-width: 768px) 50vw, 100vw"
+                          />
+                          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,20,0.08),rgba(5,8,20,0.65))]" />
                         </div>
-                        {support ? (
-                          <p className="mt-3 text-sm leading-6 text-white/70">
-                            <span className="font-semibold text-white/82">Support:</span> {support}
-                          </p>
-                        ) : null}
+
+                        <div className="p-5">
+                          <h3 className="text-lg font-black uppercase tracking-[-0.02em] text-white sm:text-xl">{event.name}</h3>
+                          <p className="mt-2 text-sm font-semibold text-[#8fd0ff]">{dateLabel(event.dateKey)}</p>
+                          <div className="mt-2 flex flex-wrap gap-3 text-xs text-white/64">
+                            {time ? (
+                              <span className="inline-flex items-center gap-1">
+                                <Clock3 className="h-3.5 w-3.5" />
+                                {time}
+                              </span>
+                            ) : null}
+                            <span className="inline-flex items-center gap-1">
+                              <Ticket className="h-3.5 w-3.5" />
+                              Show page
+                            </span>
+                          </div>
+                          {support ? (
+                            <p className="mt-3 text-sm leading-6 text-white/70">
+                              <span className="font-semibold text-white/82">Support:</span> {support}
+                            </p>
+                          ) : null}
+                        </div>
                       </Link>
 
-                      <Link
-                        href={shuttleHref}
-                        className="mt-5 inline-flex min-h-11 w-full items-center justify-center rounded-full border border-[#ffd6a3]/26 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-4 text-xs font-black uppercase tracking-[0.16em] text-[#fff4de] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
-                      >
-                        Book Shuttle To This Show
-                        <ArrowRight className="ml-2 h-3.5 w-3.5" />
-                      </Link>
+                      <div className="px-5 pb-5">
+                        <Link
+                          href={shuttleHref}
+                          className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-[#ffd6a3]/26 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-4 text-xs font-black uppercase tracking-[0.16em] text-[#fff4de] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
+                        >
+                          Book Shuttle To This Show
+                          <ArrowRight className="ml-2 h-3.5 w-3.5" />
+                        </Link>
+                      </div>
                     </article>
                   );
                 })}

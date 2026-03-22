@@ -1,6 +1,6 @@
 {
   "red-rocks-visiting-guide": {
-    "manualImage": "/images/venues/red-rocks-amphitheatre.webp",
+    "manualImage": "/assets/venue/red-rocks/red-rocks-hero.webp",
     "fallbackImage": "/hero/hero-guides.webp"
   },
   "all-guides": {
@@ -12,7 +12,7 @@
     "fallbackImage": "/hero/hero-guides.webp"
   },
   "denver-concert-transportation": {
-    "manualImage": "/images/venues/mission-ballroom.webp",
+    "manualImage": "/venues/missionsite.jpg",
     "fallbackImage": "/hero/hero-guides.webp"
   },
   "parking-reality": {
@@ -20,7 +20,7 @@
     "fallbackImage": "/hero/hero-guides.webp"
   },
   "policies": {
-    "manualImage": "/images/venues/fillmore-auditorium.webp",
+    "manualImage": "/hero/arrival.jpg",
     "fallbackImage": "/hero/hero-guides.webp"
   },
   "show-night-strategy": {
@@ -28,7 +28,7 @@
     "fallbackImage": "/hero/hero-guides.webp"
   },
   "local-pickups": {
-    "manualImage": "/hero/afterdark.jpg",
+    "manualImage": "/venues/mishsite.jpg",
     "fallbackImage": "/hero/hero-guides.webp"
   },
   "tailgating-guide": {

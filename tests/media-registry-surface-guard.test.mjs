@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
+import crypto from "node:crypto";
 
 const ROOT = "/home/ewrewr12/partyatredrocks";
 
@@ -93,5 +94,39 @@ test("social-proof registry covers seeded post ids", () => {
     assert.ok(socialProof[id], `social proof registry missing ${id}`);
     assert.ok(socialProof[id].imageUrl, `${id} missing imageUrl`);
     assert.ok(ugc.includes(`getSocialProofImage(\"${id}\")`), `UGC seeds should resolve ${id} via registry helper`);
+  }
+});
+
+function hashFile(absPath) {
+  const bytes = fs.readFileSync(absPath);
+  return crypto.createHash("sha256").update(bytes).digest("hex");
+}
+
+test("guide card registry does not map to byte-identical images", () => {
+  const guideRegistryPath = path.join(ROOT, "data/guide-media.registry.json");
+  const guideRegistry = JSON.parse(fs.readFileSync(guideRegistryPath, "utf8"));
+
+  const byHash = new Map();
+
+  for (const [slug, entry] of Object.entries(guideRegistry)) {
+    const imageRef = entry.manualImage || entry.resolvedImage || entry.fallbackImage;
+    assert.ok(imageRef, `${slug} missing active guide image`);
+
+    if (!imageRef.startsWith("/")) {
+      throw new Error(`${slug} image path must be absolute from /public: ${imageRef}`);
+    }
+
+    const absPath = path.join(ROOT, "public", imageRef.slice(1));
+    assert.ok(fs.existsSync(absPath), `${slug} image file does not exist: ${imageRef}`);
+
+    const hash = hashFile(absPath);
+    const existing = byHash.get(hash);
+    assert.equal(
+      existing,
+      undefined,
+      `${slug} duplicates image bytes with ${existing} (${imageRef})`,
+    );
+
+    byHash.set(hash, slug);
   }
 });
