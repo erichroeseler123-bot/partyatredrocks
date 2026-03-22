@@ -14,6 +14,21 @@ export const revalidate = 3600;
 const SITE = "https://www.partyatredrocks.com";
 const RED_ROCKS_SEATGEEK_VENUE_ID = 196;
 const SHOW_FALLBACK = "/images/shows/fallback.webp";
+const FALLBACK_IMAGE_SET = new Set([
+  "/images/shows/fallback.jpg",
+  "/images/shows/fallback.webp",
+  SHOW_FALLBACK,
+]);
+const CURATED_SCHEDULE_IMAGES = [
+  "/assets/venue/red-rocks/red-rocks-hero.webp",
+  "/assets/venue/red-rocks/red-rocks-arrival.webp",
+  "/venues/rrsite.jpg",
+  "/hero/afterdark.jpg",
+  "/images/marketing/shuttle.webp",
+  "/fleet/fleet-sprinter.webp",
+  "/fleet/fleet-suburban.jpg",
+  "/hero/arrival.jpg",
+] as const;
 
 type CatalogEvent = Awaited<ReturnType<typeof getEventsCatalog>>[number];
 type SeatGeekEvent = Awaited<ReturnType<typeof seatgeekEventsByVenueId>>[number];
@@ -63,6 +78,24 @@ function normalizeComparable(value: string | null | undefined) {
     .replace(/[^a-z0-9\s]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function hashString(input: string) {
+  let hash = 0;
+  for (let index = 0; index < input.length; index += 1) {
+    hash = (hash * 31 + input.charCodeAt(index)) >>> 0;
+  }
+  return hash;
+}
+
+function getCuratedScheduleImage(event: CatalogEvent) {
+  const index = hashString(event.id) % CURATED_SCHEDULE_IMAGES.length;
+  return CURATED_SCHEDULE_IMAGES[index];
+}
+
+function isMeaningfulImage(imageUrl: string | null | undefined) {
+  if (!imageUrl) return false;
+  return !FALLBACK_IMAGE_SET.has(imageUrl);
 }
 
 function buildSeatGeekByDate(events: SeatGeekEvent[]) {
@@ -216,7 +249,7 @@ export default async function SchedulePage() {
                   });
 
                   const mediaRow = mediaIndex?.eventsById?.[event.id];
-                  const mediaSnapshotImage = mediaRow
+                  const mediaSnapshotCandidate = mediaRow
                     ? selectImageByPriority({
                         seatgeekImage: mediaRow.sources?.seatgeekImage,
                         ticketmasterImage: mediaRow.sources?.ticketmasterImage,
@@ -225,10 +258,15 @@ export default async function SchedulePage() {
                         fallback: mediaRow.sources?.fallback,
                       })
                     : null;
+                  const mediaSnapshotImage = isMeaningfulImage(mediaSnapshotCandidate) ? mediaSnapshotCandidate : null;
 
                   const seatGeekMatch = findSeatGeekMatch(event, seatGeekByDate);
                   const seatGeekImage = seatGeekMatch?.performers?.find((performer) => performer.image)?.image || null;
-                  const eventImage = seatGeekImage || event.image || mediaSnapshotImage || SHOW_FALLBACK;
+                  const eventImage =
+                    seatGeekImage ||
+                    (isMeaningfulImage(event.image) ? event.image : null) ||
+                    mediaSnapshotImage ||
+                    getCuratedScheduleImage(event);
 
                   return (
                     <article
@@ -239,7 +277,7 @@ export default async function SchedulePage() {
                         <div className="relative h-44 w-full border-b border-white/10 bg-black/20">
                           <Image
                             src={eventImage}
-                            alt={`${event.name} show artwork`}
+                            alt={`${event.name} at Red Rocks`}
                             fill
                             className="object-cover"
                             sizes="(min-width: 1280px) 380px, (min-width: 768px) 50vw, 100vw"

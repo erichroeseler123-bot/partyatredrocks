@@ -4,7 +4,7 @@
     "fallbackImage": "/hero/hero-guides.webp"
   },
   "all-guides": {
-    "manualImage": "/images/venues/all-venues-collage.webp",
+    "manualImage": "/venues/rrsite.jpg",
     "fallbackImage": "/hero/hero-guides.webp"
   },
   "transportation-guide": {
@@ -12,7 +12,7 @@
     "fallbackImage": "/hero/hero-guides.webp"
   },
   "denver-concert-transportation": {
-    "manualImage": "/venues/missionsite.jpg",
+    "manualImage": "/fleet/fleet-suburban.jpg",
     "fallbackImage": "/hero/hero-guides.webp"
   },
   "parking-reality": {
@@ -24,11 +24,11 @@
     "fallbackImage": "/hero/hero-guides.webp"
   },
   "show-night-strategy": {
-    "manualImage": "/images/marketing/vip-suv.webp",
+    "manualImage": "/hero/afterdark.jpg",
     "fallbackImage": "/hero/hero-guides.webp"
   },
   "local-pickups": {
-    "manualImage": "/venues/mishsite.jpg",
+    "manualImage": "/venues/missionsite.jpg",
     "fallbackImage": "/hero/hero-guides.webp"
   },
   "tailgating-guide": {
