@@ -6,12 +6,22 @@ import { getEventsCatalog } from "@/lib/events/getCatalog";
 import { SCENES } from "@/data/scenes";
 import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
 import { eventMatchesGenre } from "@/lib/genres/artistGenres";
-import { normalizeImageSrc } from "@/lib/media/proxyImage";
 import { getSceneMedia } from "@/data/media";
-import { seatgeekEventsByVenueId } from "@/lib/seatgeek";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
-const RED_ROCKS_SEATGEEK_VENUE_ID = 196;
+const SCENE_GENERIC_IMAGES = [
+  "/assets/venue/red-rocks/red-rocks-hero.webp",
+  "/assets/venue/red-rocks/red-rocks-arrival.webp",
+  "/hero/hero-home.webp",
+  "/hero/hero-guides.webp",
+  "/images/marketing/shuttle.webp",
+  "/images/marketing/vip-suv.webp",
+  "/fleet/fleet-sprinter.webp",
+  "/fleet/fleet-suburban.jpg",
+  "/venues/rrsite.jpg",
+  "/venues/missionsite.jpg",
+  "/venues/fillsite.jpg",
+] as const;
 
 export const revalidate = 1800;
 
@@ -69,33 +79,12 @@ function hashString(input: string) {
   return hash;
 }
 
-async function getSceneApiImagePool() {
-  try {
-    const events = await seatgeekEventsByVenueId(RED_ROCKS_SEATGEEK_VENUE_ID);
-    const seen = new Set<string>();
-    const images: string[] = [];
-
-    for (const event of events) {
-      for (const performer of event.performers || []) {
-        if (!performer.image) continue;
-        const normalized = normalizeImageSrc(performer.image);
-        if (seen.has(normalized)) continue;
-        seen.add(normalized);
-        images.push(normalized);
-      }
-    }
-
-    return images;
-  } catch {
-    return [];
+function getSceneImage(sceneSlug: string) {
+  const sceneImage = String(getSceneMedia(sceneSlug).primary);
+  if (sceneImage && sceneImage !== "/images/venues/fallback.webp") {
+    return sceneImage;
   }
-}
-
-function getSceneImage(sceneSlug: string, apiImages: string[]) {
-  if (apiImages.length) {
-    return apiImages[hashString(sceneSlug) % apiImages.length];
-  }
-  return getSceneMedia(sceneSlug).primary;
+  return SCENE_GENERIC_IMAGES[hashString(sceneSlug) % SCENE_GENERIC_IMAGES.length];
 }
 
 function formatDate(dateKey: string) {
@@ -109,7 +98,6 @@ function formatDate(dateKey: string) {
 export default async function ScenesLandingPage() {
   const allEvents = await getEventsCatalog(2026, "all");
   const scenes = SCENES.slice().sort((a, b) => (a.priority ?? 999) - (b.priority ?? 999));
-  const sceneApiImages = await getSceneApiImagePool();
 
   const totalShows = scenes.reduce((count, scene) => {
     return count + allEvents.filter((event) => eventMatchesGenre(event, scene.slug)).length;
@@ -166,7 +154,7 @@ export default async function ScenesLandingPage() {
               .filter((event) => eventMatchesGenre(event, scene.slug))
               .sort((a, b) => a.dateKey.localeCompare(b.dateKey))
               .slice(0, 3);
-            const image = getSceneImage(scene.slug, sceneApiImages);
+            const image = getSceneImage(scene.slug);
 
             return (
               <article

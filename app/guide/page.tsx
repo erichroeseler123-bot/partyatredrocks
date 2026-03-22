@@ -6,8 +6,6 @@ import { GuideVisualHero } from "@/components/guide/GuideVisualHero";
 import MusicWave from "@/components/MusicWave";
 import { assertUniqueGuideImages, getGuideCardImage } from "@/data/media";
 import { type GuideVisualKey, guideVisuals } from "@/lib/guideVisuals";
-import { seatgeekEventsByVenueId } from "@/lib/seatgeek";
-import { normalizeImageSrc } from "@/lib/media/proxyImage";
 
 export const metadata = {
   title: "Red Rocks Guides",
@@ -18,8 +16,7 @@ export const metadata = {
   },
 };
 
-const RED_ROCKS_SEATGEEK_VENUE_ID = 196;
-const GUIDE_API_FALLBACKS = [
+const GUIDE_GENERIC_IMAGES = [
   "/assets/venue/red-rocks/red-rocks-hero.webp",
   "/assets/venue/red-rocks/red-rocks-arrival.webp",
   "/hero/hero-home.webp",
@@ -146,39 +143,13 @@ function hashString(input: string) {
   return hash;
 }
 
-async function getGuideApiImagePool() {
-  try {
-    const events = await seatgeekEventsByVenueId(RED_ROCKS_SEATGEEK_VENUE_ID);
-    const seen = new Set<string>();
-    const images: string[] = [];
-
-    for (const event of events) {
-      for (const performer of event.performers || []) {
-        if (!performer.image) continue;
-        const normalized = normalizeImageSrc(performer.image);
-        if (seen.has(normalized)) continue;
-        seen.add(normalized);
-        images.push(normalized);
-      }
-    }
-
-    return images;
-  } catch {
-    return [];
-  }
-}
-
-function resolveGuideImage(card: Card, apiImages: string[]) {
-  if (apiImages.length) {
-    return apiImages[hashString(card.id) % apiImages.length];
-  }
-
+function resolveGuideImage(card: Card) {
   const registryImage = getGuideCardImage(card.id);
   if (registryImage && registryImage !== "/hero/hero-guides.webp") {
     return registryImage;
   }
 
-  return GUIDE_API_FALLBACKS[hashString(card.id) % GUIDE_API_FALLBACKS.length];
+  return GUIDE_GENERIC_IMAGES[hashString(card.id) % GUIDE_GENERIC_IMAGES.length];
 }
 
 function GuideCard({ card, imageSrc }: { card: Card; imageSrc: string }) {
@@ -212,11 +183,10 @@ function GuideCard({ card, imageSrc }: { card: Card; imageSrc: string }) {
   );
 }
 
-export default async function GuideHub() {
+export default function GuideHub() {
   const cards = [...featured, ...deepDive];
-  const apiImages = await getGuideApiImagePool();
   const cardImageMap = cards.reduce<Record<string, string>>((acc, card) => {
-    acc[card.id] = resolveGuideImage(card, apiImages);
+    acc[card.id] = resolveGuideImage(card);
     return acc;
   }, {});
 
