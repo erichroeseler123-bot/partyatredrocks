@@ -16,18 +16,18 @@ export const DISPLAY = {
 
   images: {
     marketing: {
-      vipSuv: "/images/marketing/vip-suv.jpg",
-      fleet: "/images/marketing/fleet.jpg",
-      shuttle: "/images/marketing/shuttle.jpg",
+      vipSuv: "/images/marketing/vip-suv.webp",
+      fleet: "/images/marketing/fleet.webp",
+      shuttle: "/images/marketing/shuttle.webp",
     },
 
-    heroHome: "/hero/hero-home.jpg",
-    heroDefaultVenue: "/hero/hero-home.jpg",
+    heroHome: "/hero/hero-home.webp",
+    heroDefaultVenue: "/hero/hero-home.webp",
 
     sceneTiles: {
-      jam: "/images/scenes/jam.jpg",
-      edm: "/images/scenes/edm.jpg",
-      hiphop: "/images/scenes/hiphop.jpg",
+      jam: "/images/scenes/jam.webp",
+      edm: "/images/scenes/edm.webp",
+      hiphop: "/images/scenes/hiphop.webp",
       metal: "/images/scenes/metal.jpg",
       bluegrass: "/images/scenes/bluegrass.jpg",
       indie: "/images/scenes/indie.jpg",
@@ -39,16 +39,16 @@ export const DISPLAY = {
 
     // venue images keyed by venue slug
     venues: {
-      fallback: "/images/venues/fallback.jpg",
-      "cervantes-masterpiece": "/images/venues/cervantes-masterpiece.jpg",
-      "fiddlers-green-amphitheatre": "/images/venues/fiddlers-green-amphitheatre.jpg",
-      "fillmore-auditorium": "/images/venues/fillmore-auditorium.jpg",
-      "gothic-theatre": "/images/venues/gothic-theatre.jpg",
-      "mission-ballroom": "/images/venues/mission-ballroom.jpg",
-      "red-rocks-amphitheatre": "/images/venues/red-rocks-amphitheatre.jpg",
+      fallback: "/images/venues/fallback.webp",
+      "cervantes-masterpiece": "/images/venues/cervantes-masterpiece.webp",
+      "fiddlers-green-amphitheatre": "/images/venues/fiddlers-green-amphitheatre.webp",
+      "fillmore-auditorium": "/images/venues/fillmore-auditorium.webp",
+      "gothic-theatre": "/images/venues/gothic-theatre.webp",
+      "mission-ballroom": "/images/venues/mission-ballroom.webp",
+      "red-rocks-amphitheatre": "/images/venues/red-rocks-amphitheatre.webp",
     },
 
-    showFallback: "/images/shows/fallback.jpg",
+    showFallback: "/images/shows/fallback.webp",
   },
 
   ui: {
@@ -74,9 +74,10 @@ export const DISPLAY = {
   nav: {
     links: [
       { label: "Book", href: "/book" },
+      { label: "Quick Ride", href: "/quick-red-rocks" },
       { label: "Guides", href: "/guide" },
       { label: "Shuttles", href: "/shuttles" },
-      { label: "Scene", href: "/scene" },
+      { label: "Scene", href: "/scenes" },
     ],
   },
 
