@@ -9,7 +9,6 @@ import { PlanningLinks } from "@/components/booking/PlanningLinks";
 import { PrivatePromoBanner } from "@/components/booking/PrivatePromoBanner";
 import { DccReturnBanner } from "@/components/booking/DccReturnBanner";
 import { postDccSatelliteEvent, postWtaPartnerAcceptedIfNeeded } from "@/lib/dccSatellite";
-import { getRedRocksEvents } from "@/lib/redrocksEvents";
 import { getBookingVenueImage } from "@/data/media";
 import {
   buildBookingHref,
@@ -75,7 +74,6 @@ export default async function VenueBookingPage({
 
   const isRedRocks = venue === "red-rocks-amphitheatre";
   const venueMedia = getBookingVenueImage(venue);
-  const upcomingRedRocksShows = isRedRocks ? (await getRedRocksEvents(2026)).slice(0, 4) : [];
 
   await postDccSatelliteEvent({
     eventType: "handoff_viewed",
@@ -111,7 +109,7 @@ export default async function VenueBookingPage({
           ) : null}
           <div className="relative flex min-h-[calc(60vh-4rem)] max-w-3xl flex-col justify-center sm:min-h-[calc(72vh-5rem)] lg:min-h-[calc(90vh-6rem)]">
             <div className="inline-flex items-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
-              {isRedRocks ? "Upcoming Red Rocks Shows & Shuttle Booking" : `${row.name} Shuttle Booking`}
+              {isRedRocks ? "Red Rocks Shuttle Booking" : `${row.name} Shuttle Booking`}
             </div>
             <h1 className="mt-5 text-[2.5rem] font-black uppercase leading-[0.94] tracking-[-0.04em] drop-shadow-[0_10px_32px_rgba(0,0,0,0.65)] sm:text-[4rem] lg:text-[5rem]">
               {isRedRocks ? "Elevate Your Red Rocks Night" : row.name}
@@ -140,74 +138,13 @@ export default async function VenueBookingPage({
                 href={isRedRocks ? "/week/red-rocks" : `/venues/${venue}`}
                 className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-black/20 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
               >
-                {isRedRocks ? "See Upcoming Shows" : "Open Venue Guide"}
+                {isRedRocks ? "See This Week" : "Open Venue Guide"}
               </Link>
             </div>
           </div>
         </section>
 
         <DccReturnBanner searchParams={sp} />
-
-        {isRedRocks && upcomingRedRocksShows.length ? (
-          <section className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.42)] sm:p-8">
-            <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
-              Upcoming Red Rocks Shows
-            </div>
-            <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white">
-              Pick the night, then lock the ride
-            </h2>
-            <p className="mt-3 max-w-3xl text-sm leading-6 text-white/70 sm:text-[15px]">
-              Use these current Red Rocks nights as the fast path into booking. Once the show is right, the next move should be the shuttle, not a last-minute parking or rideshare gamble.
-            </p>
-            <div className="mt-6 grid gap-4 md:grid-cols-2">
-              {upcomingRedRocksShows.map((event) => (
-                <article
-                  key={event.id}
-                  className="rounded-[24px] border border-white/10 bg-black/20 p-5 transition duration-300 hover:-translate-y-1 hover:border-[#f5c66c]/34 hover:bg-black/30"
-                >
-                  <div className="text-[11px] font-black uppercase tracking-[0.18em] text-[#8fd0ff]">
-                    {new Date(event.date).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                      weekday: "short",
-                    })}
-                  </div>
-                  <h3 className="mt-3 text-xl font-black uppercase tracking-[-0.03em] text-white">
-                    {event.title}
-                  </h3>
-                  {event.support ? (
-                    <p className="mt-2 text-sm leading-6 text-white/66">{event.support}</p>
-                  ) : null}
-                  <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-                    <Link
-                      href={buildBookingHref({
-                        target: "shared",
-                        venue,
-                        searchParams: sp,
-                        overrides: {
-                          event: event.id,
-                          date: event.date,
-                          artist: event.title,
-                          source: "red-rocks-booking-cards",
-                          source_page: `/book/${venue}`,
-                        },
-                      })}
-                      className="inline-flex min-h-11 items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-5 text-[12px] font-black uppercase tracking-[0.14em] text-[#fff4de] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
-                    >
-                      Book shuttle for this night
-                    </Link>
-                    <Link
-                      href={`/shows/${event.id}`}
-                      className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/14 bg-black/20 px-5 text-[12px] font-black uppercase tracking-[0.14em] text-white transition hover:bg-white/10"
-                    >
-                      See show details
-                    </Link>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-        ) : null}
 
         {isRedRocks ? <PrivatePromoBanner /> : null}
 
