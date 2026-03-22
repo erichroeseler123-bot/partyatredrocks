@@ -1,0 +1,50 @@
+{
+  "red-rocks-amphitheatre": {
+    "wikiTitle": "Red Rocks Amphitheatre",
+    "manualImage": "/images/venues/red-rocks-amphitheatre.webp",
+    "resolvedImage": null,
+    "fallbackImage": "/images/venues/fallback.webp"
+  },
+  "mishawaka-amphitheatre": {
+    "wikiTitle": "Mishawaka Amphitheatre",
+    "manualImage": "/venues/mishsite.webp",
+    "resolvedImage": null,
+    "fallbackImage": "/images/venues/fallback.webp"
+  },
+  "mission-ballroom": {
+    "wikiTitle": "Mission Ballroom",
+    "manualImage": "/images/venues/mission-ballroom.webp",
+    "resolvedImage": "https://upload.wikimedia.org/wikipedia/commons/f/f0/MissionBlrm_Den_Edited5.jpg",
+    "fallbackImage": "/images/venues/fallback.webp"
+  },
+  "ball-arena": {
+    "wikiTitle": "Ball Arena",
+    "manualImage": "/images/venues/ball-arena.webp",
+    "resolvedImage": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Ball_Arena_exterior_2022.jpg",
+    "fallbackImage": "/images/venues/fallback.webp"
+  },
+  "empower-field-at-mile-high": {
+    "wikiTitle": "Empower Field at Mile High",
+    "manualImage": "/images/venues/empower-field.webp",
+    "resolvedImage": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Empower_Field_at_Mile_High_20241001.jpg",
+    "fallbackImage": "/images/venues/fallback.webp"
+  },
+  "fillmore-auditorium": {
+    "wikiTitle": "Fillmore Auditorium (Denver)",
+    "manualImage": "/images/venues/fillmore-auditorium.webp",
+    "resolvedImage": null,
+    "fallbackImage": "/images/venues/fallback.webp"
+  },
+  "fiddlers-green-amphitheatre": {
+    "wikiTitle": "Fiddler's Green Amphitheatre",
+    "manualImage": "/images/venues/fiddlers-green-amphitheatre.webp",
+    "resolvedImage": null,
+    "fallbackImage": "/images/venues/fallback.webp"
+  },
+  "all-venues": {
+    "wikiTitle": null,
+    "manualImage": "/images/venues/all-venues-collage.webp",
+    "resolvedImage": null,
+    "fallbackImage": "/images/venues/fallback.webp"
+  }
+}

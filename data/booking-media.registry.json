@@ -1,0 +1,39 @@
+{
+  "red-rocks-amphitheatre": {
+    "heroImage": "/assets/venue/red-rocks/red-rocks-hero.webp",
+    "heroAlt": "Daytime wide view of Red Rocks Amphitheatre rock formations and landscape",
+    "cardImage": "/assets/venue/red-rocks/red-rocks-arrival.webp",
+    "cardAlt": "Red Rocks Amphitheatre entrance sign and venue approach"
+  },
+  "ball-arena": {
+    "heroImage": "/images/venues/ball-arena.webp",
+    "heroAlt": "Ball Arena exterior in downtown Denver",
+    "cardImage": "/images/venues/ball-arena.webp",
+    "cardAlt": "Ball Arena venue arrival view in downtown Denver"
+  },
+  "empower-field-at-mile-high": {
+    "aliases": ["empower-field"],
+    "heroImage": "/images/venues/empower-field.webp",
+    "heroAlt": "Empower Field at Mile High exterior and stadium bowl context",
+    "cardImage": "/images/venues/empower-field.webp",
+    "cardAlt": "Empower Field arrival and transportation planning view"
+  },
+  "mission-ballroom": {
+    "heroImage": "/images/venues/mission-ballroom.webp",
+    "heroAlt": "Mission Ballroom exterior in Denver",
+    "cardImage": "/images/venues/mission-ballroom.webp",
+    "cardAlt": "Mission Ballroom venue approach in Denver"
+  },
+  "fillmore-auditorium": {
+    "heroImage": "/images/venues/fillmore-auditorium.webp",
+    "heroAlt": "Fillmore Auditorium exterior in Denver",
+    "cardImage": "/images/venues/fillmore-auditorium.webp",
+    "cardAlt": "Fillmore Auditorium venue entrance and curbside context"
+  },
+  "mishawaka-amphitheatre": {
+    "heroImage": "/venues/mishsite.webp",
+    "heroAlt": "Mishawaka Amphitheatre canyon-stage setting",
+    "cardImage": "/venues/mishsite.webp",
+    "cardAlt": "Mishawaka Amphitheatre river and stage approach"
+  }
+}

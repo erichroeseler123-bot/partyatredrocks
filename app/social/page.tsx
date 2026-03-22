@@ -1,0 +1,82 @@
+import type { Metadata } from "next";
+import SocialProofStrip from "@/components/social/SocialProofStrip";
+import SocialLinks from "@/components/shared/SocialLinks";
+import { SITE_CONFIG } from "@/app/site-config";
+import { getSameAs } from "@/lib/socials";
+import { getFeaturedUGCPosts } from "@/data/social/ugc-posts";
+
+const SITE = "https://www.partyatredrocks.com";
+const FEATURED_SOCIAL_IMAGE =
+  getFeaturedUGCPosts("partyatredrocks", 1)[0]?.imageUrl || "/images/marketing/fleet.webp";
+
+export const metadata: Metadata = {
+  title: "Party At Red Rocks Social | Real Rides, Real Nights, Real Groups",
+  description:
+    "See real ride nights, group arrivals, and concert transport moments from Party At Red Rocks. Follow the route, send it to your group, or ask about your ride.",
+  alternates: { canonical: `${SITE}/social` },
+  openGraph: {
+    title: "Party At Red Rocks Social | Real Rides, Real Nights, Real Groups",
+    description:
+      "See real ride nights, group arrivals, and concert transport moments from Party At Red Rocks.",
+    url: `${SITE}/social`,
+    type: "website",
+    images: [{ url: `${SITE}${FEATURED_SOCIAL_IMAGE}`, alt: "Party At Red Rocks social proof gallery" }],
+  },
+};
+
+export default function SocialPage() {
+  const brandKey = SITE_CONFIG.socialBrandKey;
+
+  const webPageJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Party At Red Rocks Social",
+    url: `${SITE}/social`,
+    description: "Real rides, real nights, and real groups planning concert transport with Party At Red Rocks.",
+    sameAs: getSameAs(brandKey),
+  };
+
+  return (
+    <main className="min-h-screen bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }} />
+      <section className="mx-auto flex max-w-[1240px] flex-col gap-8">
+        <section className="relative overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,16,32,0.98),rgba(6,9,18,0.96))] p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] sm:p-10 lg:p-12">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,138,61,0.2),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(61,243,255,0.14),transparent_28%)]" />
+          <div className="relative max-w-4xl">
+            <div className="inline-flex items-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
+              Social
+            </div>
+            <h1 className="mt-5 text-[2.5rem] font-black uppercase leading-[0.94] tracking-[-0.04em] sm:text-[4rem] lg:text-[5rem]">
+              Party At Red Rocks Social
+            </h1>
+            <p className="mt-5 max-w-3xl text-[15px] leading-7 text-white/74 sm:text-lg">
+              Real rides, real nights, real groups. This is the cleanest place to see what the route actually looks like and send the plan to the rest of your crew.
+            </p>
+            <div className="mt-7">
+              <SocialLinks brandKey={brandKey} mode="feature" showLabels />
+            </div>
+          </div>
+        </section>
+
+        <SocialProofStrip
+          brandKey="partyatredrocks"
+          mode="feature"
+          title="Ride nights and fan moments"
+          body="Curated proof from real concert nights. Strong arrivals, group energy, and the kind of plan people actually want to send around before show day."
+          pageTitle="Party At Red Rocks Social"
+          pageUrl={`${SITE}/social`}
+        />
+
+        <section className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 sm:p-8">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">Follow the route</div>
+          <h2 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white sm:text-3xl">
+            Riding with us? Tag us, follow us, or send the plan to your group.
+          </h2>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-white/72">
+            Social here is proof, not filler. If you want to see what rides actually look like or ask about a pickup plan, start here.
+          </p>
+        </section>
+      </section>
+    </main>
+  );
+}
