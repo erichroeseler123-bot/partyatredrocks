@@ -9,7 +9,7 @@ const localSignals = {
       "description": "Licensed Tier-1 Red Rocks Shuttle service (LL-02649).",
       "provider": {
         "@type": "LocalBusiness",
-        "name": "GoSno LLC",
+        "name": "Party at Red Rocks",
         "telephone": "+13035550199",
         "areaServed": ["Denver", "Golden", "Morrison"]
       }

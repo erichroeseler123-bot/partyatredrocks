@@ -188,7 +188,6 @@ export default async function GuideHub() {
 
         <section className="rounded-[24px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,16,32,0.98),rgba(6,9,18,0.96))] p-4 sm:p-5">
           <div className="flex flex-wrap gap-2 text-[11px] font-black uppercase tracking-[0.16em] text-white/84">
-            <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">Operated by GoSno LLC</div>
             <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">Secure Booking</div>
             <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">720-369-6292</div>
             <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">Guaranteed Return Ride</div>

@@ -98,9 +98,6 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, vipSrc 
               </p>
 
               <div className="mt-6 flex flex-wrap gap-2">
-                <div className="inline-flex min-h-10 items-center rounded-full border border-white/14 bg-white/7 px-4 text-[11px] font-black uppercase tracking-[0.16em] text-white/88">
-                  Operated by GoSno LLC
-                </div>
                 <div className="inline-flex min-h-10 items-center gap-2 rounded-full border border-white/14 bg-white/7 px-4 text-[11px] font-black uppercase tracking-[0.16em] text-white/88">
                   <BadgeCheck className="h-3.5 w-3.5 text-[#8fd0ff]" />
                   Secure booking
