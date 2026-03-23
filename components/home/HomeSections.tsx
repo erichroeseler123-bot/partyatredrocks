@@ -107,6 +107,30 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc }: HomeS
                 </div>
               </div>
 
+              <div className="mt-6 grid max-w-6xl gap-4 sm:grid-cols-3">
+                <article className="rounded-[24px] border border-[#f5c66c]/16 bg-[linear-gradient(180deg,rgba(53,33,16,0.96),rgba(24,16,12,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5">
+                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/16 bg-white/8">
+                    <CalendarDays className="h-4 w-4 text-[#f5c66c]" />
+                  </div>
+                  <h3 className="mt-3 text-[1.1rem] font-black uppercase tracking-[-0.04em] text-white">Choose your date</h3>
+                  <p className="mt-2 text-sm leading-6 text-white/72">Pick your show night and lock the right trip timing first.</p>
+                </article>
+                <article className="rounded-[24px] border border-[#f5c66c]/16 bg-[linear-gradient(180deg,rgba(53,33,16,0.96),rgba(24,16,12,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5">
+                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/16 bg-white/8">
+                    <CarFront className="h-4 w-4 text-[#f5c66c]" />
+                  </div>
+                  <h3 className="mt-3 text-[1.1rem] font-black uppercase tracking-[-0.04em] text-white">Pick your ride</h3>
+                  <p className="mt-2 text-sm leading-6 text-white/72">Choose shared seats or a private vehicle for your group.</p>
+                </article>
+                <article className="rounded-[24px] border border-[#f5c66c]/16 bg-[linear-gradient(180deg,rgba(53,33,16,0.96),rgba(24,16,12,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5">
+                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/16 bg-white/8">
+                    <CreditCard className="h-4 w-4 text-[#f5c66c]" />
+                  </div>
+                  <h3 className="mt-3 text-[1.1rem] font-black uppercase tracking-[-0.04em] text-white">Checkout</h3>
+                  <p className="mt-2 text-sm leading-6 text-white/72">Submit checkout once and your return ride is covered.</p>
+                </article>
+              </div>
+
               <div className="mt-6 max-w-3xl overflow-hidden rounded-[30px] border border-amber-100/55 bg-[linear-gradient(135deg,rgba(255,227,163,0.36)_0%,rgba(255,156,64,0.38)_32%,rgba(122,40,8,0.5)_58%,rgba(18,12,8,0.98)_100%)] shadow-[0_28px_110px_rgba(255,132,45,0.42)] ring-1 ring-amber-200/20 backdrop-blur">
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 w-2 bg-[linear-gradient(180deg,#fff0bf_0%,#ff9c40_100%)]" />
@@ -156,45 +180,6 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc }: HomeS
                   </div>
                 </div>
               </div>
-
-              <section className="mt-8 rounded-[28px] border border-[#f5c66c]/22 bg-[linear-gradient(135deg,rgba(50,29,12,0.98),rgba(23,14,8,0.98)_52%,rgba(8,7,7,0.98)_100%)] px-5 py-6 shadow-[0_30px_100px_rgba(0,0,0,0.48)] sm:px-6">
-                <div className="max-w-4xl">
-                  <div className="text-[11px] font-black uppercase tracking-[0.24em] text-[#f5c66c]">Start Here</div>
-                  <h2 className="mt-3 text-[1.45rem] font-black uppercase tracking-[-0.06em] text-white sm:text-[1.9rem] lg:text-[2.1rem]">
-                    Red Rocks Shuttle & Private Rides
-                  </h2>
-                  <p className="mt-3 text-[13px] leading-6 text-white/70 sm:text-[14px]">
-                    Shared seats and private vehicles from Denver, with the return ride covered.
-                  </p>
-                </div>
-
-                <div className="mx-auto mt-6 grid max-w-7xl gap-4 sm:grid-cols-3">
-                  <article className="rounded-[24px] border border-[#f5c66c]/16 bg-[linear-gradient(180deg,rgba(53,33,16,0.96),rgba(24,16,12,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5">
-                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/16 bg-white/8">
-                      <CalendarDays className="h-4 w-4 text-[#f5c66c]" />
-                    </div>
-                    <div className="text-[10px] font-black uppercase tracking-[0.18em] text-[#f5c66c]">Step 1</div>
-                    <h3 className="mt-2 text-[1.2rem] font-black uppercase tracking-[-0.04em] text-white">Choose your date</h3>
-                    <p className="mt-3 text-sm leading-6 text-white/72">Pick your show night and lock the right trip timing first.</p>
-                  </article>
-                  <article className="rounded-[24px] border border-[#f5c66c]/16 bg-[linear-gradient(180deg,rgba(53,33,16,0.96),rgba(24,16,12,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5">
-                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/16 bg-white/8">
-                      <CarFront className="h-4 w-4 text-[#f5c66c]" />
-                    </div>
-                    <div className="text-[10px] font-black uppercase tracking-[0.18em] text-[#f5c66c]">Step 2</div>
-                    <h3 className="mt-2 text-[1.2rem] font-black uppercase tracking-[-0.04em] text-white">Pick your ride</h3>
-                    <p className="mt-3 text-sm leading-6 text-white/72">Choose shared seats or a private vehicle for your group.</p>
-                  </article>
-                  <article className="rounded-[24px] border border-[#f5c66c]/16 bg-[linear-gradient(180deg,rgba(53,33,16,0.96),rgba(24,16,12,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5">
-                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/16 bg-white/8">
-                      <CreditCard className="h-4 w-4 text-[#f5c66c]" />
-                    </div>
-                    <div className="text-[10px] font-black uppercase tracking-[0.18em] text-[#f5c66c]">Step 3</div>
-                    <h3 className="mt-2 text-[1.2rem] font-black uppercase tracking-[-0.04em] text-white">Checkout</h3>
-                    <p className="mt-3 text-sm leading-6 text-white/72">Submit checkout once and your return ride is covered.</p>
-                  </article>
-                </div>
-              </section>
 
             </div>
           </div>
