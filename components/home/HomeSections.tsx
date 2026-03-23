@@ -20,45 +20,52 @@ const BOOK_RED_ROCKS = "/book/red-rocks-amphitheatre";
 const PRIMARY_CTA_CLASS =
   "inline-flex min-h-12 items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-5 text-xs font-black uppercase tracking-[0.18em] text-[#fff4de] shadow-[0_16px_36px_rgba(141,79,32,0.28)] transition hover:-translate-y-0.5 hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]";
 
-const rideCards = [
-  {
-    title: "Shared Shuttle",
-    subtitle: "$59 fixed per seat",
-    copy: "For couples, friend pairs, and solo riders who want the easiest Red Rocks plan for most concert nights.",
-    bullets: [
-      "Denver + Golden departures",
-      "Return ride handled after the show",
-      "Best value for most concert nights",
-    ],
-    href: BOOK_RED_ROCKS,
-    cta: "Secure Shared Seats",
-    image: "/fleet/fleet-sprinter.jpg",
-    alt: "Shared shuttle option for Red Rocks transportation",
-  },
-  {
-    title: "Private Vehicle",
-    subtitle: "$499 SUV to $1199 party bus",
-    copy: "For groups who want one vehicle, tailgate time, and a premium concert-night experience from pickup to dropoff.",
-    bullets: [
-      "SUV, van, sprinter, and party bus options",
-      "Upper North limo-lane access on qualifying rides",
-      "One driver and one group plan all night",
-    ],
-    href: BOOK_RED_ROCKS,
-    cta: "View Private Vehicles",
-    image: "/images/marketing/shuttle.jpg",
-    alt: "Private vehicle option for Red Rocks transportation",
-  },
-];
+type HomeSectionsProps = {
+  heroSrc: string;
+  shuttleSrc: string;
+  sprinterSrc: string;
+  vipSrc: string;
+};
 
-export default function HomeSections() {
+export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, vipSrc }: HomeSectionsProps) {
+  const rideCards = [
+    {
+      title: "Shared Shuttle",
+      subtitle: "$59 fixed per seat",
+      copy: "For couples, friend pairs, and solo riders who want the easiest Red Rocks plan for most concert nights.",
+      bullets: [
+        "Denver + Golden departures",
+        "Return ride handled after the show",
+        "Best value for most concert nights",
+      ],
+      href: BOOK_RED_ROCKS,
+      cta: "Secure Shared Seats",
+      image: sprinterSrc,
+      alt: "Shared shuttle option for Red Rocks transportation",
+    },
+    {
+      title: "Private Vehicle",
+      subtitle: "$499 SUV to $1199 party bus",
+      copy: "For groups who want one vehicle, tailgate time, and a premium concert-night experience from pickup to dropoff.",
+      bullets: [
+        "SUV, van, sprinter, and party bus options",
+        "Upper North limo-lane access on qualifying rides",
+        "One driver and one group plan all night",
+      ],
+      href: BOOK_RED_ROCKS,
+      cta: "View Private Vehicles",
+      image: shuttleSrc,
+      alt: "Private vehicle option for Red Rocks transportation",
+    },
+  ];
+
   return (
     <main className="bg-[#090909] text-[#f8f4ed]">
       <section className="mx-auto flex w-full max-w-[1500px] flex-col gap-10 px-4 pb-24 pt-16 sm:px-6 sm:pt-20 lg:px-8">
         <section className="relative overflow-hidden rounded-[36px] border border-[#f5c66c]/20 bg-[#12100e] shadow-[0_40px_120px_rgba(0,0,0,0.58)]">
           <div className="absolute inset-0">
             <Image
-              src="/hero/hero-home.jpg"
+              src={heroSrc}
               alt="Nighttime Red Rocks crowd and venue lights"
               fill
               sizes="100vw"
@@ -158,7 +165,7 @@ export default function HomeSections() {
                 <article className="overflow-hidden rounded-[24px] border border-white/14 bg-[rgba(7,7,8,0.58)] shadow-[0_18px_48px_rgba(0,0,0,0.35)]">
                   <div className="relative h-36">
                     <Image
-                      src="/images/marketing/vip-suv.jpg"
+                      src={vipSrc}
                       alt="Private SUV arrival at Red Rocks"
                       fill
                       sizes="(min-width: 640px) 50vw, 100vw"
@@ -176,7 +183,7 @@ export default function HomeSections() {
                 <article className="overflow-hidden rounded-[24px] border border-white/14 bg-[rgba(7,7,8,0.58)] shadow-[0_18px_48px_rgba(0,0,0,0.35)]">
                   <div className="relative h-36">
                     <Image
-                      src="/hero/hero-home.jpg"
+                      src={heroSrc}
                       alt="Riders arriving relaxed at Red Rocks"
                       fill
                       sizes="(min-width: 640px) 50vw, 100vw"

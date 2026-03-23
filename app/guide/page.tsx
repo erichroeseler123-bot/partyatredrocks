@@ -6,6 +6,7 @@ import { GuideVisualHero } from "@/components/guide/GuideVisualHero";
 import MusicWave from "@/components/MusicWave";
 import { assertUniqueGuideImages } from "@/data/media";
 import { type GuideVisualKey, guideVisuals } from "@/lib/guideVisuals";
+import { getDynamicImage } from "@/lib/getDynamicImage";
 
 export const metadata = {
   title: "Red Rocks Guides",
@@ -14,42 +15,6 @@ export const metadata = {
   alternates: {
     canonical: "/guide",
   },
-};
-
-const DCC_AGENT_MANIFEST_URL = "https://www.destinationcommandcenter.com/agent.json";
-const DCC_PUBLIC_BASE_URL = "https://www.destinationcommandcenter.com";
-const GUIDE_DCC_MEDIA_TARGETS = [
-  { entityType: "venue", slug: "red-rocks-amphitheatre" },
-  { entityType: "city", slug: "denver" },
-] as const;
-const LOCAL_GUIDE_FALLBACK_IMAGES = [
-  "/hero/hero-home.jpg",
-  "/hero/hero-guides.jpg",
-  "/images/marketing/shuttle.jpg",
-  "/images/marketing/vip-suv.jpg",
-  "/fleet/fleet-sprinter.jpg",
-  "/venues/rrsite.jpg",
-] as const;
-
-type DccImageAsset = {
-  src?: string | null;
-};
-
-type DccImageSet = {
-  hero?: DccImageAsset | null;
-  card?: DccImageAsset | null;
-  gallery?: DccImageAsset[];
-};
-
-type DccAgentManifest = {
-  machineReadable?: {
-    mediaFeedTemplate?: string;
-  };
-};
-
-type DccMediaFeedResponse = {
-  ok?: boolean;
-  imageSet?: DccImageSet | null;
 };
 
 type Card = {
@@ -157,87 +122,6 @@ const deepDive: Card[] = [
 
 assertUniqueGuideImages();
 
-function hashString(input: string) {
-  let hash = 0;
-  for (let index = 0; index < input.length; index += 1) {
-    hash = (hash * 31 + input.charCodeAt(index)) >>> 0;
-  }
-  return hash;
-}
-
-function absolutizeDccImageSrc(src?: string | null) {
-  if (!src) return null;
-  if (src.startsWith("/")) return `${DCC_PUBLIC_BASE_URL}${src}`;
-  return src;
-}
-
-function extractDccImageSetSources(imageSet: DccImageSet | null | undefined) {
-  if (!imageSet) return [];
-  const sources = [
-    absolutizeDccImageSrc(imageSet.hero?.src),
-    absolutizeDccImageSrc(imageSet.card?.src),
-    ...(imageSet.gallery || []).map((item) => absolutizeDccImageSrc(item?.src)),
-  ].filter(isAllowedDccGuideImageSrc) as string[];
-  return sources;
-}
-
-function isAllowedDccGuideImageSrc(src?: string | null): src is string {
-  if (!src) return false;
-  const normalized = src.toLowerCase();
-  if (!normalized.startsWith("https://www.destinationcommandcenter.com/")) return false;
-
-  // The guide page should only render photo assets, never diagram/concept SVG artwork.
-  if (normalized.endsWith(".svg")) return false;
-  if (!/\.(avif|webp|png|jpe?g)$/.test(normalized)) return false;
-  if (normalized.includes("/images/las-vegas/")) return false;
-  if (normalized.includes("concept") || normalized.includes("artwork")) return false;
-
-  return true;
-}
-
-async function getGuideDccImagePool() {
-  try {
-    const manifestResponse = await fetch(DCC_AGENT_MANIFEST_URL, { next: { revalidate: 3600 } });
-    if (!manifestResponse.ok) return [];
-    const manifest = (await manifestResponse.json()) as DccAgentManifest;
-    const template = manifest?.machineReadable?.mediaFeedTemplate;
-    if (!template) return [];
-
-    const responses = await Promise.all(
-      GUIDE_DCC_MEDIA_TARGETS.map(async ({ entityType, slug }) => {
-        const url = template
-          .replace("{entityType}", encodeURIComponent(entityType))
-          .replace("{slug}", encodeURIComponent(slug));
-        const response = await fetch(url, { next: { revalidate: 3600 } });
-        if (!response.ok) return null;
-        const data = (await response.json()) as DccMediaFeedResponse;
-        if (!data?.ok) return null;
-        return data.imageSet || null;
-      }),
-    );
-
-    const seen = new Set<string>();
-    const pool: string[] = [];
-    for (const imageSet of responses) {
-      for (const src of extractDccImageSetSources(imageSet)) {
-        if (seen.has(src)) continue;
-        seen.add(src);
-        pool.push(src);
-      }
-    }
-    return pool;
-  } catch {
-    return [];
-  }
-}
-
-function resolveGuideImage(card: Card, imagePool: string[]) {
-  if (imagePool.length) {
-    return imagePool[hashString(card.id) % imagePool.length];
-  }
-  return LOCAL_GUIDE_FALLBACK_IMAGES[hashString(card.id) % LOCAL_GUIDE_FALLBACK_IMAGES.length];
-}
-
 function GuideCard({ card, imageSrc }: { card: Card; imageSrc: string }) {
   const visual = guideVisuals[card.visual];
   return (
@@ -271,12 +155,15 @@ function GuideCard({ card, imageSrc }: { card: Card; imageSrc: string }) {
 
 export default async function GuideHub() {
   const cards = [...featured, ...deepDive];
-  const dccImagePool = await getGuideDccImagePool();
-  const cardImageMap = cards.reduce<Record<string, string>>((acc, card) => {
-    acc[card.id] = resolveGuideImage(card, dccImagePool);
-    return acc;
-  }, {});
-  const heroImage = dccImagePool[0] || "/hero/hero-home.jpg";
+  const cardImageMap = Object.fromEntries(
+    await Promise.all(
+      cards.map(async (card) => [
+        card.id,
+        await getDynamicImage("concert", `${card.title} red rocks`, "/venues/rrsite.jpg"),
+      ]),
+    ),
+  ) as Record<string, string>;
+  const heroImage = await getDynamicImage("venue", "Red Rocks Amphitheatre", "/hero/hero-guides.jpg");
 
   return (
     <main className="bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">

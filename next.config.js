@@ -38,6 +38,12 @@ const nextConfig = {
       // DCC public media feed assets
       { protocol: "https", hostname: "destinationcommandcenter.com" },
       { protocol: "https", hostname: "www.destinationcommandcenter.com" },
+
+      // Dynamic image providers
+      { protocol: "https", hostname: "theaudiodb.com" },
+      { protocol: "https", hostname: "www.theaudiodb.com" },
+      { protocol: "https", hostname: "source.unsplash.com" },
+      { protocol: "https", hostname: "images.unsplash.com" },
     ],
   },
 };

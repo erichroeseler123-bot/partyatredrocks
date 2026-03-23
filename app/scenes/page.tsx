@@ -6,22 +6,9 @@ import { getEventsCatalog } from "@/lib/events/getCatalog";
 import { SCENES } from "@/data/scenes";
 import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
 import { eventMatchesGenre } from "@/lib/genres/artistGenres";
-import { getSceneMedia } from "@/data/media";
+import { getDynamicImage } from "@/lib/getDynamicImage";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
-const SCENE_GENERIC_IMAGES = [
-  "/hero/hero-home.jpg",
-  "/hero/hero-guides.jpg",
-  "/images/marketing/shuttle.jpg",
-  "/images/marketing/vip-suv.jpg",
-  "/images/marketing/fleet.jpg",
-  "/fleet/fleet-sprinter.jpg",
-  "/fleet/fleet-suburban.jpg",
-  "/venues/rrsite.jpg",
-  "/venues/missionsite.jpg",
-  "/venues/fillsite.jpg",
-] as const;
-
 export const revalidate = 1800;
 
 export const metadata: Metadata = {
@@ -79,22 +66,6 @@ function venueName(venueId: string): string {
   return VENUE_LEDGER_BY_SLUG.get(venueId)?.name ?? venueId;
 }
 
-function hashString(input: string) {
-  let hash = 0;
-  for (let index = 0; index < input.length; index += 1) {
-    hash = (hash * 31 + input.charCodeAt(index)) >>> 0;
-  }
-  return hash;
-}
-
-function getSceneImage(sceneSlug: string) {
-  const sceneImage = String(getSceneMedia(sceneSlug).primary);
-  if (sceneImage && sceneImage !== "/images/venues/fallback.webp") {
-    return sceneImage;
-  }
-  return SCENE_GENERIC_IMAGES[hashString(sceneSlug) % SCENE_GENERIC_IMAGES.length];
-}
-
 function formatDate(dateKey: string) {
   return new Date(`${dateKey}T12:00:00`).toLocaleDateString("en-US", {
     weekday: "short",
@@ -106,6 +77,14 @@ function formatDate(dateKey: string) {
 export default async function ScenesLandingPage() {
   const allEvents = await getEventsCatalog(2026, "all");
   const scenes = SCENES.slice().sort((a, b) => (a.priority ?? 999) - (b.priority ?? 999));
+  const sceneImageMap = Object.fromEntries(
+    await Promise.all(
+      scenes.map(async (scene) => [
+        scene.slug,
+        await getDynamicImage("genre", `${scene.title} concert`, "/venues/rrsite.jpg"),
+      ]),
+    ),
+  ) as Record<string, string>;
 
   const totalShows = scenes.reduce((count, scene) => {
     return count + allEvents.filter((event) => eventMatchesGenre(event, scene.slug)).length;
@@ -186,7 +165,7 @@ export default async function ScenesLandingPage() {
               .filter((event) => eventMatchesGenre(event, scene.slug))
               .sort((a, b) => a.dateKey.localeCompare(b.dateKey))
               .slice(0, 3);
-            const image = getSceneImage(scene.slug);
+            const image = sceneImageMap[scene.slug] || "/venues/rrsite.jpg";
 
             return (
               <article

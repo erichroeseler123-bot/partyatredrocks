@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, BadgeCheck, CalendarDays, Clock3, PhoneCall } from "lucide-react";
 import { getEventsCatalog } from "@/lib/events/getCatalog";
 import { buildBookingHref } from "@/lib/parrHandoff";
+import { getDynamicImage } from "@/lib/getDynamicImage";
 
 export const revalidate = 3600;
 
@@ -56,6 +57,14 @@ export default async function SchedulePage() {
       if (a.dateKey !== b.dateKey) return a.dateKey.localeCompare(b.dateKey);
       return a.name.localeCompare(b.name);
     });
+  const eventImageMap = Object.fromEntries(
+    await Promise.all(
+      events.map(async (event) => [
+        event.id,
+        await getDynamicImage("artist", event.artistNames[0] || event.name, "/venues/rrsite.jpg"),
+      ]),
+    ),
+  ) as Record<string, string>;
 
   const grouped = events.reduce<Record<string, CatalogEvent[]>>((acc, event) => {
     const key = monthLabel(event.dateKey);
@@ -154,6 +163,16 @@ export default async function SchedulePage() {
                     >
                       <div className="flex flex-col gap-5 p-5 sm:flex-row sm:items-start sm:justify-between sm:p-6">
                         <div className="flex min-w-0 items-start gap-4">
+                          <div className="relative h-24 w-32 shrink-0 overflow-hidden rounded-xl border border-white/12">
+                            <Image
+                              src={eventImageMap[event.id] || "/venues/rrsite.jpg"}
+                              alt={`${event.name} artist photo`}
+                              fill
+                              className="object-cover"
+                              sizes="128px"
+                            />
+                            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,20,0.08),rgba(5,8,20,0.46))]" />
+                          </div>
                           <div className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/16 bg-white/8">
                             <CalendarDays className="h-4 w-4 text-[#f5c66c]" />
                           </div>
