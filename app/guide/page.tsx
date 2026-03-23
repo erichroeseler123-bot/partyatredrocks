@@ -22,6 +22,14 @@ const GUIDE_DCC_MEDIA_TARGETS = [
   { entityType: "venue", slug: "red-rocks-amphitheatre" },
   { entityType: "city", slug: "denver" },
 ] as const;
+const LOCAL_GUIDE_FALLBACK_IMAGES = [
+  "/assets/venue/red-rocks/red-rocks-hero.webp",
+  "/assets/venue/red-rocks/red-rocks-arrival.webp",
+  "/hero/hero-guides.webp",
+  "/hero/hero-home.webp",
+  "/images/marketing/shuttle.webp",
+  "/images/marketing/vip-suv.webp",
+] as const;
 
 type DccImageAsset = {
   src?: string | null;
@@ -224,11 +232,13 @@ async function getGuideDccImagePool() {
 }
 
 function resolveGuideImage(card: Card, imagePool: string[]) {
-  if (!imagePool.length) return null;
-  return imagePool[hashString(card.id) % imagePool.length];
+  if (imagePool.length) {
+    return imagePool[hashString(card.id) % imagePool.length];
+  }
+  return LOCAL_GUIDE_FALLBACK_IMAGES[hashString(card.id) % LOCAL_GUIDE_FALLBACK_IMAGES.length];
 }
 
-function GuideCard({ card, imageSrc }: { card: Card; imageSrc: string | null }) {
+function GuideCard({ card, imageSrc }: { card: Card; imageSrc: string }) {
   const visual = guideVisuals[card.visual];
   return (
     <Link
@@ -236,15 +246,13 @@ function GuideCard({ card, imageSrc }: { card: Card; imageSrc: string | null }) 
       className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
     >
       <div className="relative mb-5 h-40 overflow-hidden rounded-[20px] border border-white/10">
-        {imageSrc ? (
-          <Image
-            src={imageSrc}
-            alt={visual.imageAlt}
-            fill
-            className="object-cover"
-            sizes="(min-width: 1280px) 360px, (min-width: 768px) 50vw, 100vw"
-          />
-        ) : null}
+        <Image
+          src={imageSrc}
+          alt={visual.imageAlt}
+          fill
+          className="object-cover"
+          sizes="(min-width: 1280px) 360px, (min-width: 768px) 50vw, 100vw"
+        />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,22,0.08),rgba(5,8,22,0.66)_100%)]" />
       </div>
       {card.kicker ? (
@@ -264,11 +272,11 @@ function GuideCard({ card, imageSrc }: { card: Card; imageSrc: string | null }) 
 export default async function GuideHub() {
   const cards = [...featured, ...deepDive];
   const dccImagePool = await getGuideDccImagePool();
-  const cardImageMap = cards.reduce<Record<string, string | null>>((acc, card) => {
+  const cardImageMap = cards.reduce<Record<string, string>>((acc, card) => {
     acc[card.id] = resolveGuideImage(card, dccImagePool);
     return acc;
   }, {});
-  const heroImage = dccImagePool[0] || `${DCC_PUBLIC_BASE_URL}/images/authority/venues/red-rocks-amphitheatre/hero.webp`;
+  const heroImage = dccImagePool[0] || "/assets/venue/red-rocks/red-rocks-hero.webp";
 
   return (
     <main className="bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
@@ -290,6 +298,15 @@ export default async function GuideHub() {
             </>
           }
         />
+
+        <section className="rounded-[24px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,16,32,0.98),rgba(6,9,18,0.96))] p-4 sm:p-5">
+          <div className="flex flex-wrap gap-2 text-[11px] font-black uppercase tracking-[0.16em] text-white/84">
+            <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">Operated by GoSno LLC</div>
+            <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">Secure Booking</div>
+            <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">720-369-6292</div>
+            <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">Guaranteed Return Ride</div>
+          </div>
+        </section>
 
         <div className="max-w-[280px] opacity-80">
           <MusicWave />
