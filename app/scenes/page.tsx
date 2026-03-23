@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Music2, CalendarDays, MapPin } from "lucide-react";
+import { ArrowRight, Music2, CalendarDays, MapPin, BadgeCheck, PhoneCall } from "lucide-react";
 import { getEventsCatalog } from "@/lib/events/getCatalog";
 import { SCENES } from "@/data/scenes";
 import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
@@ -65,6 +65,15 @@ function slugifyArtist(input: string): string {
 function sceneLabel(slug: string): string {
   if (slug === "hiphop") return "Hip-Hop / Rap";
   return slug.charAt(0).toUpperCase() + slug.slice(1);
+}
+
+function sceneIcon(slug: string): string {
+  if (slug === "jam") return "🎸";
+  if (slug === "edm") return "🔊";
+  if (slug === "hiphop") return "🎤";
+  if (slug === "country") return "🤠";
+  if (slug === "bluegrass") return "🪕";
+  return "🎵";
 }
 
 function venueName(venueId: string): string {
@@ -131,6 +140,20 @@ export default async function ScenesLandingPage() {
               Browse each scene with cleaner visuals, upcoming shows, and direct links into show pages and booking flow.
             </p>
 
+            <div className="mt-6 flex flex-wrap gap-2">
+              <div className="inline-flex min-h-10 items-center rounded-full border border-white/14 bg-white/7 px-4 text-[11px] font-black uppercase tracking-[0.16em] text-white/88">
+                Operated by GoSno LLC
+              </div>
+              <div className="inline-flex min-h-10 items-center gap-2 rounded-full border border-white/14 bg-white/7 px-4 text-[11px] font-black uppercase tracking-[0.16em] text-white/88">
+                <BadgeCheck className="h-3.5 w-3.5 text-[#8fd0ff]" />
+                Secure Booking
+              </div>
+              <div className="inline-flex min-h-10 items-center gap-2 rounded-full border border-white/14 bg-white/7 px-4 text-[11px] font-black uppercase tracking-[0.16em] text-white/88">
+                <PhoneCall className="h-3.5 w-3.5 text-[#f5c66c]" />
+                720-369-6292
+              </div>
+            </div>
+
             <div className="mt-6 grid gap-3 sm:grid-cols-3">
               <div className="rounded-2xl border border-white/14 bg-black/25 p-4">
                 <div className="text-[10px] font-black uppercase tracking-[0.2em] text-[#f5c66c]">Scenes</div>
@@ -144,6 +167,16 @@ export default async function ScenesLandingPage() {
                 <div className="text-[10px] font-black uppercase tracking-[0.2em] text-[#f5c66c]">Booking Path</div>
                 <div className="mt-1 text-sm font-black uppercase tracking-[0.14em] text-white">Red Rocks Wizard</div>
               </div>
+            </div>
+
+            <div className="mt-6">
+              <Link
+                href="/book/red-rocks-amphitheatre"
+                className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#ffd6a3]/26 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-6 text-xs font-black uppercase tracking-[0.16em] text-[#fff4de] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
+              >
+                Find Your Ride Now
+                <ArrowRight className="ml-2 h-3.5 w-3.5" />
+              </Link>
             </div>
           </div>
         </section>
@@ -174,7 +207,10 @@ export default async function ScenesLandingPage() {
                   </div>
 
                   <div className="p-6 sm:p-7">
-                    <div className="text-[11px] font-black uppercase tracking-[0.2em] text-[#8fd0ff]">{sceneLabel(scene.slug)}</div>
+                    <div className="inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.2em] text-[#8fd0ff]">
+                      <span aria-hidden="true">{sceneIcon(scene.slug)}</span>
+                      {sceneLabel(scene.slug)}
+                    </div>
                     <h2 className="mt-2 text-[1.8rem] font-black uppercase tracking-[-0.03em] text-white sm:text-[2.2rem]">
                       {scene.title}
                     </h2>
@@ -224,7 +260,7 @@ export default async function ScenesLandingPage() {
                         href={`/scene/${scene.slug}`}
                         className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/18 bg-white/6 px-5 text-xs font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
                       >
-                        Explore {sceneLabel(scene.slug)}
+                        Explore {sceneLabel(scene.slug)} →
                       </Link>
                       <Link
                         href="/book/red-rocks-amphitheatre"
@@ -240,6 +276,31 @@ export default async function ScenesLandingPage() {
             );
           })}
         </div>
+
+        <section className="mt-10 rounded-[26px] border border-white/12 bg-[linear-gradient(180deg,rgba(10,16,32,0.98),rgba(6,9,18,0.96))] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.34)] sm:p-7">
+          <div className="text-[11px] font-black uppercase tracking-[0.2em] text-[#ffb07c]">Ride Planning</div>
+          <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] text-white sm:text-3xl">
+            Shared Seats Or Private Ride, Same Clean Path
+          </h2>
+          <p className="mt-3 max-w-4xl text-sm leading-6 text-white/74">
+            Fixed pricing, return ride coverage, and one booking flow for any scene night at Red Rocks.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-2 text-[11px] font-black uppercase tracking-[0.16em] text-white/82">
+            <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">Fixed $59 Shared Seats</div>
+            <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">Private SUVs/Sprinters/Buses</div>
+            <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">Guaranteed Return Ride</div>
+            <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">Beat Surge Chaos</div>
+          </div>
+          <div className="mt-5">
+            <Link
+              href="/book/red-rocks-amphitheatre"
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#ffd6a3]/26 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-6 text-xs font-black uppercase tracking-[0.16em] text-[#fff4de] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
+            >
+              Find Your Ride Now
+              <ArrowRight className="ml-2 h-3.5 w-3.5" />
+            </Link>
+          </div>
+        </section>
       </section>
     </main>
   );
