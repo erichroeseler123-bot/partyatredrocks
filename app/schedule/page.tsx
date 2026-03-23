@@ -9,6 +9,7 @@ import { getMediaIndex } from "@/lib/media/getMediaIndex";
 import { selectImageByPriority } from "@/lib/media/selectImage";
 import { getDynamicImage } from "@/lib/getDynamicImage";
 import { ANNOUNCED_RED_ROCKS_2026 } from "@/data/red-rocks-2026-announced";
+import ScheduleExplorer, { type ScheduleExplorerEvent } from "@/components/schedule/ScheduleExplorer";
 
 export const revalidate = 3600;
 
@@ -257,6 +258,35 @@ export default async function SchedulePage() {
     acc[key].push(event);
     return acc;
   }, {});
+  const scheduleEvents: ScheduleExplorerEvent[] = Object.entries(grouped).flatMap(([month, monthEvents]) =>
+    monthEvents.map((event) => {
+      const support = event.artistNames.slice(1).join(", ") || null;
+      const showHref = event.showId ? `/shows/${event.showId}` : "https://www.redrocksonline.com/events/";
+      const shuttleHref = buildBookingHref({
+        target: "shared",
+        venue: "red-rocks-amphitheatre",
+        overrides: {
+          artist: event.artistNames[0] || event.name,
+          date: event.dateKey,
+          ...(event.showId ? { event: event.showId } : {}),
+        },
+      });
+
+      return {
+        id: event.id,
+        month,
+        name: event.name,
+        dateLabel: dateLabel(event.dateKey),
+        timeLabel: toTimeLabel(event),
+        support,
+        image: eventImageMap[event.id] || "/venues/rrsite.jpg",
+        shuttleHref,
+        showHref,
+        showLabel: event.showId ? "Open Show Page" : "Official Listing",
+        showExternal: !event.showId,
+      };
+    }),
+  );
 
   return (
     <main className="bg-[#090909] text-[#f8f4ed]">
@@ -315,93 +345,7 @@ export default async function SchedulePage() {
           </div>
         </div>
 
-        <div className="mt-8 space-y-10">
-          {Object.entries(grouped).map(([month, monthEvents]) => (
-            <section key={month}>
-              <div className="flex flex-wrap items-end justify-between gap-3 border-b border-[#f5c66c]/26 pb-3">
-                <h2 className="text-2xl font-black uppercase tracking-[-0.03em] text-white sm:text-3xl">{month}</h2>
-                <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/56">{monthEvents.length} shows</div>
-              </div>
-
-              <div className="mt-5 grid gap-4">
-                {monthEvents.map((event) => {
-                  const support = event.artistNames.slice(1).join(", ");
-                  const time = toTimeLabel(event);
-                  const showHref = event.showId ? `/shows/${event.showId}` : "https://www.redrocksonline.com/events/";
-                  const shuttleHref = buildBookingHref({
-                    target: "shared",
-                    venue: "red-rocks-amphitheatre",
-                    overrides: {
-                      artist: event.artistNames[0] || event.name,
-                      date: event.dateKey,
-                      ...(event.showId ? { event: event.showId } : {}),
-                    },
-                  });
-
-                  return (
-                    <article
-                      key={event.id}
-                      className="rounded-[24px] border border-white/12 bg-[linear-gradient(180deg,rgba(14,20,38,0.96),rgba(8,12,24,0.98))] shadow-[0_22px_70px_rgba(0,0,0,0.38)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_28px_90px_rgba(0,0,0,0.46)]"
-                    >
-                      <div className="flex flex-col gap-5 p-5 sm:flex-row sm:items-start sm:justify-between sm:p-6">
-                        <div className="flex min-w-0 items-start gap-4">
-                          <div className="relative h-24 w-32 shrink-0 overflow-hidden rounded-xl border border-white/12">
-                            <Image
-                              src={eventImageMap[event.id] || "/venues/rrsite.jpg"}
-                              alt={`${event.name} artist photo`}
-                              fill
-                              className="object-cover"
-                              sizes="128px"
-                            />
-                            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,20,0.08),rgba(5,8,20,0.46))]" />
-                          </div>
-                          <div className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/16 bg-white/8">
-                            <CalendarDays className="h-4 w-4 text-[#f5c66c]" />
-                          </div>
-                          <div className="min-w-0">
-                            <h3 className="text-lg font-black uppercase tracking-[-0.02em] text-white sm:text-xl">{event.name}</h3>
-                            <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold text-[#8fd0ff]">
-                              <span>{dateLabel(event.dateKey)}</span>
-                              {time ? (
-                                <span className="inline-flex items-center gap-1 text-white/72">
-                                  <Clock3 className="h-3.5 w-3.5" />
-                                  {time}
-                                </span>
-                              ) : null}
-                            </div>
-                            {support ? (
-                              <p className="mt-3 text-sm leading-6 text-white/74">
-                                <span className="font-semibold text-white/84">Support:</span> {support}
-                              </p>
-                            ) : null}
-                          </div>
-                        </div>
-
-                        <div className="flex w-full shrink-0 flex-col gap-2 sm:w-[250px]">
-                          <Link
-                            href={shuttleHref}
-                            className="inline-flex min-h-11 items-center justify-center rounded-full border border-[#ffd6a3]/26 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-4 text-xs font-black uppercase tracking-[0.16em] text-[#fff4de] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
-                          >
-                            Book Shuttle
-                            <ArrowRight className="ml-2 h-3.5 w-3.5" />
-                          </Link>
-                          <Link
-                            href={showHref}
-                            target={event.showId ? undefined : "_blank"}
-                            rel={event.showId ? undefined : "noreferrer noopener"}
-                            className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/18 bg-black/20 px-4 text-xs font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
-                          >
-                            {event.showId ? "Open Show Page" : "Official Listing"}
-                          </Link>
-                        </div>
-                      </div>
-                    </article>
-                  );
-                })}
-              </div>
-            </section>
-          ))}
-        </div>
+        <ScheduleExplorer events={scheduleEvents} />
 
         <div className="mt-12 rounded-2xl border border-white/12 bg-white/5 p-5 text-sm leading-6 text-white/72 sm:p-6">
           More events are added regularly. For official updates, check{" "}
