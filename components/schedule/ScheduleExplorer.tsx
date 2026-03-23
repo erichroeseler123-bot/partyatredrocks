@@ -55,25 +55,25 @@ export default function ScheduleExplorer({ events }: { events: ScheduleExplorerE
                     key={event.id}
                     type="button"
                     onClick={() => setSelectedId(event.id)}
-                    className={`w-full rounded-[20px] border p-4 text-left transition ${
+                    className={`w-full min-h-[176px] rounded-[24px] border p-5 text-left transition ${
                       isActive
                         ? "border-[#f5c66c]/65 bg-[rgba(245,198,108,0.12)] shadow-[0_12px_34px_rgba(245,198,108,0.18)]"
                         : "border-white/12 bg-[linear-gradient(180deg,rgba(14,20,38,0.9),rgba(8,12,24,0.95))] hover:-translate-y-0.5 hover:border-white/24"
                     }`}
                   >
-                    <div className="flex items-start gap-4">
-                      <div className="relative h-20 w-28 shrink-0 overflow-hidden rounded-lg border border-white/12">
+                    <div className="flex items-start gap-5">
+                      <div className="relative h-32 w-36 shrink-0 overflow-hidden rounded-xl border border-white/12">
                         <Image
                           src={event.image}
-                          alt={`${event.name} artist photo`}
+                          alt={`${event.name} schedule image`}
                           fill
                           className="object-cover"
-                          sizes="112px"
+                          sizes="144px"
                         />
                       </div>
-                      <div className="min-w-0">
-                        <h3 className="text-base font-black uppercase tracking-[-0.02em] text-white sm:text-lg">{event.name}</h3>
-                        <div className="mt-1 flex flex-wrap items-center gap-3 text-xs font-semibold text-[#8fd0ff]">
+                      <div className="flex min-w-0 flex-1 flex-col justify-center">
+                        <h3 className="text-lg font-black uppercase tracking-[-0.02em] text-white sm:text-[1.35rem]">{event.name}</h3>
+                        <div className="mt-2 flex flex-wrap items-center gap-3 text-sm font-semibold text-[#8fd0ff]">
                           <span className="inline-flex items-center gap-1">
                             <CalendarDays className="h-3.5 w-3.5" />
                             {event.dateLabel}
@@ -86,7 +86,7 @@ export default function ScheduleExplorer({ events }: { events: ScheduleExplorerE
                           ) : null}
                         </div>
                         {event.support ? (
-                          <p className="mt-2 text-xs leading-5 text-white/72">
+                          <p className="mt-3 text-sm leading-6 text-white/72">
                             <span className="font-semibold text-white/82">Support:</span> {event.support}
                           </p>
                         ) : null}
