@@ -42,6 +42,7 @@ const nextConfig = {
       // Dynamic image providers
       { protocol: "https", hostname: "theaudiodb.com" },
       { protocol: "https", hostname: "www.theaudiodb.com" },
+      { protocol: "https", hostname: "r2.theaudiodb.com" },
       { protocol: "https", hostname: "source.unsplash.com" },
       { protocol: "https", hostname: "images.unsplash.com" },
     ],

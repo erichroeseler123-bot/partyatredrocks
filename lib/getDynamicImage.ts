@@ -21,13 +21,13 @@ export async function getDynamicImage(
   query = "",
   fallbackLocal?: string,
 ): Promise<string> {
-  const width = 1200;
-  const height = 630;
+  const normalizedQuery = query.trim().toLowerCase();
+  const fallback = fallbackLocal || "/hero/hero-home.jpg";
 
   try {
     if (type === "artist" && query) {
       const res = await fetch(
-        `https://theaudiodb.com/api/v1/json/2/search.php?s=${encodeURIComponent(query)}`,
+        `https://www.theaudiodb.com/api/v1/json/2/search.php?s=${encodeURIComponent(query)}`,
         { cache: "force-cache" },
       );
       if (res.ok) {
@@ -35,9 +35,13 @@ export async function getDynamicImage(
         const thumb = data.artists?.[0]?.strArtistThumb;
         if (hasUsableUrl(thumb)) return thumb;
       }
+      return fallback;
     }
 
     if (type === "venue" && query) {
+      // Keep Red Rocks hero/foundation visuals on known-good local media.
+      if (normalizedQuery.includes("red rocks")) return fallback;
+
       const res = await fetch(
         `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(query)}`,
         { cache: "force-cache" },
@@ -46,14 +50,12 @@ export async function getDynamicImage(
         const data = (await res.json()) as WikipediaSummaryResponse;
         if (hasUsableUrl(data.thumbnail?.source)) return data.thumbnail.source;
       }
+      return fallback;
     }
 
-    const unsplashQuery = query
-      ? `${query},concert,night`
-      : "red-rocks-amphitheatre,concert-crowd,shuttle-bus";
-
-    return `https://source.unsplash.com/random/${width}x${height}/?${encodeURIComponent(unsplashQuery)}`;
+    // Concert/genre/fleet should never rely on unstable random endpoints in production.
+    return fallback;
   } catch {
-    return fallbackLocal || "/hero/hero-home.jpg";
+    return fallback;
   }
 }
