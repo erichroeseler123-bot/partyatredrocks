@@ -31,11 +31,10 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   const brandKey = SITE_CONFIG.socialBrandKey;
-  const [heroSrc, shuttleSrc, sprinterSrc, vipSrc] = await Promise.all([
+  const [heroSrc, shuttleSrc, sprinterSrc] = await Promise.all([
     getDynamicImage("venue", "Red Rocks Amphitheatre", "/hero/hero-home.jpg"),
     getDynamicImage("concert", "shuttle bus denver", "/images/marketing/shuttle.jpg"),
     getDynamicImage("fleet", "sprinter van denver", "/fleet/fleet-sprinter.jpg"),
-    getDynamicImage("concert", "private suv concert arrival", "/images/marketing/vip-suv.jpg"),
   ]);
 
   const webSiteJsonLd = {
@@ -164,7 +163,6 @@ export default async function HomePage() {
         heroSrc={heroSrc}
         shuttleSrc={shuttleSrc}
         sprinterSrc={sprinterSrc}
-        vipSrc={vipSrc}
       />
       <section className="bg-[#090909] px-4 pb-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-[1500px]">
