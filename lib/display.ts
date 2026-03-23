@@ -17,13 +17,13 @@ export const DISPLAY = {
 
   images: {
     marketing: {
-      vipSuv: buildUnsplashImageSrc({ query: "private suv concert transportation denver night" }),
-      fleet: buildUnsplashImageSrc({ query: "sprinter van concert transportation denver" }),
-      shuttle: buildUnsplashImageSrc({ query: "concert shuttle bus denver night" }),
+      vipSuv: buildUnsplashImageSrc({ query: "black luxury suv concert pickup denver night curbside" }),
+      fleet: buildUnsplashImageSrc({ query: "sprinter van group concert pickup colorado night" }),
+      shuttle: buildUnsplashImageSrc({ query: "passenger shuttle van concert riders boarding colorado night" }),
     },
 
-    heroHome: buildUnsplashImageSrc({ query: "red rocks amphitheatre concert night denver" }),
-    heroDefaultVenue: buildUnsplashImageSrc({ query: "red rocks amphitheatre concert crowd" }),
+    heroHome: buildUnsplashImageSrc({ query: "red rocks amphitheatre concert dusk colorado crowd" }),
+    heroDefaultVenue: buildUnsplashImageSrc({ query: "red rocks amphitheatre stage crowd twilight" }),
 
     sceneTiles: {
       jam: buildUnsplashImageSrc({ query: "jam band concert colorado" }),

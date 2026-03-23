@@ -322,6 +322,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     (e?.sourceId ? media?.eventsById?.[e.sourceId] : null) ||
     null;
   const mediaImage = selectImageByPriority({
+    entityType: "show",
+    title: e?.title ?? null,
+    artistName: e?.performers?.map((p) => p?.name).filter(Boolean)[0] ?? null,
+    venueName: e?.venue?.siteName ?? null,
+    queryHint: e?.title ? `${e.title} ${e?.venue?.siteName || ""} concert` : "concert shuttle options",
     blobImage: mediaRow?.sources?.blobImage ?? null,
     spotifyImage: mediaRow?.sources?.spotifyImage ?? null,
     ticketmasterImage: mediaRow?.sources?.ticketmasterImage ?? null,
@@ -381,8 +386,15 @@ export default async function ShowPage({ params }: Props) {
   const venueSlug = e?.venue?.siteSlug;
   const venueName = e?.venue?.siteName || "Venue";
   const updatedAt = data?.generatedAt ?? null;
+  const primaryArtist = (e?.performers ?? []).map((p) => p?.name).filter(Boolean)[0] ?? null;
   const showMediaRow = media?.eventsById?.[e.id] || (e?.sourceId ? media?.eventsById?.[e.sourceId] : null) || null;
   const showImage = selectImageByPriority({
+    entityType: "show",
+    title: e?.title ?? null,
+    artistName: primaryArtist,
+    venueName,
+    queryHint: `${primaryArtist || e.title} ${venueName} concert`,
+    alt: e?.title ?? null,
     blobImage: showMediaRow?.sources?.blobImage ?? null,
     spotifyImage: showMediaRow?.sources?.spotifyImage ?? null,
     ticketmasterImage: showMediaRow?.sources?.ticketmasterImage ?? null,
@@ -390,13 +402,17 @@ export default async function ShowPage({ params }: Props) {
     localAsset: showMediaRow?.sources?.localAsset ?? null,
     fallback: showMediaRow?.sources?.fallback ?? "/images/shows/fallback.jpg",
   });
-  const primaryArtist = (e?.performers ?? []).map((p) => p?.name).filter(Boolean)[0] ?? null;
   const artistRec =
     (primaryArtist
       ? allArtists.find((row) => row.id === primaryArtist || slugify(row.name) === slugify(primaryArtist))
       : null) ?? null;
   const artistMediaRow = artistRec?.id ? media?.artistsById?.[artistRec.id] ?? null : null;
   const artistImage = selectImageByPriority({
+    entityType: "artist",
+    title: primaryArtist,
+    artistName: primaryArtist,
+    queryHint: primaryArtist ? `${primaryArtist} live music artist portrait` : null,
+    alt: primaryArtist,
     blobImage: artistMediaRow?.sources?.blobImage ?? null,
     spotifyImage: artistMediaRow?.sources?.spotifyImage ?? null,
     ticketmasterImage: artistMediaRow?.sources?.ticketmasterImage ?? null,

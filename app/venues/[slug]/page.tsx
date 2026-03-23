@@ -567,6 +567,11 @@ export async function generateMetadata({
   const url = `${SITE}/venues/${slug}`;
   const media = await getMediaIndex(2026);
   const venueImage = selectImageByPriority({
+    entityType: "venue",
+    title,
+    venueName: displayName(slug, withIdentityName),
+    queryHint: `${displayName(slug, withIdentityName)} concert venue`,
+    alt: `${displayName(slug, withIdentityName)} venue guide`,
     spotifyImage: media?.venuesById?.[slug]?.sources?.spotifyImage ?? null,
     ticketmasterImage: media?.venuesById?.[slug]?.sources?.ticketmasterImage ?? null,
     seatgeekImage: media?.venuesById?.[slug]?.sources?.seatgeekImage ?? null,
@@ -640,6 +645,11 @@ export default async function VenuePage({
   ]);
   const events = toVenueEvents(allEvents, slug);
   const venueImage = selectImageByPriority({
+    entityType: "venue",
+    title: name,
+    venueName: name,
+    queryHint: `${name} concert venue`,
+    alt: `${name} venue image`,
     spotifyImage: media?.venuesById?.[slug]?.sources?.spotifyImage ?? null,
     ticketmasterImage: media?.venuesById?.[slug]?.sources?.ticketmasterImage ?? null,
     seatgeekImage: media?.venuesById?.[slug]?.sources?.seatgeekImage ?? null,

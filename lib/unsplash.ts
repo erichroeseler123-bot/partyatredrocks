@@ -63,7 +63,9 @@ type BuildUnsplashImageSrcInput = {
 
 export function buildUnsplashImageSrc(input: BuildUnsplashImageSrcInput = {}) {
   const params = new URLSearchParams();
-  params.set("q", buildUnsplashQuery(input.query, input.alt, input.src));
+  const primaryQuery = buildUnsplashQuery(input.query, input.alt);
+  const fallbackQuery = input.src ? buildUnsplashQuery(input.src) : DEFAULT_QUERY;
+  params.set("q", primaryQuery || fallbackQuery);
   if (input.src) params.set("src", input.src);
   if (input.alt) params.set("alt", input.alt);
   if (input.width) params.set("w", String(input.width));
@@ -75,4 +77,3 @@ export function buildUnsplashImageSrc(input: BuildUnsplashImageSrcInput = {}) {
 export function semanticUnsplashSrc(query: string) {
   return `unsplash:${query}`;
 }
-

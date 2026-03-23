@@ -62,6 +62,11 @@ export default async function BandPage({ params }: Props) {
   const showCount = artist.showCount ?? mine.length;
   const mediaSources = media?.artistsById?.[artist.id]?.sources;
   const heroImage = selectImageByPriority({
+    entityType: "artist",
+    title: artist.name,
+    artistName: artist.name,
+    queryHint: `${artist.name} live music artist portrait`,
+    alt: artist.name,
     spotifyImage: mediaSources?.spotifyImage ?? enriched?.spotifyImage ?? null,
     ticketmasterImage: mediaSources?.ticketmasterImage ?? null,
     seatgeekImage: mediaSources?.seatgeekImage ?? artist.image ?? null,

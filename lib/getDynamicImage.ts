@@ -1,22 +1,27 @@
 export type ImageType = "artist" | "venue" | "concert" | "genre" | "fleet";
-import { buildUnsplashImageSrc, buildUnsplashQuery } from "@/lib/unsplash";
+import { resolveMediaImage } from "@/lib/media/resolver";
 
 export async function getDynamicImage(
   type: ImageType,
   query = "",
   fallbackLocal?: string,
 ): Promise<string> {
-  const baseQuery = buildUnsplashQuery(query, fallbackLocal);
-  const typeHints: Record<ImageType, string> = {
-    artist: "live music artist portrait concert",
-    venue: "concert venue crowd lights",
-    concert: "concert crowd stage lights",
-    genre: "live music scene crowd",
-    fleet: "concert transportation sprinter van shuttle",
-  };
+  const entityType = (() => {
+    if (type === "artist") return "artist";
+    if (type === "venue") return "venue";
+    if (type === "genre") return "scene";
+    if (type === "fleet") return "transport";
+    return "show";
+  })();
 
-  return buildUnsplashImageSrc({
-    query: `${baseQuery} ${typeHints[type]}`.trim(),
-    src: fallbackLocal || undefined,
+  return resolveMediaImage({
+    entityType,
+    slug: query || type,
+    sourceHints: {
+      title: query,
+      queryHint: query,
+      localImageUrl: fallbackLocal || undefined,
+      alt: query || type,
+    },
   });
 }
