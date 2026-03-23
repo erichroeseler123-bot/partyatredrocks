@@ -66,6 +66,32 @@ function venueName(venueId: string): string {
   return VENUE_LEDGER_BY_SLUG.get(venueId)?.name ?? venueId;
 }
 
+const SCENE_FALLBACKS = [
+  "/images/scenes/jam.jpg",
+  "/images/scenes/edm.jpg",
+  "/images/scenes/hiphop.jpg",
+  "/hero/hero-home.jpg",
+  "/hero/hero-guides.jpg",
+  "/images/marketing/fleet.jpg",
+  "/images/marketing/shuttle.jpg",
+  "/images/marketing/vip-suv.jpg",
+  "/venues/missionsite.jpg",
+  "/venues/mishsite.jpg",
+  "/venues/rrsite.jpg",
+] as const;
+
+function hashString(input: string) {
+  let hash = 0;
+  for (let index = 0; index < input.length; index += 1) {
+    hash = (hash * 31 + input.charCodeAt(index)) >>> 0;
+  }
+  return hash;
+}
+
+function getSceneFallbackImage(sceneSlug: string) {
+  return SCENE_FALLBACKS[hashString(sceneSlug) % SCENE_FALLBACKS.length];
+}
+
 function formatDate(dateKey: string) {
   return new Date(`${dateKey}T12:00:00`).toLocaleDateString("en-US", {
     weekday: "short",
@@ -81,7 +107,7 @@ export default async function ScenesLandingPage() {
     await Promise.all(
       scenes.map(async (scene) => [
         scene.slug,
-        await getDynamicImage("genre", `${scene.title} concert`, "/venues/rrsite.jpg"),
+        await getDynamicImage("genre", `${scene.title} concert`, getSceneFallbackImage(scene.slug)),
       ]),
     ),
   ) as Record<string, string>;

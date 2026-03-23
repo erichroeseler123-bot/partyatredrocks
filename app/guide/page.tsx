@@ -122,6 +122,32 @@ const deepDive: Card[] = [
 
 assertUniqueGuideImages();
 
+const GUIDE_CARD_FALLBACKS = [
+  "/hero/hero-guides.jpg",
+  "/hero/hero-home.jpg",
+  "/images/marketing/shuttle.jpg",
+  "/images/marketing/vip-suv.jpg",
+  "/images/marketing/fleet.jpg",
+  "/images/scenes/jam.jpg",
+  "/images/scenes/edm.jpg",
+  "/images/scenes/hiphop.jpg",
+  "/venues/missionsite.jpg",
+  "/venues/mishsite.jpg",
+  "/venues/rrsite.jpg",
+] as const;
+
+function hashString(input: string) {
+  let hash = 0;
+  for (let index = 0; index < input.length; index += 1) {
+    hash = (hash * 31 + input.charCodeAt(index)) >>> 0;
+  }
+  return hash;
+}
+
+function getGuideFallbackImage(cardId: string) {
+  return GUIDE_CARD_FALLBACKS[hashString(cardId) % GUIDE_CARD_FALLBACKS.length];
+}
+
 function GuideCard({ card, imageSrc }: { card: Card; imageSrc: string }) {
   const visual = guideVisuals[card.visual];
   return (
@@ -159,7 +185,7 @@ export default async function GuideHub() {
     await Promise.all(
       cards.map(async (card) => [
         card.id,
-        await getDynamicImage("concert", `${card.title} red rocks`, "/venues/rrsite.jpg"),
+        await getDynamicImage("concert", `${card.title} red rocks`, getGuideFallbackImage(card.id)),
       ]),
     ),
   ) as Record<string, string>;

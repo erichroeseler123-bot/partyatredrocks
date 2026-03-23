@@ -4,13 +4,37 @@ import Link from "next/link";
 import { ArrowRight, BadgeCheck, CalendarDays, Clock3, PhoneCall } from "lucide-react";
 import { getEventsCatalog } from "@/lib/events/getCatalog";
 import { buildBookingHref } from "@/lib/parrHandoff";
+import { seatgeekEventsByVenueId } from "@/lib/seatgeek";
+import { getMediaIndex } from "@/lib/media/getMediaIndex";
+import { selectImageByPriority } from "@/lib/media/selectImage";
 import { getDynamicImage } from "@/lib/getDynamicImage";
 
 export const revalidate = 3600;
 
 const SITE = "https://www.partyatredrocks.com";
+const RED_ROCKS_SEATGEEK_VENUE_ID = 196;
+const SHOW_FALLBACK = "/images/shows/fallback.webp";
+const FALLBACK_IMAGE_SET = new Set([
+  "/images/shows/fallback.jpg",
+  "/images/shows/fallback.webp",
+  SHOW_FALLBACK,
+]);
+const CURATED_SCHEDULE_IMAGES = [
+  "/hero/hero-home.jpg",
+  "/hero/hero-guides.jpg",
+  "/images/marketing/shuttle.jpg",
+  "/images/marketing/vip-suv.jpg",
+  "/images/marketing/fleet.jpg",
+  "/images/scenes/jam.jpg",
+  "/images/scenes/edm.jpg",
+  "/images/scenes/hiphop.jpg",
+  "/venues/missionsite.jpg",
+  "/venues/mishsite.jpg",
+  "/venues/rrsite.jpg",
+] as const;
 
 type CatalogEvent = Awaited<ReturnType<typeof getEventsCatalog>>[number];
+type SeatGeekEvent = Awaited<ReturnType<typeof seatgeekEventsByVenueId>>[number];
 
 export const metadata: Metadata = {
   title: "Red Rocks Amphitheatre 2026 Full Concert Schedule | Party at Red Rocks Shuttle",
@@ -50,6 +74,87 @@ function dateLabel(dateKey: string) {
   });
 }
 
+function normalizeComparable(value: string | null | undefined) {
+  return (value || "")
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function hashString(input: string) {
+  let hash = 0;
+  for (let index = 0; index < input.length; index += 1) {
+    hash = (hash * 31 + input.charCodeAt(index)) >>> 0;
+  }
+  return hash;
+}
+
+function getCuratedScheduleImage(event: CatalogEvent) {
+  const index = hashString(event.id) % CURATED_SCHEDULE_IMAGES.length;
+  return CURATED_SCHEDULE_IMAGES[index];
+}
+
+function isMeaningfulImage(imageUrl: string | null | undefined) {
+  if (!imageUrl) return false;
+  return !FALLBACK_IMAGE_SET.has(imageUrl);
+}
+
+function buildSeatGeekByDate(events: SeatGeekEvent[]) {
+  const map = new Map<string, SeatGeekEvent[]>();
+  for (const event of events) {
+    const dateKey = event.datetime_local?.slice(0, 10);
+    if (!dateKey) continue;
+    const list = map.get(dateKey) || [];
+    list.push(event);
+    map.set(dateKey, list);
+  }
+  return map;
+}
+
+function scoreSeatGeekMatch(event: CatalogEvent, seatGeekEvent: SeatGeekEvent) {
+  const catalogName = normalizeComparable(event.name);
+  const catalogHeadliner = normalizeComparable(event.artistNames[0] || "");
+  const sgTitle = normalizeComparable(seatGeekEvent.title);
+  const sgHeadliner = normalizeComparable(seatGeekEvent.performers?.[0]?.name || "");
+
+  let score = 0;
+
+  if (catalogName && sgTitle && catalogName === sgTitle) score += 8;
+  if (catalogName && sgTitle && (catalogName.includes(sgTitle) || sgTitle.includes(catalogName))) score += 5;
+
+  if (catalogHeadliner && sgHeadliner && catalogHeadliner === sgHeadliner) score += 6;
+  if (
+    catalogHeadliner &&
+    (catalogHeadliner === sgTitle || sgTitle.includes(catalogHeadliner) || catalogHeadliner.includes(sgTitle))
+  ) {
+    score += 4;
+  }
+
+  if (event.dateKey === seatGeekEvent.datetime_local?.slice(0, 10)) score += 2;
+
+  return score;
+}
+
+function findSeatGeekMatch(event: CatalogEvent, byDate: Map<string, SeatGeekEvent[]>) {
+  const candidates = byDate.get(event.dateKey) || [];
+  if (!candidates.length) return null;
+
+  let best: SeatGeekEvent | null = null;
+  let bestScore = -1;
+
+  for (const candidate of candidates) {
+    const score = scoreSeatGeekMatch(event, candidate);
+    if (score > bestScore) {
+      bestScore = score;
+      best = candidate;
+    }
+  }
+
+  return bestScore >= 6 ? best : null;
+}
+
 export default async function SchedulePage() {
   const events = (await getEventsCatalog(2026, "redrocks"))
     .filter((event) => event.venueId === "red-rocks-amphitheatre")
@@ -57,12 +162,39 @@ export default async function SchedulePage() {
       if (a.dateKey !== b.dateKey) return a.dateKey.localeCompare(b.dateKey);
       return a.name.localeCompare(b.name);
     });
+  const mediaIndex = await getMediaIndex(2026);
+  let seatGeekByDate = new Map<string, SeatGeekEvent[]>();
+  try {
+    const seatGeekEvents = await seatgeekEventsByVenueId(RED_ROCKS_SEATGEEK_VENUE_ID);
+    seatGeekByDate = buildSeatGeekByDate(seatGeekEvents);
+  } catch {
+    // Keep rendering if SeatGeek API is unavailable.
+  }
   const eventImageMap = Object.fromEntries(
     await Promise.all(
-      events.map(async (event) => [
-        event.id,
-        await getDynamicImage("artist", event.artistNames[0] || event.name, "/venues/rrsite.jpg"),
-      ]),
+      events.map(async (event) => {
+        const mediaRow = mediaIndex?.eventsById?.[event.id];
+        const mediaSnapshotCandidate = mediaRow
+          ? selectImageByPriority({
+              seatgeekImage: mediaRow.sources?.seatgeekImage,
+              ticketmasterImage: mediaRow.sources?.ticketmasterImage,
+              blobImage: mediaRow.sources?.blobImage,
+              localAsset: mediaRow.sources?.localAsset,
+              fallback: mediaRow.sources?.fallback,
+            })
+          : null;
+        const mediaSnapshotImage = isMeaningfulImage(mediaSnapshotCandidate) ? mediaSnapshotCandidate : null;
+
+        const seatGeekMatch = findSeatGeekMatch(event, seatGeekByDate);
+        const seatGeekImage = seatGeekMatch?.performers?.find((performer) => performer.image)?.image || null;
+        const resolved =
+          seatGeekImage ||
+          (isMeaningfulImage(event.image) ? event.image : null) ||
+          mediaSnapshotImage ||
+          (await getDynamicImage("artist", event.artistNames[0] || event.name, getCuratedScheduleImage(event)));
+
+        return [event.id, resolved];
+      }),
     ),
   ) as Record<string, string>;
 
