@@ -137,11 +137,6 @@ export default function SocialLinks({
               {platformGlyph(item.platform)}
             </span>
             {showLabels ? <span className={cx("leading-none", mode === "feature" && "flex-1")}>{text}</span> : null}
-            {isPrimary ? (
-              <span className="rounded-full border border-white/14 bg-white/8 px-2 py-1 text-[9px] font-black uppercase tracking-[0.18em] text-white/82">
-                Follow us
-              </span>
-            ) : null}
           </Link>
         );
       })}
