@@ -1,9 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import SocialLinks from "@/components/shared/SocialLinks";
 import ShareActions from "@/components/shared/ShareActions";
 import { getFeaturedUGCPosts } from "@/data/social/ugc-posts";
-import { BUSINESS_PHONE } from "@/lib/seo/siteTrust";
 
 type SocialProofStripProps = {
   brandKey?: "partyatredrocks";
@@ -33,9 +31,6 @@ export default function SocialProofStrip({
   className,
 }: SocialProofStripProps) {
   const posts = getFeaturedUGCPosts(brandKey, mode === "feature" ? 4 : 3);
-  const supportMessage = buildSupportMessage(pageTitle, pageUrl);
-  const smsUrl = `sms:${BUSINESS_PHONE.replace(/^\+/, "")}?&body=${encodeURIComponent(supportMessage)}`;
-  const whatsappUrl = `https://wa.me/${BUSINESS_PHONE.replace(/^\+/, "")}?text=${encodeURIComponent(supportMessage)}`;
 
   return (
     <section
@@ -49,10 +44,6 @@ export default function SocialProofStrip({
           <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">Ride nights</div>
           <h2 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white sm:text-3xl">{title}</h2>
           <p className="mt-3 text-sm leading-6 text-white/72 sm:text-[15px]">{body}</p>
-        </div>
-        <div className="flex flex-col gap-3">
-          <SocialLinks brandKey={brandKey} mode={mode === "feature" ? "feature" : "footer"} showLabels showPrimaryAccent />
-          <div className="text-sm font-semibold text-white/78">Follow real rides, show nights, and last-minute availability.</div>
         </div>
       </div>
 
@@ -87,31 +78,11 @@ export default function SocialProofStrip({
         ))}
       </div>
 
-      <div className="mt-6 flex flex-col gap-4 rounded-[24px] border border-white/10 bg-white/5 p-4 sm:p-5">
-        <div>
-          <div className="text-[10px] font-black uppercase tracking-[0.2em] text-white/55">Questions about this ride?</div>
-          <div className="mt-1 text-sm font-semibold text-white/82">Text or WhatsApp is the fastest path if you want timing, pickup, or group-plan answers.</div>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          <Link
-            href={smsUrl}
-            className="inline-flex items-center rounded-full border border-white/20 bg-white px-4 py-2.5 text-sm font-semibold text-[#1d1020] transition duration-200 hover:-translate-y-[1px] hover:bg-[#fff7ff]"
-          >
-            Text us
-          </Link>
-          <Link
-            href={whatsappUrl}
-            target="_blank"
-            rel="noreferrer noopener"
-            className="inline-flex items-center rounded-full border border-white/20 bg-white px-4 py-2.5 text-sm font-semibold text-[#1d1020] transition duration-200 hover:-translate-y-[1px] hover:bg-[#fff7ff]"
-          >
-            WhatsApp
-          </Link>
-        </div>
-        {mode === "feature" ? (
+      {mode === "feature" ? (
+        <div className="mt-6 flex flex-col gap-4 rounded-[24px] border border-white/10 bg-white/5 p-4 sm:p-5">
           <ShareActions brandKey={brandKey} url={pageUrl} title={pageTitle} mode="feature" />
-        ) : null}
-      </div>
+        </div>
+      ) : null}
     </section>
   );
 }

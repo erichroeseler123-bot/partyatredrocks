@@ -17,8 +17,6 @@ import { ReviewBlock } from "@/components/ReviewBlock";
 import { PRIVATE_TRANSPORT_PROMO } from "@/lib/privateTransportPromo";
 
 const BOOK_RED_ROCKS = "/book/red-rocks-amphitheatre";
-const PRIMARY_CTA_CLASS =
-  "inline-flex min-h-12 items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-5 text-xs font-black uppercase tracking-[0.18em] text-[#fff4de] shadow-[0_16px_36px_rgba(141,79,32,0.28)] transition hover:-translate-y-0.5 hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]";
 
 type HomeSectionsProps = {
   heroSrc: string;
@@ -55,6 +53,7 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc }: HomeS
       cta: "View Private Vehicles",
       image: shuttleSrc,
       alt: "Private vehicle option for Red Rocks transportation",
+      promo: PRIVATE_TRANSPORT_PROMO,
     },
   ];
 
@@ -130,57 +129,6 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc }: HomeS
                   <p className="mt-2 text-sm leading-6 text-white/72">Submit checkout once and your return ride is covered.</p>
                 </article>
               </div>
-
-              <div className="mt-6 max-w-3xl overflow-hidden rounded-[30px] border border-amber-100/55 bg-[linear-gradient(135deg,rgba(255,227,163,0.36)_0%,rgba(255,156,64,0.38)_32%,rgba(122,40,8,0.5)_58%,rgba(18,12,8,0.98)_100%)] shadow-[0_28px_110px_rgba(255,132,45,0.42)] ring-1 ring-amber-200/20 backdrop-blur">
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 w-2 bg-[linear-gradient(180deg,#fff0bf_0%,#ff9c40_100%)]" />
-                  <div className="absolute right-[-60px] top-[-50px] h-40 w-40 rounded-full bg-amber-200/18 blur-3xl" />
-                  <div className="absolute bottom-[-80px] right-16 h-44 w-44 rounded-full bg-orange-500/18 blur-3xl" />
-
-                  <div className="relative flex flex-col gap-5 px-5 py-5 sm:px-6 lg:flex-row lg:items-center lg:justify-between">
-                    <div className="max-w-2xl">
-                      <div className="inline-flex items-center gap-2 rounded-full border border-white/24 bg-black/32 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.26em] text-amber-50">
-                        <TicketPercent className="h-3.5 w-3.5" />
-                        April private ride promo
-                      </div>
-
-                      <div className="mt-4 flex flex-wrap items-end gap-x-3 gap-y-2">
-                        <span className="text-4xl font-black uppercase tracking-[-0.06em] text-white sm:text-5xl">
-                          $50 Off
-                        </span>
-                        <span className="pb-1 text-xs font-black uppercase tracking-[0.28em] text-[#ffe7b3] sm:text-sm">
-                          Private Transportation
-                        </span>
-                      </div>
-
-                      <p className="mt-3 max-w-2xl text-sm leading-6 text-white sm:text-[15px]">
-                        {PRIVATE_TRANSPORT_PROMO.headline} Use code{" "}
-                        <span className="rounded-full bg-black/30 px-2 py-1 font-black tracking-[0.1em] text-[#ffe2a8]">
-                          {PRIVATE_TRANSPORT_PROMO.code}
-                        </span>
-                        .
-                      </p>
-                    </div>
-
-                    <div className="flex shrink-0 flex-col gap-3 sm:min-w-[240px]">
-                      <div className="rounded-[22px] border border-white/18 bg-black/30 px-4 py-3 text-center shadow-[0_16px_40px_rgba(0,0,0,0.28)]">
-                        <div className="text-[10px] font-black uppercase tracking-[0.22em] text-white/60">Use Code</div>
-                        <div className="mt-1 text-base font-black uppercase tracking-[0.14em] text-white">
-                          {PRIVATE_TRANSPORT_PROMO.code}
-                        </div>
-                      </div>
-
-                      <Link
-                        href={BOOK_RED_ROCKS}
-                        className={PRIMARY_CTA_CLASS}
-                      >
-                        Claim Private Ride Deal
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
             </div>
           </div>
         </section>
@@ -217,6 +165,42 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc }: HomeS
                     </li>
                   ))}
                 </ul>
+                {ride.promo ? (
+                  <div className="mt-6 overflow-hidden rounded-[28px] border border-amber-100/55 bg-[linear-gradient(135deg,rgba(255,227,163,0.24)_0%,rgba(255,156,64,0.28)_30%,rgba(122,40,8,0.4)_58%,rgba(18,12,8,0.96)_100%)] shadow-[0_24px_90px_rgba(255,132,45,0.24)] ring-1 ring-amber-200/15">
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 w-2 bg-[linear-gradient(180deg,#fff0bf_0%,#ff9c40_100%)]" />
+                      <div className="relative flex flex-col gap-4 px-5 py-5 sm:flex-row sm:items-end sm:justify-between">
+                        <div>
+                          <div className="inline-flex items-center gap-2 rounded-full border border-white/24 bg-black/32 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.26em] text-amber-50">
+                            <TicketPercent className="h-3.5 w-3.5" />
+                            April private ride promo
+                          </div>
+                          <div className="mt-4 flex flex-wrap items-end gap-x-3 gap-y-2">
+                            <span className="text-3xl font-black uppercase tracking-[-0.06em] text-white sm:text-4xl">
+                              $50 Off
+                            </span>
+                            <span className="pb-1 text-[11px] font-black uppercase tracking-[0.24em] text-[#ffe7b3] sm:text-xs">
+                              Private Transportation
+                            </span>
+                          </div>
+                          <p className="mt-3 max-w-xl text-sm leading-6 text-white/88">
+                            {ride.promo.headline} Use code{" "}
+                            <span className="rounded-full bg-black/30 px-2 py-1 font-black tracking-[0.1em] text-[#ffe2a8]">
+                              {ride.promo.code}
+                            </span>
+                            .
+                          </p>
+                        </div>
+                        <div className="rounded-[22px] border border-white/18 bg-black/30 px-4 py-3 text-center shadow-[0_16px_40px_rgba(0,0,0,0.28)] sm:min-w-[180px]">
+                          <div className="text-[10px] font-black uppercase tracking-[0.22em] text-white/60">Use Code</div>
+                          <div className="mt-1 text-base font-black uppercase tracking-[0.14em] text-white">
+                            {ride.promo.code}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : null}
                 <Link
                   href={ride.href}
                   className="mt-7 inline-flex min-h-14 items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-8 text-sm font-black uppercase tracking-[0.16em] text-[#fff4de] shadow-[0_18px_42px_rgba(141,79,32,0.28)] transition hover:-translate-y-0.5 hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
