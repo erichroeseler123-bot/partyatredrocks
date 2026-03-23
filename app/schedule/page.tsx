@@ -8,6 +8,7 @@ import { seatgeekEventsByVenueId } from "@/lib/seatgeek";
 import { getMediaIndex } from "@/lib/media/getMediaIndex";
 import { selectImageByPriority } from "@/lib/media/selectImage";
 import { getDynamicImage } from "@/lib/getDynamicImage";
+import { ANNOUNCED_RED_ROCKS_2026 } from "@/data/red-rocks-2026-announced";
 
 export const revalidate = 3600;
 
@@ -35,6 +36,17 @@ const CURATED_SCHEDULE_IMAGES = [
 
 type CatalogEvent = Awaited<ReturnType<typeof getEventsCatalog>>[number];
 type SeatGeekEvent = Awaited<ReturnType<typeof seatgeekEventsByVenueId>>[number];
+type ScheduleEvent = {
+  id: string;
+  showId: string | null;
+  name: string;
+  dateKey: string;
+  artistNames: string[];
+  startAt: string | null;
+  startLocal: string | null;
+  image: string | null;
+  source: "catalog" | "announced";
+};
 
 export const metadata: Metadata = {
   title: "Red Rocks Amphitheatre 2026 Full Concert Schedule | Party at Red Rocks Shuttle",
@@ -50,7 +62,7 @@ export const metadata: Metadata = {
   },
 };
 
-function toTimeLabel(event: CatalogEvent) {
+function toTimeLabel(event: ScheduleEvent) {
   const raw = event.startLocal || event.startAt;
   if (!raw) return null;
   const date = new Date(raw);
@@ -91,7 +103,7 @@ function hashString(input: string) {
   return hash;
 }
 
-function getCuratedScheduleImage(event: CatalogEvent) {
+function getCuratedScheduleImage(event: ScheduleEvent) {
   const index = hashString(event.id) % CURATED_SCHEDULE_IMAGES.length;
   return CURATED_SCHEDULE_IMAGES[index];
 }
@@ -113,7 +125,7 @@ function buildSeatGeekByDate(events: SeatGeekEvent[]) {
   return map;
 }
 
-function scoreSeatGeekMatch(event: CatalogEvent, seatGeekEvent: SeatGeekEvent) {
+function scoreSeatGeekMatch(event: ScheduleEvent, seatGeekEvent: SeatGeekEvent) {
   const catalogName = normalizeComparable(event.name);
   const catalogHeadliner = normalizeComparable(event.artistNames[0] || "");
   const sgTitle = normalizeComparable(seatGeekEvent.title);
@@ -137,7 +149,7 @@ function scoreSeatGeekMatch(event: CatalogEvent, seatGeekEvent: SeatGeekEvent) {
   return score;
 }
 
-function findSeatGeekMatch(event: CatalogEvent, byDate: Map<string, SeatGeekEvent[]>) {
+function findSeatGeekMatch(event: ScheduleEvent, byDate: Map<string, SeatGeekEvent[]>) {
   const candidates = byDate.get(event.dateKey) || [];
   if (!candidates.length) return null;
 
@@ -156,12 +168,53 @@ function findSeatGeekMatch(event: CatalogEvent, byDate: Map<string, SeatGeekEven
 }
 
 export default async function SchedulePage() {
-  const events = (await getEventsCatalog(2026, "redrocks"))
+  const catalogEvents = (await getEventsCatalog(2026, "redrocks"))
     .filter((event) => event.venueId === "red-rocks-amphitheatre")
     .sort((a, b) => {
       if (a.dateKey !== b.dateKey) return a.dateKey.localeCompare(b.dateKey);
       return a.name.localeCompare(b.name);
     });
+
+  const normalizedEventKey = (dateKey: string, name: string) =>
+    `${dateKey}::${normalizeComparable(name)}`;
+
+  const mergedByKey = new Map<string, ScheduleEvent>();
+
+  for (const announced of ANNOUNCED_RED_ROCKS_2026) {
+    const key = normalizedEventKey(announced.dateKey, announced.name);
+    mergedByKey.set(key, {
+      id: announced.id,
+      showId: null,
+      name: announced.name,
+      dateKey: announced.dateKey,
+      artistNames: [announced.headliner],
+      startAt: null,
+      startLocal: null,
+      image: null,
+      source: "announced",
+    });
+  }
+
+  for (const event of catalogEvents) {
+    const key = normalizedEventKey(event.dateKey, event.name);
+    mergedByKey.set(key, {
+      id: event.id,
+      showId: event.id,
+      name: event.name,
+      dateKey: event.dateKey,
+      artistNames: event.artistNames.length ? event.artistNames : [event.name],
+      startAt: event.startAt,
+      startLocal: event.startLocal,
+      image: event.image,
+      source: "catalog",
+    });
+  }
+
+  const events = Array.from(mergedByKey.values()).sort((a, b) => {
+    if (a.dateKey !== b.dateKey) return a.dateKey.localeCompare(b.dateKey);
+    return a.name.localeCompare(b.name);
+  });
+
   const mediaIndex = await getMediaIndex(2026);
   let seatGeekByDate = new Map<string, SeatGeekEvent[]>();
   try {
@@ -173,7 +226,7 @@ export default async function SchedulePage() {
   const eventImageMap = Object.fromEntries(
     await Promise.all(
       events.map(async (event) => {
-        const mediaRow = mediaIndex?.eventsById?.[event.id];
+        const mediaRow = event.showId ? mediaIndex?.eventsById?.[event.showId] : null;
         const mediaSnapshotCandidate = mediaRow
           ? selectImageByPriority({
               seatgeekImage: mediaRow.sources?.seatgeekImage,
@@ -198,7 +251,7 @@ export default async function SchedulePage() {
     ),
   ) as Record<string, string>;
 
-  const grouped = events.reduce<Record<string, CatalogEvent[]>>((acc, event) => {
+  const grouped = events.reduce<Record<string, ScheduleEvent[]>>((acc, event) => {
     const key = monthLabel(event.dateKey);
     if (!acc[key]) acc[key] = [];
     acc[key].push(event);
@@ -274,14 +327,14 @@ export default async function SchedulePage() {
                 {monthEvents.map((event) => {
                   const support = event.artistNames.slice(1).join(", ");
                   const time = toTimeLabel(event);
-                  const showHref = `/shows/${event.id}`;
+                  const showHref = event.showId ? `/shows/${event.showId}` : "https://www.redrocksonline.com/events/";
                   const shuttleHref = buildBookingHref({
                     target: "shared",
                     venue: "red-rocks-amphitheatre",
                     overrides: {
-                      event: event.id,
                       artist: event.artistNames[0] || event.name,
                       date: event.dateKey,
+                      ...(event.showId ? { event: event.showId } : {}),
                     },
                   });
 
@@ -334,9 +387,11 @@ export default async function SchedulePage() {
                           </Link>
                           <Link
                             href={showHref}
+                            target={event.showId ? undefined : "_blank"}
+                            rel={event.showId ? undefined : "noreferrer noopener"}
                             className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/18 bg-black/20 px-4 text-xs font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
                           >
-                            Open Show Page
+                            {event.showId ? "Open Show Page" : "Official Listing"}
                           </Link>
                         </div>
                       </div>
