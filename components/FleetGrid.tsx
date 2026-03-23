@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { UnsplashImg } from "@/components/UnsplashImg";
 
 export default function FleetGrid() {
   // 🛰️ Internal logic: Target the first mission of the 2026 season
@@ -13,7 +14,16 @@ export default function FleetGrid() {
       {/* 🚐 SHUTTLE EXEC CARD */}
       <div className="panel-soft rounded-3xl p-6 flex flex-col items-center text-center space-y-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
         <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-          <img src="/shuttle-exec.jpg" alt="Shuttle Exec" className="object-cover w-full h-full" loading="lazy" decoding="async" width={1280} height={720} />
+          <UnsplashImg
+            src="/shuttle-exec.jpg"
+            query="concert shuttle executive van denver"
+            alt="Shuttle Exec"
+            className="object-cover w-full h-full"
+            loading="lazy"
+            decoding="async"
+            width={1280}
+            height={720}
+          />
           <span className="absolute top-4 right-4 bg-neon-blue text-black font-black text-[10px] px-3 py-1 rounded-full shadow-[0_0_10px_var(--glowHex)]">
             $59.00
           </span>
@@ -35,7 +45,16 @@ export default function FleetGrid() {
       {/* 🏎️ PRIVATE SUV NODE CARD */}
       <div className="panel-soft rounded-3xl p-6 flex flex-col items-center text-center space-y-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
         <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-          <img src="/private-suv.jpg" alt="Private Suburban" className="object-cover w-full h-full" loading="lazy" decoding="async" width={1280} height={720} />
+          <UnsplashImg
+            src="/private-suv.jpg"
+            query="private suburban concert transportation denver"
+            alt="Private Suburban"
+            className="object-cover w-full h-full"
+            loading="lazy"
+            decoding="async"
+            width={1280}
+            height={720}
+          />
           <span className="absolute top-4 right-4 bg-white text-black font-black text-[10px] px-3 py-1 rounded-full shadow-lg">
             $499.00
           </span>

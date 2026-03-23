@@ -1,6 +1,7 @@
 // components/VenueEventsGrid.tsx
 import Link from "next/link";
 import { venueImage } from "@/lib/display";
+import { UnsplashImg } from "@/components/UnsplashImg";
 
 type Props = {
   events: any[];
@@ -37,8 +38,9 @@ export default function VenueEventsGrid({ events, venueSlug }: Props) {
             className="group relative h-48 overflow-hidden rounded-2xl border border-soft bg-black transition-all duration-300 hover:-translate-y-1 hover:border-soft hover:shadow-2xl"
           >
             {/* Background image */}
-            <img
+            <UnsplashImg
               src={bg}
+              query={`${title} ${venueSlug} concert`}
               alt={title}
               className="absolute inset-0 h-full w-full object-cover opacity-35 transition-opacity duration-300 group-hover:opacity-45"
               loading="lazy"

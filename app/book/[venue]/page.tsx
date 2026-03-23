@@ -4,6 +4,7 @@ import Link from "next/link";
 import Script from "next/script";
 import { notFound } from "next/navigation";
 import venuesJson from "@/data/venues.json";
+import { UnsplashImg } from "@/components/UnsplashImg";
 import { TrustStrip } from "@/components/TrustStrip";
 import { PlanningLinks } from "@/components/booking/PlanningLinks";
 import { PrivatePromoBanner } from "@/components/booking/PrivatePromoBanner";
@@ -184,11 +185,14 @@ export default async function VenueBookingPage({
           >
             {venueMedia ? (
               <div className="relative mb-4 h-44 overflow-hidden rounded-[18px] border border-white/10">
-                <img
+                <UnsplashImg
                   src={venueMedia.card}
+                  query={`${row.name} shared shuttle transportation`}
                   alt={venueMedia.cardAlt}
                   className="h-full w-full object-cover"
                   loading="lazy"
+                  width={960}
+                  height={528}
                 />
               </div>
             ) : null}
@@ -218,11 +222,14 @@ export default async function VenueBookingPage({
           >
             {venueMedia ? (
               <div className="relative mb-4 h-44 overflow-hidden rounded-[18px] border border-white/10">
-                <img
+                <UnsplashImg
                   src={venueMedia.hero}
+                  query={`${row.name} private concert transportation`}
                   alt={isRedRocks ? "Private ride path for Red Rocks concert nights" : venueMedia.heroAlt}
                   className="h-full w-full object-cover"
                   loading="lazy"
+                  width={960}
+                  height={528}
                 />
               </div>
             ) : null}

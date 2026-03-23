@@ -20,32 +20,9 @@ const nextConfig = {
     ];
   },
   images: {
-    remotePatterns: [
-      // Common SeatGeek performer/venue image hosts
-      { protocol: "https", hostname: "seatgeekimages.com" },
-      { protocol: "https", hostname: "*.seatgeekimages.com" },
-
-      // Sometimes returned in the wild (safe to allow)
-      { protocol: "https", hostname: "seatgeek.com" },
-      { protocol: "https", hostname: "*.seatgeek.com" },
-      { protocol: "https", hostname: "seatgeekcdn.com" },
-      { protocol: "https", hostname: "*.seatgeekcdn.com" },
-      { protocol: "https", hostname: "static.seatgeek.com" },
-
-      // Wikimedia / Wikipedia venue-image resolver
-      { protocol: "https", hostname: "upload.wikimedia.org" },
-
-      // DCC public media feed assets
-      { protocol: "https", hostname: "destinationcommandcenter.com" },
-      { protocol: "https", hostname: "www.destinationcommandcenter.com" },
-
-      // Dynamic image providers
-      { protocol: "https", hostname: "theaudiodb.com" },
-      { protocol: "https", hostname: "www.theaudiodb.com" },
-      { protocol: "https", hostname: "r2.theaudiodb.com" },
-      { protocol: "https", hostname: "source.unsplash.com" },
-      { protocol: "https", hostname: "images.unsplash.com" },
-    ],
+    loader: "custom",
+    loaderFile: "./unsplash-loader.js",
+    remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com" }],
   },
 };
 

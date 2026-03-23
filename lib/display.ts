@@ -1,4 +1,5 @@
 // lib/display.ts
+import { buildUnsplashImageSrc } from "@/lib/unsplash";
 import { VENUES } from "@/lib/venues";
 
 export const DISPLAY = {
@@ -16,39 +17,39 @@ export const DISPLAY = {
 
   images: {
     marketing: {
-      vipSuv: "/images/marketing/vip-suv.webp",
-      fleet: "/images/marketing/fleet.webp",
-      shuttle: "/images/marketing/shuttle.webp",
+      vipSuv: buildUnsplashImageSrc({ query: "private suv concert transportation denver night" }),
+      fleet: buildUnsplashImageSrc({ query: "sprinter van concert transportation denver" }),
+      shuttle: buildUnsplashImageSrc({ query: "concert shuttle bus denver night" }),
     },
 
-    heroHome: "/hero/hero-home.webp",
-    heroDefaultVenue: "/hero/hero-home.webp",
+    heroHome: buildUnsplashImageSrc({ query: "red rocks amphitheatre concert night denver" }),
+    heroDefaultVenue: buildUnsplashImageSrc({ query: "red rocks amphitheatre concert crowd" }),
 
     sceneTiles: {
-      jam: "/images/scenes/jam.webp",
-      edm: "/images/scenes/edm.webp",
-      hiphop: "/images/scenes/hiphop.webp",
-      metal: "/images/scenes/metal.jpg",
-      bluegrass: "/images/scenes/bluegrass.jpg",
-      indie: "/images/scenes/indie.jpg",
-      country: "/images/scenes/country.jpg",
-      reggae: "/images/scenes/reggae.jpg",
-      punk: "/images/scenes/punk.jpg",
-      latin: "/images/scenes/latin.jpg",
+      jam: buildUnsplashImageSrc({ query: "jam band concert colorado" }),
+      edm: buildUnsplashImageSrc({ query: "edm concert denver" }),
+      hiphop: buildUnsplashImageSrc({ query: "hip hop concert denver" }),
+      metal: buildUnsplashImageSrc({ query: "metal concert denver" }),
+      bluegrass: buildUnsplashImageSrc({ query: "bluegrass concert colorado" }),
+      indie: buildUnsplashImageSrc({ query: "indie concert denver" }),
+      country: buildUnsplashImageSrc({ query: "country concert colorado" }),
+      reggae: buildUnsplashImageSrc({ query: "reggae concert crowd" }),
+      punk: buildUnsplashImageSrc({ query: "punk concert denver" }),
+      latin: buildUnsplashImageSrc({ query: "latin concert denver" }),
     },
 
     // venue images keyed by venue slug
     venues: {
-      fallback: "/images/venues/fallback.webp",
-      "cervantes-masterpiece": "/images/venues/cervantes-masterpiece.webp",
-      "fiddlers-green-amphitheatre": "/images/venues/fiddlers-green-amphitheatre.webp",
-      "fillmore-auditorium": "/images/venues/fillmore-auditorium.webp",
-      "gothic-theatre": "/images/venues/gothic-theatre.webp",
-      "mission-ballroom": "/images/venues/mission-ballroom.webp",
-      "red-rocks-amphitheatre": "/images/venues/red-rocks-amphitheatre.webp",
+      fallback: buildUnsplashImageSrc({ query: "denver concert venue exterior" }),
+      "cervantes-masterpiece": buildUnsplashImageSrc({ query: "cervantes masterpiece denver concert venue" }),
+      "fiddlers-green-amphitheatre": buildUnsplashImageSrc({ query: "fiddlers green amphitheatre concert venue colorado" }),
+      "fillmore-auditorium": buildUnsplashImageSrc({ query: "fillmore auditorium denver concert venue" }),
+      "gothic-theatre": buildUnsplashImageSrc({ query: "gothic theatre denver concert venue" }),
+      "mission-ballroom": buildUnsplashImageSrc({ query: "mission ballroom denver concert venue" }),
+      "red-rocks-amphitheatre": buildUnsplashImageSrc({ query: "red rocks amphitheatre concert venue" }),
     },
 
-    showFallback: "/images/shows/fallback.webp",
+    showFallback: buildUnsplashImageSrc({ query: "concert stage crowd lights" }),
   },
 
   ui: {

@@ -4,6 +4,7 @@ import { getRedRocksEvents } from "@/lib/redrocksEvents";
 import RedRocksShowsGrid from "@/components/RedRocksShowsGrid";
 import FAQBlock from "@/components/FAQBlock";
 import MusicWave from "@/components/MusicWave";
+import { UnsplashImg } from "@/components/UnsplashImg";
 import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
 import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
 import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
@@ -110,7 +111,16 @@ export default async function RedRocksPage({
 
   const renderRelatedCard = (card: RelatedCard) => (
     <Link key={`${card.label}-${card.href}`} href={card.href} className="comic-panel block overflow-hidden">
-      <img src={card.imageSrc} alt={card.imageAlt} className="mb-4 h-40 w-full rounded-xl border border-white/20 object-cover" />
+      <UnsplashImg
+        src={card.imageSrc}
+        query={`${card.title} red rocks`}
+        alt={card.imageAlt}
+        className="mb-4 h-40 w-full rounded-xl border border-white/20 object-cover"
+        width={640}
+        height={320}
+        loading="lazy"
+        decoding="async"
+      />
       <div className="comic-tag">{card.label}</div>
       <h3 className="comic-h3">{card.title}</h3>
       <p className="comic-copy">{card.body}</p>

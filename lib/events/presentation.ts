@@ -1,5 +1,6 @@
 import type { NormalizedEvent } from "@/lib/events/schema";
 import type { RedRocksAssetsSnapshot } from "@/lib/events/getRedRocksAssets";
+import { buildUnsplashImageSrc, buildUnsplashQuery } from "@/lib/unsplash";
 
 export type DisplayEvent = {
   id: string;
@@ -24,7 +25,11 @@ export function eventDateTimeLocal(event: NormalizedEvent): string {
 
 function resolveEventImage(event: NormalizedEvent, assets?: RedRocksAssetsSnapshot | null): string {
   const fromAssets = assets?.events?.[event.id];
-  return fromAssets?.local ?? fromAssets?.remote ?? event.image ?? "/images/shows/fallback.jpg";
+  const source = fromAssets?.local ?? fromAssets?.remote ?? event.image ?? null;
+  return buildUnsplashImageSrc({
+    query: buildUnsplashQuery(event.name, event.artistNames[0], event.venueId, source),
+    src: source,
+  });
 }
 
 export function toDisplayEvent(
@@ -41,7 +46,14 @@ export function toDisplayEvent(
     url: event.ticketUrl ?? undefined,
     image: resolveEventImage(event, opts?.assets),
     performerName: event.artistNames[0] ?? undefined,
-    thumbnail: artistKey ? opts?.artistThumbnails?.[artistKey] : undefined,
+    thumbnail: artistKey
+      ? buildUnsplashImageSrc({
+          query: buildUnsplashQuery(event.artistNames[0], opts?.artistThumbnails?.[artistKey]),
+          src: opts?.artistThumbnails?.[artistKey],
+          width: 320,
+          height: 320,
+        })
+      : undefined,
     bookHref: `/book?venue=red-rocks-amphitheatre&seatgeek_event=${encodeURIComponent(seatgeekEventId)}`,
   };
 }

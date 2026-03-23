@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { UnsplashImg } from "@/components/UnsplashImg";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { RED_ROCKS_ENTITIES, RED_ROCKS_ENTITY_BY_SLUG, RED_ROCKS_MAP_POINTS } from "@/lib/redRocksAuthority";
@@ -331,8 +332,9 @@ export default async function RedRocksAuthorityDetailPage({ params, searchParams
             <section className="comic-panel" style={{ marginTop: 16 }}>
               <div className="comic-tag">Best Seats By Goal</div>
               <div style={{ marginTop: 12, textAlign: "center" }}>
-                <img
+                <UnsplashImg
                   src="/images/venues/red-rocks-amphitheatre.jpg"
+                  query="red rocks amphitheatre seating overview"
                   alt="Red Rocks Amphitheatre seating bowl overview showing lower, mid, and upper sections with stage view"
                   width={800}
                   height={450}

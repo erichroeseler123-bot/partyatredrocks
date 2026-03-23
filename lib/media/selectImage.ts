@@ -1,3 +1,5 @@
+import { buildUnsplashImageSrc, buildUnsplashQuery } from "@/lib/unsplash";
+
 export type ImagePriorityInput = {
   blobImage?: string | null;
   spotifyImage?: string | null;
@@ -5,16 +7,21 @@ export type ImagePriorityInput = {
   seatgeekImage?: string | null;
   localAsset?: string | null;
   fallback?: string | null;
+  queryHint?: string | null;
 };
 
 export function selectImageByPriority(input: ImagePriorityInput): string {
-  return (
+  const candidate =
     input.blobImage ||
     input.spotifyImage ||
     input.ticketmasterImage ||
     input.seatgeekImage ||
     input.localAsset ||
     input.fallback ||
-    "/images/shows/fallback.jpg"
-  );
+    null;
+
+  return buildUnsplashImageSrc({
+    query: buildUnsplashQuery(input.queryHint, candidate, input.fallback),
+    src: candidate,
+  });
 }
