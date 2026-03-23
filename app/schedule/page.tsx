@@ -4,12 +4,15 @@ import Link from "next/link";
 import { ArrowRight, BadgeCheck, CalendarDays, Clock3, PhoneCall } from "lucide-react";
 import { getEventsCatalog } from "@/lib/events/getCatalog";
 import { buildBookingHref } from "@/lib/parrHandoff";
+import { seatgeekEventsByVenueId } from "@/lib/seatgeek";
+import redRocksSeatGeekEvents from "@/public/data/redrocks-events.json";
 import { ANNOUNCED_RED_ROCKS_2026 } from "@/data/red-rocks-2026-announced";
 import ScheduleExplorer, { type ScheduleExplorerEvent } from "@/components/schedule/ScheduleExplorer";
 
 export const revalidate = 3600;
 
 const SITE = "https://www.partyatredrocks.com";
+const RED_ROCKS_SEATGEEK_VENUE_ID = 196;
 const CURATED_SCHEDULE_IMAGES = [
   "/hero/hero-home.jpg",
   "/hero/hero-guides.jpg",
@@ -20,6 +23,14 @@ const CURATED_SCHEDULE_IMAGES = [
 ] as const;
 
 type CatalogEvent = Awaited<ReturnType<typeof getEventsCatalog>>[number];
+type SeatGeekImageEvent = {
+  id: number;
+  title: string;
+  datetime?: string;
+  datetime_local?: string;
+  url?: string | null;
+  image?: string | null;
+};
 type ScheduleEvent = {
   id: string;
   showId: string | null;
@@ -92,6 +103,58 @@ function getCuratedScheduleImage(event: ScheduleEvent) {
   return CURATED_SCHEDULE_IMAGES[index];
 }
 
+function buildSeatGeekImageMap(events: SeatGeekImageEvent[]) {
+  const map = new Map<string, SeatGeekImageEvent[]>();
+  for (const event of events) {
+    const dateKey = (event.datetime_local || event.datetime || "").slice(0, 10);
+    if (!dateKey) continue;
+    const list = map.get(dateKey) || [];
+    list.push(event);
+    map.set(dateKey, list);
+  }
+  return map;
+}
+
+function scoreSeatGeekImageMatch(event: ScheduleEvent, seatGeekEvent: SeatGeekImageEvent) {
+  const catalogName = normalizeComparable(event.name);
+  const catalogHeadliner = normalizeComparable(event.artistNames[0] || "");
+  const sgTitle = normalizeComparable(seatGeekEvent.title);
+
+  let score = 0;
+
+  if (catalogName && sgTitle && catalogName === sgTitle) score += 10;
+  if (catalogName && sgTitle && (catalogName.includes(sgTitle) || sgTitle.includes(catalogName))) score += 6;
+  if (
+    catalogHeadliner &&
+    sgTitle &&
+    (catalogHeadliner === sgTitle || sgTitle.includes(catalogHeadliner) || catalogHeadliner.includes(sgTitle))
+  ) {
+    score += 7;
+  }
+
+  if (event.dateKey === (seatGeekEvent.datetime_local || seatGeekEvent.datetime || "").slice(0, 10)) score += 3;
+
+  return score;
+}
+
+function findSeatGeekImageMatch(event: ScheduleEvent, byDate: Map<string, SeatGeekImageEvent[]>) {
+  const candidates = byDate.get(event.dateKey) || [];
+  if (!candidates.length) return null;
+
+  let best: SeatGeekImageEvent | null = null;
+  let bestScore = -1;
+
+  for (const candidate of candidates) {
+    const score = scoreSeatGeekImageMatch(event, candidate);
+    if (score > bestScore) {
+      bestScore = score;
+      best = candidate;
+    }
+  }
+
+  return bestScore >= 7 ? best : null;
+}
+
 export default async function SchedulePage() {
   const catalogEvents = (await getEventsCatalog(2026, "redrocks"))
     .filter((event) => event.venueId === "red-rocks-amphitheatre")
@@ -142,8 +205,31 @@ export default async function SchedulePage() {
       return a.name.localeCompare(b.name);
     });
 
+  let liveSeatGeekImageEvents: SeatGeekImageEvent[] = [];
+  try {
+    const seatGeekEvents = await seatgeekEventsByVenueId(RED_ROCKS_SEATGEEK_VENUE_ID);
+    liveSeatGeekImageEvents = seatGeekEvents.map((event) => ({
+      id: event.id,
+      title: event.title,
+      datetime_local: event.datetime_local,
+      url: event.url || null,
+      image:
+        event.performers?.find((performer) => performer.images?.huge || performer.image)?.images?.huge ||
+        event.performers?.find((performer) => performer.images?.huge || performer.image)?.image ||
+        null,
+    }));
+  } catch {
+    // Fall back to the checked-in SeatGeek export if the live key is unavailable.
+  }
+
+  const seatGeekImageByDate = buildSeatGeekImageMap(
+    liveSeatGeekImageEvents.length ? liveSeatGeekImageEvents : (redRocksSeatGeekEvents as SeatGeekImageEvent[]),
+  );
   const eventImageMap = Object.fromEntries(
-    events.map((event) => [event.id, getCuratedScheduleImage(event)]),
+    events.map((event) => {
+      const seatGeekMatch = findSeatGeekImageMatch(event, seatGeekImageByDate);
+      return [event.id, seatGeekMatch?.image || getCuratedScheduleImage(event)];
+    }),
   ) as Record<string, string>;
 
   const grouped = events.reduce<Record<string, ScheduleEvent[]>>((acc, event) => {

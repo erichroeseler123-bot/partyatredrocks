@@ -20,6 +20,12 @@ type SeatGeekEvent = {
   performers?: Array<{
     name?: string;
     image?: string;
+    images?: {
+      huge?: string;
+      banner?: string;
+      block?: string;
+      crisp?: string;
+    };
   }>;
   venue?: SeatGeekVenue;
 };
