@@ -211,10 +211,12 @@ export default async function SchedulePage() {
     });
   }
 
-  const events = Array.from(mergedByKey.values()).sort((a, b) => {
-    if (a.dateKey !== b.dateKey) return a.dateKey.localeCompare(b.dateKey);
-    return a.name.localeCompare(b.name);
-  });
+  const events = Array.from(mergedByKey.values())
+    .filter((event) => event.dateKey >= "2026-03-01")
+    .sort((a, b) => {
+      if (a.dateKey !== b.dateKey) return a.dateKey.localeCompare(b.dateKey);
+      return a.name.localeCompare(b.name);
+    });
 
   const mediaIndex = await getMediaIndex(2026);
   let seatGeekByDate = new Map<string, SeatGeekEvent[]>();
@@ -336,7 +338,7 @@ export default async function SchedulePage() {
         <div className="mt-10 rounded-[26px] border border-white/12 bg-[linear-gradient(180deg,rgba(12,18,36,0.96),rgba(8,12,24,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] sm:p-6">
           <div className="text-[11px] font-black uppercase tracking-[0.2em] text-[#ffb07c]">Schedule Summary</div>
           <p className="mt-2 text-sm leading-6 text-white/82 sm:text-[15px]">
-            Showing <span className="font-black text-white">{events.length}</span> Red Rocks concerts currently in the 2026 schedule feed.
+            Showing <span className="font-black text-white">{events.length}</span> Red Rocks concerts from March 2026 forward.
           </p>
           <div className="mt-4 flex flex-wrap gap-2 text-[11px] font-black uppercase tracking-[0.16em] text-white/78">
             <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">Fixed $59 Shared Seats</div>
