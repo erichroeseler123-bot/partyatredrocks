@@ -3,12 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Music2, CalendarDays, MapPin, BadgeCheck, PhoneCall } from "lucide-react";
 import { getEventsCatalog } from "@/lib/events/getCatalog";
+import { blobReadJson } from "@/lib/blobJson";
 import { SCENES } from "@/data/scenes";
 import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
 import { eventMatchesGenre } from "@/lib/genres/artistGenres";
 import { getDynamicImage } from "@/lib/getDynamicImage";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
+export const runtime = "nodejs";
 export const revalidate = 1800;
 
 export const metadata: Metadata = {
@@ -100,15 +102,45 @@ function formatDate(dateKey: string) {
   });
 }
 
+type SceneCacheEvent = {
+  id: number;
+  title: string;
+  datetime_local: string;
+  performers?: Array<{ name?: string; image?: string }>;
+  venue?: { siteSlug?: string; siteName?: string };
+};
+
+type SceneCachePayload = {
+  generatedAt: string;
+  events: SceneCacheEvent[];
+};
+
 export default async function ScenesLandingPage() {
   const allEvents = await getEventsCatalog(2026, "all");
   const scenes = SCENES.slice().sort((a, b) => (a.priority ?? 999) - (b.priority ?? 999));
-  const sceneImageMap = Object.fromEntries(
+  const sceneCacheMap = Object.fromEntries(
     await Promise.all(
       scenes.map(async (scene) => [
         scene.slug,
-        await getDynamicImage("genre", `${scene.title} concert`, getSceneFallbackImage(scene.slug)),
+        await blobReadJson<SceneCachePayload>(`cache/scene/${scene.slug}.json`, {
+          revalidateSeconds: 300,
+        }),
       ]),
+    ),
+  ) as Record<string, SceneCachePayload | null>;
+  const sceneImageMap = Object.fromEntries(
+    await Promise.all(
+      scenes.map(async (scene) => {
+        const cacheImage =
+          sceneCacheMap[scene.slug]?.events?.find((event) =>
+            event.performers?.some((performer) => performer?.image),
+          )?.performers?.find((performer) => performer?.image)?.image || null;
+
+        return [
+          scene.slug,
+          cacheImage || (await getDynamicImage("genre", `${scene.title} concert`, getSceneFallbackImage(scene.slug))),
+        ];
+      }),
     ),
   ) as Record<string, string>;
 
