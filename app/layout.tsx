@@ -5,6 +5,7 @@ import SiteNav from "@/components/SiteNav";
 import DisplayTheme from "@/components/DisplayTheme";
 import FloatingBook from "@/components/FloatingBook";
 import SiteFooter from "@/components/SiteFooter";
+import { buildUnsplashImageSrc } from "@/lib/unsplash";
 
 const headingFont = Montserrat({
   subsets: ["latin"],
@@ -18,6 +19,14 @@ const bodyAccentFont = Playfair_Display({
   variable: "--font-accent",
   weight: ["600", "700"],
   display: "swap",
+});
+
+const DEFAULT_SHARE_IMAGE = buildUnsplashImageSrc({
+  query: "red rocks amphitheatre concert transportation denver colorado",
+  src: "/hero/hero-home.jpg",
+  alt: "Red Rocks shuttle transportation",
+  width: 1200,
+  height: 630,
 });
 
 export const metadata: Metadata = {
@@ -63,7 +72,7 @@ export const metadata: Metadata = {
     description:
       "Fixed pricing, pickup details before the ride, and a return plan after the show. Shuttle seats from $59/pp or Private SUV from $499.",
     images: [
-      { url: "/hero/hero-home.jpg", width: 1200, height: 630, alt: "Red Rocks shuttle transportation" },
+      { url: DEFAULT_SHARE_IMAGE, width: 1200, height: 630, alt: "Red Rocks shuttle transportation" },
     ],
   },
 
@@ -72,7 +81,7 @@ export const metadata: Metadata = {
     title: "Red Rocks Shuttle from Denver | $59 Seats + Private SUVs",
     description:
       "Fixed pricing, pickup details before the ride, and a return plan after the show. Shuttle seats from $59/pp or Private SUV from $499.",
-    images: ["/hero/hero-home.jpg"],
+    images: [DEFAULT_SHARE_IMAGE],
   },
 
   icons: {

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { UnsplashImg } from "@/components/UnsplashImg";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
@@ -30,8 +31,9 @@ export default function OgdenMapPage() {
         </div>
 
         <div className="mt-8 text-center">
-          <img
+          <UnsplashImg
             src="/images/venues/fallback.jpg"
+            query="ogden theatre denver venue map layout"
             alt="Ogden Theatre Denver venue map showing entry flow, floor and balcony zones, and nearby pickup context"
             width={800}
             height={600}
@@ -66,4 +68,3 @@ export default function OgdenMapPage() {
     </main>
   );
 }
-

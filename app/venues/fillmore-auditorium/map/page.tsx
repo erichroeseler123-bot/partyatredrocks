@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { UnsplashImg } from "@/components/UnsplashImg";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
@@ -30,8 +31,9 @@ export default function FillmoreMap() {
         </div>
 
         <div className="mt-8 text-center">
-          <img
+          <UnsplashImg
             src="/images/venues/fillmore-auditorium-map.jpg"
+            query="fillmore auditorium denver venue map layout"
             alt="Fillmore Auditorium Denver venue map showing stage, GA floor, balcony seating, bars, entrances, and nearby parking"
             width={800}
             height={600}

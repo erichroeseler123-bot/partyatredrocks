@@ -1,11 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
+import { buildUnsplashImageSrc } from "@/lib/unsplash";
+
+const HERO_IMAGE = buildUnsplashImageSrc({
+  query: "red rocks amphitheatre concert transportation denver colorado",
+  src: "/hero/hero-home.jpg",
+  alt: "Party at Red Rocks Transportation",
+});
 
 export default function HomeHero() {
   return (
     <section className="relative min-h-[78vh] flex items-end overflow-hidden">
       <Image
-        src="/hero/hero-home.jpg"
+        src={HERO_IMAGE}
         alt="Party at Red Rocks Transportation"
         fill
         priority

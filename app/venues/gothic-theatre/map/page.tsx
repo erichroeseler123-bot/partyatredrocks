@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { UnsplashImg } from "@/components/UnsplashImg";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
@@ -28,8 +29,9 @@ export default function GothicMapPage() {
         </div>
 
         <div className="mt-8 text-center">
-          <img
+          <UnsplashImg
             src="/images/venues/gothic-theatre-map.jpg"
+            query="gothic theatre denver venue map layout"
             alt="Gothic Theatre map showing stage orientation, entry points, bars, and pickup guidance"
             width={800}
             height={600}

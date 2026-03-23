@@ -7,9 +7,17 @@ import { SCENES } from "@/data/scenes";
 import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
 import { eventMatchesGenre } from "@/lib/genres/artistGenres";
 import { getDynamicImage } from "@/lib/getDynamicImage";
+import { buildUnsplashImageSrc } from "@/lib/unsplash";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 export const revalidate = 1800;
+const SCENES_SHARE_IMAGE = buildUnsplashImageSrc({
+  query: "colorado live music scenes concert crowd denver",
+  src: "/images/scenes/jam.webp",
+  alt: "Colorado music scenes",
+  width: 1200,
+  height: 630,
+});
 
 export const metadata: Metadata = {
   title: "Denver & Colorado Music Scenes 2026 | Concerts & Shuttle Rides",
@@ -24,7 +32,7 @@ export const metadata: Metadata = {
     siteName: "Party at Red Rocks",
     images: [
       {
-        url: `${SITE}/images/scenes/jam.webp`,
+        url: SCENES_SHARE_IMAGE,
         width: 1200,
         height: 630,
         alt: "Colorado music scenes",
@@ -36,7 +44,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Colorado Music Scenes 2026",
     description: "Upcoming Colorado concerts by genre with direct booking links.",
-    images: [`${SITE}/images/scenes/jam.webp`],
+    images: [SCENES_SHARE_IMAGE],
   },
 };
 
@@ -66,32 +74,6 @@ function venueName(venueId: string): string {
   return VENUE_LEDGER_BY_SLUG.get(venueId)?.name ?? venueId;
 }
 
-const SCENE_FALLBACKS = [
-  "/images/scenes/jam.jpg",
-  "/images/scenes/edm.jpg",
-  "/images/scenes/hiphop.jpg",
-  "/hero/hero-home.jpg",
-  "/hero/hero-guides.jpg",
-  "/images/marketing/fleet.jpg",
-  "/images/marketing/shuttle.jpg",
-  "/images/marketing/vip-suv.jpg",
-  "/venues/missionsite.jpg",
-  "/venues/mishsite.jpg",
-  "/venues/rrsite.jpg",
-] as const;
-
-function hashString(input: string) {
-  let hash = 0;
-  for (let index = 0; index < input.length; index += 1) {
-    hash = (hash * 31 + input.charCodeAt(index)) >>> 0;
-  }
-  return hash;
-}
-
-function getSceneFallbackImage(sceneSlug: string) {
-  return SCENE_FALLBACKS[hashString(sceneSlug) % SCENE_FALLBACKS.length];
-}
-
 function formatDate(dateKey: string) {
   return new Date(`${dateKey}T12:00:00`).toLocaleDateString("en-US", {
     weekday: "short",
@@ -103,14 +85,15 @@ function formatDate(dateKey: string) {
 export default async function ScenesLandingPage() {
   const allEvents = await getEventsCatalog(2026, "all");
   const scenes = SCENES.slice().sort((a, b) => (a.priority ?? 999) - (b.priority ?? 999));
-  const sceneImageMap = Object.fromEntries(
-    await Promise.all(
+  const [heroImage, sceneImageMap] = await Promise.all([
+    getDynamicImage("genre", "colorado live music scenes concert crowd denver", "/hero/hero-home.jpg"),
+    Promise.all(
       scenes.map(async (scene) => [
         scene.slug,
-        await getDynamicImage("genre", `${scene.title} live music`, getSceneFallbackImage(scene.slug)),
+        await getDynamicImage("genre", `${scene.title} live music`, `${scene.slug} scene`),
       ]),
-    ),
-  ) as Record<string, string>;
+    ).then((entries) => Object.fromEntries(entries) as Record<string, string>),
+  ]);
 
   const totalShows = scenes.reduce((count, scene) => {
     return count + allEvents.filter((event) => eventMatchesGenre(event, scene.slug)).length;
@@ -122,7 +105,7 @@ export default async function ScenesLandingPage() {
         <section className="relative overflow-hidden rounded-[32px] border border-white/12 bg-[#0b1224]">
           <div className="absolute inset-0">
             <Image
-              src="/hero/hero-home.jpg"
+              src={heroImage}
               alt="Colorado concert night crowd"
               fill
               className="object-cover object-center opacity-35"
@@ -188,7 +171,11 @@ export default async function ScenesLandingPage() {
               .filter((event) => eventMatchesGenre(event, scene.slug))
               .sort((a, b) => a.dateKey.localeCompare(b.dateKey))
               .slice(0, 3);
-            const image = sceneImageMap[scene.slug] || "/venues/rrsite.jpg";
+            const image = sceneImageMap[scene.slug] || buildUnsplashImageSrc({
+              query: `${scene.title} live music scene denver colorado`,
+              src: `${scene.slug} scene`,
+              alt: `${scene.title} scene image`,
+            });
 
             return (
               <article

@@ -2,6 +2,7 @@ import venueMediaRegistry from "@/data/venue-media.registry.json";
 import guideMediaRegistry from "@/data/guide-media.registry.json";
 import bookingMediaRegistry from "@/data/booking-media.registry.json";
 import socialProofRegistry from "@/data/social-proof.registry.json";
+import { buildUnsplashImageSrc } from "@/lib/unsplash";
 
 type VenueMediaRegistryEntry = {
   wikiTitle?: string | null;
@@ -96,14 +97,22 @@ const BOOKING_ALIAS_TO_SLUG: Record<string, string> = Object.entries(BOOKING_MED
 
 function resolveVenueImage(slug: string) {
   const entry = VENUE_MEDIA_REGISTRY[slug];
-  if (!entry) return DEFAULT_FALLBACK;
-  return entry.manualImage || entry.resolvedImage || entry.fallbackImage || DEFAULT_FALLBACK;
+  const source = entry?.manualImage || entry?.resolvedImage || entry?.fallbackImage || DEFAULT_FALLBACK;
+  return buildUnsplashImageSrc({
+    query: `${prettifySlug(slug)} venue concert denver colorado`,
+    src: source,
+    alt: `${prettifySlug(slug)} venue image`,
+  });
 }
 
 function resolveGuideImage(slug: string) {
   const entry = GUIDE_MEDIA_REGISTRY[slug];
-  if (!entry) return DEFAULT_GUIDE_FALLBACK;
-  return entry.manualImage || entry.resolvedImage || entry.fallbackImage || DEFAULT_GUIDE_FALLBACK;
+  const source = entry?.manualImage || entry?.resolvedImage || entry?.fallbackImage || DEFAULT_GUIDE_FALLBACK;
+  return buildUnsplashImageSrc({
+    query: `${prettifySlug(slug)} red rocks guide planning`,
+    src: source,
+    alt: `${prettifySlug(slug)} guide image`,
+  });
 }
 
 function resolveBookingSlug(slug: string) {
@@ -159,7 +168,15 @@ export function getVenueRelatedCardImage(input: {
 }) {
   if (input.intent === "transport") {
     const key = input.transportKey || "shuttle";
-    return TRANSPORT_RELATED_MEDIA[key] || TRANSPORT_RELATED_MEDIA.shuttle;
+    const transport = TRANSPORT_RELATED_MEDIA[key] || TRANSPORT_RELATED_MEDIA.shuttle;
+    return {
+      imageSrc: buildUnsplashImageSrc({
+        query: transport.imageAlt,
+        src: transport.imageSrc,
+        alt: transport.imageAlt,
+      }),
+      imageAlt: transport.imageAlt,
+    };
   }
 
   if (!input.slug) {
@@ -184,9 +201,14 @@ export function getVenueRelatedCardImage(input: {
 
 export function getSocialProofImage(postId: string) {
   const entry = SOCIAL_PROOF_REGISTRY[postId];
+  const imageAlt = entry?.imageAlt || "Social proof image";
   return {
-    imageUrl: entry?.imageUrl || DEFAULT_SOCIAL_FALLBACK,
-    imageAlt: entry?.imageAlt || "Social proof image",
+    imageUrl: buildUnsplashImageSrc({
+      query: imageAlt,
+      src: entry?.imageUrl || DEFAULT_SOCIAL_FALLBACK,
+      alt: imageAlt,
+    }),
+    imageAlt,
   };
 }
 
@@ -206,5 +228,13 @@ export function assertUniqueGuideImages() {
 }
 
 export function getSceneMedia(slug: string) {
-  return MEDIA.scenes[slug as keyof typeof MEDIA.scenes] ?? { primary: DEFAULT_FALLBACK };
+  const entry = MEDIA.scenes[slug as keyof typeof MEDIA.scenes];
+  const source = entry?.primary || DEFAULT_FALLBACK;
+  return {
+    primary: buildUnsplashImageSrc({
+      query: `${prettifySlug(slug)} live music scene denver colorado`,
+      src: source,
+      alt: `${prettifySlug(slug)} scene image`,
+    }),
+  };
 }

@@ -4,15 +4,13 @@ import Link from "next/link";
 import { ArrowRight, BadgeCheck, CalendarDays, Clock3, PhoneCall } from "lucide-react";
 import { getEventsCatalog } from "@/lib/events/getCatalog";
 import { buildBookingHref } from "@/lib/parrHandoff";
-import { seatgeekEventsByVenueId } from "@/lib/seatgeek";
-import redRocksSeatGeekEvents from "@/public/data/redrocks-events.json";
 import { ANNOUNCED_RED_ROCKS_2026 } from "@/data/red-rocks-2026-announced";
 import ScheduleExplorer, { type ScheduleExplorerEvent } from "@/components/schedule/ScheduleExplorer";
+import { getDynamicImage } from "@/lib/getDynamicImage";
 
 export const revalidate = 3600;
 
 const SITE = "https://www.partyatredrocks.com";
-const RED_ROCKS_SEATGEEK_VENUE_ID = 196;
 const CURATED_SCHEDULE_IMAGES = [
   "/hero/hero-home.jpg",
   "/hero/hero-guides.jpg",
@@ -23,14 +21,6 @@ const CURATED_SCHEDULE_IMAGES = [
 ] as const;
 
 type CatalogEvent = Awaited<ReturnType<typeof getEventsCatalog>>[number];
-type SeatGeekImageEvent = {
-  id: number;
-  title: string;
-  datetime?: string;
-  datetime_local?: string;
-  url?: string | null;
-  image?: string | null;
-};
 type ScheduleEvent = {
   id: string;
   showId: string | null;
@@ -92,13 +82,6 @@ function normalizeComparable(value: string | null | undefined) {
     .trim();
 }
 
-function comparableTokens(value: string | null | undefined) {
-  const stopWords = new Set(["and", "with", "the", "of", "a", "an", "special", "guest", "night", "day", "pass"]);
-  return normalizeComparable(value)
-    .split(" ")
-    .filter((token) => token && !stopWords.has(token));
-}
-
 function hashString(input: string) {
   let hash = 0;
   for (let index = 0; index < input.length; index += 1) {
@@ -110,66 +93,6 @@ function hashString(input: string) {
 function getCuratedScheduleImage(event: ScheduleEvent) {
   const index = hashString(event.id) % CURATED_SCHEDULE_IMAGES.length;
   return CURATED_SCHEDULE_IMAGES[index];
-}
-
-function buildSeatGeekImageMap(events: SeatGeekImageEvent[]) {
-  const map = new Map<string, SeatGeekImageEvent[]>();
-  for (const event of events) {
-    const dateKey = (event.datetime_local || event.datetime || "").slice(0, 10);
-    if (!dateKey) continue;
-    const list = map.get(dateKey) || [];
-    list.push(event);
-    map.set(dateKey, list);
-  }
-  return map;
-}
-
-function scoreSeatGeekImageMatch(event: ScheduleEvent, seatGeekEvent: SeatGeekImageEvent) {
-  const catalogName = normalizeComparable(event.name);
-  const catalogHeadliner = normalizeComparable(event.artistNames[0] || "");
-  const sgTitle = normalizeComparable(seatGeekEvent.title);
-  const catalogTokens = comparableTokens(event.name);
-  const sgTokens = new Set(comparableTokens(seatGeekEvent.title));
-
-  let score = 0;
-
-  if (catalogName && sgTitle && catalogName === sgTitle) score += 10;
-  if (catalogName && sgTitle && (catalogName.includes(sgTitle) || sgTitle.includes(catalogName))) score += 6;
-  if (
-    catalogHeadliner &&
-    sgTitle &&
-    (catalogHeadliner === sgTitle || sgTitle.includes(catalogHeadliner) || catalogHeadliner.includes(sgTitle))
-  ) {
-    score += 7;
-  }
-
-  if (catalogTokens.length) {
-    const sharedTokenCount = catalogTokens.filter((token) => sgTokens.has(token)).length;
-    score += Math.min(sharedTokenCount, 6);
-  }
-
-  if (event.dateKey === (seatGeekEvent.datetime_local || seatGeekEvent.datetime || "").slice(0, 10)) score += 3;
-
-  return score;
-}
-
-function findSeatGeekImageMatch(event: ScheduleEvent, byDate: Map<string, SeatGeekImageEvent[]>) {
-  const candidates = byDate.get(event.dateKey) || [];
-  if (!candidates.length) return null;
-  if (candidates.length === 1 && candidates[0]?.image) return candidates[0];
-
-  let best: SeatGeekImageEvent | null = null;
-  let bestScore = -1;
-
-  for (const candidate of candidates) {
-    const score = scoreSeatGeekImageMatch(event, candidate);
-    if (score > bestScore) {
-      bestScore = score;
-      best = candidate;
-    }
-  }
-
-  return bestScore >= 3 ? best : null;
 }
 
 export default async function SchedulePage() {
@@ -222,32 +145,19 @@ export default async function SchedulePage() {
       return a.name.localeCompare(b.name);
     });
 
-  let liveSeatGeekImageEvents: SeatGeekImageEvent[] = [];
-  try {
-    const seatGeekEvents = await seatgeekEventsByVenueId(RED_ROCKS_SEATGEEK_VENUE_ID);
-    liveSeatGeekImageEvents = seatGeekEvents.map((event) => ({
-      id: event.id,
-      title: event.title,
-      datetime_local: event.datetime_local,
-      url: event.url || null,
-      image:
-        event.performers?.find((performer) => performer.images?.huge || performer.image)?.images?.huge ||
-        event.performers?.find((performer) => performer.images?.huge || performer.image)?.image ||
-        null,
-    }));
-  } catch {
-    // Fall back to the checked-in SeatGeek export if the live key is unavailable.
-  }
-
-  const seatGeekImageByDate = buildSeatGeekImageMap(
-    liveSeatGeekImageEvents.length ? liveSeatGeekImageEvents : (redRocksSeatGeekEvents as SeatGeekImageEvent[]),
-  );
-  const eventImageMap = Object.fromEntries(
-    events.map((event) => {
-      const seatGeekMatch = findSeatGeekImageMatch(event, seatGeekImageByDate);
-      return [event.id, seatGeekMatch?.image || getCuratedScheduleImage(event)];
-    }),
-  ) as Record<string, string>;
+  const [heroImage, eventImageMap] = await Promise.all([
+    getDynamicImage("venue", "Red Rocks Amphitheatre concert night", "/hero/hero-home.jpg"),
+    Promise.all(
+      events.map(async (event) => [
+        event.id,
+        await getDynamicImage(
+          "concert",
+          `${event.artistNames[0] || event.name} red rocks concert`,
+          getCuratedScheduleImage(event),
+        ),
+      ]),
+    ).then((entries) => Object.fromEntries(entries) as Record<string, string>),
+  ]);
 
   const grouped = events.reduce<Record<string, ScheduleEvent[]>>((acc, event) => {
     const key = monthLabel(event.dateKey);
@@ -291,7 +201,7 @@ export default async function SchedulePage() {
         <section className="relative overflow-hidden rounded-[36px] border border-[#f5c66c]/20 bg-[#12100e] shadow-[0_40px_120px_rgba(0,0,0,0.58)]">
           <div className="absolute inset-0">
             <Image
-              src="/hero/hero-home.jpg"
+              src={heroImage}
               alt="Red Rocks Amphitheatre at night"
               fill
               sizes="100vw"
