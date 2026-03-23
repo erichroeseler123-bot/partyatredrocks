@@ -66,26 +66,6 @@ export default function SiteFooter() {
               <div className="mt-4 text-[13px] font-semibold uppercase tracking-[0.16em] text-[#f5c66c]/88">
                 Follow real rides, show nights, and last-minute availability
               </div>
-              <SocialLinks brandKey={brandKey} mode="footer" showLabels className="mt-4" />
-              <div className="mt-3 text-[12px] font-black uppercase tracking-[0.18em] text-[#fff4de]/62">
-                Fastest contact
-              </div>
-              <div className="mt-2 flex flex-wrap gap-2">
-                <Link
-                  href={smsUrl}
-                  className="inline-flex items-center rounded-full border border-[#fff4de]/18 bg-[#fff4de] px-4 py-2.5 text-sm font-semibold text-[#1d1020] transition duration-200 hover:-translate-y-[1px] hover:bg-[#fff7ff]"
-                >
-                  Text us
-                </Link>
-                <Link
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="inline-flex items-center rounded-full border border-[#fff4de]/18 bg-[#fff4de] px-4 py-2.5 text-sm font-semibold text-[#1d1020] transition duration-200 hover:-translate-y-[1px] hover:bg-[#fff7ff]"
-                >
-                  WhatsApp
-                </Link>
-              </div>
             </div>
 
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
@@ -124,6 +104,31 @@ export default function SiteFooter() {
               Party at Red Rocks
             </div>
             <div>© {new Date().getFullYear()} Party at Red Rocks. All rights reserved.</div>
+          </div>
+
+          <div className="mt-4 border-t border-[#f5c66c]/12 pt-4">
+            <div className="flex items-center gap-3 overflow-x-auto whitespace-nowrap [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+              <Link
+                href={smsUrl}
+                className="inline-flex shrink-0 items-center rounded-full border border-[#fff4de]/18 bg-[#fff4de] px-4 py-2.5 text-sm font-semibold text-[#1d1020] transition duration-200 hover:-translate-y-[1px] hover:bg-[#fff7ff]"
+              >
+                Text us
+              </Link>
+              <Link
+                href={whatsappUrl}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="inline-flex shrink-0 items-center rounded-full border border-[#fff4de]/18 bg-[#fff4de] px-4 py-2.5 text-sm font-semibold text-[#1d1020] transition duration-200 hover:-translate-y-[1px] hover:bg-[#fff7ff]"
+              >
+                WhatsApp
+              </Link>
+              <SocialLinks
+                brandKey={brandKey}
+                mode="footer"
+                showLabels
+                className="!flex-nowrap shrink-0"
+              />
+            </div>
           </div>
         </div>
       </div>
