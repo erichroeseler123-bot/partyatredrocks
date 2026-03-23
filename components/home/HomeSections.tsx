@@ -4,13 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
-  BadgeCheck,
   CalendarDays,
   CarFront,
   CreditCard,
-  PhoneCall,
   ShieldCheck,
-  Sparkles,
   TicketPercent,
 } from "lucide-react";
 import { ReviewBlock } from "@/components/ReviewBlock";
@@ -76,22 +73,7 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc }: HomeS
 
           <div className="relative px-6 py-10 sm:px-8 sm:py-12 lg:px-12 lg:py-14">
             <div className="max-w-4xl">
-              <div className="flex flex-wrap gap-2">
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-black/30 px-4 py-2 text-[11px] font-black uppercase tracking-[0.24em] text-[#f5c66c] backdrop-blur">
-                  <Sparkles className="h-3.5 w-3.5" />
-                  Red Rocks Shuttle Service
-                </div>
-                <div className="inline-flex min-h-10 items-center gap-2 rounded-full border border-white/14 bg-white/7 px-4 text-[11px] font-black uppercase tracking-[0.16em] text-white/88">
-                  <BadgeCheck className="h-3.5 w-3.5 text-[#8fd0ff]" />
-                  Secure booking
-                </div>
-                <div className="inline-flex min-h-10 items-center gap-2 rounded-full border border-white/14 bg-white/7 px-4 text-[11px] font-black uppercase tracking-[0.16em] text-white/88">
-                  <PhoneCall className="h-3.5 w-3.5 text-[#f5c66c]" />
-                  720-369-6292
-                </div>
-              </div>
-
-              <p className="mt-6 font-accent text-xl italic text-[#efe5d3] sm:text-2xl">
+              <p className="font-accent text-xl italic text-[#efe5d3] sm:text-2xl">
                 Red Rocks ride planning with a premium, no-chaos finish.
               </p>
 
