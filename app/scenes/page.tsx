@@ -173,7 +173,7 @@ export default async function ScenesLandingPage() {
             <div className="mt-6">
               <Link
                 href="/book/red-rocks-amphitheatre"
-                className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#ffd6a3]/26 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-6 text-xs font-black uppercase tracking-[0.16em] text-[#fff4de] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
+                className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#ffd6a3]/26 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-6 text-xs font-black uppercase tracking-[0.16em] text-[#120f0b] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
               >
                 Find Your Ride Now
                 <ArrowRight className="ml-2 h-3.5 w-3.5" />
@@ -265,7 +265,7 @@ export default async function ScenesLandingPage() {
                       </Link>
                       <Link
                         href="/book/red-rocks-amphitheatre"
-                        className="inline-flex min-h-11 items-center justify-center rounded-full border border-[#ffd6a3]/26 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-5 text-xs font-black uppercase tracking-[0.16em] text-[#fff4de] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
+                        className="inline-flex min-h-11 items-center justify-center rounded-full border border-[#ffd6a3]/26 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-5 text-xs font-black uppercase tracking-[0.16em] text-[#120f0b] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
                       >
                         Start Booking
                         <ArrowRight className="ml-2 h-3.5 w-3.5" />
@@ -295,7 +295,7 @@ export default async function ScenesLandingPage() {
           <div className="mt-5">
             <Link
               href="/book/red-rocks-amphitheatre"
-              className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#ffd6a3]/26 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-6 text-xs font-black uppercase tracking-[0.16em] text-[#fff4de] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#ffd6a3]/26 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-6 text-xs font-black uppercase tracking-[0.16em] text-[#120f0b] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
             >
               Find Your Ride Now
               <ArrowRight className="ml-2 h-3.5 w-3.5" />

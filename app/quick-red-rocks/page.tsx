@@ -479,7 +479,7 @@ export default function QuickRedRocksPage() {
             type="button"
             disabled={!canContinue}
             onClick={() => setCheckoutReady(true)}
-            className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#fff4de] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)] disabled:cursor-not-allowed disabled:opacity-40"
+            className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#120f0b] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)] disabled:cursor-not-allowed disabled:opacity-40"
           >
             Continue to checkout
             <ArrowRight className="ml-2 h-4 w-4" />
@@ -502,7 +502,7 @@ export default function QuickRedRocksPage() {
                   href={privateCheckoutHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-4 inline-flex min-h-12 items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#fff4de] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
+                  className="mt-4 inline-flex min-h-12 items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#120f0b] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
                 >
                   Open private checkout in new tab
                 </a>

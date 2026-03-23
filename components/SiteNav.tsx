@@ -46,7 +46,7 @@ export default function SiteNav() {
           <div className="flex items-center gap-2">
             <Link
               href="/book/red-rocks-amphitheatre"
-              className="inline-flex min-h-[42px] items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-4 text-[12px] font-black uppercase tracking-[0.16em] text-[#fff4de] no-underline shadow-[0_12px_28px_rgba(141,79,32,0.24)] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
+              className="inline-flex min-h-[42px] items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-4 text-[12px] font-black uppercase tracking-[0.16em] text-[#120f0b] no-underline shadow-[0_12px_28px_rgba(141,79,32,0.24)] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
             >
               {cta}
             </Link>

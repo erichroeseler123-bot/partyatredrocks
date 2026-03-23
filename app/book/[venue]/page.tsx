@@ -130,7 +130,7 @@ export default async function VenueBookingPage({
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Link
                 href={isRedRocks ? buildBookingHref({ target: "shared", venue, searchParams: sp }) : buildVenueRequestHref({ venue, searchParams: sp })}
-                className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#fff4de] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
+                className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#120f0b] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
               >
                 {isRedRocks ? "Book Shuttle Seats" : "Request Venue Ride"}
               </Link>
