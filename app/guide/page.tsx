@@ -4,7 +4,7 @@ import Image from "next/image";
 import { GuideLocalInfo } from "@/components/guide/GuideLocalInfo";
 import { GuideVisualHero } from "@/components/guide/GuideVisualHero";
 import MusicWave from "@/components/MusicWave";
-import { assertUniqueGuideImages, getGuideCardImage } from "@/data/media";
+import { assertUniqueGuideImages } from "@/data/media";
 import { type GuideVisualKey, guideVisuals } from "@/lib/guideVisuals";
 
 export const metadata = {
@@ -16,19 +16,41 @@ export const metadata = {
   },
 };
 
-const GUIDE_GENERIC_IMAGES = [
-  "/assets/venue/red-rocks/red-rocks-hero.webp",
-  "/assets/venue/red-rocks/red-rocks-arrival.webp",
-  "/hero/hero-home.webp",
-  "/hero/hero-guides.webp",
-  "/images/marketing/shuttle.webp",
-  "/images/marketing/vip-suv.webp",
-  "/fleet/fleet-sprinter.webp",
-  "/fleet/fleet-suburban.jpg",
-  "/venues/rrsite.jpg",
-  "/venues/missionsite.jpg",
-  "/venues/fillsite.jpg",
+const DCC_AGENT_MANIFEST_URL = "https://www.destinationcommandcenter.com/agent.json";
+const DCC_PUBLIC_BASE_URL = "https://www.destinationcommandcenter.com";
+const GUIDE_DCC_MEDIA_TARGETS = [
+  { entityType: "venue", slug: "red-rocks-amphitheatre" },
+  { entityType: "venue", slug: "sphere-las-vegas" },
+  { entityType: "hotel", slug: "bellagio" },
+  { entityType: "hotel", slug: "mgm-grand" },
+  { entityType: "hotel", slug: "caesars-palace" },
+  { entityType: "attraction", slug: "fremont-street-experience" },
+  { entityType: "attraction", slug: "sphere-las-vegas" },
+  { entityType: "attraction", slug: "red-rock-canyon" },
+  { entityType: "attraction", slug: "hoover-dam" },
+  { entityType: "attraction", slug: "grand-canyon" },
 ] as const;
+
+type DccImageAsset = {
+  src?: string | null;
+};
+
+type DccImageSet = {
+  hero?: DccImageAsset | null;
+  card?: DccImageAsset | null;
+  gallery?: DccImageAsset[];
+};
+
+type DccAgentManifest = {
+  machineReadable?: {
+    mediaFeedTemplate?: string;
+  };
+};
+
+type DccMediaFeedResponse = {
+  ok?: boolean;
+  imageSet?: DccImageSet | null;
+};
 
 type Card = {
   id: string;
@@ -143,16 +165,64 @@ function hashString(input: string) {
   return hash;
 }
 
-function resolveGuideImage(card: Card) {
-  const registryImage = getGuideCardImage(card.id);
-  if (registryImage && registryImage !== "/hero/hero-guides.webp") {
-    return registryImage;
-  }
-
-  return GUIDE_GENERIC_IMAGES[hashString(card.id) % GUIDE_GENERIC_IMAGES.length];
+function absolutizeDccImageSrc(src?: string | null) {
+  if (!src) return null;
+  if (src.startsWith("/")) return `${DCC_PUBLIC_BASE_URL}${src}`;
+  return src;
 }
 
-function GuideCard({ card, imageSrc }: { card: Card; imageSrc: string }) {
+function extractDccImageSetSources(imageSet: DccImageSet | null | undefined) {
+  if (!imageSet) return [];
+  const sources = [
+    absolutizeDccImageSrc(imageSet.hero?.src),
+    absolutizeDccImageSrc(imageSet.card?.src),
+    ...(imageSet.gallery || []).map((item) => absolutizeDccImageSrc(item?.src)),
+  ].filter(Boolean) as string[];
+  return sources;
+}
+
+async function getGuideDccImagePool() {
+  try {
+    const manifestResponse = await fetch(DCC_AGENT_MANIFEST_URL, { next: { revalidate: 3600 } });
+    if (!manifestResponse.ok) return [];
+    const manifest = (await manifestResponse.json()) as DccAgentManifest;
+    const template = manifest?.machineReadable?.mediaFeedTemplate;
+    if (!template) return [];
+
+    const responses = await Promise.all(
+      GUIDE_DCC_MEDIA_TARGETS.map(async ({ entityType, slug }) => {
+        const url = template
+          .replace("{entityType}", encodeURIComponent(entityType))
+          .replace("{slug}", encodeURIComponent(slug));
+        const response = await fetch(url, { next: { revalidate: 3600 } });
+        if (!response.ok) return null;
+        const data = (await response.json()) as DccMediaFeedResponse;
+        if (!data?.ok) return null;
+        return data.imageSet || null;
+      }),
+    );
+
+    const seen = new Set<string>();
+    const pool: string[] = [];
+    for (const imageSet of responses) {
+      for (const src of extractDccImageSetSources(imageSet)) {
+        if (seen.has(src)) continue;
+        seen.add(src);
+        pool.push(src);
+      }
+    }
+    return pool;
+  } catch {
+    return [];
+  }
+}
+
+function resolveGuideImage(card: Card, imagePool: string[]) {
+  if (!imagePool.length) return null;
+  return imagePool[hashString(card.id) % imagePool.length];
+}
+
+function GuideCard({ card, imageSrc }: { card: Card; imageSrc: string | null }) {
   const visual = guideVisuals[card.visual];
   return (
     <Link
@@ -160,13 +230,15 @@ function GuideCard({ card, imageSrc }: { card: Card; imageSrc: string }) {
       className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
     >
       <div className="relative mb-5 h-40 overflow-hidden rounded-[20px] border border-white/10">
-        <Image
-          src={imageSrc}
-          alt={visual.imageAlt}
-          fill
-          className="object-cover"
-          sizes="(min-width: 1280px) 360px, (min-width: 768px) 50vw, 100vw"
-        />
+        {imageSrc ? (
+          <Image
+            src={imageSrc}
+            alt={visual.imageAlt}
+            fill
+            className="object-cover"
+            sizes="(min-width: 1280px) 360px, (min-width: 768px) 50vw, 100vw"
+          />
+        ) : null}
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,22,0.08),rgba(5,8,22,0.66)_100%)]" />
       </div>
       {card.kicker ? (
@@ -183,12 +255,14 @@ function GuideCard({ card, imageSrc }: { card: Card; imageSrc: string }) {
   );
 }
 
-export default function GuideHub() {
+export default async function GuideHub() {
   const cards = [...featured, ...deepDive];
-  const cardImageMap = cards.reduce<Record<string, string>>((acc, card) => {
-    acc[card.id] = resolveGuideImage(card);
+  const dccImagePool = await getGuideDccImagePool();
+  const cardImageMap = cards.reduce<Record<string, string | null>>((acc, card) => {
+    acc[card.id] = resolveGuideImage(card, dccImagePool);
     return acc;
   }, {});
+  const heroImage = dccImagePool[0] || `${DCC_PUBLIC_BASE_URL}/images/authority/venues/red-rocks-amphitheatre/hero.webp`;
 
   return (
     <main className="bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
@@ -197,8 +271,8 @@ export default function GuideHub() {
           eyebrow={guideVisuals.general.eyebrow}
           title="Red Rocks Guides"
           copy="Parking, transportation, venue policies, show-night timing, and local planning context for Red Rocks nights."
-          imageSrc={guideVisuals.general.imageSrc}
-          imageAlt={guideVisuals.general.imageAlt}
+          imageSrc={heroImage}
+          imageAlt="Guide hero image from Destination Command Center media feed"
           actions={
             <>
               <Link href="/book/red-rocks-amphitheatre" className="btn-primary">

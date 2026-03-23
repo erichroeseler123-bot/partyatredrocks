@@ -31,6 +31,13 @@ const nextConfig = {
       { protocol: "https", hostname: "seatgeekcdn.com" },
       { protocol: "https", hostname: "*.seatgeekcdn.com" },
       { protocol: "https", hostname: "static.seatgeek.com" },
+
+      // Wikimedia / Wikipedia venue-image resolver
+      { protocol: "https", hostname: "upload.wikimedia.org" },
+
+      // DCC public media feed assets
+      { protocol: "https", hostname: "destinationcommandcenter.com" },
+      { protocol: "https", hostname: "www.destinationcommandcenter.com" },
     ],
   },
 };
