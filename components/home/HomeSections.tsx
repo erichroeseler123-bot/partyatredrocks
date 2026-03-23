@@ -158,7 +158,7 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc }: HomeS
               </div>
               <Link
                 href="/book/red-rocks-amphitheatre/private"
-                className="inline-flex min-h-14 items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-black px-8 text-sm font-black uppercase tracking-[0.16em] text-[#fff4de] shadow-[0_18px_42px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5 hover:bg-[#111111]"
+                className="inline-flex min-h-14 items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-8 text-sm font-black uppercase tracking-[0.16em] text-[#120f0b] shadow-[0_18px_42px_rgba(141,79,32,0.28)] transition hover:-translate-y-0.5 hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
               >
                 View Private Vehicles
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -201,7 +201,7 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc }: HomeS
                 </ul>
                 <Link
                   href={ride.href}
-                  className="mt-7 inline-flex min-h-14 items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-black px-8 text-sm font-black uppercase tracking-[0.16em] text-[#fff4de] shadow-[0_18px_42px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5 hover:bg-[#111111]"
+                  className="mt-7 inline-flex min-h-14 items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-8 text-sm font-black uppercase tracking-[0.16em] text-[#120f0b] shadow-[0_18px_42px_rgba(141,79,32,0.28)] transition hover:-translate-y-0.5 hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
                 >
                   {ride.cta}
                   <ArrowRight className="ml-2 h-4 w-4" />

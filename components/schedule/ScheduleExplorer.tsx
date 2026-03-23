@@ -57,7 +57,7 @@ export default function ScheduleExplorer({ events }: { events: ScheduleExplorerE
                     onClick={() => setSelectedId(event.id)}
                     className={`w-full rounded-[20px] border p-4 text-left transition ${
                       isActive
-                        ? "border-[#f5c66c]/65 bg-black shadow-[0_12px_34px_rgba(0,0,0,0.34)]"
+                        ? "border-[#f5c66c]/65 bg-[rgba(245,198,108,0.12)] shadow-[0_12px_34px_rgba(245,198,108,0.18)]"
                         : "border-white/12 bg-[linear-gradient(180deg,rgba(14,20,38,0.9),rgba(8,12,24,0.95))] hover:-translate-y-0.5 hover:border-white/24"
                     }`}
                   >
@@ -136,7 +136,7 @@ export default function ScheduleExplorer({ events }: { events: ScheduleExplorerE
               <div className="mt-5 space-y-2">
                 <Link
                   href={selectedEvent.shuttleHref}
-                  className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-[#ffd6a3]/26 bg-black px-4 text-xs font-black uppercase tracking-[0.16em] text-[#fff4de] transition hover:bg-[#111111]"
+                  className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-[#ffd6a3]/26 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-4 text-xs font-black uppercase tracking-[0.16em] text-[#120f0b] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
                 >
                   Book Shuttle
                   <ArrowRight className="ml-2 h-3.5 w-3.5" />
@@ -145,7 +145,7 @@ export default function ScheduleExplorer({ events }: { events: ScheduleExplorerE
                   href={selectedEvent.showHref}
                   target={selectedEvent.showExternal ? "_blank" : undefined}
                   rel={selectedEvent.showExternal ? "noreferrer noopener" : undefined}
-                  className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-white/18 bg-black px-4 text-xs font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#111111]"
+                  className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-white/18 bg-white px-4 text-xs font-black uppercase tracking-[0.16em] text-[#120f0b] transition hover:bg-[#f5f5f5]"
                 >
                   {selectedEvent.showLabel}
                 </Link>
