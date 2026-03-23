@@ -12,8 +12,41 @@ type WikipediaSummaryResponse = {
   };
 };
 
+type UnsplashSearchResponse = {
+  results?: Array<{
+    urls?: {
+      regular?: string;
+      small?: string;
+      thumb?: string;
+    };
+  }>;
+};
+
 function hasUsableUrl(value: unknown): value is string {
   return typeof value === "string" && value.startsWith("http");
+}
+
+async function searchUnsplashImage(query: string): Promise<string | null> {
+  const apiKey = process.env.UNSPLASH_API_KEY || process.env.SPLASH_API_KEY;
+  if (!apiKey || !query) return null;
+
+  const response = await fetch(
+    `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&per_page=1&orientation=landscape&client_id=${apiKey}`,
+    {
+      cache: "force-cache",
+      next: { revalidate: 60 * 60 * 24 },
+    },
+  );
+  if (!response.ok) return null;
+
+  const data = (await response.json()) as UnsplashSearchResponse;
+  const image =
+    data.results?.[0]?.urls?.regular ||
+    data.results?.[0]?.urls?.small ||
+    data.results?.[0]?.urls?.thumb ||
+    null;
+
+  return hasUsableUrl(image) ? image : null;
 }
 
 export async function getDynamicImage(
@@ -39,8 +72,8 @@ export async function getDynamicImage(
     }
 
     if (type === "venue" && query) {
-      // Keep Red Rocks hero/foundation visuals on known-good local media.
-      if (normalizedQuery.includes("red rocks")) return fallback;
+      const unsplashImage = await searchUnsplashImage(query);
+      if (unsplashImage) return unsplashImage;
 
       const res = await fetch(
         `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(query)}`,
@@ -53,7 +86,11 @@ export async function getDynamicImage(
       return fallback;
     }
 
-    // Concert/genre/fleet should never rely on unstable random endpoints in production.
+    if (type === "concert" || type === "genre" || type === "fleet") {
+      const unsplashImage = await searchUnsplashImage(query);
+      if (unsplashImage) return unsplashImage;
+    }
+
     return fallback;
   } catch {
     return fallback;
