@@ -308,7 +308,7 @@ export default async function SchedulePage() {
           </div>
 
           <div className="relative px-6 py-10 sm:px-8 sm:py-12 lg:px-12 lg:py-14">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-black/30 px-4 py-2 text-[11px] font-black uppercase tracking-[0.24em] text-[#f5c66c] backdrop-blur">
+            <div className="inline-flex min-h-[42px] items-center gap-2 rounded-full border border-white/12 bg-black/30 px-4 py-3 text-[11px] font-black uppercase tracking-[0.24em] text-[#f5c66c] backdrop-blur">
               <CalendarDays className="h-3.5 w-3.5" />
               Red Rocks 2026
             </div>

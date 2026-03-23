@@ -609,14 +609,14 @@ body { background: var(--surface); color: var(--text); }
 }
 
 .comic-btn-primary{
-  color:#08111e;
+  color:#120f0b;
   border:1px solid rgba(61,243,255,.42);
   background:linear-gradient(180deg, #3df3ff, #1dbfd3);
   box-shadow:0 12px 30px rgba(61,243,255,.18);
 }
 
 .comic-btn-secondary{
-  color:#F1F6FF;
+  color:#120f0b;
   border:1px solid rgba(255,255,255,.14);
   background:rgba(255,255,255,.06);
   box-shadow:none;
@@ -775,7 +775,7 @@ body,
 .btn-ghost {
   background: linear-gradient(180deg, rgba(255,176,124,0.18), rgba(255,176,124,0.1));
   border-color: rgba(255, 176, 124, 0.3);
-  color: #fff !important;
+  color: #120f0b !important;
 }
 
 .btn-primary:hover,
@@ -783,4 +783,9 @@ body,
 .btn-ghost:hover {
   transform: translateY(-2px) scale(1.01);
   filter: saturate(1.08);
+}
+
+a[href][class*="rounded-full"][class*="justify-center"],
+button[class*="rounded-full"][class*="justify-center"] {
+  color: #120f0b !important;
 }
