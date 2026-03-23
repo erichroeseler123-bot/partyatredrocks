@@ -20,15 +20,7 @@ const DCC_AGENT_MANIFEST_URL = "https://www.destinationcommandcenter.com/agent.j
 const DCC_PUBLIC_BASE_URL = "https://www.destinationcommandcenter.com";
 const GUIDE_DCC_MEDIA_TARGETS = [
   { entityType: "venue", slug: "red-rocks-amphitheatre" },
-  { entityType: "venue", slug: "sphere-las-vegas" },
-  { entityType: "hotel", slug: "bellagio" },
-  { entityType: "hotel", slug: "mgm-grand" },
-  { entityType: "hotel", slug: "caesars-palace" },
-  { entityType: "attraction", slug: "fremont-street-experience" },
-  { entityType: "attraction", slug: "sphere-las-vegas" },
-  { entityType: "attraction", slug: "red-rock-canyon" },
-  { entityType: "attraction", slug: "hoover-dam" },
-  { entityType: "attraction", slug: "grand-canyon" },
+  { entityType: "city", slug: "denver" },
 ] as const;
 
 type DccImageAsset = {
@@ -177,8 +169,22 @@ function extractDccImageSetSources(imageSet: DccImageSet | null | undefined) {
     absolutizeDccImageSrc(imageSet.hero?.src),
     absolutizeDccImageSrc(imageSet.card?.src),
     ...(imageSet.gallery || []).map((item) => absolutizeDccImageSrc(item?.src)),
-  ].filter(Boolean) as string[];
+  ].filter(isAllowedDccGuideImageSrc) as string[];
   return sources;
+}
+
+function isAllowedDccGuideImageSrc(src?: string | null): src is string {
+  if (!src) return false;
+  const normalized = src.toLowerCase();
+  if (!normalized.startsWith("https://www.destinationcommandcenter.com/")) return false;
+
+  // The guide page should only render photo assets, never diagram/concept SVG artwork.
+  if (normalized.endsWith(".svg")) return false;
+  if (!/\.(avif|webp|png|jpe?g)$/.test(normalized)) return false;
+  if (normalized.includes("/images/las-vegas/")) return false;
+  if (normalized.includes("concept") || normalized.includes("artwork")) return false;
+
+  return true;
 }
 
 async function getGuideDccImagePool() {
