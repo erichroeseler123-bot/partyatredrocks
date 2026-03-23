@@ -83,11 +83,20 @@ function dateLabel(dateKey: string) {
 
 function normalizeComparable(value: string | null | undefined) {
   return (value || "")
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
     .replace(/&/g, " and ")
     .replace(/[^a-z0-9\s]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function comparableTokens(value: string | null | undefined) {
+  const stopWords = new Set(["and", "with", "the", "of", "a", "an", "special", "guest", "night", "day", "pass"]);
+  return normalizeComparable(value)
+    .split(" ")
+    .filter((token) => token && !stopWords.has(token));
 }
 
 function hashString(input: string) {
@@ -119,6 +128,8 @@ function scoreSeatGeekImageMatch(event: ScheduleEvent, seatGeekEvent: SeatGeekIm
   const catalogName = normalizeComparable(event.name);
   const catalogHeadliner = normalizeComparable(event.artistNames[0] || "");
   const sgTitle = normalizeComparable(seatGeekEvent.title);
+  const catalogTokens = comparableTokens(event.name);
+  const sgTokens = new Set(comparableTokens(seatGeekEvent.title));
 
   let score = 0;
 
@@ -132,6 +143,11 @@ function scoreSeatGeekImageMatch(event: ScheduleEvent, seatGeekEvent: SeatGeekIm
     score += 7;
   }
 
+  if (catalogTokens.length) {
+    const sharedTokenCount = catalogTokens.filter((token) => sgTokens.has(token)).length;
+    score += Math.min(sharedTokenCount, 6);
+  }
+
   if (event.dateKey === (seatGeekEvent.datetime_local || seatGeekEvent.datetime || "").slice(0, 10)) score += 3;
 
   return score;
@@ -140,6 +156,7 @@ function scoreSeatGeekImageMatch(event: ScheduleEvent, seatGeekEvent: SeatGeekIm
 function findSeatGeekImageMatch(event: ScheduleEvent, byDate: Map<string, SeatGeekImageEvent[]>) {
   const candidates = byDate.get(event.dateKey) || [];
   if (!candidates.length) return null;
+  if (candidates.length === 1 && candidates[0]?.image) return candidates[0];
 
   let best: SeatGeekImageEvent | null = null;
   let bestScore = -1;
@@ -152,7 +169,7 @@ function findSeatGeekImageMatch(event: ScheduleEvent, byDate: Map<string, SeatGe
     }
   }
 
-  return bestScore >= 7 ? best : null;
+  return bestScore >= 3 ? best : null;
 }
 
 export default async function SchedulePage() {
