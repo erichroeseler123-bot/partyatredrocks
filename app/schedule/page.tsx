@@ -70,7 +70,7 @@ export default async function SchedulePage() {
         <section className="relative overflow-hidden rounded-[36px] border border-[#f5c66c]/20 bg-[#12100e] shadow-[0_40px_120px_rgba(0,0,0,0.58)]">
           <div className="absolute inset-0">
             <Image
-              src="/assets/venue/red-rocks/red-rocks-hero.webp"
+              src="/hero/hero-home.jpg"
               alt="Red Rocks Amphitheatre at night"
               fill
               sizes="100vw"

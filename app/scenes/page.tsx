@@ -10,13 +10,12 @@ import { getSceneMedia } from "@/data/media";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 const SCENE_GENERIC_IMAGES = [
-  "/assets/venue/red-rocks/red-rocks-hero.webp",
-  "/assets/venue/red-rocks/red-rocks-arrival.webp",
-  "/hero/hero-home.webp",
-  "/hero/hero-guides.webp",
-  "/images/marketing/shuttle.webp",
-  "/images/marketing/vip-suv.webp",
-  "/fleet/fleet-sprinter.webp",
+  "/hero/hero-home.jpg",
+  "/hero/hero-guides.jpg",
+  "/images/marketing/shuttle.jpg",
+  "/images/marketing/vip-suv.jpg",
+  "/images/marketing/fleet.jpg",
+  "/fleet/fleet-sprinter.jpg",
   "/fleet/fleet-suburban.jpg",
   "/venues/rrsite.jpg",
   "/venues/missionsite.jpg",
@@ -118,7 +117,7 @@ export default async function ScenesLandingPage() {
         <section className="relative overflow-hidden rounded-[32px] border border-white/12 bg-[#0b1224]">
           <div className="absolute inset-0">
             <Image
-              src="/assets/venue/red-rocks/red-rocks-hero.webp"
+              src="/hero/hero-home.jpg"
               alt="Colorado concert night crowd"
               fill
               className="object-cover object-center opacity-35"

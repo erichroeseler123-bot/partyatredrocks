@@ -32,7 +32,7 @@ const rideCards = [
     ],
     href: BOOK_RED_ROCKS,
     cta: "Secure Shared Seats",
-    image: "/fleet/fleet-sprinter.webp",
+    image: "/fleet/fleet-sprinter.jpg",
     alt: "Shared shuttle option for Red Rocks transportation",
   },
   {
@@ -46,7 +46,7 @@ const rideCards = [
     ],
     href: BOOK_RED_ROCKS,
     cta: "View Private Vehicles",
-    image: "/images/marketing/shuttle.webp",
+    image: "/images/marketing/shuttle.jpg",
     alt: "Private vehicle option for Red Rocks transportation",
   },
 ];
@@ -58,7 +58,7 @@ export default function HomeSections() {
         <section className="relative overflow-hidden rounded-[36px] border border-[#f5c66c]/20 bg-[#12100e] shadow-[0_40px_120px_rgba(0,0,0,0.58)]">
           <div className="absolute inset-0">
             <Image
-              src="/hero/hero-home.webp"
+              src="/hero/hero-home.jpg"
               alt="Nighttime Red Rocks crowd and venue lights"
               fill
               sizes="100vw"
@@ -158,7 +158,7 @@ export default function HomeSections() {
                 <article className="overflow-hidden rounded-[24px] border border-white/14 bg-[rgba(7,7,8,0.58)] shadow-[0_18px_48px_rgba(0,0,0,0.35)]">
                   <div className="relative h-36">
                     <Image
-                      src="/images/marketing/vip-suv.webp"
+                      src="/images/marketing/vip-suv.jpg"
                       alt="Private SUV arrival at Red Rocks"
                       fill
                       sizes="(min-width: 640px) 50vw, 100vw"
@@ -176,7 +176,7 @@ export default function HomeSections() {
                 <article className="overflow-hidden rounded-[24px] border border-white/14 bg-[rgba(7,7,8,0.58)] shadow-[0_18px_48px_rgba(0,0,0,0.35)]">
                   <div className="relative h-36">
                     <Image
-                      src="/assets/venue/red-rocks/red-rocks-arrival.webp"
+                      src="/hero/hero-home.jpg"
                       alt="Riders arriving relaxed at Red Rocks"
                       fill
                       sizes="(min-width: 640px) 50vw, 100vw"

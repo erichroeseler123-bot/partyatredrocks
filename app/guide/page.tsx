@@ -23,12 +23,12 @@ const GUIDE_DCC_MEDIA_TARGETS = [
   { entityType: "city", slug: "denver" },
 ] as const;
 const LOCAL_GUIDE_FALLBACK_IMAGES = [
-  "/assets/venue/red-rocks/red-rocks-hero.webp",
-  "/assets/venue/red-rocks/red-rocks-arrival.webp",
-  "/hero/hero-guides.webp",
-  "/hero/hero-home.webp",
-  "/images/marketing/shuttle.webp",
-  "/images/marketing/vip-suv.webp",
+  "/hero/hero-home.jpg",
+  "/hero/hero-guides.jpg",
+  "/images/marketing/shuttle.jpg",
+  "/images/marketing/vip-suv.jpg",
+  "/fleet/fleet-sprinter.jpg",
+  "/venues/rrsite.jpg",
 ] as const;
 
 type DccImageAsset = {
@@ -276,7 +276,7 @@ export default async function GuideHub() {
     acc[card.id] = resolveGuideImage(card, dccImagePool);
     return acc;
   }, {});
-  const heroImage = dccImagePool[0] || "/assets/venue/red-rocks/red-rocks-hero.webp";
+  const heroImage = dccImagePool[0] || "/hero/hero-home.jpg";
 
   return (
     <main className="bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
