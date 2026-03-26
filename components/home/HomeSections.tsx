@@ -146,39 +146,33 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
             </p>
           </div>
 
-          <div className="mt-6 grid gap-4 xl:grid-cols-2">
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
             {rideCards.map((ride) => {
               const checked = selectedRide === ride.id;
               return (
-                <label
+                <button
                   key={ride.title}
+                  type="button"
+                  onClick={() => setSelectedRide(ride.id)}
                   className={[
-                    "group relative flex cursor-pointer gap-4 overflow-hidden rounded-[28px] border p-5 transition",
+                    "group relative flex gap-4 overflow-hidden rounded-[28px] border p-5 text-left transition",
                     checked
                       ? "border-[var(--brand-cyan)] bg-[linear-gradient(180deg,rgba(25,35,86,0.95),rgba(18,20,32,0.98))] shadow-[0_24px_80px_rgba(0,0,0,0.38)]"
                       : "border-white/10 bg-[linear-gradient(180deg,rgba(24,25,33,0.96),rgba(15,16,23,0.98))] hover:border-white/18",
                   ].join(" ")}
                 >
-                  <input
-                    type="radio"
-                    name="ride-choice"
-                    value={ride.id}
-                    checked={checked}
-                    onChange={() => setSelectedRide(ride.id)}
-                    className="sr-only"
-                  />
-                  <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-white/30 bg-black/20">
-                    <div
-                      className={[
-                        "h-3 w-3 rounded-full transition",
-                        checked ? "bg-[var(--brand-cyan)] shadow-[0_0_16px_rgba(255,207,112,0.55)]" : "bg-white/20",
-                      ].join(" ")}
-                    />
-                  </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                       <div>
-                        <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">{ride.subtitle}</div>
+                        <div className="flex items-center gap-2">
+                          <div
+                            className={[
+                              "h-2.5 w-2.5 rounded-full transition",
+                              checked ? "bg-[var(--brand-cyan)] shadow-[0_0_14px_rgba(255,207,112,0.55)]" : "bg-white/25",
+                            ].join(" ")}
+                          />
+                          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">{ride.subtitle}</div>
+                        </div>
                         <h3 className="mt-2 text-[1.5rem] font-black uppercase tracking-[-0.04em] text-white">{ride.title}</h3>
                       </div>
                       <div className="relative h-20 overflow-hidden rounded-[18px] border border-white/10 sm:w-36">
@@ -203,7 +197,7 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
                       ))}
                     </ul>
                   </div>
-                </label>
+                </button>
               );
             })}
           </div>
