@@ -16,11 +16,11 @@ export default function SiteNav() {
   const mobileLinks = NAV_LINKS;
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[#f5c66c]/18 bg-[rgba(52,33,13,0.94)] backdrop-blur">
+    <header className="sticky top-0 z-50 bg-transparent">
       <div className="comic-wrap py-3">
-        <div className="flex items-center justify-between gap-3">
+        <div className="brand-glass-bar flex items-center justify-between gap-3 rounded-[24px] px-4 py-3">
           <Link href="/" className="flex items-center gap-2 no-underline">
-            <div className="text-[12px] font-black uppercase tracking-[0.2em] text-[#fff4de]">
+            <div className="text-[12px] font-black uppercase tracking-[0.2em] text-[var(--brand-text)]">
               {brand}
             </div>
           </Link>
@@ -34,7 +34,7 @@ export default function SiteNav() {
                   href={l.href}
                   className={[
                     "text-[12px] font-black uppercase tracking-[0.16em] no-underline transition",
-                    active ? "text-[#fff4de]" : "text-[#fff4de]/82 hover:text-[#fff4de]",
+                    active ? "text-[var(--brand-text)]" : "text-[color:var(--brand-text-soft)] hover:text-[var(--brand-text)]",
                   ].join(" ")}
                 >
                   {l.label}
@@ -46,14 +46,14 @@ export default function SiteNav() {
           <div className="flex items-center gap-2">
             <Link
               href="/book/red-rocks-amphitheatre"
-              className="inline-flex min-h-[42px] items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-4 text-[12px] font-black uppercase tracking-[0.16em] text-[#120f0b] no-underline shadow-[0_12px_28px_rgba(141,79,32,0.24)] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
+              className="brand-button-primary inline-flex min-h-[42px] items-center justify-center px-4 text-[12px] font-black uppercase tracking-[0.16em] no-underline"
             >
               {cta}
             </Link>
           </div>
         </div>
 
-        <nav className="md:hidden mt-2 flex gap-4 overflow-x-auto pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+        <nav className="md:hidden mt-2 flex gap-4 overflow-x-auto px-2 pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
           {mobileLinks.map((l) => {
             const active = isActive(pathname, l.href);
             return (
@@ -62,7 +62,7 @@ export default function SiteNav() {
                 href={l.href}
                 className={[
                   "shrink-0 text-[12px] font-black uppercase tracking-[0.16em] no-underline transition",
-                  active ? "text-[#fff4de]" : "text-[#fff4de]/82 hover:text-[#fff4de]",
+                  active ? "text-[var(--brand-text)]" : "text-[color:var(--brand-text-soft)] hover:text-[var(--brand-text)]",
                 ].join(" ")}
               >
                 {l.label}
