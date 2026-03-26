@@ -17,6 +17,7 @@ import {
 } from "@/lib/parrHandoff";
 import { getCrossSiteVenue } from "@/lib/crossSiteMap";
 import { PlanningLinks } from "@/components/booking/PlanningLinks";
+import { getVenueHeroImage } from "@/data/media";
 
 export const runtime = "nodejs";
 export const revalidate = 300;
@@ -620,6 +621,57 @@ export async function generateMetadata({
   };
 }
 
+function venueEventImage(
+  event: VenueCache["events"][number],
+  venueName: string,
+  media: Awaited<ReturnType<typeof getMediaIndex>>
+) {
+  const mediaRow =
+    media?.eventsById?.[event.id] ||
+    (event.sourceId ? media?.eventsById?.[event.sourceId] : null) ||
+    null;
+
+  return selectImageByPriority({
+    entityType: "show",
+    title: event.title,
+    artistName: event.performers?.[0]?.name ?? null,
+    venueName,
+    queryHint: `${event.performers?.[0]?.name || event.title} ${venueName} concert`,
+    alt: event.title,
+    blobImage: mediaRow?.sources?.blobImage ?? null,
+    spotifyImage: mediaRow?.sources?.spotifyImage ?? null,
+    ticketmasterImage: mediaRow?.sources?.ticketmasterImage ?? null,
+    seatgeekImage: mediaRow?.sources?.seatgeekImage ?? null,
+    localAsset: mediaRow?.sources?.localAsset ?? null,
+    fallback: mediaRow?.sources?.fallback ?? "/images/shows/fallback.jpg",
+  });
+}
+
+function venueEventThumbnail(
+  event: VenueCache["events"][number],
+  media: Awaited<ReturnType<typeof getMediaIndex>>
+) {
+  const artistName = event.performers?.[0]?.name ?? null;
+  if (!artistName) return null;
+
+  const artistSlug = slugify(artistName);
+  const artistRow = media?.artistsById?.[artistSlug] ?? null;
+
+  return selectImageByPriority({
+    entityType: "artist",
+    title: artistName,
+    artistName,
+    queryHint: `${artistName} live music artist portrait`,
+    alt: artistName,
+    blobImage: artistRow?.sources?.blobImage ?? null,
+    spotifyImage: artistRow?.sources?.spotifyImage ?? null,
+    ticketmasterImage: artistRow?.sources?.ticketmasterImage ?? null,
+    seatgeekImage: artistRow?.sources?.seatgeekImage ?? null,
+    localAsset: artistRow?.sources?.localAsset ?? null,
+    fallback: `/images/artists/${artistSlug}.jpg`,
+  });
+}
+
 export default async function VenuePage({
   params,
   searchParams,
@@ -656,6 +708,10 @@ export default async function VenuePage({
     localAsset: media?.venuesById?.[slug]?.sources?.localAsset ?? null,
     fallback: media?.venuesById?.[slug]?.sources?.fallback ?? "/images/venues/fallback.jpg",
   });
+  const venueHeroImage =
+    slug === "red-rocks-amphitheatre"
+      ? getVenueHeroImage(slug)
+      : venueImage;
 
   return (
     <main className="bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
@@ -687,8 +743,21 @@ export default async function VenuePage({
       <section className="comic-wrap">
 
       {/* HERO */}
-      <div className="comic-hero rounded-[32px] border border-white/10 p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:p-10 lg:p-12">
-        <div className="flex flex-wrap items-center gap-2">
+      <div className="comic-hero relative overflow-hidden rounded-[32px] border border-white/10 p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:p-10 lg:p-12">
+        <div className="absolute inset-0">
+          <img
+            src={venueHeroImage}
+            alt={`${name} venue – hero view`}
+            width={1600}
+            height={900}
+            loading="eager"
+            decoding="async"
+            className="h-full w-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(5,8,22,0.9)_0%,rgba(5,8,22,0.64)_45%,rgba(5,8,22,0.9)_100%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,176,124,0.22),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(143,208,255,0.16),transparent_24%)]" />
+        </div>
+        <div className="relative flex flex-wrap items-center gap-2">
           <div className="inline-flex items-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
             Venue Guide
           </div>
@@ -710,29 +779,21 @@ export default async function VenuePage({
           ) : null}
         </div>
 
-        <h1 className="mt-5 text-[2.5rem] font-black uppercase leading-[0.94] tracking-[-0.04em] sm:text-[4rem] lg:text-[5rem]">
+        <h1 className="relative mt-5 text-[2.5rem] font-black uppercase leading-[0.94] tracking-[-0.04em] sm:text-[4rem] lg:text-[5rem]">
           {name}
         </h1>
 
-        <p className="mt-5 max-w-3xl text-[15px] leading-7 text-white/74 sm:text-lg">
+        <p className="relative mt-5 max-w-3xl text-[15px] leading-7 text-white/82 sm:text-lg">
           Upcoming shows, venue details, and ride options for a smoother concert night from pickup to the ride home.
         </p>
-        <div className="mt-5">
-          <img
-            src={venueImage}
-            alt={`${name} venue – ${reference.whatItIs || "live music venue overview"}`}
-            width={760}
-            height={428}
-            loading="lazy"
-            decoding="async"
-            style={{ width: "100%", maxWidth: 760, borderRadius: 18, border: "1px solid rgba(255,255,255,.14)" }}
-          />
-        </div>
-        <div className="mt-4">
+        <p className="relative mt-4 max-w-3xl text-sm leading-6 text-white/66">
+          {reference.whatItIs}
+        </p>
+        <div className="relative mt-4">
           <MusicWave bars={22} />
         </div>
 
-        <div className="mt-7 flex w-full flex-col flex-wrap items-center justify-center gap-3 sm:flex-row sm:gap-4">
+        <div className="relative mt-7 flex w-full flex-col flex-wrap items-center justify-center gap-3 sm:flex-row sm:gap-4">
           <Link
             href={buildBookingHref({ target: "book", venue: slug, searchParams: sp })}
             className="inline-flex min-h-12 w-full min-w-[180px] items-center justify-center rounded-full bg-[#ff5b2e] px-7 py-3 text-center text-[12px] font-black uppercase tracking-[0.22em] text-white transition hover:bg-[#ff7148] sm:w-auto"
@@ -753,10 +814,10 @@ export default async function VenuePage({
           venue={slug}
           source={Array.isArray(sp.source) ? sp.source[0] : sp.source}
           lead="Planning your night?"
-          className="mt-5"
+          className="relative mt-5"
         />
 
-        <div className="mt-4 text-xs text-white/45">
+        <div className="relative mt-4 text-xs text-white/45">
           Feed updated:{" "}
           {updatedAt ? (
             <time dateTime={updatedAt}>{updatedAt}</time>
@@ -1128,10 +1189,26 @@ export default async function VenuePage({
 
           <div className="mt-6 grid md:grid-cols-2 gap-5">
             {events.slice(0, 10).map((e) => (
-              <div
+              <article
                 key={e.id}
-                className="rounded-[26px] border border-white/10 bg-[#0b1224] p-5 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
+                className="overflow-hidden rounded-[26px] border border-white/10 bg-[#0b1224] shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
               >
+                <div className="relative h-48 overflow-hidden border-b border-white/10">
+                  <img
+                    src={venueEventImage(e, name, media)}
+                    alt={`${e.title} at ${name}`}
+                    width={960}
+                    height={540}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover object-center"
+                  />
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,22,0.08),rgba(5,8,22,0.72)_100%)]" />
+                  <div className="absolute left-4 top-4 rounded-full border border-white/14 bg-black/35 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-white/86">
+                    Upcoming Show
+                  </div>
+                </div>
+                <div className="p-5">
                 <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
                   {new Date(e.datetime_local).toLocaleString("en-US", {
                     weekday: "short",
@@ -1158,6 +1235,23 @@ export default async function VenuePage({
                     ))}
                 </div>
 
+                {e.performers?.[0]?.name ? (
+                  <div className="mt-4 flex items-center gap-3">
+                    <img
+                      src={venueEventThumbnail(e, media) || venueEventImage(e, name, media)}
+                      alt={`${e.performers[0].name} artist image`}
+                      width={40}
+                      height={40}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-10 w-10 rounded-full border border-white/18 object-cover"
+                    />
+                    <div className="text-xs uppercase tracking-[0.16em] text-white/54">
+                      Headliner
+                    </div>
+                  </div>
+                ) : null}
+
                 <div className="mt-4 flex flex-wrap gap-3">
                   <Link className="font-bold text-[#ffb07c] hover:text-white" href={`/shows/${encodeURIComponent(e.id)}`}>
                     Full Intel →
@@ -1174,7 +1268,8 @@ export default async function VenuePage({
                     </a>
                   ) : null}
                 </div>
-              </div>
+                </div>
+              </article>
             ))}
           </div>
 
