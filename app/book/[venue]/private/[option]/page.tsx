@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import venuesJson from "@/data/venues.json";
@@ -7,72 +8,48 @@ import { DccReturnBanner } from "@/components/booking/DccReturnBanner";
 import { postDccSatelliteEvent, postWtaPartnerAcceptedIfNeeded } from "@/lib/dccSatellite";
 import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
 import { TrustStrip } from "@/components/TrustStrip";
+import { buildPrivateOptionMetadata } from "../../bookingSeo";
+import { buildDccPrivateCheckoutHref, getPrivateRideOption, PRIVATE_RIDE_BENEFITS, type PrivateRideSlug } from "@/lib/rideCatalog";
 
 type VenueRow = {
   slug?: string;
   name?: string;
 };
 
-const optionMeta = {
-  suv: {
-    title: "Private SUV",
-    body: "Best for small groups that want Upper North limo-lane access, time to tailgate, and one vehicle for the full night.",
-    price: "$499",
-    dccProduct: "parr-suburban",
-    ctaLabel: "Start SUV Checkout",
-  },
-  van: {
-    title: "10 Passenger Van",
-    body: "Best for groups that want limo-lane access, time to tailgate, and one van for the full night.",
-    price: "$599",
-    dccProduct: "parr-van-10",
-    ctaLabel: "Start Van Checkout",
-  },
-  sprinter: {
-    title: "14 Passenger Sprinter",
-    body: "Best for larger groups that want more room, limo-lane access, and one vehicle for the full night.",
-    price: "$799",
-    dccProduct: "parr-sprinter-14",
-    ctaLabel: "Start Sprinter Checkout",
-  },
-  "party-bus": {
-    title: "24 Passenger Party Bus",
-    body: "Best for bigger groups that want to tailgate, stay together, and make the ride part of the night.",
-    price: "$1199",
-    dccProduct: "parr-party-bus-24",
-    ctaLabel: "Start Party Bus Checkout",
-  },
-} as const;
-
-const privateBenefits = [
-  "Upper North limo-lane access",
-  "Better fit for groups who want to tailgate before the show",
-  "One vehicle for the full night",
-  "Pickup details sent before your ride",
-  "Return ride handled after the show",
-];
-
 function getVenue(slug: string): VenueRow | null {
   return (venuesJson as Record<string, VenueRow>)[slug] ?? null;
 }
 
-function buildDccCheckoutHref(product: string, quantity = 1) {
-  const qty = Number.isFinite(quantity) && quantity > 0 ? Math.floor(quantity) : 1;
-  return `https://www.destinationcommandcenter.com/book?route=parr-private&product=${product}&qty=${qty}`;
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ venue: string; option: PrivateRideSlug }>;
+}): Promise<Metadata> {
+  const { venue, option } = await params;
+  if (venue !== "red-rocks-amphitheatre") return {};
+  const meta = getPrivateRideOption(option);
+  if (!meta) return {};
+  return buildPrivateOptionMetadata({
+    venue,
+    optionSlug: option,
+    optionTitle: meta.title,
+    optionBody: meta.body,
+    optionPriceLabel: meta.priceLabel,
+  });
 }
 
 export default async function PrivateOptionPage({
   params,
   searchParams,
 }: {
-  params: Promise<{ venue: string; option: keyof typeof optionMeta }>;
+  params: Promise<{ venue: string; option: PrivateRideSlug }>;
   searchParams: Promise<HandoffSearchParams>;
 }) {
   const { venue, option } = await params;
   const sp = await searchParams;
   if (venue !== "red-rocks-amphitheatre") notFound();
   const row = getVenue(venue);
-  const meta = optionMeta[option];
+  const meta = getPrivateRideOption(option);
   if (!row?.name || !meta) notFound();
   const qtyValue = Array.isArray(sp.qty) ? sp.qty[0] : sp.qty;
   const vehicleQty = qtyValue ? Math.max(1, Number(qtyValue) || 1) : 1;
@@ -103,12 +80,12 @@ export default async function PrivateOptionPage({
           <p className="mt-4 max-w-2xl text-[15px] leading-7 text-white/74 sm:text-lg">
             {meta.body}
           </p>
-          <div className="mt-4 text-sm font-bold text-[#ffb07c]">{meta.price}</div>
+          <div className="mt-4 text-sm font-bold text-[#ffb07c]">{meta.priceLabel}</div>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-white/68 sm:text-[15px]">
             Pickup details are sent before your ride. Your group rides together for the full night.
           </p>
           <div className="mt-5 grid gap-3 md:grid-cols-2">
-            {privateBenefits.map((item) => (
+            {PRIVATE_RIDE_BENEFITS.map((item) => (
               <div key={item} className="rounded-[20px] border border-white/10 bg-[#0b1224] px-4 py-3 text-sm font-bold text-white/88">
                 {item}
               </div>
@@ -116,7 +93,7 @@ export default async function PrivateOptionPage({
           </div>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <a
-              href={buildDccCheckoutHref(meta.dccProduct, vehicleQty)}
+              href={buildDccPrivateCheckoutHref(meta.slug, vehicleQty)}
               className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
             >
               {meta.ctaLabel}
@@ -154,7 +131,7 @@ export default async function PrivateOptionPage({
           </p>
           <TrustStrip className="mb-4 mt-5" />
           <a
-            href={buildDccCheckoutHref(meta.dccProduct, vehicleQty)}
+            href={buildDccPrivateCheckoutHref(meta.slug, vehicleQty)}
             className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
           >
             Continue to custom checkout

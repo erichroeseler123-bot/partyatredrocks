@@ -11,6 +11,7 @@ import { PrivatePromoBanner } from "@/components/booking/PrivatePromoBanner";
 import { DccReturnBanner } from "@/components/booking/DccReturnBanner";
 import { postDccSatelliteEvent, postWtaPartnerAcceptedIfNeeded } from "@/lib/dccSatellite";
 import { getBookingVenueImage } from "@/data/media";
+import { buildVenueBookingMetadata } from "./bookingSeo";
 import {
   buildBookingHref,
   buildVenueRequestHref,
@@ -43,22 +44,14 @@ export async function generateMetadata({
     return {};
   }
 
-  return {
-    openGraph: {
-      images: [
-        {
-          url: `https://www.partyatredrocks.com${venueMedia.hero}`,
-          width: 1200,
-          height: 630,
-          alt: venueMedia.heroAlt,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      images: [`https://www.partyatredrocks.com${venueMedia.hero}`],
-    },
-  };
+  const row = getVenue(venue);
+  if (!row?.name) return {};
+  return buildVenueBookingMetadata({
+    venue,
+    venueName: row.name,
+    heroImage: venueMedia.hero,
+    heroAlt: venueMedia.heroAlt,
+  });
 }
 
 export default async function VenueBookingPage({

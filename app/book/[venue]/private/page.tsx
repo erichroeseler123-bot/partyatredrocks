@@ -16,60 +16,15 @@ import { bookingVisuals } from "@/lib/bookingVisuals";
 import { getSameAs } from "@/lib/socials";
 import { SITE_CONFIG } from "@/app/site-config";
 import { BUSINESS_NAME, BUSINESS_PHONE, SERVICE_AREAS } from "@/lib/seo/siteTrust";
+import { buildPrivateBookingJsonLd, buildPrivateBookingMetadata, buildPrivateFaqJsonLd } from "../bookingSeo";
+import { buildDccPrivateCheckoutHref, PRIVATE_RIDE_BENEFITS, PRIVATE_RIDE_OPTIONS } from "@/lib/rideCatalog";
 
 type VenueRow = {
   slug?: string;
   name?: string;
 };
 
-const privateOptions = [
-  {
-    slug: "suv",
-    title: "Private SUV",
-    eyebrow: "$499 • Up to 6 Guests",
-    body: "Private ride for smaller groups that want limo-lane access and time to tailgate before the show.",
-  },
-  {
-    slug: "van",
-    title: "10 Passenger Van",
-    eyebrow: "$599 • Up to 10 Guests",
-    body: "One vehicle, one pickup plan, limo-lane access, and one return timeline for groups that need more room.",
-  },
-  {
-    slug: "sprinter",
-    title: "14 Passenger Sprinter",
-    eyebrow: "$799 • Up to 14 Guests",
-    body: "Best for larger groups that want more space, limo-lane access, and one vehicle for the full night.",
-  },
-  {
-    slug: "party-bus",
-    title: "24 Passenger Party Bus",
-    eyebrow: "$1199 • Up to 24 Guests",
-    body: "Best for larger groups who want to tailgate, stay together, and make the ride part of the night.",
-  },
-] as const;
-
-const dccProductMap = {
-  suv: "parr-suburban",
-  van: "parr-van-10",
-  sprinter: "parr-sprinter-14",
-  "party-bus": "parr-party-bus-24",
-} as const;
-
 const SITE = "https://www.partyatredrocks.com";
-
-function buildDccCheckoutHref(product: keyof typeof dccProductMap, quantity = 1) {
-  const qty = Number.isFinite(quantity) && quantity > 0 ? Math.floor(quantity) : 1;
-  return `https://www.destinationcommandcenter.com/book?route=parr-private&product=${dccProductMap[product]}&qty=${qty}`;
-}
-
-const privateBenefits = [
-  "Upper North limo-lane access",
-  "Best fit for groups that want to tailgate before the show",
-  "One vehicle for the full night",
-  "Pickup details sent before your ride",
-  "Return ride handled after the show",
-];
 
 function getVenue(slug: string): VenueRow | null {
   return (venuesJson as Record<string, VenueRow>)[slug] ?? null;
@@ -90,32 +45,7 @@ export async function generateMetadata({
     return {};
   }
 
-  return {
-    title: "Private Red Rocks Shuttle from Denver | $499 SUV - $799 Sprinter - Guaranteed Return",
-    description:
-      "Private shuttle from Denver to Red Rocks. SUV $499, 10-pass van $599, Sprinter $799, guaranteed return, limo-lane access, and optional liquor stop planning.",
-    alternates: { canonical: `${SITE}/book/${venue}/private` },
-    openGraph: {
-      title: "Private Red Rocks Shuttle from Denver | $499 SUV - $799 Sprinter - Guaranteed Return",
-      description:
-        "Private shuttle from Denver to Red Rocks. SUV $499, 10-pass van $599, Sprinter $799, guaranteed return, limo-lane access, and optional liquor stop planning.",
-      url: `${SITE}/book/${venue}/private`,
-      type: "website",
-      images: [
-        {
-          url: `${SITE}${bookingVisuals.private.imageSrc}`,
-          alt: bookingVisuals.private.imageAlt,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: "Private Red Rocks Shuttle from Denver | $499 SUV - $799 Sprinter - Guaranteed Return",
-      description:
-        "Private shuttle from Denver to Red Rocks. SUV $499, 10-pass van $599, Sprinter $799, guaranteed return, limo-lane access, and optional liquor stop planning.",
-      images: [`${SITE}${bookingVisuals.private.imageSrc}`],
-    },
-  };
+  return buildPrivateBookingMetadata(venue);
 }
 
 export default async function PrivateOptionsPage({
@@ -157,85 +87,8 @@ export default async function PrivateOptionsPage({
     sourcePath: `/book/${venue}/private`,
   });
 
-  const serviceJsonLd = {
-    "@context": "https://schema.org",
-    "@type": ["Service", "TaxiService"],
-    name: "Red Rocks private shuttle service",
-    provider: {
-      "@type": "LocalBusiness",
-      name: BUSINESS_NAME,
-      url: SITE,
-      telephone: BUSINESS_PHONE,
-      sameAs: getSameAs(brandKey),
-    },
-    areaServed: SERVICE_AREAS.map((city) => `${city}, CO`),
-    serviceType: "Private concert shuttle service",
-    url: `${SITE}/book/${venue}/private`,
-    description:
-      "Private Red Rocks transportation from Denver with fixed-price SUVs, vans, Sprinters, and party buses.",
-    offers: {
-      "@type": "OfferCatalog",
-      name: "Private Red Rocks vehicle pricing",
-      itemListElement: privateOptions.map((option) => ({
-        "@type": "Offer",
-        priceCurrency: "USD",
-        price: option.eyebrow.split(" • ")[0].replace("$", ""),
-        url: buildDccCheckoutHref(option.slug, vehicleQty),
-        itemOffered: {
-          "@type": "Service",
-          name: option.title,
-          description: option.body,
-        },
-      })),
-    },
-  };
-
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "How late do private Red Rocks rides run?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Private rides run through the end of the show, with return pickup handled after the concert lets out.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Can my private ride stop at a liquor store?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Yes. Most private rides can include a quick stop if the request is added before the ride.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "What time is pickup for private Red Rocks rides?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Most private Red Rocks rides use a 4:30 PM pickup window from Denver, with the exact pickup details confirmed before the event.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Do private Red Rocks shuttles have guaranteed return service?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Yes. Private rides are planned around a guaranteed return after the show so your group stays on one vehicle for the full night.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Which private vehicle is best for larger groups?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Larger groups usually choose the 10-passenger van, 14-passenger Sprinter, or 24-passenger party bus depending on headcount and how much room they want.",
-        },
-      },
-    ],
-  };
+  const serviceJsonLd = buildPrivateBookingJsonLd({ venue, quantity: vehicleQty });
+  const faqJsonLd = buildPrivateFaqJsonLd();
 
   return (
     <main className="min-h-screen bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
@@ -344,10 +197,10 @@ export default async function PrivateOptionsPage({
         <PrivatePromoBanner />
 
         <section className="grid gap-4 lg:grid-cols-2 xl:grid-cols-4">
-          {privateOptions.map((option) => (
+          {PRIVATE_RIDE_OPTIONS.map((option) => (
             <Link
               key={option.slug}
-              href={buildDccCheckoutHref(option.slug, vehicleQty)}
+              href={buildDccPrivateCheckoutHref(option.slug, vehicleQty)}
               className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
             >
               <div className="relative mb-5 h-40 overflow-hidden rounded-[20px] border border-white/10">
@@ -377,7 +230,7 @@ export default async function PrivateOptionsPage({
             Private Ride Benefits
           </div>
           <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {privateBenefits.map((item) => (
+            {PRIVATE_RIDE_BENEFITS.map((item) => (
               <div key={item} className="rounded-[24px] border border-white/10 bg-[#09101f] p-5 text-sm font-bold leading-6 text-white">
                 {item}
               </div>
