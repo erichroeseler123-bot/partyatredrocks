@@ -41,11 +41,27 @@ export default async function RedRocksTransportationPage({
       { "@type": "ListItem", position: 3, name: "Transportation", item: `${SITE}/red-rocks/transportation` },
     ],
   };
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: "Red Rocks Transportation Guide",
+    description:
+      "Red Rocks transportation guide with shuttle, rideshare, parking, pickup timing, and return planning for concert nights.",
+    url: `${SITE}/red-rocks/transportation`,
+    mainEntityOfPage: `${SITE}/red-rocks/transportation`,
+    author: { "@type": "Organization", name: "Party at Red Rocks" },
+    publisher: { "@id": `${SITE}/#organization` },
+    about: [
+      { "@type": "Place", name: "Red Rocks Amphitheatre", url: `${SITE}/venues/red-rocks-amphitheatre` },
+      { "@type": "Service", name: "Red Rocks shuttle transportation", url: `${SITE}/book/red-rocks-amphitheatre/custom/shared` },
+    ],
+  };
 
   return (
     <main className="comic-page pt-24 pb-10">
       <section className="comic-wrap">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
         {faqRows.length > 0 ? (
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
         ) : null}

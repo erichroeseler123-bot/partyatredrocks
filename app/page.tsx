@@ -40,13 +40,16 @@ export default async function HomePage() {
   const webSiteJsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": `${SITE}/#website`,
     name: BUSINESS_NAME,
     url: `${SITE}/`,
+    publisher: { "@id": `${SITE}/#organization` },
   };
 
   const localBusinessJsonLd = {
     "@context": "https://schema.org",
-    "@type": ["LocalBusiness", "Service"],
+    "@id": `${SITE}/#organization`,
+    "@type": ["LocalBusiness", "TransportationService"],
     name: BUSINESS_NAME,
     url: `${SITE}/`,
     telephone: BUSINESS_PHONE,

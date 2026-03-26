@@ -31,10 +31,12 @@ export default function WeekClient({
   initialEvents,
   faqRows = [],
   faqJsonLd,
+  schemaJsonLd = [],
 }: {
   initialEvents: WeekEvent[];
   faqRows?: FaqRow[];
   faqJsonLd?: unknown;
+  schemaJsonLd?: unknown[];
 }) {
   const [q, setQ] = useState("");
   const [month, setMonth] = useState("all");
@@ -63,6 +65,9 @@ export default function WeekClient({
   return (
     <main className="comic-page pt-24 pb-10">
       <section className="comic-wrap">
+        {schemaJsonLd.map((item, index) => (
+          <script key={`schema-${index}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(item) }} />
+        ))}
         {faqRows.length > 0 && faqJsonLd ? (
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
         ) : null}

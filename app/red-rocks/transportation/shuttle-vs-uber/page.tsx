@@ -2,10 +2,13 @@ import Link from "next/link";
 import type { HandoffSearchParams } from "@/lib/parrHandoff";
 import { buildBookingHref } from "@/lib/parrHandoff";
 
+const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
+
 export const metadata = {
   title: "Shuttle vs Uber at Red Rocks",
   description:
     "Cost, reliability, surge pricing, and the best return strategy after the encore.",
+  alternates: { canonical: "/red-rocks/transportation/shuttle-vs-uber" },
 };
 
 export default async function Page({
@@ -14,9 +17,36 @@ export default async function Page({
   searchParams: Promise<HandoffSearchParams>;
 }) {
   const sp = await searchParams;
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE}/` },
+      { "@type": "ListItem", position: 2, name: "Red Rocks", item: `${SITE}/red-rocks` },
+      { "@type": "ListItem", position: 3, name: "Transportation", item: `${SITE}/red-rocks/transportation` },
+      { "@type": "ListItem", position: 4, name: "Shuttle vs Uber", item: `${SITE}/red-rocks/transportation/shuttle-vs-uber` },
+    ],
+  };
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: "Shuttle vs Uber at Red Rocks",
+    description: "Cost, reliability, surge pricing, and the best return strategy after the encore.",
+    url: `${SITE}/red-rocks/transportation/shuttle-vs-uber`,
+    mainEntityOfPage: `${SITE}/red-rocks/transportation/shuttle-vs-uber`,
+    author: { "@type": "Organization", name: "Party at Red Rocks" },
+    publisher: { "@id": `${SITE}/#organization` },
+    about: [
+      { "@type": "Place", name: "Red Rocks Amphitheatre", url: `${SITE}/venues/red-rocks-amphitheatre` },
+      { "@type": "Service", name: "Red Rocks shared shuttle", url: `${SITE}/book/red-rocks-amphitheatre/custom/shared` },
+      { "@type": "Thing", name: "Rideshare pricing and pickup strategy at Red Rocks" },
+    ],
+  };
   return (
     <main className="min-h-screen bg-surface text-white px-6 py-24">
       <div className="max-w-4xl mx-auto">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
         <nav className="text-sm text-muted">
           <Link className="hover:text-white" href="/red-rocks/transportation">
             Transportation

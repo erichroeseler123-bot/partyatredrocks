@@ -9,6 +9,7 @@ import { getRedRocks7DayForecast } from "@/lib/weather";
 import WeekClient, { type WeekEvent } from "./WeekClient";
 
 export const revalidate = 3600;
+const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
 function inNextSevenDays(dateKey: string): boolean {
   const d = new Date(`${dateKey}T00:00:00`);
@@ -76,6 +77,57 @@ export default async function RedRocksLineupPage() {
     return out;
   });
   const faqJsonLd = buildFaqPageJsonLd(faqRows);
+  const collectionJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Red Rocks lineup this week",
+    description: "Weekly Red Rocks concert lineup with direct show pages and booking paths.",
+    url: `${SITE}/week/red-rocks`,
+    about: {
+      "@type": "Place",
+      name: "Red Rocks Amphitheatre",
+      url: `${SITE}/venues/red-rocks-amphitheatre`,
+    },
+  };
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE}/` },
+      { "@type": "ListItem", position: 2, name: "Week", item: `${SITE}/week` },
+      { "@type": "ListItem", position: 3, name: "Red Rocks", item: `${SITE}/week/red-rocks` },
+    ],
+  };
+  const itemListJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Upcoming Red Rocks shows this week",
+    itemListElement: events.slice(0, 24).map((event, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: `${SITE}/shows/${encodeURIComponent(event.id)}`,
+      name: event.name,
+      item: {
+        "@type": "MusicEvent",
+        name: event.name,
+        startDate: `${event.dateKey}T19:00:00`,
+        url: `${SITE}/shows/${encodeURIComponent(event.id)}`,
+        location: {
+          "@type": "Place",
+          name: "Red Rocks Amphitheatre",
+          url: `${SITE}/venues/red-rocks-amphitheatre`,
+        },
+      },
+    })),
+  };
+  const schemaJsonLd = [collectionJsonLd, breadcrumbJsonLd, itemListJsonLd];
 
-  return <WeekClient initialEvents={initialEvents} faqRows={faqRows} faqJsonLd={faqJsonLd} />;
+  return (
+    <WeekClient
+      initialEvents={initialEvents}
+      faqRows={faqRows}
+      faqJsonLd={faqJsonLd}
+      schemaJsonLd={schemaJsonLd}
+    />
+  );
 }

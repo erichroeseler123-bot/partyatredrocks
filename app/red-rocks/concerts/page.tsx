@@ -50,11 +50,47 @@ export default async function RedRocksConcertsPage({
       { "@type": "ListItem", position: 3, name: "Concerts", item: `${SITE}/red-rocks/concerts` },
     ],
   };
+  const collectionJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Red Rocks concert schedule 2026",
+    description: "Upcoming Red Rocks concerts, monthly calendars, show details, and ride planning links.",
+    url: `${SITE}/red-rocks/concerts`,
+    about: {
+      "@type": "Place",
+      name: "Red Rocks Amphitheatre",
+      url: `${SITE}/venues/red-rocks-amphitheatre`,
+    },
+  };
+  const itemListJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Upcoming Red Rocks concerts",
+    itemListElement: upcoming.map((event, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: `${SITE}/shows/${encodeURIComponent(event.id)}`,
+      name: event.name,
+      item: {
+        "@type": "MusicEvent",
+        name: event.name,
+        startDate: `${event.dateKey}T19:00:00`,
+        url: `${SITE}/shows/${encodeURIComponent(event.id)}`,
+        location: {
+          "@type": "Place",
+          name: "Red Rocks Amphitheatre",
+          url: `${SITE}/venues/red-rocks-amphitheatre`,
+        },
+      },
+    })),
+  };
 
   return (
     <main className="comic-page pt-24 pb-10">
       <section className="comic-wrap">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }} />
 
         <div className="comic-hero">
           <div className="comic-kicker">Concert Calendar</div>

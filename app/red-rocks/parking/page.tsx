@@ -39,11 +39,27 @@ export default async function RedRocksParkingPage({
       { "@type": "ListItem", position: 3, name: "Parking", item: `${SITE}/red-rocks/parking` },
     ],
   };
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: "Red Rocks Parking Guide",
+    description:
+      "Red Rocks parking guide with lot tradeoffs, timing guidance, walking effort planning, and post-show exit options.",
+    url: `${SITE}/red-rocks/parking`,
+    mainEntityOfPage: `${SITE}/red-rocks/parking`,
+    author: { "@type": "Organization", name: "Party at Red Rocks" },
+    publisher: { "@id": `${SITE}/#organization` },
+    about: [
+      { "@type": "Place", name: "Red Rocks Amphitheatre", url: `${SITE}/venues/red-rocks-amphitheatre` },
+      { "@type": "Thing", name: "Red Rocks parking and exit planning" },
+    ],
+  };
 
   return (
     <main className="comic-page pt-24 pb-10">
       <section className="comic-wrap">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
         {faqRows.length > 0 ? (
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
         ) : null}
