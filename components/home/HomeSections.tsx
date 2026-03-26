@@ -106,6 +106,22 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
                 Fixed $59 shuttle seats, private SUVs, sprinters, and party buses for groups that want a cleaner arrival, a guaranteed return, and less post-show chaos.
               </p>
 
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <Link
+                  href={BOOK_RED_ROCKS}
+                  className="brand-button-primary brand-button-pulse inline-flex min-h-14 px-8 text-sm font-black uppercase tracking-[0.16em]"
+                >
+                  Book Shared Seats
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+                <Link
+                  href="/book/red-rocks-amphitheatre/private"
+                  className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/14 bg-white/6 px-8 text-sm font-black uppercase tracking-[0.16em] text-white no-underline transition hover:bg-white/10"
+                >
+                  View Private Vehicles
+                </Link>
+              </div>
+
               <div className="mt-6 grid max-w-6xl gap-4 sm:grid-cols-3">
                 <article className="rounded-[24px] border border-[var(--brand-orange)]/16 bg-[linear-gradient(180deg,rgba(53,33,16,0.96),rgba(24,16,12,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5">
                   <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/16 bg-white/8">
@@ -146,7 +162,7 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
                 <span className="pb-1 text-[11px] font-black uppercase tracking-[0.24em] text-[#ffe7b3] sm:text-xs">Private Transportation</span>
               </div>
               <p className="mt-3 max-w-2xl text-sm leading-6 text-white/88 sm:text-base">
-                {PRIVATE_TRANSPORT_PROMO.headline} Use code {" "}
+                {PRIVATE_TRANSPORT_PROMO.headline} Use code{" "}
                 <span className="rounded-full bg-black/30 px-2 py-1 font-black tracking-[0.1em] text-[#ffe2a8]">
                   {PRIVATE_TRANSPORT_PROMO.code}
                 </span>{" "}
@@ -203,7 +219,7 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
                 </ul>
                 <Link
                   href={ride.href}
-                  className="mt-7 inline-flex min-h-14 items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-8 text-sm font-black uppercase tracking-[0.16em] text-[#120f0b] shadow-[0_18px_42px_rgba(141,79,32,0.28)] transition hover:-translate-y-0.5 hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
+                  className="brand-button-primary mt-7 inline-flex min-h-14 px-8 text-sm font-black uppercase tracking-[0.16em]"
                 >
                   {ride.cta}
                   <ArrowRight className="ml-2 h-4 w-4" />

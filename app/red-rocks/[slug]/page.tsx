@@ -425,20 +425,26 @@ export default async function RedRocksAuthorityDetailPage({ params, searchParams
           </>
         ) : null}
 
-        <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">Query Intents This Page Targets</div>
-          <ul style={{ marginTop: 10, paddingLeft: 18 }}>
+        <details className="comic-panel" style={{ marginTop: 16 }}>
+          <summary className="faq-summary">
+            <span className="faq-q">Query Intents This Page Targets</span>
+            <span className="faq-icon">+</span>
+          </summary>
+          <ul style={{ marginTop: 0, padding: "0 18px 16px 36px" }}>
             {page.queryIntents.map((query) => (
               <li key={query} className="comic-copy">
                 {query}
               </li>
             ))}
           </ul>
-        </section>
+        </details>
 
-        <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">Reference Links</div>
-          <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
+        <details className="comic-panel" style={{ marginTop: 16 }}>
+          <summary className="faq-summary">
+            <span className="faq-q">Reference Links</span>
+            <span className="faq-icon">+</span>
+          </summary>
+          <div style={{ marginTop: 0, padding: "0 18px 16px 18px", display: "flex", gap: 8, flexWrap: "wrap" }}>
             {page.referenceLinks.parentTopic ? (
               <Link href={page.referenceLinks.parentTopic} className="comic-btn comic-btn-secondary">
                 Parent Topic
@@ -456,11 +462,14 @@ export default async function RedRocksAuthorityDetailPage({ params, searchParams
               Book a Ride
             </Link>
           </div>
-        </section>
+        </details>
 
-        <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">Related Entities</div>
-          <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
+        <details className="comic-panel" style={{ marginTop: 16 }}>
+          <summary className="faq-summary">
+            <span className="faq-q">Related Entities</span>
+            <span className="faq-icon">+</span>
+          </summary>
+          <div style={{ marginTop: 0, padding: "0 18px 16px 18px", display: "flex", gap: 8, flexWrap: "wrap" }}>
             {page.referenceLinks.relatedEntities.map((href) => {
               const label = href.replace("/red-rocks/", "").replaceAll("-", " ");
               return (
@@ -476,48 +485,53 @@ export default async function RedRocksAuthorityDetailPage({ params, searchParams
               Compare Ride Options
             </Link>
           </div>
-        </section>
+        </details>
 
-        <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">Reference Graph</div>
-          <div style={{ marginTop: 10 }}>
-            <p className="comic-copy">Red Rocks Topics</p>
-            <div style={{ marginTop: 8, display: "flex", gap: 8, flexWrap: "wrap" }}>
-              {TOPIC_GRAPH_LINKS.map((item) => (
-                <Link key={item.href} href={item.href} className="comic-btn comic-btn-secondary">
-                  {item.label}
+        <details className="comic-panel" style={{ marginTop: 16 }}>
+          <summary className="faq-summary">
+            <span className="faq-q">Reference Graph</span>
+            <span className="faq-icon">+</span>
+          </summary>
+          <div style={{ marginTop: 0, padding: "0 18px 16px 18px" }}>
+            <div>
+              <p className="comic-copy">Red Rocks Topics</p>
+              <div style={{ marginTop: 8, display: "flex", gap: 8, flexWrap: "wrap" }}>
+                {TOPIC_GRAPH_LINKS.map((item) => (
+                  <Link key={item.href} href={item.href} className="comic-btn comic-btn-secondary">
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+            <div style={{ marginTop: 12 }}>
+              <p className="comic-copy">Related Guides</p>
+              <div style={{ marginTop: 8, display: "flex", gap: 8, flexWrap: "wrap" }}>
+                <Link href="/red-rocks/how-to-get-to-red-rocks" className="comic-btn comic-btn-secondary">
+                  How To Get To Red Rocks
                 </Link>
-              ))}
-            </div>
-          </div>
-          <div style={{ marginTop: 12 }}>
-            <p className="comic-copy">Related Guides</p>
-            <div style={{ marginTop: 8, display: "flex", gap: 8, flexWrap: "wrap" }}>
-              <Link href="/red-rocks/how-to-get-to-red-rocks" className="comic-btn comic-btn-secondary">
-                How To Get To Red Rocks
-              </Link>
-              <Link href="/red-rocks/red-rocks-shuttle" className="comic-btn comic-btn-secondary">
-                Red Rocks Shuttle Guide
-              </Link>
-              <Link href="/red-rocks/parking" className="comic-btn comic-btn-secondary">
-                Red Rocks Parking Strategy
-              </Link>
-              <Link href="/red-rocks/transportation/post-show-pickup" className="comic-btn comic-btn-secondary">
-                Post-Show Pickup Plan
-              </Link>
-            </div>
-          </div>
-          <div style={{ marginTop: 12 }}>
-            <p className="comic-copy">Explore Red Rocks Locations</p>
-            <div style={{ marginTop: 8, display: "flex", gap: 8, flexWrap: "wrap" }}>
-              {RED_ROCKS_MAP_POINTS.slice(0, 8).map((point) => (
-                <Link key={point.id} href={`/red-rocks/map/${encodeURIComponent(point.id)}`} className="comic-btn comic-btn-secondary">
-                  {point.name}
+                <Link href="/red-rocks/red-rocks-shuttle" className="comic-btn comic-btn-secondary">
+                  Red Rocks Shuttle Guide
                 </Link>
-              ))}
+                <Link href="/red-rocks/parking" className="comic-btn comic-btn-secondary">
+                  Red Rocks Parking Strategy
+                </Link>
+                <Link href="/red-rocks/transportation/post-show-pickup" className="comic-btn comic-btn-secondary">
+                  Post-Show Pickup Plan
+                </Link>
+              </div>
+            </div>
+            <div style={{ marginTop: 12 }}>
+              <p className="comic-copy">Explore Red Rocks Locations</p>
+              <div style={{ marginTop: 8, display: "flex", gap: 8, flexWrap: "wrap" }}>
+                {RED_ROCKS_MAP_POINTS.slice(0, 8).map((point) => (
+                  <Link key={point.id} href={`/red-rocks/map/${encodeURIComponent(point.id)}`} className="comic-btn comic-btn-secondary">
+                    {point.name}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
-        </section>
+        </details>
       </section>
     </main>
   );
