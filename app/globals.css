@@ -798,19 +798,23 @@ button[class*="rounded-full"][class*="justify-center"] {
 */
 
 :root {
-  --brand-bg: #050816;
-  --brand-bg-dark: #0b1224;
-  --brand-bg-panel: linear-gradient(180deg, rgba(10, 16, 32, 0.98), rgba(6, 9, 18, 0.96));
-  --brand-bg-card: #0b1224;
-  --brand-cyan: #3df3ff;
-  --brand-cyan-hover: #62f6ff;
-  --brand-orange: #ffb07c;
-  --brand-orange-strong: #f26533;
-  --brand-text: #ffffff;
-  --brand-text-soft: rgba(255, 255, 255, 0.7);
-  --brand-text-muted: rgba(255, 255, 255, 0.5);
-  --brand-border: rgba(255, 255, 255, 0.1);
-  --brand-accent-text: #07111d;
+  --brand-bg: #120f12;
+  --brand-bg-dark: #1b171c;
+  --brand-bg-panel: linear-gradient(180deg, rgba(32, 24, 31, 0.98), rgba(18, 15, 18, 0.96));
+  --brand-bg-card: #1b171c;
+  --brand-cyan: #9fd7e8;
+  --brand-cyan-hover: #c1e6f1;
+  --brand-orange: #d9a15b;
+  --brand-orange-strong: #b96b2f;
+  --brand-text: #f7f1e8;
+  --brand-text-soft: rgba(247, 241, 232, 0.74);
+  --brand-text-muted: rgba(247, 241, 232, 0.54);
+  --brand-border: rgba(255, 241, 223, 0.12);
+  --brand-accent-text: #140f0b;
+  --brand-primary-start: #d9a15b;
+  --brand-primary-end: #b96b2f;
+  --brand-primary-hover-start: #e0ae6e;
+  --brand-primary-hover-end: #c67636;
   --brand-radius-sm: 12px;
   --brand-radius-md: 18px;
   --brand-radius-lg: 24px;
@@ -862,14 +866,14 @@ button[class*="rounded-full"][class*="justify-center"] {
   justify-content: center;
   border-radius: 9999px;
   border: 1px solid color-mix(in srgb, var(--brand-orange) 28%, transparent);
-  background: linear-gradient(180deg, #a95f28 0%, #8d4f20 100%);
-  color: #120f0b !important;
-  box-shadow: 0 18px 42px rgba(141, 79, 32, 0.28);
+  background: linear-gradient(180deg, var(--brand-primary-start) 0%, var(--brand-primary-end) 100%);
+  color: var(--brand-accent-text) !important;
+  box-shadow: 0 18px 42px rgba(112, 60, 24, 0.26);
   transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
 }
 
 .brand-button-primary:hover {
-  background: linear-gradient(180deg, #b66c31 0%, #975321 100%);
+  background: linear-gradient(180deg, var(--brand-primary-hover-start) 0%, var(--brand-primary-hover-end) 100%);
   transform: translateY(-2px);
 }
 
