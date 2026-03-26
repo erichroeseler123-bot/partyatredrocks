@@ -32,7 +32,7 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
   const rideCards = [
     {
       id: "shared" as const,
-      title: "Shared Shuttle",
+      title: "Shared Tickets",
       subtitle: "$59 fixed per seat",
       copy: "Best for couples, solo riders, and smaller groups.",
       bullets: [
@@ -45,8 +45,8 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
     },
     {
       id: "private" as const,
-      title: "Private Vehicle",
-      subtitle: "$499 SUV to $1199 party bus",
+      title: "Private Car",
+      subtitle: "$499 and up",
       copy: "Best for groups that want one vehicle and a premium night.",
       bullets: [
         "SUV, van, sprinter, and party bus options",
@@ -137,10 +137,10 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
           <div className="max-w-3xl">
             <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.24em]">Shuttle Services</div>
             <h2 className="mt-3 text-[2rem] font-black uppercase tracking-[-0.04em] text-white sm:text-[2.6rem]">
-              Pick Your Ride
+              Choose Shared Tickets or a Private Car
             </h2>
             <p className="mt-3 max-w-2xl text-[15px] leading-7 text-white/76">
-              Choose one to see prices and availability.
+              Start by choosing the kind of Red Rocks ride plan you want.
             </p>
           </div>
 
@@ -166,6 +166,16 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
                           {ride.subtitle}
                         </div>
                         <h3 className="mt-2 text-[1.5rem] font-black uppercase tracking-[-0.04em] text-white">{ride.title}</h3>
+                        <div
+                          className={[
+                            "mt-3 inline-flex rounded-full border px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] transition",
+                            checked
+                              ? "border-[var(--brand-cyan)]/40 bg-[var(--brand-cyan)]/12 text-[var(--brand-cyan)]"
+                              : "border-white/12 bg-white/5 text-white/62",
+                          ].join(" ")}
+                        >
+                          {checked ? "Selected" : "Choose This"}
+                        </div>
                       </div>
                       <div className="relative h-20 overflow-hidden rounded-[18px] border border-white/10 sm:w-32">
                         <Image
