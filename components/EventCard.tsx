@@ -29,18 +29,22 @@ export default function EventCard({
   showBookRide?: boolean;
 }) {
   const artistSlug = event.performerName ? slugify(event.performerName) : "";
+  const heroImage = event.image || "/images/shows/fallback.jpg";
+  const thumbnailImage = event.thumbnail || "/images/shows/fallback.jpg";
 
   return (
     <article className="comic-panel">
-      <img
-        src={event.image}
-        alt={`${event.title} – ${event.performerName || "upcoming concert"}`}
-        width={320}
-        height={180}
-        className="w-full h-44 object-cover rounded-xl border border-white/20"
-        loading="lazy"
-        decoding="async"
-      />
+      <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl border border-white/20 bg-black/20">
+        <img
+          src={heroImage}
+          alt={`${event.title} – ${event.performerName || "upcoming concert"}`}
+          width={320}
+          height={180}
+          className="h-full w-full object-cover object-center"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
       <div className="comic-tag" style={{ marginTop: 10 }}>
         {fmtDate(event.datetimeLocal)}
       </div>
@@ -61,7 +65,7 @@ export default function EventCard({
       {event.thumbnail ? (
         <div className="mt-2 flex items-center gap-2">
           <img
-            src={event.thumbnail}
+            src={thumbnailImage}
             alt={`${event.performerName || "Artist"} thumbnail`}
             width={32}
             height={32}
