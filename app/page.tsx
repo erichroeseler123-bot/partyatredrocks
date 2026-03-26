@@ -27,6 +27,12 @@ export const metadata: Metadata = {
     url: `${SITE}/`,
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Red Rocks Shuttle from Denver | Shared Seats + Private SUVs | Party at Red Rocks",
+    description:
+      "Shared and private Red Rocks shuttles from Denver, Golden, and Morrison. Fixed pricing, guaranteed return, private SUVs, vans, Sprinters, and group ride planning.",
+  },
 };
 
 export default async function HomePage() {
