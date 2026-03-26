@@ -5,6 +5,7 @@ import SiteNav from "@/components/SiteNav";
 import DisplayTheme from "@/components/DisplayTheme";
 import FloatingBook from "@/components/FloatingBook";
 import SiteFooter from "@/components/SiteFooter";
+import { BOOKING_COPY } from "@/lib/bookingCopy";
 import { buildUnsplashImageSrc } from "@/lib/unsplash";
 
 const headingFont = Montserrat({
@@ -37,8 +38,7 @@ export const metadata: Metadata = {
     template: "%s | Party at Red Rocks",
   },
 
-  description:
-    "Book Red Rocks shuttle transportation from Denver and Golden. Fixed pricing, pickup details before the ride, and a return plan after the show. Shuttle seats from $59/pp or Private SUV from $499.",
+  description: BOOKING_COPY.meta.layoutDescription,
 
   alternates: { canonical: "/" },
 
@@ -69,8 +69,7 @@ export const metadata: Metadata = {
     url: "/",
     siteName: "Party at Red Rocks",
     title: "Red Rocks Shuttle from Denver | $59 Seats + Private SUVs",
-    description:
-      "Fixed pricing, pickup details before the ride, and a return plan after the show. Shuttle seats from $59/pp or Private SUV from $499.",
+    description: BOOKING_COPY.meta.layoutDescription,
     images: [
       { url: DEFAULT_SHARE_IMAGE, width: 1200, height: 630, alt: "Red Rocks shuttle transportation" },
     ],
@@ -79,8 +78,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Red Rocks Shuttle from Denver | $59 Seats + Private SUVs",
-    description:
-      "Fixed pricing, pickup details before the ride, and a return plan after the show. Shuttle seats from $59/pp or Private SUV from $499.",
+    description: BOOKING_COPY.meta.layoutDescription,
     images: [DEFAULT_SHARE_IMAGE],
   },
 

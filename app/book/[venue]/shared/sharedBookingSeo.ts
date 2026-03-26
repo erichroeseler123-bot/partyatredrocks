@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BOOKING_COPY } from "@/lib/bookingCopy";
 import { bookingVisuals } from "@/lib/bookingVisuals";
 
 const SITE = "https://www.partyatredrocks.com";
@@ -12,13 +13,11 @@ export function buildSharedBookingMetadata(path: string): Metadata {
 
   return {
     title: "Red Rocks Shuttle from Denver and Golden | Book Shared Seats",
-    description:
-      "Book Red Rocks shared shuttle seats from Denver or Golden. Fixed pricing, one-hour-before-doors pickup timing, secure checkout, and a guaranteed ride home after the show.",
+    description: BOOKING_COPY.meta.sharedBookingDescription,
     alternates: { canonical: `${SITE}${path}` },
     openGraph: {
       title: "Red Rocks Shuttle from Denver and Golden | Book Shared Seats",
-      description:
-        "Book Red Rocks shared shuttle seats from Denver or Golden. Fixed pricing, one-hour-before-doors pickup timing, secure checkout, and a guaranteed ride home after the show.",
+      description: BOOKING_COPY.meta.sharedBookingDescription,
       url: `${SITE}${path}`,
       type: "website",
       images: [
@@ -31,8 +30,7 @@ export function buildSharedBookingMetadata(path: string): Metadata {
     twitter: {
       card: "summary_large_image",
       title: "Red Rocks Shuttle from Denver and Golden | Book Shared Seats",
-      description:
-        "Book Red Rocks shared shuttle seats from Denver or Golden. Fixed pricing, one-hour-before-doors pickup timing, secure checkout, and a guaranteed ride home after the show.",
+      description: BOOKING_COPY.meta.sharedBookingDescription,
       images: [imageUrl],
     },
   };
@@ -59,8 +57,7 @@ export function buildSharedBookingJsonLd(path: string) {
       ],
       url: `${SITE}${path}`,
       image: absoluteImageUrl(bookingVisuals.shared.imageSrc),
-      description:
-        "Shared shuttle seats from Denver and Golden to Red Rocks with fixed pricing and a guaranteed ride home after the show.",
+      description: "Shared shuttle seats from Denver and Golden to Red Rocks with fixed pricing and a guaranteed ride home after the show.",
       offers: {
         "@type": "Offer",
         priceCurrency: "USD",
@@ -81,7 +78,7 @@ export function buildSharedBookingJsonLd(path: string) {
           "@type": "Question",
           name: "Where do shared riders get picked up?",
           acceptedAnswer: {
-            "@type": "Answer",
+          "@type": "Answer",
             text: "Shared riders choose Denver or Golden pickup, then receive a fixed shuttle plan tied to that city.",
           },
         },

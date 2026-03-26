@@ -4,6 +4,7 @@ import RezdySessionPicker from "@/components/RezdySessionPicker";
 import Script from "next/script";
 import { notFound } from "next/navigation";
 import venuesJson from "@/data/venues.json";
+import { BOOKING_COPY } from "@/lib/bookingCopy";
 import { bookingVisuals } from "@/lib/bookingVisuals";
 import { buildTrackedExternalCheckoutHref, postDccSatelliteEvent, postWtaPartnerAcceptedIfNeeded } from "@/lib/dccSatellite";
 import type { HandoffSearchParams } from "@/lib/parrHandoff";
@@ -72,8 +73,8 @@ export async function SharedBookingPage({
   const pickupHub = getPickupHub(searchParams);
   const pickupHubDetail =
     pickupHub === "golden"
-      ? "Golden pickup boards at Trailhead Taphouse in Golden."
-      : "Denver pickup boards at the Sheraton Denver Downtown.";
+      ? BOOKING_COPY.pickupHubs.golden.helper
+      : BOOKING_COPY.pickupHubs.denver.helper;
   const dateLabel = dateRaw
     ? new Date(`${dateRaw}T12:00:00`).toLocaleDateString("en-US", {
         weekday: "long",
@@ -120,8 +121,8 @@ export async function SharedBookingPage({
           <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/54">Pickup City</div>
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
             {([
-              { hub: "denver" as const, label: "Denver", detail: "Sheraton Denver Downtown" },
-              { hub: "golden" as const, label: "Golden", detail: "Trailhead Taphouse" },
+              { hub: "denver" as const, label: BOOKING_COPY.pickupHubs.denver.label, detail: BOOKING_COPY.pickupHubs.denver.detail },
+              { hub: "golden" as const, label: BOOKING_COPY.pickupHubs.golden.label, detail: BOOKING_COPY.pickupHubs.golden.detail },
             ]).map((option) => {
               const active = pickupHub === option.hub;
               return (

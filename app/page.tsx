@@ -3,6 +3,7 @@ import HomeSections from "@/components/home/HomeSections";
 import SocialProofStrip from "@/components/social/SocialProofStrip";
 import { getSameAs } from "@/lib/socials";
 import { SITE_CONFIG } from "@/app/site-config";
+import { BOOKING_COPY } from "@/lib/bookingCopy";
 import { getEventsCatalog } from "@/lib/events/getCatalog";
 import { getDynamicImage } from "@/lib/getDynamicImage";
 import {
@@ -18,21 +19,18 @@ const SITE = "https://www.partyatredrocks.com";
 
 export const metadata: Metadata = {
   title: "Red Rocks Shuttle from Denver | Shared Seats + Private SUVs | Party at Red Rocks",
-  description:
-    "Shared and private Red Rocks shuttles from Denver, Golden, and Morrison. Fixed pricing, guaranteed return, private SUVs, vans, Sprinters, and group ride planning.",
+  description: BOOKING_COPY.meta.homeDescription,
   alternates: { canonical: `${SITE}/` },
   openGraph: {
     title: "Red Rocks Shuttle from Denver | Shared Seats + Private SUVs | Party at Red Rocks",
-    description:
-      "Shared and private Red Rocks shuttles from Denver, Golden, and Morrison. Fixed pricing, guaranteed return, private SUVs, vans, Sprinters, and group ride planning.",
+    description: BOOKING_COPY.meta.homeDescription,
     url: `${SITE}/`,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Red Rocks Shuttle from Denver | Shared Seats + Private SUVs | Party at Red Rocks",
-    description:
-      "Shared and private Red Rocks shuttles from Denver, Golden, and Morrison. Fixed pricing, guaranteed return, private SUVs, vans, Sprinters, and group ride planning.",
+    description: BOOKING_COPY.meta.homeDescription,
   },
 };
 
@@ -85,8 +83,7 @@ export default async function HomePage() {
       name: `${city}, CO`,
     })),
     sameAs: getSameAs(brandKey),
-    description:
-      "Fixed-price Red Rocks shuttles and private rides with pickup planning and guaranteed return service.",
+    description: BOOKING_COPY.meta.businessDescription,
     serviceType: [
       "Private concert shuttle service",
       "Shared Red Rocks shuttle service",
@@ -169,7 +166,7 @@ export default async function HomePage() {
         name: "Do private Red Rocks shuttles have guaranteed return service?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes. Private Red Rocks rides are built around a guaranteed return after the show so your group is not left scrambling for pickup.",
+          text: BOOKING_COPY.faq.privateReturn,
         },
       },
       {

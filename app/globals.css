@@ -811,6 +811,22 @@ button[class*="rounded-full"][class*="justify-center"] {
   --brand-text-muted: rgba(255, 255, 255, 0.5);
   --brand-border: rgba(255, 255, 255, 0.1);
   --brand-accent-text: #07111d;
+  --brand-radius-sm: 12px;
+  --brand-radius-md: 18px;
+  --brand-radius-lg: 24px;
+  --brand-radius-xl: 32px;
+  --brand-radius-pill: 9999px;
+  --brand-space-xs: 8px;
+  --brand-space-sm: 12px;
+  --brand-space-md: 16px;
+  --brand-space-lg: 24px;
+  --brand-space-xl: 32px;
+  --brand-space-2xl: 48px;
+  --brand-max-page: 1500px;
+  --brand-max-content: 1240px;
+  --brand-button-height: 56px;
+  --brand-image-ratio-wide: 16 / 9;
+  --brand-image-ratio-square: 1 / 1;
 }
 
 .brand-page {

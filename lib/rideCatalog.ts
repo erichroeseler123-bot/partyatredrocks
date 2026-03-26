@@ -1,20 +1,22 @@
+import { BOOKING_COPY } from "@/lib/bookingCopy";
+
 export const SITE = "https://www.partyatredrocks.com";
 
 export const SHARED_RIDE = {
   slug: "shared",
-  title: "Shared Shuttle",
-  heroEyebrow: "Per-Person Shuttle",
-  heroTitle: "Book Shuttle Seats",
-  heroCopy: "Shared round-trip shuttle seats from Denver and Golden with one clear ride plan for show night.",
+  title: BOOKING_COPY.labels.sharedRideTitle,
+  heroEyebrow: BOOKING_COPY.labels.sharedBookingEyebrow,
+  heroTitle: BOOKING_COPY.labels.sharedBookingTitle,
+  heroCopy: BOOKING_COPY.copy.sharedRide,
   priceLabel: "$59",
   cardTitle: "Per-Person Shuttle Seats",
-  cardBody: "Seat-based shuttle options with round-trip service and online booking.",
+  cardBody: BOOKING_COPY.copy.sharedRideCard,
 } as const;
 
 export const PRIVATE_RIDE_BENEFITS = [
   "Upper North limo-lane access",
   "Best fit for groups that want to tailgate before the show",
-  "One vehicle for the full night",
+  BOOKING_COPY.trust.oneVehiclePlan,
   "Pickup details sent before your ride",
   "Return ride handled after the show",
 ] as const;

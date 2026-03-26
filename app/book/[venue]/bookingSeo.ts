@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BOOKING_COPY } from "@/lib/bookingCopy";
 import { bookingVisuals } from "@/lib/bookingVisuals";
 import { PRIVATE_RIDE_OPTIONS, SHARED_RIDE, SITE } from "@/lib/rideCatalog";
 
@@ -107,13 +108,11 @@ export function buildPrivateBookingMetadata(venue: string): Metadata {
   const canonical = `${SITE}/book/${venue}/private`;
   return {
     title: "Private Red Rocks Shuttle from Denver | $499 SUV - $799 Sprinter - Guaranteed Return",
-    description:
-      "Private shuttle from Denver to Red Rocks. SUV $499, 10-pass van $599, Sprinter $799, guaranteed return, limo-lane access, and optional liquor stop planning.",
+    description: BOOKING_COPY.meta.privateBookingDescription,
     alternates: { canonical },
     openGraph: {
       title: "Private Red Rocks Shuttle from Denver | $499 SUV - $799 Sprinter - Guaranteed Return",
-      description:
-        "Private shuttle from Denver to Red Rocks. SUV $499, 10-pass van $599, Sprinter $799, guaranteed return, limo-lane access, and optional liquor stop planning.",
+      description: BOOKING_COPY.meta.privateBookingDescription,
       url: canonical,
       type: "website",
       images: [{ url: absoluteImageUrl(bookingVisuals.private.imageSrc), alt: bookingVisuals.private.imageAlt }],
@@ -121,8 +120,7 @@ export function buildPrivateBookingMetadata(venue: string): Metadata {
     twitter: {
       card: "summary_large_image",
       title: "Private Red Rocks Shuttle from Denver | $499 SUV - $799 Sprinter - Guaranteed Return",
-      description:
-        "Private shuttle from Denver to Red Rocks. SUV $499, 10-pass van $599, Sprinter $799, guaranteed return, limo-lane access, and optional liquor stop planning.",
+      description: BOOKING_COPY.meta.privateBookingDescription,
       images: [absoluteImageUrl(bookingVisuals.private.imageSrc)],
     },
   };
@@ -179,7 +177,7 @@ export function buildPrivateFaqJsonLd() {
         name: "Can my private ride stop at a liquor store?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes. Most private rides can include a quick stop if the request is added before the ride.",
+          text: BOOKING_COPY.faq.liquorStop,
         },
       },
       {
@@ -187,7 +185,7 @@ export function buildPrivateFaqJsonLd() {
         name: "What time is pickup for private Red Rocks rides?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Most private Red Rocks rides use a 4:30 PM pickup window from Denver, with the exact pickup details confirmed before the event.",
+          text: BOOKING_COPY.faq.privatePickupTime,
         },
       },
       {
@@ -195,7 +193,7 @@ export function buildPrivateFaqJsonLd() {
         name: "Do private Red Rocks shuttles have guaranteed return service?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes. Private rides are planned around a guaranteed return after the show so your group stays on one vehicle for the full night.",
+          text: BOOKING_COPY.faq.privateReturn,
         },
       },
       {

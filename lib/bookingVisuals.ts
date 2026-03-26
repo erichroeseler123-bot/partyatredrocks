@@ -1,19 +1,20 @@
 import { buildUnsplashImageSrc } from "@/lib/unsplash";
+import { BOOKING_COPY } from "@/lib/bookingCopy";
 
 export const bookingVisuals = {
   shared: {
     imageSrc: buildUnsplashImageSrc({ query: "concert riders boarding passenger shuttle van colorado night" }),
     imageAlt: "Passengers boarding a concert shuttle for Red Rocks",
-    eyebrow: "Per-Person Shuttle",
-    title: "Book Shuttle Seats",
-    copy: "Shared round-trip shuttle seats from Denver and Golden with one clear ride plan for show night.",
+    eyebrow: BOOKING_COPY.labels.sharedBookingEyebrow,
+    title: BOOKING_COPY.labels.sharedBookingTitle,
+    copy: BOOKING_COPY.copy.sharedRide,
   },
   private: {
     imageSrc: buildUnsplashImageSrc({ query: "black luxury suv concert pickup red rocks night" }),
     imageAlt: "Private SUV transportation for a Red Rocks concert night",
-    eyebrow: "Private Ride",
-    title: "Choose Your Private Vehicle",
-    copy: "Private Red Rocks transportation for groups that want one vehicle, one pickup plan, and a cleaner night.",
+    eyebrow: BOOKING_COPY.labels.privateBookingEyebrow,
+    title: BOOKING_COPY.labels.privateBookingTitle,
+    copy: BOOKING_COPY.copy.privateRide,
   },
   privateOptions: {
     suv: {
