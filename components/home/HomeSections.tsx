@@ -84,8 +84,8 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
               priority
               fetchPriority="high"
             />
-            <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(8,12,34,0.84)_0%,rgba(8,12,34,0.5)_44%,rgba(9,9,9,0.9)_100%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(76,97,255,0.36),transparent_26%),radial-gradient(circle_at_bottom_right,rgba(255,183,3,0.12),transparent_18%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(10,18,56,0.88)_0%,rgba(10,18,56,0.56)_44%,rgba(9,9,9,0.9)_100%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(76,97,255,0.42),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(76,97,255,0.12),transparent_18%)]" />
           </div>
 
           <div className="relative px-6 py-10 sm:px-8 sm:py-12 lg:px-12 lg:py-14">
