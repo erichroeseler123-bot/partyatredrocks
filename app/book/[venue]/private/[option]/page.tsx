@@ -8,7 +8,7 @@ import { DccReturnBanner } from "@/components/booking/DccReturnBanner";
 import { postDccSatelliteEvent, postWtaPartnerAcceptedIfNeeded } from "@/lib/dccSatellite";
 import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
 import { TrustStrip } from "@/components/TrustStrip";
-import { buildPrivateOptionMetadata } from "../../bookingSeo";
+import { buildPrivateOptionJsonLd, buildPrivateOptionMetadata } from "../../bookingSeo";
 import { buildDccPrivateCheckoutHref, getPrivateRideOption, PRIVATE_RIDE_BENEFITS, type PrivateRideSlug } from "@/lib/rideCatalog";
 
 type VenueRow = {
@@ -67,8 +67,18 @@ export default async function PrivateOptionPage({
     sourcePath: `/book/${venue}/private/${option}`,
   });
 
+  const optionJsonLd = buildPrivateOptionJsonLd({
+    venue,
+    optionSlug: option,
+    optionTitle: meta.title,
+    optionBody: meta.body,
+    optionPriceLabel: meta.priceLabel,
+    quantity: vehicleQty,
+  });
+
   return (
     <main className="min-h-screen bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(optionJsonLd) }} />
       <section className="mx-auto flex max-w-[1240px] flex-col gap-8">
         <section className="rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,16,32,0.98),rgba(6,9,18,0.96))] p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] sm:p-10 lg:p-12">
           <div className="inline-flex items-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">

@@ -11,7 +11,7 @@ import { PrivatePromoBanner } from "@/components/booking/PrivatePromoBanner";
 import { DccReturnBanner } from "@/components/booking/DccReturnBanner";
 import { postDccSatelliteEvent, postWtaPartnerAcceptedIfNeeded } from "@/lib/dccSatellite";
 import { getBookingVenueImage } from "@/data/media";
-import { buildVenueBookingMetadata } from "./bookingSeo";
+import { buildVenueBookingJsonLd, buildVenueBookingMetadata } from "./bookingSeo";
 import {
   buildBookingHref,
   buildVenueRequestHref,
@@ -82,8 +82,14 @@ export default async function VenueBookingPage({
     sourcePath: `/book/${venue}`,
   });
 
+  const bookingJsonLd = buildVenueBookingJsonLd({
+    venue,
+    venueName: row.name,
+  });
+
   return (
     <main className="min-h-screen bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(bookingJsonLd) }} />
       <section className="mx-auto flex max-w-[1240px] flex-col gap-8">
         <section className="relative min-h-[60vh] overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,16,32,0.92),rgba(6,9,18,0.88))] p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] sm:min-h-[72vh] sm:p-10 lg:min-h-[90vh] lg:p-12">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,91,46,0.18),transparent_30%),radial-gradient(circle_at_top_right,rgba(143,208,255,0.14),transparent_28%)]" />

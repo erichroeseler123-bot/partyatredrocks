@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { bookingVisuals } from "@/lib/bookingVisuals";
-import { PRIVATE_RIDE_OPTIONS, SITE } from "@/lib/rideCatalog";
+import { PRIVATE_RIDE_OPTIONS, SHARED_RIDE, SITE } from "@/lib/rideCatalog";
 
 function absoluteImageUrl(src: string) {
   return src.startsWith("http") ? src : `${SITE}${src}`;
@@ -36,6 +36,69 @@ export function buildVenueBookingMetadata(input: {
     twitter: {
       card: "summary_large_image",
       images: [absoluteImageUrl(input.heroImage)],
+    },
+  };
+}
+
+export function buildVenueBookingJsonLd(input: { venue: string; venueName: string }) {
+  const bookingUrl = `${SITE}/book/${input.venue}`;
+  const sharedUrl =
+    input.venue === "red-rocks-amphitheatre"
+      ? `${SITE}/book/${input.venue}/custom/shared`
+      : bookingUrl;
+  const privateUrl = `${SITE}/book/${input.venue}/private`;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name:
+      input.venue === "red-rocks-amphitheatre"
+        ? "Red Rocks shuttle booking"
+        : `${input.venueName} shuttle booking`,
+    provider: {
+      "@type": "LocalBusiness",
+      name: "Party at Red Rocks",
+      url: SITE,
+      telephone: "+17203696292",
+    },
+    areaServed: ["Denver, CO", "Golden, CO", "Morrison, CO"],
+    serviceType:
+      input.venue === "red-rocks-amphitheatre"
+        ? "Concert shuttle and private ride booking"
+        : "Venue transportation booking",
+    url: bookingUrl,
+    description:
+      input.venue === "red-rocks-amphitheatre"
+        ? "Book shared Red Rocks shuttle seats or private SUVs, vans, Sprinters, and party buses with a guaranteed ride home."
+        : `Choose the ride type that fits ${input.venueName}, then continue into the right booking path.`,
+    offers: {
+      "@type": "OfferCatalog",
+      name: `${input.venueName} ride options`,
+      itemListElement: [
+        {
+          "@type": "Offer",
+          priceCurrency: "USD",
+          price: SHARED_RIDE.priceLabel.replace("$", ""),
+          url: sharedUrl,
+          itemOffered: {
+            "@type": "Service",
+            name: `${input.venueName} shared shuttle`,
+            description: SHARED_RIDE.cardBody,
+          },
+        },
+        {
+          "@type": "Offer",
+          url: privateUrl,
+          itemOffered: {
+            "@type": "Service",
+            name: `${input.venueName} private ride options`,
+            description:
+              input.venue === "red-rocks-amphitheatre"
+                ? "Private SUVs, vans, Sprinters, and party buses with one vehicle for the full night."
+                : `Private ride options for ${input.venueName}.`,
+          },
+        },
+      ],
     },
   };
 }
@@ -170,5 +233,45 @@ export function buildPrivateOptionMetadata(input: {
       card: "summary_large_image",
       images: [absoluteImageUrl(bookingVisuals.private.imageSrc)],
     },
+  };
+}
+
+export function buildPrivateOptionJsonLd(input: {
+  venue: string;
+  optionSlug: string;
+  optionTitle: string;
+  optionBody: string;
+  optionPriceLabel: string;
+  quantity: number;
+}) {
+  const qty = Number.isFinite(input.quantity) && input.quantity > 0 ? Math.floor(input.quantity) : 1;
+  const option = PRIVATE_RIDE_OPTIONS.find((entry) => entry.slug === input.optionSlug);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Offer",
+    priceCurrency: "USD",
+    price: input.optionPriceLabel.replace("$", ""),
+    url: `${SITE}/book/${input.venue}/private/${input.optionSlug}`,
+    availability: "https://schema.org/InStock",
+    itemOffered: {
+      "@type": ["Service", "TaxiService"],
+      name: `${input.optionTitle} to Red Rocks`,
+      description: input.optionBody,
+      provider: {
+        "@type": "LocalBusiness",
+        name: "Party at Red Rocks",
+        url: SITE,
+        telephone: "+17203696292",
+      },
+      areaServed: ["Denver, CO", "Golden, CO", "Morrison, CO"],
+      serviceType: "Private concert shuttle service",
+    },
+    potentialAction: option
+      ? {
+          "@type": "ReserveAction",
+          target: `https://www.destinationcommandcenter.com/book?route=parr-private&product=${option.dccProduct}&qty=${qty}`,
+        }
+      : undefined,
   };
 }
