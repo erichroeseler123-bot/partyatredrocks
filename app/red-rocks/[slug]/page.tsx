@@ -6,6 +6,7 @@ import { RED_ROCKS_ENTITIES, RED_ROCKS_ENTITY_BY_SLUG, RED_ROCKS_MAP_POINTS } fr
 import TransportComparisonTable from "@/components/redrocks/TransportComparisonTable";
 import type { HandoffSearchParams } from "@/lib/parrHandoff";
 import { buildBookingHref } from "@/lib/parrHandoff";
+import { getDynamicImage } from "@/lib/getDynamicImage";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 type Props = {
@@ -124,6 +125,11 @@ export default async function RedRocksAuthorityDetailPage({ params, searchParams
   const sp = await searchParams;
   const page = RED_ROCKS_ENTITY_BY_SLUG.get(slug);
   if (!page) notFound();
+  const seatingOverviewImage = await getDynamicImage(
+    "venue",
+    "Red Rocks Amphitheatre seating overview",
+    "/images/venues/red-rocks-amphitheatre.jpg",
+  );
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -333,7 +339,7 @@ export default async function RedRocksAuthorityDetailPage({ params, searchParams
               <div className="comic-tag">Best Seats By Goal</div>
               <div style={{ marginTop: 12, textAlign: "center" }}>
                 <UnsplashImg
-                  src="/images/venues/red-rocks-amphitheatre.jpg"
+                  src={seatingOverviewImage}
                   query="red rocks amphitheatre seating overview"
                   alt="Red Rocks Amphitheatre seating bowl overview showing lower, mid, and upper sections with stage view"
                   width={800}

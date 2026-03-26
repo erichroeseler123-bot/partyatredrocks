@@ -3,6 +3,29 @@
 import React from "react";
 import Link from "next/link";
 import { UnsplashImg } from "@/components/UnsplashImg";
+import { resolveMediaImage } from "@/lib/media/resolver";
+
+const shuttleExecImage = resolveMediaImage({
+  entityType: "transport",
+  slug: "shared-shuttle-exec",
+  sourceHints: {
+    title: "Shared shuttle executive van",
+    queryHint: "concert shuttle executive van denver",
+    localImageUrl: "/shuttle-exec.jpg",
+    alt: "Shuttle Exec",
+  },
+});
+
+const privateSuvImage = resolveMediaImage({
+  entityType: "transport",
+  slug: "private-suv-node",
+  sourceHints: {
+    title: "Private suburban concert transportation",
+    queryHint: "private suburban concert transportation denver",
+    localImageUrl: "/private-suv.jpg",
+    alt: "Private Suburban",
+  },
+});
 
 export default function FleetGrid() {
   // 🛰️ Internal logic: Target the first mission of the 2026 season
@@ -15,7 +38,7 @@ export default function FleetGrid() {
       <div className="panel-soft rounded-3xl p-6 flex flex-col items-center text-center space-y-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
         <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
           <UnsplashImg
-            src="/shuttle-exec.jpg"
+            src={shuttleExecImage}
             query="concert shuttle executive van denver"
             alt="Shuttle Exec"
             className="object-cover w-full h-full"
@@ -46,7 +69,7 @@ export default function FleetGrid() {
       <div className="panel-soft rounded-3xl p-6 flex flex-col items-center text-center space-y-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
         <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
           <UnsplashImg
-            src="/private-suv.jpg"
+            src={privateSuvImage}
             query="private suburban concert transportation denver"
             alt="Private Suburban"
             className="object-cover w-full h-full"
