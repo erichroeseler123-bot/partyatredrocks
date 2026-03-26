@@ -5,7 +5,7 @@ export const PARR_CANONICAL_HANDOFFS = {
   shuttles: "/shuttles",
   book: "/book",
   redRocksBook: "/book?venue=red-rocks-amphitheatre",
-  redRocksShared: "/book/red-rocks-amphitheatre/shared",
+  redRocksShared: "/book/red-rocks-amphitheatre/custom/shared",
   redRocksPrivate: "/book/red-rocks-amphitheatre/private",
 } as const;
 
@@ -126,7 +126,7 @@ export function buildBookingHref({
   }
 
   if (target === "shared") {
-    return appendQuery(`/book/${normalizedVenue}/shared`, query);
+    return appendQuery(`/book/${normalizedVenue}/custom/shared`, query);
   }
 
   if (target === "private") {

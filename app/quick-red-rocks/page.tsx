@@ -173,7 +173,7 @@ export default function QuickRedRocksPage() {
       qty: String(riderQty),
       requests: specialRequests.trim(),
     });
-    return `/book/red-rocks-amphitheatre/shared?${params.toString()}`;
+    return `/book/red-rocks-amphitheatre/custom/shared?${params.toString()}`;
   }, [riderQty, serviceDate, specialRequests]);
 
   const canContinue = rideType === "shared" ? riderQty >= 1 : vehicleQty >= 1;

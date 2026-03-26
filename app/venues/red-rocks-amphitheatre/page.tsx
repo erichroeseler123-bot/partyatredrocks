@@ -60,7 +60,7 @@ export default async function RedRocksPage({
 
   const relatedTransportCards: RelatedCard[] = [
     {
-      href: "/book/red-rocks-amphitheatre/shared",
+      href: "/book/red-rocks-amphitheatre/custom/shared",
       label: "Transport",
       title: "Shared Shuttle Seats",
       body: "Seat-based round-trip transport with fixed pickup anchors and a cleaner post-show return.",

@@ -37,7 +37,7 @@ const rideTypes = [
   {
     title: "Shared Shuttle",
     copy: "Best for most riders who want a set pickup, a set return, and a straightforward online booking path.",
-    href: "/book/red-rocks-amphitheatre/shared",
+    href: "/book/red-rocks-amphitheatre/custom/shared",
     cta: "Book Shared Seats",
   },
   {
