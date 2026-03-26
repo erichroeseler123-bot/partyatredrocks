@@ -4,9 +4,6 @@ export const DCC_ORIGIN =
 export const PARR_CANONICAL_HANDOFFS = {
   shuttles: "/shuttles",
   book: "/book",
-  redRocksBook: "/book?venue=red-rocks-amphitheatre",
-  redRocksShared: "/book/red-rocks-amphitheatre/custom/shared",
-  redRocksPrivate: "/book/red-rocks-amphitheatre/private",
 } as const;
 
 export const DCC_HANDOFF_QUERY_KEYS = [
