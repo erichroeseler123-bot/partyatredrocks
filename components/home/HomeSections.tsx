@@ -19,9 +19,15 @@ type HomeSectionsProps = {
   heroSrc: string;
   shuttleSrc: string;
   sprinterSrc: string;
+  urgency:
+    | {
+        label: string;
+        detail: string;
+      }
+    | null;
 };
 
-export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc }: HomeSectionsProps) {
+export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency }: HomeSectionsProps) {
   const rideCards = [
     {
       title: "Shared Shuttle",
@@ -56,6 +62,20 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc }: HomeS
   return (
     <main className="brand-page">
       <section className="mx-auto flex w-full max-w-[1500px] flex-col gap-10 px-4 pb-24 pt-16 sm:px-6 sm:pt-20 lg:px-8">
+        {urgency ? (
+          <section className="brand-glass-bar overflow-hidden rounded-[24px] px-5 py-4">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.24em]">{urgency.label}</div>
+                <p className="mt-1 text-sm leading-6 text-white/82">{urgency.detail}</p>
+              </div>
+              <Link href="/week/red-rocks" className="brand-link text-sm font-black uppercase tracking-[0.16em] no-underline">
+                View lineup
+              </Link>
+            </div>
+          </section>
+        ) : null}
+
         <section className="relative overflow-hidden rounded-[36px] border border-[var(--brand-orange)]/20 bg-[var(--brand-bg-dark)] shadow-[0_40px_120px_rgba(0,0,0,0.58)]">
           <div className="absolute inset-0">
             <Image
@@ -140,7 +160,7 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc }: HomeS
               </div>
               <Link
                 href="/book/red-rocks-amphitheatre/private"
-                className="inline-flex min-h-14 items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-8 text-sm font-black uppercase tracking-[0.16em] text-[#120f0b] shadow-[0_18px_42px_rgba(141,79,32,0.28)] transition hover:-translate-y-0.5 hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
+                className="brand-button-primary inline-flex min-h-14 px-8 text-sm font-black uppercase tracking-[0.16em]"
               >
                 View Private Vehicles
                 <ArrowRight className="ml-2 h-4 w-4" />

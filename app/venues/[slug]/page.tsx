@@ -714,7 +714,7 @@ export default async function VenuePage({
       : venueImage;
 
   return (
-    <main className="bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
+    <main className="brand-page px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
       {/* JSON-LD (high impact for SEO + GEO) */}
       <script
         type="application/ld+json"
@@ -758,7 +758,7 @@ export default async function VenuePage({
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,176,124,0.22),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(143,208,255,0.16),transparent_24%)]" />
         </div>
         <div className="relative flex flex-wrap items-center gap-2">
-          <div className="inline-flex items-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
+          <div className="inline-flex items-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">
             Venue Guide
           </div>
 
@@ -796,7 +796,7 @@ export default async function VenuePage({
         <div className="relative mt-7 flex w-full flex-col flex-wrap items-center justify-center gap-3 sm:flex-row sm:gap-4">
           <Link
             href={buildBookingHref({ target: "book", venue: slug, searchParams: sp })}
-            className="inline-flex min-h-12 w-full min-w-[180px] items-center justify-center rounded-full bg-[#ff5b2e] px-7 py-3 text-center text-[12px] font-black uppercase tracking-[0.22em] text-white transition hover:bg-[#ff7148] sm:w-auto"
+            className="brand-button-primary brand-button-pulse inline-flex min-h-12 w-full min-w-[180px] items-center justify-center px-7 py-3 text-center text-[12px] font-black uppercase tracking-[0.22em] sm:w-auto"
           >
             Book this venue
           </Link>
@@ -829,8 +829,8 @@ export default async function VenuePage({
 
       {/* 3-CARD INTEL */}
       <div className="mt-8 grid gap-6 md:grid-cols-3">
-        <div className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]">
-          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
+        <div className="brand-card rounded-[26px] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">
             Arrival Flow
           </div>
           <p className="mt-3 text-sm leading-6 text-white/75">
@@ -838,8 +838,8 @@ export default async function VenuePage({
           </p>
         </div>
 
-        <div className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]">
-          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
+        <div className="brand-card rounded-[26px] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">
             Return Plan
           </div>
           <p className="mt-3 text-sm leading-6 text-white/75">
@@ -847,14 +847,14 @@ export default async function VenuePage({
           </p>
         </div>
 
-        <div className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]">
-          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
+        <div className="brand-card rounded-[26px] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">
             Options
           </div>
           <p className="mt-3 text-sm leading-6 text-white/75">
             Shared seats and private upgrades depending on the night. Pick the ride style that fits your crew.
           </p>
-          <Link href="/venues" className="mt-4 inline-flex text-sm font-bold text-[#ffb07c] hover:text-white">
+          <Link href="/venues" className="mt-4 inline-flex text-sm font-bold text-[var(--brand-orange)] hover:text-white">
             Browse all venues →
           </Link>
         </div>
@@ -1191,7 +1191,7 @@ export default async function VenuePage({
             {events.slice(0, 10).map((e) => (
               <article
                 key={e.id}
-                className="overflow-hidden rounded-[26px] border border-white/10 bg-[#0b1224] shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
+                className="brand-card overflow-hidden rounded-[26px] shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
               >
                 <div className="relative h-48 overflow-hidden border-b border-white/10">
                   <img
@@ -1209,7 +1209,7 @@ export default async function VenuePage({
                   </div>
                 </div>
                 <div className="p-5">
-                <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
+                <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">
                   {new Date(e.datetime_local).toLocaleString("en-US", {
                     weekday: "short",
                     month: "short",
@@ -1253,7 +1253,7 @@ export default async function VenuePage({
                 ) : null}
 
                 <div className="mt-4 flex flex-wrap gap-3">
-                  <Link className="font-bold text-[#ffb07c] hover:text-white" href={`/shows/${encodeURIComponent(e.id)}`}>
+                  <Link className="font-bold text-[var(--brand-orange)] hover:text-white" href={`/shows/${encodeURIComponent(e.id)}`}>
                     Full Intel →
                   </Link>
                   <Link
@@ -1282,14 +1282,14 @@ export default async function VenuePage({
             </Link>
             <Link
               href={buildBookingHref({ target: "book", venue: slug, searchParams: sp })}
-              className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#ff5b2e] px-6 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white transition hover:bg-[#ff7148]"
+              className="brand-button-primary brand-button-pulse inline-flex min-h-12 items-center justify-center px-6 py-3 text-[12px] font-black uppercase tracking-[0.22em]"
             >
               Book Now
             </Link>
           </div>
         </section>
       ) : (
-        <div className="mt-10 rounded-[26px] border border-white/10 bg-[#0b1224] p-6 text-white/70 shadow-[0_18px_60px_rgba(0,0,0,0.35)]">
+        <div className="brand-card mt-10 rounded-[26px] p-6 text-white/70 shadow-[0_18px_60px_rgba(0,0,0,0.35)]">
           <span className="font-black">Upcoming at {name}:</span> No upcoming events found in the current snapshot.
         </div>
       )}
@@ -1298,7 +1298,7 @@ export default async function VenuePage({
         <h2 className="text-2xl font-black uppercase tracking-[-0.03em]">Venue FAQ</h2>
         <div className="mt-4 space-y-3">
           {reference.faq.map((row) => (
-            <details key={row.q} className="rounded-[22px] border border-white/10 bg-[#0b1224] p-4">
+            <details key={row.q} className="brand-card rounded-[22px] p-4">
               <summary className="cursor-pointer font-black">{row.q}</summary>
               <p className="mt-2 text-sm leading-6 text-white/75">{row.a}</p>
             </details>

@@ -71,7 +71,15 @@ export default function CustomBooking({ venue }: { venue?: string }) {
     }
   };
 
-  if (loading) return <div className="text-muted text-sm">Loading services...</div>;
+  if (loading) {
+    return (
+      <div className="space-y-3">
+        <div className="brand-skeleton brand-skeleton-line-lg w-40" />
+        <div className="brand-skeleton h-20 rounded-2xl" />
+        <div className="brand-skeleton h-20 rounded-2xl" />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">

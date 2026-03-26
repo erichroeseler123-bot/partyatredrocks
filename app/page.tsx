@@ -3,6 +3,7 @@ import HomeSections from "@/components/home/HomeSections";
 import SocialProofStrip from "@/components/social/SocialProofStrip";
 import { getSameAs } from "@/lib/socials";
 import { SITE_CONFIG } from "@/app/site-config";
+import { getEventsCatalog } from "@/lib/events/getCatalog";
 import { getDynamicImage } from "@/lib/getDynamicImage";
 import {
   BUSINESS_EMAIL,
@@ -37,11 +38,30 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   const brandKey = SITE_CONFIG.socialBrandKey;
-  const [heroSrc, shuttleSrc, sprinterSrc] = await Promise.all([
+  const [heroSrc, shuttleSrc, sprinterSrc, events] = await Promise.all([
     getDynamicImage("venue", "Red Rocks Amphitheatre", "/hero/hero-home.jpg"),
     getDynamicImage("concert", "shuttle bus denver", "/images/marketing/shuttle.jpg"),
     getDynamicImage("fleet", "sprinter van denver", "/fleet/fleet-sprinter.jpg"),
+    getEventsCatalog(2026, "redrocks"),
   ]);
+  const denverToday = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Denver",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date());
+  const nextRedRocksEvent = events
+    .filter((event) => event.venueId === "red-rocks-amphitheatre" && event.dateKey >= denverToday)
+    .sort((a, b) => `${a.dateKey}T${a.startLocal}`.localeCompare(`${b.dateKey}T${b.startLocal}`))[0];
+  const urgency = nextRedRocksEvent
+    ? {
+        label: nextRedRocksEvent.dateKey === denverToday ? "Tonight at Red Rocks" : "Next at Red Rocks",
+        detail:
+          nextRedRocksEvent.dateKey === denverToday
+            ? `${nextRedRocksEvent.name} is on tonight. Shared and private ride planning is still open.`
+            : `${nextRedRocksEvent.name} is coming up next. Lock the ride plan before show night gets compressed.`,
+      }
+    : null;
 
   const webSiteJsonLd = {
     "@context": "https://schema.org",
@@ -172,8 +192,9 @@ export default async function HomePage() {
         heroSrc={heroSrc}
         shuttleSrc={shuttleSrc}
         sprinterSrc={sprinterSrc}
+        urgency={urgency}
       />
-      <section className="bg-[#090909] px-4 pb-20 sm:px-6 lg:px-8">
+      <section className="brand-page px-4 pb-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-[1500px]">
           <SocialProofStrip
             brandKey="partyatredrocks"
