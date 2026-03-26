@@ -63,46 +63,54 @@ export default function WeekClient({
   }, [sorted, month, q]);
 
   return (
-    <main className="comic-page pt-24 pb-10">
-      <section className="comic-wrap">
+    <main className="brand-page px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
+      <section className="mx-auto w-full max-w-[var(--brand-max-page)]">
         {schemaJsonLd.map((item, index) => (
           <script key={`schema-${index}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(item) }} />
         ))}
         {faqRows.length > 0 && faqJsonLd ? (
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
         ) : null}
-        <div className="comic-hero">
-          <div className="comic-kicker">Upcoming Shows</div>
-          <h1 className="comic-title">Red Rocks Lineup</h1>
-          <p className="comic-copy">
+        <section className="brand-panel overflow-hidden rounded-[32px] px-6 py-8 shadow-[0_28px_90px_rgba(0,0,0,0.34)] sm:px-8 sm:py-10 lg:px-10">
+          <div className="brand-kicker text-[11px] font-black uppercase tracking-[0.24em]">Upcoming Shows</div>
+          <h1 className="mt-4 max-w-[12ch] text-4xl font-black tracking-[-0.04em] text-white sm:text-5xl">
+            Red Rocks Lineup
+          </h1>
+          <p className="mt-4 max-w-[52rem] text-base leading-7 text-white/78 sm:text-lg">
             Already have tickets? Search by artist, filter by month, and plan your ride before show night.
           </p>
-          <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-primary" href="/book">
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link
+              className="brand-button-primary brand-button-pulse inline-flex min-h-12 items-center justify-center px-6 py-3 text-[12px] font-black uppercase tracking-[0.2em]"
+              href="/book"
+            >
               Book a Ride
             </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/guide">
+            <Link
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 py-3 text-[12px] font-black uppercase tracking-[0.2em] text-white transition hover:-translate-y-0.5 hover:border-[var(--brand-border-strong)] hover:bg-white/10 hover:no-underline"
+              href="/guide"
+            >
               Guides
             </Link>
           </div>
-          <div style={{ marginTop: 18 }}>
+          <div className="mt-6">
             <MusicWave bars={24} />
           </div>
-        </div>
+        </section>
 
-        <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">Filters</div>
-          <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
+        <section className="brand-card mt-6 rounded-[28px] p-6 sm:p-7">
+          <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.22em]">Filters</div>
+          <div className="mt-4 grid gap-3 md:grid-cols-[minmax(0,1fr)_240px]">
             <input
               value={q}
               onChange={(e) => setQ(e.target.value)}
               placeholder="Search artist or event title"
-              className="w-full rounded-xl border border-white/25 bg-black/30 px-3 py-3 text-sm text-white outline-none focus:border-white/50"
+              className="w-full rounded-[18px] border border-white/14 bg-black/20 px-4 py-3 text-sm text-white outline-none transition focus:border-[var(--brand-border-strong)]"
             />
             <select
               value={month}
               onChange={(e) => setMonth(e.target.value)}
-              className="w-full rounded-xl border border-white/25 bg-black/30 px-3 py-3 text-sm text-white outline-none focus:border-white/50"
+              className="w-full rounded-[18px] border border-white/14 bg-black/20 px-4 py-3 text-sm text-white outline-none transition focus:border-[var(--brand-border-strong)]"
             >
               {monthOptions.map((key) => (
                 <option key={key} value={key}>
@@ -113,33 +121,45 @@ export default function WeekClient({
           </div>
         </section>
 
-        <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">Before Show Night</div>
-          <p className="comic-copy" style={{ marginTop: 8 }}>
+        <section className="brand-card mt-6 rounded-[28px] p-6 sm:p-7">
+          <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.22em]">Before Show Night</div>
+          <p className="mt-3 text-sm leading-7 text-white/72 sm:text-base">
             Search the lineup by artist or month, open the show page, then choose the ride that fits the night.
           </p>
-          <p className="comic-copy">
+          <p className="mt-2 text-sm leading-7 text-white/72 sm:text-base">
             Round-trip rides cover the full concert night, and pickup details are sent before the show.
           </p>
-          <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-primary" href="/book">
+          <div className="mt-4 flex flex-wrap gap-3">
+            <Link
+              className="brand-button-primary inline-flex min-h-12 items-center justify-center px-5 py-3 text-[12px] font-black uppercase tracking-[0.18em]"
+              href="/book"
+            >
               Book a Ride
             </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/venues/red-rocks-amphitheatre">
+            <Link
+              className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white transition hover:bg-white/10 hover:no-underline"
+              href="/venues/red-rocks-amphitheatre"
+            >
               Venue Details
             </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/guide/show-night-strategy/post-show-pickup-plan">
+            <Link
+              className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white transition hover:bg-white/10 hover:no-underline"
+              href="/guide/show-night-strategy/post-show-pickup-plan"
+            >
               Pickup Guide
             </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/guide/logistics/parking-lots">
+            <Link
+              className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white transition hover:bg-white/10 hover:no-underline"
+              href="/guide/logistics/parking-lots"
+            >
               Parking Guide
             </Link>
           </div>
         </section>
 
-        <section style={{ marginTop: 16 }}>
+        <section className="mt-6">
           {filtered.length === 0 ? (
-            <div className="comic-panel">No events match your current filter.</div>
+            <div className="brand-card rounded-[26px] p-6 text-sm text-white/72">No events match your current filter.</div>
           ) : (
             <div className="comic-grid">
               {filtered.map((e) => (
@@ -149,16 +169,26 @@ export default function WeekClient({
           )}
         </section>
 
-        <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">Before You Go</div>
-          <p className="comic-copy" style={{ marginTop: 8 }}>
+        <section className="brand-card mt-6 rounded-[28px] p-6 sm:p-7">
+          <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.22em]">Before You Go</div>
+          <p className="mt-3 text-sm leading-7 text-white/72 sm:text-base">
             Check venue notices and road conditions before you leave for the show.
           </p>
-          <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <a className="comic-btn comic-btn-secondary" href="https://www.redrocksonline.com" target="_blank" rel="noreferrer">
+          <div className="mt-4 flex flex-wrap gap-3">
+            <a
+              className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white transition hover:bg-white/10 hover:no-underline"
+              href="https://www.redrocksonline.com"
+              target="_blank"
+              rel="noreferrer"
+            >
               Venue Updates
             </a>
-            <a className="comic-btn comic-btn-secondary" href="https://www.cotrip.org" target="_blank" rel="noreferrer">
+            <a
+              className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white transition hover:bg-white/10 hover:no-underline"
+              href="https://www.cotrip.org"
+              target="_blank"
+              rel="noreferrer"
+            >
               Road Conditions
             </a>
           </div>
