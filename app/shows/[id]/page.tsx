@@ -446,7 +446,7 @@ export default async function ShowPage({ params }: Props) {
     .slice(0, 6);
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-12">
+    <main className="brand-page mx-auto max-w-6xl px-4 py-12">
       {/* JSON-LD */}
       <script
         type="application/ld+json"
@@ -464,7 +464,7 @@ export default async function ShowPage({ params }: Props) {
       ) : null}
 
       {/* HERO */}
-      <div className="rounded-[32px] border border-soft panel p-8 shadow-[0_22px_70px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+      <div className="brand-panel rounded-[32px] p-8 shadow-[0_22px_70px_rgba(0,0,0,0.45)] backdrop-blur-xl">
         <div className="flex flex-wrap items-center gap-2">
           <div className="inline-flex items-center rounded-full pill px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white/80">
             Show Details
@@ -496,7 +496,7 @@ export default async function ShowPage({ params }: Props) {
         </h1>
 
         {e?.datetime_local ? (
-          <p className="mt-3 text-sm font-black uppercase tracking-[0.18em] text-[#ffb07c]">
+          <p className="brand-kicker mt-3 text-sm font-black uppercase tracking-[0.18em]">
             {fmtDate(e.datetime_local)} at {venueName}
           </p>
         ) : null}
@@ -531,12 +531,12 @@ export default async function ShowPage({ params }: Props) {
             </Link>
           ) : null}
 
-          <Link
-            href={rideHref}
-            className="inline-flex items-center justify-center rounded-full bg-neon-blue px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-black transition hover:bg-surface/40 w-full sm:w-auto min-w-[180px] text-center"
-          >
-            Get a Ride
-          </Link>
+            <Link
+              href={rideHref}
+              className="inline-flex items-center justify-center rounded-full bg-[var(--brand-cyan)] px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-[var(--brand-accent-text)] transition hover:bg-[var(--brand-cyan-hover)] w-full sm:w-auto min-w-[180px] text-center"
+            >
+              Get a Ride
+            </Link>
 
           <Link
             href={isRedRocksVenue ? "/week/red-rocks" : "/week"}
@@ -684,7 +684,7 @@ export default async function ShowPage({ params }: Props) {
           <div className="mt-4">
             <Link
               href={rideHref}
-              className="comic-btn comic-btn-primary"
+              className="inline-flex items-center justify-center rounded-full bg-[var(--brand-cyan)] px-6 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-[var(--brand-accent-text)] transition hover:bg-[var(--brand-cyan-hover)]"
             >
               Get a Ride
             </Link>
