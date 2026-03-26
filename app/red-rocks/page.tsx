@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import FAQBlock from "@/components/FAQBlock";
 import CardGrid from "@/components/CardGrid";
@@ -10,12 +11,34 @@ import PrimaryCTASection from "@/components/PrimaryCTASection";
 import { RED_ROCKS_ENTITIES } from "@/lib/redRocksAuthority";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
+const DEFAULT_OG_IMAGE =
+  `${SITE}/api/unsplash-image?q=red+rocks+amphitheatre+concert+night+denver+colorado&src=%2Fhero%2Fhero-home.jpg&alt=Red+Rocks+guide&w=1200&h=630`;
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Red Rocks Guide: Visiting, Concerts, Trails, Geology, Transportation",
   description:
     "Red Rocks visiting and concert guide with parking, trails, transportation, geology, wildlife, and planning basics.",
-  alternates: { canonical: "/red-rocks" },
+  alternates: { canonical: `${SITE}/red-rocks` },
+  openGraph: {
+    title: "Red Rocks Guide: Visiting, Concerts, Trails, Geology, Transportation",
+    description:
+      "Red Rocks visiting and concert guide with parking, trails, transportation, geology, wildlife, and planning basics.",
+    url: `${SITE}/red-rocks`,
+    type: "website",
+    images: [
+      {
+        url: DEFAULT_OG_IMAGE,
+        alt: "Red Rocks guide",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Red Rocks Guide: Visiting, Concerts, Trails, Geology, Transportation",
+    description:
+      "Red Rocks visiting and concert guide with parking, trails, transportation, geology, wildlife, and planning basics.",
+    images: [DEFAULT_OG_IMAGE],
+  },
 };
 
 const clusterLinks = [
