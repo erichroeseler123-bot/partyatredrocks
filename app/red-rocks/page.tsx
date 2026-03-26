@@ -1,9 +1,12 @@
 import Link from "next/link";
 import FAQBlock from "@/components/FAQBlock";
+import CardGrid from "@/components/CardGrid";
 import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
 import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
 import type { HandoffSearchParams } from "@/lib/parrHandoff";
 import { buildBookingHref } from "@/lib/parrHandoff";
+import PageHero from "@/components/PageHero";
+import PrimaryCTASection from "@/components/PrimaryCTASection";
 import { RED_ROCKS_ENTITIES } from "@/lib/redRocksAuthority";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
@@ -81,44 +84,24 @@ export default async function RedRocksHubPage({
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
         ) : null}
 
-        <section className="brand-panel overflow-hidden rounded-[32px] px-6 py-8 shadow-[0_28px_90px_rgba(0,0,0,0.34)] sm:px-8 sm:py-10 lg:px-10">
-          <div className="brand-kicker text-[11px] font-black uppercase tracking-[0.24em]">Red Rocks Guide</div>
-          <h1 className="mt-4 max-w-[12ch] text-4xl font-black tracking-[-0.04em] text-white sm:text-5xl">
-            Plan Your Red Rocks Night
-          </h1>
-          <p className="mt-4 max-w-[56rem] text-base leading-7 text-white/78 sm:text-lg">
-            Start with the decisions that shape the whole night: how you are getting in, when you should arrive, where your group
-            will regroup, and what to do after the encore.
-          </p>
-          <p className="mt-3 max-w-[52rem] text-sm leading-7 text-white/64 sm:text-base">
-            Use the guide hub below to jump straight into parking, transportation, concerts, trails, geology, and the practical Red
-            Rocks details people usually scramble to figure out too late.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link
-              className="brand-button-primary brand-button-pulse inline-flex min-h-12 items-center justify-center px-6 py-3 text-[12px] font-black uppercase tracking-[0.2em]"
-              href={buildBookingHref({
+        <PageHero
+          kicker="Red Rocks Guide"
+          title="Plan Your Red Rocks Night"
+          description="Start with the decisions that shape the whole night: how you are getting in, when you should arrive, where your group will regroup, and what to do after the encore."
+          secondaryDescription="Use the guide hub below to jump straight into parking, transportation, concerts, trails, geology, and the practical Red Rocks details people usually scramble to figure out too late."
+          actions={[
+            {
+              href: buildBookingHref({
                 target: "book",
                 venue: "red-rocks-amphitheatre",
                 searchParams: sp,
-              })}
-            >
-              Book Shuttle
-            </Link>
-            <Link
-              className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 py-3 text-[12px] font-black uppercase tracking-[0.2em] text-white transition hover:-translate-y-0.5 hover:border-[var(--brand-border-strong)] hover:bg-white/10 hover:no-underline"
-              href="/week/red-rocks"
-            >
-              This Week at Red Rocks
-            </Link>
-            <Link
-              className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 py-3 text-[12px] font-black uppercase tracking-[0.2em] text-white transition hover:-translate-y-0.5 hover:border-[var(--brand-border-strong)] hover:bg-white/10 hover:no-underline"
-              href="/venues/red-rocks-amphitheatre"
-            >
-              Venue Schedule
-            </Link>
-          </div>
-        </section>
+              }),
+              label: "Book Shuttle",
+            },
+            { href: "/week/red-rocks", label: "This Week at Red Rocks", variant: "secondary" },
+            { href: "/venues/red-rocks-amphitheatre", label: "Venue Schedule", variant: "secondary" },
+          ]}
+        />
 
         <section className="brand-card mt-6 rounded-[28px] p-6 shadow-[0_22px_70px_rgba(0,0,0,0.34)] sm:p-7">
           <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.22em]">Featured Jam Event</div>
@@ -154,7 +137,7 @@ export default async function RedRocksHubPage({
           </div>
         </section>
 
-        <div className="mt-6 grid gap-4 lg:grid-cols-3">
+        <CardGrid className="lg:grid-cols-3">
           <article className="brand-card rounded-[26px] p-6">
             <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.2em]">Start Here</div>
             <p className="mt-3 text-sm leading-7 text-white/74">
@@ -174,9 +157,9 @@ export default async function RedRocksHubPage({
               Give your full group one arrival time, one regroup point, and one clear plan for getting home after the encore.
             </p>
           </article>
-        </div>
+        </CardGrid>
 
-        <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <CardGrid className="md:grid-cols-2 xl:grid-cols-3">
           {clusterLinks.map((link) => (
             <Link
               key={link.href}
@@ -192,7 +175,7 @@ export default async function RedRocksHubPage({
               </p>
             </Link>
           ))}
-        </div>
+        </CardGrid>
 
         <section className="brand-card mt-6 rounded-[28px] p-6 sm:p-7">
           <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.22em]">Pages By Category</div>
@@ -225,8 +208,22 @@ export default async function RedRocksHubPage({
           </div>
         </section>
 
-        <section className="brand-card mt-6 rounded-[28px] p-6 sm:p-7">
-          <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.22em]">Planning Priorities</div>
+        <PrimaryCTASection
+          kicker="Planning Priorities"
+          body="Keep the night simple: get there on time, use one regroup point, and lock the return plan in before the venue empties out."
+          actions={[
+            {
+              href: buildBookingHref({
+                target: "book",
+                venue: "red-rocks-amphitheatre",
+                searchParams: sp,
+              }),
+              label: "Reserve a Ride",
+            },
+            { href: "/red-rocks/transportation", label: "Transportation Guide", variant: "secondary" },
+            { href: "/week/red-rocks", label: "Browse Shows", variant: "secondary" },
+          ]}
+        >
           <div className="mt-4 grid gap-4 md:grid-cols-3">
             <article className="rounded-[22px] border border-white/10 bg-black/15 p-5">
               <h3 className="text-sm font-black uppercase tracking-[0.18em] text-white">Timing First</h3>
@@ -247,7 +244,7 @@ export default async function RedRocksHubPage({
               </p>
             </article>
           </div>
-        </section>
+        </PrimaryCTASection>
 
         <FAQBlock title="Red Rocks Hub FAQ" rows={faqRows} />
       </section>

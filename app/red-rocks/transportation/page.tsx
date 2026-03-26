@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import FAQBlock from "@/components/FAQBlock";
+import CardGrid from "@/components/CardGrid";
 import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
 import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
 import type { HandoffSearchParams } from "@/lib/parrHandoff";
 import { buildBookingHref } from "@/lib/parrHandoff";
+import PageHero from "@/components/PageHero";
+import PrimaryCTASection from "@/components/PrimaryCTASection";
 import { RED_ROCKS_ENTITIES } from "@/lib/redRocksAuthority";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
@@ -89,41 +92,25 @@ export default async function RedRocksTransportationPage({
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
         ) : null}
 
-        <section className="brand-panel overflow-hidden rounded-[32px] px-6 py-8 shadow-[0_28px_90px_rgba(0,0,0,0.34)] sm:px-8 sm:py-10 lg:px-10">
-          <div className="brand-kicker text-[11px] font-black uppercase tracking-[0.24em]">Transportation</div>
-          <h1 className="mt-4 max-w-[12ch] text-4xl font-black tracking-[-0.04em] text-white sm:text-5xl">
-            How To Get To Red Rocks
-          </h1>
-          <p className="mt-4 max-w-[58rem] text-base leading-7 text-white/78 sm:text-lg">
-            Red Rocks transportation usually comes down to three choices: drive and park, use rideshare, or book a shuttle or
-            private ride in advance. The best option depends on your group size, timing, and how much certainty you want after
-            the show.
-          </p>
-          <p className="mt-3 max-w-[54rem] text-sm leading-7 text-white/64 sm:text-base">
-            Red Rocks is different from a downtown arena. Traffic builds before doors, walking can be steep, and the rush after
-            the encore happens fast. If you know how you are getting in and out before show night, the whole evening is easier.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link
-              className="brand-button-primary brand-button-pulse inline-flex min-h-12 items-center justify-center px-6 py-3 text-[12px] font-black uppercase tracking-[0.2em]"
-              href={buildBookingHref({
+        <PageHero
+          kicker="Transportation"
+          title="How To Get To Red Rocks"
+          description="Red Rocks transportation usually comes down to three choices: drive and park, use rideshare, or book a shuttle or private ride in advance. The best option depends on your group size, timing, and how much certainty you want after the show."
+          secondaryDescription="Red Rocks is different from a downtown arena. Traffic builds before doors, walking can be steep, and the rush after the encore happens fast. If you know how you are getting in and out before show night, the whole evening is easier."
+          actions={[
+            {
+              href: buildBookingHref({
                 target: "book",
                 venue: "red-rocks-amphitheatre",
                 searchParams: sp,
-              })}
-            >
-              Book a Ride
-            </Link>
-            <Link
-              className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 py-3 text-[12px] font-black uppercase tracking-[0.2em] text-white transition hover:-translate-y-0.5 hover:border-[var(--brand-border-strong)] hover:bg-white/10 hover:no-underline"
-              href="/week/red-rocks"
-            >
-              Shows This Week
-            </Link>
-          </div>
-        </section>
+              }),
+              label: "Book a Ride",
+            },
+            { href: "/week/red-rocks", label: "Shows This Week", variant: "secondary" },
+          ]}
+        />
 
-        <div className="mt-6 grid gap-4 lg:grid-cols-3">
+        <CardGrid className="lg:grid-cols-3">
           <article className="brand-card rounded-[26px] p-6">
             <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.2em]">Drive + Park</div>
             <p className="mt-3 text-sm leading-7 text-white/74">
@@ -142,7 +129,7 @@ export default async function RedRocksTransportationPage({
               The clearest plan before the night starts, especially when you want fixed pricing, one pickup point, and a guaranteed ride back.
             </p>
           </article>
-        </div>
+        </CardGrid>
 
         <section className="brand-card mt-6 rounded-[28px] p-6 sm:p-7">
           <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.22em]">Arrival and Return Timing</div>
@@ -168,7 +155,7 @@ export default async function RedRocksTransportationPage({
           </div>
         </section>
 
-        <div className="mt-6 grid gap-4 lg:grid-cols-3">
+        <CardGrid className="lg:grid-cols-3">
           <Link
             href="/red-rocks/transportation/shuttle-vs-uber"
             className="brand-card block rounded-[26px] p-6 transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.38)] hover:no-underline"
@@ -193,10 +180,24 @@ export default async function RedRocksTransportationPage({
             <h2 className="mt-3 text-2xl font-black tracking-[-0.03em] text-white">Post-Show Pickup Strategy</h2>
             <p className="mt-3 text-sm leading-7 text-white/72">How to avoid regroup failures when crowds surge at close.</p>
           </Link>
-        </div>
+        </CardGrid>
 
-        <section className="brand-card mt-6 rounded-[28px] p-6 sm:p-7">
-          <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.22em]">Before Show Night</div>
+        <PrimaryCTASection
+          kicker="Before Show Night"
+          body="Lock the transport plan in before the day of the show so your group is not improvising once doors open and the lots start moving."
+          actions={[
+            {
+              href: buildBookingHref({
+                target: "book",
+                venue: "red-rocks-amphitheatre",
+                searchParams: sp,
+              }),
+              label: "Check Availability",
+            },
+            { href: "/red-rocks/parking", label: "Parking Guide", variant: "secondary" },
+            { href: "/red-rocks/transportation/shuttle-vs-uber", label: "Shuttle vs Uber", variant: "secondary" },
+          ]}
+        >
           <ul className="mt-4 grid gap-3 text-sm leading-7 text-white/72 sm:text-base">
             <li>Decide how your group is getting to Red Rocks before the day of the show.</li>
             <li>Set one meeting point for the ride in and one meeting point for the ride back.</li>
@@ -204,7 +205,7 @@ export default async function RedRocksTransportationPage({
             <li>Allow extra time for traffic, stairs, and security.</li>
             <li>Check the weather and bring layers that match the walk in and out.</li>
           </ul>
-        </section>
+        </PrimaryCTASection>
 
         <section className="brand-card mt-6 rounded-[28px] p-6 sm:p-7">
           <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.22em]">More Red Rocks Guides</div>
