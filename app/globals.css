@@ -16,7 +16,7 @@
   --heroOverlay:linear-gradient(180deg, rgba(7,10,18,0.10) 0%, rgba(7,10,18,0.72) 55%, rgba(7,10,18,0.92) 100%);
 }
 
-body { background: var(--surface); color: var(--text); }
+body { background: #ffffff; color: var(--text); }
 
 a { color: var(--accent2); text-decoration: none; }
 a:hover { text-decoration: underline; }
@@ -36,7 +36,7 @@ a:visited { color: var(--accent2); }
   --heroOverlay:linear-gradient(180deg, rgba(7,10,18,0.10) 0%, rgba(7,10,18,0.72) 55%, rgba(7,10,18,0.92) 100%);
 }
 
-body { background: var(--surface); color: var(--text); }
+body { background: #ffffff; color: var(--text); }
 
 a { color: var(--accent2); text-decoration: none; }
 a:hover { text-decoration: underline; }
@@ -837,8 +837,8 @@ button[class*="rounded-full"][class*="justify-center"] {
   background:
     radial-gradient(circle at top center, rgba(76, 97, 255, 0.24), transparent 30%),
     radial-gradient(circle at 20% 14%, rgba(72, 124, 255, 0.16), transparent 24%),
-    linear-gradient(180deg, rgba(10, 18, 48, 0.52), transparent 24%),
-    var(--brand-bg);
+    linear-gradient(180deg, rgba(10, 18, 48, 0.52), rgba(255,255,255,0) 24%),
+    #ffffff;
   color: var(--brand-text);
 }
 
