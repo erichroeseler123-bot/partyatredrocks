@@ -21,6 +21,8 @@ type HomeSectionsProps = {
     | {
         label: string;
         detail: string;
+        imageSrc: string;
+        imageAlt: string;
       }
     | null;
 };
@@ -32,14 +34,12 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
       id: "shared" as const,
       title: "Shared Shuttle",
       subtitle: "$59 fixed per seat",
-      copy: "For couples, friend pairs, and solo riders who want the easiest Red Rocks plan for most concert nights.",
+      copy: "Best for couples, solo riders, and smaller groups.",
       bullets: [
         "Denver + Golden departures",
-        "Return ride handled after the show",
-        "Best value for most concert nights",
+        "Guaranteed return after the show",
       ],
       href: BOOK_RED_ROCKS,
-      cta: "Secure Shared Seats",
       image: sprinterSrc,
       alt: "Shared shuttle option for Red Rocks transportation",
     },
@@ -47,21 +47,19 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
       id: "private" as const,
       title: "Private Vehicle",
       subtitle: "$499 SUV to $1199 party bus",
-      copy: "For groups who want one vehicle, tailgate time, and a premium concert-night experience from pickup to dropoff.",
+      copy: "Best for groups that want one vehicle and a premium night.",
       bullets: [
         "SUV, van, sprinter, and party bus options",
-        "Upper North limo-lane access on qualifying rides",
-        "One driver and one group plan all night",
+        "Private driver and one group plan all night",
       ],
       href: BOOK_RED_ROCKS,
-      cta: "View Private Vehicles",
       image: shuttleSrc,
       alt: "Private vehicle option for Red Rocks transportation",
     },
   ];
 
   return (
-    <main className="brand-page bg-[radial-gradient(circle_at_top,rgba(76,97,255,0.28),transparent_24%),radial-gradient(circle_at_18%_10%,rgba(255,183,3,0.12),transparent_16%),linear-gradient(180deg,#2140c9_0%,#141b45_18%,#111112_42%,#111112_100%)]">
+    <main className="brand-page bg-[radial-gradient(circle_at_top,rgba(255,91,46,0.15),transparent_26%),radial-gradient(circle_at_18%_10%,rgba(59,130,246,0.14),transparent_18%),linear-gradient(180deg,#0b0b0f_0%,#0b0b0f_100%)]">
       <section className="mx-auto flex w-full max-w-[1500px] flex-col gap-10 px-4 pb-24 pt-16 sm:px-6 sm:pt-20 lg:px-8">
         <section className="relative overflow-hidden rounded-[36px] border border-[var(--brand-orange)]/20 bg-[var(--brand-bg-dark)] shadow-[0_40px_120px_rgba(0,0,0,0.58)]">
           <div className="absolute inset-0">
@@ -142,7 +140,7 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
               Pick Your Ride
             </h2>
             <p className="mt-3 max-w-2xl text-[15px] leading-7 text-white/76">
-              Choose the service that fits the night, then jump straight to pricing and availability.
+              Choose one to see prices and availability.
             </p>
           </div>
 
@@ -157,30 +155,24 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
                   className={[
                     "group relative flex gap-4 overflow-hidden rounded-[28px] border p-5 text-left transition",
                     checked
-                      ? "border-[var(--brand-cyan)] bg-[linear-gradient(180deg,rgba(25,35,86,0.95),rgba(18,20,32,0.98))] shadow-[0_24px_80px_rgba(0,0,0,0.38)]"
-                      : "border-white/10 bg-[linear-gradient(180deg,rgba(24,25,33,0.96),rgba(15,16,23,0.98))] hover:border-white/18",
+                      ? "border-[var(--brand-cyan)] bg-[linear-gradient(180deg,rgba(28,32,48,0.96),rgba(18,19,28,0.98))] shadow-[0_24px_80px_rgba(0,0,0,0.32)]"
+                      : "border-white/10 bg-[linear-gradient(180deg,rgba(21,21,28,0.96),rgba(12,12,18,0.98))] hover:border-white/16",
                   ].join(" ")}
                 >
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                       <div>
-                        <div className="flex items-center gap-2">
-                          <div
-                            className={[
-                              "h-2.5 w-2.5 rounded-full transition",
-                              checked ? "bg-[var(--brand-cyan)] shadow-[0_0_14px_rgba(255,207,112,0.55)]" : "bg-white/25",
-                            ].join(" ")}
-                          />
-                          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">{ride.subtitle}</div>
+                        <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">
+                          {ride.subtitle}
                         </div>
                         <h3 className="mt-2 text-[1.5rem] font-black uppercase tracking-[-0.04em] text-white">{ride.title}</h3>
                       </div>
-                      <div className="relative h-20 overflow-hidden rounded-[18px] border border-white/10 sm:w-36">
+                      <div className="relative h-20 overflow-hidden rounded-[18px] border border-white/10 sm:w-32">
                         <Image
                           src={ride.image}
                           alt={ride.alt}
                           fill
-                          sizes="144px"
+                          sizes="128px"
                           className="object-cover"
                         />
                         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,9,9,0.12),rgba(9,9,9,0.58)_100%)]" />
@@ -191,7 +183,7 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
                     <ul className="mt-4 space-y-2">
                       {ride.bullets.map((bullet) => (
                         <li key={bullet} className="flex items-start gap-3 text-sm leading-6 text-white/82">
-                          <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#f5c66c]" />
+                          <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[var(--brand-cyan)]" />
                           <span>{bullet}</span>
                         </li>
                       ))}
@@ -213,23 +205,31 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
           </div>
         </section>
 
+        <ReviewBlock />
+
         {urgency ? (
-          <section className="brand-glass-bar overflow-hidden rounded-[24px] px-5 py-4">
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <section className="brand-glass-bar overflow-hidden rounded-[24px] p-4 sm:p-5">
+            <div className="grid gap-4 sm:grid-cols-[120px_minmax(0,1fr)_auto] sm:items-center">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-[18px] border border-white/10">
+                <Image
+                  src={urgency.imageSrc}
+                  alt={urgency.imageAlt}
+                  fill
+                  sizes="120px"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,9,9,0.08),rgba(9,9,9,0.52)_100%)]" />
+              </div>
               <div>
                 <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.24em]">{urgency.label}</div>
                 <p className="mt-1 text-sm leading-6 text-white/82">{urgency.detail}</p>
               </div>
-              <Link href="/week/red-rocks" className="brand-link text-sm font-black uppercase tracking-[0.16em] no-underline">
+              <Link href="/week/red-rocks" className="brand-link inline-flex items-center text-sm font-black uppercase tracking-[0.16em] no-underline">
                 View lineup
               </Link>
             </div>
           </section>
         ) : null}
-
-        <div className="h-px w-full bg-[linear-gradient(90deg,rgba(245,198,108,0.18),rgba(245,198,108,0.03),rgba(245,198,108,0.18))]" />
-
-        <ReviewBlock />
       </section>
 
     </main>

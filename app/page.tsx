@@ -51,6 +51,13 @@ export default async function HomePage() {
   const nextRedRocksEvent = events
     .filter((event) => event.venueId === "red-rocks-amphitheatre" && event.dateKey >= denverToday)
     .sort((a, b) => `${a.dateKey}T${a.startLocal}`.localeCompare(`${b.dateKey}T${b.startLocal}`))[0];
+  const nextRedRocksEventImage = nextRedRocksEvent
+    ? await getDynamicImage(
+        "concert",
+        `${nextRedRocksEvent.artistNames[0] || nextRedRocksEvent.name} red rocks concert`,
+        nextRedRocksEvent.image || "/venues/rrsite.jpg",
+      )
+    : null;
   const urgency = nextRedRocksEvent
     ? {
         label: nextRedRocksEvent.dateKey === denverToday ? "Tonight at Red Rocks" : "Next at Red Rocks",
@@ -58,6 +65,8 @@ export default async function HomePage() {
           nextRedRocksEvent.dateKey === denverToday
             ? `${nextRedRocksEvent.name} is on tonight. Shared and private ride planning is still open.`
             : `${nextRedRocksEvent.name} is coming up next. Lock the ride plan before show night gets compressed.`,
+        imageSrc: nextRedRocksEventImage || "/venues/rrsite.jpg",
+        imageAlt: `${nextRedRocksEvent.name} concert image`,
       }
     : null;
 
