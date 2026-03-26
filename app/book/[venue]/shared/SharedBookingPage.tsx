@@ -7,6 +7,7 @@ import venuesJson from "@/data/venues.json";
 import { bookingVisuals } from "@/lib/bookingVisuals";
 import { buildTrackedExternalCheckoutHref, postDccSatelliteEvent, postWtaPartnerAcceptedIfNeeded } from "@/lib/dccSatellite";
 import type { HandoffSearchParams } from "@/lib/parrHandoff";
+import { buildSharedBookingJsonLd } from "./sharedBookingSeo";
 
 type VenueRow = {
   slug?: string;
@@ -95,8 +96,17 @@ export async function SharedBookingPage({
     sourcePath,
   });
 
+  const jsonLd = buildSharedBookingJsonLd(basePath);
+
   return (
     <main className="min-h-screen bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
+      {jsonLd.map((item, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(item) }}
+        />
+      ))}
       <section className="mx-auto flex max-w-[1240px] flex-col gap-8">
         <BookingVisualHero
           eyebrow={bookingVisuals.shared.eyebrow}
