@@ -78,20 +78,11 @@ export default function WeekClient({
             Already have tickets? Search by artist, filter by month, and plan your ride before show night.
           </p>
           <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-secondary" href="/red-rocks">
-              Red Rocks Hub
+            <Link className="comic-btn comic-btn-primary" href="/book">
+              Book a Ride
             </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/red-rocks/concerts">
-              Concert Schedule
-            </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/red-rocks/transportation">
-              Transportation Guide
-            </Link>
-            <Link className="comic-btn comic-btn-primary" href="/book/red-rocks-amphitheatre/custom/shared">
-              Book Shared Shuttle
-            </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/book/red-rocks-amphitheatre/private">
-              Private Rides
+            <Link className="comic-btn comic-btn-secondary" href="/guide">
+              Guides
             </Link>
           </div>
           <div style={{ marginTop: 18 }}>
@@ -131,20 +122,11 @@ export default function WeekClient({
             Round-trip rides cover the full concert night, and pickup details are sent before the show.
           </p>
           <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-secondary" href="/red-rocks">
-              Back to Red Rocks Hub
-            </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/red-rocks/concerts">
-              Full Concert Calendar
-            </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/red-rocks/transportation">
-              Transportation Guide
+            <Link className="comic-btn comic-btn-primary" href="/book">
+              Book a Ride
             </Link>
             <Link className="comic-btn comic-btn-secondary" href="/venues/red-rocks-amphitheatre">
               Venue Details
-            </Link>
-            <Link className="comic-btn comic-btn-primary" href="/book/red-rocks-amphitheatre/custom/shared">
-              Book Shared Shuttle
             </Link>
             <Link className="comic-btn comic-btn-secondary" href="/guide/show-night-strategy/post-show-pickup-plan">
               Pickup Guide
@@ -183,8 +165,8 @@ export default function WeekClient({
         </section>
 
         <div className="comic-mobile-cta">
-          <Link className="comic-btn comic-btn-primary" href="/book/red-rocks-amphitheatre/custom/shared">
-            Book Shared Shuttle
+          <Link className="comic-btn comic-btn-primary" href="/book">
+            Book a Ride
           </Link>
         </div>
 
