@@ -798,23 +798,23 @@ button[class*="rounded-full"][class*="justify-center"] {
 */
 
 :root {
-  --brand-bg: #120f12;
-  --brand-bg-dark: #1b171c;
-  --brand-bg-panel: linear-gradient(180deg, rgba(32, 24, 31, 0.98), rgba(18, 15, 18, 0.96));
-  --brand-bg-card: #1b171c;
-  --brand-cyan: #9fd7e8;
-  --brand-cyan-hover: #c1e6f1;
-  --brand-orange: #d9a15b;
-  --brand-orange-strong: #b96b2f;
-  --brand-text: #f7f1e8;
-  --brand-text-soft: rgba(247, 241, 232, 0.74);
-  --brand-text-muted: rgba(247, 241, 232, 0.54);
-  --brand-border: rgba(255, 241, 223, 0.12);
-  --brand-accent-text: #140f0b;
-  --brand-primary-start: #d9a15b;
-  --brand-primary-end: #b96b2f;
-  --brand-primary-hover-start: #e0ae6e;
-  --brand-primary-hover-end: #c67636;
+  --brand-bg: #111112;
+  --brand-bg-dark: #1a1a1b;
+  --brand-bg-panel: linear-gradient(180deg, rgba(34, 22, 25, 0.98), rgba(17, 17, 18, 0.96));
+  --brand-bg-card: #1a1a1b;
+  --brand-cyan: #ffcf70;
+  --brand-cyan-hover: #ffd98c;
+  --brand-orange: #ffb703;
+  --brand-orange-strong: #e63946;
+  --brand-text: #f8f9fa;
+  --brand-text-soft: rgba(248, 249, 250, 0.78);
+  --brand-text-muted: rgba(248, 249, 250, 0.56);
+  --brand-border: rgba(255, 183, 3, 0.18);
+  --brand-accent-text: #190d10;
+  --brand-primary-start: #ffb703;
+  --brand-primary-end: #e63946;
+  --brand-primary-hover-start: #ffc126;
+  --brand-primary-hover-end: #f04b58;
   --brand-radius-sm: 12px;
   --brand-radius-md: 18px;
   --brand-radius-lg: 24px;
@@ -868,7 +868,7 @@ button[class*="rounded-full"][class*="justify-center"] {
   border: 1px solid color-mix(in srgb, var(--brand-orange) 28%, transparent);
   background: linear-gradient(180deg, var(--brand-primary-start) 0%, var(--brand-primary-end) 100%);
   color: var(--brand-accent-text) !important;
-  box-shadow: 0 18px 42px rgba(112, 60, 24, 0.26);
+  box-shadow: 0 18px 42px rgba(230, 57, 70, 0.26);
   transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
 }
 
@@ -882,8 +882,8 @@ button[class*="rounded-full"][class*="justify-center"] {
 }
 
 .brand-glass-bar {
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: linear-gradient(180deg, rgba(11, 18, 36, 0.88), rgba(5, 8, 22, 0.94));
+  border: 1px solid rgba(255, 183, 3, 0.16);
+  background: linear-gradient(180deg, rgba(38, 26, 29, 0.9), rgba(17, 17, 18, 0.95));
   box-shadow: 0 22px 60px rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(10px);
 }
