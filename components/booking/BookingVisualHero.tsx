@@ -18,7 +18,7 @@ export function BookingVisualHero({
   imageAlt,
 }: BookingVisualHeroProps) {
   return (
-    <section className="relative overflow-hidden rounded-[32px] border border-white/10 bg-[#0b1224] shadow-[0_40px_120px_rgba(0,0,0,0.45)]">
+    <section className="brand-card relative overflow-hidden rounded-[32px] shadow-[0_40px_120px_rgba(0,0,0,0.45)]">
       <div className="absolute inset-0">
         <Image
           src={imageSrc}
@@ -33,7 +33,7 @@ export function BookingVisualHero({
       </div>
 
       <div className="relative max-w-3xl px-6 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-14">
-        <div className="inline-flex items-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
+        <div className="inline-flex items-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[var(--accentCool)]">
           {eyebrow}
         </div>
         <h1 className="mt-5 text-[2.4rem] font-black uppercase leading-[0.94] tracking-[-0.04em] text-white sm:text-[4rem]">

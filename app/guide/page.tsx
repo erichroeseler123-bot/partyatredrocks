@@ -153,9 +153,9 @@ function GuideCard({ card, imageSrc }: { card: Card; imageSrc: string }) {
   return (
     <Link
       href={card.href}
-      className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
+      className="brand-card rounded-[26px] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
     >
-      <div className="relative mb-5 h-40 overflow-hidden rounded-[20px] border border-white/10">
+      <div className="relative mb-5 h-40 overflow-hidden rounded-[20px] border border-[var(--brand-border)]">
         <Image
           src={imageSrc}
           alt={visual.imageAlt}
@@ -166,13 +166,13 @@ function GuideCard({ card, imageSrc }: { card: Card; imageSrc: string }) {
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,22,0.08),rgba(5,8,22,0.66)_100%)]" />
       </div>
       {card.kicker ? (
-        <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
+        <div className="brand-kicker text-[11px] font-black uppercase tracking-[0.22em]">
           {card.kicker}
         </div>
       ) : null}
       <h2 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white">{card.title}</h2>
       <p className="mt-3 text-sm leading-6 text-white/70">{card.desc}</p>
-      <div className="mt-5 inline-flex items-center text-sm font-bold text-[#3df3ff]">
+      <div className="brand-link mt-5 inline-flex items-center text-sm font-bold">
         Open guide <ArrowRight className="ml-1 h-4 w-4" />
       </div>
     </Link>
@@ -192,7 +192,7 @@ export default async function GuideHub() {
   const heroImage = await getDynamicImage("venue", "Red Rocks Amphitheatre", "/hero/hero-guides.jpg");
 
   return (
-    <main className="bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
+    <main className="brand-page px-4 pb-14 pt-24 sm:px-6 lg:px-8">
       <section className="mx-auto flex max-w-[1440px] flex-col gap-8">
         <GuideVisualHero
           eyebrow={guideVisuals.general.eyebrow}
@@ -212,7 +212,7 @@ export default async function GuideHub() {
           }
         />
 
-        <section className="rounded-[24px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,16,32,0.98),rgba(6,9,18,0.96))] p-4 sm:p-5">
+        <section className="brand-panel rounded-[24px] p-4 sm:p-5">
           <div className="flex flex-wrap gap-2 text-[11px] font-black uppercase tracking-[0.16em] text-white/84">
             <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">Secure Booking</div>
             <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">720-369-6292</div>
@@ -226,8 +226,8 @@ export default async function GuideHub() {
 
         <GuideLocalInfo variant="general" />
 
-        <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(8,13,26,0.96),rgba(6,9,18,0.96))] p-6 sm:p-8">
-          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
+        <section className="brand-panel rounded-[30px] p-6 sm:p-8">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--accentCool)]">
             Featured Guides
           </div>
           <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -237,8 +237,8 @@ export default async function GuideHub() {
           </div>
         </section>
 
-        <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(9,15,31,0.96),rgba(7,11,25,0.96))] p-6 sm:p-8">
-          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
+        <section className="brand-panel rounded-[30px] p-6 sm:p-8">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--accentCool)]">
             Deep Dives
           </div>
           <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -248,8 +248,8 @@ export default async function GuideHub() {
           </div>
         </section>
 
-        <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(8,13,24,0.98),rgba(6,9,18,0.98))] p-6 sm:p-8">
-          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
+        <section className="brand-panel rounded-[30px] p-6 sm:p-8">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--accentCool)]">
             Trusted Sources
           </div>
           <p className="mt-3 text-sm leading-6 text-white/70">

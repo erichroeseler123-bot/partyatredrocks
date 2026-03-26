@@ -54,9 +54,9 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc }: HomeS
   ];
 
   return (
-    <main className="bg-[#090909] text-[#f8f4ed]">
+    <main className="brand-page">
       <section className="mx-auto flex w-full max-w-[1500px] flex-col gap-10 px-4 pb-24 pt-16 sm:px-6 sm:pt-20 lg:px-8">
-        <section className="relative overflow-hidden rounded-[36px] border border-[#f5c66c]/20 bg-[#12100e] shadow-[0_40px_120px_rgba(0,0,0,0.58)]">
+        <section className="relative overflow-hidden rounded-[36px] border border-[var(--brand-orange)]/20 bg-[var(--brand-bg-dark)] shadow-[0_40px_120px_rgba(0,0,0,0.58)]">
           <div className="absolute inset-0">
             <Image
               src={heroSrc}
@@ -73,13 +73,13 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc }: HomeS
 
           <div className="relative px-6 py-10 sm:px-8 sm:py-12 lg:px-12 lg:py-14">
             <div className="max-w-4xl">
-              <p className="font-accent text-xl italic text-[#efe5d3] sm:text-2xl">
+              <p className="font-accent text-xl italic text-white/84 sm:text-2xl">
                 Red Rocks ride planning with a premium, no-chaos finish.
               </p>
 
               <h1 className="mt-4 max-w-5xl text-[2.7rem] font-black uppercase leading-[0.92] tracking-[-0.05em] text-white sm:text-[4.3rem] lg:text-[5.8rem]">
                 Elevate Your
-                <span className="block text-[#f5c66c]">Red Rocks Night</span>
+                <span className="block text-[var(--brand-orange)]">Red Rocks Night</span>
               </h1>
 
               <p className="mt-5 max-w-3xl text-base leading-8 text-white/78 sm:text-lg">
@@ -87,23 +87,23 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc }: HomeS
               </p>
 
               <div className="mt-6 grid max-w-6xl gap-4 sm:grid-cols-3">
-                <article className="rounded-[24px] border border-[#f5c66c]/16 bg-[linear-gradient(180deg,rgba(53,33,16,0.96),rgba(24,16,12,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5">
+                <article className="rounded-[24px] border border-[var(--brand-orange)]/16 bg-[linear-gradient(180deg,rgba(53,33,16,0.96),rgba(24,16,12,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5">
                   <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/16 bg-white/8">
-                    <CalendarDays className="h-4 w-4 text-[#f5c66c]" />
+                    <CalendarDays className="h-4 w-4 text-[var(--brand-orange)]" />
                   </div>
                   <h3 className="mt-3 text-[1.1rem] font-black uppercase tracking-[-0.04em] text-white">Choose your date</h3>
                   <p className="mt-2 text-sm leading-6 text-white/72">Pick your show night and lock the right trip timing first.</p>
                 </article>
-                <article className="rounded-[24px] border border-[#f5c66c]/16 bg-[linear-gradient(180deg,rgba(53,33,16,0.96),rgba(24,16,12,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5">
+                <article className="rounded-[24px] border border-[var(--brand-orange)]/16 bg-[linear-gradient(180deg,rgba(53,33,16,0.96),rgba(24,16,12,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5">
                   <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/16 bg-white/8">
-                    <CarFront className="h-4 w-4 text-[#f5c66c]" />
+                    <CarFront className="h-4 w-4 text-[var(--brand-orange)]" />
                   </div>
                   <h3 className="mt-3 text-[1.1rem] font-black uppercase tracking-[-0.04em] text-white">Pick your ride</h3>
                   <p className="mt-2 text-sm leading-6 text-white/72">Choose shared seats or a private vehicle for your group.</p>
                 </article>
-                <article className="rounded-[24px] border border-[#f5c66c]/16 bg-[linear-gradient(180deg,rgba(53,33,16,0.96),rgba(24,16,12,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5">
+                <article className="rounded-[24px] border border-[var(--brand-orange)]/16 bg-[linear-gradient(180deg,rgba(53,33,16,0.96),rgba(24,16,12,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5">
                   <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/16 bg-white/8">
-                    <CreditCard className="h-4 w-4 text-[#f5c66c]" />
+                    <CreditCard className="h-4 w-4 text-[var(--brand-orange)]" />
                   </div>
                   <h3 className="mt-3 text-[1.1rem] font-black uppercase tracking-[-0.04em] text-white">Checkout</h3>
                   <p className="mt-2 text-sm leading-6 text-white/72">Submit checkout once and your return ride is covered.</p>

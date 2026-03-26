@@ -789,3 +789,50 @@ a[href][class*="rounded-full"][class*="justify-center"],
 button[class*="rounded-full"][class*="justify-center"] {
   color: #120f0b !important;
 }
+
+/* =========================================================
+   Authoritative Brand Tokens
+   Keep this block last so it wins over older drifted values.
+   ========================================================= */
+
+:root {
+  --brand-bg: #050816;
+  --brand-bg-dark: #0b1224;
+  --brand-bg-panel: linear-gradient(180deg, rgba(10, 16, 32, 0.98), rgba(6, 9, 18, 0.96));
+  --brand-cyan: #3df3ff;
+  --brand-cyan-hover: #62f6ff;
+  --brand-orange: #ffb07c;
+  --brand-orange-strong: #f26533;
+  --brand-text: #ffffff;
+  --brand-text-soft: rgba(255, 255, 255, 0.7);
+  --brand-text-muted: rgba(255, 255, 255, 0.5);
+  --brand-border: rgba(255, 255, 255, 0.1);
+  --brand-accent-text: #07111d;
+}
+
+.brand-page {
+  background: var(--brand-bg);
+  color: var(--brand-text);
+}
+
+.brand-panel {
+  border: 1px solid var(--brand-border);
+  background: var(--brand-bg-panel);
+}
+
+.brand-card {
+  border: 1px solid var(--brand-border);
+  background: var(--brand-bg-dark);
+}
+
+.brand-kicker {
+  color: var(--brand-orange);
+}
+
+.brand-link {
+  color: var(--brand-cyan);
+}
+
+.brand-link:hover {
+  color: var(--brand-cyan-hover);
+}
