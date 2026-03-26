@@ -4,9 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
-  CalendarDays,
-  CarFront,
-  CreditCard,
   ShieldCheck,
   TicketPercent,
 } from "lucide-react";
@@ -60,7 +57,7 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
   ];
 
   return (
-    <main className="brand-page">
+    <main className="brand-page bg-[radial-gradient(circle_at_top,rgba(76,97,255,0.28),transparent_24%),radial-gradient(circle_at_18%_10%,rgba(255,183,3,0.12),transparent_16%),linear-gradient(180deg,#2140c9_0%,#141b45_18%,#111112_42%,#111112_100%)]">
       <section className="mx-auto flex w-full max-w-[1500px] flex-col gap-10 px-4 pb-24 pt-16 sm:px-6 sm:pt-20 lg:px-8">
         {urgency ? (
           <section className="brand-glass-bar overflow-hidden rounded-[24px] px-5 py-4">
@@ -87,8 +84,8 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
               priority
               fetchPriority="high"
             />
-            <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(9,9,9,0.86)_0%,rgba(9,9,9,0.58)_45%,rgba(9,9,9,0.88)_100%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(245,198,108,0.28),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.1),transparent_22%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(8,12,34,0.84)_0%,rgba(8,12,34,0.5)_44%,rgba(9,9,9,0.9)_100%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(76,97,255,0.36),transparent_26%),radial-gradient(circle_at_bottom_right,rgba(255,183,3,0.12),transparent_18%)]" />
           </div>
 
           <div className="relative px-6 py-10 sm:px-8 sm:py-12 lg:px-12 lg:py-14">
@@ -106,6 +103,27 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
                 Fixed $59 shuttle seats, private SUVs, sprinters, and party buses for groups that want a cleaner arrival, a guaranteed return, and less post-show chaos.
               </p>
 
+              <div className="brand-glass-bar mt-6 inline-flex max-w-3xl flex-col gap-3 rounded-[24px] px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <div className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.24em] text-[var(--brand-cyan)]">
+                    <TicketPercent className="h-3.5 w-3.5" />
+                    April private ride promo
+                  </div>
+                  <p className="mt-2 text-sm leading-6 text-white/86 sm:text-base">
+                    <span className="font-black uppercase tracking-[0.04em] text-white">$50 off private transportation.</span>{" "}
+                    Use code{" "}
+                    <span className="rounded-full border border-white/14 bg-black/28 px-2 py-1 font-black tracking-[0.1em] text-[var(--brand-cyan)]">
+                      {PRIVATE_TRANSPORT_PROMO.code}
+                    </span>{" "}
+                    at checkout.
+                  </p>
+                </div>
+                <div className="rounded-[22px] border border-white/14 bg-black/26 px-4 py-3 text-center shadow-[0_16px_40px_rgba(0,0,0,0.28)]">
+                  <div className="text-[10px] font-black uppercase tracking-[0.22em] text-white/58">Use Code</div>
+                  <div className="mt-1 text-base font-black uppercase tracking-[0.14em] text-white">{PRIVATE_TRANSPORT_PROMO.code}</div>
+                </div>
+              </div>
+
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
                   href={BOOK_RED_ROCKS}
@@ -121,66 +139,6 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
                   View Private Vehicles
                 </Link>
               </div>
-
-              <div className="mt-6 grid max-w-6xl gap-4 sm:grid-cols-3">
-                <article className="rounded-[24px] border border-[var(--brand-orange)]/16 bg-[linear-gradient(180deg,rgba(53,33,16,0.96),rgba(24,16,12,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5">
-                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/16 bg-white/8">
-                    <CalendarDays className="h-4 w-4 text-[var(--brand-orange)]" />
-                  </div>
-                  <h3 className="mt-3 text-[1.1rem] font-black uppercase tracking-[-0.04em] text-white">Choose your date</h3>
-                  <p className="mt-2 text-sm leading-6 text-white/72">Pick your show night and lock the right trip timing first.</p>
-                </article>
-                <article className="rounded-[24px] border border-[var(--brand-orange)]/16 bg-[linear-gradient(180deg,rgba(53,33,16,0.96),rgba(24,16,12,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5">
-                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/16 bg-white/8">
-                    <CarFront className="h-4 w-4 text-[var(--brand-orange)]" />
-                  </div>
-                  <h3 className="mt-3 text-[1.1rem] font-black uppercase tracking-[-0.04em] text-white">Pick your ride</h3>
-                  <p className="mt-2 text-sm leading-6 text-white/72">Choose shared seats or a private vehicle for your group.</p>
-                </article>
-                <article className="rounded-[24px] border border-[var(--brand-orange)]/16 bg-[linear-gradient(180deg,rgba(53,33,16,0.96),rgba(24,16,12,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.38)] transition hover:-translate-y-0.5">
-                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/16 bg-white/8">
-                    <CreditCard className="h-4 w-4 text-[var(--brand-orange)]" />
-                  </div>
-                  <h3 className="mt-3 text-[1.1rem] font-black uppercase tracking-[-0.04em] text-white">Checkout</h3>
-                  <p className="mt-2 text-sm leading-6 text-white/72">Submit checkout once and your return ride is covered.</p>
-                </article>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="relative overflow-hidden rounded-[30px] border border-amber-100/45 bg-[linear-gradient(135deg,rgba(255,232,182,0.18)_0%,rgba(255,170,82,0.22)_28%,rgba(92,36,10,0.5)_58%,rgba(12,10,8,0.98)_100%)] px-6 py-6 shadow-[0_28px_90px_rgba(255,132,45,0.2)] sm:px-8 sm:py-7">
-          <div className="absolute inset-y-0 left-0 w-2 bg-[linear-gradient(180deg,#fff0bf_0%,#ff9c40_100%)]" />
-          <div className="relative flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-            <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/24 bg-black/32 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.26em] text-amber-50">
-                <TicketPercent className="h-3.5 w-3.5" />
-                April private ride promo
-              </div>
-              <div className="mt-4 flex flex-wrap items-end gap-x-3 gap-y-2">
-                <span className="text-3xl font-black uppercase tracking-[-0.06em] text-white sm:text-4xl">$50 Off</span>
-                <span className="pb-1 text-[11px] font-black uppercase tracking-[0.24em] text-[#ffe7b3] sm:text-xs">Private Transportation</span>
-              </div>
-              <p className="mt-3 max-w-2xl text-sm leading-6 text-white/88 sm:text-base">
-                {PRIVATE_TRANSPORT_PROMO.headline} Use code{" "}
-                <span className="rounded-full bg-black/30 px-2 py-1 font-black tracking-[0.1em] text-[#ffe2a8]">
-                  {PRIVATE_TRANSPORT_PROMO.code}
-                </span>{" "}
-                at checkout.
-              </p>
-            </div>
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <div className="rounded-[22px] border border-white/18 bg-black/30 px-5 py-3 text-center shadow-[0_16px_40px_rgba(0,0,0,0.28)]">
-                <div className="text-[10px] font-black uppercase tracking-[0.22em] text-white/60">Use Code</div>
-                <div className="mt-1 text-base font-black uppercase tracking-[0.14em] text-white">{PRIVATE_TRANSPORT_PROMO.code}</div>
-              </div>
-              <Link
-                href="/book/red-rocks-amphitheatre/private"
-                className="brand-button-primary inline-flex min-h-14 px-8 text-sm font-black uppercase tracking-[0.16em]"
-              >
-                View Private Vehicles
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
             </div>
           </div>
         </section>
