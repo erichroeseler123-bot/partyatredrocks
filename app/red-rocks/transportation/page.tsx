@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import FAQBlock from "@/components/FAQBlock";
 import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
@@ -7,12 +8,34 @@ import { buildBookingHref } from "@/lib/parrHandoff";
 import { RED_ROCKS_ENTITIES } from "@/lib/redRocksAuthority";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
+const DEFAULT_OG_IMAGE =
+  `${SITE}/api/unsplash-image?q=red+rocks+amphitheatre+concert+night+denver+colorado&src=%2Fhero%2Fhero-home.jpg&alt=Red+Rocks+shuttle+transportation&w=1200&h=630`;
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Red Rocks Transportation Guide",
   description:
     "Red Rocks transportation guide with shuttle, rideshare, parking, pickup timing, and return planning for concert nights.",
-  alternates: { canonical: "/red-rocks/transportation" },
+  alternates: { canonical: `${SITE}/red-rocks/transportation` },
+  openGraph: {
+    title: "Red Rocks Transportation Guide",
+    description:
+      "Red Rocks transportation guide with shuttle, rideshare, parking, pickup timing, and return planning for concert nights.",
+    url: `${SITE}/red-rocks/transportation`,
+    type: "article",
+    images: [
+      {
+        url: DEFAULT_OG_IMAGE,
+        alt: "Red Rocks transportation guide",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Red Rocks Transportation Guide",
+    description:
+      "Red Rocks transportation guide with shuttle, rideshare, parking, pickup timing, and return planning for concert nights.",
+    images: [DEFAULT_OG_IMAGE],
+  },
 };
 
 const coreLinks = [

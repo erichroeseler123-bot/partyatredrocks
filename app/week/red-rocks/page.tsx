@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getRedRocksEvents } from "@/lib/events/getRedRocksEvents";
 import { getRedRocksAssets } from "@/lib/events/getRedRocksAssets";
 import { toDisplayEvent } from "@/lib/events/presentation";
@@ -10,6 +11,35 @@ import WeekClient, { type WeekEvent } from "./WeekClient";
 
 export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
+const DEFAULT_OG_IMAGE =
+  `${SITE}/api/unsplash-image?q=red+rocks+amphitheatre+concert+night+denver+colorado&src=%2Fhero%2Fhero-home.jpg&alt=Red+Rocks+shuttle+transportation&w=1200&h=630`;
+
+export const metadata: Metadata = {
+  title: "Red Rocks Lineup This Week | Upcoming Shows and Ride Planning",
+  description:
+    "See the Red Rocks lineup this week, open show pages, and plan shuttle or private rides before show night.",
+  alternates: { canonical: `${SITE}/week/red-rocks` },
+  openGraph: {
+    title: "Red Rocks Lineup This Week | Upcoming Shows and Ride Planning",
+    description:
+      "See the Red Rocks lineup this week, open show pages, and plan shuttle or private rides before show night.",
+    url: `${SITE}/week/red-rocks`,
+    type: "website",
+    images: [
+      {
+        url: DEFAULT_OG_IMAGE,
+        alt: "Red Rocks concert lineup and shuttle planning",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Red Rocks Lineup This Week | Upcoming Shows and Ride Planning",
+    description:
+      "See the Red Rocks lineup this week, open show pages, and plan shuttle or private rides before show night.",
+    images: [DEFAULT_OG_IMAGE],
+  },
+};
 
 function inNextSevenDays(dateKey: string): boolean {
   const d = new Date(`${dateKey}T00:00:00`);

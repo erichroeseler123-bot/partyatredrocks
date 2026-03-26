@@ -1,16 +1,39 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { getEventsCatalog } from "@/lib/events/getCatalog";
 import type { HandoffSearchParams } from "@/lib/parrHandoff";
 import { buildBookingHref } from "@/lib/parrHandoff";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
+const DEFAULT_OG_IMAGE =
+  `${SITE}/api/unsplash-image?q=red+rocks+amphitheatre+concert+night+denver+colorado&src=%2Fhero%2Fhero-home.jpg&alt=Red+Rocks+shuttle+transportation&w=1200&h=630`;
 export const revalidate = 1800;
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Red Rocks Concert Schedule 2026 | Lineup, Dates, Ride Planning",
   description:
     "Red Rocks concerts and lineup for 2026. Browse upcoming shows, monthly schedules, show details, and ride options in one place.",
-  alternates: { canonical: "/red-rocks/concerts" },
+  alternates: { canonical: `${SITE}/red-rocks/concerts` },
+  openGraph: {
+    title: "Red Rocks Concert Schedule 2026 | Lineup, Dates, Ride Planning",
+    description:
+      "Red Rocks concerts and lineup for 2026. Browse upcoming shows, monthly schedules, show details, and ride options in one place.",
+    url: `${SITE}/red-rocks/concerts`,
+    type: "website",
+    images: [
+      {
+        url: DEFAULT_OG_IMAGE,
+        alt: "Red Rocks concert schedule and ride planning",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Red Rocks Concert Schedule 2026 | Lineup, Dates, Ride Planning",
+    description:
+      "Red Rocks concerts and lineup for 2026. Browse upcoming shows, monthly schedules, show details, and ride options in one place.",
+    images: [DEFAULT_OG_IMAGE],
+  },
 };
 
 function slugify(input: string): string {
