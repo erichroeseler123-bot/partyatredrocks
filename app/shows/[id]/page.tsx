@@ -11,6 +11,7 @@ import { getArtistsCatalog, getEventsCatalog } from "@/lib/events/getCatalog";
 import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
 import { getMediaIndex } from "@/lib/media/getMediaIndex";
 import { selectImageByPriority } from "@/lib/media/selectImage";
+import { buildBookingHref } from "@/lib/parrHandoff";
 
 export const runtime = "nodejs";
 export const revalidate = 300;
@@ -428,7 +429,17 @@ export default async function ShowPage({ params }: Props) {
       )}`
     : "https://www.setlist.fm";
   const isRedRocksVenue = venueSlug === "red-rocks-amphitheatre" || venueSlug === "redrocks";
-  const rideHref = venueSlug ? `/book?venue=${encodeURIComponent(venueSlug)}` : "/book";
+  const rideHref = venueSlug
+    ? buildBookingHref({
+        target: isRedRocksVenue ? "shared" : "book",
+        venue: venueSlug,
+        overrides: {
+          event: e.title,
+          date: e.dateKey,
+          artist: primaryArtist ?? undefined,
+        },
+      })
+    : "/book";
   const relatedShows = allEvents
     .filter((event) => event.id !== e.id && event.venueId === venueSlug)
     .sort((a, b) => a.dateKey.localeCompare(b.dateKey))
@@ -511,6 +522,15 @@ export default async function ShowPage({ params }: Props) {
         </div>
 
         <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-6 w-full">
+          {isRedRocksVenue ? (
+            <Link
+              href="/red-rocks"
+              className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft w-full sm:w-auto min-w-[180px] text-center"
+            >
+              Red Rocks Hub
+            </Link>
+          ) : null}
+
           <Link
             href={rideHref}
             className="inline-flex items-center justify-center rounded-full bg-neon-blue px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-black transition hover:bg-surface/40 w-full sm:w-auto min-w-[180px] text-center"
@@ -519,11 +539,20 @@ export default async function ShowPage({ params }: Props) {
           </Link>
 
           <Link
-            href="/week"
+            href={isRedRocksVenue ? "/week/red-rocks" : "/week"}
             className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft w-full sm:w-auto min-w-[180px] text-center"
           >
-            This Week →
+            {isRedRocksVenue ? "Red Rocks This Week →" : "This Week →"}
           </Link>
+
+          {isRedRocksVenue ? (
+            <Link
+              href="/red-rocks/concerts"
+              className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft w-full sm:w-auto min-w-[180px] text-center"
+            >
+              Concert Schedule →
+            </Link>
+          ) : null}
 
           {e?.url ? (
             <a
@@ -626,6 +655,11 @@ export default async function ShowPage({ params }: Props) {
             <Link href={venueSlug ? `/venues/${encodeURIComponent(venueSlug)}` : "/venues"} className="comic-btn comic-btn-secondary">
               Venue Page
             </Link>
+            {isRedRocksVenue ? (
+              <Link href="/red-rocks/transportation" className="comic-btn comic-btn-secondary">
+                Transportation Hub
+              </Link>
+            ) : null}
             <Link
               href={isRedRocksVenue ? "/red-rocks/parking" : "/guide/parking"}
               className="comic-btn comic-btn-secondary"

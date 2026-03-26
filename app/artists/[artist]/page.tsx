@@ -122,20 +122,66 @@ export default async function ArtistPage({ params, searchParams }: Props) {
             />
           </div>
           <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
+            {hasRedRocks ? (
+              <Link href="/red-rocks" className="comic-btn comic-btn-secondary">
+                Red Rocks Hub
+              </Link>
+            ) : null}
+            {hasRedRocks ? (
+              <Link href="/week/red-rocks" className="comic-btn comic-btn-secondary">
+                Red Rocks This Week
+              </Link>
+            ) : null}
             <Link href={`/bands/${encodeURIComponent(artistRow.id)}`} className="comic-btn comic-btn-secondary">
               Artist Profile
             </Link>
             <Link href="/red-rocks/concerts" className="comic-btn comic-btn-secondary">
               Red Rocks Schedule
             </Link>
+            {hasRedRocks ? (
+              <Link href="/red-rocks/transportation" className="comic-btn comic-btn-secondary">
+                Transportation Guide
+              </Link>
+            ) : null}
             <Link
-              href={buildBookingHref({ target: "book", searchParams: sp })}
+              href={
+                hasRedRocks
+                  ? buildBookingHref({ target: "shared", venue: "red-rocks-amphitheatre", searchParams: sp })
+                  : buildBookingHref({ target: "book", searchParams: sp })
+              }
               className="comic-btn comic-btn-primary"
             >
-              See Ride Options
+              {hasRedRocks ? "Book Red Rocks Shuttle" : "See Ride Options"}
             </Link>
           </div>
         </div>
+
+        {hasRedRocks ? (
+          <section className="comic-panel" style={{ marginTop: 16 }}>
+            <div className="comic-tag">Red Rocks Spider Path</div>
+            <p className="comic-copy" style={{ marginTop: 8 }}>
+              If you are here for this artist&apos;s Red Rocks date, the clean path is: Red Rocks hub, this week&apos;s lineup,
+              transportation planning, then booking.
+            </p>
+            <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
+              <Link href="/red-rocks" className="comic-btn comic-btn-secondary">
+                Red Rocks Hub
+              </Link>
+              <Link href="/week/red-rocks" className="comic-btn comic-btn-secondary">
+                This Week at Red Rocks
+              </Link>
+              <Link href="/red-rocks/transportation" className="comic-btn comic-btn-secondary">
+                Transportation Guide
+              </Link>
+              <Link
+                href={buildBookingHref({ target: "shared", venue: "red-rocks-amphitheatre", searchParams: sp })}
+                className="comic-btn comic-btn-primary"
+              >
+                Book Shared Shuttle
+              </Link>
+            </div>
+          </section>
+        ) : null}
 
         {hasRedRocks ? (
           <section className="comic-panel" style={{ marginTop: 16 }}>
