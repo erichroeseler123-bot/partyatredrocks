@@ -28,7 +28,7 @@ type HomeSectionsProps = {
 };
 
 export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency }: HomeSectionsProps) {
-  const [selectedRide, setSelectedRide] = useState<"shared" | "private">("shared");
+  const [selectedRide, setSelectedRide] = useState<"shared" | "private" | null>(null);
   const rideCards = [
     {
       id: "shared" as const,
@@ -135,12 +135,12 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
 
         <section className="brand-glass-bar rounded-[32px] px-6 py-6 sm:px-8">
           <div className="max-w-3xl">
-            <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.24em]">Shuttle Services</div>
+            <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.24em]">Step 1</div>
             <h2 className="mt-3 text-[2rem] font-black uppercase tracking-[-0.04em] text-white sm:text-[2.6rem]">
               Choose Shared Tickets or a Private Car
             </h2>
             <p className="mt-3 max-w-2xl text-[15px] leading-7 text-white/76">
-              Start by choosing the kind of Red Rocks ride plan you want.
+              You need to choose one option to continue to prices and availability.
             </p>
           </div>
 
@@ -174,7 +174,7 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
                               : "border-white/12 bg-white/5 text-white/62",
                           ].join(" ")}
                         >
-                          {checked ? "Selected" : "Choose This"}
+                          {checked ? "Selected" : "Tap To Choose"}
                         </div>
                       </div>
                       <div className="relative h-20 overflow-hidden rounded-[18px] border border-white/10 sm:w-32">
@@ -205,13 +205,19 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
           </div>
 
           <div className="mt-6">
-            <Link
-              href={rideCards.find((ride) => ride.id === selectedRide)?.href ?? BOOK_RED_ROCKS}
-              className="brand-button-primary inline-flex min-h-14 px-8 text-sm font-black uppercase tracking-[0.16em]"
-            >
-              {selectedRide === "shared" ? "See Shared Prices" : "See Private Prices"}
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
+            {selectedRide ? (
+              <Link
+                href={rideCards.find((ride) => ride.id === selectedRide)?.href ?? BOOK_RED_ROCKS}
+                className="brand-button-primary inline-flex min-h-14 px-8 text-sm font-black uppercase tracking-[0.16em]"
+              >
+                {selectedRide === "shared" ? "See Shared Prices" : "See Private Prices"}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            ) : (
+              <div className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/12 bg-white/6 px-8 text-sm font-black uppercase tracking-[0.16em] text-white/52">
+                Choose Shared or Private
+              </div>
+            )}
           </div>
         </section>
 
