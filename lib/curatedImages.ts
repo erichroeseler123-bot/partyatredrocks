@@ -4,8 +4,8 @@
 
 export const curatedImages = {
   homepageHero: "/hero/hero_red_rocks.jpg",
-  homepageShared: "/hero/sprinter_red_rocks.jpg",
-  homepagePrivate: "/images/marketing/vip-suv.webp",
+  homepageShared: "/images/marketing/vip-suv.webp",
+  homepagePrivate: "/hero/sprinter_red_rocks.jpg",
 
   guideHero: "/hero/custom/red_rocks_sunset_hero.jpg",
   guideGeneral: "/hero/hero-home.webp",
@@ -21,8 +21,8 @@ export const curatedImages = {
   aboutHero: "/hero/custom/red_rocks_sunset_hero.jpg",
   scheduleHero: "/hero/custom/red_rocks_25_hero.jpg",
 
-  sharedShuttle: "/hero/sprinter_red_rocks.jpg",
-  privateSUV: "/images/marketing/vip-suv.webp",
+  sharedShuttle: "/images/marketing/vip-suv.webp",
+  privateSUV: "/hero/sprinter_red_rocks.jpg",
   sprinterVan: "/fleet/fleet-sprinter.webp",
   partyBus: "/images/marketing/fleet.webp",
 
