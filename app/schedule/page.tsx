@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BadgeCheck, CalendarDays, Clock3, PhoneCall } from "lucide-react";
-import { getEventsCatalog } from "@/lib/events/getCatalog";
+import { getEnrichedArtistsCatalog, getEventsCatalog } from "@/lib/events/getCatalog";
 import { buildBookingHref } from "@/lib/parrHandoff";
 import { ANNOUNCED_RED_ROCKS_2026 } from "@/data/red-rocks-2026-announced";
 import ScheduleExplorer, { type ScheduleExplorerEvent } from "@/components/schedule/ScheduleExplorer";
 import { getDynamicImage } from "@/lib/getDynamicImage";
+import { selectImageByPriority } from "@/lib/media/selectImage";
 
 export const revalidate = 3600;
 
@@ -145,8 +146,9 @@ export default async function SchedulePage() {
       return a.name.localeCompare(b.name);
     });
 
-  const [heroImage, eventImageMap] = await Promise.all([
+  const [heroImage, enrichedArtists, eventImageMap] = await Promise.all([
     getDynamicImage("venue", "Red Rocks Amphitheatre concert night", "/hero/hero-home.jpg"),
+    getEnrichedArtistsCatalog(2026, "all"),
     Promise.all(
       events.map(async (event) => [
         event.id,
@@ -158,6 +160,11 @@ export default async function SchedulePage() {
       ]),
     ).then((entries) => Object.fromEntries(entries) as Record<string, string>),
   ]);
+  const artistSpotifyImageMap = Object.fromEntries(
+    enrichedArtists
+      .filter((row) => row.name && row.spotifyImage)
+      .map((row) => [row.name.trim().toLowerCase(), row.spotifyImage as string]),
+  );
 
   const grouped = events.reduce<Record<string, ScheduleEvent[]>>((acc, event) => {
     const key = monthLabel(event.dateKey);
@@ -186,7 +193,15 @@ export default async function SchedulePage() {
         dateLabel: dateLabel(event.dateKey),
         timeLabel: toTimeLabel(event),
         support,
-        image: eventImageMap[event.id] || "/venues/rrsite.jpg",
+        image: selectImageByPriority({
+          entityType: "artist",
+          title: event.name,
+          artistName: event.artistNames[0] || event.name,
+          queryHint: `${event.artistNames[0] || event.name} live music artist portrait`,
+          alt: `${event.artistNames[0] || event.name} artist image`,
+          spotifyImage: artistSpotifyImageMap[(event.artistNames[0] || "").trim().toLowerCase()] ?? null,
+          fallback: eventImageMap[event.id] || "/venues/rrsite.jpg",
+        }),
         shuttleHref,
         showHref,
         showLabel: event.showId ? "Open Show Page" : "Official Listing",

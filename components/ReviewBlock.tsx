@@ -75,19 +75,6 @@ export function ReviewBlock({ className = "" }: { className?: string }) {
         ))}
       </div>
 
-      <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between rounded-[24px] border border-white/10 bg-[#0b1224] p-5 shadow-[0_18px_60px_rgba(0,0,0,0.35)]">
-        <p className="max-w-2xl text-sm leading-6 text-white/78">
-          Want to vet the service yourself before booking? Open the public Google review profile and read the latest feedback there.
-        </p>
-        <Link
-          href={GOOGLE_REVIEW_URL}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-6 text-xs font-black uppercase tracking-[0.16em] text-[#07111f] transition hover:bg-[#76f7ff]"
-        >
-          Open Google Review Profile
-        </Link>
-      </div>
     </section>
   );
 }
