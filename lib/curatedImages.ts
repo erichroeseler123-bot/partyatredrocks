@@ -4,7 +4,7 @@
 
 export const curatedImages = {
   homepageHero: "/hero/hero_red_rocks.jpg",
-  homepageShared: "/hero/arrival.jpg",
+  homepageShared: "/hero/sprinter_red_rocks.jpg",
   homepagePrivate: "/images/marketing/vip-suv.webp",
 
   guideHero: "/hero/hero-guides.jpg",
@@ -21,7 +21,7 @@ export const curatedImages = {
   aboutHero: "/hero/price.jpg",
   scheduleHero: "/hero/arrival.jpg",
 
-  sharedShuttle: "/images/marketing/shuttle.webp",
+  sharedShuttle: "/hero/sprinter_red_rocks.jpg",
   privateSUV: "/images/marketing/vip-suv.webp",
   sprinterVan: "/fleet/fleet-sprinter.webp",
   partyBus: "/images/marketing/fleet.webp",
