@@ -55,16 +55,16 @@ export default async function WeekPage({
   const faqJsonLd = buildFaqPageJsonLd(faqRows);
 
   return (
-    <main className="bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
+    <main className="brand-page bg-[radial-gradient(circle_at_top,rgba(255,91,46,0.15),transparent_26%),radial-gradient(circle_at_18%_10%,rgba(59,130,246,0.14),transparent_18%),linear-gradient(180deg,#0b0b0f_0%,#0b0b0f_100%)] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
       <section className="mx-auto flex max-w-[1440px] flex-col gap-8">
         {faqRows.length > 0 ? (
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
         ) : null}
 
-        <section className="relative overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(9,15,31,0.96),rgba(7,11,25,0.96))] p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] sm:p-10 lg:p-12">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,91,46,0.18),transparent_28%),radial-gradient(circle_at_top_right,rgba(143,208,255,0.14),transparent_28%)]" />
+        <section className="brand-panel relative overflow-hidden rounded-[32px] p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] sm:p-10 lg:p-12">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,91,46,0.18),transparent_28%),radial-gradient(circle_at_top_right,rgba(59,130,246,0.14),transparent_28%)]" />
           <div className="relative max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">
               <Sparkles className="h-3.5 w-3.5" />
               Upcoming Shows
             </div>
@@ -77,7 +77,7 @@ export default async function WeekPage({
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/book"
-                className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
+                className="brand-button-primary inline-flex min-h-12 items-center justify-center px-6 text-sm font-black uppercase tracking-[0.16em]"
               >
                 Book a Ride
               </Link>
@@ -97,8 +97,8 @@ export default async function WeekPage({
           </div>
         </section>
 
-        <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(8,13,26,0.96),rgba(6,9,18,0.96))] p-6 sm:p-8">
-          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
+        <section className="brand-panel rounded-[30px] p-6 sm:p-8">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">
             Venue Schedules
           </div>
           <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">
@@ -109,7 +109,7 @@ export default async function WeekPage({
           </p>
 
           {schedules.length === 0 ? (
-            <div className="mt-6 rounded-[24px] border border-white/10 bg-[#0b1224] p-6 text-white/68">
+            <div className="brand-card mt-6 rounded-[24px] p-6 text-white/68">
               No venue schedules found yet.
             </div>
           ) : (
@@ -117,9 +117,9 @@ export default async function WeekPage({
               {schedules.map((schedule) => (
                 <article
                   key={schedule.venueId}
-                  className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
+                  className="brand-card rounded-[26px] p-6 transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
                 >
-                  <div className="flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
+                  <div className="flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">
                     <CalendarDays className="h-3.5 w-3.5" />
                     Next {nextDateLabel(schedule.nextDate)}
                   </div>
@@ -134,7 +134,7 @@ export default async function WeekPage({
                         venue: schedule.venueId,
                         searchParams: sp,
                       })}
-                      className="inline-flex min-h-11 items-center rounded-full bg-[#3df3ff] px-4 text-xs font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
+                      className="brand-button-primary inline-flex min-h-11 items-center px-4 text-xs font-black uppercase tracking-[0.16em]"
                     >
                       Get a Ride
                     </Link>
@@ -159,8 +159,8 @@ export default async function WeekPage({
           )}
         </section>
 
-        <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(17,11,18,0.96),rgba(10,9,20,0.96))] p-6 sm:p-8">
-          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
+        <section className="brand-card rounded-[30px] p-6 sm:p-8">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-orange)]">
             High-Intent Links
           </div>
           <div className="mt-5 flex flex-wrap gap-3">
