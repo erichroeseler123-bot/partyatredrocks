@@ -7,7 +7,7 @@ export const curatedImages = {
   homepageShared: "/hero/sprinter_red_rocks.jpg",
   homepagePrivate: "/images/marketing/vip-suv.webp",
 
-  guideHero: "/hero/hero-guides.jpg",
+  guideHero: "/hero/custom/red_rocks_sunset_hero.jpg",
   guideGeneral: "/hero/hero-home.webp",
   guideTransportation: "/hero/arrival.jpg",
   guideParking: "/venues/rrsite.jpg",
@@ -15,11 +15,11 @@ export const curatedImages = {
   guidePolicy: "/hero/price.jpg",
   guideTailgating: "/images/marketing/fleet.webp",
 
-  socialHero: "/images/marketing/fleet.webp",
-  weekHero: "/hero/arrival.jpg",
-  venuesHero: "/venues/rrsite.jpg",
-  aboutHero: "/hero/price.jpg",
-  scheduleHero: "/hero/arrival.jpg",
+  socialHero: "/hero/custom/fisheye_hero.jpg",
+  weekHero: "/hero/custom/tophalf_hero.jpg",
+  venuesHero: "/hero/custom/red_rocks_25_hero.jpg",
+  aboutHero: "/hero/custom/red_rocks_sunset_hero.jpg",
+  scheduleHero: "/hero/custom/red_rocks_25_hero.jpg",
 
   sharedShuttle: "/hero/sprinter_red_rocks.jpg",
   privateSUV: "/images/marketing/vip-suv.webp",
