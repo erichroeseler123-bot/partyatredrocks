@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import {
   ArrowRight,
   ShieldCheck,
@@ -28,10 +27,8 @@ type HomeSectionsProps = {
 };
 
 export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency }: HomeSectionsProps) {
-  const [selectedRide, setSelectedRide] = useState<"shared" | "private" | null>(null);
   const rideCards = [
     {
-      id: "shared" as const,
       title: "Shared Tickets",
       subtitle: "$59 fixed per seat",
       copy: "Best for couples, solo riders, and smaller groups.",
@@ -40,11 +37,11 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
         "Guaranteed return after the show",
       ],
       href: BOOK_RED_ROCKS,
+      cta: "See Shared Prices",
       image: sprinterSrc,
       alt: "Shared shuttle option for Red Rocks transportation",
     },
     {
-      id: "private" as const,
       title: "Private Car",
       subtitle: "$499 and up",
       copy: "Best for groups that want one vehicle and a premium night.",
@@ -52,7 +49,8 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
         "SUV, van, sprinter, and party bus options",
         "Private driver and one group plan all night",
       ],
-      href: BOOK_RED_ROCKS,
+      href: "/book/red-rocks-amphitheatre/private",
+      cta: "See Private Prices",
       image: shuttleSrc,
       alt: "Private vehicle option for Red Rocks transportation",
     },
@@ -140,84 +138,52 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
               Choose Shared Tickets or a Private Car
             </h2>
             <p className="mt-3 max-w-2xl text-[15px] leading-7 text-white/76">
-              You need to choose one option to continue to prices and availability.
+              Tap one option and go straight to pricing and availability.
             </p>
           </div>
 
           <div className="mt-6 grid gap-4 md:grid-cols-2">
-            {rideCards.map((ride) => {
-              const checked = selectedRide === ride.id;
-              return (
-                <button
-                  key={ride.title}
-                  type="button"
-                  onClick={() => setSelectedRide(ride.id)}
-                  className={[
-                    "group relative flex gap-4 overflow-hidden rounded-[28px] border p-5 text-left transition",
-                    checked
-                      ? "border-[var(--brand-cyan)] bg-[linear-gradient(180deg,rgba(28,32,48,0.96),rgba(18,19,28,0.98))] shadow-[0_24px_80px_rgba(0,0,0,0.32)]"
-                      : "border-white/10 bg-[linear-gradient(180deg,rgba(21,21,28,0.96),rgba(12,12,18,0.98))] hover:border-white/16",
-                  ].join(" ")}
-                >
-                  <div className="min-w-0 flex-1">
-                    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                      <div>
-                        <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">
-                          {ride.subtitle}
-                        </div>
-                        <h3 className="mt-2 text-[1.5rem] font-black uppercase tracking-[-0.04em] text-white">{ride.title}</h3>
-                        <div
-                          className={[
-                            "mt-3 inline-flex rounded-full border px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] transition",
-                            checked
-                              ? "border-[var(--brand-cyan)]/40 bg-[var(--brand-cyan)]/12 text-[var(--brand-cyan)]"
-                              : "border-white/12 bg-white/5 text-white/62",
-                          ].join(" ")}
-                        >
-                          {checked ? "Selected" : "Tap To Choose"}
-                        </div>
+            {rideCards.map((ride) => (
+              <Link
+                key={ride.title}
+                href={ride.href}
+                className="group relative flex gap-4 overflow-hidden rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(21,21,28,0.96),rgba(12,12,18,0.98))] p-5 text-left no-underline transition hover:-translate-y-0.5 hover:border-[var(--brand-cyan)]/45 hover:shadow-[0_24px_80px_rgba(0,0,0,0.32)]"
+              >
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">
+                        {ride.subtitle}
                       </div>
-                      <div className="relative h-20 overflow-hidden rounded-[18px] border border-white/10 sm:w-32">
-                        <Image
-                          src={ride.image}
-                          alt={ride.alt}
-                          fill
-                          sizes="128px"
-                          className="object-cover"
-                        />
-                        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,9,9,0.12),rgba(9,9,9,0.58)_100%)]" />
+                      <h3 className="mt-2 text-[1.5rem] font-black uppercase tracking-[-0.04em] text-white">{ride.title}</h3>
+                      <div className="mt-3 inline-flex rounded-full border border-white/12 bg-white/5 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-white/72 transition group-hover:border-[var(--brand-cyan)]/35 group-hover:bg-[var(--brand-cyan)]/10 group-hover:text-[var(--brand-cyan)]">
+                        {ride.cta}
                       </div>
                     </div>
-
-                    <p className="mt-3 max-w-2xl text-[15px] leading-7 text-white/74">{ride.copy}</p>
-                    <ul className="mt-4 space-y-2">
-                      {ride.bullets.map((bullet) => (
-                        <li key={bullet} className="flex items-start gap-3 text-sm leading-6 text-white/82">
-                          <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[var(--brand-cyan)]" />
-                          <span>{bullet}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    <div className="relative h-20 overflow-hidden rounded-[18px] border border-white/10 sm:w-32">
+                      <Image
+                        src={ride.image}
+                        alt={ride.alt}
+                        fill
+                        sizes="128px"
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,9,9,0.12),rgba(9,9,9,0.58)_100%)]" />
+                    </div>
                   </div>
-                </button>
-              );
-            })}
-          </div>
 
-          <div className="mt-6">
-            {selectedRide ? (
-              <Link
-                href={rideCards.find((ride) => ride.id === selectedRide)?.href ?? BOOK_RED_ROCKS}
-                className="brand-button-primary inline-flex min-h-14 px-8 text-sm font-black uppercase tracking-[0.16em]"
-              >
-                {selectedRide === "shared" ? "See Shared Prices" : "See Private Prices"}
-                <ArrowRight className="ml-2 h-4 w-4" />
+                  <p className="mt-3 max-w-2xl text-[15px] leading-7 text-white/74">{ride.copy}</p>
+                  <ul className="mt-4 space-y-2">
+                    {ride.bullets.map((bullet) => (
+                      <li key={bullet} className="flex items-start gap-3 text-sm leading-6 text-white/82">
+                        <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[var(--brand-cyan)]" />
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </Link>
-            ) : (
-              <div className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/12 bg-white/6 px-8 text-sm font-black uppercase tracking-[0.16em] text-white/52">
-                Choose Shared or Private
-              </div>
-            )}
+            ))}
           </div>
         </section>
 
