@@ -8,12 +8,34 @@ import { assertUniqueGuideImages } from "@/data/media";
 import { type GuideVisualKey, guideVisuals } from "@/lib/guideVisuals";
 import { curatedImages } from "@/lib/curatedImages";
 
+const SITE = "https://www.partyatredrocks.com";
+
 export const metadata = {
-  title: "Red Rocks Guides",
+  title: "Red Rocks Guides | Party at Red Rocks",
   description:
     "Parking, transportation, venue policies, and show-night planning guides for Red Rocks.",
   alternates: {
-    canonical: "/guide",
+    canonical: `${SITE}/guide`,
+  },
+  openGraph: {
+    title: "Red Rocks Guides | Party at Red Rocks",
+    description:
+      "Parking, transportation, venue policies, and show-night planning guides for Red Rocks.",
+    url: `${SITE}/guide`,
+    type: "website",
+    images: [
+      {
+        url: `${SITE}${curatedImages.guideHero}`,
+        alt: "Red Rocks guide planning hero image",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Red Rocks Guides | Party at Red Rocks",
+    description:
+      "Parking, transportation, venue policies, and show-night planning guides for Red Rocks.",
+    images: [`${SITE}${curatedImages.guideHero}`],
   },
 };
 
