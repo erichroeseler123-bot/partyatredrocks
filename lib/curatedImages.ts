@@ -11,13 +11,13 @@ export const curatedImages = {
   homepagePrivate: "/images/marketing/vip-suv.webp",
 
   // Hub heroes
-  guideHero: "/hero/hero-guides.jpg",
-  guideGeneral: "/hero/hero-home.webp",
+  guideHero: "/hero/hero_red_rocks.jpg",
+  guideGeneral: "/hero/custom/red_rocks_sunset_hero.jpg",
   guideTransportation: "/hero/arrival.jpg",
-  guideParking: "/venues/rrsite.jpg",
-  guidePickup: "/images/marketing/vip-suv.webp",
-  guidePolicy: "/hero/price.jpg",
-  guideTailgating: "/images/marketing/fleet.webp",
+  guideParking: "/hero/custom/red_rocks_25_hero.jpg",
+  guidePickup: "/hero/sprinter_red_rocks.jpg",
+  guidePolicy: "/hero/custom/tophalf_hero.jpg",
+  guideTailgating: "/hero/hero-home.jpg",
 
   socialHero: "/hero/hero-home.jpg",
   weekHero: "/hero/arrival.jpg",

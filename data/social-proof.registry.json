@@ -1,18 +1,18 @@
 {
   "parr-night-arrival": {
-    "imageUrl": "/assets/venue/red-rocks/red-rocks-arrival.webp",
+    "imageUrl": "/hero/arrival.jpg",
     "imageAlt": "Concert-night ride arrival near Red Rocks with group staging"
   },
   "parr-night-crowd": {
-    "imageUrl": "/assets/venue/red-rocks/red-rocks-hero.webp",
+    "imageUrl": "/hero/hero_red_rocks.jpg",
     "imageAlt": "Red Rocks venue energy and crowd atmosphere before showtime"
   },
   "parr-night-suv": {
-    "imageUrl": "/images/marketing/vip-suv.webp",
+    "imageUrl": "/fleet/fleet-suburban.jpg",
     "imageAlt": "Private SUV ready for a Red Rocks concert group"
   },
   "parr-night-group": {
-    "imageUrl": "/images/marketing/fleet.webp",
+    "imageUrl": "/hero/sprinter_red_rocks.jpg",
     "imageAlt": "Group shuttle lineup for post-show ride-home plans"
   }
 }

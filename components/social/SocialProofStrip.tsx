@@ -61,6 +61,7 @@ export default function SocialProofStrip({
                 src={post.imageUrl}
                 alt={post.caption}
                 fill
+                unoptimized
                 className="object-cover transition duration-500 group-hover:scale-[1.03]"
                 sizes="(min-width: 1280px) 280px, (min-width: 768px) 33vw, 100vw"
               />

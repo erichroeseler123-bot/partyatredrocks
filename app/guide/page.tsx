@@ -134,6 +134,7 @@ function GuideCard({ card, imageSrc }: { card: Card; imageSrc: string }) {
           src={imageSrc}
           alt={visual.imageAlt}
           fill
+          unoptimized
           className="object-cover"
           sizes="(min-width: 1280px) 360px, (min-width: 768px) 50vw, 100vw"
         />
@@ -169,7 +170,7 @@ export default async function GuideHub() {
           title="Red Rocks Guides"
           copy="Parking, transportation, venue policies, show-night timing, and local planning context for Red Rocks nights."
           imageSrc={heroImage}
-          imageAlt="Guide hero image from Destination Command Center media feed"
+          imageAlt="Red Rocks guide planning hero image"
           actions={
             <>
               <Link href="/book/red-rocks-amphitheatre" className="btn-primary">

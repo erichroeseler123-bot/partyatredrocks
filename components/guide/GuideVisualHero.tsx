@@ -25,6 +25,7 @@ export function GuideVisualHero({
           alt={imageAlt}
           fill
           priority
+          unoptimized
           className="object-cover object-center"
           sizes="(min-width: 1280px) 960px, 100vw"
         />

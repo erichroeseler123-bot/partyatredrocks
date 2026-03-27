@@ -202,12 +202,9 @@ export function getVenueRelatedCardImage(input: {
 export function getSocialProofImage(postId: string) {
   const entry = SOCIAL_PROOF_REGISTRY[postId];
   const imageAlt = entry?.imageAlt || "Social proof image";
+  const source = entry?.imageUrl || DEFAULT_SOCIAL_FALLBACK;
   return {
-    imageUrl: buildUnsplashImageSrc({
-      query: imageAlt,
-      src: entry?.imageUrl || DEFAULT_SOCIAL_FALLBACK,
-      alt: imageAlt,
-    }),
+    imageUrl: source,
     imageAlt,
   };
 }

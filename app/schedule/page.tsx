@@ -5,23 +5,12 @@ import { ArrowRight, BadgeCheck, CalendarDays, Clock3, PhoneCall } from "lucide-
 import { getEventsCatalog } from "@/lib/events/getCatalog";
 import { buildBookingHref } from "@/lib/parrHandoff";
 import { ANNOUNCED_RED_ROCKS_2026 } from "@/data/red-rocks-2026-announced";
-import { getDynamicImage } from "@/lib/getDynamicImage";
-import { selectImageByPriority } from "@/lib/media/selectImage";
 import { getMediaIndex } from "@/lib/media/getMediaIndex";
 import { curatedImages } from "@/lib/curatedImages";
 
 export const revalidate = 3600;
 
 const SITE = "https://www.partyatredrocks.com";
-const CURATED_SCHEDULE_IMAGES = [
-  "/hero/hero-home.jpg",
-  "/hero/hero-guides.jpg",
-  "/images/marketing/shuttle.jpg",
-  "/images/marketing/vip-suv.jpg",
-  "/images/marketing/fleet.jpg",
-  "/venues/rrsite.jpg",
-] as const;
-
 type CatalogEvent = Awaited<ReturnType<typeof getEventsCatalog>>[number];
 type ScheduleEvent = {
   id: string;
@@ -84,19 +73,6 @@ function normalizeComparable(value: string | null | undefined) {
     .trim();
 }
 
-function hashString(input: string) {
-  let hash = 0;
-  for (let index = 0; index < input.length; index += 1) {
-    hash = (hash * 31 + input.charCodeAt(index)) >>> 0;
-  }
-  return hash;
-}
-
-function getCuratedScheduleImage(event: ScheduleEvent) {
-  const index = hashString(event.id) % CURATED_SCHEDULE_IMAGES.length;
-  return CURATED_SCHEDULE_IMAGES[index];
-}
-
 export default async function SchedulePage() {
   const catalogEvents = (await getEventsCatalog(2026, "redrocks"))
     .filter((event) => event.venueId === "red-rocks-amphitheatre")
@@ -147,24 +123,12 @@ export default async function SchedulePage() {
       return a.name.localeCompare(b.name);
     });
 
-  const [mediaIndex, eventImageMap] = await Promise.all([
-    getMediaIndex(2026),
-    Promise.all(
-      events.map(async (event) => [
-        event.id,
-        await getDynamicImage(
-          "concert",
-          `${event.artistNames[0] || event.name} red rocks concert`,
-          getCuratedScheduleImage(event),
-        ),
-      ]),
-    ).then((entries) => Object.fromEntries(entries) as Record<string, string>),
-  ]);
+  const mediaIndex = await getMediaIndex(2026);
   const artistMediaMap = Object.fromEntries(
     Object.values(mediaIndex?.artistsById ?? {})
       .filter((row) => row.name)
       .map((row) => [
-        row.name.trim().toLowerCase(),
+        normalizeComparable(row.name),
         {
           spotifyImage: row.sources.spotifyImage,
           ticketmasterImage: row.sources.ticketmasterImage,
@@ -192,7 +156,13 @@ export default async function SchedulePage() {
           ...(event.showId ? { event: event.showId } : {}),
         },
       });
-      const artistMedia = artistMediaMap[(event.artistNames[0] || "").trim().toLowerCase()];
+      const primaryArtist = event.artistNames[0] || event.name;
+      const artistMedia = artistMediaMap[normalizeComparable(primaryArtist)];
+      const image =
+        artistMedia?.spotifyImage ||
+        artistMedia?.ticketmasterImage ||
+        event.image ||
+        curatedImages.showFallback;
 
       return {
         id: event.id,
@@ -200,16 +170,7 @@ export default async function SchedulePage() {
         dateLabel: dateLabel(event.dateKey),
         timeLabel: toTimeLabel(event),
         support,
-        image: selectImageByPriority({
-          entityType: "artist",
-          title: event.name,
-          artistName: event.artistNames[0] || event.name,
-          queryHint: `${event.artistNames[0] || event.name} live music artist portrait`,
-          alt: `${event.artistNames[0] || event.name} artist image`,
-          spotifyImage: artistMedia?.spotifyImage ?? null,
-          ticketmasterImage: artistMedia?.ticketmasterImage ?? null,
-          fallback: eventImageMap[event.id] || "/venues/rrsite.jpg",
-        }),
+        image,
         shuttleHref,
         showHref,
         showLabel: event.showId ? "Open Show Page" : "Official Listing",
@@ -297,6 +258,7 @@ export default async function SchedulePage() {
                         src={event.image}
                         alt={`${event.name} schedule image`}
                         fill
+                        unoptimized={!event.image.startsWith("/")}
                         className="object-cover"
                         sizes="(min-width: 1280px) 30vw, (min-width: 768px) 48vw, 100vw"
                       />
