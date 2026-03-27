@@ -100,8 +100,7 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
                     Use code{" "}
                     <span className="rounded-full border border-white/14 bg-black/28 px-2 py-1 font-black tracking-[0.1em] text-[var(--brand-cyan)]">
                       {PRIVATE_TRANSPORT_PROMO.code}
-                    </span>{" "}
-                    at checkout.
+                    </span>.
                   </p>
                 </div>
                 <div className="rounded-[22px] border border-white/14 bg-black/26 px-4 py-3 text-center shadow-[0_16px_40px_rgba(0,0,0,0.28)]">
@@ -120,7 +119,7 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
                 </Link>
                 <Link
                   href="/book/red-rocks-amphitheatre/private"
-                  className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/14 bg-white/6 px-8 text-sm font-black uppercase tracking-[0.16em] text-white no-underline transition hover:bg-white/10"
+                  className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/18 bg-white px-8 text-sm font-black uppercase tracking-[0.16em] text-[#120f0b] no-underline transition hover:bg-[#f5f5f5]"
                 >
                   View Private Vehicles
                 </Link>

@@ -36,12 +36,10 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   const brandKey = SITE_CONFIG.socialBrandKey;
-  const [heroSrc, shuttleSrc, sprinterSrc, events] = await Promise.all([
-    getDynamicImage("venue", "Red Rocks Amphitheatre", "/hero/hero-home.jpg"),
-    getDynamicImage("concert", "shuttle bus denver", "/images/marketing/shuttle.jpg"),
-    getDynamicImage("fleet", "sprinter van denver", "/fleet/fleet-sprinter.jpg"),
-    getEventsCatalog(2026, "redrocks"),
-  ]);
+  const [events] = await Promise.all([getEventsCatalog(2026, "redrocks")]);
+  const heroSrc = "/assets/venue/red-rocks/red-rocks-hero.webp";
+  const shuttleSrc = "/images/marketing/vip-suv.webp";
+  const sprinterSrc = "/assets/venue/red-rocks/red-rocks-arrival.webp";
   const denverToday = new Intl.DateTimeFormat("en-CA", {
     timeZone: "America/Denver",
     year: "numeric",
