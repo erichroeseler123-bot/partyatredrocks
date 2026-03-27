@@ -15,10 +15,10 @@ export const curatedImages = {
   guidePolicy: "/hero/price.jpg",
   guideTailgating: "/images/marketing/fleet.webp",
 
-  socialHero: "/hero/afterdark.jpg",
-  weekHero: "/hero/hero-home.jpg",
+  socialHero: "/images/marketing/fleet.webp",
+  weekHero: "/hero/arrival.jpg",
   venuesHero: "/venues/rrsite.jpg",
-  aboutHero: "/hero/hero-home.jpg",
+  aboutHero: "/hero/price.jpg",
 
   sharedShuttle: "/images/marketing/shuttle.webp",
   privateSUV: "/images/marketing/vip-suv.webp",
