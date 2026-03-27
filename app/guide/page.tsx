@@ -4,11 +4,11 @@ import Image from "next/image";
 import { GuideLocalInfo } from "@/components/guide/GuideLocalInfo";
 import { GuideVisualHero } from "@/components/guide/GuideVisualHero";
 import MusicWave from "@/components/MusicWave";
-import { assertUniqueGuideImages } from "@/data/media";
+import { assertUniqueGuideImages, getGuideCardImage } from "@/data/media";
 import { type GuideVisualKey, guideVisuals } from "@/lib/guideVisuals";
-import { curatedImages } from "@/lib/curatedImages";
 
 const SITE = "https://www.partyatredrocks.com";
+const GUIDE_HERO_IMAGE = getGuideCardImage("red-rocks-visiting-guide");
 
 export const metadata = {
   title: "Red Rocks Guides | Party at Red Rocks",
@@ -25,7 +25,7 @@ export const metadata = {
     type: "website",
     images: [
       {
-        url: `${SITE}${curatedImages.guideHero}`,
+        url: `${SITE}${GUIDE_HERO_IMAGE}`,
         alt: "Red Rocks guide planning hero image",
       },
     ],
@@ -35,7 +35,7 @@ export const metadata = {
     title: "Red Rocks Guides | Party at Red Rocks",
     description:
       "Parking, transportation, venue policies, and show-night planning guides for Red Rocks.",
-    images: [`${SITE}${curatedImages.guideHero}`],
+    images: [`${SITE}${GUIDE_HERO_IMAGE}`],
   },
 };
 
@@ -182,7 +182,7 @@ export default async function GuideHub() {
     string,
     string
   >;
-  const heroImage = curatedImages.guideHero;
+  const heroImage = getGuideCardImage("red-rocks-visiting-guide");
 
   return (
     <main className="brand-page bg-[radial-gradient(circle_at_top,rgba(255,91,46,0.15),transparent_26%),radial-gradient(circle_at_18%_10%,rgba(59,130,246,0.14),transparent_18%),linear-gradient(180deg,#0b0b0f_0%,#0b0b0f_100%)] px-4 pb-14 pt-24 sm:px-6 lg:px-8">

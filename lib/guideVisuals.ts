@@ -1,4 +1,4 @@
-import { curatedImages } from "@/lib/curatedImages";
+import { getGuideCardImage } from "@/data/media";
 
 export type GuideVisualKey =
   | "transportation"
@@ -16,32 +16,32 @@ type GuideVisual = {
 
 export const guideVisuals: Record<GuideVisualKey, GuideVisual> = {
   transportation: {
-    imageSrc: curatedImages.guideTransportation,
+    imageSrc: getGuideCardImage("transportation-guide"),
     imageAlt: "Concert riders on a shuttle heading to Red Rocks",
     eyebrow: "Transportation Guide",
   },
   parking: {
-    imageSrc: curatedImages.guideParking,
+    imageSrc: getGuideCardImage("parking-reality"),
     imageAlt: "Red Rocks venue atmosphere at night for parking and arrival planning",
     eyebrow: "Parking Guide",
   },
   pickup: {
-    imageSrc: curatedImages.guidePickup,
+    imageSrc: getGuideCardImage("local-pickups"),
     imageAlt: "Private ride meetup and post-show pickup planning for Red Rocks",
     eyebrow: "Pickup Planning",
   },
   policy: {
-    imageSrc: curatedImages.guidePolicy,
+    imageSrc: getGuideCardImage("policies"),
     imageAlt: "Red Rocks concert guide visual for policies and show-night rules",
     eyebrow: "Policy Guide",
   },
   tailgating: {
-    imageSrc: curatedImages.guideTailgating,
+    imageSrc: getGuideCardImage("tailgating-guide"),
     imageAlt: "Group transportation and tailgating setup for Red Rocks",
     eyebrow: "Tailgating Guide",
   },
   general: {
-    imageSrc: curatedImages.guideGeneral,
+    imageSrc: getGuideCardImage("red-rocks-visiting-guide"),
     imageAlt: "Red Rocks guide and logistics planning visual",
     eyebrow: "Guide",
   },
