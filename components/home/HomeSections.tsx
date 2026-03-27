@@ -66,12 +66,13 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
               alt="Nighttime Red Rocks crowd and venue lights"
               fill
               sizes="100vw"
+              unoptimized
               className="object-cover object-center"
               priority
               fetchPriority="high"
             />
-            <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(10,18,56,0.66)_0%,rgba(10,18,56,0.32)_44%,rgba(9,9,9,0.58)_100%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(76,97,255,0.24),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(76,97,255,0.06),transparent_18%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(10,18,56,0.42)_0%,rgba(10,18,56,0.16)_44%,rgba(9,9,9,0.32)_100%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(76,97,255,0.16),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(76,97,255,0.03),transparent_18%)]" />
           </div>
 
           <div className="relative px-6 py-10 sm:px-8 sm:py-12 lg:px-12 lg:py-14">
@@ -165,9 +166,10 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
                         alt={ride.alt}
                         fill
                         sizes="128px"
+                        unoptimized
                         className="object-cover"
                       />
-                      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,9,9,0.04),rgba(9,9,9,0.28)_100%)]" />
+                      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,9,9,0.01),rgba(9,9,9,0.14)_100%)]" />
                     </div>
                   </div>
 
@@ -197,9 +199,10 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
                   alt={urgency.imageAlt}
                   fill
                   sizes="120px"
+                  unoptimized
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,9,9,0.03),rgba(9,9,9,0.24)_100%)]" />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,9,9,0.01),rgba(9,9,9,0.12)_100%)]" />
               </div>
               <div>
                 <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.24em]">{urgency.label}</div>

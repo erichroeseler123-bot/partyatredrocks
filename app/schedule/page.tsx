@@ -228,11 +228,12 @@ export default async function SchedulePage() {
               alt="Red Rocks Amphitheatre at night"
               fill
               sizes="100vw"
+              unoptimized
               className="object-cover object-center"
               priority
             />
-            <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(10,18,56,0.66)_0%,rgba(10,18,56,0.34)_44%,rgba(9,9,9,0.62)_100%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.12),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(255,91,46,0.08),transparent_24%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(10,18,56,0.42)_0%,rgba(10,18,56,0.18)_44%,rgba(9,9,9,0.34)_100%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.08),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(255,91,46,0.05),transparent_24%)]" />
           </div>
 
           <div className="relative px-6 py-10 sm:px-8 sm:py-12 lg:px-12 lg:py-14">
