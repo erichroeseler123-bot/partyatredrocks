@@ -89,27 +89,6 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
               <p className="mt-5 max-w-3xl text-base leading-8 text-white/78 sm:text-lg">
                 Fixed $59 shuttle seats, private SUVs, sprinters, and party buses for groups that want a cleaner arrival, a guaranteed return, and less post-show chaos.
               </p>
-
-              <div className="brand-glass-bar mt-6 inline-flex max-w-3xl flex-col gap-3 rounded-[24px] px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <div className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.24em] text-[var(--brand-cyan)]">
-                    <TicketPercent className="h-3.5 w-3.5" />
-                    April private ride promo
-                  </div>
-                  <p className="mt-2 text-sm leading-6 text-white/86 sm:text-base">
-                    <span className="font-black uppercase tracking-[0.04em] text-white">$50 off private transportation.</span>{" "}
-                    Use code{" "}
-                    <span className="rounded-full border border-white/14 bg-black/28 px-2 py-1 font-black tracking-[0.1em] text-[var(--brand-cyan)]">
-                      {PRIVATE_TRANSPORT_PROMO.code}
-                    </span>.
-                  </p>
-                </div>
-                <div className="rounded-[22px] border border-white/14 bg-black/26 px-4 py-3 text-center shadow-[0_16px_40px_rgba(0,0,0,0.28)]">
-                  <div className="text-[10px] font-black uppercase tracking-[0.22em] text-white/58">Use Code</div>
-                  <div className="mt-1 text-base font-black uppercase tracking-[0.14em] text-white">{PRIVATE_TRANSPORT_PROMO.code}</div>
-                </div>
-              </div>
-
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
                   href={BOOK_RED_ROCKS}
@@ -126,6 +105,30 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
                 </Link>
               </div>
             </div>
+          </div>
+        </section>
+
+        <section className="brand-glass-bar rounded-[24px] px-5 py-4 sm:px-6">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <div className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.24em] text-[var(--brand-cyan)]">
+                <TicketPercent className="h-3.5 w-3.5" />
+                Private ride promo
+              </div>
+              <p className="mt-2 text-sm leading-6 text-white/82 sm:text-base">
+                <span className="font-black uppercase tracking-[0.04em] text-white">$50 off private transportation.</span>{" "}
+                Use code{" "}
+                <span className="rounded-full border border-white/14 bg-black/28 px-2 py-1 font-black tracking-[0.1em] text-[var(--brand-cyan)]">
+                  {PRIVATE_TRANSPORT_PROMO.code}
+                </span>.
+              </p>
+            </div>
+            <Link
+              href="/book/red-rocks-amphitheatre/private"
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/16 bg-white/6 px-5 text-xs font-black uppercase tracking-[0.16em] text-white no-underline transition hover:bg-white/10"
+            >
+              View Private Vehicles
+            </Link>
           </div>
         </section>
 
