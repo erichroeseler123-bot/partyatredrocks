@@ -3,7 +3,7 @@
 // fixed curated assets instead of broad dynamic image resolution.
 
 export const curatedImages = {
-  homepageHero: "/venues/rrsite.jpg",
+  homepageHero: "/hero/hero_red_rocks.jpg",
   homepageShared: "/hero/arrival.jpg",
   homepagePrivate: "/images/marketing/vip-suv.webp",
 
