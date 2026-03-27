@@ -63,11 +63,12 @@ export default async function WeekPage({
         ) : null}
 
         <section
-          className="brand-panel relative overflow-hidden rounded-[32px] p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] sm:p-10 lg:p-12"
+          className="brand-panel relative min-h-[420px] overflow-hidden rounded-[32px] p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] sm:min-h-[460px] sm:p-10 lg:min-h-[520px] lg:p-12"
           style={{
-            backgroundImage: `linear-gradient(110deg, rgba(11,11,15,0.84) 0%, rgba(11,11,15,0.58) 40%, rgba(11,11,15,0.9) 100%), url(${curatedImages.weekHero})`,
+            backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.72)), linear-gradient(110deg, rgba(11,11,15,0.84) 0%, rgba(11,11,15,0.58) 40%, rgba(11,11,15,0.9) 100%), url(${curatedImages.weekHero})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
           }}
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,91,46,0.18),transparent_28%),radial-gradient(circle_at_top_right,rgba(59,130,246,0.14),transparent_28%)]" />
