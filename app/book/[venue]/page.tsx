@@ -11,6 +11,7 @@ import { PrivatePromoBanner } from "@/components/booking/PrivatePromoBanner";
 import { DccReturnBanner } from "@/components/booking/DccReturnBanner";
 import { postDccSatelliteEvent, postWtaPartnerAcceptedIfNeeded } from "@/lib/dccSatellite";
 import { getBookingVenueImage } from "@/data/media";
+import { curatedImages } from "@/lib/curatedImages";
 import { buildVenueBookingJsonLd, buildVenueBookingMetadata } from "./bookingSeo";
 import {
   buildBookingHref,
@@ -96,9 +97,10 @@ export default async function VenueBookingPage({
           {venueMedia ? (
             <div className="absolute inset-0">
               <Image
-                src={venueMedia.hero}
-                alt={venueMedia.heroAlt}
+                src={isRedRocks ? curatedImages.homepageHero : venueMedia.hero}
+                alt={isRedRocks ? "Red Rocks Amphitheatre at dusk" : venueMedia.heroAlt}
                 fill
+                unoptimized={isRedRocks}
                 className="object-cover object-center opacity-70 brightness-95"
                 priority
                 fetchPriority="high"
@@ -184,15 +186,27 @@ export default async function VenueBookingPage({
           >
             {venueMedia ? (
               <div className="relative mb-4 h-44 overflow-hidden rounded-[18px] border border-white/10">
-                <UnsplashImg
-                  src={venueMedia.card}
-                  query={`${row.name} shared shuttle transportation`}
-                  alt={venueMedia.cardAlt}
-                  className="h-full w-full object-cover"
-                  loading="lazy"
-                  width={960}
-                  height={528}
-                />
+                {isRedRocks ? (
+                  <Image
+                    src={curatedImages.homepageShared}
+                    alt="Shared shuttle option for Red Rocks transportation"
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                    width={960}
+                    height={528}
+                    unoptimized
+                  />
+                ) : (
+                  <UnsplashImg
+                    src={venueMedia.card}
+                    query={`${row.name} shared shuttle transportation`}
+                    alt={venueMedia.cardAlt}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                    width={960}
+                    height={528}
+                  />
+                )}
               </div>
             ) : null}
             <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
@@ -221,15 +235,27 @@ export default async function VenueBookingPage({
           >
             {venueMedia ? (
               <div className="relative mb-4 h-44 overflow-hidden rounded-[18px] border border-white/10">
-                <UnsplashImg
-                  src={venueMedia.hero}
-                  query={`${row.name} private concert transportation`}
-                  alt={isRedRocks ? "Private ride path for Red Rocks concert nights" : venueMedia.heroAlt}
-                  className="h-full w-full object-cover"
-                  loading="lazy"
-                  width={960}
-                  height={528}
-                />
+                {isRedRocks ? (
+                  <Image
+                    src={curatedImages.homepagePrivate}
+                    alt="Private vehicle option for Red Rocks transportation"
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                    width={960}
+                    height={528}
+                    unoptimized
+                  />
+                ) : (
+                  <UnsplashImg
+                    src={venueMedia.hero}
+                    query={`${row.name} private concert transportation`}
+                    alt={isRedRocks ? "Private ride path for Red Rocks concert nights" : venueMedia.heroAlt}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                    width={960}
+                    height={528}
+                  />
+                )}
               </div>
             ) : null}
             <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
