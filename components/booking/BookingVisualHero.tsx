@@ -25,11 +25,12 @@ export function BookingVisualHero({
           alt={imageAlt}
           fill
           priority
+          unoptimized
           className="object-cover object-center"
           sizes="(min-width: 1280px) 1240px, 100vw"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,8,22,0.92)_0%,rgba(5,8,22,0.7)_46%,rgba(5,8,22,0.82)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,138,61,0.22),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(61,243,255,0.14),transparent_28%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,8,22,0.5)_0%,rgba(5,8,22,0.28)_46%,rgba(5,8,22,0.4)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,138,61,0.14),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(61,243,255,0.08),transparent_28%)]" />
       </div>
 
       <div className="relative max-w-3xl px-6 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-14">
