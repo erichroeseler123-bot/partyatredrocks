@@ -6,6 +6,7 @@ import { SITE_CONFIG } from "@/app/site-config";
 import { BOOKING_COPY } from "@/lib/bookingCopy";
 import { getEventsCatalog } from "@/lib/events/getCatalog";
 import { getDynamicImage } from "@/lib/getDynamicImage";
+import { curatedImages } from "@/lib/curatedImages";
 import {
   BUSINESS_EMAIL,
   BUSINESS_NAME,
@@ -37,9 +38,9 @@ export const metadata: Metadata = {
 export default async function HomePage() {
   const brandKey = SITE_CONFIG.socialBrandKey;
   const [events] = await Promise.all([getEventsCatalog(2026, "redrocks")]);
-  const heroSrc = "/assets/venue/red-rocks/red-rocks-hero.webp";
-  const shuttleSrc = "/images/marketing/vip-suv.webp";
-  const sprinterSrc = "/assets/venue/red-rocks/red-rocks-arrival.webp";
+  const heroSrc = curatedImages.homepageHero;
+  const shuttleSrc = curatedImages.homepageShared;
+  const sprinterSrc = curatedImages.homepagePrivate;
   const denverToday = new Intl.DateTimeFormat("en-CA", {
     timeZone: "America/Denver",
     year: "numeric",
@@ -53,7 +54,7 @@ export default async function HomePage() {
     ? await getDynamicImage(
         "concert",
         `${nextRedRocksEvent.artistNames[0] || nextRedRocksEvent.name} red rocks concert`,
-        nextRedRocksEvent.image || "/venues/rrsite.jpg",
+        nextRedRocksEvent.image || curatedImages.redRocksVenue,
       )
     : null;
   const urgency = nextRedRocksEvent
@@ -63,7 +64,7 @@ export default async function HomePage() {
           nextRedRocksEvent.dateKey === denverToday
             ? `${nextRedRocksEvent.name} is on tonight. Shared and private ride planning is still open.`
             : `${nextRedRocksEvent.name} is coming up next. Lock the ride plan before show night gets compressed.`,
-        imageSrc: nextRedRocksEventImage || "/venues/rrsite.jpg",
+        imageSrc: nextRedRocksEventImage || curatedImages.redRocksVenue,
         imageAlt: `${nextRedRocksEvent.name} concert image`,
       }
     : null;

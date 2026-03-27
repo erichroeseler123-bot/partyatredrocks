@@ -6,7 +6,7 @@ import { GuideVisualHero } from "@/components/guide/GuideVisualHero";
 import MusicWave from "@/components/MusicWave";
 import { assertUniqueGuideImages } from "@/data/media";
 import { type GuideVisualKey, guideVisuals } from "@/lib/guideVisuals";
-import { getDynamicImage } from "@/lib/getDynamicImage";
+import { curatedImages } from "@/lib/curatedImages";
 
 export const metadata = {
   title: "Red Rocks Guides",
@@ -122,32 +122,6 @@ const deepDive: Card[] = [
 
 assertUniqueGuideImages();
 
-const GUIDE_CARD_FALLBACKS = [
-  "/hero/hero-guides.jpg",
-  "/hero/hero-home.jpg",
-  "/images/marketing/shuttle.jpg",
-  "/images/marketing/vip-suv.jpg",
-  "/images/marketing/fleet.jpg",
-  "/images/scenes/jam.jpg",
-  "/images/scenes/edm.jpg",
-  "/images/scenes/hiphop.jpg",
-  "/venues/missionsite.jpg",
-  "/venues/mishsite.jpg",
-  "/venues/rrsite.jpg",
-] as const;
-
-function hashString(input: string) {
-  let hash = 0;
-  for (let index = 0; index < input.length; index += 1) {
-    hash = (hash * 31 + input.charCodeAt(index)) >>> 0;
-  }
-  return hash;
-}
-
-function getGuideFallbackImage(cardId: string) {
-  return GUIDE_CARD_FALLBACKS[hashString(cardId) % GUIDE_CARD_FALLBACKS.length];
-}
-
 function GuideCard({ card, imageSrc }: { card: Card; imageSrc: string }) {
   const visual = guideVisuals[card.visual];
   return (
@@ -181,15 +155,11 @@ function GuideCard({ card, imageSrc }: { card: Card; imageSrc: string }) {
 
 export default async function GuideHub() {
   const cards = [...featured, ...deepDive];
-  const cardImageMap = Object.fromEntries(
-    await Promise.all(
-      cards.map(async (card) => [
-        card.id,
-        await getDynamicImage("concert", `${card.title} red rocks`, getGuideFallbackImage(card.id)),
-      ]),
-    ),
-  ) as Record<string, string>;
-  const heroImage = await getDynamicImage("venue", "Red Rocks Amphitheatre", "/hero/hero-guides.jpg");
+  const cardImageMap = Object.fromEntries(cards.map((card) => [card.id, guideVisuals[card.visual].imageSrc])) as Record<
+    string,
+    string
+  >;
+  const heroImage = curatedImages.guideHero;
 
   return (
     <main className="brand-page bg-[radial-gradient(circle_at_top,rgba(255,91,46,0.15),transparent_26%),radial-gradient(circle_at_18%_10%,rgba(59,130,246,0.14),transparent_18%),linear-gradient(180deg,#0b0b0f_0%,#0b0b0f_100%)] px-4 pb-14 pt-24 sm:px-6 lg:px-8">
