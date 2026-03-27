@@ -1,13 +1,17 @@
 // Central source of truth for non-event imagery.
-// Rule: homepage, hubs, guides, and booking/fleet surfaces should use these
-// fixed curated assets instead of broad dynamic image resolution.
+// Reset rule:
+// - Hero slots use only approved wide local assets.
+// - Homepage/booking slots use fixed local files only.
+// - Dynamic selection is for event/show surfaces, not hub or booking heroes.
 
 export const curatedImages = {
+  // Homepage / top-level commercial slots
   homepageHero: "/hero/hero_red_rocks.jpg",
-  homepageShared: "/images/marketing/vip-suv.webp",
-  homepagePrivate: "/hero/sprinter_red_rocks.jpg",
+  homepageShared: "/hero/sprinter_red_rocks.jpg",
+  homepagePrivate: "/images/marketing/vip-suv.webp",
 
-  guideHero: "/hero/custom/red_rocks_sunset_hero.jpg",
+  // Hub heroes
+  guideHero: "/hero/hero-guides.jpg",
   guideGeneral: "/hero/hero-home.webp",
   guideTransportation: "/hero/arrival.jpg",
   guideParking: "/venues/rrsite.jpg",
@@ -19,11 +23,12 @@ export const curatedImages = {
   weekHero: "/hero/arrival.jpg",
   venuesHero: "/venues/rrsite.jpg",
   aboutHero: "/hero/hero-home.jpg",
-  scheduleHero: "/hero/hero-home.jpg",
+  scheduleHero: "/hero/arrival.jpg",
 
-  sharedShuttle: "/images/marketing/vip-suv.webp",
-  privateSUV: "/hero/sprinter_red_rocks.jpg",
-  sprinterVan: "/fleet/fleet-sprinter.webp",
+  // Booking / fleet slots
+  sharedShuttle: "/hero/sprinter_red_rocks.jpg",
+  privateSUV: "/images/marketing/vip-suv.webp",
+  sprinterVan: "/hero/sprinter_red_rocks.jpg",
   partyBus: "/images/marketing/fleet.webp",
 
   redRocksVenue: "/venues/rrsite.jpg",
