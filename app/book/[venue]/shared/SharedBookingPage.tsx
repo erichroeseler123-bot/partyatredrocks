@@ -1,12 +1,11 @@
 import { BookingVisualHero } from "@/components/booking/BookingVisualHero";
+import CustomBooking from "@/components/CustomBooking";
 import { DccReturnBanner } from "@/components/booking/DccReturnBanner";
-import RezdySessionPicker from "@/components/RezdySessionPicker";
-import Script from "next/script";
 import { notFound } from "next/navigation";
 import venuesJson from "@/data/venues.json";
 import { BOOKING_COPY } from "@/lib/bookingCopy";
 import { bookingVisuals } from "@/lib/bookingVisuals";
-import { buildTrackedExternalCheckoutHref, postDccSatelliteEvent, postWtaPartnerAcceptedIfNeeded } from "@/lib/dccSatellite";
+import { postDccSatelliteEvent, postWtaPartnerAcceptedIfNeeded } from "@/lib/dccSatellite";
 import type { HandoffSearchParams } from "@/lib/parrHandoff";
 import { buildSharedBookingJsonLd } from "./sharedBookingSeo";
 
@@ -22,8 +21,6 @@ type SharedBookingPageInput = {
   basePath: string;
   stage: string;
 };
-
-const SHARED_CATALOG_WIDGET_URL = "https://gosnotransportation58.rezdy.com/catalog/617787/shuttles?iframe=true";
 
 function getVenue(slug: string): VenueRow | null {
   return (venuesJson as Record<string, VenueRow>)[slug] ?? null;
@@ -174,53 +171,16 @@ export async function SharedBookingPage({
         ) : null}
 
         <section className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.42)] sm:p-8">
-          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
-            Native booking flow
-          </div>
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">Custom booking flow</div>
           <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white">
-            Book shared shuttle seats here first
+            Book shared shuttle seats here
           </h2>
           <p className="mt-3 max-w-3xl text-sm leading-6 text-white/70 sm:text-[15px]">
-            This uses the in-site booking flow instead of sending you straight into the hosted Rezdy page. It is the safest path if the external widget is slow, blocked, or forcing extra verification.
+            This is the in-site booking form. Pick your service, choose a date, and complete the booking here without the hosted Rezdy widget.
           </p>
           <div className="mt-6">
-            <RezdySessionPicker />
+            <CustomBooking venue={venue} />
           </div>
-        </section>
-
-        <section className="overflow-visible rounded-[30px] border border-white/10 bg-[#0b1224] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.42)] sm:p-6">
-          <Script src="https://gosnotransportation58.rezdy.com/pluginJs" strategy="afterInteractive" />
-          <div className="mb-4 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
-            Hosted Rezdy checkout
-          </div>
-          <p className="mb-4 max-w-3xl text-sm leading-6 text-white/70">
-            This is still available as a secondary path. If the hosted widget forces verification or loads badly, use the native booking flow above instead.
-          </p>
-          <div className="mb-4">
-            <a
-              href={buildTrackedExternalCheckoutHref({
-                targetUrl: SHARED_CATALOG_WIDGET_URL.replace("?iframe=true", ""),
-                searchParams,
-                sourcePath,
-                stage: "external_shared_catalog",
-                productSlug: "shared-shuttle",
-              })}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-11 items-center justify-center rounded-full border border-[#ffd6a3]/24 bg-[linear-gradient(180deg,rgba(74,43,19,0.96),rgba(48,29,13,0.98))] px-5 text-xs font-black uppercase tracking-[0.16em] text-[#fff4de] transition hover:bg-[linear-gradient(180deg,rgba(93,56,27,0.98),rgba(61,37,17,0.98))]"
-            >
-              Open Shared Checkout in New Tab
-            </a>
-          </div>
-          <iframe
-            seamless
-            width="100%"
-            height="1000"
-            frameBorder="0"
-            className="rezdy w-full rounded-[20px] border-0 bg-white"
-            src={SHARED_CATALOG_WIDGET_URL}
-            title="Red Rocks shared shuttle catalog"
-          />
         </section>
       </section>
     </main>
