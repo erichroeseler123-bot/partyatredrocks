@@ -15,11 +15,11 @@ export const curatedImages = {
   guidePolicy: "/hero/price.jpg",
   guideTailgating: "/images/marketing/fleet.webp",
 
-  socialHero: "/hero/custom/fisheye_hero.jpg",
-  weekHero: "/hero/custom/tophalf_hero.jpg",
-  venuesHero: "/hero/custom/red_rocks_25_hero.jpg",
-  aboutHero: "/hero/custom/red_rocks_sunset_hero.jpg",
-  scheduleHero: "/hero/custom/red_rocks_25_hero.jpg",
+  socialHero: "/hero/hero-home.jpg",
+  weekHero: "/hero/arrival.jpg",
+  venuesHero: "/venues/rrsite.jpg",
+  aboutHero: "/hero/hero-home.jpg",
+  scheduleHero: "/hero/hero-home.jpg",
 
   sharedShuttle: "/images/marketing/vip-suv.webp",
   privateSUV: "/hero/sprinter_red_rocks.jpg",
