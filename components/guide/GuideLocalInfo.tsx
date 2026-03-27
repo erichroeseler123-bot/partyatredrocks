@@ -96,8 +96,8 @@ function SnapshotCard({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative overflow-hidden rounded-[26px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] p-5 shadow-[0_24px_60px_rgba(0,0,0,0.28)]">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(245,198,108,0.14),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(61,243,255,0.12),transparent_28%)]" />
+    <div className="brand-card relative overflow-hidden rounded-[26px] p-5 shadow-[0_24px_60px_rgba(0,0,0,0.28)]">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,91,46,0.12),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.1),transparent_28%)]" />
       <div className="relative">
         <div className="flex items-center gap-3">
           <div
@@ -124,12 +124,12 @@ export async function GuideLocalInfo({
   const copy = snapshotCopy[variant];
 
   return (
-    <section className="relative overflow-hidden rounded-[32px] border border-[#f5c66c]/18 bg-[linear-gradient(180deg,rgba(20,16,12,0.97),rgba(7,7,8,0.99))] p-6 shadow-[0_28px_100px_rgba(0,0,0,0.45)] sm:p-8">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(245,198,108,0.16),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(61,243,255,0.14),transparent_26%)]" />
+    <section className="brand-panel relative overflow-hidden rounded-[32px] p-6 shadow-[0_28px_100px_rgba(0,0,0,0.45)] sm:p-8">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,91,46,0.16),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.14),transparent_26%)]" />
       <div className="relative">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#f5c66c]/20 bg-[#f5c66c]/8 px-3 py-1 text-[11px] font-black uppercase tracking-[0.22em] text-[#f5c66c]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--brand-orange)]/20 bg-[var(--brand-orange)]/10 px-3 py-1 text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-orange)]">
               <Sparkles className="h-3.5 w-3.5" />
               Red Rocks Live Snapshot
             </div>
@@ -141,16 +141,16 @@ export async function GuideLocalInfo({
             </p>
           </div>
           <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/72">
-            <CloudMoon className="h-4 w-4 text-[#8fd0ff]" />
+            <CloudMoon className="h-4 w-4 text-[var(--brand-cyan)]" />
             {copy.liveTag}
           </div>
         </div>
 
         <div className="mt-7 grid gap-4 lg:grid-cols-[1.05fr_0.9fr_1.05fr]">
           <SnapshotCard
-            icon={<Clock3 className="h-5 w-5 text-[#f5c66c]" />}
+            icon={<Clock3 className="h-5 w-5 text-[var(--brand-orange)]" />}
             label="Current Time"
-            accent="rgba(245,198,108,0.12)"
+            accent="rgba(255,91,46,0.12)"
           >
             <div className="text-2xl font-black tracking-[-0.04em] text-white sm:text-3xl">
               <GuideLocalTime />
@@ -159,18 +159,18 @@ export async function GuideLocalInfo({
           </SnapshotCard>
 
           <SnapshotCard
-            icon={<MapPinned className="h-5 w-5 text-[#f5c66c]" />}
+            icon={<MapPinned className="h-5 w-5 text-[var(--brand-orange)]" />}
             label="Time Zone"
-            accent="rgba(255,176,124,0.14)"
+            accent="rgba(255,91,46,0.14)"
           >
             <div className="text-2xl font-black tracking-[-0.04em] text-white sm:text-3xl">Mountain Time</div>
             <div className="mt-2 text-sm text-white/60">{copy.zoneHint}</div>
           </SnapshotCard>
 
           <SnapshotCard
-            icon={<CloudSun className="h-5 w-5 text-[#3df3ff]" />}
+            icon={<CloudSun className="h-5 w-5 text-[var(--brand-cyan)]" />}
             label="Current Weather"
-            accent="rgba(61,243,255,0.12)"
+            accent="rgba(59,130,246,0.12)"
           >
             {weather?.current ? (
               <>
@@ -178,7 +178,7 @@ export async function GuideLocalInfo({
                   <div className="text-3xl font-black tracking-[-0.05em] text-white sm:text-4xl">
                     {weather.current.temp}°F
                   </div>
-                  <div className="mb-1 rounded-full border border-white/12 bg-white/8 px-3 py-1 text-[11px] font-black uppercase tracking-[0.16em] text-[#8fd0ff]">
+                  <div className="mb-1 rounded-full border border-white/12 bg-white/8 px-3 py-1 text-[11px] font-black uppercase tracking-[0.16em] text-[var(--brand-cyan)]">
                     {weatherLabel}
                   </div>
                 </div>

@@ -50,12 +50,12 @@ const rideTypes = [
 
 export default function AboutPage() {
   return (
-    <main className="bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
+    <main className="brand-page bg-[radial-gradient(circle_at_top,rgba(255,91,46,0.15),transparent_26%),radial-gradient(circle_at_18%_10%,rgba(59,130,246,0.14),transparent_18%),linear-gradient(180deg,#0b0b0f_0%,#0b0b0f_100%)] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
       <section className="mx-auto flex max-w-[1440px] flex-col gap-8">
-        <section className="relative overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(9,15,31,0.96),rgba(7,11,25,0.96))] p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] sm:p-10 lg:p-12">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,91,46,0.18),transparent_28%),radial-gradient(circle_at_top_right,rgba(143,208,255,0.14),transparent_28%)]" />
+        <section className="brand-panel relative overflow-hidden rounded-[32px] p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] sm:p-10 lg:p-12">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,91,46,0.18),transparent_28%),radial-gradient(circle_at_top_right,rgba(59,130,246,0.14),transparent_28%)]" />
           <div className="relative max-w-3xl">
-            <div className="inline-flex items-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
+            <div className="inline-flex items-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">
               About Party at Red Rocks
             </div>
             <h1 className="mt-5 text-[2.5rem] font-black uppercase leading-[0.94] tracking-[-0.04em] sm:text-[4rem] lg:text-[5rem]">
@@ -70,7 +70,7 @@ export default function AboutPage() {
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/book"
-                className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
+                className="brand-button-primary inline-flex min-h-12 items-center justify-center px-6 text-sm font-black uppercase tracking-[0.16em]"
               >
                 Start Booking
               </Link>
@@ -84,8 +84,8 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(8,13,26,0.96),rgba(6,9,18,0.96))] p-6 sm:p-8">
-          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
+        <section className="brand-panel rounded-[30px] p-6 sm:p-8">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">
             Show-Night Transportation
           </div>
           <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">
@@ -97,9 +97,9 @@ export default function AboutPage() {
               return (
                 <article
                   key={point.title}
-                  className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)]"
+                  className="brand-card rounded-[26px] p-6"
                 >
-                  <Icon className="h-5 w-5 text-[#ffb07c]" />
+                  <Icon className="h-5 w-5 text-[var(--brand-orange)]" />
                   <h3 className="mt-4 text-xl font-black uppercase tracking-[-0.03em] text-white">{point.title}</h3>
                   <p className="mt-3 text-sm leading-6 text-white/70">{point.copy}</p>
                 </article>
@@ -108,8 +108,8 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(17,11,18,0.96),rgba(10,9,20,0.96))] p-6 sm:p-8">
-          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
+        <section className="brand-card rounded-[30px] p-6 sm:p-8">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-orange)]">
             How riders use it
           </div>
           <div className="mt-4 max-w-4xl space-y-4 text-sm leading-7 text-white/72">
@@ -125,21 +125,21 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(8,13,24,0.98),rgba(6,9,18,0.98))] p-6 sm:p-8">
-          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
+        <section className="brand-panel rounded-[30px] p-6 sm:p-8">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">
             Ride Types
           </div>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {rideTypes.map((ride) => (
               <article
                 key={ride.title}
-                className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)]"
+                className="brand-card rounded-[26px] p-6"
               >
                 <h3 className="text-2xl font-black uppercase tracking-[-0.03em] text-white">{ride.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-white/70">{ride.copy}</p>
                 <Link
                   href={ride.href}
-                  className="mt-5 inline-flex items-center text-sm font-bold text-[#ffb07c]"
+                  className="brand-link mt-5 inline-flex items-center text-sm font-bold"
                 >
                   {ride.cta}
                   <ArrowRight className="ml-1 h-4 w-4" />
@@ -149,8 +149,8 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(8,13,26,0.96),rgba(6,9,18,0.96))] p-6 sm:p-8">
-          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
+        <section className="brand-panel rounded-[30px] p-6 sm:p-8">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">
             The goal
           </div>
           <p className="mt-4 max-w-3xl text-sm leading-7 text-white/72">

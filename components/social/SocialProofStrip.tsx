@@ -35,13 +35,13 @@ export default function SocialProofStrip({
   return (
     <section
       className={cx(
-        "rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,16,32,0.98),rgba(6,9,18,0.96))] p-6 shadow-[0_28px_80px_rgba(0,0,0,0.34)] sm:p-8",
+        "brand-panel rounded-[30px] p-6 sm:p-8",
         className,
       )}
     >
       <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
         <div className="max-w-2xl">
-          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">Ride nights</div>
+          <div className="brand-kicker text-[11px] font-black uppercase tracking-[0.22em]">Ride nights</div>
           <h2 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white sm:text-3xl">{title}</h2>
           <p className="mt-3 text-sm leading-6 text-white/72 sm:text-[15px]">{body}</p>
         </div>
@@ -54,7 +54,7 @@ export default function SocialProofStrip({
             href={post.postUrl}
             target="_blank"
             rel="noreferrer noopener"
-            className="group overflow-hidden rounded-[24px] border border-white/10 bg-[#09101f] transition duration-300 hover:-translate-y-1 hover:border-white/16 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
+            className="brand-card group overflow-hidden rounded-[24px] transition duration-300 hover:-translate-y-1 hover:border-white/16 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
           >
             <div className="relative h-52 overflow-hidden">
               <Image
@@ -70,9 +70,9 @@ export default function SocialProofStrip({
               </div>
             </div>
             <div className="p-4">
-              <div className="text-[11px] font-black uppercase tracking-[0.18em] text-[#8fd0ff]">{post.username}</div>
+              <div className="text-[11px] font-black uppercase tracking-[0.18em] text-[var(--brand-cyan)]">{post.username}</div>
               <p className="mt-3 text-sm leading-6 text-white/80">{post.caption}</p>
-              <div className="mt-4 text-sm font-bold text-[#ffb07c]">Open post →</div>
+              <div className="mt-4 text-sm font-bold text-[var(--brand-orange)]">Open post →</div>
             </div>
           </Link>
         ))}
