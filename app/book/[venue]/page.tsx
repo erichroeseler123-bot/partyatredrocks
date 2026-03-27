@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import Script from "next/script";
 import { notFound } from "next/navigation";
 import venuesJson from "@/data/venues.json";
 import { UnsplashImg } from "@/components/UnsplashImg";
@@ -31,8 +30,6 @@ function getVenue(slug: string): VenueRow | null {
   return (venuesJson as Record<string, VenueRow>)[slug] ?? null;
 }
 
-const RED_ROCKS_PRIVATE_CATALOG_WIDGET_URL =
-  "https://gosnotransportation58.rezdy.com/catalog/541037/party-at-red-rocks?iframe=true";
 export async function generateMetadata({
   params,
 }: {
@@ -149,31 +146,6 @@ export default async function VenueBookingPage({
         <DccReturnBanner searchParams={sp} />
 
         {isRedRocks ? <PrivatePromoBanner /> : null}
-
-        {isRedRocks ? (
-          <section className="overflow-visible rounded-[30px] border border-white/10 bg-[#0b1224] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.42)] sm:p-6">
-            <Script src="https://gosnotransportation58.rezdy.com/pluginJs" strategy="afterInteractive" />
-            <div className="mb-3 text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
-              Red Rocks Booking
-            </div>
-            <h2 className="text-2xl font-black uppercase tracking-[-0.03em] text-white sm:text-3xl">
-              Book Your Ride Now
-            </h2>
-            <p className="mt-3 max-w-3xl text-sm leading-6 text-white/70 sm:text-[15px]">
-              Jump straight into the live Red Rocks private vehicle widget if you already know this is the night and want the fastest path to booking.
-            </p>
-            <TrustStrip className="mb-4 mt-5" />
-            <iframe
-              seamless
-              width="100%"
-              height="1000"
-              frameBorder="0"
-              className="rezdy w-full rounded-[20px] border-0 bg-white"
-              src={RED_ROCKS_PRIVATE_CATALOG_WIDGET_URL}
-              title="Red Rocks private vehicle booking widget"
-            />
-          </section>
-        ) : null}
 
         <section className="grid gap-4 lg:grid-cols-2">
           <Link
