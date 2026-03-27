@@ -8,6 +8,7 @@ import { ANNOUNCED_RED_ROCKS_2026 } from "@/data/red-rocks-2026-announced";
 import { getDynamicImage } from "@/lib/getDynamicImage";
 import { selectImageByPriority } from "@/lib/media/selectImage";
 import { getMediaIndex } from "@/lib/media/getMediaIndex";
+import { curatedImages } from "@/lib/curatedImages";
 
 export const revalidate = 3600;
 
@@ -146,8 +147,7 @@ export default async function SchedulePage() {
       return a.name.localeCompare(b.name);
     });
 
-  const [heroImage, mediaIndex, eventImageMap] = await Promise.all([
-    getDynamicImage("venue", "Red Rocks Amphitheatre concert night", "/hero/hero-home.jpg"),
+  const [mediaIndex, eventImageMap] = await Promise.all([
     getMediaIndex(2026),
     Promise.all(
       events.map(async (event) => [
@@ -224,7 +224,7 @@ export default async function SchedulePage() {
         <section className="relative overflow-hidden rounded-[36px] border border-[var(--brand-orange)]/20 bg-[var(--brand-bg-dark)] shadow-[0_40px_120px_rgba(0,0,0,0.58)]">
           <div className="absolute inset-0">
             <Image
-              src={heroImage}
+              src={curatedImages.scheduleHero}
               alt="Red Rocks Amphitheatre at night"
               fill
               sizes="100vw"
