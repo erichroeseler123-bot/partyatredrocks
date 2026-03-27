@@ -192,7 +192,7 @@ export default async function GuideHub() {
   const heroImage = await getDynamicImage("venue", "Red Rocks Amphitheatre", "/hero/hero-guides.jpg");
 
   return (
-    <main className="brand-page px-4 pb-14 pt-24 sm:px-6 lg:px-8">
+    <main className="brand-page bg-[radial-gradient(circle_at_top,rgba(255,91,46,0.15),transparent_26%),radial-gradient(circle_at_18%_10%,rgba(59,130,246,0.14),transparent_18%),linear-gradient(180deg,#0b0b0f_0%,#0b0b0f_100%)] px-4 pb-14 pt-24 sm:px-6 lg:px-8">
       <section className="mx-auto flex max-w-[1440px] flex-col gap-8">
         <GuideVisualHero
           eyebrow={guideVisuals.general.eyebrow}
@@ -227,7 +227,7 @@ export default async function GuideHub() {
         <GuideLocalInfo variant="general" />
 
         <section className="brand-panel rounded-[30px] p-6 sm:p-8">
-          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--accentCool)]">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">
             Featured Guides
           </div>
           <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -238,7 +238,7 @@ export default async function GuideHub() {
         </section>
 
         <section className="brand-panel rounded-[30px] p-6 sm:p-8">
-          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--accentCool)]">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">
             Deep Dives
           </div>
           <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -249,7 +249,7 @@ export default async function GuideHub() {
         </section>
 
         <section className="brand-panel rounded-[30px] p-6 sm:p-8">
-          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--accentCool)]">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">
             Trusted Sources
           </div>
           <p className="mt-3 text-sm leading-6 text-white/70">

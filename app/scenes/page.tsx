@@ -100,9 +100,9 @@ export default async function ScenesLandingPage() {
   }, 0);
 
   return (
-    <main className="min-h-screen bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
+    <main className="brand-page min-h-screen bg-[radial-gradient(circle_at_top,rgba(255,91,46,0.15),transparent_26%),radial-gradient(circle_at_18%_10%,rgba(59,130,246,0.14),transparent_18%),linear-gradient(180deg,#0b0b0f_0%,#0b0b0f_100%)] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
       <section className="mx-auto flex w-full max-w-[1400px] flex-col gap-8">
-        <section className="relative overflow-hidden rounded-[32px] border border-white/12 bg-[#0b1224]">
+        <section className="relative overflow-hidden rounded-[32px] border border-[var(--brand-orange)]/20 bg-[var(--brand-bg-dark)] shadow-[0_40px_120px_rgba(0,0,0,0.46)]">
           <div className="absolute inset-0">
             <Image
               src={heroImage}
@@ -112,11 +112,12 @@ export default async function ScenesLandingPage() {
               priority
               sizes="100vw"
             />
-            <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(5,8,22,0.92),rgba(5,8,22,0.66),rgba(5,8,22,0.92))]" />
+            <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(10,18,56,0.88)_0%,rgba(10,18,56,0.56)_44%,rgba(9,9,9,0.9)_100%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.18),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(255,91,46,0.12),transparent_24%)]" />
           </div>
 
           <div className="relative px-6 py-10 sm:px-10 sm:py-12 lg:px-12 lg:py-14">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/30 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/30 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">
               <Music2 className="h-3.5 w-3.5" />
               Scene Finder
             </div>
@@ -129,26 +130,26 @@ export default async function ScenesLandingPage() {
 
             <div className="mt-6 flex flex-wrap gap-2">
               <div className="inline-flex min-h-10 items-center gap-2 rounded-full border border-white/14 bg-white/7 px-4 text-[11px] font-black uppercase tracking-[0.16em] text-white/88">
-                <BadgeCheck className="h-3.5 w-3.5 text-[#8fd0ff]" />
+                <BadgeCheck className="h-3.5 w-3.5 text-[var(--brand-cyan)]" />
                 Secure Booking
               </div>
               <div className="inline-flex min-h-10 items-center gap-2 rounded-full border border-white/14 bg-white/7 px-4 text-[11px] font-black uppercase tracking-[0.16em] text-white/88">
-                <PhoneCall className="h-3.5 w-3.5 text-[#f5c66c]" />
+                <PhoneCall className="h-3.5 w-3.5 text-[var(--brand-orange)]" />
                 720-369-6292
               </div>
             </div>
 
             <div className="mt-6 grid gap-3 sm:grid-cols-3">
               <div className="rounded-2xl border border-white/14 bg-black/25 p-4">
-                <div className="text-[10px] font-black uppercase tracking-[0.2em] text-[#f5c66c]">Scenes</div>
+                <div className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--brand-orange)]">Scenes</div>
                 <div className="mt-1 text-2xl font-black text-white">{scenes.length}</div>
               </div>
               <div className="rounded-2xl border border-white/14 bg-black/25 p-4">
-                <div className="text-[10px] font-black uppercase tracking-[0.2em] text-[#f5c66c]">Shows Matched</div>
+                <div className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--brand-orange)]">Shows Matched</div>
                 <div className="mt-1 text-2xl font-black text-white">{totalShows}</div>
               </div>
               <div className="rounded-2xl border border-white/14 bg-black/25 p-4">
-                <div className="text-[10px] font-black uppercase tracking-[0.2em] text-[#f5c66c]">Booking Path</div>
+                <div className="text-[10px] font-black uppercase tracking-[0.2em] text-[var(--brand-orange)]">Booking Path</div>
                 <div className="mt-1 text-sm font-black uppercase tracking-[0.14em] text-white">Red Rocks Wizard</div>
               </div>
             </div>
@@ -156,7 +157,7 @@ export default async function ScenesLandingPage() {
             <div className="mt-6">
               <Link
                 href="/book/red-rocks-amphitheatre"
-                className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#ffd6a3]/26 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-6 text-xs font-black uppercase tracking-[0.16em] text-[#120f0b] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
+                className="brand-button-primary inline-flex min-h-12 items-center justify-center px-6 text-xs font-black uppercase tracking-[0.16em]"
               >
                 Find Your Ride Now
                 <ArrowRight className="ml-2 h-3.5 w-3.5" />
@@ -180,7 +181,7 @@ export default async function ScenesLandingPage() {
             return (
               <article
                 key={scene.slug}
-                className="overflow-hidden rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(11,18,36,0.95),rgba(8,12,24,0.98))] shadow-[0_22px_70px_rgba(0,0,0,0.32)]"
+                className="brand-card overflow-hidden rounded-[28px]"
               >
                 <div className="grid gap-0 lg:grid-cols-[360px_minmax(0,1fr)]">
                   <div className="relative h-56 border-b border-white/10 lg:h-full lg:border-b-0 lg:border-r">
@@ -195,7 +196,7 @@ export default async function ScenesLandingPage() {
                   </div>
 
                   <div className="p-6 sm:p-7">
-                    <div className="inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.2em] text-[#8fd0ff]">
+                    <div className="inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.2em] text-[var(--brand-cyan)]">
                       <span aria-hidden="true">{sceneIcon(scene.slug)}</span>
                       {sceneLabel(scene.slug)}
                     </div>
@@ -208,7 +209,7 @@ export default async function ScenesLandingPage() {
                       {featured.length ? (
                         featured.map((event) => (
                           <div key={event.id} className="rounded-2xl border border-white/12 bg-white/5 p-4">
-                            <div className="inline-flex items-center gap-1 text-[11px] font-black uppercase tracking-[0.16em] text-[#f5c66c]">
+                            <div className="inline-flex items-center gap-1 text-[11px] font-black uppercase tracking-[0.16em] text-[var(--brand-orange)]">
                               <CalendarDays className="h-3.5 w-3.5" />
                               {formatDate(event.dateKey)}
                             </div>
@@ -230,7 +231,7 @@ export default async function ScenesLandingPage() {
                               </p>
                             ) : null}
                             <div className="mt-3">
-                              <Link href={`/shows/${encodeURIComponent(event.id)}`} className="text-xs font-black uppercase tracking-[0.14em] text-[#cde8ff] underline">
+                              <Link href={`/shows/${encodeURIComponent(event.id)}`} className="text-xs font-black uppercase tracking-[0.14em] text-[var(--brand-cyan)] underline">
                                 Show Intel
                               </Link>
                             </div>
@@ -252,7 +253,7 @@ export default async function ScenesLandingPage() {
                       </Link>
                       <Link
                         href="/book/red-rocks-amphitheatre"
-                        className="inline-flex min-h-11 items-center justify-center rounded-full border border-[#ffd6a3]/26 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-5 text-xs font-black uppercase tracking-[0.16em] text-[#120f0b] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
+                        className="brand-button-primary inline-flex min-h-11 items-center justify-center px-5 text-xs font-black uppercase tracking-[0.16em]"
                       >
                         Start Booking
                         <ArrowRight className="ml-2 h-3.5 w-3.5" />
