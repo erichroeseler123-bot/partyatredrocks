@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BadgeCheck, CalendarDays, Clock3, PhoneCall } from "lucide-react";
-import { getEnrichedArtistsCatalog, getEventsCatalog } from "@/lib/events/getCatalog";
+import { getEventsCatalog } from "@/lib/events/getCatalog";
 import { buildBookingHref } from "@/lib/parrHandoff";
 import { ANNOUNCED_RED_ROCKS_2026 } from "@/data/red-rocks-2026-announced";
-import ScheduleExplorer, { type ScheduleExplorerEvent } from "@/components/schedule/ScheduleExplorer";
 import { getDynamicImage } from "@/lib/getDynamicImage";
 import { selectImageByPriority } from "@/lib/media/selectImage";
+import { getMediaIndex } from "@/lib/media/getMediaIndex";
 
 export const revalidate = 3600;
 
@@ -146,9 +146,9 @@ export default async function SchedulePage() {
       return a.name.localeCompare(b.name);
     });
 
-  const [heroImage, enrichedArtists, eventImageMap] = await Promise.all([
+  const [heroImage, mediaIndex, eventImageMap] = await Promise.all([
     getDynamicImage("venue", "Red Rocks Amphitheatre concert night", "/hero/hero-home.jpg"),
-    getEnrichedArtistsCatalog(2026, "all"),
+    getMediaIndex(2026),
     Promise.all(
       events.map(async (event) => [
         event.id,
@@ -160,10 +160,16 @@ export default async function SchedulePage() {
       ]),
     ).then((entries) => Object.fromEntries(entries) as Record<string, string>),
   ]);
-  const artistSpotifyImageMap = Object.fromEntries(
-    enrichedArtists
-      .filter((row) => row.name && row.spotifyImage)
-      .map((row) => [row.name.trim().toLowerCase(), row.spotifyImage as string]),
+  const artistMediaMap = Object.fromEntries(
+    Object.values(mediaIndex?.artistsById ?? {})
+      .filter((row) => row.name)
+      .map((row) => [
+        row.name.trim().toLowerCase(),
+        {
+          spotifyImage: row.sources.spotifyImage,
+          ticketmasterImage: row.sources.ticketmasterImage,
+        },
+      ]),
   );
 
   const grouped = events.reduce<Record<string, ScheduleEvent[]>>((acc, event) => {
@@ -172,8 +178,9 @@ export default async function SchedulePage() {
     acc[key].push(event);
     return acc;
   }, {});
-  const scheduleEvents: ScheduleExplorerEvent[] = Object.entries(grouped).flatMap(([month, monthEvents]) =>
-    monthEvents.map((event) => {
+  const scheduleSections = Object.entries(grouped).map(([month, monthEvents]) => ({
+    month,
+    events: monthEvents.map((event) => {
       const support = event.artistNames.slice(1).join(", ") || null;
       const showHref = event.showId ? `/shows/${event.showId}` : "https://www.redrocksonline.com/events/";
       const shuttleHref = buildBookingHref({
@@ -185,10 +192,10 @@ export default async function SchedulePage() {
           ...(event.showId ? { event: event.showId } : {}),
         },
       });
+      const artistMedia = artistMediaMap[(event.artistNames[0] || "").trim().toLowerCase()];
 
       return {
         id: event.id,
-        month,
         name: event.name,
         dateLabel: dateLabel(event.dateKey),
         timeLabel: toTimeLabel(event),
@@ -199,7 +206,8 @@ export default async function SchedulePage() {
           artistName: event.artistNames[0] || event.name,
           queryHint: `${event.artistNames[0] || event.name} live music artist portrait`,
           alt: `${event.artistNames[0] || event.name} artist image`,
-          spotifyImage: artistSpotifyImageMap[(event.artistNames[0] || "").trim().toLowerCase()] ?? null,
+          spotifyImage: artistMedia?.spotifyImage ?? null,
+          ticketmasterImage: artistMedia?.ticketmasterImage ?? null,
           fallback: eventImageMap[event.id] || "/venues/rrsite.jpg",
         }),
         shuttleHref,
@@ -208,7 +216,7 @@ export default async function SchedulePage() {
         showExternal: !event.showId,
       };
     }),
-  );
+  }));
 
   return (
     <main className="bg-[#090909] text-[#f8f4ed]">
@@ -267,7 +275,77 @@ export default async function SchedulePage() {
           </div>
         </div>
 
-        <ScheduleExplorer events={scheduleEvents} />
+        <div className="mt-10 space-y-10">
+          {scheduleSections.map((section) => (
+            <section key={section.month}>
+              <div className="flex items-end justify-between gap-3 border-b border-[#f5c66c]/26 pb-3">
+                <h2 className="text-2xl font-black uppercase tracking-[-0.03em] text-white sm:text-3xl">{section.month}</h2>
+                <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/56">
+                  {section.events.length} shows
+                </div>
+              </div>
+
+              <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                {section.events.map((event) => (
+                  <article
+                    key={event.id}
+                    className="overflow-hidden rounded-[24px] border border-white/12 bg-[linear-gradient(180deg,rgba(14,20,38,0.96),rgba(8,12,24,0.98))] shadow-[0_22px_70px_rgba(0,0,0,0.32)]"
+                  >
+                    <div className="relative aspect-[16/10] overflow-hidden border-b border-white/10">
+                      <Image
+                        src={event.image}
+                        alt={`${event.name} schedule image`}
+                        fill
+                        className="object-cover"
+                        sizes="(min-width: 1280px) 30vw, (min-width: 768px) 48vw, 100vw"
+                      />
+                      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,9,9,0.06),rgba(9,9,9,0.62)_100%)]" />
+                    </div>
+
+                    <div className="p-5">
+                      <h3 className="text-lg font-black uppercase tracking-[-0.02em] text-white sm:text-[1.35rem]">{event.name}</h3>
+                      <div className="mt-2 flex flex-wrap items-center gap-3 text-sm font-semibold text-[#8fd0ff]">
+                        <span className="inline-flex items-center gap-1">
+                          <CalendarDays className="h-3.5 w-3.5" />
+                          {event.dateLabel}
+                        </span>
+                        {event.timeLabel ? (
+                          <span className="inline-flex items-center gap-1 text-white/72">
+                            <Clock3 className="h-3.5 w-3.5" />
+                            {event.timeLabel}
+                          </span>
+                        ) : null}
+                      </div>
+                      {event.support ? (
+                        <p className="mt-3 text-sm leading-6 text-white/72">
+                          <span className="font-semibold text-white/82">Support:</span> {event.support}
+                        </p>
+                      ) : null}
+
+                      <div className="mt-5 space-y-2">
+                        <Link
+                          href={event.shuttleHref}
+                          className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-[#ffd6a3]/26 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-4 text-xs font-black uppercase tracking-[0.16em] text-[#120f0b] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
+                        >
+                          Book Shuttle
+                          <ArrowRight className="ml-2 h-3.5 w-3.5" />
+                        </Link>
+                        <Link
+                          href={event.showHref}
+                          target={event.showExternal ? "_blank" : undefined}
+                          rel={event.showExternal ? "noreferrer noopener" : undefined}
+                          className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-white/18 bg-white px-4 text-xs font-black uppercase tracking-[0.16em] text-[#120f0b] transition hover:bg-[#f5f5f5]"
+                        >
+                          {event.showLabel}
+                        </Link>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
 
         <div className="mt-12 rounded-2xl border border-white/12 bg-white/5 p-5 text-sm leading-6 text-white/72 sm:p-6">
           More events are added regularly. For official updates, check{" "}
