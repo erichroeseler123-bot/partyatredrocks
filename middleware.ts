@@ -79,17 +79,23 @@ export function middleware(req: NextRequest) {
     if (slug.includes("pickup") || slug.includes("sheraton") || slug.includes("downtown")) {
       url.pathname = "/guide/local/denver-pickups";
       url.hash = "downtown-pickup";
-    } else if (slug.includes("bag") || slug.includes("policy") || slug.includes("prohibited")) {
+    } else if (slug.includes("bag") || slug.includes("policy") || slug.includes("prohibited") || slug.includes("backpack")) {
       url.pathname = "/guide/logistics/bag-policy";
-    } else if (slug.includes("parking")) {
+    } else if (slug.includes("parking") || slug.includes("lot")) {
       url.pathname = "/guide/parking";
-    } else if (slug.includes("tailgate")) {
+    } else if (slug.includes("tailgate") || slug.includes("pregame") || slug.includes("pre-game")) {
       url.pathname = "/guide/tailgating";
-    } else if (slug.includes("uber") || slug.includes("rideshare") || slug.includes("shuttle")) {
+    } else if (slug.includes("private") && slug.includes("shared")) {
+      url.pathname = "/red-rocks/transportation/private-vs-shared";
+    } else if (slug.includes("worth-it") || slug.includes("worthit")) {
+      url.pathname = "/red-rocks/transportation/is-shuttle-worth-it";
+    } else if (slug.includes("uber") || slug.includes("rideshare")) {
       url.pathname = "/red-rocks/transportation/shuttle-vs-uber";
-    } else if (slug.includes("post-encore") || slug.includes("pickup-plan") || slug.includes("post-show")) {
+    } else if (slug.includes("drive") || slug.includes("driving")) {
+      url.pathname = "/red-rocks/transportation/shuttle-vs-driving";
+    } else if (slug.includes("post-encore") || slug.includes("pickup-plan") || slug.includes("post-show") || slug.includes("after-show") || slug.includes("ride-home")) {
       url.pathname = "/guide/show-night-strategy/post-show-pickup-plan";
-    } else if (slug.includes("weather") || slug.includes("what-to-wear")) {
+    } else if (slug.includes("weather") || slug.includes("what-to-wear") || slug.includes("cold") || slug.includes("snow") || slug.includes("rain")) {
       url.pathname = "/guide/show-night-strategy";
     } else {
       url.pathname = "/guide";
