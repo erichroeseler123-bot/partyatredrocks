@@ -93,10 +93,16 @@ export function middleware(req: NextRequest) {
       url.pathname = "/red-rocks/transportation/shuttle-vs-uber";
     } else if (slug.includes("drive") || slug.includes("driving")) {
       url.pathname = "/red-rocks/transportation/shuttle-vs-driving";
-    } else if (slug.includes("post-encore") || slug.includes("pickup-plan") || slug.includes("post-show") || slug.includes("after-show") || slug.includes("ride-home")) {
+    } else if (slug.includes("leave") || slug.includes("exit") || slug.includes("encore") || slug.includes("ride-home") || slug.includes("ridehome")) {
+      url.pathname = "/red-rocks/post-concert-transportation";
+    } else if (slug.includes("post-encore") || slug.includes("pickup-plan") || slug.includes("post-show") || slug.includes("after-show")) {
       url.pathname = "/guide/show-night-strategy/post-show-pickup-plan";
-    } else if (slug.includes("weather") || slug.includes("what-to-wear") || slug.includes("cold") || slug.includes("snow") || slug.includes("rain")) {
+    } else if (slug.includes("when-to-leave") || slug.includes("what-time") || slug.includes("when-to-arrive") || slug.includes("arrive") || slug.includes("timing")) {
       url.pathname = "/guide/show-night-strategy";
+    } else if (slug.includes("what-to-bring") || slug.includes("bring") || slug.includes("pack") || slug.includes("wear") || slug.includes("what-to-wear") || slug.includes("cold") || slug.includes("snow") || slug.includes("rain") || slug.includes("weather")) {
+      url.pathname = "/red-rocks/what-to-wear";
+    } else if (slug.includes("concert") || slug.includes("red-rocks-guide") || slug.includes("show-guide") || slug.includes("first-time")) {
+      url.pathname = "/red-rocks/concert-guide";
     } else {
       url.pathname = "/guide";
     }
