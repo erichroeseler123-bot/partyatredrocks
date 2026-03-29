@@ -30,7 +30,7 @@ type HomeSectionsProps = {
 export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency }: HomeSectionsProps) {
   const rideCards = [
     {
-      title: "$59 Shuttle Tickets",
+      title: "Shuttle Tickets",
       subtitle: "$59 fixed per seat",
       copy: "Best for couples, solo riders, and smaller groups.",
       bullets: [
@@ -38,7 +38,7 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
         "Guaranteed return after the show",
       ],
       href: BOOK_SHARED_RED_ROCKS,
-      cta: "View $59 Tickets",
+      cta: "View Shuttle Options",
       image: sprinterSrc,
       alt: "Shared shuttle option for Red Rocks transportation",
     },
@@ -96,7 +96,7 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
                   href={BOOK_SHARED_RED_ROCKS}
                   className="brand-button-primary brand-button-pulse inline-flex min-h-14 px-8 text-sm font-black uppercase tracking-[0.16em]"
                 >
-                  Book $59 Shuttle Tickets
+                  Book Shuttle
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
                 <Link
@@ -140,7 +140,7 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
           <div className="max-w-3xl">
             <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.24em]">Step 1</div>
             <h2 className="mt-3 text-[2rem] font-black uppercase tracking-[-0.04em] text-white sm:text-[2.6rem]">
-              Choose $59 Shuttle Tickets or a Private Car
+              Choose Shuttle Tickets or a Private Car
             </h2>
             <p className="mt-3 max-w-2xl text-[15px] leading-7 text-white/76">
               Tap one option and go straight to pricing and availability.
