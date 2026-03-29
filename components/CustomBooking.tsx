@@ -79,6 +79,26 @@ function firstValue(searchParams: SearchParams | undefined, key: string) {
   return Array.isArray(value) ? value[0] : value;
 }
 
+async function readJsonResponse<T>(response: Response, fallbackMessage: string): Promise<T> {
+  const text = await response.text();
+  if (!text) {
+    if (!response.ok) throw new Error(fallbackMessage);
+    return {} as T;
+  }
+
+  try {
+    return JSON.parse(text) as T;
+  } catch {
+    throw new Error(fallbackMessage);
+  }
+}
+
+function isActiveCheckout(checkout: CheckoutState | null) {
+  if (!checkout) return false;
+  const expiresAt = new Date(checkout.expiresAt).getTime();
+  return Number.isFinite(expiresAt) && expiresAt > Date.now() + 5_000;
+}
+
 function StepLabel({ step, title }: { step: number; title: string }) {
   return (
     <div className="flex items-center gap-2 text-[13px] font-black uppercase tracking-[0.18em] text-[var(--brand-orange)] sm:text-[14px]">
@@ -176,7 +196,7 @@ export default function CustomBooking({
       cache: 'no-store',
     })
       .then(async (res) => {
-        const data = await res.json();
+        const data = await readJsonResponse<{ error?: string } & Inventory>(res, 'Failed to load inventory');
         if (!res.ok) throw new Error(data.error || 'Failed to load inventory');
         return data;
       })
@@ -217,36 +237,47 @@ export default function CustomBooking({
     setError(null);
 
     try {
-      const checkoutRes = await fetch('/api/shared/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          venue,
-          date,
-          pickupHub,
-          qty: quantity,
-          artist,
-          event,
-          notes: formData.notes,
-          customer: {
-            firstName: formData.firstName,
-            lastName: formData.lastName,
-            email: formData.email,
-            phone: formData.phone,
-            phoneCountry: formData.phoneCountry,
-          },
-        }),
-      });
+      let activeCheckout = isActiveCheckout(checkoutState) ? checkoutState : null;
 
-      const checkoutData = await checkoutRes.json();
-      if (!checkoutRes.ok) throw new Error(checkoutData.error || 'Failed to start checkout');
+      if (!activeCheckout) {
+        const checkoutRes = await fetch('/api/shared/checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            venue,
+            date,
+            pickupHub,
+            qty: quantity,
+            artist,
+            event,
+            notes: formData.notes,
+            customer: {
+              firstName: formData.firstName,
+              lastName: formData.lastName,
+              email: formData.email,
+              phone: formData.phone,
+              phoneCountry: formData.phoneCountry,
+            },
+          }),
+        });
 
-      setCheckoutState({
-        internalOrderId: checkoutData.internalOrderId,
-        expiresAt: checkoutData.expiresAt,
-        squareOrderId: checkoutData.squareOrderId,
-      });
-      setInventory((current) => current ? { ...current, available: checkoutData.availableAfterHold, reserved: current.capacity - checkoutData.availableAfterHold } : current);
+        const checkoutData = await readJsonResponse<{
+          error?: string;
+          internalOrderId: string;
+          expiresAt: string;
+          squareOrderId: string;
+          availableAfterHold: number;
+        }>(checkoutRes, 'Failed to start checkout');
+        if (!checkoutRes.ok) throw new Error(checkoutData.error || 'Failed to start checkout');
+
+        activeCheckout = {
+          internalOrderId: checkoutData.internalOrderId,
+          expiresAt: checkoutData.expiresAt,
+          squareOrderId: checkoutData.squareOrderId,
+        };
+        setCheckoutState(activeCheckout);
+        setInventory((current) => current ? { ...current, available: checkoutData.availableAfterHold, reserved: current.capacity - checkoutData.availableAfterHold } : current);
+      }
 
       const tokenResult = await cardRef.current.tokenize();
       if (tokenResult.status !== 'OK' || !tokenResult.token) {
@@ -258,13 +289,17 @@ export default function CustomBooking({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          internalOrderId: checkoutData.internalOrderId,
-          squareOrderId: checkoutData.squareOrderId,
+          internalOrderId: activeCheckout.internalOrderId,
+          squareOrderId: activeCheckout.squareOrderId,
           sourceId: tokenResult.token,
         }),
       });
 
-      const paymentData = await paymentRes.json();
+      const paymentData = await readJsonResponse<{ error?: string; successUrl: string }>(paymentRes, 'Failed to process payment');
+      if (paymentRes.status === 404) {
+        setCheckoutState(null);
+        throw new Error('Your checkout hold expired. Click Pay again to start a fresh order.');
+      }
       if (!paymentRes.ok) throw new Error(paymentData.error || 'Failed to process payment');
 
       window.location.href = paymentData.successUrl;
@@ -429,6 +464,7 @@ export default function CustomBooking({
           <div className="text-[11px] font-black uppercase tracking-[0.2em] text-emerald-200">Checkout hold active</div>
           <div className="mt-2">Order: <span className="font-black text-white">{checkoutState.internalOrderId}</span></div>
           <div>Hold expires: <span className="font-black text-white">{new Date(checkoutState.expiresAt).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}</span></div>
+          <div className="mt-2 text-white/72">If card validation fails, fix the field and click Pay again. This same hold will be reused until it expires.</div>
         </div>
       ) : null}
 

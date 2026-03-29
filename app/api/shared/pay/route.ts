@@ -2,7 +2,7 @@ import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { getInternalOrderById } from "@/lib/orders";
 import { sendSharedBookingConfirmation } from "@/lib/sharedConfirmation";
-import { confirmSharedPayment } from "@/lib/sharedInventory";
+import { confirmSharedPayment, getSharedCheckoutStatus } from "@/lib/sharedInventory";
 import { siteOrigin, squareClient, squareLocationId } from "@/lib/square";
 
 export const runtime = "nodejs";
@@ -15,6 +15,22 @@ type Body = {
 
 function requiredString(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
+}
+
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function getInternalOrderWithRetry(internalOrderId: string) {
+  const delays = [0, 150, 350, 750];
+
+  for (const delayMs of delays) {
+    if (delayMs > 0) await sleep(delayMs);
+    const order = await getInternalOrderById(internalOrderId);
+    if (order) return order;
+  }
+
+  return null;
 }
 
 export async function POST(request: Request) {
@@ -33,8 +49,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Missing payment details" }, { status: 400 });
   }
 
-  const order = await getInternalOrderById(internalOrderId);
+  const order = await getInternalOrderWithRetry(internalOrderId);
   if (!order) {
+    const { hold } = await getSharedCheckoutStatus(internalOrderId);
+    if (hold?.status === "pending") {
+      return NextResponse.json({ error: "Checkout hold is still syncing. Try the payment again in a few seconds." }, { status: 409 });
+    }
     return NextResponse.json({ error: "Order not found" }, { status: 404 });
   }
 

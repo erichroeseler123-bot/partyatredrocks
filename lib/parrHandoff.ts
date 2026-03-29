@@ -24,6 +24,8 @@ export const DCC_HANDOFF_QUERY_KEYS = [
   "partner_handoff_id",
 ] as const;
 
+const DCC_SHARED_PASSTHROUGH_KEYS = ["pickupHub", "city", "requests"] as const;
+
 export type DccHandoffQueryKey = (typeof DCC_HANDOFF_QUERY_KEYS)[number];
 export type HandoffSearchParams = Record<string, string | string[] | undefined>;
 
@@ -82,6 +84,29 @@ function appendQuery(path: string, query: URLSearchParams) {
   return search ? `${path}?${search}` : path;
 }
 
+export function buildDccRedRocksBookingHref({
+  searchParams,
+  overrides,
+}: {
+  searchParams?: HandoffSearchParams;
+  overrides?: Partial<Record<DccHandoffQueryKey, string | number | null | undefined>>;
+} = {}) {
+  const query = pickDccHandoffParams(searchParams, {
+    ...overrides,
+    venue: "red-rocks-amphitheatre",
+  });
+
+  query.delete("venue");
+
+  for (const key of DCC_SHARED_PASSTHROUGH_KEYS) {
+    const rawValue = firstValue(searchParams, key);
+    if (!rawValue) continue;
+    query.set(key, rawValue);
+  }
+
+  return appendQuery("/book/red-rocks-amphitheatre/custom/shared", query);
+}
+
 type BuildBookingHrefArgs = {
   target: "book" | "venue" | "shared" | "private" | "shared-product" | "private-option" | "shuttles";
   venue?: string | null;
@@ -123,7 +148,10 @@ export function buildBookingHref({
   }
 
   if (target === "shared") {
-    return appendQuery(`/book/${normalizedVenue}/custom/shared`, query);
+    const sharedPath = normalizedVenue === "red-rocks-amphitheatre"
+      ? `/book/${normalizedVenue}/custom/shared`
+      : `/book/${normalizedVenue}/shared`;
+    return appendQuery(sharedPath, query);
   }
 
   if (target === "private") {
@@ -131,10 +159,10 @@ export function buildBookingHref({
   }
 
   if (target === "shared-product") {
-    return appendQuery(
-      `/book/${normalizedVenue}/shared/${encodeURIComponent(productCode || "")}`,
-      query,
-    );
+    const sharedPath = normalizedVenue === "red-rocks-amphitheatre"
+      ? `/book/${normalizedVenue}/custom/shared`
+      : `/book/${normalizedVenue}/shared`;
+    return appendQuery(sharedPath, query);
   }
 
   return appendQuery(
