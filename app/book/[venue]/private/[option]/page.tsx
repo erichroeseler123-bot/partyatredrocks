@@ -137,7 +137,7 @@ export default async function PrivateOptionPage({
             Custom checkout
           </div>
           <p className="max-w-3xl text-sm leading-6 text-white/74">
-            This option now uses the custom DCC checkout flow instead of the hosted Rezdy widget. Pick your show date, enter your pickup address, and pay online without the external human-verification wall.
+            This option uses the custom DCC checkout flow. Pick your show date, enter your pickup address, and pay online without leaving the site.
           </p>
           <TrustStrip className="mb-4 mt-5" />
           <a

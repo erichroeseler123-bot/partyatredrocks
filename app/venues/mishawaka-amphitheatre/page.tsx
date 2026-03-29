@@ -1,16 +1,16 @@
 import Link from "next/link";
-import Script from "next/script";
-
-const MISHAWAKA_WIDGET_URL =
-  "https://gosnotransportation58.rezdy.com/catalog/643626/mishawaka?iframe=true";
+import { PARR_PUBLIC_FACTS } from "@/lib/publicOperatorFacts";
 
 export const metadata = {
   title: "Mishawaka Shuttle | Party at Red Rocks",
   description:
-    "Book Mishawaka Amphitheatre shuttle transportation online with the live Mishawaka Rezdy catalog.",
+    "Plan Mishawaka Amphitheatre transportation with Party at Red Rocks. Contact us for current ride options and availability.",
 };
 
 export default function MishawakaPage() {
+  const supportEmail = PARR_PUBLIC_FACTS.support.email;
+  const supportPhone = PARR_PUBLIC_FACTS.support.phoneDisplay;
+
   return (
     <main className="min-h-screen bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
       <section className="mx-auto flex max-w-[1240px] flex-col gap-8">
@@ -24,19 +24,23 @@ export default function MishawakaPage() {
               Mishawaka Amphitheatre
             </h1>
             <p className="mt-5 max-w-2xl text-[15px] leading-7 text-white/74 sm:text-lg">
-              Book Mishawaka shuttle transportation online here. This page uses the live Mishawaka booking catalog.
+              Mishawaka transportation is handled directly through Party at Red Rocks. Contact us for current ride options, pricing, and show-night availability.
             </p>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-white/68 sm:text-[15px]">
-              Mountain timing can be tighter than a city venue, so it helps to lock in the ride before show night.
+              Mountain venue timing can shift fast, so we confirm the ride plan directly before show night.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <a
-                href={MISHAWAKA_WIDGET_URL.replace("?iframe=true", "")}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`mailto:${supportEmail}`}
                 className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
               >
-                Open Mishawaka Booking
+                Email {supportEmail}
+              </a>
+              <a
+                href={`sms:${PARR_PUBLIC_FACTS.support.phoneE164}?&body=${encodeURIComponent(PARR_PUBLIC_FACTS.support.smsLead)}`}
+                className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
+              >
+                Text {supportPhone}
               </a>
               <Link
                 href="/venues"
@@ -46,22 +50,6 @@ export default function MishawakaPage() {
               </Link>
             </div>
           </div>
-        </section>
-
-        <section className="overflow-visible rounded-[30px] border border-white/10 bg-[#0b1224] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.42)] sm:p-6">
-          <Script src="https://gosnotransportation58.rezdy.com/pluginJs" strategy="afterInteractive" />
-          <div className="mb-4 text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
-            Book Online
-          </div>
-          <iframe
-            seamless
-            width="100%"
-            height="1000"
-            frameBorder="0"
-            className="rezdy w-full rounded-[20px] border-0 bg-white"
-            src={MISHAWAKA_WIDGET_URL}
-            title="Mishawaka booking widget"
-          />
         </section>
       </section>
     </main>

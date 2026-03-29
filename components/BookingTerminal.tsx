@@ -4,13 +4,12 @@ import { useState, useEffect } from 'react';
 export default function BookingTerminal({ productType }: { productType: 'shared' | 'private' }) {
   const [inventory, setInventory] = useState<number | null>(null);
 
-  // Placeholder for real-time Rezdy sync
+  // Placeholder for a future real-time inventory sync
   useEffect(() => {
-    async function syncRezdy() {
-      // Logic to fetch availability for product IDs (Shared: $59 / Private: $499)
-      // fetch('https://api.rezdy.com/v1/availability/...')
+    async function syncInventory() {
+      // Logic to fetch availability for product IDs (Shared: $1 / Private: $499)
     }
-    syncRezdy();
+    syncInventory();
   }, [productType]);
 
   return (
