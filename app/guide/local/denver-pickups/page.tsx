@@ -2,8 +2,10 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import ShuttleCTA from "@/components/cta/ShuttleCTA";
 import { buildUnsplashImageSrc } from "@/lib/unsplash";
+import { buildPageIntentMetadata } from "@/lib/pageIntentMetadata";
 
 export const metadata: Metadata = {
+  ...buildPageIntentMetadata("/guide/local/denver-pickups"),
   title: "Denver Shuttle Pickup: Sheraton Downtown | Party at Red Rocks",
   description:
     "Downtown Denver pickup location for Party at Red Rocks. Meet at the Sheraton Denver Downtown and ride a $59 per-person shuttle to Red Rocks with a return plan after the show.",

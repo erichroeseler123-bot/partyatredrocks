@@ -22,7 +22,8 @@
     "style:check": "bash scripts/style_leaks_no_globals.sh",
     "typecheck": "tsc --noEmit -p tsconfig.check.json",
     "build-quick-red-rocks-events": "node scripts/build-quick-red-rocks-events.mjs",
-    "routing:validate": "tsx scripts/validate-intent-routing.ts"
+    "routing:validate": "tsx scripts/validate-intent-routing.ts",
+    "routing:report": "tsx scripts/report-intent-mismatches.ts"
   },
   "dependencies": {
     "@next/third-parties": "^16.1.6",

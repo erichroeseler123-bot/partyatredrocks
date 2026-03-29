@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { PARR_PUBLIC_FACTS } from "@/lib/publicOperatorFacts";
+import { buildPageIntentMetadata } from "@/lib/pageIntentMetadata";
 
 export const metadata = {
+  ...buildPageIntentMetadata("/venues/mishawaka-amphitheatre"),
   title: "Mishawaka Shuttle | Party at Red Rocks",
   description:
     "Plan Mishawaka Amphitheatre transportation with Party at Red Rocks. Contact us for current ride options and availability.",

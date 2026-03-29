@@ -6,11 +6,13 @@ import { GuideVisualHero } from "@/components/guide/GuideVisualHero";
 import MusicWave from "@/components/MusicWave";
 import { assertUniqueGuideImages, getGuideCardImage } from "@/data/media";
 import { type GuideVisualKey, guideVisuals } from "@/lib/guideVisuals";
+import { buildPageIntentMetadata } from "@/lib/pageIntentMetadata";
 
 const SITE = "https://www.partyatredrocks.com";
 const GUIDE_HERO_IMAGE = getGuideCardImage("red-rocks-visiting-guide");
 
 export const metadata = {
+  ...buildPageIntentMetadata("/guide"),
   title: "Red Rocks Guides | Party at Red Rocks",
   description:
     "Parking, transportation, venue policies, and show-night planning guides for Red Rocks.",
