@@ -1,7 +1,4 @@
 import { NextResponse } from "next/server";
-import { VENUE_SLUGS } from "@/lib/venues";
-import { RED_ROCKS_ENTITIES } from "@/lib/redRocksAuthority";
-import { SCENES } from "@/data/scenes";
 
 type UrlEntry = {
   loc: string;
@@ -43,166 +40,23 @@ export async function GET() {
 
   const urls: UrlEntry[] = [
     { loc: `${base}/`, lastmod: now, changefreq: "daily", priority: 1.0 },
-    { loc: `${base}/week`, lastmod: now, changefreq: "hourly", priority: 0.9 },
-    { loc: `${base}/venues`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/find`, lastmod: now, changefreq: "daily", priority: 0.9 },
     { loc: `${base}/shuttles`, lastmod: now, changefreq: "daily", priority: 0.9 },
     { loc: `${base}/book/red-rocks-amphitheatre`, lastmod: now, changefreq: "daily", priority: 0.9 },
     { loc: `${base}/book/red-rocks-amphitheatre/custom/shared`, lastmod: now, changefreq: "daily", priority: 0.9 },
     { loc: `${base}/book/red-rocks-amphitheatre/private`, lastmod: now, changefreq: "daily", priority: 0.9 },
-    { loc: `${base}/red-rocks`, lastmod: now, changefreq: "daily", priority: 0.9 },
     { loc: `${base}/red-rocks/transportation`, lastmod: now, changefreq: "daily", priority: 0.9 },
+    { loc: `${base}/red-rocks/transportation/shuttle-vs-uber`, lastmod: now, changefreq: "daily", priority: 0.8 },
     { loc: `${base}/red-rocks/transportation/shuttle-vs-driving`, lastmod: now, changefreq: "daily", priority: 0.8 },
     { loc: `${base}/red-rocks/transportation/private-vs-shared`, lastmod: now, changefreq: "daily", priority: 0.8 },
     { loc: `${base}/red-rocks/transportation/is-shuttle-worth-it`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/red-rocks/parking`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/red-rocks/faq`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/month/red-rocks`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/2026/red-rocks-concerts`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/red-rocks/concert-guide`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/red-rocks/concerts`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/red-rocks/weather`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/red-rocks/what-to-wear`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/red-rocks/visiting-guide`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/red-rocks/hiking-trails`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/red-rocks/geology`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/red-rocks/wildlife`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/red-rocks/camping-nearby`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/ogden-theatre/concerts`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/venues/ogden-theatre/concerts/june`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/ogden-theatre/concerts/july`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/ogden-theatre/concerts/august`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/gothic-theatre/concerts`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/venues/bluebird-theater/concerts`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/venues/bluebird-theater/concerts/june`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/bluebird-theater/concerts/july`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/bluebird-theater/concerts/august`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/paramount-theatre/concerts`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/venues/paramount-theatre/concerts/june`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/paramount-theatre/concerts/july`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/paramount-theatre/concerts/august`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/summit-music-hall/concerts`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/venues/summit-music-hall/concerts/june`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/summit-music-hall/concerts/july`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/summit-music-hall/concerts/august`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/levitt-pavilion-denver/concerts`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/venues/levitt-pavilion-denver/concerts/june`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/levitt-pavilion-denver/concerts/july`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/levitt-pavilion-denver/concerts/august`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/1stbank-center/concerts`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/venues/1stbank-center/concerts/june`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/1stbank-center/concerts/july`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/1stbank-center/concerts/august`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/mission-ballroom/concerts`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/venues/mission-ballroom/concerts/june`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/mission-ballroom/concerts/july`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/mission-ballroom/concerts/august`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/fiddlers-green-amphitheatre/concerts`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/venues/fiddlers-green-amphitheatre/concerts/june`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/fiddlers-green-amphitheatre/concerts/july`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/fiddlers-green-amphitheatre/concerts/august`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/ball-arena/concerts`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/venues/ball-arena/concerts/june`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/ball-arena/concerts/july`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-    { loc: `${base}/venues/ball-arena/concerts/august`, lastmod: now, changefreq: "weekly", priority: 0.7 },
-
-    // scenes
-    { loc: `${base}/scene`, lastmod: now, changefreq: "daily", priority: 0.8 },
+    { loc: `${base}/guide/local/denver-pickups`, lastmod: now, changefreq: "daily", priority: 0.9 },
+    { loc: `${base}/guide/local/trailhead-taphouse`, lastmod: now, changefreq: "weekly", priority: 0.7 },
+    { loc: `${base}/guide/parking`, lastmod: now, changefreq: "daily", priority: 0.8 },
+    { loc: `${base}/guide/tailgating`, lastmod: now, changefreq: "daily", priority: 0.8 },
+    { loc: `${base}/guide/show-night-strategy`, lastmod: now, changefreq: "daily", priority: 0.8 },
+    { loc: `${base}/guide/show-night-strategy/post-show-pickup-plan`, lastmod: now, changefreq: "daily", priority: 0.8 },
+    { loc: `${base}/guide/logistics/bag-policy`, lastmod: now, changefreq: "daily", priority: 0.8 },
   ];
-
-  const venueConcertMonthSlugs = [
-    "ogden-theatre",
-    "bluebird-theater",
-    "paramount-theatre",
-    "summit-music-hall",
-    "levitt-pavilion-denver",
-    "1stbank-center",
-    "mission-ballroom",
-    "fiddlers-green-amphitheatre",
-    "ball-arena",
-  ];
-  const additionalMonths = ["september", "october", "november", "december"] as const;
-  for (const slug of venueConcertMonthSlugs) {
-    for (const month of additionalMonths) {
-      urls.push({
-        loc: `${base}/venues/${slug}/concerts/${month}`,
-        lastmod: now,
-        changefreq: "monthly",
-        priority: 0.6,
-      });
-    }
-  }
-
-  for (const scene of SCENES) {
-    urls.push({
-      loc: `${base}/scene/${scene.slug}`,
-      lastmod: now,
-      changefreq: "daily",
-      priority: 0.8,
-    });
-  }
-  urls.push({
-    loc: `${base}/scene/bluegrass/festivals`,
-    lastmod: now,
-    changefreq: "weekly",
-    priority: 0.7,
-  });
-  urls.push({
-    loc: `${base}/phish-folsom`,
-    lastmod: now,
-    changefreq: "weekly",
-    priority: 0.8,
-  });
-  urls.push({
-    loc: `${base}/dead-and-company-red-rocks`,
-    lastmod: now,
-    changefreq: "weekly",
-    priority: 0.8,
-  });
-
-  // venue detail pages
-  for (const slug of VENUE_SLUGS) {
-    urls.push({
-      loc: `${base}/book/${slug}`,
-      lastmod: now,
-      changefreq: "daily",
-      priority: slug === "red-rocks-amphitheatre" ? 0.9 : 0.7,
-    });
-    urls.push({
-      loc: `${base}/venues/${slug}`,
-      lastmod: now,
-      changefreq: "daily",
-      priority: 0.7,
-    });
-    urls.push({
-      loc: `${base}/venues/${slug}/best-time-to-arrive`,
-      lastmod: now,
-      changefreq: "weekly",
-      priority: 0.7,
-    });
-    urls.push({
-      loc: `${base}/venues/${slug}/what-to-wear`,
-      lastmod: now,
-      changefreq: "weekly",
-      priority: 0.7,
-    });
-    urls.push({
-      loc: `${base}/venues/${slug}/transportation`,
-      lastmod: now,
-      changefreq: "weekly",
-      priority: 0.7,
-    });
-  }
-
-  // programmatic red rocks authority pages
-  for (const page of RED_ROCKS_ENTITIES) {
-    urls.push({
-      loc: `${base}/red-rocks/${page.slug}`,
-      lastmod: now,
-      changefreq: "weekly",
-      priority: page.category === "transportation" ? 0.9 : 0.7,
-    });
-  }
 
   return new NextResponse(toXml(urls), {
     headers: {

@@ -28,6 +28,10 @@ export const metadata: Metadata = {
   title: "Red Rocks Amphitheatre 2026 Full Concert Schedule | Party at Red Rocks Shuttle",
   description:
     "Red Rocks 2026 concert schedule with month-by-month listings, show pages, and direct shuttle booking links.",
+  robots: {
+    index: false,
+    follow: true,
+  },
   alternates: { canonical: `${SITE}/schedule` },
   openGraph: {
     title: "Red Rocks Amphitheatre 2026 Full Concert Schedule | Party at Red Rocks Shuttle",

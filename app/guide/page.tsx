@@ -16,6 +16,10 @@ export const metadata = {
   title: "Red Rocks Guides | Party at Red Rocks",
   description:
     "Parking, transportation, venue policies, and show-night planning guides for Red Rocks.",
+  robots: {
+    index: false,
+    follow: true,
+  },
   alternates: {
     canonical: `${SITE}/guide`,
   },

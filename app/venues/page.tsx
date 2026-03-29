@@ -2,6 +2,15 @@ import Link from "next/link";
 import ServedVenueSections from "@/components/venues/ServedVenueSections";
 import { curatedImages } from "@/lib/curatedImages";
 
+export const metadata = {
+  title: "Venue Coverage | Party at Red Rocks",
+  description: "Venue coverage pages for Party at Red Rocks.",
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
+
 export default function VenuesPage() {
   return (
     <main className="brand-page bg-[radial-gradient(circle_at_top,rgba(255,91,46,0.15),transparent_26%),radial-gradient(circle_at_18%_10%,rgba(59,130,246,0.14),transparent_18%),linear-gradient(180deg,#0b0b0f_0%,#0b0b0f_100%)] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">

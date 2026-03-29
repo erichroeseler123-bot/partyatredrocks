@@ -18,6 +18,10 @@ export const metadata: Metadata = {
   title: "Red Rocks Lineup This Week | Upcoming Shows and Ride Planning",
   description:
     "See the Red Rocks lineup this week, open show pages, and plan shuttle or private rides before show night.",
+  robots: {
+    index: false,
+    follow: true,
+  },
   alternates: { canonical: `${SITE}/week/red-rocks` },
   openGraph: {
     title: "Red Rocks Lineup This Week | Upcoming Shows and Ride Planning",

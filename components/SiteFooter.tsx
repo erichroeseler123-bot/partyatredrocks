@@ -1,53 +1,53 @@
 import Link from "next/link";
 import { SITE_CONFIG } from "@/app/site-config";
 import SocialLinks from "@/components/shared/SocialLinks";
+import { buildDccRedRocksBookingHref } from "@/lib/parrHandoff";
 import { BUSINESS_PHONE } from "@/lib/seo/siteTrust";
+import { PARR_PUBLIC_FACTS } from "@/lib/publicOperatorFacts";
+
+const redRocksBookingHref = buildDccRedRocksBookingHref();
 
 const FOOTER_GROUPS = [
   {
-    title: "Ride Options",
+    title: "Book",
     links: [
-      { href: "/book/red-rocks-amphitheatre", label: "Book a Ride" },
-      { href: "/private-suburban", label: "Private SUV" },
-      { href: "/private-van", label: "10 Passenger Van" },
-      { href: "/party-bus", label: "24 Passenger Party Bus" },
+      { href: "/book/red-rocks-amphitheatre/custom/shared", label: "Shuttle Tickets" },
+      { href: "/book/red-rocks-amphitheatre/private#suv-booking", label: "Private SUV" },
+      { href: "/book/red-rocks-amphitheatre/private#van-upgrade", label: "Van Upgrade" },
     ],
   },
   {
-    title: "Venues",
+    title: "Compare",
     links: [
-      { href: "/venues", label: "All Venues" },
-      { href: "/venues/red-rocks-amphitheatre", label: "Red Rocks" },
-      { href: "/venues/mission-ballroom", label: "Mission Ballroom" },
-      { href: "/venues/fillmore-auditorium", label: "Fillmore" },
+      { href: "/red-rocks/transportation/shuttle-vs-uber", label: "Shuttle vs Uber" },
+      { href: "/red-rocks/transportation/shuttle-vs-driving", label: "Shuttle vs Driving" },
+      { href: "/red-rocks/transportation/private-vs-shared", label: "Private vs Shared" },
+      { href: "/red-rocks/transportation/is-shuttle-worth-it", label: "Is Shuttle Worth It?" },
     ],
   },
   {
-    title: "Artists",
+    title: "Logistics",
     links: [
-      { href: "/bands", label: "Artists" },
-      { href: "/week/red-rocks", label: "Shows This Week" },
-      { href: "/calendar", label: "Calendar" },
-      { href: "/scenes", label: "Scenes" },
+      { href: "/guide/local/denver-pickups", label: "Downtown Pickups" },
+      { href: "/guide/parking", label: "Parking Guide" },
+      { href: "/guide/show-night-strategy", label: "Show-Night Strategy" },
+      { href: "/guide/logistics/bag-policy", label: "Bag Policy" },
     ],
   },
   {
-    title: "Help",
+    title: "Support",
     links: [
-      { href: "/guide", label: "Guides" },
-      { href: "/red-rocks/faq", label: "Red Rocks FAQ" },
-      { href: "/about", label: "About" },
+      { href: redRocksBookingHref, label: "Booking Hub" },
+      { href: "/contact", label: "Contact" },
       { href: "/privacy", label: "Privacy" },
       { href: "/terms", label: "Terms" },
-      { href: "/contact", label: "Contact" },
-      { href: "/book/red-rocks-amphitheatre", label: "Pickup Details" },
     ],
   },
 ] as const;
 
 export default function SiteFooter() {
   const brandKey = SITE_CONFIG.socialBrandKey;
-  const footerMessage = "Hey - asking about Party At Red Rocks rides.";
+  const footerMessage = PARR_PUBLIC_FACTS.support.smsLead;
   const smsUrl = `sms:${BUSINESS_PHONE.replace(/^\+/, "")}?&body=${encodeURIComponent(footerMessage)}`;
   const whatsappUrl = `https://wa.me/${BUSINESS_PHONE.replace(/^\+/, "")}?text=${encodeURIComponent(footerMessage)}`;
 
@@ -61,10 +61,10 @@ export default function SiteFooter() {
                 Party at Red Rocks
               </div>
               <div className="mt-3 text-[15px] text-[color:var(--brand-text-soft)]">
-                Shared shuttle seats and private rides for Red Rocks concerts, with pickup points in Denver and return rides after the show.
+                Shared shuttle tickets, private SUVs, and direct pickup planning for Red Rocks show nights.
               </div>
               <div className="mt-4 text-[13px] font-semibold uppercase tracking-[0.16em] text-[var(--brand-cyan)]">
-                Follow real rides, show nights, and last-minute availability
+                Compare the ride, pick the plan, and book it
               </div>
             </div>
 
@@ -107,6 +107,9 @@ export default function SiteFooter() {
           </div>
 
           <div className="mt-4 border-t border-[color:var(--brand-border)] pt-4">
+            <p className="mb-3 max-w-2xl text-sm text-[color:var(--brand-text-soft)]">
+              {PARR_PUBLIC_FACTS.support.longWording}
+            </p>
             <div className="flex items-center gap-3 overflow-x-auto whitespace-nowrap [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
               <Link
                 href={smsUrl}

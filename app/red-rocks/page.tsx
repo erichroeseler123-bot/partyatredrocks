@@ -18,6 +18,10 @@ export const metadata: Metadata = {
   title: "Red Rocks Guide: Visiting, Concerts, Trails, Geology, Transportation",
   description:
     "Red Rocks visiting and concert guide with parking, trails, transportation, geology, wildlife, and planning basics.",
+  robots: {
+    index: false,
+    follow: true,
+  },
   alternates: { canonical: `${SITE}/red-rocks` },
   openGraph: {
     title: "Red Rocks Guide: Visiting, Concerts, Trails, Geology, Transportation",
@@ -110,7 +114,7 @@ export default async function RedRocksHubPage({
         <PageHero
           kicker="Red Rocks Guide"
           title="Plan Your Red Rocks Night"
-          description="Start with the decisions that shape the whole night: how you are getting in, when you should arrive, where your group will regroup, and what to do after the encore."
+          description="Start with the decisions that shape the whole night: how you are getting in, when you should arrive, where your group will regroup, and what to do after the show."
           secondaryDescription="Use the guide hub below to jump straight into parking, transportation, concerts, trails, geology, and the practical Red Rocks details people usually scramble to figure out too late."
           actions={[
             {
@@ -177,7 +181,7 @@ export default async function RedRocksHubPage({
           <article className="brand-card rounded-[26px] p-6">
             <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.2em]">If You&apos;re Coordinating</div>
             <p className="mt-3 text-sm leading-7 text-white/74">
-              Give your full group one arrival time, one regroup point, and one clear plan for getting home after the encore.
+              Give your full group one arrival time, one regroup point, and one clear plan for getting home after the show.
             </p>
           </article>
         </CardGrid>

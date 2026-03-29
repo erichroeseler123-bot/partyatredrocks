@@ -23,6 +23,10 @@ export const metadata: Metadata = {
   title: "Denver & Colorado Music Scenes 2026 | Concerts & Shuttle Rides",
   description:
     "Explore Denver's top music scenes with upcoming shows and direct ride-booking links across Colorado venues.",
+  robots: {
+    index: false,
+    follow: true,
+  },
   alternates: { canonical: `${SITE}/scenes` },
   openGraph: {
     title: "Colorado Music Scenes 2026",

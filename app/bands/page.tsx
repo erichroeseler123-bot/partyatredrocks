@@ -6,6 +6,10 @@ export const revalidate = 86400;
 export const metadata = {
   title: "Bands & Artists | Party At Red Rocks",
   description: "Browse artists across venue schedules and jump straight into show dates and ride booking.",
+  robots: {
+    index: false,
+    follow: true,
+  },
 };
 
 export default async function BandsPage() {

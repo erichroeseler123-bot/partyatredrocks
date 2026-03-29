@@ -74,9 +74,10 @@ export const DISPLAY = {
 
   nav: {
     links: [
-      { label: "Schedule", href: "/schedule" },
-      { label: "Guides", href: "/guide" },
-      { label: "Scene", href: "/scenes" },
+      { label: "Private Ride", href: "/book/red-rocks-amphitheatre/private" },
+      { label: "Pickups", href: "/guide/local/denver-pickups" },
+      { label: "Compare", href: "/red-rocks/transportation" },
+      { label: "Logistics", href: "/guide/show-night-strategy" },
     ],
   },
 
