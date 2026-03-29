@@ -20,7 +20,7 @@ const lastfmApiKey = process.env.LASTFM_API_KEY;
 const setlistApiKey = process.env.SETLIST_FM_API_KEY || process.env.SETLIST_API_KEY;
 const geminiApiKey = process.env.GEMINI_API_KEY;
 const musicbrainzUserAgent =
-  process.env.MUSICBRAINZ_USER_AGENT || "PartyAtRedRocks/1.0 (contact@partyatredrocks.com)";
+  process.env.MUSICBRAINZ_USER_AGENT || "PartyAtRedRocks/1.0 (hello@partyatredrocks.com)";
 
 function withTimeout(promise, ms = 10000) {
   return Promise.race([

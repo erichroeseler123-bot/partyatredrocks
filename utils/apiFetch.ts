@@ -12,7 +12,7 @@ export async function fetchArtistMBID(query: string): Promise<string | null> {
       )}&fmt=json`,
       {
         headers: {
-          "User-Agent": "PartyAtRedRocks/1.0 (contact@partyatredrocks.com)",
+          "User-Agent": "PartyAtRedRocks/1.0 (hello@partyatredrocks.com)",
         },
       }
     );

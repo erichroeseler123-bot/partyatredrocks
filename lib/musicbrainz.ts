@@ -24,7 +24,7 @@ export async function fetchMusicBrainzArtist(artistName: string) {
       `${BASE_URL}/artist/?query=${encodeURIComponent(artistName)}&fmt=json`,
       {
         headers: {
-          "User-Agent": "PartyAtRedRocks/1.0 (contact@partyatredrocks.com)",
+          "User-Agent": "PartyAtRedRocks/1.0 (hello@partyatredrocks.com)",
         },
         cache: "force-cache",
       }
@@ -41,7 +41,7 @@ export async function fetchMusicBrainzArtist(artistName: string) {
       `${BASE_URL}/artist/${artist.id}?inc=release-groups&fmt=json`,
       {
         headers: {
-          "User-Agent": "PartyAtRedRocks/1.0 (contact@partyatredrocks.com)",
+          "User-Agent": "PartyAtRedRocks/1.0 (hello@partyatredrocks.com)",
         },
         cache: "force-cache",
       }
