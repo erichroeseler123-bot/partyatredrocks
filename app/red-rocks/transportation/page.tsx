@@ -112,19 +112,19 @@ export default async function RedRocksTransportationPage({
 
         <CardGrid className="lg:grid-cols-3">
           <article className="brand-card rounded-[26px] p-6">
-            <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.2em]">Drive + Park</div>
+            <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.2em]">Drive + Park</div>
             <p className="mt-3 text-sm leading-7 text-white/74">
               Full control, but you take on parking strategy, stair load, and the slowest part of the night after the final song.
             </p>
           </article>
           <article className="brand-card rounded-[26px] p-6">
-            <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.2em]">Rideshare</div>
+            <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.2em]">Rideshare</div>
             <p className="mt-3 text-sm leading-7 text-white/74">
               Sometimes workable on lighter nights, but the least predictable option when a sold-out crowd all heads out together.
             </p>
           </article>
           <article className="brand-card rounded-[26px] p-6">
-            <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.2em]">Shuttle or Private Ride</div>
+            <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.2em]">Shuttle or Private Ride</div>
             <p className="mt-3 text-sm leading-7 text-white/74">
               The clearest plan before the night starts, especially when you want fixed pricing, one pickup point, and a guaranteed ride back.
             </p>
@@ -132,7 +132,7 @@ export default async function RedRocksTransportationPage({
         </CardGrid>
 
         <section className="brand-card mt-6 rounded-[28px] p-6 sm:p-7">
-          <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.22em]">Arrival and Return Timing</div>
+          <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.22em]">Arrival and Return Timing</div>
           <div className="mt-4 grid gap-4 md:grid-cols-3">
             <article className="rounded-[22px] border border-white/10 bg-black/15 p-5">
               <h2 className="text-sm font-black uppercase tracking-[0.18em] text-white">Arrive Early</h2>
@@ -160,7 +160,7 @@ export default async function RedRocksTransportationPage({
             href="/red-rocks/transportation/shuttle-vs-uber"
             className="brand-card block rounded-[26px] p-6 transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.38)] hover:no-underline"
           >
-            <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.22em]">Compare</div>
+            <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.22em]">Compare</div>
             <h2 className="mt-3 text-2xl font-black tracking-[-0.03em] text-white">Shuttle vs Uber at Red Rocks</h2>
             <p className="mt-3 text-sm leading-7 text-white/72">Cost and reliability comparison with post-show risk notes.</p>
           </Link>
@@ -168,7 +168,7 @@ export default async function RedRocksTransportationPage({
             href="/red-rocks/transportation/parking-reality"
             className="brand-card block rounded-[26px] p-6 transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.38)] hover:no-underline"
           >
-            <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.22em]">Parking</div>
+            <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.22em]">Parking</div>
             <h2 className="mt-3 text-2xl font-black tracking-[-0.03em] text-white">Parking Reality</h2>
             <p className="mt-3 text-sm leading-7 text-white/72">Ingress, lot tradeoffs, stair load, and exit bottlenecks.</p>
           </Link>
@@ -176,7 +176,7 @@ export default async function RedRocksTransportationPage({
             href="/red-rocks/transportation/post-show-pickup"
             className="brand-card block rounded-[26px] p-6 transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.38)] hover:no-underline"
           >
-            <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.22em]">Pickup</div>
+            <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.22em]">Pickup</div>
             <h2 className="mt-3 text-2xl font-black tracking-[-0.03em] text-white">Post-Show Pickup Strategy</h2>
             <p className="mt-3 text-sm leading-7 text-white/72">How to avoid regroup failures when crowds surge at close.</p>
           </Link>
@@ -208,7 +208,7 @@ export default async function RedRocksTransportationPage({
         </PrimaryCTASection>
 
         <section className="brand-card mt-6 rounded-[28px] p-6 sm:p-7">
-          <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.22em]">More Red Rocks Guides</div>
+          <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.22em]">More Red Rocks Guides</div>
           <div className="mt-4 flex flex-wrap gap-3">
             {coreLinks.map((item) => (
               <Link
@@ -223,7 +223,7 @@ export default async function RedRocksTransportationPage({
         </section>
 
         <section className="brand-card mt-6 rounded-[28px] p-6 sm:p-7">
-          <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.22em]">More Transportation Topics</div>
+          <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.22em]">More Transportation Topics</div>
           <div className="mt-4 flex flex-wrap gap-3">
             {transportationEntities.map((entity) => (
               <Link

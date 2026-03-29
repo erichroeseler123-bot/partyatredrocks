@@ -41,7 +41,7 @@ export default function SocialProofStrip({
     >
       <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
         <div className="max-w-2xl">
-          <div className="brand-kicker text-[11px] font-black uppercase tracking-[0.22em]">Ride nights</div>
+          <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.22em]">Ride nights</div>
           <h2 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white sm:text-3xl">{title}</h2>
           <p className="mt-3 text-sm leading-6 text-white/72 sm:text-[15px]">{body}</p>
         </div>

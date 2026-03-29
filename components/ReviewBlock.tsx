@@ -37,7 +37,7 @@ export function ReviewBlock({ className = "" }: { className?: string }) {
         className,
       ].join(" ").trim()}
     >
-      <div className="brand-kicker text-[11px] font-black uppercase tracking-[0.22em]">
+      <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.22em]">
         Rider Feedback
       </div>
       <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] text-white sm:text-3xl">

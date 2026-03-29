@@ -163,7 +163,7 @@ function GuideCard({ card, imageSrc }: { card: Card; imageSrc: string }) {
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,22,0.08),rgba(5,8,22,0.66)_100%)]" />
       </div>
       {card.kicker ? (
-        <div className="brand-kicker text-[11px] font-black uppercase tracking-[0.22em]">
+        <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.22em]">
           {card.kicker}
         </div>
       ) : null}

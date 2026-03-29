@@ -101,8 +101,8 @@ function isActiveCheckout(checkout: CheckoutState | null) {
 
 function StepLabel({ step, title }: { step: number; title: string }) {
   return (
-    <div className="flex items-center gap-2 text-[13px] font-black uppercase tracking-[0.18em] text-[var(--brand-orange)] sm:text-[14px]">
-      <span aria-hidden="true" className="text-base leading-none text-[var(--brand-orange)]">*</span>
+    <div className="flex items-center gap-2 text-[15px] font-black uppercase tracking-[0.18em] text-[var(--brand-orange)] sm:text-[16px]">
+      <span aria-hidden="true" className="text-lg leading-none text-[var(--brand-orange)] sm:text-xl">*</span>
       <span>{`Step ${step} - ${title}`}</span>
     </div>
   );
@@ -346,7 +346,7 @@ export default function CustomBooking({
         <StepLabel step={2} title="Show Date" />
         <div className="mt-4 grid gap-4 lg:grid-cols-2">
           <label className="space-y-2 text-sm text-white/74">
-            <span className="text-[11px] font-black uppercase tracking-[0.18em] text-white/54">Date</span>
+            <span className="text-[12px] font-black uppercase tracking-[0.18em] sm:text-[13px] text-white/54">Date</span>
             <input
               type="date"
               value={date}
@@ -355,7 +355,7 @@ export default function CustomBooking({
             />
           </label>
           <label className="space-y-2 text-sm text-white/74">
-            <span className="text-[11px] font-black uppercase tracking-[0.18em] text-white/54">Artist or Event</span>
+            <span className="text-[12px] font-black uppercase tracking-[0.18em] sm:text-[13px] text-white/54">Artist or Event</span>
             <input
               type="text"
               value={artist}
@@ -372,7 +372,7 @@ export default function CustomBooking({
               <div className="text-sm">Checking live seat count...</div>
             ) : inventory ? (
               <div className="space-y-2 text-sm">
-                <div className="text-[11px] font-black uppercase tracking-[0.18em] text-current/80">Live Inventory</div>
+                <div className="text-[12px] font-black uppercase tracking-[0.18em] sm:text-[13px] text-current/80">Live Inventory</div>
                 <div>
                   {inventory.available <= 6 ? 'Only' : ''} <span className="font-black text-white">{inventory.available}</span> seat{inventory.available === 1 ? '' : 's'} available
                 </div>
@@ -391,7 +391,7 @@ export default function CustomBooking({
         <StepLabel step={3} title="Seats" />
         <div className="mt-4 grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
           <label className="space-y-2 text-sm text-white/74">
-            <span className="text-[11px] font-black uppercase tracking-[0.18em] text-white/54">Number of seats</span>
+            <span className="text-[12px] font-black uppercase tracking-[0.18em] sm:text-[13px] text-white/54">Number of seats</span>
             <select
               value={quantity}
               onChange={(event) => setQuantity(Number(event.target.value))}
@@ -401,7 +401,7 @@ export default function CustomBooking({
             </select>
           </label>
           <div className="rounded-[18px] border border-white/10 bg-black/20 px-4 py-4 text-sm text-white/82">
-            <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/52">Trip total</div>
+            <div className="text-[12px] font-black uppercase tracking-[0.18em] sm:text-[13px] text-white/52">Trip total</div>
             <div className="mt-2 text-lg font-black text-white">${inventory?.pricePerSeat ?? SHARED_PRICE_PER_SEAT} x {quantity} = {totalLabel}</div>
           </div>
         </div>

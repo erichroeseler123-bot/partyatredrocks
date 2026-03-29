@@ -127,7 +127,7 @@ export default async function RedRocksHubPage({
         />
 
         <section className="brand-card mt-6 rounded-[28px] p-6 shadow-[0_22px_70px_rgba(0,0,0,0.34)] sm:p-7">
-          <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.22em]">Featured Jam Event</div>
+          <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.22em]">Featured Jam Event</div>
           <h2 className="mt-3 text-2xl font-black tracking-[-0.03em] text-white">
             Phish at Folsom Field 2026
           </h2>
@@ -162,20 +162,20 @@ export default async function RedRocksHubPage({
 
         <CardGrid className="lg:grid-cols-3">
           <article className="brand-card rounded-[26px] p-6">
-            <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.2em]">Start Here</div>
+            <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.2em]">Start Here</div>
             <p className="mt-3 text-sm leading-7 text-white/74">
               Concert nights usually start with parking, transportation, and timing. Daytime visits usually start with trails,
               geology, and weather.
             </p>
           </article>
           <article className="brand-card rounded-[26px] p-6">
-            <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.2em]">If You&apos;re Riding</div>
+            <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.2em]">If You&apos;re Riding</div>
             <p className="mt-3 text-sm leading-7 text-white/74">
               Book before show night so pickup instructions and the return ride are already handled before the venue gets crowded.
             </p>
           </article>
           <article className="brand-card rounded-[26px] p-6">
-            <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.2em]">If You&apos;re Coordinating</div>
+            <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.2em]">If You&apos;re Coordinating</div>
             <p className="mt-3 text-sm leading-7 text-white/74">
               Give your full group one arrival time, one regroup point, and one clear plan for getting home after the encore.
             </p>
@@ -189,7 +189,7 @@ export default async function RedRocksHubPage({
               href={link.href}
               className="brand-card block rounded-[26px] p-6 transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.38)] hover:no-underline"
             >
-              <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.22em]">{link.tag}</div>
+              <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.22em]">{link.tag}</div>
               <h2 className="mt-3 text-2xl font-black tracking-[-0.03em] text-white">
                 {link.title}
               </h2>
@@ -201,7 +201,7 @@ export default async function RedRocksHubPage({
         </CardGrid>
 
         <section className="brand-card mt-6 rounded-[28px] p-6 sm:p-7">
-          <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.22em]">Pages By Category</div>
+          <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.22em]">Pages By Category</div>
           <p className="mt-3 text-sm leading-7 text-white/72 sm:text-base">
             Browse the Red Rocks pages by topic.
           </p>
@@ -210,7 +210,7 @@ export default async function RedRocksHubPage({
               const pages = RED_ROCKS_ENTITIES.filter((p) => p.category === category);
               return (
                 <article key={category} className="rounded-[24px] border border-white/10 bg-black/15 p-5">
-                  <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.2em]">{meta.label}</div>
+                  <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.2em]">{meta.label}</div>
                   <p className="mt-3 text-sm leading-7 text-white/70 sm:text-base">
                     {meta.copy}
                   </p>

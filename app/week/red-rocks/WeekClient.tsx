@@ -86,7 +86,7 @@ export default function WeekClient({
         />
 
         <section className="brand-card mt-6 rounded-[28px] p-6 sm:p-7">
-          <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.22em]">Filters</div>
+          <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.22em]">Filters</div>
           <div className="mt-4 grid gap-3 md:grid-cols-[minmax(0,1fr)_240px]">
             <input
               value={q}
@@ -133,7 +133,7 @@ export default function WeekClient({
         </section>
 
         <section className="brand-card mt-6 rounded-[28px] p-6 sm:p-7">
-          <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.22em]">Before You Go</div>
+          <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.22em]">Before You Go</div>
           <p className="mt-3 text-sm leading-7 text-white/72 sm:text-base">
             Check venue notices and road conditions before you leave for the show.
           </p>

@@ -138,7 +138,7 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
 
         <section className="brand-glass-bar rounded-[32px] px-6 py-6 sm:px-8">
           <div className="max-w-3xl">
-            <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.24em]">Step 1</div>
+            <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.24em]">Step 1</div>
             <h2 className="mt-3 text-[2rem] font-black uppercase tracking-[-0.04em] text-white sm:text-[2.6rem]">
               Choose Shuttle Tickets or a Private Car
             </h2>
@@ -210,7 +210,7 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,9,9,0.01),rgba(9,9,9,0.12)_100%)]" />
               </div>
               <div>
-                <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.24em]">{urgency.label}</div>
+                <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.24em]">{urgency.label}</div>
                 <p className="mt-1 text-sm leading-6 text-white/82">{urgency.detail}</p>
               </div>
               <Link href="/week/red-rocks" className="brand-link inline-flex items-center text-sm font-black uppercase tracking-[0.16em] no-underline">

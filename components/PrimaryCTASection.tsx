@@ -24,7 +24,7 @@ export default function PrimaryCTASection({
 }) {
   return (
     <section className="brand-card mt-6 rounded-[28px] p-6 sm:p-7">
-      <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.22em]">{kicker}</div>
+      <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.22em]">{kicker}</div>
       {title ? <h2 className="mt-3 text-2xl font-black tracking-[-0.03em] text-white">{title}</h2> : null}
       <p className="mt-3 text-sm leading-7 text-white/72 sm:text-base">{body}</p>
       {secondaryBody ? <p className="mt-2 text-sm leading-7 text-white/72 sm:text-base">{secondaryBody}</p> : null}

@@ -24,7 +24,7 @@ export default function PageHero({
 }) {
   return (
     <section className="brand-panel overflow-hidden rounded-[32px] px-6 py-8 shadow-[0_28px_90px_rgba(0,0,0,0.34)] sm:px-8 sm:py-10 lg:px-10">
-      <div className="brand-kicker text-[11px] font-black uppercase tracking-[0.24em]">{kicker}</div>
+      <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.24em]">{kicker}</div>
       <h1 className="mt-4 max-w-[12ch] text-4xl font-black tracking-[-0.04em] text-white sm:text-5xl">{title}</h1>
       <p className="mt-4 max-w-[58rem] text-base leading-7 text-white/78 sm:text-lg">{description}</p>
       {secondaryDescription ? (
