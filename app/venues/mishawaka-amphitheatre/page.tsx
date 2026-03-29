@@ -65,7 +65,7 @@ export default function MishawakaPage() {
           </article>
         </section>
 
-        <section className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 sm:p-8">
+        <section id="private-transportation" className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 sm:p-8">
           <div className="text-[22px] font-black uppercase tracking-[0.18em] text-[#ffb07c] sm:text-[24px]">Transport Options</div>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             <div className="rounded-[24px] border border-white/10 bg-black/15 p-5">

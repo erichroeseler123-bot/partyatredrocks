@@ -57,7 +57,7 @@ export default function DenverPickups() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localSchema) }} />
 
       <section className="mx-auto flex max-w-[1120px] flex-col gap-8">
-        <section className="rounded-[34px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,16,32,0.98),rgba(6,9,18,0.96))] p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] sm:p-10 lg:p-12">
+        <section id="downtown-pickup" className="rounded-[34px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,16,32,0.98),rgba(6,9,18,0.96))] p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] sm:p-10 lg:p-12">
           <div className="inline-flex items-center rounded-full border border-[#8fd0ff]/30 bg-[#8fd0ff]/10 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
             Denver Pickup
           </div>
@@ -95,7 +95,7 @@ export default function DenverPickups() {
         </section>
 
         <section className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-          <section className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 sm:p-8">
+          <section id="hotel-pickup" className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 sm:p-8">
             <div className="text-[22px] font-black uppercase tracking-[0.18em] text-[#ffb07c] sm:text-[24px]">Step 1</div>
             <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">Go to the Sheraton Downtown pickup</h2>
             <p className="mt-3 text-[15px] leading-7 text-white/74">
@@ -109,7 +109,7 @@ export default function DenverPickups() {
             </ul>
           </section>
 
-          <section className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 sm:p-8">
+          <section id="private-pickup" className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 sm:p-8">
             <div className="text-[22px] font-black uppercase tracking-[0.18em] text-[#ffb07c] sm:text-[24px]">Step 2</div>
             <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">Choose the booking path that fits your night</h2>
             <div className="mt-6 grid gap-4">

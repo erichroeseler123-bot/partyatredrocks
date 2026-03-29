@@ -56,6 +56,7 @@ export function middleware(req: NextRequest) {
   if (pathname.toLowerCase() === "/mishawaka") {
     const url = req.nextUrl.clone();
     url.pathname = "/venues/mishawaka-amphitheatre";
+    url.hash = "private-transportation";
     url.search = "";
     return NextResponse.redirect(url, 308);
   }
@@ -63,40 +64,62 @@ export function middleware(req: NextRequest) {
   if (pathname.toLowerCase() === "/downtown") {
     const url = req.nextUrl.clone();
     url.pathname = "/guide/local/denver-pickups";
+    url.hash = "downtown-pickup";
     url.search = "";
     return NextResponse.redirect(url, 308);
   }
   // END LEGACY_MISHAWAKA_AND_PICKUP_LINKS
 
   // LEGACY_WIX_ROUTES
-  // Old Wix blog posts should consolidate to /guide without tracking params.
+  // Old Wix blog posts should consolidate to the best matching modern guide, not just the generic hub.
   if (pathname.startsWith("/post/")) {
+    const slug = pathname.slice("/post/".length).toLowerCase();
     const url = req.nextUrl.clone();
-    url.pathname = "/guide";
+
+    if (slug.includes("pickup") || slug.includes("sheraton") || slug.includes("downtown")) {
+      url.pathname = "/guide/local/denver-pickups";
+      url.hash = "downtown-pickup";
+    } else if (slug.includes("bag") || slug.includes("policy") || slug.includes("prohibited")) {
+      url.pathname = "/guide/logistics/bag-policy";
+    } else if (slug.includes("parking")) {
+      url.pathname = "/guide/parking";
+    } else if (slug.includes("tailgate")) {
+      url.pathname = "/guide/tailgating";
+    } else if (slug.includes("uber") || slug.includes("rideshare") || slug.includes("shuttle")) {
+      url.pathname = "/red-rocks/transportation/shuttle-vs-uber";
+    } else if (slug.includes("post-encore") || slug.includes("pickup-plan") || slug.includes("post-show")) {
+      url.pathname = "/guide/show-night-strategy/post-show-pickup-plan";
+    } else if (slug.includes("weather") || slug.includes("what-to-wear")) {
+      url.pathname = "/guide/show-night-strategy";
+    } else {
+      url.pathname = "/guide";
+    }
+
     url.search = "";
     return NextResponse.redirect(url, 308);
   }
 
-  const legacyRouteMap: Record<string, string> = {
-    "/party-bus-to-red-rocks": "/party-bus",
-    "/sprinter": "/private-van",
-    "/mishawaka-private-transportation": "/venues/mishawaka-amphitheatre",
-    "/general-7": "/",
-    "/la-quinta-fairfield": "/guide/local/denver-pickups",
-    "/upper-north": "/guide/local/denver-pickups",
-    "/tubing": "/guide",
-    "/hiking-at-red-rocks": "/guide",
-    "/guide/post-encore-strategy": "/guide/show-night-strategy/post-show-pickup-plan",
-    "/guide/bag-policy-2026": "/guide/logistics/bag-policy",
-    "/guide/sheraton-pickup": "/guide/local/denver-pickups",
-    "/concert-guide": "/red-rocks/concert-guide",
-    "/red-rocks-concert-guide": "/red-rocks/concert-guide",
+  const legacyRouteMap: Record<string, { pathname: string; hash?: string }> = {
+    "/party-bus-to-red-rocks": { pathname: "/party-bus" },
+    "/sprinter": { pathname: "/private-van" },
+    "/mishawaka-private-transportation": { pathname: "/venues/mishawaka-amphitheatre", hash: "private-transportation" },
+    "/general-7": { pathname: "/" },
+    "/la-quinta-fairfield": { pathname: "/guide/local/denver-pickups", hash: "hotel-pickup" },
+    "/upper-north": { pathname: "/guide/local/denver-pickups", hash: "private-pickup" },
+    "/tubing": { pathname: "/guide" },
+    "/hiking-at-red-rocks": { pathname: "/guide" },
+    "/guide/post-encore-strategy": { pathname: "/guide/show-night-strategy/post-show-pickup-plan" },
+    "/guide/bag-policy-2026": { pathname: "/guide/logistics/bag-policy" },
+    "/guide/sheraton-pickup": { pathname: "/guide/local/denver-pickups", hash: "downtown-pickup" },
+    "/concert-guide": { pathname: "/red-rocks/concert-guide" },
+    "/red-rocks-concert-guide": { pathname: "/red-rocks/concert-guide" },
   };
 
   const legacyDestination = legacyRouteMap[pathname];
   if (legacyDestination) {
     const url = req.nextUrl.clone();
-    url.pathname = legacyDestination;
+    url.pathname = legacyDestination.pathname;
+    url.hash = legacyDestination.hash || "";
     url.search = "";
     return NextResponse.redirect(url, 308);
   }
