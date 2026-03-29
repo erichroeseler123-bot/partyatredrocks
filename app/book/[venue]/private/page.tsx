@@ -114,7 +114,7 @@ export default async function PrivateOptionsPage({
             Private Red Rocks Shuttle: Book in 2 Seconds
           </h1>
           <p className="mt-5 max-w-2xl text-[15px] leading-7 text-white/74 sm:text-lg">
-            No redirects, no waiting. Choose your vehicle, enter your pickup and date, then pay online before your playlist ends.
+            Choose your vehicle below, then tap the booking button on that card to continue.
           </p>
           <ShareActions
             brandKey={brandKey}
@@ -197,11 +197,13 @@ export default async function PrivateOptionsPage({
         <PrivatePromoBanner />
 
         <section className="grid gap-4 lg:grid-cols-2 xl:grid-cols-4">
-          {PRIVATE_RIDE_OPTIONS.map((option) => (
+          {PRIVATE_RIDE_OPTIONS.map((option) => {
+            const optionHref = buildBookingHref({ target: "private-option", venue, option: option.slug, searchParams: sp });
+            return (
             <Link
               key={option.slug}
-              href={buildBookingHref({ target: "private-option", venue, option: option.slug, searchParams: sp })}
-              className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
+              href={optionHref}
+              className="group rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:border-[#3df3ff]/35 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
             >
               <div className="relative mb-5 h-40 overflow-hidden rounded-[20px] border border-white/10">
                 <Image
@@ -220,9 +222,13 @@ export default async function PrivateOptionsPage({
                 {option.title}
               </h2>
               <p className="mt-3 text-sm leading-6 text-white/70">{option.body}</p>
-              <div className="mt-5 text-sm font-bold text-[#ffb07c]">Book in 2 Seconds →</div>
+              <div className="mt-5 inline-flex min-h-11 items-center justify-center rounded-full bg-[#3df3ff] px-5 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition group-hover:bg-[#62f6ff]">
+                Book This Vehicle
+              </div>
+              <div className="mt-3 text-sm font-bold text-[#ffb07c]">Tap to continue →</div>
             </Link>
-          ))}
+          );
+          })}
         </section>
 
         <section className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 sm:p-8">
