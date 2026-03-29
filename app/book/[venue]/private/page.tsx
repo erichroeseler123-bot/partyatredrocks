@@ -171,7 +171,7 @@ export default async function PrivateOptionsPage({
         <SocialProofStrip
           brandKey="partyatredrocks"
           title="Real private ride nights"
-          body="Private groups usually want the same proof before they book: what the ride feels like, what the arrival looks like, and whether the night actually stays clean after the encore."
+          body="Private groups usually want the same proof before they book: what the ride feels like, what the arrival looks like, and whether the night actually stays clean after the show."
           pageTitle="Private Red Rocks shuttle from Denver"
           pageUrl={`${SITE}/book/${venue}/private`}
         />
@@ -200,7 +200,7 @@ export default async function PrivateOptionsPage({
           {PRIVATE_RIDE_OPTIONS.map((option) => (
             <Link
               key={option.slug}
-              href={buildDccPrivateCheckoutHref(option.slug, vehicleQty)}
+              href={buildBookingHref({ target: "private-option", venue, option: option.slug, searchParams: sp })}
               className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
             >
               <div className="relative mb-5 h-40 overflow-hidden rounded-[20px] border border-white/10">
