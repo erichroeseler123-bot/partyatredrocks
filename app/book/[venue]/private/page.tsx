@@ -173,7 +173,7 @@ export default async function PrivateOptionsPage({
         </section>
 
         <section className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 sm:p-8">
-          <div className="text-[12px] font-black uppercase tracking-[0.24em] text-[#ffb07c]">Step 1</div>
+          <div className="text-[22px] font-black uppercase tracking-[0.18em] text-[#ffb07c] sm:text-[24px]">Step 1</div>
           <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">
             Start with the private SUV
           </h2>
@@ -213,7 +213,7 @@ export default async function PrivateOptionsPage({
         </section>
 
         <section className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 sm:p-8">
-          <div className="text-[12px] font-black uppercase tracking-[0.24em] text-[#ffb07c]">Step 2</div>
+          <div className="text-[22px] font-black uppercase tracking-[0.18em] text-[#ffb07c] sm:text-[24px]">Step 2</div>
           <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">
             Need more room? Upgrade to the van
           </h2>
