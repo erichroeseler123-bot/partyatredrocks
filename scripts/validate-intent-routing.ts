@@ -12,6 +12,7 @@ const ALLOWED_SOURCE_TYPES = new Set(["legacy", "external", "search", "internal"
 const ALLOWED_INTENTS = new Set(["explore", "understand", "compare", "act"]);
 const ALLOWED_DESTINATIONS = new Set(["dcc", "wts", "parr", "checkout"]);
 const ALLOWED_NEXT_STEPS = new Set<NextStepStatus>(["full", "partial", "none"]);
+const ALLOWED_CANONICAL_STATUSES = new Set(["canonical", "redirects-to-canonical"]);
 const CHECKOUT_SENTINEL = "checkout";
 
 function isPathLike(value: string) {
@@ -30,6 +31,9 @@ function validateEntry(entry: IntentRegistryEntry, seen: Set<string>, summary: S
   if (!isPathLike(entry.destinationPath)) {
     summary.errors.push(`destinationPath must start with / or be checkout sentinel: ${entry.destinationPath}`);
   }
+  if (entry.destinationAnchor !== null && entry.destinationAnchor.trim().length === 0) {
+    summary.errors.push(`destinationAnchor must be null or a non-empty string for ${entry.sourcePath}`);
+  }
   if (!ALLOWED_SOURCE_TYPES.has(entry.sourceType)) {
     summary.errors.push(`invalid sourceType for ${entry.sourcePath}: ${entry.sourceType}`);
   }
@@ -39,11 +43,17 @@ function validateEntry(entry: IntentRegistryEntry, seen: Set<string>, summary: S
   if (!ALLOWED_DESTINATIONS.has(entry.destinationType)) {
     summary.errors.push(`invalid destinationType for ${entry.sourcePath}: ${entry.destinationType}`);
   }
+  if (!ALLOWED_CANONICAL_STATUSES.has(entry.canonicalStatus)) {
+    summary.errors.push(`invalid canonicalStatus for ${entry.sourcePath}: ${entry.canonicalStatus}`);
+  }
   if (!ALLOWED_NEXT_STEPS.has(entry.nextStepExists)) {
     summary.errors.push(`invalid nextStepExists for ${entry.sourcePath}: ${entry.nextStepExists}`);
   }
   if (entry.intentMatchScore < 1 || entry.intentMatchScore > 5) {
     summary.errors.push(`intentMatchScore out of range for ${entry.sourcePath}: ${entry.intentMatchScore}`);
+  }
+  if (entry.nextStepClarity < 1 || entry.nextStepClarity > 5) {
+    summary.errors.push(`nextStepClarity out of range for ${entry.sourcePath}: ${entry.nextStepClarity}`);
   }
   if (entry.primaryNextStep && !isPathLike(entry.primaryNextStep)) {
     summary.errors.push(`primaryNextStep must be a path or checkout for ${entry.sourcePath}: ${entry.primaryNextStep}`);
@@ -65,6 +75,9 @@ function validateEntry(entry: IntentRegistryEntry, seen: Set<string>, summary: S
   }
   if (entry.intentMatchScore <= 2) {
     summary.info.push(`${entry.sourcePath}: weak intent match score ${entry.intentMatchScore}`);
+  }
+  if (entry.nextStepClarity <= 2) {
+    summary.info.push(`${entry.sourcePath}: weak next-step clarity ${entry.nextStepClarity}`);
   }
 }
 
