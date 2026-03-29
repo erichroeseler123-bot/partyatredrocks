@@ -21,7 +21,8 @@
     "sync:publish": "node sync.js && git add public/data/shows-2026.js && git commit -m \"Update 2026 show data\" && git push",
     "style:check": "bash scripts/style_leaks_no_globals.sh",
     "typecheck": "tsc --noEmit -p tsconfig.check.json",
-    "build-quick-red-rocks-events": "node scripts/build-quick-red-rocks-events.mjs"
+    "build-quick-red-rocks-events": "node scripts/build-quick-red-rocks-events.mjs",
+    "routing:validate": "tsx scripts/validate-intent-routing.ts"
   },
   "dependencies": {
     "@next/third-parties": "^16.1.6",
