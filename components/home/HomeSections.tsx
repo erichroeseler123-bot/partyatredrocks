@@ -9,8 +9,9 @@ import {
 } from "lucide-react";
 import { ReviewBlock } from "@/components/ReviewBlock";
 import { PRIVATE_TRANSPORT_PROMO } from "@/lib/privateTransportPromo";
+import { buildDccRedRocksBookingHref } from "@/lib/parrHandoff";
 
-const BOOK_RED_ROCKS = "/book/red-rocks-amphitheatre";
+const BOOK_SHARED_RED_ROCKS = buildDccRedRocksBookingHref();
 
 type HomeSectionsProps = {
   heroSrc: string;
@@ -29,15 +30,15 @@ type HomeSectionsProps = {
 export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency }: HomeSectionsProps) {
   const rideCards = [
     {
-      title: "Shared Tickets",
+      title: "$59 Shuttle Tickets",
       subtitle: "$59 fixed per seat",
       copy: "Best for couples, solo riders, and smaller groups.",
       bullets: [
         "Denver + Golden departures",
         "Guaranteed return after the show",
       ],
-      href: BOOK_RED_ROCKS,
-      cta: "See Shared Prices",
+      href: BOOK_SHARED_RED_ROCKS,
+      cta: "View $59 Tickets",
       image: sprinterSrc,
       alt: "Shared shuttle option for Red Rocks transportation",
     },
@@ -71,7 +72,8 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
               priority
               fetchPriority="high"
             />
-            <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(10,18,56,0.42)_0%,rgba(10,18,56,0.16)_44%,rgba(9,9,9,0.32)_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,10,18,0.18)_0%,rgba(7,10,18,0.54)_42%,rgba(7,10,18,0.84)_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(10,18,56,0.46)_0%,rgba(10,18,56,0.2)_44%,rgba(9,9,9,0.42)_100%)]" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(76,97,255,0.16),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(76,97,255,0.03),transparent_18%)]" />
           </div>
 
@@ -91,10 +93,10 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
-                  href={BOOK_RED_ROCKS}
+                  href={BOOK_SHARED_RED_ROCKS}
                   className="brand-button-primary brand-button-pulse inline-flex min-h-14 px-8 text-sm font-black uppercase tracking-[0.16em]"
                 >
-                  Book Shared Seats
+                  Book $59 Shuttle Tickets
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
                 <Link
@@ -138,7 +140,7 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
           <div className="max-w-3xl">
             <div className="brand-kicker text-[10px] font-black uppercase tracking-[0.24em]">Step 1</div>
             <h2 className="mt-3 text-[2rem] font-black uppercase tracking-[-0.04em] text-white sm:text-[2.6rem]">
-              Choose Shared Tickets or a Private Car
+              Choose $59 Shuttle Tickets or a Private Car
             </h2>
             <p className="mt-3 max-w-2xl text-[15px] leading-7 text-white/76">
               Tap one option and go straight to pricing and availability.
