@@ -5,7 +5,6 @@ import path from "node:path";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import TicketButtons from "@/components/TicketButtons";
-import RezdyWidgets from "@/components/RezdyWidgets";
 import venuesJson from "@/data/venues.json";
 import { getArtistsCatalog, getEventsCatalog } from "@/lib/events/getCatalog";
 import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
@@ -84,7 +83,17 @@ function slugify(input: string): string {
 
 function bookingUrlForEvent(e?: ShowEvent | null) {
   const venueSlug = e?.venue?.siteSlug;
-  return venueSlug ? `${SITE}/book?venue=${encodeURIComponent(venueSlug)}` : `${SITE}/book`;
+  if (!venueSlug) return `${SITE}/book`;
+
+  return buildBookingHref({
+    target: venueSlug === "red-rocks-amphitheatre" || venueSlug === "redrocks" ? "shared" : "book",
+    venue: venueSlug,
+    overrides: {
+      date: e?.dateKey,
+      event: e?.id,
+      artist: e?.performers?.map((p) => p?.name).filter(Boolean)[0] ?? e?.title,
+    },
+  });
 }
 
 function pickTitle(e?: ShowEvent | null, id?: string) {
@@ -704,7 +713,18 @@ export default async function ShowPage({ params }: Props) {
                   <Link href={`/shows/${encodeURIComponent(event.id)}`} className="comic-btn comic-btn-secondary">
                     Show Details
                   </Link>
-                  <Link href={rideHref} className="comic-btn comic-btn-primary">
+                  <Link
+                    href={buildBookingHref({
+                      target: isRedRocksVenue ? "shared" : "book",
+                      venue: event.venueId,
+                      overrides: {
+                        event: event.id,
+                        date: event.dateKey,
+                        artist: event.artistNames[0] ?? event.name,
+                      },
+                    })}
+                    className="comic-btn comic-btn-primary"
+                  >
                     Get a Ride
                   </Link>
                 </div>
@@ -716,10 +736,8 @@ export default async function ShowPage({ params }: Props) {
         )}
       </section>
 
-      {/* EXISTING WIDGETS */}
-      <div className="mt-10 space-y-6">
+      <div className="mt-10">
         <TicketButtons />
-        <RezdyWidgets />
       </div>
     </main>
   );

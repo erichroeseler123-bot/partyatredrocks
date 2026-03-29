@@ -1,57 +1,8 @@
-import Link from "next/link";
-import Script from "next/script";
-import { notFound } from "next/navigation";
-import venuesJson from "@/data/venues.json";
-import { RecentBookingToast } from "@/components/RecentBookingToast";
-import { PlanningLinks } from "@/components/booking/PlanningLinks";
-import { rezdyListProducts } from "@/lib/rezdy";
-import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
-import { TrustStrip } from "@/components/TrustStrip";
+import { redirect } from "next/navigation";
+import type { HandoffSearchParams } from "@/lib/parrHandoff";
 
 export const runtime = "nodejs";
 export const revalidate = 300;
-
-type VenueRow = {
-  slug?: string;
-  name?: string;
-};
-
-type RezdyProductRow = {
-  productCode?: string;
-  name?: string;
-  description?: string;
-  priceOptions?: Array<{ price?: number }>;
-};
-
-const SHARED_CATALOG_ID = "617787";
-const SHARED_WIDGET_URL = "https://gosnotransportation58.rezdy.com/catalog/617787/shuttles?iframe=true";
-const DENVER_SHUTTLE_WIDGET_URL = "https://gosnotransportation58.rezdy.com/714441/denver-to-red-rocks-shuttle?iframe=true";
-const GOLDEN_SHUTTLE_WIDGET_URL = "https://gosnotransportation58.rezdy.com/714885/golden-to-red-rocks-shuttle?iframe=true";
-
-function getVenue(slug: string): VenueRow | null {
-  return (venuesJson as Record<string, VenueRow>)[slug] ?? null;
-}
-
-function priceLabel(product: RezdyProductRow) {
-  const prices = (product.priceOptions || [])
-    .map((row) => (typeof row?.price === "number" ? row.price : null))
-    .filter((value): value is number => value !== null);
-  if (!prices.length) return "Pricing in checkout";
-  const min = Math.min(...prices);
-  const max = Math.max(...prices);
-  return min === max ? `$${min.toFixed(0)}` : `$${min.toFixed(0)}-$${max.toFixed(0)}`;
-}
-
-function resolveWidgetUrl(product: RezdyProductRow) {
-  const text = `${product.name || ""} ${product.description || ""}`.toLowerCase();
-  if (text.includes("golden") || text.includes("trailhead")) return GOLDEN_SHUTTLE_WIDGET_URL;
-  if (text.includes("denver") || text.includes("sheraton")) return DENVER_SHUTTLE_WIDGET_URL;
-  return SHARED_WIDGET_URL;
-}
-
-function bookingHref(widgetUrl: string) {
-  return widgetUrl.replace("?iframe=true", "");
-}
 
 export default async function SharedProductPage({
   params,
@@ -60,80 +11,18 @@ export default async function SharedProductPage({
   params: Promise<{ venue: string; productCode: string }>;
   searchParams: Promise<HandoffSearchParams>;
 }) {
-  const { venue, productCode } = await params;
+  const { venue } = await params;
   const sp = await searchParams;
-  if (venue !== "red-rocks-amphitheatre") notFound();
-  const row = getVenue(venue);
-  if (!row?.name) notFound();
-
   const query = new URLSearchParams();
-  query.set("catalogId", SHARED_CATALOG_ID);
-  const products = (await rezdyListProducts(query).catch(() => [])) as RezdyProductRow[];
-  const product = products.find((item) => item.productCode === productCode);
-  if (!product) notFound();
-  const widgetUrl = resolveWidgetUrl(product);
 
-  return (
-    <main className="min-h-screen bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
-      <RecentBookingToast />
-      <section className="mx-auto flex max-w-[1240px] flex-col gap-8">
-        <section className="rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,16,32,0.98),rgba(6,9,18,0.96))] p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] sm:p-10 lg:p-12">
-          <div className="inline-flex items-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
-            Final Step
-          </div>
-          <h1 className="mt-5 text-[2.3rem] font-black uppercase leading-[0.96] tracking-[-0.04em] sm:text-[3.5rem]">
-            {product.name || product.productCode}
-          </h1>
-          <p className="mt-4 max-w-2xl text-[15px] leading-7 text-white/74 sm:text-lg">
-            {product.description || "Online booking for this Red Rocks shared shuttle option."}
-          </p>
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-white/68 sm:text-[15px]">
-            Pickup details are sent before show night. Your return ride is covered after the show.
-          </p>
-          <div className="mt-4 text-sm font-bold text-[#ffb07c]">{priceLabel(product)}</div>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <a
-              href={bookingHref(widgetUrl)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
-            >
-              Book Online Now
-            </a>
-            <Link
-              href={buildBookingHref({ target: "shared", venue, searchParams: sp })}
-              className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
-            >
-              Back to Shuttle Options
-            </Link>
-          </div>
-          <PlanningLinks
-            venue={venue}
-            source={Array.isArray(sp.source) ? sp.source[0] : sp.source}
-            className="mt-6"
-          />
-        </section>
+  for (const [key, value] of Object.entries(sp)) {
+    if (Array.isArray(value)) {
+      for (const entry of value) query.append(key, entry);
+      continue;
+    }
+    if (typeof value === "string") query.set(key, value);
+  }
 
-        <section className="rounded-[30px] border border-white/10 bg-[#0b1224] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.42)] sm:p-6">
-          <Script src="https://gosnotransportation58.rezdy.com/pluginJs" strategy="afterInteractive" />
-          <div className="mb-4 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
-            Book Online
-          </div>
-          <TrustStrip className="mb-4" />
-          <p className="mb-4 text-sm leading-6 text-white/70">
-            If this option is not selected automatically, choose <span className="font-bold text-white">{product.name || product.productCode}</span> in the booking form.
-          </p>
-          <iframe
-            seamless
-            src={widgetUrl}
-            width="100%"
-            height="1000"
-            frameBorder="0"
-            className="rezdy w-full rounded-[20px] border-0 bg-white"
-            title={`${product.name || product.productCode} checkout`}
-          />
-        </section>
-      </section>
-    </main>
-  );
+  const search = query.toString();
+  redirect(search ? `/book/${venue}/shared?${search}` : `/book/${venue}/shared`);
 }
