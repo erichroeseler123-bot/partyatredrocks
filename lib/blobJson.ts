@@ -48,11 +48,17 @@ export async function blobReadJson<T>(
   const url = await resolveBlobUrl(pathname);
   if (!url) return null;
 
+  const revalidateSeconds = opts?.revalidateSeconds ?? 300;
+  const requestUrl = revalidateSeconds === 0
+    ? `${url}${url.includes("?") ? "&" : "?"}ts=${Date.now()}`
+    : url;
+
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs());
-  const res = await fetch(url, {
+  const res = await fetch(requestUrl, {
     signal: controller.signal,
-    next: { revalidate: opts?.revalidateSeconds ?? 300 },
+    cache: revalidateSeconds === 0 ? "no-store" : undefined,
+    next: { revalidate: revalidateSeconds },
   }).catch(() => null);
   clearTimeout(timer);
   if (!res?.ok) return null;
