@@ -46,6 +46,10 @@ export async function GET() {
     { loc: `${base}/week`, lastmod: now, changefreq: "hourly", priority: 0.9 },
     { loc: `${base}/venues`, lastmod: now, changefreq: "daily", priority: 0.8 },
     { loc: `${base}/find`, lastmod: now, changefreq: "daily", priority: 0.9 },
+    { loc: `${base}/shuttles`, lastmod: now, changefreq: "daily", priority: 0.9 },
+    { loc: `${base}/book/red-rocks-amphitheatre`, lastmod: now, changefreq: "daily", priority: 0.9 },
+    { loc: `${base}/book/red-rocks-amphitheatre/custom/shared`, lastmod: now, changefreq: "daily", priority: 0.9 },
+    { loc: `${base}/book/red-rocks-amphitheatre/private`, lastmod: now, changefreq: "daily", priority: 0.9 },
     { loc: `${base}/red-rocks`, lastmod: now, changefreq: "daily", priority: 0.9 },
     { loc: `${base}/red-rocks/transportation`, lastmod: now, changefreq: "daily", priority: 0.9 },
     { loc: `${base}/red-rocks/parking`, lastmod: now, changefreq: "daily", priority: 0.8 },
@@ -155,6 +159,12 @@ export async function GET() {
 
   // venue detail pages
   for (const slug of VENUE_SLUGS) {
+    urls.push({
+      loc: `${base}/book/${slug}`,
+      lastmod: now,
+      changefreq: "daily",
+      priority: slug === "red-rocks-amphitheatre" ? 0.9 : 0.7,
+    });
     urls.push({
       loc: `${base}/venues/${slug}`,
       lastmod: now,
