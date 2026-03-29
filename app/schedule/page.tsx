@@ -130,6 +130,7 @@ export default async function SchedulePage() {
       .map((row) => [
         normalizeComparable(row.name),
         {
+          primary: row.image.primary,
           spotifyImage: row.sources.spotifyImage,
           ticketmasterImage: row.sources.ticketmasterImage,
         },
@@ -157,10 +158,21 @@ export default async function SchedulePage() {
         },
       });
       const primaryArtist = event.artistNames[0] || event.name;
-      const artistMedia = artistMediaMap[normalizeComparable(primaryArtist)];
+      const eventMedia = event.showId ? mediaIndex?.eventsById?.[event.showId] ?? null : null;
+      const primaryArtistId = eventMedia?.artistIds?.[0] ?? null;
+      const artistMediaById = primaryArtistId ? mediaIndex?.artistsById?.[primaryArtistId] ?? null : null;
+      const artistMediaByName = artistMediaMap[normalizeComparable(primaryArtist)];
+      const eventImage = eventMedia?.image?.primary && eventMedia.image.primary !== curatedImages.showFallback
+        ? eventMedia.image.primary
+        : null;
       const image =
-        artistMedia?.spotifyImage ||
-        artistMedia?.ticketmasterImage ||
+        eventImage ||
+        artistMediaById?.image.primary ||
+        artistMediaById?.sources.spotifyImage ||
+        artistMediaById?.sources.ticketmasterImage ||
+        artistMediaByName?.primary ||
+        artistMediaByName?.spotifyImage ||
+        artistMediaByName?.ticketmasterImage ||
         event.image ||
         curatedImages.showFallback;
 

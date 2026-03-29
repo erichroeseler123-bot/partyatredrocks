@@ -62,11 +62,16 @@ type BuildUnsplashImageSrcInput = {
 };
 
 export function buildUnsplashImageSrc(input: BuildUnsplashImageSrcInput = {}) {
+  const src = typeof input.src === "string" ? input.src.trim() : "";
+  if (src && !src.startsWith("unsplash:")) {
+    return src;
+  }
+
   const params = new URLSearchParams();
   const primaryQuery = buildUnsplashQuery(input.query, input.alt);
-  const fallbackQuery = input.src ? buildUnsplashQuery(input.src) : DEFAULT_QUERY;
+  const fallbackQuery = src ? buildUnsplashQuery(src) : DEFAULT_QUERY;
   params.set("q", primaryQuery || fallbackQuery);
-  if (input.src) params.set("src", input.src);
+  if (src) params.set("src", src);
   if (input.alt) params.set("alt", input.alt);
   if (input.width) params.set("w", String(input.width));
   if (input.height) params.set("h", String(input.height));
