@@ -52,22 +52,6 @@ type Card = {
 
 const featured: Card[] = [
   {
-    id: "red-rocks-visiting-guide",
-    title: "Red Rocks Visiting Guide",
-    desc: "History, geology, trails, elevation, and visiting basics in one page.",
-    href: "/guide/red-rocks-intelligence-hub",
-    kicker: "Visit",
-    visual: "general",
-  },
-  {
-    id: "all-guides",
-    title: "All Guides",
-    desc: "Master index of every guide, sorted for fast scanning.",
-    href: "/guide/all",
-    kicker: "Index",
-    visual: "general",
-  },
-  {
     id: "transportation-guide",
     title: "Transportation Guide",
     desc: "Shuttle vs rideshare, timing, and getting home after the show.",
@@ -76,28 +60,20 @@ const featured: Card[] = [
     visual: "transportation",
   },
   {
-    id: "denver-concert-transportation",
-    title: "Denver Concert Transportation",
-    desc: "Concert transportation options across Denver venues.",
-    href: "/guide/denver-concert-transportation",
-    kicker: "Denver",
-    visual: "transportation",
+    id: "local-pickups",
+    title: "Denver Pickup Locations",
+    desc: "Where downtown riders board, how pickup works, and where to book.",
+    href: "/guide/local/denver-pickups",
+    kicker: "Pickup",
+    visual: "pickup",
   },
   {
     id: "parking-reality",
     title: "Parking Reality",
     desc: "Lot choices, walking distance, and getting out after the show.",
     href: "/guide/parking",
-    kicker: "Logistics",
+    kicker: "Parking",
     visual: "parking",
-  },
-  {
-    id: "policies",
-    title: "Policies",
-    desc: "Bag rules, prohibited items, and gate-readiness checklist.",
-    href: "/guide/policies",
-    kicker: "Rules",
-    visual: "policy",
   },
 ];
 
@@ -111,20 +87,20 @@ const deepDive: Card[] = [
     visual: "pickup",
   },
   {
-    id: "local-pickups",
-    title: "Local Pickups",
-    desc: "Denver pickup zones and where groups stage best.",
-    href: "/guide/local/denver-pickups",
-    kicker: "Local",
-    visual: "pickup",
-  },
-  {
     id: "tailgating-guide",
     title: "Tailgating Guide",
     desc: "Arrival timing, lot expectations, and when private service is the better fit.",
     href: "/guide/tailgating",
     kicker: "Tailgate",
     visual: "tailgating",
+  },
+  {
+    id: "policies",
+    title: "Policies",
+    desc: "Bag rules, prohibited items, and gate-readiness checklist.",
+    href: "/guide/policies",
+    kicker: "Rules",
+    visual: "policy",
   },
   {
     id: "event-guides",
@@ -141,6 +117,14 @@ const deepDive: Card[] = [
     href: "/week/red-rocks",
     kicker: "Calendar",
     visual: "parking",
+  },
+  {
+    id: "all-guides",
+    title: "All Guides",
+    desc: "Master index of every guide, sorted for fast scanning.",
+    href: "/guide/all",
+    kicker: "Index",
+    visual: "general",
   },
 ];
 
@@ -180,10 +164,7 @@ function GuideCard({ card, imageSrc }: { card: Card; imageSrc: string }) {
 
 export default async function GuideHub() {
   const cards = [...featured, ...deepDive];
-  const cardImageMap = Object.fromEntries(cards.map((card) => [card.id, guideVisuals[card.visual].imageSrc])) as Record<
-    string,
-    string
-  >;
+  const cardImageMap = Object.fromEntries(cards.map((card) => [card.id, guideVisuals[card.visual].imageSrc])) as Record<string, string>;
   const heroImage = getGuideCardImage("red-rocks-visiting-guide");
 
   return (
@@ -192,7 +173,7 @@ export default async function GuideHub() {
         <GuideVisualHero
           eyebrow={guideVisuals.general.eyebrow}
           title="Red Rocks Guides"
-          copy="Parking, transportation, venue policies, show-night timing, and local planning context for Red Rocks nights."
+          copy="Use this hub to answer the question you actually have, then move directly into the next step instead of getting lost in generic content."
           imageSrc={heroImage}
           imageAlt="Red Rocks guide planning hero image"
           actions={
@@ -200,12 +181,33 @@ export default async function GuideHub() {
               <Link href="/book/red-rocks-amphitheatre" className="btn-primary">
                 Start Booking
               </Link>
-              <Link href="/week/red-rocks" className="btn-ghost">
-                See This Week
+              <Link href="/red-rocks/transportation" className="btn-ghost">
+                Transportation Guide
               </Link>
             </>
           }
         />
+
+        <section className="brand-panel rounded-[30px] p-6 sm:p-8">
+          <div className="text-[22px] font-black uppercase tracking-[0.18em] text-[var(--brand-cyan)] sm:text-[24px]">Pick the right next step</div>
+          <div className="mt-6 grid gap-4 lg:grid-cols-3">
+            <Link href="/red-rocks/transportation" className="rounded-[24px] border border-white/12 bg-white/6 p-5 transition hover:bg-white/10 hover:no-underline">
+              <div className="text-[11px] font-black uppercase tracking-[0.18em] text-[var(--brand-cyan)]">Understand</div>
+              <h2 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white">How do I get to Red Rocks?</h2>
+              <p className="mt-3 text-sm leading-7 text-white/72">Start with the transportation guide if you need the strategy before you choose a ride.</p>
+            </Link>
+            <Link href="/week/red-rocks" className="rounded-[24px] border border-white/12 bg-white/6 p-5 transition hover:bg-white/10 hover:no-underline">
+              <div className="text-[11px] font-black uppercase tracking-[0.18em] text-[var(--brand-cyan)]">Compare</div>
+              <h2 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white">What shows are coming up?</h2>
+              <p className="mt-3 text-sm leading-7 text-white/72">Use the Red Rocks week calendar if you want to line up the show first and book second.</p>
+            </Link>
+            <Link href="/book/red-rocks-amphitheatre/custom/shared" className="rounded-[24px] border border-[#62f6ff]/24 bg-[#09101f] p-5 transition hover:border-[#62f6ff]/48 hover:bg-[#0d1629] hover:no-underline">
+              <div className="text-[11px] font-black uppercase tracking-[0.18em] text-[#62f6ff]">Act</div>
+              <h2 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white">I just need to book transport</h2>
+              <p className="mt-3 text-sm leading-7 text-white/72">Go straight to the shuttle booking flow if you already know you need the ride.</p>
+            </Link>
+          </div>
+        </section>
 
         <section className="brand-panel rounded-[24px] p-4 sm:p-5">
           <div className="flex flex-wrap gap-2 text-[11px] font-black uppercase tracking-[0.16em] text-white/84">
@@ -222,9 +224,7 @@ export default async function GuideHub() {
         <GuideLocalInfo variant="general" />
 
         <section className="brand-panel rounded-[30px] p-6 sm:p-8">
-          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">
-            Featured Guides
-          </div>
+          <div className="text-[12px] sm:text-[13px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">Core Guides</div>
           <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {featured.map((card) => (
               <GuideCard key={card.href} card={card} imageSrc={cardImageMap[card.id]} />
@@ -233,10 +233,8 @@ export default async function GuideHub() {
         </section>
 
         <section className="brand-panel rounded-[30px] p-6 sm:p-8">
-          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">
-            Deep Dives
-          </div>
-          <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <div className="text-[12px] sm:text-[13px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">Deeper Planning</div>
+          <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {deepDive.map((card) => (
               <GuideCard key={card.href} card={card} imageSrc={cardImageMap[card.id]} />
             ))}
@@ -244,27 +242,15 @@ export default async function GuideHub() {
         </section>
 
         <section className="brand-panel rounded-[30px] p-6 sm:p-8">
-          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">
-            Trusted Sources
-          </div>
+          <div className="text-[12px] sm:text-[13px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">Trusted Sources</div>
           <p className="mt-3 text-sm leading-6 text-white/70">
             Validate venue and road conditions before every show-night decision.
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
-            <a
-              className="inline-flex min-h-11 items-center rounded-full border border-white/12 bg-white/6 px-4 text-xs font-black uppercase tracking-[0.16em] text-white/88 transition hover:bg-white/10"
-              href="https://www.redrocksonline.com"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a className="inline-flex min-h-11 items-center rounded-full border border-white/12 bg-white/6 px-4 text-xs font-black uppercase tracking-[0.16em] text-white/88 transition hover:bg-white/10" href="https://www.redrocksonline.com" target="_blank" rel="noreferrer">
               Venue Source
             </a>
-            <a
-              className="inline-flex min-h-11 items-center rounded-full border border-white/12 bg-white/6 px-4 text-xs font-black uppercase tracking-[0.16em] text-white/88 transition hover:bg-white/10"
-              href="https://www.cotrip.org"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a className="inline-flex min-h-11 items-center rounded-full border border-white/12 bg-white/6 px-4 text-xs font-black uppercase tracking-[0.16em] text-white/88 transition hover:bg-white/10" href="https://www.cotrip.org" target="_blank" rel="noreferrer">
               COtrip
             </a>
           </div>
