@@ -51,14 +51,22 @@ export function middleware(req: NextRequest) {
   }
   // END LEGACY_SHOW_NUMERIC_IDS
 
-  // LEGACY_MISHAWAKA_CASE
-  // Normalize /Mishawaka (and any casing) -> /mishawaka so it doesn't 404.
-  if (pathname.toLowerCase() === "/mishawaka" && pathname !== "/mishawaka") {
+  // LEGACY_MISHAWAKA_AND_PICKUP_LINKS
+  // Old social/directory links should land on the current venue or pickup pages.
+  if (pathname.toLowerCase() === "/mishawaka") {
     const url = req.nextUrl.clone();
-    url.pathname = "/mishawaka";
+    url.pathname = "/venues/mishawaka-amphitheatre";
+    url.search = "";
     return NextResponse.redirect(url, 308);
   }
-  // END LEGACY_MISHAWAKA_CASE
+
+  if (pathname.toLowerCase() === "/downtown") {
+    const url = req.nextUrl.clone();
+    url.pathname = "/guide/local/denver-pickups";
+    url.search = "";
+    return NextResponse.redirect(url, 308);
+  }
+  // END LEGACY_MISHAWAKA_AND_PICKUP_LINKS
 
   // LEGACY_WIX_ROUTES
   // Old Wix blog posts should consolidate to /guide without tracking params.
@@ -94,7 +102,7 @@ export function middleware(req: NextRequest) {
   }
   // END LEGACY_WIX_ROUTES
 
-  // ✅ Never override cache headers for these (they manage their own caching)
+  // Never override cache headers for these (they manage their own caching)
   if (
     pathname === "/robots.txt" ||
     pathname === "/sitemap.xml" ||
@@ -105,13 +113,11 @@ export function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // Your existing behavior for “normal pages”
   const res = NextResponse.next();
   res.headers.set("Cache-Control", "public, max-age=0, must-revalidate");
   return res;
 }
 
-// Apply middleware to everything (we still early-return above)
 export const config = {
   matcher: "/:path*",
 };
