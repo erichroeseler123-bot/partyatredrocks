@@ -31,6 +31,6 @@ export default async function SharedCustomOptionsPage({
     searchParams: sp,
     sourcePath: `/book/${venue}/custom/shared`,
     basePath: `/book/${venue}/custom/shared`,
-    stage: "shared_catalog",
+    stage: "shared_booking_custom",
   });
 }
