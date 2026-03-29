@@ -6,7 +6,7 @@ import venuesJson from "@/data/venues.json";
 import { postDccSatelliteEvent, postWtaPartnerAcceptedIfNeeded } from "@/lib/dccSatellite";
 import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
 import { bookingVisuals } from "@/lib/bookingVisuals";
-import { PRIVATE_RIDE_OPTIONS } from "@/lib/rideCatalog";
+import { buildDccPrivateCheckoutHref, PRIVATE_RIDE_OPTIONS } from "@/lib/rideCatalog";
 import { buildPrivateBookingJsonLd, buildPrivateBookingMetadata, buildPrivateFaqJsonLd } from "../bookingSeo";
 
 type VenueRow = {
@@ -76,6 +76,9 @@ export default async function PrivateOptionsPage({
 
   const row = getVenue(venue);
   if (!row?.name) notFound();
+
+  const qtyValue = firstValue(sp, "qty");
+  const vehicleQty = qtyValue ? Math.max(1, Number(qtyValue) || 1) : 1;
 
   const artist = firstValue(sp, "artist");
   const dateRaw = firstValue(sp, "date");
@@ -157,7 +160,7 @@ export default async function PrivateOptionsPage({
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link
-                href={buildBookingHref({ target: "private-option", venue, option: featuredOption.slug, searchParams: sp })}
+                href={buildDccPrivateCheckoutHref(featuredOption.slug, vehicleQty)}
                 className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#62f6ff] bg-[#62f6ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#05111a] shadow-[0_18px_40px_rgba(61,243,255,0.24)] transition hover:bg-[#8cf8ff]"
               >
                 Book Private SUV
@@ -183,7 +186,7 @@ export default async function PrivateOptionsPage({
 
           <div className="mt-6">
             <Link
-              href={buildBookingHref({ target: "private-option", venue, option: featuredOption.slug, searchParams: sp })}
+              href={buildDccPrivateCheckoutHref(featuredOption.slug, vehicleQty)}
               className="group grid gap-6 rounded-[28px] border border-[#62f6ff]/24 bg-[#09101f] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:border-[#62f6ff]/48 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)] lg:grid-cols-[1.1fr_0.9fr]"
             >
               <div className="relative min-h-[240px] overflow-hidden rounded-[22px] border border-white/10">
@@ -223,7 +226,7 @@ export default async function PrivateOptionsPage({
 
           <div className="mt-6">
             <Link
-              href={buildBookingHref({ target: "private-option", venue, option: upgradeOption.slug, searchParams: sp })}
+              href={buildDccPrivateCheckoutHref(upgradeOption.slug, vehicleQty)}
               className="group grid gap-6 rounded-[28px] border border-white/10 bg-[#09101f] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:border-[#62f6ff]/35 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)] lg:grid-cols-[0.95fr_1.05fr]"
             >
               <div className="relative min-h-[220px] overflow-hidden rounded-[22px] border border-white/10">
