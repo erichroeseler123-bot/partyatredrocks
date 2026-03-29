@@ -50,8 +50,11 @@ function badge(status: string) {
   if (status === 'confirmed') return 'border-emerald-400/35 bg-emerald-500/12 text-emerald-100';
   if (status === 'pending' || status === 'pending_payment') return 'border-amber-400/35 bg-amber-500/12 text-amber-100';
   if (status === 'cancelled') return 'border-rose-400/35 bg-rose-500/12 text-rose-100';
-  return 'border-white/15 bg-white/8 text-white/80';
+  return 'border-cyan-300/35 bg-cyan-400/12 text-cyan-50';
 }
+
+const infoPillClass = 'rounded-full border border-[#ffb07c]/28 bg-[#ffb07c]/16 px-4 py-2 text-[12px] font-black uppercase tracking-[0.16em] text-[#fff1e7] shadow-[0_10px_24px_rgba(255,176,124,0.14)]';
+const secondaryActionClass = 'rounded-full border border-cyan-300/30 bg-cyan-400/14 px-4 py-2 text-[12px] font-black uppercase tracking-[0.16em] text-cyan-50 no-underline transition hover:border-cyan-200/45 hover:bg-cyan-300/20';
 
 function label(status: string) {
   if (status === 'confirmed') return 'Confirmed';
@@ -246,9 +249,9 @@ export default async function PublicBookingPage(
                 </h1>
                 <p className="mt-3 max-w-2xl text-white/76">Your ride to Red Rocks is locked in. Your booking page is now the live source for pickup details, seat count, and any changes.</p>
                 <div className="mt-5 flex flex-wrap gap-3 text-sm font-black uppercase tracking-[0.16em] text-white">
-                  <span className="rounded-full border border-white/14 bg-white/6 px-4 py-2">{pickup} pickup</span>
-                  <span className="rounded-full border border-white/14 bg-white/6 px-4 py-2">{formatShortDate(date)}</span>
-                  <span className="rounded-full border border-white/14 bg-white/6 px-4 py-2">{seats} seat{seats === 1 ? '' : 's'}</span>
+                  <span className={infoPillClass}>{pickup} pickup</span>
+                  <span className={infoPillClass}>{formatShortDate(date)}</span>
+                  <span className={infoPillClass}>{seats} seat{seats === 1 ? '' : 's'}</span>
                   <span className={`rounded-full border px-4 py-2 text-[12px] ${badge(status)}`}>Status: {label(status)}</span>
                 </div>
               </div>
@@ -310,7 +313,7 @@ export default async function PublicBookingPage(
                   href={pickupLocation.googleMapsUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-full border border-white/14 bg-white/6 px-4 py-2 text-[12px] font-black uppercase tracking-[0.16em] text-white no-underline transition hover:border-white/24 hover:bg-white/10"
+                  className={secondaryActionClass}
                 >
                   Open In Google Maps
                 </a>
@@ -319,7 +322,7 @@ export default async function PublicBookingPage(
                     href={pickupLocation.menuUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded-full border border-white/14 bg-white/6 px-4 py-2 text-[12px] font-black uppercase tracking-[0.16em] text-white no-underline transition hover:border-white/24 hover:bg-white/10"
+                    className={secondaryActionClass}
                   >
                     {pickupLocation.menuLabel || 'View Menu'}
                   </a>
@@ -328,7 +331,7 @@ export default async function PublicBookingPage(
                     href={pickupLocation.websiteUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded-full border border-white/14 bg-white/6 px-4 py-2 text-[12px] font-black uppercase tracking-[0.16em] text-white no-underline transition hover:border-white/24 hover:bg-white/10"
+                    className={secondaryActionClass}
                   >
                     {pickupLocation.websiteLabel || 'Visit Website'}
                   </a>
@@ -416,18 +419,18 @@ export default async function PublicBookingPage(
                 ) : null}
                 <div className="mt-4 flex flex-wrap gap-3">
                   {showHref ? (
-                    <Link href={showHref} className="rounded-full border border-white/14 bg-white/6 px-4 py-2 text-[12px] font-black uppercase tracking-[0.16em] text-white no-underline transition hover:border-white/24 hover:bg-white/10">
+                    <Link href={showHref} className={secondaryActionClass}>
                       View Show Page
                     </Link>
                   ) : null}
                   {artistHref ? (
-                    <Link href={artistHref} className="rounded-full border border-white/14 bg-white/6 px-4 py-2 text-[12px] font-black uppercase tracking-[0.16em] text-white no-underline transition hover:border-white/24 hover:bg-white/10">
+                    <Link href={artistHref} className={secondaryActionClass}>
                       View Artist Guide
                     </Link>
                   ) : null}
-                  {spotifyUrl ? <a href={spotifyUrl} target="_blank" rel="noreferrer" className="rounded-full border border-white/14 bg-white/6 px-4 py-2 text-[12px] font-black uppercase tracking-[0.16em] text-white no-underline transition hover:border-white/24 hover:bg-white/10">Spotify</a> : null}
-                  {artistLinks?.appleMusic ? <a href={artistLinks.appleMusic} target="_blank" rel="noreferrer" className="rounded-full border border-white/14 bg-white/6 px-4 py-2 text-[12px] font-black uppercase tracking-[0.16em] text-white no-underline transition hover:border-white/24 hover:bg-white/10">Apple Music</a> : null}
-                  {artistLinks?.youtube ? <a href={artistLinks.youtube} target="_blank" rel="noreferrer" className="rounded-full border border-white/14 bg-white/6 px-4 py-2 text-[12px] font-black uppercase tracking-[0.16em] text-white no-underline transition hover:border-white/24 hover:bg-white/10">YouTube</a> : null}
+                  {spotifyUrl ? <a href={spotifyUrl} target="_blank" rel="noreferrer" className={secondaryActionClass}>Spotify</a> : null}
+                  {artistLinks?.appleMusic ? <a href={artistLinks.appleMusic} target="_blank" rel="noreferrer" className={secondaryActionClass}>Apple Music</a> : null}
+                  {artistLinks?.youtube ? <a href={artistLinks.youtube} target="_blank" rel="noreferrer" className={secondaryActionClass}>YouTube</a> : null}
                 </div>
                 {setlistPreview.length ? (
                   <p className="mt-4 text-sm leading-7 text-white/70">
@@ -458,7 +461,7 @@ export default async function PublicBookingPage(
               <Link
                 key={item.label}
                 href={item.href}
-                className="shrink-0 rounded-full border border-white/14 bg-white/6 px-4 py-3 text-[12px] font-black uppercase tracking-[0.16em] text-white no-underline transition hover:border-white/24 hover:bg-white/10"
+                className={`shrink-0 ${secondaryActionClass}`}
               >
                 {item.label}
               </Link>

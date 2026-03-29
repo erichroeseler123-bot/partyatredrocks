@@ -5,6 +5,7 @@ import { existsSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
 import { blobReadJson, blobWriteJson } from "@/lib/blobJson";
+import { appendBookingLedgerRow } from "@/lib/bookingLedger";
 type SqliteStatement = {
   run: (...args: unknown[]) => unknown;
   get: (...args: unknown[]) => unknown;
@@ -467,6 +468,7 @@ export async function saveInternalOrder(input: OrderWriteInput) {
       },
     });
     await saveBlobOrderStore(store);
+    await appendBookingLedgerRow(store.orders[0], { eventType: "booking_created" }).catch(() => undefined);
     return { internalOrderId, bookingToken, createdAt };
   }
 
@@ -513,7 +515,7 @@ export async function saveInternalOrder(input: OrderWriteInput) {
     }
   }
 
-  await appendBackupRow({
+  const createdOrder = {
     internalOrderId,
     bookingToken,
     createdAt,
@@ -523,14 +525,19 @@ export async function saveInternalOrder(input: OrderWriteInput) {
     sessionKey: input.sessionKey,
     customer: input.customer,
     booking: input.booking ?? null,
-    payment: input.payment,
-    pickup: input.pickup,
     rezdyBookingPayload: input.rezdyBookingPayload,
+    payment: input.payment,
     notes: null,
-    followUpStatus: "new",
-    operatorPaymentStep: "none",
+    followUpStatus: "new" as const,
+    operatorPaymentStep: "none" as const,
     paymentRequestSentAt: null,
+  };
+
+  await appendBackupRow({
+    ...createdOrder,
+    pickup: input.pickup,
   });
+  await appendBookingLedgerRow(createdOrder, { eventType: "booking_created" }).catch(() => undefined);
 
   return { internalOrderId, bookingToken, createdAt };
 }

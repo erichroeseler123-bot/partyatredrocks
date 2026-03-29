@@ -26,14 +26,12 @@ async function withTimeout<T>(p: Promise<T>, ms: number): Promise<T | null> {
 async function resolveBlobUrl(pathname: string): Promise<string | null> {
   const ms = timeoutMs();
 
-  // Primary: head(pathname)
   const meta = (await withTimeout(
     head(pathname).then((m) => m as unknown as BlobMeta),
     ms
   )) as BlobMeta | null;
   if (meta?.url) return meta.url;
 
-  // Fallback: list by prefix and pick exact match
   const res = await withTimeout(list({ prefix: pathname }), ms);
   const exact = res?.blobs?.find((b) => b.pathname === pathname);
   if (exact?.url) return exact.url;
@@ -41,10 +39,7 @@ async function resolveBlobUrl(pathname: string): Promise<string | null> {
   return null;
 }
 
-export async function blobReadJson<T>(
-  pathname: string,
-  opts?: { revalidateSeconds?: number }
-): Promise<T | null> {
+async function blobRead(pathname: string, opts?: { revalidateSeconds?: number }) {
   const url = await resolveBlobUrl(pathname);
   if (!url) return null;
 
@@ -63,7 +58,25 @@ export async function blobReadJson<T>(
   clearTimeout(timer);
   if (!res?.ok) return null;
 
+  return res;
+}
+
+export async function blobReadJson<T>(
+  pathname: string,
+  opts?: { revalidateSeconds?: number }
+): Promise<T | null> {
+  const res = await blobRead(pathname, opts);
+  if (!res) return null;
   return (await res.json()) as T;
+}
+
+export async function blobReadText(
+  pathname: string,
+  opts?: { revalidateSeconds?: number }
+): Promise<string | null> {
+  const res = await blobRead(pathname, opts);
+  if (!res) return null;
+  return await res.text();
 }
 
 export async function blobWriteJson(
@@ -76,7 +89,22 @@ export async function blobWriteJson(
     contentType: "application/json",
     addRandomSuffix: false,
     allowOverwrite: true,
-    // minimum is 60 seconds
+    cacheControlMaxAge: Math.max(60, opts?.cacheControlMaxAge ?? 60),
+  });
+
+  return { url: blob.url, pathname: blob.pathname };
+}
+
+export async function blobWriteText(
+  pathname: string,
+  data: string,
+  opts?: { cacheControlMaxAge?: number; contentType?: string }
+): Promise<{ url: string; pathname: string }> {
+  const blob = await put(pathname, data, {
+    access: "public",
+    contentType: opts?.contentType ?? "text/plain; charset=utf-8",
+    addRandomSuffix: false,
+    allowOverwrite: true,
     cacheControlMaxAge: Math.max(60, opts?.cacheControlMaxAge ?? 60),
   });
 

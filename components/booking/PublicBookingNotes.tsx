@@ -50,7 +50,7 @@ export default function PublicBookingNotes({ token, initialNotes }: Props) {
           type="button"
           onClick={saveNotes}
           disabled={saving}
-          className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-5 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:border-white/24 hover:bg-white/10 disabled:cursor-not-allowed disabled:text-white/40"
+          className="inline-flex min-h-12 items-center justify-center rounded-full border border-cyan-300/30 bg-cyan-400/14 px-5 text-sm font-black uppercase tracking-[0.16em] text-cyan-50 transition hover:border-cyan-200/45 hover:bg-cyan-300/20 disabled:cursor-not-allowed disabled:border-white/12 disabled:bg-white/6 disabled:text-white/40"
         >
           {saving ? 'Saving...' : 'Save Notes'}
         </button>

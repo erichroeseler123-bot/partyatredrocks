@@ -39,7 +39,7 @@ export default function PublicBookingActions({ token, canCancel, alreadyCancelle
       <div className="grid gap-3 sm:grid-cols-2">
         <a
           href="#manage-booking"
-          className="flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-5 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:border-white/26 hover:bg-white/10"
+          className="flex min-h-12 items-center justify-center rounded-full border border-cyan-300/30 bg-cyan-400/14 px-5 text-sm font-black uppercase tracking-[0.16em] text-cyan-50 transition hover:border-cyan-200/45 hover:bg-cyan-300/20"
         >
           Manage Booking
         </a>

@@ -523,7 +523,7 @@ export async function confirmSharedPayment(input: {
     bookingPatch: {
       status: "confirmed",
       confirmedAt: hold.paidAt,
-      orderNumber: hold.internalOrderId,
+      orderNumber: hold.squareOrderId ?? hold.internalOrderId,
       squareOrderId: hold.squareOrderId ?? null,
     },
     paymentPatch: {

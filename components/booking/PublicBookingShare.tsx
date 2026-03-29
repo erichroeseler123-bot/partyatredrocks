@@ -67,16 +67,23 @@ export default function PublicBookingShare({ shareUrl, shareTitle, shareText }: 
               </button>
               <a
                 href={`sms:&body=${encodeURIComponent(`${shareText}\n${shareUrl}`)}`}
-                className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-5 text-sm font-black uppercase tracking-[0.16em] text-white no-underline transition hover:border-white/24 hover:bg-white/10"
+                className="inline-flex min-h-12 items-center justify-center rounded-full border border-cyan-300/30 bg-cyan-400/14 px-5 text-sm font-black uppercase tracking-[0.16em] text-cyan-50 no-underline transition hover:border-cyan-200/45 hover:bg-cyan-300/20"
               >
                 Text My Group
               </a>
               <button
                 type="button"
                 onClick={copyInvite}
-                className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-5 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:border-white/24 hover:bg-white/10"
+                className="inline-flex min-h-12 items-center justify-center rounded-full border border-cyan-300/30 bg-cyan-400/14 px-5 text-sm font-black uppercase tracking-[0.16em] text-cyan-50 transition hover:border-cyan-200/45 hover:bg-cyan-300/20"
               >
                 Copy Invite
+              </button>
+              <button
+                type="button"
+                onClick={copyLink}
+                className="inline-flex min-h-12 items-center justify-center rounded-full border border-cyan-300/30 bg-cyan-400/14 px-5 text-sm font-black uppercase tracking-[0.16em] text-cyan-50 transition hover:border-cyan-200/45 hover:bg-cyan-300/20"
+              >
+                Copy Link
               </button>
             </div>
             {message ? <p className="mt-3 text-sm text-white/68">{message}</p> : null}

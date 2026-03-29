@@ -108,6 +108,24 @@ function StepLabel({ step, title }: { step: number; title: string }) {
   );
 }
 
+function ProcessingNotice({ message }: { message: string }) {
+  return (
+    <div className="rounded-[20px] border border-cyan-300/30 bg-cyan-400/10 px-4 py-4 text-sm text-cyan-50">
+      <div className="flex items-center gap-3">
+        <span className="inline-flex items-center gap-1" aria-hidden="true">
+          <span className="h-2.5 w-2.5 rounded-full bg-cyan-200 animate-pulse" />
+          <span className="h-2.5 w-2.5 rounded-full bg-cyan-200 animate-pulse [animation-delay:150ms]" />
+          <span className="h-2.5 w-2.5 rounded-full bg-cyan-200 animate-pulse [animation-delay:300ms]" />
+        </span>
+        <div>
+          <div className="text-[11px] font-black uppercase tracking-[0.18em] text-cyan-100/80">Processing</div>
+          <div className="mt-1 font-semibold text-white">{message}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function CustomBooking({
   venue = 'red-rocks-amphitheatre',
   searchParams,
@@ -130,6 +148,7 @@ export default function CustomBooking({
   const [inventory, setInventory] = useState<Inventory | null>(null);
   const [inventoryLoading, setInventoryLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [processingMessage, setProcessingMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [checkoutState, setCheckoutState] = useState<CheckoutState | null>(null);
   const [cardReady, setCardReady] = useState(false);
@@ -234,6 +253,7 @@ export default function CustomBooking({
     }
 
     setSubmitting(true);
+    setProcessingMessage('We are starting your secure checkout...');
     setError(null);
 
     try {
@@ -279,11 +299,15 @@ export default function CustomBooking({
         setInventory((current) => current ? { ...current, available: checkoutData.availableAfterHold, reserved: current.capacity - checkoutData.availableAfterHold } : current);
       }
 
+      setProcessingMessage('We are verifying your card details...');
+
       const tokenResult = await cardRef.current.tokenize();
       if (tokenResult.status !== 'OK' || !tokenResult.token) {
         const cardMessage = tokenResult.errors?.[0]?.message || 'Card details could not be verified.';
         throw new Error(cardMessage);
       }
+
+      setProcessingMessage('We are processing your payment...');
 
       const paymentRes = await fetch('/api/shared/pay', {
         method: 'POST',
@@ -303,7 +327,9 @@ export default function CustomBooking({
       if (!paymentRes.ok) throw new Error(paymentData.error || 'Failed to process payment');
 
       window.location.href = paymentData.successUrl;
+      return;
     } catch (err) {
+      setProcessingMessage(null);
       setError(err instanceof Error ? err.message : 'Failed to process payment');
     } finally {
       setSubmitting(false);
@@ -458,6 +484,7 @@ export default function CustomBooking({
         </div>
       </section>
 
+      {processingMessage ? <ProcessingNotice message={processingMessage} /> : null}
       {error ? <div className="rounded-[18px] border border-rose-400/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-100">{error}</div> : null}
       {checkoutState ? (
         <div className="rounded-[18px] border border-emerald-400/30 bg-emerald-500/10 px-4 py-4 text-sm text-white/88">
@@ -475,7 +502,7 @@ export default function CustomBooking({
           onClick={handleSubmit}
           className={`flex min-h-14 w-full items-center justify-center rounded-full px-6 text-sm font-black uppercase tracking-[0.16em] transition ${submitting || !cardReady || !date || !inventory || inventory.available < quantity ? 'cursor-not-allowed bg-white/10 text-white/45' : 'bg-[#3df3ff] text-[#07111d] hover:bg-[#62f6ff]'}`}
         >
-          {submitting ? 'Processing payment...' : `Pay ${totalLabel} on this site`}
+          {submitting ? 'We are processing your payment...' : `Pay ${totalLabel} on this site`}
         </button>
       </div>
     </div>
