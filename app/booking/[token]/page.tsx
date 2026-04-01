@@ -146,9 +146,17 @@ async function getArtistLinks(artistName: string): Promise<ArtistLinks | null> {
 }
 
 export default async function PublicBookingPage(
-  { params }: { params: Promise<{ token: string }> }
+  {
+    params,
+    searchParams,
+  }: {
+    params: Promise<{ token: string }>;
+    searchParams: Promise<{ view?: string }>;
+  }
 ) {
   const { token } = await params;
+  const resolvedSearchParams = await searchParams;
+  const isGuestView = resolvedSearchParams?.view === 'guest';
   const order = await getInternalOrderByBookingToken(token);
 
   if (!order) {
@@ -233,20 +241,16 @@ export default async function PublicBookingPage(
   const artistHref = artistContext?.artistSlug || show?.artistSlug
     ? `/artists/${encodeURIComponent(artistContext?.artistSlug || show?.artistSlug || '')}`
     : null;
-  const shareUrl = `${siteOrigin()}/book/red-rocks-amphitheatre/shared?pickupHub=${encodeURIComponent(pickup.toLowerCase())}${date ? `&date=${encodeURIComponent(date)}` : ''}${artistName ? `&artist=${encodeURIComponent(artistName)}` : ''}`;
-  const shareTitle = artistName
-    ? `Join our ${pickup} shuttle for ${artistName} at Red Rocks`
-    : `Join our ${pickup} shuttle to Red Rocks`;
-  const shareText = artistName
-    ? `We booked the ${pickup} shuttle for ${artistName} on ${formatShortDate(date)}. Join our shuttle here.`
-    : `We booked the ${pickup} Red Rocks shuttle. Join our shuttle here.`;
+  const bookingFlowUrl = `${siteOrigin()}/book/red-rocks-amphitheatre/shared?pickupHub=${encodeURIComponent(pickup.toLowerCase())}${date ? `&date=${encodeURIComponent(date)}` : ''}${artistName ? `&artist=${encodeURIComponent(artistName)}` : ''}`;
   const pickupTime = show?.startLocal
     ? `Final pickup timing is confirmed before show day for ${formatDateTime(show.startLocal, show.dateKey)}.`
     : 'Final pickup timing is confirmed before show day.';
   const supportPhone = PARR_PUBLIC_FACTS.support.phoneDisplay;
   const supportEmail = PARR_PUBLIC_FACTS.support.email;
   const checklistStorageKey = `parr-pack-checklist:${token}`;
+  const guestRosterStorageKey = `parr-guest-roster:${token}`;
   const bookingUrl = `${siteOrigin()}/booking/${encodeURIComponent(token)}`;
+  const guestShareUrl = `${bookingUrl}?view=guest`;
   const eventStartIso = show?.startLocal || (show?.dateKey ? `${show.dateKey}T19:00:00` : date ? `${date}T19:00:00` : null);
   const faqSchema = {
     '@context': 'https://schema.org',
@@ -340,11 +344,25 @@ export default async function PublicBookingPage(
           </div>
         </section>
 
-        <PublicBookingShare
-          shareUrl={shareUrl}
-          shareTitle={shareTitle}
-          shareText={shareText}
-        />
+        {!isGuestView ? (
+          <PublicBookingShare
+            guestShareUrl={guestShareUrl}
+            bookingFlowUrl={bookingFlowUrl}
+            showName={artistName || 'your Red Rocks show'}
+            showDateLabel={formatShortDate(date)}
+            pickupLabel={pickupLocation.name}
+            pickupTimeLabel={show?.startLocal ? formatDateTime(show.startLocal, show.dateKey) : 'timing updates coming soon'}
+            seatCount={seats}
+            storageKey={guestRosterStorageKey}
+          />
+        ) : (
+          <section className="rounded-[28px] border border-white/10 bg-[#09101f] p-6">
+            <div className="text-[12px] font-black uppercase tracking-[0.2em] text-[var(--brand-orange)]">Guest View</div>
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-white/76">
+              You are viewing the guest-safe version of this shuttle dashboard. Packing tips, timeline, and return guidance are all here. Primary-booker controls stay hidden on this shared link.
+            </p>
+          </section>
+        )}
 
         <section className="rounded-[28px] border border-white/10 bg-[#09101f] p-6">
           <div className="text-[12px] font-black uppercase tracking-[0.2em] text-[var(--brand-orange)]">What Happens Next</div>
@@ -372,7 +390,8 @@ export default async function PublicBookingPage(
           />
         </section>
 
-        <section className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
+        {!isGuestView ? (
+          <section className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
           <div className="rounded-[28px] border border-white/10 bg-[#09101f] p-6">
             <div className="text-[12px] font-black uppercase tracking-[0.2em] text-[var(--brand-orange)]">Your Pickup</div>
             <div className="mt-5 rounded-[22px] border border-white/10 bg-black/20 p-5">
@@ -474,10 +493,8 @@ export default async function PublicBookingPage(
               />
             </div>
           </div>
-        </section>
-
-        <section className="rounded-[28px] border border-white/10 bg-[#09101f] p-6">
-          <div className="text-[12px] font-black uppercase tracking-[0.2em] text-[var(--brand-orange)]">Refund & Cancellation Details</div>
+          <section className="rounded-[28px] border border-white/10 bg-[#09101f] p-6">
+            <div className="text-[12px] font-black uppercase tracking-[0.2em] text-[var(--brand-orange)]">Refund & Cancellation Details</div>
           <div className="mt-5 grid gap-5 lg:grid-cols-[0.95fr_1.05fr]">
             <div className="rounded-[22px] border border-white/10 bg-black/20 p-5">
               <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/46">The 48-Hour Rule</div>
@@ -509,6 +526,9 @@ export default async function PublicBookingPage(
             </div>
           </div>
         </section>
+
+            </section>
+        ) : null}
 
         <section className="rounded-[28px] border border-white/10 bg-[#09101f] p-6">
           <div className="text-[12px] font-black uppercase tracking-[0.2em] text-[var(--brand-orange)]">Get Ready For Your Show</div>
@@ -645,13 +665,15 @@ export default async function PublicBookingPage(
           </div>
         </section>
 
-        <section className="rounded-[28px] border border-white/10 bg-[#09101f] p-6">
-          <div className="text-[12px] font-black uppercase tracking-[0.2em] text-[var(--brand-orange)]">Your Plan For The Night</div>
-          <p className="mt-3 text-sm leading-6 text-white/72">Add anything you don&apos;t want to forget.</p>
-          <div className="mt-5">
-            <PublicBookingNotes token={token} initialNotes={order.notes || ''} />
-          </div>
-        </section>
+        {!isGuestView ? (
+          <section className="rounded-[28px] border border-white/10 bg-[#09101f] p-6">
+            <div className="text-[12px] font-black uppercase tracking-[0.2em] text-[var(--brand-orange)]">Your Plan For The Night</div>
+            <p className="mt-3 text-sm leading-6 text-white/72">Add anything you don&apos;t want to forget.</p>
+            <div className="mt-5">
+              <PublicBookingNotes token={token} initialNotes={order.notes || ''} />
+            </div>
+          </section>
+        ) : null}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
