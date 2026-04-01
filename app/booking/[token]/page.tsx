@@ -374,8 +374,15 @@ export default async function PublicBookingPage(
           pickupName={pickupLocation.name}
           pickupAddress={pickupLocation.address}
           pickupMapsUrl={pickupLocation.googleMapsUrl}
+          pickupMapsEmbedUrl={pickupLocation.mapsEmbedUrl}
           supportPhoneDisplay={supportPhone}
           supportPhoneE164={PARR_PUBLIC_FACTS.support.phoneE164}
+          meetupLandmark={pickupLocation.meetup.landmark}
+          meetupWaitSpot={pickupLocation.meetup.bestWaitSpot}
+          meetupWaitInstructions={pickupLocation.meetup.waitInstructions}
+          meetupCheckIn={pickupLocation.meetup.checkIn}
+          meetupArrivalText={pickupLocation.meetup.arrivalText}
+          meetupBoardingCue={pickupLocation.meetup.boardingCue}
         />
 
         <section className="rounded-[28px] border border-white/10 bg-[#09101f] p-6">

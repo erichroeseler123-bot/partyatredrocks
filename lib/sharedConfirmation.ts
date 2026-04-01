@@ -47,14 +47,14 @@ function renderEmail(order: InternalOrderRow) {
   const logoMarkup = renderEmailBrandMark();
 
   return {
-    subject: "Your Red Rocks Show Night Itinerary",
+    subject: "Confirmed: Your Private Night Dashboard Is Ready",
     html: `<div style="margin:0;padding:32px 16px;background:#f4efe8">
       <div style="max-width:640px;margin:0 auto;font-family:Arial,sans-serif;color:#0f172a">
         <div style="overflow:hidden;border-radius:28px;background:#081120;border:1px solid rgba(255,255,255,0.08);box-shadow:0 24px 80px rgba(15,23,42,0.18)">
           <div style="padding:32px;background:linear-gradient(135deg,rgba(255,176,124,0.22),rgba(8,17,32,0.96) 55%,rgba(143,208,255,0.16));color:#fff">
             ${logoMarkup}            <div style="font-size:11px;font-weight:900;letter-spacing:0.22em;text-transform:uppercase;color:#8fd0ff">Party at Red Rocks</div>
-            <h1 style="margin:16px 0 0;font-size:32px;line-height:1.05;text-transform:uppercase;letter-spacing:-0.04em">Your show night itinerary is ready.</h1>
-            <p style="margin:16px 0 0;font-size:15px;line-height:1.8;color:rgba(255,255,255,0.78)">Hi ${escapeHtml(firstName)}, your shuttle is confirmed. Head back to your booking page for the full Red Rocks game plan.</p>
+            <h1 style="margin:16px 0 0;font-size:32px;line-height:1.05;text-transform:uppercase;letter-spacing:-0.04em">Your private night dashboard is ready.</h1>
+            <p style="margin:16px 0 0;font-size:15px;line-height:1.8;color:rgba(255,255,255,0.78)">Hi ${escapeHtml(firstName)}, you are all set. Use your dashboard for one-click directions to pickup, the Red Rocks packing checklist, and your live return plan.</p>
           </div>
 
           <div style="padding:28px;background:#ffffff">
@@ -64,8 +64,18 @@ function renderEmail(order: InternalOrderRow) {
             </div>
 
             ${manageUrl ? `<div style="margin-top:20px">
-              <a href="${manageUrl}" style="display:inline-block;padding:14px 22px;border-radius:999px;background:#0f172a;color:#ffffff;font-size:13px;font-weight:900;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none">Open Your Show Night Itinerary</a>
+              <a href="${manageUrl}" style="display:inline-block;padding:14px 22px;border-radius:999px;background:#0f172a;color:#ffffff;font-size:13px;font-weight:900;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none">Open My Red Rocks Dashboard</a>
             </div>` : ""}
+
+            <div style="margin-top:18px;border:1px solid rgba(15,23,42,0.08);border-radius:22px;padding:20px;background:#fffaf5">
+              <div style="font-size:11px;font-weight:900;letter-spacing:0.18em;text-transform:uppercase;color:#64748b">Why this page matters</div>
+              <div style="margin-top:14px;font-size:14px;line-height:1.8;color:#334155">
+                <div>1-click directions to pickup</div>
+                <div>2026 Red Rocks bag and packing rules</div>
+                <div>Your live return and support info</div>
+                <div style="margin-top:10px;font-weight:700;color:#0f172a">Pro tip: bookmark this page on your phone before show day.</div>
+              </div>
+            </div>
 
             <div style="margin-top:22px;border:1px solid rgba(15,23,42,0.08);border-radius:22px;padding:20px;background:#f8fafc">
               <div style="font-size:11px;font-weight:900;letter-spacing:0.18em;text-transform:uppercase;color:#64748b">Need Help?</div>

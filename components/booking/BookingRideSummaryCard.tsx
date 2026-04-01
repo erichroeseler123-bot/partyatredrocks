@@ -8,11 +8,23 @@ type Props = {
   pickupName: string;
   pickupAddress: string;
   pickupMapsUrl: string;
+  pickupMapsEmbedUrl: string;
   supportPhoneDisplay: string;
   supportPhoneE164: string;
+  meetupLandmark: string;
+  meetupWaitSpot: string;
+  meetupWaitInstructions: string;
+  meetupCheckIn: string;
+  meetupArrivalText: string;
+  meetupBoardingCue: string;
 };
 
 type Phase = 'pretrip' | 'showday' | 'return';
+
+type LiveStatus = {
+  label: string;
+  detail: string;
+};
 
 function pad(value: number) {
   return String(value).padStart(2, '0');
@@ -35,6 +47,37 @@ function formatCountdown(diffMs: number) {
   return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
 }
 
+function getLiveStatus(now: number, checkIn: Date | null, departure: Date | null, landmark: string): LiveStatus {
+  if (!checkIn || !departure) {
+    return {
+      label: 'Preparing',
+      detail: `Grab a drink and keep this page bookmarked. We will text you when it is time to head to ${landmark}.`,
+    };
+  }
+
+  const msUntilCheckIn = checkIn.getTime() - now;
+  const msUntilDeparture = departure.getTime() - now;
+
+  if (msUntilDeparture <= 0) {
+    return {
+      label: 'Boarding',
+      detail: `We are at the curb now. Head straight to ${landmark} and look for the PARR vehicle.`,
+    };
+  }
+
+  if (msUntilCheckIn <= 15 * 60 * 1000) {
+    return {
+      label: 'Arriving Soon',
+      detail: `The shuttle is close. Finish your drinks and head toward ${landmark}.`,
+    };
+  }
+
+  return {
+    label: 'Preparing',
+    detail: `Grab a drink and stay nearby. We will text you when we are 15 minutes out for ${landmark}.`,
+  };
+}
+
 const returnZoneMapsUrl =
   'https://www.google.com/maps/search/?api=1&query=Red+Rocks+Amphitheatre+18300+W+Alameda+Pkwy+Morrison+CO+80465';
 
@@ -44,8 +87,15 @@ export default function BookingRideSummaryCard({
   pickupName,
   pickupAddress,
   pickupMapsUrl,
+  pickupMapsEmbedUrl,
   supportPhoneDisplay,
   supportPhoneE164,
+  meetupLandmark,
+  meetupWaitSpot,
+  meetupWaitInstructions,
+  meetupCheckIn,
+  meetupArrivalText,
+  meetupBoardingCue,
 }: Props) {
   const [now, setNow] = useState(() => Date.now());
 
@@ -73,8 +123,9 @@ export default function BookingRideSummaryCard({
       departure,
       checkIn,
       countdown: formatCountdown(countdownTarget.getTime() - now),
+      liveStatus: getLiveStatus(now, checkIn, departure, meetupLandmark),
     };
-  }, [fallbackDate, now, showStartRaw]);
+  }, [fallbackDate, meetupLandmark, now, showStartRaw]);
 
   const smsHref = useMemo(() => {
     const body = encodeURIComponent(
@@ -98,9 +149,9 @@ export default function BookingRideSummaryCard({
           badge: 'Show Day',
           title: 'This is your live ride anchor.',
           body: 'Map, timing, and pickup details are all here now. Open the route before you leave so there is no bar-side scrambling.',
-          primaryLabel: 'Open In Google Maps',
+          primaryLabel: 'Get Directions',
           primaryHref: pickupMapsUrl,
-          secondaryLabel: 'Text Support',
+          secondaryLabel: 'Text The Driver Team',
           secondaryHref: smsHref,
         }
       : {
@@ -127,9 +178,20 @@ export default function BookingRideSummaryCard({
                 {schedule.phase === 'return' ? 'Music starts in' : 'Shuttle leaves in'} {schedule.countdown}
               </span>
             ) : null}
+            {schedule ? (
+              <span className="rounded-full border border-white/12 bg-white/8 px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white">
+                Status: {schedule.liveStatus.label}
+              </span>
+            ) : null}
           </div>
           <h2 className="mt-4 text-2xl font-black uppercase tracking-[-0.03em] text-white sm:text-3xl">{phaseCopy.title}</h2>
           <p className="mt-3 max-w-2xl text-sm leading-7 text-white/76">{phaseCopy.body}</p>
+          {schedule ? (
+            <div className="mt-4 rounded-[20px] border border-cyan-300/22 bg-cyan-400/10 px-4 py-4 text-sm leading-7 text-cyan-50">
+              <div className="text-[11px] font-black uppercase tracking-[0.18em] text-cyan-100/82">Live Status</div>
+              <p className="mt-2">{schedule.liveStatus.detail}</p>
+            </div>
+          ) : null}
         </div>
         <div className="grid w-full gap-3 lg:max-w-[320px]">
           <a
@@ -149,6 +211,16 @@ export default function BookingRideSummaryCard({
             {phaseCopy.secondaryLabel}
           </a>
         </div>
+      </div>
+
+      <div className="mt-5 overflow-hidden rounded-[24px] border border-white/10 bg-black/20">
+        <iframe
+          title={`Map for ${pickupName}`}
+          src={pickupMapsEmbedUrl}
+          className="h-[280px] w-full border-0"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
       </div>
 
       <div className="mt-5 grid gap-4 md:grid-cols-3">
@@ -174,6 +246,28 @@ export default function BookingRideSummaryCard({
               ? 'If the group gets split up after the encore, text support before you start the rideshare walk.'
               : 'Departure time is based on the current show schedule. Final driver text always wins.'}
           </p>
+        </div>
+      </div>
+
+      <div className="mt-5 rounded-[24px] border border-white/10 bg-black/20 p-5">
+        <div className="text-[12px] font-black uppercase tracking-[0.18em] text-[var(--brand-orange)]">How To Meet Us</div>
+        <div className="mt-4 grid gap-4 md:grid-cols-2">
+          <div className="rounded-[18px] border border-white/10 bg-white/[0.03] px-4 py-4 text-sm leading-7 text-white/80">
+            <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/46">The Exact Spot</div>
+            <p className="mt-2">Look for the Party at Red Rocks sign near <span className="font-black text-white">{meetupLandmark}</span>.</p>
+          </div>
+          <div className="rounded-[18px] border border-white/10 bg-white/[0.03] px-4 py-4 text-sm leading-7 text-white/80">
+            <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/46">Wait Inside Or Out?</div>
+            <p className="mt-2">Feel free to wait at <span className="font-black text-white">{meetupWaitSpot}</span>. {meetupWaitInstructions}</p>
+          </div>
+          <div className="rounded-[18px] border border-white/10 bg-white/[0.03] px-4 py-4 text-sm leading-7 text-white/80">
+            <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/46">Check-In</div>
+            <p className="mt-2">{meetupCheckIn}</p>
+          </div>
+          <div className="rounded-[18px] border border-white/10 bg-white/[0.03] px-4 py-4 text-sm leading-7 text-white/80">
+            <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/46">Notification</div>
+            <p className="mt-2">{meetupArrivalText} {meetupBoardingCue}</p>
+          </div>
         </div>
       </div>
     </section>

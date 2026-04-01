@@ -29,12 +29,22 @@ export const PARR_PUBLIC_FACTS = {
       arrivalNote: "Arrive 10-15 minutes early so boarding stays smooth.",
       googleMapsUrl:
         "https://www.google.com/maps/search/?api=1&query=39.7424135236667,-104.98926230317811",
+      mapsEmbedUrl:
+        "https://www.google.com/maps?q=39.7424135236667,-104.98926230317811&z=17&output=embed",
       websiteUrl:
         "https://www.marriott.com/en-us/hotels/dends-sheraton-denver-downtown-hotel/overview/",
       websiteLabel: "Visit Hotel",
       menuUrl: null,
       menuLabel: null,
       amenities: ["Bathrooms available inside", "Lobby seating nearby", "Easy rideshare drop-off"],
+      meetup: {
+        landmark: "the main entrance on Court Place",
+        bestWaitSpot: "the Sheraton lobby bar or hotel lobby seating",
+        waitInstructions: "Feel free to stay inside until the driver text lands, then head out to the main entrance.",
+        checkIn: "Your driver will be wearing PARR gear and will check you in by the name on the booking.",
+        arrivalText: "We will text a live pin and curbside note about 15 minutes before the shuttle arrives.",
+        boardingCue: "Head to the main entrance curb when the status flips to boarding.",
+      },
     },
     golden: {
       hubId: "golden",
@@ -50,11 +60,21 @@ export const PARR_PUBLIC_FACTS = {
       arrivalNote: "Best to arrive 10-15 minutes early to order and settle up before boarding.",
       googleMapsUrl:
         "https://www.google.com/maps/search/?api=1&query=Trailhead%20Taphouse%20%26%20Kitchen%20811%2012th%20Street%20Golden%20CO%2080401",
+      mapsEmbedUrl:
+        "https://www.google.com/maps?q=Trailhead%20Taphouse%20%26%20Kitchen%20811%2012th%20Street%20Golden%20CO%2080401&z=17&output=embed",
       websiteUrl: "https://trailheadtaphouse.com/",
       websiteLabel: "Visit Website",
       menuUrl: "https://trailheadtaphouse.com/menu/",
       menuLabel: "View Menu",
       amenities: ["Food and drinks on site", "Bathrooms inside", "Downtown Golden pickup"],
+      meetup: {
+        landmark: "the front entrance and curb on 12th Street",
+        bestWaitSpot: "inside Trailhead Taphouse",
+        waitInstructions: "Grab a drink or food inside and stay there until the driver text tells you to step outside.",
+        checkIn: "Your driver will check you in by booking name, so you do not need to print anything.",
+        arrivalText: "We will text a live pin and vehicle note about 15 minutes before arrival.",
+        boardingCue: "When the shuttle is 5 minutes out, close out your tab and head to the front curb.",
+      },
     },
   },
 } as const;
