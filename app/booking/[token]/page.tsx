@@ -3,7 +3,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import PublicBookingActions from '@/components/booking/PublicBookingActions';
 import BookingPackChecklist from '@/components/booking/BookingPackChecklist';
+import BookingRideSummaryCard from '@/components/booking/BookingRideSummaryCard';
 import BookingShowDayTimeline from '@/components/booking/BookingShowDayTimeline';
+import BookingStickyHelp from '@/components/booking/BookingStickyHelp';
 import PublicBookingNotes from '@/components/booking/PublicBookingNotes';
 import PublicBookingShare from '@/components/booking/PublicBookingShare';
 import {
@@ -251,6 +253,7 @@ export default async function PublicBookingPage(
   const guestRosterStorageKey = `parr-guest-roster:${token}`;
   const bookingUrl = `${siteOrigin()}/booking/${encodeURIComponent(token)}`;
   const guestShareUrl = `${bookingUrl}?view=guest`;
+  const supportSmsHref = `sms:${PARR_PUBLIC_FACTS.support.phoneE164}?&body=${encodeURIComponent(`Hey - I need help with my Party At Red Rocks ride. Booking token: ${token}`)}`;
   const eventStartIso = show?.startLocal || (show?.dateKey ? `${show.dateKey}T19:00:00` : date ? `${date}T19:00:00` : null);
   const faqSchema = {
     '@context': 'https://schema.org',
@@ -363,6 +366,16 @@ export default async function PublicBookingPage(
             </p>
           </section>
         )}
+
+        <BookingRideSummaryCard
+          showStartRaw={show?.startLocal || null}
+          fallbackDate={show?.dateKey || date}
+          pickupName={pickupLocation.name}
+          pickupAddress={pickupLocation.address}
+          pickupMapsUrl={pickupLocation.googleMapsUrl}
+          supportPhoneDisplay={supportPhone}
+          supportPhoneE164={PARR_PUBLIC_FACTS.support.phoneE164}
+        />
 
         <section className="rounded-[28px] border border-white/10 bg-[#09101f] p-6">
           <div className="text-[12px] font-black uppercase tracking-[0.2em] text-[var(--brand-orange)]">What Happens Next</div>
@@ -665,15 +678,40 @@ export default async function PublicBookingPage(
           </div>
         </section>
 
-        {!isGuestView ? (
-          <section className="rounded-[28px] border border-white/10 bg-[#09101f] p-6">
-            <div className="text-[12px] font-black uppercase tracking-[0.2em] text-[var(--brand-orange)]">Your Plan For The Night</div>
-            <p className="mt-3 text-sm leading-6 text-white/72">Add anything you don&apos;t want to forget.</p>
-            <div className="mt-5">
-              <PublicBookingNotes token={token} initialNotes={order.notes || ''} />
+        <section className="rounded-[28px] border border-white/10 bg-[#09101f] p-6">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <div className="text-[12px] font-black uppercase tracking-[0.2em] text-[var(--brand-orange)]">My Night Plan</div>
+              <p className="mt-3 text-sm leading-6 text-white/72">
+                {isGuestView
+                  ? 'The primary booker can drop the meetup plan here so the whole crew sees the same playbook.'
+                  : 'Add the meetup plan, bar stop, or crew notes you do not want to forget.'}
+              </p>
             </div>
-          </section>
-        ) : null}
+            {isGuestView ? (
+              <Link
+                href={bookingFlowUrl}
+                className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#ffb07c]/28 bg-[#ffb07c]/14 px-5 text-sm font-black uppercase tracking-[0.16em] text-white no-underline transition hover:bg-[#ffb07c]/20"
+              >
+                Grab Your Seat - $59
+              </Link>
+            ) : null}
+          </div>
+          <div className="mt-5">
+            {!isGuestView ? (
+              <PublicBookingNotes token={token} initialNotes={order.notes || ''} />
+            ) : order.notes ? (
+              <div className="rounded-[22px] border border-white/10 bg-black/20 p-5">
+                <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/46">Shared By Your Group Lead</div>
+                <p className="mt-4 whitespace-pre-line text-sm leading-7 text-white/80">{order.notes}</p>
+              </div>
+            ) : (
+              <div className="rounded-[22px] border border-white/10 bg-black/20 p-5 text-sm leading-7 text-white/72">
+                No custom meetup note has been added yet. Use the timeline, pickup card, and checklist above as the default game plan.
+              </div>
+            )}
+          </div>
+        </section>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -685,6 +723,10 @@ export default async function PublicBookingPage(
           />
         ) : null}
       </section>
+      <BookingStickyHelp
+        smsHref={supportSmsHref}
+        phoneLabel={supportPhone}
+      />
     </main>
   );
 }
