@@ -39,8 +39,8 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
       ],
       href: BOOK_SHARED_RED_ROCKS,
       cta: "View Shuttle Options",
-      image: sprinterSrc,
-      alt: "Shared shuttle option for Red Rocks transportation",
+      image: shuttleSrc,
+      alt: "Approved Sprinter shuttle image for Red Rocks transportation",
     },
     {
       title: "Private Car",
@@ -52,8 +52,8 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
       ],
       href: "/book/red-rocks-amphitheatre/private",
       cta: "See Private Prices",
-      image: shuttleSrc,
-      alt: "Private vehicle option for Red Rocks transportation",
+      image: sprinterSrc,
+      alt: "Approved Suburban SUV image for Red Rocks private transportation",
     },
   ];
 
