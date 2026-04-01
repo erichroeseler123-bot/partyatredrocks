@@ -1001,3 +1001,153 @@ body,
     animation: none;
   }
 }
+
+/* =============================================
+   CTA SYSTEM — SINGLE SOURCE OF TRUTH
+   Keep this block last so legacy btn/comic classes resolve to one hierarchy.
+*/
+:root {
+  --cta-radius: 9999px;
+  --cta-font-size: 0.75rem;
+  --cta-letter-spacing: 0.16em;
+  --cta-padding-x: 1.2rem;
+  --cta-padding-y: 0.78rem;
+  --cta-nav-padding-x: 1rem;
+  --cta-nav-padding-y: 0.62rem;
+  --cta-min-height: 48px;
+  --cta-nav-min-height: 40px;
+  --cta-focus: rgba(255, 255, 255, 0.92);
+}
+
+.brand-button-primary,
+.brand-button-secondary,
+.brand-button-ghost,
+.brand-button-nav,
+.btn-primary,
+.btn-secondary,
+.btn-ghost,
+.comic-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--cta-min-height);
+  padding: var(--cta-padding-y) var(--cta-padding-x);
+  border-radius: var(--cta-radius);
+  font-size: var(--cta-font-size);
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: var(--cta-letter-spacing);
+  text-decoration: none !important;
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    color 0.18s ease;
+}
+
+.brand-button-primary,
+.btn-primary,
+.comic-btn-primary {
+  border: 1px solid color-mix(in srgb, var(--brand-orange) 32%, transparent);
+  background: linear-gradient(180deg, var(--brand-primary-start) 0%, var(--brand-primary-end) 100%);
+  color: var(--brand-accent-text) !important;
+  box-shadow:
+    0 18px 40px rgba(255, 91, 46, 0.24),
+    0 6px 16px rgba(255, 91, 46, 0.12);
+}
+
+.brand-button-primary:hover,
+.btn-primary:hover,
+.comic-btn-primary:hover {
+  background: linear-gradient(180deg, var(--brand-primary-hover-start) 0%, var(--brand-primary-hover-end) 100%);
+  color: var(--brand-accent-text) !important;
+  transform: translateY(-2px);
+  box-shadow:
+    0 22px 48px rgba(255, 91, 46, 0.28),
+    0 8px 20px rgba(255, 91, 46, 0.16);
+}
+
+.brand-button-secondary,
+.btn-secondary,
+.comic-btn-secondary {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: #0b0f1a;
+  color: #ffffff !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+.brand-button-secondary:hover,
+.btn-secondary:hover,
+.comic-btn-secondary:hover {
+  background: #121826;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.32);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+}
+
+.brand-button-ghost,
+.btn-ghost {
+  border: 1px solid rgba(255, 255, 255, 0.36);
+  background: transparent;
+  color: #ffffff !important;
+  box-shadow: none;
+}
+
+.brand-button-ghost:hover,
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.46);
+  transform: translateY(-2px);
+}
+
+.brand-button-nav {
+  min-height: var(--cta-nav-min-height);
+  padding: var(--cta-nav-padding-y) var(--cta-nav-padding-x);
+  border: 1px solid color-mix(in srgb, var(--brand-orange) 32%, transparent);
+  background: linear-gradient(180deg, var(--brand-primary-start) 0%, var(--brand-primary-end) 100%);
+  color: var(--brand-accent-text) !important;
+  box-shadow:
+    0 14px 30px rgba(255, 91, 46, 0.2),
+    0 4px 12px rgba(255, 91, 46, 0.12);
+}
+
+.brand-button-nav:hover {
+  background: linear-gradient(180deg, var(--brand-primary-hover-start) 0%, var(--brand-primary-hover-end) 100%);
+  color: var(--brand-accent-text) !important;
+  transform: translateY(-1px);
+}
+
+.brand-button-secondary:focus-visible,
+.brand-button-primary:focus-visible,
+.brand-button-ghost:focus-visible,
+.brand-button-nav:focus-visible,
+.comic-btn:focus-visible,
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.btn-ghost:focus-visible {
+  outline: 2px solid var(--cta-focus);
+  outline-offset: 2px;
+}
+
+.brand-button-secondary:disabled,
+.brand-button-primary:disabled,
+.brand-button-ghost:disabled,
+.brand-button-nav:disabled,
+.btn-primary:disabled,
+.btn-secondary:disabled,
+.btn-ghost:disabled,
+.comic-btn[aria-disabled="true"] {
+  opacity: 0.7;
+}
+
+.comic-mobile-cta,
+[data-floating-cta],
+.floating-book,
+.floating-cta {
+  display: none !important;
+}
+

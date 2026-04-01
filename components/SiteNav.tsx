@@ -45,7 +45,7 @@ export default function SiteNav() {
           <div className="flex shrink-0 items-center justify-center">
             <Link
               href="/book/red-rocks-amphitheatre"
-              className="brand-button-primary inline-flex min-h-[38px] max-w-full items-center justify-center whitespace-nowrap px-3 text-[10px] font-black uppercase tracking-[0.12em] no-underline sm:min-h-[42px] sm:px-4 sm:text-[12px] sm:tracking-[0.16em]"
+              className="brand-button-nav inline-flex max-w-full items-center justify-center whitespace-nowrap px-3 text-[10px] font-black uppercase tracking-[0.12em] no-underline sm:px-4 sm:text-[12px] sm:tracking-[0.16em]"
             >
               <span className="sm:hidden">Book</span>
               <span className="hidden sm:inline">{cta}</span>
