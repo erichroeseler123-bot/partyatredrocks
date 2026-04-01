@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { GuideVisualHero } from "@/components/guide/GuideVisualHero";
 import { guideVisuals } from "@/lib/guideVisuals";
 import { curatedImages } from "@/lib/curatedImages";
+import { pageVisuals } from "@/lib/pageVisuals";
 
 const COMPARE_VISUALS = [
   {
@@ -24,6 +26,27 @@ const COMPARE_VISUALS = [
     imageAlt: "Sprinter van transportation for Red Rocks groups",
   },
 ] as const;
+
+const SITE = "https://www.partyatredrocks.com";
+
+export const metadata: Metadata = {
+  title: pageVisuals.compare.title,
+  description: pageVisuals.compare.description,
+  alternates: { canonical: `${SITE}/guide/compare` },
+  openGraph: {
+    title: pageVisuals.compare.title,
+    description: pageVisuals.compare.description,
+    url: `${SITE}/guide/compare`,
+    type: "article",
+    images: [{ url: pageVisuals.compare.shareImage, alt: "Comparing Red Rocks ride options" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: pageVisuals.compare.title,
+    description: pageVisuals.compare.description,
+    images: [pageVisuals.compare.shareImage],
+  },
+};
 
 export default function ShuttleComparison() {
   const comparisonSchema = {

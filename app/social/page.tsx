@@ -4,24 +4,25 @@ import SocialLinks from "@/components/shared/SocialLinks";
 import { SITE_CONFIG } from "@/app/site-config";
 import { getSameAs } from "@/lib/socials";
 import { pageVisuals } from "@/lib/pageVisuals";
-import { getFeaturedUGCPosts } from "@/data/social/ugc-posts";
-
 const SITE = "https://www.partyatredrocks.com";
-const FEATURED_SOCIAL_IMAGE =
-  getFeaturedUGCPosts("partyatredrocks", 1)[0]?.imageUrl || pageVisuals.social.shareFallback;
+const FEATURED_SOCIAL_IMAGE = pageVisuals.social.shareImage;
 
 export const metadata: Metadata = {
-  title: "Party At Red Rocks Social | Real Rides, Real Nights, Real Groups",
-  description:
-    "See real ride nights, group arrivals, and concert transport moments from Party At Red Rocks. Follow the route, send it to your group, or ask about your ride.",
+  title: pageVisuals.social.title,
+  description: pageVisuals.social.description,
   alternates: { canonical: `${SITE}/social` },
   openGraph: {
-    title: "Party At Red Rocks Social | Real Rides, Real Nights, Real Groups",
-    description:
-      "See real ride nights, group arrivals, and concert transport moments from Party At Red Rocks.",
+    title: pageVisuals.social.title,
+    description: pageVisuals.social.description,
     url: `${SITE}/social`,
     type: "website",
-    images: [{ url: `${SITE}${FEATURED_SOCIAL_IMAGE}`, alt: "Party At Red Rocks social proof gallery" }],
+    images: [{ url: FEATURED_SOCIAL_IMAGE, alt: "Party At Red Rocks social proof gallery" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: pageVisuals.social.title,
+    description: pageVisuals.social.description,
+    images: [FEATURED_SOCIAL_IMAGE],
   },
 };
 

@@ -1,9 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { GuideLocalInfo } from "@/components/guide/GuideLocalInfo";
 import { GuideVisualHero } from "@/components/guide/GuideVisualHero";
 import { guideVisuals } from "@/lib/guideVisuals";
 import { curatedImages } from "@/lib/curatedImages";
+import { pageVisuals } from "@/lib/pageVisuals";
 
 const SHARED_HREF = "/book/red-rocks-amphitheatre/custom/shared";
 const PRIVATE_HREF = "/book/red-rocks-amphitheatre/private";
@@ -29,9 +31,25 @@ const LOGISTICS_VISUALS = [
 ] as const;
 
 
-export const metadata = {
-  title: "Show-Night Planning Guide",
-  description: "Arrival windows, weather risk, exit timing, and the transport choice that keeps the whole night clean.",
+const SITE = "https://www.partyatredrocks.com";
+
+export const metadata: Metadata = {
+  title: pageVisuals.logistics.title,
+  description: pageVisuals.logistics.description,
+  alternates: { canonical: `${SITE}/guide/show-night-strategy` },
+  openGraph: {
+    title: pageVisuals.logistics.title,
+    description: pageVisuals.logistics.description,
+    url: `${SITE}/guide/show-night-strategy`,
+    type: "article",
+    images: [{ url: pageVisuals.logistics.shareImage, alt: "Show-night planning at Red Rocks" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: pageVisuals.logistics.title,
+    description: pageVisuals.logistics.description,
+    images: [pageVisuals.logistics.shareImage],
+  },
 };
 
 export default function Page() {
