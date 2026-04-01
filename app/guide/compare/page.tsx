@@ -8,19 +8,19 @@ const COMPARE_VISUALS = [
   {
     title: "Shared Shuttle",
     body: "Fixed pricing and one defined return plan beat improvising your way out with the crowd.",
-    imageSrc: curatedImages.guideTransportation,
+    imageSrc: curatedImages.compareShared,
     imageAlt: "Shared shuttle transportation planning for Red Rocks",
   },
   {
     title: "Private SUV",
     body: "Best for small groups that want one vehicle, one pickup point, and a cleaner ride home.",
-    imageSrc: curatedImages.privateSUV,
+    imageSrc: curatedImages.compareSUV,
     imageAlt: "Private SUV service for Red Rocks groups",
   },
   {
     title: "Sprinter Van",
     body: "The van option keeps larger groups together without dropping back into generic fallback transport imagery.",
-    imageSrc: curatedImages.sprinterVan,
+    imageSrc: curatedImages.compareVan,
     imageAlt: "Sprinter van transportation for Red Rocks groups",
   },
 ] as const;
@@ -53,8 +53,8 @@ export default function ShuttleComparison() {
           eyebrow={guideVisuals.transportation.eyebrow}
           title="Comparing Red Rocks Ride Options"
           copy="Use the actual tradeoffs, not generic transport filler: fixed-price shuttle, private SUV, or van service depending on how your group wants to arrive and return."
-          imageSrc={guideVisuals.transportation.imageSrc}
-          imageAlt={guideVisuals.transportation.imageAlt}
+          imageSrc={curatedImages.compareHero}
+          imageAlt="Red Rocks arrival and transport planning context at sunset"
           actions={
             <>
               <Link href="/book/red-rocks-amphitheatre/custom/shared" className="btn-primary">

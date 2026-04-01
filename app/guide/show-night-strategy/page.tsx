@@ -11,20 +11,20 @@ const LOGISTICS_VISUALS = [
   {
     title: "Pickup Window",
     body: "A clean night starts with a real arrival window and one clear plan for where the group meets.",
-    imageSrc: curatedImages.guidePickup,
-    imageAlt: "Pickup planning and private ride coordination for Red Rocks",
+    imageSrc: curatedImages.logisticsPickup,
+    imageAlt: "Friends meeting up before Red Rocks pickup at night",
   },
   {
     title: "Arrival Buffer",
     body: "Traffic, security, and stairs punish late starts more than almost any other part of the night.",
-    imageSrc: curatedImages.guideTransportation,
-    imageAlt: "Arrival timing and transportation planning at Red Rocks",
+    imageSrc: curatedImages.logisticsArrival,
+    imageAlt: "Red Rocks arrival flow and walking in before the show",
   },
   {
     title: "After The Encore",
     body: "The ride home should already be settled before the crowd surge begins.",
-    imageSrc: curatedImages.privateSUV,
-    imageAlt: "Private vehicle plan for Red Rocks exit logistics",
+    imageSrc: curatedImages.logisticsExit,
+    imageAlt: "Post-show crowd exit and return ride logistics at night",
   },
 ] as const;
 
@@ -42,8 +42,8 @@ export default function Page() {
           eyebrow={guideVisuals.pickup.eyebrow}
           title="Show-Night Planning Guide"
           copy="Arrival windows, weather risk, and the exit plan that keeps the night moving smoothly. Then make the transport decision before the crowd does it for you."
-          imageSrc={guideVisuals.pickup.imageSrc}
-          imageAlt={guideVisuals.pickup.imageAlt}
+          imageSrc={curatedImages.logisticsHero}
+          imageAlt="People walking up into Red Rocks for a concert at night"
           actions={
             <>
               <Link href={SHARED_HREF} className="btn-primary">
