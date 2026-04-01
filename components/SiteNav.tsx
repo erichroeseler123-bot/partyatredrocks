@@ -21,11 +21,7 @@ export default function SiteNav() {
       <div className="comic-wrap py-3">
         <div className="brand-glass-bar flex items-center justify-between gap-2 overflow-hidden rounded-[24px] px-3 py-3 sm:gap-3 sm:px-4">
           <Link href="/" className="flex min-w-0 flex-1 items-center no-underline">
-            <BrandMark
-              alt={brand}
-              frameClassName="h-14 w-[clamp(160px,50vw,210px)] sm:h-[72px] sm:w-[296px]"
-              imageClassName="h-28 sm:h-36"
-            />
+            <BrandMark alt={brand} variant="nav" />
           </Link>
 
           <nav className="hidden md:flex items-center gap-6">

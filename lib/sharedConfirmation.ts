@@ -1,6 +1,7 @@
 import "server-only";
 
 import type { InternalOrderRow } from "@/lib/orders";
+import { renderBrandMarkEmailHtml } from "@/lib/brand";
 import { PARR_PUBLIC_FACTS } from "@/lib/publicOperatorFacts";
 import { siteOrigin } from "@/lib/square";
 
@@ -32,12 +33,7 @@ function displayOrderNumber(order: InternalOrderRow) {
 }
 
 function renderEmailBrandMark() {
-  const logoUrl = `${siteOrigin()}/brand/partylogo.png`;
-  return `<div style="margin:0 0 16px;line-height:0">
-    <div style="display:inline-block;width:172px;height:44px;overflow:hidden;vertical-align:top">
-      <img src="${logoUrl}" alt="Party at Red Rocks" width="176" height="176" style="display:block;height:88px;width:auto;max-width:none;border:0;outline:none;text-decoration:none" />
-    </div>
-  </div>`;
+  return renderBrandMarkEmailHtml(siteOrigin());
 }
 
 function renderEmail(order: InternalOrderRow) {

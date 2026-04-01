@@ -58,11 +58,7 @@ export default function SiteFooter() {
         <div className="brand-glass-bar rounded-[28px] px-6 py-8 md:px-8">
           <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-md">
-              <BrandMark
-                className="mb-3"
-                frameClassName="h-10 w-[156px] sm:h-11 sm:w-[172px]"
-                imageClassName="h-20 sm:h-[88px]"
-              />
+              <BrandMark className="mb-3" variant="footer" />
               <div className="text-[12px] font-black uppercase tracking-[0.2em] text-[var(--brand-text)]">
                 Party at Red Rocks
               </div>
@@ -106,10 +102,7 @@ export default function SiteFooter() {
           />
 
           <div className="mt-6 flex flex-col gap-2 border-t border-[color:var(--brand-border)] pt-4 text-[13px] text-[color:var(--brand-text-muted)] sm:flex-row sm:items-center sm:justify-between">
-            <BrandMark
-              frameClassName="h-8 w-[132px]"
-              imageClassName="h-16"
-            />
+            <BrandMark variant="compact" />
             <div>© {new Date().getFullYear()} Party at Red Rocks. All rights reserved.</div>
           </div>
 

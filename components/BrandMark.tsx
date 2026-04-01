@@ -1,31 +1,29 @@
 import Image from "next/image";
-import type { ReactNode } from "react";
+import { BRAND_LOGO, BRAND_MARK_VARIANTS, type BrandMarkDisplayVariant } from "@/lib/brand";
 
 type BrandMarkProps = {
-  href?: string;
   alt?: string;
-  frameClassName?: string;
-  imageClassName?: string;
+  variant?: BrandMarkDisplayVariant;
   className?: string;
-  children?: ReactNode;
 };
 
 export default function BrandMark({
-  alt = "Party @ Red Rocks",
-  frameClassName = "h-8 w-[132px] sm:h-9 sm:w-[148px]",
-  imageClassName = "h-16 sm:h-[72px]",
+  alt = BRAND_LOGO.alt,
+  variant = "compact",
   className = "",
 }: BrandMarkProps) {
+  const variantStyles = BRAND_MARK_VARIANTS[variant];
+
   return (
     <span className={["flex items-center", className].filter(Boolean).join(" ")}>
-      <span className={["flex items-start overflow-hidden", frameClassName].join(" ")}>
+      <span className={["flex items-start overflow-hidden", variantStyles.frameClassName].join(" ")}>
         <Image
-          src="/brand/partylogo.png"
+          src={BRAND_LOGO.src}
           alt={alt}
-          width={160}
-          height={160}
+          width={BRAND_LOGO.width}
+          height={BRAND_LOGO.height}
           priority
-          className={["block w-auto max-w-none", imageClassName].join(" ")}
+          className={["block w-auto max-w-none", variantStyles.imageClassName].join(" ")}
         />
       </span>
     </span>
