@@ -2,6 +2,8 @@ import BrandMark from '@/components/BrandMark';
 import Image from 'next/image';
 import Link from 'next/link';
 import PublicBookingActions from '@/components/booking/PublicBookingActions';
+import BookingPackChecklist from '@/components/booking/BookingPackChecklist';
+import BookingShowDayTimeline from '@/components/booking/BookingShowDayTimeline';
 import PublicBookingNotes from '@/components/booking/PublicBookingNotes';
 import PublicBookingShare from '@/components/booking/PublicBookingShare';
 import {
@@ -116,7 +118,14 @@ function canCancel(status: string, date: string | null | undefined) {
   if (status === 'cancelled' || status === 'expired') return false;
   const showStart = new Date(`${date}T19:00:00`);
   if (Number.isNaN(showStart.getTime())) return false;
-  return showStart.getTime() - Date.now() > 24 * 60 * 60 * 1000;
+  return showStart.getTime() > Date.now();
+}
+
+function isRefundEligible(date: string | null | undefined) {
+  if (!date) return false;
+  const showStart = new Date(`${date}T19:00:00`);
+  if (Number.isNaN(showStart.getTime())) return false;
+  return showStart.getTime() - Date.now() > 48 * 60 * 60 * 1000;
 }
 
 async function getArtistLinks(artistName: string): Promise<ArtistLinks | null> {
@@ -182,6 +191,7 @@ export default async function PublicBookingPage(
     : null;
   const paymentStatus = typeof payment.status === 'string' ? payment.status : 'unpaid';
   const cancelAllowed = canCancel(status, date);
+  const refundEligible = isRefundEligible(date);
   const pickupLocation = getPickupLocationDetails(pickup);
 
   const show = storedShow ?? await resolveBookingShowContext({
@@ -235,6 +245,67 @@ export default async function PublicBookingPage(
     : 'Final pickup timing is confirmed before show day.';
   const supportPhone = PARR_PUBLIC_FACTS.support.phoneDisplay;
   const supportEmail = PARR_PUBLIC_FACTS.support.email;
+  const checklistStorageKey = `parr-pack-checklist:${token}`;
+  const bookingUrl = `${siteOrigin()}/booking/${encodeURIComponent(token)}`;
+  const eventStartIso = show?.startLocal || (show?.dateKey ? `${show.dateKey}T19:00:00` : date ? `${date}T19:00:00` : null);
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'What is the bag policy for 2026?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Red Rocks only allows single-pocket bags or clear bags up to 13 x 15 x 8 inches. Hydration packs must be 2L or smaller with no more than one extra pocket.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Where is the shuttle pickup?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `Your pickup is at ${pickupLocation.name}, ${pickupLocation.address}. Watch for the final boarding or return-zone text from your driver on show day.`,
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Can I bring a Camelbak?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes. Hydration packs are allowed if they are 2L or smaller, have no more than one extra pocket, and are empty before you reach security.',
+        },
+      },
+    ],
+  };
+  const eventSchema = artistName && eventStartIso ? {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name: `${artistName} at Red Rocks Amphitheatre`,
+    startDate: eventStartIso,
+    location: {
+      '@type': 'MusicVenue',
+      name: show?.venueName || 'Red Rocks Amphitheatre',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '18300 W Alameda Pkwy',
+        addressLocality: 'Morrison',
+        addressRegion: 'CO',
+        postalCode: '80465',
+        addressCountry: 'US',
+      },
+    },
+    performer: {
+      '@type': 'PerformingGroup',
+      name: artistName,
+    },
+    organizer: {
+      '@type': 'Organization',
+      name: PARR_PUBLIC_FACTS.operatorName,
+      url: siteOrigin(),
+    },
+    url: bookingUrl,
+  } : null;
 
   return (
     <main className="min-h-screen bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
@@ -291,6 +362,14 @@ export default async function PublicBookingPage(
               <p className="mt-3 text-sm leading-7 text-white/76">Text {supportPhone} or email {supportEmail} if you need help with pickup, timing, or a booking change.</p>
             </div>
           </div>
+        </section>
+
+        <section className="rounded-[28px] border border-white/10 bg-[#09101f] p-6">
+          <BookingShowDayTimeline
+            showStartRaw={show?.startLocal || null}
+            fallbackDate={show?.dateKey || date}
+            pickupName={pickupLocation.name}
+          />
         </section>
 
         <section className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
@@ -378,17 +457,55 @@ export default async function PublicBookingPage(
             </dl>
             <p className="mt-5 text-sm leading-6 text-white/74">
               {cancelAllowed
-                ? 'You can cancel this booking online until 24 hours before the show.'
+                ? refundEligible
+                  ? 'Cancel at least 48 hours before departure for a full refund to the original payment method.'
+                  : 'You can still cancel this seat before departure, but the 48-hour refund window has passed.'
                 : status === 'cancelled'
                   ? 'This booking has already been cancelled.'
-                  : 'Online cancellation is no longer available for this booking.'}
+                  : 'Online cancellation is no longer available because this departure has already passed.'}
             </p>
             <div className="mt-5">
               <PublicBookingActions
                 token={token}
                 canCancel={cancelAllowed}
                 alreadyCancelled={status === 'cancelled'}
+                refundEligible={refundEligible}
+                refundAmountLabel={formatMoney(payment.totalPaid ?? payment.totalDue)}
               />
+            </div>
+          </div>
+        </section>
+
+        <section className="rounded-[28px] border border-white/10 bg-[#09101f] p-6">
+          <div className="text-[12px] font-black uppercase tracking-[0.2em] text-[var(--brand-orange)]">Refund & Cancellation Details</div>
+          <div className="mt-5 grid gap-5 lg:grid-cols-[0.95fr_1.05fr]">
+            <div className="rounded-[22px] border border-white/10 bg-black/20 p-5">
+              <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/46">The 48-Hour Rule</div>
+              <ul className="mt-4 space-y-3 text-sm leading-7 text-white/78">
+                <li>Full refund when you cancel at least 48 hours before the scheduled shuttle departure time.</li>
+                <li>Cancellations within 48 hours of departure and no-shows are non-refundable.</li>
+                <li>Use this dashboard to cancel so the request is timestamped correctly.</li>
+              </ul>
+            </div>
+            <div className="rounded-[22px] border border-white/10 bg-black/20 p-5">
+              <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/46">Refund Timeline</div>
+              <ol className="mt-4 space-y-3 text-sm leading-7 text-white/78">
+                <li>1. As soon as you cancel, the refund request is triggered on our side.</li>
+                <li>2. It usually takes 3-7 business days for our bank to release the funds.</li>
+                <li>3. Your bank may take a few more business days to post the credit to your statement.</li>
+                <li>4. You will receive an automated refund or cancellation email once the request is initiated.</li>
+              </ol>
+            </div>
+            <div className="rounded-[22px] border border-white/10 bg-black/20 p-5 lg:col-span-2">
+              <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/46">Important Logistics</div>
+              <div className="mt-4 grid gap-4 md:grid-cols-2">
+                <div className="rounded-[18px] border border-white/10 bg-white/[0.03] px-4 py-4 text-sm leading-7 text-white/80">
+                  <span className="font-black text-white">Original payment only.</span> Refunds go back to the exact card used at checkout. We cannot reroute refunds to Zelle, Venmo, or a different card.
+                </div>
+                <div className="rounded-[18px] border border-white/10 bg-white/[0.03] px-4 py-4 text-sm leading-7 text-white/80">
+                  <span className="font-black text-white">Inside 48 hours?</span> If you cannot make the ride, text {supportPhone}. We may be able to help you gift the seat, even when a refund is no longer available.
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -447,6 +564,47 @@ export default async function PublicBookingPage(
         </section>
 
         <section className="rounded-[28px] border border-white/10 bg-[#09101f] p-6">
+          <div className="text-[12px] font-black uppercase tracking-[0.2em] text-[var(--brand-orange)]">Red Rocks Venue Policies & Packing Tips</div>
+          <p className="mt-3 text-sm leading-6 text-white/72">Use this as your show-day cheat sheet while you pack. The bag rules are strict and security will turn away the wrong setup.</p>
+          <div className="mt-5 grid gap-5 xl:grid-cols-2">
+            <div className="rounded-[22px] border border-white/10 bg-black/20 p-5">
+              <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/46">Bag Policy</div>
+              <ul className="mt-4 space-y-3 text-sm leading-7 text-white/78">
+                <li>Single-pocket bags or clear bags only, up to 13" x 15" x 8".</li>
+                <li>Purses and fanny packs should stay at 6" x 9" or smaller.</li>
+                <li>Hydration packs are allowed up to 2L with no more than one extra pocket.</li>
+                <li>Everything needs to fit under your 18" x 12" seat space.</li>
+              </ul>
+            </div>
+            <BookingPackChecklist storageKey={checklistStorageKey} />
+            <div className="rounded-[22px] border border-white/10 bg-black/20 p-5">
+              <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/46">Leave This On The Shuttle</div>
+              <div className="mt-4 space-y-3">
+                {[
+                  'Multi-pocket backpacks or standard hiking bags.',
+                  'Alcohol, marijuana, glass bottles, aluminum cans, or any open-container setup.',
+                  'Umbrellas, aerosols, hard-sided coolers, or strollers.',
+                ].map((item) => (
+                  <div key={item} className="flex items-start gap-3 rounded-[18px] border border-white/10 bg-white/[0.03] px-4 py-3 text-sm leading-6 text-white/80">
+                    <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-rose-300/30 bg-rose-400/12 text-[11px] font-black text-rose-100">×</span>
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="rounded-[22px] border border-white/10 bg-black/20 p-5">
+              <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/46">Tailgating & Return</div>
+              <ul className="mt-4 space-y-3 text-sm leading-7 text-white/78">
+                <li>Tailgating should stay at the rear of the vehicle and cannot block traffic.</li>
+                <li>No glass, no kegs, and no open flames. Small propane grills are only okay when there is no fire ban.</li>
+                <li>Your driver will text pickup instructions before the end of the show. Do not wander off and miss the shuttle.</li>
+                <li>If you miss the shuttle, rideshare pickup is a long downhill walk with surge pricing and major waits.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section className="rounded-[28px] border border-white/10 bg-[#09101f] p-6">
           <div className="text-[12px] font-black uppercase tracking-[0.2em] text-[var(--brand-orange)]">Plan Your Red Rocks Night</div>
           <p className="mt-3 text-sm leading-6 text-white/72">Helpful guides if you want them.</p>
           <div className="mt-5 -mx-1 flex gap-3 overflow-x-auto px-1 pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
@@ -494,6 +652,16 @@ export default async function PublicBookingPage(
             <PublicBookingNotes token={token} initialNotes={order.notes || ''} />
           </div>
         </section>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+        {eventSchema ? (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(eventSchema) }}
+          />
+        ) : null}
       </section>
     </main>
   );

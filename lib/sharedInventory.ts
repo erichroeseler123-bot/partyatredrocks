@@ -68,10 +68,23 @@ function isExpired(hold: InventoryHold, nowIso: string) {
   return hold.status === "pending" && hold.expiresAt <= nowIso;
 }
 
-function canCancelByDate(showDate: string, now = new Date()) {
+const REFUND_WINDOW_MS = 48 * 60 * 60 * 1000;
+
+function getShowStartForDate(showDate: string) {
   const showStart = new Date(`${showDate}T19:00:00`);
-  if (Number.isNaN(showStart.getTime())) return false;
-  return showStart.getTime() - now.getTime() > 24 * 60 * 60 * 1000;
+  return Number.isNaN(showStart.getTime()) ? null : showStart;
+}
+
+function canCancelByDate(showDate: string, now = new Date()) {
+  const showStart = getShowStartForDate(showDate);
+  if (!showStart) return false;
+  return showStart.getTime() > now.getTime();
+}
+
+function isRefundEligibleByDate(showDate: string, now = new Date()) {
+  const showStart = getShowStartForDate(showDate);
+  if (!showStart) return false;
+  return showStart.getTime() - now.getTime() > REFUND_WINDOW_MS;
 }
 
 async function loadState(): Promise<InventoryState> {
@@ -577,6 +590,9 @@ export async function cancelSharedBookingByInternalOrderId(
     return { ok: false as const, reason: "cutoff_passed" as const };
   }
 
+  const cancelledAt = new Date().toISOString();
+  const refundEligible = isRefundEligibleByDate(hold.date);
+
   hold.status = "cancelled";
   await saveState(state);
 
@@ -584,18 +600,26 @@ export async function cancelSharedBookingByInternalOrderId(
     bookingStatus: "cancelled",
     paymentStatus: null,
     bookingPatch: {
-      cancelledAt: new Date().toISOString(),
+      cancelledAt,
       cancelledReason: reason,
       cancelSource: "public_booking_page",
+      refundStatus: refundEligible ? "initiated" : "ineligible",
     },
-    paymentPatch: {},
+    paymentPatch: {
+      refundStatus: refundEligible ? "initiated" : "ineligible",
+      refundEligible,
+      refundRequestedAt: cancelledAt,
+      refundPolicyWindowHours: 48,
+      refundTimeline: refundEligible ? "3-7 business days plus bank posting time" : null,
+    },
     eventType: "shared.booking.cancelled",
-    payload: { reason },
+    payload: { reason, refundEligible },
   });
 
   return {
     ok: true as const,
     alreadyCancelled: false as const,
+    refundEligible,
     order: updatedOrder,
     hold,
   };
