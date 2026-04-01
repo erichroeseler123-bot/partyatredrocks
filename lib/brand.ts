@@ -23,11 +23,11 @@ export const BRAND_MARK_VARIANTS = {
     imageClassName: "",
   },
   footer: {
-    frameClassName: "w-[168px] sm:w-[188px]",
+    frameClassName: "w-[132px] sm:w-[148px]",
     imageClassName: "",
   },
   compact: {
-    frameClassName: "w-[132px]",
+    frameClassName: "w-[96px]",
     imageClassName: "",
   },
   booking: {
