@@ -6,6 +6,7 @@ import BookingPackChecklist from '@/components/booking/BookingPackChecklist';
 import BookingRideSummaryCard from '@/components/booking/BookingRideSummaryCard';
 import BookingShowDayTimeline from '@/components/booking/BookingShowDayTimeline';
 import BookingStickyHelp from '@/components/booking/BookingStickyHelp';
+import BookingSupportCard from '@/components/booking/BookingSupportCard';
 import PublicBookingNotes from '@/components/booking/PublicBookingNotes';
 import PublicBookingShare from '@/components/booking/PublicBookingShare';
 import {
@@ -677,6 +678,13 @@ export default async function PublicBookingPage(
             </Link>
           </div>
         </section>
+
+        <BookingSupportCard
+          showName={artistName || 'your Red Rocks show'}
+          phoneDisplay={supportPhone}
+          phoneE164={PARR_PUBLIC_FACTS.support.phoneE164}
+          websiteUrl={siteOrigin()}
+        />
 
         <section className="rounded-[28px] border border-white/10 bg-[#09101f] p-6">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
