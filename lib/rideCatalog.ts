@@ -73,3 +73,11 @@ export function buildDccPrivateCheckoutHref(product: PrivateRideSlug, quantity =
   const qty = Number.isFinite(quantity) && quantity > 0 ? Math.floor(quantity) : 1;
   return `https://www.destinationcommandcenter.com/book?route=parr-private&product=${option.dccProduct}&qty=${qty}`;
 }
+
+export function buildParrPrivateCheckoutHref(product: PrivateRideSlug, quantity = 1) {
+  const option = getPrivateRideOption(product);
+  if (!option) return `/book/red-rocks-amphitheatre/private`;
+  const qty = Number.isFinite(quantity) && quantity > 0 ? Math.floor(quantity) : 1;
+  const query = new URLSearchParams({ qty: String(qty) });
+  return `/book/red-rocks-amphitheatre/private/${option.slug}?${query.toString()}`;
+}

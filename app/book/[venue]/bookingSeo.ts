@@ -148,7 +148,7 @@ export function buildPrivateBookingJsonLd(input: { venue: string; quantity: numb
         "@type": "Offer",
         priceCurrency: "USD",
         price: option.priceLabel.replace("$", ""),
-        url: `https://www.destinationcommandcenter.com/book?route=parr-private&product=${option.dccProduct}&qty=${input.quantity}`,
+        url: `${SITE}/book/${input.venue}/private/${option.slug}?qty=${input.quantity}`,
         itemOffered: {
           "@type": "Service",
           name: option.title,
@@ -268,7 +268,7 @@ export function buildPrivateOptionJsonLd(input: {
     potentialAction: option
       ? {
           "@type": "ReserveAction",
-          target: `https://www.destinationcommandcenter.com/book?route=parr-private&product=${option.dccProduct}&qty=${qty}`,
+          target: `${SITE}/book/${input.venue}/private/${option.slug}?qty=${qty}`,
         }
       : undefined,
   };
