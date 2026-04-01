@@ -7,6 +7,7 @@ import { BOOKING_COPY } from "@/lib/bookingCopy";
 import { getEventsCatalog } from "@/lib/events/getCatalog";
 import { getDynamicImage } from "@/lib/getDynamicImage";
 import { curatedImages } from "@/lib/curatedImages";
+import { pageVisuals } from "@/lib/pageVisuals";
 import {
   BUSINESS_EMAIL,
   BUSINESS_NAME,
@@ -38,9 +39,9 @@ export const metadata: Metadata = {
 export default async function HomePage() {
   const brandKey = SITE_CONFIG.socialBrandKey;
   const [events] = await Promise.all([getEventsCatalog(2026, "redrocks")]);
-  const heroSrc = curatedImages.homepageHero;
-  const shuttleSrc = curatedImages.homepageShared;
-  const sprinterSrc = curatedImages.homepagePrivate;
+  const heroSrc = pageVisuals.home.heroSrc;
+  const shuttleSrc = pageVisuals.home.shuttleSrc;
+  const sprinterSrc = pageVisuals.home.privateSrc;
   const denverToday = new Intl.DateTimeFormat("en-CA", {
     timeZone: "America/Denver",
     year: "numeric",

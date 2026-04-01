@@ -3,12 +3,12 @@ import SocialProofStrip from "@/components/social/SocialProofStrip";
 import SocialLinks from "@/components/shared/SocialLinks";
 import { SITE_CONFIG } from "@/app/site-config";
 import { getSameAs } from "@/lib/socials";
-import { curatedImages } from "@/lib/curatedImages";
+import { pageVisuals } from "@/lib/pageVisuals";
 import { getFeaturedUGCPosts } from "@/data/social/ugc-posts";
 
 const SITE = "https://www.partyatredrocks.com";
 const FEATURED_SOCIAL_IMAGE =
-  getFeaturedUGCPosts("partyatredrocks", 1)[0]?.imageUrl || "/images/marketing/fleet.webp";
+  getFeaturedUGCPosts("partyatredrocks", 1)[0]?.imageUrl || pageVisuals.social.shareFallback;
 
 export const metadata: Metadata = {
   title: "Party At Red Rocks Social | Real Rides, Real Nights, Real Groups",
@@ -44,7 +44,7 @@ export default function SocialPage() {
         <section
           className="brand-panel relative min-h-[420px] overflow-hidden rounded-[32px] p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] sm:min-h-[460px] sm:p-10 lg:min-h-[520px] lg:p-12"
           style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.72)), linear-gradient(110deg, rgba(11,11,15,0.82) 0%, rgba(11,11,15,0.56) 42%, rgba(11,11,15,0.88) 100%), url(${curatedImages.socialHero})`,
+            backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.72)), linear-gradient(110deg, rgba(11,11,15,0.82) 0%, rgba(11,11,15,0.56) 42%, rgba(11,11,15,0.88) 100%), url(${pageVisuals.social.heroSrc})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",

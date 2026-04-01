@@ -7,17 +7,11 @@ import { SCENES } from "@/data/scenes";
 import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
 import { eventMatchesGenre } from "@/lib/genres/artistGenres";
 import { getDynamicImage } from "@/lib/getDynamicImage";
-import { buildUnsplashImageSrc } from "@/lib/unsplash";
+import { pageVisuals } from "@/lib/pageVisuals";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 export const revalidate = 1800;
-const SCENES_SHARE_IMAGE = buildUnsplashImageSrc({
-  query: "colorado live music scenes concert crowd denver",
-  src: "/images/scenes/jam.webp",
-  alt: "Colorado music scenes",
-  width: 1200,
-  height: 630,
-});
+const SCENES_SHARE_IMAGE = pageVisuals.scenes.shareImage;
 
 export const metadata: Metadata = {
   title: "Denver & Colorado Music Scenes 2026 | Concerts & Shuttle Rides",
@@ -90,11 +84,11 @@ export default async function ScenesLandingPage() {
   const allEvents = await getEventsCatalog(2026, "all");
   const scenes = SCENES.slice().sort((a, b) => (a.priority ?? 999) - (b.priority ?? 999));
   const [heroImage, sceneImageMap] = await Promise.all([
-    getDynamicImage("genre", "colorado live music scenes concert crowd denver", "/hero/hero-home.jpg"),
+    getDynamicImage("genre", pageVisuals.scenes.heroQuery, pageVisuals.scenes.heroFallbackSrc),
     Promise.all(
       scenes.map(async (scene) => [
         scene.slug,
-        await getDynamicImage("genre", `${scene.title} live music`, `${scene.slug} scene`),
+        await getDynamicImage("genre", pageVisuals.scenes.buildSceneQuery(scene.title), `${scene.slug} scene`),
       ]),
     ).then((entries) => Object.fromEntries(entries) as Record<string, string>),
   ]);
@@ -176,11 +170,7 @@ export default async function ScenesLandingPage() {
               .filter((event) => eventMatchesGenre(event, scene.slug))
               .sort((a, b) => a.dateKey.localeCompare(b.dateKey))
               .slice(0, 3);
-            const image = sceneImageMap[scene.slug] || buildUnsplashImageSrc({
-              query: `${scene.title} live music scene denver colorado`,
-              src: `${scene.slug} scene`,
-              alt: `${scene.title} scene image`,
-            });
+            const image = sceneImageMap[scene.slug] || pageVisuals.scenes.buildSceneFallback(scene.title, scene.slug);
 
             return (
               <article

@@ -1,12 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { buildUnsplashImageSrc } from "@/lib/unsplash";
+import { pageVisuals } from "@/lib/pageVisuals";
 
-const HERO_IMAGE = buildUnsplashImageSrc({
-  query: "red rocks amphitheatre concert transportation denver colorado",
-  src: "/hero/hero-home.jpg",
-  alt: "Party at Red Rocks Transportation",
-});
+const HERO_IMAGE = pageVisuals.layout.shareImage;
 
 export default function HomeHero() {
   return (

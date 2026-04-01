@@ -5,7 +5,7 @@ import SiteNav from "@/components/SiteNav";
 import DisplayTheme from "@/components/DisplayTheme";
 import SiteFooter from "@/components/SiteFooter";
 import { BOOKING_COPY } from "@/lib/bookingCopy";
-import { buildUnsplashImageSrc } from "@/lib/unsplash";
+import { pageVisuals } from "@/lib/pageVisuals";
 
 const headingFont = Montserrat({
   subsets: ["latin"],
@@ -21,13 +21,7 @@ const bodyAccentFont = Playfair_Display({
   display: "swap",
 });
 
-const DEFAULT_SHARE_IMAGE = buildUnsplashImageSrc({
-  query: "red rocks amphitheatre concert transportation denver colorado",
-  src: "/hero/hero-home.jpg",
-  alt: "Red Rocks shuttle transportation",
-  width: 1200,
-  height: 630,
-});
+const DEFAULT_SHARE_IMAGE = pageVisuals.layout.shareImage;
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.partyatredrocks.com"),

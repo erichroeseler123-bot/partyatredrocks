@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import ShuttleCTA from "@/components/cta/ShuttleCTA";
 import { buildPageIntentMetadata } from "@/lib/pageIntentMetadata";
-import { buildUnsplashImageSrc } from "@/lib/unsplash";
+import { pageVisuals } from "@/lib/pageVisuals";
 
 export const metadata: Metadata = {
   ...buildPageIntentMetadata("/guide/local/denver-pickups"),
@@ -26,13 +26,7 @@ const SHARED_BOOKING_PATH = "/book/red-rocks-amphitheatre/custom/shared";
 const PRIVATE_BOOKING_PATH = "/book/red-rocks-amphitheatre/private";
 
 export default function DenverPickups() {
-  const shareImage = `https://www.partyatredrocks.com${buildUnsplashImageSrc({
-    query: "downtown denver shuttle pickup red rocks",
-    src: "/hero/hero-home.jpg",
-    alt: "Downtown Denver Red Rocks shuttle pickup",
-    width: 1200,
-    height: 630,
-  })}`;
+  const shareImage = pageVisuals.guideLocal.denverPickupsShareImage;
 
   const localSchema = {
     "@context": "https://schema.org",

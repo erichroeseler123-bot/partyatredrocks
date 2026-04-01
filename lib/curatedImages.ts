@@ -39,6 +39,7 @@ export const curatedImages = {
   venuesHero: "/venues/rrsite.jpg",
   aboutHero: "/hero/hero-home.jpg",
   scheduleHero: "/hero/arrival.jpg",
+  scenesHero: "/images/scenes/jam.webp",
 
   // Booking / fleet slots
   sharedShuttle: "/hero/sprinter_red_rocks.jpg",

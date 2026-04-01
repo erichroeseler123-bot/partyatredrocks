@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import ShuttleCTA from "@/components/cta/ShuttleCTA";
-import { buildUnsplashImageSrc } from "@/lib/unsplash";
+import { pageVisuals } from "@/lib/pageVisuals";
 
 export const metadata: Metadata = {
   title: "Golden Shuttle Pickup: Trailhead Taphouse | Party at Red Rocks",
@@ -20,13 +20,7 @@ export const metadata: Metadata = {
 };
 
 export default function TrailheadHub() {
-  const shareImage = `https://www.partyatredrocks.com${buildUnsplashImageSrc({
-    query: "golden colorado shuttle pickup red rocks",
-    src: "/hero/hero-home.jpg",
-    alt: "Golden Red Rocks shuttle pickup",
-    width: 1200,
-    height: 630,
-  })}`;
+  const shareImage = pageVisuals.guideLocal.trailheadTaphouseShareImage;
   const localSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
