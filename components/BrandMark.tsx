@@ -16,14 +16,14 @@ export default function BrandMark({
 
   return (
     <span className={["flex items-center", className].filter(Boolean).join(" ")}>
-      <span className={["flex items-start overflow-hidden", variantStyles.frameClassName].join(" ")}>
+      <span className={["flex items-center", variantStyles.frameClassName].join(" ")}>
         <Image
           src={BRAND_LOGO.src}
           alt={alt}
           width={BRAND_LOGO.width}
           height={BRAND_LOGO.height}
           priority
-          className={["block w-auto max-w-none", variantStyles.imageClassName].join(" ")}
+          className={["block h-auto w-full", variantStyles.imageClassName].filter(Boolean).join(" ")}
         />
       </span>
     </span>

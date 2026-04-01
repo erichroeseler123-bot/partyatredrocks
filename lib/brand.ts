@@ -1,8 +1,8 @@
 export const BRAND_LOGO = {
-  src: "/brand/partylogo.png",
-  alt: "Party @ Red Rocks",
-  width: 160,
-  height: 160,
+  src: "/brand/red-rocks-shuttle.png",
+  alt: "Red Rocks Shuttle",
+  width: 1000,
+  height: 500,
 } as const;
 
 type BrandMarkVariantConfig = {
@@ -19,28 +19,28 @@ type BrandMarkVariantConfig = {
 
 export const BRAND_MARK_VARIANTS = {
   nav: {
-    frameClassName: "h-14 w-[clamp(160px,50vw,210px)] sm:h-[72px] sm:w-[296px]",
-    imageClassName: "h-28 sm:h-36",
+    frameClassName: "w-[clamp(180px,44vw,244px)] sm:w-[280px]",
+    imageClassName: "",
   },
   footer: {
-    frameClassName: "h-10 w-[156px] sm:h-11 sm:w-[172px]",
-    imageClassName: "h-20 sm:h-[88px]",
+    frameClassName: "w-[168px] sm:w-[188px]",
+    imageClassName: "",
   },
   compact: {
-    frameClassName: "h-8 w-[132px]",
-    imageClassName: "h-16",
+    frameClassName: "w-[132px]",
+    imageClassName: "",
   },
   booking: {
-    frameClassName: "h-10 w-[156px] sm:h-11 sm:w-[172px]",
-    imageClassName: "h-20 sm:h-[88px]",
+    frameClassName: "w-[168px] sm:w-[188px]",
+    imageClassName: "",
   },
   email: {
     email: {
       marginBottom: 16,
-      frameWidth: 172,
-      frameHeight: 44,
-      imageWidth: 176,
-      imageHeight: 88,
+      frameWidth: 188,
+      frameHeight: 94,
+      imageWidth: 188,
+      imageHeight: 94,
     },
   },
 } satisfies Record<string, BrandMarkVariantConfig>;
@@ -58,8 +58,8 @@ export function renderBrandMarkEmailHtml(
   const logoUrl = `${origin}${BRAND_LOGO.src}`;
 
   return `<div style="margin:0 0 ${marginBottom}px;line-height:0">
-    <div style="display:inline-block;width:${frameWidth}px;height:${frameHeight}px;overflow:hidden;vertical-align:top">
-      <img src="${logoUrl}" alt="${alt}" width="${imageWidth}" height="${BRAND_LOGO.height}" style="display:block;height:${imageHeight}px;width:auto;max-width:none;border:0;outline:none;text-decoration:none" />
+    <div style="display:inline-block;width:${frameWidth}px;height:${frameHeight}px;vertical-align:top">
+      <img src="${logoUrl}" alt="${alt}" width="${imageWidth}" height="${imageHeight}" style="display:block;width:${imageWidth}px;height:${imageHeight}px;border:0;outline:none;text-decoration:none" />
     </div>
   </div>`;
 }

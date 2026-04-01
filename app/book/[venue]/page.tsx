@@ -11,6 +11,7 @@ import { DccReturnBanner } from "@/components/booking/DccReturnBanner";
 import { postDccSatelliteEvent, postWtaPartnerAcceptedIfNeeded } from "@/lib/dccSatellite";
 import { getBookingVenueImage } from "@/data/media";
 import { curatedImages } from "@/lib/curatedImages";
+import { bookingVisuals } from "@/lib/bookingVisuals";
 import { buildVenueBookingJsonLd, buildVenueBookingMetadata } from "./bookingSeo";
 import {
   buildBookingHref,
@@ -66,6 +67,16 @@ export default async function VenueBookingPage({
 
   const isRedRocks = venue === "red-rocks-amphitheatre";
   const venueMedia = getBookingVenueImage(venue);
+  const artist = Array.isArray(sp.artist) ? sp.artist[0] : sp.artist;
+  const dateRaw = Array.isArray(sp.date) ? sp.date[0] : sp.date;
+  const dateLabel = dateRaw
+    ? new Date(`${dateRaw}T12:00:00`).toLocaleDateString("en-US", {
+        weekday: "long",
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      })
+    : null;
 
   await postDccSatelliteEvent({
     eventType: "handoff_viewed",
@@ -88,57 +99,70 @@ export default async function VenueBookingPage({
   return (
     <main className="min-h-screen bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(bookingJsonLd) }} />
-      <section className="mx-auto flex max-w-[1240px] flex-col gap-8">
-        <section className="relative min-h-[60vh] overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,16,32,0.92),rgba(6,9,18,0.88))] p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] sm:min-h-[72vh] sm:p-10 lg:min-h-[90vh] lg:p-12">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,91,46,0.18),transparent_30%),radial-gradient(circle_at_top_right,rgba(143,208,255,0.14),transparent_28%)]" />
-          {venueMedia ? (
-            <div className="absolute inset-0">
-              <Image
-                src={isRedRocks ? curatedImages.homepageHero : venueMedia.hero}
-                alt={isRedRocks ? "Red Rocks Amphitheatre at dusk" : venueMedia.heroAlt}
-                fill
-                unoptimized={isRedRocks}
-                className="object-cover object-center opacity-70 brightness-95"
-                priority
-                fetchPriority="high"
-                sizes="(min-width: 1024px) 1240px, 100vw"
-              />
-              <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(5,8,22,0.38)_0%,rgba(5,8,22,0.16)_45%,rgba(5,8,22,0.52)_100%)]" />
-            </div>
-          ) : null}
-          <div className="relative flex min-h-[calc(60vh-4rem)] max-w-3xl flex-col justify-center sm:min-h-[calc(72vh-5rem)] lg:min-h-[calc(90vh-6rem)]">
-            <div className="inline-flex items-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
-              {isRedRocks ? "Red Rocks Shuttle Booking" : `${row.name} Shuttle Booking`}
-            </div>
-            <h1 className="mt-5 text-[2.5rem] font-black uppercase leading-[0.94] tracking-[-0.04em] drop-shadow-[0_10px_32px_rgba(0,0,0,0.65)] sm:text-[4rem] lg:text-[5rem]">
-              {isRedRocks ? "Elevate Your Red Rocks Night" : row.name}
-            </h1>
-            <p className="mt-5 max-w-2xl text-[15px] leading-7 text-white/86 drop-shadow-[0_8px_24px_rgba(0,0,0,0.55)] sm:text-lg">
-              {isRedRocks
-                ? "Fixed $59 shuttles, private SUVs and party buses, a guaranteed ride home, and less post-show chaos. Book around the Red Rocks nights people are actually planning for."
-                : "Choose the ride style that matches this venue, then move into the right booking page."}
-            </p>
-            <div className="mt-6 text-sm font-bold text-white/68">
-              {[row.city, row.state].filter(Boolean).join(", ")}
-            </div>
-            <PlanningLinks
-              venue={venue}
-              source={Array.isArray(sp.source) ? sp.source[0] : sp.source}
-              className="mt-6"
+      <section className="mx-auto flex max-w-[1120px] flex-col gap-8">
+        <section className="relative overflow-hidden rounded-[34px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,16,32,0.98),rgba(6,9,18,0.96))] shadow-[0_40px_120px_rgba(0,0,0,0.45)]">
+          <div className="absolute inset-0">
+            <Image
+              src={isRedRocks ? curatedImages.homepageHero : venueMedia?.hero || curatedImages.homepageHero}
+              alt={isRedRocks ? "Red Rocks Amphitheatre at dusk" : venueMedia?.heroAlt || `${row.name} booking hero`}
+              fill
+              unoptimized={isRedRocks}
+              className="object-cover object-center opacity-52"
+              priority
+              fetchPriority="high"
+              sizes="(min-width: 1024px) 1120px, 100vw"
             />
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <Link
-                href={isRedRocks ? buildBookingHref({ target: "shared", venue, searchParams: sp }) : buildVenueRequestHref({ venue, searchParams: sp })}
-                className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#ffd6a3]/28 bg-[linear-gradient(180deg,#a95f28_0%,#8d4f20_100%)] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#120f0b] transition hover:bg-[linear-gradient(180deg,#b66c31_0%,#975321_100%)]"
-              >
-                {isRedRocks ? "Book Shuttle Seats" : "Request Venue Ride"}
-              </Link>
-              <Link
-                href={isRedRocks ? "/week/red-rocks" : `/venues/${venue}`}
-                className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-black/20 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
-              >
-                {isRedRocks ? "See This Week" : "Open Venue Guide"}
-              </Link>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(98,246,255,0.12),transparent_36%),radial-gradient(circle_at_82%_18%,rgba(255,176,124,0.14),transparent_28%),linear-gradient(180deg,rgba(5,8,22,0.34),rgba(5,8,22,0.82)_56%,rgba(5,8,22,0.94)_100%)]" />
+          </div>
+
+          <div className="relative p-8 sm:p-10 lg:p-12">
+            <div className="max-w-3xl">
+              <div className="inline-flex items-center rounded-full border border-[#8fd0ff]/24 bg-[#8fd0ff]/10 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
+                {isRedRocks ? "Ride Types" : `${row.name} Ride Types`}
+              </div>
+              <h1 className="mt-5 text-[2.4rem] font-black uppercase leading-[0.94] tracking-[-0.04em] sm:text-[3.6rem] lg:text-[4.3rem]">
+                {isRedRocks ? "Choose Your Red Rocks Ride" : row.name}
+              </h1>
+              <p className="mt-5 max-w-3xl text-[15px] leading-7 text-white/82 sm:text-lg">
+                {isRedRocks
+                  ? "Start with the same clean choice architecture as the private page: shared shuttle seats if you want the fixed-price move, or private SUV and van service if your group wants one vehicle and one return plan."
+                  : "Choose the ride style that matches this venue, then move into the right booking path."}
+              </p>
+
+              {artist || dateLabel ? (
+                <div className="mt-6 inline-flex flex-wrap items-center gap-2 rounded-[22px] border border-emerald-400/28 bg-emerald-500/10 px-4 py-3 text-sm text-white/90">
+                  <span className="font-black uppercase tracking-[0.16em] text-emerald-200">Selected Night</span>
+                  <span>
+                    {artist || "Your show"}
+                    {dateLabel ? ` · ${dateLabel}` : ""}
+                  </span>
+                </div>
+              ) : null}
+
+              <div className="mt-6 text-sm font-bold text-white/68">
+                {[row.city, row.state].filter(Boolean).join(", ")}
+              </div>
+
+              <PlanningLinks
+                venue={venue}
+                source={Array.isArray(sp.source) ? sp.source[0] : sp.source}
+                className="mt-6"
+              />
+
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <Link
+                  href={isRedRocks ? buildBookingHref({ target: "shared", venue, searchParams: sp }) : buildVenueRequestHref({ venue, searchParams: sp })}
+                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#62f6ff] bg-[#62f6ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#05111a] shadow-[0_18px_40px_rgba(61,243,255,0.24)] transition hover:bg-[#8cf8ff]"
+                >
+                  {isRedRocks ? "Book Shuttle Seats" : "Request Venue Ride"}
+                </Link>
+                <Link
+                  href={isRedRocks ? "/week/red-rocks" : `/venues/${venue}`}
+                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/28 bg-[#152038] px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#1d2a46]"
+                >
+                  {isRedRocks ? "See This Week" : "Open Venue Guide"}
+                </Link>
+              </div>
             </div>
           </div>
         </section>
@@ -154,14 +178,14 @@ export default async function VenueBookingPage({
                 ? buildBookingHref({ target: "shared", venue, searchParams: sp })
                 : buildVenueRequestHref({ venue, searchParams: sp })
             }
-            className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
+            className="group rounded-[28px] border border-[#62f6ff]/18 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:border-[#62f6ff]/38 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
           >
             {venueMedia ? (
               <div className="relative mb-4 h-44 overflow-hidden rounded-[18px] border border-white/10">
                 {isRedRocks ? (
                   <Image
-                    src={curatedImages.homepageShared}
-                    alt="Shared shuttle option for Red Rocks transportation"
+                    src={bookingVisuals.shared.imageSrc}
+                    alt={bookingVisuals.shared.imageAlt}
                     className="h-full w-full object-cover"
                     loading="lazy"
                     width={960}
@@ -184,16 +208,16 @@ export default async function VenueBookingPage({
             <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
               Shared Shuttle
             </div>
-            <h2 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white">
-              {isRedRocks ? "Per-Person Shuttle Seats" : "See Shared Ride Availability"}
+            <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">
+              {isRedRocks ? "Step 1: Start with shuttle seats" : "See Shared Ride Availability"}
             </h2>
             <p className="mt-3 text-sm leading-6 text-white/70">
               {isRedRocks
-                ? "Seat-based shuttle options with round-trip service and online booking."
+                ? "Fixed-price seats, one pickup plan, and the cleanest way to keep the night simple without booking a full vehicle."
                 : "Open the ride finder for current shared availability and venue options."}
             </p>
             <div className="mt-5 text-sm font-bold text-[#ffb07c]">
-              {isRedRocks ? "Choose shared shuttle →" : "Open ride finder →"}
+{isRedRocks ? "Choose shuttle seats →" : "Open ride finder →"}
             </div>
           </Link>
 
@@ -203,14 +227,14 @@ export default async function VenueBookingPage({
                 ? buildBookingHref({ target: "private", venue, searchParams: sp })
                 : buildVenueRequestHref({ venue, searchParams: sp })
             }
-            className="rounded-[26px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
+            className="group rounded-[28px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:border-[#62f6ff]/32 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
           >
             {venueMedia ? (
               <div className="relative mb-4 h-44 overflow-hidden rounded-[18px] border border-white/10">
                 {isRedRocks ? (
                   <Image
-                    src={curatedImages.homepagePrivate}
-                    alt="Private vehicle option for Red Rocks transportation"
+                    src={bookingVisuals.private.imageSrc}
+                    alt={bookingVisuals.private.imageAlt}
                     className="h-full w-full object-cover"
                     loading="lazy"
                     width={960}
@@ -233,16 +257,16 @@ export default async function VenueBookingPage({
             <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
               Private Ride
             </div>
-            <h2 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white">
-              {isRedRocks ? "SUV, Van, Sprinter, or Party Bus" : "Private Vehicle Service"}
+            <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">
+              {isRedRocks ? "Step 2: Private SUV or van" : "Private Vehicle Service"}
             </h2>
             <p className="mt-3 text-sm leading-6 text-white/70">
               {isRedRocks
-                ? "Private vehicle options for couples, crews, and larger groups with online booking."
+                ? "The same private path as the SUV page: start with the Suburban-sized option, then move up to the van only if your group needs more room."
                 : "Private venue transport for Denver and Boulder nights where one vehicle for the whole group makes more sense."}
             </p>
             <div className="mt-5 text-sm font-bold text-[#ffb07c]">
-              {isRedRocks ? "Choose private option →" : "Open private booking →"}
+{isRedRocks ? "Open private options →" : "Open private booking →"}
             </div>
           </Link>
         </section>

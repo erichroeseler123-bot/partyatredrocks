@@ -6,6 +6,7 @@ import venuesJson from "@/data/venues.json";
 import { postDccSatelliteEvent, postWtaPartnerAcceptedIfNeeded } from "@/lib/dccSatellite";
 import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
 import { bookingVisuals } from "@/lib/bookingVisuals";
+import { curatedImages } from "@/lib/curatedImages";
 import { buildDccPrivateCheckoutHref, PRIVATE_RIDE_OPTIONS } from "@/lib/rideCatalog";
 import { buildPrivateBookingJsonLd, buildPrivateBookingMetadata, buildPrivateFaqJsonLd } from "../bookingSeo";
 
@@ -120,7 +121,18 @@ export default async function PrivateOptionsPage({
 
       <section className="mx-auto flex max-w-[1120px] flex-col gap-8">
         <section className="relative overflow-hidden rounded-[34px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,16,32,0.98),rgba(6,9,18,0.96))] shadow-[0_40px_120px_rgba(0,0,0,0.45)]">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(98,246,255,0.14),transparent_40%),radial-gradient(circle_at_80%_20%,rgba(255,176,124,0.14),transparent_34%),linear-gradient(180deg,rgba(5,8,22,0.28),rgba(5,8,22,0.82)_55%,rgba(5,8,22,0.96)_100%)]" />
+          <div className="absolute inset-0">
+            <Image
+              src={curatedImages.homepageHero}
+              alt="Red Rocks Amphitheatre at dusk"
+              fill
+              unoptimized
+              priority
+              className="object-cover object-center opacity-48"
+              sizes="(min-width: 1024px) 1120px, 100vw"
+            />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(98,246,255,0.14),transparent_40%),radial-gradient(circle_at_80%_20%,rgba(255,176,124,0.14),transparent_34%),linear-gradient(180deg,rgba(5,8,22,0.3),rgba(5,8,22,0.82)_55%,rgba(5,8,22,0.96)_100%)]" />
+          </div>
 
           <div className="relative p-8 sm:p-10 lg:p-12">
             <div className="inline-flex items-center rounded-full border border-[#ffb07c]/30 bg-[#ffb07c]/10 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
