@@ -3,7 +3,6 @@ import { Montserrat, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import SiteNav from "@/components/SiteNav";
 import DisplayTheme from "@/components/DisplayTheme";
-import FloatingBook from "@/components/FloatingBook";
 import SiteFooter from "@/components/SiteFooter";
 import { BOOKING_COPY } from "@/lib/bookingCopy";
 import { buildUnsplashImageSrc } from "@/lib/unsplash";
@@ -97,7 +96,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteNav />
         {children}
         <SiteFooter />
-        <FloatingBook />
       </body>
     </html>
   );

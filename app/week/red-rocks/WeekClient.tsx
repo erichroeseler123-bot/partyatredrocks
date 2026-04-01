@@ -157,11 +157,6 @@ export default function WeekClient({
           </div>
         </section>
 
-        <div className="comic-mobile-cta">
-          <Link className="comic-btn comic-btn-primary" href="/book">
-            Book a Ride
-          </Link>
-        </div>
 
         <FAQBlock title="Red Rocks Week FAQ" rows={faqRows} />
       </section>

@@ -19,12 +19,12 @@ export default function SiteNav() {
   return (
     <header className="sticky top-0 z-50 bg-transparent">
       <div className="comic-wrap py-3">
-        <div className="brand-glass-bar flex items-center justify-between gap-3 rounded-[24px] px-4 py-3">
-          <Link href="/" className="flex h-[88px] items-center no-underline sm:h-[96px]">
+        <div className="brand-glass-bar flex items-center justify-between gap-2 overflow-hidden rounded-[24px] px-3 py-3 sm:gap-3 sm:px-4">
+          <Link href="/" className="flex min-w-0 flex-1 items-center no-underline">
             <BrandMark
               alt={brand}
-              frameClassName="h-16 w-[264px] sm:h-[72px] sm:w-[296px]"
-              imageClassName="h-32 sm:h-36"
+              frameClassName="h-14 w-[clamp(160px,50vw,210px)] sm:h-[72px] sm:w-[296px]"
+              imageClassName="h-28 sm:h-36"
             />
           </Link>
 
@@ -46,12 +46,13 @@ export default function SiteNav() {
             })}
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="flex shrink-0 items-center justify-center">
             <Link
               href="/book/red-rocks-amphitheatre"
-              className="brand-button-primary inline-flex min-h-[42px] items-center justify-center px-4 text-[12px] font-black uppercase tracking-[0.16em] no-underline"
+              className="brand-button-primary inline-flex min-h-[38px] max-w-full items-center justify-center whitespace-nowrap px-3 text-[10px] font-black uppercase tracking-[0.12em] no-underline sm:min-h-[42px] sm:px-4 sm:text-[12px] sm:tracking-[0.16em]"
             >
-              {cta}
+              <span className="sm:hidden">Book</span>
+              <span className="hidden sm:inline">{cta}</span>
             </Link>
           </div>
         </div>
