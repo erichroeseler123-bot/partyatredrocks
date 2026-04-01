@@ -1,5 +1,6 @@
 "use client";
 
+import BrandMark from "@/components/BrandMark";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { DISPLAY, NAV_LINKS } from "@/lib/display";
@@ -19,10 +20,12 @@ export default function SiteNav() {
     <header className="sticky top-0 z-50 bg-transparent">
       <div className="comic-wrap py-3">
         <div className="brand-glass-bar flex items-center justify-between gap-3 rounded-[24px] px-4 py-3">
-          <Link href="/" className="flex items-center gap-2 no-underline">
-            <div className="text-[12px] font-black uppercase tracking-[0.2em] text-[var(--brand-text)]">
-              {brand}
-            </div>
+          <Link href="/" className="flex h-[88px] items-center no-underline sm:h-[96px]">
+            <BrandMark
+              alt={brand}
+              frameClassName="h-16 w-[264px] sm:h-[72px] sm:w-[296px]"
+              imageClassName="h-32 sm:h-36"
+            />
           </Link>
 
           <nav className="hidden md:flex items-center gap-6">

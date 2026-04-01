@@ -31,6 +31,15 @@ function displayOrderNumber(order: InternalOrderRow) {
   return order.internalOrderId;
 }
 
+function renderEmailBrandMark() {
+  const logoUrl = `${siteOrigin()}/brand/partylogo.png`;
+  return `<div style="margin:0 0 16px;line-height:0">
+    <div style="display:inline-block;width:172px;height:44px;overflow:hidden;vertical-align:top">
+      <img src="${logoUrl}" alt="Party at Red Rocks" width="176" height="176" style="display:block;height:88px;width:auto;max-width:none;border:0;outline:none;text-decoration:none" />
+    </div>
+  </div>`;
+}
+
 function renderEmail(order: InternalOrderRow) {
   const customer = order.customer ?? {};
   const firstName = typeof customer.firstName === "string" && customer.firstName.trim() ? customer.firstName.trim() : "there";
@@ -39,13 +48,15 @@ function renderEmail(order: InternalOrderRow) {
   const supportEmail = PARR_PUBLIC_FACTS.support.email;
   const orderNumber = displayOrderNumber(order);
 
+  const logoMarkup = renderEmailBrandMark();
+
   return {
     subject: "Your Red Rocks Show Night Itinerary",
     html: `<div style="margin:0;padding:32px 16px;background:#f4efe8">
       <div style="max-width:640px;margin:0 auto;font-family:Arial,sans-serif;color:#0f172a">
         <div style="overflow:hidden;border-radius:28px;background:#081120;border:1px solid rgba(255,255,255,0.08);box-shadow:0 24px 80px rgba(15,23,42,0.18)">
           <div style="padding:32px;background:linear-gradient(135deg,rgba(255,176,124,0.22),rgba(8,17,32,0.96) 55%,rgba(143,208,255,0.16));color:#fff">
-            <div style="font-size:11px;font-weight:900;letter-spacing:0.22em;text-transform:uppercase;color:#8fd0ff">Party at Red Rocks</div>
+            ${logoMarkup}            <div style="font-size:11px;font-weight:900;letter-spacing:0.22em;text-transform:uppercase;color:#8fd0ff">Party at Red Rocks</div>
             <h1 style="margin:16px 0 0;font-size:32px;line-height:1.05;text-transform:uppercase;letter-spacing:-0.04em">Your show night itinerary is ready.</h1>
             <p style="margin:16px 0 0;font-size:15px;line-height:1.8;color:rgba(255,255,255,0.78)">Hi ${escapeHtml(firstName)}, your shuttle is confirmed. Head back to your booking page for the full Red Rocks game plan.</p>
           </div>

@@ -617,9 +617,9 @@ body { background: var(--surface); color: var(--text); }
 }
 
 .comic-btn-secondary{
-  color:#120f0b;
-  border:1px solid rgba(255,255,255,.14);
-  background:rgba(255,255,255,.06);
+  color:#ffffff;
+  border:1px solid rgba(255,255,255,.22);
+  background:#0b0f1a;
   box-shadow:none;
 }
 
@@ -630,8 +630,8 @@ body { background: var(--surface); color: var(--text); }
 }
 
 .comic-btn-secondary:hover{
-  background:rgba(255,255,255,.10);
-  border-color:rgba(255,255,255,.24);
+  background:#121826;
+  border-color:rgba(255,255,255,.32);
 }
 
 .comic-mobile-cta{
@@ -774,9 +774,9 @@ body,
 
 .btn-secondary,
 .btn-ghost {
-  background: linear-gradient(180deg, rgba(255,176,124,0.18), rgba(255,176,124,0.1));
-  border-color: rgba(255, 176, 124, 0.3);
-  color: #120f0b !important;
+  background: #0b0f1a;
+  border-color: rgba(255, 255, 255, 0.22);
+  color: #ffffff !important;
 }
 
 .btn-primary:hover,
@@ -786,10 +786,12 @@ body,
   filter: saturate(1.08);
 }
 
-a[href][class*="rounded-full"][class*="justify-center"],
-button[class*="rounded-full"][class*="justify-center"] {
-  color: #120f0b !important;
+.btn-secondary:hover,
+.btn-ghost:hover {
+  background: #121826;
+  border-color: rgba(255, 255, 255, 0.32);
 }
+
 
 /* =============================================
    BRAND VISUAL SYSTEM — SINGLE SOURCE OF TRUTH
@@ -811,6 +813,7 @@ button[class*="rounded-full"][class*="justify-center"] {
   --brand-text-soft: #c7c7d1;
   --brand-text-muted: #8f8fa3;
   --brand-border: rgba(255, 255, 255, 0.08);
+  --brand-border-strong: rgba(255, 255, 255, 0.24);
   --brand-accent-text: #f5f5f7;
   --brand-primary-start: #ff5b2e;
   --brand-primary-end: #ff734d;
@@ -890,6 +893,45 @@ button[class*="rounded-full"][class*="justify-center"] {
   box-shadow:
     0 22px 48px rgba(255, 91, 46, 0.28),
     0 8px 20px rgba(255, 91, 46, 0.16);
+}
+
+.brand-button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: #0b0f1a;
+  color: #ffffff !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.brand-button-secondary:hover {
+  background: #121826;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.32);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+}
+
+.brand-button-secondary:focus-visible,
+.brand-button-primary:focus-visible,
+.comic-btn:focus-visible,
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.btn-ghost:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.9);
+  outline-offset: 2px;
+}
+
+.brand-button-secondary:disabled,
+.brand-button-primary:disabled,
+.btn-primary:disabled,
+.btn-secondary:disabled,
+.btn-ghost:disabled,
+.comic-btn[aria-disabled="true"] {
+  opacity: 0.7;
 }
 
 .brand-button-pulse {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import FAQBlock from "@/components/FAQBlock";
 import CardGrid from "@/components/CardGrid";
@@ -6,13 +7,14 @@ import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
 import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
 import type { HandoffSearchParams } from "@/lib/parrHandoff";
 import { buildBookingHref } from "@/lib/parrHandoff";
-import PageHero from "@/components/PageHero";
+import { GuideVisualHero } from "@/components/guide/GuideVisualHero";
 import PrimaryCTASection from "@/components/PrimaryCTASection";
+import { guideVisuals } from "@/lib/guideVisuals";
+import { curatedImages } from "@/lib/curatedImages";
 import { RED_ROCKS_ENTITIES } from "@/lib/redRocksAuthority";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
-const DEFAULT_OG_IMAGE =
-  `${SITE}/api/unsplash-image?q=red+rocks+amphitheatre+concert+night+denver+colorado&src=%2Fhero%2Fhero-home.jpg&alt=Red+Rocks+shuttle+transportation&w=1200&h=630`;
+const DEFAULT_OG_IMAGE = `${SITE}${curatedImages.guideTransportation}`;
 
 export const metadata: Metadata = {
   title: "Red Rocks Transportation Guide",
@@ -40,6 +42,27 @@ export const metadata: Metadata = {
     images: [DEFAULT_OG_IMAGE],
   },
 };
+
+const TRANSPORT_VISUALS = [
+  {
+    title: "Arrival Flow",
+    body: "The first pressure point is getting up the hill before traffic and stair load stack.",
+    imageSrc: curatedImages.guideTransportation,
+    imageAlt: "Arrival approach and transportation planning for Red Rocks",
+  },
+  {
+    title: "Private Ride",
+    body: "Private SUVs and vans work best when your group wants one coordinated pickup and one ride home.",
+    imageSrc: curatedImages.privateSUV,
+    imageAlt: "Private SUV transportation for Red Rocks groups",
+  },
+  {
+    title: "Pickup Strategy",
+    body: "Your return plan should be clear before the encore, not improvised in the lot after lights up.",
+    imageSrc: curatedImages.guidePickup,
+    imageAlt: "Post-show pickup planning for Red Rocks transportation",
+  },
+] as const;
 
 const coreLinks = [
   { href: "/red-rocks", label: "Red Rocks Guide" },
@@ -92,43 +115,43 @@ export default async function RedRocksTransportationPage({
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
         ) : null}
 
-        <PageHero
-          kicker="Transportation"
+        <GuideVisualHero
+          eyebrow={guideVisuals.transportation.eyebrow}
           title="How To Get To Red Rocks"
-          description="Red Rocks transportation usually comes down to three choices: drive and park, use rideshare, or book a shuttle or private ride in advance. The best option depends on your group size, timing, and how much certainty you want after the show."
-          secondaryDescription="Red Rocks is different from a downtown arena. Traffic builds before doors, walking can be steep, and the rush after the encore happens fast. If you know how you are getting in and out before show night, the whole evening is easier."
-          actions={[
-            {
-              href: buildBookingHref({
-                target: "book",
-                venue: "red-rocks-amphitheatre",
-                searchParams: sp,
-              }),
-              label: "Book a Ride",
-            },
-            { href: "/week/red-rocks", label: "Shows This Week", variant: "secondary" },
-          ]}
+          copy="Red Rocks transportation usually comes down to three choices: drive and park, use rideshare, or book a shuttle or private ride in advance. The best option depends on your group size, timing, and how much certainty you want after the show."
+          imageSrc={guideVisuals.transportation.imageSrc}
+          imageAlt={guideVisuals.transportation.imageAlt}
+          actions={
+            <>
+              <Link
+                href={buildBookingHref({
+                  target: "book",
+                  venue: "red-rocks-amphitheatre",
+                  searchParams: sp,
+                })}
+                className="brand-button-primary brand-button-pulse inline-flex min-h-12 items-center justify-center px-6 py-3 text-[12px] font-black uppercase tracking-[0.2em]"
+              >
+                Book a Ride
+              </Link>
+              <Link href="/week/red-rocks" className="brand-button-secondary inline-flex min-h-12 items-center justify-center px-6 py-3 text-[12px] font-black uppercase tracking-[0.2em] hover:no-underline">
+                Shows This Week
+              </Link>
+            </>
+          }
         />
 
         <CardGrid className="lg:grid-cols-3">
-          <article className="brand-card rounded-[26px] p-6">
-            <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.2em]">Drive + Park</div>
-            <p className="mt-3 text-sm leading-7 text-white/74">
-              Full control, but you take on parking strategy, stair load, and the slowest part of the night after the final song.
-            </p>
-          </article>
-          <article className="brand-card rounded-[26px] p-6">
-            <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.2em]">Rideshare</div>
-            <p className="mt-3 text-sm leading-7 text-white/74">
-              Sometimes workable on lighter nights, but the least predictable option when a sold-out crowd all heads out together.
-            </p>
-          </article>
-          <article className="brand-card rounded-[26px] p-6">
-            <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.2em]">Shuttle or Private Ride</div>
-            <p className="mt-3 text-sm leading-7 text-white/74">
-              The clearest plan before the night starts, especially when you want fixed pricing, one pickup point, and a guaranteed ride back.
-            </p>
-          </article>
+          {TRANSPORT_VISUALS.map((item) => (
+            <article key={item.title} className="brand-card overflow-hidden rounded-[26px]">
+              <div className="relative aspect-[16/10] border-b border-white/10">
+                <Image src={item.imageSrc} alt={item.imageAlt} fill className="object-cover" sizes="(min-width: 1024px) 30vw, 100vw" />
+              </div>
+              <div className="p-6">
+                <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.2em]">{item.title}</div>
+                <p className="mt-3 text-sm leading-7 text-white/74">{item.body}</p>
+              </div>
+            </article>
+          ))}
         </CardGrid>
 
         <section className="brand-card mt-6 rounded-[28px] p-6 sm:p-7">

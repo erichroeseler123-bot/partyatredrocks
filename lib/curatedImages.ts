@@ -7,8 +7,8 @@
 export const curatedImages = {
   // Homepage / top-level commercial slots
   homepageHero: "/hero/hero_red_rocks.jpg",
-  homepageShared: "/hero/sprinter_red_rocks.jpg",
-  homepagePrivate: "/images/marketing/vip-suv.webp",
+  homepageShared: "/fleet/fleet-sprinter.jpg",
+  homepagePrivate: "/fleet/fleet-suburban.jpg",
 
   // Hub heroes
   guideHero: "/hero/hero_red_rocks.jpg",
@@ -26,8 +26,8 @@ export const curatedImages = {
   scheduleHero: "/hero/arrival.jpg",
 
   // Booking / fleet slots
-  sharedShuttle: "/hero/sprinter_red_rocks.jpg",
-  privateSUV: "/images/marketing/vip-suv.webp",
+  sharedShuttle: "/fleet/fleet-sprinter.jpg",
+  privateSUV: "/hero/hero_red_rocks.jpg",
   sprinterVan: "/hero/sprinter_red_rocks.jpg",
   partyBus: "/images/marketing/fleet.webp",
 

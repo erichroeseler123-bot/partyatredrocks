@@ -1,3 +1,4 @@
+import BrandMark from '@/components/BrandMark';
 import Image from 'next/image';
 import Link from 'next/link';
 import PublicBookingActions from '@/components/booking/PublicBookingActions';
@@ -241,6 +242,11 @@ export default async function PublicBookingPage(
         <section className="relative overflow-hidden rounded-[30px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.42)] sm:p-8">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,176,124,0.18),transparent_28%),radial-gradient(circle_at_80%_20%,rgba(143,208,255,0.12),transparent_24%)]" />
           <div className="relative">
+            <BrandMark
+              className="mb-4"
+              frameClassName="h-10 w-[156px] sm:h-11 sm:w-[172px]"
+              imageClassName="h-20 sm:h-[88px]"
+            />
             <div className="text-[12px] font-black uppercase tracking-[0.2em] text-[var(--brand-orange)]">Booking Confirmed</div>
             <div className="mt-5 grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
               <div>

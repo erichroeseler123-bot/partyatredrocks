@@ -38,7 +38,7 @@ export default function PageHero({
               href={action.href}
               className={
                 action.variant === "secondary"
-                  ? "inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 py-3 text-[12px] font-black uppercase tracking-[0.2em] text-white transition hover:-translate-y-0.5 hover:border-[var(--brand-border-strong)] hover:bg-white/10 hover:no-underline"
+                  ? "brand-button-secondary inline-flex min-h-12 items-center justify-center px-6 py-3 text-[12px] font-black uppercase tracking-[0.2em] hover:no-underline"
                   : "brand-button-primary brand-button-pulse inline-flex min-h-12 items-center justify-center px-6 py-3 text-[12px] font-black uppercase tracking-[0.2em]"
               }
             >

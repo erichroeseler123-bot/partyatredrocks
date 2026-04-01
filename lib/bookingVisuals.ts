@@ -22,7 +22,7 @@ export const bookingVisuals = {
       imageAlt: "Private SUV for Red Rocks transportation",
     },
     van: {
-      imageSrc: curatedImages.partyBus,
+      imageSrc: curatedImages.sprinterVan,
       imageAlt: "Passenger van transportation for Red Rocks groups",
     },
     sprinter: {

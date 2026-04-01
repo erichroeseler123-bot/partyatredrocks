@@ -96,6 +96,11 @@ function fallbackImageUrl(query: string, width: number, height: number, quality:
   return imageUrl;
 }
 
+function resolveLocalAssetUrl(requestUrl: URL, src: string | null) {
+  if (!src || !src.startsWith("/") || src.startsWith("//")) return null;
+  return new URL(src, requestUrl.origin);
+}
+
 function redirectTo(url: URL) {
   return NextResponse.redirect(url, {
     status: 307,
@@ -194,10 +199,14 @@ export async function GET(request: Request) {
   const width = parseDimension(url.searchParams.get("w"), 1600);
   const height = parseDimension(url.searchParams.get("h"), 900);
   const quality = parseDimension(url.searchParams.get("qf"), 80);
+  const src = url.searchParams.get("src");
+  const localAssetUrl = resolveLocalAssetUrl(url, src);
+  if (localAssetUrl) return redirectTo(localAssetUrl);
+
   const query = buildUnsplashQuery(
     url.searchParams.get("q"),
     url.searchParams.get("alt"),
-    url.searchParams.get("src"),
+    src,
   );
 
   try {

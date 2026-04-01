@@ -1,10 +1,33 @@
+import Image from "next/image";
 import Link from "next/link";
 import { GuideLocalInfo } from "@/components/guide/GuideLocalInfo";
 import { GuideVisualHero } from "@/components/guide/GuideVisualHero";
 import { guideVisuals } from "@/lib/guideVisuals";
+import { curatedImages } from "@/lib/curatedImages";
 
 const SHARED_HREF = "/book/red-rocks-amphitheatre/custom/shared";
 const PRIVATE_HREF = "/book/red-rocks-amphitheatre/private";
+const LOGISTICS_VISUALS = [
+  {
+    title: "Pickup Window",
+    body: "A clean night starts with a real arrival window and one clear plan for where the group meets.",
+    imageSrc: curatedImages.guidePickup,
+    imageAlt: "Pickup planning and private ride coordination for Red Rocks",
+  },
+  {
+    title: "Arrival Buffer",
+    body: "Traffic, security, and stairs punish late starts more than almost any other part of the night.",
+    imageSrc: curatedImages.guideTransportation,
+    imageAlt: "Arrival timing and transportation planning at Red Rocks",
+  },
+  {
+    title: "After The Encore",
+    body: "The ride home should already be settled before the crowd surge begins.",
+    imageSrc: curatedImages.privateSUV,
+    imageAlt: "Private vehicle plan for Red Rocks exit logistics",
+  },
+] as const;
+
 
 export const metadata = {
   title: "Show-Night Planning Guide",
@@ -57,6 +80,21 @@ export default function Page() {
               </Link>
             </article>
           </div>
+        </section>
+
+        <section className="mt-10 grid gap-4 md:grid-cols-3">
+          {LOGISTICS_VISUALS.map((item) => (
+            <article key={item.title} className="overflow-hidden rounded-3xl border border-soft bg-surface-strong">
+              <div className="relative aspect-[16/10] border-b border-soft">
+                <Image src={item.imageSrc} alt={item.imageAlt} fill className="object-cover" sizes="(min-width: 1024px) 30vw, 100vw" />
+              </div>
+              <div className="p-5">
+                <p className="text-[11px] font-black uppercase tracking-[0.22em] text-cyan-300">Show-Night Visual</p>
+                <h2 className="mt-3 text-2xl font-black tracking-tight">{item.title}</h2>
+                <p className="mt-3 text-soft leading-relaxed">{item.body}</p>
+              </div>
+            </article>
+          ))}
         </section>
 
         <div className="mt-10">
