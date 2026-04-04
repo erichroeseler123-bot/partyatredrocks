@@ -52,6 +52,7 @@ export function squareWebhookSignatureKey() {
 
 export async function createSharedSquareOrder(input: {
   internalOrderId: string;
+  dccHandoffId?: string | null;
   title: string;
   pickupHub: "denver" | "golden";
   date: string;
@@ -65,6 +66,7 @@ export async function createSharedSquareOrder(input: {
     order: {
       locationId: squareLocationId(),
       referenceId: input.internalOrderId,
+      metadata: input.dccHandoffId ? { dcc_handoff_id: input.dccHandoffId } : undefined,
       lineItems: [
         {
           name: `Red Rocks shared shuttle - ${input.pickupHub}`,
@@ -74,6 +76,47 @@ export async function createSharedSquareOrder(input: {
             currency: "USD",
           },
           note: [input.title, input.date, input.artist || null].filter(Boolean).join(" | "),
+        },
+      ],
+    },
+  });
+
+  const order = response.order;
+  if (!order?.id) {
+    throw new Error("Square did not return an order ID.");
+  }
+
+  return {
+    squareOrderId: order.id,
+  };
+}
+
+export async function createPrivateSquareOrder(input: {
+  internalOrderId: string;
+  dccHandoffId?: string | null;
+  title: string;
+  vehicleLabel: string;
+  date?: string | null;
+  artist?: string | null;
+  quantity: number;
+  amountCents: number;
+}) {
+  const client = squareClient();
+  const response = await client.orders.create({
+    idempotencyKey: randomUUID(),
+    order: {
+      locationId: squareLocationId(),
+      referenceId: input.internalOrderId,
+      metadata: input.dccHandoffId ? { dcc_handoff_id: input.dccHandoffId } : undefined,
+      lineItems: [
+        {
+          name: input.vehicleLabel,
+          quantity: String(input.quantity),
+          basePriceMoney: {
+            amount: BigInt(Math.round(input.amountCents / input.quantity)),
+            currency: "USD",
+          },
+          note: [input.title, input.date || null, input.artist || null].filter(Boolean).join(" | "),
         },
       ],
     },

@@ -271,6 +271,7 @@ export default function CustomBooking({
             artist,
             event,
             notes: formData.notes,
+            searchParams,
             customer: {
               firstName: formData.firstName,
               lastName: formData.lastName,
@@ -316,6 +317,7 @@ export default function CustomBooking({
           internalOrderId: activeCheckout.internalOrderId,
           squareOrderId: activeCheckout.squareOrderId,
           sourceId: tokenResult.token,
+          dccHandoffId: firstValue(searchParams, 'dcc_handoff_id') || '',
         }),
       });
 
@@ -342,8 +344,18 @@ export default function CustomBooking({
         <StepLabel step={1} title="Pickup Location" />
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           {([
-            { id: 'denver' as const, label: PARR_PUBLIC_FACTS.pickups.denver.cityLabel, detail: PARR_PUBLIC_FACTS.pickups.denver.shortLabel },
-            { id: 'golden' as const, label: PARR_PUBLIC_FACTS.pickups.golden.cityLabel, detail: PARR_PUBLIC_FACTS.pickups.golden.shortLabel },
+            {
+              id: 'denver' as const,
+              label: PARR_PUBLIC_FACTS.pickups.denver.cityLabel,
+              detail: PARR_PUBLIC_FACTS.pickups.denver.shortLabel,
+              copy: 'Downtown pickup with hotel access and a simple pre-show meet point.',
+            },
+            {
+              id: 'golden' as const,
+              label: PARR_PUBLIC_FACTS.pickups.golden.cityLabel,
+              detail: PARR_PUBLIC_FACTS.pickups.golden.shortLabel,
+              copy: 'Golden pickup for riders who want the foothills-side departure option.',
+            },
           ]).map((option) => {
             const active = pickupHub === option.id;
             return (
@@ -351,15 +363,19 @@ export default function CustomBooking({
                 key={option.id}
                 type="button"
                 onClick={() => setPickupHub(option.id)}
-                className={`rounded-[22px] border px-4 py-4 text-left transition ${active ? 'border-[#8fd0ff]/60 bg-[#11233d] text-white shadow-[0_0_0_1px_rgba(143,208,255,0.18)]' : 'border-white/12 bg-black/20 text-white/76 hover:border-white/24 hover:text-white'}`}
+                className={`rounded-[26px] border px-5 py-5 text-left transition ${active ? 'border-[#ffb07c]/50 bg-[#2a1a12] text-white shadow-[0_0_0_1px_rgba(255,176,124,0.16)]' : 'border-white/12 bg-black/20 text-white/76 hover:border-white/24 hover:text-white'}`}
               >
-                <div className="flex items-center gap-3">
-                  <span className={`flex h-5 w-5 items-center justify-center rounded-full border ${active ? 'border-[#8fd0ff] bg-[#8fd0ff]/18' : 'border-white/24'}`}>
-                    <span className={`h-2.5 w-2.5 rounded-full ${active ? 'bg-[#8fd0ff]' : 'bg-transparent'}`} />
-                  </span>
-                  <div>
-                    <div className="text-sm font-black uppercase tracking-[0.14em]">{option.label}</div>
-                    <div className="mt-1 text-sm text-white/62">{option.detail}</div>
+                <div className="flex h-full flex-col">
+                  <div className="flex items-center gap-3">
+                    <span className={`flex h-5 w-5 items-center justify-center rounded-full border ${active ? 'border-[#ffb07c] bg-[#ffb07c]/18' : 'border-white/24'}`}>
+                      <span className={`h-2.5 w-2.5 rounded-full ${active ? 'bg-[#ffb07c]' : 'bg-transparent'}`} />
+                    </span>
+                    <div className="text-sm font-black uppercase tracking-[0.14em]">{option.label} Pickup</div>
+                  </div>
+                  <div className="mt-2 text-sm font-semibold text-white/72">{option.detail}</div>
+                  <p className="mt-3 text-sm leading-6 text-white/72">{option.copy}</p>
+                  <div className={`mt-4 inline-flex min-h-11 items-center justify-center rounded-full px-5 text-xs font-black uppercase tracking-[0.16em] ${active ? 'bg-[#ffb07c] text-[#1a0d07]' : 'border border-white/12 bg-white/6 text-white/78'}`}>
+                    Book
                   </div>
                 </div>
               </button>

@@ -179,6 +179,8 @@ export default async function PublicBookingPage(
   const booking = readRecord(order.booking) ?? {};
   const customer = readRecord(order.customer) ?? {};
   const payment = readRecord(order.payment) ?? {};
+  const rideType = typeof booking.rideType === 'string' ? booking.rideType : 'shared';
+  const isSharedRide = rideType === 'shared';
   const storedShow = asShowContext(booking.show) ?? asShowContext(payload.show);
   const status = typeof booking.status === 'string' ? booking.status : hold?.status || 'pending';
   const pickup = titleCasePickup(
@@ -201,8 +203,8 @@ export default async function PublicBookingPage(
     ? customer.firstName.trim()
     : null;
   const paymentStatus = typeof payment.status === 'string' ? payment.status : 'unpaid';
-  const cancelAllowed = canCancel(status, date);
-  const refundEligible = isRefundEligible(date);
+  const cancelAllowed = isSharedRide && canCancel(status, date);
+  const refundEligible = isSharedRide && isRefundEligible(date);
   const pickupLocation = getPickupLocationDetails(pickup);
 
   const show = storedShow ?? await resolveBookingShowContext({
@@ -496,57 +498,74 @@ export default async function PublicBookingPage(
               </div>
             </dl>
             <p className="mt-5 text-sm leading-6 text-white/74">
-              {cancelAllowed
-                ? refundEligible
-                  ? 'Cancel at least 48 hours before departure for a full refund to the original payment method.'
-                  : 'You can still cancel this seat before departure, but the 48-hour refund window has passed.'
-                : status === 'cancelled'
-                  ? 'This booking has already been cancelled.'
-                  : 'Online cancellation is no longer available because this departure has already passed.'}
+              {isSharedRide
+                ? cancelAllowed
+                  ? refundEligible
+                    ? 'Cancel at least 48 hours before departure for a full refund to the original payment method.'
+                    : 'You can still cancel this seat before departure, but the 48-hour refund window has passed.'
+                  : status === 'cancelled'
+                    ? 'This booking has already been cancelled.'
+                    : 'Online cancellation is no longer available because this departure has already passed.'
+                : 'Private rides are handled directly by our team. If you need to change or cancel this ride, text 720-369-6292 and we will take care of it.'}
             </p>
             <div className="mt-5">
-              <PublicBookingActions
-                token={token}
-                canCancel={cancelAllowed}
-                alreadyCancelled={status === 'cancelled'}
-                refundEligible={refundEligible}
-                refundAmountLabel={formatMoney(payment.totalPaid ?? payment.totalDue)}
-              />
+              {isSharedRide ? (
+                <PublicBookingActions
+                  token={token}
+                  canCancel={cancelAllowed}
+                  alreadyCancelled={status === 'cancelled'}
+                  refundEligible={refundEligible}
+                  refundAmountLabel={formatMoney(payment.totalPaid ?? payment.totalDue)}
+                />
+              ) : (
+                <div className="rounded-[22px] border border-cyan-300/25 bg-cyan-400/10 p-5">
+                  <div className="text-[11px] font-black uppercase tracking-[0.18em] text-cyan-50/80">Private Ride Support</div>
+                  <p className="mt-3 text-sm leading-7 text-white/78">
+                    Need to cancel, move pickup, or make a change? Text {supportPhone} or email {supportEmail} and we will handle the private ride manually.
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-3">
+                    <a href={supportSmsHref} className={secondaryActionClass}>Text Support</a>
+                    <a href={`mailto:${supportEmail}`} className={secondaryActionClass}>Email Support</a>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
-          <section className="rounded-[28px] border border-white/10 bg-[#09101f] p-6">
-            <div className="text-[12px] font-black uppercase tracking-[0.2em] text-[var(--brand-orange)]">Refund & Cancellation Details</div>
-          <div className="mt-5 grid gap-5 lg:grid-cols-[0.95fr_1.05fr]">
-            <div className="rounded-[22px] border border-white/10 bg-black/20 p-5">
-              <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/46">The 48-Hour Rule</div>
-              <ul className="mt-4 space-y-3 text-sm leading-7 text-white/78">
-                <li>Full refund when you cancel at least 48 hours before the scheduled shuttle departure time.</li>
-                <li>Cancellations within 48 hours of departure and no-shows are non-refundable.</li>
-                <li>Use this dashboard to cancel so the request is timestamped correctly.</li>
-              </ul>
-            </div>
-            <div className="rounded-[22px] border border-white/10 bg-black/20 p-5">
-              <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/46">Refund Timeline</div>
-              <ol className="mt-4 space-y-3 text-sm leading-7 text-white/78">
-                <li>1. As soon as you cancel, the refund request is triggered on our side.</li>
-                <li>2. It usually takes 3-7 business days for our bank to release the funds.</li>
-                <li>3. Your bank may take a few more business days to post the credit to your statement.</li>
-                <li>4. You will receive an automated refund or cancellation email once the request is initiated.</li>
-              </ol>
-            </div>
-            <div className="rounded-[22px] border border-white/10 bg-black/20 p-5 lg:col-span-2">
-              <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/46">Important Logistics</div>
-              <div className="mt-4 grid gap-4 md:grid-cols-2">
-                <div className="rounded-[18px] border border-white/10 bg-white/[0.03] px-4 py-4 text-sm leading-7 text-white/80">
-                  <span className="font-black text-white">Original payment only.</span> Refunds go back to the exact card used at checkout. We cannot reroute refunds to Zelle, Venmo, or a different card.
+          {isSharedRide ? (
+            <section className="rounded-[28px] border border-white/10 bg-[#09101f] p-6">
+              <div className="text-[12px] font-black uppercase tracking-[0.2em] text-[var(--brand-orange)]">Refund & Cancellation Details</div>
+              <div className="mt-5 grid gap-5 lg:grid-cols-[0.95fr_1.05fr]">
+                <div className="rounded-[22px] border border-white/10 bg-black/20 p-5">
+                  <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/46">The 48-Hour Rule</div>
+                  <ul className="mt-4 space-y-3 text-sm leading-7 text-white/78">
+                    <li>Full refund when you cancel at least 48 hours before the scheduled shuttle departure time.</li>
+                    <li>Cancellations within 48 hours of departure and no-shows are non-refundable.</li>
+                    <li>Use this dashboard to cancel so the request is timestamped correctly.</li>
+                  </ul>
                 </div>
-                <div className="rounded-[18px] border border-white/10 bg-white/[0.03] px-4 py-4 text-sm leading-7 text-white/80">
-                  <span className="font-black text-white">Inside 48 hours?</span> If you cannot make the ride, text {supportPhone}. We may be able to help you gift the seat, even when a refund is no longer available.
+                <div className="rounded-[22px] border border-white/10 bg-black/20 p-5">
+                  <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/46">Refund Timeline</div>
+                  <ol className="mt-4 space-y-3 text-sm leading-7 text-white/78">
+                    <li>1. As soon as you cancel, the refund request is triggered on our side.</li>
+                    <li>2. It usually takes 3-7 business days for our bank to release the funds.</li>
+                    <li>3. Your bank may take a few more business days to post the credit to your statement.</li>
+                    <li>4. You will receive an automated refund or cancellation email once the request is initiated.</li>
+                  </ol>
+                </div>
+                <div className="rounded-[22px] border border-white/10 bg-black/20 p-5 lg:col-span-2">
+                  <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/46">Important Logistics</div>
+                  <div className="mt-4 grid gap-4 md:grid-cols-2">
+                    <div className="rounded-[18px] border border-white/10 bg-white/[0.03] px-4 py-4 text-sm leading-7 text-white/80">
+                      <span className="font-black text-white">Original payment only.</span> Refunds go back to the exact card used at checkout. We cannot reroute refunds to Zelle, Venmo, or a different card.
+                    </div>
+                    <div className="rounded-[18px] border border-white/10 bg-white/[0.03] px-4 py-4 text-sm leading-7 text-white/80">
+                      <span className="font-black text-white">Inside 48 hours?</span> If you cannot make the ride, text {supportPhone}. We may be able to help you gift the seat, even when a refund is no longer available.
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
+            </section>
+          ) : null}
 
             </section>
         ) : null}

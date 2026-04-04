@@ -55,7 +55,7 @@ export default async function HomePage() {
     ? await getDynamicImage(
         "concert",
         `${nextRedRocksEvent.artistNames[0] || nextRedRocksEvent.name} red rocks concert`,
-        nextRedRocksEvent.image || curatedImages.redRocksVenue,
+        nextRedRocksEvent.image || curatedImages.redRocksVenueThumb,
       )
     : null;
   const urgency = nextRedRocksEvent
@@ -65,7 +65,7 @@ export default async function HomePage() {
           nextRedRocksEvent.dateKey === denverToday
             ? `${nextRedRocksEvent.name} is on tonight. Shared and private ride planning is still open.`
             : `${nextRedRocksEvent.name} is coming up next. Lock the ride plan before show night gets compressed.`,
-        imageSrc: nextRedRocksEventImage || curatedImages.redRocksVenue,
+        imageSrc: nextRedRocksEventImage || curatedImages.redRocksVenueThumb,
         imageAlt: `${nextRedRocksEvent.name} concert image`,
       }
     : null;

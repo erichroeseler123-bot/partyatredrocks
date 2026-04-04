@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { BRAND_LOGO, BRAND_MARK_VARIANTS, type BrandMarkDisplayVariant } from "@/lib/brand";
 
 type BrandMarkProps = {
@@ -17,12 +16,13 @@ export default function BrandMark({
   return (
     <span className={["flex items-center", className].filter(Boolean).join(" ")}>
       <span className={["flex items-center", variantStyles.frameClassName].join(" ")}>
-        <Image
-          src={BRAND_LOGO.src}
+        <img
+          src={BRAND_LOGO.displaySrc}
           alt={alt}
           width={BRAND_LOGO.width}
           height={BRAND_LOGO.height}
-          priority
+          loading="eager"
+          decoding="async"
           className={["block h-auto w-full", variantStyles.imageClassName].filter(Boolean).join(" ")}
         />
       </span>

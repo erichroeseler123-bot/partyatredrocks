@@ -102,7 +102,6 @@ export default function SiteFooter() {
           />
 
           <div className="mt-6 flex flex-col gap-2 border-t border-[color:var(--brand-border)] pt-4 text-[13px] text-[color:var(--brand-text-muted)] sm:flex-row sm:items-center sm:justify-between">
-            <BrandMark variant="compact" />
             <div>© {new Date().getFullYear()} Party at Red Rocks. All rights reserved.</div>
           </div>
 

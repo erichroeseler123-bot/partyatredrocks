@@ -1,12 +1,18 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
+import { type HandoffSearchParams } from "@/lib/parrHandoff";
+import { BookingVisualHero } from "@/components/booking/BookingVisualHero";
+import { DccReturnBanner } from "@/components/booking/DccReturnBanner";
+import { LegalInlineNotice } from "@/components/legal/LegalInlineNotice";
+import { PrivateBookingForm } from "@/components/booking/PrivateBookingForm";
+import { PrivatePromoBanner } from "@/components/booking/PrivatePromoBanner";
+import { bookingVisuals } from "@/lib/bookingVisuals";
+import { postDccSatelliteEvent, postWtaPartnerAcceptedIfNeeded } from "@/lib/dccSatellite";
 import {
-  buildDccPrivateCheckoutHref,
   getPrivateRideOption,
   type PrivateRideSlug,
 } from "@/lib/rideCatalog";
+import { squareApplicationId, squareLocationId, squareWebSdkUrl } from "@/lib/square";
 import { buildPrivateOptionJsonLd, buildPrivateOptionMetadata } from "../../bookingSeo";
 
 function firstValue(searchParams: HandoffSearchParams, key: string) {
@@ -51,7 +57,6 @@ export default async function PrivateOptionPage({
 
   const qtyValue = firstValue(sp, "qty");
   const vehicleQty = qtyValue ? Math.max(1, Number(qtyValue) || 1) : 1;
-  const checkoutHref = buildDccPrivateCheckoutHref(rideOption.slug, vehicleQty);
   const jsonLd = buildPrivateOptionJsonLd({
     venue,
     optionSlug: rideOption.slug,
@@ -60,42 +65,88 @@ export default async function PrivateOptionPage({
     optionPriceLabel: rideOption.priceLabel,
     quantity: vehicleQty,
   });
+  const artist = firstValue(sp, "artist");
+  const dateRaw = firstValue(sp, "date");
+  const dateLabel = dateRaw
+    ? new Date(`${dateRaw}T12:00:00`).toLocaleDateString("en-US", {
+        weekday: "long",
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      })
+    : null;
+
+  const sourcePath = `/book/${venue}/private/${rideOption.slug}`;
+
+  await postDccSatelliteEvent({
+    eventType: "handoff_viewed",
+    searchParams: sp,
+    sourcePath,
+    stage: "private_booking_form",
+    booking: { venueSlug: venue, quantity: vehicleQty, productSlug: rideOption.slug },
+  });
+
+  await postWtaPartnerAcceptedIfNeeded({
+    searchParams: sp,
+    sourcePath,
+  });
 
   return (
-    <main className="min-h-screen bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 sm:pt-28 lg:px-8">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <section className="mx-auto max-w-[1120px] rounded-[30px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.4)] sm:p-8">
-        <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">Private checkout</div>
-        <h1 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">
-          {rideOption.title}
-        </h1>
-        <p className="mt-3 max-w-3xl text-sm leading-7 text-white/76 sm:text-base">
-          Stay on Party at Red Rocks while you complete your private booking. If the embedded checkout does not load, use the fallback button below.
-        </p>
-        <div className="mt-3 text-sm text-white/72">
-          {rideOption.priceLabel} starting price · Quantity {vehicleQty}
-        </div>
+      <section className="mx-auto flex max-w-[1240px] flex-col gap-8">
+        <BookingVisualHero
+          eyebrow={rideOption.eyebrow}
+          title={`${rideOption.title} Booking`}
+          copy={rideOption.body}
+          imageSrc={bookingVisuals.private.imageSrc}
+          imageAlt={bookingVisuals.private.imageAlt}
+        />
 
-        <div className="mt-6 overflow-hidden rounded-[24px] border border-white/10 bg-white">
-          <iframe title={`${rideOption.title} checkout`} src={checkoutHref} className="h-[980px] w-full border-0" />
-        </div>
+        <DccReturnBanner searchParams={sp} />
 
-        <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-          <a
-            href={checkoutHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#62f6ff] bg-[#62f6ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#05111a] shadow-[0_18px_40px_rgba(61,243,255,0.24)] transition hover:bg-[#8cf8ff]"
-          >
-            Open in new tab
-          </a>
-          <Link
-            href={buildBookingHref({ target: "private", venue, searchParams: sp })}
-            className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/28 bg-[#152038] px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#1d2a46]"
-          >
-            Back to private options
-          </Link>
-        </div>
+        {artist || dateLabel ? (
+          <section className="rounded-2xl border border-emerald-400/28 bg-emerald-500/10 p-4 sm:p-5">
+            <div className="text-[11px] font-black uppercase tracking-[0.2em] text-emerald-200">Quick ride selection</div>
+            <p className="mt-2 text-sm text-white/88 sm:text-[15px]">
+              You&apos;re booking for <span className="font-black text-white">{artist || "your selected artist"}</span>
+              {dateLabel ? (
+                <>
+                  {" "}
+                  on <span className="font-black text-white">{dateLabel}</span>
+                </>
+              ) : null}
+              .
+            </p>
+          </section>
+        ) : null}
+
+        <PrivatePromoBanner />
+
+        <section className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.42)] sm:p-8">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">Private Ride Checkout</div>
+          <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white">
+            Book Your {rideOption.title}
+          </h2>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-white/70 sm:text-[15px]">
+            Enter your private ride details and complete payment directly on Party at Red Rocks.
+          </p>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-cyan-100/82 sm:text-[15px]">
+            Private rides can pick your group up at your own hotel, Airbnb, home, or exact address. This is not the shared Sheraton shuttle pickup.
+          </p>
+          <div className="mt-6">
+            <PrivateBookingForm
+              venue={venue}
+              option={rideOption}
+              searchParams={sp}
+              sourcePath={sourcePath}
+              squareAppId={squareApplicationId()}
+              squareLocationId={squareLocationId()}
+              squareSdkUrl={squareWebSdkUrl()}
+            />
+          </div>
+          <LegalInlineNotice className="mt-6" />
+        </section>
       </section>
     </main>
   );

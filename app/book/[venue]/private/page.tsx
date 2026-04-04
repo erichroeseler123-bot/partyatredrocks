@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ShieldCheck } from "lucide-react";
 import venuesJson from "@/data/venues.json";
 import { postDccSatelliteEvent, postWtaPartnerAcceptedIfNeeded } from "@/lib/dccSatellite";
 import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
 import { bookingVisuals } from "@/lib/bookingVisuals";
 import { curatedImages } from "@/lib/curatedImages";
 import { buildParrPrivateCheckoutHref, PRIVATE_RIDE_OPTIONS } from "@/lib/rideCatalog";
+import { PrivatePromoBanner } from "@/components/booking/PrivatePromoBanner";
 import { buildPrivateBookingJsonLd, buildPrivateBookingMetadata, buildPrivateFaqJsonLd } from "../bookingSeo";
 
 type VenueRow = {
@@ -36,10 +38,9 @@ const REASONS: ReasonCard[] = [
 ];
 
 const INCLUDED = [
-  "Private Suburban-sized vehicle for your group",
-  "Pickup planning before show night",
-  "Guaranteed return ride after the show",
-  "Optional upgrade to a van if you need more room",
+  "Tailgating + your car waits in the same spot during the show",
+  "Door-to-door with liquor or grocery stop",
+  "Limo-lane access and guaranteed return trip",
 ];
 
 function getVenue(slug: string): VenueRow | null {
@@ -135,58 +136,70 @@ export default async function PrivateOptionsPage({
           </div>
 
           <div className="relative p-8 sm:p-10 lg:p-12">
-            <div className="inline-flex items-center rounded-full border border-[#ffb07c]/30 bg-[#ffb07c]/10 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
-              Private Ride
-            </div>
-            <h1 className="mt-5 max-w-4xl text-[2.5rem] font-black uppercase leading-[0.94] tracking-[-0.04em] sm:text-[4rem]">
-              Book a Private SUV for Red Rocks
-            </h1>
-            <p className="mt-5 max-w-3xl text-[15px] leading-7 text-white/80 sm:text-lg">
-              Start with the Suburban-sized private ride. It is the cleanest way to get your group to Red Rocks and back. If you need more room, upgrade to the van below.
-            </p>
-
-            {artist || dateLabel ? (
-              <div className="mt-6 inline-flex flex-wrap items-center gap-2 rounded-[22px] border border-emerald-400/28 bg-emerald-500/10 px-4 py-3 text-sm text-white/90">
-                <span className="font-black uppercase tracking-[0.16em] text-emerald-200">Selected Night</span>
-                <span>
-                  {artist || "Your show"}
-                  {dateLabel ? ` · ${dateLabel}` : ""}
-                </span>
-              </div>
-            ) : null}
-
-            <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              {INCLUDED.map((item) => (
-                <div key={item} className="rounded-[22px] border border-white/10 bg-black/28 px-4 py-4 text-sm font-semibold text-white/90">
-                  {item}
+            <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+              <div>
+                <div className="inline-flex items-center rounded-full border border-[#ffb07c]/30 bg-[#ffb07c]/10 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
+                  Private Ride
                 </div>
-              ))}
-            </div>
+                <h1 className="mt-5 max-w-4xl text-[2.5rem] font-black uppercase leading-[0.94] tracking-[-0.04em] sm:text-[4rem]">
+                  Private Ride To Red Rocks. Start With The Suburban.
+                </h1>
+                <p className="mt-5 max-w-3xl text-[15px] leading-7 text-white/80 sm:text-lg">
+                  Start here with the Suburban for most groups. Includes tailgating time in the limo lane and your vehicle waiting in the same spot until the show ends, so there is no scramble for rides afterward.
+                </p>
+                <p className="mt-3 max-w-3xl text-sm font-semibold uppercase tracking-[0.14em] text-white/72">
+                  No waiting for Uber. No surge pricing. No chaos after the show.
+                </p>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Link
-                href={buildParrPrivateCheckoutHref(featuredOption.slug, vehicleQty)}
-                className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#62f6ff] bg-[#62f6ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#05111a] shadow-[0_18px_40px_rgba(61,243,255,0.24)] transition hover:bg-[#8cf8ff]"
-              >
-                Book Private SUV
-              </Link>
-              <Link
-                href={buildBookingHref({ target: "venue", venue, searchParams: sp })}
-                className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/28 bg-[#152038] px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#1d2a46]"
-              >
-                Back to Ride Types
-              </Link>
+                {artist || dateLabel ? (
+                  <div className="mt-6 inline-flex flex-wrap items-center gap-2 rounded-[22px] border border-emerald-400/28 bg-emerald-500/10 px-4 py-3 text-sm text-white/90">
+                    <span className="font-black uppercase tracking-[0.16em] text-emerald-200">Selected Night</span>
+                    <span>
+                      {artist || "Your show"}
+                      {dateLabel ? ` · ${dateLabel}` : ""}
+                    </span>
+                  </div>
+                ) : null}
+
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+                  <Link
+                    href={buildParrPrivateCheckoutHref(featuredOption.slug, vehicleQty)}
+                    className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#62f6ff] bg-[#62f6ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#05111a] shadow-[0_18px_40px_rgba(61,243,255,0.24)] transition hover:bg-[#8cf8ff]"
+                  >
+                    Confirm Suburban & Book
+                  </Link>
+                  <Link
+                    href={buildBookingHref({ target: "venue", venue, searchParams: sp })}
+                    className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/28 bg-[#152038] px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#1d2a46]"
+                  >
+                    Back to Ride Types
+                  </Link>
+                </div>
+              </div>
+
+              <div className="relative min-h-[280px] overflow-hidden rounded-[28px] border border-white/10 bg-black/20">
+                <Image
+                  src={featuredVisual.imageSrc}
+                  alt={featuredVisual.imageAlt}
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 45vw, 100vw"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,22,0.08),rgba(5,8,22,0.74)_100%)]" />
+              </div>
             </div>
           </div>
         </section>
 
+        <PrivatePromoBanner />
+
         <section id="suv-booking" className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 sm:p-8">
           <div className="text-[22px] font-black uppercase tracking-[0.18em] text-[#ffb07c] sm:text-[24px]">Step 1</div>
           <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">
-            Start with the private SUV
+            Private Suburban - Up To 6 People - $499
           </h2>
           <p className="mt-3 max-w-2xl text-[15px] leading-7 text-white/74">
-            For most groups, this is the right move. One Suburban-sized vehicle, one pickup plan, and one ride home after the show.
+            Start here with the Suburban for most groups. Tailgating is built in, and the vehicle stays parked in the same spot waiting for your group until the show ends.
           </p>
 
           <div className="mt-6">
@@ -211,9 +224,16 @@ export default async function PrivateOptionsPage({
                 <h3 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">
                   {featuredOption.title}
                 </h3>
-                <p className="mt-4 text-base leading-7 text-white/76">{featuredOption.body}</p>
+                <ul className="mt-5 space-y-3">
+                  {INCLUDED.map((item) => (
+                    <li key={item} className="flex items-start gap-3 text-sm leading-6 text-white/82">
+                      <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#62f6ff]" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
                 <div className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-full border border-[#62f6ff] bg-[#62f6ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#05111a] shadow-[0_18px_40px_rgba(61,243,255,0.24)] transition group-hover:bg-[#8cf8ff] sm:w-auto">
-                  Book Private SUV
+                  Book Private Suburban - $499
                 </div>
               </div>
             </Link>
@@ -223,10 +243,10 @@ export default async function PrivateOptionsPage({
         <section id="van-upgrade" className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 sm:p-8">
           <div className="text-[22px] font-black uppercase tracking-[0.18em] text-[#ffb07c] sm:text-[24px]">Step 2</div>
           <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">
-            Need more room? Upgrade to the van
+            Upgrade To 10-Passenger Van - $599
           </h2>
           <p className="mt-3 max-w-2xl text-[15px] leading-7 text-white/74">
-            If your group is larger or wants extra room, take the van instead. That is the only upgrade path on this page.
+            If your group is bigger, keep the same private flow and move up one size.
           </p>
 
           <div className="mt-6">

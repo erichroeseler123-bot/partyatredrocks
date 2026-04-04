@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import venuesJson from "@/data/venues.json";
 import { UnsplashImg } from "@/components/UnsplashImg";
 import { TrustStrip } from "@/components/TrustStrip";
+import { LegalInlineNotice } from "@/components/legal/LegalInlineNotice";
 import { PlanningLinks } from "@/components/booking/PlanningLinks";
 import { PrivatePromoBanner } from "@/components/booking/PrivatePromoBanner";
 import { DccReturnBanner } from "@/components/booking/DccReturnBanner";
@@ -13,6 +14,8 @@ import { getBookingVenueImage } from "@/data/media";
 import { curatedImages } from "@/lib/curatedImages";
 import { bookingVisuals } from "@/lib/bookingVisuals";
 import { buildVenueBookingJsonLd, buildVenueBookingMetadata } from "./bookingSeo";
+import { SharedBookingPage } from "./shared/SharedBookingPage";
+import { buildSharedBookingMetadata } from "./shared/sharedBookingSeo";
 import {
   buildBookingHref,
   buildVenueRequestHref,
@@ -39,6 +42,9 @@ export async function generateMetadata({
   const { venue } = await params;
 
   const venueMedia = getBookingVenueImage(venue);
+  if (venue === "red-rocks-amphitheatre") {
+    return buildSharedBookingMetadata(`/book/${venue}`);
+  }
   if (!venueMedia) {
     return {};
   }
@@ -67,6 +73,15 @@ export default async function VenueBookingPage({
 
   const isRedRocks = venue === "red-rocks-amphitheatre";
   const venueMedia = getBookingVenueImage(venue);
+  if (isRedRocks) {
+    return SharedBookingPage({
+      venue,
+      searchParams: sp,
+      sourcePath: `/book/${venue}`,
+      basePath: `/book/${venue}`,
+      stage: "shared_booking_primary",
+    });
+  }
   const artist = Array.isArray(sp.artist) ? sp.artist[0] : sp.artist;
   const dateRaw = Array.isArray(sp.date) ? sp.date[0] : sp.date;
   const dateLabel = dateRaw
@@ -151,10 +166,10 @@ export default async function VenueBookingPage({
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
-                  href={isRedRocks ? buildBookingHref({ target: "shared", venue, searchParams: sp }) : buildVenueRequestHref({ venue, searchParams: sp })}
+                  href={isRedRocks ? buildBookingHref({ target: "private", venue, searchParams: sp }) : buildVenueRequestHref({ venue, searchParams: sp })}
                   className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#62f6ff] bg-[#62f6ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#05111a] shadow-[0_18px_40px_rgba(61,243,255,0.24)] transition hover:bg-[#8cf8ff]"
                 >
-                  {isRedRocks ? "Book Shuttle Seats" : "Request Venue Ride"}
+                  {isRedRocks ? "Book Private Ride" : "Request Venue Ride"}
                 </Link>
                 <Link
                   href={isRedRocks ? "/week/red-rocks" : `/venues/${venue}`}
@@ -175,59 +190,10 @@ export default async function VenueBookingPage({
           <Link
             href={
               isRedRocks
-                ? buildBookingHref({ target: "shared", venue, searchParams: sp })
-                : buildVenueRequestHref({ venue, searchParams: sp })
-            }
-            className="group rounded-[28px] border border-[#62f6ff]/18 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:border-[#62f6ff]/38 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
-          >
-            {venueMedia ? (
-              <div className="relative mb-4 h-44 overflow-hidden rounded-[18px] border border-white/10">
-                {isRedRocks ? (
-                  <Image
-                    src={bookingVisuals.shared.imageSrc}
-                    alt={bookingVisuals.shared.imageAlt}
-                    className="h-full w-full object-cover"
-                    loading="lazy"
-                    width={960}
-                    height={528}
-                    unoptimized
-                  />
-                ) : (
-                  <UnsplashImg
-                    src={venueMedia.card}
-                    query={`${row.name} shared shuttle transportation`}
-                    alt={venueMedia.cardAlt}
-                    className="h-full w-full object-cover"
-                    loading="lazy"
-                    width={960}
-                    height={528}
-                  />
-                )}
-              </div>
-            ) : null}
-            <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
-              Shared Shuttle
-            </div>
-            <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">
-              {isRedRocks ? "Step 1: Start with shuttle seats" : "See Shared Ride Availability"}
-            </h2>
-            <p className="mt-3 text-sm leading-6 text-white/70">
-              {isRedRocks
-                ? "Fixed-price seats, one pickup plan, and the cleanest way to keep the night simple without booking a full vehicle."
-                : "Open the ride finder for current shared availability and venue options."}
-            </p>
-            <div className="mt-5 text-sm font-bold text-[#ffb07c]">
-{isRedRocks ? "Choose shuttle seats →" : "Open ride finder →"}
-            </div>
-          </Link>
-
-          <Link
-            href={
-              isRedRocks
                 ? buildBookingHref({ target: "private", venue, searchParams: sp })
                 : buildVenueRequestHref({ venue, searchParams: sp })
             }
-            className="group rounded-[28px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:border-[#62f6ff]/32 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
+            className="group rounded-[28px] border border-[#62f6ff]/18 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:border-[#62f6ff]/38 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
           >
             {venueMedia ? (
               <div className="relative mb-4 h-44 overflow-hidden rounded-[18px] border border-white/10">
@@ -258,7 +224,7 @@ export default async function VenueBookingPage({
               Private Ride
             </div>
             <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">
-              {isRedRocks ? "Step 2: Private SUV or van" : "Private Vehicle Service"}
+              {isRedRocks ? "Step 1: Private SUV or van" : "Private Vehicle Service"}
             </h2>
             <p className="mt-3 text-sm leading-6 text-white/70">
               {isRedRocks
@@ -269,9 +235,59 @@ export default async function VenueBookingPage({
 {isRedRocks ? "Open private options →" : "Open private booking →"}
             </div>
           </Link>
+
+          <Link
+            href={
+              isRedRocks
+                ? buildBookingHref({ target: "shared", venue, searchParams: sp })
+                : buildVenueRequestHref({ venue, searchParams: sp })
+            }
+            className="group rounded-[28px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:border-[#62f6ff]/32 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
+          >
+            {venueMedia ? (
+              <div className="relative mb-4 h-44 overflow-hidden rounded-[18px] border border-white/10">
+                {isRedRocks ? (
+                  <Image
+                    src={bookingVisuals.shared.imageSrc}
+                    alt={bookingVisuals.shared.imageAlt}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                    width={960}
+                    height={528}
+                    unoptimized
+                  />
+                ) : (
+                  <UnsplashImg
+                    src={venueMedia.card}
+                    query={`${row.name} shared shuttle transportation`}
+                    alt={venueMedia.cardAlt}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                    width={960}
+                    height={528}
+                  />
+                )}
+              </div>
+            ) : null}
+            <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
+              Shared Shuttle
+            </div>
+            <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">
+              {isRedRocks ? "Step 2: Start with shuttle seats" : "See Shared Ride Availability"}
+            </h2>
+            <p className="mt-3 text-sm leading-6 text-white/70">
+              {isRedRocks
+                ? "Fixed-price seats, one pickup plan, and the cleanest way to keep the night simple without booking a full vehicle."
+                : "Open the ride finder for current shared availability and venue options."}
+            </p>
+            <div className="mt-5 text-sm font-bold text-[#ffb07c]">
+{isRedRocks ? "Choose shuttle seats →" : "Open ride finder →"}
+            </div>
+          </Link>
         </section>
 
         <TrustStrip />
+        <LegalInlineNotice />
       </section>
     </main>
   );

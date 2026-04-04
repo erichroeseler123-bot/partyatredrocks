@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { resolveBookingShowContext } from "@/lib/bookingContext";
+import { getDccSatelliteContext } from "@/lib/dccSatellite";
 import {
   attachSharedSquareOrder,
   cancelPendingSharedCheckout,
@@ -25,6 +26,7 @@ type Body = {
     phone?: string;
     phoneCountry?: string;
   };
+  searchParams?: Record<string, string | string[] | undefined>;
 };
 
 function requiredString(value: unknown) {
@@ -50,6 +52,7 @@ export async function POST(request: Request) {
   const qty = typeof body.qty === "number" && Number.isFinite(body.qty) ? body.qty : 1;
   const artist = requiredString(body.artist);
   const event = requiredString(body.event);
+  const satelliteContext = getDccSatelliteContext(body.searchParams);
 
   if (!date) return NextResponse.json({ error: "Missing date" }, { status: 400 });
   if (!firstName || !lastName || !email || !phone) {
@@ -85,6 +88,7 @@ export async function POST(request: Request) {
 
     const squareOrder = await createSharedSquareOrder({
       internalOrderId: pending.internalOrderId,
+      dccHandoffId: satelliteContext.handoffId || null,
       title: show?.showTitle || `Red Rocks shared shuttle ${pickupHub}`,
       pickupHub,
       date,

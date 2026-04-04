@@ -129,8 +129,7 @@ export default function HomeServicesGrid() {
 
         <div className="mt-6 rounded-2xl border border-emerald-400/25 bg-emerald-500/10 px-5 py-4 text-sm leading-6 text-emerald-50">
           <span className="font-black uppercase tracking-[0.18em] text-emerald-200">April promo</span>{" "}
-          {PRIVATE_TRANSPORT_PROMO.headline} Use code{" "}
-          <span className="font-black text-white">{PRIVATE_TRANSPORT_PROMO.code}</span>.
+          {PRIVATE_TRANSPORT_PROMO.detail}
         </div>
 
         {/* keep this tiny + blue link */}

@@ -106,12 +106,13 @@ export function buildVenueBookingJsonLd(input: { venue: string; venueName: strin
 
 export function buildPrivateBookingMetadata(venue: string): Metadata {
   const canonical = `${SITE}/book/${venue}/private`;
+  const title = "Private Red Rocks Shuttle from Denver | $499 SUV - $799 Sprinter - Guaranteed Return";
   return {
-    title: "Private Red Rocks Shuttle from Denver | $499 SUV - $799 Sprinter - Guaranteed Return",
+    title,
     description: BOOKING_COPY.meta.privateBookingDescription,
     alternates: { canonical },
     openGraph: {
-      title: "Private Red Rocks Shuttle from Denver | $499 SUV - $799 Sprinter - Guaranteed Return",
+      title,
       description: BOOKING_COPY.meta.privateBookingDescription,
       url: canonical,
       type: "website",
@@ -119,7 +120,7 @@ export function buildPrivateBookingMetadata(venue: string): Metadata {
     },
     twitter: {
       card: "summary_large_image",
-      title: "Private Red Rocks Shuttle from Denver | $499 SUV - $799 Sprinter - Guaranteed Return",
+      title,
       description: BOOKING_COPY.meta.privateBookingDescription,
       images: [absoluteImageUrl(bookingVisuals.private.imageSrc)],
     },

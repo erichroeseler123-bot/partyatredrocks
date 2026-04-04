@@ -1,5 +1,6 @@
 export const BRAND_LOGO = {
   src: "/brand/red-rocks-shuttle.png",
+  displaySrc: "/brand/red-rocks-shuttle.webp",
   alt: "Red Rocks Shuttle",
   width: 1000,
   height: 500,

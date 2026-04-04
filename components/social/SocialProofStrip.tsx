@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import ShareActions from "@/components/shared/ShareActions";
 import { getFeaturedUGCPosts } from "@/data/social/ugc-posts";
@@ -57,13 +56,12 @@ export default function SocialProofStrip({
             className="brand-card group overflow-hidden rounded-[24px] transition duration-300 hover:-translate-y-1 hover:border-white/16 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
           >
             <div className="relative h-52 overflow-hidden">
-              <Image
+              <img
                 src={post.imageUrl}
                 alt={post.caption}
-                fill
-                unoptimized
-                className="object-cover transition duration-500 group-hover:scale-[1.03]"
-                sizes="(min-width: 1280px) 280px, (min-width: 768px) 33vw, 100vw"
+                loading="lazy"
+                decoding="async"
+                className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
               />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,22,0.02),rgba(5,8,22,0.72)_100%)]" />
               <div className="absolute left-4 top-4 rounded-full border border-white/14 bg-black/35 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-white/86">

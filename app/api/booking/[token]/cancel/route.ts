@@ -16,13 +16,30 @@ export async function POST(
     return NextResponse.json({ error: "Booking not found" }, { status: 404 });
   }
 
+  const rideType = typeof order.booking?.rideType === "string" ? order.booking.rideType : null;
+  if (rideType !== "shared") {
+    return NextResponse.json(
+      { error: "Private rides are not cancelled online. Text 720-369-6292 and we will handle it." },
+      { status: 400 }
+    );
+  }
+
   const result = await cancelSharedBookingByInternalOrderId(order.internalOrderId);
 
   if (!result.ok) {
     if (result.reason === "cutoff_passed") {
       return NextResponse.json({ error: "This booking can no longer be cancelled online." }, { status: 400 });
     }
-    return NextResponse.json({ error: "Unable to cancel booking" }, { status: 400 });
+    if (result.reason === "expired") {
+      return NextResponse.json({ error: "This booking is no longer active and cannot be cancelled online." }, { status: 400 });
+    }
+    if (result.reason === "not_found") {
+      return NextResponse.json(
+        { error: "We could not find the live shuttle reservation for this booking. Text 720-369-6292 and we will handle it." },
+        { status: 404 }
+      );
+    }
+    return NextResponse.json({ error: "Unable to cancel booking online. Text 720-369-6292 and we will handle it." }, { status: 400 });
   }
 
   const payment = result.order?.payment && typeof result.order.payment === "object"

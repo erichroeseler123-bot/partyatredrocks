@@ -125,7 +125,7 @@ export default function PublicBookingShare({
       <div className="relative">
         <div className="text-[12px] font-black uppercase tracking-[0.2em] text-[var(--brand-orange)]">Coordinate The Crew</div>
         <div className="mt-4 grid gap-5 xl:grid-cols-[1.1fr_0.9fr]">
-          <div className="space-y-5">
+          <div className="min-w-0 space-y-5">
             <div>
               <h2 className="text-2xl font-black uppercase tracking-[-0.03em] text-white sm:text-3xl">Make the group plan impossible to miss.</h2>
               <p className="mt-3 max-w-2xl text-sm leading-7 text-white/78">
@@ -138,25 +138,25 @@ export default function PublicBookingShare({
               <div className="mt-4 rounded-[18px] border border-white/10 bg-white/[0.04] p-4 text-sm leading-7 text-white/82">
                 <p className="whitespace-pre-line">{snapchatText}</p>
               </div>
-              <div className="mt-4 flex flex-wrap gap-3">
+              <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <button
                   type="button"
                   onClick={nativeShare}
-                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#ffb07c]/28 bg-[#ffb07c]/14 px-5 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#ffb07c]/20"
+                  className="inline-flex min-h-12 w-full items-center justify-center rounded-full border border-[#ffb07c]/28 bg-[#ffb07c]/14 px-5 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#ffb07c]/20 sm:w-auto"
                 >
                   Share To Snapchat
                 </button>
                 <button
                   type="button"
                   onClick={copySnapMessage}
-                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-cyan-300/30 bg-cyan-400/14 px-5 text-sm font-black uppercase tracking-[0.16em] text-cyan-50 transition hover:border-cyan-200/45 hover:bg-cyan-300/20"
+                  className="inline-flex min-h-12 w-full items-center justify-center rounded-full border border-cyan-300/30 bg-cyan-400/14 px-5 text-sm font-black uppercase tracking-[0.16em] text-cyan-50 transition hover:border-cyan-200/45 hover:bg-cyan-300/20 sm:w-auto"
                 >
                   Copy Snap Message
                 </button>
                 <button
                   type="button"
                   onClick={copyGuestLink}
-                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-cyan-300/30 bg-cyan-400/14 px-5 text-sm font-black uppercase tracking-[0.16em] text-cyan-50 transition hover:border-cyan-200/45 hover:bg-cyan-300/20"
+                  className="inline-flex min-h-12 w-full items-center justify-center rounded-full border border-cyan-300/30 bg-cyan-400/14 px-5 text-sm font-black uppercase tracking-[0.16em] text-cyan-50 transition hover:border-cyan-200/45 hover:bg-cyan-300/20 sm:w-auto"
                 >
                   Copy Guest Link
                 </button>
@@ -208,10 +208,10 @@ export default function PublicBookingShare({
                   </span>
                 ))}
               </div>
-              <div className="mt-4 flex flex-wrap gap-3">
+              <div className="mt-4 flex flex-col gap-3 sm:flex-row">
                 <a
                   href={bookingFlowUrl}
-                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#ffb07c]/28 bg-[#ffb07c]/14 px-5 text-sm font-black uppercase tracking-[0.16em] text-white no-underline transition hover:bg-[#ffb07c]/20"
+                  className="inline-flex min-h-12 w-full items-center justify-center rounded-full border border-[#ffb07c]/28 bg-[#ffb07c]/14 px-5 text-center text-sm font-black uppercase tracking-[0.16em] text-white no-underline transition hover:bg-[#ffb07c]/20 sm:w-auto"
                 >
                   Add More Seats To This Group
                 </a>
@@ -219,12 +219,18 @@ export default function PublicBookingShare({
             </div>
           </div>
 
-          <div className="space-y-5">
+          <div className="min-w-0 space-y-5">
             <div className="rounded-[24px] border border-white/10 bg-black/20 p-5 text-center">
               <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/46">Scan To Join The Plan</div>
               <p className="mt-2 text-sm leading-6 text-white/76">Open this on one phone at the bar and let the group scan it into their own dashboard.</p>
-              <div className="mt-4 inline-flex rounded-[24px] border border-white/10 bg-white p-4">
-                <img src={qrUrl} alt="QR code for the guest-safe booking dashboard link" width="220" height="220" className="h-[220px] w-[220px]" />
+              <div className="mt-4 inline-flex w-full max-w-[252px] rounded-[24px] border border-white/10 bg-white p-4">
+                <img
+                  src={qrUrl}
+                  alt="QR code for the guest-safe booking dashboard link"
+                  width="220"
+                  height="220"
+                  className="h-auto w-full max-w-[220px]"
+                />
               </div>
               <p className="mt-4 break-all text-xs leading-6 text-white/50">{guestShareUrl}</p>
             </div>

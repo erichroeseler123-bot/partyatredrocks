@@ -11,6 +11,7 @@ type Body = {
   internalOrderId?: string;
   sourceId?: string;
   squareOrderId?: string;
+  dccHandoffId?: string;
 };
 
 function requiredString(value: unknown) {
@@ -62,6 +63,8 @@ export async function POST(request: Request) {
     ? order.payment.totalDue
     : null;
   const resolvedSquareOrderId = squareOrderId || (typeof order.payment?.squareOrderId === "string" ? order.payment.squareOrderId.trim() : "");
+  const dccHandoffId = requiredString(body.dccHandoffId)
+    || (typeof order.payment?.dccHandoffId === "string" ? order.payment.dccHandoffId.trim() : "");
 
   if (!totalDue || !resolvedSquareOrderId) {
     return NextResponse.json({ error: "Checkout is missing Square order details" }, { status: 409 });
@@ -79,7 +82,9 @@ export async function POST(request: Request) {
       locationId: squareLocationId(),
       orderId: resolvedSquareOrderId,
       referenceId: internalOrderId,
-      note: `PARR shared shuttle ${internalOrderId}`,
+      note: dccHandoffId
+        ? `PARR shared shuttle ${internalOrderId} | dcc:${dccHandoffId}`
+        : `PARR shared shuttle ${internalOrderId}`,
     });
 
     const payment = response.payment;
@@ -97,6 +102,7 @@ export async function POST(request: Request) {
         source: "shared_square_embedded",
         squareOrderId: typeof payment.orderId === "string" ? payment.orderId : resolvedSquareOrderId,
         squarePaymentId: typeof payment.id === "string" ? payment.id : null,
+        dccHandoffId: dccHandoffId || null,
       },
     });
 
