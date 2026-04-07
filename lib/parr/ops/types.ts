@@ -8,6 +8,7 @@ export type OpsWorkflowState =
   | "waiting"
   | "confirmed"
   | "resolved"
+  | "canceled"
   | "needs_review";
 
 export type OpsOrder = {

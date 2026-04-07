@@ -8,6 +8,12 @@ function paymentTone(state: string) {
   return "border-white/15 bg-white/5 text-white/75";
 }
 
+function workflowTone(state: string) {
+  if (state === "canceled") return "border-red-400/30 bg-red-500/15 text-red-100";
+  if (state === "needs_review") return "border-orange-400/30 bg-orange-500/15 text-orange-100";
+  return "border-white/15 bg-white/5 text-white/70";
+}
+
 type LaneKey = "private" | "denver" | "golden" | "needs_review";
 
 function getLane(order: OpsOrder): LaneKey {
@@ -130,6 +136,15 @@ export default function OpsCalendarBoard({
                               {order.paymentState}
                             </span>
                           </div>
+                          {order.workflowState === "canceled" || order.workflowState === "needs_review" ? (
+                            <div className="mt-2">
+                              <span
+                                className={`rounded-full border px-3 py-1 text-[11px] uppercase tracking-[0.12em] ${workflowTone(order.workflowState)}`}
+                              >
+                                {order.workflowState}
+                              </span>
+                            </div>
+                          ) : null}
                           <div className="mt-2 text-xs text-white/55">
                             {order.customerEmail} {order.customerPhone ? `• ${order.customerPhone}` : ""}
                           </div>

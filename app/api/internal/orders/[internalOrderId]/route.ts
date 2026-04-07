@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import {
+  cancelInternalOrderById,
   getInternalOrderById,
   updateInternalOrderOps,
   updateInternalOrderPaymentState,
@@ -12,7 +13,7 @@ import { reconcileSharedOrderFromSquare } from "@/lib/sharedSquareReconcile";
 export const runtime = "nodejs";
 
 type OpsUpdateBody = {
-  action?: "update_ops" | "update_payment" | "reassign";
+  action?: "update_ops" | "update_payment" | "reassign" | "cancel";
   notes?: string;
   followUpStatus?: "new" | "contacted" | "waiting" | "resolved";
   markPaymentRequestSent?: boolean;
@@ -82,6 +83,9 @@ export async function PATCH(
   if (typeof body.notes !== "undefined" && typeof body.notes !== "string") {
     return NextResponse.json({ error: "notes must be a string" }, { status: 400 });
   }
+  if (typeof body.reason !== "undefined" && typeof body.reason !== "string") {
+    return NextResponse.json({ error: "reason must be a string" }, { status: 400 });
+  }
   if (
     typeof body.followUpStatus !== "undefined" &&
     body.followUpStatus !== "new" &&
@@ -133,6 +137,16 @@ export async function PATCH(
       productCode: body.productCode,
       sessionKey: body.sessionKey,
       pickup: body.pickup ? { label: body.pickup } : null,
+      reason: body.reason,
+    });
+    if (!updated) {
+      return NextResponse.json({ error: "Order not found" }, { status: 404 });
+    }
+    return NextResponse.json({ ok: true, order: updated });
+  }
+
+  if (body.action === "cancel") {
+    const updated = await cancelInternalOrderById(internalOrderId, {
       reason: body.reason,
     });
     if (!updated) {

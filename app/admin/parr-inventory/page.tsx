@@ -14,7 +14,7 @@ import OpsOrdersTable from "@/app/admin/parr-inventory/components/OpsOrdersTable
 import OpsOrderDrawer from "@/app/admin/parr-inventory/components/OpsOrderDrawer";
 
 type PaymentFilter = "all" | "unpaid" | "partial" | "paid" | "manual_review";
-type WorkflowFilter = "all" | "pending_payment" | "waiting" | "confirmed" | "resolved" | "needs_review";
+type WorkflowFilter = "all" | "pending_payment" | "waiting" | "confirmed" | "resolved" | "canceled" | "needs_review";
 
 function getProductOptions(orders: OpsOrder[]) {
   const values = new Map<string, string>();
@@ -85,6 +85,7 @@ export default async function ParrInventoryPage({
     activeWorkflowRaw === "waiting" ||
     activeWorkflowRaw === "confirmed" ||
     activeWorkflowRaw === "resolved" ||
+    activeWorkflowRaw === "canceled" ||
     activeWorkflowRaw === "needs_review"
       ? activeWorkflowRaw
       : "all";

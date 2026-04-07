@@ -1,5 +1,5 @@
 type PaymentFilter = "all" | "unpaid" | "partial" | "paid" | "manual_review";
-type WorkflowFilter = "all" | "pending_payment" | "waiting" | "confirmed" | "resolved" | "needs_review";
+type WorkflowFilter = "all" | "pending_payment" | "waiting" | "confirmed" | "resolved" | "canceled" | "needs_review";
 
 export default function OpsFilters({
   activePayment,
@@ -38,6 +38,7 @@ export default function OpsFilters({
           <option value="waiting">Waiting</option>
           <option value="confirmed">Confirmed</option>
           <option value="resolved">Resolved</option>
+          <option value="canceled">Canceled</option>
           <option value="needs_review">Needs review</option>
         </select>
       </label>

@@ -45,6 +45,7 @@ export default function OpsOrderDrawer({
   const [sessionKey, setSessionKey] = useState(order.sessionKey || "");
   const [pickup, setPickup] = useState(order.pickupLabel || "");
   const [moveReason, setMoveReason] = useState("");
+  const [cancelReason, setCancelReason] = useState("");
 
   function refresh() {
     startTransition(() => router.refresh());
@@ -97,6 +98,21 @@ export default function OpsOrderDrawer({
       refresh();
     } catch (error) {
       setStatusText(error instanceof Error ? error.message : "Reassignment failed");
+    }
+  }
+
+  async function cancelBooking() {
+    setStatusText("");
+    try {
+      await patchOrder(order.orderId, {
+        action: "cancel",
+        reason: cancelReason,
+      });
+      setStatusText("Booking canceled");
+      setCancelReason("");
+      refresh();
+    } catch (error) {
+      setStatusText(error instanceof Error ? error.message : "Cancel failed");
     }
   }
 
@@ -204,6 +220,28 @@ export default function OpsOrderDrawer({
           className="mt-3 min-h-11 rounded-xl bg-white px-4 text-sm font-semibold text-black"
         >
           Save payment state
+        </button>
+      </div>
+
+      <div className="mt-6 rounded-2xl border border-white/10 bg-black/20 p-4">
+        <div className="text-xs uppercase tracking-[0.16em] text-white/45">Booking actions</div>
+        <div className="mt-2 rounded-xl border border-red-400/20 bg-red-500/10 p-3 text-sm text-red-100">
+          Cancel keeps the booking record and payment history. It does not delete the sale.
+        </div>
+        <textarea
+          value={cancelReason}
+          onChange={(event) => setCancelReason(event.target.value)}
+          rows={3}
+          placeholder="Reason for cancelation"
+          className="mt-3 w-full rounded-2xl border border-white/15 bg-black/40 px-3 py-3 text-sm text-white"
+        />
+        <button
+          type="button"
+          onClick={cancelBooking}
+          disabled={isPending}
+          className="mt-3 min-h-11 rounded-xl border border-red-400/30 bg-red-500/15 px-4 text-sm font-semibold text-red-100"
+        >
+          Cancel booking
         </button>
       </div>
 

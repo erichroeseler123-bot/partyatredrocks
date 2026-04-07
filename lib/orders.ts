@@ -1423,3 +1423,96 @@ export async function updateInternalOrderScheduleById(
 
   return getInternalOrderById(internalOrderId);
 }
+
+export async function cancelInternalOrderById(
+  internalOrderId: string,
+  input: { reason?: string | null }
+): Promise<InternalOrderRow | null> {
+  const existing = await getInternalOrderById(internalOrderId);
+  if (!existing) return null;
+
+  const touchedAt = new Date().toISOString();
+  const reason = input.reason?.trim() || null;
+  const nextBooking = {
+    ...(existing.booking ?? {}),
+    status: "canceled",
+    canceledAt: touchedAt,
+    cancellationReason: reason,
+  } satisfies JsonRecord;
+
+  if (useBlobOrderStore()) {
+    const store = await loadBlobOrderStore();
+    store.orders = sortOrdersDesc(
+      store.orders.map((order) =>
+        order.internalOrderId !== internalOrderId
+          ? order
+          : {
+              ...order,
+              booking: nextBooking,
+              followUpStatus: "resolved",
+              lastTouchedAt: touchedAt,
+            }
+      )
+    );
+    store.events.push({
+      type: "internal.order.canceled",
+      internalOrderId,
+      updatedAt: touchedAt,
+      reason,
+    });
+    await saveBlobOrderStore(store);
+    return store.orders.find((order) => order.internalOrderId === internalOrderId) ?? null;
+  }
+
+  const db = await openDb();
+  if (db) {
+    try {
+      db.prepare(
+        `UPDATE orders
+         SET bookingStatus = ?,
+             bookingJson = ?,
+             followUpStatus = ?,
+             lastTouchedAt = ?
+         WHERE internalOrderId = ?`
+      ).run("canceled", asJson(nextBooking), "resolved", touchedAt, internalOrderId);
+
+      db.prepare(
+        `INSERT INTO order_events (
+          createdAt, eventType, rezdyBookingReference, bookingStatus, paymentStatus, payloadJson
+        ) VALUES (?, ?, ?, ?, ?, ?)`
+      ).run(
+        touchedAt,
+        "internal.order.canceled",
+        existing.rezdyBookingReference,
+        "canceled",
+        typeof existing.payment?.status === "string" ? existing.payment.status : null,
+        asJson({
+          reason,
+        })
+      );
+    } finally {
+      db.close();
+    }
+  }
+
+  await appendBackupRow({
+    internalOrderId: existing.internalOrderId,
+    bookingToken: existing.bookingToken ?? null,
+    createdAt: existing.createdAt,
+    lastTouchedAt: touchedAt,
+    rezdyBookingReference: existing.rezdyBookingReference,
+    productCode: existing.productCode,
+    sessionKey: existing.sessionKey,
+    customer: existing.customer,
+    booking: nextBooking,
+    payment: existing.payment,
+    pickup: existing.pickup ?? null,
+    rezdyBookingPayload: existing.rezdyBookingPayload,
+    notes: existing.notes ?? null,
+    followUpStatus: "resolved",
+    operatorPaymentStep: existing.operatorPaymentStep ?? "none",
+    paymentRequestSentAt: existing.paymentRequestSentAt ?? null,
+  });
+
+  return getInternalOrderById(internalOrderId);
+}

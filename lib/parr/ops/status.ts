@@ -28,6 +28,7 @@ export function getOrderWorkflowState(order: InternalOrderRow): OpsWorkflowState
   const bookingStatus =
     order.booking && typeof order.booking.status === "string" ? order.booking.status.trim().toLowerCase() : "";
 
+  if (bookingStatus === "canceled" || bookingStatus === "cancelled") return "canceled";
   if (paymentState === "manual_review") return "needs_review";
   if (followUp === "resolved") return "resolved";
   if (followUp === "waiting" || order.operatorPaymentStep === "request_sent") return "waiting";
