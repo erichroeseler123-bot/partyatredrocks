@@ -1,11 +1,49 @@
 import Link from "next/link";
-import type { OpsDayGroup } from "@/lib/parr/ops/types";
+import type { OpsDayGroup, OpsOrder } from "@/lib/parr/ops/types";
 
 function paymentTone(state: string) {
   if (state === "paid") return "border-emerald-400/30 bg-emerald-500/15 text-emerald-100";
   if (state === "partial") return "border-amber-400/30 bg-amber-500/15 text-amber-100";
   if (state === "manual_review") return "border-red-400/30 bg-red-500/15 text-red-100";
   return "border-white/15 bg-white/5 text-white/75";
+}
+
+type LaneKey = "private" | "denver" | "golden" | "needs_review";
+
+function getLane(order: OpsOrder): LaneKey {
+  if (order.workflowState === "needs_review" || !order.productCode) return "needs_review";
+  if (order.productCode === "shared-denver") return "denver";
+  if (order.productCode === "shared-golden") return "golden";
+  return "private";
+}
+
+function laneTitle(lane: LaneKey) {
+  if (lane === "private") return "Private Car";
+  if (lane === "denver") return "Denver";
+  if (lane === "golden") return "Golden";
+  return "Needs Review";
+}
+
+function laneDescription(lane: LaneKey) {
+  if (lane === "private") return "Private rides and custom pickups.";
+  if (lane === "denver") return "Shared Denver shuttle bookings.";
+  if (lane === "golden") return "Shared Golden shuttle bookings.";
+  return "Orders missing a clean lane or needing manual review.";
+}
+
+function laneTone(lane: LaneKey) {
+  if (lane === "private") return "border-fuchsia-400/30 bg-fuchsia-500/10";
+  if (lane === "denver") return "border-cyan-400/30 bg-cyan-500/10";
+  if (lane === "golden") return "border-amber-400/30 bg-amber-500/10";
+  return "border-red-400/30 bg-red-500/10";
+}
+
+function summarizeLane(orders: OpsOrder[]) {
+  return {
+    ordersCount: orders.length,
+    seats: orders.reduce((sum, order) => sum + order.seats, 0),
+    unpaid: orders.filter((order) => order.paymentState !== "paid").length,
+  };
 }
 
 export default function OpsCalendarBoard({
@@ -15,6 +53,8 @@ export default function OpsCalendarBoard({
   dayGroups: OpsDayGroup[];
   buildOrderHref: (orderId: string) => string;
 }) {
+  const laneOrder: LaneKey[] = ["private", "denver", "golden", "needs_review"];
+
   return (
     <div className="space-y-6">
       {dayGroups.map((day) => (
@@ -31,47 +71,75 @@ export default function OpsCalendarBoard({
             </div>
           </div>
 
-          <div className="mt-4 space-y-4">
-            {day.departures.map((departure) => (
-              <div key={departure.key} className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div>
-                    <div className="text-sm font-semibold text-white">{departure.departureLabel}</div>
-                    <div className="text-xs text-white/55">{departure.pickupLabel}</div>
-                  </div>
-                  <div className="flex flex-wrap gap-2 text-xs">
-                    <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-white/80">{departure.orders.length} orders</span>
-                    <span className="rounded-full border border-emerald-400/30 bg-emerald-500/15 px-3 py-1 text-emerald-100">{departure.paidSeats} paid seats</span>
-                    <span className="rounded-full border border-amber-400/30 bg-amber-500/15 px-3 py-1 text-amber-100">{departure.pendingSeats} pending seats</span>
-                  </div>
-                </div>
+          <div className="mt-4 grid gap-4 xl:grid-cols-3">
+            {laneOrder.map((lane) => {
+              const laneOrders = day.orders.filter((order) => getLane(order) === lane);
+              const summary = summarizeLane(laneOrders);
 
-                <div className="mt-3 grid gap-3">
-                  {departure.orders.map((order) => (
-                    <Link
-                      key={order.orderId}
-                      href={buildOrderHref(order.orderId)}
-                      className="rounded-2xl border border-white/10 bg-white/5 p-4 hover:bg-white/10"
-                    >
-                      <div className="flex flex-wrap items-start justify-between gap-3">
-                        <div>
-                          <div className="text-sm font-semibold text-white">{order.customerName}</div>
-                          <div className="mt-1 text-xs text-white/55">
-                            {order.productLabel} • {order.seats} seat{order.seats === 1 ? "" : "s"}
+              return (
+                <div key={lane} className={`rounded-2xl border p-4 ${laneTone(lane)}`}>
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div>
+                      <div className="text-sm font-semibold text-white">{laneTitle(lane)}</div>
+                      <div className="mt-1 text-xs text-white/60">{laneDescription(lane)}</div>
+                    </div>
+                    <div className="text-right text-xs text-white/70">
+                      <div>{summary.ordersCount} bookings</div>
+                      <div>{summary.seats} seats</div>
+                    </div>
+                  </div>
+
+                  <div className="mt-3 flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.12em] text-white/70">
+                    <span className="rounded-full border border-white/15 bg-black/20 px-3 py-1">{summary.ordersCount} bookings</span>
+                    <span className="rounded-full border border-white/15 bg-black/20 px-3 py-1">{summary.seats} seats</span>
+                    {summary.unpaid > 0 ? (
+                      <span className="rounded-full border border-amber-400/30 bg-amber-500/15 px-3 py-1 text-amber-100">
+                        {summary.unpaid} unpaid
+                      </span>
+                    ) : null}
+                  </div>
+
+                  <div className="mt-4 grid gap-3">
+                    {laneOrders.length === 0 ? (
+                      <div className="rounded-2xl border border-dashed border-white/10 bg-black/20 p-4 text-sm text-white/45">
+                        No bookings in this lane.
+                      </div>
+                    ) : (
+                      laneOrders.map((order) => (
+                        <Link
+                          key={order.orderId}
+                          href={buildOrderHref(order.orderId)}
+                          className="rounded-2xl border border-white/10 bg-black/20 p-4 hover:bg-white/10"
+                        >
+                          <div className="flex flex-wrap items-start justify-between gap-3">
+                            <div>
+                              <div className="text-sm font-semibold text-white">{order.customerName}</div>
+                              <div className="mt-1 text-xs text-white/55">
+                                {order.seats} seat{order.seats === 1 ? "" : "s"} • {order.productLabel}
+                              </div>
+                              <div className="mt-1 text-xs text-white/45">
+                                {order.pickupLabel}
+                                {order.departureLabel && order.departureLabel !== order.pickupLabel
+                                  ? ` • ${order.departureLabel}`
+                                  : ""}
+                              </div>
+                            </div>
+                            <span
+                              className={`rounded-full border px-3 py-1 text-[11px] uppercase tracking-[0.12em] ${paymentTone(order.paymentState)}`}
+                            >
+                              {order.paymentState}
+                            </span>
                           </div>
-                        </div>
-                        <span className={`rounded-full border px-3 py-1 text-[11px] uppercase tracking-[0.12em] ${paymentTone(order.paymentState)}`}>
-                          {order.paymentState}
-                        </span>
-                      </div>
-                      <div className="mt-2 text-xs text-white/55">
-                        {order.customerEmail} {order.customerPhone ? `• ${order.customerPhone}` : ""}
-                      </div>
-                    </Link>
-                  ))}
+                          <div className="mt-2 text-xs text-white/55">
+                            {order.customerEmail} {order.customerPhone ? `• ${order.customerPhone}` : ""}
+                          </div>
+                        </Link>
+                      ))
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
       ))}

@@ -112,7 +112,10 @@ export default async function ParrInventoryPage({
         <div className="comic-hero">
           <div className="comic-kicker">Internal</div>
           <h1 className="comic-title">PARR Inventory</h1>
-          <p className="comic-copy">Calendar-first Party at Red Rocks operations board backed by the live internal order store.</p>
+          <p className="comic-copy">Booking-safe Party at Red Rocks operations board backed by the live internal order store.</p>
+          <p className="mt-2 text-sm text-white/60">
+            This page does not replace or delete booking records. It is a simpler operator view of the same saved orders.
+          </p>
         </div>
 
         <OpsViewTabs activeView={activeView} buildHref={(view) => buildHref(baseQuery, { view })} />
