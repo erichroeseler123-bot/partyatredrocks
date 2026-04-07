@@ -5,6 +5,7 @@ import path from "node:path";
 import { blobReadJson, blobWriteJson } from "@/lib/blobJson";
 import type { BookingShowContext } from "@/lib/bookingContext";
 import { SHARED_PRICE_PER_SEAT } from "@/lib/sharedPricing";
+import { SHARED_DAILY_CAPACITY } from "@/lib/parr/fleet";
 import {
   getInternalOrderById,
   saveInternalOrder,
@@ -13,10 +14,7 @@ import {
 
 const PRICE_PER_SEAT = SHARED_PRICE_PER_SEAT;
 const HOLD_TTL_MINUTES = 20;
-const DEFAULT_CAPACITY: Record<"denver" | "golden", number> = {
-  denver: 24,
-  golden: 14,
-};
+const DEFAULT_CAPACITY = SHARED_DAILY_CAPACITY;
 
 type PickupHub = "denver" | "golden";
 type HoldStatus = "pending" | "confirmed" | "cancelled" | "expired";
@@ -237,6 +235,10 @@ export async function createPendingSharedCheckout(input: {
       event: input.event || show?.showId || null,
       notes: input.notes || null,
       qty,
+      inventoryType: "shared_route_capacity",
+      inventoryOwner: "parr",
+      inventoryLabel: input.pickupHub === "golden" ? "Golden Shuttle" : "Denver Shuttle",
+      inventoryCapacity: capacity,
       show,
     },
   });

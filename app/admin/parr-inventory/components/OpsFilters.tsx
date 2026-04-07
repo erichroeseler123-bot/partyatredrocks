@@ -1,17 +1,32 @@
+type OwnerFilter = "all" | "parr" | "friend_fleet";
 type PaymentFilter = "all" | "unpaid" | "partial" | "paid" | "manual_review";
 type WorkflowFilter = "all" | "pending_payment" | "waiting" | "confirmed" | "resolved" | "canceled" | "needs_review";
 
 export default function OpsFilters({
+  activeOwner,
   activePayment,
   activeWorkflow,
   search,
 }: {
+  activeOwner: OwnerFilter;
   activePayment: PaymentFilter;
   activeWorkflow: WorkflowFilter;
   search: string;
 }) {
   return (
-    <form className="grid gap-3 rounded-3xl border border-white/10 bg-white/5 p-4 md:grid-cols-3">
+    <form className="grid gap-3 rounded-3xl border border-white/10 bg-white/5 p-4 md:grid-cols-4">
+      <label className="text-sm text-white/80">
+        Owner
+        <select
+          name="owner"
+          defaultValue={activeOwner}
+          className="mt-1 min-h-11 w-full rounded-xl border border-white/15 bg-black/30 px-3 text-white"
+        >
+          <option value="all">All</option>
+          <option value="parr">PARR</option>
+          <option value="friend_fleet">Friend fleet</option>
+        </select>
+      </label>
       <label className="text-sm text-white/80">
         Payment
         <select
@@ -51,7 +66,7 @@ export default function OpsFilters({
           className="mt-1 min-h-11 w-full rounded-xl border border-white/15 bg-black/30 px-3 text-white placeholder:text-white/35"
         />
       </label>
-      <div className="md:col-span-3 flex gap-2">
+      <div className="md:col-span-4 flex gap-2">
         <button className="rounded-xl bg-white px-4 py-2 text-sm font-semibold text-black">Apply Filters</button>
       </div>
     </form>

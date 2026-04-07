@@ -1,4 +1,5 @@
 import type { InternalOrderRow } from "@/lib/orders";
+import type { FleetOwner } from "@/lib/parr/fleet";
 
 export type OpsView = "calendar" | "run-sheet" | "all-orders";
 export type OpsPaymentState = "unpaid" | "partial" | "paid" | "manual_review" | "unknown";
@@ -22,6 +23,9 @@ export type OpsOrder = {
   customerPhone: string | null;
   productCode: string | null;
   productLabel: string;
+  inventoryLabel: string | null;
+  fleetOwner: FleetOwner | null;
+  fleetOwnerLabel: string;
   sessionKey: string | null;
   serviceDate: string | null;
   departureLabel: string;

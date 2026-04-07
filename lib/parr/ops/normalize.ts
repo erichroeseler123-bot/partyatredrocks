@@ -1,5 +1,6 @@
 import type { InternalOrderRow } from "@/lib/orders";
 import { PRIVATE_RIDE_OPTIONS } from "@/lib/rideCatalog";
+import { getFleetOwnerLabel, getOrderFleetOwner, getOrderServiceDate } from "@/lib/parr/fleet";
 import { getOrderPaymentState, getOrderWorkflowState } from "@/lib/parr/ops/status";
 import type { OpsOrder } from "@/lib/parr/ops/types";
 
@@ -19,15 +20,6 @@ function parseSessionKey(sessionKey: string | null | undefined) {
     departureLabel: lane ? lane.replace(/-/g, " ") : "Scheduled run",
     pickupLabel: lane ? lane.replace(/-/g, " ") : "Needs review",
   };
-}
-
-function getFallbackServiceDate(order: InternalOrderRow) {
-  return (
-    stringValue(order.booking?.date) ||
-    stringValue(order.booking?.eventDate) ||
-    stringValue(order.rezdyBookingPayload?.date) ||
-    stringValue(order.rezdyBookingPayload?.eventDate)
-  );
 }
 
 function getProductLabel(productCode: string | null | undefined) {
@@ -63,10 +55,19 @@ function getSeats(order: InternalOrderRow) {
   return 1;
 }
 
+function getInventoryLabel(order: InternalOrderRow, productLabel: string) {
+  return (
+    stringValue(order.booking?.inventoryLabel) ||
+    stringValue(order.pickup?.inventoryLabel) ||
+    stringValue(order.rezdyBookingPayload?.inventoryLabel) ||
+    productLabel
+  );
+}
+
 export function normalizeInternalOrder(order: InternalOrderRow): OpsOrder {
   const parsedSession = parseSessionKey(order.sessionKey);
   const isShared = (order.productCode || "").startsWith("shared-");
-  const fallbackServiceDate = getFallbackServiceDate(order);
+  const fallbackServiceDate = getOrderServiceDate(order);
   const serviceDate = parsedSession.serviceDate || fallbackServiceDate || null;
   const departureLabel = parsedSession.serviceDate
     ? parsedSession.departureLabel
@@ -79,6 +80,8 @@ export function normalizeInternalOrder(order: InternalOrderRow): OpsOrder {
   const totalDue = numberValue(order.payment?.totalDue);
   const totalPaid = numberValue(order.payment?.totalPaid);
   const customer = order.customer ?? {};
+  const productLabel = getProductLabel(order.productCode);
+  const fleetOwner = getOrderFleetOwner(order);
 
   return {
     orderId: order.internalOrderId,
@@ -95,7 +98,10 @@ export function normalizeInternalOrder(order: InternalOrderRow): OpsOrder {
     customerEmail: stringValue(customer.email) || "n/a",
     customerPhone: stringValue(customer.mobile) || stringValue(customer.phone) || null,
     productCode: order.productCode ?? null,
-    productLabel: getProductLabel(order.productCode),
+    productLabel,
+    inventoryLabel: getInventoryLabel(order, productLabel),
+    fleetOwner,
+    fleetOwnerLabel: getFleetOwnerLabel(fleetOwner),
     sessionKey: order.sessionKey ?? null,
     serviceDate,
     departureLabel,

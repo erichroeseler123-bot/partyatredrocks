@@ -3,7 +3,7 @@ import InventoryConsolePage from "@/app/admin/parr-inventory/InventoryConsolePag
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-export default function ParrInventoryPage({
+export default function FriendFleetInventoryPage({
   searchParams,
 }: {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
@@ -11,10 +11,10 @@ export default function ParrInventoryPage({
   return (
     <InventoryConsolePage
       searchParams={searchParams}
-      defaultOwner="parr"
-      basePath="/admin/parr-inventory"
-      title="PARR Inventory"
-      copy="Your own fleet board first. PARR private rides fill before friend inventory, and Denver / Golden shuttle caps stay fixed by service day."
+      defaultOwner="friend_fleet"
+      basePath="/admin/friend-fleet-inventory"
+      title="Friend Fleet Schedule"
+      copy="Separate schedule page for overflow private inventory assigned to your friend’s Suburban and Sprinter."
     />
   );
 }

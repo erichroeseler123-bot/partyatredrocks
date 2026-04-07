@@ -36,6 +36,7 @@ export function middleware(req: NextRequest) {
   const isInternalOpsPath =
     pathname === "/internal/orders" ||
     pathname === "/admin/parr-inventory" ||
+    pathname === "/admin/friend-fleet-inventory" ||
     pathname.startsWith("/api/internal/orders/");
   if (isInternalOpsPath && !isInternalOpsAuthorized(req)) {
     const isApi = pathname.startsWith("/api/");

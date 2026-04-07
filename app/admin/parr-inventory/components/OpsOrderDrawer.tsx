@@ -14,6 +14,13 @@ function formatMoney(value: number) {
   return `$${value.toFixed(2)}`;
 }
 
+function quantityLabel(order: OpsOrder) {
+  if ((order.productCode || "").startsWith("shared-")) {
+    return `${order.seats} seat${order.seats === 1 ? "" : "s"}`;
+  }
+  return `${order.seats} vehicle${order.seats === 1 ? "" : "s"}`;
+}
+
 async function patchOrder(orderId: string, body: Record<string, unknown>) {
   const response = await fetch(`/api/internal/orders/${encodeURIComponent(orderId)}`, {
     method: "PATCH",
@@ -128,11 +135,13 @@ export default function OpsOrderDrawer({
         <div><div className="text-xs text-white/45">Service date</div><div className="text-sm text-white">{order.serviceDate || "Unscheduled"}</div></div>
         <div><div className="text-xs text-white/45">Departure</div><div className="text-sm text-white">{order.departureLabel}</div></div>
         <div><div className="text-xs text-white/45">Pickup</div><div className="text-sm text-white">{order.pickupLabel}</div></div>
-        <div><div className="text-xs text-white/45">Seats</div><div className="text-sm text-white">{order.seats}</div></div>
+        <div><div className="text-xs text-white/45">Qty</div><div className="text-sm text-white">{quantityLabel(order)}</div></div>
+        <div><div className="text-xs text-white/45">Owner</div><div className="text-sm text-white">{order.fleetOwnerLabel}</div></div>
         <div><div className="text-xs text-white/45">Payment</div><div className="text-sm text-white">{order.paymentState}</div></div>
         <div><div className="text-xs text-white/45">Workflow</div><div className="text-sm text-white">{order.workflowState}</div></div>
         <div><div className="text-xs text-white/45">Created</div><div className="text-sm text-white">{formatDateTime(order.createdAt)}</div></div>
         <div><div className="text-xs text-white/45">Last touched</div><div className="text-sm text-white">{formatDateTime(order.lastTouchedAt)}</div></div>
+        <div><div className="text-xs text-white/45">Inventory</div><div className="text-sm text-white">{order.inventoryLabel || order.productLabel}</div></div>
         <div><div className="text-xs text-white/45">Booking ref</div><div className="text-sm text-white">{order.bookingReference || "—"}</div></div>
         <div><div className="text-xs text-white/45">Session key</div><div className="text-sm text-white">{order.sessionKey || "—"}</div></div>
       </div>

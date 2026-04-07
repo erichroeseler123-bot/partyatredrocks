@@ -1,5 +1,14 @@
 import Link from "next/link";
-import type { OpsDayGroup } from "@/lib/parr/ops/types";
+import type { OpsDayGroup, OpsOrder } from "@/lib/parr/ops/types";
+
+function isSharedOrder(order: OpsOrder) {
+  return (order.productCode || "").startsWith("shared-");
+}
+
+function orderQuantityLabel(order: OpsOrder) {
+  if (isSharedOrder(order)) return `${order.seats} seat${order.seats === 1 ? "" : "s"}`;
+  return `${order.seats} vehicle${order.seats === 1 ? "" : "s"}`;
+}
 
 export default function OpsRunSheet({
   dayGroups,
@@ -21,14 +30,15 @@ export default function OpsRunSheet({
                     <div className="text-sm font-semibold text-white">{departure.departureLabel}</div>
                     <div className="text-xs text-white/55">{departure.pickupLabel}</div>
                   </div>
-                  <div className="text-xs text-white/65">{departure.seats} total seats</div>
+                  <div className="text-xs text-white/65">{departure.seats} total units</div>
                 </div>
                 <div className="mt-3 overflow-x-auto">
                   <table className="w-full text-left text-xs text-white/80">
                     <thead>
                       <tr className="border-b border-white/10 text-white/45">
                         <th className="py-2 pr-3">Customer</th>
-                        <th className="py-2 pr-3">Seats</th>
+                        <th className="py-2 pr-3">Qty</th>
+                        <th className="py-2 pr-3">Owner</th>
                         <th className="py-2 pr-3">Payment</th>
                         <th className="py-2 pr-3">Workflow</th>
                         <th className="py-2 pr-3">Contact</th>
@@ -41,8 +51,10 @@ export default function OpsRunSheet({
                             <Link href={buildOrderHref(order.orderId)} className="font-semibold text-white hover:underline">
                               {order.customerName}
                             </Link>
+                            <div className="text-[11px] text-white/45">{order.inventoryLabel || order.productLabel}</div>
                           </td>
-                          <td className="py-2 pr-3">{order.seats}</td>
+                          <td className="py-2 pr-3">{orderQuantityLabel(order)}</td>
+                          <td className="py-2 pr-3">{order.fleetOwnerLabel}</td>
                           <td className="py-2 pr-3">{order.paymentState}</td>
                           <td className="py-2 pr-3">{order.workflowState}</td>
                           <td className="py-2 pr-3">{order.customerEmail}</td>

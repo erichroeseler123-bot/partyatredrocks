@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { saveInternalOrder, updateInternalOrderPaymentById } from "@/lib/orders";
+import { listInternalOrders, saveInternalOrder, updateInternalOrderPaymentById } from "@/lib/orders";
 import { appendRecentBooking } from "@/lib/recentBookingsStore";
 import { createPrivateSquareOrder } from "@/lib/square";
 import {
@@ -12,6 +12,7 @@ import {
   type PrivateRideSlug,
 } from "@/lib/rideCatalog";
 import { isSupportedPhoneCountry, normalizePhoneNumber } from "@/lib/phone";
+import { assignPrivateInventory } from "@/lib/parr/fleet";
 
 export const runtime = "nodejs";
 
@@ -87,9 +88,15 @@ export async function POST(request: Request) {
   const qty = asPositiveInt(body.qty, 1);
   const guestCount = body.guestCount ? asPositiveInt(body.guestCount, 1) : null;
   const sourcePath = cleanOptional(body.sourcePath) || `/book/${venue}/private/${rideOption.slug}`;
+  const serviceDate = cleanOptional(body.date);
   const totalDue = Number(rideOption.priceLabel.replace(/[^0-9.]/g, "")) * qty;
   const searchParams = body.searchParams;
   const satelliteContext = getDccSatelliteContext(searchParams);
+  const existingOrders = await listInternalOrders();
+  const inventoryAssignment = assignPrivateInventory(existingOrders, {
+    serviceDate,
+    productCode: rideOption.dccProduct,
+  });
 
   const created = await saveInternalOrder({
     rezdyBookingReference: null,
@@ -109,7 +116,12 @@ export async function POST(request: Request) {
       rideType: "private",
       productSlug: rideOption.slug,
       productTitle: rideOption.title,
-      date: cleanOptional(body.date),
+      inventoryType: "private_vehicle_pool",
+      inventoryOwner: inventoryAssignment.owner,
+      inventoryLabel: inventoryAssignment.label,
+      inventoryCapacity: inventoryAssignment.capacity,
+      inventoryOverflow: inventoryAssignment.overflow,
+      date: serviceDate,
       artist: cleanOptional(body.artist),
       quantity: qty,
       guestCount,
@@ -118,10 +130,15 @@ export async function POST(request: Request) {
     rezdyBookingPayload: {
       venueSlug: venue,
       option: rideOption.slug,
-      date: cleanOptional(body.date),
+      date: serviceDate,
       artist: cleanOptional(body.artist),
       qty,
       guestCount,
+      inventoryType: "private_vehicle_pool",
+      inventoryOwner: inventoryAssignment.owner,
+      inventoryLabel: inventoryAssignment.label,
+      inventoryCapacity: inventoryAssignment.capacity,
+      inventoryOverflow: inventoryAssignment.overflow,
       pickupAddress: cleanOptional(body.pickupAddress),
       notes: cleanOptional(body.notes),
       sourcePath,
@@ -131,12 +148,16 @@ export async function POST(request: Request) {
       totalDue,
       totalPaid: 0,
       dccHandoffId: satelliteContext.handoffId || null,
+      inventoryOwner: inventoryAssignment.owner,
+      inventoryLabel: inventoryAssignment.label,
       handoffMode: "embedded_square",
       handoffUrl: null,
       operatorAction: "Traveler completing embedded private checkout on Party at Red Rocks.",
     },
     pickup: {
       address: cleanOptional(body.pickupAddress),
+      inventoryOwner: inventoryAssignment.owner,
+      inventoryLabel: inventoryAssignment.label,
     },
   });
 
@@ -145,7 +166,7 @@ export async function POST(request: Request) {
     dccHandoffId: satelliteContext.handoffId || null,
     title: `${rideOption.title} private ride`,
     vehicleLabel: rideOption.title,
-    date: cleanOptional(body.date),
+    date: serviceDate,
     artist: cleanOptional(body.artist),
     quantity: qty,
     amountCents: Math.round(totalDue * 100),
@@ -157,6 +178,8 @@ export async function POST(request: Request) {
       totalDue,
       totalPaid: 0,
       dccHandoffId: satelliteContext.handoffId || null,
+      inventoryOwner: inventoryAssignment.owner,
+      inventoryLabel: inventoryAssignment.label,
       handoffMode: "embedded_square",
       handoffUrl: null,
       operatorAction: "Traveler completing embedded private checkout on Party at Red Rocks.",
@@ -166,6 +189,8 @@ export async function POST(request: Request) {
     payload: {
       internalOrderId: created.internalOrderId,
       squareOrderId: squareOrder.squareOrderId,
+      inventoryOwner: inventoryAssignment.owner,
+      inventoryLabel: inventoryAssignment.label,
     },
   }).catch(() => undefined);
 
@@ -190,7 +215,7 @@ export async function POST(request: Request) {
     },
     booking: {
       venueSlug: venue,
-      eventDate: cleanOptional(body.date) || undefined,
+      eventDate: serviceDate || undefined,
       quantity: qty,
       currency: "USD",
       amount: totalDue,
@@ -200,6 +225,8 @@ export async function POST(request: Request) {
       square_order_id: squareOrder.squareOrderId,
       pickup_address: cleanOptional(body.pickupAddress) || undefined,
       artist: cleanOptional(body.artist) || undefined,
+      inventory_owner: inventoryAssignment.owner,
+      inventory_label: inventoryAssignment.label,
     },
   } as const;
 
@@ -221,5 +248,9 @@ export async function POST(request: Request) {
     internalOrderId: created.internalOrderId,
     bookingToken: created.bookingToken,
     squareOrderId: squareOrder.squareOrderId,
+    totalDue,
+    inventoryOwner: inventoryAssignment.owner,
+    inventoryLabel: inventoryAssignment.label,
+    inventoryOverflow: inventoryAssignment.overflow,
   });
 }

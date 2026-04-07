@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SHARED_DAILY_CAPACITY } from "@/lib/parr/fleet";
 import type { OpsDayGroup, OpsOrder } from "@/lib/parr/ops/types";
 
 function paymentTone(state: string) {
@@ -16,6 +17,17 @@ function workflowTone(state: string) {
 
 type LaneKey = "private" | "denver" | "golden" | "needs_review";
 
+function isSharedOrder(order: OpsOrder) {
+  return (order.productCode || "").startsWith("shared-");
+}
+
+function orderQuantityLabel(order: OpsOrder) {
+  if (isSharedOrder(order)) {
+    return `${order.seats} seat${order.seats === 1 ? "" : "s"}`;
+  }
+  return `${order.seats} vehicle${order.seats === 1 ? "" : "s"}`;
+}
+
 function getLane(order: OpsOrder): LaneKey {
   if (order.workflowState === "needs_review" || !order.productCode) return "needs_review";
   if (order.productCode === "shared-denver") return "denver";
@@ -32,8 +44,8 @@ function laneTitle(lane: LaneKey) {
 
 function laneDescription(lane: LaneKey) {
   if (lane === "private") return "Private rides and custom pickups.";
-  if (lane === "denver") return "Shared Denver shuttle bookings.";
-  if (lane === "golden") return "Shared Golden shuttle bookings.";
+  if (lane === "denver") return "Denver shared shuttle capacity is fixed at 20 seats per day.";
+  if (lane === "golden") return "Golden shared shuttle capacity is fixed at 20 seats per day.";
   return "Orders missing a clean lane or needing manual review.";
 }
 
@@ -44,11 +56,15 @@ function laneTone(lane: LaneKey) {
   return "border-red-400/30 bg-red-500/10";
 }
 
-function summarizeLane(orders: OpsOrder[]) {
+function summarizeLane(lane: LaneKey, orders: OpsOrder[]) {
+  const seats = orders.reduce((sum, order) => sum + order.seats, 0);
+  const capacity = lane === "denver" ? SHARED_DAILY_CAPACITY.denver : lane === "golden" ? SHARED_DAILY_CAPACITY.golden : null;
   return {
     ordersCount: orders.length,
-    seats: orders.reduce((sum, order) => sum + order.seats, 0),
+    seats,
     unpaid: orders.filter((order) => order.paymentState !== "paid").length,
+    capacity,
+    remaining: capacity === null ? null : Math.max(0, capacity - seats),
   };
 }
 
@@ -71,16 +87,16 @@ export default function OpsCalendarBoard({
               <h2 className="mt-2 text-2xl font-black text-white">{day.serviceDate || "Unscheduled"}</h2>
             </div>
             <div className="flex flex-wrap gap-2 text-xs">
-              <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-white/80">{day.ordersCount} orders</span>
-              <span className="rounded-full border border-cyan-400/30 bg-cyan-500/15 px-3 py-1 text-cyan-100">{day.seats} seats</span>
+              <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-white/80">{day.ordersCount} bookings</span>
+              <span className="rounded-full border border-cyan-400/30 bg-cyan-500/15 px-3 py-1 text-cyan-100">{day.seats} units</span>
               <span className="rounded-full border border-red-400/30 bg-red-500/15 px-3 py-1 text-red-100">{day.warnings} warnings</span>
             </div>
           </div>
 
-          <div className="mt-4 grid gap-4 xl:grid-cols-3">
+          <div className="mt-4 grid gap-4 xl:grid-cols-4">
             {laneOrder.map((lane) => {
               const laneOrders = day.orders.filter((order) => getLane(order) === lane);
-              const summary = summarizeLane(laneOrders);
+              const summary = summarizeLane(lane, laneOrders);
 
               return (
                 <div key={lane} className={`rounded-2xl border p-4 ${laneTone(lane)}`}>
@@ -91,13 +107,18 @@ export default function OpsCalendarBoard({
                     </div>
                     <div className="text-right text-xs text-white/70">
                       <div>{summary.ordersCount} bookings</div>
-                      <div>{summary.seats} seats</div>
+                      <div>{summary.seats} units</div>
                     </div>
                   </div>
 
                   <div className="mt-3 flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.12em] text-white/70">
                     <span className="rounded-full border border-white/15 bg-black/20 px-3 py-1">{summary.ordersCount} bookings</span>
-                    <span className="rounded-full border border-white/15 bg-black/20 px-3 py-1">{summary.seats} seats</span>
+                    <span className="rounded-full border border-white/15 bg-black/20 px-3 py-1">{summary.seats} units</span>
+                    {summary.capacity !== null ? (
+                      <span className="rounded-full border border-white/15 bg-black/20 px-3 py-1">
+                        {summary.remaining} left of {summary.capacity}
+                      </span>
+                    ) : null}
                     {summary.unpaid > 0 ? (
                       <span className="rounded-full border border-amber-400/30 bg-amber-500/15 px-3 py-1 text-amber-100">
                         {summary.unpaid} unpaid
@@ -121,7 +142,7 @@ export default function OpsCalendarBoard({
                             <div>
                               <div className="text-sm font-semibold text-white">{order.customerName}</div>
                               <div className="mt-1 text-xs text-white/55">
-                                {order.seats} seat{order.seats === 1 ? "" : "s"} • {order.productLabel}
+                                {orderQuantityLabel(order)} • {order.inventoryLabel || order.productLabel}
                               </div>
                               <div className="mt-1 text-xs text-white/45">
                                 {order.pickupLabel}
@@ -129,6 +150,7 @@ export default function OpsCalendarBoard({
                                   ? ` • ${order.departureLabel}`
                                   : ""}
                               </div>
+                              <div className="mt-1 text-xs text-white/45">{order.fleetOwnerLabel}</div>
                             </div>
                             <span
                               className={`rounded-full border px-3 py-1 text-[11px] uppercase tracking-[0.12em] ${paymentTone(order.paymentState)}`}
