@@ -41,6 +41,9 @@ export type OpsOrder = {
   followUpStatus: string;
   operatorPaymentStep: string;
   paymentRequestSentAt: string | null;
+  hasReassignmentWarning: boolean;
+  reassignmentWarnings: string[];
+  primaryReassignmentWarning: string | null;
   source: InternalOrderRow;
 };
 

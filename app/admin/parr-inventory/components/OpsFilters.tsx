@@ -1,20 +1,23 @@
 type OwnerFilter = "all" | "parr" | "friend_fleet";
 type PaymentFilter = "all" | "unpaid" | "partial" | "paid" | "manual_review";
 type WorkflowFilter = "all" | "pending_payment" | "waiting" | "confirmed" | "resolved" | "canceled" | "needs_review";
+type WarningFilter = "all" | "reassignment_only";
 
 export default function OpsFilters({
   activeOwner,
   activePayment,
   activeWorkflow,
+  activeWarning,
   search,
 }: {
   activeOwner: OwnerFilter;
   activePayment: PaymentFilter;
   activeWorkflow: WorkflowFilter;
+  activeWarning: WarningFilter;
   search: string;
 }) {
   return (
-    <form className="grid gap-3 rounded-3xl border border-white/10 bg-white/5 p-4 md:grid-cols-4">
+    <form className="grid gap-3 rounded-3xl border border-white/10 bg-white/5 p-4 md:grid-cols-5">
       <label className="text-sm text-white/80">
         Owner
         <select
@@ -58,6 +61,17 @@ export default function OpsFilters({
         </select>
       </label>
       <label className="text-sm text-white/80">
+        Warnings
+        <select
+          name="warning"
+          defaultValue={activeWarning}
+          className="mt-1 min-h-11 w-full rounded-xl border border-white/15 bg-black/30 px-3 text-white"
+        >
+          <option value="all">All</option>
+          <option value="reassignment_only">Reassignment warnings only</option>
+        </select>
+      </label>
+      <label className="text-sm text-white/80">
         Search
         <input
           name="search"
@@ -66,7 +80,7 @@ export default function OpsFilters({
           className="mt-1 min-h-11 w-full rounded-xl border border-white/15 bg-black/30 px-3 text-white placeholder:text-white/35"
         />
       </label>
-      <div className="md:col-span-4 flex gap-2">
+      <div className="md:col-span-5 flex gap-2">
         <button className="rounded-xl bg-white px-4 py-2 text-sm font-semibold text-black">Apply Filters</button>
       </div>
     </form>

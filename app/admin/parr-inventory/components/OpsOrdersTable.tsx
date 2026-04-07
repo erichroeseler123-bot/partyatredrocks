@@ -17,6 +17,7 @@ export default function OpsOrdersTable({
             <th className="py-3 pr-4">Customer</th>
             <th className="py-3 pr-4">Product</th>
             <th className="py-3 pr-4">Session</th>
+            <th className="py-3 pr-4">Warning</th>
             <th className="py-3 pr-4">Payment</th>
             <th className="py-3 pr-4">Workflow</th>
             <th className="py-3 pr-4">Total</th>
@@ -34,6 +35,15 @@ export default function OpsOrdersTable({
               </td>
               <td className="py-3 pr-4">{order.productLabel}</td>
               <td className="py-3 pr-4">{order.sessionKey || "—"}</td>
+              <td className="py-3 pr-4">
+                {order.primaryReassignmentWarning ? (
+                  <div className="rounded-xl border border-orange-400/25 bg-orange-500/10 px-3 py-2 text-xs text-orange-100">
+                    {order.primaryReassignmentWarning}
+                  </div>
+                ) : (
+                  <span className="text-white/35">—</span>
+                )}
+              </td>
               <td className="py-3 pr-4">{order.paymentState}</td>
               <td className="py-3 pr-4">{order.workflowState}</td>
               <td className="py-3 pr-4">${order.totalDue.toFixed(2)}</td>

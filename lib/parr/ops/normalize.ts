@@ -1,6 +1,11 @@
 import type { InternalOrderRow } from "@/lib/orders";
 import { PRIVATE_RIDE_OPTIONS } from "@/lib/rideCatalog";
-import { getFleetOwnerLabel, getOrderFleetOwner, getOrderServiceDate } from "@/lib/parr/fleet";
+import {
+  getFleetOwnerLabel,
+  getOrderFleetOwner,
+  getOrderServiceDate,
+  reviewReassignmentDraft,
+} from "@/lib/parr/fleet";
 import { getOrderPaymentState, getOrderWorkflowState } from "@/lib/parr/ops/status";
 import type { OpsOrder } from "@/lib/parr/ops/types";
 
@@ -82,6 +87,13 @@ export function normalizeInternalOrder(order: InternalOrderRow): OpsOrder {
   const customer = order.customer ?? {};
   const productLabel = getProductLabel(order.productCode);
   const fleetOwner = getOrderFleetOwner(order);
+  const reassignmentReview = reviewReassignmentDraft({
+    productCode: order.productCode ?? null,
+    sessionKey: order.sessionKey ?? null,
+    pickupLabel: getPickupLabel(order, pickupFallback),
+    fallbackServiceDate: fallbackServiceDate,
+  });
+  const reassignmentWarnings = reassignmentReview.warnings;
 
   return {
     orderId: order.internalOrderId,
@@ -117,6 +129,9 @@ export function normalizeInternalOrder(order: InternalOrderRow): OpsOrder {
     followUpStatus: order.followUpStatus ?? "new",
     operatorPaymentStep: order.operatorPaymentStep ?? "none",
     paymentRequestSentAt: order.paymentRequestSentAt ?? null,
+    hasReassignmentWarning: reassignmentWarnings.length > 0,
+    reassignmentWarnings,
+    primaryReassignmentWarning: reassignmentWarnings[0] ?? null,
     source: order,
   };
 }

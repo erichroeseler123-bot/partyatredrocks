@@ -18,6 +18,7 @@ import OpsOrderDrawer from "@/app/admin/parr-inventory/components/OpsOrderDrawer
 type PaymentFilter = "all" | "unpaid" | "partial" | "paid" | "manual_review";
 type WorkflowFilter = "all" | "pending_payment" | "waiting" | "confirmed" | "resolved" | "canceled" | "needs_review";
 type OwnerFilter = "all" | FleetOwner;
+type WarningFilter = "all" | "reassignment_only";
 
 function getProductOptions(orders: OpsOrder[]) {
   const values = new Map<string, string>();
@@ -88,6 +89,7 @@ export default async function InventoryConsolePage({
   const activePaymentRaw = Array.isArray(sp.payment) ? sp.payment[0] : sp.payment;
   const activeWorkflowRaw = Array.isArray(sp.workflow) ? sp.workflow[0] : sp.workflow;
   const activeOwnerRaw = Array.isArray(sp.owner) ? sp.owner[0] : sp.owner;
+  const activeWarningRaw = Array.isArray(sp.warning) ? sp.warning[0] : sp.warning;
   const search = (Array.isArray(sp.search) ? sp.search[0] : sp.search) || "";
   const activeView: OpsView =
     activeViewRaw === "run-sheet" || activeViewRaw === "all-orders" ? activeViewRaw : "calendar";
@@ -111,12 +113,14 @@ export default async function InventoryConsolePage({
     activeOwnerRaw === "all" || activeOwnerRaw === "parr" || activeOwnerRaw === "friend_fleet"
       ? activeOwnerRaw
       : defaultOwner;
+  const activeWarning: WarningFilter = activeWarningRaw === "reassignment_only" ? activeWarningRaw : "all";
 
   const orders = (await listInternalOrders()).map(normalizeInternalOrder);
   const filteredOrders = orders.filter((order) => {
     if (activeOwner !== "all" && order.fleetOwner !== activeOwner) return false;
     if (activePayment !== "all" && order.paymentState !== activePayment) return false;
     if (activeWorkflow !== "all" && order.workflowState !== activeWorkflow) return false;
+    if (activeWarning === "reassignment_only" && !order.hasReassignmentWarning) return false;
     if (!matchesSearch(order, search)) return false;
     return true;
   });
@@ -127,6 +131,7 @@ export default async function InventoryConsolePage({
     owner: activeOwner !== defaultOwner ? activeOwner : undefined,
     payment: activePayment !== "all" ? activePayment : undefined,
     workflow: activeWorkflow !== "all" ? activeWorkflow : undefined,
+    warning: activeWarning !== "all" ? activeWarning : undefined,
     search: search || undefined,
   };
   const productOptions = getProductOptions(orders);
@@ -153,7 +158,13 @@ export default async function InventoryConsolePage({
 
         <OpsViewTabs activeView={activeView} buildHref={(view) => buildHref(basePath, baseQuery, { view })} />
         <OpsKpiBar {...summary} />
-        <OpsFilters activeOwner={activeOwner} activePayment={activePayment} activeWorkflow={activeWorkflow} search={search} />
+        <OpsFilters
+          activeOwner={activeOwner}
+          activePayment={activePayment}
+          activeWorkflow={activeWorkflow}
+          activeWarning={activeWarning}
+          search={search}
+        />
 
         <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_420px]">
           <div>

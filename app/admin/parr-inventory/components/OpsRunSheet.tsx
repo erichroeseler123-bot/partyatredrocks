@@ -39,6 +39,7 @@ export default function OpsRunSheet({
                         <th className="py-2 pr-3">Customer</th>
                         <th className="py-2 pr-3">Qty</th>
                         <th className="py-2 pr-3">Owner</th>
+                        <th className="py-2 pr-3">Warning</th>
                         <th className="py-2 pr-3">Payment</th>
                         <th className="py-2 pr-3">Workflow</th>
                         <th className="py-2 pr-3">Contact</th>
@@ -55,6 +56,13 @@ export default function OpsRunSheet({
                           </td>
                           <td className="py-2 pr-3">{orderQuantityLabel(order)}</td>
                           <td className="py-2 pr-3">{order.fleetOwnerLabel}</td>
+                          <td className="py-2 pr-3">
+                            {order.primaryReassignmentWarning ? (
+                              <span className="text-orange-200">{order.primaryReassignmentWarning}</span>
+                            ) : (
+                              "—"
+                            )}
+                          </td>
                           <td className="py-2 pr-3">{order.paymentState}</td>
                           <td className="py-2 pr-3">{order.workflowState}</td>
                           <td className="py-2 pr-3">{order.customerEmail}</td>
