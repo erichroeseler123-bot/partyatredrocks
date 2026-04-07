@@ -40,6 +40,7 @@ export type InternalOrderRow = {
   booking?: Record<string, unknown> | null;
   rezdyBookingPayload?: Record<string, unknown> | null;
   payment?: Record<string, unknown> | null;
+  pickup?: Record<string, unknown> | null;
   notes?: string | null;
   followUpStatus?: FollowUpStatus | null;
   operatorPaymentStep?: OperatorPaymentStep | null;
@@ -318,6 +319,7 @@ function normalizeBackupOrder(row: Record<string, unknown>): InternalOrderRow | 
     booking: readRecord(row.booking) ?? null,
     rezdyBookingPayload: readRecord(row.rezdyBookingPayload) ?? null,
     payment: readRecord(row.payment) ?? null,
+    pickup: readRecord(row.pickup) ?? null,
     notes: typeof row.notes === "string" ? row.notes : null,
     followUpStatus: asFollowUpStatus(row.followUpStatus),
     operatorPaymentStep: asOperatorPaymentStep(row.operatorPaymentStep),
@@ -440,6 +442,7 @@ export async function saveInternalOrder(input: OrderWriteInput) {
         booking: input.booking ?? null,
         rezdyBookingPayload: input.rezdyBookingPayload,
         payment: input.payment,
+        pickup: input.pickup,
         notes: null,
         followUpStatus: "new",
         operatorPaymentStep: "none",
@@ -527,6 +530,7 @@ export async function saveInternalOrder(input: OrderWriteInput) {
     booking: input.booking ?? null,
     rezdyBookingPayload: input.rezdyBookingPayload,
     payment: input.payment,
+    pickup: input.pickup,
     notes: null,
     followUpStatus: "new" as const,
     operatorPaymentStep: "none" as const,
@@ -726,8 +730,9 @@ export async function listInternalOrders(): Promise<InternalOrderRow[]> {
 
       const mapped = rows.map((row) => {
         const booking = parseJson(row.bookingJson);
-        const payment = parseJson(row.paymentJson);
-        const customer = parseJson(row.customerJson);
+          const payment = parseJson(row.paymentJson);
+          const customer = parseJson(row.customerJson);
+          const pickup = parseJson(row.pickupJson);
 
         if (booking && typeof row.bookingStatus === "string") booking.status = row.bookingStatus;
         if (payment) {
@@ -752,6 +757,7 @@ export async function listInternalOrders(): Promise<InternalOrderRow[]> {
           booking: booking ?? null,
           rezdyBookingPayload: parseJson(row.rezdyBookingPayloadJson) ?? null,
           payment: payment ?? null,
+          pickup: pickup ?? null,
           notes: typeof row.notes === "string" ? row.notes : null,
           followUpStatus: asFollowUpStatus(row.followUpStatus),
           operatorPaymentStep: asOperatorPaymentStep(row.operatorPaymentStep),
@@ -796,6 +802,7 @@ export async function getInternalOrderByBookingReference(
             bookingJson,
             rezdyBookingPayloadJson,
             paymentJson,
+            pickupJson,
             customerJson,
             notes,
             followUpStatus,
@@ -823,6 +830,7 @@ export async function getInternalOrderByBookingReference(
         booking: parseJson(row.bookingJson) ?? null,
         rezdyBookingPayload: parseJson(row.rezdyBookingPayloadJson) ?? null,
         payment: parseJson(row.paymentJson) ?? null,
+        pickup: parseJson(row.pickupJson) ?? null,
         notes: typeof row.notes === "string" ? row.notes : null,
         followUpStatus: asFollowUpStatus(row.followUpStatus),
         operatorPaymentStep: asOperatorPaymentStep(row.operatorPaymentStep),
@@ -866,6 +874,7 @@ export async function getInternalOrderById(
             bookingJson,
             rezdyBookingPayloadJson,
             paymentJson,
+            pickupJson,
             customerJson,
             notes,
             followUpStatus,
@@ -892,6 +901,7 @@ export async function getInternalOrderById(
         booking: parseJson(row.bookingJson) ?? null,
         rezdyBookingPayload: parseJson(row.rezdyBookingPayloadJson) ?? null,
         payment: parseJson(row.paymentJson) ?? null,
+        pickup: parseJson(row.pickupJson) ?? null,
         notes: typeof row.notes === "string" ? row.notes : null,
         followUpStatus: asFollowUpStatus(row.followUpStatus),
         operatorPaymentStep: asOperatorPaymentStep(row.operatorPaymentStep),
@@ -934,6 +944,7 @@ export async function getInternalOrderByBookingToken(
             bookingJson,
             rezdyBookingPayloadJson,
             paymentJson,
+            pickupJson,
             customerJson,
             notes,
             followUpStatus,
@@ -960,6 +971,7 @@ export async function getInternalOrderByBookingToken(
         booking: parseJson(row.bookingJson) ?? null,
         rezdyBookingPayload: parseJson(row.rezdyBookingPayloadJson) ?? null,
         payment: parseJson(row.paymentJson) ?? null,
+        pickup: parseJson(row.pickupJson) ?? null,
         notes: typeof row.notes === "string" ? row.notes : null,
         followUpStatus: asFollowUpStatus(row.followUpStatus),
         operatorPaymentStep: asOperatorPaymentStep(row.operatorPaymentStep),
@@ -1229,3 +1241,185 @@ export async function updateInternalOrderOps(
   return { ok: true as const };
 }
 
+export type InternalOrderPaymentAction =
+  | "mark_unpaid"
+  | "mark_partial"
+  | "mark_paid"
+  | "mark_manual_review";
+
+export async function updateInternalOrderPaymentState(
+  internalOrderId: string,
+  input: {
+    action: InternalOrderPaymentAction;
+    amountPaidDollars?: number | null;
+    reason?: string | null;
+  }
+): Promise<InternalOrderRow | null> {
+  const existing = await getInternalOrderById(internalOrderId);
+  if (!existing) return null;
+
+  const totalDue =
+    typeof existing.payment?.totalDue === "number" && Number.isFinite(existing.payment.totalDue)
+      ? existing.payment.totalDue
+      : 0;
+  const currentPaid =
+    typeof existing.payment?.totalPaid === "number" && Number.isFinite(existing.payment.totalPaid)
+      ? existing.payment.totalPaid
+      : 0;
+
+  let nextTotalPaid = currentPaid;
+  let nextStatus: string | null = existing.payment?.status && typeof existing.payment.status === "string"
+    ? existing.payment.status
+    : null;
+
+  if (input.action === "mark_unpaid") {
+    nextTotalPaid = 0;
+    nextStatus = "unpaid";
+  } else if (input.action === "mark_partial") {
+    const requested = typeof input.amountPaidDollars === "number" ? input.amountPaidDollars : NaN;
+    if (!Number.isFinite(requested) || requested <= 0 || requested >= totalDue) {
+      throw new Error("Partial amount must be greater than 0 and less than total due.");
+    }
+    nextTotalPaid = Number(requested.toFixed(2));
+    nextStatus = "partial";
+  } else if (input.action === "mark_paid") {
+    nextTotalPaid = totalDue;
+    nextStatus = "paid";
+  } else if (input.action === "mark_manual_review") {
+    nextTotalPaid = currentPaid;
+    nextStatus = "manual_review";
+  }
+
+  const paymentPatch: JsonRecord = {
+    totalDue,
+    totalPaid: nextTotalPaid,
+    status: nextStatus,
+  };
+  if (input.reason?.trim()) {
+    paymentPatch.opsReason = input.reason.trim();
+  }
+
+  return updateInternalOrderPaymentById(internalOrderId, {
+    paymentStatus: nextStatus,
+    paymentPatch,
+    eventType: "internal.order.payment_state_changed",
+    payload: {
+      action: input.action,
+      amountPaidDollars: nextTotalPaid,
+      totalDue,
+      reason: input.reason?.trim() || null,
+    },
+  });
+}
+
+export async function updateInternalOrderScheduleById(
+  internalOrderId: string,
+  input: {
+    productCode?: string | null;
+    sessionKey?: string | null;
+    pickup?: JsonRecord | null;
+    reason?: string | null;
+  }
+): Promise<InternalOrderRow | null> {
+  const existing = await getInternalOrderById(internalOrderId);
+  if (!existing) return null;
+
+  const nextProductCode = typeof input.productCode === "string" && input.productCode.trim()
+    ? input.productCode.trim()
+    : existing.productCode;
+  const nextSessionKey = typeof input.sessionKey === "string"
+    ? input.sessionKey.trim() || null
+    : existing.sessionKey ?? null;
+  const nextPickup = input.pickup ?? existing.pickup ?? null;
+  const touchedAt = new Date().toISOString();
+
+  if (useBlobOrderStore()) {
+    const store = await loadBlobOrderStore();
+    store.orders = sortOrdersDesc(
+      store.orders.map((order) =>
+        order.internalOrderId !== internalOrderId
+          ? order
+          : {
+              ...order,
+              productCode: nextProductCode,
+              sessionKey: nextSessionKey,
+              pickup: nextPickup,
+              lastTouchedAt: touchedAt,
+            }
+      )
+    );
+    store.events.push({
+      type: "internal.order.schedule",
+      internalOrderId,
+      updatedAt: touchedAt,
+      productCode: nextProductCode,
+      sessionKey: nextSessionKey,
+      pickup: nextPickup,
+      reason: input.reason?.trim() || null,
+    });
+    await saveBlobOrderStore(store);
+    return store.orders.find((order) => order.internalOrderId === internalOrderId) ?? null;
+  }
+
+  const db = await openDb();
+  if (db) {
+    try {
+      db.prepare(
+        `UPDATE orders
+         SET productCode = ?,
+             sessionKey = ?,
+             pickupJson = ?,
+             lastTouchedAt = ?
+         WHERE internalOrderId = ?`
+      ).run(nextProductCode, nextSessionKey, asJson(nextPickup), touchedAt, internalOrderId);
+
+      db.prepare(
+        `INSERT INTO order_events (
+          createdAt, eventType, rezdyBookingReference, bookingStatus, paymentStatus, payloadJson
+        ) VALUES (?, ?, ?, ?, ?, ?)`
+      ).run(
+        touchedAt,
+        "internal.order.schedule_changed",
+        existing.rezdyBookingReference,
+        typeof existing.booking?.status === "string" ? existing.booking.status : null,
+        typeof existing.payment?.status === "string" ? existing.payment.status : null,
+        asJson({
+          from: {
+            productCode: existing.productCode ?? null,
+            sessionKey: existing.sessionKey ?? null,
+            pickup: existing.pickup ?? null,
+          },
+          to: {
+            productCode: nextProductCode ?? null,
+            sessionKey: nextSessionKey,
+            pickup: nextPickup,
+          },
+          reason: input.reason?.trim() || null,
+        })
+      );
+    } finally {
+      db.close();
+    }
+  }
+
+  await appendBackupRow({
+    internalOrderId: existing.internalOrderId,
+    bookingToken: existing.bookingToken ?? null,
+    createdAt: existing.createdAt,
+    lastTouchedAt: touchedAt,
+    rezdyBookingReference: existing.rezdyBookingReference,
+    productCode: nextProductCode,
+    sessionKey: nextSessionKey,
+    customer: existing.customer,
+    booking: existing.booking,
+    payment: existing.payment,
+    pickup: nextPickup,
+    rezdyBookingPayload: existing.rezdyBookingPayload,
+    notes: existing.notes ?? null,
+    followUpStatus: existing.followUpStatus ?? "new",
+    operatorPaymentStep: existing.operatorPaymentStep ?? "none",
+    paymentRequestSentAt: existing.paymentRequestSentAt ?? null,
+  });
+
+  return getInternalOrderById(internalOrderId);
+}

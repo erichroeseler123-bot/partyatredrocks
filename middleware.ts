@@ -29,7 +29,9 @@ export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   const isInternalOpsPath =
-    pathname === "/internal/orders" || pathname.startsWith("/api/internal/orders/");
+    pathname === "/internal/orders" ||
+    pathname === "/admin/parr-inventory" ||
+    pathname.startsWith("/api/internal/orders/");
   if (isInternalOpsPath && !isInternalOpsAuthorized(req)) {
     const isApi = pathname.startsWith("/api/");
     if (isApi) {

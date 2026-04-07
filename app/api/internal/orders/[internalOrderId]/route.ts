@@ -1,15 +1,35 @@
 import { NextResponse } from "next/server";
-import { getInternalOrderById, updateInternalOrderOps } from "@/lib/orders";
+import {
+  getInternalOrderById,
+  updateInternalOrderOps,
+  updateInternalOrderPaymentState,
+  updateInternalOrderScheduleById,
+  type InternalOrderPaymentAction,
+} from "@/lib/orders";
 import { getSharedCheckoutStatus } from "@/lib/sharedInventory";
 import { reconcileSharedOrderFromSquare } from "@/lib/sharedSquareReconcile";
 
 export const runtime = "nodejs";
 
 type OpsUpdateBody = {
+  action?: "update_ops" | "update_payment" | "reassign";
   notes?: string;
   followUpStatus?: "new" | "contacted" | "waiting" | "resolved";
   markPaymentRequestSent?: boolean;
+  paymentAction?: InternalOrderPaymentAction;
+  amountPaidDollars?: number;
+  reason?: string;
+  productCode?: string;
+  sessionKey?: string | null;
+  pickup?: string | null;
 };
+
+const VALID_PAYMENT_ACTIONS = new Set<InternalOrderPaymentAction>([
+  "mark_unpaid",
+  "mark_partial",
+  "mark_paid",
+  "mark_manual_review",
+]);
 
 export async function GET(
   _request: Request,
@@ -77,10 +97,48 @@ export async function PATCH(
   ) {
     return NextResponse.json({ error: "markPaymentRequestSent must be boolean" }, { status: 400 });
   }
+  if (typeof body.amountPaidDollars !== "undefined" && typeof body.amountPaidDollars !== "number") {
+    return NextResponse.json({ error: "amountPaidDollars must be a number" }, { status: 400 });
+  }
 
   const existing = await getInternalOrderById(internalOrderId);
   if (!existing) {
     return NextResponse.json({ error: "Order not found" }, { status: 404 });
+  }
+
+  if (body.action === "update_payment") {
+    if (!body.paymentAction || !VALID_PAYMENT_ACTIONS.has(body.paymentAction)) {
+      return NextResponse.json({ error: "Invalid paymentAction" }, { status: 400 });
+    }
+    try {
+      const updated = await updateInternalOrderPaymentState(internalOrderId, {
+        action: body.paymentAction,
+        amountPaidDollars: body.amountPaidDollars,
+        reason: body.reason,
+      });
+      if (!updated) {
+        return NextResponse.json({ error: "Order not found" }, { status: 404 });
+      }
+      return NextResponse.json({ ok: true, order: updated });
+    } catch (error) {
+      return NextResponse.json(
+        { error: error instanceof Error ? error.message : "Payment update failed" },
+        { status: 400 }
+      );
+    }
+  }
+
+  if (body.action === "reassign") {
+    const updated = await updateInternalOrderScheduleById(internalOrderId, {
+      productCode: body.productCode,
+      sessionKey: body.sessionKey,
+      pickup: body.pickup ? { label: body.pickup } : null,
+      reason: body.reason,
+    });
+    if (!updated) {
+      return NextResponse.json({ error: "Order not found" }, { status: 404 });
+    }
+    return NextResponse.json({ ok: true, order: updated });
   }
 
   const updated = await updateInternalOrderOps(internalOrderId, {
