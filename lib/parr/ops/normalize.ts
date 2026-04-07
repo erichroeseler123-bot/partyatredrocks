@@ -55,7 +55,9 @@ function getSeats(order: InternalOrderRow) {
     numberValue(order.booking?.quantity) ||
     numberValue(order.booking?.qty) ||
     numberValue(order.payment?.quantity) ||
-    numberValue(order.payment?.qty);
+    numberValue(order.payment?.qty) ||
+    numberValue(order.pickup?.qty) ||
+    numberValue(order.rezdyBookingPayload?.qty);
   if (qty > 0) return Math.floor(qty);
   if ((order.productCode || "").startsWith("shared-")) return 1;
   return 1;
