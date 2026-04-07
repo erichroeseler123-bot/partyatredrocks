@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+const INTERNAL_OPS_COOKIE = "internal_ops_auth";
+
 function parseBasicAuth(header: string | null): { user: string; pass: string } | null {
   if (!header || !header.startsWith("Basic ")) return null;
   const encoded = header.slice("Basic ".length).trim();
@@ -21,6 +23,9 @@ function isInternalOpsAuthorized(req: NextRequest): boolean {
   const expectedUser = process.env.INTERNAL_OPS_USER;
   const expectedPass = process.env.INTERNAL_OPS_PASS;
   if (!expectedUser || !expectedPass) return true;
+  const expectedEncoded = btoa(`${expectedUser}:${expectedPass}`);
+  const cookieValue = req.cookies.get(INTERNAL_OPS_COOKIE)?.value;
+  if (cookieValue && cookieValue === expectedEncoded) return true;
   const auth = parseBasicAuth(req.headers.get("authorization"));
   return Boolean(auth && auth.user === expectedUser && auth.pass === expectedPass);
 }
@@ -41,6 +46,26 @@ export function middleware(req: NextRequest) {
       status: 401,
       headers: { "WWW-Authenticate": 'Basic realm="Internal Ops", charset="UTF-8"' },
     });
+  }
+
+  if (isInternalOpsPath) {
+    const expectedUser = process.env.INTERNAL_OPS_USER;
+    const expectedPass = process.env.INTERNAL_OPS_PASS;
+    if (expectedUser && expectedPass) {
+      const expectedEncoded = btoa(`${expectedUser}:${expectedPass}`);
+      const currentCookie = req.cookies.get(INTERNAL_OPS_COOKIE)?.value;
+      if (currentCookie !== expectedEncoded) {
+        const res = NextResponse.next();
+        res.cookies.set(INTERNAL_OPS_COOKIE, expectedEncoded, {
+          httpOnly: true,
+          sameSite: "lax",
+          secure: true,
+          path: "/",
+          maxAge: 60 * 60 * 8,
+        });
+        return res;
+      }
+    }
   }
 
   // LEGACY_SHOW_NUMERIC_IDS
