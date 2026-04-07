@@ -21,6 +21,15 @@ function parseSessionKey(sessionKey: string | null | undefined) {
   };
 }
 
+function getFallbackServiceDate(order: InternalOrderRow) {
+  return (
+    stringValue(order.booking?.date) ||
+    stringValue(order.booking?.eventDate) ||
+    stringValue(order.rezdyBookingPayload?.date) ||
+    stringValue(order.rezdyBookingPayload?.eventDate)
+  );
+}
+
 function getProductLabel(productCode: string | null | undefined) {
   if (!productCode) return "Unknown product";
   if (productCode === "shared-denver") return "Shared Shuttle - Denver";
@@ -34,6 +43,7 @@ function getPickupLabel(order: InternalOrderRow, fallback: string) {
   const pickup = order.pickup ?? null;
   return (
     stringValue(pickup?.label) ||
+    stringValue(pickup?.address) ||
     stringValue(pickup?.location) ||
     stringValue(pickup?.name) ||
     fallback
@@ -53,6 +63,15 @@ function getSeats(order: InternalOrderRow) {
 
 export function normalizeInternalOrder(order: InternalOrderRow): OpsOrder {
   const parsedSession = parseSessionKey(order.sessionKey);
+  const isShared = (order.productCode || "").startsWith("shared-");
+  const fallbackServiceDate = getFallbackServiceDate(order);
+  const serviceDate = parsedSession.serviceDate || fallbackServiceDate || null;
+  const departureLabel = parsedSession.serviceDate
+    ? parsedSession.departureLabel
+    : isShared
+      ? "Unscheduled"
+      : "Private Car";
+  const pickupFallback = isShared ? parsedSession.pickupLabel : "Private pickup";
   const paymentState = getOrderPaymentState(order);
   const workflowState = getOrderWorkflowState(order);
   const totalDue = numberValue(order.payment?.totalDue);
@@ -76,9 +95,9 @@ export function normalizeInternalOrder(order: InternalOrderRow): OpsOrder {
     productCode: order.productCode ?? null,
     productLabel: getProductLabel(order.productCode),
     sessionKey: order.sessionKey ?? null,
-    serviceDate: parsedSession.serviceDate,
-    departureLabel: parsedSession.departureLabel,
-    pickupLabel: getPickupLabel(order, parsedSession.pickupLabel),
+    serviceDate,
+    departureLabel,
+    pickupLabel: getPickupLabel(order, pickupFallback),
     seats: getSeats(order),
     bookingStatus: stringValue(order.booking?.status) || "n/a",
     paymentState,
