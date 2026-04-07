@@ -15,7 +15,7 @@ export const runtime = "nodejs";
 type OpsUpdateBody = {
   action?: "update_ops" | "update_payment" | "reassign" | "cancel";
   notes?: string;
-  followUpStatus?: "new" | "contacted" | "waiting" | "resolved";
+  followUpStatus?: "new" | "contacted" | "waiting" | "resolved" | "needs_review";
   markPaymentRequestSent?: boolean;
   paymentAction?: InternalOrderPaymentAction;
   amountPaidDollars?: number;
@@ -91,7 +91,8 @@ export async function PATCH(
     body.followUpStatus !== "new" &&
     body.followUpStatus !== "contacted" &&
     body.followUpStatus !== "waiting" &&
-    body.followUpStatus !== "resolved"
+    body.followUpStatus !== "resolved" &&
+    body.followUpStatus !== "needs_review"
   ) {
     return NextResponse.json({ error: "Invalid followUpStatus" }, { status: 400 });
   }
@@ -133,16 +134,30 @@ export async function PATCH(
   }
 
   if (body.action === "reassign") {
-    const updated = await updateInternalOrderScheduleById(internalOrderId, {
-      productCode: body.productCode,
-      sessionKey: body.sessionKey,
-      pickup: body.pickup ? { label: body.pickup } : null,
-      reason: body.reason,
-    });
-    if (!updated) {
-      return NextResponse.json({ error: "Order not found" }, { status: 404 });
+    try {
+      const result = await updateInternalOrderScheduleById(internalOrderId, {
+        productCode: body.productCode,
+        sessionKey: body.sessionKey,
+        pickup: body.pickup ? { label: body.pickup } : null,
+        reason: body.reason,
+      });
+      if (!result.order) {
+        return NextResponse.json({ error: "Order not found" }, { status: 404 });
+      }
+      return NextResponse.json({
+        ok: true,
+        order: result.order,
+        reassignment: {
+          warnings: result.warnings,
+          flaggedForReview: result.flaggedForReview,
+        },
+      });
+    } catch (error) {
+      return NextResponse.json(
+        { error: error instanceof Error ? error.message : "Reassignment failed" },
+        { status: 400 }
+      );
     }
-    return NextResponse.json({ ok: true, order: updated });
   }
 
   if (body.action === "cancel") {

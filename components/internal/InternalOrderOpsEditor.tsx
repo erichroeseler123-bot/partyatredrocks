@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 
-type FollowUpStatus = "new" | "contacted" | "waiting" | "resolved";
+type FollowUpStatus = "new" | "contacted" | "waiting" | "resolved" | "needs_review";
 
 export default function InternalOrderOpsEditor({
   internalOrderId,
@@ -60,6 +60,7 @@ export default function InternalOrderOpsEditor({
         <option value="new">new</option>
         <option value="contacted">contacted</option>
         <option value="waiting">waiting</option>
+        <option value="needs_review">needs_review</option>
         <option value="resolved">resolved</option>
       </select>
       <input

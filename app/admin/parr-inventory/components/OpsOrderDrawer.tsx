@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
+import { reviewReassignmentDraft } from "@/lib/parr/fleet";
 import type { OpsOrder } from "@/lib/parr/ops/types";
 
 function formatDateTime(value: string | null) {
@@ -27,10 +28,14 @@ async function patchOrder(orderId: string, body: Record<string, unknown>) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
   });
-  const data = (await response.json().catch(() => ({}))) as { error?: string };
+  const data = (await response.json().catch(() => ({}))) as {
+    error?: string;
+    reassignment?: { warnings?: string[]; flaggedForReview?: boolean };
+  };
   if (!response.ok) {
     throw new Error(data.error || "Update failed");
   }
+  return data;
 }
 
 export default function OpsOrderDrawer({
@@ -53,6 +58,13 @@ export default function OpsOrderDrawer({
   const [pickup, setPickup] = useState(order.pickupLabel || "");
   const [moveReason, setMoveReason] = useState("");
   const [cancelReason, setCancelReason] = useState("");
+  const [reassignmentWarnings, setReassignmentWarnings] = useState<string[]>([]);
+  const draftReassignment = reviewReassignmentDraft({
+    productCode,
+    sessionKey,
+    pickupLabel: pickup,
+    fallbackServiceDate: order.serviceDate,
+  });
 
   function refresh() {
     startTransition(() => router.refresh());
@@ -93,14 +105,16 @@ export default function OpsOrderDrawer({
   async function saveReassignment() {
     setStatusText("");
     try {
-      await patchOrder(order.orderId, {
+      const data = await patchOrder(order.orderId, {
         action: "reassign",
         productCode,
         sessionKey,
         pickup,
         reason: moveReason,
       });
-      setStatusText("Departure updated");
+      const warnings = data.reassignment?.warnings || [];
+      setReassignmentWarnings(warnings);
+      setStatusText(data.reassignment?.flaggedForReview ? "Departure updated and marked needs review" : "Departure updated");
       setMoveReason("");
       refresh();
     } catch (error) {
@@ -163,6 +177,7 @@ export default function OpsOrderDrawer({
             <option value="new">new</option>
             <option value="contacted">contacted</option>
             <option value="waiting">waiting</option>
+            <option value="needs_review">needs_review</option>
             <option value="resolved">resolved</option>
           </select>
           <button
@@ -256,6 +271,26 @@ export default function OpsOrderDrawer({
 
       <div className="mt-6 rounded-2xl border border-white/10 bg-black/20 p-4">
         <div className="text-xs uppercase tracking-[0.16em] text-white/45">Reassign departure</div>
+        {draftReassignment.malformedReason || draftReassignment.warnings.length || reassignmentWarnings.length ? (
+          <div className="mt-2 rounded-xl border border-amber-400/25 bg-amber-500/10 p-3 text-sm text-amber-100">
+            {draftReassignment.malformedReason ? <div>{draftReassignment.malformedReason}</div> : null}
+            {draftReassignment.warnings.map((warning) => (
+              <div key={`draft-${warning}`} className="mt-1">
+                {warning}
+              </div>
+            ))}
+            {reassignmentWarnings
+              .filter((warning) => !draftReassignment.warnings.includes(warning))
+              .map((warning) => (
+                <div key={`saved-${warning}`} className="mt-1">
+                  {warning}
+                </div>
+              ))}
+            <div className="mt-2 text-xs text-amber-50/80">
+              Suspicious reassignments are preserved and marked needs review. They are not treated as clean schedule truth.
+            </div>
+          </div>
+        ) : null}
         <select
           value={productCode}
           onChange={(event) => setProductCode(event.target.value)}

@@ -6,6 +6,11 @@ import path from "node:path";
 import { randomUUID } from "node:crypto";
 import { blobReadJson, blobWriteJson } from "@/lib/blobJson";
 import { appendBookingLedgerRow } from "@/lib/bookingLedger";
+import {
+  assignPrivateInventory,
+  type FleetOwner,
+  reviewReassignmentDraft,
+} from "@/lib/parr/fleet";
 type SqliteStatement = {
   run: (...args: unknown[]) => unknown;
   get: (...args: unknown[]) => unknown;
@@ -25,7 +30,7 @@ type SqliteModule = {
 let sqliteModulePromise: Promise<SqliteModule | null> | null = null;
 
 type JsonRecord = Record<string, unknown>;
-type FollowUpStatus = "new" | "contacted" | "waiting" | "resolved";
+type FollowUpStatus = "new" | "contacted" | "waiting" | "resolved" | "needs_review";
 type OperatorPaymentStep = "none" | "request_sent" | "paid";
 
 export type InternalOrderRow = {
@@ -71,9 +76,22 @@ function asFollowUpStatus(value: unknown): FollowUpStatus | null {
   return value === "new" ||
     value === "contacted" ||
     value === "waiting" ||
-    value === "resolved"
+    value === "resolved" ||
+    value === "needs_review"
     ? value
     : null;
+}
+
+function stringValue(value: unknown): string | null {
+  return typeof value === "string" && value.trim() ? value.trim() : null;
+}
+
+function patchInventoryOwner(record: JsonRecord | null | undefined, owner: FleetOwner | null) {
+  if (!owner) return record ?? null;
+  return {
+    ...(record ?? {}),
+    inventoryOwner: owner,
+  } satisfies JsonRecord;
 }
 
 function asOperatorPaymentStep(value: unknown): OperatorPaymentStep | null {
@@ -1320,9 +1338,13 @@ export async function updateInternalOrderScheduleById(
     pickup?: JsonRecord | null;
     reason?: string | null;
   }
-): Promise<InternalOrderRow | null> {
+): Promise<{
+  order: InternalOrderRow | null;
+  warnings: string[];
+  flaggedForReview: boolean;
+}> {
   const existing = await getInternalOrderById(internalOrderId);
-  if (!existing) return null;
+  if (!existing) return { order: null, warnings: [], flaggedForReview: false };
 
   const nextProductCode = typeof input.productCode === "string" && input.productCode.trim()
     ? input.productCode.trim()
@@ -1331,6 +1353,40 @@ export async function updateInternalOrderScheduleById(
     ? input.sessionKey.trim() || null
     : existing.sessionKey ?? null;
   const nextPickup = input.pickup ?? existing.pickup ?? null;
+  const allOrders = await listInternalOrders();
+  const review = reviewReassignmentDraft({
+    productCode: nextProductCode,
+    sessionKey: nextSessionKey,
+    pickupLabel: stringValue(nextPickup?.label),
+    fallbackServiceDate:
+      stringValue(existing.booking?.date) ||
+      stringValue(existing.booking?.eventDate) ||
+      stringValue(existing.rezdyBookingPayload?.date) ||
+      stringValue(existing.rezdyBookingPayload?.eventDate),
+  });
+  if (review.malformedReason) {
+    throw new Error(review.malformedReason);
+  }
+  const inferredOwner: FleetOwner | null =
+    typeof nextProductCode === "string" && nextProductCode.startsWith("shared-")
+      ? "parr"
+      : review.serviceDate && nextProductCode
+        ? assignPrivateInventory(allOrders, {
+            serviceDate: review.serviceDate,
+            productCode: nextProductCode,
+            excludeInternalOrderId: internalOrderId,
+          }).owner
+        : nextProductCode
+          ? "parr"
+          : null;
+  const flaggedForReview = review.warnings.length > 0;
+  const nextFollowUpStatus: FollowUpStatus = flaggedForReview
+    ? "needs_review"
+    : existing.followUpStatus ?? "new";
+  const nextBooking = patchInventoryOwner(existing.booking, inferredOwner);
+  const nextPayment = patchInventoryOwner(existing.payment, inferredOwner);
+  const nextRezdyBookingPayload = patchInventoryOwner(existing.rezdyBookingPayload, inferredOwner);
+  const nextPickupPatched = patchInventoryOwner(nextPickup, inferredOwner);
   const touchedAt = new Date().toISOString();
 
   if (useBlobOrderStore()) {
@@ -1343,7 +1399,11 @@ export async function updateInternalOrderScheduleById(
               ...order,
               productCode: nextProductCode,
               sessionKey: nextSessionKey,
-              pickup: nextPickup,
+              booking: nextBooking,
+              payment: nextPayment,
+              rezdyBookingPayload: nextRezdyBookingPayload,
+              pickup: nextPickupPatched,
+              followUpStatus: nextFollowUpStatus,
               lastTouchedAt: touchedAt,
             }
       )
@@ -1354,11 +1414,18 @@ export async function updateInternalOrderScheduleById(
       updatedAt: touchedAt,
       productCode: nextProductCode,
       sessionKey: nextSessionKey,
-      pickup: nextPickup,
+      pickup: nextPickupPatched,
+      inventoryOwner: inferredOwner,
+      followUpStatus: nextFollowUpStatus,
+      warnings: review.warnings,
       reason: input.reason?.trim() || null,
     });
     await saveBlobOrderStore(store);
-    return store.orders.find((order) => order.internalOrderId === internalOrderId) ?? null;
+    return {
+      order: store.orders.find((order) => order.internalOrderId === internalOrderId) ?? null,
+      warnings: review.warnings,
+      flaggedForReview,
+    };
   }
 
   const db = await openDb();
@@ -1368,10 +1435,24 @@ export async function updateInternalOrderScheduleById(
         `UPDATE orders
          SET productCode = ?,
              sessionKey = ?,
+             bookingJson = ?,
+             paymentJson = ?,
              pickupJson = ?,
+             rezdyBookingPayloadJson = ?,
+             followUpStatus = ?,
              lastTouchedAt = ?
          WHERE internalOrderId = ?`
-      ).run(nextProductCode, nextSessionKey, asJson(nextPickup), touchedAt, internalOrderId);
+      ).run(
+        nextProductCode,
+        nextSessionKey,
+        asJson(nextBooking),
+        asJson(nextPayment),
+        asJson(nextPickupPatched),
+        asJson(nextRezdyBookingPayload),
+        nextFollowUpStatus,
+        touchedAt,
+        internalOrderId
+      );
 
       db.prepare(
         `INSERT INTO order_events (
@@ -1392,8 +1473,11 @@ export async function updateInternalOrderScheduleById(
           to: {
             productCode: nextProductCode ?? null,
             sessionKey: nextSessionKey,
-            pickup: nextPickup,
+            pickup: nextPickupPatched,
+            inventoryOwner: inferredOwner,
+            followUpStatus: nextFollowUpStatus,
           },
+          warnings: review.warnings,
           reason: input.reason?.trim() || null,
         })
       );
@@ -1411,17 +1495,21 @@ export async function updateInternalOrderScheduleById(
     productCode: nextProductCode,
     sessionKey: nextSessionKey,
     customer: existing.customer,
-    booking: existing.booking,
-    payment: existing.payment,
-    pickup: nextPickup,
-    rezdyBookingPayload: existing.rezdyBookingPayload,
+    booking: nextBooking,
+    payment: nextPayment,
+    pickup: nextPickupPatched,
+    rezdyBookingPayload: nextRezdyBookingPayload,
     notes: existing.notes ?? null,
-    followUpStatus: existing.followUpStatus ?? "new",
+    followUpStatus: nextFollowUpStatus,
     operatorPaymentStep: existing.operatorPaymentStep ?? "none",
     paymentRequestSentAt: existing.paymentRequestSentAt ?? null,
   });
 
-  return getInternalOrderById(internalOrderId);
+  return {
+    order: await getInternalOrderById(internalOrderId),
+    warnings: review.warnings,
+    flaggedForReview,
+  };
 }
 
 export async function cancelInternalOrderById(

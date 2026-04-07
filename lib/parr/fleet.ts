@@ -1,4 +1,5 @@
 import type { InternalOrderRow } from "@/lib/orders";
+import { PRIVATE_RIDE_OPTIONS } from "@/lib/rideCatalog";
 
 export type FleetOwner = "parr" | "friend_fleet";
 
@@ -44,8 +45,99 @@ export const PRIVATE_INVENTORY_POOLS: PrivateInventoryPool[] = [
   },
 ];
 
+const SHARED_LANE_BY_PRODUCT: Record<string, "denver" | "golden"> = {
+  "shared-denver": "denver",
+  "shared-golden": "golden",
+};
+
+const PRIVATE_PRODUCT_CODES = new Set<string>(PRIVATE_RIDE_OPTIONS.map((option) => option.dccProduct));
+
+export type ReassignmentReview = {
+  malformedReason: string | null;
+  warnings: string[];
+  serviceDate: string | null;
+  sharedLane: "denver" | "golden" | null;
+};
+
 function stringValue(value: unknown): string | null {
   return typeof value === "string" && value.trim() ? value.trim() : null;
+}
+
+function parseScheduleKey(sessionKey: string | null | undefined) {
+  const trimmed = stringValue(sessionKey);
+  if (!trimmed) {
+    return { serviceDate: null, lane: null as "denver" | "golden" | null, rawLane: null as string | null };
+  }
+  const match = trimmed.match(/^(\d{4}-\d{2}-\d{2})(?::([a-z0-9-]+))?$/i);
+  if (!match) {
+    return { serviceDate: null, lane: null as "denver" | "golden" | null, rawLane: null as string | null };
+  }
+  const rawLane = typeof match[2] === "string" && match[2].trim() ? match[2].trim().toLowerCase() : null;
+  const lane: "denver" | "golden" | null =
+    rawLane === "denver" || rawLane === "golden" ? rawLane : null;
+  return { serviceDate: match[1], lane, rawLane };
+}
+
+export function reviewReassignmentDraft(input: {
+  productCode: string | null | undefined;
+  sessionKey: string | null | undefined;
+  pickupLabel?: string | null | undefined;
+  fallbackServiceDate?: string | null | undefined;
+}): ReassignmentReview {
+  const warnings: string[] = [];
+  const productCode = stringValue(input.productCode);
+  const pickupLabel = stringValue(input.pickupLabel)?.toLowerCase() || null;
+  const parsedSchedule = parseScheduleKey(input.sessionKey);
+  const fallbackServiceDate = stringValue(input.fallbackServiceDate);
+  const expectedSharedLane = productCode ? SHARED_LANE_BY_PRODUCT[productCode] || null : null;
+  const isShared = !!expectedSharedLane;
+  const isKnownPrivate = !!productCode && PRIVATE_PRODUCT_CODES.has(productCode);
+
+  if (!productCode) {
+    return {
+      malformedReason: "Choose a product before saving reassignment.",
+      warnings,
+      serviceDate: parsedSchedule.serviceDate || fallbackServiceDate,
+      sharedLane: parsedSchedule.lane,
+    };
+  }
+
+  if (!isShared && !isKnownPrivate) {
+    return {
+      malformedReason: `Unknown product code "${productCode}".`,
+      warnings,
+      serviceDate: parsedSchedule.serviceDate || fallbackServiceDate,
+      sharedLane: parsedSchedule.lane,
+    };
+  }
+
+  if (isShared) {
+    if (!parsedSchedule.serviceDate || !parsedSchedule.rawLane) {
+      warnings.push("Shared shuttle reassignment should use a session like 2026-04-18:denver or 2026-04-18:golden.");
+    } else if (parsedSchedule.lane !== expectedSharedLane) {
+      warnings.push(`Session lane ${parsedSchedule.rawLane} does not match ${expectedSharedLane} shuttle inventory.`);
+    }
+    if (pickupLabel && !pickupLabel.includes(expectedSharedLane)) {
+      warnings.push(`Pickup label does not mention ${expectedSharedLane}. Review before trusting this shuttle assignment.`);
+    }
+  } else {
+    if (parsedSchedule.rawLane === "denver" || parsedSchedule.rawLane === "golden") {
+      warnings.push("Private rides should not use a Denver or Golden shuttle lane session key.");
+    }
+    if (!parsedSchedule.serviceDate && !fallbackServiceDate) {
+      warnings.push("Private reassignment has no service date. It will stay preserved but should be reviewed.");
+    }
+    if (!PRIVATE_INVENTORY_POOLS.some((pool) => pool.productCode === productCode)) {
+      warnings.push("This private product does not have a fleet pool configured yet. Review owner assignment before operations.");
+    }
+  }
+
+  return {
+    malformedReason: null,
+    warnings,
+    serviceDate: parsedSchedule.serviceDate || fallbackServiceDate,
+    sharedLane: parsedSchedule.lane,
+  };
 }
 
 export function getFleetOwnerLabel(owner: FleetOwner | null | undefined) {

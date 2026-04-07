@@ -30,6 +30,7 @@ export function getOrderWorkflowState(order: InternalOrderRow): OpsWorkflowState
 
   if (bookingStatus === "canceled" || bookingStatus === "cancelled") return "canceled";
   if (paymentState === "manual_review") return "needs_review";
+  if (followUp === "needs_review") return "needs_review";
   if (followUp === "resolved") return "resolved";
   if (followUp === "waiting" || order.operatorPaymentStep === "request_sent") return "waiting";
   if (paymentState === "paid" || bookingStatus === "confirmed") return "confirmed";
