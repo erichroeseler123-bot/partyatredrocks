@@ -70,6 +70,7 @@ export function getOrderFleetOwner(order: InternalOrderRow): FleetOwner | null {
     stringValue(order.payment?.inventoryOwner);
   if (raw === "parr" || raw === "friend_fleet") return raw;
   if ((order.productCode || "").startsWith("shared-")) return "parr";
+  if (order.productCode) return "parr";
   return null;
 }
 
