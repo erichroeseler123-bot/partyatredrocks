@@ -22,7 +22,7 @@ const VEHICLE_OPTIONS: VehicleOption[] = [
     key: "suv",
     title: "Suburban SUV",
     checkoutProduct: "parr-suburban",
-    basePrice: "$499",
+    basePrice: "$449",
     capacity: "Up to 6 guests",
     copy: "Best for couples and smaller groups who want one clean private plan.",
   },

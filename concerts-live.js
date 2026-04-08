@@ -34,7 +34,7 @@
           Book Shuttle ($59)
         </a>
         <a class="btn btn-private" href="/private">
-          Private Suburban ($499)
+          Private Suburban ($449)
         </a>
       `;
 

@@ -44,7 +44,7 @@ export default function HomeBookingSteps() {
                 Book shuttle
               </Link>
               <Link href="/private-suburban" className="btn-secondary">
-                Private Suburban — $499
+                Private Suburban — $449
               </Link>
             </div>
           </div>

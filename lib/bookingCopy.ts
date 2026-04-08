@@ -1,7 +1,7 @@
 export const BOOKING_COPY = {
   meta: {
     layoutDescription:
-      "Book Red Rocks shuttle transportation from Denver and Golden. Fixed pricing, pickup details before the ride, and a return plan after the show. Shuttle seats from $59/pp or Private SUV from $499.",
+      "Book Red Rocks shuttle transportation from Denver and Golden. Fixed pricing, pickup details before the ride, and a return plan after the show. Shuttle seats from $59/pp or Private SUV from $449.",
     homeDescription:
       "Shared and private Red Rocks shuttles from Denver, Golden, and Morrison. Fixed pricing, guaranteed return, private SUVs, vans, Sprinters, and group ride planning.",
     businessDescription:
@@ -9,7 +9,7 @@ export const BOOKING_COPY = {
     sharedBookingDescription:
       "Book Red Rocks shared shuttle seats from Denver or Golden. Fixed pricing, one-hour-before-doors pickup timing, secure checkout, and a guaranteed ride home after the show.",
     privateBookingDescription:
-      "Private shuttle from Denver to Red Rocks. SUV $499, 10-pass van $599, Sprinter $799, guaranteed return, limo-lane access, and optional liquor stop planning.",
+      "Private shuttle from Denver to Red Rocks. SUV $449, 10-pass van $599, Sprinter $799, guaranteed return, limo-lane access, and optional liquor stop planning.",
   },
   labels: {
     sharedRideTitle: "Shared Shuttle",

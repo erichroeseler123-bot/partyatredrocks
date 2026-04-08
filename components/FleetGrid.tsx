@@ -79,7 +79,7 @@ export default function FleetGrid() {
             height={720}
           />
           <span className="absolute top-4 right-4 bg-white text-black font-black text-[10px] px-3 py-1 rounded-full shadow-lg">
-            $499.00
+            $449.00
           </span>
         </div>
         <div>

@@ -196,7 +196,7 @@ export default async function PrivateOptionsPage({
         <section id="suv-booking" className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 sm:p-8">
           <div className="text-[22px] font-black uppercase tracking-[0.18em] text-[#ffb07c] sm:text-[24px]">Step 1</div>
           <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">
-            Private Suburban - Up To 6 People - $499
+            Private Suburban - Up To 6 People - $449
           </h2>
           <p className="mt-3 max-w-2xl text-[15px] leading-7 text-white/74">
             Start here with the Suburban for most groups. Tailgating is built in, and the vehicle stays parked in the same spot waiting for your group until the show ends.
@@ -233,7 +233,7 @@ export default async function PrivateOptionsPage({
                   ))}
                 </ul>
                 <div className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-full border border-[#62f6ff] bg-[#62f6ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#05111a] shadow-[0_18px_40px_rgba(61,243,255,0.24)] transition group-hover:bg-[#8cf8ff] sm:w-auto">
-                  Book Private Suburban - $499
+                  Book Private Suburban - $449
                 </div>
               </div>
             </Link>

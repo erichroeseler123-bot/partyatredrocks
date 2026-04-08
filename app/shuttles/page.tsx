@@ -26,7 +26,7 @@ const rideCards = [
   },
   {
     title: "Private SUV",
-    price: "$499",
+    price: "$449",
     copy:
       "Best for small groups that want one vehicle, Upper North limo-lane access, and time to tailgate before the show.",
     target: "private-option" as const,

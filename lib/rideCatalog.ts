@@ -25,9 +25,9 @@ export const PRIVATE_RIDE_OPTIONS = [
   {
     slug: "suv",
     title: "Private SUV",
-    eyebrow: "$499 • Up to 6 Guests",
+    eyebrow: "$449 • Up to 6 Guests",
     body: "Private ride for smaller groups that want limo-lane access and time to tailgate before the show.",
-    priceLabel: "$499",
+    priceLabel: "$449",
     dccProduct: "parr-suburban",
     ctaLabel: "Start SUV Checkout",
   },

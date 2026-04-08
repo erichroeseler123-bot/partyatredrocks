@@ -22,7 +22,7 @@ const SERVICES: Service[] = [
   },
   {
     title: "Private SUV",
-    price: "$499",
+    price: "$449",
     note: "flat rate",
     bullets: ["Just your group", "Flexible pickup timing", "Direct return after the show"],
     href: "/private-suburban",

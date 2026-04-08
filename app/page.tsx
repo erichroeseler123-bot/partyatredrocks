@@ -105,7 +105,7 @@ export default async function HomePage() {
         {
           "@type": "Offer",
           priceCurrency: "USD",
-          price: "499",
+          price: "449",
           itemOffered: {
             "@type": "Service",
             name: "Private SUV to Red Rocks",

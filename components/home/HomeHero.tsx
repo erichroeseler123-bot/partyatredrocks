@@ -27,7 +27,7 @@ export default function HomeHero() {
 
         <p className="mt-6 max-w-3xl text-strong text-lg md:text-2xl font-medium leading-relaxed">
           Fixed pricing. Pro drivers. Reliable post-show return.
-          <span className="text-strong/80"> Shuttle seats $59–$65/pp or Private Suburban $499.</span>
+          <span className="text-strong/80"> Shuttle seats $59–$65/pp or Private Suburban $449.</span>
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row gap-3">
@@ -35,7 +35,7 @@ export default function HomeHero() {
             Book shuttle
           </Link>
           <Link href="/private-suburban" className="btn-ghost border-red-500/30 bg-red-500/10 text-red-100 hover:bg-red-500/15">
-            Private Suburban — $499
+            Private Suburban — $449
           </Link>
         </div>
       </div>

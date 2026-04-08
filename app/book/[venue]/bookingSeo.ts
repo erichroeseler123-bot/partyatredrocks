@@ -106,7 +106,7 @@ export function buildVenueBookingJsonLd(input: { venue: string; venueName: strin
 
 export function buildPrivateBookingMetadata(venue: string): Metadata {
   const canonical = `${SITE}/book/${venue}/private`;
-  const title = "Private Red Rocks Shuttle from Denver | $499 SUV - $799 Sprinter - Guaranteed Return";
+  const title = "Private Red Rocks Shuttle from Denver | $449 SUV - $799 Sprinter - Guaranteed Return";
   return {
     title,
     description: BOOKING_COPY.meta.privateBookingDescription,

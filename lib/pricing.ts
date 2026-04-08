@@ -1,6 +1,6 @@
 export const SHUTTLE_PRICING = {
   redRocks: {
-    suburban: "$499 round-trip (up to 6-7 passengers)",
+    suburban: "$449 round-trip (up to 6-7 passengers)",
     van10: "$699 round-trip",
     van14: "$799 round-trip",
     bus20: "$1,000 round-trip",

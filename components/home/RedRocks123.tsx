@@ -17,7 +17,7 @@ const STEPS: Step[] = [
   {
     n: "2",
     title: "Private Suburban",
-    desc: "$499 flat • your group only",
+    desc: "$449 flat • your group only",
     href: "/private-suburban",
   },
   {

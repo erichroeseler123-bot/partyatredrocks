@@ -29,14 +29,14 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
   const rideCards = [
     {
       title: "Private Suburban",
-      subtitle: "$499 Suburban (up to 6)",
+      subtitle: "$449 Suburban (up to 6)",
       copy: "Most popular for groups",
       bullets: [
         "Tailgating + your car waits in the same spot during the show",
         "Door-to-door with liquor/grocery stop",
       ],
       href: "/book/red-rocks-amphitheatre/private",
-      cta: "Book Private Suburban - $499",
+      cta: "Book Private Suburban - $449",
       image: sprinterSrc,
       alt: "Approved Suburban SUV image for Red Rocks private transportation",
       accent: "orange" as const,
@@ -84,7 +84,7 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
                 How do you want to get to Red Rocks?
               </h1>
               <p className="mx-auto mt-5 max-w-4xl text-base leading-8 text-white/82 sm:text-lg">
-                $59 shared seats or a $499 private Suburban for up to 6 with tailgating, limo-lane access, door-to-door service, and the vehicle waiting in the same spot during the show.
+                $59 shared seats or a $449 private Suburban for up to 6 with tailgating, limo-lane access, door-to-door service, and the vehicle waiting in the same spot during the show.
               </p>
               <p className="mx-auto mt-3 max-w-3xl text-sm font-semibold uppercase tracking-[0.14em] text-white/72 sm:text-[13px]">
                 No waiting for Uber. No surge pricing. No chaos after the show.
