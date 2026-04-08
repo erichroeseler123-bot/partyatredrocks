@@ -65,6 +65,14 @@ export default function WeekClient({
     });
   }, [sorted, month, q]);
 
+  const displayEvents = useMemo(() => {
+    return filtered.map((event) => ({
+      ...event,
+      // The weekly lineup reads better with artist-led imagery than repeated ticketing art.
+      image: event.thumbnail || event.image,
+    }));
+  }, [filtered]);
+
   return (
     <main className="brand-page px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
       <section className="mx-auto w-full max-w-[var(--brand-max-page)]">
@@ -125,7 +133,7 @@ export default function WeekClient({
             <div className="brand-card rounded-[26px] p-6 text-sm text-white/72">No events match your current filter.</div>
           ) : (
             <CardGrid className="comic-grid mt-0">
-              {filtered.map((e) => (
+              {displayEvents.map((e) => (
                 <EventCard key={e.id} event={e} />
               ))}
             </CardGrid>

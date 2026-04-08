@@ -116,6 +116,17 @@ function formatMoney(value: unknown) {
   return typeof value === 'number' && Number.isFinite(value) ? `$${value.toFixed(2)}` : 'TBD';
 }
 
+function privateRideLabel(productCode: string | null | undefined, quantity: number) {
+  const normalized = typeof productCode === 'string' ? productCode.trim().toLowerCase() : '';
+  const count = Number.isFinite(quantity) && quantity > 0 ? Math.floor(quantity) : 1;
+
+  if (normalized === 'parr-suburban') return `${count} suburban${count === 1 ? '' : 's'}`;
+  if (normalized === 'parr-van-10') return `${count} van${count === 1 ? '' : 's'}`;
+  if (normalized === 'parr-sprinter-14') return `${count} sprinter${count === 1 ? '' : 's'}`;
+  if (normalized === 'parr-party-bus-24') return `${count} party bus${count === 1 ? '' : 'es'}`;
+  return `${count} private ride${count === 1 ? '' : 's'}`;
+}
+
 function canCancel(status: string, date: string | null | undefined) {
   if (!date) return false;
   if (status === 'cancelled' || status === 'expired') return false;
@@ -181,12 +192,16 @@ export default async function PublicBookingPage(
   const payment = readRecord(order.payment) ?? {};
   const rideType = typeof booking.rideType === 'string' ? booking.rideType : 'shared';
   const isSharedRide = rideType === 'shared';
+  const productCode = typeof order.productCode === 'string' ? order.productCode : null;
   const storedShow = asShowContext(booking.show) ?? asShowContext(payload.show);
   const status = typeof booking.status === 'string' ? booking.status : hold?.status || 'pending';
   const pickup = titleCasePickup(
     typeof payload.pickupHub === 'string' ? payload.pickupHub : hold?.pickupHub
   );
   const seats = typeof payload.qty === 'number' ? payload.qty : hold?.qty || 1;
+  const quantityLabel = isSharedRide
+    ? `${seats} seat${seats === 1 ? '' : 's'}`
+    : privateRideLabel(productCode, seats);
   const date = typeof payload.dateKey === 'string'
     ? payload.dateKey
     : typeof payload.date === 'string'
@@ -328,13 +343,18 @@ export default async function PublicBookingPage(
             <div className="mt-5 grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
               <div>
                 <h1 className="text-3xl font-black tracking-[-0.03em] text-white sm:text-4xl">
-                  {firstName ? `Thanks, ${firstName} - your shuttle is confirmed.` : 'Your shuttle is confirmed.'}
+                  {firstName
+                    ? `Thanks, ${firstName} - your ${isSharedRide ? 'shuttle' : 'private ride'} is confirmed.`
+                    : `Your ${isSharedRide ? 'shuttle' : 'private ride'} is confirmed.`}
                 </h1>
-                <p className="mt-3 max-w-2xl text-white/76">Your ride to Red Rocks is locked in. Your booking page is now the live source for pickup details, seat count, and any changes.</p>
+                <p className="mt-3 max-w-2xl text-white/76">
+                  Your ride to Red Rocks is locked in. Your booking page is now the live source for pickup details,
+                  {isSharedRide ? ' seat count,' : ' vehicle count,'} and any changes.
+                </p>
                 <div className="mt-5 flex flex-wrap gap-3 text-sm font-black uppercase tracking-[0.16em] text-white">
                   <span className={infoPillClass}>{pickup} pickup</span>
                   <span className={infoPillClass}>{formatShortDate(date)}</span>
-                  <span className={infoPillClass}>{seats} seat{seats === 1 ? '' : 's'}</span>
+                  <span className={infoPillClass}>{quantityLabel}</span>
                   <span className={`rounded-full border px-4 py-2 text-[12px] ${badge(status)}`}>Status: {label(status)}</span>
                 </div>
               </div>
@@ -396,7 +416,11 @@ export default async function PublicBookingPage(
             </div>
             <div className="rounded-[22px] border border-white/10 bg-black/20 p-5">
               <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/46">During The Ride</div>
-              <p className="mt-3 text-sm leading-7 text-white/76">Your seat count is set, your ride to the venue is covered, and your return ride after the show is already included.</p>
+              <p className="mt-3 text-sm leading-7 text-white/76">
+                {isSharedRide
+                  ? 'Your seat count is set, your ride to the venue is covered, and your return ride after the show is already included.'
+                  : 'Your vehicle is reserved, your ride to the venue is covered, and your return ride after the show is already included.'}
+              </p>
             </div>
             <div className="rounded-[22px] border border-white/10 bg-black/20 p-5">
               <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/46">Need Anything?</div>
@@ -428,7 +452,11 @@ export default async function PublicBookingPage(
                 </div>
                 <div>
                   <dt className="text-[11px] font-black uppercase tracking-[0.18em] text-white/46">Return Guarantee</dt>
-                  <dd className="mt-2 text-sm leading-6 text-white/82">Your return ride is built into this shuttle booking after the show.</dd>
+                  <dd className="mt-2 text-sm leading-6 text-white/82">
+                    {isSharedRide
+                      ? 'Your return ride is built into this shuttle booking after the show.'
+                      : 'Your return ride is built into this private booking after the show.'}
+                  </dd>
                 </div>
               </dl>
               <div className="mt-4 flex flex-wrap gap-3">

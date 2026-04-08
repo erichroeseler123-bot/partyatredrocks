@@ -1,5 +1,6 @@
 import "server-only";
 
+import { Fragment } from "react";
 import Link from "next/link";
 import { listInternalOrders, type InternalOrderRow as OrderRow } from "@/lib/orders";
 import InternalOrderOpsEditor from "@/components/internal/InternalOrderOpsEditor";
@@ -117,6 +118,11 @@ function operatorPaymentStepBadgeClass(step: string): string {
   if (step === "paid") return "bg-emerald-500/20 text-emerald-200 border-emerald-400/30";
   if (step === "request_sent") return "bg-cyan-500/20 text-cyan-200 border-cyan-400/30";
   return "bg-white/10 text-white/80 border-white/20";
+}
+
+function bookingHrefOf(row: OrderRow): string | null {
+  const token = typeof row.bookingToken === "string" ? row.bookingToken.trim() : "";
+  return token ? `/booking/${encodeURIComponent(token)}` : null;
 }
 
 export default async function InternalOrdersPage({
@@ -391,8 +397,323 @@ export default async function InternalOrdersPage({
           </div>
         </div>
 
-        <div className="comic-panel mt-4 overflow-x-auto">
-          <table className="w-full text-left text-sm">
+        <div className="comic-panel mt-4 md:hidden">
+          <div className="space-y-4">
+            {filteredOrders.map((row) => {
+              const bookingStatus =
+                row.booking && typeof row.booking.status === "string" ? row.booking.status : "n/a";
+              const paymentStatus =
+                row.payment && typeof row.payment.status === "string" ? row.payment.status : "n/a";
+              const handoffMode =
+                row.payment && typeof row.payment.handoffMode === "string" ? row.payment.handoffMode : "n/a";
+              const handoffUrl = handoffUrlOf(row);
+              const operatorAction = operatorActionOf(row);
+              const followUpStatus = followUpStatusOf(row);
+              const notes = typeof row.notes === "string" ? row.notes : "";
+              const operatorPaymentStep =
+                row.operatorPaymentStep === "request_sent" || row.operatorPaymentStep === "paid"
+                  ? row.operatorPaymentStep
+                  : "none";
+              const canMarkPaymentRequestSent =
+                handoffMode === "manual" &&
+                (paymentStatus === "unpaid" || paymentStatus === "partial") &&
+                operatorPaymentStep !== "paid";
+              const orderNumber =
+                row.booking && typeof row.booking.orderNumber === "string"
+                  ? row.booking.orderNumber
+                  : (row.rezdyBookingReference ?? "n/a");
+              const bookingHref = bookingHrefOf(row);
+
+              return (
+                <article key={`mobile-${row.internalOrderId}`} className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <div className="text-[11px] uppercase tracking-[0.16em] text-white/55">Customer</div>
+                      <div className="mt-1 text-base font-black text-white">{customerName(row.customer)}</div>
+                    </div>
+                    <span
+                      className={`inline-flex rounded-full border px-2 py-1 text-[10px] uppercase tracking-[0.12em] ${paymentBadgeClass(
+                        paymentStatus
+                      )}`}
+                    >
+                      {paymentStatus}
+                    </span>
+                  </div>
+                  <div className="mt-4 grid grid-cols-2 gap-3 text-xs">
+                    <div>
+                      <div className="text-white/55">Created</div>
+                      <div className="mt-1 text-white">{formatCreatedAt(row.createdAt)}</div>
+                    </div>
+                    <div>
+                      <div className="text-white/55">Last Touched</div>
+                      <div className="mt-1 text-white">{row.lastTouchedAt ? formatCreatedAt(row.lastTouchedAt) : "n/a"}</div>
+                    </div>
+                    <div>
+                      <div className="text-white/55">Product</div>
+                      <div className="mt-1 text-white">{row.productCode || "n/a"}</div>
+                    </div>
+                    <div>
+                      <div className="text-white/55">Order Number</div>
+                      <div className="mt-1 text-white">{orderNumber}</div>
+                    </div>
+                    <div>
+                      <div className="text-white/55">Booking</div>
+                      <div className="mt-1 text-white">{bookingStatus}</div>
+                    </div>
+                    <div>
+                      <div className="text-white/55">Handoff</div>
+                      <div className="mt-1 text-white">{handoffMode}</div>
+                    </div>
+                    <div>
+                      <div className="text-white/55">Total Due</div>
+                      <div className="mt-1 text-white">{formatAmount(row.payment?.totalDue)}</div>
+                    </div>
+                    <div>
+                      <div className="text-white/55">Total Paid</div>
+                      <div className="mt-1 text-white">{formatAmount(row.payment?.totalPaid)}</div>
+                    </div>
+                    <div className="col-span-2">
+                      <div className="text-white/55">Email</div>
+                      <div className="mt-1 break-all text-white">{customerEmail(row.customer)}</div>
+                    </div>
+                    <div className="col-span-2">
+                      <div className="text-white/55">Internal ID</div>
+                      <div className="mt-1 break-all font-mono text-white/90">{row.internalOrderId}</div>
+                    </div>
+                  </div>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {bookingHref ? (
+                      <Link href={bookingHref} className="comic-btn comic-btn-secondary">
+                        View Booking
+                      </Link>
+                    ) : null}
+                    {handoffUrl ? (
+                      <a
+                        href={handoffUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="comic-btn comic-btn-secondary"
+                      >
+                        Payment Link
+                      </a>
+                    ) : null}
+                  </div>
+                  {operatorAction ? <div className="mt-4 text-xs text-white/70">{operatorAction}</div> : null}
+                  <div className="mt-4">
+                    <div className="mb-2 flex items-center gap-2">
+                      <span
+                        className={`inline-flex rounded-full border px-2 py-1 text-[10px] uppercase tracking-[0.12em] ${followUpBadgeClass(
+                          followUpStatus
+                        )}`}
+                      >
+                        {followUpStatus}
+                      </span>
+                      <span
+                        className={`inline-flex rounded-full border px-2 py-1 text-[10px] uppercase tracking-[0.12em] ${operatorPaymentStepBadgeClass(
+                          operatorPaymentStep
+                        )}`}
+                      >
+                        {operatorPaymentStep}
+                      </span>
+                    </div>
+                    <InternalOrderOpsEditor
+                      internalOrderId={row.internalOrderId}
+                      initialNotes={notes}
+                      initialFollowUpStatus={followUpStatus}
+                      canMarkPaymentRequestSent={canMarkPaymentRequestSent}
+                      paymentRequestSentAt={row.paymentRequestSentAt ?? null}
+                      operatorPaymentStep={operatorPaymentStep}
+                    />
+                  </div>
+                </article>
+              );
+            })}
+            {filteredOrders.length === 0 ? (
+              <div className="py-3 text-sm text-muted">No orders for this filter.</div>
+            ) : null}
+          </div>
+        </div>
+
+        <div className="comic-panel mt-4 hidden md:block lg:hidden">
+          <div className="overflow-x-auto">
+            <table className="min-w-full w-full text-left text-[13px] leading-5">
+              <thead>
+                <tr className="border-b border-white/10">
+                  <th className="py-2 pr-2">Created</th>
+                  <th className="py-2 pr-2">Product</th>
+                  <th className="py-2 pr-2">Order Number</th>
+                  <th className="py-2 pr-2">Booking Status</th>
+                  <th className="py-2 pr-2">Payment Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredOrders.map((row) => {
+                  const bookingStatus =
+                    row.booking && typeof row.booking.status === "string" ? row.booking.status : "n/a";
+                  const paymentStatus =
+                    row.payment && typeof row.payment.status === "string" ? row.payment.status : "n/a";
+                  const handoffMode =
+                    row.payment && typeof row.payment.handoffMode === "string" ? row.payment.handoffMode : "n/a";
+                  const handoffUrl = handoffUrlOf(row);
+                  const operatorAction = operatorActionOf(row);
+                  const followUpStatus = followUpStatusOf(row);
+                  const notes = typeof row.notes === "string" ? row.notes : "";
+                  const operatorPaymentStep =
+                    row.operatorPaymentStep === "request_sent" || row.operatorPaymentStep === "paid"
+                      ? row.operatorPaymentStep
+                      : "none";
+                  const canMarkPaymentRequestSent =
+                    handoffMode === "manual" &&
+                    (paymentStatus === "unpaid" || paymentStatus === "partial") &&
+                    operatorPaymentStep !== "paid";
+                  const orderNumber =
+                    row.booking && typeof row.booking.orderNumber === "string"
+                      ? row.booking.orderNumber
+                      : (row.rezdyBookingReference ?? "n/a");
+                  const bookingHref = bookingHrefOf(row);
+
+                  return (
+                    <Fragment key={row.internalOrderId}>
+                      <tr key={row.internalOrderId} className="border-b border-white/5 align-top">
+                        <td className="py-2 pr-2 whitespace-nowrap">{formatCreatedAt(row.createdAt)}</td>
+                        <td className="py-2 pr-2">{row.productCode || "n/a"}</td>
+                        <td className="py-2 pr-2 max-w-[180px]">
+                          <span className="block truncate font-medium text-white/90" title={orderNumber}>
+                            {orderNumber}
+                          </span>
+                        </td>
+                        <td className="py-2 pr-2">{bookingStatus}</td>
+                        <td className="py-2 pr-2">
+                          <span
+                            className={`inline-flex rounded-full border px-2 py-1 text-[10px] uppercase tracking-[0.12em] ${paymentBadgeClass(
+                              paymentStatus
+                            )}`}
+                          >
+                            {paymentStatus}
+                          </span>
+                        </td>
+                      </tr>
+                      <tr className="border-b border-white/10">
+                        <td colSpan={5} className="pb-3 pt-1">
+                          <div className="rounded-2xl border border-white/8 bg-white/[0.03] px-3 py-3">
+                            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3 text-xs text-white/78">
+                              <div>
+                                <div className="text-white/48 uppercase tracking-[0.14em] text-[10px]">Last Touched</div>
+                                <div className="mt-1">{row.lastTouchedAt ? formatCreatedAt(row.lastTouchedAt) : "n/a"}</div>
+                              </div>
+                              <div>
+                                <div className="text-white/48 uppercase tracking-[0.14em] text-[10px]">Age</div>
+                                <div className="mt-1">
+                                  <span
+                                    className={`inline-flex rounded-full border px-2 py-1 text-[10px] uppercase tracking-[0.12em] ${ageBadgeClass(
+                                      row.createdAt
+                                    )}`}
+                                  >
+                                    {ageLabel(row.createdAt)}
+                                  </span>
+                                </div>
+                              </div>
+                              <div>
+                                <div className="text-white/48 uppercase tracking-[0.14em] text-[10px]">Handoff</div>
+                                <div className="mt-1">{handoffMode}</div>
+                              </div>
+                              <div className="sm:col-span-2 xl:col-span-3">
+                                <div className="text-white/48 uppercase tracking-[0.14em] text-[10px]">Handoff Detail</div>
+                                <div className="mt-1 break-all">
+                                  {handoffMode === "url" && handoffUrl ? (
+                                    <a
+                                      href={handoffUrl}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="underline text-white/80"
+                                    >
+                                      payment link
+                                    </a>
+                                  ) : handoffMode === "manual" ? (
+                                    operatorAction || "Send payment request from Rezdy dashboard."
+                                  ) : (
+                                    "n/a"
+                                  )}
+                                </div>
+                              </div>
+                              <div>
+                                <div className="text-white/48 uppercase tracking-[0.14em] text-[10px]">Payment Ops</div>
+                                <div className="mt-1">
+                                  <span
+                                    className={`inline-flex rounded-full border px-2 py-1 text-[10px] uppercase tracking-[0.12em] ${operatorPaymentStepBadgeClass(
+                                      operatorPaymentStep
+                                    )}`}
+                                  >
+                                    {operatorPaymentStep}
+                                  </span>
+                                </div>
+                              </div>
+                              <div>
+                                <div className="text-white/48 uppercase tracking-[0.14em] text-[10px]">Links</div>
+                                <div className="mt-1 flex flex-wrap gap-3">
+                                  {bookingHref ? (
+                                    <Link href={bookingHref} className="underline text-white/80">
+                                      booking page
+                                    </Link>
+                                  ) : null}
+                                  {handoffUrl ? (
+                                    <a
+                                      href={handoffUrl}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="underline text-white/80"
+                                    >
+                                      payment link
+                                    </a>
+                                  ) : null}
+                                </div>
+                              </div>
+                              <div className="sm:col-span-2 xl:col-span-3">
+                                <div className="text-white/48 uppercase tracking-[0.14em] text-[10px]">Order ID</div>
+                                <div className="mt-1 font-mono text-[11px] break-all text-white/62" title={row.internalOrderId}>
+                                  {row.internalOrderId}
+                                </div>
+                              </div>
+                              <div className="sm:col-span-2 xl:col-span-3">
+                                <div className="mb-2 flex items-center gap-2">
+                                  <span
+                                    className={`inline-flex rounded-full border px-2 py-1 text-[10px] uppercase tracking-[0.12em] ${followUpBadgeClass(
+                                      followUpStatus
+                                    )}`}
+                                  >
+                                    {followUpStatus}
+                                  </span>
+                                </div>
+                                <InternalOrderOpsEditor
+                                  internalOrderId={row.internalOrderId}
+                                  initialNotes={notes}
+                                  initialFollowUpStatus={followUpStatus}
+                                  canMarkPaymentRequestSent={canMarkPaymentRequestSent}
+                                  paymentRequestSentAt={row.paymentRequestSentAt ?? null}
+                                  operatorPaymentStep={operatorPaymentStep}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </Fragment>
+                  );
+                })}
+                {filteredOrders.length === 0 ? (
+                  <tr>
+                    <td className="py-3 text-muted" colSpan={5}>
+                      No orders for this filter.
+                    </td>
+                  </tr>
+                ) : null}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className="comic-panel mt-4 hidden overflow-x-auto lg:block">
+          <table className="min-w-[1440px] w-full text-left text-sm">
             <thead>
               <tr className="border-b border-white/10">
                 <th className="py-2 pr-3">Created</th>
@@ -410,6 +731,7 @@ export default async function InternalOrdersPage({
                 <th className="py-2 pr-3">Customer</th>
                 <th className="py-2 pr-3">Email</th>
                 <th className="py-2 pr-3">Session</th>
+                <th className="py-2 pr-3">Links</th>
                 <th className="py-2 pr-3">Follow-up</th>
                 <th className="py-2 pr-3">Ops</th>
               </tr>
@@ -438,6 +760,7 @@ export default async function InternalOrdersPage({
                   row.booking && typeof row.booking.orderNumber === "string"
                     ? row.booking.orderNumber
                     : (row.rezdyBookingReference ?? "n/a");
+                const bookingHref = bookingHrefOf(row);
 
                 return (
                   <tr key={row.internalOrderId} className="border-b border-white/5 align-top">
@@ -498,6 +821,28 @@ export default async function InternalOrdersPage({
                     <td className="py-2 pr-3">{customerEmail(row.customer)}</td>
                     <td className="py-2 pr-3">{row.sessionKey || "n/a"}</td>
                     <td className="py-2 pr-3">
+                      <div className="flex min-w-[120px] flex-col gap-2">
+                        {bookingHref ? (
+                          <Link href={bookingHref} className="underline text-white/80">
+                            booking page
+                          </Link>
+                        ) : null}
+                        {handoffUrl ? (
+                          <a
+                            href={handoffUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="underline text-white/80"
+                          >
+                            payment link
+                          </a>
+                        ) : null}
+                        <span className="break-all font-mono text-[10px] text-white/45">
+                          {row.internalOrderId}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="py-2 pr-3">
                       <span
                         className={`inline-flex rounded-full border px-2 py-1 text-[10px] uppercase tracking-[0.12em] ${followUpBadgeClass(
                           followUpStatus
@@ -521,7 +866,7 @@ export default async function InternalOrdersPage({
               })}
               {filteredOrders.length === 0 ? (
                 <tr>
-                  <td className="py-3 text-muted" colSpan={17}>
+                  <td className="py-3 text-muted" colSpan={18}>
                     No orders for this filter.
                   </td>
                 </tr>

@@ -7,7 +7,7 @@ export default function BookingTerminal({ productType }: { productType: 'shared'
   // Placeholder for a future real-time inventory sync
   useEffect(() => {
     async function syncInventory() {
-      // Logic to fetch availability for product IDs (Shared: $1 / Private: $499)
+      // Logic to fetch availability for product IDs (Shared: $1 / Private: $449)
     }
     syncInventory();
   }, [productType]);

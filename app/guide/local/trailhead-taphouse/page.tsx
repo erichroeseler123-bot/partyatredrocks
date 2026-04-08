@@ -27,7 +27,7 @@ export default function TrailheadHub() {
     name: "Party at Red Rocks",
     url: "https://www.partyatredrocks.com",
     image: shareImage,
-    priceRange: "$59-$499",
+    priceRange: "$59-$449",
     areaServed: ["Golden, CO", "Morrison, CO", "Denver Metro"],
   };
 

@@ -124,6 +124,10 @@ export default function SharedCheckoutStatus({ internalOrderId, initialStatus = 
   const paymentLabel = paymentStatus === 'paid' ? 'paid' : isProcessing ? 'processing' : 'not paid';
   const bookingToken = typeof status?.order?.bookingToken === 'string' ? status.order.bookingToken : '';
   const bookingHref = bookingToken ? `/booking/${bookingToken}` : '';
+  const heading = isConfirmed ? 'Thank you. Your booking is confirmed.' : 'Your Red Rocks ride is being finalized.';
+  const intro = isConfirmed
+    ? 'Your payment went through and your shared shuttle seats are locked in. Your booking page is now the live source of truth for ride details.'
+    : 'We keep checking your Square payment in the background so this page can update on its own instead of leaving you guessing.';
 
   const tone = useMemo(() => {
     if (isConfirmed) {
@@ -156,9 +160,9 @@ export default function SharedCheckoutStatus({ internalOrderId, initialStatus = 
             <span>Shared checkout</span>
             <span className="rounded-full border border-white/12 bg-white/6 px-3 py-1 text-white/72">Order {internalOrderId.slice(0, 8)}</span>
           </div>
-          <h1 className="mt-4 max-w-2xl text-3xl font-black uppercase tracking-[-0.04em] sm:text-5xl">Your Red Rocks ride is being finalized.</h1>
+          <h1 className="mt-4 max-w-2xl text-3xl font-black uppercase tracking-[-0.04em] sm:text-5xl">{heading}</h1>
           <p className="mt-4 max-w-2xl text-sm leading-7 text-white/74 sm:text-base">
-            We keep checking your Square payment in the background so this page can update on its own instead of leaving you guessing.
+            {intro}
           </p>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
@@ -193,7 +197,11 @@ export default function SharedCheckoutStatus({ internalOrderId, initialStatus = 
                 <div className="rounded-[24px] border border-white/10 bg-black/20 p-5">
                   <div className="text-[11px] font-black uppercase tracking-[0.18em] text-white/46">What happens next</div>
                   <div className="mt-4 grid gap-3 text-sm text-white/76">
-                    <div className="rounded-[18px] border border-white/10 bg-white/[0.04] px-4 py-3">Square finishes processing and we match the payment to this booking.</div>
+                    <div className="rounded-[18px] border border-white/10 bg-white/[0.04] px-4 py-3">
+                      {isConfirmed
+                        ? 'Your payment is already matched to this booking.'
+                        : 'Square finishes processing and we match the payment to this booking.'}
+                    </div>
                     <div className="rounded-[18px] border border-white/10 bg-white/[0.04] px-4 py-3">Your booking page becomes the source of truth for seats, pickup, and any changes.</div>
                     <div className="rounded-[18px] border border-white/10 bg-white/[0.04] px-4 py-3">You should receive both the Square receipt and a Party at Red Rocks confirmation email.</div>
                   </div>

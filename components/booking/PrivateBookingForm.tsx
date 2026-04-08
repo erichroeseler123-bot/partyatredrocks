@@ -32,6 +32,7 @@ type CheckoutState = {
   internalOrderId: string;
   bookingToken: string;
   squareOrderId: string;
+  totalDue: number;
 };
 
 type SquareCard = {
@@ -235,9 +236,17 @@ export function PrivateBookingForm({
         });
 
         const data = (await response.json().catch(() => null)) as
-          | { error?: string; internalOrderId?: string; bookingToken?: string; squareOrderId?: string }
+          | { error?: string; internalOrderId?: string; bookingToken?: string; squareOrderId?: string; totalDue?: number }
           | null;
-        if (!response.ok || !data?.internalOrderId || !data?.bookingToken || !data?.squareOrderId) {
+        if (
+          !response.ok ||
+          !data?.internalOrderId ||
+          !data?.bookingToken ||
+          !data?.squareOrderId ||
+          typeof data.totalDue !== "number" ||
+          !Number.isFinite(data.totalDue) ||
+          data.totalDue <= 0
+        ) {
           throw new Error(data?.error || "Unable to start private checkout.");
         }
 
@@ -245,6 +254,7 @@ export function PrivateBookingForm({
           internalOrderId: data.internalOrderId,
           bookingToken: data.bookingToken,
           squareOrderId: data.squareOrderId,
+          totalDue: data.totalDue,
         };
         setCheckoutState(activeCheckout);
       }
@@ -263,7 +273,9 @@ export function PrivateBookingForm({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           internalOrderId: activeCheckout.internalOrderId,
+          bookingToken: activeCheckout.bookingToken,
           squareOrderId: activeCheckout.squareOrderId,
+          totalDue: activeCheckout.totalDue,
           sourceId: tokenResult.token,
           dccHandoffId: firstValue(searchParams, "dcc_handoff_id") || "",
         }),
@@ -348,9 +360,7 @@ export function PrivateBookingForm({
             <div className="mt-2 text-lg font-black text-white">
               {option.priceLabel} x {vehicleQty} = {estimatedTotalLabel}
             </div>
-            <div className="mt-2 text-white/64">
-              Fixed vehicle pricing. For April service dates, use code APRILSHOWERS50 at checkout for $50 off. Total shown here is before any promo is applied.
-            </div>
+            <div className="mt-2 text-white/64">Fixed vehicle pricing. Total shown here is before tax.</div>
           </div>
         </div>
       </section>
@@ -451,9 +461,7 @@ export function PrivateBookingForm({
           <div className="rounded-[20px] border border-white/10 bg-[#0d1629] px-4 py-4">
             <div id="private-square-card-container" className="min-h-16" />
           </div>
-          <p className="text-xs text-white/52">
-            Secure card entry is powered by Square and stays on Party at Red Rocks. April service dates can use APRILSHOWERS50 for $50 off.
-          </p>
+          <p className="text-xs text-white/52">Secure card entry is powered by Square and stays on Party at Red Rocks.</p>
           {cardError ? <div className="rounded-[18px] border border-rose-400/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-100">{cardError}</div> : null}
           {!cardError && !cardReady ? <div className="rounded-[18px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/72">Loading secure card entry...</div> : null}
         </div>

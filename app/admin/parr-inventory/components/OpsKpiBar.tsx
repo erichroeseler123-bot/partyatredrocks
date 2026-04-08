@@ -15,7 +15,7 @@ export default function OpsKpiBar({
 }) {
   const items = [
     { label: "bookings", value: totalOrders, tone: "border-white/15 bg-white/5 text-white" },
-    { label: "seats", value: totalSeats, tone: "border-cyan-400/30 bg-cyan-500/15 text-cyan-100" },
+    { label: "units", value: totalSeats, tone: "border-cyan-400/30 bg-cyan-500/15 text-cyan-100" },
     { label: "unpaid", value: unpaidOrders, tone: "border-amber-400/30 bg-amber-500/15 text-amber-100" },
     { label: "needs review", value: needsReview, tone: "border-red-400/30 bg-red-500/15 text-red-100" },
     { label: "waiting", value: waiting, tone: "border-indigo-400/30 bg-indigo-500/15 text-indigo-100" },

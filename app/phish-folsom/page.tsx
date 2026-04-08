@@ -98,7 +98,7 @@ export default function PhishFolsomPage() {
           <h3 className="comic-h3 mt-6">Your Shuttle Pricing for Phish Runs</h3>
           <div className="comic-copy mt-4 space-y-2">
             <p>
-              <strong>Red Rocks rates (if applicable for side shows)</strong>: Suburban $499, 10-pass van $699,
+              <strong>Red Rocks rates (if applicable for side shows)</strong>: Suburban $449, 10-pass van $699,
               14-pass van $799, 20-pass bus $1,000 round-trip
             </p>
             <p>
