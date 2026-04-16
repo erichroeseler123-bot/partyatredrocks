@@ -520,7 +520,12 @@ export async function confirmSharedPayment(input: {
   }
 
   if (hold.status === "confirmed") return { alreadyConfirmed: true as const };
-  if (hold.status !== "pending") throw new Error(`Shared hold is ${hold.status}.`);
+  if (hold.status === "cancelled") {
+    throw new Error("Shared hold was cancelled before payment confirmation.");
+  }
+  if (hold.status !== "pending" && hold.status !== "expired") {
+    throw new Error(`Shared hold is ${hold.status}.`);
+  }
 
   hold.status = "confirmed";
   hold.paidAt = new Date().toISOString();
