@@ -1,9 +1,15 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { packDccTelemetry, readHandoffContext } from '@/lib/handoff/readContext';
+import {
+  MARRIOTT_WEST_PICKUP_ID,
+  isMarriottWestPickup,
+} from '@/lib/parr/marriottWestManager';
 import { PARR_PUBLIC_FACTS } from '@/lib/publicOperatorFacts';
 import { normalizePhoneNumber, PHONE_COUNTRY_OPTIONS, type SupportedPhoneCountry } from '@/lib/phone';
 import { SHARED_PRICE_PER_SEAT } from '@/lib/sharedPricing';
+import { trackParrEvent } from '@/lib/telemetry';
 
 type SearchParams = Record<string, string | string[] | undefined>;
 
@@ -26,10 +32,13 @@ type Inventory = {
 };
 
 type CheckoutState = {
-  internalOrderId: string;
+  checkoutSessionId: string;
+  checkoutSnapshotToken: string;
   expiresAt: string;
   squareOrderId: string;
 };
+
+type PublicPickupOptionId = 'denver' | 'golden' | typeof MARRIOTT_WEST_PICKUP_ID;
 
 type SquareCard = {
   attach: (selector: string) => Promise<void>;
@@ -133,17 +142,24 @@ export default function CustomBooking({
   squareLocationId,
   squareSdkUrl,
 }: Props) {
+  const handoffContext = useMemo(
+    () => readHandoffContext(searchParams || {}),
+    [searchParams],
+  );
   const initialDate = firstValue(searchParams, 'date') || '';
   const initialArtist = firstValue(searchParams, 'artist') || '';
   const initialEvent = firstValue(searchParams, 'event') || '';
-  const initialPickupHub = firstValue(searchParams, 'pickupHub') === 'golden' || firstValue(searchParams, 'city') === 'golden'
-    ? 'golden'
-    : 'denver';
+  const requestedPickupLabel = firstValue(searchParams, 'pickupLabel') || firstValue(searchParams, 'requests') || '';
+  const initialPickupOption: PublicPickupOptionId = isMarriottWestPickup(requestedPickupLabel)
+    ? MARRIOTT_WEST_PICKUP_ID
+    : firstValue(searchParams, 'pickupHub') === 'golden' || firstValue(searchParams, 'city') === 'golden'
+      ? 'golden'
+      : 'denver';
   const initialQty = Math.max(1, Number(firstValue(searchParams, 'qty')) || 1);
 
   const [date, setDate] = useState(initialDate);
   const [artist, setArtist] = useState(initialArtist);
-  const [pickupHub, setPickupHub] = useState<'denver' | 'golden'>(initialPickupHub);
+  const [pickupOption, setPickupOption] = useState<PublicPickupOptionId>(initialPickupOption);
   const [quantity, setQuantity] = useState(initialQty);
   const [inventory, setInventory] = useState<Inventory | null>(null);
   const [inventoryLoading, setInventoryLoading] = useState(false);
@@ -163,6 +179,12 @@ export default function CustomBooking({
     phone: '',
     notes: '',
   });
+  const pickupHub: 'denver' | 'golden' = pickupOption === 'denver' ? 'denver' : 'golden';
+  const pickupFacts = pickupOption === 'denver'
+    ? PARR_PUBLIC_FACTS.pickups.denver
+    : pickupOption === 'golden'
+      ? PARR_PUBLIC_FACTS.pickups.golden
+      : PARR_PUBLIC_FACTS.pickups[MARRIOTT_WEST_PICKUP_ID];
 
   useEffect(() => {
     let active = true;
@@ -267,6 +289,7 @@ export default function CustomBooking({
             venue,
             date,
             pickupHub,
+            pickupLabel: pickupFacts.name,
             qty: quantity,
             artist,
             event,
@@ -284,7 +307,8 @@ export default function CustomBooking({
 
         const checkoutData = await readJsonResponse<{
           error?: string;
-          internalOrderId: string;
+          checkoutSessionId: string;
+          checkoutSnapshotToken?: string;
           expiresAt: string;
           squareOrderId: string;
           availableAfterHold: number;
@@ -292,10 +316,30 @@ export default function CustomBooking({
         if (!checkoutRes.ok) throw new Error(checkoutData.error || 'Failed to start checkout');
 
         activeCheckout = {
-          internalOrderId: checkoutData.internalOrderId,
+          checkoutSessionId: checkoutData.checkoutSessionId,
+          checkoutSnapshotToken: checkoutData.checkoutSnapshotToken || '',
           expiresAt: checkoutData.expiresAt,
           squareOrderId: checkoutData.squareOrderId,
         };
+        trackParrEvent('checkout_started', {
+          corridor: 'parr',
+          page_type: 'shared_checkout',
+          ...packDccTelemetry(handoffContext),
+          source_page: window.location.pathname,
+          target_path: `/book/${venue}/custom/shared`,
+          venue,
+          pickup_hub: pickupHub,
+          pickup_label: pickupFacts.name,
+          qty: quantity,
+          date,
+          artist,
+          event,
+          decision_corridor: handoffContext.decisionCorridor || 'red-rocks-transport',
+          decision_action: handoffContext.decisionAction || 'book_shared_red_rocks_shuttle',
+          decision_option: handoffContext.decisionOption || 'shuttle',
+          decision_product: handoffContext.decisionProduct || 'shared-red-rocks-shuttle-seat',
+          product_slug: handoffContext.productSlug || 'shared-red-rocks-shuttle-seat',
+        });
         setCheckoutState(activeCheckout);
         setInventory((current) => current ? { ...current, available: checkoutData.availableAfterHold, reserved: current.capacity - checkoutData.availableAfterHold } : current);
       }
@@ -314,7 +358,8 @@ export default function CustomBooking({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          internalOrderId: activeCheckout.internalOrderId,
+          checkoutSessionId: activeCheckout.checkoutSessionId,
+          checkoutSnapshotToken: activeCheckout.checkoutSnapshotToken,
           squareOrderId: activeCheckout.squareOrderId,
           sourceId: tokenResult.token,
           dccHandoffId: firstValue(searchParams, 'dcc_handoff_id') || '',
@@ -324,7 +369,7 @@ export default function CustomBooking({
       const paymentData = await readJsonResponse<{ error?: string; successUrl: string }>(paymentRes, 'Failed to process payment');
       if (paymentRes.status === 404) {
         setCheckoutState(null);
-        throw new Error('Your checkout hold expired. Click Pay again to start a fresh order.');
+        throw new Error('We could not find that checkout hold. Click Pay again to start a fresh order.');
       }
       if (!paymentRes.ok) throw new Error(paymentData.error || 'Failed to process payment');
 
@@ -341,41 +386,57 @@ export default function CustomBooking({
   return (
     <div className="space-y-6 sm:pb-8">
       <section className="rounded-[26px] border border-white/10 bg-[#09101f] p-5 sm:p-6">
-        <StepLabel step={1} title="Pickup Location" />
-        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+        <StepLabel step={1} title="Choose Pickup" />
+        <div className="mt-4 grid gap-3 sm:grid-cols-3">
           {([
             {
               id: 'denver' as const,
-              label: PARR_PUBLIC_FACTS.pickups.denver.cityLabel,
+              label: 'Downtown',
               detail: PARR_PUBLIC_FACTS.pickups.denver.shortLabel,
-              copy: 'Downtown pickup with hotel access and a simple pre-show meet point.',
+              copy: 'Best default for most Denver riders.',
+              recommended: true,
             },
             {
               id: 'golden' as const,
               label: PARR_PUBLIC_FACTS.pickups.golden.cityLabel,
               detail: PARR_PUBLIC_FACTS.pickups.golden.shortLabel,
-              copy: 'Golden pickup for riders who want the foothills-side departure option.',
+              copy: 'Best for west-side riders.',
+              recommended: false,
             },
-          ]).map((option) => {
-            const active = pickupHub === option.id;
+            {
+              id: MARRIOTT_WEST_PICKUP_ID,
+              label: PARR_PUBLIC_FACTS.pickups[MARRIOTT_WEST_PICKUP_ID].cityLabel,
+              detail: PARR_PUBLIC_FACTS.pickups[MARRIOTT_WEST_PICKUP_ID].shortLabel,
+              copy: 'Best for Marriott West hotel guests.',
+              recommended: false,
+            },
+          ] satisfies Array<{ id: PublicPickupOptionId; label: string; detail: string; copy: string; recommended: boolean }>).map((option) => {
+            const active = pickupOption === option.id;
             return (
               <button
                 key={option.id}
                 type="button"
-                onClick={() => setPickupHub(option.id)}
-                className={`rounded-[26px] border px-5 py-5 text-left transition ${active ? 'border-[#ffb07c]/50 bg-[#2a1a12] text-white shadow-[0_0_0_1px_rgba(255,176,124,0.16)]' : 'border-white/12 bg-black/20 text-white/76 hover:border-white/24 hover:text-white'}`}
+                onClick={() => setPickupOption(option.id)}
+                className={`rounded-[26px] border px-5 py-5 text-left transition ${active ? 'border-[#ffb07c]/50 bg-[#2a1a12] text-white shadow-[0_0_0_1px_rgba(255,176,124,0.16)]' : option.recommended ? 'border-[#8fd0ff]/28 bg-[#8fd0ff]/10 text-white hover:border-[#8fd0ff]/40 hover:bg-[#8fd0ff]/14' : 'border-white/12 bg-black/20 text-white/76 hover:border-white/24 hover:text-white'}`}
               >
                 <div className="flex h-full flex-col">
-                  <div className="flex items-center gap-3">
-                    <span className={`flex h-5 w-5 items-center justify-center rounded-full border ${active ? 'border-[#ffb07c] bg-[#ffb07c]/18' : 'border-white/24'}`}>
-                      <span className={`h-2.5 w-2.5 rounded-full ${active ? 'bg-[#ffb07c]' : 'bg-transparent'}`} />
-                    </span>
-                    <div className="text-sm font-black uppercase tracking-[0.14em]">{option.label} Pickup</div>
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                      <span className={`flex h-5 w-5 items-center justify-center rounded-full border ${active ? 'border-[#ffb07c] bg-[#ffb07c]/18' : option.recommended ? 'border-[#8fd0ff]/55 bg-[#8fd0ff]/12' : 'border-white/24'}`}>
+                        <span className={`h-2.5 w-2.5 rounded-full ${active ? 'bg-[#ffb07c]' : option.recommended ? 'bg-[#8fd0ff]/80' : 'bg-transparent'}`} />
+                      </span>
+                      <div className="text-sm font-black uppercase tracking-[0.14em]">{option.label}</div>
+                    </div>
+                    {option.recommended ? (
+                      <span className={`rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] ${active ? 'bg-[#ffb07c]/14 text-[#ffd7bf]' : 'bg-[#8fd0ff]/16 text-[#b7e3ff]'}`}>
+                        Recommended
+                      </span>
+                    ) : null}
                   </div>
                   <div className="mt-2 text-sm font-semibold text-white/72">{option.detail}</div>
                   <p className="mt-3 text-sm leading-6 text-white/72">{option.copy}</p>
                   <div className={`mt-4 inline-flex min-h-11 items-center justify-center rounded-full px-5 text-xs font-black uppercase tracking-[0.16em] ${active ? 'bg-[#ffb07c] text-[#1a0d07]' : 'border border-white/12 bg-white/6 text-white/78'}`}>
-                    Book
+                    {active ? 'Selected' : 'Choose'}
                   </div>
                 </div>
               </button>
@@ -385,7 +446,7 @@ export default function CustomBooking({
       </section>
 
       <section className="rounded-[26px] border border-white/10 bg-[#09101f] p-5 sm:p-6">
-        <StepLabel step={2} title="Show Date" />
+        <StepLabel step={2} title="Check Live Availability" />
         <div className="mt-4 grid gap-4 lg:grid-cols-2">
           <label className="space-y-2 text-sm text-white/74">
             <span className="text-[12px] font-black uppercase tracking-[0.18em] sm:text-[13px] text-white/54">Date</span>
@@ -402,7 +463,7 @@ export default function CustomBooking({
               type="text"
               value={artist}
               onChange={(event) => setArtist(event.target.value)}
-              placeholder="Optional, but helpful for operations"
+              placeholder="Optional, but helpful for your ride plan"
               className="w-full rounded-[20px] border border-white/12 bg-[#0d1629] px-4 py-3 text-white outline-none transition focus:border-[#8fd0ff]"
             />
           </label>
@@ -414,12 +475,12 @@ export default function CustomBooking({
               <div className="text-sm">Checking live seat count...</div>
             ) : inventory ? (
               <div className="space-y-2 text-sm">
-                <div className="text-[12px] font-black uppercase tracking-[0.18em] sm:text-[13px] text-current/80">Live Inventory</div>
+                <div className="text-[12px] font-black uppercase tracking-[0.18em] sm:text-[13px] text-current/80">Live Availability</div>
                 <div>
                   {inventory.available <= 6 ? 'Only' : ''} <span className="font-black text-white">{inventory.available}</span> seat{inventory.available === 1 ? '' : 's'} available
                 </div>
                 <div className="text-white/72">
-                  {pickupHub === 'golden' ? 'Golden' : 'Denver'} pickup · ${inventory.pricePerSeat}/seat · {inventory.holdTtlMinutes || 20} minute checkout hold
+                  {pickupFacts.cityLabel} pickup · ${inventory.pricePerSeat}/seat flat rate · {inventory.holdTtlMinutes || 20} minute checkout hold
                 </div>
               </div>
             ) : (
@@ -430,7 +491,7 @@ export default function CustomBooking({
       </section>
 
       <section className="rounded-[26px] border border-white/10 bg-[#09101f] p-5 sm:p-6">
-        <StepLabel step={3} title="Seats" />
+        <StepLabel step={3} title="Lock Your Seats" />
         <div className="mt-4 grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
           <label className="space-y-2 text-sm text-white/74">
             <span className="text-[12px] font-black uppercase tracking-[0.18em] sm:text-[13px] text-white/54">Number of seats</span>
@@ -445,12 +506,13 @@ export default function CustomBooking({
           <div className="rounded-[18px] border border-white/10 bg-black/20 px-4 py-4 text-sm text-white/82">
             <div className="text-[12px] font-black uppercase tracking-[0.18em] sm:text-[13px] text-white/52">Trip total</div>
             <div className="mt-2 text-lg font-black text-white">${inventory?.pricePerSeat ?? SHARED_PRICE_PER_SEAT} x {quantity} = {totalLabel}</div>
+            <div className="mt-2 text-sm text-white/62">Your return ride is included in this total.</div>
           </div>
         </div>
       </section>
 
       <section className="rounded-[26px] border border-white/10 bg-[#09101f] p-5 sm:p-6">
-        <StepLabel step={4} title="Your Info" />
+        <StepLabel step={4} title="Rider Details" />
         <div className="mt-4 space-y-4">
           <div className="grid gap-4 sm:grid-cols-2">
             <input type="text" name="firstName" autoComplete="given-name" value={formData.firstName} placeholder="First name" onChange={(event) => setFormData({ ...formData, firstName: event.target.value })} className="rounded-[18px] border border-white/12 bg-[#0d1629] px-4 py-3 text-white outline-none transition focus:border-[#8fd0ff]" />
@@ -484,12 +546,12 @@ export default function CustomBooking({
             </div>
           </div>
           <p className="text-xs text-white/52">Enter the number the way you normally would. We’ll format it correctly for checkout.</p>
-          <textarea value={formData.notes} placeholder="Pickup notes or rider details" onChange={(event) => setFormData({ ...formData, notes: event.target.value })} rows={4} className="w-full rounded-[18px] border border-white/12 bg-[#0d1629] px-4 py-3 text-white outline-none transition focus:border-[#8fd0ff]" />
+          <textarea value={formData.notes} placeholder="Pickup notes, hotel, or group details" onChange={(event) => setFormData({ ...formData, notes: event.target.value })} rows={4} className="w-full rounded-[18px] border border-white/12 bg-[#0d1629] px-4 py-3 text-white outline-none transition focus:border-[#8fd0ff]" />
         </div>
       </section>
 
       <section className="rounded-[26px] border border-white/10 bg-[#09101f] p-5 sm:p-6">
-        <StepLabel step={5} title="Payment" />
+        <StepLabel step={5} title="Secure Checkout" />
         <div className="mt-4 space-y-4">
           <div className="rounded-[20px] border border-white/10 bg-[#0d1629] px-4 py-4">
             <div id="square-card-container" className="min-h-16" />
@@ -505,7 +567,7 @@ export default function CustomBooking({
       {checkoutState ? (
         <div className="rounded-[18px] border border-emerald-400/30 bg-emerald-500/10 px-4 py-4 text-sm text-white/88">
           <div className="text-[11px] font-black uppercase tracking-[0.2em] text-emerald-200">Checkout hold active</div>
-          <div className="mt-2">Order: <span className="font-black text-white">{checkoutState.internalOrderId}</span></div>
+          <div className="mt-2">Session: <span className="font-black text-white">{checkoutState.checkoutSessionId}</span></div>
           <div>Hold expires: <span className="font-black text-white">{new Date(checkoutState.expiresAt).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}</span></div>
           <div className="mt-2 text-white/72">If card validation fails, fix the field and click Pay again. This same hold will be reused until it expires.</div>
         </div>
@@ -518,7 +580,7 @@ export default function CustomBooking({
           onClick={handleSubmit}
           className={`flex min-h-14 w-full items-center justify-center rounded-full px-6 text-sm font-black uppercase tracking-[0.16em] transition ${submitting || !cardReady || !date || !inventory || inventory.available < quantity ? 'cursor-not-allowed bg-white/10 text-white/45' : 'bg-[#3df3ff] text-[#07111d] hover:bg-[#62f6ff]'}`}
         >
-          {submitting ? 'We are processing your payment...' : `Pay ${totalLabel} on this site`}
+          {submitting ? 'We are processing your payment...' : `Lock In Ride For ${totalLabel}`}
         </button>
       </div>
     </div>
