@@ -22,6 +22,11 @@ function quantityLabel(order: OpsOrder) {
   return `${order.seats} vehicle${order.seats === 1 ? "" : "s"}`;
 }
 
+function buildBookingPageUrl(bookingToken: string | null) {
+  if (!bookingToken) return null;
+  return `https://www.partyatredrocks.com/booking/${encodeURIComponent(bookingToken)}`;
+}
+
 async function patchOrder(orderId: string, body: Record<string, unknown>) {
   const response = await fetch(`/api/internal/orders/${encodeURIComponent(orderId)}`, {
     method: "PATCH",
@@ -58,7 +63,9 @@ export default function OpsOrderDrawer({
   const [pickup, setPickup] = useState(order.pickupLabel || "");
   const [moveReason, setMoveReason] = useState("");
   const [cancelReason, setCancelReason] = useState("");
+  const [bookingLinkStatus, setBookingLinkStatus] = useState("");
   const [reassignmentWarnings, setReassignmentWarnings] = useState<string[]>([]);
+  const bookingPageUrl = buildBookingPageUrl(order.bookingToken);
   const draftReassignment = reviewReassignmentDraft({
     productCode,
     sessionKey,
@@ -137,6 +144,17 @@ export default function OpsOrderDrawer({
     }
   }
 
+  async function copyBookingPageLink() {
+    if (!bookingPageUrl) return;
+    setBookingLinkStatus("");
+    try {
+      await navigator.clipboard.writeText(bookingPageUrl);
+      setBookingLinkStatus("Copied");
+    } catch {
+      setBookingLinkStatus("Copy failed");
+    }
+  }
+
   return (
     <aside className="rounded-3xl border border-white/10 bg-white/5 p-5">
       <div className="text-xs uppercase tracking-[0.16em] text-orange-300">Selected order</div>
@@ -158,6 +176,41 @@ export default function OpsOrderDrawer({
         <div><div className="text-xs text-white/45">Inventory</div><div className="text-sm text-white">{order.inventoryLabel || order.productLabel}</div></div>
         <div><div className="text-xs text-white/45">Booking ref</div><div className="text-sm text-white">{order.bookingReference || "—"}</div></div>
         <div><div className="text-xs text-white/45">Session key</div><div className="text-sm text-white">{order.sessionKey || "—"}</div></div>
+      </div>
+
+      <div className="mt-5 rounded-2xl border border-cyan-400/25 bg-cyan-500/10 p-4">
+        <div className="text-xs uppercase tracking-[0.16em] text-cyan-100/70">Public booking page</div>
+        {bookingPageUrl ? (
+          <div className="mt-3 grid gap-3">
+            <input
+              readOnly
+              value={bookingPageUrl}
+              className="min-h-11 w-full rounded-xl border border-white/15 bg-black/40 px-3 font-mono text-xs text-cyan-50"
+            />
+            <div className="grid gap-2 sm:grid-cols-2">
+              <button
+                type="button"
+                onClick={copyBookingPageLink}
+                className="min-h-11 rounded-xl bg-cyan-300 px-4 text-sm font-black text-slate-950"
+              >
+                Copy booking page link
+              </button>
+              <a
+                href={bookingPageUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex min-h-11 items-center justify-center rounded-xl border border-white/15 bg-white/5 px-4 text-sm font-semibold text-white hover:bg-white/10"
+              >
+                Open page
+              </a>
+            </div>
+            {bookingLinkStatus ? <div className="text-xs font-semibold text-cyan-100">{bookingLinkStatus}</div> : null}
+          </div>
+        ) : (
+          <div className="mt-3 rounded-xl border border-amber-300/25 bg-amber-400/10 p-3 text-sm text-amber-100">
+            No booking token is saved on this order. Do not send the booking reference as a public link.
+          </div>
+        )}
       </div>
 
       <div className="mt-6 rounded-2xl border border-white/10 bg-black/20 p-4">
