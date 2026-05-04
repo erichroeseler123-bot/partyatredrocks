@@ -1,3 +1,9 @@
+import {
+  MARRIOTT_WEST_PICKUP_ID,
+  MARRIOTT_WEST_PICKUP_LABEL,
+  isMarriottWestPickup,
+} from "@/lib/parr/marriottWestManager";
+
 export const PARR_PUBLIC_FACTS = {
   operatorName: "Party at Red Rocks",
   support: {
@@ -10,7 +16,7 @@ export const PARR_PUBLIC_FACTS = {
       "Questions about pickup, payment, or your ride? Text 720-369-6292 or email hello@partyatredrocks.com.",
   },
   trustPoints: [
-    "Shared Denver and Golden pickup hubs",
+    "Shared Denver, Golden, and Marriott West pickup options",
     "Private SUV, van, Sprinter, and party bus options",
     "Return ride after the show",
   ],
@@ -76,12 +82,47 @@ export const PARR_PUBLIC_FACTS = {
         boardingCue: "When the shuttle is 5 minutes out, close out your tab and head to the front curb.",
       },
     },
+    [MARRIOTT_WEST_PICKUP_ID]: {
+      hubId: "golden",
+      cityLabel: "Marriott West",
+      shortLabel: MARRIOTT_WEST_PICKUP_LABEL,
+      name: MARRIOTT_WEST_PICKUP_LABEL,
+      address: "1717 Denver West Boulevard, Golden, CO 80401",
+      shortAddress: "1717 Denver West Blvd, Golden, CO 80401",
+      description:
+        "A hotel pickup for Denver Marriott West guests that still boards into the west-side Golden shared shuttle pool.",
+      instructions:
+        "Meet outside the main hotel entrance unless we text you otherwise. We will text the exact curbside pickup note before boarding.",
+      arrivalNote: "Arrive 10-15 minutes early so boarding stays easy for the whole hotel pickup group.",
+      googleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Denver%20Marriott%20West%201717%20Denver%20West%20Boulevard%20Golden%20CO%2080401",
+      mapsEmbedUrl:
+        "https://www.google.com/maps?q=Denver%20Marriott%20West%201717%20Denver%20West%20Boulevard%20Golden%20CO%2080401&z=17&output=embed",
+      websiteUrl: "https://www.marriott.com/en-us/hotels/dendw-denver-marriott-west/overview/",
+      websiteLabel: "Visit Hotel",
+      menuUrl: null,
+      menuLabel: null,
+      amenities: ["Hotel lobby nearby", "Bathrooms inside", "Easy west-side departure"],
+      meetup: {
+        landmark: "the main hotel entrance and front drive",
+        bestWaitSpot: "the Marriott West lobby seating",
+        waitInstructions: "Stay inside the lobby until the driver text lands, then head out to the hotel entrance.",
+        checkIn: "Your driver will check you in by the booking name tied to the reservation.",
+        arrivalText: "We will text a live pin and curbside note about 15 minutes before arrival.",
+        boardingCue: "When the shuttle is 5 minutes out, head to the front drive with your group.",
+      },
+    },
   },
 } as const;
 
 export type ParrPickupHubId = keyof typeof PARR_PUBLIC_FACTS.pickups;
 
 export function getParrPickupFacts(input: string | null | undefined) {
-  const key = input === "Golden" || input === "golden" ? "golden" : "denver";
+  const normalized = String(input || "").trim().toLowerCase();
+  const key = isMarriottWestPickup(input)
+    ? MARRIOTT_WEST_PICKUP_ID
+    : normalized === "golden" || normalized === "trailhead taphouse" || normalized.includes("golden")
+      ? "golden"
+      : "denver";
   return PARR_PUBLIC_FACTS.pickups[key];
 }
