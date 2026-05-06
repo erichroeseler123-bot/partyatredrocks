@@ -20,6 +20,25 @@ declare global {
 
 let squareScriptPromise: Promise<void> | null = null;
 
+function trackPayBalanceEvent(input: {
+  token: string;
+  eventType: "payment_page_viewed" | "balance_payment_initiated";
+  amountLabel: string;
+}) {
+  const payload = JSON.stringify(input);
+  if (typeof navigator !== "undefined" && "sendBeacon" in navigator) {
+    const blob = new Blob([payload], { type: "application/json" });
+    if (navigator.sendBeacon("/api/pay-balance/telemetry", blob)) return;
+  }
+
+  void fetch("/api/pay-balance/telemetry", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: payload,
+    keepalive: true,
+  }).catch(() => undefined);
+}
+
 function loadSquareSdk(src: string) {
   if (typeof window === "undefined") return Promise.reject(new Error("Square SDK requires a browser."));
   if (window.Square) return Promise.resolve();
@@ -65,6 +84,14 @@ export default function PayBalanceForm({
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    trackPayBalanceEvent({
+      token,
+      eventType: "payment_page_viewed",
+      amountLabel,
+    });
+  }, [amountLabel, token]);
+
+  useEffect(() => {
     let active = true;
 
     async function initSquareCard() {
@@ -98,6 +125,11 @@ export default function PayBalanceForm({
 
   async function submit() {
     if (!cardRef.current || busy) return;
+    trackPayBalanceEvent({
+      token,
+      eventType: "balance_payment_initiated",
+      amountLabel,
+    });
     setBusy(true);
     setError(null);
 

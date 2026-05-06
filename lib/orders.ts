@@ -594,6 +594,67 @@ export async function saveRezdyWebhookEvent(eventType: string, payload: unknown)
   });
 }
 
+export async function appendInternalOrderEvent(input: {
+  internalOrderId: string;
+  eventType: string;
+  bookingStatus?: string | null;
+  paymentStatus?: string | null;
+  payload?: unknown;
+}) {
+  const eventAt = new Date().toISOString();
+  const order = await getInternalOrderById(input.internalOrderId);
+  const paymentStatus = normalizePaymentStatus(input.paymentStatus ?? null);
+
+  if (useBlobOrderStore()) {
+    const store = await loadBlobOrderStore();
+    store.events.push({
+      createdAt: eventAt,
+      eventType: input.eventType,
+      internalOrderId: input.internalOrderId,
+      rezdyBookingReference: order?.rezdyBookingReference ?? null,
+      bookingStatus: input.bookingStatus ?? null,
+      paymentStatus,
+      payload: input.payload ?? null,
+    });
+    await saveBlobOrderStore(store);
+    return;
+  }
+
+  const db = await openDb();
+  if (db) {
+    try {
+      db.prepare(
+        `INSERT INTO order_events (
+          createdAt, eventType, rezdyBookingReference, bookingStatus, paymentStatus, payloadJson
+        ) VALUES (?, ?, ?, ?, ?, ?)`
+      ).run(
+        eventAt,
+        input.eventType,
+        order?.rezdyBookingReference ?? null,
+        input.bookingStatus ?? null,
+        paymentStatus,
+        asJson({
+          internalOrderId: input.internalOrderId,
+          ...(input.payload && typeof input.payload === "object" ? input.payload as Record<string, unknown> : { payload: input.payload ?? null }),
+        })
+      );
+    } finally {
+      db.close();
+    }
+  }
+
+  await appendBackupRow({
+    type: "internal.order.event",
+    eventType: input.eventType,
+    eventAt,
+    internalOrderId: input.internalOrderId,
+    rezdyBookingReference: order?.rezdyBookingReference ?? null,
+    bookingStatus: input.bookingStatus ?? null,
+    paymentStatus,
+    payload: input.payload ?? null,
+  });
+}
+
 
 export async function saveInternalOrderStateUpdate(input: OrderStateUpdateInput) {
   const updatedAt = new Date().toISOString();

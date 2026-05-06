@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import {
+  appendInternalOrderEvent,
   getInternalOrderByAnyReference,
   updateInternalOrderPaymentById,
 } from "@/lib/orders";
@@ -99,6 +100,19 @@ export async function POST(request: Request) {
           squarePaymentId: typeof payment.id === "string" ? payment.id : null,
         },
       });
+      await appendInternalOrderEvent({
+        internalOrderId: order.internalOrderId,
+        eventType: "balance_payment_completed",
+        bookingStatus: "confirmed",
+        paymentStatus: "paid",
+        payload: {
+          source: "pay_balance",
+          productCode: order.productCode ?? null,
+          squareOrderId: typeof payment.orderId === "string" ? payment.orderId : squareOrderId,
+          squarePaymentId: typeof payment.id === "string" ? payment.id : null,
+          totalPaid: totalDue,
+        },
+      }).catch(() => undefined);
     } else {
       const updated = await updateInternalOrderPaymentById(order.internalOrderId, {
         bookingStatus: "confirmed",
@@ -122,8 +136,10 @@ export async function POST(request: Request) {
           handoffUrl: null,
           operatorAction: "Balance payment completed on Party at Red Rocks.",
         },
-        eventType: "internal.order.balance_payment_completed",
+        eventType: "balance_payment_completed",
         payload: {
+          source: "pay_balance",
+          productCode: order.productCode ?? null,
           squareOrderId: typeof payment.orderId === "string" ? payment.orderId : squareOrderId,
           squarePaymentId: typeof payment.id === "string" ? payment.id : null,
           totalPaid: totalDue,
