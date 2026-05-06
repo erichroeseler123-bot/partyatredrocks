@@ -1005,6 +1005,51 @@ export async function getInternalOrderByBookingToken(
   return orders.find((order) => order.bookingToken === token) ?? null;
 }
 
+function normalizeLookupId(value: string | null | undefined) {
+  return String(value || "").trim().toLowerCase();
+}
+
+function compactLookupId(value: string | null | undefined) {
+  return normalizeLookupId(value).replace(/[^a-z0-9]/g, "");
+}
+
+function lookupCandidates(order: InternalOrderRow) {
+  return [
+    order.internalOrderId,
+    order.bookingToken,
+    order.rezdyBookingReference,
+    order.sessionKey,
+    typeof order.booking?.orderNumber === "string" ? order.booking.orderNumber : null,
+    typeof order.booking?.squareOrderId === "string" ? order.booking.squareOrderId : null,
+    typeof order.payment?.squareOrderId === "string" ? order.payment.squareOrderId : null,
+    typeof order.payment?.squarePaymentId === "string" ? order.payment.squarePaymentId : null,
+    typeof order.payment?.paymentLinkId === "string" ? order.payment.paymentLinkId : null,
+  ].filter((value): value is string => Boolean(value && value.trim()));
+}
+
+export async function getInternalOrderByAnyReference(
+  reference: string
+): Promise<InternalOrderRow | null> {
+  const raw = reference.trim();
+  if (!raw) return null;
+
+  const direct =
+    await getInternalOrderById(raw) ||
+    await getInternalOrderByBookingToken(raw) ||
+    await getInternalOrderByBookingReference(raw);
+  if (direct) return direct;
+
+  const normalized = normalizeLookupId(raw);
+  const compact = compactLookupId(raw);
+  const orders = await listInternalOrders();
+
+  return orders.find((order) =>
+    lookupCandidates(order).some((candidate) =>
+      normalizeLookupId(candidate) === normalized || compactLookupId(candidate) === compact
+    )
+  ) ?? null;
+}
+
 export async function updateInternalOrderPaymentById(
   internalOrderId: string,
   input: {
