@@ -1,5 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
+import { SquareError } from "square";
 import { getInternalOrderById, updateInternalOrderPaymentById } from "@/lib/orders";
 import { PRIVATE_RIDE_OPTIONS } from "@/lib/rideCatalog";
 import { sendSharedBookingConfirmation } from "@/lib/sharedConfirmation";
@@ -82,6 +83,57 @@ function resolvePrivateOrderTotalDue(order: Awaited<ReturnType<typeof getInterna
 function moneyAmountDollars(value: unknown) {
   const parsed = numberValue(value);
   return parsed && parsed > 0 ? parsed / 100 : null;
+}
+
+function squarePaymentError(error: unknown) {
+  if (!(error instanceof SquareError)) return null;
+
+  const squareError = error.errors[0];
+  const code = squareError?.code || "PAYMENT_FAILED";
+  const category = squareError?.category || "PAYMENT_METHOD_ERROR";
+
+  if (category === "PAYMENT_METHOD_ERROR") {
+    if (code === "INSUFFICIENT_FUNDS") {
+      return {
+        status: 402,
+        code,
+        category,
+        message: "The card was declined for insufficient funds. Please try another card or contact the card issuer.",
+      };
+    }
+
+    if (code === "CVV_FAILURE" || code === "VERIFY_CVV_FAILURE") {
+      return {
+        status: 402,
+        code,
+        category,
+        message: "The card security code was declined. Please check the CVV and try again.",
+      };
+    }
+
+    if (code === "ADDRESS_VERIFICATION_FAILURE" || code === "VERIFY_AVS_FAILURE") {
+      return {
+        status: 402,
+        code,
+        category,
+        message: "The billing details were declined. Please check the card ZIP code and try again.",
+      };
+    }
+
+    return {
+      status: 402,
+      code,
+      category,
+      message: "The card was declined. Please try another card or contact the card issuer.",
+    };
+  }
+
+  return {
+    status: error.statusCode && error.statusCode >= 400 ? error.statusCode : 409,
+    code,
+    category,
+    message: "Square could not process this payment. Please try again or contact support.",
+  };
 }
 
 async function getInternalOrderWithRetry(internalOrderId: string) {
@@ -204,6 +256,15 @@ export async function POST(request: Request) {
       successUrl: `${siteOrigin()}/booking/${encodeURIComponent(bookingToken || internalOrderId)}`,
     });
   } catch (error) {
+    const paymentError = squarePaymentError(error);
+    if (paymentError) {
+      return NextResponse.json({
+        error: paymentError.message,
+        code: paymentError.code,
+        category: paymentError.category,
+      }, { status: paymentError.status });
+    }
+
     const message = error instanceof Error ? error.message : "Failed to process payment";
     return NextResponse.json({ error: message }, { status: 409 });
   }
