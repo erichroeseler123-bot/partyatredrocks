@@ -14,7 +14,7 @@ import {
   resolveBookingShowContext,
   type BookingShowContext,
 } from '@/lib/bookingContext';
-import { getInternalOrderByBookingToken } from '@/lib/orders';
+import { getInternalOrderByAnyReference } from '@/lib/orders';
 import { getPickupLocationDetails } from '@/lib/pickupLocations';
 import { PARR_PUBLIC_FACTS } from '@/lib/publicOperatorFacts';
 import { getSharedCheckoutStatus } from '@/lib/sharedInventory';
@@ -171,7 +171,7 @@ export default async function PublicBookingPage(
   const { token } = await params;
   const resolvedSearchParams = await searchParams;
   const isGuestView = resolvedSearchParams?.view === 'guest';
-  const order = await getInternalOrderByBookingToken(token);
+  const order = await getInternalOrderByAnyReference(token);
 
   if (!order) {
     return (
