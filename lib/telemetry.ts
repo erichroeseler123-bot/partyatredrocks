@@ -7,6 +7,8 @@ type ParrTelemetryEvent =
   | "checkout_started"
   | "navigation_clicked"
   | "decision_cta_clicked"
+  | "booking_opened"
+  | "rezdy_embed_viewed"
   | "booking_confirmed"
   | "booking_completed"
   | "page_viewed";

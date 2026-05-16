@@ -6,6 +6,7 @@ import { DccReturnBanner } from "@/components/booking/DccReturnBanner";
 import { LegalInlineNotice } from "@/components/legal/LegalInlineNotice";
 import { PrivateBookingForm } from "@/components/booking/PrivateBookingForm";
 import { PrivatePromoBanner } from "@/components/booking/PrivatePromoBanner";
+import { RezdyBookingEmbed } from "@/components/booking/rezdy/RezdyBookingEmbed";
 import { bookingVisuals } from "@/lib/bookingVisuals";
 import { postDccSatelliteEvent, postWtaPartnerAcceptedIfNeeded } from "@/lib/dccSatellite";
 import {
@@ -14,6 +15,19 @@ import {
 } from "@/lib/rideCatalog";
 import { squareApplicationId, squareLocationId, squareWebSdkUrl } from "@/lib/square";
 import { buildPrivateOptionJsonLd, buildPrivateOptionMetadata } from "../../bookingSeo";
+
+const REZDY_PRIVATE_PRODUCTS = {
+  suv: {
+    productId: "596193",
+    productName: "Suburban",
+    rezdyUrl: "https://gosnotransportation58.rezdy.com/596193/suburban?iframe=true",
+  },
+  van: {
+    productId: "630812",
+    productName: "10 Passenger Van",
+    rezdyUrl: "https://gosnotransportation58.rezdy.com/630812/van-10-passenger?iframe=true",
+  },
+} as const;
 
 function firstValue(searchParams: HandoffSearchParams, key: string) {
   const value = searchParams[key];
@@ -135,15 +149,31 @@ export default async function PrivateOptionPage({
             Private rides can pick your group up at your own hotel, Airbnb, home, or exact address. This is not the shared Sheraton shuttle pickup.
           </p>
           <div className="mt-6">
-            <PrivateBookingForm
-              venue={venue}
-              option={rideOption}
-              searchParams={sp}
-              sourcePath={sourcePath}
-              squareAppId={squareApplicationId()}
-              squareLocationId={squareLocationId()}
-              squareSdkUrl={squareWebSdkUrl()}
-            />
+            {rideOption.slug === "suv" || rideOption.slug === "van" ? (
+              <RezdyBookingEmbed
+                page={sourcePath}
+                surface="private_booking"
+                title={`Book ${rideOption.title}`}
+                subtitle="Complete this Red Rocks private ride booking through the temporary Rezdy widget. Pickup details, date, rider information, and payment are handled inside the widget."
+                productId={REZDY_PRIVATE_PRODUCTS[rideOption.slug].productId}
+                productName={REZDY_PRIVATE_PRODUCTS[rideOption.slug].productName}
+                rezdyUrl={REZDY_PRIVATE_PRODUCTS[rideOption.slug].rezdyUrl}
+                eventMeta={{
+                  venue,
+                  option: rideOption.slug,
+                }}
+              />
+            ) : (
+              <PrivateBookingForm
+                venue={venue}
+                option={rideOption}
+                searchParams={sp}
+                sourcePath={sourcePath}
+                squareAppId={squareApplicationId()}
+                squareLocationId={squareLocationId()}
+                squareSdkUrl={squareWebSdkUrl()}
+              />
+            )}
           </div>
           <LegalInlineNotice className="mt-6" />
         </section>
