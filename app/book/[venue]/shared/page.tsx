@@ -4,6 +4,25 @@ import type { HandoffSearchParams } from "@/lib/parrHandoff";
 export const runtime = "nodejs";
 export const revalidate = 300;
 
+function firstValue(searchParams: HandoffSearchParams, key: string) {
+  const value = searchParams[key];
+  return Array.isArray(value) ? value[0] : value;
+}
+
+function rezdyPickupFromSearch(searchParams: HandoffSearchParams) {
+  const pickupHint = [
+    firstValue(searchParams, "pickupHub"),
+    firstValue(searchParams, "pickup"),
+    firstValue(searchParams, "city"),
+    firstValue(searchParams, "requests"),
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+  return pickupHint.includes("golden") || pickupHint.includes("westside") ? "golden" : "denver";
+}
+
 export default async function SharedOptionsPage({
   params,
   searchParams,
@@ -24,5 +43,6 @@ export default async function SharedOptionsPage({
   }
 
   const search = query.toString();
-  redirect(search ? `/book/${venue}/custom/shared?${search}` : `/book/${venue}/custom/shared`);
+  const pickup = rezdyPickupFromSearch(sp);
+  redirect(search ? `/book/${venue}/custom/shared/${pickup}?${search}` : `/book/${venue}/custom/shared/${pickup}`);
 }

@@ -102,6 +102,20 @@ function appendQuery(path: string, query: URLSearchParams) {
   return search ? `${path}?${search}` : path;
 }
 
+function rezdyPickupPath(searchParams?: HandoffSearchParams) {
+  const pickupHint = [
+    firstValue(searchParams, "pickupHub"),
+    firstValue(searchParams, "pickup"),
+    firstValue(searchParams, "city"),
+    firstValue(searchParams, "requests"),
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+  return pickupHint.includes("golden") || pickupHint.includes("westside") ? "golden" : "denver";
+}
+
 export function buildDccRedRocksBookingHref({
   searchParams,
   overrides,
@@ -122,7 +136,7 @@ export function buildDccRedRocksBookingHref({
     query.set(key, rawValue);
   }
 
-  return appendQuery("/book/red-rocks-amphitheatre/custom/shared", query);
+  return appendQuery(`/book/red-rocks-amphitheatre/custom/shared/${rezdyPickupPath(searchParams)}`, query);
 }
 
 type BuildBookingHrefArgs = {
@@ -167,7 +181,7 @@ export function buildBookingHref({
 
   if (target === "shared") {
     const sharedPath = normalizedVenue === "red-rocks-amphitheatre"
-      ? `/book/${normalizedVenue}/custom/shared`
+      ? `/book/${normalizedVenue}/custom/shared/${rezdyPickupPath(searchParams)}`
       : `/book/${normalizedVenue}/shared`;
     return appendQuery(sharedPath, query);
   }
@@ -178,7 +192,7 @@ export function buildBookingHref({
 
   if (target === "shared-product") {
     const sharedPath = normalizedVenue === "red-rocks-amphitheatre"
-      ? `/book/${normalizedVenue}/custom/shared`
+      ? `/book/${normalizedVenue}/custom/shared/${rezdyPickupPath(searchParams)}`
       : `/book/${normalizedVenue}/shared`;
     return appendQuery(sharedPath, query);
   }
