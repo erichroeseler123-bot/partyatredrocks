@@ -9,8 +9,8 @@ import {
 
 export const metadata = {
   robots: { index: false, follow: true },
-  title: "Book Shuttle | Pick Your Venue",
-  description: "Start by picking your venue, then choose shared or private ride options.",
+  title: "Book Private Red Rocks Transportation | Party at Red Rocks",
+  description: "Start with Private Suburban transportation to Red Rocks or upgrade to a private van.",
 };
 
 export default async function BookPage({
@@ -26,6 +26,7 @@ export default async function BookPage({
   if (venue) {
     redirect(buildBookingHref({ target: "venue", venue, searchParams: sp }));
   }
+  redirect("/book/red-rocks-amphitheatre/private/suv");
 
   return (
     <main className="min-h-screen bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
@@ -40,7 +41,7 @@ export default async function BookPage({
               Pick Your Venue
             </h1>
             <p className="mt-5 max-w-2xl text-[15px] leading-7 text-white/74 sm:text-lg">
-              Start with the venue you are headed to, then choose shared or private ride options.
+              Start with the venue you are headed to, then choose private Red Rocks transportation.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Link

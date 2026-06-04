@@ -4,20 +4,20 @@ const STEPS = [
   {
     n: "1",
     title: "Choose your ride",
-    sub: "Choose shuttle seats or private door-to-door service.",
-    href: "/book-shuttle",
+    sub: "Start with the Private Suburban or upgrade to a private van.",
+    href: "/book/red-rocks-amphitheatre/private/suv",
   },
   {
     n: "2",
     title: "Pick your date",
     sub: "Select the show date + pickup location, then confirm.",
-    href: "/book-shuttle",
+    href: "/book/red-rocks-amphitheatre/private/suv",
   },
   {
     n: "3",
     title: "Get confirmation",
     sub: "Instant confirmation. Simple changes before the cutoff.",
-    href: "/book-shuttle",
+    href: "/book/red-rocks-amphitheatre/private/suv",
   },
 ];
 
@@ -29,7 +29,7 @@ export default function HomeBookingSteps() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div>
               <p className="text-[22px] font-black uppercase tracking-[0.24em] text-muted md:text-[24px]">
-                Red Rocks shuttle booking
+                Red Rocks private booking
               </p>
               <h2 className="mt-3 text-4xl md:text-6xl font-black tracking-tight">
                 1–2–3 and you’re locked in
@@ -41,10 +41,10 @@ export default function HomeBookingSteps() {
 
             <div className="flex gap-3">
               <Link href="/book-shuttle" className="btn-primary">
-                Book shuttle
+                Book Private Suburban
               </Link>
               <Link href="/private-suburban" className="btn-secondary">
-                Private Suburban — $449
+                Private Suburban — $399–$499
               </Link>
             </div>
           </div>

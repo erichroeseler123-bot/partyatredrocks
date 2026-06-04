@@ -5,11 +5,15 @@ import { notFound } from "next/navigation";
 import { ShieldCheck } from "lucide-react";
 import venuesJson from "@/data/venues.json";
 import { postDccSatelliteEvent, postWtaPartnerAcceptedIfNeeded } from "@/lib/dccSatellite";
-import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
+import type { HandoffSearchParams } from "@/lib/parrHandoff";
 import { bookingVisuals } from "@/lib/bookingVisuals";
 import { curatedImages } from "@/lib/curatedImages";
-import { buildParrPrivateCheckoutHref, PRIVATE_RIDE_OPTIONS } from "@/lib/rideCatalog";
-import { PrivatePromoBanner } from "@/components/booking/PrivatePromoBanner";
+import {
+  buildParrPrivateCheckoutHref,
+  getSuburbanDisplayPrice,
+  PUBLIC_PRIVATE_RIDE_OPTIONS,
+  SUBURBAN_PRICE_RANGE_LABEL,
+} from "@/lib/rideCatalog";
 import { buildPrivateBookingJsonLd, buildPrivateBookingMetadata, buildPrivateFaqJsonLd } from "../bookingSeo";
 
 type VenueRow = {
@@ -28,8 +32,8 @@ const REASONS: ReasonCard[] = [
     body: "Most groups just need one clean SUV, one pickup plan, and one guaranteed ride home after the show.",
   },
   {
-    title: "Van upgrade when needed",
-    body: "If your group is bigger or wants more room, the van is the simple next step without changing the rest of the plan.",
+    title: "No shared pickup confusion",
+    body: "Your group gets one direct pickup plan instead of sorting out shared stops or post-show rideshare timing.",
   },
   {
     title: "Built for transportation",
@@ -108,12 +112,10 @@ export default async function PrivateOptionsPage({
 
   const serviceJsonLd = buildPrivateBookingJsonLd({ venue, quantity: 1 });
   const faqJsonLd = buildPrivateFaqJsonLd();
-  const featuredOption = PRIVATE_RIDE_OPTIONS.find((option) => option.slug === "suv");
-  const upgradeOption = PRIVATE_RIDE_OPTIONS.find((option) => option.slug === "van");
+  const featuredOption = PUBLIC_PRIVATE_RIDE_OPTIONS.find((option) => option.slug === "suv");
   const featuredVisual = bookingVisuals.privateOptions.suv;
-  const upgradeVisual = bookingVisuals.privateOptions.van;
 
-  if (!featuredOption || !upgradeOption || !featuredVisual || !upgradeVisual) notFound();
+  if (!featuredOption || !featuredVisual) notFound();
 
   return (
     <main className="min-h-screen bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
@@ -139,10 +141,10 @@ export default async function PrivateOptionsPage({
             <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
               <div>
                 <div className="inline-flex items-center rounded-full border border-[#ffb07c]/30 bg-[#ffb07c]/10 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
-                  Private Ride
+                  Private Red Rocks Transportation
                 </div>
                 <h1 className="mt-5 max-w-4xl text-[2.5rem] font-black uppercase leading-[0.94] tracking-[-0.04em] sm:text-[4rem]">
-                  Private Ride To Red Rocks. Start With The Suburban.
+                  Private Transportation To Red Rocks. Start With The Suburban.
                 </h1>
                 <p className="mt-5 max-w-3xl text-[15px] leading-7 text-white/80 sm:text-lg">
                   Start here with the Suburban for most groups. Includes tailgating time in the limo lane and your vehicle waiting in the same spot until the show ends, so there is no scramble for rides afterward.
@@ -166,14 +168,8 @@ export default async function PrivateOptionsPage({
                     href={buildParrPrivateCheckoutHref(featuredOption.slug, vehicleQty)}
                     className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#62f6ff] bg-[#62f6ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#05111a] shadow-[0_18px_40px_rgba(61,243,255,0.24)] transition hover:bg-[#8cf8ff]"
                   >
-                    Confirm Suburban & Book
-                  </Link>
-                  <Link
-                    href={buildBookingHref({ target: "venue", venue, searchParams: sp })}
-                    className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/28 bg-[#152038] px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#1d2a46]"
-                  >
-                    Back to Ride Types
-                  </Link>
+                  Book Private Suburban
+                </Link>
                 </div>
               </div>
 
@@ -191,12 +187,10 @@ export default async function PrivateOptionsPage({
           </div>
         </section>
 
-        <PrivatePromoBanner />
-
         <section id="suv-booking" className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 sm:p-8">
           <div className="text-[22px] font-black uppercase tracking-[0.18em] text-[#ffb07c] sm:text-[24px]">Step 1</div>
           <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">
-            Private Suburban - Up To 6 People - $449
+            Private Suburban - Up To 6 People - {SUBURBAN_PRICE_RANGE_LABEL}
           </h2>
           <p className="mt-3 max-w-2xl text-[15px] leading-7 text-white/74">
             Start here with the Suburban for most groups. Tailgating is built in, and the vehicle stays parked in the same spot waiting for your group until the show ends.
@@ -233,51 +227,22 @@ export default async function PrivateOptionsPage({
                   ))}
                 </ul>
                 <div className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-full border border-[#62f6ff] bg-[#62f6ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#05111a] shadow-[0_18px_40px_rgba(61,243,255,0.24)] transition group-hover:bg-[#8cf8ff] sm:w-auto">
-                  Book Private Suburban - $449
+                  Book Private Suburban - {SUBURBAN_PRICE_RANGE_LABEL}
                 </div>
               </div>
             </Link>
           </div>
-        </section>
-
-        <section id="van-upgrade" className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 sm:p-8">
-          <div className="text-[22px] font-black uppercase tracking-[0.18em] text-[#ffb07c] sm:text-[24px]">Step 2</div>
-          <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">
-            Upgrade To 10-Passenger Van - $599
-          </h2>
-          <p className="mt-3 max-w-2xl text-[15px] leading-7 text-white/74">
-            If your group is bigger, keep the same private flow and move up one size.
+          <div className="mt-5 grid gap-2 text-sm font-bold text-white/76 sm:grid-cols-4">
+            {[1, 2, 3, 4].map((vehicleNumber) => (
+              <div key={vehicleNumber} className="rounded-2xl border border-white/10 bg-black/18 px-4 py-3">
+                {vehicleNumber === 1 ? "1st" : vehicleNumber === 2 ? "2nd" : vehicleNumber === 3 ? "3rd" : "4th"} Suburban:{" "}
+                <span className="text-white">{getSuburbanDisplayPrice(vehicleNumber)}</span>
+              </div>
+            ))}
+          </div>
+          <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-white/50">
+            Actual SUV/van checkout is handled by Rezdy; update Rezdy product pricing to match public pricing.
           </p>
-
-          <div className="mt-6">
-            <Link
-              href={buildParrPrivateCheckoutHref(upgradeOption.slug, vehicleQty)}
-              className="group grid gap-6 rounded-[28px] border border-white/10 bg-[#09101f] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:border-[#62f6ff]/35 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)] lg:grid-cols-[0.95fr_1.05fr]"
-            >
-              <div className="relative min-h-[220px] overflow-hidden rounded-[22px] border border-white/10">
-                <Image
-                  src={upgradeVisual.imageSrc}
-                  alt={upgradeVisual.imageAlt}
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 1024px) 45vw, 100vw"
-                />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,22,0.08),rgba(5,8,22,0.62)_100%)]" />
-              </div>
-              <div className="flex flex-col justify-center">
-                <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
-                  {upgradeOption.eyebrow}
-                </div>
-                <h3 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white sm:text-3xl">
-                  {upgradeOption.title}
-                </h3>
-                <p className="mt-4 text-base leading-7 text-white/76">{upgradeOption.body}</p>
-                <div className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-full border border-white/22 bg-[#152038] px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition group-hover:bg-[#1d2a46] sm:w-auto">
-                  Upgrade to Van
-                </div>
-              </div>
-            </Link>
-          </div>
         </section>
 
         <section className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 sm:p-8">

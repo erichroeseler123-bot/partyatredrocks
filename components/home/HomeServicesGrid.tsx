@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { buildBookingHref } from "@/lib/parrHandoff";
-import { PRIVATE_TRANSPORT_PROMO } from "@/lib/privateTransportPromo";
 
 type Service = {
   title: string;
@@ -8,57 +6,24 @@ type Service = {
   note: string;
   bullets: string[];
   href: string;
-  tag: "Seats" | "Private SUV" | "Sprinter" | "Bus";
+  tag: "Private SUV";
 };
 
 const SERVICES: Service[] = [
   {
-    title: "Group coach seats",
-    price: "$59–$65",
-    note: "per person",
-    bullets: ["Denver pickup windows", "Professional driver + show-night timing", "Reliable return after the encore"],
-    href: "/book-shuttle",
-    tag: "Seats",
-  },
-  {
-    title: "Private SUV",
-    price: "$449",
-    note: "flat rate",
-    bullets: ["Just your group", "Flexible pickup timing", "Direct return after the show"],
-    href: "/private-suburban",
+    title: "Private Suburban",
+    price: "$399–$499",
+    note: "tiered Suburban pricing",
+    bullets: ["Best for small groups", "Private pickup for your group", "Simple there-and-back Red Rocks transportation"],
+    href: "/book/red-rocks-amphitheatre/private/suv",
     tag: "Private SUV",
-  },
-  {
-    title: "14 Passenger Sprinter",
-    price: "$799",
-    note: "flat rate",
-    bullets: ["More room + more comfort", "Ideal for larger groups", "Direct pickup + direct return"],
-    href: buildBookingHref({ target: "private-option", venue: "red-rocks-amphitheatre", option: "sprinter" }),
-    tag: "Sprinter",
-  },
-  {
-    title: "24 Passenger Party Bus",
-    price: "$1199",
-    note: "flat rate",
-    bullets: ["Big groups, one vehicle", "Great for corporate / birthdays", "Direct pickup + direct return"],
-    href: buildBookingHref({ target: "private-option", venue: "red-rocks-amphitheatre", option: "party-bus" }),
-    tag: "Bus",
   },
 ];
 
 function Tag({ t }: { t: Service["tag"] }) {
   const base =
     "inline-flex items-center rounded-full border px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.22em]";
-  switch (t) {
-    case "Seats":
-      return <span className={`${base} border-soft pill text-strong`}>Seats</span>;
-    case "Private SUV":
-      return <span className={`${base} border-red-500/30 bg-red-500/10 text-red-100`}>Private</span>;
-    case "Sprinter":
-      return <span className={`${base} border-cyan-500/30 bg-cyan-500/10 text-cyan-100`}>Group van</span>;
-    case "Bus":
-      return <span className={`${base} border-violet-500/30 bg-violet-500/10 text-violet-100`}>Large group</span>;
-  }
+  return <span className={`${base} border-red-500/30 bg-red-500/10 text-red-100`}>{t}</span>;
 }
 
 export default function HomeServicesGrid() {
@@ -71,20 +36,20 @@ export default function HomeServicesGrid() {
               Red Rocks transportation
             </p>
             <h2 className="mt-3 text-2xl md:text-4xl font-black tracking-tight">
-              Choose your ride
+              Book the private Suburban
             </h2>
             <p className="mt-4 text-[15px] md:text-[18px] leading-relaxed text-soft">
-              Everything on this page is for <span className="text-white font-black">Red Rocks</span>. Tap any option to book.
+              The public offer is simple: Private Suburban for your small group, with a private van upgrade when you need more room.
             </p>
           </div>
 
           {/* remove the extra hero buttons — keep this single CTA only */}
-          <Link href="/book-shuttle" className="btn-primary">
-            Book Red Rocks Shuttle
+          <Link href="/book/red-rocks-amphitheatre/private/suv" className="btn-primary">
+            Book Private Suburban
           </Link>
         </div>
 
-        <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-8 grid gap-5 md:grid-cols-2">
           {SERVICES.map((s) => (
             <Link
               key={s.title + s.price}
@@ -125,11 +90,6 @@ export default function HomeServicesGrid() {
               </div>
             </Link>
           ))}
-        </div>
-
-        <div className="mt-6 rounded-2xl border border-emerald-400/25 bg-emerald-500/10 px-5 py-4 text-sm leading-6 text-emerald-50">
-          <span className="font-black uppercase tracking-[0.18em] text-emerald-200">April promo</span>{" "}
-          {PRIVATE_TRANSPORT_PROMO.detail}
         </div>
 
         {/* keep this tiny + blue link */}

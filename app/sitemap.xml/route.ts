@@ -40,15 +40,11 @@ export async function GET() {
 
   const urls: UrlEntry[] = [
     { loc: `${base}/`, lastmod: now, changefreq: "daily", priority: 1.0 },
-    { loc: `${base}/shuttles`, lastmod: now, changefreq: "daily", priority: 0.9 },
     { loc: `${base}/book/red-rocks-amphitheatre`, lastmod: now, changefreq: "daily", priority: 0.9 },
-    { loc: `${base}/book/red-rocks-amphitheatre/custom/shared`, lastmod: now, changefreq: "daily", priority: 0.9 },
     { loc: `${base}/book/red-rocks-amphitheatre/private`, lastmod: now, changefreq: "daily", priority: 0.9 },
+    { loc: `${base}/book/red-rocks-amphitheatre/private/suv`, lastmod: now, changefreq: "daily", priority: 0.9 },
+    { loc: `${base}/book/red-rocks-amphitheatre/private/van`, lastmod: now, changefreq: "daily", priority: 0.8 },
     { loc: `${base}/red-rocks/transportation`, lastmod: now, changefreq: "daily", priority: 0.9 },
-    { loc: `${base}/red-rocks/transportation/shuttle-vs-uber`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/red-rocks/transportation/shuttle-vs-driving`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/red-rocks/transportation/private-vs-shared`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/red-rocks/transportation/is-shuttle-worth-it`, lastmod: now, changefreq: "daily", priority: 0.8 },
     { loc: `${base}/guide/local/denver-pickups`, lastmod: now, changefreq: "daily", priority: 0.9 },
     { loc: `${base}/guide/local/trailhead-taphouse`, lastmod: now, changefreq: "weekly", priority: 0.7 },
     { loc: `${base}/guide/parking`, lastmod: now, changefreq: "daily", priority: 0.8 },

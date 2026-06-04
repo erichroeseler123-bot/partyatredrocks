@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { type HandoffSearchParams } from "@/lib/parrHandoff";
 import { BookingVisualHero } from "@/components/booking/BookingVisualHero";
 import { DccReturnBanner } from "@/components/booking/DccReturnBanner";
 import { LegalInlineNotice } from "@/components/legal/LegalInlineNotice";
 import { PrivateBookingForm } from "@/components/booking/PrivateBookingForm";
-import { PrivatePromoBanner } from "@/components/booking/PrivatePromoBanner";
 import { RezdyBookingEmbed } from "@/components/booking/rezdy/RezdyBookingEmbed";
 import { bookingVisuals } from "@/lib/bookingVisuals";
 import { postDccSatelliteEvent, postWtaPartnerAcceptedIfNeeded } from "@/lib/dccSatellite";
 import {
   getPrivateRideOption,
+  isPublicPrivateRideSlug,
   type PrivateRideSlug,
 } from "@/lib/rideCatalog";
 import { squareApplicationId, squareLocationId, squareWebSdkUrl } from "@/lib/square";
@@ -28,6 +28,7 @@ const REZDY_PRIVATE_PRODUCTS = {
     rezdyUrl: "https://gosnotransportation58.rezdy.com/630812/van-10-passenger?iframe=true",
   },
 } as const;
+// Actual SUV/van checkout is handled by Rezdy; update Rezdy product pricing to match public pricing.
 
 function firstValue(searchParams: HandoffSearchParams, key: string) {
   const value = searchParams[key];
@@ -44,6 +45,12 @@ export async function generateMetadata({
 
   const rideOption = getPrivateRideOption(option);
   if (!rideOption) return {};
+  if (!isPublicPrivateRideSlug(option)) {
+    return {
+      title: `${rideOption.title} | Party at Red Rocks`,
+      robots: { index: false, follow: false },
+    };
+  }
 
   return buildPrivateOptionMetadata({
     venue,
@@ -68,6 +75,7 @@ export default async function PrivateOptionPage({
 
   const rideOption = getPrivateRideOption(option);
   if (!rideOption) notFound();
+  if (!isPublicPrivateRideSlug(rideOption.slug)) redirect(`/book/${venue}/private/suv`);
 
   const qtyValue = firstValue(sp, "qty");
   const vehicleQty = qtyValue ? Math.max(1, Number(qtyValue) || 1) : 1;
@@ -135,18 +143,16 @@ export default async function PrivateOptionPage({
           </section>
         ) : null}
 
-        <PrivatePromoBanner />
-
         <section className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.42)] sm:p-8">
           <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">Private Ride Checkout</div>
           <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white">
             Book Your {rideOption.title}
           </h2>
           <p className="mt-3 max-w-3xl text-sm leading-6 text-white/70 sm:text-[15px]">
-            Enter your private ride details and complete payment directly on Party at Red Rocks.
+            Book this private Red Rocks vehicle online through Rezdy.
           </p>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-cyan-100/82 sm:text-[15px]">
-            Private rides can pick your group up at your own hotel, Airbnb, home, or exact address. This is not the shared Sheraton shuttle pickup.
+            Private rides can pick your group up at your own hotel, Airbnb, home, or exact address.
           </p>
           <div className="mt-6">
             {rideOption.slug === "suv" || rideOption.slug === "van" ? (
@@ -154,7 +160,7 @@ export default async function PrivateOptionPage({
                 page={sourcePath}
                 surface="private_booking"
                 title={`Book ${rideOption.title}`}
-                subtitle="Complete this Red Rocks private ride booking through the temporary Rezdy widget. Pickup details, date, rider information, and payment are handled inside the widget."
+                subtitle="Complete this Red Rocks private ride booking through Rezdy. Pickup details, date, rider information, and payment are handled inside the widget."
                 productId={REZDY_PRIVATE_PRODUCTS[rideOption.slug].productId}
                 productName={REZDY_PRIVATE_PRODUCTS[rideOption.slug].productName}
                 rezdyUrl={REZDY_PRIVATE_PRODUCTS[rideOption.slug].rezdyUrl}

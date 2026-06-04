@@ -2,14 +2,17 @@ import { BOOKING_COPY } from "@/lib/bookingCopy";
 
 export const SITE = "https://www.partyatredrocks.com";
 
+export const SUBURBAN_PRICE_RANGE_LABEL = "$399–$499";
+export const SUBURBAN_PRICE_TIERS = [399, 449, 499, 499] as const;
+
 export const SHARED_RIDE = {
   slug: "shared",
   title: BOOKING_COPY.labels.sharedRideTitle,
   heroEyebrow: BOOKING_COPY.labels.sharedBookingEyebrow,
   heroTitle: BOOKING_COPY.labels.sharedBookingTitle,
   heroCopy: BOOKING_COPY.copy.sharedRide,
-  priceLabel: "$59",
-  cardTitle: "Per-Person Shuttle Seats",
+  priceLabel: SUBURBAN_PRICE_RANGE_LABEL,
+  cardTitle: "Private Red Rocks Transportation",
   cardBody: BOOKING_COPY.copy.sharedRideCard,
 } as const;
 
@@ -24,21 +27,21 @@ export const PRIVATE_RIDE_BENEFITS = [
 export const PRIVATE_RIDE_OPTIONS = [
   {
     slug: "suv",
-    title: "Private SUV",
-    eyebrow: "$449 • Up to 6 Guests",
-    body: "Private ride for smaller groups that want limo-lane access and time to tailgate before the show.",
-    priceLabel: "$449",
+    title: "Private Suburban",
+    eyebrow: `${SUBURBAN_PRICE_RANGE_LABEL} • Up to 6 guests`,
+    body: "Private Suburban for smaller groups that want direct pickup, limo-lane access, and time to tailgate before the show.",
+    priceLabel: SUBURBAN_PRICE_RANGE_LABEL,
     dccProduct: "parr-suburban",
-    ctaLabel: "Start SUV Checkout",
+    ctaLabel: "Book Private Suburban",
   },
   {
     slug: "van",
-    title: "10 Passenger Van",
+    title: "Upgrade to Private Van",
     eyebrow: "$599 • Up to 10 Guests",
     body: "One vehicle, one pickup plan, limo-lane access, and one return timeline for groups that need more room.",
     priceLabel: "$599",
     dccProduct: "parr-van-10",
-    ctaLabel: "Start Van Checkout",
+    ctaLabel: "Book Private Van",
   },
   {
     slug: "sprinter",
@@ -63,8 +66,26 @@ export const PRIVATE_RIDE_OPTIONS = [
 export type PrivateRideOption = (typeof PRIVATE_RIDE_OPTIONS)[number];
 export type PrivateRideSlug = PrivateRideOption["slug"];
 
+export const PUBLIC_PRIVATE_RIDE_OPTIONS = [PRIVATE_RIDE_OPTIONS[0], PRIVATE_RIDE_OPTIONS[1]] as const;
+
+export type PublicPrivateRideOption = (typeof PUBLIC_PRIVATE_RIDE_OPTIONS)[number];
+export type PublicPrivateRideSlug = PublicPrivateRideOption["slug"];
+
 export function getPrivateRideOption(slug: string): PrivateRideOption | undefined {
   return PRIVATE_RIDE_OPTIONS.find((option) => option.slug === slug);
+}
+
+export function getPublicPrivateRideOption(slug: string): PublicPrivateRideOption | undefined {
+  return PUBLIC_PRIVATE_RIDE_OPTIONS.find((option) => option.slug === slug);
+}
+
+export function isPublicPrivateRideSlug(slug: string): slug is PublicPrivateRideSlug {
+  return slug === "suv" || slug === "van";
+}
+
+export function getSuburbanDisplayPrice(vehicleNumber: number) {
+  const index = Math.max(0, Math.min(SUBURBAN_PRICE_TIERS.length - 1, Math.floor(vehicleNumber) - 1));
+  return `$${SUBURBAN_PRICE_TIERS[index]}`;
 }
 
 export function buildDccPrivateCheckoutHref(product: PrivateRideSlug, quantity = 1) {

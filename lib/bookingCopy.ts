@@ -1,24 +1,24 @@
 export const BOOKING_COPY = {
   meta: {
     layoutDescription:
-      "Book Red Rocks shuttle transportation from Denver and Golden. Fixed pricing, pickup details before the ride, and a return plan after the show. Shuttle seats from $59/pp or Private SUV from $449.",
+      "Book private Red Rocks transportation with direct pickup, vehicle details before the ride, and a return plan after the show. Private Suburban pricing is $399–$499, with van upgrade availability online.",
     homeDescription:
-      "Shared and private Red Rocks shuttles from Denver, Golden, and Morrison. Fixed pricing, guaranteed return, private SUVs, vans, Sprinters, and group ride planning.",
+      "Private Red Rocks transportation from Denver, Golden, and Morrison. Direct pickup, guaranteed return, Private Suburban service, and private van upgrade planning.",
     businessDescription:
-      "Fixed-price Red Rocks shuttles and private rides with pickup planning and guaranteed return service.",
+      "Private Red Rocks transportation with pickup planning and guaranteed return service.",
     sharedBookingDescription:
-      "Book Red Rocks shared shuttle seats from Denver or Golden. Fixed pricing, one-hour-before-doors pickup timing, secure checkout, and a guaranteed ride home after the show.",
+      "Party at Red Rocks public booking is private-vehicle-only. Book a Private Suburban or upgrade to a private van.",
     privateBookingDescription:
-      "Private shuttle from Denver to Red Rocks. SUV $449, 10-pass van $599, Sprinter $799, guaranteed return, limo-lane access, and optional liquor stop planning.",
+      "Private Red Rocks transportation from Denver. Private Suburban $399–$499, private van upgrade available, guaranteed return, limo-lane access, and optional liquor stop planning.",
   },
   labels: {
-    sharedRideTitle: "Shared Shuttle",
+    sharedRideTitle: "Private Vehicle",
     privateRideTitle: "Private Vehicle",
-    sharedBookingTitle: "Book Shuttle Seats",
+    sharedBookingTitle: "Book Private Transportation",
     privateBookingTitle: "Choose Your Private Vehicle",
-    sharedBookingEyebrow: "Per-Person Shuttle",
+    sharedBookingEyebrow: "Private Red Rocks Transportation",
     privateBookingEyebrow: "Private Ride",
-    bookSharedSeats: "Book Shared Seats",
+    bookSharedSeats: "Book Private Suburban",
     viewPrivateVehicles: "View Private Vehicles",
   },
   trust: {
@@ -29,12 +29,12 @@ export const BOOKING_COPY = {
   },
   copy: {
     sharedRide:
-      "Shared round-trip shuttle seats from Denver and Golden with one clear ride plan for show night.",
+      "Private round-trip Red Rocks transportation with one clear ride plan for show night.",
     privateRide:
       "Private Red Rocks transportation for groups that want one vehicle, one pickup plan, and a cleaner night.",
-    sharedRideCard: "Seat-based shuttle options with round-trip service and online booking.",
+    sharedRideCard: "Private Red Rocks transportation with round-trip service and online booking.",
     privateRideOptions:
-      "Private SUVs, vans, Sprinters, and party buses with one vehicle for the full night.",
+      "Private Suburban and private van options with one vehicle for the full night.",
   },
   pickupHubs: {
     denver: {
