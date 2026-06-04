@@ -2,8 +2,8 @@ import { BOOKING_COPY } from "@/lib/bookingCopy";
 
 export const SITE = "https://www.partyatredrocks.com";
 
-export const SUBURBAN_PRICE_RANGE_LABEL = "$399–$499";
-export const SUBURBAN_PRICE_TIERS = [399, 449, 499, 499] as const;
+export const SUBURBAN_PRICE = 399;
+export const SUBURBAN_PRICE_LABEL = "$399";
 
 export const SHARED_RIDE = {
   slug: "shared",
@@ -11,7 +11,7 @@ export const SHARED_RIDE = {
   heroEyebrow: BOOKING_COPY.labels.sharedBookingEyebrow,
   heroTitle: BOOKING_COPY.labels.sharedBookingTitle,
   heroCopy: BOOKING_COPY.copy.sharedRide,
-  priceLabel: SUBURBAN_PRICE_RANGE_LABEL,
+  priceLabel: SUBURBAN_PRICE_LABEL,
   cardTitle: "Private Red Rocks Transportation",
   cardBody: BOOKING_COPY.copy.sharedRideCard,
 } as const;
@@ -28,9 +28,9 @@ export const PRIVATE_RIDE_OPTIONS = [
   {
     slug: "suv",
     title: "Private Suburban",
-    eyebrow: `${SUBURBAN_PRICE_RANGE_LABEL} • Up to 6 guests`,
+    eyebrow: `${SUBURBAN_PRICE_LABEL} • Up to 6 guests`,
     body: "Private Suburban for smaller groups that want direct pickup, limo-lane access, and time to tailgate before the show.",
-    priceLabel: SUBURBAN_PRICE_RANGE_LABEL,
+    priceLabel: SUBURBAN_PRICE_LABEL,
     dccProduct: "parr-suburban",
     ctaLabel: "Book Private Suburban",
   },
@@ -84,8 +84,7 @@ export function isPublicPrivateRideSlug(slug: string): slug is PublicPrivateRide
 }
 
 export function getSuburbanDisplayPrice(vehicleNumber: number) {
-  const index = Math.max(0, Math.min(SUBURBAN_PRICE_TIERS.length - 1, Math.floor(vehicleNumber) - 1));
-  return `$${SUBURBAN_PRICE_TIERS[index]}`;
+  return `$${SUBURBAN_PRICE}`;
 }
 
 export function buildDccPrivateCheckoutHref(product: PrivateRideSlug, quantity = 1) {

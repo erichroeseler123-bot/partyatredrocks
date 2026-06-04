@@ -12,7 +12,7 @@ import {
   buildParrPrivateCheckoutHref,
   getSuburbanDisplayPrice,
   PUBLIC_PRIVATE_RIDE_OPTIONS,
-  SUBURBAN_PRICE_RANGE_LABEL,
+  SUBURBAN_PRICE_LABEL,
 } from "@/lib/rideCatalog";
 import { buildPrivateBookingJsonLd, buildPrivateBookingMetadata, buildPrivateFaqJsonLd } from "../bookingSeo";
 
@@ -32,8 +32,8 @@ const REASONS: ReasonCard[] = [
     body: "Most groups just need one clean SUV, one pickup plan, and one guaranteed ride home after the show.",
   },
   {
-    title: "No shared pickup confusion",
-    body: "Your group gets one direct pickup plan instead of sorting out shared stops or post-show rideshare timing.",
+    title: "Private pickup plan",
+    body: "Your group gets one direct pickup plan instead of sorting out multiple stops or post-show rideshare timing.",
   },
   {
     title: "Built for transportation",
@@ -190,7 +190,7 @@ export default async function PrivateOptionsPage({
         <section id="suv-booking" className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 sm:p-8">
           <div className="text-[22px] font-black uppercase tracking-[0.18em] text-[#ffb07c] sm:text-[24px]">Step 1</div>
           <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">
-            Private Suburban - Up To 6 People - {SUBURBAN_PRICE_RANGE_LABEL}
+            Private Suburban - Up To 6 People - {SUBURBAN_PRICE_LABEL}
           </h2>
           <p className="mt-3 max-w-2xl text-[15px] leading-7 text-white/74">
             Start here with the Suburban for most groups. Tailgating is built in, and the vehicle stays parked in the same spot waiting for your group until the show ends.
@@ -227,7 +227,7 @@ export default async function PrivateOptionsPage({
                   ))}
                 </ul>
                 <div className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-full border border-[#62f6ff] bg-[#62f6ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#05111a] shadow-[0_18px_40px_rgba(61,243,255,0.24)] transition group-hover:bg-[#8cf8ff] sm:w-auto">
-                  Book Private Suburban - {SUBURBAN_PRICE_RANGE_LABEL}
+                  Book Private Suburban - {SUBURBAN_PRICE_LABEL}
                 </div>
               </div>
             </Link>

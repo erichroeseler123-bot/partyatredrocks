@@ -12,10 +12,29 @@ function read(path) {
 test("public booking config exposes only Suburban and private van", () => {
   const catalog = read("lib/rideCatalog.ts");
   assert.match(catalog, /PUBLIC_PRIVATE_RIDE_OPTIONS = \[PRIVATE_RIDE_OPTIONS\[0\], PRIVATE_RIDE_OPTIONS\[1\]\] as const/);
-  assert.match(catalog, /SUBURBAN_PRICE_RANGE_LABEL = "\$399–\$499"/);
-  assert.match(catalog, /SUBURBAN_PRICE_TIERS = \[399, 449, 499, 499\] as const/);
+  assert.match(catalog, /SUBURBAN_PRICE = 399/);
+  assert.match(catalog, /SUBURBAN_PRICE_LABEL = "\$399"/);
+  assert.doesNotMatch(catalog, /\$399–\$499/);
+  assert.doesNotMatch(catalog, /399, 449, 499/);
   assert.match(catalog, /title: "Private Suburban"/);
   assert.match(catalog, /title: "Upgrade to Private Van"/);
+});
+
+test("public Suburban pricing is flat 399", () => {
+  const catalog = read("lib/rideCatalog.ts");
+  const privatePage = read("app/book/[venue]/private/page.tsx");
+  const privateSeo = read("app/book/[venue]/bookingSeo.ts");
+  const combined = `${catalog}\n${privatePage}\n${privateSeo}`;
+
+  assert.match(combined, /\$399/);
+  assert.match(catalog, /return `\$\$\{SUBURBAN_PRICE\}`/);
+  assert.doesNotMatch(combined, /\$399–\$499/);
+  assert.doesNotMatch(combined, /\$449/);
+  assert.doesNotMatch(combined, /\$499/);
+  assert.doesNotMatch(combined, /\$59\/pp/);
+  assert.doesNotMatch(combined, /per person/i);
+  assert.doesNotMatch(combined, /shared pickup/i);
+  assert.doesNotMatch(combined, /shared shuttle/i);
 });
 
 test("public shared booking routes redirect to private Suburban", () => {
