@@ -1,70 +1,158 @@
 import Link from "next/link";
+import { buildBookingHref } from "@/lib/parrHandoff";
+import { PRIVATE_TRANSPORT_PROMO } from "@/lib/privateTransportPromo";
 
-const SUBURBAN_BOOKING_HREF = "/book/red-rocks-amphitheatre/private/suv";
+type Card = {
+  group: "Red Rocks";
+  title: string;
+  price: string;
+  note: string;
+  bullets: string[];
+  href: string;
+  cta: string;
+  tone: "shared" | "suv" | "sprinter" | "bus";
+};
+
+const CARDS: Card[] = [
+  // ---------------- RED ROCKS ----------------
+  {
+    group: "Red Rocks",
+    title: "Group coach seats",
+    price: "$59–$65",
+    note: "per person",
+    bullets: ["Denver pickup windows", "Professional driver + clean timing", "Best value for most groups"],
+    href: "/book-shuttle",
+    cta: "Reserve seats",
+    tone: "shared",
+  },
+  {
+    group: "Red Rocks",
+    title: "Private SUV",
+    price: "$449",
+    note: "flat rate",
+    bullets: ["Just your group", "Flexible pickup timing", "Direct return after the show"],
+    href: "/private-suburban",
+    cta: "Book Private SUV",
+    tone: "suv",
+  },
+  {
+    group: "Red Rocks",
+    title: "14 Passenger Sprinter",
+    price: "$799",
+    note: "flat rate",
+    bullets: ["More room + more comfort", "Ideal for larger groups", "Direct pickup + direct return"],
+    href: buildBookingHref({ target: "private-option", venue: "red-rocks-amphitheatre", option: "sprinter" }),
+    cta: "Book Sprinter",
+    tone: "sprinter",
+  },
+  {
+    group: "Red Rocks",
+    title: "24 Passenger Party Bus",
+    price: "$1199",
+    note: "flat rate",
+    bullets: ["Big groups, one vehicle", "Best for corporate / birthdays", "Direct pickup + direct return"],
+    href: buildBookingHref({ target: "private-option", venue: "red-rocks-amphitheatre", option: "party-bus" }),
+    cta: "Book Party Bus",
+    tone: "bus",
+  },
+];
+
+function badge(tone: Card["tone"]) {
+  const base =
+    "inline-flex items-center rounded-full border px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.22em]";
+  switch (tone) {
+    case "shared":
+      return <span className={`${base} border-zinc-600/60 bg-surface/35 text-strong`}>Shared ride</span>;
+    case "suv":
+      return <span className={`${base} border-red-500/30 bg-red-500/10 text-red-100`}>Private</span>;
+    case "sprinter":
+      return <span className={`${base} border-cyan-500/30 bg-cyan-500/10 text-cyan-100`}>Group vehicle</span>;
+    case "bus":
+      return <span className={`${base} border-violet-500/30 bg-violet-500/10 text-violet-100`}>Large group</span>;
+  }
+}
+
+function CardUI({ c }: { c: Card }) {
+  return (
+    <div className="bg-surface border-soft shadow-soft rounded-3xl p-6 transition-all duration-300 hover:-translate-y-1 hover:glow-accent hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+      <div className="flex items-start justify-between gap-4">
+        <div className="min-w-0">
+          {badge(c.tone)}
+          <h3 className="mt-3 text-xl md:text-2xl font-black tracking-tight">{c.title}</h3>
+        </div>
+
+        <div className="text-right shrink-0">
+          <div className="text-2xl md:text-3xl font-black leading-none">{c.price}</div>
+          <div className="mt-1 text-[11px] uppercase tracking-[0.22em] text-muted">{c.note}</div>
+        </div>
+      </div>
+
+      <ul className="mt-5 space-y-2 text-[15px] leading-relaxed text-strong/90">
+        {c.bullets.map((b) => (
+          <li key={b} className="flex gap-2">
+            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400/60" />
+            <span>{b}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div className="mt-6">
+        <Link
+          href={c.href}
+          className="inline-flex w-full items-center justify-center rounded-full border border-zinc-600/45 bg-surface/25 px-4 py-3 text-xs font-black uppercase tracking-[0.22em] text-strong hover:bg-surface/40 transition"
+        >
+          {c.cta}
+        </Link>
+      </div>
+    </div>
+  );
+}
 
 export default function FeaturedServices() {
   return (
-    <section className="relative z-10 mx-auto -mt-16 max-w-7xl px-6 pb-10">
-      <div className="rounded-[32px] border-soft bg-surface-strong p-7 shadow-soft md:p-10">
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+    <section className="relative z-10 max-w-7xl mx-auto px-6 -mt-16 pb-10">
+      <div className="bg-surface-strong border-soft shadow-soft rounded-[32px] p-7 md:p-10">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
           <div className="max-w-3xl">
             <p className="text-[12px] font-black uppercase tracking-[0.32em] text-muted">
-              Private Red Rocks ride
+              Transportation options
             </p>
-            <h2 className="mt-3 text-3xl font-black tracking-tight md:text-5xl">
-              One private Suburban for your group, there and back.
+            <h2 className="mt-3 text-3xl md:text-5xl font-black tracking-tight">
+              Would you rather ride with other people — or have a private vehicle just for your group?
             </h2>
-            <p className="mt-4 text-[16px] leading-relaxed text-soft md:text-[18px]">
-              Party at Red Rocks is now focused on private vehicle service: direct pickup, simple return service,
-              and limited show-night availability.
+            <p className="mt-4 text-[16px] md:text-[18px] leading-relaxed text-soft">
+              Fixed pricing, professional drivers, and timing built for show nights. Pick the option that fits your
+              group size and vibe.
             </p>
           </div>
-          <Link
-            href={SUBURBAN_BOOKING_HREF}
-            className="inline-flex min-h-12 items-center justify-center rounded-full bg-red-500 px-5 text-xs font-black uppercase tracking-[0.22em] text-white transition hover:bg-red-400"
-          >
-            Book Private Suburban
-          </Link>
         </div>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-[minmax(0,1fr)_280px]">
-          <div className="rounded-3xl border-soft bg-surface p-6 shadow-soft">
-            <div className="inline-flex items-center rounded-full border border-red-500/30 bg-red-500/10 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.22em] text-red-100">
-              Private Suburban
-            </div>
-            <h3 className="mt-3 text-xl font-black tracking-tight md:text-2xl">Best for small groups</h3>
-            <p className="mt-3 text-[15px] leading-relaxed text-strong/90">
-              A direct Red Rocks ride for groups that want one pickup, one vehicle, and a clean return after the show.
-            </p>
-            <ul className="mt-5 space-y-2 text-[15px] leading-relaxed text-strong/90">
-              {[
-                "Private pickup for your group",
-                "Simple there-and-back transportation",
-                "Private door-to-door pickup",
-              ].map((bullet) => (
-                <li key={bullet} className="flex gap-2">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400/60" />
-                  <span>{bullet}</span>
-                </li>
-              ))}
-            </ul>
+        <div className="mt-10">
+          <div className="rounded-2xl border border-emerald-400/25 bg-emerald-500/10 px-5 py-4 text-sm leading-6 text-emerald-50">
+            <span className="font-black uppercase tracking-[0.18em] text-emerald-200">April promo</span>{" "}
+            {PRIVATE_TRANSPORT_PROMO.detail}
           </div>
 
-          <div className="rounded-3xl border-soft bg-surface p-6 shadow-soft">
-            <div className="text-4xl font-black leading-none">$399–$499</div>
-            <div className="mt-1 text-[11px] font-black uppercase tracking-[0.22em] text-muted">
-              Suburban range
-            </div>
-            <Link
-              href={SUBURBAN_BOOKING_HREF}
-              className="mt-6 inline-flex w-full items-center justify-center rounded-full border border-zinc-600/45 bg-surface/25 px-4 py-3 text-xs font-black uppercase tracking-[0.22em] text-strong transition hover:bg-surface/40"
-            >
-              Reserve Private Ride
+          <div className="flex items-center justify-between gap-4">
+            <h3 className="text-sm font-black uppercase tracking-[0.28em] text-muted">Red Rocks</h3>
+            <Link href="/book" className="text-xs font-black uppercase tracking-[0.28em] text-soft hover:text-white">
+              Get a quote →
             </Link>
-            <p className="mt-5 text-sm leading-6 text-soft">
-              Built for small groups that want one private vehicle and one return plan.
-            </p>
           </div>
+
+          <div className="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {CARDS.map((c) => (
+              <CardUI key={c.title + c.price} c={c} />
+            ))}
+          
+
+        <div className="mt-8">
+          <a href="/other-venues" className="link-blue text-sm font-black uppercase tracking-[0.22em]">
+            Going somewhere else? Mishawaka + other venues →
+          </a>
+        </div>
+
+</div>
         </div>
       </div>
     </section>

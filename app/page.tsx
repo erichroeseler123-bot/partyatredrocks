@@ -3,6 +3,7 @@ import HomeSections from "@/components/home/HomeSections";
 import SocialProofStrip from "@/components/social/SocialProofStrip";
 import { getSameAs } from "@/lib/socials";
 import { SITE_CONFIG } from "@/app/site-config";
+import { BOOKING_COPY } from "@/lib/bookingCopy";
 import { getEventsCatalog } from "@/lib/events/getCatalog";
 import { getDynamicImage } from "@/lib/getDynamicImage";
 import { curatedImages } from "@/lib/curatedImages";
@@ -17,23 +18,21 @@ import {
 
 export const revalidate = 300;
 const SITE = "https://www.partyatredrocks.com";
-const HOME_DESCRIPTION =
-  "Book private Suburban transportation to Red Rocks with direct pickup, concert drop-off, and return service after the show.";
 
 export const metadata: Metadata = {
-  title: "Private Red Rocks Suburban Rides | Party at Red Rocks",
-  description: HOME_DESCRIPTION,
+  title: "Red Rocks Shuttle from Denver | Shared Seats + Private SUVs | Party at Red Rocks",
+  description: BOOKING_COPY.meta.homeDescription,
   alternates: { canonical: `${SITE}/` },
   openGraph: {
-    title: "Private Red Rocks Suburban Rides | Party at Red Rocks",
-    description: HOME_DESCRIPTION,
+    title: "Red Rocks Shuttle from Denver | Shared Seats + Private SUVs | Party at Red Rocks",
+    description: BOOKING_COPY.meta.homeDescription,
     url: `${SITE}/`,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Private Red Rocks Suburban Rides | Party at Red Rocks",
-    description: HOME_DESCRIPTION,
+    title: "Red Rocks Shuttle from Denver | Shared Seats + Private SUVs | Party at Red Rocks",
+    description: BOOKING_COPY.meta.homeDescription,
   },
 };
 
@@ -41,6 +40,7 @@ export default async function HomePage() {
   const brandKey = SITE_CONFIG.socialBrandKey;
   const [events] = await Promise.all([getEventsCatalog(2026, "redrocks")]);
   const heroSrc = pageVisuals.home.heroSrc;
+  const shuttleSrc = pageVisuals.home.shuttleSrc;
   const sprinterSrc = pageVisuals.home.privateSrc;
   const denverToday = new Intl.DateTimeFormat("en-CA", {
     timeZone: "America/Denver",
@@ -63,7 +63,7 @@ export default async function HomePage() {
         label: nextRedRocksEvent.dateKey === denverToday ? "Tonight at Red Rocks" : "Next at Red Rocks",
         detail:
           nextRedRocksEvent.dateKey === denverToday
-            ? `${nextRedRocksEvent.name} is on tonight. Private Suburban booking is still open if availability remains.`
+            ? `${nextRedRocksEvent.name} is on tonight. Shared and private ride planning is still open.`
             : `${nextRedRocksEvent.name} is coming up next. Lock the ride plan before show night gets compressed.`,
         imageSrc: nextRedRocksEventImage || curatedImages.redRocksVenueThumb,
         imageAlt: `${nextRedRocksEvent.name} concert image`,
@@ -92,10 +92,10 @@ export default async function HomePage() {
       name: `${city}, CO`,
     })),
     sameAs: getSameAs(brandKey),
-    description: HOME_DESCRIPTION,
+    description: BOOKING_COPY.meta.businessDescription,
     serviceType: [
-      "Private Suburban Red Rocks transportation",
-      "Direct Red Rocks ride service",
+      "Private concert shuttle service",
+      "Shared Red Rocks shuttle service",
       "Red Rocks Amphitheatre transportation",
     ],
     offers: {
@@ -105,16 +105,37 @@ export default async function HomePage() {
         {
           "@type": "Offer",
           priceCurrency: "USD",
-          price: "399",
-          priceSpecification: {
-            "@type": "PriceSpecification",
-            priceCurrency: "USD",
-            minPrice: "399",
-            maxPrice: "499",
-          },
+          price: "449",
           itemOffered: {
             "@type": "Service",
-            name: "Private Suburban to Red Rocks",
+            name: "Private SUV to Red Rocks",
+          },
+        },
+        {
+          "@type": "Offer",
+          priceCurrency: "USD",
+          price: "599",
+          itemOffered: {
+            "@type": "Service",
+            name: "10 Passenger Van to Red Rocks",
+          },
+        },
+        {
+          "@type": "Offer",
+          priceCurrency: "USD",
+          price: "799",
+          itemOffered: {
+            "@type": "Service",
+            name: "14 Passenger Sprinter to Red Rocks",
+          },
+        },
+        {
+          "@type": "Offer",
+          priceCurrency: "USD",
+          price: "1199",
+          itemOffered: {
+            "@type": "Service",
+            name: "24 Passenger Party Bus to Red Rocks",
           },
         },
       ],
@@ -143,18 +164,26 @@ export default async function HomePage() {
       },
       {
         "@type": "Question",
-        name: "What does Party at Red Rocks sell now?",
+        name: "Do you offer shared and private Red Rocks transportation?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Party at Red Rocks is focused on private Suburban transportation to Red Rocks for small groups that want direct pickup and return service.",
+          text: "Yes. Party at Red Rocks offers fixed-seat shared shuttles and private SUVs, vans, Sprinters, and party buses.",
         },
       },
       {
         "@type": "Question",
-        name: "Do private Red Rocks rides have guaranteed return service?",
+        name: "Do private Red Rocks shuttles have guaranteed return service?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes. The private Suburban booking includes return service after the show, so your group does not have to arrange a separate ride home.",
+          text: BOOKING_COPY.faq.privateReturn,
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Can groups book larger vehicles for Red Rocks?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. Larger groups can book vans, Sprinters, or a 24-passenger party bus depending on group size and the kind of night they want.",
         },
       },
     ],
@@ -167,6 +196,7 @@ export default async function HomePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <HomeSections
         heroSrc={heroSrc}
+        shuttleSrc={shuttleSrc}
         sprinterSrc={sprinterSrc}
         urgency={urgency}
       />

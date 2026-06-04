@@ -5,7 +5,7 @@ const FAQ = [
   },
   {
     q: "Is this round-trip?",
-    a: "Yes. Private Suburban and private van bookings include the ride to Red Rocks and the return after the show.",
+    a: "Yes. Shuttle seats are per-person round-trip. Private Suburban is a flat-rate round-trip service.",
   },
   {
     q: "What if it rains or snows?",

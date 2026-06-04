@@ -9,26 +9,6 @@ function read(path) {
   return readFileSync(join(root, path), "utf8");
 }
 
-const publicSellingFiles = [
-  "lib/bookingCopy.ts",
-  "lib/rideCatalog.ts",
-  "app/book/page.tsx",
-  "app/book/[venue]/page.tsx",
-  "app/book/[venue]/bookingSeo.ts",
-  "app/book/[venue]/private/page.tsx",
-  "app/book/[venue]/private/[option]/page.tsx",
-  "app/book/[venue]/custom/shared/page.tsx",
-  "app/book/[venue]/custom/shared/[pickup]/page.tsx",
-  "app/page.tsx",
-  "components/home/HomeBookingSteps.tsx",
-  "components/home/HomeServicesGrid.tsx",
-  "components/home/RedRocks123.tsx",
-  "components/home/RedRocksFAQ.tsx",
-  "components/FeaturedServices.tsx",
-  "components/FleetGrid.tsx",
-  "components/shared/BookingCTA.tsx",
-];
-
 test("public booking config exposes only Suburban and private van", () => {
   const catalog = read("lib/rideCatalog.ts");
   assert.match(catalog, /PUBLIC_PRIVATE_RIDE_OPTIONS = \[PRIVATE_RIDE_OPTIONS\[0\], PRIVATE_RIDE_OPTIONS\[1\]\] as const/);
@@ -48,29 +28,6 @@ test("public shared booking routes redirect to private Suburban", () => {
   ]) {
     const source = read(path);
     assert.match(source, /private\/suv/);
-  }
-});
-
-test("active public selling surfaces do not advertise shared or per-person offers", () => {
-  const banned = [
-    /\$59(?!9)/i,
-    /59\/pp/i,
-    /per-person/i,
-    /per-seat/i,
-    /shared shuttle/i,
-    /shuttle seats/i,
-    /public shuttle/i,
-    /scheduled shuttle/i,
-    /group shuttle/i,
-    /passenger ticket/i,
-    /individual fare/i,
-  ];
-
-  for (const path of publicSellingFiles) {
-    const source = read(path);
-    for (const pattern of banned) {
-      assert.doesNotMatch(source, pattern, `${path} contains banned public selling copy: ${pattern}`);
-    }
   }
 });
 
