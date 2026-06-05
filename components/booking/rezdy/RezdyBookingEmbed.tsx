@@ -15,6 +15,34 @@ type RezdyBookingEmbedProps = {
   eventMeta?: Record<string, string>;
 };
 
+const TRACKING_QUERY_KEYS = [
+  "source",
+  "dcc_handoff_id",
+  "handoff_id",
+  "decision_corridor",
+  "ref",
+  "dcc",
+  "utm_source",
+  "utm_campaign",
+] as const;
+
+function readTrackingContext() {
+  if (typeof window === "undefined") return {};
+
+  const params = new URLSearchParams(window.location.search);
+  const context: Record<string, string> = {};
+  for (const key of TRACKING_QUERY_KEYS) {
+    const value = params.get(key);
+    if (value) context[key] = value;
+  }
+
+  if (!context.handoff_id && context.dcc_handoff_id) {
+    context.handoff_id = context.dcc_handoff_id;
+  }
+
+  return context;
+}
+
 export function RezdyBookingEmbed({
   page,
   surface,
@@ -29,6 +57,7 @@ export function RezdyBookingEmbed({
     const payload = {
       surface,
       page,
+      ...readTrackingContext(),
       product_id: productId,
       product_name: productName,
       booking_provider: "rezdy",

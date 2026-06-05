@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import type { HandoffSearchParams } from "@/lib/parrHandoff";
+import { appendSearchParams, type HandoffSearchParams } from "@/lib/parrHandoff";
 
 type PageProps = {
   params: Promise<{ venue: string; pickup: string }>;
@@ -19,7 +19,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function SharedRezdyPickupPage({ params }: PageProps) {
+export default async function SharedRezdyPickupPage({ params, searchParams }: PageProps) {
   const { venue } = await params;
-  redirect(`/book/${venue}/private/suv`);
+  const sp = await searchParams;
+  redirect(appendSearchParams(`/book/${venue}/private/suv`, sp));
 }

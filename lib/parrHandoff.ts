@@ -7,6 +7,10 @@ export const PARR_CANONICAL_HANDOFFS = {
 } as const;
 
 export const DCC_HANDOFF_QUERY_KEYS = [
+  "ref",
+  "dcc",
+  "utm_source",
+  "utm_campaign",
   "dcc_handoff_id",
   "handoff_id",
   "dcc_return",
@@ -100,6 +104,20 @@ export function pickDccHandoffParams(
 function appendQuery(path: string, query: URLSearchParams) {
   const search = query.toString();
   return search ? `${path}?${search}` : path;
+}
+
+export function appendSearchParams(path: string, searchParams?: HandoffSearchParams) {
+  const query = new URLSearchParams();
+
+  for (const [key, value] of Object.entries(searchParams || {})) {
+    if (Array.isArray(value)) {
+      for (const entry of value) query.append(key, entry);
+      continue;
+    }
+    if (typeof value === "string") query.set(key, value);
+  }
+
+  return appendQuery(path, query);
 }
 
 function rezdyPickupPath(searchParams?: HandoffSearchParams) {

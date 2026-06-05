@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import type { HandoffSearchParams } from "@/lib/parrHandoff";
+import { appendSearchParams, type HandoffSearchParams } from "@/lib/parrHandoff";
 
 export const runtime = "nodejs";
 export const revalidate = 300;
@@ -21,11 +21,13 @@ export async function generateMetadata({
 
 export default async function SharedCustomOptionsPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ venue: string }>;
   searchParams: Promise<HandoffSearchParams>;
 }) {
   const { venue } = await params;
+  const sp = await searchParams;
   if (venue !== "red-rocks-amphitheatre") return null;
-  redirect(`/book/${venue}/private/suv`);
+  redirect(appendSearchParams(`/book/${venue}/private/suv`, sp));
 }

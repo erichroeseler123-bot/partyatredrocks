@@ -14,6 +14,7 @@ import { curatedImages } from "@/lib/curatedImages";
 import { bookingVisuals } from "@/lib/bookingVisuals";
 import { buildVenueBookingJsonLd, buildVenueBookingMetadata } from "./bookingSeo";
 import {
+  appendSearchParams,
   buildBookingHref,
   buildVenueRequestHref,
   type HandoffSearchParams,
@@ -77,7 +78,7 @@ export default async function VenueBookingPage({
   const isRedRocks = venue === "red-rocks-amphitheatre";
   const venueMedia = getBookingVenueImage(venue);
   if (isRedRocks) {
-    redirect(`/book/${venue}/private/suv`);
+    redirect(appendSearchParams(`/book/${venue}/private/suv`, sp));
   }
   const artist = Array.isArray(sp.artist) ? sp.artist[0] : sp.artist;
   const dateRaw = Array.isArray(sp.date) ? sp.date[0] : sp.date;

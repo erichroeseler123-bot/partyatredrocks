@@ -10,6 +10,8 @@ const VALID_EVENTS = new Set<ParrStoredTelemetryEvent["name"]>([
   "shortlist_rendered",
   "product_opened",
   "checkout_started",
+  "booking_opened",
+  "rezdy_embed_viewed",
   "navigation_clicked",
   "decision_cta_clicked",
   "booking_confirmed",

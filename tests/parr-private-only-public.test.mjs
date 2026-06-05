@@ -113,6 +113,50 @@ test("public shared booking routes redirect to private Suburban", () => {
   }
 });
 
+test("DCC tracking params are preserved through private redirects", () => {
+  const handoff = read("lib/parrHandoff.ts");
+  for (const key of ["ref", "dcc", "utm_source", "utm_campaign"]) {
+    assert.match(handoff, new RegExp(`"${key}"`), `lib/parrHandoff.ts should preserve ${key}`);
+  }
+  assert.match(handoff, /export function appendSearchParams/);
+
+  for (const path of [
+    "app/book-shuttle/page.tsx",
+    "app/book/[venue]/page.tsx",
+    "app/book/[venue]/custom/shared/page.tsx",
+    "app/book/[venue]/custom/shared/[pickup]/page.tsx",
+  ]) {
+    const source = read(path);
+    assert.match(source, /appendSearchParams/);
+    assert.match(source, /private\/suv/);
+  }
+});
+
+test("Rezdy booking telemetry events are accepted and carry DCC context", () => {
+  const telemetryRoute = read("app/api/telemetry/parr/route.ts");
+  const telemetryStore = read("lib/parrTelemetryStore.ts");
+  const rezdyEmbed = read("components/booking/rezdy/RezdyBookingEmbed.tsx");
+
+  for (const eventName of ["booking_opened", "rezdy_embed_viewed"]) {
+    assert.match(telemetryRoute, new RegExp(`"${eventName}"`));
+    assert.match(telemetryStore, new RegExp(`\\| "${eventName}"`));
+    assert.match(rezdyEmbed, new RegExp(`trackParrEvent\\("${eventName}"`));
+  }
+
+  for (const key of [
+    "source",
+    "dcc_handoff_id",
+    "handoff_id",
+    "decision_corridor",
+    "ref",
+    "dcc",
+    "utm_source",
+    "utm_campaign",
+  ]) {
+    assert.match(rezdyEmbed, new RegExp(`"${key}"`));
+  }
+});
+
 test("public sitemap omits shared booking URLs", () => {
   const sitemap = read("app/sitemap.xml/route.ts");
   assert.doesNotMatch(sitemap, /custom\/shared/);
