@@ -4,6 +4,38 @@ import { join } from "node:path";
 import test from "node:test";
 
 const root = process.cwd();
+const ACTIVE_PUBLIC_COPY_FILES = [
+  "app/page.tsx",
+  "app/shuttles/page.tsx",
+  "components/home/HomeHero.tsx",
+  "components/home/HomeSections.tsx",
+  "components/home/HomeServicesGrid.tsx",
+  "components/FeaturedServices.tsx",
+  "components/MainNav.tsx",
+  "components/SiteFooter.tsx",
+  "components/shared/BookingCTA.tsx",
+  "lib/bookingCopy.ts",
+  "lib/pricing.ts",
+];
+
+const PUBLIC_FORBIDDEN_PATTERNS = [
+  /\$59(?!9)/,
+  /59\/pp/i,
+  /per person/i,
+  /per-person/i,
+  /shared shuttle/i,
+  /shuttle seats/i,
+  /public shuttle/i,
+  /scheduled shuttle/i,
+  /group shuttle/i,
+  /passenger ticket/i,
+  /individual fare/i,
+  /\$399–\$499/,
+  /\$449/,
+  /Suburban[^"\n]*\$499/i,
+  /Sprinter/i,
+  /party bus/i,
+];
 
 function read(path) {
   return readFileSync(join(root, path), "utf8");
@@ -35,6 +67,15 @@ test("public Suburban pricing is flat 399", () => {
   assert.doesNotMatch(combined, /per person/i);
   assert.doesNotMatch(combined, /shared pickup/i);
   assert.doesNotMatch(combined, /shared shuttle/i);
+});
+
+test("active public copy does not sell shared or per-person rides", () => {
+  for (const path of ACTIVE_PUBLIC_COPY_FILES) {
+    const source = read(path);
+    for (const pattern of PUBLIC_FORBIDDEN_PATTERNS) {
+      assert.doesNotMatch(source, pattern, `${path} contains ${pattern}`);
+    }
+  }
 });
 
 test("public shared booking routes redirect to private Suburban", () => {

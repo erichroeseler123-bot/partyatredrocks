@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { buildBookingHref } from "@/lib/parrHandoff";
 import { PRIVATE_TRANSPORT_PROMO } from "@/lib/privateTransportPromo";
 
 type Service = {
@@ -8,41 +7,25 @@ type Service = {
   note: string;
   bullets: string[];
   href: string;
-  tag: "Seats" | "Private SUV" | "Sprinter" | "Bus";
+  tag: "Private SUV" | "Van";
 };
 
 const SERVICES: Service[] = [
   {
-    title: "Group coach seats",
-    price: "$59–$65",
-    note: "per person",
-    bullets: ["Denver pickup windows", "Professional driver + show-night timing", "Reliable return after the encore"],
-    href: "/book-shuttle",
-    tag: "Seats",
-  },
-  {
-    title: "Private SUV",
-    price: "$449",
+    title: "Private Suburban",
+    price: "$399",
     note: "flat rate",
-    bullets: ["Just your group", "Flexible pickup timing", "Direct return after the show"],
-    href: "/private-suburban",
+    bullets: ["Your group only", "Private pickup timing", "Direct return after the show"],
+    href: "/book/red-rocks-amphitheatre/private/suv",
     tag: "Private SUV",
   },
   {
-    title: "14 Passenger Sprinter",
-    price: "$799",
+    title: "Private Van Upgrade",
+    price: "$599",
     note: "flat rate",
-    bullets: ["More room + more comfort", "Ideal for larger groups", "Direct pickup + direct return"],
-    href: buildBookingHref({ target: "private-option", venue: "red-rocks-amphitheatre", option: "sprinter" }),
-    tag: "Sprinter",
-  },
-  {
-    title: "24 Passenger Party Bus",
-    price: "$1199",
-    note: "flat rate",
-    bullets: ["Big groups, one vehicle", "Great for corporate / birthdays", "Direct pickup + direct return"],
-    href: buildBookingHref({ target: "private-option", venue: "red-rocks-amphitheatre", option: "party-bus" }),
-    tag: "Bus",
+    bullets: ["More room for larger groups", "One vehicle", "Direct pickup + direct return"],
+    href: "/book/red-rocks-amphitheatre/private/van",
+    tag: "Van",
   },
 ];
 
@@ -50,14 +33,10 @@ function Tag({ t }: { t: Service["tag"] }) {
   const base =
     "inline-flex items-center rounded-full border px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.22em]";
   switch (t) {
-    case "Seats":
-      return <span className={`${base} border-soft pill text-strong`}>Seats</span>;
     case "Private SUV":
       return <span className={`${base} border-red-500/30 bg-red-500/10 text-red-100`}>Private</span>;
-    case "Sprinter":
-      return <span className={`${base} border-cyan-500/30 bg-cyan-500/10 text-cyan-100`}>Group van</span>;
-    case "Bus":
-      return <span className={`${base} border-violet-500/30 bg-violet-500/10 text-violet-100`}>Large group</span>;
+    case "Van":
+      return <span className={`${base} border-cyan-500/30 bg-cyan-500/10 text-cyan-100`}>Private van</span>;
   }
 }
 
@@ -71,16 +50,16 @@ export default function HomeServicesGrid() {
               Red Rocks transportation
             </p>
             <h2 className="mt-3 text-2xl md:text-4xl font-black tracking-tight">
-              Choose your ride
+              Choose your private ride
             </h2>
             <p className="mt-4 text-[15px] md:text-[18px] leading-relaxed text-soft">
-              Everything on this page is for <span className="text-white font-black">Red Rocks</span>. Tap any option to book.
+              Everything on this page is private Red Rocks transportation. Pick the vehicle that fits your group.
             </p>
           </div>
 
           {/* remove the extra hero buttons — keep this single CTA only */}
-          <Link href="/book-shuttle" className="btn-primary">
-            Book Red Rocks Shuttle
+          <Link href="/book/red-rocks-amphitheatre/private/suv" className="btn-primary">
+            Book Private Suburban
           </Link>
         </div>
 

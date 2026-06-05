@@ -20,18 +20,18 @@ export const revalidate = 300;
 const SITE = "https://www.partyatredrocks.com";
 
 export const metadata: Metadata = {
-  title: "Red Rocks Shuttle from Denver | Shared Seats + Private SUVs | Party at Red Rocks",
+  title: "Private Red Rocks Transportation | Suburban $399 + Van Upgrade | Party at Red Rocks",
   description: BOOKING_COPY.meta.homeDescription,
   alternates: { canonical: `${SITE}/` },
   openGraph: {
-    title: "Red Rocks Shuttle from Denver | Shared Seats + Private SUVs | Party at Red Rocks",
+    title: "Private Red Rocks Transportation | Suburban $399 + Van Upgrade | Party at Red Rocks",
     description: BOOKING_COPY.meta.homeDescription,
     url: `${SITE}/`,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Red Rocks Shuttle from Denver | Shared Seats + Private SUVs | Party at Red Rocks",
+    title: "Private Red Rocks Transportation | Suburban $399 + Van Upgrade | Party at Red Rocks",
     description: BOOKING_COPY.meta.homeDescription,
   },
 };
@@ -40,8 +40,7 @@ export default async function HomePage() {
   const brandKey = SITE_CONFIG.socialBrandKey;
   const [events] = await Promise.all([getEventsCatalog(2026, "redrocks")]);
   const heroSrc = pageVisuals.home.heroSrc;
-  const shuttleSrc = pageVisuals.home.shuttleSrc;
-  const sprinterSrc = pageVisuals.home.privateSrc;
+  const privateVehicleSrc = pageVisuals.home.privateSrc;
   const denverToday = new Intl.DateTimeFormat("en-CA", {
     timeZone: "America/Denver",
     year: "numeric",
@@ -63,7 +62,7 @@ export default async function HomePage() {
         label: nextRedRocksEvent.dateKey === denverToday ? "Tonight at Red Rocks" : "Next at Red Rocks",
         detail:
           nextRedRocksEvent.dateKey === denverToday
-            ? `${nextRedRocksEvent.name} is on tonight. Shared and private ride planning is still open.`
+            ? `${nextRedRocksEvent.name} is on tonight. Private ride planning is still open.`
             : `${nextRedRocksEvent.name} is coming up next. Lock the ride plan before show night gets compressed.`,
         imageSrc: nextRedRocksEventImage || curatedImages.redRocksVenueThumb,
         imageAlt: `${nextRedRocksEvent.name} concert image`,
@@ -94,8 +93,7 @@ export default async function HomePage() {
     sameAs: getSameAs(brandKey),
     description: BOOKING_COPY.meta.businessDescription,
     serviceType: [
-      "Private concert shuttle service",
-      "Shared Red Rocks shuttle service",
+      "Private concert transportation",
       "Red Rocks Amphitheatre transportation",
     ],
     offers: {
@@ -105,10 +103,10 @@ export default async function HomePage() {
         {
           "@type": "Offer",
           priceCurrency: "USD",
-          price: "449",
+          price: "399",
           itemOffered: {
             "@type": "Service",
-            name: "Private SUV to Red Rocks",
+            name: "Private Suburban to Red Rocks",
           },
         },
         {
@@ -118,24 +116,6 @@ export default async function HomePage() {
           itemOffered: {
             "@type": "Service",
             name: "10 Passenger Van to Red Rocks",
-          },
-        },
-        {
-          "@type": "Offer",
-          priceCurrency: "USD",
-          price: "799",
-          itemOffered: {
-            "@type": "Service",
-            name: "14 Passenger Sprinter to Red Rocks",
-          },
-        },
-        {
-          "@type": "Offer",
-          priceCurrency: "USD",
-          price: "1199",
-          itemOffered: {
-            "@type": "Service",
-            name: "24 Passenger Party Bus to Red Rocks",
           },
         },
       ],
@@ -164,15 +144,15 @@ export default async function HomePage() {
       },
       {
         "@type": "Question",
-        name: "Do you offer shared and private Red Rocks transportation?",
+        name: "Do you offer private Red Rocks transportation?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes. Party at Red Rocks offers fixed-seat shared shuttles and private SUVs, vans, Sprinters, and party buses.",
+          text: "Yes. Party at Red Rocks offers private Suburban service and a private van upgrade for Red Rocks show nights.",
         },
       },
       {
         "@type": "Question",
-        name: "Do private Red Rocks shuttles have guaranteed return service?",
+        name: "Do private Red Rocks rides have guaranteed return service?",
         acceptedAnswer: {
           "@type": "Answer",
           text: BOOKING_COPY.faq.privateReturn,
@@ -183,7 +163,7 @@ export default async function HomePage() {
         name: "Can groups book larger vehicles for Red Rocks?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes. Larger groups can book vans, Sprinters, or a 24-passenger party bus depending on group size and the kind of night they want.",
+          text: "Yes. Larger groups can upgrade from the Private Suburban to a private van.",
         },
       },
     ],
@@ -196,8 +176,7 @@ export default async function HomePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <HomeSections
         heroSrc={heroSrc}
-        shuttleSrc={shuttleSrc}
-        sprinterSrc={sprinterSrc}
+        privateVehicleSrc={privateVehicleSrc}
         urgency={urgency}
       />
       <section className="brand-page px-4 pb-20 sm:px-6 lg:px-8">

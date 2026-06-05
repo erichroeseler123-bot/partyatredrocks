@@ -12,18 +12,17 @@ const FOOTER_GROUPS = [
   {
     title: "Book",
     links: [
-      { href: "/book/red-rocks-amphitheatre/custom/shared", label: "Shuttle Tickets" },
-      { href: "/book/red-rocks-amphitheatre/private#suv-booking", label: "Private SUV" },
+      { href: "/book/red-rocks-amphitheatre/private/suv", label: "Private Suburban" },
       { href: "/book/red-rocks-amphitheatre/private#van-upgrade", label: "Van Upgrade" },
     ],
   },
   {
-    title: "Compare",
+    title: "Plan",
     links: [
-      { href: "/red-rocks/transportation/shuttle-vs-uber", label: "Shuttle vs Uber" },
-      { href: "/red-rocks/transportation/shuttle-vs-driving", label: "Shuttle vs Driving" },
-      { href: "/red-rocks/transportation/private-vs-shared", label: "Private vs Shared" },
-      { href: "/red-rocks/transportation/is-shuttle-worth-it", label: "Is Shuttle Worth It?" },
+      { href: "/red-rocks/transportation/post-show-pickup", label: "Post-Show Pickup" },
+      { href: "/red-rocks/transportation/parking-reality", label: "Parking Reality" },
+      { href: "/guide/show-night-strategy", label: "Show-Night Strategy" },
+      { href: "/guide/tailgating", label: "Tailgating Guide" },
     ],
   },
   {
@@ -63,7 +62,7 @@ export default function SiteFooter() {
                 Party at Red Rocks
               </div>
               <div className="mt-3 text-[15px] text-[color:var(--brand-text-soft)]">
-                Shared shuttle tickets, private SUVs, and direct pickup planning for Red Rocks show nights.
+                Private Suburban, private van upgrade, and direct pickup planning for Red Rocks show nights.
               </div>
               <div className="mt-4 text-[13px] font-semibold uppercase tracking-[0.16em] text-[var(--brand-cyan)]">
                 Compare the ride, pick the plan, and book it

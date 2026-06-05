@@ -7,14 +7,10 @@ import {
 } from "lucide-react";
 import { ReviewBlock } from "@/components/ReviewBlock";
 import { PRIVATE_TRANSPORT_PROMO } from "@/lib/privateTransportPromo";
-import { buildDccRedRocksBookingHref } from "@/lib/parrHandoff";
-
-const BOOK_SHARED_RED_ROCKS = buildDccRedRocksBookingHref();
 
 type HomeSectionsProps = {
   heroSrc: string;
-  shuttleSrc: string;
-  sprinterSrc: string;
+  privateVehicleSrc: string;
   urgency:
     | {
         label: string;
@@ -25,34 +21,34 @@ type HomeSectionsProps = {
     | null;
 };
 
-export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency }: HomeSectionsProps) {
+export default function HomeSections({ heroSrc, privateVehicleSrc, urgency }: HomeSectionsProps) {
   const rideCards = [
     {
       title: "Private Suburban",
-      subtitle: "$449 Suburban (up to 6)",
-      copy: "Most popular for groups",
+      subtitle: "$399 Private Suburban",
+      copy: "Your group, your vehicle",
       bullets: [
         "Tailgating + your car waits in the same spot during the show",
         "Door-to-door with liquor/grocery stop",
       ],
-      href: "/book/red-rocks-amphitheatre/private",
-      cta: "Book Private Suburban - $449",
-      image: sprinterSrc,
+      href: "/book/red-rocks-amphitheatre/private/suv",
+      cta: "Book Private Suburban - $399",
+      image: privateVehicleSrc,
       alt: "Approved Suburban SUV image for Red Rocks private transportation",
       accent: "orange" as const,
     },
     {
-      title: "Shuttle Tickets",
-      subtitle: "$59 fixed per seat",
-      copy: "Pickup locations",
+      title: "Private Van Upgrade",
+      subtitle: "$599 Private Van",
+      copy: "More room for larger groups",
       bullets: [
-        "Denver",
-        "Golden",
+        "One pickup plan",
+        "Book online through Rezdy",
       ],
-      href: "/book/red-rocks-amphitheatre",
-      cta: "Book $59 Shuttle Tickets",
-      image: shuttleSrc,
-      alt: "Approved Sprinter shuttle image for Red Rocks transportation",
+      href: "/book/red-rocks-amphitheatre/private/van",
+      cta: "Upgrade to Private Van",
+      image: privateVehicleSrc,
+      alt: "Approved private vehicle image for Red Rocks transportation",
       accent: "cyan" as const,
     },
   ];
@@ -81,10 +77,10 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
                 Red Rocks Transportation
               </p>
               <h1 className="mt-4 text-[2.7rem] font-black leading-[0.92] tracking-[-0.05em] text-white sm:text-[4.3rem] lg:text-[5.6rem]">
-                How do you want to get to Red Rocks?
+                Private Red Rocks transportation for your group
               </h1>
               <p className="mx-auto mt-5 max-w-4xl text-base leading-8 text-white/82 sm:text-lg">
-                $59 shared seats or a $449 private Suburban for up to 6 with tailgating, limo-lane access, door-to-door service, and the vehicle waiting in the same spot during the show.
+                Private Suburban is $399 with tailgating, limo-lane access, door-to-door service, and the vehicle waiting in the same spot during the show. Larger groups can upgrade to a private van.
               </p>
               <p className="mx-auto mt-3 max-w-3xl text-sm font-semibold uppercase tracking-[0.14em] text-white/72 sm:text-[13px]">
                 No waiting for Uber. No surge pricing. No chaos after the show.
@@ -93,12 +89,12 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
 
             <div className="mt-10 grid gap-5 lg:grid-cols-2">
               {rideCards.map((ride) => {
-                const isShared = ride.accent === "cyan";
+                const isVan = ride.accent === "cyan";
                 return (
                   <Link
                     key={ride.title}
                     href={ride.href}
-                    className={`group relative overflow-hidden rounded-[30px] border p-6 text-left no-underline shadow-[0_24px_80px_rgba(0,0,0,0.36)] transition hover:-translate-y-1 ${isShared ? "border-cyan-300/22 bg-[linear-gradient(180deg,rgba(8,20,34,0.98),rgba(5,12,22,0.98))] hover:border-cyan-200/44" : "border-[#ff8f5a]/26 bg-[linear-gradient(180deg,rgba(28,13,10,0.98),rgba(16,9,8,0.98))] hover:border-[#ff9d72]/52 lg:-mt-3 lg:mb-3 lg:p-7"}`}
+                    className={`group relative overflow-hidden rounded-[30px] border p-6 text-left no-underline shadow-[0_24px_80px_rgba(0,0,0,0.36)] transition hover:-translate-y-1 ${isVan ? "border-cyan-300/22 bg-[linear-gradient(180deg,rgba(8,20,34,0.98),rgba(5,12,22,0.98))] hover:border-cyan-200/44" : "border-[#ff8f5a]/26 bg-[linear-gradient(180deg,rgba(28,13,10,0.98),rgba(16,9,8,0.98))] hover:border-[#ff9d72]/52 lg:-mt-3 lg:mb-3 lg:p-7"}`}
                   >
                     <div className="absolute right-4 top-4 h-20 w-28 overflow-hidden rounded-[18px] border border-white/10 opacity-85 sm:h-24 sm:w-36">
                       <img
@@ -112,7 +108,7 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
                     </div>
 
                     <div className="pr-24 sm:pr-40">
-                      {!isShared ? (
+                      {!isVan ? (
                         <div className="inline-flex rounded-full border border-[#ffb07c]/30 bg-[#ffb07c]/12 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-[#ffcfad]">
                           {ride.copy}
                         </div>
@@ -123,7 +119,7 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
                       <div className="mt-3 text-[1.9rem] font-black tracking-[-0.04em] text-white sm:text-[2.6rem]">
                         {ride.subtitle}
                       </div>
-                      {isShared ? (
+                      {isVan ? (
                         <p className="mt-2 text-sm font-semibold uppercase tracking-[0.16em] text-white/68">
                           {ride.copy}
                         </p>
@@ -134,7 +130,7 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
                       )}
                     </div>
 
-                    {isShared ? (
+                    {isVan ? (
                       <div className="mt-6 flex flex-wrap gap-3">
                         {ride.bullets.map((bullet) => (
                           <span
@@ -157,7 +153,7 @@ export default function HomeSections({ heroSrc, shuttleSrc, sprinterSrc, urgency
                     )}
 
                     <div
-                      className={`mt-8 inline-flex min-h-14 w-full items-center justify-center rounded-full px-6 text-sm font-black uppercase tracking-[0.16em] transition sm:w-auto ${isShared ? "bg-[#3df3ff] text-[#07111d] group-hover:bg-[#62f6ff]" : "bg-[#ff6b3d] text-[#1b0b05] group-hover:bg-[#ff845d]"}`}
+                      className={`mt-8 inline-flex min-h-14 w-full items-center justify-center rounded-full px-6 text-sm font-black uppercase tracking-[0.16em] transition sm:w-auto ${isVan ? "bg-[#3df3ff] text-[#07111d] group-hover:bg-[#62f6ff]" : "bg-[#ff6b3d] text-[#1b0b05] group-hover:bg-[#ff845d]"}`}
                     >
                       {ride.cta} →
                     </div>

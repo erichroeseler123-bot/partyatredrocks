@@ -17,8 +17,8 @@ export default function MainNav() {
           <Link href="/venues" className="hover:text-white transition">
             Venues
           </Link>
-          <Link href="/shuttles" className="hover:text-white transition">
-            Shuttles
+          <Link href="/book/red-rocks-amphitheatre/private/suv" className="hover:text-white transition">
+            Private Rides
           </Link>
           <Link href="/gallery" className="hover:text-white transition">
             Gallery

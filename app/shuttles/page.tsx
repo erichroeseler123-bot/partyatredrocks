@@ -1,14 +1,14 @@
 import Link from "next/link";
-import { ArrowRight, BadgeCheck, Bus, CarFront, ShieldCheck, Ticket } from "lucide-react";
+import { ArrowRight, BadgeCheck, Bus, CarFront, ShieldCheck } from "lucide-react";
 import { ReviewBlock } from "@/components/ReviewBlock";
 import { RecentBookingToast } from "@/components/RecentBookingToast";
 import { PlanningLinks } from "@/components/booking/PlanningLinks";
 import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
 
 export const metadata = {
-  title: "Red Rocks Shuttle from Denver | $59 Seats + Private Options",
+  title: "Private Red Rocks Transportation | Suburban $399 + Van Upgrade",
   description:
-    "Book Red Rocks shuttle transportation from Denver with fixed-price shared seats and private ride options. Start with venue, choose ride type, and book online.",
+    "Book private Red Rocks transportation from Denver with a Private Suburban or private van upgrade. Start with your vehicle, choose pickup details, and book online.",
   alternates: {
     canonical: "/shuttles",
   },
@@ -16,26 +16,17 @@ export const metadata = {
 
 const rideCards = [
   {
-    title: "Shared Shuttle",
-    price: "$59 / seat",
+    title: "Private Suburban",
+    price: "$399",
     copy:
-      "Round-trip shuttle seats for most riders. Fixed price, clear pickup, and a set ride home after the show.",
-    target: "shared" as const,
-    cta: "Book Shared Seats",
-    icon: Ticket,
-  },
-  {
-    title: "Private SUV",
-    price: "$449",
-    copy:
-      "Best for small groups that want one vehicle, Upper North limo-lane access, and time to tailgate before the show.",
+      "Best for smaller groups that want one vehicle, Upper North limo-lane access, and time to tailgate before the show.",
     target: "private-option" as const,
     option: "suv",
-    cta: "Book Private SUV",
+    cta: "Book Private Suburban",
     icon: CarFront,
   },
   {
-    title: "10 Passenger Van",
+    title: "Upgrade to Private Van",
     price: "$599",
     copy:
       "Built for groups that want to stay together, use the limo lane, and tailgate before heading in.",
@@ -44,31 +35,11 @@ const rideCards = [
     cta: "Book 10 Passenger Van",
     icon: Bus,
   },
-  {
-    title: "14 Passenger Sprinter",
-    price: "$799",
-    copy:
-      "Best for larger groups that want more room, limo-lane access, and one vehicle for the full night.",
-    target: "private-option" as const,
-    option: "sprinter",
-    cta: "Book Sprinter Van",
-    icon: Bus,
-  },
-  {
-    title: "24 Passenger Party Bus",
-    price: "$1199",
-    copy:
-      "Best for bigger groups who want to tailgate, stay together, and make the ride part of the night.",
-    target: "private-option" as const,
-    option: "party-bus",
-    cta: "Book Party Bus",
-    icon: Bus,
-  },
 ];
 
 const proofPoints = [
-  "Shared shuttle seats from Denver",
-  "Private rides for groups",
+  "Private pickup for your group",
+  "Private Suburban or van",
   "Secure online booking",
   "Pickup details before show night",
 ];
@@ -92,10 +63,10 @@ export default async function ShuttlesPage({
               Red Rocks Rides
             </div>
             <h1 className="mt-5 text-[2.5rem] font-black uppercase leading-[0.94] tracking-[-0.04em] sm:text-[4rem] lg:text-[5rem]">
-              Red Rocks Shuttle From Denver
+              Private Red Rocks Transportation From Denver
             </h1>
             <p className="mt-5 max-w-2xl text-[15px] leading-7 text-white/74 sm:text-lg">
-              Shared seats from $59. Private rides for groups. Book online and get pickup details before show night.
+              Private Suburban is $399. Larger groups can upgrade to a private van. Book online and get pickup details before show night.
             </p>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-white/68 sm:text-[15px]">
               Your return ride is covered after the show.
@@ -113,23 +84,13 @@ export default async function ShuttlesPage({
               </Link>
               <Link
                 href={buildBookingHref({
-                  target: "shared",
-                  venue: "red-rocks-amphitheatre",
-                  searchParams: sp,
-                })}
-                className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
-              >
-                Shared Shuttle
-              </Link>
-              <Link
-                href={buildBookingHref({
                   target: "private",
                   venue: "red-rocks-amphitheatre",
                   searchParams: sp,
                 })}
                 className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
               >
-                Private Rides
+                Private Vehicles
               </Link>
             </div>
             <PlanningLinks venue="red-rocks-amphitheatre" source={source} className="mt-6" />
@@ -141,7 +102,7 @@ export default async function ShuttlesPage({
             Ride Options
           </div>
           <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">
-            Shared if you want speed. Private if you want control.
+            Private Suburban by default. Upgrade to private van for more room.
           </h2>
           <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {rideCards.map((ride) => {
@@ -227,7 +188,7 @@ export default async function ShuttlesPage({
             ))}
           </div>
           <p className="mt-5 max-w-3xl text-sm leading-6 text-white/70">
-            Choose shared shuttle seats or a private ride, then complete booking online for your Red Rocks night.
+            Choose the Private Suburban or private van, then complete booking online for your Red Rocks night.
           </p>
         </section>
 
@@ -238,7 +199,7 @@ export default async function ShuttlesPage({
           </div>
           <div className="mt-4 max-w-4xl space-y-4 text-sm leading-7 text-white/72">
             <p>
-              Shared shuttle seats and private rides can be booked online.
+              Private Red Rocks transportation can be booked online.
             </p>
             <p>
               Pickup details are sent before show night, and your return ride is covered after the show.
@@ -253,7 +214,7 @@ export default async function ShuttlesPage({
               })}
               className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
             >
-              Book Red Rocks Shuttle
+              Book Private Transportation
             </Link>
             <Link
               href="/about"

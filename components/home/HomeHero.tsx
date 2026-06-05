@@ -26,16 +26,16 @@ export default function HomeHero() {
         </h1>
 
         <p className="mt-6 max-w-3xl text-strong text-lg md:text-2xl font-medium leading-relaxed">
-          Fixed pricing. Pro drivers. Reliable post-show return.
-          <span className="text-strong/80"> Shuttle seats $59–$65/pp or Private Suburban $449.</span>
+          Private Red Rocks transportation. Pro drivers. Reliable post-show return.
+          <span className="text-strong/80"> Private Suburban — $399, with a private van upgrade available.</span>
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row gap-3">
-          <Link href="/book-shuttle" className="btn-primary">
-            Book shuttle
+          <Link href="/book/red-rocks-amphitheatre/private/suv" className="btn-primary">
+            Book Private Suburban
           </Link>
-          <Link href="/private-suburban" className="btn-ghost border-red-500/30 bg-red-500/10 text-red-100 hover:bg-red-500/15">
-            Private Suburban — $449
+          <Link href="/book/red-rocks-amphitheatre/private/van" className="btn-ghost border-red-500/30 bg-red-500/10 text-red-100 hover:bg-red-500/15">
+            Upgrade to Private Van
           </Link>
         </div>
       </div>
