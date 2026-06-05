@@ -37,6 +37,10 @@ const PUBLIC_FORBIDDEN_PATTERNS = [
   /party bus/i,
 ];
 
+const ALLOWED_METADATA_CLARIFICATIONS = [
+  "No shared seats or per-person fares.",
+];
+
 function read(path) {
   return readFileSync(join(root, path), "utf8");
 }
@@ -71,11 +75,29 @@ test("public Suburban pricing is flat 399", () => {
 
 test("active public copy does not sell shared or per-person rides", () => {
   for (const path of ACTIVE_PUBLIC_COPY_FILES) {
-    const source = read(path);
+    let source = read(path);
+    for (const allowed of ALLOWED_METADATA_CLARIFICATIONS) {
+      source = source.replaceAll(allowed, "");
+    }
     for (const pattern of PUBLIC_FORBIDDEN_PATTERNS) {
       assert.doesNotMatch(source, pattern, `${path} contains ${pattern}`);
     }
   }
+});
+
+test("shuttles page metadata is private-vehicle-only", () => {
+  const shuttles = read("app/shuttles/page.tsx");
+
+  assert.match(shuttles, /Private Red Rocks Transportation \| Suburban \$399 \+ Van Upgrade/);
+  assert.match(
+    shuttles,
+    /Book private Red Rocks transportation with a \$399 Private Suburban or upgrade to a private van\. No shared seats or per-person fares\./,
+  );
+  assert.match(shuttles, /openGraph/);
+  assert.match(shuttles, /twitter/);
+  assert.doesNotMatch(shuttles, /\$59(?!9)/);
+  assert.doesNotMatch(shuttles, /Red Rocks Shuttle from Denver/);
+  assert.doesNotMatch(shuttles, /Private SUVs/);
 });
 
 test("public shared booking routes redirect to private Suburban", () => {

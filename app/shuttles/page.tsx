@@ -8,9 +8,19 @@ import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
 export const metadata = {
   title: "Private Red Rocks Transportation | Suburban $399 + Van Upgrade",
   description:
-    "Book private Red Rocks transportation from Denver with a Private Suburban or private van upgrade. Start with your vehicle, choose pickup details, and book online.",
+    "Book private Red Rocks transportation with a $399 Private Suburban or upgrade to a private van. No shared seats or per-person fares.",
   alternates: {
     canonical: "/shuttles",
+  },
+  openGraph: {
+    title: "Private Red Rocks Transportation | Suburban $399 + Van Upgrade",
+    description:
+      "Book private Red Rocks transportation with a $399 Private Suburban or upgrade to a private van. No shared seats or per-person fares.",
+  },
+  twitter: {
+    title: "Private Red Rocks Transportation | Suburban $399 + Van Upgrade",
+    description:
+      "Book private Red Rocks transportation with a $399 Private Suburban or upgrade to a private van. No shared seats or per-person fares.",
   },
 };
 
