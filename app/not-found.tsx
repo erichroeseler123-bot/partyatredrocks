@@ -1,12 +1,11 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
 
-// 1. SEO Metadata: Telling Google not to index the error page itself
 export const metadata: Metadata = {
   title: 'Page Not Found | Party at Red Rocks',
   description: 'The requested guide or event page could not be found.',
   robots: {
-    index: false, // Essential: Prevent 404s from appearing in search results
+    index: false,
     follow: true,
   },
 };
@@ -14,41 +13,38 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <main className="min-h-screen bg-surface text-white flex flex-col items-center justify-center px-6 text-center">
-      {/* Visual Error Code */}
       <h1 className="text-9xl font-black text-red-600 italic tracking-tighter mb-4">404</h1>
-      
+
       <div className="max-w-xl">
         <h2 className="text-3xl font-black uppercase mb-6">Looks like you took a wrong turn.</h2>
         <p className="text-muted text-lg mb-10 leading-relaxed">
-          The 2025 event or guide you're looking for has been moved to our new <strong>2026 Venue Intelligence Hub</strong>. 
-          Don't get stranded—use the guides below to master your Red Rocks logistics.
+          The page you’re looking for may have moved. Use the current Red Rocks guides below, or return to the homepage.
         </p>
 
-        {/* Recovery Links: Guiding users back to authority content */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12 text-left">
-          <Link href="/guide/logistics/parking-lots" className="p-4 border border-soft rounded-2xl hover:border-red-600 transition group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-            <span className="block font-black uppercase text-red-600 group-hover:text-red-500">Parking Hacks</span>
-            <span className="text-xs text-muted">Avoid the 380-stair climb.</span>
+          <Link href="/guide/parking" className="p-4 border border-soft rounded-2xl hover:border-red-600 transition group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+            <span className="block font-black uppercase text-red-600 group-hover:text-red-500">Parking Guide</span>
+            <span className="text-xs text-muted">Plan arrival and parking for show night.</span>
           </Link>
-          
+
           <Link href="/guide/logistics/bag-policy" className="p-4 border border-soft rounded-2xl hover:border-red-600 transition group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-            <span className="block font-black uppercase text-red-600 group-hover:text-red-500">2026 Bag Rules</span>
-            <span className="text-xs text-muted">New single-pocket policy.</span>
+            <span className="block font-black uppercase text-red-600 group-hover:text-red-500">Bag Policy</span>
+            <span className="text-xs text-muted">Check current bag-planning guidance.</span>
           </Link>
-          
+
           <Link href="/guide/local/denver-pickups" className="p-4 border border-soft rounded-2xl hover:border-red-600 transition group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
             <span className="block font-black uppercase text-red-600 group-hover:text-red-500">Denver Pickups</span>
-            <span className="text-xs text-muted">Sheraton Downtown hub.</span>
+            <span className="text-xs text-muted">Plan a private pickup from the Denver area.</span>
           </Link>
-          
-          <Link href="/guide/logistics/sold-out-survival" className="p-4 border border-soft rounded-2xl hover:border-red-600 transition group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-            <span className="block font-black uppercase text-red-600 group-hover:text-red-500">Sold-Out Survival</span>
-            <span className="text-xs text-muted">Beat the $150 Uber surge.</span>
+
+          <Link href="/red-rocks/transportation" className="p-4 border border-soft rounded-2xl hover:border-red-600 transition group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+            <span className="block font-black uppercase text-red-600 group-hover:text-red-500">Transportation</span>
+            <span className="text-xs text-muted">See the current private ride options.</span>
           </Link>
         </div>
 
-        <Link 
-          href="/" 
+        <Link
+          href="/"
           className="inline-block btn-primary uppercase hover:bg-red-500 transition shadow-xl"
         >
           Return to Homepage
