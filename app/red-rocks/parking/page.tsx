@@ -84,7 +84,7 @@ export default async function RedRocksParkingPage({
                 searchParams: sp,
               })}
             >
-              Book a Ride
+              Book Private Ride
             </Link>
             <Link className="comic-btn comic-btn-secondary" href="/red-rocks/transportation">
               Transportation Guide
@@ -97,7 +97,7 @@ export default async function RedRocksParkingPage({
           <p className="comic-copy" style={{ marginTop: 8 }}>
             Start with your main priority. If your group wants less stair strain, arrive earlier and choose a plan that reduces
             the climb. If a smoother exit matters more, accept that you may walk farther before the show. If you want the least
-            hassle overall, a shuttle or private ride may be the better fit.
+            hassle overall, a pre-booked private ride may be the better fit.
           </p>
           <p className="comic-copy">
             Also account for weather, mobility, and altitude. A moderate walk can feel much harder in cold weather or at elevation,
@@ -136,7 +136,7 @@ export default async function RedRocksParkingPage({
             turns a short delay into a much longer one.
           </p>
           <p className="comic-copy">
-            If getting out quickly really matters, it is worth comparing parking against a pre-booked ride before show night.
+            If getting out quickly really matters, it is worth comparing parking against a pre-booked private ride before show night.
           </p>
         </section>
 
@@ -173,8 +173,8 @@ export default async function RedRocksParkingPage({
             className="comic-panel block"
           >
             <div className="comic-tag">Alternative</div>
-            <h2 className="comic-h3">See Ride Options</h2>
-            <p className="comic-copy">See shuttle and private options aligned to your group size.</p>
+            <h2 className="comic-h3">See Private Ride Options</h2>
+            <p className="comic-copy">Choose a $399 Suburban or $599 van for a private Red Rocks show-night ride.</p>
           </Link>
         </div>
 
