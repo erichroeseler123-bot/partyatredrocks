@@ -4,13 +4,14 @@ import { GuideVisualHero } from "@/components/guide/GuideVisualHero";
 import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
 import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
 import { guideVisuals } from "@/lib/guideVisuals";
+import { buildBookingHref } from "@/lib/parrHandoff";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
 export const metadata = {
-  title: "Red Rocks Shuttle vs Uber (2026): Price vs Reliability",
+  title: "Private Red Rocks Ride vs Uber (2026): Price vs Reliability",
   description:
-    "Head-to-head comparison of shuttle vs Uber at Red Rocks: reliability, pricing behavior, pickup friction, and post-show failure modes.",
+    "Head-to-head comparison of a private Red Rocks ride vs Uber/Lyft: reliability, pricing behavior, pickup friction, and post-show planning.",
   alternates: {
     canonical: "/guide/transportation/shuttle-vs-uber",
   },
@@ -19,18 +20,18 @@ export const metadata = {
 const comparisonRows = [
   {
     option: "Uber/Lyft",
-    strongestUse: "Inbound flexibility",
-    primaryRisk: "Post-encore surge and pickup friction",
+    strongestUse: "Flexible one-way rides",
+    primaryRisk: "Post-encore pricing, driver availability, and pickup friction can change quickly",
   },
   {
-    option: "Shared Shuttle",
-    strongestUse: "Reliable round trip",
-    primaryRisk: "You need to match the departure timing",
+    option: "Private Suburban — $399",
+    strongestUse: "Door-to-door plan for your group with one vehicle waiting through the show",
+    primaryRisk: "Higher upfront cost than a single rideshare trip",
   },
   {
-    option: "Private SUV/Van",
-    strongestUse: "Control and comfort for your group",
-    primaryRisk: "Higher upfront cost",
+    option: "Private Van — $599",
+    strongestUse: "Larger private groups that want one vehicle and one return plan",
+    primaryRisk: "Higher total price, best when the group needs the capacity",
   },
 ] as const;
 
@@ -48,7 +49,7 @@ const relatedLinks = [
   {
     href: "/venues/red-rocks-amphitheatre",
     title: "Red Rocks Venue Guide",
-    body: "Venue details, upcoming shows, and ride links for Red Rocks.",
+    body: "Venue details, upcoming shows, and private ride links for Red Rocks.",
   },
   {
     href: "/guide/red-rocks-intelligence-hub",
@@ -70,6 +71,7 @@ const relatedLinks = [
 export default async function Page() {
   const faqRows = await getFaqRowsWithGlobal("guide/shuttle-vs-uber.json");
   const faqJsonLd = buildFaqPageJsonLd(faqRows);
+  const privateHref = buildBookingHref({ target: "private", venue: "red-rocks-amphitheatre" });
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -77,7 +79,7 @@ export default async function Page() {
       { "@type": "ListItem", position: 1, name: "Home", item: `${SITE}/` },
       { "@type": "ListItem", position: 2, name: "Guide", item: `${SITE}/guide` },
       { "@type": "ListItem", position: 3, name: "Transportation", item: `${SITE}/guide/transportation` },
-      { "@type": "ListItem", position: 4, name: "Shuttle vs Uber", item: `${SITE}/guide/transportation/shuttle-vs-uber` },
+      { "@type": "ListItem", position: 4, name: "Private Ride vs Uber", item: `${SITE}/guide/transportation/shuttle-vs-uber` },
     ],
   };
 
@@ -89,14 +91,14 @@ export default async function Page() {
 
         <GuideVisualHero
           eyebrow={guideVisuals.transportation.eyebrow}
-          title="Shuttle vs Uber to Red Rocks"
-          copy="Rideshare is flexible on the way in but less predictable after the show. A scheduled shuttle is less flexible on timing, but much stronger for the ride home."
+          title="Private Red Rocks Ride vs Uber"
+          copy="Uber and Lyft can be flexible, but their post-show price and pickup experience can change fast. A private Party at Red Rocks ride gives your group one vehicle, one plan, and a known ride home before the concert starts."
           imageSrc={guideVisuals.transportation.imageSrc}
           imageAlt={guideVisuals.transportation.imageAlt}
           actions={
             <>
-              <Link className="btn-primary" href="/book">
-                Book a Ride
+              <Link className="btn-primary" href={privateHref}>
+                Book Private Ride
               </Link>
               <Link className="btn-ghost" href="/week/red-rocks">
                 Red Rocks This Week
@@ -113,7 +115,7 @@ export default async function Page() {
                 <tr className="border-b border-soft text-strong">
                   <th className="py-2 pr-3 font-black">Option</th>
                   <th className="py-2 pr-3 font-black">Strongest use</th>
-                  <th className="py-2 pr-3 font-black">Primary risk</th>
+                  <th className="py-2 pr-3 font-black">Primary tradeoff</th>
                 </tr>
               </thead>
               <tbody>
@@ -138,7 +140,7 @@ export default async function Page() {
           ))}
         </section>
 
-        <FAQBlock title="Shuttle vs Uber FAQ" rows={faqRows} />
+        <FAQBlock title="Private Ride vs Uber FAQ" rows={faqRows} />
       </section>
     </main>
   );
