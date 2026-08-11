@@ -5,7 +5,7 @@ import { buildBookingHref } from "@/lib/parrHandoff";
 export const metadata = {
   title: "Red Rocks FAQ | Party at Red Rocks",
   description:
-    "Everything people actually need: pickup timing, return plan, what to bring, cancellation rules, and common questions.",
+    "Everything people actually need: private pickup timing, return plan, what to bring, cancellation rules, and common Red Rocks transportation questions.",
 };
 
 function FAQ({ q, a }: { q: string; a: string }) {
@@ -25,6 +25,18 @@ export default async function RedRocksFAQ({
   searchParams: Promise<HandoffSearchParams>;
 }) {
   const sp = await searchParams;
+  const privateHref = buildBookingHref({
+    target: "private",
+    venue: "red-rocks-amphitheatre",
+    searchParams: sp,
+  });
+  const suvHref = buildBookingHref({
+    target: "private-option",
+    venue: "red-rocks-amphitheatre",
+    option: "suv",
+    searchParams: sp,
+  });
+
   return (
     <main className="min-h-screen bg-surface px-6 py-20 text-white">
       <section>
@@ -38,18 +50,18 @@ export default async function RedRocksFAQ({
           </h1>
 
           <p className="mt-5 max-w-3xl text-lg leading-relaxed text-soft">
-            Pickup timing, return rides, what to bring, cancellation rules, and the questions people usually ask first.
+            Private pickup timing, your return ride, what to bring, cancellation rules, and the questions people usually ask first.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/book" className="btn-primary">
-              Book a Ride
+            <Link href={privateHref} className="btn-primary">
+              Book Private Ride
             </Link>
-            <Link href={buildBookingHref({ target: "shared", venue: "red-rocks-amphitheatre", searchParams: sp })} className="btn-ghost">
-              Book Shuttle Seats
+            <Link href={suvHref} className="btn-ghost">
+              Private Suburban — $399
             </Link>
-            <Link href={buildBookingHref({ target: "private-option", venue: "red-rocks-amphitheatre", option: "suv", searchParams: sp })} className="btn-ghost">
-              Private SUV
+            <Link href="/book/red-rocks-amphitheatre/private/van" className="btn-ghost">
+              Private Van — $599
             </Link>
           </div>
         </div>
@@ -65,36 +77,36 @@ export default async function RedRocksFAQ({
             <div className="mt-5 grid gap-4">
               <FAQ
                 q="How does pickup work?"
-                a="You pick your ride (shuttle seats or private). After booking, you’ll receive confirmation details and the pickup instructions. For shuttle seats, pickups are in defined windows. For private, timing is flexible."
+                a="Choose your private Suburban or van and complete your reservation. Your ride is door-to-door, and pickup details are confirmed for your group before show night."
               />
               <FAQ
                 q="What happens after the show?"
-                a="We run a real return plan. Shuttle: meet point + departure cadence. Private: your driver coordinates a clean pickup and return after the encore."
+                a="Your private vehicle waits through the show, so your group already has a return plan instead of searching for a new ride after the encore."
               />
               <FAQ
                 q="Can I cancel?"
                 a="Yes — cancel up to 3 days in advance. After that, bookings are non-cancellable."
               />
               <FAQ
-                q="We’re known for Suburbans — why?"
-                a="Because it’s the cleanest experience: door-to-door, no strangers, premium timing, and an easier post-show exit."
+                q="Why a private Suburban?"
+                a="It keeps the night simple: door-to-door service, no shared passengers, one vehicle for your group, and a planned ride home after the show."
               />
               <FAQ
                 q="What should I bring?"
-                a="Plan for temperature swings. A light layer for after sunset is smart. Closed-toe shoes help on rocky paths. Empty water bottle (under venue size rules) is a win."
+                a="Plan for temperature swings. A light layer for after sunset is smart. Closed-toe shoes help on rocky paths. Check current venue rules before you go."
               />
               <FAQ
-                q="Is the shuttle worth it?"
-                a="If you want the best value: yes. Fixed pricing, pro driver, no parking stress, and a reliable return plan."
+                q="What does private Red Rocks transportation cost?"
+                a="Party at Red Rocks currently offers a private Suburban for $399 and a private van for $599."
               />
             </div>
 
             <div className="mt-6 flex flex-col sm:flex-row gap-3">
-              <Link href="/book" className="btn-primary">
-                Book a Ride
+              <Link href={privateHref} className="btn-primary">
+                Book Private Ride
               </Link>
-              <Link href={buildBookingHref({ target: "shared", venue: "red-rocks-amphitheatre", searchParams: sp })} className="btn-ghost">
-                Book Shuttle Seats
+              <Link href="/red-rocks/transportation" className="btn-ghost">
+                Transportation Guide
               </Link>
             </div>
           </div>
