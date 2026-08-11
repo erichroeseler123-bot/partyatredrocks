@@ -6,32 +6,32 @@ import { buildBookingHref } from "@/lib/parrHandoff";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 const DEFAULT_OG_IMAGE =
-  `${SITE}/api/unsplash-image?q=red+rocks+amphitheatre+concert+night+denver+colorado&src=%2Fhero%2Fhero-home.jpg&alt=Red+Rocks+shuttle+transportation&w=1200&h=630`;
+  `${SITE}/api/unsplash-image?q=red+rocks+amphitheatre+concert+night+denver+colorado&src=%2Fhero%2Fhero-home.jpg&alt=Red+Rocks+private+transportation&w=1200&h=630`;
 export const revalidate = 1800;
 
 export const metadata: Metadata = {
-  title: "Red Rocks Concert Schedule 2026 | Lineup, Dates, Ride Planning",
+  title: "Red Rocks Concert Schedule 2026 | Shows + Private Transportation",
   description:
-    "Red Rocks concerts and lineup for 2026. Browse upcoming shows, monthly schedules, show details, and ride options in one place.",
+    "Browse Red Rocks concerts and 2026 lineup dates, then reserve private transportation for your show. Private Suburban $399 with a private van upgrade for larger groups.",
   alternates: { canonical: `${SITE}/red-rocks/concerts` },
   openGraph: {
-    title: "Red Rocks Concert Schedule 2026 | Lineup, Dates, Ride Planning",
+    title: "Red Rocks Concert Schedule 2026 | Shows + Private Transportation",
     description:
-      "Red Rocks concerts and lineup for 2026. Browse upcoming shows, monthly schedules, show details, and ride options in one place.",
+      "Find your Red Rocks show and reserve one private vehicle for the night. Private Suburban $399 with a private van upgrade for larger groups.",
     url: `${SITE}/red-rocks/concerts`,
     type: "website",
     images: [
       {
         url: DEFAULT_OG_IMAGE,
-        alt: "Red Rocks concert schedule and ride planning",
+        alt: "Red Rocks concert schedule and private transportation",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Red Rocks Concert Schedule 2026 | Lineup, Dates, Ride Planning",
+    title: "Red Rocks Concert Schedule 2026 | Shows + Private Transportation",
     description:
-      "Red Rocks concerts and lineup for 2026. Browse upcoming shows, monthly schedules, show details, and ride options in one place.",
+      "Find your Red Rocks show and reserve one private vehicle for the night. Private Suburban $399 with a private van upgrade for larger groups.",
     images: [DEFAULT_OG_IMAGE],
   },
 };
@@ -49,6 +49,13 @@ function monthOf(dateKey: string): number {
   return Number.isFinite(month) ? month : 0;
 }
 
+function isFutureDate(dateKey: string): boolean {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const eventDate = new Date(`${dateKey}T00:00:00`);
+  return Number.isFinite(eventDate.getTime()) && eventDate >= today;
+}
+
 const MONTH_LINKS: Array<{ month: number; label: string; href: string }> = [
   { month: 6, label: "June", href: "/red-rocks/concerts/june" },
   { month: 7, label: "July", href: "/red-rocks/concerts/july" },
@@ -62,7 +69,7 @@ export default async function RedRocksConcertsPage({
 }) {
   const sp = await searchParams;
   const events = (await getEventsCatalog(2026, "redrocks")).sort((a, b) => a.dateKey.localeCompare(b.dateKey));
-  const upcoming = events.slice(0, 24);
+  const upcoming = events.filter((event) => isFutureDate(event.dateKey)).slice(0, 24);
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -77,7 +84,7 @@ export default async function RedRocksConcertsPage({
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     name: "Red Rocks concert schedule 2026",
-    description: "Upcoming Red Rocks concerts, monthly calendars, show details, and ride planning links.",
+    description: "Upcoming Red Rocks concerts, monthly calendars, show details, and private transportation booking links.",
     url: `${SITE}/red-rocks/concerts`,
     about: {
       "@type": "Place",
@@ -119,7 +126,7 @@ export default async function RedRocksConcertsPage({
           <div className="comic-kicker">Concert Calendar</div>
           <h1 className="comic-title">Red Rocks Concert Schedule 2026</h1>
           <p className="comic-copy">
-            Browse upcoming Red Rocks shows, monthly schedules, and ride options for concert nights.
+            Find your show first. Then reserve one private vehicle for the whole Red Rocks night — $399 Private Suburban, with a $599 private van upgrade for larger groups.
           </p>
           <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-4 sm:mt-6 w-full px-4">
             {MONTH_LINKS.map((row) => (
@@ -129,13 +136,13 @@ export default async function RedRocksConcertsPage({
             ))}
             <Link
               href={buildBookingHref({
-                target: "book",
+                target: "private",
                 venue: "red-rocks-amphitheatre",
                 searchParams: sp,
               })}
               className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[180px] text-center"
             >
-              Book a Ride →
+              Private Suburban — $399 →
             </Link>
           </div>
         </div>
@@ -178,24 +185,27 @@ export default async function RedRocksConcertsPage({
                     </p>
                   )}
                   <p className="comic-copy">Month: {monthOf(event.dateKey)}</p>
+                  <p className="comic-copy" style={{ marginTop: 6 }}>
+                    Private transportation: $399 Suburban • $599 van upgrade
+                  </p>
                   <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
                     <Link href={`/shows/${encodeURIComponent(event.id)}`} className="comic-btn comic-btn-secondary">
                       Show Details
                     </Link>
                     <Link
                       href={buildBookingHref({
-                        target: "book",
+                        target: "private",
                         venue: "red-rocks-amphitheatre",
                         searchParams: sp,
                         overrides: {
                           event: event.name,
                           date: event.dateKey,
-                          qty: 2,
+                          artist: event.artistNames[0] ?? event.name,
                         },
                       })}
                       className="comic-btn comic-btn-primary"
                     >
-                      Get a Ride
+                      Reserve Private Ride
                     </Link>
                   </div>
                 </article>
@@ -203,13 +213,16 @@ export default async function RedRocksConcertsPage({
             </div>
           ) : (
             <p className="comic-copy" style={{ marginTop: 8 }}>
-              No Red Rocks concerts were found in the current snapshot.
+              No upcoming Red Rocks concerts were found in the current snapshot.
             </p>
           )}
         </section>
 
         <section className="comic-panel" style={{ marginTop: 16 }}>
           <div className="comic-tag">Plan Your Visit</div>
+          <p className="comic-copy" style={{ marginTop: 8 }}>
+            Skip the post-show rideshare scramble. Your private vehicle stays with your group through the concert night.
+          </p>
           <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-4 sm:mt-6 w-full px-4">
             <Link href="/red-rocks/parking" className="comic-btn comic-btn-secondary w-full sm:w-auto min-w-[180px] text-center">
               Parking Guide
@@ -222,13 +235,13 @@ export default async function RedRocksConcertsPage({
             </Link>
             <Link
               href={buildBookingHref({
-                target: "book",
+                target: "private",
                 venue: "red-rocks-amphitheatre",
                 searchParams: sp,
               })}
               className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[180px] text-center"
             >
-              Book a Ride →
+              Reserve Private Ride →
             </Link>
           </div>
         </section>
