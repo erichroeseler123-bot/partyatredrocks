@@ -2,11 +2,8 @@ import Link from "next/link";
 import BrandMark from "@/components/BrandMark";
 import { SITE_CONFIG } from "@/app/site-config";
 import SocialLinks from "@/components/shared/SocialLinks";
-import { buildDccRedRocksBookingHref } from "@/lib/parrHandoff";
 import { BUSINESS_PHONE } from "@/lib/seo/siteTrust";
 import { PARR_PUBLIC_FACTS } from "@/lib/publicOperatorFacts";
-
-const redRocksBookingHref = buildDccRedRocksBookingHref();
 
 const FOOTER_GROUPS = [
   {
@@ -37,7 +34,7 @@ const FOOTER_GROUPS = [
   {
     title: "Support",
     links: [
-      { href: redRocksBookingHref, label: "Booking Hub" },
+      { href: "/book/red-rocks-amphitheatre/private/suv", label: "Booking Hub" },
       { href: "/contact", label: "Contact" },
       { href: "/privacy", label: "Privacy" },
       { href: "/terms", label: "Terms" },
