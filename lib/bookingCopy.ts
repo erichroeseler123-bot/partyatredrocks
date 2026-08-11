@@ -1,59 +1,59 @@
 export const BOOKING_COPY = {
   meta: {
     layoutDescription:
-      "Book Red Rocks shuttle transportation from Denver and Golden. Fixed pricing, pickup details before the ride, and a return plan after the show. Shuttle seats from $59/pp or Private SUV from $449.",
+      "Private Red Rocks transportation for your group with fixed pricing, direct pickup planning, tailgating-friendly service, and a return plan after the show.",
     homeDescription:
-      "Shared and private Red Rocks shuttles from Denver, Golden, and Morrison. Fixed pricing, guaranteed return, private SUVs, vans, Sprinters, and group ride planning.",
+      "Private Red Rocks transportation for groups from Denver and the Front Range, with direct pickup planning, private vehicles, and a return plan after the show.",
     businessDescription:
-      "Fixed-price Red Rocks shuttles and private rides with pickup planning and guaranteed return service.",
+      "Private Red Rocks transportation with direct pickup planning and return service after the show.",
     sharedBookingDescription:
-      "Book Red Rocks shared shuttle seats from Denver or Golden. Fixed pricing, one-hour-before-doors pickup timing, secure checkout, and a guaranteed ride home after the show.",
+      "Party at Red Rocks now offers private transportation only. Choose a private vehicle for your group and plan one ride for the full night.",
     privateBookingDescription:
-      "Private shuttle from Denver to Red Rocks. SUV $449, 10-pass van $599, Sprinter $799, guaranteed return, limo-lane access, and optional liquor stop planning.",
+      "Private transportation to Red Rocks with one vehicle for your group, direct pickup planning, limo-lane access where available, and return service after the show.",
   },
   labels: {
-    sharedRideTitle: "Shared Shuttle",
+    sharedRideTitle: "Private Transportation",
     privateRideTitle: "Private Vehicle",
-    sharedBookingTitle: "Book Shuttle Seats",
+    sharedBookingTitle: "Choose a Private Vehicle",
     privateBookingTitle: "Choose Your Private Vehicle",
-    sharedBookingEyebrow: "Per-Person Shuttle",
+    sharedBookingEyebrow: "Private Service Only",
     privateBookingEyebrow: "Private Ride",
-    bookSharedSeats: "Book Shared Seats",
+    bookSharedSeats: "View Private Vehicles",
     viewPrivateVehicles: "View Private Vehicles",
   },
   trust: {
     fixedPricing: "Fixed pricing",
-    guaranteedReturn: "Guaranteed return ride",
-    denverGoldenPickups: "Denver + Golden departures",
+    guaranteedReturn: "Return ride planned after the show",
+    denverGoldenPickups: "Direct pickup planning",
     oneVehiclePlan: "One vehicle for the full night",
   },
   copy: {
     sharedRide:
-      "Shared round-trip shuttle seats from Denver and Golden with one clear ride plan for show night.",
+      "Party at Red Rocks now offers private transportation only, with one vehicle and one clear plan for your group.",
     privateRide:
       "Private Red Rocks transportation for groups that want one vehicle, one pickup plan, and a cleaner night.",
-    sharedRideCard: "Seat-based shuttle options with round-trip service and online booking.",
+    sharedRideCard: "Private vehicle options with direct pickup planning and online booking.",
     privateRideOptions:
       "Private SUVs, vans, Sprinters, and party buses with one vehicle for the full night.",
   },
   pickupHubs: {
     denver: {
       label: "Denver",
-      detail: "Sheraton Denver Downtown",
-      helper: "Denver pickup boards at the Sheraton Denver Downtown.",
+      detail: "Direct pickup planning",
+      helper: "Your exact Denver pickup details are confirmed for your private ride.",
     },
     golden: {
       label: "Golden",
-      detail: "Trailhead Taphouse",
-      helper: "Golden pickup boards at Trailhead Taphouse in Golden.",
+      detail: "Direct pickup planning",
+      helper: "Your exact Golden pickup details are confirmed for your private ride.",
     },
   },
   faq: {
     privateReturn:
-      "Yes. Private rides are planned around a guaranteed return after the show so your group stays on one vehicle for the full night.",
+      "Yes. Private rides are planned around a return after the show so your group stays on one vehicle for the full night.",
     privatePickupTime:
-      "Most private Red Rocks rides use a 4:30 PM pickup window from Denver, with the exact pickup details confirmed before the event.",
+      "Private ride timing is planned around your show and pickup location, with exact details confirmed before the event.",
     liquorStop:
-      "Yes. Most private rides can include a quick stop if the request is added before the ride.",
+      "Most private rides can include a quick stop when requested in advance, subject to the confirmed ride plan.",
   },
 } as const;
