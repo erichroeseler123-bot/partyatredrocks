@@ -1,17 +1,17 @@
 [
   {
     "id": "rideshare-post-show-risk",
-    "question": "Why does rideshare get harder after Red Rocks shows?",
-    "answer": "Demand spikes at the same time while pickup movement is constrained, which creates delays, surge pricing, and inconsistent match timing."
+    "question": "Why can rideshare get harder after Red Rocks shows?",
+    "answer": "A large number of guests leave at the same time, so driver availability, pickup timing, and app pricing can change quickly after the show."
   },
   {
-    "id": "shuttle-value",
-    "question": "When is a shuttle the better option?",
-    "answer": "Shuttle is usually better when your top priority is a predictable return plan and lower post-show uncertainty."
+    "id": "private-value",
+    "question": "When is private Red Rocks transportation the better option?",
+    "answer": "Private transportation is a strong fit when your group wants door-to-door service, one dedicated vehicle, no shared passengers, and a ride home already arranged before the show begins."
   },
   {
     "id": "group-choice",
-    "question": "What is best for groups: shuttle, Uber, or private vehicle?",
-    "answer": "Shared shuttle fits budget-focused groups, while private vehicles are better when your group wants tighter timing control and comfort."
+    "question": "What is best for groups: Uber or a private vehicle?",
+    "answer": "Uber or Lyft can work when flexibility matters most. A private vehicle is better when your group values one driver, one vehicle, and a planned return after the concert. Party at Red Rocks currently offers a $399 private Suburban and a $599 private van."
   }
 ]
