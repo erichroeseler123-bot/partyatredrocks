@@ -61,7 +61,6 @@ export function RezdyBookingEmbed({
       product_id: productId,
       product_name: productName,
       booking_provider: "rezdy",
-      temporary_booking_path: true,
       ...eventMeta,
     };
 
@@ -77,16 +76,13 @@ export function RezdyBookingEmbed({
       />
       <div className="mb-5 rounded-2xl border border-[#ffb07c]/20 bg-[#ffb07c]/10 p-4">
         <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
-          Temporary Rezdy booking
+          Secure online booking
         </div>
         <h2 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white sm:text-3xl">
           {title}
         </h2>
         <p className="mt-3 max-w-3xl text-sm leading-6 text-white/76 sm:text-[15px]">
           {subtitle}
-        </p>
-        <p className="mt-3 max-w-3xl text-xs leading-5 text-white/58">
-          Native Party at Red Rocks booking, Square checkout, orders, and admin inventory are intentionally preserved for rollback.
         </p>
       </div>
       <div className="w-full min-w-0 overflow-hidden rounded-[22px] bg-white p-2">
