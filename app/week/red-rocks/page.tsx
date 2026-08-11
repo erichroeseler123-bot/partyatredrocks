@@ -12,35 +12,35 @@ import WeekClient, { type WeekEvent } from "./WeekClient";
 export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 const DEFAULT_OG_IMAGE =
-  `${SITE}/api/unsplash-image?q=red+rocks+amphitheatre+concert+night+denver+colorado&src=%2Fhero%2Fhero-home.jpg&alt=Red+Rocks+shuttle+transportation&w=1200&h=630`;
+  `${SITE}/api/unsplash-image?q=red+rocks+amphitheatre+concert+night+denver+colorado&src=%2Fhero%2Fhero-home.jpg&alt=Red+Rocks+private+transportation&w=1200&h=630`;
 
 export const metadata: Metadata = {
-  title: "Red Rocks Lineup This Week | Upcoming Shows and Ride Planning",
+  title: "Red Rocks Lineup This Week | Shows + Private Transportation",
   description:
-    "See the Red Rocks lineup this week, open show pages, and plan shuttle or private rides before show night.",
+    "See the Red Rocks lineup this week, open show pages, and reserve private Red Rocks transportation. Private Suburban $399 with a private van upgrade for larger groups.",
   robots: {
     index: false,
     follow: true,
   },
   alternates: { canonical: `${SITE}/week/red-rocks` },
   openGraph: {
-    title: "Red Rocks Lineup This Week | Upcoming Shows and Ride Planning",
+    title: "Red Rocks Lineup This Week | Shows + Private Transportation",
     description:
-      "See the Red Rocks lineup this week, open show pages, and plan shuttle or private rides before show night.",
+      "Find your Red Rocks show, then reserve one private vehicle for the concert night. Private Suburban $399 with a van upgrade for larger groups.",
     url: `${SITE}/week/red-rocks`,
     type: "website",
     images: [
       {
         url: DEFAULT_OG_IMAGE,
-        alt: "Red Rocks concert lineup and shuttle planning",
+        alt: "Red Rocks concert lineup and private transportation",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Red Rocks Lineup This Week | Upcoming Shows and Ride Planning",
+    title: "Red Rocks Lineup This Week | Shows + Private Transportation",
     description:
-      "See the Red Rocks lineup this week, open show pages, and plan shuttle or private rides before show night.",
+      "Find your Red Rocks show, then reserve one private vehicle for the concert night. Private Suburban $399 with a van upgrade for larger groups.",
     images: [DEFAULT_OG_IMAGE],
   },
 };
@@ -115,7 +115,7 @@ export default async function RedRocksLineupPage() {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     name: "Red Rocks lineup this week",
-    description: "Weekly Red Rocks concert lineup with direct show pages and booking paths.",
+    description: "Weekly Red Rocks concert lineup with direct show pages and private transportation booking paths.",
     url: `${SITE}/week/red-rocks`,
     about: {
       "@type": "Place",
