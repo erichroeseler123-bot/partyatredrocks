@@ -68,7 +68,6 @@ export default function WeekClient({
   const displayEvents = useMemo(() => {
     return filtered.map((event) => ({
       ...event,
-      // The weekly lineup reads better with artist-led imagery than repeated ticketing art.
       image: event.thumbnail || event.image,
     }));
   }, [filtered]);
@@ -85,9 +84,9 @@ export default function WeekClient({
         <PageHero
           kicker="Upcoming Shows"
           title="Red Rocks Lineup"
-          description="Already have tickets? Search by artist, filter by month, and plan your ride before show night."
+          description="Already have tickets? Find your show, then reserve one private vehicle for the whole night. Private Suburban is $399; larger groups can upgrade to a private van."
           actions={[
-            { href: "/book", label: "Book a Ride" },
+            { href: "/shuttles", label: "See Private Ride Options" },
             { href: "/guide", label: "Guides", variant: "secondary" },
           ]}
           footer={<MusicWave bars={24} />}
@@ -117,11 +116,11 @@ export default function WeekClient({
         </section>
 
         <PrimaryCTASection
-          kicker="Before Show Night"
-          body="Search the lineup by artist or month, open the show page, then choose the ride that fits the night."
-          secondaryBody="Round-trip rides cover the full concert night, and pickup details are sent before the show."
+          kicker="Your Red Rocks Night"
+          body="Find the artist and date below. Every Red Rocks ride button now carries the show into the private booking path so the customer does not have to start over."
+          secondaryBody="Private Suburban: $399. Private van upgrade: $599. One group, one vehicle, and the return ride is already part of the plan."
           actions={[
-            { href: "/book", label: "Book a Ride" },
+            { href: "/shuttles", label: "Private Suburban — $399" },
             { href: "/venues/red-rocks-amphitheatre", label: "Venue Details", variant: "secondary" },
             { href: "/guide/show-night-strategy/post-show-pickup-plan", label: "Pickup Guide", variant: "secondary" },
             { href: "/guide/logistics/parking-lots", label: "Parking Guide", variant: "secondary" },
@@ -164,7 +163,6 @@ export default function WeekClient({
             </a>
           </div>
         </section>
-
 
         <FAQBlock title="Red Rocks Week FAQ" rows={faqRows} />
       </section>
