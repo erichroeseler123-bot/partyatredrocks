@@ -53,8 +53,8 @@ export default async function Page({
         </section>
 
         <div className="mt-12">
-          <Link href={buildBookingHref({ target: "book", venue: "red-rocks-amphitheatre", searchParams: sp })} className="btn-primary">
-            Skip parking — Book the $59 shuttle →
+          <Link href={buildBookingHref({ target: "private", venue: "red-rocks-amphitheatre", searchParams: sp })} className="btn-primary">
+            Skip parking — Book Private Ride ($399 / $599) →
           </Link>
         </div>
       </div>
