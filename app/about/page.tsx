@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { ArrowRight, Bus, CarFront, Clock3, Headphones } from "lucide-react";
+import { ArrowRight, CarFront, Clock3, Headphones, ShieldCheck } from "lucide-react";
 import { curatedImages } from "@/lib/curatedImages";
 
 export const metadata = {
   title: "About Party at Red Rocks",
   description:
-    "Party at Red Rocks provides shared shuttle seats and private rides for Red Rocks concerts, with Denver pickup points and return rides after the show.",
+    "Party at Red Rocks provides private transportation for Red Rocks concerts, with direct pickup planning and a return plan after the show.",
   alternates: {
     canonical: "/about",
   },
@@ -13,39 +13,24 @@ export const metadata = {
 
 const servicePoints = [
   {
-    title: "Shared shuttle seats",
-    copy: "Round-trip shuttle seats for riders heading to Red Rocks from Denver pickup points.",
-    icon: Bus,
+    title: "Private service only",
+    copy: "Your group gets its own vehicle rather than sharing a ride with unrelated passengers.",
+    icon: ShieldCheck,
   },
   {
     title: "Private rides for groups",
-    copy: "SUVs, vans, and larger private options for groups that want one vehicle for the night.",
+    copy: "Choose a Private Suburban or private van based on your group size and show-night plan.",
     icon: CarFront,
   },
   {
     title: "Show-night timing",
-    copy: "Pickup details are sent before the show, and drivers handle the return ride after the encore.",
+    copy: "Pickup details are confirmed before the show, with the return plan already built into your ride.",
     icon: Clock3,
   },
   {
     title: "Text support",
-    copy: "If you need help on show night, support is available by text or phone.",
+    copy: "If you need help with your ride, support is available by text or phone.",
     icon: Headphones,
-  },
-];
-
-const rideTypes = [
-  {
-    title: "Shared Shuttle",
-    copy: "Best for most riders who want a set pickup, a set return, and a straightforward online booking path.",
-    href: "/book/red-rocks-amphitheatre/custom/shared",
-    cta: "Book Shared Seats",
-  },
-  {
-    title: "Private Ride",
-    copy: "Best for groups that want one vehicle, one driver, and one plan for the full night.",
-    href: "/book/red-rocks-amphitheatre/private",
-    cta: "Book Private Ride",
   },
 ];
 
@@ -68,26 +53,26 @@ export default function AboutPage() {
               About Party at Red Rocks
             </div>
             <h1 className="mt-5 text-[2.5rem] font-black uppercase leading-[0.94] tracking-[-0.04em] sm:text-[4rem] lg:text-[5rem]">
-              Red Rocks rides for show night
+              Private Red Rocks rides for show night
             </h1>
             <p className="mt-5 max-w-2xl text-[15px] leading-7 text-white/74 sm:text-lg">
-              Party at Red Rocks provides shared shuttle seats and private transportation for concerts at Red Rocks Amphitheatre.
+              Party at Red Rocks provides private transportation for groups heading to concerts at Red Rocks Amphitheatre.
             </p>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-white/68 sm:text-[15px]">
-              Shared seats leave from Denver pickup points and return after the show. Private SUVs and vans are available for groups who want one ride for the full night.
+              Your group keeps one vehicle and one ride plan from pickup through the post-show return. No shared seats or per-person fares.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/book"
+                href="/book/red-rocks-amphitheatre/private"
                 className="brand-button-primary inline-flex min-h-12 items-center justify-center px-6 text-sm font-black uppercase tracking-[0.16em]"
               >
-                Start Booking
+                View Private Vehicles
               </Link>
               <Link
                 href="/shuttles"
                 className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
               >
-                View Ride Options
+                Transportation Details
               </Link>
             </div>
           </div>
@@ -98,16 +83,13 @@ export default function AboutPage() {
             Show-Night Transportation
           </div>
           <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">
-            Simple ride options for Red Rocks
+            One private ride plan for your group
           </h2>
           <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {servicePoints.map((point) => {
               const Icon = point.icon;
               return (
-                <article
-                  key={point.title}
-                  className="brand-card rounded-[26px] p-6"
-                >
+                <article key={point.title} className="brand-card rounded-[26px] p-6">
                   <Icon className="h-5 w-5 text-[var(--brand-orange)]" />
                   <h3 className="mt-4 text-xl font-black uppercase tracking-[-0.03em] text-white">{point.title}</h3>
                   <p className="mt-3 text-sm leading-6 text-white/70">{point.copy}</p>
@@ -122,40 +104,26 @@ export default function AboutPage() {
             How riders use it
           </div>
           <div className="mt-4 max-w-4xl space-y-4 text-sm leading-7 text-white/72">
-            <p>
-              Some riders book shared seats and travel with other concertgoers.
-            </p>
-            <p>
-              Others book a private SUV or van so their group stays together from pickup through the ride home.
-            </p>
-            <p>
-              Pickup details are sent before show night, and drivers handle the return ride after the concert.
-            </p>
+            <p>Choose the private vehicle that fits your group and complete the booking online.</p>
+            <p>Pickup details are confirmed before show night so everyone knows the plan before the concert.</p>
+            <p>After the show, your return ride is part of the same private transportation plan.</p>
           </div>
         </section>
 
         <section className="brand-panel rounded-[30px] p-6 sm:p-8">
           <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">
-            Ride Types
+            Current Service
           </div>
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
-            {rideTypes.map((ride) => (
-              <article
-                key={ride.title}
-                className="brand-card rounded-[26px] p-6"
-              >
-                <h3 className="text-2xl font-black uppercase tracking-[-0.03em] text-white">{ride.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-white/70">{ride.copy}</p>
-                <Link
-                  href={ride.href}
-                  className="brand-link mt-5 inline-flex items-center text-sm font-bold"
-                >
-                  {ride.cta}
-                  <ArrowRight className="ml-1 h-4 w-4" />
-                </Link>
-              </article>
-            ))}
-          </div>
+          <article className="brand-card mt-6 rounded-[26px] p-6">
+            <h3 className="text-2xl font-black uppercase tracking-[-0.03em] text-white">Private Transportation</h3>
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-white/70">
+              Party at Red Rocks currently offers private transportation only. The Private Suburban is the standard option, with a private van upgrade for groups that need more room.
+            </p>
+            <Link href="/book/red-rocks-amphitheatre/private" className="brand-link mt-5 inline-flex items-center text-sm font-bold">
+              View Private Vehicles
+              <ArrowRight className="ml-1 h-4 w-4" />
+            </Link>
+          </article>
         </section>
 
         <section className="brand-panel rounded-[30px] p-6 sm:p-8">
@@ -163,7 +131,7 @@ export default function AboutPage() {
             The goal
           </div>
           <p className="mt-4 max-w-3xl text-sm leading-7 text-white/72">
-            Make getting to and from Red Rocks easier on show night.
+            Make getting to and from Red Rocks easier by giving your group one clear private transportation plan for the night.
           </p>
         </section>
       </section>
