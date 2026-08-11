@@ -1,25 +1,31 @@
-# Party at Red Rocks (Denver / Boulder / Colorado Springs)
-Primary: Concert transportation + venue intel + scene hubs.
+# Party at Red Rocks (Red Rocks Amphitheatre / Denver)
+Primary: Private Red Rocks transportation, concert planning, venue intel, and show guides.
+
+Current transportation product:
+- Private Suburban: $399 flat rate
+- Private van: $599 flat rate
+- Private group transportation only; no shared shuttle seats
+- Door-to-door pickup for the group
+- Vehicle waits through the show for the return ride
+- Red Rocks booking: /book/red-rocks-amphitheatre/private
 
 Key pages:
-- /week (this week’s shows)
-- /venues (venue directory)
-- /venues/{slug} (venue intel + upcoming)
-- /scene/jam (jam scene hub)
-- /scene/edm (EDM/bass scene hub)
-- /scene/hiphop (hip-hop scene hub)
-- /shows/{id} (show intel + shuttle options)
+- /red-rocks/concerts (Red Rocks concert schedule)
+- /week/red-rocks (shows this week)
+- /venues/red-rocks-amphitheatre (venue intel)
+- /red-rocks/transportation (transportation planning)
+- /red-rocks/parking (parking guide)
+- /shows/{id} (show details + private ride planning)
+- /shuttles (current private transportation offer)
 
-Data sources (used for enrichment/caching):
-- SeatGeek (events/venues)
-- Ticketmaster (fallback/events)
-- MusicBrainz (entity IDs + canonical metadata)
-- Setlist.fm (setlists)
-- Last.fm (tags + discovery)
-
-Freshness:
-- Scene + venue caches refresh via /api/cron/sync and are timestamped on-page.
+Data sources used for event and artist enrichment/caching:
+- SeatGeek
+- Ticketmaster
+- MusicBrainz
+- Setlist.fm
+- Last.fm
 
 Business:
-- Service area: Denver, Boulder, Colorado Springs (Front Range).
-- Booking: /book (shared + private options).
+- Party at Red Rocks provides private transportation for Red Rocks concert groups.
+- Current public offer is $399 Private Suburban or $599 Private Van.
+- Booking is completed through the current Party at Red Rocks booking pages and embedded Rezdy booking experience.
