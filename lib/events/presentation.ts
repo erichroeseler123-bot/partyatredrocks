@@ -1,6 +1,7 @@
 import type { NormalizedEvent } from "@/lib/events/schema";
 import type { RedRocksAssetsSnapshot } from "@/lib/events/getRedRocksAssets";
 import { resolveMediaImage } from "@/lib/media/resolver";
+import { buildBookingHref } from "@/lib/parrHandoff";
 
 export type DisplayEvent = {
   id: string;
@@ -46,7 +47,6 @@ export function toDisplayEvent(
   opts?: { assets?: RedRocksAssetsSnapshot | null; artistThumbnails?: Record<string, string> }
 ): DisplayEvent {
   const eventId = event.id;
-  const seatgeekEventId = event.sourceId ?? event.id;
   const artistKey = (event.artistNames[0] ?? "").trim().toLowerCase();
   return {
     id: eventId,
@@ -68,6 +68,14 @@ export function toDisplayEvent(
           },
         })
       : undefined,
-    bookHref: `/book?venue=red-rocks-amphitheatre&seatgeek_event=${encodeURIComponent(seatgeekEventId)}`,
+    bookHref: buildBookingHref({
+      target: "private",
+      venue: "red-rocks-amphitheatre",
+      overrides: {
+        event: event.name,
+        date: event.dateKey,
+        artist: event.artistNames[0] ?? event.name,
+      },
+    }),
   };
 }
