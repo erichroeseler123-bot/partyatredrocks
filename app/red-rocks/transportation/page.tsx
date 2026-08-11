@@ -17,14 +17,14 @@ const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks
 const DEFAULT_OG_IMAGE = `${SITE}${curatedImages.guideTransportation}`;
 
 export const metadata: Metadata = {
-  title: "Red Rocks Transportation Guide",
+  title: "Red Rocks Transportation Guide | Private Rides, Uber & Parking",
   description:
-    "Red Rocks transportation guide with shuttle, rideshare, parking, pickup timing, and return planning for concert nights.",
+    "Plan Red Rocks transportation with current private ride pricing, rideshare and parking tradeoffs, pickup timing, and return strategy.",
   alternates: { canonical: `${SITE}/red-rocks/transportation` },
   openGraph: {
-    title: "Red Rocks Transportation Guide",
+    title: "Red Rocks Transportation Guide | Private Rides, Uber & Parking",
     description:
-      "Red Rocks transportation guide with shuttle, rideshare, parking, pickup timing, and return planning for concert nights.",
+      "Plan Red Rocks transportation with current private ride pricing, rideshare and parking tradeoffs, pickup timing, and return strategy.",
     url: `${SITE}/red-rocks/transportation`,
     type: "article",
     images: [
@@ -36,9 +36,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Red Rocks Transportation Guide",
+    title: "Red Rocks Transportation Guide | Private Rides, Uber & Parking",
     description:
-      "Red Rocks transportation guide with shuttle, rideshare, parking, pickup timing, and return planning for concert nights.",
+      "Plan Red Rocks transportation with current private ride pricing, rideshare and parking tradeoffs, pickup timing, and return strategy.",
     images: [DEFAULT_OG_IMAGE],
   },
 };
@@ -52,7 +52,7 @@ const TRANSPORT_VISUALS = [
   },
   {
     title: "Private Ride",
-    body: "Private SUVs and vans work best when your group wants one coordinated pickup and one ride home.",
+    body: "Private Suburbans and vans work best when your group wants one coordinated pickup, no shared passengers, and one ride home.",
     imageSrc: curatedImages.privateSUV,
     imageAlt: "Private SUV transportation for Red Rocks groups",
   },
@@ -95,14 +95,14 @@ export default async function RedRocksTransportationPage({
     "@type": "Article",
     headline: "Red Rocks Transportation Guide",
     description:
-      "Red Rocks transportation guide with shuttle, rideshare, parking, pickup timing, and return planning for concert nights.",
+      "Red Rocks transportation guide covering current private rides, rideshare, parking, pickup timing, and return planning for concert nights.",
     url: `${SITE}/red-rocks/transportation`,
     mainEntityOfPage: `${SITE}/red-rocks/transportation`,
     author: { "@type": "Organization", name: "Party at Red Rocks" },
     publisher: { "@id": `${SITE}/#organization` },
     about: [
       { "@type": "Place", name: "Red Rocks Amphitheatre", url: `${SITE}/venues/red-rocks-amphitheatre` },
-      { "@type": "Service", name: "Red Rocks shuttle transportation", url: `${SITE}/book/red-rocks-amphitheatre/custom/shared` },
+      { "@type": "Service", name: "Private Red Rocks transportation", url: `${SITE}/book/red-rocks-amphitheatre/private` },
     ],
   };
 
@@ -118,20 +118,20 @@ export default async function RedRocksTransportationPage({
         <GuideVisualHero
           eyebrow={guideVisuals.transportation.eyebrow}
           title="How To Get To Red Rocks"
-          copy="Red Rocks transportation usually comes down to three choices: drive and park, use rideshare, or book a shuttle or private ride in advance. The best option depends on your group size, timing, and how much certainty you want after the show."
+          copy="Red Rocks transportation usually comes down to three choices: drive and park, use rideshare, or book private transportation in advance. Party at Red Rocks currently offers private service only: a $399 Suburban or $599 van, with door-to-door pickup and the same vehicle waiting through the show."
           imageSrc={guideVisuals.transportation.imageSrc}
           imageAlt={guideVisuals.transportation.imageAlt}
           actions={
             <>
               <Link
                 href={buildBookingHref({
-                  target: "book",
+                  target: "private",
                   venue: "red-rocks-amphitheatre",
                   searchParams: sp,
                 })}
                 className="brand-button-primary brand-button-pulse inline-flex min-h-12 items-center justify-center px-6 py-3 text-[12px] font-black uppercase tracking-[0.2em]"
               >
-                Book a Ride
+                See Private Ride Options
               </Link>
               <Link href="/week/red-rocks" className="brand-button-secondary inline-flex min-h-12 items-center justify-center px-6 py-3 text-[12px] font-black uppercase tracking-[0.2em] hover:no-underline">
                 Shows This Week
@@ -184,8 +184,8 @@ export default async function RedRocksTransportationPage({
             className="brand-card block rounded-[26px] p-6 transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.38)] hover:no-underline"
           >
             <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.22em]">Compare</div>
-            <h2 className="mt-3 text-2xl font-black tracking-[-0.03em] text-white">Shuttle vs Uber at Red Rocks</h2>
-            <p className="mt-3 text-sm leading-7 text-white/72">Cost and reliability comparison with post-show risk notes.</p>
+            <h2 className="mt-3 text-2xl font-black tracking-[-0.03em] text-white">Private Ride vs Uber at Red Rocks</h2>
+            <p className="mt-3 text-sm leading-7 text-white/72">Cost, coordination, and post-show reliability tradeoffs.</p>
           </Link>
           <Link
             href="/red-rocks/transportation/parking-reality"
@@ -211,14 +211,14 @@ export default async function RedRocksTransportationPage({
           actions={[
             {
               href: buildBookingHref({
-                target: "book",
+                target: "private",
                 venue: "red-rocks-amphitheatre",
                 searchParams: sp,
               }),
-              label: "Check Availability",
+              label: "See Private Ride Options",
             },
             { href: "/red-rocks/parking", label: "Parking Guide", variant: "secondary" },
-            { href: "/red-rocks/transportation/shuttle-vs-uber", label: "Shuttle vs Uber", variant: "secondary" },
+            { href: "/red-rocks/transportation/shuttle-vs-uber", label: "Private Ride vs Uber", variant: "secondary" },
           ]}
         >
           <ul className="mt-4 grid gap-3 text-sm leading-7 text-white/72 sm:text-base">
