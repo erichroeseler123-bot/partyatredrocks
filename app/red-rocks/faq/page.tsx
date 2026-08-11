@@ -10,7 +10,7 @@ const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks
 export const metadata = {
   title: "Red Rocks FAQ",
   description:
-    "Red Rocks FAQ covering concerts, hiking, parking, transportation, and practical trip planning.",
+    "Red Rocks FAQ covering concerts, hiking, parking, private transportation, and practical trip planning.",
   alternates: { canonical: "/red-rocks/faq" },
 };
 
@@ -22,6 +22,11 @@ export default async function RedRocksFaqPage({
   const sp = await searchParams;
   const faqRows = await getFaqRowsWithGlobal("red-rocks/faq.json");
   const faqJsonLd = buildFaqPageJsonLd(faqRows);
+  const privateHref = buildBookingHref({
+    target: "private",
+    venue: "red-rocks-amphitheatre",
+    searchParams: sp,
+  });
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -43,22 +48,16 @@ export default async function RedRocksFaqPage({
           <div className="comic-kicker">FAQ</div>
           <h1 className="comic-title">Red Rocks FAQ</h1>
           <p className="comic-copy">
-            This page answers common questions about visiting Red Rocks, including parking, transportation, hiking, weather, and
-            concert nights. If you need more detail, you can jump into the related guides below.
+            This page answers common questions about visiting Red Rocks, including parking, private transportation, hiking,
+            weather, and concert nights. If you need more detail, jump into the related guides below.
           </p>
           <p className="comic-copy">
-            If you are planning for a group, this is a good place to start before everyone heads to the venue.
+            Party at Red Rocks currently offers private transportation for your group: a $399 Suburban or $599 van, with
+            door-to-door service and the vehicle waiting through the show.
           </p>
           <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link
-              className="comic-btn comic-btn-primary"
-              href={buildBookingHref({
-                target: "book",
-                venue: "red-rocks-amphitheatre",
-                searchParams: sp,
-              })}
-            >
-              Book a Ride
+            <Link className="comic-btn comic-btn-primary" href={privateHref}>
+              Book Private Ride
             </Link>
             <Link className="comic-btn comic-btn-secondary" href="/red-rocks/concert-guide">
               Concert Guide
@@ -91,24 +90,17 @@ export default async function RedRocksFaqPage({
             <Link href="/red-rocks/transportation" className="comic-panel block">
               <div className="comic-tag">Transport</div>
               <h2 className="comic-h3">Transportation Guide</h2>
-              <p className="comic-copy">Arrival, pickup, and return strategy for show nights.</p>
+              <p className="comic-copy">Private arrival, pickup, and return strategy for show nights.</p>
             </Link>
             <Link href="/red-rocks/parking" className="comic-panel block">
               <div className="comic-tag">Parking</div>
               <h2 className="comic-h3">Parking Guide</h2>
               <p className="comic-copy">Lot tradeoffs, timing windows, and egress expectations.</p>
             </Link>
-            <Link
-              href={buildBookingHref({
-                target: "book",
-                venue: "red-rocks-amphitheatre",
-                searchParams: sp,
-              })}
-              className="comic-panel block"
-            >
+            <Link href={privateHref} className="comic-panel block">
               <div className="comic-tag">Book</div>
-              <h2 className="comic-h3">See Ride Options</h2>
-              <p className="comic-copy">Shared shuttle seats and private rides for Red Rocks concerts.</p>
+              <h2 className="comic-h3">Private Ride Options</h2>
+              <p className="comic-copy">$399 private Suburban or $599 private van for your Red Rocks concert night.</p>
             </Link>
           </div>
         </section>
