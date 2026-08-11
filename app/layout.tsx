@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.partyatredrocks.com"),
 
   title: {
-    default: "Red Rocks Shuttle from Denver | $59 Seats + Private SUVs",
+    default: "Private Red Rocks Transportation from Denver | $399 SUV + $599 Van",
     template: "%s | Party at Red Rocks",
   },
 
@@ -61,16 +61,16 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
     siteName: "Party at Red Rocks",
-    title: "Red Rocks Shuttle from Denver | $59 Seats + Private SUVs",
+    title: "Private Red Rocks Transportation from Denver | $399 SUV + $599 Van",
     description: BOOKING_COPY.meta.layoutDescription,
     images: [
-      { url: DEFAULT_SHARE_IMAGE, width: 1200, height: 630, alt: "Red Rocks shuttle transportation" },
+      { url: DEFAULT_SHARE_IMAGE, width: 1200, height: 630, alt: "Private Red Rocks transportation" },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Red Rocks Shuttle from Denver | $59 Seats + Private SUVs",
+    title: "Private Red Rocks Transportation from Denver | $399 SUV + $599 Van",
     description: BOOKING_COPY.meta.layoutDescription,
     images: [DEFAULT_SHARE_IMAGE],
   },
