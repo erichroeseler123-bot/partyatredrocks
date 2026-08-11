@@ -5,7 +5,7 @@ import { buildBookingHref } from "@/lib/parrHandoff";
 export const metadata = {
   title: "Post-Show Pickup Strategy (Red Rocks)",
   description:
-    "Where to meet, best pickup windows, and how to avoid the chaos after the encore.",
+    "Where to meet, how to plan pickup, and how to reduce confusion after the encore.",
 };
 
 export default async function Page({
@@ -26,14 +26,14 @@ export default async function Page({
 
         <h1 className="mt-4 text-5xl font-black tracking-tight">Post-Show Pickup</h1>
         <p className="mt-4 text-lg text-soft">
-          Red Rocks has choke points and controlled flow. Pickup works differently than a normal venue.
+          Red Rocks has controlled traffic flow and large post-show crowds. A clear pickup plan matters more here than at a typical city venue.
         </p>
 
         <section className="mt-10 grid gap-6">
           <div className="panel rounded-2xl p-6">
-            <h3 className="text-xl font-bold">Best windows</h3>
+            <h3 className="text-xl font-bold">Plan before the encore</h3>
             <p className="mt-2 text-soft">
-              Leaving immediately can mean gridlock. Waiting 15–25 minutes can make pickup faster and cheaper.
+              Know who you are riding with, where you will regroup, and what the fallback plan is before the venue starts emptying.
             </p>
           </div>
 
@@ -47,14 +47,14 @@ export default async function Page({
           <div className="panel rounded-2xl p-6">
             <h3 className="text-xl font-bold">Don’t rely on cell service</h3>
             <p className="mt-2 text-soft">
-              Crowds strain networks. Agree on a fallback plan before the encore ends.
+              Crowds can strain networks. Agree on a fallback plan before the encore ends.
             </p>
           </div>
         </section>
 
         <div className="mt-12">
-          <Link href={buildBookingHref({ target: "book", venue: "red-rocks-amphitheatre", searchParams: sp })} className="btn-primary">
-            Guaranteed return — Book the shuttle →
+          <Link href={buildBookingHref({ target: "private", venue: "red-rocks-amphitheatre", searchParams: sp })} className="btn-primary">
+            Pre-arrange the return — Book Private Ride →
           </Link>
         </div>
       </div>
