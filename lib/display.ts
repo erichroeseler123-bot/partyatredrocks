@@ -19,7 +19,7 @@ export const DISPLAY = {
     marketing: {
       vipSuv: buildUnsplashImageSrc({ query: "black luxury suv concert pickup denver night curbside" }),
       fleet: buildUnsplashImageSrc({ query: "sprinter van group concert pickup colorado night" }),
-      shuttle: buildUnsplashImageSrc({ query: "passenger shuttle van concert riders boarding colorado night" }),
+      shuttle: buildUnsplashImageSrc({ query: "private passenger van concert group colorado night" }),
     },
 
     heroHome: buildUnsplashImageSrc({ query: "red rocks amphitheatre concert dusk colorado crowd" }),
@@ -55,20 +55,20 @@ export const DISPLAY = {
   ui: {
     brand: "Party @ Red Rocks",
     cta: {
-      primary: "Book Shuttle",
+      primary: "Book Private Ride",
       secondary: "This Week",
     },
 
     home: {
-      badge: "Colorado Concert Shuttles",
+      badge: "Private Red Rocks Transportation",
       headline: "Red Rocks — without the parking chaos.",
       subhead:
-        "Fixed-price shuttle seats and private SUVs from Denver to Red Rocks and major Colorado venues. No surge, no waiting, guaranteed ride home.",
-      trustLine: "Sheraton pickup • Pro drivers • Clear meetup plan • Support text line",
-      quickBookLabel: "Book in 10 seconds",
+        "Private Suburbans and vans from Denver to Red Rocks. Door-to-door service, no shared passengers, no surge pricing, and your vehicle waits for you through the show.",
+      trustLine: "$399 Private Suburban • $599 Private Van • Door-to-door • Vehicle waits through the show",
+      quickBookLabel: "See private ride options",
       tipPrefix: "Tip: browse an event on",
       tipLinkText: "This Week",
-      tipSuffix: "then tap “Ride Options”.",
+      tipSuffix: "then choose your private ride.",
     },
   },
 
