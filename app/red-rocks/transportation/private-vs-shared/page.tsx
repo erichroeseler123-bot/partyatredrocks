@@ -1,11 +1,11 @@
 import Link from "next/link";
 
-const SHARED_HREF = "/book/red-rocks-amphitheatre/custom/shared";
 const PRIVATE_HREF = "/book/red-rocks-amphitheatre/private";
 
 export const metadata = {
   title: "Private vs Shared Red Rocks Transportation",
-  description: "When to book a private SUV or van, when shared shuttle seats are enough, and how to choose the right Red Rocks ride.",
+  description:
+    "Comparing private and shared Red Rocks transportation. Party at Red Rocks currently offers private transportation only: $399 Suburban or $599 van.",
   alternates: { canonical: "/red-rocks/transportation/private-vs-shared" },
 };
 
@@ -18,21 +18,26 @@ export default function Page() {
           <span className="text-faint">/</span> Private vs Shared
         </nav>
 
-        <h1 className="mt-4 text-5xl font-black tracking-tight">Private vs Shared</h1>
+        <h1 className="mt-4 text-5xl font-black tracking-tight">Private vs Shared Red Rocks Transportation</h1>
         <p className="mt-4 text-lg text-soft">
-          Shared is the best value. Private is the cleanest group experience. The right choice depends on how many people you have and how much coordination you want to avoid.
+          Shared shuttle seats used to be part of the Party at Red Rocks offer. They are not currently sold. Today the service is private transportation for your group: a $399 Suburban or $599 van.
         </p>
 
         <section className="mt-10 grid gap-6 md:grid-cols-2">
           <div className="panel rounded-2xl p-6">
-            <h2 className="text-xl font-bold">Shared shuttle</h2>
-            <p className="mt-2 text-soft">Best for solo riders, couples, and small groups that want fixed pricing and do not need their own vehicle.</p>
-            <Link href={SHARED_HREF} className="btn-primary mt-6 inline-flex">Book Shuttle Seats</Link>
+            <h2 className="text-xl font-bold">Shared shuttle seats</h2>
+            <p className="mt-2 text-soft">
+              Not currently offered by Party at Red Rocks. If you are comparing shared service because of price, factor in the tradeoff between a per-seat ride and having one dedicated vehicle for your whole concert night.
+            </p>
+            <Link href="/red-rocks/transportation" className="btn-ghost mt-6 inline-flex">Compare Transportation</Link>
           </div>
           <div className="panel rounded-2xl p-6">
-            <h2 className="text-xl font-bold">Private SUV or van</h2>
-            <p className="mt-2 text-soft">Best for groups that want one pickup plan, one vehicle, and one clean ride home without splitting up.</p>
-            <Link href={PRIVATE_HREF} className="btn-ghost mt-6 inline-flex">Book Private Ride</Link>
+            <h2 className="text-xl font-bold">Private Suburban or van</h2>
+            <p className="mt-2 text-soft">
+              Current Party at Red Rocks service: door-to-door for your group, no shared passengers, and the vehicle waits through the show so your return ride is already arranged.
+            </p>
+            <p className="mt-3 text-soft"><strong className="text-white">Suburban: $399 · Van: $599</strong></p>
+            <Link href={PRIVATE_HREF} className="btn-primary mt-6 inline-flex">Book Private Ride</Link>
           </div>
         </section>
       </div>
