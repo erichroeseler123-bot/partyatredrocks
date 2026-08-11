@@ -43,6 +43,19 @@ function dateLabel(dateKey: string): string {
   return dt.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric" });
 }
 
+function todayInDenver(): string {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Denver",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(new Date());
+  const year = parts.find((part) => part.type === "year")?.value;
+  const month = parts.find((part) => part.type === "month")?.value;
+  const day = parts.find((part) => part.type === "day")?.value;
+  return year && month && day ? `${year}-${month}-${day}` : new Date().toISOString().slice(0, 10);
+}
+
 async function resolveArtistPageData(slug: string) {
   const [artists, events, media] = await Promise.all([getArtistsCatalog(2026, "all"), getEventsCatalog(2026, "all"), getMediaIndex(2026)]);
   const artist = artists.find((row) => slugify(row.name) === slug) ?? null;
@@ -51,7 +64,6 @@ async function resolveArtistPageData(slug: string) {
   const matches = events
     .filter((event) => event.artistNames.some((name) => slugify(name) === slug))
     .sort((a, b) => a.dateKey.localeCompare(b.dateKey));
-  const redRocksShows = matches.filter((event) => isRedRocksVenue(event.venueId));
   const mediaSources = media?.artistsById?.[artist.id]?.sources;
 
   const heroImage = selectImageByPriority({
@@ -67,7 +79,7 @@ async function resolveArtistPageData(slug: string) {
     fallback: mediaSources?.fallback ?? "/images/shows/fallback.jpg",
   });
 
-  return { artist, matches, redRocksShows, heroImage };
+  return { artist, matches, heroImage };
 }
 
 export async function generateStaticParams() {
@@ -86,7 +98,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${data.artist.name} Concerts in Colorado | Shows, Venues, Ride Planning`,
-    description: `See upcoming ${data.artist.name} shows, Red Rocks dates, venue details, and ride booking options.`,
+    description: `See ${data.artist.name} concert dates, Red Rocks history, venue details, and private ride planning options.`,
     alternates: { canonical: `${SITE}/artists/${artist}` },
   };
 }
@@ -97,18 +109,21 @@ export default async function ArtistPage({ params, searchParams }: Props) {
   const data = await resolveArtistPageData(artist);
   if (!data) notFound();
 
-  const { artist: artistRow, matches, redRocksShows, heroImage } = data;
-  const nextShows = matches.slice(0, 18);
-  const hasRedRocks = redRocksShows.length > 0;
+  const { artist: artistRow, matches, heroImage } = data;
+  const todayKey = todayInDenver();
+  const upcomingShows = matches.filter((event) => event.dateKey >= todayKey);
+  const pastShows = matches.filter((event) => event.dateKey < todayKey).reverse();
+  const upcomingRedRocksShows = upcomingShows.filter((event) => isRedRocksVenue(event.venueId));
+  const hasUpcomingRedRocks = upcomingRedRocksShows.length > 0;
 
   return (
     <main className="comic-page pt-24 pb-10">
       <section className="comic-wrap">
         <div className="comic-hero">
-          <div className="comic-kicker">Upcoming Shows</div>
+          <div className="comic-kicker">Artist Guide</div>
           <h1 className="comic-title">{artistRow.name}</h1>
           <p className="comic-copy">
-            Upcoming Colorado shows, venue details, and ride options for concert nights.
+            Colorado concert dates, venue details, Red Rocks history, and private ride planning for upcoming show nights.
           </p>
           <div style={{ marginTop: 10 }}>
             <img
@@ -122,95 +137,50 @@ export default async function ArtistPage({ params, searchParams }: Props) {
             />
           </div>
           <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            {hasRedRocks ? (
-              <Link href="/red-rocks" className="comic-btn comic-btn-secondary">
-                Red Rocks Hub
-              </Link>
-            ) : null}
-            {hasRedRocks ? (
-              <Link href="/week/red-rocks" className="comic-btn comic-btn-secondary">
-                Red Rocks This Week
-              </Link>
-            ) : null}
             <Link href={`/bands/${encodeURIComponent(artistRow.id)}`} className="comic-btn comic-btn-secondary">
               Artist Profile
             </Link>
             <Link href="/red-rocks/concerts" className="comic-btn comic-btn-secondary">
               Red Rocks Schedule
             </Link>
-            {hasRedRocks ? (
+            {hasUpcomingRedRocks ? (
               <Link href="/red-rocks/transportation" className="comic-btn comic-btn-secondary">
                 Transportation Guide
               </Link>
             ) : null}
-            <Link
-              href={
-                hasRedRocks
-                  ? buildBookingHref({ target: "shared", venue: "red-rocks-amphitheatre", searchParams: sp })
-                  : buildBookingHref({ target: "book", searchParams: sp })
-              }
-              className="comic-btn comic-btn-primary"
-            >
-              {hasRedRocks ? "Book Red Rocks Shuttle" : "See Ride Options"}
-            </Link>
+            {hasUpcomingRedRocks ? (
+              <Link
+                href={buildBookingHref({ target: "private", venue: "red-rocks-amphitheatre", searchParams: sp })}
+                className="comic-btn comic-btn-primary"
+              >
+                View Private Red Rocks Rides
+              </Link>
+            ) : null}
           </div>
         </div>
 
-        {hasRedRocks ? (
+        {hasUpcomingRedRocks ? (
           <section className="comic-panel" style={{ marginTop: 16 }}>
-            <div className="comic-tag">Red Rocks Spider Path</div>
-            <p className="comic-copy" style={{ marginTop: 8 }}>
-              If you are here for this artist&apos;s Red Rocks date, the clean path is: Red Rocks hub, this week&apos;s lineup,
-              transportation planning, then booking.
-            </p>
-            <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
-              <Link href="/red-rocks" className="comic-btn comic-btn-secondary">
-                Red Rocks Hub
-              </Link>
-              <Link href="/week/red-rocks" className="comic-btn comic-btn-secondary">
-                This Week at Red Rocks
-              </Link>
-              <Link href="/red-rocks/transportation" className="comic-btn comic-btn-secondary">
-                Transportation Guide
-              </Link>
-              <Link
-                href={buildBookingHref({ target: "shared", venue: "red-rocks-amphitheatre", searchParams: sp })}
-                className="comic-btn comic-btn-primary"
-              >
-                Book Shared Shuttle
-              </Link>
-            </div>
-          </section>
-        ) : null}
-
-        {hasRedRocks ? (
-          <section className="comic-panel" style={{ marginTop: 16 }}>
-            <div className="comic-tag">Red Rocks Shows</div>
+            <div className="comic-tag">Upcoming Red Rocks Shows</div>
             <div className="comic-grid" style={{ marginTop: 10 }}>
-              {redRocksShows.slice(0, 8).map((event) => (
+              {upcomingRedRocksShows.slice(0, 8).map((event) => (
                 <article key={event.id} className="comic-panel">
                   <div className="comic-tag">{dateLabel(event.dateKey)}</div>
-                  <h2 className="comic-h3" style={{ marginTop: 8 }}>
-                    {event.name}
-                  </h2>
+                  <h2 className="comic-h3" style={{ marginTop: 8 }}>{event.name}</h2>
                   <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
                     <Link href={`/shows/${encodeURIComponent(event.id)}`} className="comic-btn comic-btn-secondary">
                       Show Details
                     </Link>
                     <Link
                       href={buildBookingHref({
-                        target: "book",
+                        target: "private",
                         venue: "red-rocks-amphitheatre",
                         searchParams: sp,
-                        overrides: {
-                          artist: artistRow.name,
-                          event: event.name,
-                          date: event.dateKey,
-                        },
+                        overrides: { artist: artistRow.name, event: event.name, date: event.dateKey },
                       })}
                       className="comic-btn comic-btn-primary"
                     >
-                      Get a Ride
+                      View Private Rides
                     </Link>
                   </div>
                 </article>
@@ -221,9 +191,9 @@ export default async function ArtistPage({ params, searchParams }: Props) {
 
         <section className="comic-panel" style={{ marginTop: 16 }}>
           <div className="comic-tag">Upcoming Shows</div>
-          {nextShows.length ? (
+          {upcomingShows.length ? (
             <div className="comic-grid" style={{ marginTop: 10 }}>
-              {nextShows.map((event) => {
+              {upcomingShows.slice(0, 18).map((event) => {
                 const venueName =
                   VENUE_LEDGER_BY_SLUG.get?.(event.venueId)?.name ||
                   (VENUE_LEDGER_BY_SLUG as unknown as Record<string, { name?: string }>)[event.venueId]?.name ||
@@ -231,32 +201,25 @@ export default async function ArtistPage({ params, searchParams }: Props) {
                 return (
                   <article key={event.id} className="comic-panel">
                     <div className="comic-tag">{dateLabel(event.dateKey)}</div>
-                    <h2 className="comic-h3" style={{ marginTop: 8 }}>
-                      {event.name}
-                    </h2>
+                    <h2 className="comic-h3" style={{ marginTop: 8 }}>{event.name}</h2>
                     <p className="comic-copy">{venueName}</p>
                     <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
-                      <Link href={`/artists/${encodeURIComponent(artist)}/${encodeURIComponent(event.venueId)}`} className="comic-btn comic-btn-secondary">
-                        Artist x Venue
-                      </Link>
                       <Link href={`/shows/${encodeURIComponent(event.id)}`} className="comic-btn comic-btn-secondary">
                         Show Details
                       </Link>
-                      <Link
-                        href={buildBookingHref({
-                          target: "book",
-                          venue: event.venueId,
-                          searchParams: sp,
-                          overrides: {
-                            artist: artistRow.name,
-                            event: event.name,
-                            date: event.dateKey,
-                          },
-                        })}
-                        className="comic-btn comic-btn-primary"
-                      >
-                        Get a Ride
-                      </Link>
+                      {isRedRocksVenue(event.venueId) ? (
+                        <Link
+                          href={buildBookingHref({
+                            target: "private",
+                            venue: "red-rocks-amphitheatre",
+                            searchParams: sp,
+                            overrides: { artist: artistRow.name, event: event.name, date: event.dateKey },
+                          })}
+                          className="comic-btn comic-btn-primary"
+                        >
+                          View Private Rides
+                        </Link>
+                      ) : null}
                     </div>
                   </article>
                 );
@@ -264,10 +227,30 @@ export default async function ArtistPage({ params, searchParams }: Props) {
             </div>
           ) : (
             <p className="comic-copy" style={{ marginTop: 8 }}>
-              No upcoming shows found in the current snapshot.
+              No upcoming Colorado shows are listed in the current 2026 snapshot.
             </p>
           )}
         </section>
+
+        {pastShows.length ? (
+          <section className="comic-panel" style={{ marginTop: 16 }}>
+            <div className="comic-tag">Past 2026 Shows</div>
+            <p className="comic-copy" style={{ marginTop: 8 }}>
+              These dates are kept as concert-history pages; they are not presented as upcoming events.
+            </p>
+            <div className="comic-grid" style={{ marginTop: 10 }}>
+              {pastShows.slice(0, 8).map((event) => (
+                <article key={event.id} className="comic-panel">
+                  <div className="comic-tag">{dateLabel(event.dateKey)}</div>
+                  <h2 className="comic-h3" style={{ marginTop: 8 }}>{event.name}</h2>
+                  <Link href={`/shows/${encodeURIComponent(event.id)}`} className="comic-btn comic-btn-secondary" style={{ marginTop: 10 }}>
+                    Show Details
+                  </Link>
+                </article>
+              ))}
+            </div>
+          </section>
+        ) : null}
       </section>
     </main>
   );
