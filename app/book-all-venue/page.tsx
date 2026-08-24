@@ -24,12 +24,12 @@ export default async function BookAllVenue({
     <main className="min-h-screen bg-surface text-white flex flex-col items-center justify-center px-6">
       <div className="max-w-3xl text-center">
         <h1 className="text-5xl font-black uppercase italic tracking-tighter mb-8">
-          Book Your <span className="text-[#8fd0ff]">Ride</span>
+          Request Your <span className="text-[#8fd0ff]">Private Ride</span>
         </h1>
         <p className="text-xl text-muted mb-12">
           {venue?.name
-            ? `Tell us about your ${venue.name} ride and we will line up the best booking path for your group.`
-            : "Door-to-door transportation for Denver and Boulder venues."}
+            ? `Tell us about your ${venue.name} ride and we will confirm the private transportation plan for your group.`
+            : "Private door-to-door transportation for Denver and Boulder venue nights."}
         </p>
 
         {venue ? (
@@ -51,20 +51,22 @@ export default async function BookAllVenue({
             ) : null}
           </div>
         ) : null}
-        
+
         <div className="panel-soft p-10 rounded-[3rem] shadow-2xl mb-12">
-          <h2 className="text-3xl font-black mb-4">$250 Flat Rate</h2>
-          <p className="text-muted mb-8 font-medium">Includes pickup, drop-off, and waiting return service.</p>
-          <a 
-            href="tel:7203696292" 
+          <h2 className="text-3xl font-black mb-4">Private Transportation Quote</h2>
+          <p className="text-muted mb-8 font-medium">
+            Vehicle, pickup plan, return plan, availability, and final price are confirmed for your specific venue night before booking.
+          </p>
+          <a
+            href="tel:7203696292"
             className="block w-full btn-primary uppercase shadow-lg transition"
           >
-            Call/Text to Book: 720-369-6292
+            Call/Text: 720-369-6292
           </a>
         </div>
-        
+
         <p className="text-muted text-sm">
-          *Price covers round-trip transport for the entire group. No surge pricing, no hidden fees.
+          Party at Red Rocks currently offers private transportation only. Use the confirmed quote and booking details for your actual trip.
         </p>
       </div>
     </main>

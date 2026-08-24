@@ -1,8 +1,8 @@
-import { BadgeCheck, DollarSign, Headphones, ShieldCheck } from "lucide-react";
+import { BadgeCheck, CalendarCheck, Headphones, ShieldCheck } from "lucide-react";
 
 const trustItems = [
-  { icon: ShieldCheck, label: "Guaranteed Return" },
-  { icon: DollarSign, label: "$59 Fixed / No Surge" },
+  { icon: ShieldCheck, label: "Private Vehicle" },
+  { icon: CalendarCheck, label: "Planned Pickup + Return" },
   { icon: Headphones, label: "Text Support" },
   { icon: BadgeCheck, label: "Secure Rezdy Checkout" },
 ];

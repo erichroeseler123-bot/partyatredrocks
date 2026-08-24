@@ -1,15 +1,15 @@
 export const BOOKING_COPY = {
   meta: {
     layoutDescription:
-      "Book private Red Rocks transportation with fixed pricing, private pickup details before the ride, and a return plan after the show. Private Suburban is $399 with a private van upgrade available.",
+      "Book private Red Rocks transportation with published vehicle pricing, private pickup details before the ride, and a planned return after the show. Private Suburban is $399 with a private van upgrade available.",
     homeDescription:
-      "Private Red Rocks transportation from Denver, Golden, and Morrison. Fixed pricing, guaranteed return, Private Suburban, private van upgrade, and group ride planning.",
+      "Private Red Rocks transportation from Denver, Golden, and Morrison. Published private-vehicle pricing, Private Suburban, private van upgrade, and one coordinated ride plan for your group.",
     businessDescription:
-      "Fixed-price private Red Rocks transportation with pickup planning and guaranteed return service.",
+      "Private Red Rocks transportation with published vehicle pricing, pickup planning, and a coordinated return plan.",
     sharedBookingDescription:
-      "Private Red Rocks transportation is available online with fixed pricing, pickup timing, secure checkout, and a guaranteed ride home after the show.",
+      "Private Red Rocks transportation is available with published vehicle pricing, pickup planning, secure checkout, and a coordinated return plan after the show.",
     privateBookingDescription:
-      "Private Red Rocks transportation from Denver. Private Suburban $399, private van $599, guaranteed return, limo-lane access, and optional liquor stop planning.",
+      "Private Red Rocks transportation from Denver. Private Suburban $399, private van $599, limo-lane access, return planning, and optional liquor-stop planning.",
   },
   labels: {
     sharedRideTitle: "Private Ride",
@@ -22,8 +22,8 @@ export const BOOKING_COPY = {
     viewPrivateVehicles: "View Private Vehicles",
   },
   trust: {
-    fixedPricing: "Fixed pricing",
-    guaranteedReturn: "Guaranteed return ride",
+    fixedPricing: "Published private-vehicle pricing",
+    guaranteedReturn: "Planned return ride",
     denverGoldenPickups: "Denver + Golden departures",
     oneVehiclePlan: "One vehicle for the full night",
   },
@@ -50,7 +50,7 @@ export const BOOKING_COPY = {
   },
   faq: {
     privateReturn:
-      "Yes. Private rides are planned around a guaranteed return after the show so your group stays on one vehicle for the full night.",
+      "Yes. Private rides include a planned return after the show, with the vehicle and pickup details coordinated for your group before show night.",
     privatePickupTime:
       "Most private Red Rocks rides use a 4:30 PM pickup window from Denver, with the exact pickup details confirmed before the event.",
     liquorStop:
