@@ -142,7 +142,15 @@ export default function HomeSections({ heroSrc, privateVehicleSrc, urgency }: Ho
                 <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.24em]">{urgency.label}</div>
                 <p className="mt-1 text-sm leading-6 text-white/82">{urgency.detail}</p>
               </div>
-              <Link href="/week/red-rocks" className="brand-link inline-flex items-center text-sm font-black uppercase tracking-[0.16em] no-underline">View lineup</Link>
+              <div className="flex flex-col items-stretch gap-2 sm:items-end">
+                <Link
+                  href="/book/red-rocks-amphitheatre/private/suv"
+                  className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#ff6b3d] px-5 text-xs font-black uppercase tracking-[0.14em] text-[#1b0b05] no-underline transition hover:bg-[#ff845d]"
+                >
+                  Book $399 ride
+                </Link>
+                <Link href="/week/red-rocks" className="brand-link inline-flex items-center justify-center text-xs font-black uppercase tracking-[0.14em] no-underline sm:justify-end">View lineup</Link>
+              </div>
             </div>
           </section>
         ) : null}
