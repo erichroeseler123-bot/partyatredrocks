@@ -183,7 +183,6 @@ export default async function PrivateOptionsPage({
               </div>
             ))}
           </div>
-          <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-white/50">Actual SUV/van checkout is handled by Rezdy; current booking details in checkout control the trip.</p>
         </section>
 
         <section className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 sm:p-8">
