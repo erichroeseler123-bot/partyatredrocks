@@ -44,6 +44,24 @@ export function PrivateOnlyAuthorityPage({ eyebrow, title, intro, points, search
             </article>
           ))}
         </section>
+
+        <section className="mt-8 rounded-3xl border border-soft bg-surface-strong p-6 md:p-8">
+          <p className="text-xs font-black uppercase tracking-[0.2em] text-muted">Choose the right private ride</p>
+          <div className="mt-5 grid gap-4 md:grid-cols-3">
+            <Link href="/red-rocks/car-service" className="rounded-2xl border border-soft p-5 hover:no-underline">
+              <h2 className="text-xl font-black text-white">Private car service</h2>
+              <p className="mt-2 leading-relaxed text-soft">A private Suburban for groups of up to six.</p>
+            </Link>
+            <Link href="/red-rocks/group-transportation" className="rounded-2xl border border-soft p-5 hover:no-underline">
+              <h2 className="text-xl font-black text-white">Group transportation</h2>
+              <p className="mt-2 leading-relaxed text-soft">Compare the Suburban and larger private van.</p>
+            </Link>
+            <Link href="/guide/local/denver-pickups" className="rounded-2xl border border-soft p-5 hover:no-underline">
+              <h2 className="text-xl font-black text-white">Denver pickups</h2>
+              <p className="mt-2 leading-relaxed text-soft">See how private pickup planning works.</p>
+            </Link>
+          </div>
+        </section>
       </section>
     </main>
   );

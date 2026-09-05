@@ -3,8 +3,8 @@ import type { HandoffSearchParams } from "@/lib/parrHandoff";
 import { PrivateOnlyAuthorityPage } from "@/components/redrocks/PrivateOnlyAuthorityPage";
 
 export const metadata: Metadata = {
-  title: "Red Rocks Shuttle Options | Current Private Service",
-  description: "Current Party at Red Rocks transportation options: private Suburban $399 or private van $599. Shared shuttle seats are not currently offered.",
+  title: "Red Rocks Shuttle | Private SUV & Van Transportation",
+  description: "Book private Red Rocks shuttle service for your group: $399 Suburban or $599 private van with a planned ride home. No shared shuttle seats.",
   alternates: { canonical: "/red-rocks/shuttle" },
 };
 
@@ -13,7 +13,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<Han
   return (
     <PrivateOnlyAuthorityPage
       eyebrow="Red Rocks shuttle search"
-      title="Red Rocks Shuttle Options"
+      title="Private Red Rocks Shuttle Options"
       intro="If you found this page while searching for Red Rocks shuttle options, the current Party at Red Rocks product is private transportation only. Shared seats are retired; choose a private Suburban for $399 or a private van for $599."
       searchParams={sp}
       points={[

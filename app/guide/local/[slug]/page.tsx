@@ -2,11 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import ShuttleCTA from "@/components/cta/ShuttleCTA";
 import { PAGE_INTENT_METADATA, buildPageIntentMetadata } from "@/lib/pageIntentMetadata";
 import {
   PRIVATE_BOOKING_PATH,
-  SHARED_BOOKING_PATH,
   comparisonRows,
   gatewayFaqs,
   localGatewayPageList,
@@ -31,22 +29,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     ...buildPageIntentMetadata(`/guide/local/${page.slug}` as keyof typeof PAGE_INTENT_METADATA),
-    title: { absolute: page.seoTitle || `${page.locationName} to Red Rocks Shuttle | Party at Red Rocks` },
-    description: page.seoDescription || page.heroBody,
+    title: { absolute: `${page.locationName} to Red Rocks Private Transportation | Party at Red Rocks` },
+    description: `Private transportation from the ${page.locationName} area to Red Rocks: $399 Suburban or $599 van with a planned return ride. No shared shuttle seats.`,
     alternates: {
       canonical: `${SITE}/guide/local/${page.slug}`,
     },
     openGraph: {
-      title: page.seoTitle || `${page.locationName} to Red Rocks Shuttle | Party at Red Rocks`,
-      description: page.seoDescription || page.heroBody,
+      title: `${page.locationName} to Red Rocks Private Transportation | Party at Red Rocks`,
+      description: `Private transportation from the ${page.locationName} area to Red Rocks with a planned return ride.`,
       url: `${SITE}/guide/local/${page.slug}`,
       type: "article",
       images: [page.shareImage],
     },
     twitter: {
       card: "summary_large_image",
-      title: page.seoTitle || `${page.locationName} to Red Rocks Shuttle | Party at Red Rocks`,
-      description: page.seoDescription || page.heroBody,
+      title: `${page.locationName} to Red Rocks Private Transportation | Party at Red Rocks`,
+      description: `Private transportation from the ${page.locationName} area to Red Rocks with a planned return ride.`,
       images: [page.shareImage],
     },
   };
@@ -66,7 +64,7 @@ export default async function LocalGatewayPage({ params }: Props) {
         name: `Where exactly is the pickup at ${page.locationName}?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text: page.faqLocationAnswer,
+          text: `The exact private pickup address near ${page.locationName} is coordinated with your group before show night.`,
         },
       },
       ...gatewayFaqs.map((item) => ({
@@ -99,7 +97,7 @@ export default async function LocalGatewayPage({ params }: Props) {
       {
         "@type": "ListItem",
         position: 3,
-        name: `${page.locationName} Shuttle`,
+        name: `${page.locationName} Private Transportation`,
         item: `${SITE}/guide/local/${page.slug}`,
       },
     ],
@@ -112,8 +110,8 @@ export default async function LocalGatewayPage({ params }: Props) {
     url: SITE,
     image: page.shareImage,
     areaServed: ["Denver, CO", "Golden, CO", "Morrison, CO"],
-    priceRange: "$59-$599",
-    description: page.heroBody,
+    priceRange: "$399-$599",
+    description: `Private transportation from the ${page.locationName} area to Red Rocks.`,
   };
 
   return (
@@ -127,12 +125,12 @@ export default async function LocalGatewayPage({ params }: Props) {
           <div className="grid gap-0 lg:grid-cols-[1.08fr_0.92fr]">
             <div className="p-8 sm:p-10 lg:p-12">
               <div className="inline-flex items-center rounded-full border border-[#8fd0ff]/30 bg-[#8fd0ff]/10 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">
-                {page.pickupLabel}
+                Private pickup area
               </div>
               <h1 className="mt-5 max-w-4xl text-[2.4rem] font-black uppercase leading-[0.94] tracking-[-0.04em] sm:text-[4rem]">
-                {page.heroTitle}
+                Private Transportation from {page.locationName} to Red Rocks
               </h1>
-              <p className="mt-5 max-w-3xl text-[15px] leading-7 text-white/80 sm:text-lg">{page.heroBody}</p>
+              <p className="mt-5 max-w-3xl text-[15px] leading-7 text-white/80 sm:text-lg">Book a private Suburban for $399 or a private van for $599. Your group gets one vehicle, one pickup plan, and a planned ride home after the show. Shared shuttle seats are not currently offered.</p>
               <div className="mt-6 grid gap-4 md:grid-cols-3">
                 <div className="rounded-[22px] border border-white/10 bg-black/20 p-5">
                   <div className="text-[11px] font-black uppercase tracking-[0.18em] text-[#8fd0ff]">Pickup Area</div>
@@ -144,15 +142,12 @@ export default async function LocalGatewayPage({ params }: Props) {
                 </div>
                 <div className="rounded-[22px] border border-white/10 bg-black/20 p-5">
                   <div className="text-[11px] font-black uppercase tracking-[0.18em] text-[#8fd0ff]">Return Plan</div>
-                  <div className="mt-3 text-base font-semibold text-white">Departs 30 minutes after the encore</div>
+                  <div className="mt-3 text-base font-semibold text-white">Coordinated for your group before show night</div>
                 </div>
               </div>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Link href={SHARED_BOOKING_PATH} className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#62f6ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#8cf8ff]">
-                  Book Your Seat - $59
-                </Link>
                 <Link href={PRIVATE_BOOKING_PATH} className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10">
-                  View Private Vehicle Rates
+                  Book Private Transportation
                 </Link>
               </div>
             </div>
@@ -166,13 +161,13 @@ export default async function LocalGatewayPage({ params }: Props) {
         <section className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
           <section className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 sm:p-8">
             <div className="text-[12px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">Why This Departure Works</div>
-            <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">Why departing from {page.locationName} works</h2>
-            <p className="mt-3 text-[15px] leading-7 text-white/74">{page.whyThisWorks}</p>
+            <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">Planning pickup near {page.locationName}</h2>
+            <p className="mt-3 text-[15px] leading-7 text-white/74">Private pickup details are coordinated for your group before the ride. Confirm the exact address during booking so the vehicle plan matches where your group is staying or meeting.</p>
             <div className="mt-5 rounded-[22px] border border-white/10 bg-black/15 p-5 text-sm leading-7 text-white/76">
               <strong className="text-white">Who this pickup is best for:</strong> {page.bestFor}
             </div>
             <div className="mt-4 rounded-[22px] border border-white/10 bg-black/15 p-5 text-sm leading-7 text-white/76">
-              <strong className="text-white">Local angle:</strong> {page.localAngle}
+              <strong className="text-white">Current service:</strong> Private Suburban or private van; no shared stops or per-person fares.
             </div>
           </section>
 
@@ -181,13 +176,13 @@ export default async function LocalGatewayPage({ params }: Props) {
             <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">Timing and returns</h2>
             <div className="mt-6 grid gap-4">
               <div className="rounded-[22px] border border-white/10 bg-black/15 p-5 text-sm leading-7 text-white/76">
-                <strong className="text-white">Departure:</strong> We depart about 1.5 hours before the first opener or around 2 hours before the headliner depending on the show.
+                <strong className="text-white">Departure:</strong> Your pickup time and location are confirmed for your private group before show night.
               </div>
               <div className="rounded-[22px] border border-white/10 bg-black/15 p-5 text-sm leading-7 text-white/76">
-                <strong className="text-white">Check-in:</strong> Arrive around 15 minutes early so the driver can check everyone in cleanly.
+                <strong className="text-white">Pickup:</strong> Keep the group together and ready at the agreed pickup address.
               </div>
               <div className="rounded-[22px] border border-white/10 bg-black/15 p-5 text-sm leading-7 text-white/76">
-                <strong className="text-white">Return:</strong> The shuttle departs 30 minutes after the final encore from the same general area where you arrived.
+                <strong className="text-white">Return:</strong> The vehicle waits through the show, so the return ride is already part of your plan.
               </div>
             </div>
           </section>
@@ -225,7 +220,7 @@ export default async function LocalGatewayPage({ params }: Props) {
             <div className="text-[12px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">Private Upgrade</div>
             <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">Traveling with a crew of 6 or more?</h2>
             <p className="mt-3 text-[15px] leading-7 text-white/74">
-              Do not split the squad. Book a private Suburban, van, or party bus for your group and keep the whole night on one dedicated ride plan.
+              Keep the group together in a private Suburban for up to six or a private van for up to ten. Party at Red Rocks does not currently offer a traditional party bus.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
               <Link href={PRIVATE_BOOKING_PATH} className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10">
@@ -240,7 +235,7 @@ export default async function LocalGatewayPage({ params }: Props) {
           <section className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 sm:p-8">
             <div className="text-[12px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">Nearby Spots</div>
             <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">Local guide</h2>
-            <p className="mt-3 text-[15px] leading-7 text-white/74">{page.localGuideIntro}</p>
+            <p className="mt-3 text-[15px] leading-7 text-white/74">Use {page.locationName} as the starting point for your private pickup plan. Confirm the exact address while booking, then keep the whole group on the same arrival and return plan.</p>
             <div className="mt-6 grid gap-4">
               {page.nearbySpots.map((spot) => (
                 <div key={spot.name} className="rounded-[22px] border border-white/10 bg-black/15 p-5">
@@ -259,7 +254,7 @@ export default async function LocalGatewayPage({ params }: Props) {
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             <div className="rounded-[22px] border border-white/10 bg-black/15 p-5 text-sm leading-7 text-white/76">
               <strong className="text-white">Where exactly is the pickup at {page.locationName}?</strong>
-              <div className="mt-2">{page.faqLocationAnswer}</div>
+              <div className="mt-2">The exact private pickup address near {page.locationName} is coordinated with your group before show night.</div>
             </div>
             {gatewayFaqs.map((faq) => (
               <div key={faq.question} className="rounded-[22px] border border-white/10 bg-black/15 p-5 text-sm leading-7 text-white/76">
@@ -270,12 +265,11 @@ export default async function LocalGatewayPage({ params }: Props) {
           </div>
         </section>
 
-        <ShuttleCTA
-          title={`${page.locationName} to Red Rocks Shuttle`}
-          blurb={`Book fixed-price shuttle seats from the ${page.locationName} area, or upgrade your group to a private vehicle if you want the whole night on one plan.`}
-          href={SHARED_BOOKING_PATH}
-          button="Book Your Seat - $59"
-        />
+        <section className="rounded-[30px] border border-[#62f6ff]/25 bg-[#0b1224] p-6 text-center sm:p-8">
+          <h2 className="text-3xl font-black uppercase tracking-[-0.03em] text-white">{page.locationName} to Red Rocks Private Ride</h2>
+          <p className="mx-auto mt-3 max-w-2xl text-[15px] leading-7 text-white/74">Choose a private Suburban or van and coordinate the exact pickup address for your group.</p>
+          <Link href={PRIVATE_BOOKING_PATH} className="mt-6 inline-flex min-h-12 items-center justify-center rounded-full bg-[#62f6ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#8cf8ff]">Book Private Transportation</Link>
+        </section>
       </section>
     </main>
   );

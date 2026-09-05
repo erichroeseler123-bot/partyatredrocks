@@ -65,12 +65,15 @@ export default function HomeSections({ heroSrc, privateVehicleSrc, urgency }: Ho
 
           <div className="relative px-6 py-10 sm:px-8 sm:py-12 lg:px-12 lg:py-14">
             <div className="mx-auto max-w-5xl text-center">
-              <p className="text-[11px] font-black uppercase tracking-[0.24em] text-white/72 sm:text-[12px]">Red Rocks Transportation</p>
+              <p className="text-[11px] font-black uppercase tracking-[0.24em] text-white/72 sm:text-[12px]">Red Rocks Shuttle &amp; Transportation</p>
               <h1 className="mt-4 text-[2.7rem] font-black leading-[0.92] tracking-[-0.05em] text-white sm:text-[4.3rem] lg:text-[5.6rem]">
-                Private Red Rocks transportation for your group
+                Private Red Rocks shuttle service for your group
               </h1>
               <p className="mx-auto mt-5 max-w-4xl text-base leading-8 text-white/82 sm:text-lg">
                 Private Suburban is $399 with tailgating, limo-lane access, door-to-door service, and the vehicle waiting in the same spot during the show. Larger groups can upgrade to a private van.
+              </p>
+              <p className="mx-auto mt-3 max-w-3xl text-sm leading-6 text-white/72">
+                This is private transportation for your group. We do not currently sell shared shuttle seats or per-person fares.
               </p>
               <p className="mx-auto mt-3 max-w-3xl text-sm font-semibold uppercase tracking-[0.14em] text-white/72 sm:text-[13px]">
                 One vehicle. One pickup plan. A return plan set before show night.
@@ -126,6 +129,13 @@ export default function HomeSections({ heroSrc, privateVehicleSrc, urgency }: Ho
                   </Link>
                 );
               })}
+            </div>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-sm">
+              <Link href="/red-rocks/shuttle" className="brand-link font-bold no-underline">Red Rocks shuttle options</Link>
+              <span className="text-white/30">•</span>
+              <Link href="/red-rocks/car-service" className="brand-link font-bold no-underline">Private car service</Link>
+              <span className="text-white/30">•</span>
+              <Link href="/red-rocks/group-transportation" className="brand-link font-bold no-underline">Group transportation</Link>
             </div>
           </div>
         </section>

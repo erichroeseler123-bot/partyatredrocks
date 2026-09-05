@@ -5,7 +5,7 @@ import { PrivateOnlyAuthorityPage } from "@/components/redrocks/PrivateOnlyAutho
 export const metadata: Metadata = {
   title: "Red Rocks Shuttle Guide | Private Transportation",
   description: "Red Rocks shuttle search guide updated for Party at Red Rocks' current private-only transportation service: $399 Suburban or $599 van.",
-  alternates: { canonical: "/red-rocks/red-rocks-shuttle" },
+  alternates: { canonical: "/red-rocks/shuttle" },
 };
 
 export default async function Page({ searchParams }: { searchParams: Promise<HandoffSearchParams> }) {

@@ -76,9 +76,9 @@ export const localGatewayPages: Record<LocalGatewaySlug, LocalGatewayPage> = {
     locationName: "Union Station",
     landmarkName: "Union Station transit hub",
     pickupLabel: "Union Station Pickup",
-    seoTitle: "Union Station to Red Rocks Shuttle | $59 Round-Trip | Party at Red Rocks 2026",
+    seoTitle: "Union Station to Red Rocks Private Transportation | Party at Red Rocks",
     seoDescription:
-      "Catch the best Red Rocks shuttle from Denver Union Station. Fixed $59 shared seats, guaranteed return after the show, and zero surge pricing. Book your 2026 concert ride now!",
+      "Plan private transportation from the Union Station area to Red Rocks with a $399 Suburban or $599 van and a coordinated return ride.",
     heroTitle: "The Smart Way to Get from Union Station to Red Rocks",
     heroBody:
       "Skip the $120 Uber surges and the headache of downtown parking. Join Party at Red Rocks for a high-energy round-trip shuttle departing from Denver's transit hub.",
@@ -86,7 +86,7 @@ export const localGatewayPages: Record<LocalGatewaySlug, LocalGatewayPage> = {
       "Union Station is not just a train stop. It is one of the cleanest launch points for a Red Rocks night. Whether you are staying at The Crawford, The Oxford, or coming in on the A-Line from DIA, this pickup keeps the whole plan simple. Grab a pre-show drink at Terminal Bar, meet your crew, and head to Red Rocks without dealing with surge pricing, rental cars, or post-show rideshare chaos.",
     bestFor: "Airport arrivals, downtown hotel guests, and riders who want the most convenient transit-to-show handoff in Denver.",
     localAngle:
-      "This page should win on the transit-hub angle: fresh off the A-Line, one drink at Terminal Bar, then straight to the rocks for $59 instead of a corporate $65-plus shuttle or a triple-digit Uber.",
+      "Union Station is a useful downtown reference point for guests arriving by train or staying near LoDo.",
     localGuideIntro:
       "Union Station is the cleanest airport-to-hotel-to-show flow in Denver. Meet your group in the Great Hall, grab a quick drink at Terminal Bar or a meal at Thirsty Lion, then board a fixed-price ride with the return already handled after the encore.",
     nearbySpots: [
@@ -198,19 +198,19 @@ export const localGatewayPageList = Object.values(localGatewayPages);
 export const comparisonRows = [
   {
     feature: "Cost",
-    parr: "$59 fixed",
-    uber: "$80-$150 with surge",
-    driving: "Gas, parking, and the stress",
+    parr: "$399 Suburban / $599 van",
+    uber: "Varies by demand",
+    driving: "Gas and your own vehicle",
   },
   {
     feature: "Drop-off",
-    parr: "Prime Red Rocks arrival flow",
-    uber: "Lower-lot roulette",
+    parr: "Private arrival plan",
+    uber: "App-directed drop-off",
     driving: "Depends how early you get there",
   },
   {
     feature: "Reliability",
-    parr: "Guaranteed return",
+    parr: "Planned return with the same vehicle",
     uber: "Driver availability varies",
     driving: "You are the whole plan",
   },
@@ -224,15 +224,15 @@ export const comparisonRows = [
 
 export const gatewayFaqs = [
   {
-    question: "Can I bring drinks on the shuttle?",
-    answer: "Yes, riders 21 and over can usually bring drinks as long as the group keeps the ride clean and respectful.",
+    question: "Is this a shared shuttle?",
+    answer: "No. Party at Red Rocks currently offers private Suburban and private van transportation only.",
   },
   {
     question: "What if the concert runs late?",
     answer: "The return is planned around the end of the show, so riders do not need to guess when to leave or hunt for a second ride in the dark.",
   },
   {
-    question: "Is it really only $59?",
-    answer: "Yes. Shared seats are fixed-price, so riders are not dealing with rideshare surge pricing or hidden post-show fees.",
+    question: "What does private transportation cost?",
+    answer: "The private Suburban is $399 and the private van is $599. Confirm current availability on the booking page.",
   },
 ] as const;

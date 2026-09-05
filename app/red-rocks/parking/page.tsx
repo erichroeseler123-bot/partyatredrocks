@@ -8,9 +8,9 @@ import { buildBookingHref } from "@/lib/parrHandoff";
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
 export const metadata = {
-  title: "Red Rocks Parking Guide",
+  title: "Red Rocks Parking Guide: Lots, Arrival & Post-Show Exit",
   description:
-    "Red Rocks parking guide with lot tradeoffs, timing guidance, walking effort planning, and post-show exit options.",
+    "Compare Red Rocks parking lots, arrival timing, walking effort, and post-show exit plans—plus when private transportation may be easier.",
   alternates: { canonical: "/red-rocks/parking" },
 };
 
@@ -66,7 +66,7 @@ export default async function RedRocksParkingPage({
 
         <div className="comic-hero">
           <div className="comic-kicker">Parking</div>
-          <h1 className="comic-title">Red Rocks Parking Guide</h1>
+          <h1 className="comic-title">Red Rocks Parking: Lots, Arrival Times &amp; Post-Show Exit</h1>
           <p className="comic-copy">
             There is no single best Red Rocks lot for every group. The right parking plan depends on when you arrive, how much
             walking your group is comfortable with, and how quickly you want to leave after the show.
