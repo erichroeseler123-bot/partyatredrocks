@@ -45,10 +45,15 @@ const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://partyatredrocks.com
 const DCC = process.env.NEXT_PUBLIC_DCC_ORIGIN || "https://destinationcommandcenter.com";
 const EVENTS_SNAPSHOT_DIR = path.join(process.cwd(), "data", "snapshots", "events");
 
-function safeDate(raw?: string) {
+function safeDate(raw: string): Date | null {
   if (!raw) return null;
-  const d = new Date(raw);
+  const isoDateOnly = /^\d{4}-\d{2}-\d{2}$/.test(raw);
+  const d = new Date(isoDateOnly ? `${raw}T12:00:00` : raw);
   return Number.isFinite(d.getTime()) ? d : null;
+}
+
+function hasExplicitTime(raw: string): boolean {
+  return /T\d{2}:\d{2}/.test(raw);
 }
 
 function fmtDateTime(raw: string) {
@@ -136,9 +141,10 @@ function breadcrumbJsonLd(e: ShowEvent | null, id: string) {
   return { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: items };
 }
 
-function musicEventJsonLd(e: ShowEvent, id: string) {
+function musicEventJsonLd(e: ShowEvent, id: string, image?: string | null) {
   const venueName = e.venue?.siteName || "Venue";
   const venueSlug = e.venue?.siteSlug;
+  const isRedRocks = isRedRocksSlug(venueSlug);
   const venueUrl = venueSlug ? `${SITE}/venues/${venueSlug}` : undefined;
   const location: any = {
     "@type": "Place",
@@ -146,16 +152,18 @@ function musicEventJsonLd(e: ShowEvent, id: string) {
     url: venueUrl,
     address: {
       "@type": "PostalAddress",
-      addressLocality: e.venue?.city || undefined,
-      addressRegion: e.venue?.state || undefined,
-      streetAddress: e.venue?.address1 || undefined,
-      postalCode: e.venue?.postalCode || undefined,
+      addressLocality: e.venue?.city || (isRedRocks ? "Morrison" : "Denver"),
+      addressRegion: e.venue?.state || "CO",
+      streetAddress: e.venue?.address1 || (isRedRocks ? "18300 W Alameda Pkwy" : undefined),
+      postalCode: e.venue?.postalCode || (isRedRocks ? "80465" : undefined),
       addressCountry: "US",
     },
     geo:
       typeof e.venue?.lat === "number" && typeof e.venue?.lon === "number"
         ? { "@type": "GeoCoordinates", latitude: e.venue.lat, longitude: e.venue.lon }
-        : undefined,
+        : isRedRocks
+          ? { "@type": "GeoCoordinates", latitude: 39.6654, longitude: -105.2057 }
+          : undefined,
   };
   const performers =
     (e.performers ?? [])
@@ -175,7 +183,7 @@ function musicEventJsonLd(e: ShowEvent, id: string) {
   }
   offers.push({
     "@type": "Offer",
-    name: isRedRocksSlug(venueSlug) ? "Private Red Rocks Transportation" : "Transportation Options",
+    name: isRedRocks ? "Private Red Rocks Transportation" : "Transportation Options",
     url: bookingUrlForEvent(e),
     priceCurrency: "USD",
     seller: { "@id": `${SITE}/#organization` },
@@ -185,10 +193,11 @@ function musicEventJsonLd(e: ShowEvent, id: string) {
     "@type": "MusicEvent",
     "@id": `${SITE}/shows/${id}#event`,
     name: e.title,
-    startDate: e.datetime_local,
+    startDate: e.datetime_local || e.dateKey,
     url: `${SITE}/shows/${id}`,
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     eventStatus: "https://schema.org/EventScheduled",
+    image: image ? (image.startsWith("http") ? image : `${SITE}${image}`) : undefined,
     description: pickDescription(e),
     location,
     performer: performers.length ? performers : undefined,
@@ -225,7 +234,7 @@ function toShowEvent(event: Awaited<ReturnType<typeof getEventsCatalog>>[number]
   return {
     id: event.id,
     title: event.name,
-    datetime_local: event.startLocal ?? event.startAt ?? `${event.dateKey}T19:00:00`,
+    datetime_local: event.startLocal || event.startAt || event.dateKey,
     dateKey: event.dateKey,
     sourceId: event.sourceId,
     url: event.ticketUrl ?? undefined,
@@ -408,12 +417,12 @@ export default async function ShowPage({ params }: Props) {
   return (
     <main className="brand-page mx-auto max-w-6xl px-4 py-12">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd(e, e.id)) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(musicEventJsonLd(e, e.id)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(musicEventJsonLd(e, e.id, showImage)) }} />
 
       <div className="brand-panel rounded-[32px] p-8 shadow-[0_22px_70px_rgba(0,0,0,0.45)] backdrop-blur-xl">
         <div className="flex flex-wrap items-center gap-2">
           <div className="inline-flex items-center rounded-full pill px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white/80">Show Details</div>
-          {e.datetime_local ? <div className="inline-flex items-center rounded-full border border-soft panel px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60">{fmtDateTime(e.datetime_local)}</div> : null}
+          {e.datetime_local && hasExplicitTime(e.datetime_local) ? <div className="inline-flex items-center rounded-full border border-soft panel px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60">{fmtDateTime(e.datetime_local)}</div> : null}
           {venueSlug ? <Link href={`/venues/${venueSlug}`} className="inline-flex items-center rounded-full border border-soft panel px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60 hover:bg-surface/40">{venueName} →</Link> : null}
         </div>
         <h1 className="mt-5 text-4xl md:text-6xl font-black tracking-tight">{e.title}</h1>

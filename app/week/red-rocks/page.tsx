@@ -144,12 +144,22 @@ export default async function RedRocksLineupPage() {
       item: {
         "@type": "MusicEvent",
         name: event.name,
-        startDate: `${event.dateKey}T19:00:00`,
+        startDate: event.startLocal || event.startAt || event.dateKey,
         url: `${SITE}/shows/${encodeURIComponent(event.id)}`,
+        eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+        eventStatus: "https://schema.org/EventScheduled",
         location: {
           "@type": "Place",
           name: "Red Rocks Amphitheatre",
           url: `${SITE}/venues/red-rocks-amphitheatre`,
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "18300 W Alameda Pkwy",
+            addressLocality: "Morrison",
+            addressRegion: "CO",
+            postalCode: "80465",
+            addressCountry: "US",
+          },
         },
       },
     })),

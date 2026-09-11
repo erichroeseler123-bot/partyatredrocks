@@ -193,31 +193,7 @@ export default async function RedRocksAuthorityDetailPage({ params, searchParams
             url: `${SITE}/red-rocks`,
           },
         }
-      : page.entityType === "MusicEvent"
-        ? {
-            "@context": "https://schema.org",
-            "@type": "MusicEvent",
-            name: page.title,
-            description: page.description,
-            location: {
-              "@type": "Place",
-              name: "Red Rocks Amphitheatre",
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "Morrison",
-                addressRegion: "CO",
-                addressCountry: "US",
-              },
-              geo: page.coordinates
-                ? {
-                    "@type": "GeoCoordinates",
-                    latitude: page.coordinates.lat,
-                    longitude: page.coordinates.lng,
-                  }
-                : undefined,
-            },
-          }
-        : null;
+      : null;
 
   const faqJsonLd = {
     "@context": "https://schema.org",

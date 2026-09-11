@@ -258,7 +258,8 @@ function cityLine(v: VenueRec) {
 
 function safeDate(raw?: string): Date | null {
   if (!raw) return null;
-  const d = new Date(raw);
+  const isoDateOnly = /^\d{4}-\d{2}-\d{2}$/.test(raw);
+  const d = new Date(isoDateOnly ? `${raw}T23:59:59` : raw);
   return Number.isFinite(d.getTime()) ? d : null;
 }
 
@@ -373,7 +374,7 @@ function eventsItemListJsonLd(slug: string, v: VenueRec, events: VenueCache["eve
         "@type": "MusicEvent",
         "@id": `${SITE}/shows/${e.id}#event`,
         name: e.title,
-        startDate: e.datetime_local,
+        startDate: e.datetime_local || e.dateKey,
         url: `${SITE}/shows/${e.id}`,
         eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
         eventStatus: "https://schema.org/EventScheduled",
@@ -417,7 +418,7 @@ function toVenueEvents(
   const rows = allEvents
     .filter((event) => event.venueId === venueSlug)
     .map((event) => {
-      const datetime_local = event.startLocal ?? event.startAt ?? `${event.dateKey}T19:00:00`;
+      const datetime_local = event.startLocal || event.startAt || event.dateKey;
       return {
         id: event.id,
         title: event.name,

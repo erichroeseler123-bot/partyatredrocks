@@ -22,7 +22,7 @@ export type RedRocksEntity = {
   slug: string;
   title: string;
   category: "concerts" | "geology" | "hiking" | "wildlife" | "transportation" | "visiting";
-  entityType: "TouristAttraction" | "HikingTrail" | "MusicEvent" | "Thing";
+  entityType: "TouristAttraction" | "HikingTrail" | "Thing";
   parent?: string;
   related: string[];
   facts: { label: string; value: string }[];
@@ -1455,7 +1455,7 @@ const CATEGORY_TO_PARENT: Record<RedRocksEntity["category"], string> = {
 
 const CATEGORY_TO_SCHEMA: Record<RedRocksEntity["category"], RedRocksEntity["entityType"]> = {
   hiking: "HikingTrail",
-  concerts: "MusicEvent",
+  concerts: "TouristAttraction",
   geology: "TouristAttraction",
   transportation: "Thing",
   wildlife: "Thing",
