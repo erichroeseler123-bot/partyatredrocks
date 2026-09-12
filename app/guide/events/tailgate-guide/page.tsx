@@ -2,13 +2,12 @@ import Link from 'next/link';
 
 export default function TailgateGuide() {
   const faqs = [
-    { q: "Why skip tailgating altogether and book a shuttle instead?", a: "Tailgating is fun but stressful: hunting spots, traffic, and uphill hikes. Our shuttle eliminates it all—$59 per-person, BYOB-friendly, and we wait for you post-show. No parking fees, no rules worries. Book now for Subtronics → /book-shuttle." },
-    { q: "How does your shuttle make tailgating easier for groups?", a: "Groups love the private Suburban vibe—pregame with drinks on board, no splitting cars. $250 min covers up to 6+ people affordably. Drop at venue entrance, wait post-show. Ready? Book your group ride → /private-suburban." },
-    { q: "Can I still tailgate lightly and use your shuttle?", a: "Yes—many do a quick pre-show hang at a Denver bar like the Sheraton Downtown hub, then shuttle in. We handle arrival so you avoid parking hunts. Post-show pickup means no Uber surges." },
-    { q: "Is tailgating allowed at Red Rocks in 2026?", a: "Yes, but rules are strict: no tents, no open flames, and no glass. Our shuttle avoids these hassles entirely—focus on the show, not the rules. Book hassle-free → /book-shuttle." },
-    { q: "Can I bring alcohol to tailgate—and what about on your shuttle?", a: "In lots: beer/wine ok (no glass). On our shuttle: BYOB-friendly (Suburban/van)—pregame safely en route. No venue rules to worry about." },
-    { q: "What's the best alternative to driving/parking?", a: "Our shuttle service skips the lots entirely: $59 per-person, custom pickups, entrance drop-off, and waiting post-show. Unlike the Westracks pilot (ends 5 PM), we are built for concert-night reliability." },
-    // ... (This component will map the remaining 14 questions you provided)
+    { q: "Why skip tailgating hassles and book private transportation instead?", a: "Tailgating is fun but stressful: hunting spots, lot traffic, and steep uphill hikes. Our private transportation eliminates it all—door-to-door pickup in a $399 Suburban (up to 6) or $599 van (up to 10), BYOB-friendly ride, and your vehicle waits for you through the show. Book private transportation → /book/red-rocks-amphitheatre/private." },
+    { q: "How does private transportation make tailgating easier for groups?", a: "Groups love having one private vehicle for the night—pregame comfortably en route, no splitting into multiple rides. Door-to-door service gets you right up to the venue entrance, and the ride home is already reserved. Book your private ride → /book/red-rocks-amphitheatre/private." },
+    { q: "Can I still tailgate and use private transportation?", a: "Yes—your driver picks up your group at your chosen address, takes you to the venue in time to tailgate before gates open, and stages on-site so your return ride is ready right after the encore." },
+    { q: "Is tailgating allowed at Red Rocks in 2026?", a: "Yes, but rules are strict: no tents, no open flames, and no glass. Our private ride takes away parking worries so you can relax and focus on the show. Book private ride → /book/red-rocks-amphitheatre/private." },
+    { q: "Can I bring drinks on the vehicle?", a: "In venue lots: beer/wine ok (no glass). In your private Suburban or van: BYOB-friendly for adult passengers—relax and enjoy the ride responsibly." },
+    { q: "What's the best alternative to driving/parking yourself?", a: "Our private transportation service provides door-to-door round-trip service: $399 for a private Suburban or $599 for a private 10-passenger van. One driver, one vehicle, and guaranteed return after the concert." },
   ];
 
   return (
@@ -51,9 +50,9 @@ export default function TailgateGuide() {
         <div className="rounded-[2.5rem] border border-[#3df3ff]/35 bg-surface-strong p-8">
           <h3 className="text-green-500 font-black uppercase mb-4 italic">Shuttle Advantage</h3>
           <ul className="space-y-3 text-base text-muted">
-            <li>• Direct Denver/Golden hotel pickups.</li>
+            <li>• Door-to-door pickup for your group.</li>
             <li>• Pregame en route (BYOB-friendly).</li>
-            <li>• **We Wait For You** post-show at Row 70.</li>
+            <li>• **Vehicle Waits For You** through the entire show.</li>
           </ul>
         </div>
       </div>
@@ -78,11 +77,10 @@ export default function TailgateGuide() {
       <div className="btn-primary">
         <h2 className="text-3xl font-black mb-4 uppercase italic">Skip the Parking Search</h2>
         <p className="mb-8 text-xl font-medium text-white/82">
-          Lock in your 2026 shuttle spot today. Shared rides for $59, 
-          private Suburbans from $299. No surges, no stress.
+          Lock in your private Red Rocks ride today. $399 Private Suburban (up to 6) or $599 Private Van (up to 10). Door-to-door with guaranteed return.
         </p>
-        <Link href="/book" className="inline-block rounded-full bg-[#3df3ff] px-12 py-5 font-black uppercase text-[#08111e] transition hover:bg-[#62f6ff] shadow-lg">
-          Book Your 2026 Shuttle
+        <Link href="/book/red-rocks-amphitheatre/private" className="inline-block rounded-full bg-[#3df3ff] px-12 py-5 font-black uppercase text-[#08111e] transition hover:bg-[#62f6ff] shadow-lg">
+          Book Private Red Rocks Ride
         </Link>
       </div>
     </div>

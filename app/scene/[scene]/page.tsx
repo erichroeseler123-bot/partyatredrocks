@@ -244,10 +244,10 @@ export default async function SceneHub({ params }: Props) {
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/shuttles"
+                href="/red-rocks/shuttle"
                 className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff]"
               >
-                See Shuttle Options
+                See Transportation Options
               </Link>
               <Link
                 href="/venues"
@@ -386,9 +386,9 @@ export default async function SceneHub({ params }: Props) {
                     ) : null}
                     <Link
                       className="inline-flex min-h-11 items-center rounded-full border border-white/12 bg-white/6 px-4 text-xs font-black uppercase tracking-[0.16em] text-white/88 transition hover:bg-white/10"
-                      href="/shuttles"
+                      href="/red-rocks/shuttle"
                     >
-                      Shuttle Options
+                      Private Rides
                     </Link>
                   </div>
                 </article>

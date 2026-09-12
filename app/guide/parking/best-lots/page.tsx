@@ -36,8 +36,8 @@ export default function Page() {
         </div>
 
         <div className="mt-10 flex flex-wrap gap-3">
-          <Link href="/book" className="btn-primary">
-            Book Shuttle — $59/pp →
+          <Link href="/book/red-rocks-amphitheatre/private" className="btn-primary">
+            Book Private Ride — from $399 →
           </Link>
           <Link
             href="/guide/parking"

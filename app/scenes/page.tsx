@@ -263,14 +263,14 @@ export default async function ScenesLandingPage() {
         <section className="mt-10 rounded-[26px] border border-white/12 bg-[linear-gradient(180deg,rgba(10,16,32,0.98),rgba(6,9,18,0.96))] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.34)] sm:p-7">
           <div className="text-[11px] font-black uppercase tracking-[0.2em] text-[#ffb07c]">Ride Planning</div>
           <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] text-white sm:text-3xl">
-            Shared Seats Or Private Ride, Same Clean Path
+            Private Suburban Or Van, One Clean Ride Plan
           </h2>
           <p className="mt-3 max-w-4xl text-sm leading-6 text-white/74">
             Fixed pricing, return ride coverage, and one booking flow for any scene night at Red Rocks.
           </p>
           <div className="mt-4 flex flex-wrap gap-2 text-[11px] font-black uppercase tracking-[0.16em] text-white/82">
-            <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">Fixed $59 Shared Seats</div>
-            <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">Private SUVs/Sprinters/Buses</div>
+            <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">$399 Private Suburban</div>
+            <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">$599 Private Van</div>
             <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">Guaranteed Return Ride</div>
             <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">Beat Surge Chaos</div>
           </div>

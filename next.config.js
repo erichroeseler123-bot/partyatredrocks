@@ -20,6 +20,36 @@ const nextConfig = {
         destination: "/guide/local/denver-pickups",
         permanent: true,
       },
+      {
+        source: "/guide/local/trailhead-taphouse",
+        destination: "/guide/local/denver-pickups",
+        permanent: true,
+      },
+      {
+        source: "/shuttles",
+        destination: "/red-rocks/shuttle",
+        permanent: true,
+      },
+      {
+        source: "/red-rocks/red-rocks-shuttle",
+        destination: "/red-rocks/shuttle",
+        permanent: true,
+      },
+      {
+        source: "/book-shuttle",
+        destination: "/red-rocks/shuttle",
+        permanent: true,
+      },
+      {
+        source: "/party-bus",
+        destination: "/red-rocks/group-transportation",
+        permanent: true,
+      },
+      {
+        source: "/red-rocks/how-to-get-to-red-rocks",
+        destination: "/red-rocks/transportation",
+        permanent: true,
+      },
     ];
   },
   images: {

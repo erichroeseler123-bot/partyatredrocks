@@ -10,21 +10,21 @@ type Step = {
 const STEPS: Step[] = [
   {
     n: "1",
-    title: "Shuttle seats",
-    desc: "$59–$65/pp • easiest for most people",
-    href: "/book-shuttle",
+    title: "Private Suburban",
+    desc: "$399 flat • Up to 6 passengers • Door-to-door pickup",
+    href: "/book/red-rocks-amphitheatre/private/suv",
   },
   {
     n: "2",
-    title: "Private Suburban",
-    desc: "$449 flat • your group only",
-    href: "/private-suburban",
+    title: "Private Van",
+    desc: "$599 flat • Up to 10 passengers • All travel together",
+    href: "/book/red-rocks-amphitheatre/private/van",
   },
   {
     n: "3",
-    title: "Group quote",
-    desc: "Sprinter / bus options for bigger groups",
-    href: "/book",
+    title: "Return Guaranteed",
+    desc: "Vehicle waits through the show • No post-concert surge",
+    href: "/red-rocks/transportation",
   },
 ];
 

@@ -2,7 +2,7 @@ export const DCC_ORIGIN =
   process.env.NEXT_PUBLIC_DCC_ORIGIN || "https://destinationcommandcenter.com";
 
 export const PARR_CANONICAL_HANDOFFS = {
-  shuttles: "/shuttles",
+  shuttles: "/red-rocks/shuttle",
   book: "/book",
 } as const;
 

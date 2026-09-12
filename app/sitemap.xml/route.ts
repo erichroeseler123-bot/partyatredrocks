@@ -50,7 +50,6 @@ export async function GET() {
     { loc: `${base}/red-rocks/group-transportation`, lastmod: now, changefreq: "weekly", priority: 0.8 },
     { loc: `${base}/red-rocks/parking`, lastmod: now, changefreq: "weekly", priority: 0.8 },
     { loc: `${base}/guide/local/denver-pickups`, lastmod: now, changefreq: "daily", priority: 0.9 },
-    { loc: `${base}/guide/local/trailhead-taphouse`, lastmod: now, changefreq: "weekly", priority: 0.7 },
     { loc: `${base}/guide/parking`, lastmod: now, changefreq: "daily", priority: 0.8 },
     { loc: `${base}/guide/tailgating`, lastmod: now, changefreq: "daily", priority: 0.8 },
     { loc: `${base}/guide/show-night-strategy`, lastmod: now, changefreq: "daily", priority: 0.8 },

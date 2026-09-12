@@ -17,14 +17,14 @@ const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks
 const DEFAULT_OG_IMAGE = `${SITE}${curatedImages.guideTransportation}`;
 
 export const metadata: Metadata = {
-  title: "Red Rocks Transportation Guide | Private Rides, Uber & Parking",
+  title: "Best Way to Get to Red Rocks | Transportation Options, Rideshare & Parking",
   description:
-    "Plan Red Rocks transportation with current private ride pricing, rideshare and parking tradeoffs, pickup timing, and return strategy.",
+    "Find the best way to get to Red Rocks from Denver: compare private Suburbans ($399), vans ($599), rideshare surges, and parking lots. Straight answers, clear tradeoffs & live booking.",
   alternates: { canonical: `${SITE}/red-rocks/transportation` },
   openGraph: {
-    title: "Red Rocks Transportation Guide | Private Rides, Uber & Parking",
+    title: "Best Way to Get to Red Rocks | Transportation Options, Rideshare & Parking",
     description:
-      "Plan Red Rocks transportation with current private ride pricing, rideshare and parking tradeoffs, pickup timing, and return strategy.",
+      "Find the best way to get to Red Rocks from Denver: compare private Suburbans ($399), vans ($599), rideshare surges, and parking lots. Straight answers, clear tradeoffs & live booking.",
     url: `${SITE}/red-rocks/transportation`,
     type: "article",
     images: [
@@ -36,9 +36,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Red Rocks Transportation Guide | Private Rides, Uber & Parking",
+    title: "Best Way to Get to Red Rocks | Transportation Options, Rideshare & Parking",
     description:
-      "Plan Red Rocks transportation with current private ride pricing, rideshare and parking tradeoffs, pickup timing, and return strategy.",
+      "Find the best way to get to Red Rocks from Denver: compare private Suburbans ($399), vans ($599), rideshare surges, and parking lots. Straight answers, clear tradeoffs & live booking.",
     images: [DEFAULT_OG_IMAGE],
   },
 };
@@ -140,7 +140,72 @@ export default async function RedRocksTransportationPage({
           }
         />
 
-        <CardGrid className="lg:grid-cols-3">
+        {/* QUICK ANSWER: WHAT IS THE BEST WAY TO GET TO RED ROCKS */}
+        <section className="brand-card mt-6 rounded-[28px] p-6 sm:p-8">
+          <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.22em] text-[#3df3ff]">Direct Answer</div>
+          <h2 className="mt-2 text-2xl font-black uppercase tracking-tight text-white sm:text-3xl">
+            What Is the Best Way to Get to Red Rocks from Denver?
+          </h2>
+          <p className="mt-3 text-sm leading-7 text-white/80 sm:text-base">
+            The right choice depends on your group size, budget, and how much you care about post-show hassle:
+          </p>
+
+          <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <div className="rounded-2xl border border-emerald-500/30 bg-emerald-950/15 p-5">
+              <span className="inline-block rounded-full bg-emerald-500/20 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-emerald-400">#1 Best Overall</span>
+              <h3 className="mt-2 font-bold text-white text-lg">Private Transportation</h3>
+              <p className="mt-2 text-xs text-white/70 leading-5">
+                $399 Suburban (up to 6) or $599 Van (up to 10). Door-to-door pickup, Top Circle drop-off, vehicle stays parked on-site all night, and zero post-show surges.
+              </p>
+              <div className="mt-4">
+                <Link href="/book/red-rocks-amphitheatre/private" className="text-xs font-bold text-emerald-400 underline">
+                  Book Private Ride →
+                </Link>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-white/4 p-5">
+              <span className="inline-block rounded-full bg-white/10 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-white/70">Budget Solo</span>
+              <h3 className="mt-2 font-bold text-white text-lg">Drive & Park Free</h3>
+              <p className="mt-2 text-xs text-white/70 leading-5">
+                Venue lots are free. But someone must stay sober, you must arrive 2.5+ hours early to avoid the 400-stair climb, and post-show lot exit takes 45–75 mins.
+              </p>
+              <div className="mt-4">
+                <Link href="/red-rocks/parking" className="text-xs font-bold text-[#3df3ff] underline">
+                  Parking Guide →
+                </Link>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-white/4 p-5">
+              <span className="inline-block rounded-full bg-[#ffb07c]/20 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-[#ffb07c]">High Surge Risk</span>
+              <h3 className="mt-2 font-bold text-white text-lg">Rideshare (Uber/Lyft)</h3>
+              <p className="mt-2 text-xs text-white/70 leading-5">
+                Easy $35–$55 ride on the way in. But expect $150–$250 surges, 60–90 minute waits in the dirt Jurassic lot, and frequent cancellations post-show.
+              </p>
+              <div className="mt-4">
+                <Link href="/red-rocks/transportation/shuttle-vs-uber" className="text-xs font-bold text-[#ffb07c] underline">
+                  Uber vs Private Guide →
+                </Link>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-white/4 p-5">
+              <span className="inline-block rounded-full bg-white/10 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-white/70">Fixed Route</span>
+              <h3 className="mt-2 font-bold text-white text-lg">Broker Shuttles</h3>
+              <p className="mt-2 text-xs text-white/70 leading-5">
+                $55–$75 per seat on large shared buses. You must travel to fixed downtown bars on a rigid schedule, with no group privacy or door-to-door convenience.
+              </p>
+              <div className="mt-4">
+                <Link href="/red-rocks/shuttle" className="text-xs font-bold text-[#3df3ff] underline">
+                  Private Shuttle Fleet →
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <CardGrid className="lg:grid-cols-3 mt-6">
           {TRANSPORT_VISUALS.map((item) => (
             <article key={item.title} className="brand-card overflow-hidden rounded-[26px]">
               <div className="relative aspect-[16/10] border-b border-white/10">

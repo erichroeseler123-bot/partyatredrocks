@@ -16,24 +16,24 @@ export default function ZBBEvent() {
           <h3 className="font-bold text-xl mb-2">Show Intelligence</h3>
           <p className="text-strong">
             Based on historical data from <a href="https://www.setlist.fm" target="_blank" className="underline">Setlist.fm</a>, 
-            expect a 2.5-hour performance. Our shuttle departs 30 minutes after the final encore.
+            expect a 2.5-hour performance. Your driver stages on-site through the entire show and heads out when your group is ready after the encore.
           </p>
         </div>
 
         <div className="border-b pb-6">
           <h3 className="font-bold text-xl mb-2">The "Uber Trap" Warning</h3>
           <p className="text-strong">
-            ZBB is a high-demand show. Expect rideshare surge pricing to exceed $180 post-concert. 
-            Our flat-rate $59 shared shuttle locks your price today.
+            ZBB is a high-demand show. Expect rideshare surge pricing to exceed $180 post-concert with long wait times. 
+            Our private Suburban ($399) or private van ($599) locks your round-trip ride with zero surge pricing.
           </p>
         </div>
       </div>
 
       <div className="mt-12 p-8 border rounded-2xl bg-slate-50 flex flex-col items-center hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
         <h3 className="mt-0">Secure Your Transport</h3>
-        <p className="text-center mb-6">Pickups at Sheraton Downtown Denver & Trailhead Taphouse Golden.</p>
-        <Link href="/book" className="w-full rounded-2xl bg-[#3df3ff] py-4 text-center font-bold text-[#08111e] transition-all duration-300 hover:-translate-y-1 hover:bg-[#62f6ff] hover:shadow-2xl">
-          Book Zac Brown Shuttle
+        <p className="text-center mb-6">Door-to-door private pickup across Denver, Golden, and Morrison.</p>
+        <Link href="/book/red-rocks-amphitheatre/private" className="w-full rounded-2xl bg-[#3df3ff] py-4 text-center font-bold text-[#08111e] transition-all duration-300 hover:-translate-y-1 hover:bg-[#62f6ff] hover:shadow-2xl">
+          Book Private Red Rocks Transportation
         </Link>
       </div>
     </div>

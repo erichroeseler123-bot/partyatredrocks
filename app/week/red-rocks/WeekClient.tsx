@@ -86,7 +86,7 @@ export default function WeekClient({
           title="Red Rocks Lineup"
           description="Already have tickets? Find your show, then reserve one private vehicle for the whole night. Private Suburban is $399; larger groups can upgrade to a private van."
           actions={[
-            { href: "/shuttles", label: "See Private Ride Options" },
+            { href: "/red-rocks/shuttle", label: "See Private Ride Options" },
             { href: "/guide", label: "Guides", variant: "secondary" },
           ]}
           footer={<MusicWave bars={24} />}
@@ -120,7 +120,7 @@ export default function WeekClient({
           body="Find the artist and date below. Every Red Rocks ride button now carries the show into the private booking path so the customer does not have to start over."
           secondaryBody="Private Suburban: $399. Private van upgrade: $599. One group, one vehicle, and the return ride is already part of the plan."
           actions={[
-            { href: "/shuttles", label: "Private Suburban — $399" },
+            { href: "/red-rocks/shuttle", label: "Private Suburban — $399" },
             { href: "/venues/red-rocks-amphitheatre", label: "Venue Details", variant: "secondary" },
             { href: "/guide/show-night-strategy/post-show-pickup-plan", label: "Pickup Guide", variant: "secondary" },
             { href: "/guide/logistics/parking-lots", label: "Parking Guide", variant: "secondary" },

@@ -42,7 +42,7 @@ export default function SafetyAndLegitimacy() {
             <span className="font-bold text-[#ffb07c]">03.</span>
             <div>
               <strong className="block text-white uppercase tracking-wide">Fixed-Rate Integrity</strong>
-              <p className="text-muted text-base mt-1">Your $59 seat or private-ride rate is set when you book.</p>
+              <p className="text-muted text-base mt-1">Your private ride rate ($399 Suburban / $599 van) is locked in when you book—never subject to surge pricing.</p>
             </div>
           </li>
         </ul>
@@ -57,7 +57,7 @@ export default function SafetyAndLegitimacy() {
       </div>
 
       <div className="mt-16 text-center border-t border-zinc-900 pt-10">
-        <Link href="/book" className="btn-primary uppercase tracking-widest transition shadow-xl inline-block">
+        <Link href="/book/red-rocks-amphitheatre/private" className="btn-primary uppercase tracking-widest transition shadow-xl inline-block">
           Book a Ride
         </Link>
       </div>

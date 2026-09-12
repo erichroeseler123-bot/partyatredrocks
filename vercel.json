@@ -43,7 +43,12 @@
     },
     {
       "source": "/shuttle",
-      "destination": "/shuttles",
+      "destination": "/red-rocks/shuttle",
+      "permanent": true
+    },
+    {
+      "source": "/shuttles",
+      "destination": "/red-rocks/shuttle",
       "permanent": true
     }
   ]

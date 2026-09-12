@@ -95,8 +95,8 @@ export default function RedRocksIntelHubPage() {
           imageAlt={guideVisuals.general.imageAlt}
           actions={
             <>
-              <Link className="btn-primary" href="/shuttles">
-                See Shuttle Options
+              <Link className="btn-primary" href="/red-rocks/shuttle">
+                See Private Transportation
               </Link>
               <Link className="btn-ghost" href="/week/red-rocks">
                 Live Lineup

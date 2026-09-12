@@ -99,7 +99,7 @@ export async function SharedBookingPage({
                 Shared Shuttle
               </div>
               <h1 className="mt-5 text-[2.5rem] font-black uppercase leading-[0.94] tracking-[-0.04em] text-white sm:text-[4rem]">
-                Book Your $59 Shared Shuttle Tickets
+                Book Private Red Rocks Transportation
               </h1>
               <p className="mt-5 max-w-3xl text-[15px] leading-7 text-white/80 sm:text-lg">
                 Pick Denver or Golden, choose your date, and lock your shuttle seats without bouncing through extra choice screens.

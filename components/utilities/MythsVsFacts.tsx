@@ -2,7 +2,7 @@
 export default function MythsVsFacts() {
   const items = [
     { myth: "Parking is easy", fact: "Lots fill 2+ hours early — shuttles avoid waits" },
-    { myth: "Rideshares are cheap", fact: "Post-show surges hit $100+ — fixed $59 with us" },
+    { myth: "Rideshares are cheap", fact: "Post-show surges hit $100+ per car with long waits — private round-trip locks your ride home" },
     { myth: "Weather is always perfect", fact: "Nights drop 20°F — pack layers (see our guide)" },
     { myth: "Tailgating is unlimited", fact: "2-hour limit, no fires — plan accordingly" },
     { myth: "All bags OK", fact: "Clear 12x6x12 max — check prohibited items" },

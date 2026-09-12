@@ -81,17 +81,17 @@ export const localGatewayPages: Record<LocalGatewaySlug, LocalGatewayPage> = {
       "Plan private transportation from the Union Station area to Red Rocks with a $399 Suburban or $599 van and a coordinated return ride.",
     heroTitle: "The Smart Way to Get from Union Station to Red Rocks",
     heroBody:
-      "Skip the $120 Uber surges and the headache of downtown parking. Join Party at Red Rocks for a high-energy round-trip shuttle departing from Denver's transit hub.",
+      "Skip the $120 Uber surges and the headache of downtown parking. Party at Red Rocks provides private door-to-door transportation for your group with the vehicle waiting through the show.",
     whyThisWorks:
       "Union Station is not just a train stop. It is one of the cleanest launch points for a Red Rocks night. Whether you are staying at The Crawford, The Oxford, or coming in on the A-Line from DIA, this pickup keeps the whole plan simple. Grab a pre-show drink at Terminal Bar, meet your crew, and head to Red Rocks without dealing with surge pricing, rental cars, or post-show rideshare chaos.",
     bestFor: "Airport arrivals, downtown hotel guests, and riders who want the most convenient transit-to-show handoff in Denver.",
     localAngle:
       "Union Station is a useful downtown reference point for guests arriving by train or staying near LoDo.",
     localGuideIntro:
-      "Union Station is the cleanest airport-to-hotel-to-show flow in Denver. Meet your group in the Great Hall, grab a quick drink at Terminal Bar or a meal at Thirsty Lion, then board a fixed-price ride with the return already handled after the encore.",
+      "Union Station is the cleanest airport-to-hotel-to-show flow in Denver. Meet your group in the Great Hall, grab a quick drink at Terminal Bar or a meal, then board your private ride with the return already handled after the encore.",
     nearbySpots: [
       { name: "Terminal Bar", note: "The easiest pre-show drink stop inside the station." },
-      { name: "Thirsty Lion", note: "A fast meal before boarding the shuttle." },
+      { name: "Urban Farmer", note: "Great pre-show dinner near the station." },
       { name: "The Maven Hotel", note: "An easy stay-and-play option just a short walk away in LoDo." },
     ],
     faqLocationAnswer:
@@ -111,7 +111,7 @@ export const localGatewayPages: Record<LocalGatewaySlug, LocalGatewayPage> = {
     pickupLabel: "West Side Pickup",
     heroTitle: "The Best Way to Get from Golden to Red Rocks",
     heroBody:
-      "Skip the parking stress and post-show traffic. Join a round-trip Red Rocks shuttle from Golden and keep the foothills side of the night simple.",
+      "Skip the parking stress and post-show traffic. Book private Red Rocks transportation with door-to-door pickup in Golden and keep the foothills side of the night simple.",
     whyThisWorks:
       "Golden gives you the west-side advantage. You are closer to the venue, closer to the foothills hotels, and positioned for a cleaner in-and-out than most downtown riders.",
     bestFor: "Locals and foothills visitors who want a west-side ride plan with less traffic stress.",
