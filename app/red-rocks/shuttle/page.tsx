@@ -270,7 +270,7 @@ export default async function RedRocksShuttlePage({
                 <div className="mt-6 space-y-3 border-t border-white/10 pt-6">
                   <div className="flex items-center gap-3 text-sm text-white/85">
                     <Users className="h-4 w-4 text-[#ffb07c] shrink-0" />
-                    <span><strong>Passenger capacity:</strong> Up to 10 guests (~$59.90/person)</span>
+                    <span><strong>Passenger capacity:</strong> Up to 10 guests (under $60/person split 10 ways)</span>
                   </div>
                   <div className="flex items-center gap-3 text-sm text-white/85">
                     <MapPin className="h-4 w-4 text-[#ffb07c] shrink-0" />

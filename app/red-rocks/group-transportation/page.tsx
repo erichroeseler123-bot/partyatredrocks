@@ -47,7 +47,7 @@ const FAQS = [
   },
   {
     q: "How does the price break down per person?",
-    a: "Our private 10-passenger van is $599 flat round-trip, which works out to just $59.90 per person for a group of 10. Our private Suburban is $399 flat round-trip, or roughly $66 per person for a group of 6. Both options are far cheaper and less stressful than paying $150–$250 each way per rideshare car.",
+    a: "Our private 10-passenger van is $599 flat round-trip, which works out to under $60 per person when split across a group of 10. Our private Suburban is $399 flat round-trip, or roughly $66 per person for a group of 6. Both options are far cheaper and less stressful than paying $150–$250 each way per rideshare car.",
   },
 ];
 
@@ -191,7 +191,7 @@ export default async function RedRocksGroupTransportationPage({
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-emerald-400 shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-white">$599 Flat Total ($59.90/person):</strong>
+                    <strong className="text-white">$599 Flat Total (Under $60/person):</strong>
                     <p className="text-white/70 mt-0.5">Affordable, transparent flat pricing for the entire evening. No fuel surcharges or surprise hourly overages.</p>
                   </div>
                 </li>
@@ -271,7 +271,7 @@ export default async function RedRocksGroupTransportationPage({
                   Keep your entire group together in one spacious vehicle. High roof, dedicated air conditioning, luggage storage for jackets and coolers, and an on-site driver who waits through the show.
                 </p>
                 <div className="mt-6 space-y-2.5 text-xs text-white/80 border-t border-white/10 pt-6">
-                  <p>• <strong>Capacity:</strong> Up to 10 guests (~$59.90/person)</p>
+                  <p>• <strong>Capacity:</strong> Up to 10 guests (under $60/person split 10 ways)</p>
                   <p>• <strong>Pickup:</strong> Door-to-door at your hotel, home, or rental</p>
                   <p>• <strong>Staging:</strong> Driver remains on-site all evening</p>
                   <p>• <strong>Drop-off:</strong> Upper North / Top Circle commercial access</p>
