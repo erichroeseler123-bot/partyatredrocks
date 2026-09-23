@@ -22,10 +22,10 @@ export default function HomeSections({ heroSrc, privateVehicleSrc, urgency }: Ho
     {
       title: "Private Suburban",
       subtitle: "$399 Private Suburban",
-      copy: "Your group, your vehicle",
+      copy: "Up to 6 passengers • Your group, your vehicle",
       bullets: [
         "Tailgating + your vehicle waits in the same spot during the show",
-        "Door-to-door with liquor/grocery stop",
+        "Denver-area hotel or home pickup with liquor/grocery stop",
       ],
       href: "/book/red-rocks-amphitheatre/private/suv",
       cta: "Book Private Suburban - $399",
@@ -36,7 +36,7 @@ export default function HomeSections({ heroSrc, privateVehicleSrc, urgency }: Ho
     {
       title: "Private Van Upgrade",
       subtitle: "$599 Private Van",
-      copy: "More room for larger groups",
+      copy: "Up to 10 passengers • More room for larger groups",
       bullets: ["One pickup plan", "Book online through Rezdy"],
       href: "/book/red-rocks-amphitheatre/private/van",
       cta: "Upgrade to Private Van",
@@ -65,18 +65,18 @@ export default function HomeSections({ heroSrc, privateVehicleSrc, urgency }: Ho
 
           <div className="relative px-6 py-10 sm:px-8 sm:py-12 lg:px-12 lg:py-14">
             <div className="mx-auto max-w-5xl text-center">
-              <p className="text-[11px] font-black uppercase tracking-[0.24em] text-white/72 sm:text-[12px]">Red Rocks Shuttle &amp; Transportation</p>
+              <p className="text-[11px] font-black uppercase tracking-[0.24em] text-white/72 sm:text-[12px]">Private Red Rocks Shuttle &amp; Group Transportation</p>
               <h1 className="mt-4 text-[2.7rem] font-black leading-[0.92] tracking-[-0.05em] text-white sm:text-[4.3rem] lg:text-[5.6rem]">
                 Private Red Rocks shuttle service for your group
               </h1>
               <p className="mx-auto mt-5 max-w-4xl text-base leading-8 text-white/82 sm:text-lg">
-                Private Suburban is $399 with tailgating, limo-lane access, door-to-door service, and the vehicle waiting in the same spot during the show. Larger groups can upgrade to a private van.
+                Dedicated private group transportation for your entire party. Your driver provides Denver-area hotel or home pickup, coordinated Red Rocks drop-off at designated venue areas, waits on-site during the show, and includes your return ride home together.
               </p>
               <p className="mx-auto mt-3 max-w-3xl text-sm leading-6 text-white/72">
-                This is private transportation for your group. We do not currently sell shared shuttle seats or per-person fares.
+                Private group transportation only — not a shared bus or public transit. No shared seats or per-person fares. $399 Private Suburban (up to 6 passengers) or $599 Private Van (up to 10 passengers).
               </p>
               <p className="mx-auto mt-3 max-w-3xl text-sm font-semibold uppercase tracking-[0.14em] text-white/72 sm:text-[13px]">
-                One vehicle. One pickup plan. A return plan set before show night.
+                Private Group Transportation Only • Denver-Area Hotel &amp; Home Pickup • Coordinated Red Rocks Drop-Off • Vehicle Waits During The Show • Return Ride Included
               </p>
             </div>
 

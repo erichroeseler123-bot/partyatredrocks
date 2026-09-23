@@ -3,7 +3,7 @@ export const BOOKING_COPY = {
     layoutDescription:
       "Book private Red Rocks transportation with published vehicle pricing, private pickup details before the ride, and a planned return after the show. Private Suburban is $399 with a private van upgrade available.",
     homeDescription:
-      "Book a private Red Rocks shuttle from Denver, Golden, or Morrison. Choose a $399 Private Suburban or $599 private van with one coordinated ride plan for your group. No shared seats.",
+      "Private Red Rocks shuttle by Party at Red Rocks. Dedicated SUV ($399) & Van ($599) for your group: Denver-area hotel or home pickup, designated Red Rocks drop-off, on-site show wait, & return ride.",
     businessDescription:
       "Private Red Rocks transportation with published vehicle pricing, pickup planning, and a coordinated return plan.",
     sharedBookingDescription:

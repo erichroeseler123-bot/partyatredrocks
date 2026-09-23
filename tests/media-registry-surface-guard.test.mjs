@@ -4,7 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 
-const ROOT = "/home/ewrewr12/partyatredrocks";
+const ROOT = process.cwd();
 
 const TARGET_FILES = [
   "app/book/[venue]/page.tsx",

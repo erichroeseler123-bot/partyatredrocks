@@ -36,11 +36,11 @@
     "fallbackImage": "/hero/hero-guides.webp"
   },
   "event-guides": {
-    "manualImage": "/images/venues/ball-arena.webp",
+    "manualImage": "/venues/mishsite.jpg",
     "fallbackImage": "/hero/hero-guides.webp"
   },
   "red-rocks-week-calendar": {
-    "manualImage": "/images/venues/empower-field.webp",
+    "manualImage": "/hero/hero-home.webp",
     "fallbackImage": "/hero/hero-guides.webp"
   }
 }

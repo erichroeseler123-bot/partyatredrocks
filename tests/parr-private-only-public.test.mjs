@@ -6,7 +6,7 @@ import test from "node:test";
 const root = process.cwd();
 const ACTIVE_PUBLIC_COPY_FILES = [
   "app/page.tsx",
-  "app/shuttles/page.tsx",
+  "app/red-rocks/shuttle/page.tsx",
   "components/home/HomeHero.tsx",
   "components/home/HomeSections.tsx",
   "components/home/HomeServicesGrid.tsx",
@@ -39,10 +39,17 @@ const PUBLIC_FORBIDDEN_PATTERNS = [
 
 const ALLOWED_METADATA_CLARIFICATIONS = [
   "No shared seats or per-person fares.",
+  "We do not currently sell shared shuttle seats or per-person fares.",
+  "No per-person fees, no surprise fuel charges, and no surge pricing.",
+  "No per-person tickets, no individual seat sales.",
+  "No per-person tickets, no shared bus stops.",
+  "costs less per person than public shuttle tickets.",
+  "Per-person shared shuttle seating:",
+  "What is the difference between this and a shared shuttle?",
 ];
 
 function read(path) {
-  return readFileSync(join(root, path), "utf8");
+  return readFileSync(join(root, path), "utf8").replace(/\r\n/g, "\n");
 }
 
 test("public booking config exposes only Suburban and private van", () => {
@@ -86,18 +93,18 @@ test("active public copy does not sell shared or per-person rides", () => {
 });
 
 test("shuttles page metadata is private-vehicle-only", () => {
-  const shuttles = read("app/shuttles/page.tsx");
+  const shuttles = read("app/red-rocks/shuttle/page.tsx");
+  const metadataBlock = shuttles.slice(shuttles.indexOf("export const metadata"), shuttles.indexOf("const PICKUP_AREAS"));
 
-  assert.match(shuttles, /Private Red Rocks Transportation \| Suburban \$399 \+ Van Upgrade/);
+  assert.match(metadataBlock, /Red Rocks Shuttle & Private Transportation from Denver/);
   assert.match(
-    shuttles,
-    /Book private Red Rocks transportation with a \$399 Private Suburban or upgrade to a private van\. No shared seats or per-person fares\./,
+    metadataBlock,
+    /\$399 private Suburban \(up to 6\) or \$599 private van \(up to 10\)/,
   );
-  assert.match(shuttles, /openGraph/);
-  assert.match(shuttles, /twitter/);
-  assert.doesNotMatch(shuttles, /\$59(?!9)/);
-  assert.doesNotMatch(shuttles, /Red Rocks Shuttle from Denver/);
-  assert.doesNotMatch(shuttles, /Private SUVs/);
+  assert.match(metadataBlock, /openGraph/);
+  assert.match(metadataBlock, /twitter/);
+  assert.doesNotMatch(metadataBlock, /\$59(?!9)/);
+  assert.doesNotMatch(metadataBlock, /per-person/i);
 });
 
 test("public shared booking routes redirect to private Suburban", () => {

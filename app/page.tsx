@@ -20,18 +20,18 @@ export const revalidate = 300;
 const SITE = "https://www.partyatredrocks.com";
 
 export const metadata: Metadata = {
-  title: "Red Rocks Shuttle & Private Transportation | $399 SUV + $599 Van",
+  title: "Red Rocks Shuttle & Private Group Transportation | Party at Red Rocks",
   description: BOOKING_COPY.meta.homeDescription,
   alternates: { canonical: `${SITE}/` },
   openGraph: {
-    title: "Red Rocks Shuttle & Private Transportation | $399 SUV + $599 Van",
+    title: "Red Rocks Shuttle & Private Group Transportation | Party at Red Rocks",
     description: BOOKING_COPY.meta.homeDescription,
     url: `${SITE}/`,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Red Rocks Shuttle & Private Transportation | $399 SUV + $599 Van",
+    title: "Red Rocks Shuttle & Private Group Transportation | Party at Red Rocks",
     description: BOOKING_COPY.meta.homeDescription,
   },
 };
