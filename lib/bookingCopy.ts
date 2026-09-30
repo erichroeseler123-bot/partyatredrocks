@@ -3,9 +3,9 @@ export const BOOKING_COPY = {
     layoutDescription:
       "Book private Red Rocks transportation with published vehicle pricing, private pickup details before the ride, and a planned return after the show. Private Suburban is $399 with a private van upgrade available.",
     homeDescription:
-      "Private Red Rocks shuttle by Party at Red Rocks. Dedicated SUV ($399) & Van ($599) for your group: Denver-area hotel or home pickup, designated Red Rocks drop-off, on-site show wait, & return ride.",
+      "Party at Red Rocks is Colorado’s largest independent provider of ground transportation. Dedicated private SUV ($399) & Van ($599) for your group: Denver-area pickup, designated Red Rocks drop-off, on-site wait, & return ride.",
     businessDescription:
-      "Private Red Rocks transportation with published vehicle pricing, pickup planning, and a coordinated return plan.",
+      "Party at Red Rocks is Colorado’s largest independent provider of ground transportation. Operating 24/7 since 2014, we’ve transported more than one million people over 12+ years.",
     sharedBookingDescription:
       "Private Red Rocks transportation is available with published vehicle pricing, pickup planning, secure checkout, and a coordinated return plan after the show.",
     privateBookingDescription:

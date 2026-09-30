@@ -89,6 +89,7 @@ export default async function HomePage() {
     url: `${SITE}/`,
     telephone: BUSINESS_PHONE,
     email: BUSINESS_EMAIL,
+    foundingDate: "2014",
     areaServed: SERVICE_AREAS.map((city) => ({
       "@type": "City",
       name: `${city}, CO`,

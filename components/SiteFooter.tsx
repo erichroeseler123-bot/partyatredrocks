@@ -58,7 +58,10 @@ export default function SiteFooter() {
               <div className="text-[12px] font-black uppercase tracking-[0.2em] text-[var(--brand-text)]">
                 Party at Red Rocks
               </div>
-              <div className="mt-3 text-[15px] text-[color:var(--brand-text-soft)]">
+              <div className="mt-3 text-[14px] leading-relaxed text-[color:var(--brand-text-soft)]">
+                Colorado’s largest independent ground transportation provider · Operating 24/7 since 2014 · More than one million people transported.
+              </div>
+              <div className="mt-2 text-[14px] text-[color:var(--brand-text-soft)]">
                 Private Suburban, private van upgrade, and direct pickup planning for Red Rocks show nights.
               </div>
               <div className="mt-4 text-[13px] font-semibold uppercase tracking-[0.16em] text-[var(--brand-cyan)]">

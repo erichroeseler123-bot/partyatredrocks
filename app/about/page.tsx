@@ -3,12 +3,38 @@ import { ArrowRight, CarFront, Clock3, Headphones, ShieldCheck } from "lucide-re
 import { curatedImages } from "@/lib/curatedImages";
 
 export const metadata = {
-  title: "About Party at Red Rocks",
+  title: "About Party at Red Rocks | Colorado's Largest Independent Transportation Provider",
   description:
-    "Party at Red Rocks provides private transportation for Red Rocks concerts, with direct pickup planning and a return plan after the show.",
+    "Party at Red Rocks is Colorado’s largest independent provider of ground transportation. Operating 24/7 since 2014, we’ve transported more than one million people over 12+ years.",
   alternates: {
     canonical: "/about",
   },
+  openGraph: {
+    title: "About Party at Red Rocks | Colorado's Largest Independent Transportation Provider",
+    description:
+      "Party at Red Rocks is Colorado’s largest independent provider of ground transportation. Operating 24/7 since 2014, we’ve transported more than one million people over 12+ years.",
+    url: "https://www.partyatredrocks.com/about",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Party at Red Rocks | Colorado's Largest Independent Transportation Provider",
+    description:
+      "Party at Red Rocks is Colorado’s largest independent provider of ground transportation. Operating 24/7 since 2014, we’ve transported more than one million people over 12+ years.",
+  },
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://www.partyatredrocks.com/#organization",
+  name: "Party at Red Rocks",
+  url: "https://www.partyatredrocks.com/",
+  foundingDate: "2014",
+  description:
+    "Party at Red Rocks is Colorado’s largest independent provider of ground transportation. Operating 24/7 since 2014, we’ve transported more than one million people over 12+ years.",
+  telephone: "+17203696292",
+  email: "contact@partyatredrocks.com",
 };
 
 const servicePoints = [
@@ -37,6 +63,10 @@ const servicePoints = [
 export default function AboutPage() {
   return (
     <main className="brand-page bg-[radial-gradient(circle_at_top,rgba(255,91,46,0.15),transparent_26%),radial-gradient(circle_at_18%_10%,rgba(59,130,246,0.14),transparent_18%),linear-gradient(180deg,#0b0b0f_0%,#0b0b0f_100%)] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      />
       <section className="mx-auto flex max-w-[1440px] flex-col gap-8">
         <section
           className="brand-panel relative min-h-[420px] overflow-hidden rounded-[32px] p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] sm:min-h-[460px] sm:p-10 lg:min-h-[520px] lg:p-12"
@@ -55,11 +85,11 @@ export default function AboutPage() {
             <h1 className="mt-5 text-[2.5rem] font-black uppercase leading-[0.94] tracking-[-0.04em] sm:text-[4rem] lg:text-[5rem]">
               Private Red Rocks rides for show night
             </h1>
-            <p className="mt-5 max-w-2xl text-[15px] leading-7 text-white/74 sm:text-lg">
-              Party at Red Rocks provides private transportation for groups heading to concerts at Red Rocks Amphitheatre.
+            <p className="mt-5 max-w-2xl text-[16px] font-semibold leading-7 text-white/90 sm:text-xl">
+              Party at Red Rocks is Colorado’s largest independent provider of ground transportation. Operating 24/7 since 2014, we’ve transported more than one million people over 12+ years.
             </p>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-white/68 sm:text-[15px]">
-              Your group keeps one vehicle and one ride plan from pickup through the post-show return. No shared seats or per-person fares.
+              For Red Rocks concerts, your group keeps one vehicle and one ride plan from pickup through the post-show return. No shared seats or per-person fares.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <Link
@@ -74,6 +104,32 @@ export default function AboutPage() {
               >
                 Transportation Details
               </Link>
+            </div>
+          </div>
+        </section>
+
+        <section className="brand-panel rounded-[30px] border border-white/12 bg-[radial-gradient(ellipse_at_top,rgba(255,91,46,0.12),transparent_50%),linear-gradient(180deg,rgba(20,20,26,0.96)_0%,rgba(11,11,15,0.98)_100%)] p-6 sm:p-8 lg:p-10 shadow-[0_24px_80px_rgba(0,0,0,0.36)]">
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-orange)]">
+            Company Overview
+          </div>
+          <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">
+            Colorado’s Largest Independent Provider
+          </h2>
+          <p className="mt-4 max-w-3xl text-base leading-7 text-white/84 sm:text-lg">
+            Party at Red Rocks is Colorado’s largest independent provider of ground transportation. Operating 24/7 since 2014, we’ve transported more than one million people over 12+ years.
+          </p>
+          <div className="mt-6 grid grid-cols-1 gap-4 pt-6 border-t border-white/10 sm:grid-cols-3">
+            <div className="rounded-2xl border border-white/8 bg-white/4 p-4 text-center">
+              <div className="text-2xl font-black text-white sm:text-3xl">#1 Largest</div>
+              <div className="mt-1 text-xs font-semibold uppercase tracking-wider text-white/60">Independent Provider in CO</div>
+            </div>
+            <div className="rounded-2xl border border-white/8 bg-white/4 p-4 text-center">
+              <div className="text-2xl font-black text-[var(--brand-cyan)] sm:text-3xl">24/7 Since 2014</div>
+              <div className="mt-1 text-xs font-semibold uppercase tracking-wider text-white/60">Round-The-Clock Service</div>
+            </div>
+            <div className="rounded-2xl border border-white/8 bg-white/4 p-4 text-center">
+              <div className="text-2xl font-black text-[var(--brand-orange)] sm:text-3xl">1,000,000+</div>
+              <div className="mt-1 text-xs font-semibold uppercase tracking-wider text-white/60">Cumulative Passengers (12+ Years)</div>
             </div>
           </div>
         </section>
