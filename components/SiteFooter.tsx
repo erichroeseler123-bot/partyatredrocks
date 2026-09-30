@@ -36,6 +36,8 @@ const FOOTER_GROUPS = [
     links: [
       { href: "/book/red-rocks-amphitheatre/private/suv", label: "Booking Hub" },
       { href: "/contact", label: "Contact" },
+      { href: "/authors/erich", label: "Erich" },
+      { href: "/editorial-policy", label: "Editorial Policy" },
       { href: "/privacy", label: "Privacy" },
       { href: "/terms", label: "Terms" },
     ],

@@ -51,7 +51,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<Han
       "Comparing fixed-price private Red Rocks transportation with rideshare surge pricing, post-show waits, and pickup uncertainty.",
     url: `${SITE}/red-rocks/transportation/shuttle-vs-uber-2026`,
     mainEntityOfPage: `${SITE}/red-rocks/transportation/shuttle-vs-uber-2026`,
-    author: { "@type": "Organization", name: "Party at Red Rocks" },
+    author: { "@type": "Organization", "@id": "https://www.partyatredrocks.com/#organization", name: "Party at Red Rocks", url: "https://www.partyatredrocks.com/editorial-policy" },
     publisher: { "@id": `${SITE}/#organization` },
     about: [
       { "@type": "Place", name: "Red Rocks Amphitheatre", url: `${SITE}/venues/red-rocks-amphitheatre` },
@@ -74,6 +74,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<Han
         <section className="mt-6 overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(13,19,34,0.98),rgba(8,11,20,0.98))] p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] sm:p-10 lg:p-12">
           <div className="inline-flex items-center rounded-full border border-[#8fd0ff]/30 bg-[#8fd0ff]/10 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">2026 Comparison</div>
           <h1 className="mt-5 max-w-4xl text-[2.5rem] font-black uppercase leading-[0.94] tracking-[-0.04em] sm:text-[4rem]">Red Rocks Private Transportation vs. Uber in 2026</h1>
+        <p style={{ color: "#cbd5e1", fontSize: 14, marginTop: 16 }}>By Party at Red Rocks · <a href="/editorial-policy" style={{ color: "#e2e8f0", textDecoration: "underline" }}>Editorial policy</a></p>
           <p className="mt-5 max-w-3xl text-[15px] leading-7 text-white/78 sm:text-lg">
             The real difference shows up after the encore. Party at Red Rocks gives your group one private vehicle, one return plan, and fixed group pricing before the night starts.
           </p>

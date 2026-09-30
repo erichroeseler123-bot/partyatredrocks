@@ -13,7 +13,7 @@ export default function SoldOutSurvival() {
     headline: "Red Rocks Sold-Out Show Survival Guide 2026",
     description:
       "How to plan parking, rideshare, private transportation, arrival timing, and your ride home for high-demand Red Rocks concerts in 2026.",
-    author: { "@type": "Organization", name: "Party at Red Rocks" },
+    author: { "@type": "Organization", "@id": "https://www.partyatredrocks.com/#organization", name: "Party at Red Rocks", url: "https://www.partyatredrocks.com/editorial-policy" },
   };
 
   return (
@@ -23,6 +23,7 @@ export default function SoldOutSurvival() {
       <h1 className="text-5xl font-black mb-6 leading-tight">
         Sold-Out Survival: <span className="text-[#4cc9f0]">Have Your Red Rocks Exit Plan Before the Show</span>
       </h1>
+        <p style={{ color: "#cbd5e1", fontSize: 14, marginTop: 16 }}>By Party at Red Rocks · <a href="/editorial-policy" style={{ color: "#e2e8f0", textDecoration: "underline" }}>Editorial policy</a></p>
 
       <p className="text-xl text-strong mb-12 leading-relaxed">
         High-demand Red Rocks nights put more pressure on roads, parking, rideshare pickup, and post-show transportation.
