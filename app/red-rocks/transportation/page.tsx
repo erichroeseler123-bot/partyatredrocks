@@ -98,7 +98,7 @@ export default async function RedRocksTransportationPage({
       "Red Rocks transportation guide covering current private rides, rideshare, parking, pickup timing, and return planning for concert nights.",
     url: `${SITE}/red-rocks/transportation`,
     mainEntityOfPage: `${SITE}/red-rocks/transportation`,
-    author: { "@type": "Organization", name: "Party at Red Rocks" },
+    author: { "@type": "Organization", "@id": "https://www.partyatredrocks.com/#organization", name: "Party at Red Rocks", url: "https://www.partyatredrocks.com/editorial-policy" },
     publisher: { "@id": `${SITE}/#organization` },
     about: [
       { "@type": "Place", name: "Red Rocks Amphitheatre", url: `${SITE}/venues/red-rocks-amphitheatre` },

@@ -47,7 +47,7 @@ export default async function RedRocksParkingPage({
       "Red Rocks parking guide with lot tradeoffs, timing guidance, walking effort planning, and post-show exit options.",
     url: `${SITE}/red-rocks/parking`,
     mainEntityOfPage: `${SITE}/red-rocks/parking`,
-    author: { "@type": "Organization", name: "Party at Red Rocks" },
+    author: { "@type": "Organization", "@id": "https://www.partyatredrocks.com/#organization", name: "Party at Red Rocks", url: "https://www.partyatredrocks.com/editorial-policy" },
     publisher: { "@id": `${SITE}/#organization` },
     about: [
       { "@type": "Place", name: "Red Rocks Amphitheatre", url: `${SITE}/venues/red-rocks-amphitheatre` },
@@ -67,6 +67,7 @@ export default async function RedRocksParkingPage({
         <div className="comic-hero">
           <div className="comic-kicker">Parking</div>
           <h1 className="comic-title">Red Rocks Parking: Lots, Arrival Times &amp; Post-Show Exit</h1>
+        <p style={{ color: "#cbd5e1", fontSize: 14, marginTop: 16 }}>By Party at Red Rocks · <a href="/editorial-policy" style={{ color: "#e2e8f0", textDecoration: "underline" }}>Editorial policy</a></p>
           <p className="comic-copy">
             There is no single best Red Rocks lot for every group. The right parking plan depends on when you arrive, how much
             walking your group is comfortable with, and how quickly you want to leave after the show.
