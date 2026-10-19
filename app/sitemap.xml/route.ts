@@ -39,6 +39,8 @@ export async function GET() {
   const now = new Date().toISOString();
 
   const urls: UrlEntry[] = [
+    { loc: `${base}/authors/erich`, changefreq: "monthly", priority: 0.4 },
+    { loc: `${base}/editorial-policy`, changefreq: "monthly", priority: 0.4 },
     { loc: `${base}/`, lastmod: now, changefreq: "daily", priority: 1.0 },
     { loc: `${base}/book/red-rocks-amphitheatre`, lastmod: now, changefreq: "daily", priority: 0.9 },
     { loc: `${base}/book/red-rocks-amphitheatre/private`, lastmod: now, changefreq: "daily", priority: 0.9 },

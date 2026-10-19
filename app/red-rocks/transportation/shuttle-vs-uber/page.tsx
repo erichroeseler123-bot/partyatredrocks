@@ -42,7 +42,7 @@ export default async function Page({
       "Compare private Red Rocks transportation with rideshare for price certainty, pickup planning, and the return trip after the show.",
     url: `${SITE}/red-rocks/transportation/shuttle-vs-uber`,
     mainEntityOfPage: `${SITE}/red-rocks/transportation/shuttle-vs-uber`,
-    author: { "@type": "Organization", name: "Party at Red Rocks" },
+    author: { "@type": "Organization", "@id": "https://www.partyatredrocks.com/#organization", name: "Party at Red Rocks", url: "https://www.partyatredrocks.com/editorial-policy" },
     publisher: { "@id": `${SITE}/#organization` },
     about: [
       { "@type": "Place", name: "Red Rocks Amphitheatre", url: `${SITE}/venues/red-rocks-amphitheatre` },
@@ -65,6 +65,7 @@ export default async function Page({
         </nav>
 
         <h1 className="mt-4 text-5xl font-black tracking-tight">Private Ride vs Uber at Red Rocks</h1>
+        <p style={{ color: "#cbd5e1", fontSize: 14, marginTop: 16 }}>By Party at Red Rocks · <a href="/editorial-policy" style={{ color: "#e2e8f0", textDecoration: "underline" }}>Editorial policy</a></p>
         <p className="mt-4 text-lg text-soft">
           Party at Red Rocks currently offers private transportation only: a $399 Suburban or a $599 private van.
           Rideshare can work, but the tradeoff is more uncertainty around post-show pricing, pickup location, and driver availability.
