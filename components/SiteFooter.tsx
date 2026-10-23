@@ -61,7 +61,7 @@ export default function SiteFooter() {
                 Party at Red Rocks
               </div>
               <div className="mt-3 text-[14px] leading-relaxed text-[color:var(--brand-text-soft)]">
-                Independent Colorado ground transportation since 2014 · 24/7 scheduled service subject to live availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and{" "}
+                Independent Colorado ground transportation since 2014 · 24/7 scheduled service subject to live vehicle and schedule availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and{" "}
                 <a
                   href="https://gosno.co"
                   target="_blank"

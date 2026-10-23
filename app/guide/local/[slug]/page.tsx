@@ -103,14 +103,20 @@ export default async function LocalGatewayPage({ params }: Props) {
     ],
   };
 
-  const localBusinessSchema = {
+  const localServiceSchema = {
     "@context": "https://schema.org",
-    "@type": ["LocalBusiness", "TransportationService"],
-    name: "Party at Red Rocks",
-    url: SITE,
+    "@type": "Service",
+    name: `${page.locationName} Private Concert Transportation`,
+    serviceType: "Private concert transportation",
+    provider: {
+      "@type": "Organization",
+      "@id": `${SITE}/#organization`,
+      name: "Party at Red Rocks",
+      url: SITE,
+      telephone: "+1-720-369-6292",
+    },
     image: page.shareImage,
     areaServed: ["Denver, CO", "Golden, CO", "Morrison, CO"],
-    priceRange: "$399-$599",
     description: `Private transportation from the ${page.locationName} area to Red Rocks.`,
   };
 
@@ -118,7 +124,7 @@ export default async function LocalGatewayPage({ params }: Props) {
     <main className="min-h-screen bg-[#050816] px-4 pb-16 pt-24 text-white sm:px-6 lg:px-8">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localServiceSchema) }} />
 
       <section className="mx-auto flex max-w-[1180px] flex-col gap-8">
         <section className="overflow-hidden rounded-[34px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,16,32,0.98),rgba(6,9,18,0.96))] shadow-[0_40px_120px_rgba(0,0,0,0.45)]">

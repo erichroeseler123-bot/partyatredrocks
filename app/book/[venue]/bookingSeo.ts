@@ -53,7 +53,7 @@ export function buildVenueBookingJsonLd(input: { venue: string; venueName: strin
         ? "Private Red Rocks transportation booking"
         : `${input.venueName} transportation booking`,
     provider: {
-      "@type": "LocalBusiness",
+      "@type": "Organization",
       "@id": `${SITE}/#organization`,
       name: "Party at Red Rocks",
       url: SITE,
@@ -111,10 +111,10 @@ export function buildPrivateBookingMetadata(venue: string): Metadata {
 export function buildPrivateBookingJsonLd(input: { venue: string; quantity: number }) {
   return {
     "@context": "https://schema.org",
-    "@type": ["Service", "TaxiService"],
+    "@type": "Service",
     name: "Private Red Rocks transportation",
     provider: {
-      "@type": "LocalBusiness",
+      "@type": "Organization",
       "@id": `${SITE}/#organization`,
       name: "Party at Red Rocks",
       url: SITE,
@@ -236,11 +236,11 @@ export function buildPrivateOptionJsonLd(input: {
     url: `${SITE}/book/${input.venue}/private/${input.optionSlug}`,
     availability: "https://schema.org/InStock",
     itemOffered: {
-      "@type": ["Service", "TaxiService"],
+      "@type": "Service",
       name: `${input.optionTitle} to Red Rocks`,
       description: input.optionBody,
       provider: {
-        "@type": "LocalBusiness",
+        "@type": "Organization",
         "@id": `${SITE}/#organization`,
         name: "Party at Red Rocks",
         url: SITE,

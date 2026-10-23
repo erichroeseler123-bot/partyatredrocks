@@ -81,51 +81,37 @@ export default async function HomePage() {
     publisher: { "@id": `${SITE}/#organization` },
   };
 
-  const localBusinessJsonLd = {
+  const organizationJsonLd = {
     "@context": "https://schema.org",
     "@id": `${SITE}/#organization`,
-    "@type": ["LocalBusiness", "TransportationService", "TaxiService"],
+    "@type": "Organization",
     name: BUSINESS_NAME,
     url: `${SITE}/`,
     telephone: "+1-720-369-6292",
     email: BUSINESS_EMAIL,
     foundingDate: "2014",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "1020 15th St Apt 21K",
-      addressLocality: "Denver",
-      addressRegion: "CO",
-      postalCode: "80202",
-      addressCountry: "US",
-    },
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday",
-        ],
-        opens: "00:00",
-        closes: "23:59",
-        description: "24/7 prearranged service subject to live availability",
-      },
-    ],
     areaServed: SERVICE_AREAS.map((city) => ({
       "@type": "City",
       name: `${city}, CO`,
     })),
     sameAs: getSameAs(brandKey),
     description: BOOKING_COPY.meta.businessDescription,
-    serviceType: [
-      "Private concert transportation",
-      "Red Rocks Amphitheatre transportation",
-    ],
-    offers: {
+  };
+
+  const serviceJsonLd = {
+    "@context": "https://schema.org",
+    "@id": `${SITE}/#service`,
+    "@type": "Service",
+    name: "Private Red Rocks Concert Transportation",
+    serviceType: "Private concert transportation",
+    description:
+      "Private concert transportation to and from Red Rocks Amphitheatre in a Private Suburban ($399) or 10-passenger Private Van ($599).",
+    provider: { "@id": `${SITE}/#organization` },
+    areaServed: SERVICE_AREAS.map((city) => ({
+      "@type": "City",
+      name: `${city}, CO`,
+    })),
+    hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Private Red Rocks ride options",
       itemListElement: [
@@ -136,6 +122,7 @@ export default async function HomePage() {
           itemOffered: {
             "@type": "Service",
             name: "Private Suburban to Red Rocks",
+            description: "Private concert transportation for up to 6 passengers in a Suburban.",
           },
         },
         {
@@ -145,6 +132,7 @@ export default async function HomePage() {
           itemOffered: {
             "@type": "Service",
             name: "10 Passenger Van to Red Rocks",
+            description: "Private concert transportation for up to 10 passengers in a private van.",
           },
         },
       ],
@@ -201,7 +189,8 @@ export default async function HomePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <HomeSections
         heroSrc={heroSrc}

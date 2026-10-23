@@ -147,7 +147,7 @@ export default function HomeSections({ heroSrc, privateVehicleSrc, urgency }: Ho
               Independent Colorado Transportation Since 2014
             </div>
             <p className="mt-4 text-lg font-bold leading-relaxed text-white sm:text-xl lg:text-[1.35rem]">
-              Operating in Colorado since 2014 with 24/7 scheduled service subject to live availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and{" "}
+              Operating in Colorado since 2014 with 24/7 scheduled service subject to live vehicle and schedule availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and{" "}
               <a
                 href="https://gosno.co"
                 target="_blank"

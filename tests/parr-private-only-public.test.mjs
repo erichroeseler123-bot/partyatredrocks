@@ -173,7 +173,7 @@ test("public sitemap omits shared booking URLs", () => {
   assert.match(sitemap, /private\/van/);
 });
 
-test("seasonal network explanation, reciprocal GoSno link, reconciled organization schema, and qualified 24/7 availability", () => {
+test("seasonal network explanation, reciprocal GoSno visible link, Organization/Service schema without reciprocal sameAs or 24/7 openingHoursSpecification", () => {
   const bookingCopy = read("lib/bookingCopy.ts");
   const homePage = read("app/page.tsx");
   const aboutPage = read("app/about/page.tsx");
@@ -183,19 +183,32 @@ test("seasonal network explanation, reciprocal GoSno link, reconciled organizati
 
   for (const source of [bookingCopy, aboutPage, homeSections, siteFooter]) {
     assert.match(source, /same Colorado transportation operation runs Party at Red Rocks/i);
-    assert.match(source, /subject to live availability/i);
+    assert.match(source, /24\/7 scheduled service subject to live vehicle and schedule availability/i);
     assert.doesNotMatch(source, /largest independent/i);
     assert.doesNotMatch(source, /one million people/i);
   }
 
-  for (const source of [aboutPage, homeSections, siteFooter, socialRegistry]) {
+  for (const source of [aboutPage, homeSections, siteFooter]) {
     assert.match(source, /https:\/\/gosno\.co/);
   }
 
+  assert.doesNotMatch(socialRegistry, /gosno\.co/i);
+
   for (const source of [homePage, aboutPage]) {
-    assert.match(source, /1020 15th St Apt 21K/);
-    assert.match(source, /24\/7 prearranged service subject to live availability/);
+    assert.match(source, /"@type":\s*"Organization"/);
+    assert.match(source, /"@type":\s*"Service"/);
+    assert.match(source, /serviceType:\s*"Private concert transportation"/);
     assert.match(source, /\+1-720-369-6292/);
+    assert.doesNotMatch(source, /TaxiService/);
+    assert.doesNotMatch(source, /TransportationService/);
+    assert.doesNotMatch(source, /LocalBusiness/);
+    assert.doesNotMatch(source, /openingHoursSpecification/i);
+    assert.doesNotMatch(source, /1020 15th St Apt 21K/);
   }
+  assert.doesNotMatch(homePage, /gosno\.co/i);
+  assert.doesNotMatch(
+    aboutPage.slice(0, aboutPage.indexOf("export default function AboutPage")),
+    /https:\/\/gosno\.co/i,
+  );
 });
 

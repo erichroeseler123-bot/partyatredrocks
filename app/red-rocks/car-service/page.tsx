@@ -73,7 +73,7 @@ export default async function RedRocksCarServicePage({
         "@id": `${SITE}/red-rocks/car-service#service`,
         name: "Private Car Service to Red Rocks Amphitheatre",
         provider: {
-          "@type": "LocalBusiness",
+          "@type": "Organization",
           "@id": `${SITE}/#organization`,
           name: "Party at Red Rocks",
           url: SITE,

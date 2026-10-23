@@ -54,9 +54,10 @@ export default function ShuttleComparison() {
     "@type": "Service",
     serviceType: "Red Rocks Private Transportation",
     provider: {
-      "@type": "LocalBusiness",
+      "@type": "Organization",
+      "@id": `${SITE}/#organization`,
       name: "Party at Red Rocks",
-      address: "Golden, CO",
+      url: SITE,
     },
     description: "Private SUV ($399) and 10-passenger van ($599) service vs broker shuttles and rideshare for Red Rocks concerts.",
     offers: {

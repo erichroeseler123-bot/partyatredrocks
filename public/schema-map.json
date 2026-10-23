@@ -2,13 +2,15 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "TransportationService",
-      "name": "Party at Red Rocks",
-      "description": "Licensed Tier-1 Red Rocks Shuttle service .",
+      "@type": "Service",
+      "name": "Private Red Rocks Concert Transportation",
+      "serviceType": "Private concert transportation",
+      "description": "Private concert transportation to and from Red Rocks Amphitheatre.",
       "provider": {
-        "@type": "LocalBusiness",
+        "@type": "Organization",
+        "@id": "https://www.partyatredrocks.com/#organization",
         "name": "Party at Red Rocks",
-        "telephone": "+13035550199",
+        "telephone": "+1-720-369-6292",
         "areaServed": [
           "Denver",
           "Golden",

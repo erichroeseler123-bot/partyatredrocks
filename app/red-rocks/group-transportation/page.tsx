@@ -80,7 +80,7 @@ export default async function RedRocksGroupTransportationPage({
         "@id": `${SITE}/red-rocks/group-transportation#service`,
         name: "Red Rocks Group Transportation & Private Van Service",
         provider: {
-          "@type": "LocalBusiness",
+          "@type": "Organization",
           "@id": `${SITE}/#organization`,
           name: "Party at Red Rocks",
           url: SITE,

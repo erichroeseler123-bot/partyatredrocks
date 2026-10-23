@@ -44,7 +44,8 @@ export function buildSharedBookingJsonLd(path: string) {
       name: "Red Rocks Shared Shuttle Seats",
       serviceType: "Shared Red Rocks shuttle service",
       provider: {
-        "@type": "LocalBusiness",
+        "@type": "Organization",
+        "@id": `${SITE}/#organization`,
         name: "Party at Red Rocks",
         url: SITE,
         telephone: "+17203696292",

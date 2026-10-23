@@ -3,7 +3,7 @@ import Link from 'next/link';
 export default function SafetyAndLegitimacy() {
   const safetySchema = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": "Organization",
     "@id": "https://www.partyatredrocks.com/#organization",
     "name": "Party at Red Rocks",
     "url": "https://www.partyatredrocks.com/",

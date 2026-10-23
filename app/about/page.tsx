@@ -5,14 +5,14 @@ import { curatedImages } from "@/lib/curatedImages";
 export const metadata = {
   title: "About Party at Red Rocks | Independent Colorado Transportation Since 2014",
   description:
-    "Independent Colorado transportation provider operating since 2014 with 24/7 scheduled service subject to live availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and GoSno during the winter ski season.",
+    "Independent Colorado transportation provider operating since 2014 with 24/7 scheduled service subject to live vehicle and schedule availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and GoSno during the winter ski season.",
   alternates: {
     canonical: "/about",
   },
   openGraph: {
     title: "About Party at Red Rocks | Independent Colorado Transportation Since 2014",
     description:
-      "Independent Colorado transportation provider operating since 2014 with 24/7 scheduled service subject to live availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and GoSno during the winter ski season.",
+      "Independent Colorado transportation provider operating since 2014 with 24/7 scheduled service subject to live vehicle and schedule availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and GoSno during the winter ski season.",
     url: "https://www.partyatredrocks.com/about",
     type: "website",
   },
@@ -20,51 +20,57 @@ export const metadata = {
     card: "summary_large_image",
     title: "About Party at Red Rocks | Independent Colorado Transportation Since 2014",
     description:
-      "Independent Colorado transportation provider operating since 2014 with 24/7 scheduled service subject to live availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and GoSno during the winter ski season.",
+      "Independent Colorado transportation provider operating since 2014 with 24/7 scheduled service subject to live vehicle and schedule availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and GoSno during the winter ski season.",
   },
 };
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "TransportationService", "TaxiService"],
-  "@id": "https://www.partyatredrocks.com/#organization",
-  name: "Party at Red Rocks",
-  url: "https://www.partyatredrocks.com/",
-  foundingDate: "2014",
-  description:
-    "Independent Colorado transportation provider operating since 2014 with 24/7 scheduled service subject to live availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and GoSno during the winter ski season.",
-  telephone: "+1-720-369-6292",
-  email: "contact@partyatredrocks.com",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "1020 15th St Apt 21K",
-    addressLocality: "Denver",
-    addressRegion: "CO",
-    postalCode: "80202",
-    addressCountry: "US",
-  },
-  openingHoursSpecification: [
+  "@graph": [
     {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday",
-      ],
-      opens: "00:00",
-      closes: "23:59",
-      description: "24/7 prearranged service subject to live availability",
+      "@type": "AboutPage",
+      "@id": "https://www.partyatredrocks.com/about#webpage",
+      url: "https://www.partyatredrocks.com/about",
+      name: "About Party at Red Rocks | Independent Colorado Transportation Since 2014",
+      description:
+        "Independent Colorado transportation provider operating since 2014 with 24/7 scheduled service subject to live vehicle and schedule availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and GoSno during the winter ski season.",
+      mainEntity: { "@id": "https://www.partyatredrocks.com/#organization" },
     },
-  ],
-  sameAs: [
-    "https://www.instagram.com/partyatredrocks",
-    "https://www.facebook.com/redrockstransportation/",
-    "https://x.com/partyatredrocks",
-    "https://gosno.co",
+    {
+      "@type": "Organization",
+      "@id": "https://www.partyatredrocks.com/#organization",
+      name: "Party at Red Rocks",
+      url: "https://www.partyatredrocks.com/",
+      foundingDate: "2014",
+      description:
+        "Independent Colorado transportation provider operating since 2014 with 24/7 scheduled service subject to live vehicle and schedule availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and GoSno during the winter ski season.",
+      telephone: "+1-720-369-6292",
+      email: "contact@partyatredrocks.com",
+      areaServed: [
+        { "@type": "City", name: "Denver, CO" },
+        { "@type": "City", name: "Golden, CO" },
+        { "@type": "City", name: "Morrison, CO" },
+      ],
+      sameAs: [
+        "https://www.instagram.com/partyatredrocks",
+        "https://www.facebook.com/redrockstransportation/",
+        "https://x.com/partyatredrocks",
+      ],
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.partyatredrocks.com/#service",
+      name: "Private Red Rocks Concert Transportation",
+      serviceType: "Private concert transportation",
+      description:
+        "Private concert transportation to and from Red Rocks Amphitheatre in private Suburbans and passenger vans.",
+      provider: { "@id": "https://www.partyatredrocks.com/#organization" },
+      areaServed: [
+        { "@type": "City", name: "Denver, CO" },
+        { "@type": "City", name: "Golden, CO" },
+        { "@type": "City", name: "Morrison, CO" },
+      ],
+    },
   ],
 };
 
@@ -117,7 +123,7 @@ export default function AboutPage() {
               Private Red Rocks rides for show night
             </h1>
             <p className="mt-5 max-w-2xl text-[16px] font-semibold leading-7 text-white/90 sm:text-xl">
-              Independent Colorado transportation operating since 2014 with 24/7 scheduled service subject to live availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and{" "}
+              Independent Colorado transportation operating since 2014 with 24/7 scheduled service subject to live vehicle and schedule availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and{" "}
               <a
                 href="https://gosno.co"
                 target="_blank"
@@ -156,7 +162,7 @@ export default function AboutPage() {
             Independent Colorado Transportation Since 2014
           </h2>
           <p className="mt-4 max-w-3xl text-base leading-7 text-white/84 sm:text-lg">
-            Party at Red Rocks has operated in Colorado since 2014, providing prearranged private Suburban and passenger-van transportation with 24/7 scheduled service subject to live availability. The same Colorado transportation operation runs{" "}
+            Party at Red Rocks has operated in Colorado since 2014, providing prearranged private Suburban and passenger-van transportation with 24/7 scheduled service subject to live vehicle and schedule availability. The same Colorado transportation operation runs{" "}
             <strong className="text-white">Party at Red Rocks</strong> during the summer concert season and{" "}
             <a
               href="https://gosno.co"
