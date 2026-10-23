@@ -87,9 +87,10 @@ export default async function HomePage() {
     "@type": "Organization",
     name: BUSINESS_NAME,
     url: `${SITE}/`,
+    logo: `${SITE}/brand/red-rocks-shuttle.png`,
+    image: `${SITE}/fleet/fleet-suburban.jpg`,
     telephone: "+1-720-369-6292",
     email: BUSINESS_EMAIL,
-    foundingDate: "2014",
     areaServed: SERVICE_AREAS.map((city) => ({
       "@type": "City",
       name: `${city}, CO`,

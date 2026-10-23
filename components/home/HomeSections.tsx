@@ -144,10 +144,10 @@ export default function HomeSections({ heroSrc, privateVehicleSrc, urgency }: Ho
         <section className="brand-panel relative overflow-hidden rounded-[30px] border border-white/12 bg-[radial-gradient(ellipse_at_top,rgba(255,91,46,0.14),transparent_55%),linear-gradient(180deg,rgba(20,20,26,0.96)_0%,rgba(11,11,15,0.98)_100%)] p-6 sm:p-8 lg:p-10 shadow-[0_24px_80px_rgba(0,0,0,0.36)]">
           <div className="mx-auto max-w-4xl text-center">
             <div className="inline-flex items-center rounded-full border border-[var(--brand-orange)]/30 bg-[var(--brand-orange)]/10 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-orange)]">
-              Independent Colorado Transportation Since 2014
+              Colorado Seasonal Transportation Network
             </div>
             <p className="mt-4 text-lg font-bold leading-relaxed text-white sm:text-xl lg:text-[1.35rem]">
-              Operating in Colorado since 2014 with 24/7 scheduled service subject to live vehicle and schedule availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and{" "}
+              The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and{" "}
               <a
                 href="https://gosno.co"
                 target="_blank"
@@ -156,12 +156,12 @@ export default function HomeSections({ heroSrc, privateVehicleSrc, urgency }: Ho
               >
                 GoSno
               </a>{" "}
-              during the winter ski season.
+              during the winter ski season, with 24/7 scheduled service subject to live vehicle and schedule availability.
             </p>
             <div className="mt-6 grid grid-cols-1 gap-4 pt-6 border-t border-white/10 sm:grid-cols-3">
               <div className="rounded-2xl border border-white/8 bg-white/4 p-4 text-center">
-                <div className="text-2xl font-black text-white sm:text-3xl">Since 2014</div>
-                <div className="mt-1 text-xs font-semibold uppercase tracking-wider text-white/60">Colorado Operating History</div>
+                <div className="text-2xl font-black text-white sm:text-3xl">Private Fleet</div>
+                <div className="mt-1 text-xs font-semibold uppercase tracking-wider text-white/60">Suburbans &amp; Passenger Vans</div>
               </div>
               <div className="rounded-2xl border border-white/8 bg-white/4 p-4 text-center">
                 <div className="text-2xl font-black text-[var(--brand-cyan)] sm:text-3xl">24/7 Service</div>

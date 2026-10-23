@@ -197,7 +197,7 @@ export default async function PrivateOptionsPage({
             ))}
           </div>
           <div className="mt-6 rounded-[24px] border border-white/10 bg-[#09101f] p-5 text-sm leading-6 text-white/74">
-            <strong className="text-white">Year-Round Colorado Fleet Operation:</strong> Operating since 2014 with 24/7 scheduled service subject to live vehicle and schedule availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and{" "}
+            <strong className="text-white">Year-Round Colorado Fleet Operation:</strong> 24/7 scheduled service subject to live vehicle and schedule availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and{" "}
             <a
               href="https://gosno.co"
               target="_blank"

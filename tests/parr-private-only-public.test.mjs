@@ -173,19 +173,28 @@ test("public sitemap omits shared booking URLs", () => {
   assert.match(sitemap, /private\/van/);
 });
 
-test("seasonal network explanation, reciprocal GoSno visible link, Organization/Service schema without reciprocal sameAs or 24/7 openingHoursSpecification", () => {
+test("seasonal network explanation, reciprocal GoSno visible link, Organization/Service schema without static InStock, unverified foundingDate, reciprocal sameAs, or 24/7 openingHoursSpecification", () => {
   const bookingCopy = read("lib/bookingCopy.ts");
   const homePage = read("app/page.tsx");
   const aboutPage = read("app/about/page.tsx");
   const homeSections = read("components/home/HomeSections.tsx");
   const siteFooter = read("components/SiteFooter.tsx");
+  const privatePage = read("app/book/[venue]/private/page.tsx");
+  const llmsRoute = read("app/llms.txt/route.ts");
+  const bookingSeo = read("app/book/[venue]/bookingSeo.ts");
+  const sharedBookingSeo = read("app/book/[venue]/shared/sharedBookingSeo.ts");
+  const scenePage = read("app/scene/[scene]/page.tsx");
+  const showsPage = read("app/shows/[id]/page.tsx");
+  const venuesPage = read("app/venues/[slug]/page.tsx");
+  const schemaLib = read("lib/schema.ts");
   const socialRegistry = read("data/social/social-registry.ts");
 
-  for (const source of [bookingCopy, aboutPage, homeSections, siteFooter]) {
+  for (const source of [bookingCopy, aboutPage, homeSections, siteFooter, privatePage, llmsRoute]) {
     assert.match(source, /same Colorado transportation operation runs Party at Red Rocks/i);
-    assert.match(source, /24\/7 scheduled service subject to live vehicle and schedule availability/i);
+    assert.match(source, /24\/7 scheduled service subject to live/i);
     assert.doesNotMatch(source, /largest independent/i);
     assert.doesNotMatch(source, /one million people/i);
+    assert.doesNotMatch(source, /2014/);
   }
 
   for (const source of [aboutPage, homeSections, siteFooter]) {
@@ -198,6 +207,12 @@ test("seasonal network explanation, reciprocal GoSno visible link, Organization/
     assert.match(source, /"@type":\s*"Organization"/);
     assert.match(source, /"@type":\s*"Service"/);
     assert.match(source, /serviceType:\s*"Private concert transportation"/);
+    assert.match(source, /brand\/red-rocks-shuttle\.png/);
+    assert.match(source, /fleet\/fleet-suburban\.jpg/);
+    assert.doesNotMatch(source, /logo:\s*[^\n]*fleet-suburban/);
+    assert.doesNotMatch(source, /logo:\s*[^\n]*hero/);
+    assert.doesNotMatch(source, /foundingDate/);
+    assert.doesNotMatch(source, /2014/);
     assert.match(source, /\+1-720-369-6292/);
     assert.doesNotMatch(source, /TaxiService/);
     assert.doesNotMatch(source, /TransportationService/);
@@ -205,6 +220,24 @@ test("seasonal network explanation, reciprocal GoSno visible link, Organization/
     assert.doesNotMatch(source, /openingHoursSpecification/i);
     assert.doesNotMatch(source, /1020 15th St Apt 21K/);
   }
+
+  for (const schemaSource of [
+    homePage,
+    aboutPage,
+    bookingSeo,
+    sharedBookingSeo,
+    scenePage,
+    showsPage,
+    venuesPage,
+    schemaLib,
+  ]) {
+    assert.doesNotMatch(schemaSource, /InStock/);
+    assert.doesNotMatch(schemaSource, /ItemAvailability/);
+  }
+
+  assert.doesNotMatch(scenePage, /logo:\s*`\$\{SITE\}\/og-default\.jpg`/);
+  assert.match(scenePage, /logo:\s*`\$\{SITE\}\/brand\/red-rocks-shuttle\.png`/);
+
   assert.doesNotMatch(homePage, /gosno\.co/i);
   assert.doesNotMatch(
     aboutPage.slice(0, aboutPage.indexOf("export default function AboutPage")),

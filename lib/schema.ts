@@ -20,8 +20,7 @@ export function getEventSchema(event: any) {
       "@type": "Offer",
       "url": "https://partyatredrocks.com/book-shuttle",
       "price": "55.00",
-      "priceCurrency": "USD",
-      "availability": "https://schema.org/InStock"
+      "priceCurrency": "USD"
     },
     "performer": {
       "@type": "Person",
