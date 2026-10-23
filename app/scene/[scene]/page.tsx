@@ -118,7 +118,7 @@ function orgJsonLd() {
     "@id": `${SITE}/#organization`,
     name: "Party at Red Rocks",
     url: SITE,
-    logo: `${SITE}/og-default.jpg`,
+    logo: `${SITE}/brand/red-rocks-shuttle.png`,
   };
 }
 
@@ -186,7 +186,6 @@ function sceneJsonLd(def: SceneDef, pageUrl: string, events: SceneEvent[]) {
               name: "Shuttle booking",
               url: `${SITE}/book?event=${e.id}&scene=${def.slug}`,
               priceCurrency: "USD",
-              availability: "https://schema.org/InStock",
               seller: { "@id": `${SITE}/#organization` },
             },
           },

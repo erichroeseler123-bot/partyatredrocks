@@ -44,7 +44,8 @@ export function buildSharedBookingJsonLd(path: string) {
       name: "Red Rocks Shared Shuttle Seats",
       serviceType: "Shared Red Rocks shuttle service",
       provider: {
-        "@type": "LocalBusiness",
+        "@type": "Organization",
+        "@id": `${SITE}/#organization`,
         name: "Party at Red Rocks",
         url: SITE,
         telephone: "+17203696292",
@@ -63,7 +64,6 @@ export function buildSharedBookingJsonLd(path: string) {
         priceCurrency: "USD",
         price: "59",
         url: `${SITE}${path}`,
-        availability: "https://schema.org/InStock",
         itemOffered: {
           "@type": "Service",
           name: "Red Rocks Shared Shuttle Seats",
@@ -159,7 +159,6 @@ export function buildSharedBookingJsonLd(path: string) {
         url: `${SITE}${path}`,
         price: "59.00",
         priceCurrency: "USD",
-        availability: "https://schema.org/InStock",
       },
     },
   ];

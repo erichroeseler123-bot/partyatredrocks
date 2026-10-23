@@ -178,7 +178,6 @@ function musicEventJsonLd(e: ShowEvent, id: string, image?: string | null) {
       name: "Tickets",
       url: e.url,
       priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
     });
   }
   offers.push({

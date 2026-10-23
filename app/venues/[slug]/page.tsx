@@ -403,7 +403,6 @@ function eventsItemListJsonLd(slug: string, v: VenueRec, events: VenueCache["eve
             overrides: { date: e.dateKey, qty: 2 },
           })}`,
           priceCurrency: "USD",
-          availability: "https://schema.org/InStock",
         },
       },
     })),

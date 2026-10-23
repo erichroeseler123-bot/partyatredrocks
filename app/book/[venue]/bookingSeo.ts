@@ -53,10 +53,12 @@ export function buildVenueBookingJsonLd(input: { venue: string; venueName: strin
         ? "Private Red Rocks transportation booking"
         : `${input.venueName} transportation booking`,
     provider: {
-      "@type": "LocalBusiness",
+      "@type": "Organization",
+      "@id": `${SITE}/#organization`,
       name: "Party at Red Rocks",
       url: SITE,
-      telephone: "+17203696292",
+      logo: `${SITE}/brand/red-rocks-shuttle.png`,
+      telephone: "+1-720-369-6292",
     },
     areaServed: ["Denver, CO", "Golden, CO", "Morrison, CO"],
     serviceType:
@@ -68,7 +70,7 @@ export function buildVenueBookingJsonLd(input: { venue: string; venueName: strin
       input.venue === "red-rocks-amphitheatre"
         ? "Book Private Suburban transportation or upgrade to a private van with a guaranteed ride home."
         : `Choose the ride type that fits ${input.venueName}, then continue into the right booking path.`,
-    offers: {
+    hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: `${input.venueName} ride options`,
       itemListElement: PUBLIC_PRIVATE_RIDE_OPTIONS.map((option) => ({
@@ -110,19 +112,21 @@ export function buildPrivateBookingMetadata(venue: string): Metadata {
 export function buildPrivateBookingJsonLd(input: { venue: string; quantity: number }) {
   return {
     "@context": "https://schema.org",
-    "@type": ["Service", "TaxiService"],
+    "@type": "Service",
     name: "Private Red Rocks transportation",
     provider: {
-      "@type": "LocalBusiness",
+      "@type": "Organization",
+      "@id": `${SITE}/#organization`,
       name: "Party at Red Rocks",
       url: SITE,
-      telephone: "+17203696292",
+      logo: `${SITE}/brand/red-rocks-shuttle.png`,
+      telephone: "+1-720-369-6292",
     },
     areaServed: ["Denver, CO", "Golden, CO", "Morrison, CO"],
     serviceType: "Private concert transportation",
     url: `${SITE}/book/${input.venue}/private`,
     description: "Private Red Rocks transportation from Denver with a Private Suburban and private van upgrade option.",
-    offers: {
+    hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Private Red Rocks vehicle pricing",
       itemListElement: PUBLIC_PRIVATE_RIDE_OPTIONS.map((option) => ({
@@ -232,16 +236,17 @@ export function buildPrivateOptionJsonLd(input: {
     priceCurrency: "USD",
     price: input.optionSlug === "suv" ? "399" : input.optionPriceLabel.replace("$", ""),
     url: `${SITE}/book/${input.venue}/private/${input.optionSlug}`,
-    availability: "https://schema.org/InStock",
     itemOffered: {
-      "@type": ["Service", "TaxiService"],
+      "@type": "Service",
       name: `${input.optionTitle} to Red Rocks`,
       description: input.optionBody,
       provider: {
-        "@type": "LocalBusiness",
+        "@type": "Organization",
+        "@id": `${SITE}/#organization`,
         name: "Party at Red Rocks",
         url: SITE,
-        telephone: "+17203696292",
+        logo: `${SITE}/brand/red-rocks-shuttle.png`,
+        telephone: "+1-720-369-6292",
       },
       areaServed: ["Denver, CO", "Golden, CO", "Morrison, CO"],
       serviceType: "Private concert transportation",

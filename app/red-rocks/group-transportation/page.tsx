@@ -80,10 +80,11 @@ export default async function RedRocksGroupTransportationPage({
         "@id": `${SITE}/red-rocks/group-transportation#service`,
         name: "Red Rocks Group Transportation & Private Van Service",
         provider: {
-          "@type": "LocalBusiness",
+          "@type": "Organization",
+          "@id": `${SITE}/#organization`,
           name: "Party at Red Rocks",
           url: SITE,
-          telephone: "+1-303-555-0199",
+          telephone: "+1-720-369-6292",
         },
         description:
           "Private group transportation to Red Rocks Amphitheatre with high-roof passenger vans and luxury Suburbans. $599 van (up to 10) or $399 Suburban (up to 6).",

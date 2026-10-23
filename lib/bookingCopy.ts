@@ -3,9 +3,9 @@ export const BOOKING_COPY = {
     layoutDescription:
       "Book private Red Rocks transportation with published vehicle pricing, private pickup details before the ride, and a planned return after the show. Private Suburban is $399 with a private van upgrade available.",
     homeDescription:
-      "Party at Red Rocks is Colorado’s largest independent provider of ground transportation. Dedicated private SUV ($399) & Van ($599) for your group: Denver-area pickup, designated Red Rocks drop-off, on-site wait, & return ride.",
+      "Dedicated private SUV ($399) & Van ($599) for your group: Denver-area pickup, designated Red Rocks drop-off, on-site wait, & return ride.",
     businessDescription:
-      "Party at Red Rocks is Colorado’s largest independent provider of ground transportation. Operating 24/7 since 2014, we’ve transported more than one million people over 12+ years.",
+      "Independent Colorado concert transportation provider with 24/7 scheduled service subject to live vehicle and schedule availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and GoSno during the winter ski season.",
     sharedBookingDescription:
       "Private Red Rocks transportation is available with published vehicle pricing, pickup planning, secure checkout, and a coordinated return plan after the show.",
     privateBookingDescription:
