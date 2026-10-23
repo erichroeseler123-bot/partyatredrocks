@@ -196,6 +196,18 @@ export default async function PrivateOptionsPage({
               </div>
             ))}
           </div>
+          <div className="mt-6 rounded-[24px] border border-white/10 bg-[#09101f] p-5 text-sm leading-6 text-white/74">
+            <strong className="text-white">Year-Round Colorado Fleet Operation:</strong> Operating since 2014 with 24/7 scheduled service subject to live availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and{" "}
+            <a
+              href="https://gosno.co"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-[#62f6ff] underline decoration-[#62f6ff]/40 underline-offset-4 hover:text-white"
+            >
+              GoSno
+            </a>{" "}
+            during the winter ski season.
+          </div>
         </section>
       </section>
     </main>

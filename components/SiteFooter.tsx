@@ -34,10 +34,12 @@ const FOOTER_GROUPS = [
   {
     title: "Support",
     links: [
+      { href: "/about", label: "About & Fleet" },
       { href: "/book/red-rocks-amphitheatre/private/suv", label: "Booking Hub" },
       { href: "/contact", label: "Contact" },
       { href: "/privacy", label: "Privacy" },
       { href: "/terms", label: "Terms" },
+      { href: "https://gosno.co", label: "Winter: GoSno Ski ↗" },
     ],
   },
 ] as const;
@@ -59,7 +61,16 @@ export default function SiteFooter() {
                 Party at Red Rocks
               </div>
               <div className="mt-3 text-[14px] leading-relaxed text-[color:var(--brand-text-soft)]">
-                Colorado’s largest independent ground transportation provider · Operating 24/7 since 2014 · More than one million people transported.
+                Independent Colorado ground transportation since 2014 · 24/7 scheduled service subject to live availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and{" "}
+                <a
+                  href="https://gosno.co"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-[var(--brand-text)]"
+                >
+                  GoSno
+                </a>{" "}
+                during the winter ski season.
               </div>
               <div className="mt-2 text-[14px] text-[color:var(--brand-text-soft)]">
                 Private Suburban, private van upgrade, and direct pickup planning for Red Rocks show nights.

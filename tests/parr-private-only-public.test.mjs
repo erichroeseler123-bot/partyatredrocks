@@ -172,3 +172,30 @@ test("public sitemap omits shared booking URLs", () => {
   assert.match(sitemap, /private\/suv/);
   assert.match(sitemap, /private\/van/);
 });
+
+test("seasonal network explanation, reciprocal GoSno link, reconciled organization schema, and qualified 24/7 availability", () => {
+  const bookingCopy = read("lib/bookingCopy.ts");
+  const homePage = read("app/page.tsx");
+  const aboutPage = read("app/about/page.tsx");
+  const homeSections = read("components/home/HomeSections.tsx");
+  const siteFooter = read("components/SiteFooter.tsx");
+  const socialRegistry = read("data/social/social-registry.ts");
+
+  for (const source of [bookingCopy, aboutPage, homeSections, siteFooter]) {
+    assert.match(source, /same Colorado transportation operation runs Party at Red Rocks/i);
+    assert.match(source, /subject to live availability/i);
+    assert.doesNotMatch(source, /largest independent/i);
+    assert.doesNotMatch(source, /one million people/i);
+  }
+
+  for (const source of [aboutPage, homeSections, siteFooter, socialRegistry]) {
+    assert.match(source, /https:\/\/gosno\.co/);
+  }
+
+  for (const source of [homePage, aboutPage]) {
+    assert.match(source, /1020 15th St Apt 21K/);
+    assert.match(source, /24\/7 prearranged service subject to live availability/);
+    assert.match(source, /\+1-720-369-6292/);
+  }
+});
+

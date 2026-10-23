@@ -50,6 +50,7 @@ export const socialRegistry: Record<string, BrandSocialProfile> = {
       "https://www.instagram.com/partyatredrocks",
       "https://www.facebook.com/redrockstransportation/",
       "https://x.com/partyatredrocks",
+      "https://gosno.co",
     ],
     socials: [
       {

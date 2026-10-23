@@ -74,9 +74,10 @@ export default async function RedRocksCarServicePage({
         name: "Private Car Service to Red Rocks Amphitheatre",
         provider: {
           "@type": "LocalBusiness",
+          "@id": `${SITE}/#organization`,
           name: "Party at Red Rocks",
           url: SITE,
-          telephone: "+1-303-555-0199",
+          telephone: "+1-720-369-6292",
         },
         description:
           "Private luxury SUV car service to Red Rocks Amphitheatre from Denver and surrounding areas. $399 flat round-trip for up to 6 passengers.",

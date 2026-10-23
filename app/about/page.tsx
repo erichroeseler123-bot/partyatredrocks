@@ -3,38 +3,69 @@ import { ArrowRight, CarFront, Clock3, Headphones, ShieldCheck } from "lucide-re
 import { curatedImages } from "@/lib/curatedImages";
 
 export const metadata = {
-  title: "About Party at Red Rocks | Colorado's Largest Independent Transportation Provider",
+  title: "About Party at Red Rocks | Independent Colorado Transportation Since 2014",
   description:
-    "Party at Red Rocks is Colorado’s largest independent provider of ground transportation. Operating 24/7 since 2014, we’ve transported more than one million people over 12+ years.",
+    "Independent Colorado transportation provider operating since 2014 with 24/7 scheduled service subject to live availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and GoSno during the winter ski season.",
   alternates: {
     canonical: "/about",
   },
   openGraph: {
-    title: "About Party at Red Rocks | Colorado's Largest Independent Transportation Provider",
+    title: "About Party at Red Rocks | Independent Colorado Transportation Since 2014",
     description:
-      "Party at Red Rocks is Colorado’s largest independent provider of ground transportation. Operating 24/7 since 2014, we’ve transported more than one million people over 12+ years.",
+      "Independent Colorado transportation provider operating since 2014 with 24/7 scheduled service subject to live availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and GoSno during the winter ski season.",
     url: "https://www.partyatredrocks.com/about",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "About Party at Red Rocks | Colorado's Largest Independent Transportation Provider",
+    title: "About Party at Red Rocks | Independent Colorado Transportation Since 2014",
     description:
-      "Party at Red Rocks is Colorado’s largest independent provider of ground transportation. Operating 24/7 since 2014, we’ve transported more than one million people over 12+ years.",
+      "Independent Colorado transportation provider operating since 2014 with 24/7 scheduled service subject to live availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and GoSno during the winter ski season.",
   },
 };
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": ["LocalBusiness", "TransportationService", "TaxiService"],
   "@id": "https://www.partyatredrocks.com/#organization",
   name: "Party at Red Rocks",
   url: "https://www.partyatredrocks.com/",
   foundingDate: "2014",
   description:
-    "Party at Red Rocks is Colorado’s largest independent provider of ground transportation. Operating 24/7 since 2014, we’ve transported more than one million people over 12+ years.",
-  telephone: "+17203696292",
+    "Independent Colorado transportation provider operating since 2014 with 24/7 scheduled service subject to live availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and GoSno during the winter ski season.",
+  telephone: "+1-720-369-6292",
   email: "contact@partyatredrocks.com",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "1020 15th St Apt 21K",
+    addressLocality: "Denver",
+    addressRegion: "CO",
+    postalCode: "80202",
+    addressCountry: "US",
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+      ],
+      opens: "00:00",
+      closes: "23:59",
+      description: "24/7 prearranged service subject to live availability",
+    },
+  ],
+  sameAs: [
+    "https://www.instagram.com/partyatredrocks",
+    "https://www.facebook.com/redrockstransportation/",
+    "https://x.com/partyatredrocks",
+    "https://gosno.co",
+  ],
 };
 
 const servicePoints = [
@@ -86,7 +117,16 @@ export default function AboutPage() {
               Private Red Rocks rides for show night
             </h1>
             <p className="mt-5 max-w-2xl text-[16px] font-semibold leading-7 text-white/90 sm:text-xl">
-              Party at Red Rocks is Colorado’s largest independent provider of ground transportation. Operating 24/7 since 2014, we’ve transported more than one million people over 12+ years.
+              Independent Colorado transportation operating since 2014 with 24/7 scheduled service subject to live availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and{" "}
+              <a
+                href="https://gosno.co"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline decoration-white/40 underline-offset-4 hover:text-[var(--brand-cyan)]"
+              >
+                GoSno
+              </a>{" "}
+              during the winter ski season.
             </p>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-white/68 sm:text-[15px]">
               For Red Rocks concerts, your group keeps one vehicle and one ride plan from pickup through the post-show return. No shared seats or per-person fares.
@@ -110,26 +150,36 @@ export default function AboutPage() {
 
         <section className="brand-panel rounded-[30px] border border-white/12 bg-[radial-gradient(ellipse_at_top,rgba(255,91,46,0.12),transparent_50%),linear-gradient(180deg,rgba(20,20,26,0.96)_0%,rgba(11,11,15,0.98)_100%)] p-6 sm:p-8 lg:p-10 shadow-[0_24px_80px_rgba(0,0,0,0.36)]">
           <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-orange)]">
-            Company Overview
+            Company Overview &amp; Seasonal Network
           </div>
           <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] sm:text-3xl">
-            Colorado’s Largest Independent Provider
+            Independent Colorado Transportation Since 2014
           </h2>
           <p className="mt-4 max-w-3xl text-base leading-7 text-white/84 sm:text-lg">
-            Party at Red Rocks is Colorado’s largest independent provider of ground transportation. Operating 24/7 since 2014, we’ve transported more than one million people over 12+ years.
+            Party at Red Rocks has operated in Colorado since 2014, providing prearranged private Suburban and passenger-van transportation with 24/7 scheduled service subject to live availability. The same Colorado transportation operation runs{" "}
+            <strong className="text-white">Party at Red Rocks</strong> during the summer concert season and{" "}
+            <a
+              href="https://gosno.co"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-[var(--brand-cyan)] underline decoration-[var(--brand-cyan)]/40 underline-offset-4 hover:text-white"
+            >
+              GoSno
+            </a>{" "}
+            during the winter ski season for private airport-to-resort mountain transfers.
           </p>
           <div className="mt-6 grid grid-cols-1 gap-4 pt-6 border-t border-white/10 sm:grid-cols-3">
             <div className="rounded-2xl border border-white/8 bg-white/4 p-4 text-center">
-              <div className="text-2xl font-black text-white sm:text-3xl">#1 Largest</div>
-              <div className="mt-1 text-xs font-semibold uppercase tracking-wider text-white/60">Independent Provider in CO</div>
+              <div className="text-2xl font-black text-white sm:text-3xl">Since 2014</div>
+              <div className="mt-1 text-xs font-semibold uppercase tracking-wider text-white/60">Colorado Operating History</div>
             </div>
             <div className="rounded-2xl border border-white/8 bg-white/4 p-4 text-center">
-              <div className="text-2xl font-black text-[var(--brand-cyan)] sm:text-3xl">24/7 Since 2014</div>
-              <div className="mt-1 text-xs font-semibold uppercase tracking-wider text-white/60">Round-The-Clock Service</div>
+              <div className="text-2xl font-black text-[var(--brand-cyan)] sm:text-3xl">24/7 Service</div>
+              <div className="mt-1 text-xs font-semibold uppercase tracking-wider text-white/60">Subject to Live Availability</div>
             </div>
             <div className="rounded-2xl border border-white/8 bg-white/4 p-4 text-center">
-              <div className="text-2xl font-black text-[var(--brand-orange)] sm:text-3xl">1,000,000+</div>
-              <div className="mt-1 text-xs font-semibold uppercase tracking-wider text-white/60">Cumulative Passengers (12+ Years)</div>
+              <div className="text-2xl font-black text-[var(--brand-orange)] sm:text-3xl">Summer &amp; Winter</div>
+              <div className="mt-1 text-xs font-semibold uppercase tracking-wider text-white/60">Party at Red Rocks &amp; GoSno</div>
             </div>
           </div>
         </section>
@@ -168,18 +218,35 @@ export default function AboutPage() {
 
         <section className="brand-panel rounded-[30px] p-6 sm:p-8">
           <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">
-            Current Service
+            Fleet &amp; Current Service
           </div>
-          <article className="brand-card mt-6 rounded-[26px] p-6">
-            <h3 className="text-2xl font-black uppercase tracking-[-0.03em] text-white">Private Transportation</h3>
-            <p className="mt-3 max-w-3xl text-sm leading-6 text-white/70">
-              Party at Red Rocks currently offers private transportation only. The Private Suburban is the standard option, with a private van upgrade for groups that need more room.
-            </p>
-            <Link href="/book/red-rocks-amphitheatre/private" className="brand-link mt-5 inline-flex items-center text-sm font-bold">
-              View Private Vehicles
-              <ArrowRight className="ml-1 h-4 w-4" />
-            </Link>
-          </article>
+          <div className="mt-6 grid gap-4 lg:grid-cols-2">
+            <article className="brand-card rounded-[26px] p-6">
+              <h3 className="text-2xl font-black uppercase tracking-[-0.03em] text-white">Private Concert Fleet</h3>
+              <p className="mt-3 text-sm leading-6 text-white/70">
+                Party at Red Rocks offers private transportation only: the Private Suburban ($399 for up to 6 passengers) and the Private Van ($599 for up to 10 passengers). All rides are prearranged and subject to live vehicle and schedule availability.
+              </p>
+              <Link href="/book/red-rocks-amphitheatre/private" className="brand-link mt-5 inline-flex items-center text-sm font-bold">
+                View Private Vehicles
+                <ArrowRight className="ml-1 h-4 w-4" />
+              </Link>
+            </article>
+            <article className="brand-card rounded-[26px] p-6">
+              <h3 className="text-2xl font-black uppercase tracking-[-0.03em] text-white">Winter Ski Season: GoSno</h3>
+              <p className="mt-3 text-sm leading-6 text-white/70">
+                Outside the Red Rocks concert calendar, the same Colorado transportation operation runs GoSno during the winter ski season, providing private SUV and passenger-van airport transfers between Denver (DEN), Colorado Springs (COS), and Colorado mountain resorts.
+              </p>
+              <a
+                href="https://gosno.co"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="brand-link mt-5 inline-flex items-center text-sm font-bold"
+              >
+                Visit GoSno Winter Ski Transfers
+                <ArrowRight className="ml-1 h-4 w-4" />
+              </a>
+            </article>
+          </div>
         </section>
 
         <section className="brand-panel rounded-[30px] p-6 sm:p-8">

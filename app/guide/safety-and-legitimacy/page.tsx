@@ -4,10 +4,12 @@ export default function SafetyAndLegitimacy() {
   const safetySchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
+    "@id": "https://www.partyatredrocks.com/#organization",
     "name": "Party at Red Rocks",
-    "description": "Transportation provider for Red Rocks and Denver venues with vetted drivers and commercial insurance coverage.",
+    "url": "https://www.partyatredrocks.com/",
+    "description": "Independent Colorado transportation provider for Red Rocks and Denver venues with vetted drivers and commercial insurance coverage.",
     "areaServed": ["Denver", "Boulder", "Morrison"],
-    "telephone": "+17203696292"
+    "telephone": "+1-720-369-6292"
   };
 
   return (

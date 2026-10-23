@@ -54,9 +54,10 @@ export function buildVenueBookingJsonLd(input: { venue: string; venueName: strin
         : `${input.venueName} transportation booking`,
     provider: {
       "@type": "LocalBusiness",
+      "@id": `${SITE}/#organization`,
       name: "Party at Red Rocks",
       url: SITE,
-      telephone: "+17203696292",
+      telephone: "+1-720-369-6292",
     },
     areaServed: ["Denver, CO", "Golden, CO", "Morrison, CO"],
     serviceType:
@@ -114,9 +115,10 @@ export function buildPrivateBookingJsonLd(input: { venue: string; quantity: numb
     name: "Private Red Rocks transportation",
     provider: {
       "@type": "LocalBusiness",
+      "@id": `${SITE}/#organization`,
       name: "Party at Red Rocks",
       url: SITE,
-      telephone: "+17203696292",
+      telephone: "+1-720-369-6292",
     },
     areaServed: ["Denver, CO", "Golden, CO", "Morrison, CO"],
     serviceType: "Private concert transportation",
@@ -239,9 +241,10 @@ export function buildPrivateOptionJsonLd(input: {
       description: input.optionBody,
       provider: {
         "@type": "LocalBusiness",
+        "@id": `${SITE}/#organization`,
         name: "Party at Red Rocks",
         url: SITE,
-        telephone: "+17203696292",
+        telephone: "+1-720-369-6292",
       },
       areaServed: ["Denver, CO", "Golden, CO", "Morrison, CO"],
       serviceType: "Private concert transportation",

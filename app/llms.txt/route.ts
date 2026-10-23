@@ -7,10 +7,10 @@ Portfolio graph: https://www.destinationcommandcenter.com/api/public/portfolio-f
 Agent contract: https://www.partyatredrocks.com/agent.json
 Last verified: 2026-08-24
 
-Party at Red Rocks is a private Red Rocks concert transportation service.
+Party at Red Rocks is a private Red Rocks concert transportation service operating in Colorado since 2014 with 24/7 scheduled service subject to live availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and GoSno (https://gosno.co) during the winter ski season.
 
 ## Current public service model
-- Private transportation only.
+- Private transportation only (subject to live vehicle and schedule availability).
 - Published private Suburban price: $399.
 - Published private van price: $599.
 - Shared-seat service is not part of the current public offer.

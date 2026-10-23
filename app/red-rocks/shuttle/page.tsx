@@ -92,13 +92,16 @@ export default async function RedRocksShuttlePage({
         name: "Private Red Rocks Transportation & Shuttle Service",
         provider: {
           "@type": "LocalBusiness",
+          "@id": `${SITE}/#organization`,
           name: "Party at Red Rocks",
           url: SITE,
-          telephone: "+1-303-555-0199",
+          telephone: "+1-720-369-6292",
           address: {
             "@type": "PostalAddress",
+            streetAddress: "1020 15th St Apt 21K",
             addressLocality: "Denver",
             addressRegion: "CO",
+            postalCode: "80202",
             addressCountry: "US",
           },
         },
