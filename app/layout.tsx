@@ -88,27 +88,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${headingFont.variable} ${bodyAccentFont.variable} bg-surface text-default`}>
         <DisplayTheme />
         <SiteNav />
-        <aside
-          role="status"
-          aria-label="Red Rocks transportation availability"
-          style={{
-            margin: "0 auto 16px",
-            padding: "14px 20px",
-            width: "calc(100% - 32px)",
-            maxWidth: "1200px",
-            boxSizing: "border-box",
-            border: "2px solid #d49315",
-            borderRadius: "12px",
-            background: "#fff4ce",
-            color: "#30220b",
-            textAlign: "center",
-            fontSize: "16px",
-            lineHeight: 1.5,
-          }}
-        >
-          <strong>Sold out: October 19 &amp; 20, 2026.</strong>{" "}
-          All Red Rocks transportation is fully booked on these dates. Please select another date.
-        </aside>
         {children}
         <SiteFooter />
       </body>
