@@ -1,6 +1,34 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const INTERNAL_OPS_COOKIE = "internal_ops_auth";
+const PARR_TRIP_CTX_COOKIE = "parr_trip_ctx";
+const DCC_CTX_TOKEN_PATTERN = /^dcc_ctx_[A-Za-z0-9_-]{6,128}$/;
+const FORBIDDEN_URL_PII_PARAMS = [
+  "name",
+  "fullname",
+  "first_name",
+  "last_name",
+  "passengername",
+  "email",
+  "phone",
+  "weight",
+  "weights",
+  "passengerweight",
+  "passengerweightlbs",
+  "maxpassengerweightlbs",
+  "accessibility",
+  "mobilitynotes",
+  "medicalnotes",
+  "bookingref",
+  "bookingreference",
+  "confirmationnumber",
+  "cabin",
+  "cabinnumber",
+  "stateroom",
+  "stateroomnumber",
+  "privatenotes",
+  "internalnotes",
+];
 
 function parseBasicAuth(header: string | null): { user: string; pass: string } | null {
   if (!header || !header.startsWith("Basic ")) return null;
@@ -31,7 +59,46 @@ function isInternalOpsAuthorized(req: NextRequest): boolean {
 }
 
 export function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
+  const { pathname, searchParams } = req.nextUrl;
+
+  if (
+    !pathname.startsWith("/_next/") &&
+    !pathname.startsWith("/api/") &&
+    pathname !== "/.well-known/dcc-site"
+  ) {
+    const rawCtx = searchParams.get("ctx") || searchParams.get("context_id");
+    const validCtx = rawCtx && DCC_CTX_TOKEN_PATTERN.test(rawCtx.trim()) ? rawCtx.trim() : null;
+    const hasCtxParam = searchParams.has("ctx") || searchParams.has("context_id");
+    let hasForbiddenPii = false;
+    for (const key of Array.from(searchParams.keys())) {
+      if (FORBIDDEN_URL_PII_PARAMS.includes(key.toLowerCase())) {
+        hasForbiddenPii = true;
+        break;
+      }
+    }
+
+    if (hasCtxParam || hasForbiddenPii) {
+      const cleanUrl = req.nextUrl.clone();
+      cleanUrl.searchParams.delete("ctx");
+      cleanUrl.searchParams.delete("context_id");
+      for (const key of Array.from(cleanUrl.searchParams.keys())) {
+        if (FORBIDDEN_URL_PII_PARAMS.includes(key.toLowerCase())) {
+          cleanUrl.searchParams.delete(key);
+        }
+      }
+      const redirectRes = NextResponse.redirect(cleanUrl, 302);
+      if (validCtx) {
+        redirectRes.cookies.set(PARR_TRIP_CTX_COOKIE, validCtx, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "lax",
+          path: "/",
+          maxAge: 60 * 60 * 24 * 7,
+        });
+      }
+      return redirectRes;
+    }
+  }
 
   const isInternalOpsPath =
     pathname === "/internal/orders" ||
@@ -169,6 +236,7 @@ export function middleware(req: NextRequest) {
   if (
     pathname === "/robots.txt" ||
     pathname === "/sitemap.xml" ||
+    pathname === "/.well-known/dcc-site" ||
     pathname.startsWith("/api/") ||
     pathname.startsWith("/_next/") ||
     pathname === "/favicon.ico"
