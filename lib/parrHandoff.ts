@@ -9,7 +9,9 @@ export const PARR_CANONICAL_HANDOFFS = {
 export const DCC_HANDOFF_QUERY_KEYS = [
   "ref",
   "dcc",
+  "ctx",
   "utm_source",
+  "utm_medium",
   "utm_campaign",
   "dcc_handoff_id",
   "handoff_id",

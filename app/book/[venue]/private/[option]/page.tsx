@@ -87,7 +87,7 @@ export default async function PrivateOptionPage({
     optionPriceLabel: rideOption.priceLabel,
     quantity: vehicleQty,
   });
-  const artist = firstValue(sp, "artist");
+  const artist = firstValue(sp, "artist") || firstValue(sp, "event");
   const dateRaw = firstValue(sp, "date");
   const dateLabel = dateRaw
     ? new Date(`${dateRaw}T12:00:00`).toLocaleDateString("en-US", {
@@ -167,6 +167,8 @@ export default async function PrivateOptionPage({
                 eventMeta={{
                   venue,
                   option: rideOption.slug,
+                  ...(artist ? { artist } : {}),
+                  ...(dateRaw ? { date: dateRaw } : {}),
                 }}
               />
             ) : (

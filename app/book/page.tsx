@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import ServedVenueSections from "@/components/venues/ServedVenueSections";
 import {
+  appendSearchParams,
   buildBookingHref,
   normalizeVenueSlug,
   type HandoffSearchParams,
@@ -26,7 +27,7 @@ export default async function BookPage({
   if (venue) {
     redirect(buildBookingHref({ target: "venue", venue, searchParams: sp }));
   }
-  redirect("/book/red-rocks-amphitheatre/private/suv");
+  redirect(appendSearchParams("/book/red-rocks-amphitheatre/private/suv", sp));
 
   return (
     <main className="min-h-screen bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">

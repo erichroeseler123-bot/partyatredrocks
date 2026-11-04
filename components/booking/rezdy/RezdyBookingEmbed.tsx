@@ -22,8 +22,13 @@ const TRACKING_QUERY_KEYS = [
   "decision_corridor",
   "ref",
   "dcc",
+  "ctx",
   "utm_source",
+  "utm_medium",
   "utm_campaign",
+  "date",
+  "artist",
+  "event",
 ] as const;
 
 function readTrackingContext() {
