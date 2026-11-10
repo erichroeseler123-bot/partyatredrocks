@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { WebhooksHelper } from "square";
 import { getInternalOrderById } from "@/lib/orders";
-import { sendSharedBookingConfirmation } from "@/lib/sharedConfirmation";
+import { sendSharedBookingConfirmation, VERIFIED_SUPPORT_CONTACT } from "@/lib/sharedConfirmation";
 import { confirmSharedPayment, getSharedHoldBySquareOrderId } from "@/lib/sharedInventory";
 import { squareClient, squareWebhookSignatureKey, squareWebhookUrl } from "@/lib/square";
 
@@ -97,10 +97,18 @@ export async function POST(request: Request) {
     payload,
   });
 
+  let confirmationEmailSent = false;
   if (!result.alreadyConfirmed) {
     const order = await getInternalOrderById(internalOrderId);
-    await sendSharedBookingConfirmation(order).catch(() => undefined);
+    const emailResult = await sendSharedBookingConfirmation(order).catch(() => ({ sent: false as const }));
+    confirmationEmailSent = Boolean(emailResult?.sent);
   }
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({
+    ok: true,
+    confirmationEmailSent,
+    supportEmail: VERIFIED_SUPPORT_CONTACT.email,
+    supportPhone: VERIFIED_SUPPORT_CONTACT.phone,
+    support: VERIFIED_SUPPORT_CONTACT,
+  });
 }

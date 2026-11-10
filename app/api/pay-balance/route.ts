@@ -1,11 +1,12 @@
-import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
+import { buildSquarePaymentIdempotencyKey } from "@/lib/blobVault";
 import {
   appendInternalOrderEvent,
   getInternalOrderByAnyReference,
+  getInternalOrderById,
   updateInternalOrderPaymentById,
 } from "@/lib/orders";
-import { sendSharedBookingConfirmation } from "@/lib/sharedConfirmation";
+import { sendSharedBookingConfirmation, VERIFIED_SUPPORT_CONTACT } from "@/lib/sharedConfirmation";
 import { confirmSharedPayment } from "@/lib/sharedInventory";
 import { siteOrigin, squareClient, squareLocationId } from "@/lib/square";
 
@@ -54,11 +55,19 @@ export async function POST(request: Request) {
   const totalDue = numberValue(order.payment?.totalDue);
   const totalPaid = numberValue(order.payment?.totalPaid);
   const remainingDue = Math.max(0, totalDue - totalPaid);
+  const successUrl = `${siteOrigin()}/booking/${encodeURIComponent(order.bookingToken || order.internalOrderId)}`;
   if (!totalDue || remainingDue <= 0 || order.payment?.status === "paid") {
     return NextResponse.json({
       ok: true,
       alreadyPaid: true,
-      successUrl: `${siteOrigin()}/booking/${encodeURIComponent(order.bookingToken || order.internalOrderId)}`,
+      internalOrderId: order.internalOrderId,
+      bookingToken: order.bookingToken || null,
+      successUrl,
+      redirectUrl: successUrl,
+      confirmationEmailSent: Boolean(order.payment?.confirmationEmailSent),
+      supportEmail: VERIFIED_SUPPORT_CONTACT.email,
+      supportPhone: VERIFIED_SUPPORT_CONTACT.phone,
+      support: VERIFIED_SUPPORT_CONTACT,
     });
   }
 
@@ -66,13 +75,20 @@ export async function POST(request: Request) {
     stringValue(order.payment?.squareOrderId) ||
     stringValue(order.booking?.squareOrderId) ||
     stringValue(order.booking?.orderNumber);
+  const amountCents = Math.round(remainingDue * 100);
+  const idempotencyKey = buildSquarePaymentIdempotencyKey(
+    "balance",
+    order.internalOrderId,
+    sourceId,
+    amountCents,
+  );
 
   try {
     const response = await squareClient().payments.create({
       sourceId,
-      idempotencyKey: randomUUID(),
+      idempotencyKey,
       amountMoney: {
-        amount: BigInt(Math.round(remainingDue * 100)),
+        amount: BigInt(amountCents),
         currency: "USD",
       },
       autocomplete: true,
@@ -84,11 +100,17 @@ export async function POST(request: Request) {
 
     const payment = response.payment;
     if (!payment || payment.status !== "COMPLETED") {
-      return NextResponse.json({ error: "Square did not complete the payment" }, { status: 409 });
+      return NextResponse.json({
+        error: "Square did not complete the payment",
+        supportEmail: VERIFIED_SUPPORT_CONTACT.email,
+        supportPhone: VERIFIED_SUPPORT_CONTACT.phone,
+        support: VERIFIED_SUPPORT_CONTACT,
+      }, { status: 409 });
     }
 
+    let confirmationEmailSent = false;
     if (isSharedOrder(order.productCode)) {
-      await confirmSharedPayment({
+      const sharedResult = await confirmSharedPayment({
         internalOrderId: order.internalOrderId,
         squareOrderId: typeof payment.orderId === "string" ? payment.orderId : squareOrderId,
         squarePaymentId: typeof payment.id === "string" ? payment.id : null,
@@ -113,6 +135,11 @@ export async function POST(request: Request) {
           totalPaid: totalDue,
         },
       }).catch(() => undefined);
+      if (!sharedResult.alreadyConfirmed) {
+        const refreshed = await getInternalOrderById(order.internalOrderId);
+        const emailResult = await sendSharedBookingConfirmation(refreshed).catch(() => ({ sent: false as const }));
+        confirmationEmailSent = Boolean(emailResult?.sent);
+      }
     } else {
       const updated = await updateInternalOrderPaymentById(order.internalOrderId, {
         bookingStatus: "confirmed",
@@ -145,15 +172,28 @@ export async function POST(request: Request) {
           totalPaid: totalDue,
         },
       });
-      await sendSharedBookingConfirmation(updated).catch(() => undefined);
+      const emailResult = await sendSharedBookingConfirmation(updated).catch(() => ({ sent: false as const }));
+      confirmationEmailSent = Boolean(emailResult?.sent);
     }
 
     return NextResponse.json({
       ok: true,
-      successUrl: `${siteOrigin()}/booking/${encodeURIComponent(order.bookingToken || order.internalOrderId)}`,
+      internalOrderId: order.internalOrderId,
+      bookingToken: order.bookingToken || null,
+      successUrl,
+      redirectUrl: successUrl,
+      confirmationEmailSent,
+      supportEmail: VERIFIED_SUPPORT_CONTACT.email,
+      supportPhone: VERIFIED_SUPPORT_CONTACT.phone,
+      support: VERIFIED_SUPPORT_CONTACT,
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Failed to process payment";
-    return NextResponse.json({ error: message }, { status: 409 });
+    return NextResponse.json({
+      error: message,
+      supportEmail: VERIFIED_SUPPORT_CONTACT.email,
+      supportPhone: VERIFIED_SUPPORT_CONTACT.phone,
+      support: VERIFIED_SUPPORT_CONTACT,
+    }, { status: 409 });
   }
 }

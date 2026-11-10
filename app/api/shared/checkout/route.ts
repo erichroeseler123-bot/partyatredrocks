@@ -8,6 +8,7 @@ import {
 } from "@/lib/sharedInventory";
 import { createSharedSquareOrder, squareApplicationId, squareLocationId } from "@/lib/square";
 import { isSupportedPhoneCountry, normalizePhoneNumber } from "@/lib/phone";
+import { VERIFIED_SUPPORT_CONTACT } from "@/lib/sharedConfirmation";
 
 export const runtime = "nodejs";
 
@@ -114,6 +115,8 @@ export async function POST(request: Request) {
     return NextResponse.json({
       ok: true,
       internalOrderId: pending.internalOrderId,
+      checkoutSessionId: pending.internalOrderId,
+      bookingToken: pending.bookingToken,
       expiresAt: pending.expiresAt,
       squareOrderId: squareOrder.squareOrderId,
       squareApplicationId: squareApplicationId(),
@@ -122,6 +125,9 @@ export async function POST(request: Request) {
       paymentProvider: "square",
       bookingStatus: "pending_payment",
       paymentStatus: "unpaid",
+      supportEmail: VERIFIED_SUPPORT_CONTACT.email,
+      supportPhone: VERIFIED_SUPPORT_CONTACT.phone,
+      support: VERIFIED_SUPPORT_CONTACT,
     });
   } catch (error) {
     if (pending?.internalOrderId) {

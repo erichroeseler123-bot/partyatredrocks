@@ -48,6 +48,18 @@ function readTrackingContext() {
   return context;
 }
 
+function toDirectRezdyBookingUrl(embedUrl: string): string {
+  try {
+    const parsed = new URL(embedUrl);
+    parsed.searchParams.delete("iframe");
+    return parsed.toString();
+  } catch {
+    return embedUrl.replace(/([?&])iframe=true(&|$)/, (_match, prefix, suffix) =>
+      prefix === "?" && suffix === "&" ? "?" : suffix
+    );
+  }
+}
+
 export function RezdyBookingEmbed({
   page,
   surface,
@@ -58,6 +70,8 @@ export function RezdyBookingEmbed({
   rezdyUrl,
   eventMeta,
 }: RezdyBookingEmbedProps) {
+  const directBookingUrl = toDirectRezdyBookingUrl(rezdyUrl);
+
   useEffect(() => {
     const payload = {
       surface,
@@ -89,6 +103,20 @@ export function RezdyBookingEmbed({
         <p className="mt-3 max-w-3xl text-sm leading-6 text-white/76 sm:text-[15px]">
           {subtitle}
         </p>
+        <div className="mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-white/10 pt-3 text-xs text-white/75">
+          <span>
+            Having trouble viewing the embedded calendar in a strict browser?
+          </span>
+          <a
+            href={directBookingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-testid="rezdy-direct-booking-fallback"
+            className="inline-flex items-center gap-1 rounded-full border border-[#ffb07c]/40 bg-[#ffb07c]/15 px-3 py-1 font-bold text-[#ffb07c] transition hover:bg-[#ffb07c]/25"
+          >
+            Open direct {productName} booking page ↗
+          </a>
+        </div>
       </div>
       <div className="w-full min-w-0 overflow-hidden rounded-[22px] bg-white p-2">
         <iframe

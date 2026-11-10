@@ -49,7 +49,7 @@ export function buildSharedBookingJsonLd(path: string) {
         name: "Party at Red Rocks",
         url: SITE,
         telephone: "+17203696292",
-        email: "contact@partyatredrocks.com",
+        email: "hello@partyatredrocks.com",
       },
       areaServed: [
         { "@type": "City", name: "Denver, CO" },

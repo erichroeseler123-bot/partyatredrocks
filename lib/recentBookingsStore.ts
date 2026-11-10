@@ -4,7 +4,10 @@ import { blobReadJson, blobWriteJson } from "@/lib/blobJson";
 import type { RecentBooking } from "@/lib/recentBookings";
 import { recentBookingKey } from "@/lib/recentBookings";
 
-const RECENT_BOOKINGS_PATH = "cache/recent-bookings.json";
+function recentBookingsBlobPath() {
+  const prefix = process.env.VERCEL_ENV === "preview" ? "preview/" : "";
+  return `${prefix}cache/recent-bookings.json`;
+}
 const MAX_RECENT_BOOKINGS = 20;
 
 type RecentBookingFeed = {
@@ -60,7 +63,7 @@ function normalizeFeed(value: unknown): RecentBookingFeed {
 }
 
 export async function listRecentBookings(): Promise<RecentBooking[]> {
-  const feed = await blobReadJson<RecentBookingFeed>(RECENT_BOOKINGS_PATH, { revalidateSeconds: 0 }).catch(
+  const feed = await blobReadJson<RecentBookingFeed>(recentBookingsBlobPath(), { revalidateSeconds: 0 }).catch(
     () => null
   );
   return normalizeFeed(feed).bookings;
@@ -70,8 +73,9 @@ export async function appendRecentBooking(booking: RecentBooking): Promise<void>
   const normalized = normalizeRecentBooking(booking);
   if (!normalized) return;
 
+  const blobPath = recentBookingsBlobPath();
   const current = normalizeFeed(
-    await blobReadJson<RecentBookingFeed>(RECENT_BOOKINGS_PATH, { revalidateSeconds: 0 }).catch(() => null)
+    await blobReadJson<RecentBookingFeed>(blobPath, { revalidateSeconds: 0 }).catch(() => null)
   );
   const next = [normalized, ...current.bookings].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
   const deduped: RecentBooking[] = [];
@@ -86,7 +90,7 @@ export async function appendRecentBooking(booking: RecentBooking): Promise<void>
   }
 
   await blobWriteJson(
-    RECENT_BOOKINGS_PATH,
+    blobPath,
     {
       updatedAt: new Date().toISOString(),
       bookings: deduped,

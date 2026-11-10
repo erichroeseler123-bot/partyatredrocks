@@ -4,12 +4,13 @@ import { appendFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import type { InternalOrderRow } from '@/lib/orders';
 import { blobReadText, blobWriteText } from '@/lib/blobJson';
+import { decryptVaultText, encryptVaultText, vaultBlobPath } from '@/lib/blobVault';
 
 type LedgerOptions = {
   eventType?: string;
 };
 
-const BOOKING_LEDGER_BLOB_PATH = 'cache/orders/booking-ledger.csv';
+const LEGACY_BOOKING_LEDGER_BLOB_PATH = 'cache/orders/booking-ledger.csv';
 const HEADER = [
   'recorded_at',
   'event_type',
@@ -93,18 +94,50 @@ function hasInternalOrder(csv: string, internalOrderId: string) {
   return csv.split('\n').some((line) => line.includes(needle));
 }
 
+async function loadBlobLedgerCsv(): Promise<string> {
+  const ledgerVaultPath = vaultBlobPath('ledger', 'enc.json');
+  const encryptedRaw = await blobReadText(ledgerVaultPath, { revalidateSeconds: 0 }).catch(() => null);
+  if (encryptedRaw !== null) {
+    try {
+      return decryptVaultText(encryptedRaw);
+    } catch {
+      return '';
+    }
+  }
+
+  if (process.env.VERCEL_ENV !== 'preview') {
+    const legacyRaw = await blobReadText(LEGACY_BOOKING_LEDGER_BLOB_PATH, { revalidateSeconds: 0 }).catch(() => null);
+    if (legacyRaw !== null) {
+      try {
+        return decryptVaultText(legacyRaw);
+      } catch {
+        return '';
+      }
+    }
+  }
+
+  return '';
+}
+
+export async function readBookingLedgerCsv(): Promise<string> {
+  if (useBlobLedger()) {
+    return loadBlobLedgerCsv();
+  }
+  return readFile(ledgerPath(), 'utf8').catch(() => '');
+}
+
 export async function appendBookingLedgerRow(order: InternalOrderRow, options?: LedgerOptions) {
   const line = toLedgerLine(order, options);
 
   if (useBlobLedger()) {
-    const current = (await blobReadText(BOOKING_LEDGER_BLOB_PATH, { revalidateSeconds: 0 }).catch(() => null)) ?? '';
+    const current = await loadBlobLedgerCsv();
     if (hasInternalOrder(current, order.internalOrderId)) return;
-    const next = current.trim()
+    const nextCsv = current.trim()
       ? `${current.trimEnd()}\n${line}\n`
       : `${HEADER}\n${line}\n`;
-    await blobWriteText(BOOKING_LEDGER_BLOB_PATH, next, {
+    await blobWriteText(vaultBlobPath('ledger', 'enc.json'), encryptVaultText(nextCsv), {
       cacheControlMaxAge: 60,
-      contentType: 'text/csv; charset=utf-8',
+      contentType: 'application/octet-stream',
     });
     return;
   }

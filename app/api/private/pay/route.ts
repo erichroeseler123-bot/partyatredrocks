@@ -1,9 +1,9 @@
-import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { SquareError } from "square";
+import { buildSquarePaymentIdempotencyKey } from "@/lib/blobVault";
 import { getInternalOrderById, updateInternalOrderPaymentById } from "@/lib/orders";
 import { PRIVATE_RIDE_OPTIONS } from "@/lib/rideCatalog";
-import { sendSharedBookingConfirmation } from "@/lib/sharedConfirmation";
+import { sendSharedBookingConfirmation, VERIFIED_SUPPORT_CONTACT } from "@/lib/sharedConfirmation";
 import { siteOrigin, squareClient, squareLocationId } from "@/lib/square";
 
 export const runtime = "nodejs";
@@ -15,6 +15,7 @@ type Body = {
   dccHandoffId?: string;
   bookingToken?: string;
   totalDue?: number;
+  paymentOption?: string;
 };
 
 function requiredString(value: unknown) {
@@ -175,6 +176,34 @@ export async function POST(request: Request) {
   }
 
   const order = await getInternalOrderWithRetry(internalOrderId);
+  const bookingToken = (typeof order?.bookingToken === "string" ? order.bookingToken.trim() : "") || bookingTokenFromBody;
+  const successUrl = `${siteOrigin()}/booking/${encodeURIComponent(bookingToken || internalOrderId)}`;
+
+  const existingPaymentStatus = typeof order?.payment?.status === "string"
+    ? order.payment.status.trim().toLowerCase()
+    : "";
+  const requestedPaymentOption = requiredString(body.paymentOption).toLowerCase()
+    || (typeof order?.payment?.paymentOption === "string" ? order.payment.paymentOption.trim().toLowerCase() : "");
+  const depositAlreadyCaptured =
+    existingPaymentStatus === "deposit_paid" ||
+    (requestedPaymentOption === "deposit" &&
+      (existingPaymentStatus === "partial" || (positiveMoney(order?.payment?.totalPaid) ?? 0) > 0));
+
+  if (existingPaymentStatus === "paid" || depositAlreadyCaptured) {
+    return NextResponse.json({
+      ok: true,
+      alreadyPaid: true,
+      internalOrderId,
+      bookingToken: bookingToken || null,
+      successUrl,
+      redirectUrl: successUrl,
+      confirmationEmailSent: Boolean(order?.payment?.confirmationEmailSent),
+      supportEmail: VERIFIED_SUPPORT_CONTACT.email,
+      supportPhone: VERIFIED_SUPPORT_CONTACT.phone,
+      support: VERIFIED_SUPPORT_CONTACT,
+    });
+  }
+
   const resolvedSquareOrderId =
     squareOrderId ||
     (typeof order?.payment?.squareOrderId === "string" ? order.payment.squareOrderId.trim() : "") ||
@@ -182,20 +211,32 @@ export async function POST(request: Request) {
   const totalDue =
     resolvePrivateOrderTotalDue(order, totalDueFromBody) ||
     (resolvedSquareOrderId ? await getSquareOrderTotalDue(resolvedSquareOrderId).catch(() => null) : null);
-  const bookingToken = (typeof order?.bookingToken === "string" ? order.bookingToken.trim() : "") || bookingTokenFromBody;
   const dccHandoffId = requiredString(body.dccHandoffId)
     || (typeof order?.payment?.dccHandoffId === "string" ? order.payment.dccHandoffId.trim() : "");
 
   if (!totalDue) {
-    return NextResponse.json({ error: "Checkout is missing order details" }, { status: 409 });
+    return NextResponse.json({
+      error: "Checkout is missing order details",
+      supportEmail: VERIFIED_SUPPORT_CONTACT.email,
+      supportPhone: VERIFIED_SUPPORT_CONTACT.phone,
+      support: VERIFIED_SUPPORT_CONTACT,
+    }, { status: 409 });
   }
+
+  const amountCents = Math.round(totalDue * 100);
+  const idempotencyKey = buildSquarePaymentIdempotencyKey(
+    "private",
+    internalOrderId,
+    sourceId,
+    amountCents,
+  );
 
   try {
     const response = await squareClient().payments.create({
       sourceId,
-      idempotencyKey: randomUUID(),
+      idempotencyKey,
       amountMoney: {
-        amount: BigInt(Math.round(totalDue * 100)),
+        amount: BigInt(amountCents),
         currency: "USD",
       },
       autocomplete: true,
@@ -209,7 +250,12 @@ export async function POST(request: Request) {
 
     const payment = response.payment;
     if (!payment || payment.status !== "COMPLETED") {
-      return NextResponse.json({ error: "Square did not complete the payment" }, { status: 409 });
+      return NextResponse.json({
+        error: "Square did not complete the payment",
+        supportEmail: VERIFIED_SUPPORT_CONTACT.email,
+        supportPhone: VERIFIED_SUPPORT_CONTACT.phone,
+        support: VERIFIED_SUPPORT_CONTACT,
+      }, { status: 409 });
     }
 
     let updatedOrder = null;
@@ -249,11 +295,19 @@ export async function POST(request: Request) {
     if (!updatedOrder) {
       updatedOrder = await getInternalOrderWithRetry(internalOrderId);
     }
-    await sendSharedBookingConfirmation(updatedOrder).catch(() => undefined);
+    const emailResult = await sendSharedBookingConfirmation(updatedOrder).catch(() => ({ sent: false as const }));
+    const confirmationEmailSent = Boolean(emailResult?.sent);
 
     return NextResponse.json({
       ok: true,
-      successUrl: `${siteOrigin()}/booking/${encodeURIComponent(bookingToken || internalOrderId)}`,
+      internalOrderId,
+      bookingToken: bookingToken || null,
+      successUrl,
+      redirectUrl: successUrl,
+      confirmationEmailSent,
+      supportEmail: VERIFIED_SUPPORT_CONTACT.email,
+      supportPhone: VERIFIED_SUPPORT_CONTACT.phone,
+      support: VERIFIED_SUPPORT_CONTACT,
     });
   } catch (error) {
     const paymentError = squarePaymentError(error);
@@ -262,10 +316,18 @@ export async function POST(request: Request) {
         error: paymentError.message,
         code: paymentError.code,
         category: paymentError.category,
+        supportEmail: VERIFIED_SUPPORT_CONTACT.email,
+        supportPhone: VERIFIED_SUPPORT_CONTACT.phone,
+        support: VERIFIED_SUPPORT_CONTACT,
       }, { status: paymentError.status });
     }
 
     const message = error instanceof Error ? error.message : "Failed to process payment";
-    return NextResponse.json({ error: message }, { status: 409 });
+    return NextResponse.json({
+      error: message,
+      supportEmail: VERIFIED_SUPPORT_CONTACT.email,
+      supportPhone: VERIFIED_SUPPORT_CONTACT.phone,
+      support: VERIFIED_SUPPORT_CONTACT,
+    }, { status: 409 });
   }
 }

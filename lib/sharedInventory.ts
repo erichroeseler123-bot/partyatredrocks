@@ -52,7 +52,10 @@ function inventoryPath() {
   return path.join(process.cwd(), "data", "orders", "shared-inventory.json");
 }
 
-const SHARED_INVENTORY_BLOB_PATH = "cache/orders/shared-inventory.json";
+function sharedInventoryBlobPath() {
+  const prefix = process.env.VERCEL_ENV === "preview" ? "preview/" : "";
+  return `${prefix}cache/orders/shared-inventory.json`;
+}
 
 function useBlobSharedInventory() {
   return process.env.VERCEL === "1" && !!process.env.BLOB_READ_WRITE_TOKEN;
@@ -87,7 +90,7 @@ function isRefundEligibleByDate(showDate: string, now = new Date()) {
 
 async function loadState(): Promise<InventoryState> {
   if (useBlobSharedInventory()) {
-    const parsed = await blobReadJson<InventoryState>(SHARED_INVENTORY_BLOB_PATH, { revalidateSeconds: 0 }).catch(() => null);
+    const parsed = await blobReadJson<InventoryState>(sharedInventoryBlobPath(), { revalidateSeconds: 0 }).catch(() => null);
     const holds = parsed && typeof parsed === "object" && parsed.holds && typeof parsed.holds === "object"
       ? parsed.holds
       : {};
@@ -108,7 +111,7 @@ async function loadState(): Promise<InventoryState> {
 async function saveState(state: InventoryState) {
   state.updatedAt = new Date().toISOString();
   if (useBlobSharedInventory()) {
-    await blobWriteJson(SHARED_INVENTORY_BLOB_PATH, state, { cacheControlMaxAge: 60 });
+    await blobWriteJson(sharedInventoryBlobPath(), state, { cacheControlMaxAge: 60 });
     return;
   }
   const file = inventoryPath();

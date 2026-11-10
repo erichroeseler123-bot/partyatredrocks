@@ -13,6 +13,7 @@ import {
 } from "@/lib/rideCatalog";
 import { isSupportedPhoneCountry, normalizePhoneNumber } from "@/lib/phone";
 import { assignPrivateInventory } from "@/lib/parr/fleet";
+import { VERIFIED_SUPPORT_CONTACT } from "@/lib/sharedConfirmation";
 
 export const runtime = "nodejs";
 
@@ -252,5 +253,8 @@ export async function POST(request: Request) {
     inventoryOwner: inventoryAssignment.owner,
     inventoryLabel: inventoryAssignment.label,
     inventoryOverflow: inventoryAssignment.overflow,
+    supportEmail: VERIFIED_SUPPORT_CONTACT.email,
+    supportPhone: VERIFIED_SUPPORT_CONTACT.phone,
+    support: VERIFIED_SUPPORT_CONTACT,
   });
 }

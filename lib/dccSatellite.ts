@@ -294,22 +294,150 @@ export async function postWtaPartnerAcceptedIfNeeded(args: {
   });
 }
 
-export function getDccReturnHref(searchParams?: HandoffSearchParams) {
-  const raw = firstValue(searchParams, "dcc_return");
-  if (!raw) return null;
+const ALLOWED_DCC_RETURN_HOSTS = new Set([
+  "destinationcommandcenter.com",
+  "www.destinationcommandcenter.com",
+  "brinkberry.com",
+  "www.brinkberry.com",
+]);
+
+function isAllowedDccReturnUrl(candidate: URL): boolean {
+  if (candidate.username || candidate.password) return false;
+  const host = candidate.hostname.toLowerCase();
+  if (candidate.protocol === "https:" && ALLOWED_DCC_RETURN_HOSTS.has(host)) {
+    return !candidate.port || candidate.port === "443";
+  }
   try {
-    return new URL(raw, DCC_ORIGIN).toString();
+    const configuredDcc = new URL(DCC_ORIGIN);
+    if (
+      (configuredDcc.hostname === "localhost" || configuredDcc.hostname === "127.0.0.1") &&
+      candidate.origin === configuredDcc.origin
+    ) {
+      return true;
+    }
   } catch {
+    // Ignore invalid DCC_ORIGIN override
+  }
+  return false;
+}
+
+export function normalizeValidRedRocksEventId(
+  rawEvent?: string | null,
+  rawArtist?: string | null,
+  eventDate?: string | null,
+): string | undefined {
+  const cleanedEvent = String(rawEvent || "").trim();
+  const cleanedArtist = String(rawArtist || "").trim().toLowerCase().replace(/\.$/, "");
+  const normalizedDate = normalizeEventDate(eventDate);
+
+  if (
+    cleanedEvent.toLowerCase() === "rr-2026-11-14-mike" ||
+    ((cleanedEvent.toLowerCase().replace(/\.$/, "") === "mike" || cleanedArtist === "mike") &&
+      (!normalizedDate || normalizedDate === "2026-11-14"))
+  ) {
+    return "rr-2026-11-14-mike";
+  }
+
+  if (cleanedEvent && /^[a-zA-Z0-9._-]{1,80}$/.test(cleanedEvent) && !cleanedEvent.includes("..")) {
+    return cleanedEvent;
+  }
+  return undefined;
+}
+
+export function validateDccReturnUrl(
+  rawReturnUrl?: string | null,
+  searchParams?: HandoffSearchParams,
+): string | null {
+  const trimmed = String(rawReturnUrl || "").trim();
+  const srcParam = String(firstValue(searchParams, "src") || "").trim().toLowerCase();
+  const utmSource = String(firstValue(searchParams, "utm_source") || "").trim().toLowerCase();
+  const sourceParam = String(firstValue(searchParams, "source") || "").trim().toLowerCase();
+  const hasDccReferral =
+    sourceParam === "dcc" ||
+    srcParam.startsWith("dcc") ||
+    utmSource === "destinationcommandcenter" ||
+    utmSource === "destinationcommandcenter.com";
+
+  let parsed: URL;
+  if (trimmed) {
+    if (
+      trimmed.startsWith("//") ||
+      trimmed.startsWith("/\\") ||
+      trimmed.startsWith("\\") ||
+      /[\r\n\t]/.test(trimmed)
+    ) {
+      return null;
+    }
+    try {
+      parsed = trimmed.startsWith("/")
+        ? new URL(trimmed, "https://www.destinationcommandcenter.com")
+        : new URL(trimmed);
+    } catch {
+      return null;
+    }
+    if (!isAllowedDccReturnUrl(parsed)) {
+      return null;
+    }
+  } else if (hasDccReferral) {
+    parsed = new URL("/red-rocks", "https://www.destinationcommandcenter.com");
+  } else {
     return null;
   }
+
+  // Normalize canonical Red Rocks path on DCC so /red-rocks-amphitheatre never 404s
+  if (
+    parsed.pathname === "/red-rocks-amphitheatre" ||
+    parsed.pathname === "/red-rocks-amphitheatre/"
+  ) {
+    parsed.pathname = "/red-rocks";
+  }
+
+  const eventDate = normalizeEventDate(
+    firstValue(searchParams, "date") || parsed.searchParams.get("date"),
+  );
+  const rawArtist =
+    firstValue(searchParams, "artist") || parsed.searchParams.get("artist") || undefined;
+  const validEventId = normalizeValidRedRocksEventId(
+    firstValue(searchParams, "event") || parsed.searchParams.get("event"),
+    rawArtist,
+    eventDate,
+  );
+
+  if (
+    parsed.pathname === "/red-rocks" ||
+    parsed.pathname === "/venues/red-rocks-amphitheatre"
+  ) {
+    if (eventDate) {
+      parsed.searchParams.set("date", eventDate);
+    }
+    if (validEventId) {
+      parsed.searchParams.set("event", validEventId);
+    } else if (parsed.searchParams.has("event")) {
+      parsed.searchParams.delete("event");
+    }
+    if (rawArtist && rawArtist.trim().length <= 80 && !/[\r\n<>]/.test(rawArtist)) {
+      parsed.searchParams.set("artist", rawArtist.trim());
+    }
+  }
+
+  return parsed.toString();
+}
+
+export function getDccReturnHref(searchParams?: HandoffSearchParams) {
+  const raw = firstValue(searchParams, "dcc_return");
+  return validateDccReturnUrl(raw, searchParams);
 }
 
 export function buildTrackedDccReturnHref(searchParams?: HandoffSearchParams) {
   const context = getDccSatelliteContext(searchParams);
-  if (!context.handoffId || context.source !== "dcc" || !context.returnUrl) return null;
+  const validatedReturnUrl = validateDccReturnUrl(context.returnUrl, searchParams);
+  if (!validatedReturnUrl) return null;
+  if (!context.handoffId || context.source !== "dcc") {
+    return validatedReturnUrl;
+  }
 
   const url = new URL("/handoff/return", SITE_ORIGIN);
-  const query = pickTrackedQueryParams(context);
+  const query = pickTrackedQueryParams({ ...context, returnUrl: validatedReturnUrl });
   query.forEach((value, key) => url.searchParams.set(key, value));
   return url.toString();
 }

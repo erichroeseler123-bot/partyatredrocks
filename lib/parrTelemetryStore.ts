@@ -30,7 +30,10 @@ type ParrTelemetryBlobStore = {
   events: ParrStoredTelemetryEvent[];
 };
 
-const PARR_TELEMETRY_BLOB_PATH = "cache/telemetry/parr-events.json";
+function parrTelemetryBlobPath() {
+  const prefix = process.env.VERCEL_ENV === "preview" ? "preview/" : "";
+  return `${prefix}cache/telemetry/parr-events.json`;
+}
 const MAX_STORED_EVENTS = 1500;
 
 function useBlobStore() {
@@ -84,7 +87,7 @@ function normalizeStore(value: unknown): ParrTelemetryBlobStore {
 }
 
 async function loadBlobStore(): Promise<ParrTelemetryBlobStore> {
-  const value = await blobReadJson<ParrTelemetryBlobStore>(PARR_TELEMETRY_BLOB_PATH, {
+  const value = await blobReadJson<ParrTelemetryBlobStore>(parrTelemetryBlobPath(), {
     revalidateSeconds: 0,
   }).catch(() => null);
   return normalizeStore(value);
@@ -92,7 +95,7 @@ async function loadBlobStore(): Promise<ParrTelemetryBlobStore> {
 
 async function saveBlobStore(store: ParrTelemetryBlobStore) {
   store.updatedAt = new Date().toISOString();
-  await blobWriteJson(PARR_TELEMETRY_BLOB_PATH, store, { cacheControlMaxAge: 60 });
+  await blobWriteJson(parrTelemetryBlobPath(), store, { cacheControlMaxAge: 60 });
 }
 
 async function appendNdjson(event: ParrStoredTelemetryEvent) {

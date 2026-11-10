@@ -46,7 +46,7 @@ const organizationJsonLd = {
       description:
         "Independent Colorado concert transportation provider with 24/7 scheduled service subject to live vehicle and schedule availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and GoSno during the winter ski season.",
       telephone: "+1-720-369-6292",
-      email: "contact@partyatredrocks.com",
+      email: "hello@partyatredrocks.com",
       areaServed: [
         { "@type": "City", name: "Denver, CO" },
         { "@type": "City", name: "Golden, CO" },

@@ -21,6 +21,7 @@ export const DCC_HANDOFF_QUERY_KEYS = [
   "event",
   "artist",
   "qty",
+  "src",
   "source",
   "source_slug",
   "source_page",

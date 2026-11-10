@@ -4,12 +4,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ShieldCheck } from "lucide-react";
 import venuesJson from "@/data/venues.json";
+import { DccReturnBanner } from "@/components/booking/DccReturnBanner";
 import { postDccSatelliteEvent, postWtaPartnerAcceptedIfNeeded } from "@/lib/dccSatellite";
-import type { HandoffSearchParams } from "@/lib/parrHandoff";
+import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
 import { bookingVisuals } from "@/lib/bookingVisuals";
 import { curatedImages } from "@/lib/curatedImages";
 import {
-  buildParrPrivateCheckoutHref,
   getSuburbanDisplayPrice,
   PUBLIC_PRIVATE_RIDE_OPTIONS,
   SUBURBAN_PRICE_LABEL,
@@ -138,7 +138,7 @@ export default async function PrivateOptionsPage({
                 ) : null}
 
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-                  <Link href={buildParrPrivateCheckoutHref(featuredOption.slug, vehicleQty)} className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#62f6ff] bg-[#62f6ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#05111a] shadow-[0_18px_40px_rgba(61,243,255,0.24)] transition hover:bg-[#8cf8ff]">Book Private Suburban</Link>
+                  <Link href={buildBookingHref({ target: "private-option", venue, option: featuredOption.slug, searchParams: sp, overrides: { qty: vehicleQty } })} className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#62f6ff] bg-[#62f6ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#05111a] shadow-[0_18px_40px_rgba(61,243,255,0.24)] transition hover:bg-[#8cf8ff]">Book Private Suburban</Link>
                 </div>
               </div>
 
@@ -150,13 +150,15 @@ export default async function PrivateOptionsPage({
           </div>
         </section>
 
+        <DccReturnBanner searchParams={sp} />
+
         <section id="suv-booking" className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 sm:p-8">
           <div className="text-[22px] font-black uppercase tracking-[0.18em] text-[#ffb07c] sm:text-[24px]">Step 1</div>
           <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">Private Suburban - Up To 6 People - {SUBURBAN_PRICE_LABEL}</h2>
           <p className="mt-3 max-w-2xl text-[15px] leading-7 text-white/74">Tailgating is built in, and the vehicle stays parked in the same spot waiting for your group until the show ends.</p>
 
           <div className="mt-6">
-            <Link href={buildParrPrivateCheckoutHref(featuredOption.slug, vehicleQty)} className="group grid gap-6 rounded-[28px] border border-[#62f6ff]/24 bg-[#09101f] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:border-[#62f6ff]/48 lg:grid-cols-[1.1fr_0.9fr]">
+            <Link href={buildBookingHref({ target: "private-option", venue, option: featuredOption.slug, searchParams: sp, overrides: { qty: vehicleQty } })} className="group grid gap-6 rounded-[28px] border border-[#62f6ff]/24 bg-[#09101f] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:border-[#62f6ff]/48 lg:grid-cols-[1.1fr_0.9fr]">
               <div className="relative min-h-[240px] overflow-hidden rounded-[22px] border border-white/10">
                 <Image src={featuredVisual.imageSrc} alt={featuredVisual.imageAlt} fill className="object-cover" sizes="(min-width: 1024px) 50vw, 100vw" />
               </div>

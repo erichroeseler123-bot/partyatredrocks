@@ -91,6 +91,11 @@ function renderEmail(order: InternalOrderRow) {
   };
 }
 
+export const VERIFIED_SUPPORT_CONTACT = {
+  email: PARR_PUBLIC_FACTS.support.email,
+  phone: PARR_PUBLIC_FACTS.support.phoneDisplay,
+} as const;
+
 export async function sendSharedBookingConfirmation(order: InternalOrderRow | null) {
   if (!order?.customer) return { sent: false as const, reason: "missing_order" as const };
   const apiKey = process.env.RESEND_API_KEY?.trim();
@@ -101,25 +106,32 @@ export async function sendSharedBookingConfirmation(order: InternalOrderRow | nu
   }
 
   const email = renderEmail(order);
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from,
-      to: [to],
-      subject: email.subject,
-      html: email.html,
-    }),
-    cache: "no-store",
-  });
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from,
+        to: [to],
+        subject: email.subject,
+        html: email.html,
+      }),
+      cache: "no-store",
+    });
 
-  if (!res.ok) {
-    const text = await res.text().catch(() => "");
-    throw new Error(`Resend email failed: ${text || res.status}`);
+    if (!res.ok) {
+      return {
+        sent: false as const,
+        reason: "resend_failed" as const,
+        status: res.status,
+      };
+    }
+
+    return { sent: true as const };
+  } catch {
+    return { sent: false as const, reason: "network_error" as const };
   }
-
-  return { sent: true as const };
 }

@@ -4,7 +4,8 @@ import { appendFile, mkdir, readFile } from "node:fs/promises";
 import { existsSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
-import { blobReadJson, blobWriteJson } from "@/lib/blobJson";
+import { blobReadText, blobWriteText } from "@/lib/blobJson";
+import { decryptVaultText, encryptVaultText, vaultBlobPath } from "@/lib/blobVault";
 import { appendBookingLedgerRow } from "@/lib/bookingLedger";
 import {
   assignPrivateInventory,
@@ -113,7 +114,7 @@ function orderDbPath() {
 }
 
 
-const ORDER_BLOB_PATH = "cache/orders/store.json";
+const LEGACY_ORDER_BLOB_PATH = "cache/orders/store.json";
 
 type BlobOrderStore = {
   updatedAt: string;
@@ -142,14 +143,39 @@ function normalizeBlobOrderStore(value: unknown): BlobOrderStore {
   return { updatedAt, orders, events };
 }
 
+function parseBlobOrderStoreText(raw: string): BlobOrderStore {
+  try {
+    const plaintext = decryptVaultText(raw);
+    return normalizeBlobOrderStore(JSON.parse(plaintext));
+  } catch {
+    return emptyBlobOrderStore();
+  }
+}
+
 async function loadBlobOrderStore(): Promise<BlobOrderStore> {
-  const value = await blobReadJson<BlobOrderStore>(ORDER_BLOB_PATH, { revalidateSeconds: 0 }).catch(() => null);
-  return normalizeBlobOrderStore(value);
+  const vaultPath = vaultBlobPath("vault", "enc.json");
+  const encryptedRaw = await blobReadText(vaultPath, { revalidateSeconds: 0 }).catch(() => null);
+  if (encryptedRaw !== null) {
+    return parseBlobOrderStoreText(encryptedRaw);
+  }
+
+  if (process.env.VERCEL_ENV !== "preview") {
+    const legacyRaw = await blobReadText(LEGACY_ORDER_BLOB_PATH, { revalidateSeconds: 0 }).catch(() => null);
+    if (legacyRaw !== null) {
+      return parseBlobOrderStoreText(legacyRaw);
+    }
+  }
+
+  return emptyBlobOrderStore();
 }
 
 async function saveBlobOrderStore(state: BlobOrderStore) {
   state.updatedAt = new Date().toISOString();
-  await blobWriteJson(ORDER_BLOB_PATH, state, { cacheControlMaxAge: 60 });
+  const ciphertext = encryptVaultText(JSON.stringify(state));
+  await blobWriteText(vaultBlobPath("vault", "enc.json"), ciphertext, {
+    cacheControlMaxAge: 60,
+    contentType: "application/octet-stream",
+  });
 }
 
 function sortOrdersDesc(rows: InternalOrderRow[]) {
@@ -278,9 +304,11 @@ function normalizePaymentStatus(value: string | null): string | null {
   const lower = value.trim().toLowerCase();
   if (!lower) return null;
   if (lower === "paid") return "paid";
+  if (lower === "deposit_paid") return "deposit_paid";
   if (lower === "unpaid") return "unpaid";
   if (lower === "partial") return "partial";
   if (lower.includes("unpaid") || lower.includes("not_paid") || lower.includes("payment_due")) return "unpaid";
+  if (lower.includes("deposit")) return "deposit_paid";
   if (lower.includes("partial")) return "partial";
   if (lower.includes("paid")) return "paid";
   return lower;
