@@ -20,7 +20,7 @@ function readFiniteNumber(value: unknown): number {
   return typeof value === "number" && Number.isFinite(value) ? value : 0;
 }
 
-export function isSyntheticTestOrder(order: InternalOrderRow): boolean {
+function isSyntheticTestOrder(order: InternalOrderRow): boolean {
   const customer = order.customer ?? {};
   const firstName = readString(customer.firstName).toLowerCase();
   const lastName = readString(customer.lastName).toLowerCase();
@@ -49,7 +49,7 @@ export function isSyntheticTestOrder(order: InternalOrderRow): boolean {
   return false;
 }
 
-export function summarizeOwnerOrders28d(orders: InternalOrderRow[], now: Date = new Date()) {
+function summarizeOwnerOrders28d(orders: InternalOrderRow[], now: Date = new Date()) {
   const windowStartMs = now.getTime() - 28 * 24 * 60 * 60 * 1000;
 
   const liveOrders28d = orders.filter((order) => {

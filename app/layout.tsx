@@ -1,5 +1,5 @@
+import type { CSSProperties } from "react";
 import type { Metadata } from "next";
-import { Montserrat, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import SiteNav from "@/components/SiteNav";
 import DisplayTheme from "@/components/DisplayTheme";
@@ -7,19 +7,10 @@ import SiteFooter from "@/components/SiteFooter";
 import { BOOKING_COPY } from "@/lib/bookingCopy";
 import { pageVisuals } from "@/lib/pageVisuals";
 
-const headingFont = Montserrat({
-  subsets: ["latin"],
-  variable: "--font-heading",
-  weight: ["600", "700", "800", "900"],
-  display: "swap",
-});
-
-const bodyAccentFont = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-accent",
-  weight: ["600", "700"],
-  display: "swap",
-});
+const FONT_VARIABLES = {
+  "--font-heading": '"Montserrat", "Avenir Next", "Segoe UI", sans-serif',
+  "--font-accent": '"Playfair Display", Georgia, serif',
+} as CSSProperties;
 
 const DEFAULT_SHARE_IMAGE = pageVisuals.layout.shareImage;
 
@@ -85,7 +76,15 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${headingFont.variable} ${bodyAccentFont.variable} bg-surface text-default`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Playfair+Display:wght@600;700&display=swap"
+        />
+      </head>
+      <body style={FONT_VARIABLES} className="bg-surface text-default">
         <DisplayTheme />
         <SiteNav />
         {children}
