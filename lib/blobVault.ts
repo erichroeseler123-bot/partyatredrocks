@@ -8,6 +8,12 @@ export type VaultEnvelopeV1 = {
   ct: string;
 };
 
+export function isVaultEncryptionConfigured(): boolean {
+  return Boolean(
+    process.env.PARR_SECRET?.trim() || process.env.BLOB_READ_WRITE_TOKEN?.trim(),
+  );
+}
+
 function deriveVaultKey(): Buffer {
   const secret =
     process.env.PARR_SECRET ||

@@ -30,6 +30,26 @@ const FORBIDDEN_URL_PII_PARAMS = [
   "internalnotes",
 ];
 
+function constantTimeEqual(actual: string, expected: string): boolean {
+  const encoder = new TextEncoder();
+  const actualBytes = encoder.encode(actual);
+  const expectedBytes = encoder.encode(expected);
+  const length = Math.max(actualBytes.length, expectedBytes.length);
+  let diff = actualBytes.length ^ expectedBytes.length;
+  for (let i = 0; i < length; i += 1) {
+    diff |= (actualBytes[i] ?? 0) ^ (expectedBytes[i] ?? 0);
+  }
+  return diff === 0;
+}
+
+function parseBearerToken(header: string | null): string | null {
+  if (!header) return null;
+  const match = header.match(/^Bearer\s+(.+)$/i);
+  if (!match) return null;
+  const token = match[1].trim();
+  return token || null;
+}
+
 function parseBasicAuth(header: string | null): { user: string; pass: string } | null {
   if (!header || !header.startsWith("Basic ")) return null;
   const encoded = header.slice("Basic ".length).trim();
@@ -47,15 +67,53 @@ function parseBasicAuth(header: string | null): { user: string; pass: string } |
   }
 }
 
-function isInternalOpsAuthorized(req: NextRequest): boolean {
-  const expectedUser = process.env.INTERNAL_OPS_USER;
-  const expectedPass = process.env.INTERNAL_OPS_PASS;
-  if (!expectedUser || !expectedPass) return true;
+type InternalOpsAuthResult = {
+  authorized: boolean;
+  method: "bearer" | "cookie" | "basic" | "local_dev" | "none";
+};
+
+function evaluateInternalOpsAuth(req: NextRequest): InternalOpsAuthResult {
+  const pathname = req.nextUrl.pathname;
+  const isInternalApiPath =
+    pathname === "/api/internal" || pathname.startsWith("/api/internal/");
+
+  if (isInternalApiPath) {
+    const parrSecret = process.env.PARR_SECRET?.trim() || "";
+    const bearerToken = parseBearerToken(req.headers.get("authorization"));
+    if (parrSecret && bearerToken && constantTimeEqual(bearerToken, parrSecret)) {
+      return { authorized: true, method: "bearer" };
+    }
+  }
+
+  const expectedUser = process.env.INTERNAL_OPS_USER?.trim() || "";
+  const expectedPass = process.env.INTERNAL_OPS_PASS?.trim() || "";
+  if (!expectedUser || !expectedPass) {
+    if (process.env.NODE_ENV === "development" && process.env.VERCEL !== "1") {
+      return { authorized: true, method: "local_dev" };
+    }
+    return { authorized: false, method: "none" };
+  }
+
   const expectedEncoded = btoa(`${expectedUser}:${expectedPass}`);
-  const cookieValue = req.cookies.get(INTERNAL_OPS_COOKIE)?.value;
-  if (cookieValue && cookieValue === expectedEncoded) return true;
+  const cookieValue = req.cookies.get(INTERNAL_OPS_COOKIE)?.value || "";
+  if (cookieValue && constantTimeEqual(cookieValue, expectedEncoded)) {
+    return { authorized: true, method: "cookie" };
+  }
+
   const auth = parseBasicAuth(req.headers.get("authorization"));
-  return Boolean(auth && auth.user === expectedUser && auth.pass === expectedPass);
+  if (auth) {
+    const userMatches = constantTimeEqual(auth.user, expectedUser);
+    const passMatches = constantTimeEqual(auth.pass, expectedPass);
+    if (userMatches && passMatches) {
+      return { authorized: true, method: "basic" };
+    }
+  }
+
+  return { authorized: false, method: "none" };
+}
+
+export function isInternalOpsAuthorized(req: NextRequest): boolean {
+  return evaluateInternalOpsAuth(req).authorized;
 }
 
 export function middleware(req: NextRequest) {
@@ -102,10 +160,15 @@ export function middleware(req: NextRequest) {
 
   const isInternalOpsPath =
     pathname === "/internal/orders" ||
+    pathname.startsWith("/internal/orders/") ||
     pathname === "/admin/parr-inventory" ||
+    pathname.startsWith("/admin/parr-inventory/") ||
     pathname === "/admin/friend-fleet-inventory" ||
+    pathname.startsWith("/admin/friend-fleet-inventory/") ||
+    pathname === "/api/internal/orders" ||
     pathname.startsWith("/api/internal/orders/");
-  if (isInternalOpsPath && !isInternalOpsAuthorized(req)) {
+  const opsAuth = isInternalOpsPath ? evaluateInternalOpsAuth(req) : null;
+  if (isInternalOpsPath && !opsAuth?.authorized) {
     const isApi = pathname.startsWith("/api/");
     if (isApi) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -116,9 +179,9 @@ export function middleware(req: NextRequest) {
     });
   }
 
-  if (isInternalOpsPath) {
-    const expectedUser = process.env.INTERNAL_OPS_USER;
-    const expectedPass = process.env.INTERNAL_OPS_PASS;
+  if (isInternalOpsPath && opsAuth?.method === "basic") {
+    const expectedUser = process.env.INTERNAL_OPS_USER?.trim() || "";
+    const expectedPass = process.env.INTERNAL_OPS_PASS?.trim() || "";
     if (expectedUser && expectedPass) {
       const expectedEncoded = btoa(`${expectedUser}:${expectedPass}`);
       const currentCookie = req.cookies.get(INTERNAL_OPS_COOKIE)?.value;

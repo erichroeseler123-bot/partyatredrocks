@@ -34,3 +34,5 @@ tsconfig.check.tsbuildinfo
 data/snapshots/
 data/media/
 data/media-index.json
+*.sqlite-shm
+*.sqlite-wal

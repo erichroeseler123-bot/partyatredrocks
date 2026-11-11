@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { isInternalOrdersRequestAuthorized } from "@/lib/internalApiAuth";
 import {
   cancelInternalOrderById,
   getInternalOrderById,
@@ -33,9 +34,16 @@ const VALID_PAYMENT_ACTIONS = new Set<InternalOrderPaymentAction>([
 ]);
 
 export async function GET(
-  _request: Request,
+  request: Request,
   { params }: { params: Promise<{ internalOrderId: string }> }
 ) {
+  if (!isInternalOrdersRequestAuthorized(request)) {
+    return NextResponse.json(
+      { error: "Unauthorized" },
+      { status: 401, headers: { "Cache-Control": "no-store" } }
+    );
+  }
+
   const { internalOrderId } = await params;
   if (!internalOrderId) {
     return NextResponse.json({ error: "Missing internalOrderId" }, { status: 400 });
@@ -68,6 +76,13 @@ export async function PATCH(
   request: Request,
   { params }: { params: Promise<{ internalOrderId: string }> }
 ) {
+  if (!isInternalOrdersRequestAuthorized(request)) {
+    return NextResponse.json(
+      { error: "Unauthorized" },
+      { status: 401, headers: { "Cache-Control": "no-store" } }
+    );
+  }
+
   const { internalOrderId } = await params;
   if (!internalOrderId) {
     return NextResponse.json({ error: "Missing internalOrderId" }, { status: 400 });

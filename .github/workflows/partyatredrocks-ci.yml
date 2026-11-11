@@ -25,8 +25,8 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
-      - name: Run DCC site manifest and middleware tests
-        run: npx tsx --test tests/dcc-site.test.ts
+      - name: Run DCC site manifest, ops auth, and owner summary tests
+        run: npx tsx --import ./tests/server-only-shim.cjs --test tests/dcc-site.test.ts tests/ops-auth-and-owner-summary.test.ts
 
       - name: Run surface guard tests
         run: node --test tests/*.test.mjs

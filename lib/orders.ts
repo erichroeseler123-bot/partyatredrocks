@@ -25,7 +25,7 @@ type SqliteDatabase = {
 };
 
 type SqliteModule = {
-  DatabaseSync: new (filename: string) => SqliteDatabase;
+  DatabaseSync: new (filename: string, options?: { readOnly?: boolean }) => SqliteDatabase;
 };
 
 let sqliteModulePromise: Promise<SqliteModule | null> | null = null;
@@ -875,6 +875,116 @@ export async function listInternalOrders(): Promise<InternalOrderRow[]> {
       if (mapped.length > 0) return mapped;
     } finally {
       db.close();
+    }
+  }
+
+  return loadOrdersFromBackup();
+}
+
+export async function listInternalOrdersReadOnly(): Promise<InternalOrderRow[]> {
+  if (useBlobOrderStore()) {
+    const store = await loadBlobOrderStore();
+    return sortOrdersDesc(store.orders);
+  }
+
+  const dbFile = orderDbPath();
+  if (existsSync(dbFile)) {
+    const sqlite = await loadSqliteModule();
+    if (sqlite?.DatabaseSync) {
+      let db: SqliteDatabase | null = null;
+      try {
+        db = new sqlite.DatabaseSync(dbFile, { readOnly: true });
+        const tableInfo = db
+          .prepare(`PRAGMA table_info(orders)`)
+          .all() as Array<{ name?: string }>;
+        if (tableInfo.length > 0) {
+          const columnSet = new Set(
+            tableInfo
+              .map((col) => (typeof col.name === "string" ? col.name : ""))
+              .filter(Boolean),
+          );
+          const colOrNull = (name: string) =>
+            columnSet.has(name) ? name : `NULL AS ${name}`;
+
+          const rows = db
+            .prepare(
+              `SELECT
+                internalOrderId,
+                ${colOrNull("bookingToken")},
+                createdAt,
+                ${colOrNull("lastTouchedAt")},
+                rezdyBookingReference,
+                productCode,
+                sessionKey,
+                bookingJson,
+                rezdyBookingPayloadJson,
+                paymentJson,
+                ${colOrNull("pickupJson")},
+                customerJson,
+                bookingStatus,
+                paymentStatus,
+                totalDue,
+                totalPaid,
+                handoffMode,
+                handoffUrl,
+                operatorAction,
+                ${colOrNull("notes")},
+                ${colOrNull("followUpStatus")},
+                ${colOrNull("operatorPaymentStep")},
+                ${colOrNull("paymentRequestSentAt")}
+              FROM orders
+              ORDER BY createdAt DESC`,
+            )
+            .all() as Array<Record<string, unknown>>;
+
+          const mapped = rows.map((row) => {
+            const booking = parseJson(row.bookingJson);
+            const payment = parseJson(row.paymentJson);
+            const customer = parseJson(row.customerJson);
+            const pickup = parseJson(row.pickupJson);
+
+            if (booking && typeof row.bookingStatus === "string") booking.status = row.bookingStatus;
+            if (payment) {
+              if (typeof row.paymentStatus === "string") payment.status = row.paymentStatus;
+              if (typeof row.totalDue === "number") payment.totalDue = row.totalDue;
+              if (typeof row.totalPaid === "number") payment.totalPaid = row.totalPaid;
+              if (typeof row.handoffMode === "string") payment.handoffMode = row.handoffMode;
+              if (typeof row.handoffUrl === "string") payment.handoffUrl = row.handoffUrl;
+              if (typeof row.operatorAction === "string") payment.operatorAction = row.operatorAction;
+            }
+
+            return {
+              internalOrderId: String(row.internalOrderId),
+              bookingToken: typeof row.bookingToken === "string" ? row.bookingToken : null,
+              createdAt: String(row.createdAt),
+              lastTouchedAt: typeof row.lastTouchedAt === "string" ? row.lastTouchedAt : null,
+              rezdyBookingReference:
+                typeof row.rezdyBookingReference === "string" ? row.rezdyBookingReference : null,
+              productCode: typeof row.productCode === "string" ? row.productCode : undefined,
+              sessionKey: typeof row.sessionKey === "string" ? row.sessionKey : null,
+              customer: customer ?? null,
+              booking: booking ?? null,
+              rezdyBookingPayload: parseJson(row.rezdyBookingPayloadJson) ?? null,
+              payment: payment ?? null,
+              pickup: pickup ?? null,
+              notes: typeof row.notes === "string" ? row.notes : null,
+              followUpStatus: asFollowUpStatus(row.followUpStatus),
+              operatorPaymentStep: asOperatorPaymentStep(row.operatorPaymentStep),
+              paymentRequestSentAt:
+                typeof row.paymentRequestSentAt === "string" ? row.paymentRequestSentAt : null,
+            };
+          });
+          if (mapped.length > 0) return mapped;
+        }
+      } catch {
+        // Fall back to read-only NDJSON backup without mutating disk
+      } finally {
+        try {
+          db?.close();
+        } catch {
+          // ignore close error
+        }
+      }
     }
   }
 
