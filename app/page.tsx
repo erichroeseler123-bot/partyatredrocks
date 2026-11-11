@@ -56,6 +56,7 @@ export default async function HomePage() {
 
   const heroSrc = pageVisuals.home.heroSrc;
   const privateVehicleSrc = pageVisuals.home.privateSrc;
+  const privateVanSrc = pageVisuals.home.shuttleSrc;
 
   const nextRedRocksEvent = upcomingEvents[0] ?? null;
   const nextRedRocksEventDate = nextRedRocksEvent
@@ -230,6 +231,7 @@ export default async function HomePage() {
       <HomeSections
         heroSrc={heroSrc}
         privateVehicleSrc={privateVehicleSrc}
+        privateVanSrc={privateVanSrc}
         urgency={urgency}
         upcoming2027Preview={upcoming2027Preview}
         verified2027Count={upcoming2027Events.length}

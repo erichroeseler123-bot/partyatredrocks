@@ -1,5 +1,6 @@
 // app/venues/[slug]/page.tsx
 import type { Metadata } from "next";
+import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import Link from "next/link";
@@ -17,7 +18,7 @@ import {
 } from "@/lib/parrHandoff";
 import { getCrossSiteVenue } from "@/lib/crossSiteMap";
 import { PlanningLinks } from "@/components/booking/PlanningLinks";
-import { getVenueHeroImage } from "@/data/media";
+import { getVenueCardImage, getVenueHeroImage } from "@/data/media";
 
 export const runtime = "nodejs";
 export const revalidate = 300;
@@ -621,8 +622,32 @@ export async function generateMetadata({
   };
 }
 
+function publicAssetExists(publicRelPath: string | null | undefined): boolean {
+  if (!publicRelPath || !publicRelPath.startsWith("/")) return false;
+  const clean = publicRelPath.split("?")[0].replace(/^\/+/, "");
+  return existsSync(path.join(process.cwd(), "public", clean));
+}
+
+function sanitizeMediaAsset(candidate: string | null | undefined): string | null {
+  if (!candidate) return null;
+  if (candidate.includes("/fallback.")) return null;
+  if (candidate.startsWith("/") && !publicAssetExists(candidate)) return null;
+  return candidate;
+}
+
+function resolveVenueLocalFallback(venueSlug: string): string {
+  for (const candidate of [
+    `/images/venues/${venueSlug}.jpg`,
+    `/images/venues/${venueSlug}.webp`,
+  ]) {
+    if (publicAssetExists(candidate)) return candidate;
+  }
+  return getVenueCardImage(venueSlug);
+}
+
 function venueEventImage(
   event: VenueCache["events"][number],
+  venueSlug: string,
   venueName: string,
   media: Awaited<ReturnType<typeof getMediaIndex>>
 ) {
@@ -630,6 +655,7 @@ function venueEventImage(
     media?.eventsById?.[event.id] ||
     (event.sourceId ? media?.eventsById?.[event.sourceId] : null) ||
     null;
+  const venueFallback = resolveVenueLocalFallback(venueSlug);
 
   return selectImageByPriority({
     entityType: "show",
@@ -638,24 +664,35 @@ function venueEventImage(
     venueName,
     queryHint: `${event.performers?.[0]?.name || event.title} ${venueName} concert`,
     alt: event.title,
-    blobImage: mediaRow?.sources?.blobImage ?? null,
-    spotifyImage: mediaRow?.sources?.spotifyImage ?? null,
-    ticketmasterImage: mediaRow?.sources?.ticketmasterImage ?? null,
-    seatgeekImage: mediaRow?.sources?.seatgeekImage ?? null,
-    localAsset: mediaRow?.sources?.localAsset ?? null,
-    fallback: mediaRow?.sources?.fallback ?? "/images/shows/fallback.jpg",
+    blobImage: sanitizeMediaAsset(mediaRow?.sources?.blobImage),
+    spotifyImage: sanitizeMediaAsset(mediaRow?.sources?.spotifyImage),
+    ticketmasterImage: sanitizeMediaAsset(mediaRow?.sources?.ticketmasterImage),
+    seatgeekImage: sanitizeMediaAsset(mediaRow?.sources?.seatgeekImage),
+    localAsset: sanitizeMediaAsset(mediaRow?.sources?.localAsset),
+    fallback: sanitizeMediaAsset(mediaRow?.sources?.fallback) ?? venueFallback,
   });
 }
 
 function venueEventThumbnail(
   event: VenueCache["events"][number],
   media: Awaited<ReturnType<typeof getMediaIndex>>
-) {
+): string | null {
   const artistName = event.performers?.[0]?.name ?? null;
   if (!artistName) return null;
 
   const artistSlug = slugify(artistName);
   const artistRow = media?.artistsById?.[artistSlug] ?? null;
+  const localPortrait = `/images/artists/${artistSlug}.jpg`;
+  const verifiedLocal = publicAssetExists(localPortrait) ? localPortrait : null;
+  const primaryCandidate =
+    sanitizeMediaAsset(artistRow?.sources?.blobImage) ??
+    sanitizeMediaAsset(artistRow?.sources?.spotifyImage) ??
+    sanitizeMediaAsset(artistRow?.sources?.ticketmasterImage) ??
+    sanitizeMediaAsset(artistRow?.sources?.seatgeekImage) ??
+    sanitizeMediaAsset(artistRow?.sources?.localAsset) ??
+    verifiedLocal;
+
+  if (!primaryCandidate) return null;
 
   return selectImageByPriority({
     entityType: "artist",
@@ -663,12 +700,12 @@ function venueEventThumbnail(
     artistName,
     queryHint: `${artistName} live music artist portrait`,
     alt: artistName,
-    blobImage: artistRow?.sources?.blobImage ?? null,
-    spotifyImage: artistRow?.sources?.spotifyImage ?? null,
-    ticketmasterImage: artistRow?.sources?.ticketmasterImage ?? null,
-    seatgeekImage: artistRow?.sources?.seatgeekImage ?? null,
-    localAsset: artistRow?.sources?.localAsset ?? null,
-    fallback: `/images/artists/${artistSlug}.jpg`,
+    blobImage: sanitizeMediaAsset(artistRow?.sources?.blobImage),
+    spotifyImage: sanitizeMediaAsset(artistRow?.sources?.spotifyImage),
+    ticketmasterImage: sanitizeMediaAsset(artistRow?.sources?.ticketmasterImage),
+    seatgeekImage: sanitizeMediaAsset(artistRow?.sources?.seatgeekImage),
+    localAsset: sanitizeMediaAsset(artistRow?.sources?.localAsset) ?? verifiedLocal,
+    fallback: primaryCandidate,
   });
 }
 
@@ -696,17 +733,18 @@ export default async function VenuePage({
     getMediaIndex(2026),
   ]);
   const events = toVenueEvents(allEvents, slug);
+  const venueFallback = resolveVenueLocalFallback(slug);
   const venueImage = selectImageByPriority({
     entityType: "venue",
     title: name,
     venueName: name,
     queryHint: `${name} concert venue`,
     alt: `${name} venue image`,
-    spotifyImage: media?.venuesById?.[slug]?.sources?.spotifyImage ?? null,
-    ticketmasterImage: media?.venuesById?.[slug]?.sources?.ticketmasterImage ?? null,
-    seatgeekImage: media?.venuesById?.[slug]?.sources?.seatgeekImage ?? null,
-    localAsset: media?.venuesById?.[slug]?.sources?.localAsset ?? null,
-    fallback: media?.venuesById?.[slug]?.sources?.fallback ?? "/images/venues/fallback.jpg",
+    spotifyImage: sanitizeMediaAsset(media?.venuesById?.[slug]?.sources?.spotifyImage),
+    ticketmasterImage: sanitizeMediaAsset(media?.venuesById?.[slug]?.sources?.ticketmasterImage),
+    seatgeekImage: sanitizeMediaAsset(media?.venuesById?.[slug]?.sources?.seatgeekImage),
+    localAsset: sanitizeMediaAsset(media?.venuesById?.[slug]?.sources?.localAsset),
+    fallback: sanitizeMediaAsset(media?.venuesById?.[slug]?.sources?.fallback) ?? venueFallback,
   });
   const venueHeroImage =
     slug === "red-rocks-amphitheatre"
@@ -743,8 +781,8 @@ export default async function VenuePage({
       <section className="comic-wrap">
 
       {/* HERO */}
-      <div className="comic-hero relative overflow-hidden rounded-[32px] border border-white/10 p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:p-10 lg:p-12">
-        <div className="absolute inset-0">
+      <div className="comic-hero relative overflow-hidden rounded-[32px] border border-white/10 p-6 shadow-[0_40px_120px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:p-10 lg:p-12">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[250px] sm:h-[340px] lg:inset-0 lg:h-full">
           <img
             src={venueHeroImage}
             alt={`${name} venue – hero view`}
@@ -756,6 +794,7 @@ export default async function VenuePage({
           />
           <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(5,8,22,0.9)_0%,rgba(5,8,22,0.64)_45%,rgba(5,8,22,0.9)_100%)]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,176,124,0.22),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(143,208,255,0.16),transparent_24%)]" />
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#060912] to-transparent lg:hidden" />
         </div>
         <div className="relative flex flex-wrap items-center gap-2">
           <div className="inline-flex items-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-cyan)]">
@@ -1188,14 +1227,17 @@ export default async function VenuePage({
           </div>
 
           <div className="mt-6 grid md:grid-cols-2 gap-5">
-            {events.slice(0, 10).map((e) => (
+            {events.slice(0, 10).map((e) => {
+              const eventImage = venueEventImage(e, slug, name, media);
+              const artistThumb = venueEventThumbnail(e, media);
+              return (
               <article
                 key={e.id}
                 className="brand-card overflow-hidden rounded-[26px] shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.42)]"
               >
                 <div className="relative h-48 overflow-hidden border-b border-white/10">
                   <img
-                    src={venueEventImage(e, name, media)}
+                    src={eventImage}
                     alt={`${e.title} at ${name}`}
                     width={960}
                     height={540}
@@ -1224,22 +1266,22 @@ export default async function VenuePage({
                 <div className="mt-2 text-sm leading-6 text-white/70">
                   {(e.performers ?? [])
                     .map((p) => p?.name)
-                    .filter((name): name is string => Boolean(name))
-                    .map((name, idx, arr) => (
-                      <span key={`${e.id}-${name}`}>
-                        <Link href={`/artists/${encodeURIComponent(slugify(name))}`} className="text-white/80 underline hover:text-white">
-                          {name}
+                    .filter((performerName): performerName is string => Boolean(performerName))
+                    .map((performerName, idx, arr) => (
+                      <span key={`${e.id}-${performerName}`}>
+                        <Link href={`/artists/${encodeURIComponent(slugify(performerName))}`} className="text-white/80 underline hover:text-white">
+                          {performerName}
                         </Link>
                         {idx < arr.length - 1 ? ", " : ""}
                       </span>
                     ))}
                 </div>
 
-                {e.performers?.[0]?.name ? (
+                {e.performers?.[0]?.name && artistThumb ? (
                   <div className="mt-4 flex items-center gap-3">
                     <img
-                      src={venueEventThumbnail(e, media) || venueEventImage(e, name, media)}
-                      alt={`${e.performers[0].name} artist image`}
+                      src={artistThumb}
+                      alt={`${e.performers[0].name} artist portrait`}
                       width={40}
                       height={40}
                       loading="lazy"
@@ -1270,7 +1312,8 @@ export default async function VenuePage({
                 </div>
                 </div>
               </article>
-            ))}
+              );
+            })}
           </div>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">

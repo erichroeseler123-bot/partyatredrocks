@@ -1,43 +1,42 @@
 // Central source of truth for non-event imagery.
 // Reset rule:
-// - Hero slots use only approved wide local assets unless a page needs an intentional sourced query.
+// - Hero slots use only approved wide local assets from verified provenance.
 // - Homepage/booking slots use fixed local files only.
 // - Dynamic selection is for event/show surfaces, not hub or booking heroes.
 
-const searchedImage = (query: string) => `/api/unsplash-image?q=${encodeURIComponent(query)}`;
-
 export const curatedImages = {
-  // Homepage / top-level commercial slots
+  // Homepage / top-level commercial slots (3 distinct verified visuals)
   homepageHero: "/hero/hero_red_rocks.webp",
+  homepageSuburban: "/hero/arrival_thumb.webp",
   homepageShared: "/hero/sprinter_red_rocks_card.webp",
-  homepagePrivate: "/hero/hero_red_rocks_card.webp",
+  homepagePrivate: "/hero/arrival_thumb.webp",
 
   // Hub heroes
   guideHero: "/hero/hero_red_rocks.webp",
-  guideGeneral: "/hero/custom/red_rocks_sunset_hero.jpg",
-  guideTransportation: "/hero/arrival.jpg",
-  guideParking: "/hero/custom/red_rocks_25_hero.jpg",
-  guidePickup: "/hero/sprinter_red_rocks.webp",
-  guidePolicy: "/hero/custom/tophalf_hero.jpg",
-  guideTailgating: "/hero/hero-home.jpg",
+  guideGeneral: "/images/red-rocks/Panorama_of_Red_Rocks_Amphitheater.jpg",
+  guideTransportation: "/assets/venue/red-rocks/red-rocks-shuttle.jpg",
+  guideParking: "/assets/venue/red-rocks/red-rocks-arrival.webp",
+  guidePickup: "/hero/arrival.jpg",
+  guidePolicy: "/images/red-rocks/trading-post-trail-sign-red-rocks.jpg",
+  guideTailgating: "/images/red-rocks/red-rocks-trading-post-backyard.jpg",
 
-  // Compare page sourced visuals
-  compareHero: searchedImage("red rocks amphitheatre parking sunset"),
-  compareShared: searchedImage("group shuttle van people boarding night"),
-  compareSUV: searchedImage("black suv mountain road scenic"),
-  compareVan: searchedImage("black sprinter van exterior mountain road"),
+  // Compare page verified local visuals
+  compareHero: "/images/red-rocks/Panorama_of_Red_Rocks_Amphitheater.jpg",
+  compareShared: "/assets/venue/red-rocks/red-rocks-shuttle.jpg",
+  compareSUV: "/fleet/fleet-suburban.jpg",
+  compareVan: "/hero/sprinter_red_rocks.webp",
 
-  // Logistics page sourced visuals
-  logisticsHero: searchedImage("red rocks amphitheatre walking up stairs concert night"),
-  logisticsPickup: searchedImage("friends meeting outside bar night city"),
-  logisticsArrival: searchedImage("red rocks amphitheatre walking up stairs concert night"),
-  logisticsExit: searchedImage("concert crowd leaving parking lot night cars"),
-  logisticsRideHome: searchedImage("friends in car night city lights"),
+  // Logistics page verified local visuals
+  logisticsHero: "/hero/afterdark.jpg",
+  logisticsPickup: "/hero/arrival.jpg",
+  logisticsArrival: "/assets/venue/red-rocks/red-rocks-arrival.webp",
+  logisticsExit: "/images/red-rocks/red-rocks-amphitheater-from-top.jpg",
+  logisticsRideHome: "/hero/hero_red_rocks.webp",
 
-  socialHero: "/hero/hero-home.jpg",
-  weekHero: "/hero/arrival.jpg",
+  socialHero: "/venues/rrsite.webp",
+  weekHero: "/images/red-rocks/red-rocks-amphitheater-from-top.jpg",
   venuesHero: "/venues/rrsite.webp",
-  aboutHero: "/hero/hero-home.jpg",
+  aboutHero: "/images/red-rocks/Panorama_of_Red_Rocks_Amphitheater.jpg",
   scheduleHero: "/hero/arrival.jpg",
   scenesHero: "/images/scenes/jam.webp",
 
@@ -45,10 +44,10 @@ export const curatedImages = {
   sharedShuttle: "/hero/sprinter_red_rocks.webp",
   privateSUV: "/hero/hero_red_rocks.webp",
   sprinterVan: "/hero/sprinter_red_rocks.webp",
-  partyBus: "/images/marketing/fleet.webp",
+  partyBus: "/fleet/fleet-suburban.jpg",
 
   redRocksVenue: "/venues/rrsite.webp",
   redRocksVenueThumb: "/venues/rrsite_thumb.webp",
-  venueFallback: "/images/venues/fallback.jpg",
-  showFallback: "/images/shows/fallback.jpg",
+  venueFallback: "/images/venues/all-venues-collage.webp",
+  showFallback: "/venues/rrsite.webp",
 } as const;

@@ -3,48 +3,48 @@
     "wikiTitle": "Red Rocks Amphitheatre",
     "manualImage": "/images/venues/red-rocks-amphitheatre.webp",
     "resolvedImage": null,
-    "fallbackImage": "/images/venues/fallback.webp"
+    "fallbackImage": "/venues/rrsite.webp"
   },
   "mishawaka-amphitheatre": {
     "wikiTitle": "Mishawaka Amphitheatre",
     "manualImage": "/venues/mishsite.webp",
     "resolvedImage": null,
-    "fallbackImage": "/images/venues/fallback.webp"
+    "fallbackImage": "/images/venues/all-venues-collage.webp"
   },
   "mission-ballroom": {
     "wikiTitle": "Mission Ballroom",
     "manualImage": "/images/venues/mission-ballroom.webp",
     "resolvedImage": null,
-    "fallbackImage": "/images/venues/fallback.webp"
+    "fallbackImage": "/images/venues/all-venues-collage.webp"
   },
   "ball-arena": {
     "wikiTitle": "Ball Arena",
     "manualImage": "/images/venues/ball-arena.webp",
     "resolvedImage": null,
-    "fallbackImage": "/images/venues/fallback.webp"
+    "fallbackImage": "/images/venues/all-venues-collage.webp"
   },
   "empower-field-at-mile-high": {
     "wikiTitle": "Empower Field at Mile High",
     "manualImage": "/images/venues/empower-field.webp",
     "resolvedImage": null,
-    "fallbackImage": "/images/venues/fallback.webp"
+    "fallbackImage": "/images/venues/all-venues-collage.webp"
   },
   "fillmore-auditorium": {
     "wikiTitle": "Fillmore Auditorium (Denver)",
     "manualImage": "/images/venues/fillmore-auditorium.webp",
     "resolvedImage": null,
-    "fallbackImage": "/images/venues/fallback.webp"
+    "fallbackImage": "/images/venues/all-venues-collage.webp"
   },
   "fiddlers-green-amphitheatre": {
     "wikiTitle": "Fiddler's Green Amphitheatre",
     "manualImage": "/images/venues/fiddlers-green-amphitheatre.webp",
     "resolvedImage": null,
-    "fallbackImage": "/images/venues/fallback.webp"
+    "fallbackImage": "/images/venues/all-venues-collage.webp"
   },
   "all-venues": {
     "wikiTitle": null,
-    "manualImage": "/images/venues/all-venues-summary.svg",
+    "manualImage": "/images/venues/all-venues-collage.webp",
     "resolvedImage": null,
-    "fallbackImage": "/images/venues/fallback.webp"
+    "fallbackImage": "/images/venues/all-venues-collage.webp"
   }
 }

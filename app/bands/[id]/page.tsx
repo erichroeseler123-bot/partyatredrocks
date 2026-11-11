@@ -61,6 +61,10 @@ export default async function BandPage({ params }: Props) {
     .slice(0, 24);
   const showCount = artist.showCount ?? mine.length;
   const mediaSources = media?.artistsById?.[artist.id]?.sources;
+  const sanitizedFallback =
+    mediaSources?.fallback && !mediaSources.fallback.includes("/fallback.")
+      ? mediaSources.fallback
+      : "/venues/rrsite.webp";
   const heroImage = selectImageByPriority({
     entityType: "artist",
     title: artist.name,
@@ -71,7 +75,7 @@ export default async function BandPage({ params }: Props) {
     ticketmasterImage: mediaSources?.ticketmasterImage ?? null,
     seatgeekImage: mediaSources?.seatgeekImage ?? artist.image ?? null,
     localAsset: mediaSources?.localAsset ?? null,
-    fallback: mediaSources?.fallback ?? "/images/shows/fallback.jpg",
+    fallback: sanitizedFallback,
   });
   const venueRows = (artist.venueIds || [])
     .map((venueId) => ({ venueId, venueName: VENUE_LEDGER_BY_SLUG.get(venueId)?.name || venueId }))

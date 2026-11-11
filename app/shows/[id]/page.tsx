@@ -1,5 +1,6 @@
 // app/shows/[id]/page.tsx
 import type { Metadata } from "next";
+import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import Link from "next/link";
@@ -93,6 +94,34 @@ function slugify(input: string): string {
 
 function isRedRocksSlug(slug?: string) {
   return slug === "red-rocks-amphitheatre" || slug === "redrocks";
+}
+
+function publicFileExists(relPath?: string | null): boolean {
+  if (!relPath || !relPath.startsWith("/")) return false;
+  const clean = relPath.split("?")[0]?.replace(/^\/+/, "");
+  if (!clean) return false;
+  return existsSync(path.join(process.cwd(), "public", clean));
+}
+
+function resolveShowVenueFallback(venueSlug?: string | null): string {
+  if (!venueSlug || isRedRocksSlug(venueSlug)) {
+    return "/venues/rrsite.webp";
+  }
+  const jpgCandidate = `/images/venues/${venueSlug}.jpg`;
+  if (publicFileExists(jpgCandidate)) return jpgCandidate;
+  const webpCandidate = `/images/venues/${venueSlug}.webp`;
+  if (publicFileExists(webpCandidate)) return webpCandidate;
+  if (venueSlug === "mishawaka-amphitheatre" && publicFileExists("/venues/mishsite.webp")) {
+    return "/venues/mishsite.webp";
+  }
+  return "/venues/rrsite.webp";
+}
+
+function sanitizeMediaLocalAsset(candidate?: string | null): string | null {
+  if (!candidate) return null;
+  if (/^\/images\/(shows|venues)\/fallback\./i.test(candidate)) return null;
+  if (candidate.startsWith("/") && !publicFileExists(candidate)) return null;
+  return candidate;
 }
 
 function bookingUrlForEvent(e?: ShowEvent | null) {
@@ -327,6 +356,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ].filter(Boolean))
   );
   const mediaRow = (e ? media?.eventsById?.[e.id] : null) || (e?.sourceId ? media?.eventsById?.[e.sourceId] : null) || null;
+  const venueFallback = resolveShowVenueFallback(e?.venue?.siteSlug);
   const mediaImage = selectImageByPriority({
     entityType: "show",
     title: e?.title ?? null,
@@ -337,8 +367,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     spotifyImage: mediaRow?.sources?.spotifyImage ?? null,
     ticketmasterImage: mediaRow?.sources?.ticketmasterImage ?? null,
     seatgeekImage: mediaRow?.sources?.seatgeekImage ?? null,
-    localAsset: mediaRow?.sources?.localAsset ?? null,
-    fallback: mediaRow?.sources?.fallback ?? "/og-default.jpg",
+    localAsset: sanitizeMediaLocalAsset(mediaRow?.sources?.localAsset),
+    fallback: e ? venueFallback : "/og-default.jpg",
   });
   return {
     title,
@@ -388,6 +418,38 @@ export default async function ShowPage({ params }: Props) {
   const updatedAt = data?.generatedAt ?? null;
   const primaryArtist = (e.performers ?? []).map((p) => p?.name).filter(Boolean)[0] ?? null;
   const showMediaRow = media?.eventsById?.[e.id] || (e.sourceId ? media?.eventsById?.[e.sourceId] : null) || null;
+  const venueFallback = resolveShowVenueFallback(venueSlug);
+  const artistRec = primaryArtist
+    ? allArtists.find((row) => row.id === primaryArtist || slugify(row.name) === slugify(primaryArtist)) ?? null
+    : null;
+  const artistMediaRow = artistRec?.id ? media?.artistsById?.[artistRec.id] ?? null : null;
+  const localArtistCandidate = primaryArtist ? `/images/artists/${slugify(primaryArtist)}.jpg` : null;
+  const verifiedLocalArtistPortrait =
+    sanitizeMediaLocalAsset(artistMediaRow?.sources?.localAsset) ||
+    (localArtistCandidate && publicFileExists(localArtistCandidate) ? localArtistCandidate : null);
+  const hasVerifiedArtistPortrait = Boolean(
+    artistMediaRow?.sources?.blobImage ||
+      artistMediaRow?.sources?.spotifyImage ||
+      artistMediaRow?.sources?.ticketmasterImage ||
+      artistMediaRow?.sources?.seatgeekImage ||
+      artistRec?.image ||
+      verifiedLocalArtistPortrait
+  );
+  const artistImage = hasVerifiedArtistPortrait
+    ? selectImageByPriority({
+        entityType: "artist",
+        title: primaryArtist,
+        artistName: primaryArtist,
+        queryHint: primaryArtist ? `${primaryArtist} live music artist portrait` : null,
+        alt: primaryArtist,
+        blobImage: artistMediaRow?.sources?.blobImage ?? null,
+        spotifyImage: artistMediaRow?.sources?.spotifyImage ?? null,
+        ticketmasterImage: artistMediaRow?.sources?.ticketmasterImage ?? null,
+        seatgeekImage: artistMediaRow?.sources?.seatgeekImage ?? artistRec?.image ?? null,
+        localAsset: verifiedLocalArtistPortrait,
+        fallback: venueFallback,
+      })
+    : null;
   const showImage = selectImageByPriority({
     entityType: "show",
     title: e.title,
@@ -396,26 +458,11 @@ export default async function ShowPage({ params }: Props) {
     queryHint: `${primaryArtist || e.title} ${venueName} concert`,
     alt: e.title,
     blobImage: showMediaRow?.sources?.blobImage ?? null,
-    spotifyImage: showMediaRow?.sources?.spotifyImage ?? null,
+    spotifyImage: showMediaRow?.sources?.spotifyImage ?? artistMediaRow?.sources?.spotifyImage ?? null,
     ticketmasterImage: showMediaRow?.sources?.ticketmasterImage ?? null,
     seatgeekImage: showMediaRow?.sources?.seatgeekImage ?? null,
-    localAsset: showMediaRow?.sources?.localAsset ?? null,
-    fallback: showMediaRow?.sources?.fallback ?? "/images/shows/fallback.jpg",
-  });
-  const artistRec = primaryArtist ? allArtists.find((row) => row.id === primaryArtist || slugify(row.name) === slugify(primaryArtist)) ?? null : null;
-  const artistMediaRow = artistRec?.id ? media?.artistsById?.[artistRec.id] ?? null : null;
-  const artistImage = selectImageByPriority({
-    entityType: "artist",
-    title: primaryArtist,
-    artistName: primaryArtist,
-    queryHint: primaryArtist ? `${primaryArtist} live music artist portrait` : null,
-    alt: primaryArtist,
-    blobImage: artistMediaRow?.sources?.blobImage ?? null,
-    spotifyImage: artistMediaRow?.sources?.spotifyImage ?? null,
-    ticketmasterImage: artistMediaRow?.sources?.ticketmasterImage ?? null,
-    seatgeekImage: artistMediaRow?.sources?.seatgeekImage ?? null,
-    localAsset: artistMediaRow?.sources?.localAsset ?? null,
-    fallback: primaryArtist ? `/images/artists/${slugify(primaryArtist)}.jpg` : "/images/shows/fallback.jpg",
+    localAsset: sanitizeMediaLocalAsset(showMediaRow?.sources?.localAsset),
+    fallback: venueFallback,
   });
   const setlist = primaryArtist ? await getSetlist(primaryArtist, e.dateKey, venueName) : null;
   const setlistSongs = setlist?.sets?.set?.[0]?.song ?? [];
@@ -489,7 +536,35 @@ export default async function ShowPage({ params }: Props) {
             <article>
               <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">Artist</div>
               <h2 className="mt-2 text-2xl font-black">{primaryArtist}</h2>
-              <img src={artistImage} alt={`${primaryArtist} performing at ${venueName}`} width={320} height={320} loading="lazy" decoding="async" className="mt-4 w-full max-w-[320px] h-auto rounded-xl border border-white/20 object-cover" />
+              {artistImage && artistImage !== showImage ? (
+                <img
+                  src={artistImage}
+                  alt={`${primaryArtist} performing at ${venueName}`}
+                  width={320}
+                  height={320}
+                  loading="lazy"
+                  decoding="async"
+                  className="mt-4 w-full max-w-[320px] h-auto rounded-xl border border-white/20 object-cover"
+                />
+              ) : (
+                <div className="mt-4 rounded-2xl border border-white/14 bg-white/[0.04] p-5">
+                  <div className="text-[11px] font-black uppercase tracking-[0.2em] text-[var(--brand-cyan)]">
+                    Live Stage Bill
+                  </div>
+                  <p className="mt-2 text-sm leading-6 text-white/78">
+                    {primaryArtist} is scheduled at <strong className="text-white">{venueName}</strong> on{" "}
+                    <strong className="text-white">{fmtDate(e.datetime_local)}</strong>.
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <Link
+                      href={`/artists/${encodeURIComponent(slugify(primaryArtist))}`}
+                      className="comic-btn comic-btn-secondary"
+                    >
+                      Artist Tour Dates →
+                    </Link>
+                  </div>
+                </div>
+              )}
             </article>
             <article>
               <div className="text-[11px] font-black uppercase tracking-[0.22em] text-white/60">Setlist</div>

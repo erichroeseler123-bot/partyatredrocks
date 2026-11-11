@@ -121,8 +121,8 @@ export default async function PrivateOptionPage({
           eyebrow={rideOption.eyebrow}
           title={`${rideOption.title} Booking`}
           copy={rideOption.body}
-          imageSrc={bookingVisuals.private.imageSrc}
-          imageAlt={bookingVisuals.private.imageAlt}
+          imageSrc={bookingVisuals.privateOptions[rideOption.slug]?.imageSrc || bookingVisuals.private.imageSrc}
+          imageAlt={bookingVisuals.privateOptions[rideOption.slug]?.imageAlt || bookingVisuals.private.imageAlt}
         />
 
         <DccReturnBanner searchParams={sp} />

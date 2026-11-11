@@ -144,7 +144,7 @@ function GuideCard({ card, imageSrc }: { card: Card; imageSrc: string }) {
       <div className="relative mb-5 h-40 overflow-hidden rounded-[20px] border border-[var(--brand-border)]">
         <Image
           src={imageSrc}
-          alt={visual.imageAlt}
+          alt={`${card.title} — ${visual.imageAlt}`}
           fill
           unoptimized
           className="object-cover"
@@ -168,7 +168,7 @@ function GuideCard({ card, imageSrc }: { card: Card; imageSrc: string }) {
 
 export default async function GuideHub() {
   const cards = [...featured, ...deepDive];
-  const cardImageMap = Object.fromEntries(cards.map((card) => [card.id, guideVisuals[card.visual].imageSrc])) as Record<string, string>;
+  const cardImageMap = Object.fromEntries(cards.map((card) => [card.id, getGuideCardImage(card.id)])) as Record<string, string>;
   const heroImage = getGuideCardImage("red-rocks-visiting-guide");
 
   return (

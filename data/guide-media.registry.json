@@ -1,46 +1,57 @@
 {
   "red-rocks-visiting-guide": {
+    "cardImage": "/assets/venue/red-rocks/red-rocks-hero.webp",
     "manualImage": "/assets/venue/red-rocks/red-rocks-hero.webp",
-    "fallbackImage": "/hero/hero-guides.webp"
+    "fallbackImage": "/venues/rrsite.webp"
   },
   "all-guides": {
-    "manualImage": "/venues/rrsite.jpg",
-    "fallbackImage": "/hero/hero-guides.webp"
+    "cardImage": "/images/red-rocks/Panorama_of_Red_Rocks_Amphitheater.jpg",
+    "manualImage": "/images/red-rocks/Panorama_of_Red_Rocks_Amphitheater.jpg",
+    "fallbackImage": "/venues/rrsite.webp"
   },
   "transportation-guide": {
-    "manualImage": "/images/marketing/shuttle.webp",
-    "fallbackImage": "/hero/hero-guides.webp"
+    "cardImage": "/assets/venue/red-rocks/red-rocks-shuttle.jpg",
+    "manualImage": "/assets/venue/red-rocks/red-rocks-shuttle.jpg",
+    "fallbackImage": "/venues/rrsite.webp"
   },
   "denver-concert-transportation": {
+    "cardImage": "/fleet/fleet-suburban.jpg",
     "manualImage": "/fleet/fleet-suburban.jpg",
-    "fallbackImage": "/hero/hero-guides.webp"
+    "fallbackImage": "/venues/rrsite.webp"
   },
   "parking-reality": {
+    "cardImage": "/assets/venue/red-rocks/red-rocks-arrival.webp",
     "manualImage": "/assets/venue/red-rocks/red-rocks-arrival.webp",
-    "fallbackImage": "/hero/hero-guides.webp"
+    "fallbackImage": "/venues/rrsite.webp"
   },
   "policies": {
-    "manualImage": "/hero/arrival.jpg",
-    "fallbackImage": "/hero/hero-guides.webp"
+    "cardImage": "/images/red-rocks/trading-post-trail-sign-red-rocks.jpg",
+    "manualImage": "/images/red-rocks/trading-post-trail-sign-red-rocks.jpg",
+    "fallbackImage": "/venues/rrsite.webp"
   },
   "show-night-strategy": {
+    "cardImage": "/hero/afterdark.jpg",
     "manualImage": "/hero/afterdark.jpg",
-    "fallbackImage": "/hero/hero-guides.webp"
+    "fallbackImage": "/venues/rrsite.webp"
   },
   "local-pickups": {
-    "manualImage": "/venues/missionsite.jpg",
-    "fallbackImage": "/hero/hero-guides.webp"
+    "cardImage": "/hero/arrival.jpg",
+    "manualImage": "/hero/arrival.jpg",
+    "fallbackImage": "/venues/rrsite.webp"
   },
   "tailgating-guide": {
-    "manualImage": "/fleet/fleet-sprinter.webp",
-    "fallbackImage": "/hero/hero-guides.webp"
+    "cardImage": "/images/red-rocks/red-rocks-trading-post-backyard.jpg",
+    "manualImage": "/images/red-rocks/red-rocks-trading-post-backyard.jpg",
+    "fallbackImage": "/venues/rrsite.webp"
   },
   "event-guides": {
-    "manualImage": "/venues/mishsite.jpg",
-    "fallbackImage": "/hero/hero-guides.webp"
+    "cardImage": "/images/red-rocks/Red-Rocks-Park.jpg",
+    "manualImage": "/images/red-rocks/Red-Rocks-Park.jpg",
+    "fallbackImage": "/venues/rrsite.webp"
   },
   "red-rocks-week-calendar": {
-    "manualImage": "/hero/hero-home.webp",
-    "fallbackImage": "/hero/hero-guides.webp"
+    "cardImage": "/images/red-rocks/red-rocks-amphitheater-from-top.jpg",
+    "manualImage": "/images/red-rocks/red-rocks-amphitheater-from-top.jpg",
+    "fallbackImage": "/venues/rrsite.webp"
   }
 }

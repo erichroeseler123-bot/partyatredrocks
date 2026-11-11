@@ -157,8 +157,15 @@ export default async function LocalGatewayPage({ params }: Props) {
                 </Link>
               </div>
             </div>
-            <div className="relative min-h-[320px] lg:min-h-full">
-              <Image src={page.heroImageSrc} alt={page.heroImageAlt} fill className="object-cover" />
+            <div className="relative aspect-[16/10] lg:aspect-auto lg:min-h-full">
+              <Image
+                src={page.heroImageSrc}
+                alt={page.heroImageAlt}
+                fill
+                unoptimized
+                sizes="(min-width: 1024px) 45vw, 100vw"
+                className="object-cover"
+              />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,22,0.08),rgba(5,8,22,0.65)_100%)]" />
             </div>
           </div>
@@ -226,7 +233,7 @@ export default async function LocalGatewayPage({ params }: Props) {
             <div className="text-[12px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">Private Upgrade</div>
             <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">Traveling with a crew of 6 or more?</h2>
             <p className="mt-3 text-[15px] leading-7 text-white/74">
-              Keep the group together in a private Suburban for up to six or a private van for up to ten. Party at Red Rocks does not currently offer a traditional party bus.
+              Keep the group together in a private Suburban for up to six or a private van for up to ten, with one coordinated pickup and return plan for the full concert night.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
               <Link href={PRIVATE_BOOKING_PATH} className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10">

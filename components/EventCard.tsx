@@ -1,8 +1,7 @@
 import Link from "next/link";
 import type { DisplayEvent } from "@/lib/events/presentation";
 
-const CARD_FALLBACK_IMAGE =
-  "/api/unsplash-image?q=red+rocks+concert+crowd+night+colorado&src=%2Fimages%2Fshows%2Ffallback.jpg&alt=Red+Rocks+concert+night&w=960&h=540";
+const CARD_FALLBACK_IMAGE = "/venues/rrsite.webp";
 
 function slugify(input: string): string {
   return input

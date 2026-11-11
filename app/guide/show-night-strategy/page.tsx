@@ -13,19 +13,19 @@ const LOGISTICS_VISUALS = [
     title: "Pickup Window",
     body: "A clean night starts with a real arrival window and one clear plan for where the group meets.",
     imageSrc: curatedImages.logisticsPickup,
-    imageAlt: "Friends meeting up before Red Rocks pickup at night",
+    imageAlt: "Historic Denver Union Station illuminated plaza meetup zone before Red Rocks departure",
   },
   {
     title: "Arrival Buffer",
     body: "Traffic, security, and stairs punish late starts more than almost any other part of the night.",
     imageSrc: curatedImages.logisticsArrival,
-    imageAlt: "Red Rocks arrival flow and walking in before the show",
+    imageAlt: "Red Rocks Park entrance marker and sandstone approach road before doors",
   },
   {
     title: "After The Encore",
     body: "The ride home should already be settled before the crowd surge begins.",
     imageSrc: curatedImages.logisticsExit,
-    imageAlt: "Post-show crowd exit and return ride logistics at night",
+    imageAlt: "Top-plaza overlook down Red Rocks Amphitheatre rows toward Ship Rock and Creation Rock",
   },
 ] as const;
 
@@ -87,7 +87,7 @@ export default function Page() {
           {LOGISTICS_VISUALS.map((item) => (
             <article key={item.title} className="overflow-hidden rounded-3xl border border-soft bg-surface-strong">
               <div className="relative aspect-[16/10] border-b border-soft">
-                <Image src={item.imageSrc} alt={item.imageAlt} fill className="object-cover" sizes="(min-width: 1024px) 30vw, 100vw" />
+                <Image src={item.imageSrc} alt={item.imageAlt} fill unoptimized className="object-cover" sizes="(min-width: 1024px) 30vw, 100vw" />
               </div>
               <div className="p-5">
                 <p className="text-[11px] font-black uppercase tracking-[0.22em] text-cyan-300">Show-Night Visual</p>

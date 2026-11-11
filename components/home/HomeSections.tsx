@@ -19,6 +19,7 @@ export type UpcomingRedRocksPreviewItem = {
 type HomeSectionsProps = {
   heroSrc: string;
   privateVehicleSrc: string;
+  privateVanSrc?: string;
   urgency:
     | {
         label: string;
@@ -71,6 +72,7 @@ function buildPresaleMailto(customDate: string, customArtist: string): string {
 export default function HomeSections({
   heroSrc,
   privateVehicleSrc,
+  privateVanSrc = "/venues/rrsite_thumb.webp",
   urgency,
   upcoming2027Preview = [],
   verified2027Count = 0,
@@ -90,7 +92,7 @@ export default function HomeSections({
       href: "/book/red-rocks-amphitheatre/private/suv",
       cta: "Book Private Suburban - $399",
       image: privateVehicleSrc,
-      alt: "Approved Suburban SUV image for Red Rocks private transportation",
+      alt: "Downtown Denver Union Station pickup corridor for private Suburban Red Rocks rides",
       accent: "orange" as const,
     },
     {
@@ -100,8 +102,8 @@ export default function HomeSections({
       bullets: ["One pickup plan", "Book online through Rezdy"],
       href: "/book/red-rocks-amphitheatre/private/van",
       cta: "Upgrade to Private Van",
-      image: privateVehicleSrc,
-      alt: "Approved private vehicle image for Red Rocks transportation",
+      image: privateVanSrc,
+      alt: "Red Rocks Amphitheatre sandstone seating bowl for private 10-passenger van groups",
       accent: "cyan" as const,
     },
   ];
@@ -114,10 +116,10 @@ export default function HomeSections({
     <main className="brand-page bg-[radial-gradient(circle_at_top,rgba(255,91,46,0.15),transparent_26%),radial-gradient(circle_at_18%_10%,rgba(59,130,246,0.14),transparent_18%),linear-gradient(180deg,#0b0b0f_0%,#0b0b0f_100%)]">
       <section className="mx-auto flex w-full max-w-[1500px] flex-col gap-10 px-4 pb-24 pt-16 sm:px-6 sm:pt-20 lg:px-8">
         <section className="relative overflow-hidden rounded-[36px] border border-[var(--brand-orange)]/20 bg-[var(--brand-bg-dark)] shadow-[0_40px_120px_rgba(0,0,0,0.58)]">
-          <div className="absolute inset-0">
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-[270px] sm:h-[360px] lg:inset-0 lg:h-full">
             <img
               src={heroSrc}
-              alt="Nighttime Red Rocks crowd and venue lights"
+              alt="Illuminated Red Rocks Amphitheatre show night vista above Morrison"
               fetchPriority="high"
               loading="eager"
               decoding="async"
@@ -125,6 +127,7 @@ export default function HomeSections({
             />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,10,18,0.18)_0%,rgba(7,10,18,0.54)_42%,rgba(7,10,18,0.84)_100%)]" />
             <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(10,18,56,0.46)_0%,rgba(10,18,56,0.2)_44%,rgba(9,9,9,0.42)_100%)]" />
+            <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-[var(--brand-bg-dark)] lg:hidden" />
           </div>
 
           <div className="relative px-6 py-10 sm:px-8 sm:py-12 lg:px-12 lg:py-14">

@@ -64,12 +64,12 @@ export const localGatewayPages: Record<LocalGatewaySlug, LocalGatewayPage> = {
     faqLocationAnswer:
       "The Maven-area pickup is set around Dairy Block / LoDo so riders can walk over from nearby hotels without needing a second ride.",
     shareImage: buildShareImage(
-      "maven hotel denver red rocks shuttle",
-      curatedImages.guideTransportation,
-      "The Maven Hotel to Red Rocks shuttle planning",
+      "maven hotel denver red rocks private transportation",
+      "/hero/custom/lower_east_hero.jpg",
+      "Downtown Denver skyline and LoDo hotel district before a Red Rocks concert night",
     ),
-    heroImageSrc: curatedImages.guideTransportation,
-    heroImageAlt: "Red Rocks shuttle arrival planning from downtown Denver hotels",
+    heroImageSrc: "/hero/custom/lower_east_hero.jpg",
+    heroImageAlt: "Downtown Denver skyline and LoDo hotel district before a Red Rocks concert night",
   },
   "union-station-red-rocks-shuttle": {
     slug: "union-station-red-rocks-shuttle",
@@ -97,12 +97,12 @@ export const localGatewayPages: Record<LocalGatewaySlug, LocalGatewayPage> = {
     faqLocationAnswer:
       "Union Station riders receive the final pickup instructions before departure, and the handoff is built for walkability from nearby hotels and the A-Line arrival zone.",
     shareImage: buildShareImage(
-      "union station denver red rocks shuttle",
-      curatedImages.guideTransportation,
-      "Union Station to Red Rocks shuttle",
+      "union station denver red rocks private transportation",
+      curatedImages.guidePickup,
+      "Historic Denver Union Station illuminated plaza and transit hub",
     ),
-    heroImageSrc: curatedImages.guideTransportation,
-    heroImageAlt: "Union Station riders planning transportation to Red Rocks",
+    heroImageSrc: curatedImages.guidePickup,
+    heroImageAlt: "Historic Denver Union Station illuminated plaza and transit hub",
   },
   "golden-red-rocks-shuttle": {
     slug: "golden-red-rocks-shuttle",
@@ -120,18 +120,18 @@ export const localGatewayPages: Record<LocalGatewaySlug, LocalGatewayPage> = {
     localGuideIntro:
       "Golden is the best pickup fit for riders who already live or stay near the foothills. It cuts down on downtown traffic and makes the ride home easier after the encore.",
     nearbySpots: [
-      { name: "Trailhead Taphouse", note: "Solid pre-show meetup spot in Golden." },
+      { name: "Golden City Brewery", note: "Relaxed west-side beer garden stop in downtown Golden." },
       { name: "Mountain Toad Brewing", note: "Quick beer stop before pickup." },
     ],
     faqLocationAnswer:
       "Golden pickup details are shared with your booking, and the area is designed for riders staying near the foothills who want to avoid downtown departure traffic.",
     shareImage: buildShareImage(
-      "golden colorado red rocks shuttle",
-      curatedImages.guidePickup,
-      "Golden to Red Rocks shuttle planning",
+      "golden colorado red rocks private transportation",
+      "/images/red-rocks/Red-Rocks-Park.jpg",
+      "West-side foothills and Red Rocks Park sandstone formations near Golden",
     ),
-    heroImageSrc: curatedImages.guidePickup,
-    heroImageAlt: "Golden pickup and shuttle planning for Red Rocks",
+    heroImageSrc: "/images/red-rocks/Red-Rocks-Park.jpg",
+    heroImageAlt: "West-side foothills and Red Rocks Park sandstone formations near Golden",
   },
   "avanti-red-rocks-shuttle": {
     slug: "avanti-red-rocks-shuttle",
@@ -155,12 +155,12 @@ export const localGatewayPages: Record<LocalGatewaySlug, LocalGatewayPage> = {
     faqLocationAnswer:
       "The Avanti-area pickup is planned around the RiNo pregame zone so groups can meet nearby and walk over together before departure.",
     shareImage: buildShareImage(
-      "avanti denver red rocks shuttle nightlife",
-      curatedImages.guideTransportation,
-      "Avanti to Red Rocks shuttle",
+      "avanti denver rino red rocks private transportation",
+      "/venues/missionsite.jpg",
+      "Denver RiNo corridor concert venue exterior and pre-show gathering zone",
     ),
-    heroImageSrc: curatedImages.guideTransportation,
-    heroImageAlt: "RiNo and Avanti pregame shuttle planning for Red Rocks",
+    heroImageSrc: "/venues/missionsite.jpg",
+    heroImageAlt: "Denver RiNo corridor concert venue exterior and pre-show gathering zone",
   },
   "morrison-red-rocks-ride-options": {
     slug: "morrison-red-rocks-ride-options",
@@ -185,11 +185,11 @@ export const localGatewayPages: Record<LocalGatewaySlug, LocalGatewayPage> = {
       "Morrison pickup details are built around staying close to the venue while avoiding the most frustrating parking and post-show regrouping problems.",
     shareImage: buildShareImage(
       "morrison colorado red rocks ride options",
-      curatedImages.redRocksVenue,
-      "Morrison ride options for Red Rocks",
+      "/images/red-rocks/red-rocks-trading-post-backyard.jpg",
+      "Red Rocks Trading Post lower-park sandstone courtyard near Morrison",
     ),
-    heroImageSrc: curatedImages.redRocksVenue,
-    heroImageAlt: "Red Rocks arrival context for Morrison ride planning",
+    heroImageSrc: "/images/red-rocks/red-rocks-trading-post-backyard.jpg",
+    heroImageAlt: "Red Rocks Trading Post lower-park sandstone courtyard near Morrison",
   },
 };
 

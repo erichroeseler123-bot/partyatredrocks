@@ -114,7 +114,7 @@ export default async function VenueBookingPage({
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(bookingJsonLd) }} />
       <section className="mx-auto flex max-w-[1120px] flex-col gap-8">
         <section className="relative overflow-hidden rounded-[34px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,16,32,0.98),rgba(6,9,18,0.96))] shadow-[0_40px_120px_rgba(0,0,0,0.45)]">
-          <div className="absolute inset-0">
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-[250px] sm:h-[340px] lg:inset-0 lg:h-full">
             <Image
               src={isRedRocks ? curatedImages.homepageHero : venueMedia?.hero || curatedImages.homepageHero}
               alt={isRedRocks ? "Red Rocks Amphitheatre at dusk" : venueMedia?.heroAlt || `${row.name} booking hero`}
@@ -126,6 +126,7 @@ export default async function VenueBookingPage({
               sizes="(min-width: 1024px) 1120px, 100vw"
             />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(98,246,255,0.12),transparent_36%),radial-gradient(circle_at_82%_18%,rgba(255,176,124,0.14),transparent_28%),linear-gradient(180deg,rgba(5,8,22,0.34),rgba(5,8,22,0.82)_56%,rgba(5,8,22,0.94)_100%)]" />
+            <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent to-[#070b15] lg:hidden" />
           </div>
 
           <div className="relative p-8 sm:p-10 lg:p-12">

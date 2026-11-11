@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, XCircle, ShieldCheck, MapPin, Clock, Users, CarFront, Bus } from "lucide-react";
 import type { HandoffSearchParams } from "@/lib/parrHandoff";
@@ -145,7 +146,20 @@ export default async function RedRocksShuttlePage({
       <div className="mx-auto max-w-[1280px]">
         {/* HERO SECTION */}
         <section className="relative overflow-hidden rounded-[34px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,16,32,0.98),rgba(6,9,18,0.96))] p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] sm:p-12 lg:p-16">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(61,243,255,0.15),transparent_35%),radial-gradient(circle_at_top_right,rgba(255,91,46,0.12),transparent_30%)]" />
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-[250px] sm:h-[340px] lg:inset-0 lg:h-full">
+            <Image
+              src="/hero/hero_red_rocks.webp"
+              alt="Illuminated Red Rocks Amphitheatre show night vista above Morrison"
+              fill
+              priority
+              unoptimized
+              className="object-cover object-center opacity-45"
+              sizes="(min-width: 1280px) 1280px, 100vw"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(6,9,18,0.88)_0%,rgba(6,9,18,0.58)_50%,rgba(6,9,18,0.86)_100%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(61,243,255,0.15),transparent_35%),radial-gradient(circle_at_top_right,rgba(255,91,46,0.12),transparent_30%)]" />
+            <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-[#070b15] lg:hidden" />
+          </div>
           <div className="relative max-w-4xl">
             <div className="inline-flex items-center rounded-full border border-[#3df3ff]/30 bg-[#3df3ff]/10 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#3df3ff]">
               Official Private Ride Service
@@ -193,6 +207,17 @@ export default async function RedRocksShuttlePage({
               </div>
 
               <div>
+                <div className="relative mb-6 aspect-[16/10] overflow-hidden rounded-2xl border border-white/10">
+                  <Image
+                    src="/fleet/fleet-suburban.jpg"
+                    alt="Full-size Chevrolet Suburban SUV for private Red Rocks group transportation"
+                    fill
+                    unoptimized
+                    className="object-cover"
+                    sizes="(min-width: 1024px) 560px, 100vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#070b18]/65 via-transparent to-transparent" />
+                </div>
                 <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[#ffb07c]">
                   <CarFront className="h-4 w-4" />
                   Luxury SUV Option
@@ -247,6 +272,17 @@ export default async function RedRocksShuttlePage({
               </div>
 
               <div>
+                <div className="relative mb-6 aspect-[16/10] overflow-hidden rounded-2xl border border-white/10">
+                  <Image
+                    src="/assets/venue/red-rocks/red-rocks-shuttle.jpg"
+                    alt="Red Rocks Park approach road and sandstone monoliths for 10-passenger private van service"
+                    fill
+                    unoptimized
+                    className="object-cover"
+                    sizes="(min-width: 1024px) 560px, 100vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#070b18]/65 via-transparent to-transparent" />
+                </div>
                 <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[#3df3ff]">
                   <Bus className="h-4 w-4" />
                   Group Van Option

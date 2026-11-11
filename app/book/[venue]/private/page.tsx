@@ -115,9 +115,10 @@ export default async function PrivateOptionsPage({
 
       <section className="mx-auto flex max-w-[1120px] flex-col gap-8">
         <section className="relative overflow-hidden rounded-[34px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,16,32,0.98),rgba(6,9,18,0.96))] shadow-[0_40px_120px_rgba(0,0,0,0.45)]">
-          <div className="absolute inset-0">
-            <Image src={curatedImages.homepageHero} alt="Red Rocks Amphitheatre at dusk" fill unoptimized priority className="object-cover object-center opacity-48" sizes="(min-width: 1024px) 1120px, 100vw" />
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-[250px] sm:h-[340px] lg:inset-0 lg:h-full">
+            <Image src={curatedImages.homepageHero} alt="Illuminated Red Rocks Amphitheatre show night vista above Morrison" fill unoptimized priority className="object-cover object-center opacity-48" sizes="(min-width: 1024px) 1120px, 100vw" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(98,246,255,0.14),transparent_40%),radial-gradient(circle_at_80%_20%,rgba(255,176,124,0.14),transparent_34%),linear-gradient(180deg,rgba(5,8,22,0.3),rgba(5,8,22,0.82)_55%,rgba(5,8,22,0.96)_100%)]" />
+            <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent to-[#070b15] lg:hidden" />
           </div>
 
           <div className="relative p-8 sm:p-10 lg:p-12">
@@ -142,8 +143,15 @@ export default async function PrivateOptionsPage({
                 </div>
               </div>
 
-              <div className="relative min-h-[280px] overflow-hidden rounded-[28px] border border-white/10 bg-black/20">
-                <Image src={featuredVisual.imageSrc} alt={featuredVisual.imageAlt} fill className="object-cover" sizes="(min-width: 1024px) 45vw, 100vw" />
+              <div className="relative aspect-[16/10] overflow-hidden rounded-[28px] border border-white/10 bg-black/20 lg:aspect-auto lg:min-h-[280px]">
+                <Image
+                  src="/assets/venue/red-rocks/red-rocks-arrival.webp"
+                  alt="Red Rocks Park and Amphitheatre stone entrance sign for Upper North private arrival"
+                  fill
+                  unoptimized
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 45vw, 100vw"
+                />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,22,0.08),rgba(5,8,22,0.74)_100%)]" />
               </div>
             </div>
@@ -159,8 +167,8 @@ export default async function PrivateOptionsPage({
 
           <div className="mt-6">
             <Link href={buildBookingHref({ target: "private-option", venue, option: featuredOption.slug, searchParams: sp, overrides: { qty: vehicleQty } })} className="group grid gap-6 rounded-[28px] border border-[#62f6ff]/24 bg-[#09101f] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:border-[#62f6ff]/48 lg:grid-cols-[1.1fr_0.9fr]">
-              <div className="relative min-h-[240px] overflow-hidden rounded-[22px] border border-white/10">
-                <Image src={featuredVisual.imageSrc} alt={featuredVisual.imageAlt} fill className="object-cover" sizes="(min-width: 1024px) 50vw, 100vw" />
+              <div className="relative aspect-[16/10] overflow-hidden rounded-[22px] border border-white/10 lg:aspect-auto lg:min-h-[240px]">
+                <Image src={featuredVisual.imageSrc} alt={featuredVisual.imageAlt} fill unoptimized className="object-cover" sizes="(min-width: 1024px) 50vw, 100vw" />
               </div>
               <div className="flex flex-col justify-center">
                 <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">{featuredOption.eyebrow}</div>

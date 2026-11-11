@@ -1,6 +1,9 @@
+import fs from "node:fs";
+import path from "node:path";
 import { NextResponse } from "next/server";
 import { buildUnsplashQuery } from "@/lib/unsplash";
 
+export const runtime = "nodejs";
 export const revalidate = 86400;
 
 type UnsplashSearchResponse = {
@@ -25,6 +28,26 @@ type PexelsSearchResponse = {
     };
   }>;
 };
+
+const LOCAL_VERIFIED_POOLS = {
+  venue: [
+    "/venues/rrsite.webp",
+    "/assets/venue/red-rocks/red-rocks-hero.webp",
+    "/images/red-rocks/Panorama_of_Red_Rocks_Amphitheater.jpg",
+    "/images/red-rocks/Red-Rocks-Park.jpg",
+  ],
+  vehicle: [
+    "/hero/arrival.jpg",
+    "/assets/venue/red-rocks/red-rocks-shuttle.jpg",
+    "/fleet/fleet-suburban.jpg",
+  ],
+  concert: [
+    "/venues/rrsite.webp",
+    "/hero/hero_red_rocks.webp",
+    "/hero/sprinter_red_rocks.webp",
+    "/images/venues/all-venues-collage.webp",
+  ],
+} as const;
 
 const FALLBACK_IMAGE_POOLS = {
   concert: [
@@ -58,7 +81,7 @@ function hashString(value: string) {
   return hash;
 }
 
-function fallbackPoolForQuery(query: string) {
+function categoryForQuery(query: string): keyof typeof FALLBACK_IMAGE_POOLS {
   const normalized = query.toLowerCase();
   if (
     normalized.includes("shuttle") ||
@@ -66,9 +89,11 @@ function fallbackPoolForQuery(query: string) {
     normalized.includes("van") ||
     normalized.includes("sprinter") ||
     normalized.includes("bus") ||
-    normalized.includes("transport")
+    normalized.includes("transport") ||
+    normalized.includes("pickup") ||
+    normalized.includes("denver")
   ) {
-    return FALLBACK_IMAGE_POOLS.vehicle;
+    return "vehicle";
   }
 
   if (
@@ -77,16 +102,32 @@ function fallbackPoolForQuery(query: string) {
     normalized.includes("amphitheater") ||
     normalized.includes("map") ||
     normalized.includes("parking") ||
-    normalized.includes("guide")
+    normalized.includes("guide") ||
+    normalized.includes("red rocks")
   ) {
-    return FALLBACK_IMAGE_POOLS.venue;
+    return "venue";
   }
 
-  return FALLBACK_IMAGE_POOLS.concert;
+  return "concert";
+}
+
+function fallbackLocalUrl(requestUrl: URL, query: string): URL | null {
+  const category = categoryForQuery(query);
+  const pool = LOCAL_VERIFIED_POOLS[category];
+  const candidate = pool[hashString(query) % pool.length] || "/venues/rrsite.webp";
+  const abs = path.join(process.cwd(), "public", candidate.replace(/^\/+/, ""));
+  if (fs.existsSync(abs)) {
+    return new URL(candidate, requestUrl.origin);
+  }
+  const defaultAbs = path.join(process.cwd(), "public", "venues/rrsite.webp");
+  if (fs.existsSync(defaultAbs)) {
+    return new URL("/venues/rrsite.webp", requestUrl.origin);
+  }
+  return null;
 }
 
 function fallbackImageUrl(query: string, width: number, height: number, quality: number) {
-  const pool = fallbackPoolForQuery(query);
+  const pool = FALLBACK_IMAGE_POOLS[categoryForQuery(query)];
   const imageUrl = new URL(pool[hashString(query) % pool.length]);
   imageUrl.searchParams.set("auto", "format");
   imageUrl.searchParams.set("fit", "crop");
@@ -96,8 +137,30 @@ function fallbackImageUrl(query: string, width: number, height: number, quality:
   return imageUrl;
 }
 
-function resolveLocalAssetUrl(requestUrl: URL, src: string | null) {
+function resolveLocalAssetUrl(requestUrl: URL, src: string | null): URL | null {
   if (!src || !src.startsWith("/") || src.startsWith("//")) return null;
+  if (src.startsWith("/api/unsplash-image")) return null;
+
+  const cleanRel = decodeURIComponent(src.split("?")[0] || "").replace(/^\/+/, "");
+  if (!cleanRel) return null;
+
+  const publicDir = path.resolve(process.cwd(), "public");
+  const candidateAbs = path.resolve(publicDir, cleanRel);
+  if (!candidateAbs.startsWith(publicDir + path.sep) && candidateAbs !== publicDir) {
+    return null;
+  }
+
+  if (!fs.existsSync(candidateAbs)) {
+    return null;
+  }
+
+  try {
+    const stat = fs.statSync(candidateAbs);
+    if (!stat.isFile() || stat.size <= 0) return null;
+  } catch {
+    return null;
+  }
+
   return new URL(src, requestUrl.origin);
 }
 
@@ -216,8 +279,11 @@ export async function GET(request: Request) {
     const pexelsImage = await resolvePexelsImage(query, width, height, quality);
     if (pexelsImage) return redirectTo(pexelsImage);
   } catch {
-    // Fall through to deterministic CDN fallback.
+    // Fall through to verified local fallback or deterministic CDN fallback.
   }
+
+  const verifiedLocalFallback = fallbackLocalUrl(url, query);
+  if (verifiedLocalFallback) return redirectTo(verifiedLocalFallback);
 
   return redirectTo(fallbackImageUrl(query, width, height, quality));
 }

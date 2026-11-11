@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+import { existsSync } from "node:fs";
 import path from "node:path";
 
 const ROOT = process.cwd();
@@ -34,6 +35,22 @@ function asArray(parsed, key) {
 
 function compact(values) {
   return [...new Set(values.filter(Boolean))];
+}
+
+function resolveVenueImagePath(venueSlug) {
+  if (venueSlug === "red-rocks-amphitheatre" || venueSlug === "redrocks") {
+    return "/venues/rrsite.webp";
+  }
+  const candidates = [
+    `/images/venues/${venueSlug}.webp`,
+    `/images/venues/${venueSlug}.jpg`,
+  ];
+  for (const rel of candidates) {
+    if (existsSync(path.join(ROOT, "public", rel.replace(/^\/+/, "")))) {
+      return rel;
+    }
+  }
+  return "/venues/rrsite.webp";
 }
 
 async function discoverYears() {
@@ -95,9 +112,9 @@ async function buildYearMedia(year, venuesRegistry) {
     const ticketmasterImage = null;
     const seatgeekImage = artist?.image ?? null;
     const localAsset = asset?.local ?? null;
-    const fallback = "/images/shows/fallback.jpg";
+    const fallback = "/venues/rrsite.webp";
     const candidates = compact([spotifyImage, ticketmasterImage, seatgeekImage, localAsset, fallback]);
-    const primary = candidates[0] ?? "/images/shows/fallback.jpg";
+    const primary = candidates[0] ?? "/venues/rrsite.webp";
     artistMediaById[artist.id] = {
       id: artist.id,
       name: artist.name,
@@ -132,9 +149,9 @@ async function buildYearMedia(year, venuesRegistry) {
         ? asset?.remote ?? event?.image ?? null
         : asset?.remote ?? event?.image ?? null;
     const spotifyImage = null;
-    const fallback = "/images/shows/fallback.jpg";
+    const fallback = resolveVenueImagePath(event.venueId);
     const candidates = compact([spotifyImage, ticketmasterImage, seatgeekImage, localAsset, fallback]);
-    const primary = candidates[0] ?? "/images/shows/fallback.jpg";
+    const primary = candidates[0] ?? fallback;
 
     const artistRefs = compact(
       (event.artistNames ?? [])
@@ -168,14 +185,14 @@ async function buildYearMedia(year, venuesRegistry) {
   const venueMediaById = {};
   for (const venue of venuesRegistry) {
     if (!venue?.slug || !venue?.name) continue;
-    const local = `/images/venues/${venue.slug}.jpg`;
+    const local = resolveVenueImagePath(venue.slug);
     venueMediaById[venue.slug] = {
       id: venue.slug,
       key: venue.key,
       name: venue.name,
       image: {
         primary: local,
-        candidates: [local, "/images/venues/fallback.jpg"],
+        candidates: [local, "/images/venues/all-venues-collage.webp"],
       },
       sources: {
         blobImage: null,
@@ -183,7 +200,7 @@ async function buildYearMedia(year, venuesRegistry) {
         ticketmasterImage: null,
         seatgeekImage: null,
         localAsset: local,
-        fallback: "/images/venues/fallback.jpg",
+        fallback: "/images/venues/all-venues-collage.webp",
       },
       alt: `${venue.name} venue photo`,
       caption: `${venue.name} venue image.`,

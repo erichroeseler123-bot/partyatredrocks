@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { CarFront, ShieldCheck } from "lucide-react";
 import { GuideLocalInfo } from "@/components/guide/GuideLocalInfo";
@@ -55,21 +56,45 @@ export default function TailgatingGuidePage() {
             Party at Red Rocks currently offers private transportation only. Choose the $399 Suburban or $599 van when your group wants door-to-door pickup, time to enjoy the pre-show atmosphere, and the return ride handled after the concert.
           </p>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
-            <article className="rounded-[24px] border border-[#ffb07c]/24 bg-[#0b1224] p-5">
-              <div className="text-[11px] font-black uppercase tracking-[0.18em] text-[#ffb07c]">Private Suburban</div>
-              <h3 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white">$399 Private Ride</h3>
-              <p className="mt-3 text-sm leading-7 text-white/74">One vehicle, no shared passengers, and one plan from pickup through the ride home.</p>
-              <Link href="/book/red-rocks-amphitheatre/private/suv" className="mt-5 inline-flex min-h-11 items-center justify-center rounded-full bg-[#3df3ff] px-5 text-sm font-black uppercase tracking-[0.16em] text-[#07111d]">
-                Book Suburban
-              </Link>
+            <article className="overflow-hidden rounded-[24px] border border-[#ffb07c]/24 bg-[#0b1224]">
+              <div className="relative aspect-[16/10] border-b border-white/10">
+                <Image
+                  src="/fleet/fleet-suburban.jpg"
+                  alt="Full-size Chevrolet Suburban SUV for private Red Rocks group tailgating and round-trip rides"
+                  fill
+                  unoptimized
+                  sizes="(min-width: 768px) 45vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-5">
+                <div className="text-[11px] font-black uppercase tracking-[0.18em] text-[#ffb07c]">Private Suburban</div>
+                <h3 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white">$399 Private Ride</h3>
+                <p className="mt-3 text-sm leading-7 text-white/74">One vehicle, no shared passengers, and one plan from pickup through the ride home.</p>
+                <Link href="/book/red-rocks-amphitheatre/private/suv" className="mt-5 inline-flex min-h-11 items-center justify-center rounded-full bg-[#3df3ff] px-5 text-sm font-black uppercase tracking-[0.16em] text-[#07111d]">
+                  Book Suburban
+                </Link>
+              </div>
             </article>
-            <article className="rounded-[24px] border border-white/10 bg-[#0b1224] p-5">
-              <div className="text-[11px] font-black uppercase tracking-[0.18em] text-[#8fd0ff]">Private Van</div>
-              <h3 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white">$599 Van</h3>
-              <p className="mt-3 text-sm leading-7 text-white/74">A larger private vehicle for groups that need more space while keeping the same single-vehicle night plan.</p>
-              <Link href="/book/red-rocks-amphitheatre/private#van-upgrade" className="mt-5 inline-flex min-h-11 items-center justify-center rounded-full border border-white/14 bg-white/6 px-5 text-sm font-black uppercase tracking-[0.16em] text-white">
-                View Van Option
-              </Link>
+            <article className="overflow-hidden rounded-[24px] border border-white/10 bg-[#0b1224]">
+              <div className="relative aspect-[16/10] border-b border-white/10">
+                <Image
+                  src="/assets/venue/red-rocks/red-rocks-shuttle.jpg"
+                  alt="Red Rocks Park South corridor road leading to Upper North private van staging"
+                  fill
+                  unoptimized
+                  sizes="(min-width: 768px) 45vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-5">
+                <div className="text-[11px] font-black uppercase tracking-[0.18em] text-[#8fd0ff]">Private Van</div>
+                <h3 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white">$599 Van</h3>
+                <p className="mt-3 text-sm leading-7 text-white/74">A larger private vehicle for groups that need more space while keeping the same single-vehicle night plan.</p>
+                <Link href="/book/red-rocks-amphitheatre/private#van-upgrade" className="mt-5 inline-flex min-h-11 items-center justify-center rounded-full border border-white/14 bg-white/6 px-5 text-sm font-black uppercase tracking-[0.16em] text-white">
+                  View Van Option
+                </Link>
+              </div>
             </article>
           </div>
         </section>

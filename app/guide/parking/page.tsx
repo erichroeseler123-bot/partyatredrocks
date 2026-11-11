@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { GuideLocalInfo } from "@/components/guide/GuideLocalInfo";
 import { GuideVisualHero } from "@/components/guide/GuideVisualHero";
@@ -34,27 +35,51 @@ export default function Page() {
             If you are reading a parking guide because you want the smoothest night possible, the question is not only which lot to use. It is whether your group wants to manage parking and the post-show exit at all.
           </p>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
-            <article className="rounded-3xl border border-soft bg-surface p-6">
-              <p className="text-[11px] font-black uppercase tracking-[0.22em] text-cyan-300">Drive Yourself</p>
-              <h3 className="mt-3 text-2xl font-black tracking-tight">Use the Red Rocks lots</h3>
-              <p className="mt-3 text-soft leading-relaxed">
-                Best if someone in your group wants to drive, arrive early, handle the walk, and deal with the exit after the show.
-              </p>
+            <article className="overflow-hidden rounded-3xl border border-soft bg-surface">
+              <div className="relative aspect-[16/10] border-b border-soft">
+                <Image
+                  src="/images/red-rocks/red-rocks-amphitheater-from-top.jpg"
+                  alt="Red Rocks Amphitheatre seating elevation and surrounding park approach from the top plaza"
+                  fill
+                  unoptimized
+                  sizes="(min-width: 768px) 45vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6">
+                <p className="text-[11px] font-black uppercase tracking-[0.22em] text-cyan-300">Drive Yourself</p>
+                <h3 className="mt-3 text-2xl font-black tracking-tight">Use the Red Rocks lots</h3>
+                <p className="mt-3 text-soft leading-relaxed">
+                  Best if someone in your group wants to drive, arrive early, handle the walk, and deal with the exit after the show.
+                </p>
+              </div>
             </article>
-            <article className="rounded-3xl border border-soft bg-surface p-6">
-              <p className="text-[11px] font-black uppercase tracking-[0.22em] text-amber-300">Private Service</p>
-              <h3 className="mt-3 text-2xl font-black tracking-tight">Private Suburban or Van</h3>
-              <p className="mt-3 text-soft leading-relaxed">
-                Best if your group wants one vehicle, one pickup plan, and the return ride handled as part of the same booking.
-              </p>
-              <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-soft">
-                <li>No shared passengers</li>
-                <li>No parking-lot hunt for your group</li>
-                <li>One ride plan for arrival and return</li>
-              </ul>
-              <Link href={PRIVATE_HREF} className="btn-primary mt-6 inline-flex">
-                View Private Vehicles
-              </Link>
+            <article className="overflow-hidden rounded-3xl border border-soft bg-surface">
+              <div className="relative aspect-[16/10] border-b border-soft">
+                <Image
+                  src="/fleet/fleet-suburban.jpg"
+                  alt="Full-size Chevrolet Suburban SUV for private Red Rocks door-to-door transportation"
+                  fill
+                  unoptimized
+                  sizes="(min-width: 768px) 45vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6">
+                <p className="text-[11px] font-black uppercase tracking-[0.22em] text-amber-300">Private Service</p>
+                <h3 className="mt-3 text-2xl font-black tracking-tight">Private Suburban or Van</h3>
+                <p className="mt-3 text-soft leading-relaxed">
+                  Best if your group wants one vehicle, one pickup plan, and the return ride handled as part of the same booking.
+                </p>
+                <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-soft">
+                  <li>No shared passengers</li>
+                  <li>No parking-lot hunt for your group</li>
+                  <li>One ride plan for arrival and return</li>
+                </ul>
+                <Link href={PRIVATE_HREF} className="btn-primary mt-6 inline-flex">
+                  View Private Vehicles
+                </Link>
+              </div>
             </article>
           </div>
         </section>

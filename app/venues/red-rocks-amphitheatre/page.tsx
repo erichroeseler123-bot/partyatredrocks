@@ -62,7 +62,7 @@ export default async function RedRocksPage({ searchParams }: { searchParams: Pro
       label: "Transport",
       title: "Private Van — $599",
       body: "Private van upgrade for larger groups that want one vehicle and one concert-night plan from pickup through the ride home.",
-      ...getVenueRelatedCardImage({ intent: "transport", transportKey: "fleet" }),
+      ...getVenueRelatedCardImage({ intent: "transport", transportKey: "shuttle" }),
     },
   ];
 
@@ -115,10 +115,11 @@ export default async function RedRocksPage({ searchParams }: { searchParams: Pro
         {faqRows.length > 0 ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} /> : null}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
-        <header className="relative mb-8 overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,16,32,0.98),rgba(6,9,18,0.96))] p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] sm:p-10 lg:p-12">
-          <div className="absolute inset-0">
-            <Image src={venueMedia.hero} alt="Red Rocks Amphitheatre crowd and venue lights at night" fill className="object-cover object-center opacity-32" priority sizes="(min-width: 1280px) 1240px, 100vw" />
+        <header className="relative mb-8 overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,16,32,0.98),rgba(6,9,18,0.96))] p-6 shadow-[0_40px_120px_rgba(0,0,0,0.45)] sm:p-10 lg:p-12">
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-[250px] sm:h-[340px] lg:inset-0 lg:h-full">
+            <Image src={venueMedia.hero} alt="Red Rocks Amphitheatre sandstone monoliths and concert bowl" fill unoptimized className="object-cover object-center opacity-32" priority sizes="(min-width: 1280px) 1240px, 100vw" />
             <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(5,8,22,0.88)_0%,rgba(5,8,22,0.58)_45%,rgba(5,8,22,0.92)_100%)]" />
+            <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#060912] to-transparent lg:hidden" />
           </div>
           <div className="relative max-w-4xl">
             <div className="inline-flex items-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#8fd0ff]">Venue Guide</div>

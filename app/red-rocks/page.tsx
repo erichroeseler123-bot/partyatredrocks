@@ -11,8 +11,7 @@ import PrimaryCTASection from "@/components/PrimaryCTASection";
 import { RED_ROCKS_ENTITIES } from "@/lib/redRocksAuthority";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
-const DEFAULT_OG_IMAGE =
-  `${SITE}/api/unsplash-image?q=red+rocks+amphitheatre+concert+night+denver+colorado&src=%2Fhero%2Fhero-home.jpg&alt=Red+Rocks+guide&w=1200&h=630`;
+const DEFAULT_OG_IMAGE = `${SITE}/hero/hero_red_rocks.webp`;
 
 export const metadata: Metadata = {
   title: "Red Rocks Guide: Visiting, Concerts, Trails, Geology, Transportation",

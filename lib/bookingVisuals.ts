@@ -4,34 +4,34 @@ import { curatedImages } from "@/lib/curatedImages";
 export const bookingVisuals = {
   shared: {
     imageSrc: curatedImages.sharedShuttle,
-    imageAlt: "Passengers boarding a concert shuttle for Red Rocks",
+    imageAlt: "Red Rocks Amphitheatre sandstone seating bowl and foothills vista",
     eyebrow: BOOKING_COPY.labels.sharedBookingEyebrow,
     title: BOOKING_COPY.labels.sharedBookingTitle,
     copy: BOOKING_COPY.copy.sharedRide,
   },
   private: {
     imageSrc: curatedImages.privateSUV,
-    imageAlt: "Private SUV transportation for a Red Rocks concert night",
+    imageAlt: "Illuminated Red Rocks Amphitheatre concert night view above Morrison",
     eyebrow: BOOKING_COPY.labels.privateBookingEyebrow,
     title: BOOKING_COPY.labels.privateBookingTitle,
     copy: BOOKING_COPY.copy.privateRide,
   },
   privateOptions: {
     suv: {
-      imageSrc: curatedImages.privateSUV,
-      imageAlt: "Private SUV for Red Rocks transportation",
+      imageSrc: "/fleet/fleet-suburban.jpg",
+      imageAlt: "Full-size Chevrolet Suburban SUV for private Red Rocks group transportation",
     },
     van: {
       imageSrc: curatedImages.sprinterVan,
-      imageAlt: "Passenger van transportation for Red Rocks groups",
+      imageAlt: "Red Rocks Amphitheatre seating bowl for private 10-passenger group van rides",
     },
     sprinter: {
       imageSrc: curatedImages.sprinterVan,
-      imageAlt: "Sprinter van transportation for larger Red Rocks groups",
+      imageAlt: "Red Rocks Amphitheatre group van transportation",
     },
     "party-bus": {
       imageSrc: curatedImages.partyBus,
-      imageAlt: "Party bus style group transportation for a concert night",
+      imageAlt: "Large group private concert transportation vehicle",
     },
   },
 } as const;

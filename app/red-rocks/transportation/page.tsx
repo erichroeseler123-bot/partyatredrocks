@@ -209,7 +209,7 @@ export default async function RedRocksTransportationPage({
           {TRANSPORT_VISUALS.map((item) => (
             <article key={item.title} className="brand-card overflow-hidden rounded-[26px]">
               <div className="relative aspect-[16/10] border-b border-white/10">
-                <Image src={item.imageSrc} alt={item.imageAlt} fill className="object-cover" sizes="(min-width: 1024px) 30vw, 100vw" />
+                <Image src={item.imageSrc} alt={item.imageAlt} fill unoptimized className="object-cover" sizes="(min-width: 1024px) 30vw, 100vw" />
               </div>
               <div className="p-6">
                 <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.2em]">{item.title}</div>

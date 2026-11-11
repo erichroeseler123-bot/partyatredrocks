@@ -17,32 +17,32 @@ type GuideVisual = {
 export const guideVisuals: Record<GuideVisualKey, GuideVisual> = {
   transportation: {
     imageSrc: curatedImages.guideTransportation,
-    imageAlt: "Concert riders on a shuttle heading to Red Rocks",
+    imageAlt: "Red Rocks Park South approach road and sandstone monoliths",
     eyebrow: "Transportation Guide",
   },
   parking: {
     imageSrc: curatedImages.guideParking,
-    imageAlt: "Red Rocks venue atmosphere at night for parking and arrival planning",
+    imageAlt: "Red Rocks Park and Amphitheatre entrance wall and lot approach",
     eyebrow: "Parking Guide",
   },
   pickup: {
     imageSrc: curatedImages.guidePickup,
-    imageAlt: "Private ride meetup and post-show pickup planning for Red Rocks",
+    imageAlt: "Downtown Denver Union Station pickup corridor for Red Rocks concert nights",
     eyebrow: "Pickup Planning",
   },
   policy: {
     imageSrc: curatedImages.guidePolicy,
-    imageAlt: "Red Rocks concert guide visual for policies and show-night rules",
+    imageAlt: "Red Rocks Park Trading Post Trail signage and concert entry corridor",
     eyebrow: "Policy Guide",
   },
   tailgating: {
     imageSrc: curatedImages.guideTailgating,
-    imageAlt: "Group transportation and tailgating setup for Red Rocks",
+    imageAlt: "Historic Red Rocks Trading Post and sandstone pre-show gathering area",
     eyebrow: "Tailgating Guide",
   },
   general: {
     imageSrc: curatedImages.guideGeneral,
-    imageAlt: "Red Rocks guide and logistics planning visual",
+    imageAlt: "Wide daytime panorama of Red Rocks Amphitheatre seating rows and stage",
     eyebrow: "Guide",
   },
 };

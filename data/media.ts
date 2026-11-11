@@ -12,6 +12,7 @@ type VenueMediaRegistryEntry = {
 };
 
 type GuideMediaRegistryEntry = {
+  cardImage?: string | null;
   manualImage?: string | null;
   resolvedImage?: string | null;
   fallbackImage?: string | null;
@@ -39,7 +40,7 @@ export const MEDIA = {
       primary: "/assets/venue/red-rocks/red-rocks-arrival.webp",
     },
     hiphop: {
-      primary: "/images/marketing/shuttle.webp",
+      primary: "/images/venues/ogden-theatre.webp",
     },
     metal: {
       primary: "/images/venues/ball-arena.webp",
@@ -54,29 +55,29 @@ export const MEDIA = {
       primary: "/images/venues/empower-field.webp",
     },
     reggae: {
-      primary: "/images/marketing/fleet.webp",
+      primary: "/images/venues/gothic-theatre.webp",
     },
     punk: {
-      primary: "/images/venues/all-venues-collage.webp",
+      primary: "/images/venues/fillmore-auditorium.webp",
     },
     latin: {
-      primary: "/images/venues/all-venues-summary.svg",
+      primary: "/images/venues/fiddlers-green-amphitheatre.webp",
     },
   },
 } as const;
 
-const DEFAULT_FALLBACK = "/images/venues/fallback.webp";
-const DEFAULT_GUIDE_FALLBACK = "/hero/hero-guides.webp";
-const DEFAULT_SOCIAL_FALLBACK = "/images/marketing/fleet.webp";
+const DEFAULT_FALLBACK = "/venues/rrsite.webp";
+const DEFAULT_GUIDE_FALLBACK = "/venues/rrsite.webp";
+const DEFAULT_SOCIAL_FALLBACK = "/venues/rrsite_thumb.webp";
 
 const TRANSPORT_RELATED_MEDIA = {
   shuttle: {
-    imageSrc: "/images/marketing/shuttle.webp",
-    imageAlt: "Shuttle loading for a Red Rocks show night",
+    imageSrc: "/assets/venue/red-rocks/red-rocks-shuttle.jpg",
+    imageAlt: "Red Rocks Park South approach road and sandstone monoliths",
   },
   fleet: {
-    imageSrc: "/images/marketing/fleet.webp",
-    imageAlt: "Fleet lineup for concert transportation and group pickup",
+    imageSrc: "/fleet/fleet-suburban.jpg",
+    imageAlt: "Full-size Chevrolet Suburban SUV for private concert transportation",
   },
 } as const;
 
@@ -107,7 +108,12 @@ function resolveVenueImage(slug: string) {
 
 function resolveGuideImage(slug: string) {
   const entry = GUIDE_MEDIA_REGISTRY[slug];
-  const source = entry?.manualImage || entry?.resolvedImage || entry?.fallbackImage || DEFAULT_GUIDE_FALLBACK;
+  const source =
+    entry?.cardImage ||
+    entry?.manualImage ||
+    entry?.resolvedImage ||
+    entry?.fallbackImage ||
+    DEFAULT_GUIDE_FALLBACK;
   return buildUnsplashImageSrc({
     query: `${prettifySlug(slug)} red rocks guide planning`,
     src: source,
@@ -214,7 +220,12 @@ export function assertUniqueGuideImages() {
 
   const seen = new Map<string, string>();
   for (const [slug, item] of Object.entries(GUIDE_MEDIA_REGISTRY)) {
-    const image = item.manualImage || item.resolvedImage || item.fallbackImage || DEFAULT_GUIDE_FALLBACK;
+    const image =
+      item.cardImage ||
+      item.manualImage ||
+      item.resolvedImage ||
+      item.fallbackImage ||
+      DEFAULT_GUIDE_FALLBACK;
     const existing = seen.get(image);
     if (existing) {
       console.warn(`Duplicate guide image detected: ${slug} and ${existing} -> ${image}`);

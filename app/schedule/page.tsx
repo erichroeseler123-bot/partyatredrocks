@@ -206,18 +206,19 @@ export default async function SchedulePage() {
     <main className="brand-page bg-[radial-gradient(circle_at_top,rgba(255,91,46,0.15),transparent_26%),radial-gradient(circle_at_18%_10%,rgba(59,130,246,0.14),transparent_18%),linear-gradient(180deg,#0b0b0f_0%,#0b0b0f_100%)]">
       <section className="mx-auto w-full max-w-[1500px] px-4 pb-20 pt-16 sm:px-6 lg:px-8">
         <section className="relative overflow-hidden rounded-[36px] border border-[var(--brand-orange)]/20 bg-[var(--brand-bg-dark)] shadow-[0_40px_120px_rgba(0,0,0,0.58)]">
-          <div className="absolute inset-0">
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-[250px] sm:h-[340px] md:inset-0 md:h-full">
             <Image
               src={curatedImages.scheduleHero}
-              alt="Red Rocks Amphitheatre at night"
+              alt="Downtown Denver Union Station departure plaza for Red Rocks concert nights"
               fill
               sizes="100vw"
               unoptimized
               className="object-cover object-center"
               priority
             />
-            <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(10,18,56,0.42)_0%,rgba(10,18,56,0.18)_44%,rgba(9,9,9,0.34)_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(10,18,56,0.54)_0%,rgba(10,18,56,0.28)_44%,rgba(9,9,9,0.48)_100%)]" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(59,130,246,0.08),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(255,91,46,0.05),transparent_24%)]" />
+            <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-[var(--brand-bg-dark)] md:hidden" />
           </div>
 
           <div className="relative px-6 py-10 sm:px-8 sm:py-12 lg:px-12 lg:py-14">

@@ -32,7 +32,7 @@ export default function OgdenMapPage() {
 
         <div className="mt-8 text-center">
           <UnsplashImg
-            src="/images/venues/fallback.jpg"
+            src="/images/venues/ogden-theatre-map.jpg"
             query="ogden theatre denver venue map layout"
             alt="Ogden Theatre Denver venue map showing entry flow, floor and balcony zones, and nearby pickup context"
             width={800}
