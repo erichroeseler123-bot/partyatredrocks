@@ -11,7 +11,7 @@ const SEARCH_DIR = path.join(ROOT, "data", "snapshots", "search");
 const ASSETS_DIR = path.join(ROOT, "data", "snapshots", "assets");
 const PUBLIC_DIR = path.join(ROOT, "public");
 
-const year = Number(process.argv[2] ?? "2026");
+const explicitYearArg = process.argv[2] ? Number(process.argv[2]) : null;
 
 function slugify(input) {
   return String(input)
@@ -38,7 +38,16 @@ function assert(cond, message) {
 function validateLedgerRows(rows, venueKey) {
   assert(Array.isArray(rows), `Ledger must be an array for ${venueKey}`);
   const seen = new Set();
-  const allowedKeys = new Set(["dateKey", "title", "support"]);
+  const allowedKeys = new Set([
+    "dateKey",
+    "title",
+    "support",
+    "startLocal",
+    "sourceUrl",
+    "ticketUrl",
+    "sourceId",
+    "verifiedAt",
+  ]);
 
   for (let i = 0; i < rows.length; i += 1) {
     const row = rows[i];
@@ -52,6 +61,33 @@ function validateLedgerRows(rows, venueKey) {
     assert(typeof row.title === "string" && row.title.trim().length > 0, `Missing title for ${venueKey} at index ${i}`);
     if (row.support != null) {
       assert(typeof row.support === "string", `support must be string for ${venueKey} at index ${i}`);
+    }
+    if (row.startLocal != null) {
+      assert(
+        typeof row.startLocal === "string" && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/.test(row.startLocal),
+        `Invalid startLocal "${row.startLocal}" for ${venueKey} at index ${i}`
+      );
+    }
+    if (row.sourceUrl != null) {
+      assert(
+        typeof row.sourceUrl === "string" && /^https:\/\//.test(row.sourceUrl),
+        `Invalid sourceUrl "${row.sourceUrl}" for ${venueKey} at index ${i}`
+      );
+    }
+    if (row.ticketUrl != null) {
+      assert(
+        typeof row.ticketUrl === "string" && /^https:\/\//.test(row.ticketUrl),
+        `Invalid ticketUrl "${row.ticketUrl}" for ${venueKey} at index ${i}`
+      );
+    }
+    if (row.sourceId != null) {
+      assert(typeof row.sourceId === "string", `sourceId must be string for ${venueKey} at index ${i}`);
+    }
+    if (row.verifiedAt != null) {
+      assert(
+        typeof row.verifiedAt === "string" && /^\d{4}-\d{2}-\d{2}$/.test(row.verifiedAt),
+        `Invalid verifiedAt "${row.verifiedAt}" for ${venueKey} at index ${i}`
+      );
     }
     const key = `${row.dateKey}|||${String(row.title).toLowerCase().trim()}`;
     assert(!seen.has(key), `Duplicate show row for ${venueKey} at index ${i}: ${row.dateKey} ${row.title}`);
@@ -107,6 +143,11 @@ async function loadVenueLedgers(targetYear) {
           date: row.dateKey,
           title: row.title,
           support: row.support || "",
+          startLocal: row.startLocal || null,
+          sourceUrl: row.sourceUrl || null,
+          ticketUrl: row.ticketUrl || null,
+          sourceId: row.sourceId || null,
+          verifiedAt: row.verifiedAt || null,
         })),
       });
     } catch (err) {
@@ -141,11 +182,11 @@ function buildEvents(venueKey, venueId, shows, eventYear) {
     .map((show) => {
       const artistNames = parseArtists(show.title, show.support);
       const headliner = artistNames[0] || show.title;
-      const startAt = `${show.date}T19:00:00`;
-      return {
+      const startAt = show.startLocal || `${show.date}T19:00:00`;
+      const row = {
         id: eventId(venueKey, show.date, show.title),
         source: "snapshot",
-        sourceId: null,
+        sourceId: show.sourceId || null,
         name: show.title,
         startAt,
         startLocal: startAt,
@@ -154,10 +195,13 @@ function buildEvents(venueKey, venueId, shows, eventYear) {
         artists: artistNames.map(artistId),
         artistNames,
         image: null,
-        ticketUrl: null,
+        ticketUrl: show.ticketUrl || show.sourceUrl || null,
+        ...(show.sourceUrl ? { sourceUrl: show.sourceUrl } : {}),
+        ...(show.verifiedAt ? { verifiedAt: show.verifiedAt } : {}),
         dateKey: show.date,
         slug: slugify(`${show.date}-${show.title}`),
       };
+      return row;
     })
     .sort((a, b) => String(a.startAt).localeCompare(String(b.startAt)));
 }
@@ -333,32 +377,45 @@ async function writeBundle(stem, events, targetYear, generatedAt) {
   const search = buildSearch(events);
   const assets = await buildAssets(events, artists);
 
+  const verifiedAtValues = [...new Set(events.map((ev) => ev.verifiedAt).filter(Boolean))];
+  const verifiedAt = verifiedAtValues.length === 1 ? verifiedAtValues[0] : undefined;
+  const effectiveGeneratedAt = verifiedAt ? `${verifiedAt}T00:00:00.000Z` : generatedAt;
+
   await Promise.all([
     fs.writeFile(
       path.join(EVENTS_DIR, `${stem}-${targetYear}.json`),
-      JSON.stringify({ generatedAt, year: targetYear, events }, null, 2) + "\n",
+      JSON.stringify(
+        {
+          generatedAt: effectiveGeneratedAt,
+          ...(verifiedAt ? { verifiedAt } : {}),
+          year: targetYear,
+          events,
+        },
+        null,
+        2
+      ) + "\n",
       "utf8"
     ),
     fs.writeFile(
       path.join(INDEXES_DIR, `${stem}-${targetYear}.byDate.json`),
-      JSON.stringify({ generatedAt, year: targetYear, eventsByDate: indexes.eventsByDate }, null, 2) + "\n",
+      JSON.stringify({ generatedAt: effectiveGeneratedAt, year: targetYear, eventsByDate: indexes.eventsByDate }, null, 2) + "\n",
       "utf8"
     ),
     fs.writeFile(
       path.join(INDEXES_DIR, `${stem}-${targetYear}.byMonth.json`),
-      JSON.stringify({ generatedAt, year: targetYear, eventsByMonth: indexes.eventsByMonth }, null, 2) + "\n",
+      JSON.stringify({ generatedAt: effectiveGeneratedAt, year: targetYear, eventsByMonth: indexes.eventsByMonth }, null, 2) + "\n",
       "utf8"
     ),
     fs.writeFile(
       path.join(INDEXES_DIR, `${stem}-${targetYear}.byVenue.json`),
-      JSON.stringify({ generatedAt, year: targetYear, eventsByVenue: indexes.eventsByVenue }, null, 2) + "\n",
+      JSON.stringify({ generatedAt: effectiveGeneratedAt, year: targetYear, eventsByVenue: indexes.eventsByVenue }, null, 2) + "\n",
       "utf8"
     ),
     fs.writeFile(
       path.join(INDEXES_DIR, `${stem}-${targetYear}.artists.json`),
       JSON.stringify(
         {
-          generatedAt,
+          generatedAt: effectiveGeneratedAt,
           year: targetYear,
           artistToEvents: indexes.artistToEvents,
           artistIndex: indexes.artistIndex,
@@ -370,35 +427,46 @@ async function writeBundle(stem, events, targetYear, generatedAt) {
     ),
     fs.writeFile(
       path.join(INDEXES_DIR, `${stem}-${targetYear}.artistProfiles.json`),
-      JSON.stringify({ generatedAt, year: targetYear, ...artistProfiles }, null, 2) + "\n",
+      JSON.stringify({ generatedAt: effectiveGeneratedAt, year: targetYear, ...artistProfiles }, null, 2) + "\n",
       "utf8"
     ),
     fs.writeFile(
       path.join(ARTISTS_DIR, `${stem}-${targetYear}.json`),
-      JSON.stringify({ generatedAt, year: targetYear, artists }, null, 2) + "\n",
+      JSON.stringify({ generatedAt: effectiveGeneratedAt, year: targetYear, artists }, null, 2) + "\n",
       "utf8"
     ),
     fs.writeFile(
       path.join(SEARCH_DIR, `${stem}-${targetYear}.search.json`),
-      JSON.stringify({ generatedAt, year: targetYear, docs: search }, null, 2) + "\n",
+      JSON.stringify({ generatedAt: effectiveGeneratedAt, year: targetYear, docs: search }, null, 2) + "\n",
       "utf8"
     ),
     fs.writeFile(
       path.join(ASSETS_DIR, `${stem}-${targetYear}.assets.json`),
-      JSON.stringify({ generatedAt, year: targetYear, ...assets }, null, 2) + "\n",
+      JSON.stringify({ generatedAt: effectiveGeneratedAt, year: targetYear, ...assets }, null, 2) + "\n",
       "utf8"
     ),
   ]);
 }
 
-async function main() {
-  const ledgers = await loadVenueLedgers(year);
-  const generatedAt = new Date().toISOString();
-  await ensureDirs();
+async function discoverLedgerYears() {
+  const dirs = await fs.readdir(SHOWS_DIR, { withFileTypes: true });
+  const years = new Set();
+  for (const dir of dirs) {
+    if (!dir.isDirectory()) continue;
+    const files = await fs.readdir(path.join(SHOWS_DIR, dir.name));
+    for (const file of files) {
+      const m = file.match(/^(\d{4})\.json$/);
+      if (m) years.add(Number(m[1]));
+    }
+  }
+  return Array.from(years).sort((a, b) => a - b);
+}
 
+async function buildYear(targetYear, generatedAt) {
+  const ledgers = await loadVenueLedgers(targetYear);
   const eventsByVenueKey = {};
   for (const ledger of ledgers) {
-    eventsByVenueKey[ledger.venueKey] = buildEvents(ledger.venueKey, ledger.venueId, ledger.shows, year);
+    eventsByVenueKey[ledger.venueKey] = buildEvents(ledger.venueKey, ledger.venueId, ledger.shows, targetYear);
   }
 
   const allEvents = Object.values(eventsByVenueKey)
@@ -406,11 +474,21 @@ async function main() {
     .sort((a, b) => String(a.startAt).localeCompare(String(b.startAt)));
 
   await Promise.all([
-    ...ledgers.map((ledger) => writeBundle(ledger.venueKey, eventsByVenueKey[ledger.venueKey], year, generatedAt)),
-    writeBundle("all", allEvents, year, generatedAt),
+    ...ledgers.map((ledger) => writeBundle(ledger.venueKey, eventsByVenueKey[ledger.venueKey], targetYear, generatedAt)),
+    writeBundle("all", allEvents, targetYear, generatedAt),
   ]);
 
-  console.log(`Built ${allEvents.length} events across ${ledgers.length} venue ledgers for ${year}.`);
+  console.log(`Built ${allEvents.length} events across ${ledgers.length} venue ledgers for ${targetYear}.`);
+}
+
+async function main() {
+  const targetYears = explicitYearArg ? [explicitYearArg] : await discoverLedgerYears();
+  const generatedAt = new Date().toISOString();
+  await ensureDirs();
+
+  for (const targetYear of targetYears) {
+    await buildYear(targetYear, generatedAt);
+  }
 }
 
 main().catch((err) => {

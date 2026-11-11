@@ -81,3 +81,30 @@ export async function getMediaIndex(year = 2026): Promise<MediaIndex | null> {
     return null;
   }
 }
+
+export async function getMultiYearMediaIndex(years: number[] = [2026, 2027]): Promise<MediaIndex | null> {
+  const snapshots = (await Promise.all(years.map((year) => getMediaIndex(year)))).filter(
+    (entry): entry is MediaIndex => entry !== null
+  );
+  if (!snapshots.length) return null;
+
+  const merged: MediaIndex = {
+    generatedAt: snapshots[0].generatedAt,
+    year: snapshots[0].year,
+    artistsById: {},
+    eventsById: {},
+    venuesById: {},
+    mapPoints: [],
+  };
+
+  for (const snap of snapshots) {
+    Object.assign(merged.artistsById, snap.artistsById);
+    Object.assign(merged.eventsById, snap.eventsById);
+    Object.assign(merged.venuesById, snap.venuesById);
+    for (const point of snap.mapPoints ?? []) {
+      if (merged.mapPoints.length < 12) merged.mapPoints.push(point);
+    }
+  }
+
+  return merged;
+}

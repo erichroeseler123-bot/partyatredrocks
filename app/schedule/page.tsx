@@ -2,10 +2,14 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BadgeCheck, CalendarDays, Clock3, PhoneCall } from "lucide-react";
-import { getEventsCatalog } from "@/lib/events/getCatalog";
+import {
+  getDenverDateKey,
+  getEventsCatalog,
+  getMultiYearEventsCatalog,
+} from "@/lib/events/getCatalog";
 import { buildBookingHref } from "@/lib/parrHandoff";
 import { ANNOUNCED_RED_ROCKS_2026 } from "@/data/red-rocks-2026-announced";
-import { getMediaIndex } from "@/lib/media/getMediaIndex";
+import { getMultiYearMediaIndex } from "@/lib/media/getMediaIndex";
 import { curatedImages } from "@/lib/curatedImages";
 
 export const revalidate = 3600;
@@ -25,18 +29,18 @@ type ScheduleEvent = {
 };
 
 export const metadata: Metadata = {
-  title: "Red Rocks Amphitheatre 2026 Full Concert Schedule | Party at Red Rocks Shuttle",
+  title: "Red Rocks Amphitheatre 2026–2027 Concert Schedule | Party at Red Rocks Shuttle",
   description:
-    "Red Rocks 2026 concert schedule with month-by-month listings, show pages, and direct shuttle booking links.",
+    "Red Rocks 2026–2027 concert schedule with month-by-month listings, show pages, and direct private shuttle booking links.",
   robots: {
     index: false,
     follow: true,
   },
   alternates: { canonical: `${SITE}/schedule` },
   openGraph: {
-    title: "Red Rocks Amphitheatre 2026 Full Concert Schedule | Party at Red Rocks Shuttle",
+    title: "Red Rocks Amphitheatre 2026–2027 Concert Schedule | Party at Red Rocks Shuttle",
     description:
-      "Scan the 2026 Red Rocks concert calendar by month and book shared or private rides for your show night.",
+      "Scan the 2026–2027 Red Rocks concert calendar by month and book private rides for your show night.",
     url: `${SITE}/schedule`,
     type: "website",
   },
@@ -78,7 +82,10 @@ function normalizeComparable(value: string | null | undefined) {
 }
 
 export default async function SchedulePage() {
-  const catalogEvents = (await getEventsCatalog(2026, "redrocks"))
+  const denverToday = getDenverDateKey();
+  const currentYear = Number(denverToday.slice(0, 4));
+  const scheduleYears = Array.from(new Set([2026, currentYear, currentYear + 1])).sort((a, b) => a - b);
+  const catalogEvents = (await getMultiYearEventsCatalog({ scopes: ["redrocks"], years: scheduleYears }))
     .filter((event) => event.venueId === "red-rocks-amphitheatre")
     .sort((a, b) => {
       if (a.dateKey !== b.dateKey) return a.dateKey.localeCompare(b.dateKey);
@@ -127,7 +134,7 @@ export default async function SchedulePage() {
       return a.name.localeCompare(b.name);
     });
 
-  const mediaIndex = await getMediaIndex(2026);
+  const mediaIndex = await getMultiYearMediaIndex(scheduleYears);
   const artistMediaMap = Object.fromEntries(
     Object.values(mediaIndex?.artistsById ?? {})
       .filter((row) => row.name)
@@ -153,7 +160,7 @@ export default async function SchedulePage() {
       const support = event.artistNames.slice(1).join(", ") || null;
       const showHref = event.showId ? `/shows/${event.showId}` : "https://www.redrocksonline.com/events/";
       const shuttleHref = buildBookingHref({
-        target: "shared",
+        target: "private",
         venue: "red-rocks-amphitheatre",
         overrides: {
           artist: event.artistNames[0] || event.name,
@@ -216,12 +223,12 @@ export default async function SchedulePage() {
           <div className="relative px-6 py-10 sm:px-8 sm:py-12 lg:px-12 lg:py-14">
             <div className="inline-flex min-h-[42px] items-center gap-2 rounded-full border border-white/12 bg-black/30 px-4 py-3 text-[11px] font-black uppercase tracking-[0.24em] text-[var(--brand-orange)] backdrop-blur">
               <CalendarDays className="h-3.5 w-3.5" />
-              Red Rocks 2026
+              Red Rocks 2026–2027
             </div>
 
             <h1 className="mt-4 max-w-5xl text-[2.5rem] font-black uppercase leading-[0.92] tracking-[-0.05em] text-white sm:text-[4rem] lg:text-[5.2rem]">
-              Full 2026 Concert Schedule
-              <span className="block text-[var(--brand-orange)]">Book Your Shuttle Ride</span>
+              2026–2027 Concert Schedule
+              <span className="block text-[var(--brand-orange)]">Book Your Private Ride</span>
             </h1>
 
             <p className="mt-5 max-w-3xl text-base leading-8 text-white/78 sm:text-lg">

@@ -1,18 +1,16 @@
 import type { Metadata } from "next";
-import HomeSections from "@/components/home/HomeSections";
+import HomeSections, { type UpcomingRedRocksPreviewItem } from "@/components/home/HomeSections";
 import SocialProofStrip from "@/components/social/SocialProofStrip";
 import { getSameAs } from "@/lib/socials";
 import { SITE_CONFIG } from "@/app/site-config";
 import { BOOKING_COPY } from "@/lib/bookingCopy";
-import { getEventsCatalog } from "@/lib/events/getCatalog";
+import { getDenverDateKey, getUpcomingEventsCatalog } from "@/lib/events/getCatalog";
 import { getDynamicImage } from "@/lib/getDynamicImage";
 import { curatedImages } from "@/lib/curatedImages";
 import { pageVisuals } from "@/lib/pageVisuals";
 import {
   BUSINESS_EMAIL,
   BUSINESS_NAME,
-  BUSINESS_PHONE,
-  BUSINESS_PHONE_DISPLAY,
   SERVICE_AREAS,
 } from "@/lib/seo/siteTrust";
 
@@ -36,22 +34,32 @@ export const metadata: Metadata = {
   },
 };
 
+function formatDenverEventDate(dateKey: string): string {
+  return new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Denver",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  }).format(new Date(`${dateKey}T12:00:00-07:00`));
+}
+
 export default async function HomePage() {
   const brandKey = SITE_CONFIG.socialBrandKey;
-  const [events] = await Promise.all([getEventsCatalog(2026, "redrocks")]);
+  const denverToday = getDenverDateKey();
+  const currentYear = Number(denverToday.slice(0, 4));
+  const upcomingEvents = await getUpcomingEventsCatalog({
+    scopes: ["redrocks"],
+    fromDateKey: denverToday,
+    years: [currentYear, currentYear + 1],
+    venueId: "red-rocks-amphitheatre",
+  });
+
   const heroSrc = pageVisuals.home.heroSrc;
   const privateVehicleSrc = pageVisuals.home.privateSrc;
-  const denverToday = new Intl.DateTimeFormat("en-CA", {
-    timeZone: "America/Denver",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  }).format(new Date());
-  const nextRedRocksEvent = events
-    .filter((event) => event.venueId === "red-rocks-amphitheatre" && event.dateKey >= denverToday)
-    .sort((a, b) => `${a.dateKey}T${a.startLocal}`.localeCompare(`${b.dateKey}T${b.startLocal}`))[0];
+
+  const nextRedRocksEvent = upcomingEvents[0] ?? null;
   const nextRedRocksEventDate = nextRedRocksEvent
-    ? new Intl.DateTimeFormat("en-US", { timeZone: "America/Denver", month: "long", day: "numeric", year: "numeric" }).format(new Date(`${nextRedRocksEvent.dateKey}T12:00:00-06:00`))
+    ? formatDenverEventDate(nextRedRocksEvent.dateKey)
     : null;
   const nextRedRocksEventImage = nextRedRocksEvent
     ? await getDynamicImage(
@@ -60,17 +68,43 @@ export default async function HomePage() {
         nextRedRocksEvent.image || curatedImages.redRocksVenueThumb,
       )
     : null;
+
   const urgency = nextRedRocksEvent
     ? {
-        label: nextRedRocksEvent.dateKey === denverToday ? "Tonight at Red Rocks" : "Next at Red Rocks",
+        label:
+          nextRedRocksEvent.dateKey === denverToday
+            ? "Tonight at Red Rocks"
+            : nextRedRocksEvent.dateKey.startsWith("2027-")
+              ? "Next Announced 2027 Show at Red Rocks"
+              : "Next at Red Rocks",
         detail:
           nextRedRocksEvent.dateKey === denverToday
             ? `${nextRedRocksEvent.name} is on tonight. Private ride planning is still open.`
             : `${nextRedRocksEvent.name} is coming up next on ${nextRedRocksEventDate}. Lock the ride plan before show night gets compressed.`,
         imageSrc: nextRedRocksEventImage || curatedImages.redRocksVenueThumb,
         imageAlt: `${nextRedRocksEvent.name} concert image`,
+        bookingHref: `/book/red-rocks-amphitheatre/private/suv?date=${encodeURIComponent(nextRedRocksEvent.dateKey)}&artist=${encodeURIComponent(nextRedRocksEvent.name)}`,
       }
-    : null;
+    : {
+        label: "2027 Red Rocks Season Ride Planning",
+        detail:
+          "Official 2027 Red Rocks concert announcements roll out progressively from late fall through spring. Book a custom show date or request presale ride coordination anytime.",
+        imageSrc: curatedImages.redRocksVenueThumb,
+        imageAlt: "Red Rocks Amphitheatre concert venue",
+        bookingHref: "/book/red-rocks-amphitheatre/private/suv",
+      };
+
+  const upcoming2027Events = upcomingEvents.filter((event) => event.dateKey >= "2027-01-01");
+  const upcoming2027Preview: UpcomingRedRocksPreviewItem[] = upcoming2027Events.slice(0, 6).map((event) => ({
+    id: event.id,
+    name: event.name,
+    dateKey: event.dateKey,
+    dateLabel: formatDenverEventDate(event.dateKey),
+    supportLabel: event.artistNames.slice(1).join(", ") || null,
+    sourceUrl: event.sourceUrl ?? null,
+    suvBookingHref: `/book/red-rocks-amphitheatre/private/suv?date=${encodeURIComponent(event.dateKey)}&artist=${encodeURIComponent(event.name)}`,
+    vanBookingHref: `/book/red-rocks-amphitheatre/private/van?date=${encodeURIComponent(event.dateKey)}&artist=${encodeURIComponent(event.name)}`,
+  }));
 
   const webSiteJsonLd = {
     "@context": "https://schema.org",
@@ -197,6 +231,8 @@ export default async function HomePage() {
         heroSrc={heroSrc}
         privateVehicleSrc={privateVehicleSrc}
         urgency={urgency}
+        upcoming2027Preview={upcoming2027Preview}
+        verified2027Count={upcoming2027Events.length}
       />
       <section className="brand-page px-4 pb-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-[1500px]">

@@ -1,0 +1,1147 @@
+{
+  "generatedAt": "2026-11-11T00:00:00.000Z",
+  "verifiedAt": "2026-11-11",
+  "year": 2027,
+  "events": [
+    {
+      "id": "rr-2027-03-25-porter-robinson-b2b-ninajirachi",
+      "source": "snapshot",
+      "sourceId": "1644262",
+      "name": "Porter Robinson B2B Ninajirachi",
+      "startAt": "2027-03-25T18:00:00",
+      "startLocal": "2027-03-25T18:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-porter-robinson-b2b-ninajirachi"
+      ],
+      "artists": [
+        "artist-porter-robinson-b2b-ninajirachi",
+        "artist-frost-children-dj-set",
+        "artist-10cust"
+      ],
+      "artistNames": [
+        "Porter Robinson B2B Ninajirachi",
+        "Frost Children (DJ Set)",
+        "10cust"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1644262/porter-robinson-b2b-ninajirachi-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/porter-robinson-b2b-ninajirachi-1644262/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-03-25",
+      "slug": "2027-03-25-porter-robinson-b2b-ninajirachi"
+    },
+    {
+      "id": "rr-2027-03-26-kai-wachi",
+      "source": "snapshot",
+      "sourceId": "1695051",
+      "name": "Kai Wachi",
+      "startAt": "2027-03-26T19:00:00",
+      "startLocal": "2027-03-26T19:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-kai-wachi"
+      ],
+      "artists": [
+        "artist-kai-wachi"
+      ],
+      "artistNames": [
+        "Kai Wachi"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1695051/kai-wachi-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/kai-wachi-1695051/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-03-26",
+      "slug": "2027-03-26-kai-wachi"
+    },
+    {
+      "id": "rr-2027-03-27-sidepiece-x-ship-wrek",
+      "source": "snapshot",
+      "sourceId": "1593462",
+      "name": "SIDEPIECE X Ship Wrek",
+      "startAt": "2027-03-27T18:00:00",
+      "startLocal": "2027-03-27T18:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-sidepiece-x-ship-wrek"
+      ],
+      "artists": [
+        "artist-sidepiece-x-ship-wrek",
+        "artist-girl-math"
+      ],
+      "artistNames": [
+        "SIDEPIECE X Ship Wrek",
+        "Girl Math"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1593462/sidepiece-x-ship-wrek-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/sidepiece-x-ship-wrek-1593462/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-03-27",
+      "slug": "2027-03-27-sidepiece-x-ship-wrek"
+    },
+    {
+      "id": "rr-2027-04-02-nora-en-pure-presents-purified-red-rocks",
+      "source": "snapshot",
+      "sourceId": "1673859",
+      "name": "Nora En Pure Presents Purified Red Rocks",
+      "startAt": "2027-04-02T16:30:00",
+      "startLocal": "2027-04-02T16:30:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-nora-en-pure-presents-purified-red-rocks"
+      ],
+      "artists": [
+        "artist-nora-en-pure-presents-purified-red-rocks",
+        "artist-yotto",
+        "artist-jan-blomqvist",
+        "artist-kolsch",
+        "artist-corren-cavini"
+      ],
+      "artistNames": [
+        "Nora En Pure Presents Purified Red Rocks",
+        "Yotto",
+        "Jan Blomqvist",
+        "Kolsch",
+        "Corren Cavini"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1673859/nora-en-pure-presents-purified-red-rocks-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/nora-en-pure-presents-purified-red-rocks-1673859/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-04-02",
+      "slug": "2027-04-02-nora-en-pure-presents-purified-red-rocks"
+    },
+    {
+      "id": "rr-2027-04-03-elderbrook",
+      "source": "snapshot",
+      "sourceId": "1644724",
+      "name": "Elderbrook",
+      "startAt": "2027-04-03T19:00:00",
+      "startLocal": "2027-04-03T19:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-elderbrook"
+      ],
+      "artists": [
+        "artist-elderbrook",
+        "artist-mindchatter",
+        "artist-arlo",
+        "artist-rules"
+      ],
+      "artistNames": [
+        "Elderbrook",
+        "Mindchatter",
+        "Arlo",
+        "Rules"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1644724/elderbrook-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/elderbrook-1644724/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-04-03",
+      "slug": "2027-04-03-elderbrook"
+    },
+    {
+      "id": "rr-2027-04-04-hol",
+      "source": "snapshot",
+      "sourceId": "1657003",
+      "name": "HOL!",
+      "startAt": "2027-04-04T18:00:00",
+      "startLocal": "2027-04-04T18:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-hol"
+      ],
+      "artists": [
+        "artist-hol"
+      ],
+      "artistNames": [
+        "HOL!"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1657003/hol-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/hol-1657003/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-04-04",
+      "slug": "2027-04-04-hol"
+    },
+    {
+      "id": "rr-2027-04-09-svdden-death",
+      "source": "snapshot",
+      "sourceId": "1633743",
+      "name": "Svdden Death",
+      "startAt": "2027-04-09T18:00:00",
+      "startLocal": "2027-04-09T18:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-svdden-death"
+      ],
+      "artists": [
+        "artist-svdden-death",
+        "artist-masquerade",
+        "artist-space-wizard",
+        "artist-hamro",
+        "artist-and-vanfleet"
+      ],
+      "artistNames": [
+        "Svdden Death",
+        "Masquerade",
+        "Space Wizard",
+        "Hamro",
+        "& Vanfleet"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1633743/svdden-death-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/svdden-death-1633743/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-04-09",
+      "slug": "2027-04-09-svdden-death"
+    },
+    {
+      "id": "rr-2027-04-10-prof",
+      "source": "snapshot",
+      "sourceId": "1692327",
+      "name": "PROF",
+      "startAt": "2027-04-10T18:00:00",
+      "startLocal": "2027-04-10T18:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-prof"
+      ],
+      "artists": [
+        "artist-prof",
+        "artist-waka-flocka-flame",
+        "artist-tierra-whack",
+        "artist-pete-and-bas",
+        "artist-sophie-hunter",
+        "artist-willie-wonka",
+        "artist-khantrast"
+      ],
+      "artistNames": [
+        "PROF",
+        "Waka Flocka Flame",
+        "Tierra Whack",
+        "Pete & Bas",
+        "Sophie Hunter",
+        "Willie Wonka",
+        "Khantrast"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1692327/prof-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/prof-1692327/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-04-10",
+      "slug": "2027-04-10-prof"
+    },
+    {
+      "id": "rr-2027-04-16-bilmuri",
+      "source": "snapshot",
+      "sourceId": "1688792",
+      "name": "Bilmuri",
+      "startAt": "2027-04-16T18:30:00",
+      "startLocal": "2027-04-16T18:30:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-bilmuri"
+      ],
+      "artists": [
+        "artist-bilmuri",
+        "artist-mitchell-tenpenny",
+        "artist-dylan-marlowe",
+        "artist-and-the-drowsy-lads"
+      ],
+      "artistNames": [
+        "Bilmuri",
+        "Mitchell Tenpenny",
+        "Dylan Marlowe",
+        "& The Drowsy Lads"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1688792/bilmuri-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/bilmuri-1688792/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-04-16",
+      "slug": "2027-04-16-bilmuri"
+    },
+    {
+      "id": "rr-2027-04-17-sublime",
+      "source": "snapshot",
+      "sourceId": "1681852",
+      "name": "Sublime",
+      "startAt": "2027-04-17T18:00:00",
+      "startLocal": "2027-04-17T18:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-sublime"
+      ],
+      "artists": [
+        "artist-sublime"
+      ],
+      "artistNames": [
+        "Sublime"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1681852/sublime-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/sublime-1681852/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-04-17",
+      "slug": "2027-04-17-sublime"
+    },
+    {
+      "id": "rr-2027-04-18-sublime",
+      "source": "snapshot",
+      "sourceId": "1681854",
+      "name": "Sublime",
+      "startAt": "2027-04-18T18:00:00",
+      "startLocal": "2027-04-18T18:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-sublime"
+      ],
+      "artists": [
+        "artist-sublime"
+      ],
+      "artistNames": [
+        "Sublime"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1681854/sublime-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/sublime-1681854/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-04-18",
+      "slug": "2027-04-18-sublime"
+    },
+    {
+      "id": "rr-2027-04-21-meshuggah-the-forty-year-anomaly",
+      "source": "snapshot",
+      "sourceId": "1670899",
+      "name": "Meshuggah: The Forty-Year Anomaly",
+      "startAt": "2027-04-21T19:00:00",
+      "startLocal": "2027-04-21T19:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-meshuggah-the-forty-year-anomaly"
+      ],
+      "artists": [
+        "artist-meshuggah-the-forty-year-anomaly",
+        "artist-testament",
+        "artist-blood-incantation"
+      ],
+      "artistNames": [
+        "Meshuggah: The Forty-Year Anomaly",
+        "Testament",
+        "Blood Incantation"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1670899/meshuggah-the-forty-year-anomaly-w-testament-blood-incantation-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/meshuggah-the-forty-year-anomaly-w-testament-blood-incantation-1670899/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-04-21",
+      "slug": "2027-04-21-meshuggah-the-forty-year-anomaly"
+    },
+    {
+      "id": "rr-2027-04-23-bunt",
+      "source": "snapshot",
+      "sourceId": "1644160",
+      "name": "BUNT.",
+      "startAt": "2027-04-23T18:00:00",
+      "startLocal": "2027-04-23T18:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-bunt"
+      ],
+      "artists": [
+        "artist-bunt"
+      ],
+      "artistNames": [
+        "BUNT."
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1644160/bunt-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/bunt-1644160/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-04-23",
+      "slug": "2027-04-23-bunt"
+    },
+    {
+      "id": "rr-2027-04-25-carly-rae-jepsen-day-and-night-tour",
+      "source": "snapshot",
+      "sourceId": "1636194",
+      "name": "Carly Rae Jepsen: Day and Night Tour",
+      "startAt": "2027-04-25T19:30:00",
+      "startLocal": "2027-04-25T19:30:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-carly-rae-jepsen-day-and-night-tour"
+      ],
+      "artists": [
+        "artist-carly-rae-jepsen-day-and-night-tour",
+        "artist-carol-ades"
+      ],
+      "artistNames": [
+        "Carly Rae Jepsen: Day and Night Tour",
+        "Carol Ades"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1636194/carly-rae-jepsen-day-and-night-tour-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/carly-rae-jepsen-day-and-night-tour-1636194/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-04-25",
+      "slug": "2027-04-25-carly-rae-jepsen-day-and-night-tour"
+    },
+    {
+      "id": "rr-2027-04-30-two-friends-big-bootie-world",
+      "source": "snapshot",
+      "sourceId": "1651536",
+      "name": "Two Friends: Big Bootie World",
+      "startAt": "2027-04-30T19:00:00",
+      "startLocal": "2027-04-30T19:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-two-friends-big-bootie-world"
+      ],
+      "artists": [
+        "artist-two-friends-big-bootie-world"
+      ],
+      "artistNames": [
+        "Two Friends: Big Bootie World"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1651536/two-friends-big-bootie-world-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/two-friends-big-bootie-world-1651536/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-04-30",
+      "slug": "2027-04-30-two-friends-big-bootie-world"
+    },
+    {
+      "id": "rr-2027-05-01-cloonee",
+      "source": "snapshot",
+      "sourceId": "1640232",
+      "name": "Cloonee",
+      "startAt": "2027-05-01T20:00:00",
+      "startLocal": "2027-05-01T20:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-cloonee"
+      ],
+      "artists": [
+        "artist-cloonee"
+      ],
+      "artistNames": [
+        "Cloonee"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1640232/cloonee-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/cloonee-1640232/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-05-01",
+      "slug": "2027-05-01-cloonee"
+    },
+    {
+      "id": "rr-2027-05-07-tove-lo",
+      "source": "snapshot",
+      "sourceId": "1680093",
+      "name": "Tove Lo",
+      "startAt": "2027-05-07T19:30:00",
+      "startLocal": "2027-05-07T19:30:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-tove-lo"
+      ],
+      "artists": [
+        "artist-tove-lo",
+        "artist-cobrah",
+        "artist-coco-and-clair-clair"
+      ],
+      "artistNames": [
+        "Tove Lo",
+        "Cobrah",
+        "Coco & Clair Clair"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1680093/tove-lo-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/tove-lo-1680093/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-05-07",
+      "slug": "2027-05-07-tove-lo"
+    },
+    {
+      "id": "rr-2027-05-10-josiah-queen",
+      "source": "snapshot",
+      "sourceId": "1631705",
+      "name": "Josiah Queen",
+      "startAt": "2027-05-10T19:30:00",
+      "startLocal": "2027-05-10T19:30:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-josiah-queen"
+      ],
+      "artists": [
+        "artist-josiah-queen"
+      ],
+      "artistNames": [
+        "Josiah Queen"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1631705/josiah-queen-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/josiah-queen-1631705/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-05-10",
+      "slug": "2027-05-10-josiah-queen"
+    },
+    {
+      "id": "rr-2027-05-11-two-door-cinema-club",
+      "source": "snapshot",
+      "sourceId": "1656993",
+      "name": "Two Door Cinema Club",
+      "startAt": "2027-05-11T19:30:00",
+      "startLocal": "2027-05-11T19:30:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-two-door-cinema-club"
+      ],
+      "artists": [
+        "artist-two-door-cinema-club",
+        "artist-friendly-fires"
+      ],
+      "artistNames": [
+        "Two Door Cinema Club",
+        "Friendly Fires"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1656993/two-door-cinema-club-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/two-door-cinema-club-1656993/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-05-11",
+      "slug": "2027-05-11-two-door-cinema-club"
+    },
+    {
+      "id": "rr-2027-05-12-queens-of-the-stone-age",
+      "source": "snapshot",
+      "sourceId": "1670037",
+      "name": "Queens of the Stone Age",
+      "startAt": "2027-05-12T18:30:00",
+      "startLocal": "2027-05-12T18:30:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-queens-of-the-stone-age"
+      ],
+      "artists": [
+        "artist-queens-of-the-stone-age",
+        "artist-pixies",
+        "artist-wheelchair-sports-camp"
+      ],
+      "artistNames": [
+        "Queens of the Stone Age",
+        "PIXIES",
+        "Wheelchair Sports Camp"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1670037/queens-of-the-stone-age-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/queens-of-the-stone-age-1670037/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-05-12",
+      "slug": "2027-05-12-queens-of-the-stone-age"
+    },
+    {
+      "id": "rr-2027-05-13-turnpike-troubadours",
+      "source": "snapshot",
+      "sourceId": "1656983",
+      "name": "Turnpike Troubadours",
+      "startAt": "2027-05-13T19:00:00",
+      "startLocal": "2027-05-13T19:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-turnpike-troubadours"
+      ],
+      "artists": [
+        "artist-turnpike-troubadours",
+        "artist-amble",
+        "artist-wade-forster"
+      ],
+      "artistNames": [
+        "Turnpike Troubadours",
+        "Amble",
+        "Wade Forster"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1656983/turnpike-troubadours-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/turnpike-troubadours-1656983/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-05-13",
+      "slug": "2027-05-13-turnpike-troubadours"
+    },
+    {
+      "id": "rr-2027-05-14-turnpike-troubadours",
+      "source": "snapshot",
+      "sourceId": "1656987",
+      "name": "Turnpike Troubadours",
+      "startAt": "2027-05-14T19:00:00",
+      "startLocal": "2027-05-14T19:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-turnpike-troubadours"
+      ],
+      "artists": [
+        "artist-turnpike-troubadours",
+        "artist-amble",
+        "artist-wade-forster"
+      ],
+      "artistNames": [
+        "Turnpike Troubadours",
+        "Amble",
+        "Wade Forster"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1656987/turnpike-troubadours-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/turnpike-troubadours-1656987/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-05-14",
+      "slug": "2027-05-14-turnpike-troubadours"
+    },
+    {
+      "id": "rr-2027-05-16-remi-wolf",
+      "source": "snapshot",
+      "sourceId": "1645236",
+      "name": "Remi Wolf",
+      "startAt": "2027-05-16T19:00:00",
+      "startLocal": "2027-05-16T19:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-remi-wolf"
+      ],
+      "artists": [
+        "artist-remi-wolf",
+        "artist-annabelle-dinda"
+      ],
+      "artistNames": [
+        "Remi Wolf",
+        "Annabelle Dinda"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1645236/remi-wolf-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/remi-wolf-1645236/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-05-16",
+      "slug": "2027-05-16-remi-wolf"
+    },
+    {
+      "id": "rr-2027-05-22-matchbox-twenty-30",
+      "source": "snapshot",
+      "sourceId": "1651534",
+      "name": "Matchbox Twenty – 30",
+      "startAt": "2027-05-22T19:30:00",
+      "startLocal": "2027-05-22T19:30:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-matchbox-twenty-30"
+      ],
+      "artists": [
+        "artist-matchbox-twenty-30",
+        "artist-the-wallflowers"
+      ],
+      "artistNames": [
+        "Matchbox Twenty – 30",
+        "The Wallflowers"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1651534/matchbox-twenty-30-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/matchbox-twenty-30-1651534/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-05-22",
+      "slug": "2027-05-22-matchbox-twenty-30"
+    },
+    {
+      "id": "rr-2027-05-23-matchbox-twenty-30",
+      "source": "snapshot",
+      "sourceId": "1656984",
+      "name": "Matchbox Twenty – 30",
+      "startAt": "2027-05-23T19:30:00",
+      "startLocal": "2027-05-23T19:30:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-matchbox-twenty-30"
+      ],
+      "artists": [
+        "artist-matchbox-twenty-30",
+        "artist-the-wallflowers"
+      ],
+      "artistNames": [
+        "Matchbox Twenty – 30",
+        "The Wallflowers"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1656984/matchbox-twenty-30-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/matchbox-twenty-30-1656984/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-05-23",
+      "slug": "2027-05-23-matchbox-twenty-30"
+    },
+    {
+      "id": "rr-2027-05-27-a-perfect-circle-with-special-guest-the-cult",
+      "source": "snapshot",
+      "sourceId": "1622799",
+      "name": "A Perfect Circle with special guest THE CULT",
+      "startAt": "2027-05-27T19:30:00",
+      "startLocal": "2027-05-27T19:30:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-a-perfect-circle"
+      ],
+      "artists": [
+        "artist-a-perfect-circle",
+        "artist-special-guest-the-cult",
+        "artist-the-cult"
+      ],
+      "artistNames": [
+        "A Perfect Circle",
+        "special guest THE CULT",
+        "THE CULT"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1622799/a-perfect-circle-with-special-guest-the-cult-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/a-perfect-circle-1622799/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-05-27",
+      "slug": "2027-05-27-a-perfect-circle-with-special-guest-the-cult"
+    },
+    {
+      "id": "rr-2027-06-07-stick-figure",
+      "source": "snapshot",
+      "sourceId": "1651189",
+      "name": "Stick Figure",
+      "startAt": "2027-06-07T18:00:00",
+      "startLocal": "2027-06-07T18:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-stick-figure"
+      ],
+      "artists": [
+        "artist-stick-figure",
+        "artist-the-movement",
+        "artist-harry-mack",
+        "artist-sensamotion"
+      ],
+      "artistNames": [
+        "Stick Figure",
+        "The Movement",
+        "Harry Mack",
+        "SensaMotion"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1651189/stick-figure-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/stick-figure-1651189/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-06-07",
+      "slug": "2027-06-07-stick-figure"
+    },
+    {
+      "id": "rr-2027-06-10-brit-floyd",
+      "source": "snapshot",
+      "sourceId": "1644900",
+      "name": "Brit Floyd",
+      "startAt": "2027-06-10T20:00:00",
+      "startLocal": "2027-06-10T20:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-brit-floyd"
+      ],
+      "artists": [
+        "artist-brit-floyd"
+      ],
+      "artistNames": [
+        "Brit Floyd"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1644900/brit-floyd-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/brit-floyd-1644900/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-06-10",
+      "slug": "2027-06-10-brit-floyd"
+    },
+    {
+      "id": "rr-2027-06-11-brit-floyd",
+      "source": "snapshot",
+      "sourceId": "1651532",
+      "name": "Brit Floyd",
+      "startAt": "2027-06-11T20:00:00",
+      "startLocal": "2027-06-11T20:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-brit-floyd"
+      ],
+      "artists": [
+        "artist-brit-floyd"
+      ],
+      "artistNames": [
+        "Brit Floyd"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1651532/brit-floyd-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/brit-floyd-1651532/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-06-11",
+      "slug": "2027-06-11-brit-floyd"
+    },
+    {
+      "id": "rr-2027-06-21-papa-roach-rise-of-the-roach-tour",
+      "source": "snapshot",
+      "sourceId": "1660146",
+      "name": "Papa Roach: Rise of the Roach Tour",
+      "startAt": "2027-06-21T19:00:00",
+      "startLocal": "2027-06-21T19:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-papa-roach-rise-of-the-roach-tour"
+      ],
+      "artists": [
+        "artist-papa-roach-rise-of-the-roach-tour",
+        "artist-ice-nine-kills",
+        "artist-ninth-key"
+      ],
+      "artistNames": [
+        "Papa Roach: Rise of the Roach Tour",
+        "Ice Nine Kills",
+        "Ninth Key"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1660146/papa-roach-rise-of-the-roach-tour-w-ice-nine-kills-ninth-key-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/papa-roach-rise-of-the-roach-tour-w-ice-nine-kills-ninth-key-1660146/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-06-21",
+      "slug": "2027-06-21-papa-roach-rise-of-the-roach-tour"
+    },
+    {
+      "id": "rr-2027-07-06-lizzy-mcalpine",
+      "source": "snapshot",
+      "sourceId": "1621554",
+      "name": "Lizzy McAlpine",
+      "startAt": "2027-07-06T19:00:00",
+      "startLocal": "2027-07-06T19:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-lizzy-mcalpine"
+      ],
+      "artists": [
+        "artist-lizzy-mcalpine",
+        "artist-searows",
+        "artist-post-animal"
+      ],
+      "artistNames": [
+        "Lizzy McAlpine",
+        "Searows",
+        "Post Animal"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1621554/lizzy-mcalpine-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/lizzy-mcalpine-1621554/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-07-06",
+      "slug": "2027-07-06-lizzy-mcalpine"
+    },
+    {
+      "id": "rr-2027-07-08-death-cab-for-cutie",
+      "source": "snapshot",
+      "sourceId": "1669435",
+      "name": "Death Cab for Cutie",
+      "startAt": "2027-07-08T19:00:00",
+      "startLocal": "2027-07-08T19:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-death-cab-for-cutie"
+      ],
+      "artists": [
+        "artist-death-cab-for-cutie",
+        "artist-sml"
+      ],
+      "artistNames": [
+        "Death Cab for Cutie",
+        "SML"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1669435/death-cab-for-cutie-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/death-cab-for-cutie-1669435/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-07-08",
+      "slug": "2027-07-08-death-cab-for-cutie"
+    },
+    {
+      "id": "rr-2027-07-28-killer-queen",
+      "source": "snapshot",
+      "sourceId": "1644909",
+      "name": "Killer Queen",
+      "startAt": "2027-07-28T20:00:00",
+      "startLocal": "2027-07-28T20:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-killer-queen"
+      ],
+      "artists": [
+        "artist-killer-queen"
+      ],
+      "artistNames": [
+        "Killer Queen"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1644909/killer-queen-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/killer-queen-1644909/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-07-28",
+      "slug": "2027-07-28-killer-queen"
+    },
+    {
+      "id": "rr-2027-08-03-leon-bridges",
+      "source": "snapshot",
+      "sourceId": "1645219",
+      "name": "Leon Bridges",
+      "startAt": "2027-08-03T19:30:00",
+      "startLocal": "2027-08-03T19:30:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-leon-bridges"
+      ],
+      "artists": [
+        "artist-leon-bridges",
+        "artist-kokoroko"
+      ],
+      "artistNames": [
+        "Leon Bridges",
+        "Kokoroko"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1645219/leon-bridges-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/leon-bridges-1645219/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-08-03",
+      "slug": "2027-08-03-leon-bridges"
+    },
+    {
+      "id": "rr-2027-08-12-mt-joy",
+      "source": "snapshot",
+      "sourceId": "1674999",
+      "name": "Mt. Joy",
+      "startAt": "2027-08-12T19:00:00",
+      "startLocal": "2027-08-12T19:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-mt-joy"
+      ],
+      "artists": [
+        "artist-mt-joy",
+        "artist-emma-ogier"
+      ],
+      "artistNames": [
+        "Mt. Joy",
+        "Emma Ogier"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1674999/mt-joy-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/mt-joy-1674999/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-08-12",
+      "slug": "2027-08-12-mt-joy"
+    },
+    {
+      "id": "rr-2027-08-13-mt-joy",
+      "source": "snapshot",
+      "sourceId": "1675240",
+      "name": "Mt. Joy",
+      "startAt": "2027-08-13T19:00:00",
+      "startLocal": "2027-08-13T19:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-mt-joy"
+      ],
+      "artists": [
+        "artist-mt-joy",
+        "artist-evan-honer"
+      ],
+      "artistNames": [
+        "Mt. Joy",
+        "Evan Honer"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1675240/mt-joy-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/mt-joy-1675240/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-08-13",
+      "slug": "2027-08-13-mt-joy"
+    },
+    {
+      "id": "rr-2027-08-14-mt-joy",
+      "source": "snapshot",
+      "sourceId": "1675489",
+      "name": "Mt. Joy",
+      "startAt": "2027-08-14T19:00:00",
+      "startLocal": "2027-08-14T19:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-mt-joy"
+      ],
+      "artists": [
+        "artist-mt-joy",
+        "artist-love-spells"
+      ],
+      "artistNames": [
+        "Mt. Joy",
+        "Love Spells"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1675489/mt-joy-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/mt-joy-1675489/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-08-14",
+      "slug": "2027-08-14-mt-joy"
+    },
+    {
+      "id": "rr-2027-08-30-sienna-spiro",
+      "source": "snapshot",
+      "sourceId": "1655895",
+      "name": "Sienna Spiro",
+      "startAt": "2027-08-30T19:00:00",
+      "startLocal": "2027-08-30T19:00:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-sienna-spiro"
+      ],
+      "artists": [
+        "artist-sienna-spiro"
+      ],
+      "artistNames": [
+        "Sienna Spiro"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1655895/sienna-spiro-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/sienna-spiro-1655895/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-08-30",
+      "slug": "2027-08-30-sienna-spiro"
+    },
+    {
+      "id": "rr-2027-09-02-rod-stewart",
+      "source": "snapshot",
+      "sourceId": "1215549",
+      "name": "Rod Stewart",
+      "startAt": "2027-09-02T19:30:00",
+      "startLocal": "2027-09-02T19:30:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-rod-stewart"
+      ],
+      "artists": [
+        "artist-rod-stewart"
+      ],
+      "artistNames": [
+        "Rod Stewart"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1215549/rod-stewart-one-last-time-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/rod-stewart-1215549/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-09-02",
+      "slug": "2027-09-02-rod-stewart"
+    },
+    {
+      "id": "rr-2027-09-03-rod-stewart",
+      "source": "snapshot",
+      "sourceId": "1216092",
+      "name": "Rod Stewart",
+      "startAt": "2027-09-03T19:30:00",
+      "startLocal": "2027-09-03T19:30:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-rod-stewart"
+      ],
+      "artists": [
+        "artist-rod-stewart"
+      ],
+      "artistNames": [
+        "Rod Stewart"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1216092/rod-stewart-one-last-time-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/rod-stewart-one-last-time-1216092/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-09-03",
+      "slug": "2027-09-03-rod-stewart"
+    },
+    {
+      "id": "rr-2027-09-16-get-the-led-out",
+      "source": "snapshot",
+      "sourceId": "1644914",
+      "name": "Get The Led Out",
+      "startAt": "2027-09-16T19:30:00",
+      "startLocal": "2027-09-16T19:30:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-get-the-led-out"
+      ],
+      "artists": [
+        "artist-get-the-led-out"
+      ],
+      "artistNames": [
+        "Get The Led Out"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1644914/get-the-led-out-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/get-the-led-out-1644914/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-09-16",
+      "slug": "2027-09-16-get-the-led-out"
+    },
+    {
+      "id": "rr-2027-09-20-kings-of-leon",
+      "source": "snapshot",
+      "sourceId": "1690410",
+      "name": "Kings of Leon",
+      "startAt": "2027-09-20T19:30:00",
+      "startLocal": "2027-09-20T19:30:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-kings-of-leon"
+      ],
+      "artists": [
+        "artist-kings-of-leon",
+        "artist-dexter-and-the-moonrocks"
+      ],
+      "artistNames": [
+        "Kings of Leon",
+        "Dexter And The Moonrocks"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1690410/kings-of-leon-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/kings-of-leon-1690410/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-09-20",
+      "slug": "2027-09-20-kings-of-leon"
+    },
+    {
+      "id": "rr-2027-10-13-fontaines-d-c",
+      "source": "snapshot",
+      "sourceId": "1640655",
+      "name": "Fontaines D.C.",
+      "startAt": "2027-10-13T19:30:00",
+      "startLocal": "2027-10-13T19:30:00",
+      "venueId": "red-rocks-amphitheatre",
+      "headliners": [
+        "artist-fontaines-d-c"
+      ],
+      "artists": [
+        "artist-fontaines-d-c",
+        "artist-iceage"
+      ],
+      "artistNames": [
+        "Fontaines D.C.",
+        "Iceage"
+      ],
+      "image": null,
+      "ticketUrl": "https://www.axs.com/events/1640655/fontaines-d-c-tickets?skin=redrocks",
+      "sourceUrl": "https://www.redrocksonline.com/events/fontaines-d-c-1640655/",
+      "verifiedAt": "2026-11-11",
+      "dateKey": "2027-10-13",
+      "slug": "2027-10-13-fontaines-d-c"
+    }
+  ]
+}

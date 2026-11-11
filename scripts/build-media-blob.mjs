@@ -3,8 +3,8 @@ import path from "node:path";
 import crypto from "node:crypto";
 
 const ROOT = process.cwd();
-const year = Number(process.argv[2] ?? "2026");
-const MEDIA_PATH = path.join(ROOT, "data", "snapshots", "media", `all-${year}.media.json`);
+const explicitYear = process.argv[2] ? Number(process.argv[2]) : null;
+const MEDIA_DIR = path.join(ROOT, "data", "snapshots", "media");
 const LEGACY_MEDIA_PATH = path.join(ROOT, "data", "media-index.json");
 
 function isHttpUrl(value) {
@@ -37,7 +37,7 @@ function unique(values) {
   return [...new Set(values.filter(Boolean))];
 }
 
-async function uploadToBlob(url, put) {
+async function uploadToBlob(url, year, put) {
   const hash = crypto.createHash("sha1").update(url).digest("hex");
   const { wrapped } = withTimeout(
     (signal) => fetch(url, { signal, redirect: "follow" }),
@@ -64,29 +64,38 @@ async function uploadToBlob(url, put) {
   return blob.url;
 }
 
-async function main() {
-  if (!process.env.BLOB_READ_WRITE_TOKEN) {
-    console.log("Skipping blob media caching: BLOB_READ_WRITE_TOKEN not set.");
-    return;
+async function discoverYears() {
+  if (Number.isInteger(explicitYear) && explicitYear >= 2000 && explicitYear <= 2100) {
+    return [explicitYear];
   }
+  try {
+    const entries = await fs.readdir(MEDIA_DIR);
+    const years = entries
+      .map((name) => {
+        const match = /^all-(\d{4})\.media\.json$/.exec(name);
+        return match ? Number(match[1]) : null;
+      })
+      .filter((value) => Number.isInteger(value))
+      .sort((a, b) => a - b);
+    return years.length ? years : [2026];
+  } catch {
+    return [2026];
+  }
+}
 
-  const { put } = await import("@vercel/blob");
-
-  const raw = await fs.readFile(MEDIA_PATH, "utf8");
-  const media = JSON.parse(raw);
-
+async function patchMediaSnapshot(media, year, put, cache) {
   const externalUrls = unique([
     ...Object.values(media.artistsById ?? {}).map((row) => pickExternalSource(row?.sources)),
     ...Object.values(media.eventsById ?? {}).map((row) => pickExternalSource(row?.sources)),
     ...Object.values(media.venuesById ?? {}).map((row) => pickExternalSource(row?.sources)),
   ]).filter(isHttpUrl);
 
-  const cache = new Map();
   let uploaded = 0;
 
   for (const url of externalUrls) {
+    if (cache.has(url)) continue;
     try {
-      const blobUrl = await uploadToBlob(url, put);
+      const blobUrl = await uploadToBlob(url, year, put);
       cache.set(url, blobUrl);
       uploaded += 1;
     } catch (error) {
@@ -123,11 +132,36 @@ async function main() {
     return event?.image?.primary ? { ...point, image: event.image.primary } : point;
   });
 
-  const serialized = JSON.stringify(media, null, 2) + "\n";
-  await fs.writeFile(MEDIA_PATH, serialized, "utf8");
-  await fs.writeFile(LEGACY_MEDIA_PATH, serialized, "utf8");
+  return { media, uploaded, totalExternal: externalUrls.length };
+}
 
-  console.log(`Blob media caching complete: ${uploaded}/${externalUrls.length} external images cached.`);
+async function main() {
+  if (!process.env.BLOB_READ_WRITE_TOKEN) {
+    console.log("Skipping blob media caching: BLOB_READ_WRITE_TOKEN not set.");
+    return;
+  }
+
+  const { put } = await import("@vercel/blob");
+  const years = await discoverYears();
+  const cache = new Map();
+
+  for (const year of years) {
+    const mediaPath = path.join(MEDIA_DIR, `all-${year}.media.json`);
+    const raw = await fs.readFile(mediaPath, "utf8");
+    const parsed = JSON.parse(raw);
+    const { media, uploaded, totalExternal } = await patchMediaSnapshot(parsed, year, put, cache);
+    await fs.writeFile(mediaPath, JSON.stringify(media, null, 2) + "\n", "utf8");
+    console.log(`Blob media caching (${year}): ${uploaded}/${totalExternal} external images cached.`);
+  }
+
+  try {
+    const legacyRaw = await fs.readFile(LEGACY_MEDIA_PATH, "utf8");
+    const legacyParsed = JSON.parse(legacyRaw);
+    const { media } = await patchMediaSnapshot(legacyParsed, years[0] ?? 2026, put, cache);
+    await fs.writeFile(LEGACY_MEDIA_PATH, JSON.stringify(media, null, 2) + "\n", "utf8");
+  } catch {
+    // Legacy media index optional
+  }
 }
 
 main().catch((error) => {

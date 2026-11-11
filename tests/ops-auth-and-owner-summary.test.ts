@@ -360,10 +360,24 @@ test("GET /api/internal/owner-summary returns zero-PII 28d metrics without mutat
     });
     assert.deepEqual(payload.metrics28d, {
       ordersTotal: 4,
+      genuineOrdersTotal: 4,
+      testRecordsExcluded: 2,
       paidOrders: 2,
-      ownedGrossRevenueUsd: 599,
+      paidGrossSalesUsd: 798,
+      confirmedUnpaidOrders: 0,
+      pendingPaymentOrders: 1,
+      openQuotes: 0,
+      holds: 0,
+      awaitingBalanceOrders: 1,
+      awaitingBalanceGrossUsd: 399,
+      depositCollectedUsd: 200,
       needsReviewOrders: 1,
-      awaitingBalanceOrders: 2,
+      grossSalesUsd: 998,
+      ownedGrossRevenueUsd: 599,
+      netOperatingRevenueUsd: null,
+      affiliateCommissionsUsd: 0,
+      accountingNote:
+        "Gross merchant sales (grossSalesUsd, paidGrossSalesUsd, and ownedGrossRevenueUsd) reflect collected customer payments only — never uncollected balances, open quotes, or holds — and are not net operating revenue or profit.",
     });
 
     // Strictly verify zero PII leakage
@@ -393,4 +407,107 @@ test("GET /api/internal/owner-summary returns zero-PII 28d metrics without mutat
     restoreEnv(snap);
     rmSync(tempDir, { recursive: true, force: true });
   }
+});
+
+test("ownerSummary strictly separates synthetic test patterns, confirmed-unpaid, open quotes, holds, deposits, and never counts uncollected balances as revenue", async () => {
+  const { isSyntheticTestOrder, summarizeOwnerOrders28d } = await import("@/lib/parr/ops/ownerSummary");
+  const now = new Date("2026-11-11T16:00:00.000Z");
+  const createdAt = "2026-11-10T16:00:00.000Z";
+
+  const syntheticSamples = [
+    { internalOrderId: "s1", createdAt, customer: { email: "runner@example.org", firstName: "Alex", lastName: "One" } },
+    { internalOrderId: "s2", createdAt, customer: { email: "runner@example.net", firstName: "Alex", lastName: "Two" } },
+    { internalOrderId: "s3", createdAt, customer: { email: "probe@test.local", firstName: "Alex", lastName: "Three" } },
+    { internalOrderId: "s4", createdAt, customer: { email: "real@domain.com", firstName: "E2E", lastName: "Verifier" } },
+    { internalOrderId: "s5", createdAt, customer: { email: "real@domain.com", firstName: "QA", lastName: "Bot" } },
+    { internalOrderId: "s6", createdAt, customer: { email: "real@domain.com", firstName: "Codex", lastName: "Check" } },
+    { internalOrderId: "s7", createdAt, customer: { email: "real@domain.com", firstName: "Antigravity", lastName: "Probe" } },
+    { internalOrderId: "s8", createdAt, customer: { email: "real@domain.com", firstName: "Synthetic", lastName: "Order" } },
+    { internalOrderId: "s9", createdAt, customer: { email: "real@domain.com", firstName: "Jane", lastName: "Doe" } },
+  ];
+
+  for (const row of syntheticSamples) {
+    assert.equal(isSyntheticTestOrder(row as never), true, `expected ${row.internalOrderId} to be synthetic`);
+  }
+
+  // Real customers whose names/notes contain substrings like "qa" inside "chautauqua"/"square" or "testa" must NOT be flagged
+  const genuineEdgeSamples = [
+    {
+      internalOrderId: "g_paid",
+      createdAt,
+      productCode: "parr-suburban",
+      customer: { firstName: "Nick", lastName: "Testa", email: "nick.testa@chautauqua-denver.org" },
+      notes: "Pickup near Union Square hotel lobby",
+      booking: { status: "confirmed", inventoryOwner: "parr" },
+      payment: { status: "paid", totalDue: 399, totalPaid: 399 },
+    },
+    {
+      internalOrderId: "g_confirmed_unpaid",
+      createdAt,
+      productCode: "parr-van-10",
+      customer: { firstName: "Elena", lastName: "Vasquez", email: "elena.v@proton.me" },
+      booking: { status: "confirmed", inventoryOwner: "parr" },
+      payment: { status: "unpaid", totalDue: 599, totalPaid: 0 },
+    },
+    {
+      internalOrderId: "g_deposit",
+      createdAt,
+      productCode: "parr-van-10",
+      customer: { firstName: "Marcus", lastName: "Reed", email: "mreed@company.co" },
+      booking: { status: "confirmed", inventoryOwner: "parr" },
+      payment: { status: "deposit_paid", totalDue: 599, totalPaid: 199 },
+    },
+    {
+      internalOrderId: "g_quote",
+      createdAt,
+      productCode: "parr-suburban",
+      customer: { firstName: "Hannah", lastName: "Cole", email: "hcole@company.co" },
+      booking: { status: "quote", inventoryOwner: "parr" },
+      payment: { status: "unpaid", totalDue: 399, totalPaid: 0 },
+    },
+    {
+      internalOrderId: "g_hold",
+      createdAt,
+      productCode: "parr-suburban",
+      customer: { firstName: "Devon", lastName: " Brooks", email: "dbrooks@company.co" },
+      booking: { status: "on_hold", inventoryOwner: "parr" },
+      payment: { status: "unpaid", totalDue: 399, totalPaid: 0 },
+    },
+    {
+      internalOrderId: "g_canceled",
+      createdAt,
+      productCode: "parr-suburban",
+      customer: { firstName: "Sam", lastName: "Canceled", email: "scanceled@company.co" },
+      booking: { status: "canceled", inventoryOwner: "parr" },
+      payment: { status: "unpaid", totalDue: 399, totalPaid: 0 },
+    },
+  ];
+
+  for (const row of genuineEdgeSamples) {
+    assert.equal(isSyntheticTestOrder(row as never), false, `expected ${row.internalOrderId} to be genuine`);
+  }
+
+  const summary = summarizeOwnerOrders28d(
+    [...syntheticSamples, ...genuineEdgeSamples] as never[],
+    now
+  );
+
+  assert.equal(summary.testRecordsExcluded, syntheticSamples.length);
+  assert.equal(summary.openQuotes, 1);
+  assert.equal(summary.holds, 1);
+  assert.equal(summary.genuineOrdersTotal, 3);
+  assert.equal(summary.ordersTotal, 3);
+  assert.equal(summary.paidOrders, 1);
+  assert.equal(summary.paidGrossSalesUsd, 399);
+  assert.equal(summary.confirmedUnpaidOrders, 1);
+  assert.equal(summary.pendingPaymentOrders, 0);
+  assert.equal(summary.awaitingBalanceOrders, 1);
+  assert.equal(summary.depositCollectedUsd, 199);
+  assert.equal(summary.awaitingBalanceGrossUsd, 400);
+  // Gross sales & ownedGrossRevenueUsd strictly equal collected $399 + $199 = $598 (never uncollected $599 or $400)
+  assert.equal(summary.grossSalesUsd, 598);
+  assert.equal(summary.ownedGrossRevenueUsd, 598);
+  assert.equal(summary.netOperatingRevenueUsd, null);
+  assert.equal(summary.affiliateCommissionsUsd, 0);
+  assert.match(summary.accountingNote, /not net operating revenue or profit/i);
 });

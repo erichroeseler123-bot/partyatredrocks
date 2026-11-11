@@ -1,7 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getArtistsCatalog, getEventsCatalog, readByDateIndex, readByMonthIndex } from "@/lib/events/getCatalog";
-import { getMediaIndex } from "@/lib/media/getMediaIndex";
+import {
+  getDenverDateKey,
+  getMultiYearArtistsCatalog,
+  getMultiYearEventsCatalog,
+  readMultiYearByDateIndex,
+  readMultiYearByMonthIndex,
+} from "@/lib/events/getCatalog";
+import { getMultiYearMediaIndex } from "@/lib/media/getMediaIndex";
 import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
 import { curatedImages } from "@/lib/curatedImages";
 
@@ -40,12 +46,16 @@ export default async function CalendarPage({ searchParams }: Props) {
   const venueFilter = sp.venue || "";
   const artistFilter = sp.artist || "";
 
+  const denverToday = getDenverDateKey();
+  const currentYear = Number(denverToday.slice(0, 4));
+  const calendarYears = Array.from(new Set([2026, currentYear, currentYear + 1])).sort((a, b) => a - b);
+
   const [events, artists, byDate, byMonth, mediaIndex] = await Promise.all([
-    getEventsCatalog(2026, "all"),
-    getArtistsCatalog(2026, "all"),
-    readByDateIndex(2026, "all"),
-    readByMonthIndex(2026, "all"),
-    getMediaIndex(2026),
+    getMultiYearEventsCatalog({ scope: "all", years: calendarYears }),
+    getMultiYearArtistsCatalog({ scope: "all", years: calendarYears }),
+    readMultiYearByDateIndex(calendarYears, "all"),
+    readMultiYearByMonthIndex(calendarYears, "all"),
+    getMultiYearMediaIndex(calendarYears),
   ]);
 
   const eventById = new Map(events.map((ev) => [ev.id, ev]));
@@ -103,7 +113,7 @@ export default async function CalendarPage({ searchParams }: Props) {
       <section className="comic-wrap">
         <div className="comic-hero">
           <div className="comic-kicker">Calendar</div>
-          <h1 className="comic-title">2026 Concert Calendar</h1>
+          <h1 className="comic-title">2026–2027 Concert Calendar</h1>
           <p className="comic-copy">Built from snapshot indexes (`byMonth`, `byDate`) with venue and artist filters.</p>
         </div>
 

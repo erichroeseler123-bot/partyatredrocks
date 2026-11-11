@@ -30,8 +30,11 @@ __pycache__/
 tsconfig.tsbuildinfo
 tsconfig.check.tsbuildinfo
 
-# generated data (ignore new/untracked artifacts)
-data/snapshots/
+# generated data (ignore new/untracked artifacts except verified 2027 Red Rocks snapshot)
+data/snapshots/*
+!data/snapshots/events/
+data/snapshots/events/*
+!data/snapshots/events/redrocks-2027.json
 data/media/
 data/media-index.json
 *.sqlite-shm

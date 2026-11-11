@@ -13,6 +13,8 @@ export type NormalizedEvent = {
   artistNames: string[];
   image: string | null;
   ticketUrl: string | null;
+  sourceUrl?: string | null;
+  verifiedAt?: string | null;
   dateKey: string;
   slug: string;
 };
@@ -39,6 +41,7 @@ export type NormalizedArtist = {
 
 export type EventsSnapshot = {
   generatedAt: string;
+  verifiedAt?: string;
   year: number;
   events: NormalizedEvent[];
 };

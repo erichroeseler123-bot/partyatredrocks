@@ -6,9 +6,14 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import TicketButtons from "@/components/TicketButtons";
 import venuesJson from "@/data/venues.json";
-import { getArtistsCatalog, getEventsCatalog } from "@/lib/events/getCatalog";
+import {
+  getDenverDateKey,
+  getEventsCatalog,
+  getMultiYearArtistsCatalog,
+  getMultiYearEventsCatalog,
+} from "@/lib/events/getCatalog";
 import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
-import { getMediaIndex } from "@/lib/media/getMediaIndex";
+import { getMultiYearMediaIndex } from "@/lib/media/getMediaIndex";
 import { selectImageByPriority } from "@/lib/media/selectImage";
 import { buildBookingHref } from "@/lib/parrHandoff";
 
@@ -272,13 +277,26 @@ async function getSetlist(artistName: string, dateKey: string, venueName: string
   }
 }
 
+function resolveShowYears(rawId?: string): number[] {
+  const currentYear = Number(getDenverDateKey().slice(0, 4));
+  const years = new Set<number>([2026, currentYear, currentYear + 1]);
+  const idYearMatch = /(\d{4})-\d{2}-\d{2}/.exec(rawId || "");
+  if (idYearMatch) {
+    const parsedYear = Number(idYearMatch[1]);
+    if (parsedYear >= 2000 && parsedYear <= 2100) years.add(parsedYear);
+  }
+  return Array.from(years).sort((a, b) => a - b);
+}
+
 async function readShow(id: string): Promise<{ generatedAt?: string; event?: ShowEvent } | null> {
-  const all = await getEventsCatalog(2026, "all");
+  const years = resolveShowYears(id);
+  const all = await getMultiYearEventsCatalog({ scope: "all", years });
   const selected = all.find((event) => event.id === id || event.sourceId === id);
   if (!selected) return null;
+  const eventYear = Number(selected.dateKey.slice(0, 4)) || 2026;
   let generatedAt: string | undefined;
   try {
-    const raw = await readFile(path.join(EVENTS_SNAPSHOT_DIR, "all-2026.json"), "utf8");
+    const raw = await readFile(path.join(EVENTS_SNAPSHOT_DIR, `all-${eventYear}.json`), "utf8");
     const parsed = JSON.parse(raw) as { generatedAt?: string };
     generatedAt = typeof parsed.generatedAt === "string" ? parsed.generatedAt : undefined;
   } catch {
@@ -289,7 +307,8 @@ async function readShow(id: string): Promise<{ generatedAt?: string; event?: Sho
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id: raw } = await params;
-  const [data, media] = await Promise.all([readShow(raw), getMediaIndex(2026)]);
+  const years = resolveShowYears(raw);
+  const [data, media] = await Promise.all([readShow(raw), getMultiYearMediaIndex(years)]);
   const e = data?.event ?? null;
   const title = pickTitle(e, raw);
   const description = pickDescription(e);
@@ -351,7 +370,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ShowPage({ params }: Props) {
   const { id: raw } = await params;
-  const [data, media] = await Promise.all([readShow(raw), getMediaIndex(2026)]);
+  const years = resolveShowYears(raw);
+  const [data, media] = await Promise.all([readShow(raw), getMultiYearMediaIndex(years)]);
   const e = data?.event ?? null;
   if (!e) {
     if (/^\d+$/.test(raw)) redirect("/red-rocks/concerts");
@@ -359,7 +379,10 @@ export default async function ShowPage({ params }: Props) {
   }
   if (raw !== e.id) redirect(`/shows/${encodeURIComponent(e.id)}`);
 
-  const [allEvents, allArtists] = await Promise.all([getEventsCatalog(2026, "all"), getArtistsCatalog(2026, "all")]);
+  const [allEvents, allArtists] = await Promise.all([
+    getMultiYearEventsCatalog({ scope: "all", years }),
+    getMultiYearArtistsCatalog({ scope: "all", years }),
+  ]);
   const venueSlug = e.venue?.siteSlug;
   const venueName = e.venue?.siteName || "Venue";
   const updatedAt = data?.generatedAt ?? null;

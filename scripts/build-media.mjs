@@ -2,15 +2,11 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 const ROOT = process.cwd();
-const year = Number(process.argv[2] ?? "2026");
-
-const EVENTS_PATH = path.join(ROOT, "data", "snapshots", "events", `all-${year}.json`);
-const ASSETS_PATH = path.join(ROOT, "data", "snapshots", "assets", `all-${year}.assets.json`);
-const ARTISTS_PATH = path.join(ROOT, "data", "snapshots", "artists", `all-${year}.json`);
-const ARTISTS_ENRICHED_PATH = path.join(ROOT, "data", "snapshots", "artists", `all-${year}.enriched.json`);
+const explicitYear = process.argv[2] ? Number(process.argv[2]) : null;
+const EVENTS_SNAPSHOT_DIR = path.join(ROOT, "data", "snapshots", "events");
+const ARTISTS_SNAPSHOT_DIR = path.join(ROOT, "data", "snapshots", "artists");
 const VENUES_REGISTRY_PATH = path.join(ROOT, "data", "venues.registry.json");
 const OUTPUT_DIR = path.join(ROOT, "data", "snapshots", "media");
-const OUTPUT_PATH = path.join(OUTPUT_DIR, `all-${year}.media.json`);
 const LEGACY_OUTPUT_PATH = path.join(ROOT, "data", "media-index.json");
 
 function slugify(input = "") {
@@ -40,19 +36,41 @@ function compact(values) {
   return [...new Set(values.filter(Boolean))];
 }
 
-async function main() {
-  const [eventsRaw, assetsRaw, artistsRaw, artistsEnrichedRaw, venuesRegistryRaw] = await Promise.all([
-    readJson(EVENTS_PATH, { events: [] }),
-    readJson(ASSETS_PATH, { events: {}, artists: {} }),
-    readJson(ARTISTS_PATH, { artists: [] }),
-    readJson(ARTISTS_ENRICHED_PATH, { artists: [] }),
-    readJson(VENUES_REGISTRY_PATH, []),
+async function discoverYears() {
+  if (Number.isInteger(explicitYear) && explicitYear >= 2000 && explicitYear <= 2100) {
+    return [explicitYear];
+  }
+  try {
+    const entries = await fs.readdir(EVENTS_SNAPSHOT_DIR);
+    const years = entries
+      .map((name) => {
+        const match = /^all-(\d{4})\.json$/.exec(name);
+        return match ? Number(match[1]) : null;
+      })
+      .filter((value) => Number.isInteger(value))
+      .sort((a, b) => a - b);
+    return years.length ? years : [2026];
+  } catch {
+    return [2026];
+  }
+}
+
+async function buildYearMedia(year, venuesRegistry) {
+  const eventsPath = path.join(EVENTS_SNAPSHOT_DIR, `all-${year}.json`);
+  const assetsPath = path.join(EVENTS_SNAPSHOT_DIR, `all-${year}.assets.json`);
+  const artistsPath = path.join(ARTISTS_SNAPSHOT_DIR, `all-${year}.json`);
+  const artistsEnrichedPath = path.join(ARTISTS_SNAPSHOT_DIR, `all-${year}.enriched.json`);
+
+  const [eventsRaw, assetsRaw, artistsRaw, artistsEnrichedRaw] = await Promise.all([
+    readJson(eventsPath, { events: [] }),
+    readJson(assetsPath, { events: {}, artists: {} }),
+    readJson(artistsPath, { artists: [] }),
+    readJson(artistsEnrichedPath, { artists: [] }),
   ]);
 
   const events = asArray(eventsRaw, "events");
   const artists = asArray(artistsRaw, "artists");
   const artistsEnriched = asArray(artistsEnrichedRaw, "artists");
-  const venuesRegistry = Array.isArray(venuesRegistryRaw) ? venuesRegistryRaw : [];
 
   const assetsByEvent = assetsRaw?.events && typeof assetsRaw.events === "object" ? assetsRaw.events : {};
   const assetsByArtist = assetsRaw?.artists && typeof assetsRaw.artists === "object" ? assetsRaw.artists : {};
@@ -192,14 +210,49 @@ async function main() {
   };
 
   await fs.mkdir(OUTPUT_DIR, { recursive: true });
+  const outputPath = path.join(OUTPUT_DIR, `all-${year}.media.json`);
   const serialized = JSON.stringify(payload, null, 2) + "\n";
-  await fs.writeFile(OUTPUT_PATH, serialized, "utf8");
-  await fs.writeFile(LEGACY_OUTPUT_PATH, serialized, "utf8");
+  await fs.writeFile(outputPath, serialized, "utf8");
 
   console.log(
-    `Built media snapshot: ${Object.keys(artistMediaById).length} artists, ` +
+    `Built media snapshot (${year}): ${Object.keys(artistMediaById).length} artists, ` +
       `${Object.keys(eventMediaById).length} events, ${Object.keys(venueMediaById).length} venues`
   );
+
+  return payload;
+}
+
+async function main() {
+  const venuesRegistryRaw = await readJson(VENUES_REGISTRY_PATH, []);
+  const venuesRegistry = Array.isArray(venuesRegistryRaw) ? venuesRegistryRaw : [];
+  const years = await discoverYears();
+
+  const mergedArtistsById = {};
+  const mergedEventsById = {};
+  let mergedVenuesById = {};
+  const mergedMapPoints = [];
+
+  for (const year of years) {
+    const payload = await buildYearMedia(year, venuesRegistry);
+    Object.assign(mergedArtistsById, payload.artistsById);
+    Object.assign(mergedEventsById, payload.eventsById);
+    mergedVenuesById = { ...mergedVenuesById, ...payload.venuesById };
+    for (const point of payload.mapPoints) {
+      if (mergedMapPoints.length < 12) mergedMapPoints.push(point);
+    }
+  }
+
+  const legacyPayload = {
+    generatedAt: new Date().toISOString(),
+    year: years[0] ?? 2026,
+    years,
+    artistsById: mergedArtistsById,
+    eventsById: mergedEventsById,
+    venuesById: mergedVenuesById,
+    mapPoints: mergedMapPoints,
+  };
+
+  await fs.writeFile(LEGACY_OUTPUT_PATH, JSON.stringify(legacyPayload, null, 2) + "\n", "utf8");
 }
 
 main().catch((error) => {

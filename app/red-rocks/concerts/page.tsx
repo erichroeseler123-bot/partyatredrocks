@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getEventsCatalog } from "@/lib/events/getCatalog";
+import {
+  getDenverDateKey,
+  getMultiYearEventsCatalog,
+  getUpcomingEventsCatalog,
+} from "@/lib/events/getCatalog";
 import type { HandoffSearchParams } from "@/lib/parrHandoff";
 import { buildBookingHref } from "@/lib/parrHandoff";
 
@@ -10,12 +14,12 @@ const DEFAULT_OG_IMAGE =
 export const revalidate = 1800;
 
 export const metadata: Metadata = {
-  title: "Red Rocks Concert Schedule 2026 | Shows + Private Transportation",
+  title: "Red Rocks Concert Schedule 2026–2027 | Shows + Private Transportation",
   description:
-    "Browse Red Rocks concerts and 2026 lineup dates, then reserve private transportation for your show. Private Suburban $399 with a private van upgrade for larger groups.",
+    "Browse upcoming Red Rocks concerts and verified 2026–2027 lineup dates, then reserve private transportation for your show. Private Suburban $399 with a private van upgrade for larger groups.",
   alternates: { canonical: `${SITE}/red-rocks/concerts` },
   openGraph: {
-    title: "Red Rocks Concert Schedule 2026 | Shows + Private Transportation",
+    title: "Red Rocks Concert Schedule 2026–2027 | Shows + Private Transportation",
     description:
       "Find your Red Rocks show and reserve one private vehicle for the night. Private Suburban $399 with a private van upgrade for larger groups.",
     url: `${SITE}/red-rocks/concerts`,
@@ -29,7 +33,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Red Rocks Concert Schedule 2026 | Shows + Private Transportation",
+    title: "Red Rocks Concert Schedule 2026–2027 | Shows + Private Transportation",
     description:
       "Find your Red Rocks show and reserve one private vehicle for the night. Private Suburban $399 with a private van upgrade for larger groups.",
     images: [DEFAULT_OG_IMAGE],
@@ -68,8 +72,20 @@ export default async function RedRocksConcertsPage({
   searchParams: Promise<HandoffSearchParams>;
 }) {
   const sp = await searchParams;
-  const events = (await getEventsCatalog(2026, "redrocks")).sort((a, b) => a.dateKey.localeCompare(b.dateKey));
-  const upcoming = events.filter((event) => isFutureDate(event.dateKey)).slice(0, 24);
+  const denverToday = getDenverDateKey();
+  const currentYear = Number(denverToday.slice(0, 4));
+  const years = [currentYear, currentYear + 1];
+  const [events, upcomingAll] = await Promise.all([
+    getMultiYearEventsCatalog({ scopes: ["redrocks"], years }),
+    getUpcomingEventsCatalog({
+      scopes: ["redrocks"],
+      fromDateKey: denverToday,
+      years,
+      venueId: "red-rocks-amphitheatre",
+      limit: 24,
+    }),
+  ]);
+  const upcoming = upcomingAll;
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -134,7 +150,7 @@ export default async function RedRocksConcertsPage({
 
         <div className="comic-hero">
           <div className="comic-kicker">Concert Calendar</div>
-          <h1 className="comic-title">Red Rocks Concert Schedule 2026</h1>
+          <h1 className="comic-title">Red Rocks Concert Schedule 2026–2027</h1>
           <p className="comic-copy">
             Find your show first. Then reserve one private vehicle for the whole Red Rocks night — $399 Private Suburban, with a $599 private van upgrade for larger groups.
           </p>

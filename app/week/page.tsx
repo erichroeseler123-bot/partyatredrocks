@@ -1,7 +1,11 @@
 import Link from "next/link";
 import { ArrowRight, CalendarDays, MapPinned, Sparkles } from "lucide-react";
 import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
-import { getEventsCatalog } from "@/lib/events/getCatalog";
+import {
+  getDenverDateKey,
+  getEventsCatalog,
+  getUpcomingEventsCatalog,
+} from "@/lib/events/getCatalog";
 import FAQBlock from "@/components/FAQBlock";
 import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
 import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
@@ -50,7 +54,13 @@ export default async function WeekPage({
   searchParams: Promise<HandoffSearchParams>;
 }) {
   const sp = await searchParams;
-  const events = await getEventsCatalog(2026, "all");
+  const denverToday = getDenverDateKey();
+  const currentYear = Number(denverToday.slice(0, 4));
+  const events = await getUpcomingEventsCatalog({
+    scope: "all",
+    fromDateKey: denverToday,
+    years: [currentYear, currentYear + 1],
+  });
   const schedules = buildVenueSchedules(events);
   const faqRows = await getFaqRowsWithGlobal("week/index.json");
   const faqJsonLd = buildFaqPageJsonLd(faqRows);

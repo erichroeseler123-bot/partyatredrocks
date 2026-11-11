@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { getRedRocksEvents } from "@/lib/events/getRedRocksEvents";
+import { getUpcomingRedRocksEvents } from "@/lib/events/getRedRocksEvents";
 import { getRedRocksAssets } from "@/lib/events/getRedRocksAssets";
 import { toDisplayEvent } from "@/lib/events/presentation";
-import { getEnrichedArtistsCatalog } from "@/lib/events/getCatalog";
+import { getDenverDateKey, getEnrichedArtistsCatalog } from "@/lib/events/getCatalog";
 import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
 import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
 import { getProbableSetlist } from "@/lib/setlists";
@@ -56,11 +56,13 @@ function inNextSevenDays(dateKey: string): boolean {
 }
 
 export default async function RedRocksLineupPage() {
+  const denverToday = getDenverDateKey();
+  const currentYear = Number(denverToday.slice(0, 4));
   const [events, assets, faqRows, enrichedArtists, forecastByDate] = await Promise.all([
-    getRedRocksEvents(2026),
-    getRedRocksAssets(2026),
+    getUpcomingRedRocksEvents({ fromDateKey: denverToday, years: [currentYear, currentYear + 1] }),
+    getRedRocksAssets(currentYear),
     getFaqRowsWithGlobal("week/red-rocks.json"),
-    getEnrichedArtistsCatalog(2026, "all"),
+    getEnrichedArtistsCatalog(currentYear, "all"),
     getRedRocks7DayForecast(),
   ]);
 

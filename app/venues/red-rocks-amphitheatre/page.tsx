@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getRedRocksEvents } from "@/lib/redrocksEvents";
+import { getUpcomingRedRocksSchedule } from "@/lib/redrocksEvents";
 import RedRocksShowsGrid from "@/components/RedRocksShowsGrid";
 import FAQBlock from "@/components/FAQBlock";
 import MusicWave from "@/components/MusicWave";
@@ -45,7 +45,7 @@ export default async function RedRocksPage({ searchParams }: { searchParams: Pro
   const pickup = first(sp, "pickup") || "";
   const date = first(sp, "date") || "";
   const qty = first(sp, "qty") || "";
-  const events = await getRedRocksEvents(2026);
+  const events = await getUpcomingRedRocksSchedule();
   const bookTarget = buildBookingHref({ target: "private", venue: "red-rocks-amphitheatre", searchParams: sp });
   const venueMedia = getVenueMedia("red-rocks-amphitheatre");
 
