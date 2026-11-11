@@ -16,9 +16,9 @@ export const PARR_PUBLIC_FACTS = {
       "Questions about pickup, payment, or your ride? Text 720-369-6292 or email hello@partyatredrocks.com.",
   },
   trustPoints: [
-    "Shared Denver, Golden, and Marriott West pickup options",
-    "Private SUV, van, Sprinter, and party bus options",
-    "Return ride after the show",
+    "Private Suburban ($399) and 10-passenger Private Van ($599) options",
+    "Door-to-door group pickup and dedicated return ride after the show",
+    "Operated by the same Colorado ground transport team as GoSno",
   ],
   pickups: {
     denver: {

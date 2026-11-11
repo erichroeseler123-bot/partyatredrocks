@@ -2,7 +2,7 @@ const AGENT = {
   spec: "dcc-site-contract",
   version: "1.0",
   dcc_id: "dcc:site:party-at-red-rocks",
-  schema_version: "2026-08-24",
+  schema_version: "2026-11-11",
   site: {
     id: "party-at-red-rocks",
     name: "Party at Red Rocks",
@@ -12,7 +12,7 @@ const AGENT = {
   },
   status: {
     state: "active",
-    last_verified: "2026-08-24",
+    last_verified: "2026-11-11",
   },
   authority: [
     "red_rocks_private_transportation",

@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import test from "node:test";
 
@@ -243,5 +243,28 @@ test("seasonal network explanation, reciprocal GoSno visible link, Organization/
     aboutPage.slice(0, aboutPage.indexOf("export default function AboutPage")),
     /https:\/\/gosno\.co/i,
   );
+});
+
+test("PARR_PUBLIC_FACTS.trustPoints and single authoritative /llms.txt & /agent.json stay private-only", () => {
+  assert.equal(
+    existsSync(join(root, "public/llms.txt")),
+    false,
+    "static public/llms.txt must be deleted so app/llms.txt/route.ts is authoritative",
+  );
+  const facts = read("lib/publicOperatorFacts.ts");
+  const trustBlock = facts.slice(facts.indexOf("trustPoints:"), facts.indexOf("pickups:"));
+  assert.match(trustBlock, /Private Suburban \(\$399\) and 10-passenger Private Van \(\$599\) options/);
+  assert.match(trustBlock, /GoSno/);
+  assert.doesNotMatch(trustBlock, /Shared/i);
+  assert.doesNotMatch(trustBlock, /Sprinter/i);
+  assert.doesNotMatch(trustBlock, /party bus/i);
+
+  const llmsRoute = read("app/llms.txt/route.ts");
+  assert.match(llmsRoute, /Last verified: 2026-11-11/);
+  assert.match(llmsRoute, /\/book\/red-rocks-amphitheatre\/private/);
+  assert.match(llmsRoute, /\/contact/);
+
+  const agentRoute = read("app/agent.json/route.ts");
+  assert.match(agentRoute, /last_verified:\s*"2026-11-11"/);
 });
 
