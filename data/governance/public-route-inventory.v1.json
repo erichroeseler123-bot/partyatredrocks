@@ -1,0 +1,2102 @@
+{
+  "schema": "parr.public-route-inventory.v1",
+  "version": "1.0.0",
+  "lockedDate": "2026-11-11",
+  "siteId": "partyatredrocks",
+  "canonicalOrigin": "https://www.partyatredrocks.com",
+  "operatingRole": "standalone_merchant_of_record_and_operator_surface",
+  "summary": {
+    "totalAppRouteAndPageFiles": 245,
+    "publicPagesCount": 197,
+    "publicPagesByCategory": {
+      "schedule_and_events": 35,
+      "support_and_legal": 4,
+      "artist_and_scene": 10,
+      "booking": 11,
+      "customer_order": 4,
+      "service": 23,
+      "gallery_and_social": 2,
+      "guide": 54,
+      "home": 1,
+      "venue": 53
+    },
+    "machineAndHandoffRoutesCount": 7,
+    "bookingAndCheckoutApiRoutesCount": 13,
+    "publicDataAndSupportApiRoutesCount": 16,
+    "excludedInternalAndAdminRoutesCount": 12,
+    "bookingActionsCount": 18,
+    "registeredVenuesCount": 23,
+    "vehicleClassesDefinedCount": 4,
+    "vehicleClassesPublicSelfServeCount": 2,
+    "vercelEdgeRedirectsCount": 3
+  },
+  "serviceAndVehicleCatalog": {
+    "privateRideOptions": [
+      {
+        "slug": "suv",
+        "title": "Private Suburban",
+        "priceUsd": 399,
+        "maxGuests": 6,
+        "fleetId": "parr-suburban",
+        "publicSelfServe": true
+      },
+      {
+        "slug": "van",
+        "title": "Upgrade to Private Van",
+        "priceUsd": 599,
+        "maxGuests": 10,
+        "fleetId": "parr-van-10",
+        "publicSelfServe": true
+      },
+      {
+        "slug": "sprinter",
+        "title": "14 Passenger Sprinter",
+        "priceUsd": 799,
+        "maxGuests": 14,
+        "fleetId": "parr-sprinter-14",
+        "publicSelfServe": false
+      },
+      {
+        "slug": "party-bus",
+        "title": "24 Passenger Party Bus",
+        "priceUsd": 1199,
+        "maxGuests": 24,
+        "fleetId": "parr-party-bus-24",
+        "publicSelfServe": false
+      }
+    ],
+    "corridorPricing": {
+      "redRocks": {
+        "suburban": "$399 round-trip",
+        "van10": "$599 round-trip"
+      },
+      "mishawaka": {
+        "privateSuburban": "$599 round-trip"
+      },
+      "denverBoulderOtherVenues": {
+        "suburban": "$250 flat round-trip (up to 6-7 passengers)"
+      }
+    }
+  },
+  "configuredRedirects": {
+    "vercelJson": [
+      {
+        "source": "/book-all-venues",
+        "destination": "/book-all-venue",
+        "permanent": true
+      },
+      {
+        "source": "/shuttle",
+        "destination": "/red-rocks/shuttle",
+        "permanent": true
+      },
+      {
+        "source": "/shuttles",
+        "destination": "/red-rocks/shuttle",
+        "permanent": true
+      }
+    ],
+    "nextConfigTs": [
+      {
+        "source": "/shuttle",
+        "destination": "/shuttles",
+        "permanent": true
+      }
+    ],
+    "nextConfigJs": [
+      {
+        "source": "/shuttle",
+        "destination": "/red-rocks/shuttle",
+        "permanent": true
+      },
+      {
+        "source": "/shuttles",
+        "destination": "/red-rocks/shuttle",
+        "permanent": true
+      },
+      {
+        "source": "/shared-shuttle",
+        "destination": "/red-rocks/shuttle",
+        "permanent": true
+      },
+      {
+        "source": "/private-shuttle",
+        "destination": "/book/red-rocks-amphitheatre/private",
+        "permanent": true
+      },
+      {
+        "source": "/red-rocks-shuttle",
+        "destination": "/red-rocks/shuttle",
+        "permanent": true
+      },
+      {
+        "source": "/guide/tailgate",
+        "destination": "/guide/tailgating",
+        "permanent": true
+      },
+      {
+        "source": "/guide/local/denver-pickup-locations",
+        "destination": "/guide/local/denver-pickups",
+        "permanent": true
+      },
+      {
+        "source": "/venues/fiddlers-green",
+        "destination": "/venues/fiddlers-green-amphitheatre",
+        "permanent": true
+      },
+      {
+        "source": "/venues/mishawaka",
+        "destination": "/venues/mishawaka-amphitheatre",
+        "permanent": true
+      }
+    ]
+  },
+  "bookingActions": [
+    {
+      "actionId": "private_suv_rezdy_checkout",
+      "surface": "/book/red-rocks-amphitheatre/private/suv",
+      "filePath": "app/book/[venue]/private/[option]/page.tsx",
+      "mode": "rezdy_embed_with_direct_fallback",
+      "vehicleSlug": "suv",
+      "publicPriceUsd": 399,
+      "maxGuests": 6,
+      "rezdyProductCode": "596193",
+      "directFallbackUrl": "https://gosnotransportation58.rezdy.com/596193/suburban?iframe=true",
+      "status": "live_public_primary"
+    },
+    {
+      "actionId": "private_van_rezdy_checkout",
+      "surface": "/book/red-rocks-amphitheatre/private/van",
+      "filePath": "app/book/[venue]/private/[option]/page.tsx",
+      "mode": "rezdy_embed_with_direct_fallback",
+      "vehicleSlug": "van",
+      "publicPriceUsd": 599,
+      "maxGuests": 10,
+      "rezdyProductCode": "630812",
+      "directFallbackUrl": "https://gosnotransportation58.rezdy.com/630812/10-passenger-van?iframe=true",
+      "status": "live_public_primary"
+    },
+    {
+      "actionId": "private_square_create_order",
+      "surface": "/api/private/checkout",
+      "filePath": "app/api/private/checkout/route.ts",
+      "method": "POST",
+      "mode": "native_square_order_and_deposit_or_full_checkout",
+      "supportedSlugs": [
+        "suv",
+        "van",
+        "sprinter",
+        "party-bus"
+      ],
+      "status": "live_api_route_built_form_secondary"
+    },
+    {
+      "actionId": "private_square_capture_payment",
+      "surface": "/api/private/pay",
+      "filePath": "app/api/private/pay/route.ts",
+      "method": "POST",
+      "mode": "native_square_card_capture_and_confirmation",
+      "status": "live_api_route_built_form_secondary"
+    },
+    {
+      "actionId": "shared_shuttle_inventory_snapshot",
+      "surface": "/api/shared/inventory",
+      "filePath": "app/api/shared/inventory/route.ts",
+      "method": "GET",
+      "mode": "shared_capacity_and_hold_lookup",
+      "status": "live_api_route_retained_for_compatibility"
+    },
+    {
+      "actionId": "shared_shuttle_square_checkout",
+      "surface": "/api/shared/checkout",
+      "filePath": "app/api/shared/checkout/route.ts",
+      "method": "POST",
+      "mode": "shared_hold_and_square_order",
+      "status": "live_api_route_retained_for_compatibility"
+    },
+    {
+      "actionId": "shared_shuttle_square_capture_payment",
+      "surface": "/api/shared/pay",
+      "filePath": "app/api/shared/pay/route.ts",
+      "method": "POST",
+      "mode": "shared_square_card_capture_and_confirmation",
+      "status": "live_api_route_retained_for_compatibility"
+    },
+    {
+      "actionId": "shared_shuttle_legacy_book_guard",
+      "surface": "/api/shared/book",
+      "filePath": "app/api/shared/book/route.ts",
+      "method": "POST",
+      "mode": "deprecated_410_pointer_to_shared_checkout",
+      "status": "live_legacy_guard"
+    },
+    {
+      "actionId": "customer_order_view",
+      "surface": "/booking/[token]",
+      "filePath": "app/booking/[token]/page.tsx",
+      "method": "GET",
+      "mode": "token_or_reference_order_detail_and_pickup_status",
+      "status": "live_public"
+    },
+    {
+      "actionId": "customer_pay_remaining_balance_view",
+      "surface": "/pay-balance/[token]",
+      "filePath": "app/pay-balance/[token]/page.tsx",
+      "method": "GET",
+      "mode": "remaining_balance_checkout_page",
+      "status": "live_public"
+    },
+    {
+      "actionId": "customer_pay_remaining_balance_submit",
+      "surface": "/api/pay-balance",
+      "filePath": "app/api/pay-balance/route.ts",
+      "method": "POST",
+      "mode": "square_remaining_balance_capture",
+      "status": "live_public"
+    },
+    {
+      "actionId": "customer_cancel_order",
+      "surface": "/api/booking/[token]/cancel",
+      "filePath": "app/api/booking/[token]/cancel/route.ts",
+      "method": "POST",
+      "mode": "self_serve_order_cancellation_and_refund_eligibility",
+      "status": "live_public"
+    },
+    {
+      "actionId": "customer_save_booking_notes",
+      "surface": "/api/booking/[token]/notes",
+      "filePath": "app/api/booking/[token]/notes/route.ts",
+      "method": "PATCH",
+      "mode": "token_verified_pickup_and_rider_notes_update",
+      "status": "live_public"
+    },
+    {
+      "actionId": "customer_self_serve_order_lookup",
+      "surface": "/booking",
+      "filePath": "app/booking/page.tsx",
+      "method": "POST",
+      "mode": "verified_reference_and_contact_order_lookup_to_booking_token",
+      "status": "live_public"
+    },
+    {
+      "actionId": "square_payment_webhook_reconcile",
+      "surface": "/api/webhooks/square",
+      "filePath": "app/api/webhooks/square/route.ts",
+      "method": "POST",
+      "mode": "hmac_verified_square_webhook_order_update",
+      "status": "live_webhook"
+    },
+    {
+      "actionId": "multi_venue_and_2027_presale_quote_dispatch",
+      "surface": "/book-all-venue",
+      "filePath": "app/book-all-venue/page.tsx",
+      "method": "GET",
+      "mode": "direct_dispatch_call_or_sms_quote_and_2027_custom_date_booking",
+      "supportPhoneE164": "+17203696292",
+      "status": "live_public"
+    },
+    {
+      "actionId": "dcc_inbound_handoff_entry",
+      "surface": "/handoff/dcc",
+      "filePath": "app/handoff/dcc/route.ts",
+      "method": "GET",
+      "mode": "non_blocking_dcc_context_resolution_to_parr_booking",
+      "status": "live_public"
+    },
+    {
+      "actionId": "dcc_outbound_traveler_return",
+      "surface": "/handoff/return",
+      "filePath": "app/handoff/return/route.ts",
+      "method": "GET",
+      "mode": "allowlisted_return_to_dcc_with_local_fallback",
+      "status": "live_public"
+    }
+  ],
+  "publicPages": [
+    {
+      "routePattern": "/2026/red-rocks-concerts",
+      "filePath": "app/2026/red-rocks-concerts/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/about",
+      "filePath": "app/about/page.tsx",
+      "category": "support_and_legal",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/artists/[artist]/[venue]",
+      "filePath": "app/artists/[artist]/[venue]/page.tsx",
+      "category": "artist_and_scene",
+      "dynamic": true,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/artists/[artist]",
+      "filePath": "app/artists/[artist]/page.tsx",
+      "category": "artist_and_scene",
+      "dynamic": true,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/bands/[id]",
+      "filePath": "app/bands/[id]/page.tsx",
+      "category": "artist_and_scene",
+      "dynamic": true,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/bands",
+      "filePath": "app/bands/page.tsx",
+      "category": "artist_and_scene",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/book-all-venue",
+      "filePath": "app/book-all-venue/page.tsx",
+      "category": "booking",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/book-all-venues",
+      "filePath": "app/book-all-venues/page.tsx",
+      "category": "booking",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/book-shuttle",
+      "filePath": "app/book-shuttle/page.tsx",
+      "category": "booking",
+      "dynamic": false,
+      "hasServerRedirect": true
+    },
+    {
+      "routePattern": "/book/[venue]/custom/shared/[pickup]",
+      "filePath": "app/book/[venue]/custom/shared/[pickup]/page.tsx",
+      "category": "booking",
+      "dynamic": true,
+      "hasServerRedirect": true
+    },
+    {
+      "routePattern": "/book/[venue]/custom/shared",
+      "filePath": "app/book/[venue]/custom/shared/page.tsx",
+      "category": "booking",
+      "dynamic": true,
+      "hasServerRedirect": true
+    },
+    {
+      "routePattern": "/book/[venue]",
+      "filePath": "app/book/[venue]/page.tsx",
+      "category": "booking",
+      "dynamic": true,
+      "hasServerRedirect": true
+    },
+    {
+      "routePattern": "/book/[venue]/private/[option]",
+      "filePath": "app/book/[venue]/private/[option]/page.tsx",
+      "category": "booking",
+      "dynamic": true,
+      "hasServerRedirect": true
+    },
+    {
+      "routePattern": "/book/[venue]/private",
+      "filePath": "app/book/[venue]/private/page.tsx",
+      "category": "booking",
+      "dynamic": true,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/book/[venue]/shared/[productCode]",
+      "filePath": "app/book/[venue]/shared/[productCode]/page.tsx",
+      "category": "booking",
+      "dynamic": true,
+      "hasServerRedirect": true
+    },
+    {
+      "routePattern": "/book/[venue]/shared",
+      "filePath": "app/book/[venue]/shared/page.tsx",
+      "category": "booking",
+      "dynamic": true,
+      "hasServerRedirect": true
+    },
+    {
+      "routePattern": "/book/[venue]/shared/success",
+      "filePath": "app/book/[venue]/shared/success/page.tsx",
+      "category": "customer_order",
+      "dynamic": true,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/book",
+      "filePath": "app/book/page.tsx",
+      "category": "booking",
+      "dynamic": false,
+      "hasServerRedirect": true
+    },
+    {
+      "routePattern": "/booking/[token]",
+      "filePath": "app/booking/[token]/page.tsx",
+      "category": "customer_order",
+      "dynamic": true,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/booking",
+      "filePath": "app/booking/page.tsx",
+      "category": "customer_order",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/calendar",
+      "filePath": "app/calendar/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/contact",
+      "filePath": "app/contact/page.tsx",
+      "category": "support_and_legal",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/dead-and-company-red-rocks",
+      "filePath": "app/dead-and-company-red-rocks/page.tsx",
+      "category": "service",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/event-details/[[...slug]]",
+      "filePath": "app/event-details/[[...slug]]/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": true,
+      "hasServerRedirect": true
+    },
+    {
+      "routePattern": "/find",
+      "filePath": "app/find/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": false,
+      "hasServerRedirect": true
+    },
+    {
+      "routePattern": "/gallery",
+      "filePath": "app/gallery/page.tsx",
+      "category": "gallery_and_social",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/all",
+      "filePath": "app/guide/all/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/compare",
+      "filePath": "app/guide/compare/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/denver-concert-transportation",
+      "filePath": "app/guide/denver-concert-transportation/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/events/2026-season-preview",
+      "filePath": "app/guide/events/2026-season-preview/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/events/[slug]",
+      "filePath": "app/guide/events/[slug]/page.tsx",
+      "category": "guide",
+      "dynamic": true,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/events/tailgate-guide",
+      "filePath": "app/guide/events/tailgate-guide/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/events/zac-brown-band",
+      "filePath": "app/guide/events/zac-brown-band/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/local-music-intelligence",
+      "filePath": "app/guide/local-music-intelligence/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/local/[slug]",
+      "filePath": "app/guide/local/[slug]/page.tsx",
+      "category": "guide",
+      "dynamic": true,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/local/denver-pickups",
+      "filePath": "app/guide/local/denver-pickups/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/local/trailhead-taphouse",
+      "filePath": "app/guide/local/trailhead-taphouse/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": true
+    },
+    {
+      "routePattern": "/guide/logistics/bag-policy",
+      "filePath": "app/guide/logistics/bag-policy/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/logistics/parking-comparison",
+      "filePath": "app/guide/logistics/parking-comparison/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/logistics/parking-lots",
+      "filePath": "app/guide/logistics/parking-lots/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/logistics/policies",
+      "filePath": "app/guide/logistics/policies/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/logistics/prohibited-items-2026",
+      "filePath": "app/guide/logistics/prohibited-items-2026/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/logistics/shuttle-vs-westracks-2026",
+      "filePath": "app/guide/logistics/shuttle-vs-westracks-2026/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/logistics/sold-out-survival",
+      "filePath": "app/guide/logistics/sold-out-survival/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/logistics/tailgating-rules",
+      "filePath": "app/guide/logistics/tailgating-rules/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/logistics/weather-prep",
+      "filePath": "app/guide/logistics/weather-prep/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/logistics/winter-survival",
+      "filePath": "app/guide/logistics/winter-survival/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide",
+      "filePath": "app/guide/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/parking/best-lots",
+      "filePath": "app/guide/parking/best-lots/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/parking",
+      "filePath": "app/guide/parking/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/policies",
+      "filePath": "app/guide/policies/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/red-rocks-faq",
+      "filePath": "app/guide/red-rocks-faq/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/red-rocks-intelligence-hub",
+      "filePath": "app/guide/red-rocks-intelligence-hub/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/safety-and-legitimacy",
+      "filePath": "app/guide/safety-and-legitimacy/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/safety/standards",
+      "filePath": "app/guide/safety/standards/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/show-night-strategy",
+      "filePath": "app/guide/show-night-strategy/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/show-night-strategy/post-show-pickup-plan",
+      "filePath": "app/guide/show-night-strategy/post-show-pickup-plan/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/tailgate-faq",
+      "filePath": "app/guide/tailgate-faq/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/tailgating",
+      "filePath": "app/guide/tailgating/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/transportation",
+      "filePath": "app/guide/transportation/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/transportation/shuttle-vs-uber",
+      "filePath": "app/guide/transportation/shuttle-vs-uber/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/guide/updates",
+      "filePath": "app/guide/updates/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/mishawaka",
+      "filePath": "app/mishawaka/page.tsx",
+      "category": "service",
+      "dynamic": false,
+      "hasServerRedirect": true
+    },
+    {
+      "routePattern": "/month/red-rocks",
+      "filePath": "app/month/red-rocks/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/other-venues",
+      "filePath": "app/other-venues/page.tsx",
+      "category": "service",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/",
+      "filePath": "app/page.tsx",
+      "category": "home",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/party-bus",
+      "filePath": "app/party-bus/page.tsx",
+      "category": "service",
+      "dynamic": false,
+      "hasServerRedirect": true
+    },
+    {
+      "routePattern": "/pay-balance/[token]",
+      "filePath": "app/pay-balance/[token]/page.tsx",
+      "category": "customer_order",
+      "dynamic": true,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/phish-folsom",
+      "filePath": "app/phish-folsom/page.tsx",
+      "category": "service",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/privacy",
+      "filePath": "app/privacy/page.tsx",
+      "category": "support_and_legal",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/private-suburban",
+      "filePath": "app/private-suburban/page.tsx",
+      "category": "service",
+      "dynamic": false,
+      "hasServerRedirect": true
+    },
+    {
+      "routePattern": "/private-van",
+      "filePath": "app/private-van/page.tsx",
+      "category": "service",
+      "dynamic": false,
+      "hasServerRedirect": true
+    },
+    {
+      "routePattern": "/quick-red-rocks",
+      "filePath": "app/quick-red-rocks/page.tsx",
+      "category": "service",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks-live",
+      "filePath": "app/red-rocks-live/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/[slug]",
+      "filePath": "app/red-rocks/[slug]/page.tsx",
+      "category": "venue",
+      "dynamic": true,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/best-time-to-arrive",
+      "filePath": "app/red-rocks/best-time-to-arrive/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/camping-nearby",
+      "filePath": "app/red-rocks/camping-nearby/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/camping",
+      "filePath": "app/red-rocks/camping/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/car-service",
+      "filePath": "app/red-rocks/car-service/page.tsx",
+      "category": "service",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/concert-guide",
+      "filePath": "app/red-rocks/concert-guide/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/concerts/august",
+      "filePath": "app/red-rocks/concerts/august/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/concerts/july",
+      "filePath": "app/red-rocks/concerts/july/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/concerts/june",
+      "filePath": "app/red-rocks/concerts/june/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/concerts",
+      "filePath": "app/red-rocks/concerts/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/faq",
+      "filePath": "app/red-rocks/faq/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/geology",
+      "filePath": "app/red-rocks/geology/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/group-transportation",
+      "filePath": "app/red-rocks/group-transportation/page.tsx",
+      "category": "service",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/hiking-trails",
+      "filePath": "app/red-rocks/hiking-trails/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/history",
+      "filePath": "app/red-rocks/history/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/how-to-get-to-red-rocks",
+      "filePath": "app/red-rocks/how-to-get-to-red-rocks/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": true
+    },
+    {
+      "routePattern": "/red-rocks/map/[slug]",
+      "filePath": "app/red-rocks/map/[slug]/page.tsx",
+      "category": "guide",
+      "dynamic": true,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/map",
+      "filePath": "app/red-rocks/map/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks",
+      "filePath": "app/red-rocks/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/parking",
+      "filePath": "app/red-rocks/parking/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/red-rocks-shuttle",
+      "filePath": "app/red-rocks/red-rocks-shuttle/page.tsx",
+      "category": "service",
+      "dynamic": false,
+      "hasServerRedirect": true
+    },
+    {
+      "routePattern": "/red-rocks/rideshare-vs-shuttle",
+      "filePath": "app/red-rocks/rideshare-vs-shuttle/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/shuttle",
+      "filePath": "app/red-rocks/shuttle/page.tsx",
+      "category": "service",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/trading-post-trail",
+      "filePath": "app/red-rocks/trading-post-trail/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/transportation/is-shuttle-worth-it",
+      "filePath": "app/red-rocks/transportation/is-shuttle-worth-it/page.tsx",
+      "category": "service",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/transportation",
+      "filePath": "app/red-rocks/transportation/page.tsx",
+      "category": "service",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/transportation/parking-reality",
+      "filePath": "app/red-rocks/transportation/parking-reality/page.tsx",
+      "category": "service",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/transportation/post-show-pickup",
+      "filePath": "app/red-rocks/transportation/post-show-pickup/page.tsx",
+      "category": "service",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/transportation/private-vs-shared",
+      "filePath": "app/red-rocks/transportation/private-vs-shared/page.tsx",
+      "category": "service",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/transportation/shuttle-vs-driving",
+      "filePath": "app/red-rocks/transportation/shuttle-vs-driving/page.tsx",
+      "category": "service",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/transportation/shuttle-vs-uber-2026",
+      "filePath": "app/red-rocks/transportation/shuttle-vs-uber-2026/page.tsx",
+      "category": "service",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/transportation/shuttle-vs-uber",
+      "filePath": "app/red-rocks/transportation/shuttle-vs-uber/page.tsx",
+      "category": "service",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/visiting-guide",
+      "filePath": "app/red-rocks/visiting-guide/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/weather",
+      "filePath": "app/red-rocks/weather/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/what-to-wear",
+      "filePath": "app/red-rocks/what-to-wear/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/red-rocks/wildlife",
+      "filePath": "app/red-rocks/wildlife/page.tsx",
+      "category": "guide",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/scene/[scene]",
+      "filePath": "app/scene/[scene]/page.tsx",
+      "category": "artist_and_scene",
+      "dynamic": true,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/scene/bluegrass/festivals",
+      "filePath": "app/scene/bluegrass/festivals/page.tsx",
+      "category": "artist_and_scene",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/scene/jam/camping",
+      "filePath": "app/scene/jam/camping/page.tsx",
+      "category": "artist_and_scene",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/scene",
+      "filePath": "app/scene/page.tsx",
+      "category": "artist_and_scene",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/scenes/[genre]",
+      "filePath": "app/scenes/[genre]/page.tsx",
+      "category": "artist_and_scene",
+      "dynamic": true,
+      "hasServerRedirect": true
+    },
+    {
+      "routePattern": "/scenes",
+      "filePath": "app/scenes/page.tsx",
+      "category": "artist_and_scene",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/schedule",
+      "filePath": "app/schedule/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/search",
+      "filePath": "app/search/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/shows/[id]",
+      "filePath": "app/shows/[id]/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": true,
+      "hasServerRedirect": true
+    },
+    {
+      "routePattern": "/shuttles/all-venue",
+      "filePath": "app/shuttles/all-venue/page.tsx",
+      "category": "service",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/shuttles",
+      "filePath": "app/shuttles/page.tsx",
+      "category": "service",
+      "dynamic": false,
+      "hasServerRedirect": true
+    },
+    {
+      "routePattern": "/social",
+      "filePath": "app/social/page.tsx",
+      "category": "gallery_and_social",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/suv",
+      "filePath": "app/suv/page.tsx",
+      "category": "service",
+      "dynamic": false,
+      "hasServerRedirect": true
+    },
+    {
+      "routePattern": "/terms",
+      "filePath": "app/terms/page.tsx",
+      "category": "support_and_legal",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/1stbank-center/best-time-to-arrive",
+      "filePath": "app/venues/1stbank-center/best-time-to-arrive/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/1stbank-center/concerts/[month]",
+      "filePath": "app/venues/1stbank-center/concerts/[month]/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": true,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/1stbank-center/concerts",
+      "filePath": "app/venues/1stbank-center/concerts/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/1stbank-center/map",
+      "filePath": "app/venues/1stbank-center/map/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/1stbank-center/parking",
+      "filePath": "app/venues/1stbank-center/parking/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/1stbank-center/transportation",
+      "filePath": "app/venues/1stbank-center/transportation/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/[slug]/best-time-to-arrive",
+      "filePath": "app/venues/[slug]/best-time-to-arrive/page.tsx",
+      "category": "venue",
+      "dynamic": true,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/[slug]",
+      "filePath": "app/venues/[slug]/page.tsx",
+      "category": "venue",
+      "dynamic": true,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/[slug]/transportation",
+      "filePath": "app/venues/[slug]/transportation/page.tsx",
+      "category": "venue",
+      "dynamic": true,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/[slug]/what-to-wear",
+      "filePath": "app/venues/[slug]/what-to-wear/page.tsx",
+      "category": "venue",
+      "dynamic": true,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/ball-arena/best-time-to-arrive",
+      "filePath": "app/venues/ball-arena/best-time-to-arrive/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/ball-arena/concerts/[month]",
+      "filePath": "app/venues/ball-arena/concerts/[month]/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": true,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/ball-arena/concerts",
+      "filePath": "app/venues/ball-arena/concerts/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/ball-arena/map",
+      "filePath": "app/venues/ball-arena/map/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/ball-arena/parking",
+      "filePath": "app/venues/ball-arena/parking/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/ball-arena/transportation",
+      "filePath": "app/venues/ball-arena/transportation/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/bluebird-theater/best-time-to-arrive",
+      "filePath": "app/venues/bluebird-theater/best-time-to-arrive/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/bluebird-theater/concerts/[month]",
+      "filePath": "app/venues/bluebird-theater/concerts/[month]/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": true,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/bluebird-theater/concerts",
+      "filePath": "app/venues/bluebird-theater/concerts/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/bluebird-theater/map",
+      "filePath": "app/venues/bluebird-theater/map/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/bluebird-theater/parking",
+      "filePath": "app/venues/bluebird-theater/parking/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/bluebird-theater/transportation",
+      "filePath": "app/venues/bluebird-theater/transportation/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/fiddlers-green-amphitheatre/best-time-to-arrive",
+      "filePath": "app/venues/fiddlers-green-amphitheatre/best-time-to-arrive/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/fiddlers-green-amphitheatre/concerts/[month]",
+      "filePath": "app/venues/fiddlers-green-amphitheatre/concerts/[month]/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": true,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/fiddlers-green-amphitheatre/concerts",
+      "filePath": "app/venues/fiddlers-green-amphitheatre/concerts/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/fiddlers-green-amphitheatre/map",
+      "filePath": "app/venues/fiddlers-green-amphitheatre/map/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/fiddlers-green-amphitheatre/parking",
+      "filePath": "app/venues/fiddlers-green-amphitheatre/parking/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/fiddlers-green-amphitheatre/transportation",
+      "filePath": "app/venues/fiddlers-green-amphitheatre/transportation/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/fillmore-auditorium/best-time-to-arrive",
+      "filePath": "app/venues/fillmore-auditorium/best-time-to-arrive/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/fillmore-auditorium/map",
+      "filePath": "app/venues/fillmore-auditorium/map/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/fillmore-auditorium/parking",
+      "filePath": "app/venues/fillmore-auditorium/parking/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/fillmore-auditorium/transportation",
+      "filePath": "app/venues/fillmore-auditorium/transportation/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/gothic-theatre/best-time-to-arrive",
+      "filePath": "app/venues/gothic-theatre/best-time-to-arrive/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/gothic-theatre/concerts",
+      "filePath": "app/venues/gothic-theatre/concerts/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/gothic-theatre/map",
+      "filePath": "app/venues/gothic-theatre/map/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/gothic-theatre/parking",
+      "filePath": "app/venues/gothic-theatre/parking/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/gothic-theatre/transportation",
+      "filePath": "app/venues/gothic-theatre/transportation/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/levitt-pavilion-denver/best-time-to-arrive",
+      "filePath": "app/venues/levitt-pavilion-denver/best-time-to-arrive/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/levitt-pavilion-denver/concerts/[month]",
+      "filePath": "app/venues/levitt-pavilion-denver/concerts/[month]/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": true,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/levitt-pavilion-denver/concerts",
+      "filePath": "app/venues/levitt-pavilion-denver/concerts/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/levitt-pavilion-denver/map",
+      "filePath": "app/venues/levitt-pavilion-denver/map/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/levitt-pavilion-denver/parking",
+      "filePath": "app/venues/levitt-pavilion-denver/parking/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/levitt-pavilion-denver/transportation",
+      "filePath": "app/venues/levitt-pavilion-denver/transportation/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/mishawaka-amphitheatre",
+      "filePath": "app/venues/mishawaka-amphitheatre/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/mission-ballroom/best-time-to-arrive",
+      "filePath": "app/venues/mission-ballroom/best-time-to-arrive/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/mission-ballroom/concerts/[month]",
+      "filePath": "app/venues/mission-ballroom/concerts/[month]/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": true,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/mission-ballroom/concerts",
+      "filePath": "app/venues/mission-ballroom/concerts/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/mission-ballroom/map",
+      "filePath": "app/venues/mission-ballroom/map/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/mission-ballroom/parking",
+      "filePath": "app/venues/mission-ballroom/parking/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/mission-ballroom/transportation",
+      "filePath": "app/venues/mission-ballroom/transportation/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/ogden-theatre/best-time-to-arrive",
+      "filePath": "app/venues/ogden-theatre/best-time-to-arrive/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/ogden-theatre/concerts/[month]",
+      "filePath": "app/venues/ogden-theatre/concerts/[month]/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": true,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/ogden-theatre/concerts",
+      "filePath": "app/venues/ogden-theatre/concerts/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/ogden-theatre/map",
+      "filePath": "app/venues/ogden-theatre/map/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/ogden-theatre/parking",
+      "filePath": "app/venues/ogden-theatre/parking/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/ogden-theatre/transportation",
+      "filePath": "app/venues/ogden-theatre/transportation/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues",
+      "filePath": "app/venues/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/paramount-theatre/best-time-to-arrive",
+      "filePath": "app/venues/paramount-theatre/best-time-to-arrive/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/paramount-theatre/concerts/[month]",
+      "filePath": "app/venues/paramount-theatre/concerts/[month]/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": true,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/paramount-theatre/concerts",
+      "filePath": "app/venues/paramount-theatre/concerts/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/paramount-theatre/map",
+      "filePath": "app/venues/paramount-theatre/map/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/paramount-theatre/parking",
+      "filePath": "app/venues/paramount-theatre/parking/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/paramount-theatre/transportation",
+      "filePath": "app/venues/paramount-theatre/transportation/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/red-rocks-amphitheatre",
+      "filePath": "app/venues/red-rocks-amphitheatre/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/summit-music-hall/best-time-to-arrive",
+      "filePath": "app/venues/summit-music-hall/best-time-to-arrive/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/summit-music-hall/concerts/[month]",
+      "filePath": "app/venues/summit-music-hall/concerts/[month]/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": true,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/summit-music-hall/concerts",
+      "filePath": "app/venues/summit-music-hall/concerts/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/summit-music-hall/map",
+      "filePath": "app/venues/summit-music-hall/map/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/summit-music-hall/parking",
+      "filePath": "app/venues/summit-music-hall/parking/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/venues/summit-music-hall/transportation",
+      "filePath": "app/venues/summit-music-hall/transportation/page.tsx",
+      "category": "venue",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/week",
+      "filePath": "app/week/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/week/red-rocks",
+      "filePath": "app/week/red-rocks/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": false,
+      "hasServerRedirect": false
+    },
+    {
+      "routePattern": "/week/search",
+      "filePath": "app/week/search/page.tsx",
+      "category": "schedule_and_events",
+      "dynamic": false,
+      "hasServerRedirect": false
+    }
+  ],
+  "machineAndHandoffRoutes": [
+    {
+      "routePattern": "/.well-known/dcc-site",
+      "filePath": "app/.well-known/dcc-site/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "category": "machine_discovery_and_seo"
+    },
+    {
+      "routePattern": "/agent.json",
+      "filePath": "app/agent.json/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "category": "machine_discovery_and_seo"
+    },
+    {
+      "routePattern": "/handoff/dcc",
+      "filePath": "app/handoff/dcc/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "category": "dcc_handoff"
+    },
+    {
+      "routePattern": "/handoff/return",
+      "filePath": "app/handoff/return/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "category": "dcc_handoff"
+    },
+    {
+      "routePattern": "/llms.txt",
+      "filePath": "app/llms.txt/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "category": "machine_discovery_and_seo"
+    },
+    {
+      "routePattern": "/robots.txt",
+      "filePath": "app/robots.txt/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "category": "machine_discovery_and_seo"
+    },
+    {
+      "routePattern": "/sitemap.xml",
+      "filePath": "app/sitemap.xml/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "category": "machine_discovery_and_seo"
+    }
+  ],
+  "bookingAndCheckoutApiRoutes": [
+    {
+      "routePattern": "/api/booking/[token]/cancel",
+      "filePath": "app/api/booking/[token]/cancel/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": true
+    },
+    {
+      "routePattern": "/api/booking/[token]/notes",
+      "filePath": "app/api/booking/[token]/notes/route.ts",
+      "methods": [
+        "PATCH",
+        "POST"
+      ],
+      "dynamic": true
+    },
+    {
+      "routePattern": "/api/pay-balance",
+      "filePath": "app/api/pay-balance/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "routePattern": "/api/pay-balance/telemetry",
+      "filePath": "app/api/pay-balance/telemetry/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "routePattern": "/api/private/checkout",
+      "filePath": "app/api/private/checkout/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "routePattern": "/api/private/pay",
+      "filePath": "app/api/private/pay/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "routePattern": "/api/recent-bookings",
+      "filePath": "app/api/recent-bookings/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": false
+    },
+    {
+      "routePattern": "/api/shared/book",
+      "filePath": "app/api/shared/book/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "routePattern": "/api/shared/checkout",
+      "filePath": "app/api/shared/checkout/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "routePattern": "/api/shared/inventory",
+      "filePath": "app/api/shared/inventory/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": false
+    },
+    {
+      "routePattern": "/api/shared/pay",
+      "filePath": "app/api/shared/pay/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "routePattern": "/api/telemetry/parr",
+      "filePath": "app/api/telemetry/parr/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "routePattern": "/api/webhooks/square",
+      "filePath": "app/api/webhooks/square/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    }
+  ],
+  "publicDataAndSupportApiRoutes": [
+    {
+      "routePattern": "/api/artist-info",
+      "filePath": "app/api/artist-info/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": false
+    },
+    {
+      "routePattern": "/api/artist-intel",
+      "filePath": "app/api/artist-intel/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": false
+    },
+    {
+      "routePattern": "/api/artist-top-track",
+      "filePath": "app/api/artist-top-track/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": false
+    },
+    {
+      "routePattern": "/api/contact-card",
+      "filePath": "app/api/contact-card/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": false
+    },
+    {
+      "routePattern": "/api/gemini-content",
+      "filePath": "app/api/gemini-content/route.ts",
+      "methods": [
+        "POST"
+      ],
+      "dynamic": false
+    },
+    {
+      "routePattern": "/api/health",
+      "filePath": "app/api/health/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": false
+    },
+    {
+      "routePattern": "/api/odesli",
+      "filePath": "app/api/odesli/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": false
+    },
+    {
+      "routePattern": "/api/red-rocks-events",
+      "filePath": "app/api/red-rocks-events/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": false
+    },
+    {
+      "routePattern": "/api/red-rocks-intelligence",
+      "filePath": "app/api/red-rocks-intelligence/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": false
+    },
+    {
+      "routePattern": "/api/redrocks/events",
+      "filePath": "app/api/redrocks/events/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": false
+    },
+    {
+      "routePattern": "/api/resolve-image",
+      "filePath": "app/api/resolve-image/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": false
+    },
+    {
+      "routePattern": "/api/setlist",
+      "filePath": "app/api/setlist/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": false
+    },
+    {
+      "routePattern": "/api/setlists",
+      "filePath": "app/api/setlists/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": false
+    },
+    {
+      "routePattern": "/api/spotify-id",
+      "filePath": "app/api/spotify-id/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": false
+    },
+    {
+      "routePattern": "/api/unsplash-image",
+      "filePath": "app/api/unsplash-image/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": false
+    },
+    {
+      "routePattern": "/api/week-events",
+      "filePath": "app/api/week-events/route.ts",
+      "methods": [
+        "GET"
+      ],
+      "dynamic": false
+    }
+  ],
+  "excludedInternalAndAdminRoutes": [
+    {
+      "routePattern": "/admin/friend-fleet-inventory",
+      "filePath": "app/admin/friend-fleet-inventory/page.tsx",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "reason": "internal_admin_manager_or_cron"
+    },
+    {
+      "routePattern": "/admin/parr-inventory",
+      "filePath": "app/admin/parr-inventory/page.tsx",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "reason": "internal_admin_manager_or_cron"
+    },
+    {
+      "routePattern": "/api/cron/cleanup-guides",
+      "filePath": "app/api/cron/cleanup-guides/route.ts",
+      "kind": "route",
+      "methods": [
+        "GET"
+      ],
+      "reason": "internal_admin_manager_or_cron"
+    },
+    {
+      "routePattern": "/api/cron/sync",
+      "filePath": "app/api/cron/sync/route.ts",
+      "kind": "route",
+      "methods": [
+        "GET"
+      ],
+      "reason": "internal_admin_manager_or_cron"
+    },
+    {
+      "routePattern": "/api/internal/orders/[internalOrderId]",
+      "filePath": "app/api/internal/orders/[internalOrderId]/route.ts",
+      "kind": "route",
+      "methods": [
+        "GET",
+        "PATCH"
+      ],
+      "reason": "internal_admin_manager_or_cron"
+    },
+    {
+      "routePattern": "/api/internal/owner-summary",
+      "filePath": "app/api/internal/owner-summary/route.ts",
+      "kind": "route",
+      "methods": [
+        "GET"
+      ],
+      "reason": "internal_admin_manager_or_cron"
+    },
+    {
+      "routePattern": "/api/internal/test-shared-confirmation",
+      "filePath": "app/api/internal/test-shared-confirmation/route.ts",
+      "kind": "route",
+      "methods": [
+        "POST"
+      ],
+      "reason": "internal_admin_manager_or_cron"
+    },
+    {
+      "routePattern": "/api/publish",
+      "filePath": "app/api/publish/route.ts",
+      "kind": "route",
+      "methods": [
+        "POST"
+      ],
+      "reason": "internal_admin_manager_or_cron"
+    },
+    {
+      "routePattern": "/internal/orders",
+      "filePath": "app/internal/orders/page.tsx",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "reason": "internal_admin_manager_or_cron"
+    },
+    {
+      "routePattern": "/manager/marriott-west/logout",
+      "filePath": "app/manager/marriott-west/logout/route.ts",
+      "kind": "route",
+      "methods": [
+        "GET"
+      ],
+      "reason": "internal_admin_manager_or_cron"
+    },
+    {
+      "routePattern": "/manager/marriott-west",
+      "filePath": "app/manager/marriott-west/page.tsx",
+      "kind": "page",
+      "methods": [
+        "GET"
+      ],
+      "reason": "internal_admin_manager_or_cron"
+    },
+    {
+      "routePattern": "/manager/marriott-west/unlock",
+      "filePath": "app/manager/marriott-west/unlock/route.ts",
+      "kind": "route",
+      "methods": [
+        "POST"
+      ],
+      "reason": "internal_admin_manager_or_cron"
+    }
+  ]
+}

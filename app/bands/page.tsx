@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getArtistsCatalog, getEventsCatalog } from "@/lib/events/getCatalog";
+import { getMultiYearArtistsCatalog, getUpcomingEventsCatalog } from "@/lib/events/getCatalog";
 
 export const revalidate = 86400;
 
@@ -13,7 +13,10 @@ export const metadata = {
 };
 
 export default async function BandsPage() {
-  const [artists, events] = await Promise.all([getArtistsCatalog(2026, "all"), getEventsCatalog(2026, "all")]);
+  const [artists, events] = await Promise.all([
+    getMultiYearArtistsCatalog({ scope: "all" }),
+    getUpcomingEventsCatalog({ scope: "all" }),
+  ]);
   const artistStats = new Map<string, { count: number; nextDate: string | null }>();
   for (const event of events) {
     for (const artistId of event.artists) {

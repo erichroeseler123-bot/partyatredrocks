@@ -21,8 +21,8 @@ export default function BookingPage() {
         <div className="font-black italic uppercase tracking-tighter text-xl">
           Party @ <span className="text-blue-500">Red Rocks!</span>
         </div>
-        <a href="tel:3030000000" className="bg-blue-600 text-white px-4 py-2 rounded-full font-black text-xs flex items-center gap-2 uppercase">
-          <PhoneCall className="w-3 h-3" /> Call
+        <a href="tel:+17203696292" className="bg-blue-600 text-white px-4 py-2 rounded-full font-black text-xs flex items-center gap-2 uppercase">
+          <PhoneCall className="w-3 h-3" /> 720-369-6292
         </a>
       </nav>
 

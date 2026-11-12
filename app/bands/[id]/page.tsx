@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getArtistById, getArtistsCatalog, getEnrichedArtistById, getEventsCatalog } from "@/lib/events/getCatalog";
+import {
+  getArtistById,
+  getEnrichedArtistById,
+  getMultiYearArtistsCatalog,
+  getMultiYearEventsCatalog,
+  resolveUpcomingYears,
+} from "@/lib/events/getCatalog";
 import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
-import { getMediaIndex } from "@/lib/media/getMediaIndex";
+import { getMultiYearMediaIndex } from "@/lib/media/getMediaIndex";
 import { selectImageByPriority } from "@/lib/media/selectImage";
 
 export const revalidate = 3600;
@@ -11,7 +17,7 @@ export const revalidate = 3600;
 type Props = { params: Promise<{ id: string }> };
 
 export async function generateStaticParams() {
-  const artists = await getArtistsCatalog(2026, "all");
+  const artists = await getMultiYearArtistsCatalog({ scope: "all" });
   return artists.map((artist) => ({ id: artist.id }));
 }
 
@@ -40,16 +46,17 @@ function dateLabel(iso: string) {
 
 export default async function BandPage({ params }: Props) {
   const { id } = await params;
+  const activeYears = resolveUpcomingYears();
   const [artist, enriched, media] = await Promise.all([
-    getArtistById(id, 2026),
-    getEnrichedArtistById(id, 2026, "all"),
-    getMediaIndex(2026),
+    getArtistById(id, activeYears[0] ?? 2026),
+    getEnrichedArtistById(id, activeYears[0] ?? 2026, "all"),
+    getMultiYearMediaIndex(activeYears),
   ]);
   if (!artist) notFound();
 
   const [events, allArtists] = await Promise.all([
-    getEventsCatalog(2026, "all"),
-    getArtistsCatalog(2026, "all"),
+    getMultiYearEventsCatalog({ scope: "all", years: activeYears }),
+    getMultiYearArtistsCatalog({ scope: "all", years: activeYears }),
   ]);
   const eventIdSet = new Set(artist.eventIds ?? []);
   const mine = events

@@ -4,6 +4,9 @@ import {
   getArtistsCatalog,
   getEnrichedArtistsCatalog,
   getEventsCatalog,
+  getMultiYearArtistsCatalog,
+  getMultiYearEventsCatalog,
+  resolveUpcomingYears,
 } from "@/lib/events/getCatalog";
 
 export type BookingShowContext = {
@@ -74,8 +77,10 @@ export async function resolveBookingShowContext(input: {
   const dateKey = String(input.dateKey || "").trim();
   const artistName = String(input.artistName || "").trim();
   const event = String(input.event || "").trim();
-  const year = Number.parseInt((dateKey || "2026").slice(0, 4), 10) || 2026;
-  const events = await getEventsCatalog(year, "all");
+  const parsedYear = dateKey ? Number.parseInt(dateKey.slice(0, 4), 10) : Number.NaN;
+  const events = Number.isFinite(parsedYear)
+    ? await getEventsCatalog(parsedYear, "all")
+    : await getMultiYearEventsCatalog({ scope: "all" });
   const scoped = events.filter((row) => row.venueId === venueSlug);
   const eventNorm = normalize(event);
   const artistNorm = normalize(artistName);
@@ -125,11 +130,16 @@ export async function resolveBookingArtistContext(input: {
   const artistSlug = String(input.artistSlug || slugify(artistName)).trim();
   if (!artistName && !artistSlug) return null;
 
-  const year = Number.parseInt((String(input.dateKey || "2026").trim() || "2026").slice(0, 4), 10) || 2026;
-  const [artists, enriched] = await Promise.all([
-    getArtistsCatalog(year, "all"),
-    getEnrichedArtistsCatalog(year, "all"),
+  const rawDateKey = String(input.dateKey || "").trim();
+  const parsedYear = rawDateKey ? Number.parseInt(rawDateKey.slice(0, 4), 10) : Number.NaN;
+  const activeYears = Number.isFinite(parsedYear) ? [parsedYear] : resolveUpcomingYears();
+  const [artists, enrichedBatches] = await Promise.all([
+    Number.isFinite(parsedYear)
+      ? getArtistsCatalog(parsedYear, "all")
+      : getMultiYearArtistsCatalog({ scope: "all", years: activeYears }),
+    Promise.all(activeYears.map((year) => getEnrichedArtistsCatalog(year, "all"))),
   ]);
+  const enriched = enrichedBatches.flat();
 
   const artist = artists.find((row) => slugify(row.name) === artistSlug || normalize(row.name) === normalize(artistName)) ?? null;
   const enrichedRow = enriched.find((row) => slugify(row.name) === artistSlug || normalize(row.name) === normalize(artistName)) ?? null;

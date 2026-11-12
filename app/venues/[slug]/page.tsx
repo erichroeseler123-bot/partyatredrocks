@@ -6,10 +6,14 @@ import path from "node:path";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import venuesJson from "@/data/venues.json";
-import { getEventsCatalog } from "@/lib/events/getCatalog";
+import {
+  getDenverDateKey,
+  getUpcomingEventsCatalog,
+  resolveUpcomingYears,
+} from "@/lib/events/getCatalog";
 import { VENUE_LEDGER_BY_SLUG, VENUE_LEDGER_REGISTRY } from "@/lib/venues/ledgerRegistry";
 import MusicWave from "@/components/MusicWave";
-import { getMediaIndex } from "@/lib/media/getMediaIndex";
+import { getMultiYearMediaIndex, type MediaIndex } from "@/lib/media/getMediaIndex";
 import { selectImageByPriority } from "@/lib/media/selectImage";
 import { DCC_ORIGIN } from "@/lib/parrHandoff";
 import {
@@ -411,11 +415,10 @@ function eventsItemListJsonLd(slug: string, v: VenueRec, events: VenueCache["eve
 }
 
 function toVenueEvents(
-  allEvents: Awaited<ReturnType<typeof getEventsCatalog>>,
+  upcomingEvents: Awaited<ReturnType<typeof getUpcomingEventsCatalog>>,
   venueSlug: string
 ): VenueCache["events"] {
-  const now = new Date();
-  const rows = allEvents
+  const rows = upcomingEvents
     .filter((event) => event.venueId === venueSlug)
     .map((event) => {
       const datetime_local = event.startLocal || event.startAt || event.dateKey;
@@ -430,23 +433,27 @@ function toVenueEvents(
         venue: { siteSlug: venueSlug, siteName: venueSlug },
       };
     })
-    .filter((event) => {
-      const dt = safeDate(event.datetime_local);
-      return dt && dt >= now;
-    })
     .sort((a, b) => eventDateTimeLocal(a).localeCompare(eventDateTimeLocal(b)));
 
   return rows.slice(0, 24);
 }
 
-async function readSnapshotGeneratedAt(year = 2026): Promise<string | null> {
-  try {
-    const raw = await readFile(path.join(EVENTS_SNAPSHOT_DIR, `all-${year}.json`), "utf8");
-    const parsed = JSON.parse(raw) as { generatedAt?: string };
-    return typeof parsed.generatedAt === "string" ? parsed.generatedAt : null;
-  } catch {
-    return null;
-  }
+async function readSnapshotGeneratedAt(years: number[] = [2026, 2027]): Promise<string | null> {
+  const stamps = (
+    await Promise.all(
+      years.map(async (year) => {
+        try {
+          const raw = await readFile(path.join(EVENTS_SNAPSHOT_DIR, `all-${year}.json`), "utf8");
+          const parsed = JSON.parse(raw) as { generatedAt?: string };
+          return typeof parsed.generatedAt === "string" ? parsed.generatedAt : null;
+        } catch {
+          return null;
+        }
+      })
+    )
+  ).filter((stamp): stamp is string => Boolean(stamp));
+  if (!stamps.length) return null;
+  return stamps.sort().at(-1) ?? stamps[0];
 }
 
 function venueFaqJsonLd(slug: string, v: VenueRec) {
@@ -567,7 +574,7 @@ export async function generateMetadata({
   const title = venueTitle(slug, withIdentityName);
   const description = venueDescription(slug, withIdentityName);
   const url = `${SITE}/venues/${slug}`;
-  const media = await getMediaIndex(2026);
+  const media = await getMultiYearMediaIndex(resolveUpcomingYears());
   const venueImage = selectImageByPriority({
     entityType: "venue",
     title,
@@ -649,7 +656,7 @@ function venueEventImage(
   event: VenueCache["events"][number],
   venueSlug: string,
   venueName: string,
-  media: Awaited<ReturnType<typeof getMediaIndex>>
+  media: MediaIndex | null
 ) {
   const mediaRow =
     media?.eventsById?.[event.id] ||
@@ -675,7 +682,7 @@ function venueEventImage(
 
 function venueEventThumbnail(
   event: VenueCache["events"][number],
-  media: Awaited<ReturnType<typeof getMediaIndex>>
+  media: MediaIndex | null
 ): string | null {
   const artistName = event.performers?.[0]?.name ?? null;
   if (!artistName) return null;
@@ -727,12 +734,20 @@ export default async function VenuePage({
   const reference = getVenueReference(slug, v, name);
   const crossSiteVenue = getCrossSiteVenue(slug);
   const dccVenueUrl = crossSiteVenue?.dccAuthorityPath || `${DCC_ORIGIN}/venues/${slug}`;
-  const [allEvents, updatedAt, media] = await Promise.all([
-    getEventsCatalog(2026, "all"),
-    readSnapshotGeneratedAt(2026),
-    getMediaIndex(2026),
+  const denverToday = getDenverDateKey();
+  const activeYears = resolveUpcomingYears(denverToday);
+  const [upcomingEvents, updatedAt, media] = await Promise.all([
+    getUpcomingEventsCatalog({
+      scope: "all",
+      venueId: slug,
+      fromDateKey: denverToday,
+      years: activeYears,
+      limit: 24,
+    }),
+    readSnapshotGeneratedAt(activeYears),
+    getMultiYearMediaIndex(activeYears),
   ]);
-  const events = toVenueEvents(allEvents, slug);
+  const events = toVenueEvents(upcomingEvents, slug);
   const venueFallback = resolveVenueLocalFallback(slug);
   const venueImage = selectImageByPriority({
     entityType: "venue",

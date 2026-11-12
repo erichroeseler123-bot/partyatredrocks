@@ -23,7 +23,7 @@
     "sync:publish": "node sync.js && git add public/data/shows-2026.js && git commit -m \"Update 2026 show data\" && git push",
     "style:check": "bash scripts/style_leaks_no_globals.sh",
     "typecheck": "tsc --noEmit -p tsconfig.check.json",
-    "test": "tsx --import ./tests/server-only-shim.cjs --test tests/dcc-site.test.ts tests/ops-auth-and-owner-summary.test.ts tests/upcoming-events-selector.test.ts && node --test tests/media-registry-surface-guard.test.mjs tests/parr-private-only-public.test.mjs",
+    "test": "tsx --import ./tests/server-only-shim.cjs --test tests/dcc-site.test.ts tests/ops-auth-and-owner-summary.test.ts tests/upcoming-events-selector.test.ts tests/north-star-standalone-fallback.test.ts && node --test tests/media-registry-surface-guard.test.mjs tests/parr-private-only-public.test.mjs",
     "build-quick-red-rocks-events": "node scripts/build-quick-red-rocks-events.mjs",
     "routing:validate": "tsx scripts/validate-intent-routing.ts",
     "routing:report": "tsx scripts/report-intent-mismatches.ts"

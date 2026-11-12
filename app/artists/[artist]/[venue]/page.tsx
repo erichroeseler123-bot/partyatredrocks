@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getArtistsCatalog, getEventsCatalog } from "@/lib/events/getCatalog";
+import {
+  getMultiYearArtistsCatalog,
+  getMultiYearEventsCatalog,
+  getUpcomingEventsCatalog,
+} from "@/lib/events/getCatalog";
 import type { HandoffSearchParams } from "@/lib/parrHandoff";
 import { buildBookingHref } from "@/lib/parrHandoff";
 import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
@@ -37,8 +41,8 @@ type ArtistVenuePair = {
   venueSlug: string;
 };
 
-async function getArtistVenuePairs(year = 2026): Promise<ArtistVenuePair[]> {
-  const events = await getEventsCatalog(year, "all");
+async function getArtistVenuePairs(): Promise<ArtistVenuePair[]> {
+  const events = await getMultiYearEventsCatalog({ scope: "all" });
   const seen = new Set<string>();
   const out: ArtistVenuePair[] = [];
 
@@ -57,13 +61,13 @@ async function getArtistVenuePairs(year = 2026): Promise<ArtistVenuePair[]> {
 }
 
 export async function generateStaticParams() {
-  const pairs = await getArtistVenuePairs(2026);
+  const pairs = await getArtistVenuePairs();
   return pairs.map((pair) => ({ artist: pair.artistSlug, venue: pair.venueSlug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { artist, venue } = await params;
-  const events = await getEventsCatalog(2026, "all");
+  const events = await getMultiYearEventsCatalog({ scope: "all" });
   const matching = events.filter(
     (event) => event.venueId === venue && event.artistNames.some((name) => slugify(name) === artist)
   );
@@ -88,10 +92,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ArtistVenuePage({ params, searchParams }: Props) {
   const { artist, venue } = await params;
   const sp = await searchParams;
-  const [events, artists] = await Promise.all([getEventsCatalog(2026, "all"), getArtistsCatalog(2026, "all")]);
-  const shows = events
+  const [upcomingEvents, allEvents, artists] = await Promise.all([
+    getUpcomingEventsCatalog({ scope: "all", venueId: venue }),
+    getMultiYearEventsCatalog({ scope: "all" }),
+    getMultiYearArtistsCatalog({ scope: "all" }),
+  ]);
+  const upcomingShows = upcomingEvents
+    .filter((event) => event.artistNames.some((name) => slugify(name) === artist))
+    .sort((a, b) => a.dateKey.localeCompare(b.dateKey));
+  const historicalShows = allEvents
     .filter((event) => event.venueId === venue && event.artistNames.some((name) => slugify(name) === artist))
     .sort((a, b) => a.dateKey.localeCompare(b.dateKey));
+  const shows = upcomingShows.length ? upcomingShows : historicalShows;
 
   if (!shows.length) return notFound();
 
