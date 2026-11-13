@@ -235,7 +235,6 @@ function musicEventJsonLd(e: ShowEvent, id: string, image?: string | null) {
     location,
     performer: performers.length ? performers : undefined,
     offers,
-    organizer: { "@id": `${SITE}/#organization` },
     sameAs: [`${DCC}/shows/${id}`],
     identifier: [
       { "@type": "PropertyValue", name: "dccShowId", value: `dcc:show:${id}` },

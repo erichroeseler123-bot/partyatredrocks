@@ -121,12 +121,31 @@ export function buildAttributedDccRedRocksUrl(params: {
   return url.toString();
 }
 
+export function sanitizeTelemetryPath(rawPath?: string | null): string {
+  const pathOnly = (rawPath || "/").split("?")[0].split("#")[0].trim() || "/";
+  if (/^\/booking\/[^/]+/i.test(pathOnly)) return "/booking/[token]";
+  if (/^\/pay-balance\/[^/]+/i.test(pathOnly)) return "/pay-balance/[token]";
+  if (/^\/pay\/[^/]+/i.test(pathOnly)) return "/pay/[token]";
+  if (/^\/quote\/[^/]+/i.test(pathOnly)) return "/quote/[token]";
+  if (/^\/manage\/[^/]+/i.test(pathOnly)) return "/manage/[token]";
+  return pathOnly;
+}
+
+export function sanitizeTelemetryEventId(rawEventId?: string | null): string | undefined {
+  const trimmed = (rawEventId || "").trim();
+  if (!trimmed) return undefined;
+  if (/^(parr_booking_|gosno_booking_)/i.test(trimmed)) {
+    return undefined;
+  }
+  return trimmed;
+}
+
 export function trackNetworkEvent(input: TrackNetworkEventInput): void {
   if (typeof window === "undefined") return;
   const sessionId = getAnonymousSessionId();
   const journeyId = input.journeyId || getOrCreateJourneyId();
-  const eventId = input.eventId || createOpaqueId("evt");
-  const entryPage = input.entryPage || window.location.pathname || "/";
+  const eventId = sanitizeTelemetryEventId(input.eventId) || createOpaqueId("evt");
+  const entryPage = sanitizeTelemetryPath(input.entryPage || window.location.pathname || "/");
   const urlParams = new URLSearchParams(window.location.search);
   const isTest = Boolean(input.isTest || isQaTestMode());
   const campaignSource =

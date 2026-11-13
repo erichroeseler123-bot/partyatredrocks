@@ -1,3 +1,4 @@
+import { createHmac } from 'node:crypto';
 import BrandMark from '@/components/BrandMark';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -325,13 +326,37 @@ export default async function PublicBookingPage(
       '@type': 'PerformingGroup',
       name: artistName,
     },
-    organizer: {
+  } : null;
+
+  const transportServiceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: isSharedRide
+      ? 'Party at Red Rocks Shuttle Transportation'
+      : 'Party at Red Rocks Private Concert Transportation',
+    serviceType: 'Concert Transportation',
+    provider: {
       '@type': 'Organization',
       name: PARR_PUBLIC_FACTS.operatorName,
       url: siteOrigin(),
     },
-    url: bookingUrl,
-  } : null;
+    areaServed: ['Denver, CO', 'Golden, CO', 'Morrison, CO'],
+    offers: {
+      '@type': 'Offer',
+      url: `${siteOrigin()}/book/${encodeURIComponent(show?.venueSlug || 'red-rocks-amphitheatre')}`,
+      priceCurrency: 'USD',
+    },
+  };
+
+  const telemetrySecret =
+    process.env.TELEMETRY_HASH_SECRET?.trim() ||
+    process.env.PARR_SECRET?.trim() ||
+    process.env.DCC_PARR_WEBHOOK_TOKEN?.trim() ||
+    'parr-internal-telemetry-dedupe';
+  const telemetryDedupeId = `parr_evt_${createHmac('sha256', telemetrySecret)
+    .update(String(order.internalOrderId || 'unknown'))
+    .digest('hex')
+    .slice(0, 24)}`;
 
   return (
     <main className="min-h-screen bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
@@ -808,13 +833,17 @@ export default async function PublicBookingPage(
             dangerouslySetInnerHTML={{ __html: JSON.stringify(eventSchema) }}
           />
         ) : null}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(transportServiceSchema) }}
+        />
       </section>
       <BookingStickyHelp
         smsHref={supportSmsHref}
         phoneLabel={supportPhone}
       />
       <VerifiedBookingTelemetry
-        token={token}
+        dedupeEventId={telemetryDedupeId}
         status={status}
         isGuestView={isGuestView}
         date={date}
