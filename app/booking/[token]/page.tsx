@@ -9,6 +9,7 @@ import BookingStickyHelp from '@/components/booking/BookingStickyHelp';
 import BookingSupportCard from '@/components/booking/BookingSupportCard';
 import PublicBookingNotes from '@/components/booking/PublicBookingNotes';
 import PublicBookingShare from '@/components/booking/PublicBookingShare';
+import VerifiedBookingTelemetry from '@/components/booking/VerifiedBookingTelemetry';
 import {
   resolveBookingArtistContext,
   resolveBookingShowContext,
@@ -811,6 +812,12 @@ export default async function PublicBookingPage(
       <BookingStickyHelp
         smsHref={supportSmsHref}
         phoneLabel={supportPhone}
+      />
+      <VerifiedBookingTelemetry
+        token={token}
+        status={status}
+        isGuestView={isGuestView}
+        date={date}
       />
     </main>
   );

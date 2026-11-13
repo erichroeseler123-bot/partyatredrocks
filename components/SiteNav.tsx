@@ -18,8 +18,8 @@ export default function SiteNav() {
 
   return (
     <header className="sticky top-0 z-50 bg-transparent">
-      <div className="comic-wrap py-3">
-        <div className="brand-glass-bar flex items-center justify-between gap-2 overflow-hidden rounded-[24px] px-3 py-3 sm:gap-3 sm:px-4">
+      <div className="comic-wrap py-1.5 sm:py-2">
+        <div className="brand-glass-bar flex items-center justify-between gap-2 overflow-hidden rounded-[20px] px-3 py-1.5 sm:gap-3 sm:px-4 sm:py-2">
           <Link href="/" className="flex min-w-0 flex-1 items-center no-underline">
             <BrandMark alt={brand} variant="nav" />
           </Link>

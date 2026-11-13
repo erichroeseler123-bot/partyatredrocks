@@ -20,7 +20,7 @@ type BrandMarkVariantConfig = {
 
 export const BRAND_MARK_VARIANTS = {
   nav: {
-    frameClassName: "w-[clamp(180px,44vw,244px)] sm:w-[280px]",
+    frameClassName: "w-[clamp(132px,32vw,170px)] sm:w-[176px]",
     imageClassName: "",
   },
   footer: {

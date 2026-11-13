@@ -4,7 +4,11 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { CalendarDays, ShieldCheck, CloudSun, Car, Clock, CheckCircle2 } from "lucide-react";
 import { ReviewBlock } from "@/components/ReviewBlock";
-import { buildAttributedDccRedRocksUrl, trackNetworkEvent } from "@/lib/networkEvents";
+import {
+  buildAttributedDccRedRocksUrl,
+  getOrCreateJourneyId,
+  trackNetworkEvent,
+} from "@/lib/networkEvents";
 
 export type UpcomingRedRocksPreviewItem = {
   id: string;
@@ -82,13 +86,22 @@ export default function HomeSections({
   const [customArtist, setCustomArtist] = useState("");
   const [partySize, setPartySize] = useState<number>(4);
   const [pickupArea, setPickupArea] = useState<string>("Denver Metro");
+  const [journeyId, setJourneyId] = useState<string>("");
+  const [showStickyMobileCta, setShowStickyMobileCta] = useState(false);
 
   useEffect(() => {
+    setJourneyId(getOrCreateJourneyId());
     trackNetworkEvent({
       eventName: "service_page_view",
       entryPage: "/",
       travelIntent: "red-rocks-concert",
     });
+
+    const onScroll = () => {
+      setShowStickyMobileCta(window.scrollY > 360);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const recommendedOption = partySize > 6 ? "van" : "suv";
@@ -98,6 +111,7 @@ export default function HomeSections({
     partySize,
     origin: pickupArea,
     entryPage: "/",
+    journeyId: journeyId || undefined,
   });
 
   const rideCards = [
@@ -134,9 +148,9 @@ export default function HomeSections({
 
   return (
     <main className="brand-page bg-[radial-gradient(circle_at_top,rgba(255,91,46,0.15),transparent_26%),radial-gradient(circle_at_18%_10%,rgba(59,130,246,0.14),transparent_18%),linear-gradient(180deg,#0b0b0f_0%,#0b0b0f_100%)]">
-      <section className="mx-auto flex w-full max-w-[1500px] flex-col gap-10 px-4 pb-24 pt-16 sm:px-6 sm:pt-20 lg:px-8">
-        <section className="relative overflow-hidden rounded-[36px] border border-[var(--brand-orange)]/20 bg-[var(--brand-bg-dark)] shadow-[0_40px_120px_rgba(0,0,0,0.58)]">
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-[270px] sm:h-[360px] lg:inset-0 lg:h-full">
+      <section className="mx-auto flex w-full max-w-[1500px] flex-col gap-8 px-4 pb-24 pt-3 sm:px-6 sm:pt-4 lg:px-8">
+        <section className="relative overflow-hidden rounded-[32px] border border-[var(--brand-orange)]/20 bg-[var(--brand-bg-dark)] shadow-[0_40px_120px_rgba(0,0,0,0.58)]">
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-[230px] sm:h-[300px] lg:inset-0 lg:h-full">
             <img
               src={heroSrc}
               alt="Illuminated Red Rocks Amphitheatre show night vista above Morrison"
@@ -150,18 +164,18 @@ export default function HomeSections({
             <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-[var(--brand-bg-dark)] lg:hidden" />
           </div>
 
-          <div className="relative px-6 py-10 sm:px-8 sm:py-12 lg:px-12 lg:py-14">
+          <div className="relative px-5 py-5 sm:px-8 sm:py-6 lg:px-10 lg:py-7">
             <div className="mx-auto max-w-5xl text-center">
-              <p className="text-[11px] font-black uppercase tracking-[0.24em] text-white/72 sm:text-[12px]">Private Red Rocks Shuttle &amp; Group Transportation</p>
-              <h1 className="mt-4 text-[2.5rem] font-black leading-[0.94] tracking-[-0.05em] text-white sm:text-[4rem] lg:text-[5rem]">
+              <p className="text-[11px] font-black uppercase tracking-[0.22em] text-white/75">Private Red Rocks Shuttle &amp; Group Transportation</p>
+              <h1 className="mt-2 text-[2rem] font-black leading-[0.98] tracking-[-0.04em] text-white sm:text-[2.9rem] lg:text-[3.35rem]">
                 Private transportation for your 2027 Red Rocks show
               </h1>
-              <p className="mx-auto mt-5 max-w-4xl text-base leading-8 text-white/84 sm:text-lg">
+              <p className="mx-auto mt-2.5 max-w-3xl text-sm leading-6 text-white/84 sm:text-base">
                 Choose your show or date. Get Denver-area pickup, a private vehicle that waits through the concert and your return ride home.
               </p>
 
               {/* Show / Date + Party Size -> Vehicle & Price -> Check Live Availability */}
-              <div className="mx-auto mt-7 max-w-4xl rounded-2xl border border-white/15 bg-black/55 p-4 text-left backdrop-blur-md sm:p-5">
+              <div className="mx-auto mt-4 max-w-4xl rounded-2xl border border-white/15 bg-black/60 p-3.5 text-left backdrop-blur-md sm:p-4">
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[175px_minmax(0,1fr)_140px_auto] lg:items-end">
                   <label className="flex flex-col gap-1 text-[11px] font-bold uppercase tracking-[0.12em] text-white/75">
                     <span>Show Date</span>
@@ -633,6 +647,35 @@ export default function HomeSections({
 
         <ReviewBlock />
       </section>
+
+      {showStickyMobileCta ? (
+        <div className="md:hidden fixed inset-x-3 bottom-3 z-40 rounded-2xl border border-white/15 bg-[#0b101b]/95 p-2.5 shadow-[0_16px_40px_rgba(0,0,0,0.65)] backdrop-blur-md">
+          <div className="flex items-center justify-between gap-3">
+            <div className="min-w-0 text-left">
+              <div className="truncate text-[11px] font-black uppercase tracking-[0.12em] text-white">
+                {partySize > 6 ? "$599 Private Van" : "$399 Private Suburban"}
+              </div>
+              <div className="truncate text-[11px] text-white/70">
+                {partySize} {partySize === 1 ? "guest" : "guests"} · Vehicle waits on-site
+              </div>
+            </div>
+            <Link
+              href={heroBookingHref}
+              onClick={() =>
+                trackNetworkEvent({
+                  eventName: "availability_started",
+                  entryPage: "/",
+                  date: customDate || undefined,
+                  travelIntent: "red-rocks-concert",
+                })
+              }
+              className="inline-flex min-h-10 shrink-0 items-center justify-center rounded-xl bg-[#ff6b3d] px-4 text-[11px] font-black uppercase tracking-[0.12em] text-[#1b0b05] no-underline"
+            >
+              Check Live Availability →
+            </Link>
+          </div>
+        </div>
+      ) : null}
     </main>
   );
 }
