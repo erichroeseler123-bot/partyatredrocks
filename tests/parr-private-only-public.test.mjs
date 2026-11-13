@@ -46,6 +46,7 @@ const ALLOWED_METADATA_CLARIFICATIONS = [
   "costs less per person than public shuttle tickets.",
   "Per-person shared shuttle seating:",
   "What is the difference between this and a shared shuttle?",
+  "Flat vehicle rate, never per-person",
 ];
 
 function read(path) {

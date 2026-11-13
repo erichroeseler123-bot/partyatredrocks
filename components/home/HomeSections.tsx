@@ -611,7 +611,7 @@ export default function HomeSections({
               Licensed Colorado Private Fleet · Vehicle Waits Throughout the Concert
             </div>
             <p className="mt-4 text-lg font-bold leading-relaxed text-white sm:text-xl lg:text-[1.35rem]">
-              Commercial passenger-insured Suburbans and 10-passenger vans operated year-round in Colorado (Party at Red Rocks in concert season,{" "}
+              The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and{" "}
               <a
                 href="https://gosno.co"
                 target="_blank"
@@ -620,7 +620,7 @@ export default function HomeSections({
               >
                 GoSno
               </a>{" "}
-              in winter ski season).
+              during the winter ski season, with 24/7 scheduled service subject to live vehicle and schedule availability.
             </p>
             <div className="mt-6 grid grid-cols-1 gap-4 pt-6 border-t border-white/10 sm:grid-cols-3 text-left">
               <div className="rounded-2xl border border-white/8 bg-white/4 p-4">

@@ -79,7 +79,7 @@ export default function SiteFooter() {
                 >
                   Destination Command Center&apos;s
                 </a>{" "}
-                travel-planning network.
+                travel-planning network. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and GoSno during the winter ski season, with 24/7 scheduled service subject to live availability.
               </div>
               <div className="mt-2 text-[13px] text-[color:var(--brand-text-soft)]">
                 Other planning tools:{" "}
