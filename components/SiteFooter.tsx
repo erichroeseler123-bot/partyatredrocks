@@ -61,7 +61,7 @@ export default function SiteFooter() {
                 Party at Red Rocks
               </div>
               <div className="mt-3 text-[14px] leading-relaxed text-[color:var(--brand-text-soft)]">
-                Independent Colorado ground transportation · 24/7 scheduled service subject to live vehicle and schedule availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and{" "}
+                Party at Red Rocks and{" "}
                 <a
                   href="https://gosno.co"
                   target="_blank"
@@ -70,10 +70,28 @@ export default function SiteFooter() {
                 >
                   GoSno
                 </a>{" "}
-                during the winter ski season.
+                are independent Colorado transportation services connected to{" "}
+                <a
+                  href="https://destinationcommandcenter.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-[var(--brand-text)]"
+                >
+                  Destination Command Center&apos;s
+                </a>{" "}
+                travel-planning network.
               </div>
-              <div className="mt-2 text-[14px] text-[color:var(--brand-text-soft)]">
-                Private Suburban, private van upgrade, and direct pickup planning for Red Rocks show nights.
+              <div className="mt-2 text-[13px] text-[color:var(--brand-text-soft)]">
+                Other planning tools:{" "}
+                <a
+                  href="https://cruisepromenade.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-[var(--brand-text)]"
+                >
+                  Cruise Promenade
+                </a>{" "}
+                (cruise itinerary &amp; group coordination).
               </div>
               <div className="mt-4 text-[13px] font-semibold uppercase tracking-[0.16em] text-[var(--brand-cyan)]">
                 Compare the ride, pick the plan, and book it

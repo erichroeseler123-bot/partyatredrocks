@@ -774,6 +774,29 @@ export default async function PublicBookingPage(
             )}
           </div>
         </section>
+        {!isGuestView ? (
+          <section className="rounded-[24px] border border-white/10 bg-white/[0.03] p-5 sm:p-6">
+            <div className="text-[11px] font-black uppercase tracking-[0.18em] text-cyan-300">
+              Planning another group trip?
+            </div>
+            <h2 className="mt-2 text-lg font-black text-white">
+              Traveling with this group again?
+            </h2>
+            <p className="mt-1.5 text-sm leading-6 text-white/75">
+              If your next trip is a cruise, Cruise Promenade gives everyone one shared sailing schedule, excursion board and RollCall conversation.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-3">
+              <a
+                href="https://cruisepromenade.com?source=partyatredrocks&intent=post-booking-group-trip&entry=booking-confirmation"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-10 items-center justify-center rounded-full border border-cyan-300/35 bg-cyan-300/12 px-4 text-xs font-black uppercase tracking-[0.14em] text-cyan-100 no-underline transition hover:bg-cyan-300/22"
+              >
+                Explore Cruise Promenade →
+              </a>
+            </div>
+          </section>
+        ) : null}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

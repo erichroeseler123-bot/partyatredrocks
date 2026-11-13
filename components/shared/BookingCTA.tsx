@@ -13,6 +13,14 @@ export default function BookingCTA({ text = "Book Private Red Rocks Transportati
         <div className="mt-3 text-sm text-soft">
           Private vehicle availability changes on sold-out shows. Lock in your ride plan now.
         </div>
+        <div className="mt-4 text-xs text-soft">
+          <a
+            href="https://destinationcommandcenter.com/red-rocks?source=partyatredrocks&intent=red-rocks-concert-planning"
+            className="underline underline-offset-4 hover:text-white transition"
+          >
+            Need concert-night timing, weather, and exit guidance? Plan your whole night on DCC →
+          </a>
+        </div>
       </div>
     </div>
   );
