@@ -2,9 +2,9 @@ import Link from "next/link";
 
 export default function ShuttleCTA({
   title = "Ready for Your Red Rocks Show?",
-  blurb = "Skip parking and surges—book private transportation with a $399 Suburban or $599 van.",
+  blurb = "Skip parking and surges—book private transportation with a $499 Suburban or $699 van.",
   href = "/book/red-rocks-amphitheatre/private",
-  button = "Book Private Ride — from $399",
+  button = "Book Private Ride — from $499",
 }: {
   title?: string;
   blurb?: string;

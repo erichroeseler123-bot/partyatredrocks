@@ -14,7 +14,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<Han
     <PrivateOnlyAuthorityPage
       eyebrow="Transportation comparison"
       title="Rideshare vs Shuttle at Red Rocks"
-      intro="Party at Red Rocks no longer offers shared shuttle seats, so the practical comparison today is rideshare versus pre-booked private transportation. The private option is a $399 Suburban or $599 van."
+      intro="Party at Red Rocks no longer offers shared shuttle seats, so the practical comparison today is rideshare versus pre-booked private transportation. The private option is a $499 Suburban or $699 van."
       searchParams={sp}
       points={[
         { title: "Rideshare", body: "Flexible and on-demand, with availability and pricing that can change with demand." },

@@ -59,11 +59,11 @@ export default function ShuttleComparison() {
       name: "Party at Red Rocks",
       url: SITE,
     },
-    description: "Private SUV ($399) and 10-passenger van ($599) service vs broker shuttles and rideshare for Red Rocks concerts.",
+    description: "Private SUV ($499) and 10-passenger van ($699) service vs broker shuttles and rideshare for Red Rocks concerts.",
     offers: {
       "@type": "AggregateOffer",
-      lowPrice: "399.00",
-      highPrice: "599.00",
+      lowPrice: "499.00",
+      highPrice: "699.00",
       priceCurrency: "USD",
     },
   };
@@ -76,16 +76,16 @@ export default function ShuttleComparison() {
         <GuideVisualHero
           eyebrow={guideVisuals.transportation.eyebrow}
           title="Comparing Red Rocks Ride Options"
-          copy="Use the actual tradeoffs, not generic transport filler: private Suburban ($399) or private van ($599) vs rideshare surges and broker shuttles."
+          copy="Use the actual tradeoffs, not generic transport filler: private Suburban ($499) or private van ($699) vs rideshare surges and broker shuttles."
           imageSrc={curatedImages.compareHero}
           imageAlt="Red Rocks arrival and transport planning context at sunset"
           actions={
             <>
               <Link href="/book/red-rocks-amphitheatre/private/suv" className="btn-primary">
-                Book Private Suburban ($399)
+                Book Private Suburban ($499)
               </Link>
               <Link href="/book/red-rocks-amphitheatre/private/van" className="btn-ghost">
-                Book Private Van ($599)
+                Book Private Van ($699)
               </Link>
             </>
           }
@@ -119,7 +119,7 @@ export default function ShuttleComparison() {
             <tbody className="text-strong">
               <tr className="border-b border-soft">
                 <td className="p-5 font-bold">Round-Trip Rate</td>
-                <td className="p-5 font-bold text-green-400">$399 SUV / $599 Van</td>
+                <td className="p-5 font-bold text-green-400">$499 SUV / $699 Van</td>
                 <td className="p-5">$65 - $85/person</td>
                 <td className="p-5 text-[#ffb07c]">Surge: $120 - $250 each way</td>
               </tr>
@@ -168,10 +168,10 @@ export default function ShuttleComparison() {
           <p className="mb-8 text-xl">Stop comparing and book the transport plan that actually fits the night.</p>
           <div className="flex flex-col justify-center gap-4 md:flex-row">
             <Link href="/book/red-rocks-amphitheatre/private/suv" className="rounded-full bg-[#3df3ff] px-8 py-4 font-black text-[#08111e] transition hover:bg-[#62f6ff]">
-              Book Private Suburban ($399)
+              Book Private Suburban ($499)
             </Link>
             <Link href="/book/red-rocks-amphitheatre/private/van" className="brand-button-secondary inline-flex items-center justify-center rounded-full px-8 py-4 font-black">
-              Book Private Van ($599)
+              Book Private Van ($699)
             </Link>
           </div>
         </div>

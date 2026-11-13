@@ -67,14 +67,14 @@ export default function SoldOutSurvival() {
         </li>
         <li className="flex items-start">
           <span className="mr-3 rounded bg-[#3df3ff]/16 p-1 text-[#4cc9f0]">✔</span>
-          <span><strong>For a private ride, keep one vehicle for the night.</strong> Party at Red Rocks offers a $399 private Suburban and a $599 private van; the vehicle waits through the show.</span>
+          <span><strong>For a private ride, keep one vehicle for the night.</strong> Party at Red Rocks offers a $499 private Suburban and a $699 private van; the vehicle waits through the show.</span>
         </li>
       </ul>
 
       <div className="rounded-3xl border border-[#3df3ff]/30 bg-[linear-gradient(180deg,rgba(61,243,255,0.18),rgba(29,191,211,0.16))] p-10 text-center text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
         <h2 className="text-white text-3xl font-black mb-4 uppercase">Lock In the Ride Before the Crowd</h2>
         <p className="text-lg mb-8 max-w-xl mx-auto">
-          Private Suburban $399 or private van $599. Door-to-door for your group, no shared passengers, and your vehicle waits through the show.
+          Private Suburban $499 or private van $699. Door-to-door for your group, no shared passengers, and your vehicle waits through the show.
         </p>
         <Link href={privateHref} className="inline-block rounded-full bg-[#3df3ff] px-10 py-4 text-xl font-black text-[#08111e] transition hover:bg-[#62f6ff] shadow-lg">
           Book Private Ride

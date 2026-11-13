@@ -30,9 +30,9 @@ export default function ParkingComparison() {
 
       <div className="mt-10 rounded-lg border border-[#3df3ff]/30 bg-[linear-gradient(180deg,rgba(61,243,255,0.18),rgba(29,191,211,0.16))] p-6 text-center text-white">
         <h2 className="text-white mt-0">Skip the Parking Nightmare</h2>
-        <p>Book private round-trip transportation with a $399 Suburban or $599 van.</p>
+        <p>Book private round-trip transportation with a $499 Suburban or $699 van.</p>
         <Link href="/book/red-rocks-amphitheatre/private" className="rounded bg-[#3df3ff] px-6 py-2 font-bold text-[#08111e] no-underline hover:bg-[#62f6ff]">
-          Book Private Ride — from $399
+          Book Private Ride — from $499
         </Link>
       </div>
     </div>

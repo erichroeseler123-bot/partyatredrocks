@@ -64,7 +64,7 @@ export const DISPLAY = {
       headline: "Red Rocks — without the parking chaos.",
       subhead:
         "Private Suburbans and vans from Denver to Red Rocks. Door-to-door service, no shared passengers, no surge pricing, and your vehicle waits for you through the show.",
-      trustLine: "$399 Private Suburban • $599 Private Van • Door-to-door • Vehicle waits through the show",
+      trustLine: "$499 Private Suburban • $699 Private Van • Flat round-trip • Upper North Lot tailgating & on-site wait",
       quickBookLabel: "See private ride options",
       tipPrefix: "Tip: browse an event on",
       tipLinkText: "This Week",

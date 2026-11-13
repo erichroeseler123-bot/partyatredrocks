@@ -9,14 +9,14 @@ const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks
 export const metadata: Metadata = {
   title: "Red Rocks Group Transportation | Private Van & SUV Options",
   description:
-    "Compare private Red Rocks group transportation: $599 private 10-passenger van or $399 Suburban. Door-to-door service, Top Circle access, and vehicle waits all night.",
+    "Compare private Red Rocks group transportation: $699 private 10-passenger van or $499 Suburban. Door-to-door service, Top Circle access, and vehicle waits all night.",
   alternates: {
     canonical: `${SITE}/red-rocks/group-transportation`,
   },
   openGraph: {
     title: "Red Rocks Group Transportation | Private Van & SUV Options",
     description:
-      "Private group transportation to Red Rocks: $599 private van (up to 10) or $399 Suburban (up to 6). Door-to-door pickup, vehicle waits on-site, guaranteed return ride.",
+      "Private group transportation to Red Rocks: $699 private van (up to 10) or $499 Suburban (up to 6). Door-to-door pickup, vehicle waits on-site, guaranteed return ride.",
     url: `${SITE}/red-rocks/group-transportation`,
     type: "website",
   },
@@ -24,14 +24,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Red Rocks Group Transportation | Private Van & SUV Options",
     description:
-      "Private group transportation to Red Rocks: $599 private van (up to 10) or $399 Suburban (up to 6). Door-to-door pickup, vehicle waits on-site, guaranteed return ride.",
+      "Private group transportation to Red Rocks: $699 private van (up to 10) or $499 Suburban (up to 6). Door-to-door pickup, vehicle waits on-site, guaranteed return ride.",
   },
 };
 
 const FAQS = [
   {
     q: "Do you offer traditional 30-to-40 passenger party buses?",
-    a: "No. Party at Red Rocks specializes in private 10-passenger high-roof vans ($599) and 6-passenger luxury Suburbans ($399). We do not operate oversized buses because they are forced to park in distant lower lots requiring a steep 400-stair climb, and they often get trapped in 60-90 minute exit gridlock.",
+    a: "No. Party at Red Rocks specializes in private 10-passenger high-roof vans ($699) and 6-passenger luxury Suburbans ($499). We do not operate oversized buses because they are forced to park in distant lower lots requiring a steep 400-stair climb, and they often get trapped in 60-90 minute exit gridlock.",
   },
   {
     q: "Can our group bring alcohol on the private van?",
@@ -47,7 +47,7 @@ const FAQS = [
   },
   {
     q: "How does the price break down per person?",
-    a: "Our private 10-passenger van is $599 flat round-trip, which works out to under $60 per person when split across a group of 10. Our private Suburban is $399 flat round-trip, or roughly $66 per person for a group of 6. Both options are far cheaper and less stressful than paying $150–$250 each way per rideshare car.",
+    a: "Our private 10-passenger van is $699 flat round-trip, which works out to under $60 per person when split across a group of 10. Our private Suburban is $499 flat round-trip, or roughly $66 per person for a group of 6. Both options are far cheaper and less stressful than paying $150–$250 each way per rideshare car.",
   },
 ];
 
@@ -87,11 +87,11 @@ export default async function RedRocksGroupTransportationPage({
           telephone: "+1-720-369-6292",
         },
         description:
-          "Private group transportation to Red Rocks Amphitheatre with high-roof passenger vans and luxury Suburbans. $599 van (up to 10) or $399 Suburban (up to 6).",
+          "Private group transportation to Red Rocks Amphitheatre with high-roof passenger vans and luxury Suburbans. $699 van (up to 10) or $499 Suburban (up to 6).",
         offers: {
           "@type": "AggregateOffer",
-          lowPrice: "399.00",
-          highPrice: "599.00",
+          lowPrice: "499.00",
+          highPrice: "699.00",
           priceCurrency: "USD",
         },
       },
@@ -136,20 +136,20 @@ export default async function RedRocksGroupTransportationPage({
               Red Rocks Group Transportation & Private Van Service
             </h1>
             <p className="mt-6 max-w-3xl text-base leading-7 text-white/80 sm:text-xl sm:leading-8">
-              Searching for a party bus or group ride to Red Rocks? Before renting an oversized 35-passenger bus, discover why smart concertgoers choose our private 10-passenger van ($599) and 6-passenger Suburban ($399) service for better parking, faster departures, and zero stress.
+              Searching for a party bus or group ride to Red Rocks? Before renting an oversized 35-passenger bus, discover why smart concertgoers choose our private 10-passenger van ($699) and 6-passenger Suburban ($499) service for better parking, faster departures, and zero stress.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
                 href={vanBookingHref}
                 className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-8 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff] shadow-lg shadow-[#3df3ff]/20"
               >
-                Book 10-Passenger Van — $599
+                Book 10-Passenger Van — $699
               </Link>
               <Link
                 href={suvBookingHref}
                 className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-6 text-sm font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/10"
               >
-                Book 6-Passenger SUV — $399
+                Book 6-Passenger SUV — $499
               </Link>
             </div>
           </div>
@@ -172,7 +172,7 @@ export default async function RedRocksGroupTransportationPage({
             <div className="rounded-2xl border border-emerald-500/20 bg-emerald-950/10 p-6 sm:p-8">
               <h3 className="flex items-center gap-2 text-2xl font-black uppercase tracking-tight text-emerald-400">
                 <CheckCircle2 className="h-6 w-6 shrink-0 text-emerald-400" />
-                Our Private Van ($599)
+                Our Private Van ($699)
               </h3>
               <ul className="mt-6 space-y-4 text-sm text-white/85">
                 <li className="flex items-start gap-3">
@@ -192,7 +192,7 @@ export default async function RedRocksGroupTransportationPage({
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-emerald-400 shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-white">$599 Flat Total (Under $60/person):</strong>
+                    <strong className="text-white">$699 Flat Total (Under $60/person):</strong>
                     <p className="text-white/70 mt-0.5">Affordable, transparent flat pricing for the entire evening. No fuel surcharges or surprise hourly overages.</p>
                   </div>
                 </li>
@@ -265,7 +265,7 @@ export default async function RedRocksGroupTransportationPage({
                 </div>
                 <h3 className="mt-4 text-3xl font-black uppercase text-white">Private 10-Passenger Van</h3>
                 <div className="mt-4 flex items-baseline gap-2">
-                  <span className="text-5xl font-black text-white">$599</span>
+                  <span className="text-5xl font-black text-white">$699</span>
                   <span className="text-sm font-bold uppercase text-white/60">flat round-trip</span>
                 </div>
                 <p className="mt-4 text-sm text-white/75 leading-6">
@@ -283,7 +283,7 @@ export default async function RedRocksGroupTransportationPage({
                   href={vanBookingHref}
                   className="flex min-h-14 w-full items-center justify-center rounded-2xl bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff] shadow-lg shadow-[#3df3ff]/20"
                 >
-                  Book Private Van — $599
+                  Book Private Van — $699
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </div>
@@ -298,7 +298,7 @@ export default async function RedRocksGroupTransportationPage({
                 </div>
                 <h3 className="mt-4 text-3xl font-black uppercase text-white">Private Suburban</h3>
                 <div className="mt-4 flex items-baseline gap-2">
-                  <span className="text-5xl font-black text-white">$399</span>
+                  <span className="text-5xl font-black text-white">$499</span>
                   <span className="text-sm font-bold uppercase text-white/60">flat round-trip</span>
                 </div>
                 <p className="mt-4 text-sm text-white/75 leading-6">
@@ -316,7 +316,7 @@ export default async function RedRocksGroupTransportationPage({
                   href={suvBookingHref}
                   className="flex min-h-14 w-full items-center justify-center rounded-2xl bg-white px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-white/90 shadow-lg"
                 >
-                  Book Private Suburban — $399
+                  Book Private Suburban — $499
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </div>
@@ -357,20 +357,20 @@ export default async function RedRocksGroupTransportationPage({
             Book Your Group Transportation
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-base text-white/85 sm:text-lg">
-            Skip the rideshare surge and the party bus hassle. Secure your private van ($599) or Suburban ($399) today.
+            Skip the rideshare surge and the party bus hassle. Secure your private van ($699) or Suburban ($499) today.
           </p>
           <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
             <Link
               href={vanBookingHref}
               className="inline-flex min-h-14 items-center justify-center rounded-full bg-[#3df3ff] px-8 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff] shadow-lg shadow-[#3df3ff]/20"
             >
-              Book 10-Passenger Van — $599
+              Book 10-Passenger Van — $699
             </Link>
             <Link
               href={suvBookingHref}
               className="inline-flex min-h-14 items-center justify-center rounded-full bg-white px-8 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-white/90 shadow-lg"
             >
-              Book 6-Passenger SUV — $399
+              Book 6-Passenger SUV — $499
             </Link>
           </div>
         </section>

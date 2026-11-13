@@ -132,7 +132,7 @@ export function buildPrivateBookingJsonLd(input: { venue: string; quantity: numb
       itemListElement: PUBLIC_PRIVATE_RIDE_OPTIONS.map((option) => ({
         "@type": "Offer",
         priceCurrency: "USD",
-        price: option.slug === "suv" ? "399" : option.priceLabel.replace("$", ""),
+        price: option.priceLabel.replace("$", ""),
         url: `${SITE}/book/${input.venue}/private/${option.slug}?qty=${input.quantity}`,
         itemOffered: {
           "@type": "Service",
@@ -234,7 +234,7 @@ export function buildPrivateOptionJsonLd(input: {
     "@context": "https://schema.org",
     "@type": "Offer",
     priceCurrency: "USD",
-    price: input.optionSlug === "suv" ? "399" : input.optionPriceLabel.replace("$", ""),
+    price: input.optionPriceLabel.replace("$", ""),
     url: `${SITE}/book/${input.venue}/private/${input.optionSlug}`,
     itemOffered: {
       "@type": "Service",

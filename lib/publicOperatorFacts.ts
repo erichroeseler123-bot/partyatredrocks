@@ -3,6 +3,7 @@ import {
   MARRIOTT_WEST_PICKUP_LABEL,
   isMarriottWestPickup,
 } from "@/lib/parr/marriottWestManager";
+import { SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
 
 export const PARR_PUBLIC_FACTS = {
   operatorName: "Party at Red Rocks",
@@ -16,8 +17,8 @@ export const PARR_PUBLIC_FACTS = {
       "Questions about pickup, payment, or your ride? Text 720-369-6292 or email hello@partyatredrocks.com.",
   },
   trustPoints: [
-    "Private Suburban ($399) and 10-passenger Private Van ($599) options",
-    "Door-to-door group pickup and dedicated return ride after the show",
+    `Private Suburban ($${SUBURBAN_2027_USD}) and 10-passenger Private Van ($${VAN_2027_USD}) flat round-trip options`,
+    "Door-to-door Denver-area pickup, Upper North Lot tailgating setup, on-site wait, and return ride home",
     "Operated by the same Colorado ground transport team as GoSno",
   ],
   pickups: {

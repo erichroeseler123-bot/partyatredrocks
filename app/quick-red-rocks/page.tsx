@@ -30,7 +30,7 @@ const VEHICLE_OPTIONS: VehicleOption[] = [
     key: "van",
     title: "10 Passenger Van",
     checkoutProduct: "parr-van-10",
-    basePrice: "$599",
+    basePrice: "$699",
     capacity: "Up to 10 guests",
     copy: "Simple group option with one pickup and one return plan.",
   },

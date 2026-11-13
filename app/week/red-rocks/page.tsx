@@ -16,7 +16,7 @@ const DEFAULT_OG_IMAGE = `${SITE}/hero/hero_red_rocks.webp`;
 export const metadata: Metadata = {
   title: "Red Rocks Lineup This Week | Shows + Private Transportation",
   description:
-    "See the Red Rocks lineup this week, open show pages, and reserve private Red Rocks transportation. Private Suburban $399 with a private van upgrade for larger groups.",
+    "See the Red Rocks lineup this week, open show pages, and reserve private Red Rocks transportation. Private Suburban $499 with a private van upgrade for larger groups.",
   robots: {
     index: false,
     follow: true,
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Red Rocks Lineup This Week | Shows + Private Transportation",
     description:
-      "Find your Red Rocks show, then reserve one private vehicle for the concert night. Private Suburban $399 with a van upgrade for larger groups.",
+      "Find your Red Rocks show, then reserve one private vehicle for the concert night. Private Suburban $499 with a van upgrade for larger groups.",
     url: `${SITE}/week/red-rocks`,
     type: "website",
     images: [
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Red Rocks Lineup This Week | Shows + Private Transportation",
     description:
-      "Find your Red Rocks show, then reserve one private vehicle for the concert night. Private Suburban $399 with a van upgrade for larger groups.",
+      "Find your Red Rocks show, then reserve one private vehicle for the concert night. Private Suburban $499 with a van upgrade for larger groups.",
     images: [DEFAULT_OG_IMAGE],
   },
 };

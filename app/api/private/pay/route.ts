@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { SquareError } from "square";
 import { buildSquarePaymentIdempotencyKey } from "@/lib/blobVault";
 import { getInternalOrderById, updateInternalOrderPaymentById } from "@/lib/orders";
+import { getPrivateRidePricingForDate } from "@/lib/pricing";
 import { PRIVATE_RIDE_OPTIONS } from "@/lib/rideCatalog";
 import { sendSharedBookingConfirmation, VERIFIED_SUPPORT_CONTACT } from "@/lib/sharedConfirmation";
 import { siteOrigin, squareClient, squareLocationId } from "@/lib/square";
@@ -70,7 +71,17 @@ function resolvePrivateOrderTotalDue(order: Awaited<ReturnType<typeof getInterna
   const option = PRIVATE_RIDE_OPTIONS.find((candidate) =>
     candidate.dccProduct === productCode || candidate.slug === productSlug
   );
-  const price = option ? optionPrice(option) : null;
+  const serviceDate =
+    (typeof booking?.date === "string" ? booking.date : "") ||
+    (typeof payload?.date === "string" ? payload.date : "") ||
+    (typeof order?.createdAt === "string" ? order.createdAt : "");
+  const price = option
+    ? getPrivateRidePricingForDate({
+        optionSlug: option.slug,
+        serviceDate,
+        legacyAmount: positiveMoney(booking?.unitPriceUsd) || positiveMoney(payload?.unitPriceUsd),
+      }).priceUsd || optionPrice(option)
+    : null;
   if (!price) return null;
 
   const quantity =

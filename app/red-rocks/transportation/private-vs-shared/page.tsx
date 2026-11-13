@@ -5,7 +5,7 @@ const PRIVATE_HREF = "/book/red-rocks-amphitheatre/private";
 export const metadata = {
   title: "Private vs Shared Red Rocks Transportation",
   description:
-    "Comparing private and shared Red Rocks transportation. Party at Red Rocks currently offers private transportation only: $399 Suburban or $599 van.",
+    "Comparing private and shared Red Rocks transportation. Party at Red Rocks currently offers private transportation only: $499 Suburban or $699 van.",
   alternates: { canonical: "/red-rocks/transportation/private-vs-shared" },
 };
 
@@ -20,7 +20,7 @@ export default function Page() {
 
         <h1 className="mt-4 text-5xl font-black tracking-tight">Private vs Shared Red Rocks Transportation</h1>
         <p className="mt-4 text-lg text-soft">
-          Shared shuttle seats used to be part of the Party at Red Rocks offer. They are not currently sold. Today the service is private transportation for your group: a $399 Suburban or $599 van.
+          Shared shuttle seats used to be part of the Party at Red Rocks offer. They are not currently sold. Today the service is private transportation for your group: a $499 Suburban or $699 van.
         </p>
 
         <section className="mt-10 grid gap-6 md:grid-cols-2">
@@ -36,7 +36,7 @@ export default function Page() {
             <p className="mt-2 text-soft">
               Current Party at Red Rocks service: door-to-door for your group, no shared passengers, and the vehicle waits through the show so your return ride is already arranged.
             </p>
-            <p className="mt-3 text-soft"><strong className="text-white">Suburban: $399 · Van: $599</strong></p>
+            <p className="mt-3 text-soft"><strong className="text-white">Suburban: $499 · Van: $699</strong></p>
             <Link href={PRIVATE_HREF} className="btn-primary mt-6 inline-flex">Book Private Ride</Link>
           </div>
         </section>

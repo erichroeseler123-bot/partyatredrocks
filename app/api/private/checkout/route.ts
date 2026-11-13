@@ -11,6 +11,7 @@ import {
   getPrivateRideOption,
   type PrivateRideSlug,
 } from "@/lib/rideCatalog";
+import { getPrivateRidePricingForDate } from "@/lib/pricing";
 import { isSupportedPhoneCountry, normalizePhoneNumber } from "@/lib/phone";
 import { assignPrivateInventory } from "@/lib/parr/fleet";
 import { VERIFIED_SUPPORT_CONTACT } from "@/lib/sharedConfirmation";
@@ -90,7 +91,11 @@ export async function POST(request: Request) {
   const guestCount = body.guestCount ? asPositiveInt(body.guestCount, 1) : null;
   const sourcePath = cleanOptional(body.sourcePath) || `/book/${venue}/private/${rideOption.slug}`;
   const serviceDate = cleanOptional(body.date);
-  const totalDue = Number(rideOption.priceLabel.replace(/[^0-9.]/g, "")) * qty;
+  const resolvedPricing = getPrivateRidePricingForDate({
+    optionSlug: rideOption.slug,
+    serviceDate,
+  });
+  const totalDue = resolvedPricing.priceUsd * qty;
   const searchParams = body.searchParams;
   const satelliteContext = getDccSatelliteContext(searchParams);
   const existingOrders = await listInternalOrders();
@@ -125,6 +130,9 @@ export async function POST(request: Request) {
       date: serviceDate,
       artist: cleanOptional(body.artist),
       quantity: qty,
+      unitPriceUsd: resolvedPricing.priceUsd,
+      totalDue,
+      pricingSeason: resolvedPricing.season,
       guestCount,
       pickupAddress: cleanOptional(body.pickupAddress),
     },
@@ -134,6 +142,9 @@ export async function POST(request: Request) {
       date: serviceDate,
       artist: cleanOptional(body.artist),
       qty,
+      unitPriceUsd: resolvedPricing.priceUsd,
+      totalDue,
+      pricingSeason: resolvedPricing.season,
       guestCount,
       inventoryType: "private_vehicle_pool",
       inventoryOwner: inventoryAssignment.owner,

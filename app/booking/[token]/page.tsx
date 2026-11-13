@@ -781,7 +781,7 @@ export default async function PublicBookingPage(
                 href={bookingFlowUrl}
                 className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#ffb07c]/28 bg-[#ffb07c]/14 px-5 text-sm font-black uppercase tracking-[0.16em] text-white no-underline transition hover:bg-[#ffb07c]/20"
               >
-                Book Private Ride — from $399
+                Book Private Ride — from $499
               </Link>
             ) : null}
           </div>

@@ -37,7 +37,7 @@ export default function Page() {
 
         <div className="mt-10 flex flex-wrap gap-3">
           <Link href="/book/red-rocks-amphitheatre/private" className="btn-primary">
-            Book Private Ride — from $399 →
+            Book Private Ride — from $499 →
           </Link>
           <Link
             href="/guide/parking"

@@ -44,7 +44,7 @@ export default function FleetGrid() {
             height={720}
           />
           <span className="absolute top-4 right-4 bg-neon-blue text-black font-black text-[11px] px-3 py-1 rounded-full shadow-[0_0_10px_var(--glowHex)]">
-            $399.00
+            $499.00
           </span>
         </div>
         <div>
@@ -56,7 +56,7 @@ export default function FleetGrid() {
           href="/book/red-rocks-amphitheatre/private/suv"
           className="w-full py-4 bg-neon-blue text-black font-black uppercase italic tracking-tighter text-sm rounded-2xl hover:bg-surface/40 transition-all shadow-[0_0_20px_var(--glowHex)] active:scale-95 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
         >
-          BOOK PRIVATE SUBURBAN — $399
+          BOOK PRIVATE SUBURBAN — $499
         </Link>
       </div>
 
@@ -74,7 +74,7 @@ export default function FleetGrid() {
             height={720}
           />
           <span className="absolute top-4 right-4 bg-white text-black font-black text-[11px] px-3 py-1 rounded-full shadow-lg">
-            $599.00
+            $699.00
           </span>
         </div>
         <div>
@@ -86,7 +86,7 @@ export default function FleetGrid() {
           href="/book/red-rocks-amphitheatre/private/van"
           className="w-full py-4 bg-white text-black font-black uppercase italic tracking-tighter text-sm rounded-2xl hover:bg-white/80 transition-all shadow-lg active:scale-95 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
         >
-          BOOK PRIVATE VAN — $599
+          BOOK PRIVATE VAN — $699
         </Link>
       </div>
 

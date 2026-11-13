@@ -4,6 +4,7 @@ import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import Link from "next/link";
+import { getPrivateRidePricingForDate } from "@/lib/pricing";
 import { notFound, redirect } from "next/navigation";
 import TicketButtons from "@/components/TicketButtons";
 import venuesJson from "@/data/venues.json";
@@ -153,7 +154,9 @@ function pickDescription(e?: ShowEvent | null) {
   const venue = e.venue?.siteName ? ` at ${e.venue.siteName}` : "";
   const when = e.datetime_local ? ` on ${fmtDate(e.datetime_local)}` : "";
   if (isRedRocksSlug(e.venue?.siteSlug)) {
-    return `Private transportation for ${e.title}${venue}${when}. Plan a $399 Private Suburban or $599 Private Van with a waiting vehicle for the ride home.`;
+    const suvPrice = getPrivateRidePricingForDate({ optionSlug: "suv", serviceDate: e.datetime_local }).priceLabel;
+    const vanPrice = getPrivateRidePricingForDate({ optionSlug: "van", serviceDate: e.datetime_local }).priceLabel;
+    return `Private transportation for ${e.title}${venue}${when}. Plan a ${suvPrice} Private Suburban or ${vanPrice} Private Van flat round-trip with Upper North Lot tailgating setup and a waiting vehicle for the ride home.`;
   }
   return `Transportation planning for ${e.title}${venue}${when}. Already have tickets? Plan your ride and return before show night.`;
 }
@@ -502,7 +505,7 @@ export default async function ShowPage({ params }: Props) {
         </p>
         <p className="mt-2 max-w-3xl text-sm text-white/60">
           {isRedRocksVenue
-            ? "$399 Private Suburban or $599 Private Van. Door-to-door service, no shared passengers, and your vehicle waits through the show for the return ride."
+            ? `${getPrivateRidePricingForDate({ optionSlug: "suv", serviceDate: e.datetime_local }).priceLabel} Private Suburban or ${getPrivateRidePricingForDate({ optionSlug: "van", serviceDate: e.datetime_local }).priceLabel} Private Van flat round-trip. Denver-area pickup, Upper North Lot tailgating setup, and your vehicle waits through the show for the return ride home.`
             : "Plan the full concert night, including the return ride, before the show."}
         </p>
         <div className="mt-5">

@@ -1,3 +1,5 @@
+import { PARR_VALUE_PROPOSITION, SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
+
 const BODY = `# Party at Red Rocks
 
 Canonical URL: https://www.partyatredrocks.com
@@ -6,19 +8,21 @@ DCC site manifest: https://www.partyatredrocks.com/.well-known/dcc-site
 DCC truth record: https://www.destinationcommandcenter.com/api/public/truth-feed?id=party-at-red-rocks
 Portfolio graph: https://www.destinationcommandcenter.com/api/public/portfolio-feed
 Agent contract: https://www.partyatredrocks.com/agent.json
-Last verified: 2026-11-11
+Last verified: 2026-11-13
 
 Party at Red Rocks is a private Red Rocks concert transportation service operating in Colorado with 24/7 scheduled service subject to live availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and GoSno (https://gosno.co) during the winter ski season.
 
-## Current public service model
+## Current 2027 public service model
 - Private transportation only (subject to live vehicle and schedule availability).
-- Published private Suburban price (up to 6 passengers): $399 flat rate.
-- Published private van price (up to 10 passengers): $599 flat rate.
-- Door-to-door pickup for the group; vehicle waits through the show for the dedicated return ride.
+- Published private Suburban price (up to 6 passengers): $${SUBURBAN_2027_USD} flat round-trip.
+- Published private van price (up to 10 passengers): $${VAN_2027_USD} flat round-trip.
+- Included: ${PARR_VALUE_PROPOSITION.summary}
+- Tailgating setup: ${PARR_VALUE_PROPOSITION.tailgatingSummary}
+- Exclusions: ${PARR_VALUE_PROPOSITION.exclusionsSummary}
 - Shared-seat service is not part of the current public offer.
 
 ## Key pages
-- https://www.partyatredrocks.com/book/red-rocks-amphitheatre/private — Private Suburban ($399) and Private Van ($599) booking
+- https://www.partyatredrocks.com/book/red-rocks-amphitheatre/private — Private Suburban ($${SUBURBAN_2027_USD}) and Private Van ($${VAN_2027_USD}) booking
 - https://www.partyatredrocks.com/red-rocks/concerts — Red Rocks concert schedule
 - https://www.partyatredrocks.com/venues/red-rocks-amphitheatre — Red Rocks Amphitheatre venue guide
 - https://www.partyatredrocks.com/red-rocks/transportation — Red Rocks transportation planning guide

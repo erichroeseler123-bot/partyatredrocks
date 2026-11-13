@@ -174,7 +174,7 @@ export default async function RedRocksParkingPage({
           >
             <div className="comic-tag">Alternative</div>
             <h2 className="comic-h3">See Private Ride Options</h2>
-            <p className="comic-copy">Choose a $399 Suburban or $599 van for a private Red Rocks show-night ride.</p>
+            <p className="comic-copy">Choose a $499 Suburban or $699 van for a private Red Rocks show-night ride.</p>
           </Link>
         </div>
 

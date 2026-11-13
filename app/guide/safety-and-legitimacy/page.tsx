@@ -44,7 +44,7 @@ export default function SafetyAndLegitimacy() {
             <span className="font-bold text-[#ffb07c]">03.</span>
             <div>
               <strong className="block text-white uppercase tracking-wide">Fixed-Rate Integrity</strong>
-              <p className="text-muted text-base mt-1">Your private ride rate ($399 Suburban / $599 van) is locked in when you book—never subject to surge pricing.</p>
+              <p className="text-muted text-base mt-1">Your private ride rate ($499 Suburban / $699 van) is locked in when you book—never subject to surge pricing.</p>
             </div>
           </li>
         </ul>

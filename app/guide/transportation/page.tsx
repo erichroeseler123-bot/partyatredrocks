@@ -21,7 +21,7 @@ export default function Page() {
           actions={
             <>
               <Link href="/book/red-rocks-amphitheatre/private" className="btn-primary">
-                Book Private Ride — $399 / $599 →
+                Book Private Ride — $499 / $699 →
               </Link>
               <Link href="/guide" className="btn-ghost">
                 Back to Guides →
@@ -53,7 +53,7 @@ export default function Page() {
             </details>
             <details className="rounded-2xl border border-soft bg-surface-strong p-5">
               <summary className="cursor-pointer font-black">What does Party at Red Rocks currently offer?</summary>
-              <p className="mt-2 text-soft leading-relaxed">Private Red Rocks transportation: a $399 Suburban or $599 van, with door-to-door pickup and the vehicle waiting through the show.</p>
+              <p className="mt-2 text-soft leading-relaxed">Private Red Rocks transportation: a $499 Suburban or $699 van, with door-to-door pickup and the vehicle waiting through the show.</p>
             </details>
             <details className="rounded-2xl border border-soft bg-surface-strong p-5">
               <summary className="cursor-pointer font-black">What should my group decide before the show?</summary>
@@ -82,7 +82,7 @@ export default function Page() {
                   "name": "What does Party at Red Rocks currently offer?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Private Red Rocks transportation: a $399 Suburban or $599 van, with door-to-door pickup and the vehicle waiting through the show."
+                    "text": "Private Red Rocks transportation: a $499 Suburban or $699 van, with door-to-door pickup and the vehicle waiting through the show."
                   }
                 },
                 {

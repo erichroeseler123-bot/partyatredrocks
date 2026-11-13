@@ -24,7 +24,7 @@ export default function ZBBEvent() {
           <h3 className="font-bold text-xl mb-2">The "Uber Trap" Warning</h3>
           <p className="text-strong">
             ZBB is a high-demand show. Expect rideshare surge pricing to exceed $180 post-concert with long wait times. 
-            Our private Suburban ($399) or private van ($599) locks your round-trip ride with zero surge pricing.
+            Our private Suburban ($499) or private van ($699) locks your round-trip ride with zero surge pricing.
           </p>
         </div>
       </div>

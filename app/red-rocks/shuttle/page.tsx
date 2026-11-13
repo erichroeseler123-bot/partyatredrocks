@@ -10,14 +10,14 @@ const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks
 export const metadata: Metadata = {
   title: "Red Rocks Shuttle & Private Transportation from Denver",
   description:
-    "Book private Red Rocks transportation for your group: $399 private Suburban (up to 6) or $599 private van (up to 10). Door-to-door pickup, vehicle waits through show, return ride included.",
+    "Book private Red Rocks transportation for your group: $499 private Suburban (up to 6) or $699 private van (up to 10). Door-to-door pickup, vehicle waits through show, return ride included.",
   alternates: {
     canonical: `${SITE}/red-rocks/shuttle`,
   },
   openGraph: {
     title: "Red Rocks Shuttle & Private Transportation from Denver",
     description:
-      "Private Red Rocks transportation: $399 Suburban (up to 6) or $599 van (up to 10). Door-to-door pickup, vehicle waits through show, guaranteed return ride.",
+      "Private Red Rocks transportation: $499 Suburban (up to 6) or $699 van (up to 10). Door-to-door pickup, vehicle waits through show, guaranteed return ride.",
     url: `${SITE}/red-rocks/shuttle`,
     type: "website",
   },
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Red Rocks Shuttle & Private Transportation from Denver",
     description:
-      "Private Red Rocks transportation: $399 Suburban (up to 6) or $599 van (up to 10). Door-to-door pickup, vehicle waits through show, guaranteed return ride.",
+      "Private Red Rocks transportation: $499 Suburban (up to 6) or $699 van (up to 10). Door-to-door pickup, vehicle waits through show, guaranteed return ride.",
   },
 };
 
@@ -106,11 +106,11 @@ export default async function RedRocksShuttlePage({
           "Boulder, CO",
         ],
         description:
-          "Private round-trip concert transportation to Red Rocks Amphitheatre from Denver and surrounding areas. $399 Suburban for up to 6 or $599 private van for up to 10.",
+          "Private round-trip concert transportation to Red Rocks Amphitheatre from Denver and surrounding areas. $499 Suburban for up to 6 or $699 private van for up to 10.",
         offers: {
           "@type": "AggregateOffer",
-          lowPrice: "399.00",
-          highPrice: "599.00",
+          lowPrice: "499.00",
+          highPrice: "699.00",
           priceCurrency: "USD",
         },
       },
@@ -226,7 +226,7 @@ export default async function RedRocksShuttlePage({
                   Private Suburban
                 </h3>
                 <div className="mt-4 flex items-baseline gap-2">
-                  <span className="text-5xl font-black tracking-tight text-white">$399</span>
+                  <span className="text-5xl font-black tracking-tight text-white">$499</span>
                   <span className="text-sm font-bold uppercase tracking-wider text-white/60">flat round-trip</span>
                 </div>
                 <p className="mt-4 text-sm leading-6 text-white/75">
@@ -258,7 +258,7 @@ export default async function RedRocksShuttlePage({
                   href={suvBookingHref}
                   className="flex min-h-14 w-full items-center justify-center rounded-2xl bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff] shadow-lg shadow-[#3df3ff]/20"
                 >
-                  Book Private Suburban — $399
+                  Book Private Suburban — $499
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
                 <p className="mt-2 text-center text-xs text-white/50">Instant online booking • Live calendar</p>
@@ -291,7 +291,7 @@ export default async function RedRocksShuttlePage({
                   Private Passenger Van
                 </h3>
                 <div className="mt-4 flex items-baseline gap-2">
-                  <span className="text-5xl font-black tracking-tight text-white">$599</span>
+                  <span className="text-5xl font-black tracking-tight text-white">$699</span>
                   <span className="text-sm font-bold uppercase tracking-wider text-white/60">flat round-trip</span>
                 </div>
                 <p className="mt-4 text-sm leading-6 text-white/75">
@@ -323,7 +323,7 @@ export default async function RedRocksShuttlePage({
                   href={vanBookingHref}
                   className="flex min-h-14 w-full items-center justify-center rounded-2xl bg-white px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-white/90 shadow-lg"
                 >
-                  Book Private Van — $599
+                  Book Private Van — $699
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
                 <p className="mt-2 text-center text-xs text-white/50">Instant online booking • Live calendar</p>
@@ -455,7 +455,7 @@ export default async function RedRocksShuttlePage({
               <h3 className="text-lg font-black uppercase text-white">Party at Red Rocks</h3>
               <p className="mt-2 text-xs font-bold uppercase text-emerald-400">Private Suburban / Van</p>
               <ul className="mt-4 space-y-2.5 text-xs text-white/75 leading-relaxed">
-                <li>• <strong>$399 / $599 flat rate:</strong> Never surges, no hidden fees.</li>
+                <li>• <strong>$499 / $699 flat rate:</strong> Never surges, no hidden fees.</li>
                 <li>• <strong>Vehicle waits:</strong> 100% guaranteed ride home right at the end.</li>
                 <li>• <strong>Door-to-door:</strong> Picked up at your front door, dropped back there.</li>
                 <li>• <strong>Top Circle drop-off:</strong> Direct entrance access without hiking.</li>
@@ -519,20 +519,20 @@ export default async function RedRocksShuttlePage({
             Lock In Your Red Rocks Transportation
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-base text-white/85 sm:text-lg">
-            Dates sell out fast for high-demand concerts. Reserve your private Suburban ($399) or 10-passenger van ($599) today.
+            Dates sell out fast for high-demand concerts. Reserve your private Suburban ($499) or 10-passenger van ($699) today.
           </p>
           <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
             <Link
               href={suvBookingHref}
               className="inline-flex min-h-14 items-center justify-center rounded-full bg-[#3df3ff] px-8 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff] shadow-lg shadow-[#3df3ff]/20"
             >
-              Book Private Suburban — $399
+              Book Private Suburban — $499
             </Link>
             <Link
               href={vanBookingHref}
               className="inline-flex min-h-14 items-center justify-center rounded-full bg-white px-8 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-white/90 shadow-lg"
             >
-              Book Private Van — $599
+              Book Private Van — $699
             </Link>
           </div>
         </section>

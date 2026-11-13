@@ -19,12 +19,12 @@ const DEFAULT_OG_IMAGE = `${SITE}${curatedImages.guideTransportation}`;
 export const metadata: Metadata = {
   title: "Best Way to Get to Red Rocks | Transportation Options, Rideshare & Parking",
   description:
-    "Find the best way to get to Red Rocks from Denver: compare private Suburbans ($399), vans ($599), rideshare surges, and parking lots. Straight answers, clear tradeoffs & live booking.",
+    "Find the best way to get to Red Rocks from Denver: compare private Suburbans ($499), vans ($699), rideshare surges, and parking lots. Straight answers, clear tradeoffs & live booking.",
   alternates: { canonical: `${SITE}/red-rocks/transportation` },
   openGraph: {
     title: "Best Way to Get to Red Rocks | Transportation Options, Rideshare & Parking",
     description:
-      "Find the best way to get to Red Rocks from Denver: compare private Suburbans ($399), vans ($599), rideshare surges, and parking lots. Straight answers, clear tradeoffs & live booking.",
+      "Find the best way to get to Red Rocks from Denver: compare private Suburbans ($499), vans ($699), rideshare surges, and parking lots. Straight answers, clear tradeoffs & live booking.",
     url: `${SITE}/red-rocks/transportation`,
     type: "article",
     images: [
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Best Way to Get to Red Rocks | Transportation Options, Rideshare & Parking",
     description:
-      "Find the best way to get to Red Rocks from Denver: compare private Suburbans ($399), vans ($599), rideshare surges, and parking lots. Straight answers, clear tradeoffs & live booking.",
+      "Find the best way to get to Red Rocks from Denver: compare private Suburbans ($499), vans ($699), rideshare surges, and parking lots. Straight answers, clear tradeoffs & live booking.",
     images: [DEFAULT_OG_IMAGE],
   },
 };
@@ -118,7 +118,7 @@ export default async function RedRocksTransportationPage({
         <GuideVisualHero
           eyebrow={guideVisuals.transportation.eyebrow}
           title="How To Get To Red Rocks"
-          copy="Red Rocks transportation usually comes down to three choices: drive and park, use rideshare, or book private transportation in advance. Party at Red Rocks currently offers private service only: a $399 Suburban or $599 van, with door-to-door pickup and the same vehicle waiting through the show."
+          copy="Red Rocks transportation usually comes down to three choices: drive and park, use rideshare, or book private transportation in advance. Party at Red Rocks currently offers private service only: a $499 Suburban or $699 van, with door-to-door pickup and the same vehicle waiting through the show."
           imageSrc={guideVisuals.transportation.imageSrc}
           imageAlt={guideVisuals.transportation.imageAlt}
           actions={
@@ -155,7 +155,7 @@ export default async function RedRocksTransportationPage({
               <span className="inline-block rounded-full bg-emerald-500/20 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-emerald-400">#1 Best Overall</span>
               <h3 className="mt-2 font-bold text-white text-lg">Private Transportation</h3>
               <p className="mt-2 text-xs text-white/70 leading-5">
-                $399 Suburban (up to 6) or $599 Van (up to 10). Door-to-door pickup, Top Circle drop-off, vehicle stays parked on-site all night, and zero post-show surges.
+                $499 Suburban (up to 6) or $699 Van (up to 10). Door-to-door pickup, Top Circle drop-off, vehicle stays parked on-site all night, and zero post-show surges.
               </p>
               <div className="mt-4">
                 <Link href="/book/red-rocks-amphitheatre/private" className="text-xs font-bold text-emerald-400 underline">

@@ -58,10 +58,10 @@ export default async function RedRocksFAQ({
               Book Private Ride
             </Link>
             <Link href={suvHref} className="btn-ghost">
-              Private Suburban — $399
+              Private Suburban — $499
             </Link>
             <Link href="/book/red-rocks-amphitheatre/private/van" className="btn-ghost">
-              Private Van — $599
+              Private Van — $699
             </Link>
           </div>
         </div>
@@ -97,7 +97,7 @@ export default async function RedRocksFAQ({
               />
               <FAQ
                 q="What does private Red Rocks transportation cost?"
-                a="Party at Red Rocks currently offers a private Suburban for $399 and a private van for $599."
+                a="Party at Red Rocks currently offers a private Suburban for $499 and a private van for $699."
               />
             </div>
 

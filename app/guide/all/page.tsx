@@ -102,7 +102,7 @@ export default function AllGuidesIndex() {
               Back to Guide Hub →
             </Link>
             <Link href="/book/red-rocks-amphitheatre/private" className="btn-primary">
-              Book Private Red Rocks Transportation — from $399 →
+              Book Private Red Rocks Transportation — from $499 →
             </Link>
           </div>
         </header>

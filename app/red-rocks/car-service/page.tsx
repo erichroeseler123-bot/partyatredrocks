@@ -9,14 +9,14 @@ const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks
 export const metadata: Metadata = {
   title: "Red Rocks Car Service | Private Luxury SUV Transportation",
   description:
-    "Book private car service to Red Rocks Amphitheatre. Luxury Suburban for up to 6 passengers for $399 flat round-trip. Door-to-door pickup, Top Circle access, vehicle waits all night.",
+    "Book private car service to Red Rocks Amphitheatre. Luxury Suburban for up to 6 passengers for $499 flat round-trip. Door-to-door pickup, Top Circle access, vehicle waits all night.",
   alternates: {
     canonical: `${SITE}/red-rocks/car-service`,
   },
   openGraph: {
     title: "Red Rocks Car Service | Private Luxury SUV Transportation",
     description:
-      "Private luxury SUV car service to Red Rocks: $399 flat round-trip for up to 6 passengers. Door-to-door pickup, driver waits on-site, guaranteed return ride.",
+      "Private luxury SUV car service to Red Rocks: $499 flat round-trip for up to 6 passengers. Door-to-door pickup, driver waits on-site, guaranteed return ride.",
     url: `${SITE}/red-rocks/car-service`,
     type: "website",
   },
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Red Rocks Car Service | Private Luxury SUV Transportation",
     description:
-      "Private luxury SUV car service to Red Rocks: $399 flat round-trip for up to 6 passengers. Door-to-door pickup, driver waits on-site, guaranteed return ride.",
+      "Private luxury SUV car service to Red Rocks: $499 flat round-trip for up to 6 passengers. Door-to-door pickup, driver waits on-site, guaranteed return ride.",
   },
 };
 
@@ -46,8 +46,8 @@ const FAQS = [
     a: "With our commercial Colorado PUC licensing (LL-02649), our drivers have access to the Upper North Lot and Top Circle staging near Row 70, allowing you to walk into the venue near the top rather than tackling hundreds of stairs from lower parking lots.",
   },
   {
-    q: "Is the $399 price per person or for the whole car?",
-    a: "The $399 rate is a flat round-trip price for the entire vehicle (up to 6 passengers). It covers both your arrival trip and your return ride with zero surge pricing.",
+    q: "Is the $499 price per person or for the whole car?",
+    a: "The $499 rate is a flat round-trip price for the entire vehicle (up to 6 passengers). It covers both your arrival trip and your return ride with zero surge pricing.",
   },
 ];
 
@@ -80,10 +80,10 @@ export default async function RedRocksCarServicePage({
           telephone: "+1-720-369-6292",
         },
         description:
-          "Private luxury SUV car service to Red Rocks Amphitheatre from Denver and surrounding areas. $399 flat round-trip for up to 6 passengers.",
+          "Private luxury SUV car service to Red Rocks Amphitheatre from Denver and surrounding areas. $499 flat round-trip for up to 6 passengers.",
         offers: {
           "@type": "Offer",
-          price: "399.00",
+          price: "499.00",
           priceCurrency: "USD",
         },
       },
@@ -128,14 +128,14 @@ export default async function RedRocksCarServicePage({
               Private Car Service to Red Rocks Amphitheatre
             </h1>
             <p className="mt-6 max-w-3xl text-base leading-7 text-white/80 sm:text-xl sm:leading-8">
-              Experience Red Rocks in comfort without the chaos of rideshares or public buses. Our $399 private Suburban service gives your group dedicated door-to-door transportation, VIP limo-lane access, and a professional driver who stages on-site all evening.
+              Experience Red Rocks in comfort without the chaos of rideshares or public buses. Our $499 private Suburban service gives your group dedicated door-to-door transportation, VIP limo-lane access, and a professional driver who stages on-site all evening.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
                 href={bookingHref}
                 className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#3df3ff] px-8 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff] shadow-lg shadow-[#3df3ff]/20"
               >
-                Book Private Car Service — $399
+                Book Private Car Service — $499
               </Link>
               <Link
                 href="/red-rocks/transportation"
@@ -186,7 +186,7 @@ export default async function RedRocksCarServicePage({
             <div>
               <p className="text-[12px] font-black uppercase tracking-[0.28em] text-[#3df3ff]">Flat Rate Guarantee</p>
               <h2 className="mt-2 text-3xl font-black uppercase tracking-tight text-white sm:text-4xl">
-                $399 Flat Round-Trip
+                $499 Flat Round-Trip
               </h2>
               <p className="mt-4 text-base text-white/75 leading-relaxed">
                 Unlike rideshare apps that surge up to $250 each way or charge surge pricing after the encore, our private car service rate is locked in when you book.
@@ -220,7 +220,7 @@ export default async function RedRocksCarServicePage({
                   href={bookingHref}
                   className="inline-flex min-h-14 items-center justify-center rounded-2xl bg-[#3df3ff] px-8 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff] shadow-lg shadow-[#3df3ff]/20"
                 >
-                  Book Private Suburban — $399
+                  Book Private Suburban — $499
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </div>
@@ -229,14 +229,14 @@ export default async function RedRocksCarServicePage({
             <div className="rounded-2xl border border-white/10 bg-white/4 p-8">
               <h3 className="text-xl font-black uppercase tracking-tight text-white">Need Room for a Larger Group?</h3>
               <p className="mt-3 text-sm text-white/70 leading-relaxed">
-                If your party has 7 to 10 guests, upgrade to our private 10-passenger van for $599 flat round-trip. You get the same luxury door-to-door service and on-site staging with extra headroom and space for everyone.
+                If your party has 7 to 10 guests, upgrade to our private 10-passenger van for $699 flat round-trip. You get the same luxury door-to-door service and on-site staging with extra headroom and space for everyone.
               </p>
               <div className="mt-6">
                 <Link
                   href="/book/red-rocks-amphitheatre/private/van"
                   className="inline-flex min-h-12 items-center justify-center rounded-xl border border-white/20 bg-white/8 px-6 text-xs font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/14"
                 >
-                  View 10-Passenger Van ($599) →
+                  View 10-Passenger Van ($699) →
                 </Link>
               </div>
             </div>
@@ -276,14 +276,14 @@ export default async function RedRocksCarServicePage({
             Reserve Your Private Red Rocks Car Service
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-base text-white/85 sm:text-lg">
-            High-demand show dates sell out in advance. Lock in your $399 private Suburban with live availability.
+            High-demand show dates sell out in advance. Lock in your $499 private Suburban with live availability.
           </p>
           <div className="mt-8 flex justify-center">
             <Link
               href={bookingHref}
               className="inline-flex min-h-14 items-center justify-center rounded-full bg-[#3df3ff] px-10 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff] shadow-lg shadow-[#3df3ff]/20"
             >
-              Book Private Car Service — $399
+              Book Private Car Service — $499
             </Link>
           </div>
         </section>

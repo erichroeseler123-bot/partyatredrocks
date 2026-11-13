@@ -40,7 +40,7 @@ export default function Page() {
           <div className="panel rounded-2xl p-6">
             <h2 className="text-xl font-bold">Current private ride pricing</h2>
             <p className="mt-2 text-soft">
-              Private Suburban service is $399. The private van upgrade is $599. Choose based on your group size
+              Private Suburban service is $499. The private van upgrade is $699. Choose based on your group size
               and vehicle preference.
             </p>
           </div>

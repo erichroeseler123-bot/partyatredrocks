@@ -141,7 +141,7 @@ export default async function HomePage() {
     name: "Private Red Rocks Concert Transportation",
     serviceType: "Private concert transportation",
     description:
-      "Private concert transportation to and from Red Rocks Amphitheatre in a Private Suburban ($399) or 10-passenger Private Van ($599).",
+      "Private concert transportation to and from Red Rocks Amphitheatre in a Private Suburban ($499) or 10-passenger Private Van ($699).",
     provider: { "@id": `${SITE}/#organization` },
     areaServed: SERVICE_AREAS.map((city) => ({
       "@type": "City",
@@ -154,7 +154,7 @@ export default async function HomePage() {
         {
           "@type": "Offer",
           priceCurrency: "USD",
-          price: "399",
+          price: "499",
           itemOffered: {
             "@type": "Service",
             name: "Private Suburban to Red Rocks",
@@ -164,7 +164,7 @@ export default async function HomePage() {
         {
           "@type": "Offer",
           priceCurrency: "USD",
-          price: "599",
+          price: "699",
           itemOffered: {
             "@type": "Service",
             name: "10 Passenger Van to Red Rocks",

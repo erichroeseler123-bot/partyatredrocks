@@ -52,7 +52,7 @@ export default async function RedRocksFaqPage({
             weather, and concert nights. If you need more detail, jump into the related guides below.
           </p>
           <p className="comic-copy">
-            Party at Red Rocks currently offers private transportation for your group: a $399 Suburban or $599 van, with
+            Party at Red Rocks currently offers private transportation for your group: a $499 Suburban or $699 van, with
             door-to-door service and the vehicle waiting through the show.
           </p>
           <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
@@ -100,7 +100,7 @@ export default async function RedRocksFaqPage({
             <Link href={privateHref} className="comic-panel block">
               <div className="comic-tag">Book</div>
               <h2 className="comic-h3">Private Ride Options</h2>
-              <p className="comic-copy">$399 private Suburban or $599 private van for your Red Rocks concert night.</p>
+              <p className="comic-copy">$499 private Suburban or $699 private van for your Red Rocks concert night.</p>
             </Link>
           </div>
         </section>

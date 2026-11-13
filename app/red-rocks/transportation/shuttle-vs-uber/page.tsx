@@ -66,7 +66,7 @@ export default async function Page({
 
         <h1 className="mt-4 text-5xl font-black tracking-tight">Private Ride vs Uber at Red Rocks</h1>
         <p className="mt-4 text-lg text-soft">
-          Party at Red Rocks currently offers private transportation only: a $399 Suburban or a $599 private van.
+          Party at Red Rocks currently offers private transportation only: a $499 Suburban or a $699 private van.
           Rideshare can work, but the tradeoff is more uncertainty around post-show pricing, pickup location, and driver availability.
         </p>
 

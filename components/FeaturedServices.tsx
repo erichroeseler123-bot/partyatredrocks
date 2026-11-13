@@ -15,7 +15,7 @@ const CARDS: Card[] = [
   {
     group: "Red Rocks",
     title: "Private Suburban",
-    price: "$399",
+    price: "$499",
     note: "flat rate",
     bullets: ["Your group only", "Private pickup timing", "Planned return after the show"],
     href: "/book/red-rocks-amphitheatre/private/suv",
@@ -25,7 +25,7 @@ const CARDS: Card[] = [
   {
     group: "Red Rocks",
     title: "Private Van Upgrade",
-    price: "$599",
+    price: "$699",
     note: "flat rate",
     bullets: ["More room for larger groups", "One vehicle", "Direct pickup + planned return"],
     href: "/book/red-rocks-amphitheatre/private/van",

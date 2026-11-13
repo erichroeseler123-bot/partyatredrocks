@@ -13,6 +13,7 @@ import {
   isPublicPrivateRideSlug,
   type PrivateRideSlug,
 } from "@/lib/rideCatalog";
+import { getPrivateRidePricingForDate, PARR_VALUE_PROPOSITION } from "@/lib/pricing";
 import { squareApplicationId, squareLocationId, squareWebSdkUrl } from "@/lib/square";
 import { buildPrivateOptionJsonLd, buildPrivateOptionMetadata } from "../../bookingSeo";
 
@@ -148,11 +149,18 @@ export default async function PrivateOptionPage({
           <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white">
             Book Your {rideOption.title}
           </h2>
-          <p className="mt-3 max-w-3xl text-sm leading-6 text-white/70 sm:text-[15px]">
-            Book this private Red Rocks vehicle online through Rezdy.
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-white/78 sm:text-[15px]">
+            {PARR_VALUE_PROPOSITION.summary} {PARR_VALUE_PROPOSITION.tailgatingSummary}
+          </p>
+          <p className="mt-2 max-w-3xl text-xs leading-5 text-white/60">
+            Flat round-trip rate:{" "}
+            <span className="font-bold text-white">
+              {getPrivateRidePricingForDate({ optionSlug: rideOption.slug, serviceDate: dateRaw }).roundTripLabel}
+            </span>
+            . {PARR_VALUE_PROPOSITION.exclusionsSummary}
           </p>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-cyan-100/82 sm:text-[15px]">
-            Private rides can pick your group up at your own hotel, Airbnb, home, or exact address.
+            Private rides pick your group up at your own hotel, Airbnb, home, or exact Denver-area address.
           </p>
           <div className="mt-6">
             {rideOption.slug === "suv" || rideOption.slug === "van" ? (

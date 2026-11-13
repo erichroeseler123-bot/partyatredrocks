@@ -24,12 +24,12 @@ const comparisonRows = [
     primaryRisk: "Post-encore pricing, driver availability, and pickup friction can change quickly",
   },
   {
-    option: "Private Suburban — $399",
+    option: "Private Suburban — $499",
     strongestUse: "Door-to-door plan for your group with one vehicle waiting through the show",
     primaryRisk: "Higher upfront cost than a single rideshare trip",
   },
   {
-    option: "Private Van — $599",
+    option: "Private Van — $699",
     strongestUse: "Larger private groups that want one vehicle and one return plan",
     primaryRisk: "Higher total price, best when the group needs the capacity",
   },

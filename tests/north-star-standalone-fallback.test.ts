@@ -301,8 +301,8 @@ test("2. Continuous Standalone Bookability & Truthful Unannounced-Season Framing
       dccProduct: o.dccProduct,
     })),
     [
-      { slug: "suv", priceLabel: "$399", eyebrow: "$399 • Up to 6 guests", dccProduct: "parr-suburban" },
-      { slug: "van", priceLabel: "$599", eyebrow: "$599 • Up to 10 Guests", dccProduct: "parr-van-10" },
+      { slug: "suv", priceLabel: "$499", eyebrow: "$499 • Up to 6 guests", dccProduct: "parr-suburban" },
+      { slug: "van", priceLabel: "$699", eyebrow: "$699 • Up to 10 Guests", dccProduct: "parr-van-10" },
       { slug: "sprinter", priceLabel: "$799", eyebrow: "$799 • Up to 14 Guests", dccProduct: "parr-sprinter-14" },
       { slug: "party-bus", priceLabel: "$1199", eyebrow: "$1199 • Up to 24 Guests", dccProduct: "parr-party-bus-24" },
     ],
@@ -317,8 +317,8 @@ test("2. Continuous Standalone Bookability & Truthful Unannounced-Season Framing
   assert.equal(isPublicPrivateRideSlug("van"), true);
   assert.equal(getPrivateRideOption("sprinter")?.priceLabel, "$799");
 
-  assert.equal(SHUTTLE_PRICING.redRocks.suburban, "$399 round-trip");
-  assert.equal(SHUTTLE_PRICING.redRocks.van10, "$599 round-trip");
+  assert.equal(SHUTTLE_PRICING.redRocks.suburban, "$499 flat round-trip");
+  assert.equal(SHUTTLE_PRICING.redRocks.van10, "$699 flat round-trip");
   assert.equal(SHUTTLE_PRICING.mishawaka.privateSuburban, "$599 round-trip");
   assert.match(SHUTTLE_PRICING.denverBoulderOtherVenues.suburban, /\$250/);
 
@@ -735,7 +735,7 @@ test("3. Fallback-Isolation Proof: when DCC, Cruise Promenade, weather/event fee
   assert.ok(checkoutBody.internalOrderId);
   assert.ok(checkoutBody.bookingToken);
   assert.equal(checkoutBody.squareOrderId, "sq_sandbox_isolated_order_503_proof");
-  assert.equal(checkoutBody.totalDue, 399);
+  assert.equal(checkoutBody.totalDue, 499);
   assert.equal(checkoutBody.inventoryOwner, "parr");
 
   // Confirm customer order lookup resolves the newly created order immediately

@@ -2,6 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import {
+  getPrivateRidePricingForDate,
+  PARR_VALUE_PROPOSITION,
+  SUBURBAN_2027_USD,
+  VAN_2027_USD,
+} from "@/lib/pricing";
 import { CalendarDays, ShieldCheck, CloudSun, Car, Clock, CheckCircle2 } from "lucide-react";
 import { ReviewBlock } from "@/components/ReviewBlock";
 import {
@@ -66,7 +72,7 @@ function buildPresaleMailto(customDate: string, customArtist: string): string {
       `We are planning private group transportation for a 2027 Red Rocks concert:`,
       `- Show / Presale Artist: ${customArtist.trim() || "(let us know once announced)"}`,
       `- Target Show Date: ${customDate.trim() || "(TBD / presale drop)"}`,
-      `- Preferred Vehicle: $399 Private Suburban (up to 6) or $599 Private Van (up to 10)`,
+      `- Preferred Vehicle: $${SUBURBAN_2027_USD} Private Suburban (up to 6) or $${VAN_2027_USD} Private Van (up to 10) flat round-trip`,
       "",
       "Please share availability or notify us when this date opens.",
     ].join("\n")
@@ -114,28 +120,34 @@ export default function HomeSections({
     journeyId: journeyId || undefined,
   });
 
+  const suvPricing = getPrivateRidePricingForDate({ optionSlug: "suv", serviceDate: customDate });
+  const vanPricing = getPrivateRidePricingForDate({ optionSlug: "van", serviceDate: customDate });
+
   const rideCards = [
     {
       title: "Private Suburban",
-      subtitle: "$399 Private Suburban",
-      copy: "Up to 6 passengers • Your group, your vehicle",
+      subtitle: `${suvPricing.priceLabel} Private Suburban`,
+      copy: "Up to 6 passengers • Flat round-trip",
       bullets: [
-        "Tailgating + your vehicle waits in the same spot during the show",
-        "Denver-area hotel or home pickup with liquor/grocery stop",
+        "Upper North Lot tailgating setup (chairs, cooler, ice & speaker) + vehicle waits through the show",
+        "Denver-area hotel or home pickup with optional grocery/liquor stop & same vehicle home",
       ],
       href: "/book/red-rocks-amphitheatre/private/suv",
-      cta: "Book Private Suburban - $399",
+      cta: `Book Private Suburban - ${suvPricing.priceLabel}`,
       image: privateVehicleSrc,
       alt: "Downtown Denver Union Station pickup corridor for private Suburban Red Rocks rides",
       accent: "orange" as const,
     },
     {
       title: "Private Van Upgrade",
-      subtitle: "$599 Private Van",
-      copy: "Up to 10 passengers • More room for larger groups",
-      bullets: ["One pickup plan", "Book online through Rezdy"],
+      subtitle: `${vanPricing.priceLabel} Private Van`,
+      copy: "Up to 10 passengers • Flat round-trip",
+      bullets: [
+        "Upper North Lot tailgating setup + one pickup plan",
+        "Driver & vehicle wait on-site through the show",
+      ],
       href: "/book/red-rocks-amphitheatre/private/van",
-      cta: "Upgrade to Private Van",
+      cta: `Book Private Van - ${vanPricing.priceLabel}`,
       image: privateVanSrc,
       alt: "Red Rocks Amphitheatre sandstone seating bowl for private 10-passenger van groups",
       accent: "cyan" as const,
@@ -241,9 +253,11 @@ export default function HomeSections({
                   <span>
                     Recommended for {partySize} {partySize === 1 ? "guest" : "guests"}:{" "}
                     <strong className="text-white">
-                      {partySize > 6 ? "$599 Private Van (up to 10)" : "$399 Private Suburban (up to 6)"}
+                      {partySize > 6
+                        ? `${vanPricing.priceLabel} Private Van (up to 10)`
+                        : `${suvPricing.priceLabel} Private Suburban (up to 6)`}
                     </strong>{" "}
-                    · Flat vehicle rate, never per-person
+                    · Flat round-trip vehicle rate, never per-guest
                   </span>
                   <span className="text-emerald-300 font-semibold">Vehicle waits throughout the concert</span>
                 </div>
@@ -310,19 +324,30 @@ export default function HomeSections({
           </div>
         </section>
 
-        {/* Section 2: Visual 6-Step Concert Night Experience */}
+        {/* Section 2: Visual 7-Step Concert Night Experience & Flat-Price Value */}
         <section aria-label="How the private ride works" className="rounded-[26px] border border-white/10 bg-white/[0.03] p-5 sm:p-6">
-          <div className="text-[11px] font-black uppercase tracking-[0.2em] text-[#ffb07c] mb-3">
-            The Concert-Night Experience · One Private Vehicle All Night
+          <div className="flex flex-col gap-2 lg:flex-row lg:items-end lg:justify-between mb-4">
+            <div>
+              <div className="text-[11px] font-black uppercase tracking-[0.2em] text-[#ffb07c]">
+                {PARR_VALUE_PROPOSITION.headline}
+              </div>
+              <p className="mt-1.5 max-w-4xl text-sm leading-6 text-white/82">
+                {PARR_VALUE_PROPOSITION.summary} {PARR_VALUE_PROPOSITION.tailgatingSummary}
+              </p>
+            </div>
+            <div className="text-xs text-white/60 lg:text-right shrink-0">
+              {PARR_VALUE_PROPOSITION.exclusionsSummary}
+            </div>
           </div>
-          <div className="grid gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+          <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-7">
             {[
-              { step: "1", label: "Pickup", sub: "Denver hotel or home" },
-              { step: "2", label: "Optional Stop", sub: "Liquor / grocery run" },
-              { step: "3", label: "Red Rocks", sub: "Upper North / South drop" },
-              { step: "4", label: "Tailgate", sub: "Pre-show at your vehicle" },
-              { step: "5", label: "Concert", sub: "Driver waits on-site" },
-              { step: "6", label: "Same Vehicle Home", sub: "Zero rideshare surge" },
+              { step: "1", label: "Pickup", sub: "Denver-area hotel or home" },
+              { step: "2", label: "Optional Stop", sub: "Grocery or liquor stop" },
+              { step: "3", label: "Upper North Lot", sub: "Red Rocks primary tailgate lot" },
+              { step: "4", label: "Tailgate Setup", sub: "Chairs, cooler, ice & speaker" },
+              { step: "5", label: "Tailgate", sub: "Time to tailgate pre-show" },
+              { step: "6", label: "Concert", sub: "Driver & vehicle wait on-site" },
+              { step: "7", label: "Same Vehicle Home", sub: "Flat rate, zero surge" },
             ].map((item) => (
               <div key={item.step} className="rounded-2xl border border-white/10 bg-black/40 p-3.5">
                 <div className="text-[10px] font-black uppercase tracking-wider text-cyan-300">
@@ -350,7 +375,7 @@ export default function HomeSections({
                   href={urgency.bookingHref || "/book/red-rocks-amphitheatre/private/suv"}
                   className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#ff6b3d] px-5 text-xs font-black uppercase tracking-[0.14em] text-[#1b0b05] no-underline transition hover:bg-[#ff845d]"
                 >
-                  Book $399 ride
+                  Book {suvPricing.priceLabel} ride
                 </Link>
                 <Link href="/week/red-rocks" className="brand-link inline-flex items-center justify-center text-xs font-black uppercase tracking-[0.14em] no-underline sm:justify-end">View lineup</Link>
               </div>
@@ -440,13 +465,13 @@ export default function HomeSections({
                         href={item.suvBookingHref}
                         className="inline-flex min-h-9 items-center justify-center rounded-full bg-[#ff6b3d] px-3.5 text-[11px] font-black uppercase tracking-[0.12em] text-[#1b0b05] no-underline transition hover:bg-[#ff845d]"
                       >
-                        $399 Suburban
+                        ${SUBURBAN_2027_USD} Suburban
                       </Link>
                       <Link
                         href={item.vanBookingHref}
                         className="inline-flex min-h-9 items-center justify-center rounded-full border border-cyan-300/35 bg-cyan-300/12 px-3.5 text-[11px] font-black uppercase tracking-[0.12em] text-cyan-200 no-underline transition hover:bg-cyan-300/22"
                       >
-                        $599 Private Van
+                        ${VAN_2027_USD} Private Van
                       </Link>
                     </div>
                   </div>
@@ -465,7 +490,7 @@ export default function HomeSections({
                 Custom 2027 Show-Date Booking &amp; Artist Presale Ride Interest
               </div>
               <p className="mt-1.5 text-sm leading-6 text-white/76">
-                Got artist presale tickets before our calendar syncs, or locking in a 2027 show night early? Enter your 2027 concert date to prefill online booking at live flat vehicle pricing ($399 Private Suburban up to 6 passengers, $599 Private Van up to 10 passengers), or send our dispatch desk a presale coordination note.
+                Got artist presale tickets before our calendar syncs, or locking in a 2027 show night early? Enter your 2027 concert date to prefill online booking at live flat round-trip vehicle pricing (${SUBURBAN_2027_USD} Private Suburban up to 6 passengers, ${VAN_2027_USD} Private Van up to 10 passengers), or send our dispatch desk a presale coordination note.
               </p>
             </div>
 
@@ -498,13 +523,13 @@ export default function HomeSections({
                   href={customSuvHref}
                   className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#ff6b3d] px-4 text-xs font-black uppercase tracking-[0.14em] text-[#1b0b05] no-underline transition hover:bg-[#ff845d]"
                 >
-                  Book $399 Suburban
+                  Book {suvPricing.priceLabel} Suburban
                 </Link>
                 <Link
                   href={customVanHref}
                   className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#3df3ff] px-4 text-xs font-black uppercase tracking-[0.14em] text-[#07111d] no-underline transition hover:bg-[#62f6ff]"
                 >
-                  Book $599 Van
+                  Book {vanPricing.priceLabel} Van
                 </Link>
                 <a
                   href={presaleMailtoHref}
@@ -653,7 +678,7 @@ export default function HomeSections({
           <div className="flex items-center justify-between gap-3">
             <div className="min-w-0 text-left">
               <div className="truncate text-[11px] font-black uppercase tracking-[0.12em] text-white">
-                {partySize > 6 ? "$599 Private Van" : "$399 Private Suburban"}
+                {partySize > 6 ? `${vanPricing.priceLabel} Private Van` : `${suvPricing.priceLabel} Private Suburban`}
               </div>
               <div className="truncate text-[11px] text-white/70">
                 {partySize} {partySize === 1 ? "guest" : "guests"} · Vehicle waits on-site

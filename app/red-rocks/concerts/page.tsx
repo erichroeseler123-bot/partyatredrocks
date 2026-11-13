@@ -15,12 +15,12 @@ export const revalidate = 1800;
 export const metadata: Metadata = {
   title: "Red Rocks Concert Schedule 2026–2027 | Shows + Private Transportation",
   description:
-    "Browse upcoming Red Rocks concerts and verified 2026–2027 lineup dates, then reserve private transportation for your show. Private Suburban $399 with a private van upgrade for larger groups.",
+    "Browse upcoming Red Rocks concerts and verified 2026–2027 lineup dates, then reserve private transportation for your show. Private Suburban $499 with a private van upgrade for larger groups.",
   alternates: { canonical: `${SITE}/red-rocks/concerts` },
   openGraph: {
     title: "Red Rocks Concert Schedule 2026–2027 | Shows + Private Transportation",
     description:
-      "Find your Red Rocks show and reserve one private vehicle for the night. Private Suburban $399 with a private van upgrade for larger groups.",
+      "Find your Red Rocks show and reserve one private vehicle for the night. Private Suburban $499 with a private van upgrade for larger groups.",
     url: `${SITE}/red-rocks/concerts`,
     type: "website",
     images: [
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Red Rocks Concert Schedule 2026–2027 | Shows + Private Transportation",
     description:
-      "Find your Red Rocks show and reserve one private vehicle for the night. Private Suburban $399 with a private van upgrade for larger groups.",
+      "Find your Red Rocks show and reserve one private vehicle for the night. Private Suburban $499 with a private van upgrade for larger groups.",
     images: [DEFAULT_OG_IMAGE],
   },
 };
@@ -151,7 +151,7 @@ export default async function RedRocksConcertsPage({
           <div className="comic-kicker">Concert Calendar</div>
           <h1 className="comic-title">Red Rocks Concert Schedule 2026–2027</h1>
           <p className="comic-copy">
-            Find your show first. Then reserve one private vehicle for the whole Red Rocks night — $399 Private Suburban, with a $599 private van upgrade for larger groups.
+            Find your show first. Then reserve one private vehicle for the whole Red Rocks night — $499 Private Suburban, with a $699 private van upgrade for larger groups.
           </p>
           <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-4 sm:mt-6 w-full px-4">
             {MONTH_LINKS.map((row) => (
@@ -167,7 +167,7 @@ export default async function RedRocksConcertsPage({
               })}
               className="comic-btn comic-btn-primary w-full sm:w-auto min-w-[180px] text-center"
             >
-              Private Suburban — $399 →
+              Private Suburban — $499 →
             </Link>
           </div>
         </div>
@@ -211,7 +211,7 @@ export default async function RedRocksConcertsPage({
                   )}
                   <p className="comic-copy">Month: {monthOf(event.dateKey)}</p>
                   <p className="comic-copy" style={{ marginTop: 6 }}>
-                    Private transportation: $399 Suburban • $599 van upgrade
+                    Private transportation: $499 Suburban • $699 van upgrade
                   </p>
                   <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
                     <Link href={`/shows/${encodeURIComponent(event.id)}`} className="comic-btn comic-btn-secondary">

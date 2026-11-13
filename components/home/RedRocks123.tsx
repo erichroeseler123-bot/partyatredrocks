@@ -11,13 +11,13 @@ const STEPS: Step[] = [
   {
     n: "1",
     title: "Private Suburban",
-    desc: "$399 flat • Up to 6 passengers • Door-to-door pickup",
+    desc: "$499 flat • Up to 6 passengers • Door-to-door pickup",
     href: "/book/red-rocks-amphitheatre/private/suv",
   },
   {
     n: "2",
     title: "Private Van",
-    desc: "$599 flat • Up to 10 passengers • All travel together",
+    desc: "$699 flat • Up to 10 passengers • All travel together",
     href: "/book/red-rocks-amphitheatre/private/van",
   },
   {

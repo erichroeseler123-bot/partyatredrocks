@@ -15,7 +15,6 @@ const ACTIVE_PUBLIC_COPY_FILES = [
   "components/SiteFooter.tsx",
   "components/shared/BookingCTA.tsx",
   "lib/bookingCopy.ts",
-  "lib/pricing.ts",
 ];
 
 const PUBLIC_FORBIDDEN_PATTERNS = [
@@ -32,7 +31,6 @@ const PUBLIC_FORBIDDEN_PATTERNS = [
   /individual fare/i,
   /\$399–\$499/,
   /\$449/,
-  /Suburban[^"\n]*\$499/i,
   /Sprinter/i,
   /party bus/i,
 ];
@@ -56,25 +54,25 @@ function read(path) {
 test("public booking config exposes only Suburban and private van", () => {
   const catalog = read("lib/rideCatalog.ts");
   assert.match(catalog, /PUBLIC_PRIVATE_RIDE_OPTIONS = \[PRIVATE_RIDE_OPTIONS\[0\], PRIVATE_RIDE_OPTIONS\[1\]\] as const/);
-  assert.match(catalog, /SUBURBAN_PRICE = 399/);
-  assert.match(catalog, /SUBURBAN_PRICE_LABEL = "\$399"/);
+  assert.match(catalog, /SUBURBAN_PRICE = SUBURBAN_2027_USD/);
+  assert.match(catalog, /SUBURBAN_PRICE_LABEL = `\$\$\{SUBURBAN_2027_USD\}`/);
   assert.doesNotMatch(catalog, /\$399–\$499/);
   assert.doesNotMatch(catalog, /399, 449, 499/);
   assert.match(catalog, /title: "Private Suburban"/);
   assert.match(catalog, /title: "Upgrade to Private Van"/);
 });
 
-test("public Suburban pricing is flat 399", () => {
+test("public Suburban pricing is flat 499 for 2027", () => {
   const catalog = read("lib/rideCatalog.ts");
+  const pricing = read("lib/pricing.ts");
   const privatePage = read("app/book/[venue]/private/page.tsx");
   const privateSeo = read("app/book/[venue]/bookingSeo.ts");
-  const combined = `${catalog}\n${privatePage}\n${privateSeo}`;
+  const combined = `${catalog}\n${pricing}\n${privatePage}\n${privateSeo}`;
 
-  assert.match(combined, /\$399/);
+  assert.match(combined, /499/);
   assert.match(catalog, /return `\$\$\{SUBURBAN_PRICE\}`/);
   assert.doesNotMatch(combined, /\$399–\$499/);
   assert.doesNotMatch(combined, /\$449/);
-  assert.doesNotMatch(combined, /\$499/);
   assert.doesNotMatch(combined, /\$59\/pp/);
   assert.doesNotMatch(combined, /per person/i);
   assert.doesNotMatch(combined, /shared pickup/i);
@@ -100,7 +98,7 @@ test("shuttles page metadata is private-vehicle-only", () => {
   assert.match(metadataBlock, /Red Rocks Shuttle & Private Transportation from Denver/);
   assert.match(
     metadataBlock,
-    /\$399 private Suburban \(up to 6\) or \$599 private van \(up to 10\)/,
+    /\$499 private Suburban \(up to 6\) or \$699 private van \(up to 10\)/,
   );
   assert.match(metadataBlock, /openGraph/);
   assert.match(metadataBlock, /twitter/);
@@ -254,18 +252,18 @@ test("PARR_PUBLIC_FACTS.trustPoints and single authoritative /llms.txt & /agent.
   );
   const facts = read("lib/publicOperatorFacts.ts");
   const trustBlock = facts.slice(facts.indexOf("trustPoints:"), facts.indexOf("pickups:"));
-  assert.match(trustBlock, /Private Suburban \(\$399\) and 10-passenger Private Van \(\$599\) options/);
+  assert.match(trustBlock, /Private Suburban \(\$\$\{SUBURBAN_2027_USD\}\) and 10-passenger Private Van \(\$\$\{VAN_2027_USD\}\) flat round-trip options/);
   assert.match(trustBlock, /GoSno/);
   assert.doesNotMatch(trustBlock, /Shared/i);
   assert.doesNotMatch(trustBlock, /Sprinter/i);
   assert.doesNotMatch(trustBlock, /party bus/i);
 
   const llmsRoute = read("app/llms.txt/route.ts");
-  assert.match(llmsRoute, /Last verified: 2026-11-11/);
+  assert.match(llmsRoute, /Last verified: 2026-11-13/);
   assert.match(llmsRoute, /\/book\/red-rocks-amphitheatre\/private/);
   assert.match(llmsRoute, /\/contact/);
 
   const agentRoute = read("app/agent.json/route.ts");
-  assert.match(agentRoute, /last_verified:\s*"2026-11-11"/);
+  assert.match(agentRoute, /last_verified:\s*"2026-11-13"/);
 });
 

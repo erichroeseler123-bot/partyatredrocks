@@ -5,7 +5,7 @@ const FAQ = [
   },
   {
     q: "Is this round-trip?",
-    a: "Yes. All bookings are round-trip for your private group: $399 for a private Suburban (up to 6) or $599 for a private van (up to 10). Your vehicle waits through the entire show.",
+    a: "Yes. All bookings are round-trip for your private group: $499 for a private Suburban (up to 6) or $699 for a private van (up to 10). Your vehicle waits through the entire show.",
   },
   {
     q: "What if it rains or snows?",

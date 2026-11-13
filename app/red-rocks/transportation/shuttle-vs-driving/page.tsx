@@ -34,7 +34,7 @@ export default function Page() {
           </div>
           <div className="panel rounded-2xl p-6">
             <h2 className="text-xl font-bold">Current Party at Red Rocks option</h2>
-            <p className="mt-2 text-soft">Private Suburban $399 or private van $599. Shared shuttle seats are not currently offered.</p>
+            <p className="mt-2 text-soft">Private Suburban $499 or private van $699. Shared shuttle seats are not currently offered.</p>
           </div>
         </section>
 

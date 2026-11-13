@@ -78,7 +78,7 @@ export const localGatewayPages: Record<LocalGatewaySlug, LocalGatewayPage> = {
     pickupLabel: "Union Station Pickup",
     seoTitle: "Union Station to Red Rocks Private Transportation | Party at Red Rocks",
     seoDescription:
-      "Plan private transportation from the Union Station area to Red Rocks with a $399 Suburban or $599 van and a coordinated return ride.",
+      "Plan private transportation from the Union Station area to Red Rocks with a $499 Suburban or $699 van and a coordinated return ride.",
     heroTitle: "The Smart Way to Get from Union Station to Red Rocks",
     heroBody:
       "Skip the $120 Uber surges and the headache of downtown parking. Party at Red Rocks provides private door-to-door transportation for your group with the vehicle waiting through the show.",
@@ -198,7 +198,7 @@ export const localGatewayPageList = Object.values(localGatewayPages);
 export const comparisonRows = [
   {
     feature: "Cost",
-    parr: "$399 Suburban / $599 van",
+    parr: "$499 Suburban / $699 van",
     uber: "Varies by demand",
     driving: "Gas and your own vehicle",
   },
@@ -233,6 +233,6 @@ export const gatewayFaqs = [
   },
   {
     question: "What does private transportation cost?",
-    answer: "The private Suburban is $399 and the private van is $599. Confirm current availability on the booking page.",
+    answer: "The private Suburban is $499 and the private van is $699. Confirm current availability on the booking page.",
   },
 ] as const;

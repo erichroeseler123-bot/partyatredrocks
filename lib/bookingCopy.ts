@@ -1,15 +1,17 @@
+import { PARR_VALUE_PROPOSITION, SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
+
 export const BOOKING_COPY = {
   meta: {
     layoutDescription:
-      "Book private Red Rocks transportation with published vehicle pricing, private pickup details before the ride, and a planned return after the show. Private Suburban is $399 with a private van upgrade available.",
+      `Book private Red Rocks transportation with published flat vehicle pricing ($${SUBURBAN_2027_USD} Private Suburban, $${VAN_2027_USD} Private Van), Upper North Lot tailgating setup, and a coordinated return after the show.`,
     homeDescription:
-      "Dedicated private SUV ($399) & Van ($599) for your group: Denver-area pickup, designated Red Rocks drop-off, on-site wait, & return ride.",
+      `Dedicated private SUV ($${SUBURBAN_2027_USD}) & Van ($${VAN_2027_USD}) flat round-trip for your group: Denver-area pickup, Upper North Lot tailgating setup, on-site wait, & return ride.`,
     businessDescription:
       "Independent Colorado concert transportation provider with 24/7 scheduled service subject to live vehicle and schedule availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and GoSno during the winter ski season.",
     sharedBookingDescription:
       "Private Red Rocks transportation is available with published vehicle pricing, pickup planning, secure checkout, and a coordinated return plan after the show.",
     privateBookingDescription:
-      "Private Red Rocks transportation from Denver. Private Suburban $399, private van $599, limo-lane access, return planning, and optional liquor-stop planning.",
+      `Private Red Rocks transportation from Denver. Private Suburban $${SUBURBAN_2027_USD}, private van $${VAN_2027_USD} flat round-trip—${PARR_VALUE_PROPOSITION.summary}`,
   },
   labels: {
     sharedRideTitle: "Private Ride",

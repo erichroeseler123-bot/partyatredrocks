@@ -1,9 +1,12 @@
 import { BOOKING_COPY } from "@/lib/bookingCopy";
+import { SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
 
 export const SITE = "https://www.partyatredrocks.com";
 
-export const SUBURBAN_PRICE = 399;
-export const SUBURBAN_PRICE_LABEL = "$399";
+export const SUBURBAN_PRICE = SUBURBAN_2027_USD;
+export const SUBURBAN_PRICE_LABEL = `$${SUBURBAN_2027_USD}`;
+export const VAN_PRICE = VAN_2027_USD;
+export const VAN_PRICE_LABEL = `$${VAN_2027_USD}`;
 
 export const SHARED_RIDE = {
   slug: "shared",
@@ -37,9 +40,9 @@ export const PRIVATE_RIDE_OPTIONS = [
   {
     slug: "van",
     title: "Upgrade to Private Van",
-    eyebrow: "$599 • Up to 10 Guests",
-    body: "One vehicle, one pickup plan, limo-lane access, and one return timeline for groups that need more room.",
-    priceLabel: "$599",
+    eyebrow: `${VAN_PRICE_LABEL} • Up to 10 Guests`,
+    body: "One vehicle, one pickup plan, Upper North Lot tailgating setup, and one return timeline for groups that need more room.",
+    priceLabel: VAN_PRICE_LABEL,
     dccProduct: "parr-van-10",
     ctaLabel: "Book Private Van",
   },
