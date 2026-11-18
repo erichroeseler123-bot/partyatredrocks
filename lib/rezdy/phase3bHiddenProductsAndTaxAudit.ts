@@ -38,7 +38,7 @@ export function assertProductCodeAllowedForPhase3bWrite(productCode: string): vo
 }
 
 async function rezdyRequest(
-  method: "GET" | "POST" | "PUT",
+  method: "GET" | "POST" | "PUT" | "DELETE",
   pathWithQuery: string,
   apiKey: string,
   bodyObj?: Record<string, unknown>
@@ -119,11 +119,13 @@ function redactPiiAndSecrets(value: unknown, secrets: string[]): Record<string, 
   return JSON.parse(str) as Record<string, unknown>;
 }
 
-function buildHiddenProductSpec(kind: "suburban" | "van") {
+function buildHiddenProductSpec(kind: "suburban" | "van", existingPriceOptionId?: number) {
   const isSuburban = kind === "suburban";
   const price = isSuburban ? 499 : 699;
   const maxGuests = isSuburban ? 6 : 10;
-  const maxVehicles = isSuburban ? 4 : 2;
+  // Rezdy Track #1: Normal checkout is strictly 1 vehicle (Suburban up to 6 or Van up to 10).
+  // Multiple vehicles require the separate /red-rocks/group-transportation flow.
+  const maxVehicles = 1;
   const partyListOptions = Array.from({ length: maxGuests }, (_, i) => String(i + 1)).join("\r\n");
 
   return {
@@ -148,17 +150,19 @@ function buildHiddenProductSpec(kind: "suburban" | "van") {
     minimumNoticeMinutes: 120,
     cancellationPolicyDays: 2,
     shortDescription: isSuburban
-      ? "Private round-trip Suburban (up to 6 guests) for Red Rocks with Upper North Lot tailgating gear and waiting driver."
-      : "Private round-trip 10-passenger Van (up to 10 guests) for Red Rocks with Upper North Lot tailgating gear and waiting driver.",
+      ? "Private round-trip Suburban (1 vehicle, up to 6 guests) for Red Rocks with Upper North Lot tailgating gear and waiting driver."
+      : "Private round-trip 10-passenger Van (1 vehicle, up to 10 guests) for Red Rocks with Upper North Lot tailgating gear and waiting driver.",
     description:
       `Private round-trip group transportation for up to ${maxGuests} guests in one dedicated ${isSuburban ? "Suburban" : "10-passenger Van"}. ` +
       `Includes Denver-area door-to-door pickup, one optional grocery or beverage stop en route, Upper North Lot staging with tailgating time, ` +
       `folding chairs, cooler, fresh ice, and Bluetooth speaker, your driver waiting on-site at Red Rocks throughout the entire concert, ` +
-      `and your direct return ride home—all for one flat vehicle price. Excludes concert admission tickets, optional purchases, driver gratuity, and unplanned extra stops.`,
+      `and your direct return ride home—all for one flat vehicle price. Single-vehicle checkout (1 vehicle); groups needing multiple vehicles use /red-rocks/group-transportation. ` +
+      `Excludes concert admission tickets, optional purchases, driver gratuity, and unplanned extra stops.`,
     priceOptions: [
       {
+        ...(existingPriceOptionId ? { id: existingPriceOptionId } : {}),
         price,
-        label: isSuburban ? "Private Suburban (Up to 6)" : "Private Van (Up to 10)",
+        label: isSuburban ? "Private Suburban (Up to 6 Guests)" : "Private Van (Up to 10 Guests)",
         seatsUsed: 1,
         minQuantity: 1,
         maxQuantity: maxVehicles,
@@ -243,7 +247,11 @@ function buildHiddenProductSpec(kind: "suburban" | "van") {
   };
 }
 
-async function ensureSingleTestSession(productCode: string, apiKey: string) {
+async function ensureSingleTestSession(
+  productCode: string,
+  apiKey: string,
+  refreshSessionPriceOptions = false
+) {
   assertProductCodeAllowedForPhase3bWrite(productCode);
 
   const existingAvail = await rezdyRequest(
@@ -255,12 +263,23 @@ async function ensureSingleTestSession(productCode: string, apiKey: string) {
     ? (existingAvail.data?.sessions as Array<Record<string, unknown>>)
     : [];
 
-  if (existingSessions.length > 0) {
+  if (existingSessions.length > 0 && !refreshSessionPriceOptions) {
     return {
       createdNewSession: false,
+      refreshedExistingSessions: false,
       sessionCountIn2027: existingSessions.length,
       sessions: existingSessions,
     };
+  }
+
+  // When updating product priceOption maxQuantity -> 1, recreate the controlled off-season test session
+  // so session-cached priceOptions reflect minQuantity: 1, maxQuantity: 1 cleanly.
+  if (existingSessions.length > 0 && refreshSessionPriceOptions) {
+    for (const s of existingSessions) {
+      if (s.id != null) {
+        await rezdyRequest("DELETE", `/availability/${encodeURIComponent(String(s.id))}`, apiKey);
+      }
+    }
   }
 
   const createSessionRes = await rezdyRequest("POST", "/availability", apiKey, {
@@ -281,6 +300,7 @@ async function ensureSingleTestSession(productCode: string, apiKey: string) {
 
   return {
     createdNewSession: true,
+    refreshedExistingSessions: refreshSessionPriceOptions && existingSessions.length > 0,
     createHttpStatus: createSessionRes.status,
     createResponseStatus: createSessionRes.data?.requestStatus ?? null,
     sessionCountIn2027: verifiedSessions.length,
@@ -288,7 +308,10 @@ async function ensureSingleTestSession(productCode: string, apiKey: string) {
   };
 }
 
-export async function executePhase3bSetupAndTaxInvestigation(options: { provisionProducts: boolean }) {
+export async function executePhase3bSetupAndTaxInvestigation(options: {
+  provisionProducts: boolean;
+  syncSingleVehicleQuantity?: boolean;
+}) {
   const apiKey = getRezdyApiKey();
 
   // 1. Inspect existing catalog to ensure idempotency
@@ -311,8 +334,11 @@ export async function executePhase3bSetupAndTaxInvestigation(options: { provisio
 
   const provisioningLog: Record<string, unknown> = {
     provisionRequested: options.provisionProducts,
+    syncSingleVehicleQuantityRequested: Boolean(options.syncSingleVehicleQuantity),
     suburbanCreatedNow: false,
     vanCreatedNow: false,
+    suburbanUpdatedQuantityToOne: false,
+    vanUpdatedQuantityToOne: false,
   };
 
   if (options.provisionProducts) {
@@ -339,16 +365,51 @@ export async function executePhase3bSetupAndTaxInvestigation(options: { provisio
     }
   }
 
-  // Read back full product details + seed 1 controlled test session each
+  if (options.syncSingleVehicleQuantity) {
+    if (suburbanProd && typeof suburbanProd.productCode === "string") {
+      const code = suburbanProd.productCode;
+      assertProductCodeAllowedForPhase3bWrite(code);
+      const existingOptId = Array.isArray(suburbanProd.priceOptions) && suburbanProd.priceOptions[0]
+        ? Number((suburbanProd.priceOptions[0] as Record<string, unknown>).id) || undefined
+        : undefined;
+      const spec = buildHiddenProductSpec("suburban", existingOptId);
+      const putRes = await rezdyRequest("PUT", `/products/${encodeURIComponent(code)}`, apiKey, {
+        ...spec,
+        productCode: code,
+      });
+      provisioningLog.suburbanPutStatus = putRes.status;
+      provisioningLog.suburbanPutRequestStatus = putRes.data?.requestStatus ?? null;
+      provisioningLog.suburbanUpdatedQuantityToOne = putRes.ok;
+    }
+
+    if (vanProd && typeof vanProd.productCode === "string") {
+      const code = vanProd.productCode;
+      assertProductCodeAllowedForPhase3bWrite(code);
+      const existingOptId = Array.isArray(vanProd.priceOptions) && vanProd.priceOptions[0]
+        ? Number((vanProd.priceOptions[0] as Record<string, unknown>).id) || undefined
+        : undefined;
+      const spec = buildHiddenProductSpec("van", existingOptId);
+      const putRes = await rezdyRequest("PUT", `/products/${encodeURIComponent(code)}`, apiKey, {
+        ...spec,
+        productCode: code,
+      });
+      provisioningLog.vanPutStatus = putRes.status;
+      provisioningLog.vanPutRequestStatus = putRes.data?.requestStatus ?? null;
+      provisioningLog.vanUpdatedQuantityToOne = putRes.ok;
+    }
+  }
+
+  // Read back full product details + seed/refresh 1 controlled test session each
   let suburbanVerification: Record<string, unknown> | null = null;
   let vanVerification: Record<string, unknown> | null = null;
 
   if (suburbanProd && typeof suburbanProd.productCode === "string") {
     const code = suburbanProd.productCode;
     const detail = await rezdyRequest("GET", `/products/${encodeURIComponent(code)}`, apiKey);
-    const sess = options.provisionProducts
-      ? await ensureSingleTestSession(code, apiKey)
-      : null;
+    const sess =
+      options.provisionProducts || options.syncSingleVehicleQuantity
+        ? await ensureSingleTestSession(code, apiKey, Boolean(options.syncSingleVehicleQuantity))
+        : null;
     suburbanVerification = {
       productCode: code,
       httpStatus: detail.status,
@@ -360,9 +421,10 @@ export async function executePhase3bSetupAndTaxInvestigation(options: { provisio
   if (vanProd && typeof vanProd.productCode === "string") {
     const code = vanProd.productCode;
     const detail = await rezdyRequest("GET", `/products/${encodeURIComponent(code)}`, apiKey);
-    const sess = options.provisionProducts
-      ? await ensureSingleTestSession(code, apiKey)
-      : null;
+    const sess =
+      options.provisionProducts || options.syncSingleVehicleQuantity
+        ? await ensureSingleTestSession(code, apiKey, Boolean(options.syncSingleVehicleQuantity))
+        : null;
     vanVerification = {
       productCode: code,
       httpStatus: detail.status,

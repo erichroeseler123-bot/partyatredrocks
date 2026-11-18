@@ -37,9 +37,13 @@ export async function POST(request: Request) {
   }
 
   try {
-    const body = (await request.json().catch(() => ({}))) as { provisionProducts?: boolean };
+    const body = (await request.json().catch(() => ({}))) as {
+      provisionProducts?: boolean;
+      syncSingleVehicleQuantity?: boolean;
+    };
     const result = await executePhase3bSetupAndTaxInvestigation({
       provisionProducts: Boolean(body.provisionProducts),
+      syncSingleVehicleQuantity: Boolean(body.syncSingleVehicleQuantity),
     });
     return NextResponse.json(result, { status: 200, headers: NO_STORE_HEADERS });
   } catch (error) {

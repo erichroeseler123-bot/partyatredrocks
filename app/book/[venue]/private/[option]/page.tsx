@@ -5,7 +5,12 @@ import { BookingVisualHero } from "@/components/booking/BookingVisualHero";
 import { DccReturnBanner } from "@/components/booking/DccReturnBanner";
 import { LegalInlineNotice } from "@/components/legal/LegalInlineNotice";
 import { PrivateBookingForm } from "@/components/booking/PrivateBookingForm";
+import { ParrNativeRezdyCheckout } from "@/components/booking/rezdy/ParrNativeRezdyCheckout";
 import { RezdyBookingEmbed } from "@/components/booking/rezdy/RezdyBookingEmbed";
+import {
+  getSafeRezdyStripePublishableKey,
+  isParrNativeRezdyCheckoutEnabled,
+} from "@/lib/rezdy/parrNativeRezdyService";
 import { bookingVisuals } from "@/lib/bookingVisuals";
 import { postDccSatelliteEvent, postWtaPartnerAcceptedIfNeeded } from "@/lib/dccSatellite";
 import {
@@ -164,21 +169,49 @@ export default async function PrivateOptionPage({
           </p>
           <div className="mt-6">
             {rideOption.slug === "suv" || rideOption.slug === "van" ? (
-              <RezdyBookingEmbed
-                page={sourcePath}
-                surface="private_booking"
-                title={`Book ${rideOption.title}`}
-                subtitle="Complete this Red Rocks private ride booking through Rezdy. Pickup details, date, rider information, and payment are handled inside the widget."
-                productId={REZDY_PRIVATE_PRODUCTS[rideOption.slug].productId}
-                productName={REZDY_PRIVATE_PRODUCTS[rideOption.slug].productName}
-                rezdyUrl={REZDY_PRIVATE_PRODUCTS[rideOption.slug].rezdyUrl}
-                eventMeta={{
-                  venue,
-                  option: rideOption.slug,
-                  ...(artist ? { artist } : {}),
-                  ...(dateRaw ? { date: dateRaw } : {}),
-                }}
-              />
+              isParrNativeRezdyCheckoutEnabled({ previewQueryFlag: firstValue(sp, "checkout") }) ? (
+                <ParrNativeRezdyCheckout
+                  vehicleSlug={rideOption.slug}
+                  vehicleTitle={rideOption.title}
+                  expectedPriceUsd={getPrivateRidePricingForDate({ optionSlug: rideOption.slug }).priceUsd}
+                  maxPartySize={rideOption.slug === "suv" ? 6 : 10}
+                  initialDate={dateRaw}
+                  initialArtist={artist}
+                  rezdyPublishableKey={getSafeRezdyStripePublishableKey()}
+                  fallbackEmbedProps={{
+                    page: sourcePath,
+                    surface: "private_booking",
+                    title: `Book ${rideOption.title}`,
+                    subtitle:
+                      "Complete this Red Rocks private ride booking through Rezdy. Pickup details, date, rider information, and payment are handled inside the widget.",
+                    productId: REZDY_PRIVATE_PRODUCTS[rideOption.slug].productId,
+                    productName: REZDY_PRIVATE_PRODUCTS[rideOption.slug].productName,
+                    rezdyUrl: REZDY_PRIVATE_PRODUCTS[rideOption.slug].rezdyUrl,
+                    eventMeta: {
+                      venue,
+                      option: rideOption.slug,
+                      ...(artist ? { artist } : {}),
+                      ...(dateRaw ? { date: dateRaw } : {}),
+                    },
+                  }}
+                />
+              ) : (
+                <RezdyBookingEmbed
+                  page={sourcePath}
+                  surface="private_booking"
+                  title={`Book ${rideOption.title}`}
+                  subtitle="Complete this Red Rocks private ride booking through Rezdy. Pickup details, date, rider information, and payment are handled inside the widget."
+                  productId={REZDY_PRIVATE_PRODUCTS[rideOption.slug].productId}
+                  productName={REZDY_PRIVATE_PRODUCTS[rideOption.slug].productName}
+                  rezdyUrl={REZDY_PRIVATE_PRODUCTS[rideOption.slug].rezdyUrl}
+                  eventMeta={{
+                    venue,
+                    option: rideOption.slug,
+                    ...(artist ? { artist } : {}),
+                    ...(dateRaw ? { date: dateRaw } : {}),
+                  }}
+                />
+              )
             ) : (
               <PrivateBookingForm
                 venue={venue}
