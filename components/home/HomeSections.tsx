@@ -249,8 +249,8 @@ export default function HomeSections({
     <main className="bg-[#070b14] text-white">
       {/* ================= HERO: EMOTIONAL PROMISE + ONE UNIFIED BOOKING ACTION ================= */}
       <section className="mx-auto max-w-[1440px] px-2.5 pt-2 sm:px-6 sm:pt-5 lg:px-8">
-        <div className="relative overflow-hidden rounded-[24px] border border-white/12 bg-[#0d1424] shadow-[0_36px_110px_rgba(0,0,0,0.65)] sm:rounded-[36px]">
-          <div className="pointer-events-none absolute inset-0">
+        <div className="relative z-20 rounded-[24px] border border-white/12 bg-[#0d1424] shadow-[0_36px_110px_rgba(0,0,0,0.65)] sm:rounded-[36px]">
+          <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit]">
             <picture>
               <source media="(max-width: 640px)" srcSet="/images/redesign/hero-red-rocks-mobile.webp" />
               <source media="(max-width: 1080px)" srcSet="/images/redesign/hero-red-rocks-tablet.webp" />

@@ -141,8 +141,8 @@ export default async function PrivateOptionsPage({
         </nav>
 
         {/* Hero */}
-        <section className="relative overflow-hidden rounded-[24px] border border-white/12 bg-[#0d1424] shadow-[0_24px_80px_rgba(0,0,0,0.5)] sm:rounded-[32px]">
-          <div className="pointer-events-none absolute inset-0">
+        <section className="relative z-20 rounded-[24px] border border-white/12 bg-[#0d1424] shadow-[0_24px_80px_rgba(0,0,0,0.5)] sm:rounded-[32px]">
+          <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit]">
             <picture>
               <source media="(max-width: 640px)" srcSet="/images/redesign/hero-red-rocks-mobile.webp" />
               <img
