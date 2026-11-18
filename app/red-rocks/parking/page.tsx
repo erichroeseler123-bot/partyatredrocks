@@ -4,6 +4,12 @@ import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
 import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
 import type { HandoffSearchParams } from "@/lib/parrHandoff";
 import { buildBookingHref } from "@/lib/parrHandoff";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
@@ -174,7 +180,7 @@ export default async function RedRocksParkingPage({
           >
             <div className="comic-tag">Alternative</div>
             <h2 className="comic-h3">See Private Ride Options</h2>
-            <p className="comic-copy">Choose a $499 Suburban or $699 van for a private Red Rocks show-night ride.</p>
+            <p className="comic-copy">Choose a {SUBURBAN_ALL_IN_TOTAL_LABEL} Suburban total ({SUBURBAN_ITEMIZED_LABEL}) or {VAN_ALL_IN_TOTAL_LABEL} van total ({VAN_ITEMIZED_LABEL}) for a private Red Rocks show-night ride.</p>
           </Link>
         </div>
 

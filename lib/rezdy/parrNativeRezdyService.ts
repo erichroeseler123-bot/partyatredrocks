@@ -1,5 +1,17 @@
 import "server-only";
 import crypto from "node:crypto";
+import {
+  acquireOrReuseCheckoutHold,
+  blockAmbiguousInFlightHold,
+  finalizeConfirmedRezdyHold,
+  getPublicVehicleAvailability,
+  InMemoryCasInventoryStore,
+  promoteHoldToPendingWithOutbox,
+  releaseHoldAfterFailedAttempt,
+  SOLD_OUT_TRAVELER_MESSAGE,
+  type InventoryRuntimeDeps,
+} from "@/lib/inventory/parrVehicleInventory";
+import { PARR_2027_OPTION_B_PRICING_AUTHORITY } from "@/lib/pricing";
 import { FORBIDDEN_LIVE_PRODUCT_CODES } from "./phase3bHiddenProductsAndTaxAudit";
 
 const REZDY_V1_BASE = "https://api.rezdy.com/v1";
@@ -8,56 +20,56 @@ export type ParrNativeVehicleSlug = "suv" | "van";
 
 export type ParrHiddenTestProductConfig = {
   slug: ParrNativeVehicleSlug;
-  productCode: string;
+  productCode: "P94HN4" | "PU8R6Y";
   internalCode: string;
   shortVehicleLabel: string;
   displayName: string;
+  basePriceCents: number;
+  calculatedBookingFeeCents: number;
+  allInTotalCents: number;
   basePriceUsd: number;
   bookingFeeRatePct: number;
   bookingFeeLabel: string;
   expectedBookingFeeUsd: number;
   expectedTotalChargedUsd: number;
   maxPartySize: number;
+  dailyVehicleCapacity: number;
 };
 
+function fromAuthority(slug: ParrNativeVehicleSlug): ParrHiddenTestProductConfig {
+  const auth = PARR_2027_OPTION_B_PRICING_AUTHORITY[slug];
+  return {
+    slug: auth.slug,
+    productCode: auth.rezdy.previewProductCode,
+    internalCode: auth.rezdy.previewInternalCode,
+    shortVehicleLabel: auth.shortLabel,
+    displayName: auth.displayName,
+    basePriceCents: auth.basePriceCents,
+    calculatedBookingFeeCents: auth.calculatedBookingFeeCents,
+    allInTotalCents: auth.allInTotalCents,
+    basePriceUsd: auth.basePriceUsd,
+    bookingFeeRatePct: auth.bookingFeeRatePct,
+    bookingFeeLabel: auth.bookingFeeLabel,
+    expectedBookingFeeUsd: auth.bookingFeeUsd,
+    expectedTotalChargedUsd: auth.allInTotalUsd,
+    maxPartySize: auth.maxGuests,
+    dailyVehicleCapacity: auth.dailyVehicleCapacity,
+  };
+}
+
 /**
- * Preview-only hidden test products created in Phase 3B (Option B all-in pricing).
- * Base vehicle prices stay unchanged ($499.00 / $699.00) with the intentional 4% Rezdy Booking fee
- * ($19.96 / $27.96) added and disclosed upfront so Total charged today reconciles at $518.96 / $726.96.
- * Live public products (`P0U1MY` / `596193` and `PJM9GD` / `630812`) remain untouched.
+ * Derived strictly from `PARR_2027_OPTION_B_PRICING_AUTHORITY` (zero duplicated price literals).
  */
-export const PARR_PREVIEW_HIDDEN_PRODUCTS: Record<ParrNativeVehicleSlug, ParrHiddenTestProductConfig> = {
-  suv: {
-    slug: "suv",
-    productCode: "P94HN4",
-    internalCode: "PARR_2027_SUBURBAN_API_TEST",
-    shortVehicleLabel: "Private Suburban",
-    displayName: "Private Suburban (Up to 6 Guests)",
-    basePriceUsd: 499,
-    bookingFeeRatePct: 4,
-    bookingFeeLabel: "Booking fee (4%)",
-    expectedBookingFeeUsd: 19.96,
-    expectedTotalChargedUsd: 518.96,
-    maxPartySize: 6,
-  },
-  van: {
-    slug: "van",
-    productCode: "PU8R6Y",
-    internalCode: "PARR_2027_VAN_API_TEST",
-    shortVehicleLabel: "Private Van",
-    displayName: "Private 10-Passenger Van (Up to 10 Guests)",
-    basePriceUsd: 699,
-    bookingFeeRatePct: 4,
-    bookingFeeLabel: "Booking fee (4%)",
-    expectedBookingFeeUsd: 27.96,
-    expectedTotalChargedUsd: 726.96,
-    maxPartySize: 10,
-  },
+export const PARR_PREVIEW_HIDDEN_PRODUCTS: Record<
+  ParrNativeVehicleSlug,
+  ParrHiddenTestProductConfig
+> = {
+  suv: fromAuthority("suv"),
+  van: fromAuthority("van"),
 };
 
 export type FetchLike = (input: string | URL | Request, init?: RequestInit) => Promise<Response>;
 
-// Server-instance in-flight duplicate-submit lock keyed by deterministic resellerReference
 const inFlightSubmissions = new Set<string>();
 
 export function isPreviewOrDevEnvironment(): boolean {
@@ -68,17 +80,12 @@ export function isPreviewOrDevEnvironment(): boolean {
 }
 
 export function isParrNativeRezdyCheckoutEnabled(opts?: { previewQueryFlag?: string | null }): boolean {
-  // Strictly Preview/Dev/Test only during Phase 3 — NEVER active on Production.
   if (!isPreviewOrDevEnvironment()) return false;
   if (process.env.PARR_NATIVE_REZDY_CHECKOUT_ENABLED === "true") return true;
   if (opts?.previewQueryFlag === "native_preview") return true;
   return false;
 }
 
-/**
- * Safely reads ONLY the Stripe publishable key (`pk_...`) for browser tokenization.
- * Explicitly rejects secret keys (`sk_...` / `rk_...`) so no Stripe secret key can ever be exposed.
- */
 export function getSafeRezdyStripePublishableKey(): string | null {
   const candidate = (
     process.env.REZDY_STRIPE_PUBLISHABLE_KEY ||
@@ -167,7 +174,6 @@ async function callRezdyJson(
   });
 
   const text = await res.text();
-  // Scrub API key from any upstream error message
   const scrubbedText = apiKey ? text.split(apiKey).join("[REDACTED]") : text;
   if (!res.ok) {
     throw new Error(`Rezdy HTTP ${res.status}: ${scrubbedText.slice(0, 300)}`);
@@ -175,9 +181,42 @@ async function callRezdyJson(
   return JSON.parse(scrubbedText) as Record<string, unknown>;
 }
 
+// Shared ephemeral store ONLY when legacy unit tests pass `fetchImpl` without `inventoryDeps`
+const ephemeralLegacyTestStore = new InMemoryCasInventoryStore();
+
+function resolveInventoryDeps(deps?: {
+  fetchImpl?: FetchLike;
+  inventoryDeps?: InventoryRuntimeDeps;
+}): InventoryRuntimeDeps {
+  if (deps?.inventoryDeps) {
+    return {
+      ...deps.inventoryDeps,
+      fetchImpl: deps.inventoryDeps.fetchImpl ?? deps.fetchImpl,
+    };
+  }
+  if (deps?.fetchImpl) {
+    return {
+      store: ephemeralLegacyTestStore,
+      fetchImpl: deps.fetchImpl,
+      skipOpeningRezdyFetch: true,
+      finalizeOrderMirrorImpl: async (input) => ({
+        internalOrderId: `ord_test_${input.orderNumber}`,
+        bookingToken: `tok_test_${input.orderNumber}`,
+        created: true,
+      }),
+    };
+  }
+  return {};
+}
+
 export async function getParrRezdyAvailabilityForDate(
-  input: { vehicleSlug: ParrNativeVehicleSlug; dateKey: string },
-  deps?: { fetchImpl?: FetchLike }
+  input: {
+    vehicleSlug: ParrNativeVehicleSlug;
+    dateKey: string;
+    showId?: string | null;
+    qaSoldOut?: boolean;
+  },
+  deps?: { fetchImpl?: FetchLike; inventoryDeps?: InventoryRuntimeDeps }
 ) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(input.dateKey)) {
     throw new Error("Invalid ISO dateKey (expected YYYY-MM-DD).");
@@ -185,6 +224,39 @@ export async function getParrRezdyAvailabilityForDate(
   const cfg = PARR_PREVIEW_HIDDEN_PRODUCTS[input.vehicleSlug];
   if (!cfg) throw new Error(`Unsupported vehicle option: ${String(input.vehicleSlug)}`);
   assertAllowedTestProductCode(cfg.productCode);
+
+  const invDeps = resolveInventoryDeps(deps);
+  const parrInv = await getPublicVehicleAvailability(
+    {
+      dateKey: input.dateKey,
+      vehicleSlug: input.vehicleSlug,
+      showId: input.showId,
+    },
+    invDeps
+  );
+
+  const forcedQaSoldOut = Boolean(input.qaSoldOut && isPreviewOrDevEnvironment());
+
+  if (!parrInv.available || forcedQaSoldOut) {
+    return {
+      ok: true as const,
+      available: false,
+      soldOut: true,
+      statusMessage: SOLD_OUT_TRAVELER_MESSAGE,
+      vehicleSlug: cfg.slug,
+      productCode: cfg.productCode,
+      dateKey: input.dateKey,
+      canonicalShowId: parrInv.canonicalShowId,
+      capacity: cfg.dailyVehicleCapacity,
+      availableCount: 0,
+      basePriceUsd: cfg.basePriceUsd,
+      expectedBookingFeeUsd: cfg.expectedBookingFeeUsd,
+      expectedTotalChargedUsd: cfg.expectedTotalChargedUsd,
+      maxPartySize: cfg.maxPartySize,
+      vehicleQuantityAllowed: 1 as const,
+      session: null,
+    };
+  }
 
   const startRange = `${input.dateKey} 00:00:00`;
   const endRange = `${input.dateKey} 23:59:59`;
@@ -205,9 +277,14 @@ export async function getParrRezdyAvailabilityForDate(
     return {
       ok: true as const,
       available: false,
+      soldOut: true,
+      statusMessage: SOLD_OUT_TRAVELER_MESSAGE,
       vehicleSlug: cfg.slug,
       productCode: cfg.productCode,
       dateKey: input.dateKey,
+      canonicalShowId: parrInv.canonicalShowId,
+      capacity: cfg.dailyVehicleCapacity,
+      availableCount: 0,
       basePriceUsd: cfg.basePriceUsd,
       expectedBookingFeeUsd: cfg.expectedBookingFeeUsd,
       expectedTotalChargedUsd: cfg.expectedTotalChargedUsd,
@@ -225,9 +302,14 @@ export async function getParrRezdyAvailabilityForDate(
   return {
     ok: true as const,
     available: true,
+    soldOut: false,
+    statusMessage: null,
     vehicleSlug: cfg.slug,
     productCode: cfg.productCode,
     dateKey: input.dateKey,
+    canonicalShowId: parrInv.canonicalShowId,
+    capacity: cfg.dailyVehicleCapacity,
+    availableCount: parrInv.availableCount,
     basePriceUsd: cfg.basePriceUsd,
     expectedBookingFeeUsd: cfg.expectedBookingFeeUsd,
     expectedTotalChargedUsd: cfg.expectedTotalChargedUsd,
@@ -237,10 +319,10 @@ export async function getParrRezdyAvailabilityForDate(
       sessionId: String(openSession.id),
       startTimeLocal: String(openSession.startTimeLocal),
       endTimeLocal: openSession.endTimeLocal ? String(openSession.endTimeLocal) : null,
-      seatsAvailable: Number(openSession.seatsAvailable),
+      seatsAvailable: Math.min(Number(openSession.seatsAvailable), parrInv.availableCount),
       optionLabel: String(primaryOpt.label || cfg.displayName),
       optionPrice: Number(primaryOpt.price ?? cfg.basePriceUsd),
-      maxQuantity: Number(primaryOpt.maxQuantity ?? 1),
+      maxQuantity: 1,
     },
   };
 }
@@ -293,16 +375,11 @@ export async function getParrRezdyStatelessQuote(
     : [];
   const firstItem = items[0] ?? {};
 
-  // Note: Rezdy REST API v1 returns the account-wide 4% "Booking fee" inside `items[0].totalItemTax`
-  // even when Settings -> Taxes & Fees has 0 taxes. Never label this charge as tax.
   const itemAmount = Number(firstItem.amount ?? cfg.basePriceUsd);
   const bookingFeeUsd = Number(firstItem.totalItemTax ?? 0);
   const totalAmount = Number(booking.totalAmount ?? firstItem.subtotal ?? itemAmount + bookingFeeUsd);
   const totalDue = Number(booking.totalDue ?? totalAmount);
 
-  // Option B Hard Parity Gate: Traveler-visible breakdown and charged total must reconcile to the exact cent:
-  // - P94HN4: $499.00 base + $19.96 Booking fee (4%) = $518.96 total charged today
-  // - PU8R6Y: $699.00 base + $27.96 Booking fee (4%) = $726.96 total charged today
   const quoteParityPassed =
     Math.abs(itemAmount - cfg.basePriceUsd) < 0.005 &&
     Math.abs(bookingFeeUsd - cfg.expectedBookingFeeUsd) < 0.005 &&
@@ -319,6 +396,9 @@ export async function getParrRezdyStatelessQuote(
     vehicleSlug: cfg.slug,
     productCode: cfg.productCode,
     shortVehicleLabel: cfg.shortVehicleLabel,
+    basePriceCents: cfg.basePriceCents,
+    calculatedBookingFeeCents: cfg.calculatedBookingFeeCents,
+    allInTotalCents: cfg.allInTotalCents,
     basePriceUsd: cfg.basePriceUsd,
     bookingFeeRatePct: cfg.bookingFeeRatePct,
     bookingFeeLabel: cfg.bookingFeeLabel,
@@ -336,9 +416,7 @@ export async function getParrRezdyStatelessQuote(
       totalChargedTodayLine: `Total charged today: $${totalDueRounded.toFixed(2)}`,
     },
     quoteParityPassed,
-    blockedReason: quoteParityPassed
-      ? null
-      : ("QUOTE_TOTAL_MISMATCH" as const),
+    blockedReason: quoteParityPassed ? null : ("QUOTE_TOTAL_MISMATCH" as const),
     blockedMessage: quoteParityPassed
       ? null
       : `Rezdy stateless quote returned $${totalDueRounded.toFixed(2)} ($${baseRounded.toFixed(2)} vehicle + $${feeRounded.toFixed(2)} booking fee) instead of expected $${cfg.expectedTotalChargedUsd.toFixed(2)} ($${cfg.basePriceUsd.toFixed(2)} + $${cfg.expectedBookingFeeUsd.toFixed(2)} Booking fee (4%)). Checkout is paused until totals reconcile.`,
@@ -358,6 +436,7 @@ export type CreateParrNativeBookingInput = {
   phone: string;
   pickupAddress: string;
   concertAndTripNotes?: string;
+  showId?: string;
   cardToken: string;
   idempotencyKey: string;
 };
@@ -447,13 +526,19 @@ async function recoverExistingBookingByResellerReference(
   if (found.status !== "CONFIRMED") {
     throw new Error(`Recovered RezdyPay booking is not CONFIRMED (status=${String(found.status)}).`);
   }
+  if (found.totalAmount !== undefined) {
+    const actualTotal = Number(found.totalAmount);
+    if (Number.isFinite(actualTotal) && Math.abs(actualTotal - expected.expectedPriceUsd) > 0.02) {
+      throw new Error(`Recovered booking totalAmount (${actualTotal}) mismatched expected (${expected.expectedPriceUsd}).`);
+    }
+  }
 
   return found;
 }
 
 export async function createParrRezdyBooking(
   input: CreateParrNativeBookingInput,
-  deps?: { fetchImpl?: FetchLike }
+  deps?: { fetchImpl?: FetchLike; inventoryDeps?: InventoryRuntimeDeps }
 ) {
   const validation = validateParrBookingInput(input);
   if (!validation.valid) {
@@ -468,9 +553,19 @@ export async function createParrRezdyBooking(
   const cfg = PARR_PREVIEW_HIDDEN_PRODUCTS[input.vehicleSlug];
   assertAllowedTestProductCode(cfg.productCode);
   const normalizedStart = input.startTimeLocal.replace("T", " ");
-  const resellerReference = buildParrResellerReference(input.idempotencyKey);
+  const dateKey = normalizedStart.slice(0, 10);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(dateKey)) {
+    return {
+      ok: false as const,
+      httpStatus: 400,
+      code: "INVALID_DATE",
+      message: "Invalid concert service date.",
+    };
+  }
 
-  // Concurrent duplicate-submit lock
+  const resellerReference = buildParrResellerReference(input.idempotencyKey);
+  const invDeps = resolveInventoryDeps(deps);
+
   if (inFlightSubmissions.has(resellerReference)) {
     return {
       ok: false as const,
@@ -482,7 +577,18 @@ export async function createParrRezdyBooking(
 
   inFlightSubmissions.add(resellerReference);
   try {
-    // 1. Pre-create idempotency recovery check (prevents re-charging on retry!)
+    const customerRecord = {
+      firstName: input.firstName.trim(),
+      lastName: input.lastName.trim(),
+      email: input.email.trim(),
+      phone: input.phone.trim(),
+    };
+    const pickupRecord = {
+      address: input.pickupAddress.trim(),
+      notes: input.concertAndTripNotes?.trim() || null,
+    };
+
+    // 1. Pre-create idempotency recovery check against Rezdy (prevents double-charging on retry!)
     const preexisting = await recoverExistingBookingByResellerReference(
       resellerReference,
       {
@@ -494,6 +600,34 @@ export async function createParrRezdyBooking(
     );
     if (preexisting) {
       const orderNum = String(preexisting.orderNumber);
+      // Ensure local hold & order mirror are reconciled idempotently without consuming a 2nd unit
+      const holdCheck = await acquireOrReuseCheckoutHold(
+        {
+          dateKey,
+          vehicleSlug: input.vehicleSlug,
+          idempotencyKey: input.idempotencyKey,
+          partySize: input.partySize,
+          showId: input.showId,
+        },
+        invDeps
+      );
+      if (holdCheck.ok && holdCheck.hold.state !== "confirmed_sold") {
+        await finalizeConfirmedRezdyHold(
+          {
+            dateKey,
+            vehicleSlug: input.vehicleSlug,
+            internalHoldId: holdCheck.hold.internalHoldId,
+            rezdyOrderNumber: orderNum,
+            resellerReference,
+            startTimeLocal: normalizedStart,
+            partySize: input.partySize,
+            customer: customerRecord,
+            pickup: pickupRecord,
+            rezdyBookingPayload: preexisting,
+          },
+          invDeps
+        );
+      }
       return {
         ok: true as const,
         httpStatus: 200,
@@ -506,7 +640,31 @@ export async function createParrRezdyBooking(
       };
     }
 
-    // 2. Hard Stateless Quote Parity Gate ($518.96 Suburban / $726.96 Van) before attempting any card charge!
+    // 2. Atomic Vehicle Inventory Hold Gate (Sections E, G, H):
+    // Enforces 6 Suburbans / 3 Vans max, blocks sold-out & reconciliation-blocked pools,
+    // prevents stale browsers from bypassing sold-out UI, and reuses same-idempotencyKey holds!
+    const holdRes = await acquireOrReuseCheckoutHold(
+      {
+        dateKey,
+        vehicleSlug: input.vehicleSlug,
+        idempotencyKey: input.idempotencyKey,
+        partySize: input.partySize,
+        showId: input.showId,
+      },
+      invDeps
+    );
+    if (!holdRes.ok) {
+      return {
+        ok: false as const,
+        httpStatus: 409,
+        code: holdRes.code,
+        message: SOLD_OUT_TRAVELER_MESSAGE,
+      };
+    }
+
+    const internalHoldId = holdRes.hold.internalHoldId;
+
+    // 3. Hard Stateless Quote Parity Gate ($518.96 Suburban / $726.96 Van) before charging!
     const quote = await getParrRezdyStatelessQuote(
       {
         vehicleSlug: input.vehicleSlug,
@@ -517,6 +675,17 @@ export async function createParrRezdyBooking(
       deps
     );
     if (!quote.ok || !quote.quoteParityPassed) {
+      await releaseHoldAfterFailedAttempt(
+        {
+          dateKey,
+          vehicleSlug: input.vehicleSlug,
+          internalHoldId,
+          reason: quote.ok
+            ? quote.blockedReason ?? "QUOTE_TOTAL_MISMATCH"
+            : quote.code,
+        },
+        invDeps
+      );
       return {
         ok: false as const,
         httpStatus: 422,
@@ -527,17 +696,44 @@ export async function createParrRezdyBooking(
       };
     }
 
-    // 3. Submit server-side RezdyPay booking (sendNotifications: false during Preview testing)
+    // 4. Promote hold to `payment_booking_pending` with durable outbox record BEFORE calling Rezdy!
+    const pendingPromotion = await promoteHoldToPendingWithOutbox(
+      {
+        dateKey,
+        vehicleSlug: input.vehicleSlug,
+        internalHoldId,
+        resellerReference,
+        metadata: {
+          vehicleSlug: input.vehicleSlug,
+          productCode: cfg.productCode,
+          startTimeLocal: normalizedStart,
+          partySize: input.partySize,
+          customerEmail: customerRecord.email,
+        },
+      },
+      invDeps
+    );
+
+    if (pendingPromotion.alreadyConfirmedOrderNumber) {
+      const ord = pendingPromotion.alreadyConfirmedOrderNumber;
+      return {
+        ok: true as const,
+        httpStatus: 200,
+        idempotentRecovery: true,
+        orderNumber: ord,
+        resellerReference,
+        status: "CONFIRMED",
+        totalPaid: cfg.expectedTotalChargedUsd,
+        confirmationSig: signConfirmationToken(ord, resellerReference),
+      };
+    }
+
+    // 5. Submit server-side RezdyPay booking (sendNotifications: false during Preview testing)
     const partyFieldLabel = `Party Size (1-${cfg.maxPartySize} Guests)`;
     const bookingPayload = {
       resellerReference,
       sendNotifications: false,
-      customer: {
-        firstName: input.firstName.trim(),
-        lastName: input.lastName.trim(),
-        email: input.email.trim(),
-        phone: input.phone.trim(),
-      },
+      customer: customerRecord,
       items: [
         {
           productCode: cfg.productCode,
@@ -548,17 +744,17 @@ export async function createParrRezdyBooking(
         },
       ],
       fields: [
-        { label: "First Name", value: input.firstName.trim() },
-        { label: "Last Name", value: input.lastName.trim() },
-        { label: "Email", value: input.email.trim() },
-        { label: "Mobile", value: input.phone.trim() },
-        { label: "Pickup Address", value: input.pickupAddress.trim() },
+        { label: "First Name", value: customerRecord.firstName },
+        { label: "Last Name", value: customerRecord.lastName },
+        { label: "Email", value: customerRecord.email },
+        { label: "Mobile", value: customerRecord.phone },
+        { label: "Pickup Address", value: pickupRecord.address },
         { label: partyFieldLabel, value: String(input.partySize) },
         ...(input.concertAndTripNotes?.trim()
           ? [{ label: "Concert / Artist & Trip Notes", value: input.concertAndTripNotes.trim() }]
           : []),
       ],
-      comments: `PARR Private ${cfg.displayName} | Party Size: ${input.partySize} | Pickup: ${input.pickupAddress.trim()}${input.concertAndTripNotes?.trim() ? ` | Notes: ${input.concertAndTripNotes.trim()}` : ""}`,
+      comments: `PARR Private ${cfg.displayName} | Party Size: ${input.partySize} | Pickup: ${pickupRecord.address}${input.concertAndTripNotes?.trim() ? ` | Notes: ${input.concertAndTripNotes.trim()}` : ""}`,
       creditCard: {
         cardToken: input.cardToken.trim(),
       },
@@ -572,6 +768,15 @@ export async function createParrRezdyBooking(
       });
       const booking = (createdRes.booking ?? createdRes) as Record<string, unknown>;
       if (!booking.orderNumber || booking.status !== "CONFIRMED") {
+        await releaseHoldAfterFailedAttempt(
+          {
+            dateKey,
+            vehicleSlug: input.vehicleSlug,
+            internalHoldId,
+            reason: `Rezdy returned non-confirmed status: ${String(booking.status ?? "NONE")}`,
+          },
+          invDeps
+        );
         return {
           ok: false as const,
           httpStatus: 502,
@@ -580,45 +785,143 @@ export async function createParrRezdyBooking(
             "Your payment could not be confirmed by RezdyPay. No reservation was finalized—please check your card or use the classic booking widget.",
         };
       }
+
       const orderNum = String(booking.orderNumber);
+      const finalized = await finalizeConfirmedRezdyHold(
+        {
+          dateKey,
+          vehicleSlug: input.vehicleSlug,
+          internalHoldId,
+          rezdyOrderNumber: orderNum,
+          resellerReference,
+          startTimeLocal: normalizedStart,
+          partySize: input.partySize,
+          customer: customerRecord,
+          pickup: pickupRecord,
+          rezdyBookingPayload: booking,
+        },
+        invDeps
+      );
+
+      if (!finalized.finalizedLocally) {
+        // Requirement G.7: Rezdy succeeded, PARR local mirror failed!
+        // Never report a failed purchase and resell the same vehicle.
+        return {
+          ok: true as const,
+          httpStatus: 202,
+          idempotentRecovery: false,
+          pendingLocalReconciliation: true,
+          orderNumber: orderNum,
+          resellerReference,
+          internalHoldId,
+          status: "CONFIRMED",
+          totalPaid: Number(booking.totalPaid ?? cfg.expectedTotalChargedUsd),
+          confirmationSig: signConfirmationToken(orderNum, resellerReference),
+        };
+      }
+
       return {
         ok: true as const,
         httpStatus: 200,
         idempotentRecovery: false,
+        pendingLocalReconciliation: false,
         orderNumber: orderNum,
+        internalOrderId: finalized.internalOrderId,
+        bookingToken: finalized.bookingToken,
+        internalHoldId,
         resellerReference,
         status: String(booking.status),
         totalPaid: Number(booking.totalPaid ?? cfg.expectedTotalChargedUsd),
         confirmationSig: signConfirmationToken(orderNum, resellerReference),
       };
     } catch (upstreamErr) {
-      // 4. Timeout / network-drop recovery: check if Rezdy accepted the booking before surfacing failure!
-      const recovered = await recoverExistingBookingByResellerReference(
-        resellerReference,
-        {
-          productCode: cfg.productCode,
-          startTimeLocal: normalizedStart,
-          expectedPriceUsd: cfg.expectedTotalChargedUsd,
-        },
-        deps?.fetchImpl
-      ).catch(() => null);
+      // 6. Timeout / network-drop recovery: check if Rezdy accepted the booking before releasing the hold!
+      let recovered: Record<string, unknown> | null = null;
+      let recoveryLookupFailed = false;
+      try {
+        recovered = await recoverExistingBookingByResellerReference(
+          resellerReference,
+          {
+            productCode: cfg.productCode,
+            startTimeLocal: normalizedStart,
+            expectedPriceUsd: cfg.expectedTotalChargedUsd,
+          },
+          deps?.fetchImpl
+        );
+      } catch {
+        recoveryLookupFailed = true;
+      }
 
       if (recovered) {
         const orderNum = String(recovered.orderNumber);
+        const finalized = await finalizeConfirmedRezdyHold(
+          {
+            dateKey,
+            vehicleSlug: input.vehicleSlug,
+            internalHoldId,
+            rezdyOrderNumber: orderNum,
+            resellerReference,
+            startTimeLocal: normalizedStart,
+            partySize: input.partySize,
+            customer: customerRecord,
+            pickup: pickupRecord,
+            rezdyBookingPayload: recovered,
+          },
+          invDeps
+        );
+
         return {
           ok: true as const,
-          httpStatus: 200,
+          httpStatus: finalized.finalizedLocally ? 200 : 202,
           idempotentRecovery: true,
+          pendingLocalReconciliation: !finalized.finalizedLocally,
           orderNumber: orderNum,
           resellerReference,
+          internalHoldId,
           status: String(recovered.status),
           totalPaid: Number(recovered.totalPaid ?? cfg.expectedTotalChargedUsd),
           confirmationSig: signConfirmationToken(orderNum, resellerReference),
         };
       }
 
-      const errMsg = upstreamErr instanceof Error ? upstreamErr.message.toLowerCase() : "";
-      if (errMsg.includes("declin") || errMsg.includes("insufficient") || errMsg.includes("card")) {
+      const rawErrMsg = upstreamErr instanceof Error ? upstreamErr.message : String(upstreamErr);
+      const errMsg = rawErrMsg.toLowerCase();
+      const isDefinitiveCardDecline =
+        errMsg.includes("declin") || errMsg.includes("insufficient") || errMsg.includes("card");
+
+      if (recoveryLookupFailed && !isDefinitiveCardDecline) {
+        // Upstream state is genuinely unknown; block the unit pending reconciliation so it cannot be resold!
+        await blockAmbiguousInFlightHold(
+          {
+            dateKey,
+            vehicleSlug: input.vehicleSlug,
+            internalHoldId,
+            resellerReference,
+            errorDetail: rawErrMsg,
+          },
+          invDeps
+        );
+        return {
+          ok: false as const,
+          httpStatus: 503,
+          code: "BOOKING_PENDING_RECONCILIATION",
+          message:
+            "Your payment submission experienced a network interruption while confirming with Rezdy. We have held your vehicle so it cannot be resold while our dispatch team verifies your confirmation.",
+        };
+      }
+
+      // Confirmed zero booking exists in Rezdy -> safely release the hold!
+      await releaseHoldAfterFailedAttempt(
+        {
+          dateKey,
+          vehicleSlug: input.vehicleSlug,
+          internalHoldId,
+          reason: rawErrMsg,
+        },
+        invDeps
+      );
+
+      if (isDefinitiveCardDecline) {
         return {
           ok: false as const,
           httpStatus: 402,

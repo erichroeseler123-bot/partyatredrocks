@@ -153,8 +153,17 @@ export function ParrNativeRezdyCheckout({
       idempotencyKeyRef.current = createClientIdempotencyKey();
 
       try {
+        const qs = new URLSearchParams({
+          vehicle: vehicleSlug,
+          date: dateKey,
+        });
+        if (typeof window !== "undefined") {
+          const cur = new URLSearchParams(window.location.search);
+          const qso = cur.get("qa_sold_out");
+          if (qso) qs.set("qa_sold_out", qso);
+        }
         const res = await fetch(
-          `/api/rezdy/availability?vehicle=${encodeURIComponent(vehicleSlug)}&date=${encodeURIComponent(dateKey)}`,
+          `/api/rezdy/availability?${qs.toString()}`,
           { cache: "no-store" }
         );
         const data = await res.json();
@@ -313,10 +322,16 @@ export function ParrNativeRezdyCheckout({
 
       const bookData = await bookRes.json();
       if (!bookRes.ok || !bookData.ok) {
-        setSubmitError(
-          bookData.message ||
-            "Your payment could not be completed. No booking was finalized—please check your card or switch to the classic widget."
-        );
+        if (bookData.code === "SOLD_OUT" || bookData.code === "RECONCILIATION_BLOCKED") {
+          setAvailState("sold_out");
+          setSession(null);
+          setSubmitError("Not available for this show.");
+        } else {
+          setSubmitError(
+            bookData.message ||
+              "Your payment could not be completed. No booking was finalized—please check your card or switch to the classic widget."
+          );
+        }
         setSubmitStatus("idle");
         inFlightLockRef.current = false;
         return;
@@ -427,12 +442,15 @@ export function ParrNativeRezdyCheckout({
         data-testid="parr-upfront-price-breakdown"
         className="mt-4 rounded-2xl border border-white/16 bg-black/35 p-4"
       >
-        <div className="space-y-1 text-sm text-white/80">
+        <div className="text-xl font-black text-[#ffb07c] sm:text-2xl">
+          Total charged today: ${activeTotal.toFixed(2)}
+        </div>
+        <div className="mt-1.5 space-y-0.5 text-sm text-white/85">
           <div>{shortVehicleLabel}: ${activeBase.toFixed(2)}</div>
           <div>Booking fee (4%): ${activeFee.toFixed(2)}</div>
         </div>
-        <div className="mt-2 border-t border-white/12 pt-2 text-lg font-black text-[#ffb07c] sm:text-xl">
-          Total charged today: ${activeTotal.toFixed(2)}
+        <div className="mt-2 border-t border-white/12 pt-2 text-xs text-white/70">
+          Your complete total is shown before payment.
         </div>
       </div>
 
@@ -482,9 +500,15 @@ export function ParrNativeRezdyCheckout({
         ) : null}
 
         {availState === "sold_out" ? (
-          <div className="rounded-xl border border-amber-400/35 bg-amber-500/12 p-4 text-sm text-amber-100">
-            No online test/inventory session is open for <strong>{selectedDate}</strong> on this hidden Preview product.
-            Choose another date or switch to the classic Rezdy booking widget above.
+          <div
+            data-testid="checkout-sold-out-banner"
+            role="status"
+            className="rounded-xl border border-amber-400/40 bg-amber-500/15 p-4 text-sm text-amber-100"
+          >
+            <div className="text-base font-black text-white">Not available for this show.</div>
+            <p className="mt-1 text-xs leading-5 text-amber-100/90 sm:text-sm">
+              {shortVehicleLabel} inventory is not available for <strong>{selectedDate}</strong>. Select another concert date or check whether another private vehicle class is open.
+            </p>
           </div>
         ) : null}
 
@@ -581,15 +605,15 @@ export function ParrNativeRezdyCheckout({
               data-testid="parr-prepayment-price-breakdown"
               className="rounded-2xl border border-white/16 bg-black/35 p-4"
             >
-              <div className="space-y-1 text-sm text-white/80">
+              <div className="text-xl font-black text-[#ffb07c] sm:text-2xl">
+                Total charged today: ${quote.totalDue.toFixed(2)}
+              </div>
+              <div className="mt-1.5 space-y-0.5 text-sm text-white/85">
                 <div>{shortVehicleLabel}: ${quote.itemAmount.toFixed(2)}</div>
                 <div>Booking fee (4%): ${quote.bookingFeeUsd.toFixed(2)}</div>
               </div>
-              <div className="mt-2 border-t border-white/12 pt-2 text-lg font-black text-[#ffb07c] sm:text-xl">
-                Total charged today: ${quote.totalDue.toFixed(2)}
-              </div>
-              <p className="mt-1.5 text-xs text-white/60">
-                Round-trip private vehicle with Upper North Lot tailgating gear and on-site waiting driver. Concert tickets and optional driver gratuity excluded.
+              <p className="mt-2 border-t border-white/12 pt-2 text-xs text-white/75">
+                Your complete total is shown before payment. Round-trip private vehicle with Upper North Lot tailgating gear and on-site waiting driver. Concert tickets and optional driver gratuity excluded.
               </p>
             </div>
 

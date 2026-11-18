@@ -5,8 +5,8 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import Link from "next/link";
 import {
-  SUBURBAN_2027_USD,
-  VAN_2027_USD,
+  PARR_2027_OPTION_B_PRICING_AUTHORITY,
+  PARR_COMPLETE_TOTAL_DISCLOSURE,
 } from "@/lib/pricing";
 import { notFound, redirect } from "next/navigation";
 import TicketButtons from "@/components/TicketButtons";
@@ -182,7 +182,9 @@ function pickDescription(e: ShowEvent | null, isPast: boolean) {
     return `Historical concert record for ${e.title}${venue}${when} (completed event). Browse verified upcoming 2027 Red Rocks concert dates and private group transportation.`;
   }
   if (isRedRocksSlug(e.venue?.siteSlug)) {
-    return `Private transportation for ${e.title}${venue}${when}. Reserve a $${SUBURBAN_2027_USD} Private Suburban (up to 6) or $${VAN_2027_USD} Private Van (up to 10) flat round-trip with Upper North Lot tailgating setup and a waiting driver for the ride home.`;
+    const suv = PARR_2027_OPTION_B_PRICING_AUTHORITY.suv;
+    const van = PARR_2027_OPTION_B_PRICING_AUTHORITY.van;
+    return `Private transportation for ${e.title}${venue}${when}. Reserve a ${suv.allInTotalFormatted} total Private Suburban (${suv.itemizedSummary}, up to 6) or ${van.allInTotalFormatted} total Private Van (${van.itemizedSummary}, up to 10) with Upper North Lot tailgating setup and a waiting driver.`;
   }
   return `Transportation planning for ${e.title}${venue}${when}. Plan your group ride and post-show return before show night.`;
 }
@@ -330,16 +332,18 @@ function futureShowJsonLdNodes(e: ShowEvent, id: string, image?: string | null) 
     offers: [
       {
         "@type": "Offer",
-        name: "Private Suburban (Up to 6 Guests — Flat Round-Trip Vehicle Price)",
-        price: String(SUBURBAN_2027_USD),
+        name: "Private Suburban (Up to 6 Guests — All-In Round-Trip Vehicle Total)",
+        price: PARR_2027_OPTION_B_PRICING_AUTHORITY.suv.schemaPriceString,
         priceCurrency: "USD",
+        description: `${PARR_2027_OPTION_B_PRICING_AUTHORITY.suv.allInTotalFormatted} total (${PARR_2027_OPTION_B_PRICING_AUTHORITY.suv.itemizedSummary}). ${PARR_COMPLETE_TOTAL_DISCLOSURE}`,
         url: bookingAbsoluteUrl,
       },
       {
         "@type": "Offer",
-        name: "Private 10-Passenger Van (Up to 10 Guests — Flat Round-Trip Vehicle Price)",
-        price: String(VAN_2027_USD),
+        name: "Private 10-Passenger Van (Up to 10 Guests — All-In Round-Trip Vehicle Total)",
+        price: PARR_2027_OPTION_B_PRICING_AUTHORITY.van.schemaPriceString,
         priceCurrency: "USD",
+        description: `${PARR_2027_OPTION_B_PRICING_AUTHORITY.van.allInTotalFormatted} total (${PARR_2027_OPTION_B_PRICING_AUTHORITY.van.itemizedSummary}). ${PARR_COMPLETE_TOTAL_DISCLOSURE}`,
         url: bookingAbsoluteUrl,
       },
     ],
@@ -800,7 +804,7 @@ export default async function ShowPage({ params }: Props) {
               {isPastShow
                 ? `This ${venueName} concert concluded on ${fmtDate(e.datetime_local)}. Use the links below to check setlist archives, view upcoming ${primaryArtist || "artist"} dates, or plan private group transportation for a future 2027 concert night.`
                 : isRedRocksVenue
-                  ? `Skip the steep lot hike and post-encore rideshare surge. Reserve one dedicated private vehicle for your group—$${SUBURBAN_2027_USD} Private Suburban (up to 6) or $${VAN_2027_USD} Private Van (up to 10) flat round-trip—including Upper North Lot tailgating setup (chairs, cooler, speaker & ice) and your driver waiting on-site through the show.`
+                  ? `Skip the steep lot hike and post-encore rideshare surge. Reserve one dedicated private vehicle for your group—${PARR_2027_OPTION_B_PRICING_AUTHORITY.suv.allInTotalFormatted} total Private Suburban (${PARR_2027_OPTION_B_PRICING_AUTHORITY.suv.itemizedSummary}, up to 6) or ${PARR_2027_OPTION_B_PRICING_AUTHORITY.van.allInTotalFormatted} total Private Van (${PARR_2027_OPTION_B_PRICING_AUTHORITY.van.itemizedSummary}, up to 10)—including Upper North Lot tailgating setup (chairs, cooler, speaker & ice) and your driver waiting on-site through the show. ${PARR_COMPLETE_TOTAL_DISCLOSURE}`
                   : servedVenueSummary
                     ? `Attending ${e.title} at ${venueName}? Request a dedicated private group charter (${servedVenueSummary}) with pre-set pickup and post-show return.`
                     : `Concert schedule and venue details for ${e.title} at ${venueName}.`}
@@ -830,7 +834,7 @@ export default async function ShowPage({ params }: Props) {
                       className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#ff6b3d] px-7 text-xs font-black uppercase tracking-[0.14em] text-white no-underline shadow-[0_12px_30px_rgba(255,107,61,0.3)] transition hover:bg-[#ff7f56]"
                     >
                       {isRedRocksVenue
-                        ? `Book Private Ride ($${SUBURBAN_2027_USD} / $${VAN_2027_USD})`
+                        ? `Book Private Ride (${PARR_2027_OPTION_B_PRICING_AUTHORITY.suv.allInTotalFormatted} / ${PARR_2027_OPTION_B_PRICING_AUTHORITY.van.allInTotalFormatted} Total)`
                         : "Request Private Venue Charter"}
                     </Link>
                   ) : null}
@@ -1047,7 +1051,7 @@ export default async function ShowPage({ params }: Props) {
             </article>
           </div>
           <p className="mt-4 text-xs text-white/55">
-            Starting vehicle rates ($499 Private Suburban up to 6 / $699 Private Van up to 10) are flat per vehicle round-trip from Denver/Golden/Morrison; concert admission tickets, optional en-route purchases, and driver gratuity are not included.
+            Published all-in vehicle totals ({PARR_2027_OPTION_B_PRICING_AUTHORITY.suv.allInTotalFormatted} Private Suburban: {PARR_2027_OPTION_B_PRICING_AUTHORITY.suv.itemizedSummary}, up to 6 / {PARR_2027_OPTION_B_PRICING_AUTHORITY.van.allInTotalFormatted} Private Van: {PARR_2027_OPTION_B_PRICING_AUTHORITY.van.itemizedSummary}, up to 10) cover round-trip private service from Denver/Golden/Morrison. {PARR_COMPLETE_TOTAL_DISCLOSURE} Concert admission tickets, optional en-route purchases, and driver gratuity are not included.
           </p>
         </section>
       ) : null}
@@ -1177,9 +1181,9 @@ export default async function ShowPage({ params }: Props) {
           </div>
           <p className="mt-3 text-sm text-white/75">
             {isPastShow
-              ? "This concert date has passed—choose a verified 2027 Red Rocks show date to reserve a private Suburban ($499) or Van ($699)."
+              ? `This concert date has passed—choose a verified 2027 Red Rocks show date to reserve a Private Suburban (${PARR_2027_OPTION_B_PRICING_AUTHORITY.suv.allInTotalFormatted} total) or Van (${PARR_2027_OPTION_B_PRICING_AUTHORITY.van.allInTotalFormatted} total).`
               : isRedRocksVenue
-                ? "Reserve your group's private Suburban ($499) or 10-Passenger Van ($699) before concert night."
+                ? `Reserve your group's Private Suburban (${PARR_2027_OPTION_B_PRICING_AUTHORITY.suv.allInTotalFormatted} total: ${PARR_2027_OPTION_B_PRICING_AUTHORITY.suv.itemizedSummary}) or 10-Passenger Van (${PARR_2027_OPTION_B_PRICING_AUTHORITY.van.allInTotalFormatted} total: ${PARR_2027_OPTION_B_PRICING_AUTHORITY.van.itemizedSummary}) before concert night.`
                 : "Request private group transportation for an upcoming venue date."}
           </p>
           <div className="mt-4">

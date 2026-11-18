@@ -7,16 +7,18 @@ import { GuideVisualHero } from "@/components/guide/GuideVisualHero";
 import { assertUniqueGuideImages, getGuideCardImage } from "@/data/media";
 import { type GuideVisualKey, guideVisuals } from "@/lib/guideVisuals";
 import { buildPageIntentMetadata } from "@/lib/pageIntentMetadata";
-import { SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
+import { PARR_2027_OPTION_B_PRICING_AUTHORITY, PARR_COMPLETE_TOTAL_DISCLOSURE } from "@/lib/pricing";
 
 const SITE = "https://www.partyatredrocks.com";
+const SUV = PARR_2027_OPTION_B_PRICING_AUTHORITY.suv;
+const VAN = PARR_2027_OPTION_B_PRICING_AUTHORITY.van;
 const GUIDE_HERO_IMAGE = getGuideCardImage("red-rocks-visiting-guide");
 
 export const metadata: Metadata = {
   ...buildPageIntentMetadata("/guide"),
   title: "Red Rocks Show-Night Planning Guides | Tailgating, Pickups, Bags & Parking",
   description:
-    `Local show-night planning guides for Red Rocks Amphitheatre: Upper North Lot tailgating, Denver & Golden pickup logistics, single-pocket bag rules, parking tradeoffs, and $${SUBURBAN_2027_USD}/$${VAN_2027_USD} private rides.`,
+    `Local show-night planning guides for Red Rocks Amphitheatre: Upper North Lot tailgating, Denver & Golden pickup logistics, single-pocket bag rules, parking tradeoffs, and ${SUV.allInTotalFormatted}/${VAN.allInTotalFormatted} total private rides.`,
   robots: {
     index: true,
     follow: true,
@@ -59,7 +61,7 @@ const featured: Card[] = [
   {
     id: "transportation-guide",
     title: "Transportation Comparison",
-    desc: `Private Suburban ($${SUBURBAN_2027_USD}) and Private Van ($${VAN_2027_USD}) vs. rideshare surges and self-driving.`,
+    desc: `Private Suburban (${SUV.allInTotalFormatted} total: ${SUV.itemizedSummary}) and Private Van (${VAN.allInTotalFormatted} total: ${VAN.itemizedSummary}) vs. rideshare surges and self-driving.`,
     href: "/guide/transportation",
     kicker: "Transportation",
     visual: "transportation",
@@ -197,7 +199,7 @@ export default async function GuideHub() {
           actions={
             <>
               <Link href="/book/red-rocks-amphitheatre/private" className="btn-primary">
-                Choose Private Vehicle (${SUBURBAN_2027_USD} / ${VAN_2027_USD})
+                Choose Private Vehicle ({SUV.allInTotalFormatted} / {VAN.allInTotalFormatted} Total)
               </Link>
               <Link href="/red-rocks/concerts" className="btn-ghost">
                 2027 Concert Schedule
@@ -244,10 +246,10 @@ export default async function GuideHub() {
             >
               <div className="text-[11px] font-black uppercase tracking-[0.18em] text-[#ffb07c]">Step 3 · Lock Your Vehicle</div>
               <h3 className="mt-2 text-xl font-black uppercase tracking-[-0.02em] text-white">
-                Reserve Suburban (${SUBURBAN_2027_USD}) or Van (${VAN_2027_USD})
+                Reserve Suburban ({SUV.allInTotalFormatted}) or Van ({VAN.allInTotalFormatted})
               </h3>
               <p className="mt-2 text-sm leading-6 text-white/78">
-                One flat vehicle price covers door-to-door pickup, tailgating time, driver waiting through the concert, and the return ride home.
+                Upfront all-in vehicle total ({SUV.itemizedSummary} or {VAN.itemizedSummary}) covers door-to-door pickup, tailgating time, waiting driver, and the return ride home. {PARR_COMPLETE_TOTAL_DISCLOSURE}
               </p>
             </Link>
           </div>

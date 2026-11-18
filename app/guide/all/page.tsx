@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { readdirSync, statSync, existsSync } from "fs";
 import path from "path";
+import { SUBURBAN_ALL_IN_TOTAL_LABEL } from "@/lib/rideCatalog";
 
 export const runtime = "nodejs"; // allows fs
 export const dynamic = "force-dynamic"; // avoids static caching issues
@@ -103,7 +104,7 @@ export default function AllGuidesIndex() {
               Back to Guide Hub →
             </Link>
             <Link href="/book/red-rocks-amphitheatre/private" className="btn-primary">
-              Book Private Red Rocks Transportation — from $499 →
+              Book Private Red Rocks Transportation — from {SUBURBAN_ALL_IN_TOTAL_LABEL} total →
             </Link>
           </div>
         </header>

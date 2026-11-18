@@ -1,14 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { shows2026 } from "@/lib/shows-2026";
-import { SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
+import { PARR_COMPLETE_TOTAL_DISCLOSURE } from "@/lib/pricing";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
 
 const SITE = "https://www.partyatredrocks.com";
 
 export const metadata: Metadata = {
   title: "2026 Red Rocks Season Lineup Archive | Event Guides",
   description:
-    `Historical 2026 Red Rocks season preview and show-by-show guide archive. Planning a 2027 concert night? See the 2027 Red Rocks schedule and book private transportation ($${SUBURBAN_2027_USD} Suburban / $${VAN_2027_USD} Van).`,
+    `Historical 2026 Red Rocks season preview and show-by-show guide archive. Planning a 2027 concert night? See the 2027 Red Rocks schedule and book private transportation (${SUBURBAN_ALL_IN_TOTAL_LABEL} Suburban total / ${VAN_ALL_IN_TOTAL_LABEL} Van total, including 4% Booking fee).`,
   alternates: { canonical: `${SITE}/guide/events/2026-season-preview` },
   openGraph: {
     title: "2026 Red Rocks Season Lineup Guide (Archive)",
@@ -37,7 +43,7 @@ export default function SeasonPreview() {
         </Link>{" "}
         or{" "}
         <Link href="/book/red-rocks-amphitheatre/private" className="font-bold text-[#ffb07c] underline">
-          reserve a 2027 Private Suburban (${SUBURBAN_2027_USD}) or Private Van (${VAN_2027_USD})
+          reserve a 2027 Private Suburban ({SUBURBAN_ALL_IN_TOTAL_LABEL} total: {SUBURBAN_ITEMIZED_LABEL}) or Private Van ({VAN_ALL_IN_TOTAL_LABEL} total: {VAN_ITEMIZED_LABEL})
         </Link>
         .
       </aside>
@@ -87,7 +93,7 @@ export default function SeasonPreview() {
           Planning a 2027 Red Rocks Night?
         </h2>
         <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-muted">
-          Book a flat-rate Private Suburban (${SUBURBAN_2027_USD}, up to 6 guests) or Private Van (${VAN_2027_USD}, up to 10 guests) with Upper North Lot tailgating gear and a driver waiting through the show.
+          Book a Private Suburban ({SUBURBAN_ALL_IN_TOTAL_LABEL} total: {SUBURBAN_ITEMIZED_LABEL}, up to 6 guests) or Private Van ({VAN_ALL_IN_TOTAL_LABEL} total: {VAN_ITEMIZED_LABEL}, up to 10 guests) with Upper North Lot tailgating gear and a driver waiting through the show. {PARR_COMPLETE_TOTAL_DISCLOSURE}
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-4">
           <Link href="/red-rocks/concerts" className="btn-primary">

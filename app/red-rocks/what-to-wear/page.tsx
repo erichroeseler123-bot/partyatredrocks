@@ -1,14 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CheckCircle2, CloudSun, ShieldCheck, Thermometer, Wind } from "lucide-react";
-import { SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
+import { PARR_COMPLETE_TOTAL_DISCLOSURE } from "@/lib/pricing";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
 
 const SITE = "https://www.partyatredrocks.com";
 
 export const metadata: Metadata = {
   title: "What to Wear to a Red Rocks Concert | Seasonal Layering & Packing Guide",
   description:
-    `Month-by-month Red Rocks Amphitheatre outfit and layering guide for 6,450-ft elevation swings: spring, summer, and fall packing lists, footwear, bag rules, and keeping extra layers in your private Suburban ($${SUBURBAN_2027_USD}) or Van ($${VAN_2027_USD}).`,
+    `Month-by-month Red Rocks Amphitheatre outfit and layering guide for 6,450-ft elevation swings: spring, summer, and fall packing lists, footwear, bag rules, and keeping extra layers in your private Suburban (${SUBURBAN_ALL_IN_TOTAL_LABEL} total) or Van (${VAN_ALL_IN_TOTAL_LABEL} total, including 4% Booking fee).`,
   alternates: { canonical: `${SITE}/red-rocks/what-to-wear` },
   openGraph: {
     title: "What to Wear to a Red Rocks Concert | 6,450-Ft Layering Guide",
@@ -85,7 +91,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "Where can we keep extra jackets and tailgate gear if we do not drive?",
-    a: `When you book a Party at Red Rocks Private Suburban ($${SUBURBAN_2027_USD}) or Private Van ($${VAN_2027_USD}), your dedicated vehicle and driver stay parked at Red Rocks all night—so coolers, chairs, and backup heavy coats stay safely locked inside.`,
+    a: `When you book a Party at Red Rocks Private Suburban (${SUBURBAN_ALL_IN_TOTAL_LABEL} total: ${SUBURBAN_ITEMIZED_LABEL}) or Private Van (${VAN_ALL_IN_TOTAL_LABEL} total: ${VAN_ITEMIZED_LABEL}), your dedicated vehicle and driver stay parked at Red Rocks all night—so coolers, chairs, and backup heavy coats stay safely locked inside. ${PARR_COMPLETE_TOTAL_DISCLOSURE}`,
   },
 ] as const;
 
@@ -161,7 +167,7 @@ export default function RedRocksWhatToWearPage() {
                   href="/book/red-rocks-amphitheatre/private"
                   className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#ff7a4d] px-6 text-xs font-black uppercase tracking-[0.14em] text-[#140804] no-underline transition hover:bg-[#ff926b]"
                 >
-                  Book Private Ride (${SUBURBAN_2027_USD} / ${VAN_2027_USD})
+                  Book Private Ride ({SUBURBAN_ALL_IN_TOTAL_LABEL} / {VAN_ALL_IN_TOTAL_LABEL} total)
                 </Link>
                 <Link
                   href="/red-rocks/weather"
@@ -283,8 +289,8 @@ export default function RedRocksWhatToWearPage() {
           </h2>
           <p className="mt-3 max-w-3xl text-sm leading-7 text-white/82 sm:text-base">
             When you take an Uber up to Morrison, everything you wear or carry has to pass Red Rocks&apos; single-pocket bag check—and after the encore, you&apos;re standing outside in the cold hiking down to the rideshare lot. With a Party at Red Rocks{" "}
-            <strong className="text-white">Private Suburban (${SUBURBAN_2027_USD}, up to 6)</strong> or{" "}
-            <strong className="text-white">Private Van (${VAN_2027_USD}, up to 10)</strong>, you tailgate in Upper North Lot with included chairs, cooler, speaker, and ice, stash extra coats or blankets safely inside the locked vehicle during the concert, and step straight into a heated cabin afterward.
+            <strong className="text-white">Private Suburban ({SUBURBAN_ALL_IN_TOTAL_LABEL} total: {SUBURBAN_ITEMIZED_LABEL}, up to 6)</strong> or{" "}
+            <strong className="text-white">Private Van ({VAN_ALL_IN_TOTAL_LABEL} total: {VAN_ITEMIZED_LABEL}, up to 10)</strong>, you tailgate in Upper North Lot with included chairs, cooler, speaker, and ice, stash extra coats or blankets safely inside the locked vehicle during the concert, and step straight into a heated cabin afterward. {PARR_COMPLETE_TOTAL_DISCLOSURE}
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link

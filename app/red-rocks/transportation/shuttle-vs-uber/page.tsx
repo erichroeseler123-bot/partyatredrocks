@@ -1,6 +1,13 @@
 import Link from "next/link";
 import type { HandoffSearchParams } from "@/lib/parrHandoff";
 import { buildBookingHref } from "@/lib/parrHandoff";
+import { PARR_COMPLETE_TOTAL_DISCLOSURE } from "@/lib/pricing";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
@@ -66,8 +73,8 @@ export default async function Page({
 
         <h1 className="mt-4 text-5xl font-black tracking-tight">Private Ride vs Uber at Red Rocks</h1>
         <p className="mt-4 text-lg text-soft">
-          Party at Red Rocks currently offers private transportation only: a $499 Suburban or a $699 private van.
-          Rideshare can work, but the tradeoff is more uncertainty around post-show pricing, pickup location, and driver availability.
+          Party at Red Rocks currently offers private transportation only: {SUBURBAN_ALL_IN_TOTAL_LABEL} Suburban total ({SUBURBAN_ITEMIZED_LABEL}) or {VAN_ALL_IN_TOTAL_LABEL} private van total ({VAN_ITEMIZED_LABEL}). {PARR_COMPLETE_TOTAL_DISCLOSURE}
+          {" "}Rideshare can work, but the tradeoff is more uncertainty around post-show pricing, pickup location, and driver availability.
         </p>
 
         <section className="mt-10 grid gap-6">

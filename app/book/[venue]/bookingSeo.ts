@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import { BOOKING_COPY } from "@/lib/bookingCopy";
 import { bookingVisuals } from "@/lib/bookingVisuals";
-import { PUBLIC_PRIVATE_RIDE_OPTIONS, SITE, SUBURBAN_PRICE_LABEL, VAN_PRICE_LABEL } from "@/lib/rideCatalog";
+import {
+  PUBLIC_PRIVATE_RIDE_OPTIONS,
+  SITE,
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+} from "@/lib/rideCatalog";
 
 function absoluteImageUrl(src: string) {
   return src.startsWith("http") ? src : `${SITE}${src}`;
@@ -75,6 +80,9 @@ export function buildVenueBookingJsonLd(input: { venue: string; venueName: strin
       name: `${input.venueName} ride options`,
       itemListElement: PUBLIC_PRIVATE_RIDE_OPTIONS.map((option) => ({
         "@type": "Offer",
+        priceCurrency: "USD",
+        price: option.schemaPrice,
+        description: `${option.priceLabel} total (${option.itemizedLabel}). Your complete total is shown before payment.`,
         url: `${privateUrl}/${option.slug}`,
         itemOffered: {
           "@type": "Service",
@@ -88,7 +96,7 @@ export function buildVenueBookingJsonLd(input: { venue: string; venueName: strin
 
 export function buildPrivateBookingMetadata(venue: string): Metadata {
   const canonical = `${SITE}/book/${venue}/private`;
-  const title = `Private Red Rocks Transportation | Suburban ${SUBURBAN_PRICE_LABEL} & Van ${VAN_PRICE_LABEL}`;
+  const title = `Private Red Rocks Transportation | Suburban ${SUBURBAN_ALL_IN_TOTAL_LABEL} & Van ${VAN_ALL_IN_TOTAL_LABEL} Total`;
   return {
     title,
     description: BOOKING_COPY.meta.privateBookingDescription,
@@ -132,7 +140,8 @@ export function buildPrivateBookingJsonLd(input: { venue: string; quantity: numb
       itemListElement: PUBLIC_PRIVATE_RIDE_OPTIONS.map((option) => ({
         "@type": "Offer",
         priceCurrency: "USD",
-        price: option.priceLabel.replace("$", ""),
+        price: option.schemaPrice,
+        description: `${option.priceLabel} total (${option.itemizedLabel}). Your complete total is shown before payment.`,
         url: `${SITE}/book/${input.venue}/private/${option.slug}?qty=${input.quantity}`,
         itemOffered: {
           "@type": "Service",
@@ -202,12 +211,12 @@ export function buildPrivateOptionMetadata(input: {
 }): Metadata {
   const canonical = `${SITE}/book/${input.venue}/private/${input.optionSlug}`;
   return {
-    title: `${input.optionTitle} to Red Rocks | ${input.optionPriceLabel} Private Booking`,
-    description: `${input.optionTitle} for Red Rocks. ${input.optionBody}`,
+    title: `${input.optionTitle} to Red Rocks | ${input.optionPriceLabel} Total Private Booking`,
+    description: `${input.optionTitle} for Red Rocks (${input.optionPriceLabel} total). Your complete total is shown before payment. ${input.optionBody}`,
     alternates: { canonical },
     openGraph: {
-      title: `${input.optionTitle} to Red Rocks | ${input.optionPriceLabel} Private Booking`,
-      description: `${input.optionTitle} for Red Rocks. ${input.optionBody}`,
+      title: `${input.optionTitle} to Red Rocks | ${input.optionPriceLabel} Total Private Booking`,
+      description: `${input.optionTitle} for Red Rocks (${input.optionPriceLabel} total). Your complete total is shown before payment. ${input.optionBody}`,
       url: canonical,
       type: "website",
       images: [{ url: absoluteImageUrl(bookingVisuals.private.imageSrc), alt: bookingVisuals.private.imageAlt }],
@@ -234,7 +243,10 @@ export function buildPrivateOptionJsonLd(input: {
     "@context": "https://schema.org",
     "@type": "Offer",
     priceCurrency: "USD",
-    price: input.optionPriceLabel.replace("$", ""),
+    price: option ? option.schemaPrice : input.optionPriceLabel.replace("$", ""),
+    description: option
+      ? `${option.priceLabel} total (${option.itemizedLabel}). Your complete total is shown before payment.`
+      : undefined,
     url: `${SITE}/book/${input.venue}/private/${input.optionSlug}`,
     itemOffered: {
       "@type": "Service",

@@ -1,4 +1,11 @@
-import { PARR_VALUE_PROPOSITION, SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
+import {
+  PARR_2027_OPTION_B_PRICING_AUTHORITY,
+  PARR_COMPLETE_TOTAL_DISCLOSURE,
+  PARR_VALUE_PROPOSITION,
+} from "@/lib/pricing";
+
+const SUV = PARR_2027_OPTION_B_PRICING_AUTHORITY.suv;
+const VAN = PARR_2027_OPTION_B_PRICING_AUTHORITY.van;
 
 const BODY = `# Party at Red Rocks
 
@@ -14,15 +21,16 @@ Party at Red Rocks is a private Red Rocks concert transportation service operati
 
 ## Current 2027 public service model
 - Private transportation only (subject to live vehicle and schedule availability).
-- Published private Suburban price (up to 6 passengers): $${SUBURBAN_2027_USD} flat round-trip.
-- Published private van price (up to 10 passengers): $${VAN_2027_USD} flat round-trip.
+- Published Private Suburban total (up to 6 passengers): ${SUV.allInTotalFormatted} total (${SUV.itemizedSummary}).
+- Published Private Van total (up to 10 passengers): ${VAN.allInTotalFormatted} total (${VAN.itemizedSummary}).
+- Disclosure: ${PARR_COMPLETE_TOTAL_DISCLOSURE}
 - Included: ${PARR_VALUE_PROPOSITION.summary}
 - Tailgating setup: ${PARR_VALUE_PROPOSITION.tailgatingSummary}
 - Exclusions: ${PARR_VALUE_PROPOSITION.exclusionsSummary}
 - Shared-seat service is not part of the current public offer.
 
 ## Key pages
-- https://www.partyatredrocks.com/book/red-rocks-amphitheatre/private — Private Suburban ($${SUBURBAN_2027_USD}) and Private Van ($${VAN_2027_USD}) booking
+- https://www.partyatredrocks.com/book/red-rocks-amphitheatre/private — Private Suburban (${SUV.allInTotalFormatted} total) and Private Van (${VAN.allInTotalFormatted} total) booking
 - https://www.partyatredrocks.com/red-rocks/concerts — Red Rocks concert schedule
 - https://www.partyatredrocks.com/venues/red-rocks-amphitheatre — Red Rocks Amphitheatre venue guide
 - https://www.partyatredrocks.com/red-rocks/transportation — Red Rocks transportation planning guide

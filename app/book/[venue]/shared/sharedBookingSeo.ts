@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { BOOKING_COPY } from "@/lib/bookingCopy";
 import { bookingVisuals } from "@/lib/bookingVisuals";
-import { SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
+import { PARR_2027_OPTION_B_PRICING_AUTHORITY } from "@/lib/pricing";
 
 const SITE = "https://www.partyatredrocks.com";
+const SUV = PARR_2027_OPTION_B_PRICING_AUTHORITY.suv;
+const VAN = PARR_2027_OPTION_B_PRICING_AUTHORITY.van;
 
 function absoluteImageUrl(src: string) {
   return src.startsWith("http") ? src : `${SITE}${src}`;
@@ -13,12 +15,12 @@ export function buildSharedBookingMetadata(path: string): Metadata {
   const imageUrl = absoluteImageUrl(bookingVisuals.private.imageSrc);
 
   return {
-    title: `Private Red Rocks Transportation | $${SUBURBAN_2027_USD} Suburban & $${VAN_2027_USD} Van`,
+    title: `Private Red Rocks Transportation | ${SUV.allInTotalFormatted} Suburban & ${VAN.allInTotalFormatted} Van Total`,
     description: BOOKING_COPY.meta.sharedBookingDescription,
     robots: { index: false, follow: true },
     alternates: { canonical: `${SITE}/book/red-rocks-amphitheatre/private` },
     openGraph: {
-      title: `Private Red Rocks Transportation | $${SUBURBAN_2027_USD} Suburban & $${VAN_2027_USD} Van`,
+      title: `Private Red Rocks Transportation | ${SUV.allInTotalFormatted} Suburban & ${VAN.allInTotalFormatted} Van Total`,
       description: BOOKING_COPY.meta.sharedBookingDescription,
       url: `${SITE}${path}`,
       type: "website",
@@ -31,7 +33,7 @@ export function buildSharedBookingMetadata(path: string): Metadata {
     },
     twitter: {
       card: "summary_large_image",
-      title: `Private Red Rocks Transportation | $${SUBURBAN_2027_USD} Suburban & $${VAN_2027_USD} Van`,
+      title: `Private Red Rocks Transportation | ${SUV.allInTotalFormatted} Suburban & ${VAN.allInTotalFormatted} Van Total`,
       description: BOOKING_COPY.meta.sharedBookingDescription,
       images: [imageUrl],
     },
@@ -69,7 +71,7 @@ export function buildSharedBookingJsonLd(path: string) {
           {
             "@type": "Offer",
             priceCurrency: "USD",
-            price: String(SUBURBAN_2027_USD),
+            price: SUV.schemaPriceString,
             url: `${SITE}/book/red-rocks-amphitheatre/private/suv`,
             itemOffered: {
               "@type": "Service",
@@ -79,7 +81,7 @@ export function buildSharedBookingJsonLd(path: string) {
           {
             "@type": "Offer",
             priceCurrency: "USD",
-            price: String(VAN_2027_USD),
+            price: VAN.schemaPriceString,
             url: `${SITE}/book/red-rocks-amphitheatre/private/van`,
             itemOffered: {
               "@type": "Service",

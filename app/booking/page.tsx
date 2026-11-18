@@ -4,14 +4,20 @@ import Script from "next/script";
 import { PhoneCall, ChevronLeft } from "lucide-react";
 import BookingOrderLookup from "@/components/booking/BookingOrderLookup";
 import { PARR_PUBLIC_FACTS } from "@/lib/publicOperatorFacts";
-import { SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
+import { PARR_COMPLETE_TOTAL_DISCLOSURE } from "@/lib/pricing";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
 
 const SITE = "https://www.partyatredrocks.com";
 
 export const metadata: Metadata = {
   title: "Manage Booking & Private Reservation Lookup | Party at Red Rocks",
   description:
-    `Look up an existing Party at Red Rocks reservation or reserve private Red Rocks transportation ($${SUBURBAN_2027_USD} Suburban / $${VAN_2027_USD} Van).`,
+    `Look up an existing Party at Red Rocks reservation or reserve private Red Rocks transportation (${SUBURBAN_ALL_IN_TOTAL_LABEL} Suburban total / ${VAN_ALL_IN_TOTAL_LABEL} Van total, including 4% Booking fee).`,
   alternates: { canonical: `${SITE}/booking` },
 };
 
@@ -47,7 +53,7 @@ export default function BookingPage() {
               Manage Existing Booking or Reserve Private Ride
             </h1>
             <p className="mt-2 text-sm text-white/75">
-              2027 flat round-trip vehicle rates: Private Suburban (${SUBURBAN_2027_USD}, up to 6) · Private Van (${VAN_2027_USD}, up to 10). Existing 2026 orders remain unchanged at their original booked prices.
+              2027 round-trip vehicle totals: Private Suburban {SUBURBAN_ALL_IN_TOTAL_LABEL} total ({SUBURBAN_ITEMIZED_LABEL}, up to 6) · Private Van {VAN_ALL_IN_TOTAL_LABEL} total ({VAN_ITEMIZED_LABEL}, up to 10). {PARR_COMPLETE_TOTAL_DISCLOSURE} Existing 2026 orders remain unchanged at their original booked prices.
             </p>
           </div>
 

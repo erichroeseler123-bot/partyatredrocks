@@ -1,20 +1,27 @@
 import Link from 'next/link';
+import { PARR_COMPLETE_TOTAL_DISCLOSURE } from '@/lib/pricing';
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from '@/lib/rideCatalog';
 
 
 export const metadata = {
   title: "Red Rocks Concert Tailgating FAQ & Group Ride Guide | Party at Red Rocks",
-  description: "Answers to common Red Rocks tailgating questions: Upper North Lot setup, BYOB vehicle rules, no-glass policy, and $499/$699 private rides.",
+  description: `Answers to common Red Rocks tailgating questions: Upper North Lot setup, BYOB vehicle rules, no-glass policy, and ${SUBURBAN_ALL_IN_TOTAL_LABEL}/${VAN_ALL_IN_TOTAL_LABEL} total private rides (including 4% Booking fee).`,
   alternates: { canonical: "https://www.partyatredrocks.com/guide/events/tailgate-guide" },
 };
 
 export default function TailgateGuide() {
   const faqs = [
-    { q: "Why skip tailgating hassles and book private transportation instead?", a: "Tailgating is fun but stressful: hunting spots, lot traffic, and steep uphill hikes. Our private transportation eliminates it all—door-to-door pickup in a $499 Suburban (up to 6) or $699 van (up to 10), BYOB-friendly ride, and your vehicle waits for you through the show. Book private transportation → /book/red-rocks-amphitheatre/private." },
+    { q: "Why skip tailgating hassles and book private transportation instead?", a: `Tailgating is fun but stressful: hunting spots, lot traffic, and steep uphill hikes. Our private transportation eliminates it all—door-to-door pickup in a ${SUBURBAN_ALL_IN_TOTAL_LABEL} Suburban total (${SUBURBAN_ITEMIZED_LABEL}, up to 6) or ${VAN_ALL_IN_TOTAL_LABEL} van total (${VAN_ITEMIZED_LABEL}, up to 10), BYOB-friendly ride, and your vehicle waits for you through the show. ${PARR_COMPLETE_TOTAL_DISCLOSURE} Book private transportation → /book/red-rocks-amphitheatre/private.` },
     { q: "How does private transportation make tailgating easier for groups?", a: "Groups love having one private vehicle for the night—pregame comfortably en route, no splitting into multiple rides. Door-to-door service gets you right up to the venue entrance, and the ride home is already reserved. Book your private ride → /book/red-rocks-amphitheatre/private." },
     { q: "Can I still tailgate and use private transportation?", a: "Yes—your driver picks up your group at your chosen address, takes you to the venue in time to tailgate before gates open, and stages on-site so your return ride is ready right after the encore." },
     { q: "Is tailgating allowed at Red Rocks in 2026?", a: "Yes, but rules are strict: no tents, no open flames, and no glass. Our private ride takes away parking worries so you can relax and focus on the show. Book private ride → /book/red-rocks-amphitheatre/private." },
     { q: "Can I bring drinks on the vehicle?", a: "In venue lots: beer/wine ok (no glass). In your private Suburban or van: BYOB-friendly for adult passengers—relax and enjoy the ride responsibly." },
-    { q: "What's the best alternative to driving/parking yourself?", a: "Our private transportation service provides door-to-door round-trip service: $499 for a private Suburban or $699 for a private 10-passenger van. One driver, one vehicle, and guaranteed return after the concert." },
+    { q: "What's the best alternative to driving/parking yourself?", a: `Our private transportation service provides door-to-door round-trip service: ${SUBURBAN_ALL_IN_TOTAL_LABEL} total (${SUBURBAN_ITEMIZED_LABEL}) for a private Suburban or ${VAN_ALL_IN_TOTAL_LABEL} total (${VAN_ITEMIZED_LABEL}) for a private 10-passenger van. One driver, one vehicle, and guaranteed return after the concert. ${PARR_COMPLETE_TOTAL_DISCLOSURE}` },
   ];
 
   return (
@@ -84,7 +91,7 @@ export default function TailgateGuide() {
       <div className="btn-primary">
         <h2 className="text-3xl font-black mb-4 uppercase italic">Skip the Parking Search</h2>
         <p className="mb-8 text-xl font-medium text-white/82">
-          Lock in your private Red Rocks ride today. $499 Private Suburban (up to 6) or $699 Private Van (up to 10). Door-to-door with guaranteed return.
+          Lock in your private Red Rocks ride today. {SUBURBAN_ALL_IN_TOTAL_LABEL} Private Suburban total ({SUBURBAN_ITEMIZED_LABEL}, up to 6) or {VAN_ALL_IN_TOTAL_LABEL} Private Van total ({VAN_ITEMIZED_LABEL}, up to 10). Door-to-door with guaranteed return. {PARR_COMPLETE_TOTAL_DISCLOSURE}
         </p>
         <Link href="/book/red-rocks-amphitheatre/private" className="inline-block rounded-full bg-[#3df3ff] px-12 py-5 font-black uppercase text-[#08111e] transition hover:bg-[#62f6ff] shadow-lg">
           Book Private Red Rocks Ride

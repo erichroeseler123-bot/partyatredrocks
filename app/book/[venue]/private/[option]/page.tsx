@@ -26,11 +26,15 @@ import {
   getPrivateRideOption,
   isPublicPrivateRideSlug,
   SITE,
-  SUBURBAN_PRICE_LABEL,
-  VAN_PRICE_LABEL,
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
   type PrivateRideSlug,
 } from "@/lib/rideCatalog";
-import { getPrivateRidePricingForDate, PARR_VALUE_PROPOSITION } from "@/lib/pricing";
+import {
+  getPrivateRidePricingForDate,
+  PARR_COMPLETE_TOTAL_DISCLOSURE,
+  PARR_VALUE_PROPOSITION,
+} from "@/lib/pricing";
 import { squareApplicationId, squareLocationId, squareWebSdkUrl } from "@/lib/square";
 import { buildPrivateOptionJsonLd, buildPrivateOptionMetadata } from "../../bookingSeo";
 
@@ -227,10 +231,9 @@ export default async function PrivateOptionPage({
     searchParams: sp,
   });
 
-  const heroEyebrow =
-    isNativeCheckout && nativeCfg
-      ? `$${nativeCfg.expectedTotalChargedUsd.toFixed(2)} Total Charged Today • Up to ${nativeCfg.maxPartySize} Guests`
-      : `${pricingInfo.roundTripLabel} · ${rideOption.slug === "suv" ? "Up to 6 Guests" : "Up to 10 Guests"}`;
+  const heroEyebrow = nativeCfg
+    ? `$${nativeCfg.expectedTotalChargedUsd.toFixed(2)} Total (${nativeCfg.shortVehicleLabel}: $${nativeCfg.basePriceUsd.toFixed(2)} + $${nativeCfg.expectedBookingFeeUsd.toFixed(2)} Booking fee (4%)) • Up to ${nativeCfg.maxPartySize} Guests`
+    : `${pricingInfo.roundTripLabel} · ${rideOption.slug === "suv" ? "Up to 6 Guests" : "Up to 10 Guests"}`;
 
   return (
     <main className="min-h-screen bg-[#070b14] px-4 pb-16 pt-6 text-white sm:px-6 sm:pt-8 lg:px-8">
@@ -251,8 +254,8 @@ export default async function PrivateOptionPage({
           </div>
           <Link href={switchVehicleHref} className="text-[#ffb07c] underline hover:text-white">
             {rideOption.slug === "suv"
-              ? `Need up to 10 seats? Switch to Private Van (${isNativeCheckout ? "$726.96 total" : VAN_PRICE_LABEL}) →`
-              : `6 or fewer guests? Switch to Suburban (${isNativeCheckout ? "$518.96 total" : SUBURBAN_PRICE_LABEL}) →`}
+              ? `Need up to 10 seats? Switch to Private Van (${VAN_ALL_IN_TOTAL_LABEL} total) →`
+              : `6 or fewer guests? Switch to Suburban (${SUBURBAN_ALL_IN_TOTAL_LABEL} total) →`}
           </Link>
         </nav>
 
@@ -333,14 +336,14 @@ export default async function PrivateOptionPage({
               <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] text-white sm:text-3xl">
                 Complete Your {rideOption.slug === "suv" ? "Private Suburban" : "Private Van"} Reservation
               </h2>
-              {isNativeCheckout && nativeCfg ? (
+              {nativeCfg ? (
                 <>
                   <p className="mt-2 max-w-3xl text-sm leading-6 text-white/82">
-                    Enter your exact hotel, Airbnb, or home pickup address below. Includes Upper North Lot tailgating gear (chairs, cooler, speaker &amp; ice), a dedicated driver waiting through the concert, and your return ride home.
+                    Enter your exact hotel, Airbnb, or home pickup address below. Includes Upper North Lot tailgating gear (chairs, cooler, speaker &amp; ice), a dedicated driver waiting through the concert, and your return ride home. {PARR_COMPLETE_TOTAL_DISCLOSURE}
                   </p>
                   <p className="mt-2 max-w-3xl text-base font-black text-white">
                     Total charged today: ${nativeCfg.expectedTotalChargedUsd.toFixed(2)}{" "}
-                    <span className="text-xs font-medium text-white/70">
+                    <span className="text-xs font-medium text-white/75">
                       (${nativeCfg.basePriceUsd.toFixed(2)} {nativeCfg.shortVehicleLabel} + ${nativeCfg.expectedBookingFeeUsd.toFixed(2)} Booking fee (4%) · {PARR_VALUE_PROPOSITION.exclusionsSummary})
                     </span>
                   </p>
@@ -348,8 +351,7 @@ export default async function PrivateOptionPage({
               ) : (
                 <>
                   <p className="mt-2 max-w-3xl text-sm leading-6 text-white/80">
-                    Enter your exact hotel, Airbnb, or home pickup address inside checkout below. Your flat{" "}
-                    <strong className="text-white">{pricingInfo.roundTripLabel}</strong> includes Upper North Lot tailgating gear (chairs, cooler, speaker &amp; ice), a dedicated driver waiting through the concert, and your return ride home.
+                    Enter your exact hotel, Airbnb, or home pickup address inside checkout below. Includes Upper North Lot tailgating gear (chairs, cooler, speaker &amp; ice), a dedicated driver waiting through the concert, and your return ride home.
                   </p>
                   <p className="mt-1.5 text-xs text-white/60">{PARR_VALUE_PROPOSITION.exclusionsSummary}</p>
                 </>
@@ -400,7 +402,7 @@ export default async function PrivateOptionPage({
                 <RezdyBookingEmbed
                   page={sourcePath}
                   surface="private_booking"
-                  title={`Reserve ${rideOption.slug === "suv" ? "Private Suburban" : "Private Van"} (${pricingInfo.priceLabel})`}
+                  title={`Reserve ${rideOption.slug === "suv" ? "Private Suburban" : "Private Van"} (${rideOption.slug === "suv" ? SUBURBAN_ALL_IN_TOTAL_LABEL : VAN_ALL_IN_TOTAL_LABEL} total)`}
                   subtitle="Select your concert date, enter your pickup address and rider contact details, and complete secure reservation checkout below."
                   productId={REZDY_PRIVATE_PRODUCTS[rideOption.slug].productId}
                   productName={REZDY_PRIVATE_PRODUCTS[rideOption.slug].productName}

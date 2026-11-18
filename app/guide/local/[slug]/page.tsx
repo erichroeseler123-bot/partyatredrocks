@@ -11,6 +11,13 @@ import {
   localGatewayPages,
   type LocalGatewaySlug,
 } from "@/lib/localGatewayPages";
+import { PARR_COMPLETE_TOTAL_DISCLOSURE } from "@/lib/pricing";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
 
 const SITE = "https://www.partyatredrocks.com";
 
@@ -30,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     ...buildPageIntentMetadata(`/guide/local/${page.slug}` as keyof typeof PAGE_INTENT_METADATA),
     title: { absolute: `${page.locationName} to Red Rocks Private Transportation | Party at Red Rocks` },
-    description: `Private transportation from the ${page.locationName} area to Red Rocks: $499 Suburban or $699 van flat round-trip with Upper North Lot tailgating setup and a planned return ride. No shared shuttle seats.`,
+    description: `Private transportation from the ${page.locationName} area to Red Rocks: ${SUBURBAN_ALL_IN_TOTAL_LABEL} Suburban total (${SUBURBAN_ITEMIZED_LABEL}) or ${VAN_ALL_IN_TOTAL_LABEL} van total (${VAN_ITEMIZED_LABEL}) round-trip with Upper North Lot tailgating setup and a planned return ride. No shared shuttle seats.`,
     alternates: {
       canonical: `${SITE}/guide/local/${page.slug}`,
     },
@@ -136,7 +143,7 @@ export default async function LocalGatewayPage({ params }: Props) {
               <h1 className="mt-5 max-w-4xl text-[2.4rem] font-black uppercase leading-[0.94] tracking-[-0.04em] sm:text-[4rem]">
                 Private Transportation from {page.locationName} to Red Rocks
               </h1>
-              <p className="mt-5 max-w-3xl text-[15px] leading-7 text-white/80 sm:text-lg">Book a private Suburban for $499 or a private van for $699 flat round-trip. Your group gets Denver-area pickup, Upper North Lot tailgating setup (chairs, cooler, ice, speaker), and a driver and vehicle that wait through the show for your return ride home. Shared shuttle seats are not currently offered.</p>
+              <p className="mt-5 max-w-3xl text-[15px] leading-7 text-white/80 sm:text-lg">Book a private Suburban for {SUBURBAN_ALL_IN_TOTAL_LABEL} total ({SUBURBAN_ITEMIZED_LABEL}) or a private van for {VAN_ALL_IN_TOTAL_LABEL} total ({VAN_ITEMIZED_LABEL}) round-trip. Your group gets Denver-area pickup, Upper North Lot tailgating setup (chairs, cooler, ice, speaker), and a driver and vehicle that wait through the show for your return ride home. {PARR_COMPLETE_TOTAL_DISCLOSURE} Shared shuttle seats are not currently offered.</p>
               <div className="mt-6 grid gap-4 md:grid-cols-3">
                 <div className="rounded-[22px] border border-white/10 bg-black/20 p-5">
                   <div className="text-[11px] font-black uppercase tracking-[0.18em] text-[#8fd0ff]">Pickup Area</div>

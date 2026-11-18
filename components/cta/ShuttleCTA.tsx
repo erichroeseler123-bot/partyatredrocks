@@ -2,9 +2,9 @@ import Link from "next/link";
 
 export default function ShuttleCTA({
   title = "Ready for Your Red Rocks Show?",
-  blurb = "Skip parking and surges—book private transportation with a $499 Suburban or $699 van.",
+  blurb = "Skip parking and surges—book private transportation: $518.96 total Suburban ($499.00 base + $19.96 Booking fee (4%)) or $726.96 total Van ($699.00 base + $27.96 Booking fee (4%)). Your complete total is shown before payment.",
   href = "/book/red-rocks-amphitheatre/private",
-  button = "Book Private Ride — from $499",
+  button = "Book Private Ride — $518.96 Suburban / $726.96 Van Total",
 }: {
   title?: string;
   blurb?: string;

@@ -1,4 +1,10 @@
 import Link from "next/link";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
 
 type Step = {
   n: string;
@@ -11,13 +17,13 @@ const STEPS: Step[] = [
   {
     n: "1",
     title: "Private Suburban",
-    desc: "$499 flat • Up to 6 passengers • Door-to-door pickup",
+    desc: `${SUBURBAN_ALL_IN_TOTAL_LABEL} total (${SUBURBAN_ITEMIZED_LABEL}) • Up to 6 passengers`,
     href: "/book/red-rocks-amphitheatre/private/suv",
   },
   {
     n: "2",
     title: "Private Van",
-    desc: "$699 flat • Up to 10 passengers • All travel together",
+    desc: `${VAN_ALL_IN_TOTAL_LABEL} total (${VAN_ITEMIZED_LABEL}) • Up to 10 passengers`,
     href: "/book/red-rocks-amphitheatre/private/van",
   },
   {

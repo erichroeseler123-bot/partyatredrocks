@@ -3,10 +3,9 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
-  getPrivateRidePricingForDate,
+  PARR_2027_OPTION_B_PRICING_AUTHORITY,
+  PARR_COMPLETE_TOTAL_DISCLOSURE,
   PARR_VALUE_PROPOSITION,
-  SUBURBAN_2027_USD,
-  VAN_2027_USD,
 } from "@/lib/pricing";
 import {
   CalendarDays,
@@ -133,8 +132,8 @@ const INCLUDED_ITEMS = [
     detail: "One commercial driver and one vehicle assigned solely to your group from departure through final drop-off.",
   },
   {
-    title: "Flat Round-Trip Rate",
-    detail: "Published vehicle price locked at booking—zero surge multipliers when 9,500 fans exit at midnight.",
+    title: "Upfront All-In Total",
+    detail: "Complete vehicle total shown before payment—zero surge multipliers when 9,500 fans exit at midnight.",
   },
 ] as const;
 
@@ -173,7 +172,7 @@ function buildPresaleMailto(customDate: string, customArtist: string): string {
       "We are planning private group transportation for a 2027 Red Rocks concert:",
       `- Show / Artist: ${customArtist.trim() || "(TBD / presale)"}`,
       `- Target Date: ${customDate.trim() || "(TBD)"}`,
-      `- Vehicle: $${SUBURBAN_2027_USD} Private Suburban (up to 6) or $${VAN_2027_USD} Private Van (up to 10)`,
+      `- Vehicle: ${PARR_2027_OPTION_B_PRICING_AUTHORITY.suv.allInTotalFormatted} total Private Suburban (up to 6) or ${PARR_2027_OPTION_B_PRICING_AUTHORITY.van.allInTotalFormatted} total Private Van (up to 10)`,
     ].join("\n")
   );
   return `mailto:hello@partyatredrocks.com?subject=${subject}&body=${body}`;
@@ -221,8 +220,8 @@ export default function HomeSections({
   }, []);
 
   const recommendedOption: "suv" | "van" = partySize > 6 ? "van" : "suv";
-  const suvPricing = getPrivateRidePricingForDate({ optionSlug: "suv", serviceDate: customDate });
-  const vanPricing = getPrivateRidePricingForDate({ optionSlug: "van", serviceDate: customDate });
+  const suvAuth = PARR_2027_OPTION_B_PRICING_AUTHORITY.suv;
+  const vanAuth = PARR_2027_OPTION_B_PRICING_AUTHORITY.van;
 
   const primaryHeroHref = buildBookingFlowHref(recommendedOption, customDate, customArtist, pickupArea);
   const customSuvHref = buildBookingFlowHref("suv", customDate, customArtist, pickupArea);
@@ -283,8 +282,8 @@ export default function HomeSections({
 
               <p className="mt-2 max-w-2xl text-[13px] leading-[1.45] text-white/88 sm:mt-4 sm:text-lg sm:leading-relaxed">
                 Skip the parking climb and rideshare chaos. Book a Private Suburban (
-                <strong className="text-[#ffb07c]">${SUBURBAN_2027_USD}</strong>, up to 6) or Private Van (
-                <strong className="text-[#ffb07c]">${VAN_2027_USD}</strong>, up to 10) with Upper North Lot tailgating—chairs, cooler, speaker &amp; ice—and a driver waiting all show.
+                <strong className="text-[#ffb07c]">{suvAuth.allInTotalFormatted} total</strong>: {suvAuth.itemizedSummary}, up to 6) or Private Van (
+                <strong className="text-[#ffb07c]">{vanAuth.allInTotalFormatted} total</strong>: {vanAuth.itemizedSummary}, up to 10) with Upper North Lot tailgating—chairs, cooler, speaker &amp; ice—and a driver waiting all show. {PARR_COMPLETE_TOTAL_DISCLOSURE}
               </p>
             </div>
 
@@ -351,16 +350,19 @@ export default function HomeSections({
                     </h3>
                     <div className="text-right">
                       <span className="text-3xl font-black text-[#ffb07c] sm:text-4xl">
-                        {suvPricing.priceLabel}
+                        {suvAuth.allInTotalFormatted} total
                       </span>
-                      <span className="block text-[11px] font-bold uppercase tracking-wider text-white/65">
-                        Flat round-trip (~$83 each for 6)
+                      <span className="mt-0.5 block text-xs font-semibold text-white/85">
+                        {suvAuth.itemizedSummary}
+                      </span>
+                      <span className="mt-0.5 block text-[11px] font-medium text-white/65">
+                        ({suvAuth.approxMaxGroupEachFormatted})
                       </span>
                     </div>
                   </div>
 
                   <p className="mt-3 text-sm leading-6 text-white/80">
-                    Full-size Chevrolet Suburban or equivalent SUV built for couples, double dates, and crews up to 6 who want spacious seating, Upper North Lot tailgating, and an effortless exit.
+                    Full-size Chevrolet Suburban or equivalent SUV built for couples, double dates, and crews up to 6 who want spacious seating, Upper North Lot tailgating, and an effortless exit. {PARR_COMPLETE_TOTAL_DISCLOSURE}
                   </p>
 
                   <ul className="mt-5 space-y-2.5 text-sm text-white/88">
@@ -384,7 +386,7 @@ export default function HomeSections({
                     href={customSuvHref}
                     className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full bg-[#ff7a4d] px-5 text-xs font-black uppercase tracking-[0.13em] text-[#140804] no-underline transition hover:bg-[#ff926b]"
                   >
-                    Book Private Suburban — {suvPricing.priceLabel}
+                    Book Private Suburban — {suvAuth.allInTotalFormatted} Total
                   </Link>
                   <Link
                     href="/book/red-rocks-amphitheatre/private#suv-booking"
@@ -424,16 +426,19 @@ export default function HomeSections({
                     </h3>
                     <div className="text-right">
                       <span className="text-3xl font-black text-[#ffb07c] sm:text-4xl">
-                        {vanPricing.priceLabel}
+                        {vanAuth.allInTotalFormatted} total
                       </span>
-                      <span className="block text-[11px] font-bold uppercase tracking-wider text-white/65">
-                        Flat round-trip (~$70 each for 10)
+                      <span className="mt-0.5 block text-xs font-semibold text-white/85">
+                        {vanAuth.itemizedSummary}
+                      </span>
+                      <span className="mt-0.5 block text-[11px] font-medium text-white/65">
+                        ({vanAuth.approxMaxGroupEachFormatted})
                       </span>
                     </div>
                   </div>
 
                   <p className="mt-3 text-sm leading-6 text-white/80">
-                    Spacious 10-passenger private van so birthday crews, bachelor/bachelorette groups, and visiting friends stay together on one timeline instead of splitting into 3 Ubers.
+                    Spacious 10-passenger private van so birthday crews, bachelor/bachelorette groups, and visiting friends stay together on one timeline instead of splitting into 3 Ubers. {PARR_COMPLETE_TOTAL_DISCLOSURE}
                   </p>
 
                   <ul className="mt-5 space-y-2.5 text-sm text-white/88">
@@ -457,7 +462,7 @@ export default function HomeSections({
                     href={customVanHref}
                     className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full bg-[#ff7a4d] px-6 text-xs font-black uppercase tracking-[0.14em] text-[#140804] no-underline transition hover:bg-[#ff926b]"
                   >
-                    Book Private Van — {vanPricing.priceLabel}
+                    Book Private Van — {vanAuth.allInTotalFormatted} Total
                   </Link>
                   <Link
                     href="/book/red-rocks-amphitheatre/private#van-upgrade"
@@ -526,7 +531,7 @@ export default function HomeSections({
                 {PARR_VALUE_PROPOSITION.headline}
               </div>
               <h2 id="everything-included-heading" className="mt-2 text-3xl font-black tracking-[-0.03em] text-white sm:text-4xl">
-                Everything Included in Your Flat Vehicle Rate
+                Everything Included in Your Private Vehicle Booking
               </h2>
               <p className="mt-2 text-sm leading-6 text-white/80 sm:text-base">
                 {PARR_VALUE_PROPOSITION.summary}
@@ -649,13 +654,13 @@ export default function HomeSections({
                       href={item.suvBookingHref}
                       className="inline-flex min-h-9 flex-1 items-center justify-center rounded-full bg-[#ff7a4d] px-3 text-[11px] font-black uppercase tracking-[0.1em] text-[#140804] no-underline transition hover:bg-[#ff926b]"
                     >
-                      ${SUBURBAN_2027_USD} Suburban
+                      {suvAuth.allInTotalFormatted} Suburban
                     </Link>
                     <Link
                       href={item.vanBookingHref}
                       className="inline-flex min-h-9 flex-1 items-center justify-center rounded-full border border-white/16 bg-white/8 px-3 text-[11px] font-bold uppercase tracking-[0.1em] text-white no-underline transition hover:bg-white/14"
                     >
-                      ${VAN_2027_USD} Van
+                      {vanAuth.allInTotalFormatted} Van
                     </Link>
                   </div>
                 </article>
@@ -819,10 +824,10 @@ export default function HomeSections({
           <div className="flex items-center justify-between gap-3">
             <div className="min-w-0">
               <div className="truncate text-xs font-black uppercase tracking-wide text-white">
-                {partySize > 6 ? `${vanPricing.priceLabel} Private Van` : `${suvPricing.priceLabel} Private Suburban`}
+                {partySize > 6 ? `${vanAuth.allInTotalFormatted} total Private Van` : `${suvAuth.allInTotalFormatted} total Private Suburban`}
               </div>
               <div className="truncate text-[11px] text-white/75">
-                Tailgate gear + waiting driver included
+                {partySize > 6 ? vanAuth.itemizedSummary : suvAuth.itemizedSummary}
               </div>
             </div>
             <Link

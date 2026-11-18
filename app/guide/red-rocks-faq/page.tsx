@@ -59,10 +59,10 @@ export default async function RedRocksFAQ({
               Book Private Ride
             </Link>
             <Link href={suvHref} className="btn-ghost">
-              Private Suburban — $499
+              Private Suburban — $518.96 Total
             </Link>
             <Link href="/book/red-rocks-amphitheatre/private/van" className="btn-ghost">
-              Private Van — $699
+              Private Van — $726.96 Total
             </Link>
           </div>
         </div>
@@ -98,7 +98,7 @@ export default async function RedRocksFAQ({
               />
               <FAQ
                 q="What does private Red Rocks transportation cost?"
-                a="Party at Red Rocks currently offers a private Suburban for $499 and a private van for $699."
+                a="Party at Red Rocks offers a Private Suburban for $518.96 total ($499.00 base + $19.96 Booking fee (4%)) and a Private Van for $726.96 total ($699.00 base + $27.96 Booking fee (4%)). Your complete total is shown before payment."
               />
             </div>
 

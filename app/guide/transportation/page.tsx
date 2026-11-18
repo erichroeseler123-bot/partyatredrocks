@@ -22,7 +22,7 @@ export default function Page() {
           actions={
             <>
               <Link href="/book/red-rocks-amphitheatre/private" className="btn-primary">
-                Book Private Ride — $499 / $699 →
+                Book Private Ride — $518.96 / $726.96 Total →
               </Link>
               <Link href="/guide" className="btn-ghost">
                 Back to Guides →
@@ -54,7 +54,7 @@ export default function Page() {
             </details>
             <details className="rounded-2xl border border-soft bg-surface-strong p-5">
               <summary className="cursor-pointer font-black">What does Party at Red Rocks currently offer?</summary>
-              <p className="mt-2 text-soft leading-relaxed">Private Red Rocks transportation: a $499 Suburban or $699 van, with door-to-door pickup and the vehicle waiting through the show.</p>
+              <p className="mt-2 text-soft leading-relaxed">Private Red Rocks transportation: a $518.96 total Suburban ($499.00 base + $19.96 Booking fee (4%)) or $726.96 total Van ($699.00 base + $27.96 Booking fee (4%)), with door-to-door pickup and the vehicle waiting through the show. Your complete total is shown before payment.</p>
             </details>
             <details className="rounded-2xl border border-soft bg-surface-strong p-5">
               <summary className="cursor-pointer font-black">What should my group decide before the show?</summary>
@@ -83,7 +83,7 @@ export default function Page() {
                   "name": "What does Party at Red Rocks currently offer?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Private Red Rocks transportation: a $499 Suburban or $699 van, with door-to-door pickup and the vehicle waiting through the show."
+                    "text": "Private Red Rocks transportation: a $518.96 total Suburban ($499.00 base + $19.96 Booking fee (4%)) or $726.96 total Van ($699.00 base + $27.96 Booking fee (4%)), with door-to-door pickup and the vehicle waiting through the show. Your complete total is shown before payment."
                   }
                 },
                 {

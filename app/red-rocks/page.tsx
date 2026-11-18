@@ -9,7 +9,13 @@ import { buildBookingHref } from "@/lib/parrHandoff";
 import PageHero from "@/components/PageHero";
 import PrimaryCTASection from "@/components/PrimaryCTASection";
 import { RED_ROCKS_ENTITIES } from "@/lib/redRocksAuthority";
-import { SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
+import { PARR_COMPLETE_TOTAL_DISCLOSURE } from "@/lib/pricing";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
 
 const SITE = "https://www.partyatredrocks.com";
 const DEFAULT_OG_IMAGE = `${SITE}/hero/hero_red_rocks.webp`;
@@ -17,7 +23,7 @@ const DEFAULT_OG_IMAGE = `${SITE}/hero/hero_red_rocks.webp`;
 export const metadata: Metadata = {
   title: "Red Rocks Amphitheatre Guide | Concerts, Tailgating, Parking & Private Rides",
   description:
-    `Complete Red Rocks Amphitheatre visitor and concert guide: 2027 concert schedule, Upper North Lot tailgating, parking vs. private transportation ($${SUBURBAN_2027_USD} Suburban / $${VAN_2027_USD} Van), weather prep, and trails.`,
+    `Complete Red Rocks Amphitheatre visitor and concert guide: 2027 concert schedule, Upper North Lot tailgating, parking vs. private transportation (${SUBURBAN_ALL_IN_TOTAL_LABEL} Suburban total / ${VAN_ALL_IN_TOTAL_LABEL} Van total, including 4% Booking fee), weather prep, and trails.`,
   robots: {
     index: true,
     follow: true,
@@ -122,11 +128,11 @@ export default async function RedRocksHubPage({
           kicker="Morrison, CO · 6,450 Feet"
           title="The Practical Red Rocks Concert & Visitor Guide"
           description="Everything that shapes a great Red Rocks night: when to leave Denver, how Upper North Lot tailgating works, what to pack for mountain weather swings, and how to get your group home smoothly after the encore."
-          secondaryDescription={`Want the easiest group plan? Reserve a dedicated Private Suburban ($${SUBURBAN_2027_USD}, up to 6) or Private Van ($${VAN_2027_USD}, up to 10) with chairs, cooler, speaker, ice, and a driver who waits through the show.`}
+          secondaryDescription={`Want the easiest group plan? Reserve a dedicated Private Suburban (${SUBURBAN_ALL_IN_TOTAL_LABEL} total: ${SUBURBAN_ITEMIZED_LABEL}, up to 6) or Private Van (${VAN_ALL_IN_TOTAL_LABEL} total: ${VAN_ITEMIZED_LABEL}, up to 10) with chairs, cooler, speaker, ice, and a driver who waits through the show. ${PARR_COMPLETE_TOTAL_DISCLOSURE}`}
           actions={[
             {
               href: privateBookingHref,
-              label: `Book Private Ride ($${SUBURBAN_2027_USD} / $${VAN_2027_USD})`,
+              label: `Book Private Ride (${SUBURBAN_ALL_IN_TOTAL_LABEL} / ${VAN_ALL_IN_TOTAL_LABEL} total)`,
             },
             { href: "/red-rocks/concerts", label: "2027 Concert Schedule", variant: "secondary" },
             { href: "/venues/red-rocks-amphitheatre", label: "Venue Overview", variant: "secondary" },
@@ -212,8 +218,8 @@ export default async function RedRocksHubPage({
         </section>
 
         <PrimaryCTASection
-          kicker="Flat-Rate Group Rides"
-          body={`Private round-trip transportation with pickup, Upper North Lot tailgating time, chairs, cooler, speaker and ice, your driver waiting through the show, and the return ride—all included for one flat vehicle price ($${SUBURBAN_2027_USD} Suburban / $${VAN_2027_USD} Van).`}
+          kicker="Private Group Rides"
+          body={`Private round-trip transportation with pickup, Upper North Lot tailgating time, chairs, cooler, speaker and ice, your driver waiting through the show, and the return ride—${SUBURBAN_ALL_IN_TOTAL_LABEL} Suburban total (${SUBURBAN_ITEMIZED_LABEL}) or ${VAN_ALL_IN_TOTAL_LABEL} Van total (${VAN_ITEMIZED_LABEL}). ${PARR_COMPLETE_TOTAL_DISCLOSURE}`}
           actions={[
             {
               href: privateBookingHref,

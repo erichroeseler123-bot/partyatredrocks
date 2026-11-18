@@ -1,4 +1,11 @@
 import Link from "next/link";
+import { PARR_COMPLETE_TOTAL_DISCLOSURE } from "@/lib/pricing";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
 
 const PRIVATE_HREF = "/book/red-rocks-amphitheatre/private";
 
@@ -34,7 +41,7 @@ export default function Page() {
           </div>
           <div className="panel rounded-2xl p-6">
             <h2 className="text-xl font-bold">Current Party at Red Rocks option</h2>
-            <p className="mt-2 text-soft">Private Suburban $499 or private van $699. Shared shuttle seats are not currently offered.</p>
+            <p className="mt-2 text-soft">Private Suburban {SUBURBAN_ALL_IN_TOTAL_LABEL} total ({SUBURBAN_ITEMIZED_LABEL}) or private van {VAN_ALL_IN_TOTAL_LABEL} total ({VAN_ITEMIZED_LABEL}). Shared shuttle seats are not currently offered. {PARR_COMPLETE_TOTAL_DISCLOSURE}</p>
           </div>
         </section>
 

@@ -13,6 +13,10 @@ import {
   type DateResolutionResult,
 } from "@/lib/shows/redRocksBookingCatalog";
 import { trackNetworkEvent } from "@/lib/networkEvents";
+import {
+  PARR_2027_OPTION_B_PRICING_AUTHORITY,
+  PARR_COMPLETE_TOTAL_DISCLOSURE,
+} from "@/lib/pricing";
 
 export type SelectedBookingContext = {
   show: CanonicalRedRocksBookingShow | null;
@@ -35,13 +39,9 @@ type Props = {
   onSelectionChange?: (ctx: SelectedBookingContext) => void;
 };
 
-const SUBURBAN_BASE = 499;
-const SUBURBAN_FEE = 19.96;
-const SUBURBAN_TOTAL = 518.96;
-
-const VAN_BASE = 699;
-const VAN_FEE = 27.96;
-const VAN_TOTAL = 726.96;
+const SUBURBAN_AUTH = PARR_2027_OPTION_B_PRICING_AUTHORITY.suv;
+const VAN_AUTH = PARR_2027_OPTION_B_PRICING_AUTHORITY.van;
+const SOLD_OUT_MESSAGE = "Not available for this show.";
 
 export function ParrShowBookingSelector({
   catalog,
@@ -66,6 +66,12 @@ export function ParrShowBookingSelector({
 
   const [qaExtraShows, setQaExtraShows] = useState<CanonicalRedRocksBookingShow[]>([]);
   const [runtimeCheckoutFlag, setRuntimeCheckoutFlag] = useState<string | null>(null);
+  const [qaSoldOutFlag, setQaSoldOutFlag] = useState<string | null>(null);
+  const [liveAvail, setLiveAvail] = useState<{
+    forDateKey: string | null;
+    suvAvailable: boolean;
+    vanAvailable: boolean;
+  }>({ forDateKey: null, suvAvailable: true, vanAvailable: true });
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -74,6 +80,10 @@ export function ParrShowBookingSelector({
     const sp = new URLSearchParams(window.location.search);
     const chk = sp.get("checkout");
     if (chk) setRuntimeCheckoutFlag(chk);
+    if (isPreviewHost) {
+      const qso = sp.get("qa_sold_out");
+      if (qso) setQaSoldOutFlag(qso);
+    }
     if (isPreviewHost && sp.get("qa_multi_date") === "1") {
       setQaExtraShows(buildPreviewQaMultiDateFixture(todayDateKey));
     }
@@ -127,7 +137,47 @@ export function ParrShowBookingSelector({
   const [partySize, setPartySize] = useState<number>(clampedInitialParty);
   const [manualVanUpgrade, setManualVanUpgrade] = useState<boolean>(initialVehicleSlug === "van");
 
-  const vehicleSlug: "suv" | "van" = partySize > 6 || manualVanUpgrade ? "van" : "suv";
+  const suvAvailable =
+    liveAvail.forDateKey === selectedShow?.dateKey ? liveAvail.suvAvailable : true;
+  const vanAvailable =
+    liveAvail.forDateKey === selectedShow?.dateKey ? liveAvail.vanAvailable : true;
+
+  const vehicleSlug: "suv" | "van" =
+    !suvAvailable && vanAvailable
+      ? "van"
+      : !vanAvailable && suvAvailable && partySize <= 6
+        ? "suv"
+        : partySize > 6 || manualVanUpgrade
+          ? "van"
+          : "suv";
+
+  const activeVehicleAvailable = vehicleSlug === "van" ? vanAvailable : suvAvailable;
+
+  useEffect(() => {
+    if (!selectedShow || selectedShow.isPastShow) return;
+    let cancelled = false;
+    const qs = new URLSearchParams({
+      date: selectedShow.dateKey,
+      show: selectedShow.id,
+    });
+    if (qaSoldOutFlag) qs.set("qa_sold_out", qaSoldOutFlag);
+
+    fetch(`/api/rezdy/availability?${qs.toString()}`, { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (cancelled || !data?.ok || !data?.vehicles) return;
+        setLiveAvail({
+          forDateKey: selectedShow.dateKey,
+          suvAvailable: Boolean(data.vehicles.suv?.available),
+          vanAvailable: Boolean(data.vehicles.van?.available),
+        });
+      })
+      .catch(() => undefined);
+
+    return () => {
+      cancelled = true;
+    };
+  }, [qaSoldOutFlag, selectedShow]);
 
   const containerRef = useRef<HTMLDivElement | null>(null);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
@@ -289,18 +339,22 @@ export function ParrShowBookingSelector({
     if (runtimeCheckoutFlag && !params.has("checkout")) {
       params.set("checkout", runtimeCheckoutFlag);
     }
+    if (qaSoldOutFlag && !params.has("qa_sold_out")) {
+      params.set("qa_sold_out", qaSoldOutFlag);
+    }
     params.set("date", selectedShow.dateKey);
     params.set("artist", selectedShow.title);
     params.set("show", selectedShow.id);
     params.set("partySize", String(partySize));
     params.set("qty", "1");
     return `/book/red-rocks-amphitheatre/private/${vehicleSlug}?${params.toString()}`;
-  }, [partySize, preservedQueryParams, runtimeCheckoutFlag, selectedShow, vehicleSlug]);
+  }, [partySize, preservedQueryParams, qaSoldOutFlag, runtimeCheckoutFlag, selectedShow, vehicleSlug]);
 
-  const activeTotal = vehicleSlug === "van" ? VAN_TOTAL : SUBURBAN_TOTAL;
-  const activeBase = vehicleSlug === "van" ? VAN_BASE : SUBURBAN_BASE;
-  const activeFee = vehicleSlug === "van" ? VAN_FEE : SUBURBAN_FEE;
-  const activeVehicleLabel = vehicleSlug === "van" ? "Private Van" : "Private Suburban";
+  const activeAuth = vehicleSlug === "van" ? VAN_AUTH : SUBURBAN_AUTH;
+  const activeTotal = activeAuth.allInTotalUsd;
+  const activeBase = activeAuth.basePriceUsd;
+  const activeFee = activeAuth.bookingFeeUsd;
+  const activeVehicleLabel = activeAuth.shortLabel;
 
   return (
     <div
@@ -638,39 +692,60 @@ export function ParrShowBookingSelector({
                   <div className="grid grid-cols-2 gap-2">
                     <button
                       type="button"
-                      disabled={partySize > 6}
+                      disabled={partySize > 6 || !suvAvailable}
                       data-testid="choose-suv-pill"
                       onClick={() => setManualVanUpgrade(false)}
                       className={[
                         "min-h-11 rounded-xl border px-3 py-2 text-left text-xs transition",
-                        vehicleSlug === "suv"
-                          ? "border-[#ffb07c] bg-[#ffb07c]/18 text-white"
-                          : partySize > 6
-                            ? "cursor-not-allowed border-white/10 bg-white/5 text-white/35"
-                            : "border-white/16 bg-[#0f172a] text-white/80 hover:border-white/35",
+                        !suvAvailable
+                          ? "cursor-not-allowed border-rose-400/25 bg-white/5 text-white/45"
+                          : vehicleSlug === "suv"
+                            ? "border-[#ffb07c] bg-[#ffb07c]/18 text-white"
+                            : partySize > 6
+                              ? "cursor-not-allowed border-white/10 bg-white/5 text-white/35"
+                              : "border-white/16 bg-[#0f172a] text-white/80 hover:border-white/35",
                       ].join(" ")}
                     >
                       <div className="font-black">Suburban (1–6)</div>
-                      <div className="text-[11px] font-bold text-[#ffb07c]">
-                        {showAllInOptionBPricing ? `$${SUBURBAN_TOTAL.toFixed(2)} total` : `$${SUBURBAN_BASE}`}
-                      </div>
+                      {!suvAvailable ? (
+                        <div data-testid="suv-sold-out-label" className="text-[11px] font-bold text-amber-200">
+                          {SOLD_OUT_MESSAGE}
+                        </div>
+                      ) : (
+                        <div className="text-[11px] font-bold text-[#ffb07c]">
+                          {showAllInOptionBPricing
+                            ? `${SUBURBAN_AUTH.allInTotalFormatted} total`
+                            : SUBURBAN_AUTH.basePriceFormatted}
+                        </div>
+                      )}
                     </button>
 
                     <button
                       type="button"
+                      disabled={!vanAvailable}
                       data-testid="choose-van-pill"
                       onClick={() => setManualVanUpgrade(true)}
                       className={[
                         "min-h-11 rounded-xl border px-3 py-2 text-left text-xs transition",
-                        vehicleSlug === "van"
-                          ? "border-[#ffb07c] bg-[#ffb07c]/18 text-white"
-                          : "border-white/16 bg-[#0f172a] text-white/80 hover:border-white/35",
+                        !vanAvailable
+                          ? "cursor-not-allowed border-rose-400/25 bg-white/5 text-white/45"
+                          : vehicleSlug === "van"
+                            ? "border-[#ffb07c] bg-[#ffb07c]/18 text-white"
+                            : "border-white/16 bg-[#0f172a] text-white/80 hover:border-white/35",
                       ].join(" ")}
                     >
                       <div className="font-black">Private Van (1–10)</div>
-                      <div className="text-[11px] font-bold text-[#ffb07c]">
-                        {showAllInOptionBPricing ? `$${VAN_TOTAL.toFixed(2)} total` : `$${VAN_BASE}`}
-                      </div>
+                      {!vanAvailable ? (
+                        <div data-testid="van-sold-out-label" className="text-[11px] font-bold text-amber-200">
+                          {SOLD_OUT_MESSAGE}
+                        </div>
+                      ) : (
+                        <div className="text-[11px] font-bold text-[#ffb07c]">
+                          {showAllInOptionBPricing
+                            ? `${VAN_AUTH.allInTotalFormatted} total`
+                            : VAN_AUTH.basePriceFormatted}
+                        </div>
+                      )}
                     </button>
                   </div>
                 </div>
@@ -679,34 +754,47 @@ export function ParrShowBookingSelector({
               <div className="flex flex-col gap-3 rounded-2xl border border-white/12 bg-black/30 p-3.5 sm:flex-row sm:items-center sm:justify-between sm:p-4">
                 <div>
                   <div className="text-base font-black text-white sm:text-lg">
-                    {showAllInOptionBPricing
-                      ? `Total charged at booking: $${activeTotal.toFixed(2)}`
-                      : `${activeVehicleLabel}: $${activeBase}`}
+                    {!activeVehicleAvailable
+                      ? `${activeVehicleLabel}: ${SOLD_OUT_MESSAGE}`
+                      : showAllInOptionBPricing
+                        ? `${activeTotal.toFixed(2).replace(/^/, "$")} total (${activeVehicleLabel})`
+                        : `${activeVehicleLabel}: $${activeBase.toFixed(2)}`}
                   </div>
                   {showAllInOptionBPricing ? (
-                    <div className="mt-0.5 text-xs text-white/75">
-                      {activeVehicleLabel}: ${activeBase.toFixed(2)} + Booking fee (4%): ${activeFee.toFixed(2)} · Tailgate gear &amp; waiting driver included
+                    <div className="mt-0.5 text-xs text-white/80">
+                      ${activeBase.toFixed(2)} base + ${activeFee.toFixed(2)} {activeAuth.bookingFeeLabel} · {PARR_COMPLETE_TOTAL_DISCLOSURE}
                     </div>
                   ) : null}
                 </div>
 
                 {mode === "navigate" ? (
-                  <Link
-                    href={continueHref}
-                    data-testid="continue-to-availability-btn"
-                    onClick={() =>
-                      trackNetworkEvent({
-                        eventName: "availability_started",
-                        entryPage: entrySurface,
-                        date: selectedShow.dateKey,
-                        travelIntent: "red-rocks-concert",
-                      })
-                    }
-                    className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-xl bg-[#ff7a4d] px-5 py-2.5 text-xs font-black uppercase tracking-[0.12em] text-[#140804] no-underline shadow-[0_12px_30px_rgba(255,122,77,0.35)] transition hover:bg-[#ff926b]"
-                  >
-                    <span>Continue to Availability</span>
-                    <ArrowRight className="h-4 w-4 shrink-0" />
-                  </Link>
+                  activeVehicleAvailable ? (
+                    <Link
+                      href={continueHref}
+                      data-testid="continue-to-availability-btn"
+                      onClick={() =>
+                        trackNetworkEvent({
+                          eventName: "availability_started",
+                          entryPage: entrySurface,
+                          date: selectedShow.dateKey,
+                          travelIntent: "red-rocks-concert",
+                        })
+                      }
+                      className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-xl bg-[#ff7a4d] px-5 py-2.5 text-xs font-black uppercase tracking-[0.12em] text-[#140804] no-underline shadow-[0_12px_30px_rgba(255,122,77,0.35)] transition hover:bg-[#ff926b]"
+                    >
+                      <span>Continue to Availability</span>
+                      <ArrowRight className="h-4 w-4 shrink-0" />
+                    </Link>
+                  ) : (
+                    <button
+                      type="button"
+                      disabled
+                      data-testid="selector-sold-out-state"
+                      className="inline-flex min-h-11 shrink-0 cursor-not-allowed items-center justify-center rounded-xl border border-white/15 bg-white/8 px-5 py-2.5 text-xs font-black uppercase tracking-[0.1em] text-amber-200"
+                    >
+                      {SOLD_OUT_MESSAGE}
+                    </button>
+                  )
                 ) : null}
               </div>
 

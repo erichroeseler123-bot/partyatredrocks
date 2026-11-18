@@ -1,4 +1,11 @@
-import { PARR_VALUE_PROPOSITION, SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
+import {
+  PARR_2027_OPTION_B_PRICING_AUTHORITY,
+  PARR_COMPLETE_TOTAL_DISCLOSURE,
+  PARR_VALUE_PROPOSITION,
+} from "@/lib/pricing";
+
+const SUV = PARR_2027_OPTION_B_PRICING_AUTHORITY.suv;
+const VAN = PARR_2027_OPTION_B_PRICING_AUTHORITY.van;
 
 const AGENT = {
   spec: "dcc-site-contract",
@@ -30,10 +37,16 @@ const AGENT = {
   public_claims: {
     service_model: "private transportation only",
     shared_seat_service: false,
-    season: "2027",
-    suburban_usd: SUBURBAN_2027_USD,
-    van_usd: VAN_2027_USD,
-    pricing_type: "flat round-trip vehicle price",
+    season: SUV.effectiveSeason,
+    pricing_version: SUV.version,
+    suburban_usd: SUV.allInTotalUsd,
+    suburban_base_usd: SUV.basePriceUsd,
+    suburban_booking_fee_usd: SUV.bookingFeeUsd,
+    van_usd: VAN.allInTotalUsd,
+    van_base_usd: VAN.basePriceUsd,
+    van_booking_fee_usd: VAN.bookingFeeUsd,
+    booking_fee_label: SUV.bookingFeeLabel,
+    pricing_type: `all-in vehicle total (base price + ${SUV.bookingFeeLabel}); ${PARR_COMPLETE_TOTAL_DISCLOSURE}`,
     included: PARR_VALUE_PROPOSITION.summary,
     tailgating_setup: PARR_VALUE_PROPOSITION.tailgatingSummary,
     exclusions: PARR_VALUE_PROPOSITION.exclusionsSummary,

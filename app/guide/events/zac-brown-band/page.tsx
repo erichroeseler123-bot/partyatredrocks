@@ -1,9 +1,16 @@
 import Link from 'next/link';
+import { PARR_COMPLETE_TOTAL_DISCLOSURE } from '@/lib/pricing';
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from '@/lib/rideCatalog';
 
 
 export const metadata = {
   title: "Zac Brown Band at Red Rocks | Arrival, Weather & Private Ride Guide",
-  description: "October cold-weather layering, arrival timing, and flat-rate private Suburban ($499) and Van ($699) transportation for Zac Brown Band at Red Rocks.",
+  description: `October cold-weather layering, arrival timing, and private Suburban (${SUBURBAN_ALL_IN_TOTAL_LABEL} total) and Van (${VAN_ALL_IN_TOTAL_LABEL} total, including 4% Booking fee) transportation for Zac Brown Band at Red Rocks.`,
   alternates: { canonical: "https://www.partyatredrocks.com/guide/events/zac-brown-band" },
 };
 
@@ -31,7 +38,7 @@ export default function ZBBEvent() {
           <h3 className="font-bold text-xl mb-2">The "Uber Trap" Warning</h3>
           <p className="text-strong">
             ZBB is a high-demand show. Expect rideshare surge pricing to exceed $180 post-concert with long wait times. 
-            Our private Suburban ($499) or private van ($699) locks your round-trip ride with zero surge pricing.
+            Our private Suburban ({SUBURBAN_ALL_IN_TOTAL_LABEL} total: {SUBURBAN_ITEMIZED_LABEL}) or private van ({VAN_ALL_IN_TOTAL_LABEL} total: {VAN_ITEMIZED_LABEL}) locks your round-trip ride with zero surge pricing. {PARR_COMPLETE_TOTAL_DISCLOSURE}
           </p>
         </div>
       </div>

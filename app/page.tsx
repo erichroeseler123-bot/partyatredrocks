@@ -138,7 +138,7 @@ export default async function HomePage() {
     name: "Private Red Rocks Concert Transportation",
     serviceType: "Private concert transportation",
     description:
-      "Private round-trip concert transportation to Red Rocks Amphitheatre in a Private Suburban ($499) or 10-passenger Private Van ($699), including Upper North Lot tailgating gear and an on-site waiting driver.",
+      "Private round-trip concert transportation to Red Rocks Amphitheatre in a Private Suburban ($518.96 total: $499.00 base + $19.96 Booking fee (4%)) or 10-passenger Private Van ($726.96 total: $699.00 base + $27.96 Booking fee (4%)), including Upper North Lot tailgating gear and an on-site waiting driver.",
     provider: { "@id": `${SITE}/#organization` },
     areaServed: SERVICE_AREAS.map((city) => ({
       "@type": "City",
@@ -151,7 +151,8 @@ export default async function HomePage() {
         {
           "@type": "Offer",
           priceCurrency: "USD",
-          price: "499",
+          price: "518.96",
+          description: "$518.96 total ($499.00 base + $19.96 Booking fee (4%)). Your complete total is shown before payment.",
           url: `${SITE}/book/red-rocks-amphitheatre/private/suv`,
           itemOffered: {
             "@type": "Service",
@@ -162,7 +163,8 @@ export default async function HomePage() {
         {
           "@type": "Offer",
           priceCurrency: "USD",
-          price: "699",
+          price: "726.96",
+          description: "$726.96 total ($699.00 base + $27.96 Booking fee (4%)). Your complete total is shown before payment.",
           url: `${SITE}/book/red-rocks-amphitheatre/private/van`,
           itemOffered: {
             "@type": "Service",
@@ -180,7 +182,7 @@ export default async function HomePage() {
     mainEntity: [
       {
         "@type": "Question",
-        name: "What is included in the flat vehicle price?",
+        name: "What is included in your private vehicle booking?",
         acceptedAnswer: {
           "@type": "Answer",
           text: "Every private ride includes Denver-area pickup, an optional beverage/grocery stop, Upper North Lot staging, tailgating time with chairs, cooler, Bluetooth speaker and ice, a dedicated driver and vehicle waiting through the concert, and your return ride home.",
@@ -191,7 +193,7 @@ export default async function HomePage() {
         name: "How much does private Red Rocks transportation cost for 2027?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Published 2027 round-trip pricing is $499 flat for a Private Suburban (up to 6 guests) and $699 flat for a 10-passenger Private Van (up to 10 guests).",
+          text: "Published 2027 all-in totals are $518.96 for a Private Suburban ($499.00 base + $19.96 Booking fee (4%), up to 6 guests) and $726.96 for a 10-passenger Private Van ($699.00 base + $27.96 Booking fee (4%), up to 10 guests). Your complete total is shown before payment.",
         },
       },
       {

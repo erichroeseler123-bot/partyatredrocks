@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
+import { PARR_2027_OPTION_B_PRICING_AUTHORITY, PARR_COMPLETE_TOTAL_DISCLOSURE } from "@/lib/pricing";
 
 const SITE = "https://www.partyatredrocks.com";
+const SUV = PARR_2027_OPTION_B_PRICING_AUTHORITY.suv;
+const VAN = PARR_2027_OPTION_B_PRICING_AUTHORITY.van;
 
 export const metadata: Metadata = {
   title: "Professional Transportation & Safety Standards | Party at Red Rocks",
   description:
-    `Commercial passenger licensing, driver background vetting, commercial insurance, and flat-rate private group pricing ($${SUBURBAN_2027_USD} Suburban / $${VAN_2027_USD} Van) for Red Rocks concerts.`,
+    `Commercial passenger licensing, driver background vetting, commercial insurance, and upfront all-in group pricing (${SUV.allInTotalFormatted} Suburban / ${VAN.allInTotalFormatted} Van total) for Red Rocks concerts.`,
   alternates: { canonical: `${SITE}/guide/safety-and-legitimacy` },
 };
 
@@ -58,9 +60,9 @@ export default function SafetyAndLegitimacy() {
           <li className="flex gap-4">
             <span className="font-bold text-[#ffb07c]">03.</span>
             <div>
-              <strong className="block uppercase tracking-wide text-white">Published Flat-Rate Integrity</strong>
+              <strong className="block uppercase tracking-wide text-white">Upfront All-In Pricing Integrity</strong>
               <p className="mt-1 text-base text-muted">
-                Your 2027 round-trip rate (${SUBURBAN_2027_USD} Private Suburban up to 6 / ${VAN_2027_USD} Private Van up to 10) is locked when you book—zero post-show surge multipliers.
+                Your 2027 all-in round-trip total ({SUV.allInTotalFormatted} Private Suburban: {SUV.itemizedSummary} / {VAN.allInTotalFormatted} Private Van: {VAN.itemizedSummary}) is itemized upfront—zero post-show surge multipliers. {PARR_COMPLETE_TOTAL_DISCLOSURE}
               </p>
             </div>
           </li>

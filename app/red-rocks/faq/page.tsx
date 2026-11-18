@@ -4,6 +4,13 @@ import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
 import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
 import type { HandoffSearchParams } from "@/lib/parrHandoff";
 import { buildBookingHref } from "@/lib/parrHandoff";
+import { PARR_COMPLETE_TOTAL_DISCLOSURE } from "@/lib/pricing";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
@@ -52,8 +59,8 @@ export default async function RedRocksFaqPage({
             weather, and concert nights. If you need more detail, jump into the related guides below.
           </p>
           <p className="comic-copy">
-            Party at Red Rocks currently offers private transportation for your group: a $499 Suburban or $699 van, with
-            door-to-door service and the vehicle waiting through the show.
+            Party at Red Rocks currently offers private transportation for your group: {SUBURBAN_ALL_IN_TOTAL_LABEL} Suburban total ({SUBURBAN_ITEMIZED_LABEL}) or {VAN_ALL_IN_TOTAL_LABEL} van total ({VAN_ITEMIZED_LABEL}), with
+            door-to-door service and the vehicle waiting through the show. {PARR_COMPLETE_TOTAL_DISCLOSURE}
           </p>
           <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
             <Link className="comic-btn comic-btn-primary" href={privateHref}>
@@ -100,7 +107,7 @@ export default async function RedRocksFaqPage({
             <Link href={privateHref} className="comic-panel block">
               <div className="comic-tag">Book</div>
               <h2 className="comic-h3">Private Ride Options</h2>
-              <p className="comic-copy">$499 private Suburban or $699 private van for your Red Rocks concert night.</p>
+              <p className="comic-copy">{SUBURBAN_ALL_IN_TOTAL_LABEL} private Suburban total ({SUBURBAN_ITEMIZED_LABEL}) or {VAN_ALL_IN_TOTAL_LABEL} private van total ({VAN_ITEMIZED_LABEL}) for your Red Rocks concert night.</p>
             </Link>
           </div>
         </section>

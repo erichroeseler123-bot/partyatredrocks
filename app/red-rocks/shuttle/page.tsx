@@ -4,20 +4,26 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2, XCircle, ShieldCheck, MapPin, Clock, Users, CarFront, Bus } from "lucide-react";
 import type { HandoffSearchParams } from "@/lib/parrHandoff";
 import { buildBookingHref } from "@/lib/parrHandoff";
+import {
+  PARR_2027_OPTION_B_PRICING_AUTHORITY,
+  PARR_COMPLETE_TOTAL_DISCLOSURE,
+} from "@/lib/pricing";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
+const SUV = PARR_2027_OPTION_B_PRICING_AUTHORITY.suv;
+const VAN = PARR_2027_OPTION_B_PRICING_AUTHORITY.van;
 
 export const metadata: Metadata = {
   title: "Red Rocks Shuttle & Private Transportation from Denver",
   description:
-    "Book private Red Rocks transportation for your group: $499 private Suburban (up to 6) or $699 private van (up to 10). Door-to-door pickup, vehicle waits through show, return ride included.",
+    `Book private Red Rocks transportation for your group: ${SUV.allInTotalFormatted} total private Suburban (${SUV.itemizedSummary}, up to 6) or ${VAN.allInTotalFormatted} total private van (${VAN.itemizedSummary}, up to 10). Door-to-door pickup, vehicle waits through show, return ride included.`,
   alternates: {
     canonical: `${SITE}/red-rocks/shuttle`,
   },
   openGraph: {
     title: "Red Rocks Shuttle & Private Transportation from Denver",
     description:
-      "Private Red Rocks transportation: $499 Suburban (up to 6) or $699 van (up to 10). Door-to-door pickup, vehicle waits through show, guaranteed return ride.",
+      `Private Red Rocks transportation: ${SUV.allInTotalFormatted} total Suburban (up to 6) or ${VAN.allInTotalFormatted} total van (up to 10). Door-to-door pickup, vehicle waits through show, guaranteed return ride.`,
     url: `${SITE}/red-rocks/shuttle`,
     type: "website",
   },
@@ -25,7 +31,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Red Rocks Shuttle & Private Transportation from Denver",
     description:
-      "Private Red Rocks transportation: $499 Suburban (up to 6) or $699 van (up to 10). Door-to-door pickup, vehicle waits through show, guaranteed return ride.",
+      `Private Red Rocks transportation: ${SUV.allInTotalFormatted} total Suburban (up to 6) or ${VAN.allInTotalFormatted} total van (up to 10). Door-to-door pickup, vehicle waits through show, guaranteed return ride.`,
   },
 };
 
@@ -106,11 +112,11 @@ export default async function RedRocksShuttlePage({
           "Boulder, CO",
         ],
         description:
-          "Private round-trip concert transportation to Red Rocks Amphitheatre from Denver and surrounding areas. $499 Suburban for up to 6 or $699 private van for up to 10.",
+          `Private round-trip concert transportation to Red Rocks Amphitheatre from Denver and surrounding areas. ${SUV.allInTotalFormatted} total Suburban (${SUV.itemizedSummary}, up to 6) or ${VAN.allInTotalFormatted} total private van (${VAN.itemizedSummary}, up to 10).`,
         offers: {
           "@type": "AggregateOffer",
-          lowPrice: "499.00",
-          highPrice: "699.00",
+          lowPrice: SUV.schemaPriceString,
+          highPrice: VAN.schemaPriceString,
           priceCurrency: "USD",
         },
       },
@@ -190,12 +196,12 @@ export default async function RedRocksShuttlePage({
         {/* VEHICLE PRICING & OPTIONS GRID - IMMEDIATELY VISIBLE */}
         <section id="vehicles" className="mt-12">
           <div className="text-center max-w-2xl mx-auto mb-8">
-            <p className="text-[12px] font-black uppercase tracking-[0.28em] text-[#ffb07c]">Transparent Flat Rates</p>
+            <p className="text-[12px] font-black uppercase tracking-[0.28em] text-[#ffb07c]">Upfront All-In Vehicle Totals</p>
             <h2 className="mt-2 text-3xl font-black uppercase tracking-tight text-white sm:text-4xl">
               Choose Your Private Vehicle
             </h2>
             <p className="mt-3 text-sm text-white/70 sm:text-base">
-              One flat price for your entire group. No per-person fees, no surprise fuel charges, and no surge pricing.
+              One private vehicle total for your entire group ({SUV.bookingFeeLabel} itemized upfront, zero surge pricing). {PARR_COMPLETE_TOTAL_DISCLOSURE}
             </p>
           </div>
 
@@ -228,9 +234,14 @@ export default async function RedRocksShuttlePage({
                 <h3 className="mt-3 text-3xl font-black uppercase tracking-tight text-white sm:text-4xl">
                   Private Suburban
                 </h3>
-                <div className="mt-4 flex items-baseline gap-2">
-                  <span className="text-5xl font-black tracking-tight text-white">$499</span>
-                  <span className="text-sm font-bold uppercase tracking-wider text-white/60">flat round-trip</span>
+                <div className="mt-4">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-5xl font-black tracking-tight text-white">{SUV.allInTotalFormatted}</span>
+                    <span className="text-sm font-bold uppercase tracking-wider text-white/70">all-in total</span>
+                  </div>
+                  <div className="mt-1 text-xs font-semibold text-white/80">
+                    {SUV.itemizedSummary} · {PARR_COMPLETE_TOTAL_DISCLOSURE}
+                  </div>
                 </div>
                 <p className="mt-4 text-sm leading-6 text-white/75">
                   Comfortable, spacious full-size Chevrolet Suburban or equivalent SUV. Ideal for couples, families, and smaller groups who want private door-to-door service without having to drive.
@@ -239,7 +250,7 @@ export default async function RedRocksShuttlePage({
                 <div className="mt-6 space-y-3 border-t border-white/10 pt-6">
                   <div className="flex items-center gap-3 text-sm text-white/85">
                     <Users className="h-4 w-4 text-[#3df3ff] shrink-0" />
-                    <span><strong>Passenger capacity:</strong> Up to 6 guests (~$83 each split 6 ways)</span>
+                    <span><strong>Passenger capacity:</strong> Up to 6 guests ({SUV.approxMaxGroupEachFormatted})</span>
                   </div>
                   <div className="flex items-center gap-3 text-sm text-white/85">
                     <MapPin className="h-4 w-4 text-[#3df3ff] shrink-0" />
@@ -261,7 +272,7 @@ export default async function RedRocksShuttlePage({
                   href={suvBookingHref}
                   className="flex min-h-14 w-full items-center justify-center rounded-2xl bg-[#3df3ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff] shadow-lg shadow-[#3df3ff]/20"
                 >
-                  Book Private Suburban — $499
+                  Book Private Suburban — {SUV.allInTotalFormatted} Total
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
                 <p className="mt-2 text-center text-xs text-white/50">Instant online booking • Live calendar</p>
@@ -293,18 +304,23 @@ export default async function RedRocksShuttlePage({
                 <h3 className="mt-3 text-3xl font-black uppercase tracking-tight text-white sm:text-4xl">
                   Private Passenger Van
                 </h3>
-                <div className="mt-4 flex items-baseline gap-2">
-                  <span className="text-5xl font-black tracking-tight text-white">$699</span>
-                  <span className="text-sm font-bold uppercase tracking-wider text-white/60">flat round-trip</span>
+                <div className="mt-4">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-5xl font-black tracking-tight text-white">{VAN.allInTotalFormatted}</span>
+                    <span className="text-sm font-bold uppercase tracking-wider text-white/70">all-in total</span>
+                  </div>
+                  <div className="mt-1 text-xs font-semibold text-white/80">
+                    {VAN.itemizedSummary} · {PARR_COMPLETE_TOTAL_DISCLOSURE}
+                  </div>
                 </div>
                 <p className="mt-4 text-sm leading-6 text-white/75">
-                  High-roof, spacious passenger van that keeps your entire crew together. Avoids the splitting of rideshares and costs less per person than public shuttle tickets.
+                  High-roof, spacious passenger van that keeps your entire crew together without splitting into multiple rideshares.
                 </p>
 
                 <div className="mt-6 space-y-3 border-t border-white/10 pt-6">
                   <div className="flex items-center gap-3 text-sm text-white/85">
                     <Users className="h-4 w-4 text-[#ffb07c] shrink-0" />
-                    <span><strong>Passenger capacity:</strong> Up to 10 guests (~$70 each split 10 ways)</span>
+                    <span><strong>Passenger capacity:</strong> Up to 10 guests ({VAN.approxMaxGroupEachFormatted})</span>
                   </div>
                   <div className="flex items-center gap-3 text-sm text-white/85">
                     <MapPin className="h-4 w-4 text-[#ffb07c] shrink-0" />
@@ -326,7 +342,7 @@ export default async function RedRocksShuttlePage({
                   href={vanBookingHref}
                   className="flex min-h-14 w-full items-center justify-center rounded-2xl bg-white px-6 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-white/90 shadow-lg"
                 >
-                  Book Private Van — $699
+                  Book Private Van — {VAN.allInTotalFormatted} Total
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
                 <p className="mt-2 text-center text-xs text-white/50">Instant online booking • Live calendar</p>
@@ -458,7 +474,7 @@ export default async function RedRocksShuttlePage({
               <h3 className="text-lg font-black uppercase text-white">Party at Red Rocks</h3>
               <p className="mt-2 text-xs font-bold uppercase text-emerald-400">Private Suburban / Van</p>
               <ul className="mt-4 space-y-2.5 text-xs text-white/75 leading-relaxed">
-                <li>• <strong>$499 / $699 flat rate:</strong> Never surges, no hidden fees.</li>
+                <li>• <strong>{SUV.allInTotalFormatted} / {VAN.allInTotalFormatted} all-in total:</strong> Includes base rate + 4% Booking fee—zero surge multipliers.</li>
                 <li>• <strong>Vehicle waits:</strong> 100% guaranteed ride home right at the end.</li>
                 <li>• <strong>Door-to-door:</strong> Picked up at your front door, dropped back there.</li>
                 <li>• <strong>Top Circle drop-off:</strong> Direct entrance access without hiking.</li>
@@ -522,20 +538,20 @@ export default async function RedRocksShuttlePage({
             Lock In Your Red Rocks Transportation
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-base text-white/85 sm:text-lg">
-            Dates sell out fast for high-demand concerts. Reserve your private Suburban ($499) or 10-passenger van ($699) today.
+            Dates sell out fast for high-demand concerts. Reserve your Private Suburban ({SUV.allInTotalFormatted} total: {SUV.itemizedSummary}) or 10-passenger Van ({VAN.allInTotalFormatted} total: {VAN.itemizedSummary}) today.
           </p>
           <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
             <Link
               href={suvBookingHref}
               className="inline-flex min-h-14 items-center justify-center rounded-full bg-[#3df3ff] px-8 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-[#62f6ff] shadow-lg shadow-[#3df3ff]/20"
             >
-              Book Private Suburban — $499
+              Book Private Suburban — {SUV.allInTotalFormatted} Total
             </Link>
             <Link
               href={vanBookingHref}
               className="inline-flex min-h-14 items-center justify-center rounded-full bg-white px-8 text-sm font-black uppercase tracking-[0.16em] text-[#07111d] transition hover:bg-white/90 shadow-lg"
             >
-              Book Private Van — $699
+              Book Private Van — {VAN.allInTotalFormatted} Total
             </Link>
           </div>
         </section>

@@ -8,15 +8,15 @@ import { pageVisuals } from "@/lib/pageVisuals";
 
 const COMPARE_VISUALS = [
   {
-    title: "Private Suburban ($499)",
-    body: "Up to 6 guests in one full-size Suburban—door-to-door pickup, Upper North Lot tailgate gear, driver waiting on-site, and direct ride home.",
+    title: "Private Suburban ($518.96 total)",
+    body: "$499.00 base + $19.96 Booking fee (4%). Up to 6 guests in one full-size Suburban—door-to-door pickup, Upper North Lot tailgate gear, driver waiting on-site, and direct ride home.",
     imageSrc: "/images/redesign/private-suburban-black.webp",
     imageAlt: "Representative Chevrolet Suburban for private Red Rocks groups up to 6 guests",
     disclosure: "Representative vehicle; exact vehicle may vary.",
   },
   {
-    title: "Private Van ($699)",
-    body: "Up to 10 guests in one 10-passenger van—everyone arrives, tailgates in Upper North Lot, and rides home together.",
+    title: "Private Van ($726.96 total)",
+    body: "$699.00 base + $27.96 Booking fee (4%). Up to 10 guests in one 10-passenger van—everyone arrives, tailgates in Upper North Lot, and rides home together.",
     imageSrc: "/images/redesign/private-van-black.webp",
     imageAlt: "Representative 10-passenger van for Red Rocks concert groups",
     disclosure: "Representative vehicle; exact vehicle may vary.",
@@ -62,11 +62,11 @@ export default function ShuttleComparison() {
       name: "Party at Red Rocks",
       url: SITE,
     },
-    description: "Private SUV ($499) and 10-passenger van ($699) service vs broker shuttles and rideshare for Red Rocks concerts.",
+    description: "Private SUV ($518.96 total: $499.00 base + $19.96 Booking fee (4%)) and 10-passenger van ($726.96 total: $699.00 base + $27.96 Booking fee (4%)) service vs broker shuttles and rideshare for Red Rocks concerts.",
     offers: {
       "@type": "AggregateOffer",
-      lowPrice: "499.00",
-      highPrice: "699.00",
+      lowPrice: "518.96",
+      highPrice: "726.96",
       priceCurrency: "USD",
     },
   };
@@ -79,16 +79,16 @@ export default function ShuttleComparison() {
         <GuideVisualHero
           eyebrow={guideVisuals.transportation.eyebrow}
           title="Comparing Red Rocks Ride Options"
-          copy="Use the actual tradeoffs, not generic transport filler: private Suburban ($499) or private van ($699) vs rideshare surges and broker shuttles."
+          copy="Use the actual tradeoffs, not generic transport filler: Private Suburban ($518.96 total) or Private Van ($726.96 total) vs rideshare surges and broker shuttles. Your complete total is shown before payment."
           imageSrc={curatedImages.compareHero}
           imageAlt="Red Rocks arrival and transport planning context at sunset"
           actions={
             <>
               <Link href="/book/red-rocks-amphitheatre/private/suv" className="btn-primary">
-                Book Private Suburban ($499)
+                Book Private Suburban ($518.96 Total)
               </Link>
               <Link href="/book/red-rocks-amphitheatre/private/van" className="btn-ghost">
-                Book Private Van ($699)
+                Book Private Van ($726.96 Total)
               </Link>
             </>
           }
@@ -124,8 +124,8 @@ export default function ShuttleComparison() {
             </thead>
             <tbody className="text-strong">
               <tr className="border-b border-soft">
-                <td className="p-5 font-bold">Round-Trip Rate</td>
-                <td className="p-5 font-bold text-green-400">$499 SUV / $699 Van</td>
+                <td className="p-5 font-bold">Round-Trip Total</td>
+                <td className="p-5 font-bold text-green-400">$518.96 SUV / $726.96 Van (incl. 4% Booking fee)</td>
                 <td className="p-5">$65 - $85/person</td>
                 <td className="p-5 text-[#ffb07c]">Surge: $120 - $250 each way</td>
               </tr>
@@ -174,10 +174,10 @@ export default function ShuttleComparison() {
           <p className="mb-8 text-xl">Stop comparing and book the transport plan that actually fits the night.</p>
           <div className="flex flex-col justify-center gap-4 md:flex-row">
             <Link href="/book/red-rocks-amphitheatre/private/suv" className="rounded-full bg-[#3df3ff] px-8 py-4 font-black text-[#08111e] transition hover:bg-[#62f6ff]">
-              Book Private Suburban ($499)
+              Book Private Suburban ($518.96 Total)
             </Link>
             <Link href="/book/red-rocks-amphitheatre/private/van" className="brand-button-secondary inline-flex items-center justify-center rounded-full px-8 py-4 font-black">
-              Book Private Van ($699)
+              Book Private Van ($726.96 Total)
             </Link>
           </div>
         </div>

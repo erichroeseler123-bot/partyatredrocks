@@ -7,16 +7,22 @@ import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
 import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
 import { getProbableSetlist } from "@/lib/setlists";
 import { getRedRocks7DayForecast } from "@/lib/weather";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
 import WeekClient, { type WeekEvent } from "./WeekClient";
 
 export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 const DEFAULT_OG_IMAGE = `${SITE}/hero/hero_red_rocks.webp`;
+const WEEK_META_DESC = `See the Red Rocks lineup this week, open show pages, and reserve private Red Rocks transportation: Private Suburban ${SUBURBAN_ALL_IN_TOTAL_LABEL} total (${SUBURBAN_ITEMIZED_LABEL}) or Private Van ${VAN_ALL_IN_TOTAL_LABEL} total (${VAN_ITEMIZED_LABEL}).`;
 
 export const metadata: Metadata = {
   title: "Red Rocks Lineup This Week | Shows + Private Transportation",
-  description:
-    "See the Red Rocks lineup this week, open show pages, and reserve private Red Rocks transportation. Private Suburban $499 with a private van upgrade for larger groups.",
+  description: WEEK_META_DESC,
   robots: {
     index: false,
     follow: true,
@@ -24,8 +30,7 @@ export const metadata: Metadata = {
   alternates: { canonical: `${SITE}/week/red-rocks` },
   openGraph: {
     title: "Red Rocks Lineup This Week | Shows + Private Transportation",
-    description:
-      "Find your Red Rocks show, then reserve one private vehicle for the concert night. Private Suburban $499 with a van upgrade for larger groups.",
+    description: WEEK_META_DESC,
     url: `${SITE}/week/red-rocks`,
     type: "website",
     images: [
@@ -38,8 +43,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Red Rocks Lineup This Week | Shows + Private Transportation",
-    description:
-      "Find your Red Rocks show, then reserve one private vehicle for the concert night. Private Suburban $499 with a van upgrade for larger groups.",
+    description: WEEK_META_DESC,
     images: [DEFAULT_OG_IMAGE],
   },
 };

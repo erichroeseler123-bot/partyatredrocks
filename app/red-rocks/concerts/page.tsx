@@ -8,16 +8,22 @@ import {
 } from "@/lib/events/getCatalog";
 import type { HandoffSearchParams } from "@/lib/parrHandoff";
 import { buildBookingHref } from "@/lib/parrHandoff";
-import { PARR_VALUE_PROPOSITION, SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
+import {
+  PARR_2027_OPTION_B_PRICING_AUTHORITY,
+  PARR_COMPLETE_TOTAL_DISCLOSURE,
+  PARR_VALUE_PROPOSITION,
+} from "@/lib/pricing";
 
 const SITE = "https://www.partyatredrocks.com";
 const DEFAULT_OG_IMAGE = `${SITE}/hero/hero_red_rocks.webp`;
+const SUV = PARR_2027_OPTION_B_PRICING_AUTHORITY.suv;
+const VAN = PARR_2027_OPTION_B_PRICING_AUTHORITY.van;
 export const revalidate = 1800;
 
 export const metadata: Metadata = {
-  title: `2027 Red Rocks Concert Schedule | Verified Lineup & Private Rides ($${SUBURBAN_2027_USD}/$${VAN_2027_USD})`,
+  title: `2027 Red Rocks Concert Schedule | Verified Lineup & Private Rides (${SUV.allInTotalFormatted}/${VAN.allInTotalFormatted} Total)`,
   description:
-    `Official 2027 Red Rocks Amphitheatre concert schedule by month. Pick your show, then book a Private Suburban ($${SUBURBAN_2027_USD}, up to 6) or Private Van ($${VAN_2027_USD}, up to 10) with Upper North Lot tailgating.`,
+    `Official 2027 Red Rocks Amphitheatre concert schedule by month. Pick your show, then book a Private Suburban (${SUV.allInTotalFormatted} total: ${SUV.itemizedSummary}, up to 6) or Private Van (${VAN.allInTotalFormatted} total: ${VAN.itemizedSummary}, up to 10) with Upper North Lot tailgating.`,
   robots: {
     index: true,
     follow: true,
@@ -26,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "2027 Red Rocks Concert Schedule & Private Group Rides",
     description:
-      `Browse all verified 2027 Red Rocks concerts and reserve one flat-rate private vehicle ($${SUBURBAN_2027_USD} Suburban / $${VAN_2027_USD} Van) with tailgating and a waiting driver.`,
+      `Browse all verified 2027 Red Rocks concerts and reserve a private vehicle (${SUV.allInTotalFormatted} total Suburban / ${VAN.allInTotalFormatted} total Van) with tailgating and a waiting driver.`,
     url: `${SITE}/red-rocks/concerts`,
     type: "website",
     images: [
@@ -40,7 +46,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "2027 Red Rocks Concert Schedule & Private Rides",
     description:
-      `Find your 2027 Red Rocks show and book a $${SUBURBAN_2027_USD} Private Suburban or $${VAN_2027_USD} Private Van.`,
+      `Find your 2027 Red Rocks show and book a ${SUV.allInTotalFormatted} total Private Suburban or ${VAN.allInTotalFormatted} total Private Van.`,
     images: [DEFAULT_OG_IMAGE],
   },
 };
@@ -226,9 +232,9 @@ export default async function RedRocksConcertsPage({
               2027 Red Rocks Concert Schedule
             </h1>
             <p className="mt-1.5 max-w-3xl text-[13px] leading-[1.42] text-white/82 sm:mt-3 sm:text-base sm:leading-7">
-              Pick your concert date below to prefill one flat-rate private vehicle:{" "}
-              <strong className="text-[#ffb07c]">${SUBURBAN_2027_USD} Suburban</strong> (up to 6) or{" "}
-              <strong className="text-[#ffb07c]">${VAN_2027_USD} Van</strong> (up to 10) with Upper North Lot tailgating &amp; waiting driver.
+              Pick your concert date below to prefill one private vehicle:{" "}
+              <strong className="text-[#ffb07c]">{SUV.allInTotalFormatted} total Suburban</strong> ({SUV.itemizedSummary}, up to 6) or{" "}
+              <strong className="text-[#ffb07c]">{VAN.allInTotalFormatted} total Van</strong> ({VAN.itemizedSummary}, up to 10) with Upper North Lot tailgating &amp; waiting driver. {PARR_COMPLETE_TOTAL_DISCLOSURE}
             </p>
 
             <div className="mt-3 flex flex-wrap items-center gap-2 sm:mt-5 sm:gap-3">
@@ -236,7 +242,7 @@ export default async function RedRocksConcertsPage({
                 href={generalPrivateHref}
                 className="inline-flex min-h-10 items-center justify-center rounded-full bg-[#ff7a4d] px-4 text-xs font-black uppercase tracking-[0.12em] text-[#140804] no-underline shadow-[0_12px_28px_rgba(255,122,77,0.3)] transition hover:bg-[#ff926b] sm:min-h-11 sm:px-6 sm:text-xs sm:tracking-[0.14em]"
               >
-                Book Any Date (${SUBURBAN_2027_USD} / ${VAN_2027_USD})
+                Book Any Date ({SUV.allInTotalFormatted} / {VAN.allInTotalFormatted} Total)
               </Link>
               <div className="hidden flex-wrap gap-2 sm:flex">
                 {SUMMER_MONTH_GUIDES.map((m) => (
@@ -347,8 +353,8 @@ export default async function RedRocksConcertsPage({
                         ) : null}
 
                         <p className="mt-2 text-xs text-white/65 sm:mt-3">
-                          Private Suburban <strong className="text-white">${SUBURBAN_2027_USD}</strong> (up to 6) · Private Van{" "}
-                          <strong className="text-white">${VAN_2027_USD}</strong> (up to 10)
+                          Suburban <strong className="text-white">{SUV.allInTotalFormatted} total</strong> ({SUV.itemizedSummary}) · Van{" "}
+                          <strong className="text-white">{VAN.allInTotalFormatted} total</strong> ({VAN.itemizedSummary})
                         </p>
                       </div>
 
@@ -418,7 +424,7 @@ export default async function RedRocksConcertsPage({
               href={generalPrivateHref}
               className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#ff7a4d] px-6 text-sm font-black uppercase tracking-[0.13em] text-[#140804] no-underline transition hover:bg-[#ff926b]"
             >
-              Book Suburban (${SUBURBAN_2027_USD}) or Van (${VAN_2027_USD})
+              Book Suburban ({SUV.allInTotalFormatted}) or Van ({VAN.allInTotalFormatted}) Total
             </Link>
             <Link
               href="/red-rocks/what-to-wear"

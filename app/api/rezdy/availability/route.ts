@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
 import {
+  getPublicVehicleAvailability,
+  SOLD_OUT_TRAVELER_MESSAGE,
+} from "@/lib/inventory/parrVehicleInventory";
+import {
   getParrRezdyAvailabilityForDate,
   isPreviewOrDevEnvironment,
   type ParrNativeVehicleSlug,
@@ -20,11 +24,53 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
   const vehicle = url.searchParams.get("vehicle") as ParrNativeVehicleSlug | null;
   const date = url.searchParams.get("date") || "";
-  if (vehicle !== "suv" && vehicle !== "van") {
-    return NextResponse.json({ ok: false, error: "Invalid vehicle option" }, { status: 400, headers: HEADERS });
+  const showId = url.searchParams.get("show") || null;
+  const qaSoldOutParam = (url.searchParams.get("qa_sold_out") || "").toLowerCase();
+
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    return NextResponse.json({ ok: false, error: "Invalid ISO date (YYYY-MM-DD)" }, { status: 400, headers: HEADERS });
   }
+
   try {
-    const result = await getParrRezdyAvailabilityForDate({ vehicleSlug: vehicle, dateKey: date });
+    // Summary mode for `ParrShowBookingSelector`: returns public-safe PARR inventory for both SUV and Van
+    if (!vehicle) {
+      const [suvPub, vanPub] = await Promise.all([
+        getPublicVehicleAvailability({ dateKey: date, vehicleSlug: "suv", showId }),
+        getPublicVehicleAvailability({ dateKey: date, vehicleSlug: "van", showId }),
+      ]);
+      const forceSuv = qaSoldOutParam === "suv" || qaSoldOutParam === "both" || qaSoldOutParam === "1";
+      const forceVan = qaSoldOutParam === "van" || qaSoldOutParam === "both";
+
+      return NextResponse.json(
+        {
+          ok: true,
+          dateKey: date,
+          vehicles: {
+            suv: forceSuv
+              ? { ...suvPub, available: false, soldOut: true, availableCount: 0, statusMessage: SOLD_OUT_TRAVELER_MESSAGE }
+              : suvPub,
+            van: forceVan
+              ? { ...vanPub, available: false, soldOut: true, availableCount: 0, statusMessage: SOLD_OUT_TRAVELER_MESSAGE }
+              : vanPub,
+          },
+        },
+        { status: 200, headers: HEADERS }
+      );
+    }
+
+    if (vehicle !== "suv" && vehicle !== "van") {
+      return NextResponse.json({ ok: false, error: "Invalid vehicle option" }, { status: 400, headers: HEADERS });
+    }
+
+    const qaSoldOut =
+      qaSoldOutParam === vehicle || qaSoldOutParam === "both" || qaSoldOutParam === "1";
+
+    const result = await getParrRezdyAvailabilityForDate({
+      vehicleSlug: vehicle,
+      dateKey: date,
+      showId,
+      qaSoldOut,
+    });
     return NextResponse.json(result, { status: 200, headers: HEADERS });
   } catch (err) {
     return NextResponse.json(

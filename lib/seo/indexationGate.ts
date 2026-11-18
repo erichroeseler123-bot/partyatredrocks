@@ -278,7 +278,7 @@ export function getParrVenueServiceSummary(venueSlug?: string | null): string | 
   if (!venueSlug) return null;
   const clean = venueSlug.trim().toLowerCase();
   if (clean === "red-rocks-amphitheatre") {
-    return `$${PARR_2027_PRICING.suv} Private Suburban (up to 6) / $${PARR_2027_PRICING.van} Private Van (up to 10)`;
+    return `$518.96 total Private Suburban ($499.00 base + $19.96 Booking fee (4%), up to 6) / $726.96 total Private Van ($699.00 base + $27.96 Booking fee (4%), up to 10)`;
   }
   if (clean === "mishawaka-amphitheatre") {
     return `${SHUTTLE_PRICING.mishawaka.privateSuburban} private Suburban charter`;
@@ -1085,7 +1085,7 @@ export function buildRedRocksShowLogisticsGuidance(input: {
     timeGuidance,
     pickupWindowGuidance,
     upperNorthTailgateGuidance:
-      "Your private Suburban ($499 flat round-trip, up to 6 guests) or 10-Passenger Van ($699 flat round-trip, up to 10 guests) stages in the Upper North Lot—Red Rocks' premier top-of-venue party lot—stocked with folding chairs, a cooler with fresh ice, and a Bluetooth speaker, plus one optional grocery/liquor stop en route.",
+      "Your Private Suburban ($518.96 total: $499.00 base + $19.96 Booking fee (4%), up to 6 guests) or 10-Passenger Van ($726.96 total: $699.00 base + $27.96 Booking fee (4%), up to 10 guests) stages in the Upper North Lot—Red Rocks' premier top-of-venue party lot—stocked with folding chairs, a cooler with fresh ice, and a Bluetooth speaker, plus one optional grocery/liquor stop en route. Your complete total is shown before payment.",
     postEncoreExitGuidance:
       "Your driver and vehicle stay at Red Rocks throughout the entire concert. After the encore, walk back to your waiting vehicle at the top lot instead of hiking down to the Jurassic Lot rideshare queue or waiting out post-show surge pricing.",
     weatherNote,

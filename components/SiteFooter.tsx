@@ -4,14 +4,20 @@ import { SITE_CONFIG } from "@/app/site-config";
 import SocialLinks from "@/components/shared/SocialLinks";
 import { BUSINESS_PHONE } from "@/lib/seo/siteTrust";
 import { PARR_PUBLIC_FACTS } from "@/lib/publicOperatorFacts";
-import { SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
+import { PARR_2027_OPTION_B_PRICING_AUTHORITY } from "@/lib/pricing";
 
 const FOOTER_GROUPS = [
   {
     title: "Book Private Ride",
     links: [
-      { href: "/book/red-rocks-amphitheatre/private#suv-booking", label: `Private Suburban ($${SUBURBAN_2027_USD})` },
-      { href: "/book/red-rocks-amphitheatre/private#van-upgrade", label: `Private Van ($${VAN_2027_USD})` },
+      {
+        href: "/book/red-rocks-amphitheatre/private#suv-booking",
+        label: `Private Suburban (${PARR_2027_OPTION_B_PRICING_AUTHORITY.suv.allInTotalFormatted} total)`,
+      },
+      {
+        href: "/book/red-rocks-amphitheatre/private#van-upgrade",
+        label: `Private Van (${PARR_2027_OPTION_B_PRICING_AUTHORITY.van.allInTotalFormatted} total)`,
+      },
       { href: "/red-rocks/concerts", label: "2027 Concert Schedule" },
       { href: "/booking", label: "Manage Existing Booking" },
     ],

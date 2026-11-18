@@ -76,7 +76,7 @@ test("Phase 2 Decision #1: collapsed single-hop 308 redirects & /find query/attr
   const privatePage = readText("app/book/[venue]/private/page.tsx");
   assert.match(privatePage, /id="suv-booking"/);
   assert.match(privatePage, /id="van-upgrade"/);
-  assert.match(privatePage, /VAN_PRICE_LABEL/);
+  assert.match(privatePage, /VAN_ALL_IN_TOTAL_LABEL/);
 });
 
 test("Phase 2 Decision #2: all 11 historical 404 routes 308-redirect in 1 hop to exact topical successors (zero homepage catch-alls)", () => {
@@ -224,23 +224,31 @@ test("Phase 2 Decision #4 & #5: full-site $499/$699 pricing consistency, FAQ/man
 
   // Check machine manifests (/agent.json, /llms.txt, public-route-inventory.v1.json, _authority_spec.json)
   const agentBody = await (await getAgentJson()).json();
-  assert.equal(agentBody.public_claims.suburban_usd, 499);
-  assert.equal(agentBody.public_claims.van_usd, 699);
+  assert.equal(agentBody.public_claims.suburban_usd, 518.96);
+  assert.equal(agentBody.public_claims.suburban_base_usd, 499);
+  assert.equal(agentBody.public_claims.suburban_booking_fee_usd, 19.96);
+  assert.equal(agentBody.public_claims.van_usd, 726.96);
+  assert.equal(agentBody.public_claims.van_base_usd, 699);
+  assert.equal(agentBody.public_claims.van_booking_fee_usd, 27.96);
   assert.equal(agentBody.public_claims.shared_seat_service, false);
 
   const llmsText = await (await getLlmsTxt()).text();
-  assert.match(llmsText, /\$499 flat round-trip/);
-  assert.match(llmsText, /\$699 flat round-trip/);
+  assert.match(llmsText, /\$518\.96 total \(\$499\.00 base \+ \$19\.96 Booking fee \(4%\)\)/);
+  assert.match(llmsText, /\$726\.96 total \(\$699\.00 base \+ \$27\.96 Booking fee \(4%\)\)/);
 
   const routeInv = JSON.parse(readText("data/governance/public-route-inventory.v1.json"));
-  assert.equal(routeInv.serviceAndVehicleCatalog.privateRideOptions[0].priceUsd, 499);
-  assert.equal(routeInv.serviceAndVehicleCatalog.privateRideOptions[1].priceUsd, 699);
-  assert.equal(routeInv.bookingActions[0].publicPriceUsd, 499);
-  assert.equal(routeInv.bookingActions[1].publicPriceUsd, 699);
+  assert.equal(routeInv.serviceAndVehicleCatalog.privateRideOptions[0].priceUsd, 518.96);
+  assert.equal(routeInv.serviceAndVehicleCatalog.privateRideOptions[0].basePriceUsd, 499);
+  assert.equal(routeInv.serviceAndVehicleCatalog.privateRideOptions[0].bookingFeeUsd, 19.96);
+  assert.equal(routeInv.serviceAndVehicleCatalog.privateRideOptions[1].priceUsd, 726.96);
+  assert.equal(routeInv.serviceAndVehicleCatalog.privateRideOptions[1].basePriceUsd, 699);
+  assert.equal(routeInv.serviceAndVehicleCatalog.privateRideOptions[1].bookingFeeUsd, 27.96);
+  assert.equal(routeInv.bookingActions[0].publicPriceUsd, 518.96);
+  assert.equal(routeInv.bookingActions[1].publicPriceUsd, 726.96);
 
   const authSpec = readText("_authority_spec.json");
   assert.doesNotMatch(authSpec, /59\/pp/);
-  assert.match(authSpec, /\$499 SUV \/ \$699 Van/);
+  assert.match(authSpec, /\$518\.96 Suburban \/ \$726\.96 Van Total/);
 
   const emailConfirm = readText("lib/sharedConfirmation.ts");
   assert.doesNotMatch(emailConfirm, /2026 Red Rocks bag/);

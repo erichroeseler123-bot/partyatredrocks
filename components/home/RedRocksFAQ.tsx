@@ -1,3 +1,11 @@
+import { PARR_COMPLETE_TOTAL_DISCLOSURE } from "@/lib/pricing";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
+
 const FAQ = [
   {
     q: "Do you return after the show?",
@@ -5,7 +13,7 @@ const FAQ = [
   },
   {
     q: "Is this round-trip?",
-    a: "Yes. All bookings are round-trip for your private group: $499 for a private Suburban (up to 6) or $699 for a private van (up to 10). Your vehicle waits through the entire show.",
+    a: `Yes. All bookings are round-trip for your private group: ${SUBURBAN_ALL_IN_TOTAL_LABEL} total (${SUBURBAN_ITEMIZED_LABEL}) for a private Suburban (up to 6) or ${VAN_ALL_IN_TOTAL_LABEL} total (${VAN_ITEMIZED_LABEL}) for a private van (up to 10). ${PARR_COMPLETE_TOTAL_DISCLOSURE} Your vehicle waits through the entire show.`,
   },
   {
     q: "What if it rains or snows?",

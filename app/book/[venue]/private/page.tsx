@@ -12,12 +12,15 @@ import {
 import { postDccSatelliteEvent, postWtaPartnerAcceptedIfNeeded } from "@/lib/dccSatellite";
 import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
 import { bookingVisuals } from "@/lib/bookingVisuals";
-import { PARR_VALUE_PROPOSITION } from "@/lib/pricing";
+import { PARR_COMPLETE_TOTAL_DISCLOSURE, PARR_VALUE_PROPOSITION } from "@/lib/pricing";
 import {
-  getSuburbanDisplayPrice,
   PUBLIC_PRIVATE_RIDE_OPTIONS,
-  SUBURBAN_PRICE_LABEL,
-  VAN_PRICE_LABEL,
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_APPROX_EACH_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_APPROX_EACH_LABEL,
+  VAN_ITEMIZED_LABEL,
 } from "@/lib/rideCatalog";
 import { buildPrivateBookingJsonLd, buildPrivateBookingMetadata, buildPrivateFaqJsonLd } from "../bookingSeo";
 
@@ -30,7 +33,7 @@ const INCLUDED_SUV = [
   "Door-to-door Denver, Golden, or Boulder hotel/home pickup + optional drink stop",
   "Upper North Lot staging with chairs, cooler, Bluetooth speaker & fresh ice",
   "Driver & locked SUV stay at Red Rocks through the entire concert",
-  "Direct return ride home after the encore—flat vehicle price, zero surge",
+  "Direct return ride home after the encore—upfront all-in total, zero surge pricing",
 ];
 
 const INCLUDED_VAN = [
@@ -162,8 +165,8 @@ export default async function PrivateOptionsPage({
           <div className="relative p-4 sm:p-10 lg:p-12">
             <div className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-[#ffb07c]/35 bg-[#ffb07c]/12 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.13em] text-[#ffb07c] sm:px-4 sm:py-1.5 sm:text-[11px] sm:tracking-[0.2em]">
               <Sparkles className="h-3 w-3 shrink-0 sm:h-3.5 sm:w-3.5" />
-              <span className="sm:hidden">2027 Flat Vehicle Pricing</span>
-              <span className="hidden sm:inline">2027 Flat Vehicle Pricing · Upper North Tailgate</span>
+              <span className="sm:hidden">2027 All-In Vehicle Pricing</span>
+              <span className="hidden sm:inline">2027 Upfront All-In Pricing · Upper North Tailgate</span>
             </div>
 
             <h1 className="mt-2.5 max-w-4xl text-[1.58rem] font-black uppercase leading-[1.02] tracking-[-0.035em] sm:mt-4 sm:text-[3.5rem] sm:leading-[0.96]">
@@ -194,13 +197,13 @@ export default async function PrivateOptionsPage({
                 href="#suv-booking"
                 className="inline-flex min-h-10 items-center justify-center rounded-full bg-[#ff7a4d] px-4 text-[11px] font-black uppercase tracking-[0.12em] text-[#140804] no-underline transition hover:bg-[#ff926b] sm:min-h-11 sm:px-6 sm:text-xs sm:tracking-[0.14em]"
               >
-                Suburban ({SUBURBAN_PRICE_LABEL} · Up to 6)
+                Suburban ({SUBURBAN_ALL_IN_TOTAL_LABEL} total · Up to 6)
               </a>
               <a
                 href="#van-upgrade"
                 className="inline-flex min-h-10 items-center justify-center rounded-full border border-white/20 bg-white/10 px-4 text-[11px] font-black uppercase tracking-[0.12em] text-white no-underline transition hover:bg-white/16 sm:min-h-11 sm:px-6 sm:text-xs sm:tracking-[0.14em]"
               >
-                Van ({VAN_PRICE_LABEL} · Up to 10)
+                Van ({VAN_ALL_IN_TOTAL_LABEL} total · Up to 10)
               </a>
             </div>
           </div>
@@ -246,15 +249,18 @@ export default async function PrivateOptionsPage({
                     </h2>
                   </div>
                   <div className="text-right">
-                    <div className="text-3xl font-black text-[#ffb07c] sm:text-4xl">{SUBURBAN_PRICE_LABEL}</div>
-                    <div className="text-[11px] font-bold uppercase tracking-wider text-white/65">
-                      Flat round-trip (~$83 each for 6)
+                    <div className="text-3xl font-black text-[#ffb07c] sm:text-4xl">{SUBURBAN_ALL_IN_TOTAL_LABEL} total</div>
+                    <div className="mt-0.5 text-xs font-semibold text-white/85">
+                      {SUBURBAN_ITEMIZED_LABEL}
+                    </div>
+                    <div className="mt-0.5 text-[11px] font-medium text-white/65">
+                      ({SUBURBAN_APPROX_EACH_LABEL})
                     </div>
                   </div>
                 </div>
 
                 <p className="mt-3 text-sm leading-6 text-white/80 sm:mt-4">
-                  Ideal for couples, double dates, and groups up to 6 who want spacious SUV seating, easy curbside hotel or home pickup, Upper North Lot tailgating, and a dedicated vehicle waiting through the encore.
+                  Ideal for couples, double dates, and groups up to 6 who want spacious SUV seating, easy curbside hotel or home pickup, Upper North Lot tailgating, and a dedicated vehicle waiting through the encore. {PARR_COMPLETE_TOTAL_DISCLOSURE}
                 </p>
 
                 <ul className="mt-4 space-y-2 sm:mt-5 sm:space-y-2.5">
@@ -266,13 +272,11 @@ export default async function PrivateOptionsPage({
                   ))}
                 </ul>
 
-                <div className="mt-4 grid grid-cols-2 gap-2 text-xs font-bold text-white/75 sm:mt-5 sm:grid-cols-4">
-                  {[1, 2, 3, 4].map((vehicleNumber) => (
-                    <div key={vehicleNumber} className="rounded-xl border border-white/10 bg-black/25 px-3 py-2 text-center">
-                      {vehicleNumber === 1 ? "1 SUV" : `${vehicleNumber} SUVs`}:{" "}
-                      <span className="text-white">{getSuburbanDisplayPrice(vehicleNumber)} ea</span>
-                    </div>
-                  ))}
+                <div className="mt-4 rounded-xl border border-white/10 bg-black/25 px-4 py-3 text-xs leading-5 text-white/75 sm:mt-5">
+                  <strong className="text-white">Single-Vehicle Checkout:</strong> Online booking reserves 1 Private Suburban ({SUBURBAN_ALL_IN_TOTAL_LABEL} total: {SUBURBAN_ITEMIZED_LABEL}). Need multiple SUVs?{" "}
+                  <Link href="/red-rocks/group-transportation" className="font-bold text-[#ffb07c] underline">
+                    Request Multi-Vehicle Group Transportation →
+                  </Link>
                 </div>
               </div>
             </div>
@@ -282,7 +286,7 @@ export default async function PrivateOptionsPage({
                 href={suvHref}
                 className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-[#ff7a4d] px-4 py-3 text-xs font-black uppercase tracking-[0.12em] text-[#140804] no-underline shadow-[0_12px_30px_rgba(255,122,77,0.3)] transition hover:bg-[#ff926b] sm:min-h-13 sm:px-6 sm:py-3.5 sm:text-sm sm:tracking-[0.14em]"
               >
-                <span>Select Private Suburban — {SUBURBAN_PRICE_LABEL}</span>
+                <span>Select Private Suburban — {SUBURBAN_ALL_IN_TOTAL_LABEL} Total</span>
                 <ArrowRight className="h-4 w-4 shrink-0" />
               </Link>
             </div>
@@ -324,15 +328,18 @@ export default async function PrivateOptionsPage({
                     </h2>
                   </div>
                   <div className="text-right">
-                    <div className="text-3xl font-black text-[#ffb07c] sm:text-4xl">{VAN_PRICE_LABEL}</div>
-                    <div className="text-[11px] font-bold uppercase tracking-wider text-white/65">
-                      Flat round-trip (~$70 each for 10)
+                    <div className="text-3xl font-black text-[#ffb07c] sm:text-4xl">{VAN_ALL_IN_TOTAL_LABEL} total</div>
+                    <div className="mt-0.5 text-xs font-semibold text-white/85">
+                      {VAN_ITEMIZED_LABEL}
+                    </div>
+                    <div className="mt-0.5 text-[11px] font-medium text-white/65">
+                      ({VAN_APPROX_EACH_LABEL})
                     </div>
                   </div>
                 </div>
 
                 <p className="mt-3 text-sm leading-6 text-white/80 sm:mt-4">
-                  Built for groups of 7 to 10 friends who want spacious seating, luggage/cooler room, one pickup timeline, Upper North Lot tailgating together, and one warm van waiting after the show.
+                  Built for groups of 7 to 10 friends who want spacious seating, luggage/cooler room, one pickup timeline, Upper North Lot tailgating together, and one warm van waiting after the show. {PARR_COMPLETE_TOTAL_DISCLOSURE}
                 </p>
 
                 <ul className="mt-4 space-y-2 sm:mt-5 sm:space-y-2.5">
@@ -345,7 +352,7 @@ export default async function PrivateOptionsPage({
                 </ul>
 
                 <div className="mt-4 rounded-xl border border-white/10 bg-black/25 px-4 py-3 text-xs leading-5 text-white/75 sm:mt-5">
-                  <strong className="text-white">Group over 10 guests?</strong> Combine a Private Van ({VAN_PRICE_LABEL}) + Private Suburban ({SUBURBAN_PRICE_LABEL}) for up to 16 guests, or{" "}
+                  <strong className="text-white">Group over 10 guests?</strong> Coordinate a Private Van ({VAN_ALL_IN_TOTAL_LABEL} total) + Private Suburban ({SUBURBAN_ALL_IN_TOTAL_LABEL} total) for up to 16 guests, or{" "}
                   <Link href="/contact" className="font-bold text-[#ffb07c] underline">
                     text dispatch at 720-369-6292
                   </Link>{" "}
@@ -359,7 +366,7 @@ export default async function PrivateOptionsPage({
                 href={vanHref}
                 className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-[#ff7a4d] px-4 py-3 text-xs font-black uppercase tracking-[0.12em] text-[#140804] no-underline shadow-[0_12px_30px_rgba(255,122,77,0.3)] transition hover:bg-[#ff926b] sm:min-h-13 sm:px-6 sm:py-3.5 sm:text-sm sm:tracking-[0.14em]"
               >
-                <span>Select Private Van — {VAN_PRICE_LABEL}</span>
+                <span>Select Private Van — {VAN_ALL_IN_TOTAL_LABEL} Total</span>
                 <ArrowRight className="h-4 w-4 shrink-0" />
               </Link>
             </div>

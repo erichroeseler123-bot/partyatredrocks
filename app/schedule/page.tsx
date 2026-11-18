@@ -11,6 +11,12 @@ import { buildBookingHref } from "@/lib/parrHandoff";
 import { ANNOUNCED_RED_ROCKS_2026 } from "@/data/red-rocks-2026-announced";
 import { getMultiYearMediaIndex } from "@/lib/media/getMediaIndex";
 import { curatedImages } from "@/lib/curatedImages";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
 
 export const revalidate = 3600;
 
@@ -262,8 +268,8 @@ export default async function SchedulePage() {
             Showing <span className="font-black text-white">{events.length}</span> Red Rocks concerts from March 2026 forward.
           </p>
           <div className="mt-4 flex flex-wrap gap-2 text-[11px] font-black uppercase tracking-[0.16em] text-white/78">
-            <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">$499 Private Suburban</div>
-            <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">$699 Private Van</div>
+            <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">{SUBURBAN_ALL_IN_TOTAL_LABEL} Total Private Suburban ({SUBURBAN_ITEMIZED_LABEL})</div>
+            <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">{VAN_ALL_IN_TOTAL_LABEL} Total Private Van ({VAN_ITEMIZED_LABEL})</div>
             <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">Guaranteed Return Ride</div>
           </div>
         </div>

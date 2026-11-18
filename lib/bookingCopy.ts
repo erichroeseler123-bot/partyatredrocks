@@ -1,17 +1,24 @@
-import { PARR_VALUE_PROPOSITION, SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
+import {
+  PARR_2027_OPTION_B_PRICING_AUTHORITY,
+  PARR_COMPLETE_TOTAL_DISCLOSURE,
+  PARR_VALUE_PROPOSITION,
+} from "@/lib/pricing";
+
+const SUV = PARR_2027_OPTION_B_PRICING_AUTHORITY.suv;
+const VAN = PARR_2027_OPTION_B_PRICING_AUTHORITY.van;
 
 export const BOOKING_COPY = {
   meta: {
     layoutDescription:
-      `Book private Red Rocks transportation with published flat vehicle pricing ($${SUBURBAN_2027_USD} Private Suburban, $${VAN_2027_USD} Private Van), Upper North Lot tailgating setup, and a coordinated return after the show.`,
+      `Book private Red Rocks transportation with upfront all-in totals (${SUV.allInTotalFormatted} Private Suburban: ${SUV.itemizedSummary}; ${VAN.allInTotalFormatted} Private Van: ${VAN.itemizedSummary}), Upper North Lot tailgating setup, and a coordinated return after the show.`,
     homeDescription:
-      `Dedicated private SUV ($${SUBURBAN_2027_USD}) & Van ($${VAN_2027_USD}) flat round-trip for your group: Denver-area pickup, Upper North Lot tailgating setup, on-site wait, & return ride.`,
+      `Dedicated private SUV (${SUV.allInTotalFormatted} total: ${SUV.itemizedSummary}) & Van (${VAN.allInTotalFormatted} total: ${VAN.itemizedSummary}) round-trip for your group: Denver-area pickup, Upper North Lot tailgating setup, on-site wait, & return ride.`,
     businessDescription:
       "Independent Colorado concert transportation provider with 24/7 scheduled service subject to live vehicle and schedule availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and GoSno during the winter ski season.",
     sharedBookingDescription:
-      "Private Red Rocks transportation is available with published vehicle pricing, pickup planning, secure checkout, and a coordinated return plan after the show.",
+      `Private Red Rocks transportation with upfront all-in totals (${PARR_COMPLETE_TOTAL_DISCLOSURE}), pickup planning, secure checkout, and a coordinated return plan after the show.`,
     privateBookingDescription:
-      `Private Red Rocks transportation from Denver. Private Suburban $${SUBURBAN_2027_USD}, private van $${VAN_2027_USD} flat round-trip—${PARR_VALUE_PROPOSITION.summary}`,
+      `Private Red Rocks transportation from Denver. Private Suburban ${SUV.allInTotalFormatted} total (${SUV.itemizedSummary}), Private Van ${VAN.allInTotalFormatted} total (${VAN.itemizedSummary})—${PARR_VALUE_PROPOSITION.summary}`,
   },
   labels: {
     sharedRideTitle: "Private Ride",

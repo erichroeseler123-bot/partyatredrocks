@@ -2,19 +2,25 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import type { HandoffSearchParams } from "@/lib/parrHandoff";
 import { buildBookingHref } from "@/lib/parrHandoff";
-import { PARR_VALUE_PROPOSITION, SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
+import { PARR_COMPLETE_TOTAL_DISCLOSURE, PARR_VALUE_PROPOSITION } from "@/lib/pricing";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
 
 const SITE = "https://www.partyatredrocks.com";
 
 export const metadata: Metadata = {
   title: "Red Rocks Private Transportation vs Uber (2026 Archive & 2027 Guide)",
   description:
-    `2026 Red Rocks rideshare comparison archive and current 2027 private round-trip pricing ($${SUBURBAN_2027_USD} Private Suburban, $${VAN_2027_USD} Private Van) with Upper North Lot tailgating and a waiting driver.`,
+    `2026 Red Rocks rideshare comparison archive and current 2027 private round-trip totals (${SUBURBAN_ALL_IN_TOTAL_LABEL} Private Suburban total, ${VAN_ALL_IN_TOTAL_LABEL} Private Van total, including 4% Booking fee) with Upper North Lot tailgating and a waiting driver.`,
   alternates: { canonical: `${SITE}/red-rocks/transportation/shuttle-vs-uber-2026` },
   openGraph: {
     title: "Red Rocks Private Transportation vs Uber (2026 Archive & 2027 Rates)",
     description:
-      `Compare private Red Rocks transportation ($${SUBURBAN_2027_USD} Suburban / $${VAN_2027_USD} Van for 2027) with rideshare surge pricing and post-show pickup delays.`,
+      `Compare private Red Rocks transportation (${SUBURBAN_ALL_IN_TOTAL_LABEL} Suburban total / ${VAN_ALL_IN_TOTAL_LABEL} Van total for 2027) with rideshare surge pricing and post-show pickup delays.`,
     url: `${SITE}/red-rocks/transportation/shuttle-vs-uber-2026`,
     type: "article",
   },
@@ -85,9 +91,9 @@ export default async function Page({ searchParams }: { searchParams: Promise<Han
           className="mt-5 rounded-2xl border border-[#ffb07c]/35 bg-[#ffb07c]/10 p-4 text-sm leading-6 text-white/90 sm:p-5"
         >
           <span className="font-black uppercase tracking-[0.16em] text-[#ffb07c]">2026 Season Archive:</span>{" "}
-          This guide preserves 2026 Red Rocks season reference analysis. Existing 2026 bookings, paid orders, and previously issued quotes remain unchanged at their original 2026 rates. For upcoming <strong>2027 Red Rocks concerts</strong>, public flat-rate vehicle pricing is{" "}
-          <strong>${SUBURBAN_2027_USD} Private Suburban</strong> (up to 6 guests) and{" "}
-          <strong>${VAN_2027_USD} Private Van</strong> (up to 10 guests), including Upper North Lot tailgating gear and a driver who waits through the show.
+          This guide preserves 2026 Red Rocks season reference analysis. Existing 2026 bookings, paid orders, and previously issued quotes remain unchanged at their original 2026 rates. For upcoming <strong>2027 Red Rocks concerts</strong>, public round-trip vehicle totals are{" "}
+          <strong>{SUBURBAN_ALL_IN_TOTAL_LABEL} Private Suburban total</strong> ({SUBURBAN_ITEMIZED_LABEL}, up to 6 guests) and{" "}
+          <strong>{VAN_ALL_IN_TOTAL_LABEL} Private Van total</strong> ({VAN_ITEMIZED_LABEL}, up to 10 guests), including Upper North Lot tailgating gear and a driver who waits through the show. {PARR_COMPLETE_TOTAL_DISCLOSURE}
         </aside>
 
         <section className="mt-6 overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(15,22,38,0.98),rgba(8,12,22,0.98))] p-8 shadow-[0_40px_120px_rgba(0,0,0,0.45)] sm:p-10 lg:p-12">
@@ -102,10 +108,10 @@ export default async function Page({ searchParams }: { searchParams: Promise<Han
           </p>
           <div className="mt-6 flex flex-wrap gap-3 text-sm font-bold text-white/90">
             <span className="rounded-full border border-white/14 bg-white/8 px-4 py-2">
-              2027 Private Suburban: ${SUBURBAN_2027_USD} flat
+              2027 Private Suburban: {SUBURBAN_ALL_IN_TOTAL_LABEL} total ({SUBURBAN_ITEMIZED_LABEL})
             </span>
             <span className="rounded-full border border-white/14 bg-white/8 px-4 py-2">
-              2027 Private Van: ${VAN_2027_USD} flat
+              2027 Private Van: {VAN_ALL_IN_TOTAL_LABEL} total ({VAN_ITEMIZED_LABEL})
             </span>
             <span className="rounded-full border border-white/14 bg-white/8 px-4 py-2">
               Upper North Lot tailgate + waiting driver
@@ -166,7 +172,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<Han
                 <tr className="border-t border-white/10 bg-black/10 align-top">
                   <td className="px-4 py-4 font-black text-white">Round-trip price</td>
                   <td className="px-4 py-4">
-                    ${SUBURBAN_2027_USD} Private Suburban (up to 6) or ${VAN_2027_USD} Private Van (up to 10) flat vehicle price
+                    {SUBURBAN_ALL_IN_TOTAL_LABEL} Private Suburban total ({SUBURBAN_ITEMIZED_LABEL}, up to 6) or {VAN_ALL_IN_TOTAL_LABEL} Private Van total ({VAN_ITEMIZED_LABEL}, up to 10)
                   </td>
                   <td className="px-4 py-4">Varies by demand and often surges sharply after the encore</td>
                 </tr>
