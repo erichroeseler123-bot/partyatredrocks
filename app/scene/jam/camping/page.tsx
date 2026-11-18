@@ -3,6 +3,13 @@ import { JAM_FESTIVALS } from "@/data/jamFestivals";
 
 export const runtime = "nodejs";
 
+
+export const metadata = {
+  title: "Colorado Jam Festival & Red Rocks Camping Logistics Guide",
+  description: "Where to camp near Red Rocks and Colorado jam runs, plus how to separate foothills camping from concert-night transportation.",
+  alternates: { canonical: "https://www.partyatredrocks.com/scene/jam/camping" },
+};
+
 export default function JamCampingGuide() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-12">

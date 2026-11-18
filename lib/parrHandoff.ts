@@ -47,6 +47,13 @@ export const DCC_HANDOFF_QUERY_KEYS = [
   "partner_satellite",
   "partner_reason",
   "partner_handoff_id",
+  "pickup",
+  "pickupHub",
+  "utm_content",
+  "utm_term",
+  "gclid",
+  "fbclid",
+  "affiliate",
 ] as const;
 
 const DCC_SHARED_PASSTHROUGH_KEYS = ["pickupHub", "city", "requests"] as const;

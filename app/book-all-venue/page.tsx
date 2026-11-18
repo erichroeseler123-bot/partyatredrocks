@@ -7,6 +7,13 @@ function firstValue(searchParams: HandoffSearchParams, key: string) {
   return Array.isArray(value) ? value[0] : value;
 }
 
+
+export const metadata = {
+  title: "Request Private Venue Transportation | Denver, Boulder & Mishawaka",
+  description: "Request private group concert transportation for Mission Ballroom, Ball Arena, Fiddler's Green, Folsom Field, Mishawaka, and Front Range venues.",
+  alternates: { canonical: "https://www.partyatredrocks.com/book-all-venue" },
+};
+
 export default async function BookAllVenue({
   searchParams,
 }: {

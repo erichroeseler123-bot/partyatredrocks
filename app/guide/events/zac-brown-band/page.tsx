@@ -1,5 +1,12 @@
 import Link from 'next/link';
 
+
+export const metadata = {
+  title: "Zac Brown Band at Red Rocks | Arrival, Weather & Private Ride Guide",
+  description: "October cold-weather layering, arrival timing, and flat-rate private Suburban ($499) and Van ($699) transportation for Zac Brown Band at Red Rocks.",
+  alternates: { canonical: "https://www.partyatredrocks.com/guide/events/zac-brown-band" },
+};
+
 export default function ZBBEvent() {
   return (
     <div className="max-w-4xl mx-auto px-6 py-16">

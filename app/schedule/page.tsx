@@ -237,6 +237,13 @@ export default async function SchedulePage() {
             </p>
 
             <div className="mt-6 flex flex-wrap gap-2">
+              <Link
+                href="/red-rocks/concerts"
+                className="inline-flex min-h-10 items-center gap-2 rounded-full border border-[#ffb07c]/40 bg-[#ffb07c]/15 px-4 text-[11px] font-black uppercase tracking-[0.16em] text-[#ffb07c] transition hover:bg-[#ffb07c]/25"
+              >
+                <CalendarDays className="h-3.5 w-3.5" />
+                2027 Canonical Concert Calendar →
+              </Link>
               <div className="inline-flex min-h-10 items-center gap-2 rounded-full border border-white/14 bg-white/7 px-4 text-[11px] font-black uppercase tracking-[0.16em] text-white/88">
                 <BadgeCheck className="h-3.5 w-3.5 text-[var(--brand-cyan)]" />
                 Secure Booking

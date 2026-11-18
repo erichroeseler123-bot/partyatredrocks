@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import { type HandoffSearchParams } from "@/lib/parrHandoff";
+import { CheckCircle2 } from "lucide-react";
+import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
 import { BookingVisualHero } from "@/components/booking/BookingVisualHero";
 import { DccReturnBanner } from "@/components/booking/DccReturnBanner";
 import { LegalInlineNotice } from "@/components/legal/LegalInlineNotice";
@@ -11,6 +13,8 @@ import { postDccSatelliteEvent, postWtaPartnerAcceptedIfNeeded } from "@/lib/dcc
 import {
   getPrivateRideOption,
   isPublicPrivateRideSlug,
+  SUBURBAN_PRICE_LABEL,
+  VAN_PRICE_LABEL,
   type PrivateRideSlug,
 } from "@/lib/rideCatalog";
 import { getPrivateRidePricingForDate, PARR_VALUE_PROPOSITION } from "@/lib/pricing";
@@ -29,7 +33,6 @@ const REZDY_PRIVATE_PRODUCTS = {
     rezdyUrl: "https://gosnotransportation58.rezdy.com/630812/van-10-passenger?iframe=true",
   },
 } as const;
-// Actual SUV/van checkout is handled by Rezdy; update Rezdy product pricing to match public pricing.
 
 function firstValue(searchParams: HandoffSearchParams, key: string) {
   const value = searchParams[key];
@@ -88,7 +91,9 @@ export default async function PrivateOptionPage({
     optionPriceLabel: rideOption.priceLabel,
     quantity: vehicleQty,
   });
+
   const artist = firstValue(sp, "artist") || firstValue(sp, "event");
+  const pickup = firstValue(sp, "pickup");
   const dateRaw = firstValue(sp, "date");
   const dateLabel = dateRaw
     ? new Date(`${dateRaw}T12:00:00`).toLocaleDateString("en-US", {
@@ -114,13 +119,46 @@ export default async function PrivateOptionPage({
     sourcePath,
   });
 
+  const pricingInfo = getPrivateRidePricingForDate({ optionSlug: rideOption.slug, serviceDate: dateRaw });
+  const otherSlug = rideOption.slug === "suv" ? "van" : "suv";
+  const switchVehicleHref = buildBookingHref({
+    target: "private-option",
+    venue,
+    option: otherSlug,
+    searchParams: sp,
+    overrides: { qty: vehicleQty },
+  });
+  const backToCompareHref = buildBookingHref({
+    target: "private",
+    venue,
+    searchParams: sp,
+  });
+
   return (
-    <main className="min-h-screen bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 sm:pt-28 lg:px-8">
+    <main className="min-h-screen bg-[#070b14] px-4 pb-16 pt-6 text-white sm:px-6 sm:pt-8 lg:px-8">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <section className="mx-auto flex max-w-[1240px] flex-col gap-8">
+      <section className="mx-auto flex max-w-[1240px] flex-col gap-6">
+        {/* Step Progress Bar */}
+        <nav aria-label="Booking progress" className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/10 bg-[#0d1424] px-4 py-3 text-[11px] font-bold uppercase tracking-wider">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-5">
+            <Link href="/red-rocks/concerts" className="text-white/65 no-underline hover:text-white">
+              1. Event / Date
+            </Link>
+            <Link href={backToCompareHref} className="text-white/65 no-underline hover:text-white">
+              2. {rideOption.slug === "suv" ? "Private Suburban" : "Private Van"}
+            </Link>
+            <span className="font-black text-[#ffb07c]">3. Confirm Pickup &amp; Book</span>
+          </div>
+          <Link href={switchVehicleHref} className="text-[#ffb07c] underline hover:text-white">
+            {rideOption.slug === "suv"
+              ? `Need up to 10 seats? Switch to Private Van (${VAN_PRICE_LABEL}) →`
+              : `6 or fewer guests? Switch to Suburban (${SUBURBAN_PRICE_LABEL}) →`}
+          </Link>
+        </nav>
+
         <BookingVisualHero
-          eyebrow={rideOption.eyebrow}
-          title={`${rideOption.title} Booking`}
+          eyebrow={`${pricingInfo.roundTripLabel} · ${rideOption.slug === "suv" ? "Up to 6 Guests" : "Up to 10 Guests"}`}
+          title={rideOption.slug === "suv" ? "Private Suburban Booking" : "Private Van Booking"}
           copy={rideOption.body}
           imageSrc={bookingVisuals.privateOptions[rideOption.slug]?.imageSrc || bookingVisuals.private.imageSrc}
           imageAlt={bookingVisuals.privateOptions[rideOption.slug]?.imageAlt || bookingVisuals.private.imageAlt}
@@ -128,15 +166,30 @@ export default async function PrivateOptionPage({
 
         <DccReturnBanner searchParams={sp} />
 
-        {artist || dateLabel ? (
-          <section className="rounded-2xl border border-emerald-400/28 bg-emerald-500/10 p-4 sm:p-5">
-            <div className="text-[11px] font-black uppercase tracking-[0.2em] text-emerald-200">Quick ride selection</div>
-            <p className="mt-2 text-sm text-white/88 sm:text-[15px]">
-              You&apos;re booking for <span className="font-black text-white">{artist || "your selected artist"}</span>
+        {artist || dateLabel || pickup ? (
+          <section className="rounded-2xl border border-emerald-400/35 bg-emerald-500/12 p-4 sm:p-5">
+            <div className="text-[11px] font-black uppercase tracking-[0.2em] text-emerald-200">
+              Selected Trip Summary
+            </div>
+            <p className="mt-1.5 text-sm text-white/90 sm:text-[15px]">
+              Booking <strong className="text-white">{rideOption.slug === "suv" ? "Private Suburban" : "Private Van"}</strong>{" "}
+              ({pricingInfo.roundTripLabel})
+              {artist ? (
+                <>
+                  {" "}
+                  for <strong className="text-white">{artist}</strong>
+                </>
+              ) : null}
               {dateLabel ? (
                 <>
                   {" "}
-                  on <span className="font-black text-white">{dateLabel}</span>
+                  on <strong className="text-white">{dateLabel}</strong>
+                </>
+              ) : null}
+              {pickup ? (
+                <>
+                  {" "}
+                  · Pickup area: <strong className="text-white">{pickup}</strong>
                 </>
               ) : null}
               .
@@ -144,31 +197,38 @@ export default async function PrivateOptionPage({
           </section>
         ) : null}
 
-        <section className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.42)] sm:p-8">
-          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">Private Ride Checkout</div>
-          <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white">
-            Book Your {rideOption.title}
-          </h2>
-          <p className="mt-3 max-w-3xl text-sm leading-6 text-white/78 sm:text-[15px]">
-            {PARR_VALUE_PROPOSITION.summary} {PARR_VALUE_PROPOSITION.tailgatingSummary}
-          </p>
-          <p className="mt-2 max-w-3xl text-xs leading-5 text-white/60">
-            Flat round-trip rate:{" "}
-            <span className="font-bold text-white">
-              {getPrivateRidePricingForDate({ optionSlug: rideOption.slug, serviceDate: dateRaw }).roundTripLabel}
-            </span>
-            . {PARR_VALUE_PROPOSITION.exclusionsSummary}
-          </p>
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-cyan-100/82 sm:text-[15px]">
-            Private rides pick your group up at your own hotel, Airbnb, home, or exact Denver-area address.
-          </p>
+        <section className="rounded-[30px] border border-white/10 bg-[#0d1424] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.42)] sm:p-8">
+          <div className="flex flex-col gap-4 border-b border-white/10 pb-6 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
+                Confirm Pickup &amp; Lock Your Date
+              </div>
+              <h2 className="mt-2 text-2xl font-black uppercase tracking-[-0.03em] text-white sm:text-3xl">
+                Complete Your {rideOption.slug === "suv" ? "Private Suburban" : "Private Van"} Reservation
+              </h2>
+              <p className="mt-2 max-w-3xl text-sm leading-6 text-white/80">
+                Enter your exact hotel, Airbnb, or home pickup address inside checkout below. Your flat{" "}
+                <strong className="text-white">{pricingInfo.roundTripLabel}</strong> includes Upper North Lot tailgating gear (chairs, cooler, speaker &amp; ice), a dedicated driver waiting through the concert, and your return ride home.
+              </p>
+              <p className="mt-1.5 text-xs text-white/60">{PARR_VALUE_PROPOSITION.exclusionsSummary}</p>
+            </div>
+            <div className="flex flex-wrap gap-2 text-xs font-bold text-emerald-200">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1.5">
+                <CheckCircle2 className="h-3.5 w-3.5" /> Tailgate Gear Included
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1.5">
+                <CheckCircle2 className="h-3.5 w-3.5" /> Driver Waits All Show
+              </span>
+            </div>
+          </div>
+
           <div className="mt-6">
             {rideOption.slug === "suv" || rideOption.slug === "van" ? (
               <RezdyBookingEmbed
                 page={sourcePath}
                 surface="private_booking"
-                title={`Book ${rideOption.title}`}
-                subtitle="Complete this Red Rocks private ride booking through Rezdy. Pickup details, date, rider information, and payment are handled inside the widget."
+                title={`Reserve ${rideOption.slug === "suv" ? "Private Suburban" : "Private Van"} (${pricingInfo.priceLabel})`}
+                subtitle="Select your concert date, enter your pickup address and rider contact details, and complete secure reservation checkout below."
                 productId={REZDY_PRIVATE_PRODUCTS[rideOption.slug].productId}
                 productName={REZDY_PRIVATE_PRODUCTS[rideOption.slug].productName}
                 rezdyUrl={REZDY_PRIVATE_PRODUCTS[rideOption.slug].rezdyUrl}

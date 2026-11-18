@@ -4,6 +4,7 @@ import { getMultiYearArtistsCatalog, getUpcomingEventsCatalog } from "@/lib/even
 export const revalidate = 86400;
 
 export const metadata = {
+  alternates: { canonical: "https://www.partyatredrocks.com/bands" },
   title: "Bands & Artists | Party At Red Rocks",
   description: "Browse artists across venue schedules and jump straight into show dates and ride booking.",
   robots: {

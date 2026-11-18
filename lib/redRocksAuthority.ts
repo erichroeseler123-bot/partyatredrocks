@@ -271,7 +271,7 @@ const RED_ROCKS_ENTITY_SEEDS: RedRocksEntitySeed[] = [
       { label: "Intent", value: "Shuttle-first planning" },
       { label: "Fit", value: "Reliability over improvisation" },
       { label: "Compare", value: "Shuttle vs rideshare vs drive" },
-      { label: "Action", value: "Use /find" },
+      { label: "Action", value: "Book private ride" },
     ],
     queryIntents: ["red rocks shuttle options", "best shuttle red rocks", "book red rocks shuttle"],
     sections: [
@@ -290,15 +290,15 @@ const RED_ROCKS_ENTITY_SEEDS: RedRocksEntitySeed[] = [
         ],
       },
       {
-        heading: "When To Upgrade",
+        heading: "Choosing Your Vehicle",
         paragraphs: [
-          "Move to private options for strict timing or large-party coordination.",
-          "Use shared shuttle for standard concert-night reliability.",
+          "Choose the Private Suburban ($499 flat round-trip) for groups up to 6 guests.",
+          "Upgrade to the 10-passenger Private Van ($699 flat round-trip) when your crew needs extra room.",
         ],
       },
     ],
     related: [
-      { href: "/red-rocks/red-rocks-shuttle", label: "Shuttle Guide" },
+      { href: "/red-rocks/shuttle", label: "Shuttle Guide" },
       { href: "/red-rocks/denver-to-red-rocks-transportation", label: "Denver Transport" },
     ],
   },

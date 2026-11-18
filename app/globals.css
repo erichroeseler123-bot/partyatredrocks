@@ -1,64 +1,54 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600 900;
+  font-display: swap;
+  src: url("/fonts/montserrat-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Montserrat Fallback";
+  src: local("Segoe UI"), local("Arial");
+  size-adjust: 113.5%;
+  ascent-override: 85%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 600 700;
+  font-display: swap;
+  src: url("/fonts/playfair-display-latin.woff2") format("woff2");
+}
+
 :root{
-  --font-heading:"Montserrat", "Avenir Next", "Segoe UI", sans-serif;
+  --font-heading:"Montserrat", "Montserrat Fallback", "Segoe UI", sans-serif;
   --font-accent:"Playfair Display", Georgia, serif;
-  --surface:#050816;
-  --surface2:#0B1224;
+  --surface:#070b14;
+  --surface2:#0d1424;
   --text:#ffffff;
-  --muted:rgba(255,255,255,0.74);
-  --accent:#3DF3FF;
-  --accentHover:#62F6FF;
-  --accentText:#07111D;
+  --muted:rgba(255,255,255,0.76);
+  --accent:#ff7a4d;
+  --accentHover:#ff926b;
+  --accentText:#140804;
   --accent2:#FFB07C;
   --accentCool:#8FD0FF;
-  --glow:rgba(61,243,255,0.28);
+  --glow:rgba(255,122,77,0.28);
   --radius-pill:9999px;
-  --heroOverlay:linear-gradient(180deg, rgba(7,10,18,0.10) 0%, rgba(7,10,18,0.72) 55%, rgba(7,10,18,0.92) 100%);
+  --heroOverlay:linear-gradient(180deg, rgba(7,11,20,0.14) 0%, rgba(7,11,20,0.72) 55%, rgba(7,11,20,0.94) 100%);
 }
 
-body { background: #3a2416; color: var(--text); }
+body { background: #070b14; color: var(--text); }
 
 a { color: var(--accent2); text-decoration: none; }
 a:hover { text-decoration: underline; }
 a:visited { color: var(--accent2); }
-
-:root{
-  --font-heading:"Montserrat", "Avenir Next", "Segoe UI", sans-serif;
-  --font-accent:"Playfair Display", Georgia, serif;
-  --surface:#050816;
-  --surface2:#0B1224;
-  --text:#ffffff;
-  --muted:rgba(255,255,255,0.74);
-  --accent:#3DF3FF;
-  --accentHover:#62F6FF;
-  --accentText:#07111D;
-  --accent2:#FFB07C;
-  --accentCool:#8FD0FF;
-  --glow:rgba(61,243,255,0.28);
-  --heroOverlay:linear-gradient(180deg, rgba(7,10,18,0.10) 0%, rgba(7,10,18,0.72) 55%, rgba(7,10,18,0.92) 100%);
-}
-
-body { background: #3a2416; color: var(--text); }
-
-a { color: var(--accent2); text-decoration: none; }
-a:hover { text-decoration: underline; }
-a:visited { color: var(--accent2); }
-
-:root{
-  --surface: #050816;
-  --surface2: #0B1224;
-  --text: #ffffff;
-  --muted: rgba(255,255,255,0.74);
-  --accent: #3DF3FF;
-  --accentHover: #62F6FF;
-  --accentText: #07111D;
-  --accent2: #FFB07C;
-  --accentCool: #8FD0FF;
-  --glow: rgba(61,243,255,0.28);
-  --heroOverlay: linear-gradient(180deg, rgba(7,10,18,0.10) 0%, rgba(7,10,18,0.72) 55%, rgba(7,10,18,0.92) 100%);
-}
 
 /* optional: convenient utility-ish classes */
 .bg-surface { background: var(--surface); }

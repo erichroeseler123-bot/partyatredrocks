@@ -4,6 +4,13 @@ import { guideVisuals } from "@/lib/guideVisuals";
 
 const PRIVATE_HREF = "/book/red-rocks-amphitheatre/private";
 
+
+export const metadata = {
+  title: "Red Rocks Bag Policy: Single-Pocket Rule, Dimensions & Clear Bags",
+  description: "Official Red Rocks bag dimensions, single-pocket backpack rules, hydration pack limits, and keeping extra gear locked in your private vehicle.",
+  alternates: { canonical: "https://www.partyatredrocks.com/guide/logistics/bag-policy" },
+};
+
 export default function BagPolicy() {
   return (
     <main className="mx-auto max-w-5xl px-6 py-16 text-white">

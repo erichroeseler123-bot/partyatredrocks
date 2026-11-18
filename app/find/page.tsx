@@ -1,13 +1,9 @@
-import { redirect } from "next/navigation";
-import {
-  buildBookingHref,
-  normalizeVenueSlug,
-  type HandoffSearchParams,
-} from "@/lib/parrHandoff";
+import { permanentRedirect } from "next/navigation";
+import { appendSearchParams, type HandoffSearchParams } from "@/lib/parrHandoff";
 
 export const metadata = {
   title: "Find Your Ride | Party at Red Rocks",
-  description: "Redirecting to the current booking flow for Red Rocks ride options.",
+  description: "Redirecting to private Red Rocks vehicle options.",
   robots: {
     index: false,
     follow: true,
@@ -20,8 +16,16 @@ export default async function FindPage({
   searchParams: Promise<HandoffSearchParams>;
 }) {
   const sp = await searchParams;
-  const rawVenue = Array.isArray(sp.venue) ? sp.venue[0] : sp.venue;
-  const venue = normalizeVenueSlug(rawVenue) || "red-rocks-amphitheatre";
+  const cleaned: HandoffSearchParams = { ...sp };
+  const rawVenue = Array.isArray(cleaned.venue) ? cleaned.venue[0] : cleaned.venue;
+  if (
+    rawVenue &&
+    ["redrocks", "red-rocks", "red-rocks-amphitheater", "red-rocks-amphitheatre"].includes(
+      rawVenue.trim().toLowerCase()
+    )
+  ) {
+    delete cleaned.venue;
+  }
 
-  redirect(buildBookingHref({ target: "book", venue, searchParams: sp }));
+  permanentRedirect(appendSearchParams("/book/red-rocks-amphitheatre/private", cleaned));
 }

@@ -37,7 +37,8 @@ export const metadata: Metadata = {
 function formatDenverEventDate(dateKey: string): string {
   return new Intl.DateTimeFormat("en-US", {
     timeZone: "America/Denver",
-    month: "long",
+    weekday: "short",
+    month: "short",
     day: "numeric",
     year: "numeric",
   }).format(new Date(`${dateKey}T12:00:00-07:00`));
@@ -52,11 +53,12 @@ export default async function HomePage() {
     fromDateKey: denverToday,
     years: [currentYear, currentYear + 1],
     venueId: "red-rocks-amphitheatre",
+    limit: 120,
   });
 
   const heroSrc = pageVisuals.home.heroSrc;
-  const privateVehicleSrc = pageVisuals.home.privateSrc;
-  const privateVanSrc = pageVisuals.home.shuttleSrc;
+  const privateVehicleSrc = "/images/redesign/private-suburban-black.webp";
+  const privateVanSrc = "/images/redesign/private-van-black.webp";
 
   const nextRedRocksEvent = upcomingEvents[0] ?? null;
   const nextRedRocksEventDate = nextRedRocksEvent
@@ -76,27 +78,20 @@ export default async function HomePage() {
           nextRedRocksEvent.dateKey === denverToday
             ? "Tonight at Red Rocks"
             : nextRedRocksEvent.dateKey.startsWith("2027-")
-              ? "Next Announced 2027 Show at Red Rocks"
+              ? "Next Announced 2027 Show"
               : "Next at Red Rocks",
         detail:
           nextRedRocksEvent.dateKey === denverToday
-            ? `${nextRedRocksEvent.name} is on tonight. Private ride planning is still open.`
-            : `${nextRedRocksEvent.name} is coming up next on ${nextRedRocksEventDate}. Lock the ride plan before show night gets compressed.`,
+            ? `${nextRedRocksEvent.name} is on tonight at Red Rocks.`
+            : `${nextRedRocksEvent.name} kicks off ${nextRedRocksEventDate}. Reserve your group vehicle early.`,
         imageSrc: nextRedRocksEventImage || curatedImages.redRocksVenueThumb,
-        imageAlt: `${nextRedRocksEvent.name} concert image`,
-        bookingHref: `/book/red-rocks-amphitheatre/private/suv?date=${encodeURIComponent(nextRedRocksEvent.dateKey)}&artist=${encodeURIComponent(nextRedRocksEvent.name)}`,
+        imageAlt: `${nextRedRocksEvent.name} at Red Rocks Amphitheatre`,
+        bookingHref: `/book/red-rocks-amphitheatre/private?date=${encodeURIComponent(nextRedRocksEvent.dateKey)}&artist=${encodeURIComponent(nextRedRocksEvent.name)}`,
       }
-    : {
-        label: "2027 Red Rocks Season Ride Planning",
-        detail:
-          "Official 2027 Red Rocks concert announcements roll out progressively from late fall through spring. Book a custom show date or request presale ride coordination anytime.",
-        imageSrc: curatedImages.redRocksVenueThumb,
-        imageAlt: "Red Rocks Amphitheatre concert venue",
-        bookingHref: "/book/red-rocks-amphitheatre/private/suv",
-      };
+    : null;
 
   const upcoming2027Events = upcomingEvents.filter((event) => event.dateKey >= "2027-01-01");
-  const upcoming2027Preview: UpcomingRedRocksPreviewItem[] = upcoming2027Events.slice(0, 6).map((event) => ({
+  const upcoming2027Preview: UpcomingRedRocksPreviewItem[] = upcoming2027Events.map((event) => ({
     id: event.id,
     name: event.name,
     dateKey: event.dateKey,
@@ -141,7 +136,7 @@ export default async function HomePage() {
     name: "Private Red Rocks Concert Transportation",
     serviceType: "Private concert transportation",
     description:
-      "Private concert transportation to and from Red Rocks Amphitheatre in a Private Suburban ($499) or 10-passenger Private Van ($699).",
+      "Private round-trip concert transportation to Red Rocks Amphitheatre in a Private Suburban ($499) or 10-passenger Private Van ($699), including Upper North Lot tailgating gear and an on-site waiting driver.",
     provider: { "@id": `${SITE}/#organization` },
     areaServed: SERVICE_AREAS.map((city) => ({
       "@type": "City",
@@ -155,20 +150,22 @@ export default async function HomePage() {
           "@type": "Offer",
           priceCurrency: "USD",
           price: "499",
+          url: `${SITE}/book/red-rocks-amphitheatre/private/suv`,
           itemOffered: {
             "@type": "Service",
             name: "Private Suburban to Red Rocks",
-            description: "Private concert transportation for up to 6 passengers in a Suburban.",
+            description: "Private concert transportation for up to 6 guests in a black Suburban with Upper North Lot tailgating setup and waiting driver.",
           },
         },
         {
           "@type": "Offer",
           priceCurrency: "USD",
           price: "699",
+          url: `${SITE}/book/red-rocks-amphitheatre/private/van`,
           itemOffered: {
             "@type": "Service",
-            name: "10 Passenger Van to Red Rocks",
-            description: "Private concert transportation for up to 10 passengers in a private van.",
+            name: "10 Passenger Private Van to Red Rocks",
+            description: "Private concert transportation for up to 10 guests in a high-roof van with Upper North Lot tailgating setup and waiting driver.",
           },
         },
       ],
@@ -181,31 +178,31 @@ export default async function HomePage() {
     mainEntity: [
       {
         "@type": "Question",
-        name: "How late do Red Rocks rides run?",
+        name: "What is included in the flat vehicle price?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Return rides run after the show ends, so your group does not have to guess the exit timing.",
+          text: "Every private ride includes Denver-area pickup, an optional beverage/grocery stop, Upper North Lot staging, tailgating time with chairs, cooler, Bluetooth speaker and ice, a dedicated driver and vehicle waiting through the concert, and your return ride home.",
         },
       },
       {
         "@type": "Question",
-        name: "Can private rides stop at a liquor store?",
+        name: "How much does private Red Rocks transportation cost for 2027?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes. Private rides can usually include a quick stop if you add the request before the ride.",
+          text: "Published 2027 round-trip pricing is $499 flat for a Private Suburban (up to 6 guests) and $699 flat for a 10-passenger Private Van (up to 10 guests).",
         },
       },
       {
         "@type": "Question",
-        name: "Do you offer private Red Rocks transportation?",
+        name: "Can our private ride stop at a liquor or grocery store before Red Rocks?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes. Party at Red Rocks offers private Suburban service and a private van upgrade for Red Rocks show nights.",
+          text: BOOKING_COPY.faq.liquorStop,
         },
       },
       {
         "@type": "Question",
-        name: "Do private Red Rocks rides have guaranteed return service?",
+        name: "Does our driver wait at Red Rocks during the concert?",
         acceptedAnswer: {
           "@type": "Answer",
           text: BOOKING_COPY.faq.privateReturn,
@@ -213,10 +210,10 @@ export default async function HomePage() {
       },
       {
         "@type": "Question",
-        name: "Can groups book larger vehicles for Red Rocks?",
+        name: "Where do we tailgate at Red Rocks?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes. Larger groups can upgrade from the Private Suburban to a private van.",
+          text: "Private rides stage for pre-show tailgating in the Upper North Lot—Red Rocks' primary party lot near the top amphitheatre entrance.",
         },
       },
     ],
@@ -236,12 +233,12 @@ export default async function HomePage() {
         upcoming2027Preview={upcoming2027Preview}
         verified2027Count={upcoming2027Events.length}
       />
-      <section className="brand-page px-4 pb-20 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-[1500px]">
+      <section className="bg-[#070b14] px-4 pb-20 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1380px]">
           <SocialProofStrip
             brandKey="partyatredrocks"
-            title="Real ride nights"
-            body="A fast look at real arrivals, real groups, and the kind of Red Rocks night people are actually booking."
+            title="Real Red Rocks nights"
+            body="Group arrivals, sunset tailgates in Upper North Lot, and zero-stress rides home after the encore."
             pageTitle="Party At Red Rocks"
             pageUrl={`${SITE}/`}
           />

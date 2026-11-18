@@ -3,6 +3,7 @@ import type { HandoffSearchParams } from "@/lib/parrHandoff";
 import { buildBookingHref } from "@/lib/parrHandoff";
 
 export const metadata = {
+  alternates: { canonical: "https://www.partyatredrocks.com/red-rocks/transportation/parking-reality" },
   title: "Red Rocks Parking Reality",
   description:
     "Arrival timing, overflow lots, and what actually happens on busy nights.",

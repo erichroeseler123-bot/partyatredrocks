@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { lookupLegacyStaticRedirect } from "./lib/legacyRedirects";
 
 const INTERNAL_OPS_COOKIE = "internal_ops_auth";
 const PARR_TRIP_CTX_COOKIE = "parr_trip_ctx";
@@ -29,6 +30,13 @@ const FORBIDDEN_URL_PII_PARAMS = [
   "privatenotes",
   "internalnotes",
 ];
+
+function applyPreviewRobotsHeader(res: NextResponse): NextResponse {
+  if (process.env.VERCEL_ENV === "preview") {
+    res.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
+  }
+  return res;
+}
 
 function constantTimeEqual(actual: string, expected: string): boolean {
   const encoder = new TextEncoder();
@@ -154,7 +162,7 @@ export function middleware(req: NextRequest) {
           maxAge: 60 * 60 * 24 * 7,
         });
       }
-      return redirectRes;
+      return applyPreviewRobotsHeader(redirectRes);
     }
   }
 
@@ -171,12 +179,14 @@ export function middleware(req: NextRequest) {
   if (isInternalOpsPath && !opsAuth?.authorized) {
     const isApi = pathname.startsWith("/api/");
     if (isApi) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return applyPreviewRobotsHeader(NextResponse.json({ error: "Unauthorized" }, { status: 401 }));
     }
-    return new NextResponse("Authentication required", {
-      status: 401,
-      headers: { "WWW-Authenticate": 'Basic realm="Internal Ops", charset="UTF-8"' },
-    });
+    return applyPreviewRobotsHeader(
+      new NextResponse("Authentication required", {
+        status: 401,
+        headers: { "WWW-Authenticate": 'Basic realm="Internal Ops", charset="UTF-8"' },
+      })
+    );
   }
 
   if (isInternalOpsPath && opsAuth?.method === "basic") {
@@ -194,29 +204,42 @@ export function middleware(req: NextRequest) {
           path: "/",
           maxAge: 60 * 60 * 8,
         });
-        return res;
+        res.headers.set("Cache-Control", "private, no-store");
+        return applyPreviewRobotsHeader(res);
       }
     }
   }
 
+  // Collapsed single-hop permanent redirect for /find preserving all legitimate query/attribution params
+  if (pathname === "/find" || pathname === "/find/") {
+    const url = req.nextUrl.clone();
+    url.pathname = "/book/red-rocks-amphitheatre/private";
+    if (
+      url.searchParams.get("venue") &&
+      ["redrocks", "red-rocks", "red-rocks-amphitheater", "red-rocks-amphitheatre"].includes(
+        String(url.searchParams.get("venue")).trim().toLowerCase()
+      )
+    ) {
+      url.searchParams.delete("venue");
+    }
+    return applyPreviewRobotsHeader(NextResponse.redirect(url, 308));
+  }
+
   // LEGACY_SHOW_NUMERIC_IDS
-  // Old numeric /shows/{sourceId} links should land on a safe modern schedule page.
   if (pathname.startsWith("/shows/") && /^\/shows\/\d+\/?$/.test(pathname)) {
     const url = req.nextUrl.clone();
     url.pathname = "/red-rocks/concerts";
     url.search = "";
-    return NextResponse.redirect(url, 308);
+    return applyPreviewRobotsHeader(NextResponse.redirect(url, 308));
   }
-  // END LEGACY_SHOW_NUMERIC_IDS
 
   // LEGACY_MISHAWAKA_AND_PICKUP_LINKS
-  // Old social/directory links should land on the current venue or pickup pages.
   if (pathname.toLowerCase() === "/mishawaka") {
     const url = req.nextUrl.clone();
     url.pathname = "/venues/mishawaka-amphitheatre";
     url.hash = "private-transportation";
     url.search = "";
-    return NextResponse.redirect(url, 308);
+    return applyPreviewRobotsHeader(NextResponse.redirect(url, 308));
   }
 
   if (pathname.toLowerCase() === "/downtown") {
@@ -224,12 +247,10 @@ export function middleware(req: NextRequest) {
     url.pathname = "/guide/local/denver-pickups";
     url.hash = "downtown-pickup";
     url.search = "";
-    return NextResponse.redirect(url, 308);
+    return applyPreviewRobotsHeader(NextResponse.redirect(url, 308));
   }
-  // END LEGACY_MISHAWAKA_AND_PICKUP_LINKS
 
   // LEGACY_WIX_ROUTES
-  // Old Wix blog posts should consolidate to the best matching modern guide, not just the generic hub.
   if (pathname.startsWith("/post/")) {
     const slug = pathname.slice("/post/".length).toLowerCase();
     const url = req.nextUrl.clone();
@@ -266,50 +287,44 @@ export function middleware(req: NextRequest) {
     }
 
     url.search = "";
-    return NextResponse.redirect(url, 308);
+    return applyPreviewRobotsHeader(NextResponse.redirect(url, 308));
   }
 
-  const legacyRouteMap: Record<string, { pathname: string; hash?: string }> = {
-    "/party-bus-to-red-rocks": { pathname: "/party-bus" },
-    "/sprinter": { pathname: "/private-van" },
-    "/mishawaka-private-transportation": { pathname: "/venues/mishawaka-amphitheatre", hash: "private-transportation" },
-    "/general-7": { pathname: "/" },
-    "/la-quinta-fairfield": { pathname: "/guide/local/denver-pickups", hash: "hotel-pickup" },
-    "/upper-north": { pathname: "/guide/local/denver-pickups", hash: "private-pickup" },
-    "/tubing": { pathname: "/guide" },
-    "/hiking-at-red-rocks": { pathname: "/guide" },
-    "/guide/post-encore-strategy": { pathname: "/guide/show-night-strategy/post-show-pickup-plan" },
-    "/guide/bag-policy-2026": { pathname: "/guide/logistics/bag-policy" },
-    "/guide/sheraton-pickup": { pathname: "/guide/local/denver-pickups", hash: "downtown-pickup" },
-    "/concert-guide": { pathname: "/red-rocks/concert-guide" },
-    "/red-rocks-concert-guide": { pathname: "/red-rocks/concert-guide" },
-  };
-
-  const legacyDestination = legacyRouteMap[pathname];
+  const legacyDestination = lookupLegacyStaticRedirect(pathname);
   if (legacyDestination) {
     const url = req.nextUrl.clone();
     url.pathname = legacyDestination.pathname;
     url.hash = legacyDestination.hash || "";
     url.search = "";
-    return NextResponse.redirect(url, 308);
+    return applyPreviewRobotsHeader(NextResponse.redirect(url, 308));
   }
-  // END LEGACY_WIX_ROUTES
 
-  // Never override cache headers for these (they manage their own caching)
+  // Never override cache headers for self-managed machine/asset routes
   if (
     pathname === "/robots.txt" ||
     pathname === "/sitemap.xml" ||
+    pathname === "/llms.txt" ||
+    pathname === "/agent.json" ||
     pathname === "/.well-known/dcc-site" ||
     pathname.startsWith("/api/") ||
     pathname.startsWith("/_next/") ||
+    pathname.startsWith("/fonts/") ||
+    pathname.startsWith("/images/") ||
     pathname === "/favicon.ico"
   ) {
-    return NextResponse.next();
+    return applyPreviewRobotsHeader(NextResponse.next());
   }
 
   const res = NextResponse.next();
-  res.headers.set("Cache-Control", "public, max-age=0, must-revalidate");
-  return res;
+  if (
+    isInternalOpsPath ||
+    pathname.startsWith("/booking/") ||
+    pathname.startsWith("/pay-balance/") ||
+    pathname.startsWith("/manager/")
+  ) {
+    res.headers.set("Cache-Control", "private, no-store");
+  }
+  return applyPreviewRobotsHeader(res);
 }
 
 export const config = {

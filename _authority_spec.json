@@ -1,10 +1,10 @@
 {
   "base": "app/red-rocks/transportation",
   "hub": {
-    "title": "Red Rocks Transportation",
-    "description": "How to get to Red Rocks: shuttle vs rideshare, parking reality, and post-show pickup strategy.",
-    "ctaHref": "/book-shuttle",
-    "ctaText": "Book Red Rocks Shuttle \u2014 $59/pp \u2192",
+    "title": "Red Rocks Private Transportation",
+    "description": "How to get to Red Rocks: private SUV and van service vs rideshare, parking reality, and post-show pickup strategy.",
+    "ctaHref": "/book/red-rocks-amphitheatre/private",
+    "ctaText": "Book Private Ride \u2014 $499 SUV / $699 Van \u2192",
     "href": "/red-rocks/transportation"
   },
   "leaves": [

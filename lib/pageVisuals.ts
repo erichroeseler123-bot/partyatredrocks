@@ -26,9 +26,9 @@ export const pageVisuals = {
     privateSrc: curatedImages.homepagePrivate,
   },
   compare: {
-    title: "Comparing Red Rocks Ride Options",
+    title: "Comparing Red Rocks Ride Options | Private SUV & Van vs Rideshare",
     description:
-      "Compare fixed-price shared shuttle seats, private SUV service, and Sprinter van options for Red Rocks so your group can pick the right ride plan before show night.",
+      "Compare flat-rate Private Suburban ($499) and Private Van ($699) service against rideshare surges and fixed bus stops so your group picks the right Red Rocks plan.",
     shareImage: `${SITE}${buildContentShareImage(
       "red rocks amphitheatre parking sunset",
       curatedImages.compareHero,

@@ -1,5 +1,12 @@
 import Link from 'next/link';
 
+
+export const metadata = {
+  title: "Spring & Late-Fall Cold Weather Survival Guide at Red Rocks (6,450 ft)",
+  description: "How to dress for March, April, October, and November shows at Red Rocks: the 20-degree foothills drop, seat cushions, wind shells, and warm return rides.",
+  alternates: { canonical: "https://www.partyatredrocks.com/guide/logistics/winter-survival" },
+};
+
 export default function WinterSurvival() {
   return (
     <div className="max-w-4xl mx-auto px-6 py-16 bg-surface text-white">

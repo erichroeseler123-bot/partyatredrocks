@@ -8,7 +8,7 @@ import { BOOKING_COPY } from "@/lib/bookingCopy";
 import { pageVisuals } from "@/lib/pageVisuals";
 
 const FONT_VARIABLES = {
-  "--font-heading": '"Montserrat", "Avenir Next", "Segoe UI", sans-serif',
+  "--font-heading": '"Montserrat", "Montserrat Fallback", "Segoe UI", sans-serif',
   "--font-accent": '"Playfair Display", Georgia, serif',
 } as CSSProperties;
 
@@ -23,8 +23,6 @@ export const metadata: Metadata = {
   },
 
   description: BOOKING_COPY.meta.layoutDescription,
-
-  alternates: { canonical: "/" },
 
   keywords: [
     "Red Rocks shuttle",
@@ -50,7 +48,6 @@ export const metadata: Metadata = {
 
   openGraph: {
     type: "website",
-    url: "/",
     siteName: "Party at Red Rocks",
     title: "Red Rocks Shuttle & Private Group Transportation | Party at Red Rocks",
     description: BOOKING_COPY.meta.layoutDescription,
@@ -77,14 +74,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Playfair+Display:wght@600;700&display=swap"
+          rel="preload"
+          href="/fonts/montserrat-latin.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
         />
       </head>
-      <body style={FONT_VARIABLES} className="bg-surface text-default">
+      <body style={FONT_VARIABLES} className="bg-surface text-default antialiased">
         <DisplayTheme />
         <SiteNav />
         {children}

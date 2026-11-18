@@ -39,6 +39,14 @@ function normalizeComparable(value: string | null | undefined) {
     .trim();
 }
 
+
+export const metadata = {
+  title: "Colorado Concert Calendar | Red Rocks & Front Range Venues",
+  description: "Monthly concert calendar across Red Rocks Amphitheatre, Denver, and Boulder venues with private group ride booking.",
+  alternates: { canonical: "https://www.partyatredrocks.com/calendar" },
+  robots: { index: false, follow: true },
+};
+
 export default async function CalendarPage({ searchParams }: Props) {
   const sp = await searchParams;
   const monthFilter = sp.month || "";

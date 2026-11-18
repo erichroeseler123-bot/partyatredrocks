@@ -1,22 +1,22 @@
 [
   {
     "id": "find-choose-ride",
-    "question": "How do I choose the right ride option?",
-    "answer": "Party at Red Rocks offers private transportation: a $399 Suburban for up to 6 passengers or a $599 private van for up to 10 passengers. Both options include round-trip door-to-door service with the vehicle waiting through the show."
+    "question": "How do I choose the right private ride option?",
+    "answer": "Party at Red Rocks offers private round-trip vehicles only: a $499 Private Suburban for up to 6 passengers or a $699 Private Van for up to 10 passengers. Both include pickup, Upper North Lot tailgating setup (chairs, cooler, speaker, and ice), a waiting driver through the concert, and the ride home."
   },
   {
     "id": "find-arrival-time",
-    "question": "How early should I be ready?",
-    "answer": "Be ready before your scheduled pickup window. Show-night traffic and venue ingress can stack up quickly, especially for sold-out dates."
+    "question": "How early should my group be ready?",
+    "answer": "Be ready 5 to 10 minutes before your scheduled pickup window so you maximize Upper North Lot tailgating time ahead of doors."
   },
   {
     "id": "find-return-after-show",
-    "question": "Can I ride back after the show?",
-    "answer": "Yes. Return coverage is part of the plan, with a designated meetup process after the concert."
+    "question": "Does the same driver take us home after the show?",
+    "answer": "Yes. Your driver and private vehicle remain staged at Red Rocks throughout the entire show and drive your group straight back afterward."
   },
   {
     "id": "find-plan-changes",
-    "question": "What if my plans change?",
-    "answer": "Use your confirmation details to contact support as soon as possible so your reservation can be adjusted based on availability and policy."
+    "question": "What if my group's plans change?",
+    "answer": "Text 720-369-6292 or reply to your confirmation email as soon as possible so dispatch can update your pickup details based on availability and policy."
   }
 ]

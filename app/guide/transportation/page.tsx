@@ -4,6 +4,7 @@ import { GuideVisualHero } from "@/components/guide/GuideVisualHero";
 import { guideVisuals } from "@/lib/guideVisuals";
 
 export const metadata = {
+  alternates: { canonical: "https://www.partyatredrocks.com/guide/transportation" },
   title: "Red Rocks Transportation Guide",
   description: "Private transportation vs rideshare, parking tradeoffs, and how to plan the ride home after a Red Rocks show.",
 };

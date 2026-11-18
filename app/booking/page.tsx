@@ -1,54 +1,61 @@
-'use client';
+import type { Metadata } from "next";
+import Link from "next/link";
+import Script from "next/script";
+import { PhoneCall, ChevronLeft } from "lucide-react";
+import BookingOrderLookup from "@/components/booking/BookingOrderLookup";
+import { PARR_PUBLIC_FACTS } from "@/lib/publicOperatorFacts";
+import { SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
 
-import React from 'react';
-import Script from 'next/script';
-import { PhoneCall, ChevronLeft } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import BookingOrderLookup from '@/components/booking/BookingOrderLookup';
-import { PARR_PUBLIC_FACTS } from '@/lib/publicOperatorFacts';
+const SITE = "https://www.partyatredrocks.com";
+
+export const metadata: Metadata = {
+  title: "Manage Booking & Private Reservation Lookup | Party at Red Rocks",
+  description:
+    `Look up an existing Party at Red Rocks reservation or reserve private Red Rocks transportation ($${SUBURBAN_2027_USD} Suburban / $${VAN_2027_USD} Van).`,
+  alternates: { canonical: `${SITE}/booking` },
+};
 
 export default function BookingPage() {
-  const router = useRouter();
-
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans">
-      {/* Navigation Header */}
-      <nav className="bg-white border-b border-slate-200 py-4 px-6 flex justify-between items-center sticky top-0 z-50">
-        <button
-          onClick={() => router.push('/')}
-          className="flex items-center gap-2 text-strong hover:text-blue-600 font-bold uppercase text-xs transition-colors"
+    <div className="min-h-screen bg-[#070b14] text-white font-sans">
+      <nav className="sticky top-0 z-50 flex items-center justify-between border-b border-white/10 bg-[#070b14]/95 px-6 py-4 backdrop-blur">
+        <Link
+          href="/"
+          className="flex items-center gap-2 text-xs font-bold uppercase text-white/80 no-underline transition-colors hover:text-[#ffb07c]"
         >
-          <ChevronLeft className="w-4 h-4" /> Back to Home
-        </button>
-        <div className="font-black italic uppercase tracking-tighter text-xl">
-          Party @ <span className="text-blue-500">Red Rocks!</span>
+          <ChevronLeft className="h-4 w-4" /> Back to Home
+        </Link>
+        <div className="text-lg font-black uppercase tracking-tight">
+          Party at <span className="text-[#ffb07c]">Red Rocks</span>
         </div>
         <a
           href={`tel:${PARR_PUBLIC_FACTS.support.phoneE164}`}
-          className="bg-blue-600 text-white px-4 py-2 rounded-full font-black text-xs flex items-center gap-2 uppercase"
+          className="flex items-center gap-2 rounded-full bg-[#ff6b3d] px-4 py-2 text-xs font-black uppercase text-white no-underline"
         >
-          <PhoneCall className="w-3 h-3" /> {PARR_PUBLIC_FACTS.support.phoneDisplay}
+          <PhoneCall className="h-3 w-3" /> {PARR_PUBLIC_FACTS.support.phoneDisplay}
         </a>
       </nav>
 
-      <main className="max-w-6xl mx-auto py-10 px-4">
-        {/* Verified Self-Service Order Lookup */}
-        <BookingOrderLookup />
+      <main className="mx-auto max-w-6xl px-4 py-10">
+        <div className="mb-8 rounded-3xl border border-white/10 bg-white p-4 text-slate-900 sm:p-6">
+          <BookingOrderLookup />
+        </div>
 
-        {/* Widget Container */}
-        <div className="bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-slate-200">
-          <div className="p-8 border-b border-slate-100 bg-slate-50">
-            <h1 className="text-3xl font-black uppercase italic tracking-tighter">Secure Your Transport</h1>
-            <p className="text-strong font-medium uppercase text-xs tracking-widest mt-1">Select your service and vehicle below</p>
+        <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[#0d1424] shadow-2xl">
+          <div className="border-b border-white/10 p-6 sm:p-8">
+            <h1 className="text-3xl font-black uppercase tracking-tight text-white">
+              Manage Existing Booking or Reserve Private Ride
+            </h1>
+            <p className="mt-2 text-sm text-white/75">
+              2027 flat round-trip vehicle rates: Private Suburban (${SUBURBAN_2027_USD}, up to 6) · Private Van (${VAN_2027_USD}, up to 10). Existing 2026 orders remain unchanged at their original booked prices.
+            </p>
           </div>
 
-          <div className="relative min-h-[1000px]">
-            {/* Rezdy Script Loader */}
+          <div className="relative min-h-[1000px] bg-white p-2">
             <Script
               src="https://gosnotransportation58.rezdy.com/pluginJs"
               strategy="afterInteractive"
             />
-            {/* The Widget Iframe */}
             <iframe
               seamless
               width="100%"
@@ -57,13 +64,13 @@ export default function BookingPage() {
               className="rezdy"
               title="Party at Red Rocks Booking"
               src="https://gosnotransportation58.rezdy.com/catalog/541037/party-at-red-rocks?iframe=true"
-            ></iframe>
+            />
           </div>
         </div>
       </main>
 
-      <footer className="py-10 text-center text-slate-400 text-[10px] font-black uppercase tracking-[0.4em]">
-        © 2026 Party @ Red Rocks! | Dispatch {PARR_PUBLIC_FACTS.support.phoneDisplay} | Professional Fleet Logistics
+      <footer className="py-10 text-center text-[11px] font-bold uppercase tracking-[0.22em] text-white/50">
+        Party at Red Rocks · Dispatch {PARR_PUBLIC_FACTS.support.phoneDisplay} · Private Concert Transportation
       </footer>
     </div>
   );

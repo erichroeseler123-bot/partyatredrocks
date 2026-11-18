@@ -36,7 +36,7 @@ type ScenePayload = {
 };
 
 const SITE =
-  process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://partyatredrocks.com";
+  process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
 const DCC =
   process.env.NEXT_PUBLIC_DCC_ORIGIN || "https://destinationcommandcenter.com";

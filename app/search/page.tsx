@@ -29,6 +29,14 @@ async function readDocs(year = 2026): Promise<SearchDoc[]> {
   }
 }
 
+
+export const metadata = {
+  title: "Search Colorado Concerts & Artists | Party at Red Rocks",
+  description: "Search artists and concerts across Red Rocks Amphitheatre and Front Range venues.",
+  alternates: { canonical: "https://www.partyatredrocks.com/search" },
+  robots: { index: false, follow: true },
+};
+
 export default async function SearchPage({ searchParams }: Props) {
   const sp = await searchParams;
   const q = (sp.q || "").trim();

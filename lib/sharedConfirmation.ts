@@ -71,7 +71,7 @@ function renderEmail(order: InternalOrderRow) {
               <div style="font-size:11px;font-weight:900;letter-spacing:0.18em;text-transform:uppercase;color:#64748b">Why this page matters</div>
               <div style="margin-top:14px;font-size:14px;line-height:1.8;color:#334155">
                 <div>1-click directions to pickup</div>
-                <div>2026 Red Rocks bag and packing rules</div>
+                <div>Red Rocks bag and packing rules</div>
                 <div>Your live return and support info</div>
                 <div style="margin-top:10px;font-weight:700;color:#0f172a">Pro tip: bookmark this page on your phone before show day.</div>
               </div>

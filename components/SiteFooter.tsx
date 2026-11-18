@@ -4,41 +4,44 @@ import { SITE_CONFIG } from "@/app/site-config";
 import SocialLinks from "@/components/shared/SocialLinks";
 import { BUSINESS_PHONE } from "@/lib/seo/siteTrust";
 import { PARR_PUBLIC_FACTS } from "@/lib/publicOperatorFacts";
+import { SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
 
 const FOOTER_GROUPS = [
   {
-    title: "Book",
+    title: "Book Private Ride",
     links: [
-      { href: "/book/red-rocks-amphitheatre/private/suv", label: "Private Suburban" },
-      { href: "/book/red-rocks-amphitheatre/private#van-upgrade", label: "Van Upgrade" },
+      { href: "/book/red-rocks-amphitheatre/private#suv-booking", label: `Private Suburban ($${SUBURBAN_2027_USD})` },
+      { href: "/book/red-rocks-amphitheatre/private#van-upgrade", label: `Private Van ($${VAN_2027_USD})` },
+      { href: "/red-rocks/concerts", label: "2027 Concert Schedule" },
+      { href: "/booking", label: "Manage Existing Booking" },
     ],
   },
   {
-    title: "Plan",
+    title: "Red Rocks Night",
     links: [
-      { href: "/red-rocks/transportation/post-show-pickup", label: "Post-Show Pickup" },
-      { href: "/red-rocks/transportation/parking-reality", label: "Parking Reality" },
-      { href: "/guide/show-night-strategy", label: "Show-Night Strategy" },
-      { href: "/guide/tailgating", label: "Tailgating Guide" },
+      { href: "/guide/tailgating", label: "Upper North Tailgating" },
+      { href: "/red-rocks/what-to-wear", label: "What to Wear by Month" },
+      { href: "/red-rocks/post-concert-exit-guide", label: "Post-Concert Exit Guide" },
+      { href: "/red-rocks/weather", label: "Mountain Weather Prep" },
     ],
   },
   {
-    title: "Logistics",
+    title: "Logistics & Hubs",
     links: [
-      { href: "/guide/local/denver-pickups", label: "Downtown Pickups" },
-      { href: "/guide/parking", label: "Parking Guide" },
-      { href: "/guide/show-night-strategy", label: "Show-Night Strategy" },
-      { href: "/guide/logistics/bag-policy", label: "Bag Policy" },
+      { href: "/guide/local/denver-pickups", label: "Denver & Golden Pickups" },
+      { href: "/guide/parking", label: "Parking Lot Breakdown" },
+      { href: "/guide/logistics/bag-policy", label: "Single-Pocket Bag Rules" },
+      { href: "/red-rocks", label: "Red Rocks Guide Hub" },
+      { href: "/venues", label: "All Colorado Venues" },
     ],
   },
   {
-    title: "Support",
+    title: "Company & Support",
     links: [
-      { href: "/about", label: "About & Fleet" },
-      { href: "/book/red-rocks-amphitheatre/private/suv", label: "Booking Hub" },
-      { href: "/contact", label: "Contact" },
-      { href: "/privacy", label: "Privacy" },
-      { href: "/terms", label: "Terms" },
+      { href: "/about", label: "About & Licensing" },
+      { href: "/contact", label: "Dispatch & Contact" },
+      { href: "/privacy", label: "Privacy Policy" },
+      { href: "/terms", label: "Booking Terms" },
       { href: "https://gosno.co", label: "Winter: GoSno Ski ↗" },
     ],
   },
@@ -51,22 +54,25 @@ export default function SiteFooter() {
   const whatsappUrl = `https://wa.me/${BUSINESS_PHONE.replace(/^\+/, "")}?text=${encodeURIComponent(footerMessage)}`;
 
   return (
-    <footer className="mt-16 border-t border-[var(--brand-border)] bg-[radial-gradient(circle_at_top,rgba(230,57,70,0.12),transparent_24%),linear-gradient(180deg,rgba(31,18,22,0.98),rgba(17,17,18,1))] text-[var(--brand-text)]">
-      <div className="comic-wrap py-12">
-        <div className="brand-glass-bar rounded-[28px] px-6 py-8 md:px-8">
+    <footer className="mt-16 border-t border-white/10 bg-[radial-gradient(circle_at_top,rgba(255,122,77,0.12),transparent_32%),linear-gradient(180deg,#0b101d_0%,#060911_100%)] text-white">
+      <div className="mx-auto max-w-[1440px] px-4 py-12 sm:px-6 lg:px-8">
+        <div className="rounded-[28px] border border-white/10 bg-white/[0.03] px-6 py-8 md:px-10">
           <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-md">
               <BrandMark className="mb-3" variant="footer" />
-              <div className="text-[12px] font-black uppercase tracking-[0.2em] text-[var(--brand-text)]">
-                Party at Red Rocks
+              <div className="text-xs font-black uppercase tracking-[0.2em] text-[#ffb07c]">
+                Party at Red Rocks · Morrison &amp; Denver, CO
               </div>
-              <div className="mt-3 text-[14px] leading-relaxed text-[color:var(--brand-text-soft)]">
+              <p className="mt-3 text-sm leading-relaxed text-white/78">
+                Private round-trip Red Rocks concert transportation with door-to-door pickup, Upper North Lot tailgating gear (chairs, cooler, speaker &amp; ice), a dedicated driver waiting through the show, and your safe ride home.
+              </p>
+              <p className="mt-3 text-xs leading-relaxed text-white/65">
                 Party at Red Rocks and{" "}
                 <a
                   href="https://gosno.co"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="underline hover:text-[var(--brand-text)]"
+                  className="text-[#ffb07c] underline hover:text-white"
                 >
                   GoSno
                 </a>{" "}
@@ -75,40 +81,25 @@ export default function SiteFooter() {
                   href="https://destinationcommandcenter.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="underline hover:text-[var(--brand-text)]"
+                  className="text-[#ffb07c] underline hover:text-white"
                 >
                   Destination Command Center&apos;s
                 </a>{" "}
-                travel-planning network. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and GoSno during the winter ski season, with 24/7 scheduled service subject to live availability.
-              </div>
-              <div className="mt-2 text-[13px] text-[color:var(--brand-text-soft)]">
-                Other planning tools:{" "}
-                <a
-                  href="https://cruisepromenade.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline hover:text-[var(--brand-text)]"
-                >
-                  Cruise Promenade
-                </a>{" "}
-                (cruise itinerary &amp; group coordination).
-              </div>
-              <div className="mt-4 text-[13px] font-semibold uppercase tracking-[0.16em] text-[var(--brand-cyan)]">
-                Compare the ride, pick the plan, and book it
-              </div>
+                Colorado travel network. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and GoSno during the winter ski season, with 24/7 scheduled service subject to live availability.
+              </p>
             </div>
 
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
               {FOOTER_GROUPS.map((group) => (
                 <div key={group.title}>
-                  <div className="text-[12px] font-black uppercase tracking-[0.16em] text-[var(--brand-text)]">
+                  <div className="text-xs font-black uppercase tracking-[0.16em] text-[#ffb07c]">
                     {group.title}
                   </div>
-                  <div className="mt-3 flex flex-col gap-2">
+                  <div className="mt-3 flex flex-col gap-2.5">
                     {group.links.map((link) => (
                       <Link
-                        key={link.href}
-                        className="text-[15px] text-[color:var(--brand-text-soft)] no-underline transition hover:text-[var(--brand-text)]"
+                        key={link.href + link.label}
+                        className="text-sm text-white/78 no-underline transition hover:text-white"
                         href={link.href}
                       >
                         {link.label}
@@ -120,35 +111,26 @@ export default function SiteFooter() {
             </div>
           </div>
 
-          <div
-            className="mt-8 h-px opacity-70"
-            aria-hidden="true"
-            style={{
-              background:
-                "linear-gradient(90deg, rgba(255,183,3,0.22), rgba(255,183,3,0.06), rgba(230,57,70,0.22))",
-            }}
-          />
+          <div className="mt-8 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="text-sm text-white/80">{PARR_PUBLIC_FACTS.support.longWording}</p>
+              <p className="mt-1 text-xs text-white/55">
+                © {new Date().getFullYear()} Party at Red Rocks · Colorado PUC LL-02649 · All rights reserved.
+              </p>
+            </div>
 
-          <div className="mt-6 flex flex-col gap-2 border-t border-[color:var(--brand-border)] pt-4 text-[13px] text-[color:var(--brand-text-muted)] sm:flex-row sm:items-center sm:justify-between">
-            <div>© {new Date().getFullYear()} Party at Red Rocks. All rights reserved.</div>
-          </div>
-
-          <div className="mt-4 border-t border-[color:var(--brand-border)] pt-4">
-            <p className="mb-3 max-w-2xl text-sm text-[color:var(--brand-text-soft)]">
-              {PARR_PUBLIC_FACTS.support.longWording}
-            </p>
-            <div className="flex items-center gap-3 overflow-x-auto whitespace-nowrap [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+            <div className="flex flex-wrap items-center gap-3">
               <Link
                 href={smsUrl}
-                className="brand-button-primary inline-flex shrink-0 items-center px-4 py-2.5 text-sm font-semibold"
+                className="inline-flex min-h-10 items-center rounded-full bg-[#ff7a4d] px-4 text-xs font-black uppercase tracking-[0.12em] text-[#140804] no-underline transition hover:bg-[#ff926b]"
               >
-                Text us
+                Text 720-369-6292
               </Link>
               <Link
                 href={whatsappUrl}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="brand-button-primary inline-flex shrink-0 items-center px-4 py-2.5 text-sm font-semibold"
+                className="inline-flex min-h-10 items-center rounded-full border border-white/16 bg-white/6 px-4 text-xs font-bold uppercase tracking-[0.12em] text-white no-underline transition hover:bg-white/12"
               >
                 WhatsApp
               </Link>

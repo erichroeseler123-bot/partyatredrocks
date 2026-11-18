@@ -9,63 +9,64 @@ import { buildBookingHref } from "@/lib/parrHandoff";
 import PageHero from "@/components/PageHero";
 import PrimaryCTASection from "@/components/PrimaryCTASection";
 import { RED_ROCKS_ENTITIES } from "@/lib/redRocksAuthority";
+import { SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
 
-const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
+const SITE = "https://www.partyatredrocks.com";
 const DEFAULT_OG_IMAGE = `${SITE}/hero/hero_red_rocks.webp`;
 
 export const metadata: Metadata = {
-  title: "Red Rocks Guide: Visiting, Concerts, Trails, Geology, Transportation",
+  title: "Red Rocks Amphitheatre Guide | Concerts, Tailgating, Parking & Private Rides",
   description:
-    "Red Rocks visiting and concert guide with parking, trails, transportation, geology, wildlife, and planning basics.",
+    `Complete Red Rocks Amphitheatre visitor and concert guide: 2027 concert schedule, Upper North Lot tailgating, parking vs. private transportation ($${SUBURBAN_2027_USD} Suburban / $${VAN_2027_USD} Van), weather prep, and trails.`,
   robots: {
-    index: false,
+    index: true,
     follow: true,
   },
   alternates: { canonical: `${SITE}/red-rocks` },
   openGraph: {
-    title: "Red Rocks Guide: Visiting, Concerts, Trails, Geology, Transportation",
+    title: "Red Rocks Amphitheatre Guide | Concerts, Tailgating, Parking & Rides",
     description:
-      "Red Rocks visiting and concert guide with parking, trails, transportation, geology, wildlife, and planning basics.",
+      `Plan your Red Rocks concert night or daytime park visit: 2027 lineup, Upper North Lot tailgating, parking lots, weather at 6,450 ft, and private group rides.`,
     url: `${SITE}/red-rocks`,
     type: "website",
     images: [
       {
         url: DEFAULT_OG_IMAGE,
-        alt: "Red Rocks guide",
+        alt: "Red Rocks Amphitheatre illuminated sandstone monoliths at night",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Red Rocks Guide: Visiting, Concerts, Trails, Geology, Transportation",
+    title: "Red Rocks Amphitheatre Guide | Concerts, Tailgating & Private Rides",
     description:
-      "Red Rocks visiting and concert guide with parking, trails, transportation, geology, wildlife, and planning basics.",
+      "Parking lots, Upper North Lot tailgating, 6,450-ft weather layering, 2027 concert dates, and private round-trip rides from Denver & Golden.",
     images: [DEFAULT_OG_IMAGE],
   },
 };
 
 const clusterLinks = [
-  { href: "/red-rocks/visiting-guide", tag: "Visit", title: "Visiting Guide", copy: "Hours, timing, weather, and what to bring." },
-  { href: "/red-rocks/parking", tag: "Parking", title: "Parking Guide", copy: "Lot tradeoffs, stair effort, and exit timing." },
-  { href: "/red-rocks/concert-guide", tag: "Concerts", title: "Concert Guide", copy: "Capacity, movement, and show-night basics." },
-  { href: "/red-rocks/hiking-trails", tag: "Trails", title: "Hiking Trails", copy: "Route planning for first-time and repeat visitors." },
-  { href: "/red-rocks/trading-post-trail", tag: "Trail Focus", title: "Trading Post Trail", copy: "A practical route profile with pacing notes." },
-  { href: "/red-rocks/geology", tag: "Geology", title: "Why the Rocks Are Red", copy: "Fountain Formation and Front Range uplift context." },
-  { href: "/red-rocks/wildlife", tag: "Wildlife", title: "Wildlife Guide", copy: "What you may see and how to observe safely." },
-  { href: "/red-rocks/best-time-to-arrive", tag: "Timing", title: "Best Time to Arrive", copy: "Arrival windows by lot, stairs, and show-night timing." },
-  { href: "/red-rocks/camping-nearby", tag: "Camping", title: "Camping Nearby", copy: "Where to stay and how to separate lodging from transport." },
-  { href: "/red-rocks/transportation", tag: "Transportation", title: "How To Get To Red Rocks", copy: "Ride planning and post-show pickup details." },
-  { href: "/red-rocks/map", tag: "Interactive", title: "Red Rocks Map", copy: "Trails, seating, geology, parking, and pickup points." },
-  { href: "/red-rocks/faq", tag: "FAQ", title: "Red Rocks FAQ", copy: "High-intent answers for planning and logistics." },
+  { href: "/red-rocks/concerts", tag: "2027 Lineup", title: "Red Rocks Concert Schedule", copy: "Official 2027 concert calendar by month with one-click private vehicle booking." },
+  { href: "/red-rocks/what-to-wear", tag: "Weather Prep", title: "What to Wear at Red Rocks", copy: "Month-by-month layering guide for 6,450-ft sunset temperature drops and wind." },
+  { href: "/red-rocks/parking", tag: "Lots & Stairs", title: "Parking & Lot Guide", copy: "Upper North vs. Upper South vs. Lower South stairs, arrival windows, and exit speed." },
+  { href: "/red-rocks/post-concert-exit-guide", tag: "Exit Plan", title: "Post-Concert Exit Guide", copy: "How to avoid the Jurassic Lot bottleneck and regroup cleanly after the encore." },
+  { href: "/red-rocks/transportation", tag: "Compare", title: "How to Get to Red Rocks", copy: "Side-by-side tradeoffs between private SUVs/vans, self-driving, and rideshare." },
+  { href: "/red-rocks/seating-chart", tag: "Rows 1–70", title: "Seating Chart & Views", copy: "Sound sweet spots, stair count from each entrance, and accessible row options." },
+  { href: "/red-rocks/weather", tag: "Forecast", title: "Mountain Weather Guide", copy: "Rain-or-shine policy, lightning delays, and keeping dry gear in your vehicle." },
+  { href: "/red-rocks/visiting-guide", tag: "Daytime", title: "Daytime Visiting Guide", copy: "Park hours, Trading Post access, pre-show closures, and altitude hydration." },
+  { href: "/red-rocks/hiking-trails", tag: "Trails", title: "Hiking Trails", copy: "Trading Post Trail and Geological Overlook profiles before show doors." },
+  { href: "/red-rocks/geology", tag: "Geology", title: "Why the Rocks Are Red", copy: "300-million-year Fountain Formation sandstone history behind Creation & Ship Rock." },
+  { href: "/red-rocks/map", tag: "Interactive", title: "Red Rocks Map", copy: "Lot layouts, Upper North tailgate zone, entrances, and stair connections." },
+  { href: "/red-rocks/faq", tag: "Answers", title: "Red Rocks FAQ", copy: "Direct answers on bag sizes, tailgating rules, pickup windows, and return rides." },
 ] as const;
 
 const CATEGORY_META = {
-  transportation: { label: "Transportation", copy: "Getting there, pickup planning, and the ride back after the show." },
-  concerts: { label: "Concerts", copy: "Show-night planning, seating, and concert basics." },
-  hiking: { label: "Hiking", copy: "Trail pages with route notes and planning basics." },
-  geology: { label: "Geology", copy: "Formation and history pages for Red Rocks." },
-  wildlife: { label: "Wildlife", copy: "Nature pages covering birds, plants, and safety basics." },
-  visiting: { label: "Visiting", copy: "General planning pages including timing, weather, and nearby camping." },
+  transportation: { label: "Transportation & Exit Strategy", copy: "Getting from Denver, Golden, or Boulder to Morrison—and getting home without surge chaos." },
+  concerts: { label: "Concert Night Planning", copy: "Seating rows, arrival timing, dress code, and first-timer essentials." },
+  visiting: { label: "Weather, Timing & Nearby Stays", copy: "Seasonal conditions at 6,450 feet, arrival windows, and foothills lodging." },
+  hiking: { label: "Daytime Trails", copy: "Morning and early-afternoon hikes inside Red Rocks Park." },
+  geology: { label: "Sandstone Geology", copy: "How Ship Rock, Creation Rock, and Stage Rock formed." },
+  wildlife: { label: "Foothills Wildlife", copy: "Mule deer, raptors, and trail etiquette in Morrison." },
 } as const;
 
 export default async function RedRocksHubPage({
@@ -74,6 +75,11 @@ export default async function RedRocksHubPage({
   searchParams: Promise<HandoffSearchParams>;
 }) {
   const sp = await searchParams;
+  const privateBookingHref = buildBookingHref({
+    target: "private",
+    venue: "red-rocks-amphitheatre",
+    searchParams: sp,
+  });
   const faqRows = await getFaqRowsWithGlobal("red-rocks/hub.json");
   const faqJsonLd = buildFaqPageJsonLd(faqRows);
 
@@ -82,11 +88,13 @@ export default async function RedRocksHubPage({
     "@type": "TouristAttraction",
     name: "Red Rocks Amphitheatre",
     description:
-      "Natural sandstone amphitheatre in Morrison, Colorado known for concerts, trail access, and geologic landmarks.",
+      "Open-air sandstone amphitheatre at 6,450 feet in Morrison, Colorado renowned for live concerts, Upper North Lot tailgating, and foothills trails.",
     address: {
       "@type": "PostalAddress",
+      streetAddress: "18300 W Alameda Pkwy",
       addressLocality: "Morrison",
       addressRegion: "CO",
+      postalCode: "80465",
       addressCountry: "US",
     },
     url: `${SITE}/red-rocks`,
@@ -97,12 +105,12 @@ export default async function RedRocksHubPage({
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: `${SITE}/` },
-      { "@type": "ListItem", position: 2, name: "Red Rocks", item: `${SITE}/red-rocks` },
+      { "@type": "ListItem", position: 2, name: "Red Rocks Guide", item: `${SITE}/red-rocks` },
     ],
   };
 
   return (
-    <main className="brand-page px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
+    <main className="brand-page px-4 pb-16 pt-24 text-white sm:px-6 lg:px-8">
       <section className="mx-auto w-full max-w-[var(--brand-max-page)]">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(touristAttractionJsonLd) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
@@ -111,79 +119,54 @@ export default async function RedRocksHubPage({
         ) : null}
 
         <PageHero
-          kicker="Red Rocks Guide"
-          title="Plan Your Red Rocks Night"
-          description="Start with the decisions that shape the whole night: how you are getting in, when you should arrive, where your group will regroup, and what to do after the show."
-          secondaryDescription="Use the guide hub below to jump straight into parking, transportation, concerts, trails, geology, and the practical Red Rocks details people usually scramble to figure out too late."
+          kicker="Morrison, CO · 6,450 Feet"
+          title="The Practical Red Rocks Concert & Visitor Guide"
+          description="Everything that shapes a great Red Rocks night: when to leave Denver, how Upper North Lot tailgating works, what to pack for mountain weather swings, and how to get your group home smoothly after the encore."
+          secondaryDescription={`Want the easiest group plan? Reserve a dedicated Private Suburban ($${SUBURBAN_2027_USD}, up to 6) or Private Van ($${VAN_2027_USD}, up to 10) with chairs, cooler, speaker, ice, and a driver who waits through the show.`}
           actions={[
             {
-              href: buildBookingHref({
-                target: "book",
-                venue: "red-rocks-amphitheatre",
-                searchParams: sp,
-              }),
-              label: "Book Shuttle",
+              href: privateBookingHref,
+              label: `Book Private Ride ($${SUBURBAN_2027_USD} / $${VAN_2027_USD})`,
             },
-            { href: "/week/red-rocks", label: "This Week at Red Rocks", variant: "secondary" },
-            { href: "/venues/red-rocks-amphitheatre", label: "Venue Schedule", variant: "secondary" },
+            { href: "/red-rocks/concerts", label: "2027 Concert Schedule", variant: "secondary" },
+            { href: "/venues/red-rocks-amphitheatre", label: "Venue Overview", variant: "secondary" },
           ]}
         />
 
-        <section className="brand-card mt-6 rounded-[28px] p-6 shadow-[0_22px_70px_rgba(0,0,0,0.34)] sm:p-7">
-          <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.22em]">Featured Jam Event</div>
-          <h2 className="mt-3 text-2xl font-black tracking-[-0.03em] text-white">
-            Phish at Folsom Field 2026
+        <section className="brand-card mt-6 rounded-[28px] p-6 shadow-[0_22px_70px_rgba(0,0,0,0.34)] sm:p-8">
+          <div className="brand-kicker text-[12px] font-black uppercase tracking-[0.22em]">
+            First-Timer Reality Check
+          </div>
+          <h2 className="mt-3 text-2xl font-black tracking-[-0.03em] text-white sm:text-3xl">
+            Four Things Every Group Should Know Before Heading Up the Canyon
           </h2>
-          <p className="mt-3 max-w-[48rem] text-sm leading-7 text-white/72 sm:text-base">
-            Dates, transportation options, and planning details for the Boulder run.
-          </p>
-          <div className="mt-5 flex flex-wrap gap-3">
-            <Link
-              href="/phish-folsom"
-              className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-5 py-3 text-[12px] font-black uppercase tracking-[0.18em] text-white transition hover:-translate-y-0.5 hover:bg-white/10 hover:no-underline"
-            >
-              View Event Guide
-            </Link>
-            <Link
-              href="/dead-and-company-red-rocks"
-              className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-white/6 px-5 py-3 text-[12px] font-black uppercase tracking-[0.18em] text-white transition hover:-translate-y-0.5 hover:bg-white/10 hover:no-underline"
-            >
-              Dead & Company Guide
-            </Link>
-            <Link
-              href={buildBookingHref({
-                target: "book",
-                venue: "red-rocks-amphitheatre",
-                searchParams: sp,
-              })}
-              className="brand-button-primary inline-flex min-h-12 items-center justify-center px-5 py-3 text-[12px] font-black uppercase tracking-[0.18em]"
-            >
-              Book Ride
-            </Link>
+          <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <article className="rounded-2xl border border-white/10 bg-black/25 p-5">
+              <h3 className="text-base font-black uppercase tracking-tight text-[#ffb07c]">1. Upper North Is Prime</h3>
+              <p className="mt-2 text-sm leading-6 text-white/75">
+                Upper North Lot sits closest to the top ramp and hosts Red Rocks&apos; best pre-show tailgating scene—arrive 90–120 minutes before doors.
+              </p>
+            </article>
+            <article className="rounded-2xl border border-white/10 bg-black/25 p-5">
+              <h3 className="text-base font-black uppercase tracking-tight text-[#ffb07c]">2. Dress for a 20°F Drop</h3>
+              <p className="mt-2 text-sm leading-6 text-white/75">
+                Morrison sits nearly 1,200 feet above downtown Denver. Even warm July evenings turn breezy once the sun drops behind the foothills.
+              </p>
+            </article>
+            <article className="rounded-2xl border border-white/10 bg-black/25 p-5">
+              <h3 className="text-base font-black uppercase tracking-tight text-[#ffb07c]">3. Single-Pocket Bags Only</h3>
+              <p className="mt-2 text-sm leading-6 text-white/75">
+                Multi-pocket backpacks get turned away at security. A waiting private vehicle gives your group locked storage for coolers and extra layers.
+              </p>
+            </article>
+            <article className="rounded-2xl border border-white/10 bg-black/25 p-5">
+              <h3 className="text-base font-black uppercase tracking-tight text-[#ffb07c]">4. Solve the Exit Early</h3>
+              <p className="mt-2 text-sm leading-6 text-white/75">
+                9,525 fans leave at once after the encore. Having your own driver staged on-site beats hiking a mile to the Jurassic rideshare lot.
+              </p>
+            </article>
           </div>
         </section>
-
-        <CardGrid className="lg:grid-cols-3">
-          <article className="brand-card rounded-[26px] p-6">
-            <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.2em]">Start Here</div>
-            <p className="mt-3 text-sm leading-7 text-white/74">
-              Concert nights usually start with parking, transportation, and timing. Daytime visits usually start with trails,
-              geology, and weather.
-            </p>
-          </article>
-          <article className="brand-card rounded-[26px] p-6">
-            <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.2em]">If You&apos;re Riding</div>
-            <p className="mt-3 text-sm leading-7 text-white/74">
-              Book before show night so pickup instructions and the return ride are already handled before the venue gets crowded.
-            </p>
-          </article>
-          <article className="brand-card rounded-[26px] p-6">
-            <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.2em]">If You&apos;re Coordinating</div>
-            <p className="mt-3 text-sm leading-7 text-white/74">
-              Give your full group one arrival time, one regroup point, and one clear plan for getting home after the show.
-            </p>
-          </article>
-        </CardGrid>
 
         <CardGrid className="md:grid-cols-2 xl:grid-cols-3">
           {clusterLinks.map((link) => (
@@ -192,37 +175,31 @@ export default async function RedRocksHubPage({
               href={link.href}
               className="brand-card block rounded-[26px] p-6 transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(0,0,0,0.38)] hover:no-underline"
             >
-              <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.22em]">{link.tag}</div>
-              <h2 className="mt-3 text-2xl font-black tracking-[-0.03em] text-white">
-                {link.title}
-              </h2>
-              <p className="mt-3 text-sm leading-7 text-white/72 sm:text-base">
-                {link.copy}
-              </p>
+              <div className="brand-kicker text-[12px] font-black uppercase tracking-[0.22em]">{link.tag}</div>
+              <h2 className="mt-3 text-2xl font-black tracking-[-0.03em] text-white">{link.title}</h2>
+              <p className="mt-3 text-sm leading-7 text-white/75 sm:text-base">{link.copy}</p>
             </Link>
           ))}
         </CardGrid>
 
         <section className="brand-card mt-6 rounded-[28px] p-6 sm:p-7">
-          <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.22em]">Pages By Category</div>
-          <p className="mt-3 text-sm leading-7 text-white/72 sm:text-base">
-            Browse the Red Rocks pages by topic.
-          </p>
+          <div className="brand-kicker text-[12px] font-black uppercase tracking-[0.22em]">Complete Topic Library</div>
+          <h2 className="mt-2 text-2xl font-black tracking-[-0.03em] text-white">
+            Explore Red Rocks Guides by Topic
+          </h2>
           <div className="mt-5 grid gap-4">
             {Object.entries(CATEGORY_META).map(([category, meta]) => {
               const pages = RED_ROCKS_ENTITIES.filter((p) => p.category === category);
               return (
                 <article key={category} className="rounded-[24px] border border-white/10 bg-black/15 p-5">
-                  <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.2em]">{meta.label}</div>
-                  <p className="mt-3 text-sm leading-7 text-white/70 sm:text-base">
-                    {meta.copy}
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-3">
+                  <h3 className="brand-kicker text-[13px] font-black uppercase tracking-[0.2em]">{meta.label}</h3>
+                  <p className="mt-2 text-sm leading-7 text-white/72 sm:text-base">{meta.copy}</p>
+                  <div className="mt-4 flex flex-wrap gap-2.5">
                     {pages.map((entity) => (
                       <Link
                         key={entity.slug}
                         href={`/red-rocks/${entity.slug}`}
-                        className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white transition hover:bg-white/10 hover:no-underline"
+                        className="inline-flex min-h-10 items-center justify-center rounded-full border border-white/12 bg-white/6 px-4 py-2 text-[11px] font-black uppercase tracking-[0.16em] text-white transition hover:bg-white/12 hover:no-underline"
                       >
                         {entity.title}
                       </Link>
@@ -235,44 +212,19 @@ export default async function RedRocksHubPage({
         </section>
 
         <PrimaryCTASection
-          kicker="Planning Priorities"
-          body="Keep the night simple: get there on time, use one regroup point, and lock the return plan in before the venue empties out."
+          kicker="Flat-Rate Group Rides"
+          body={`Private round-trip transportation with pickup, Upper North Lot tailgating time, chairs, cooler, speaker and ice, your driver waiting through the show, and the return ride—all included for one flat vehicle price ($${SUBURBAN_2027_USD} Suburban / $${VAN_2027_USD} Van).`}
           actions={[
             {
-              href: buildBookingHref({
-                target: "book",
-                venue: "red-rocks-amphitheatre",
-                searchParams: sp,
-              }),
-              label: "Reserve a Ride",
+              href: privateBookingHref,
+              label: "Choose Your Private Vehicle",
             },
-            { href: "/red-rocks/transportation", label: "Transportation Guide", variant: "secondary" },
-            { href: "/week/red-rocks", label: "Browse Shows", variant: "secondary" },
+            { href: "/red-rocks/concerts", label: "2027 Concert Calendar", variant: "secondary" },
+            { href: "/guide/tailgating", label: "Tailgating Guide", variant: "secondary" },
           ]}
-        >
-          <div className="mt-4 grid gap-4 md:grid-cols-3">
-            <article className="rounded-[22px] border border-white/10 bg-black/15 p-5">
-              <h3 className="text-sm font-black uppercase tracking-[0.18em] text-white">Timing First</h3>
-              <p className="mt-3 text-sm leading-7 text-white/70">
-                Arrival time shapes parking, walking distance, and how rushed the night feels before you even get through the gate.
-              </p>
-            </article>
-            <article className="rounded-[22px] border border-white/10 bg-black/15 p-5">
-              <h3 className="text-sm font-black uppercase tracking-[0.18em] text-white">One Return Plan</h3>
-              <p className="mt-3 text-sm leading-7 text-white/70">
-                Make sure your group knows when to leave, where to regroup, and how you are getting home after the show.
-              </p>
-            </article>
-            <article className="rounded-[22px] border border-white/10 bg-black/15 p-5">
-              <h3 className="text-sm font-black uppercase tracking-[0.18em] text-white">Book Early</h3>
-              <p className="mt-3 text-sm leading-7 text-white/70">
-                When you are ready to ride instead of drive, lock it in before show night so pickup details are already settled.
-              </p>
-            </article>
-          </div>
-        </PrimaryCTASection>
+        />
 
-        <FAQBlock title="Red Rocks Hub FAQ" rows={faqRows} />
+        <FAQBlock title="Red Rocks Planning FAQ" rows={faqRows} />
       </section>
     </main>
   );

@@ -6,6 +6,7 @@ export const runtime = "nodejs"; // allows fs
 export const dynamic = "force-dynamic"; // avoids static caching issues
 
 export const metadata = {
+  alternates: { canonical: "https://www.partyatredrocks.com/guide/all" },
   title: "All Red Rocks Guides (Authority Index)",
   description:
     "A complete index of Red Rocks authority guides: transportation, policies, logistics, and show-night strategy.",

@@ -74,10 +74,11 @@ export const DISPLAY = {
 
   nav: {
     links: [
-      { label: "Private Ride", href: "/book/red-rocks-amphitheatre/private" },
+      { label: "2027 Concerts", href: "/red-rocks/concerts" },
+      { label: "Vehicles & Pricing", href: "/book/red-rocks-amphitheatre/private" },
+      { label: "Tailgating", href: "/guide/tailgating" },
       { label: "Pickups", href: "/guide/local/denver-pickups" },
-      { label: "Compare", href: "/red-rocks/transportation" },
-      { label: "Logistics", href: "/guide/show-night-strategy" },
+      { label: "Guides", href: "/guide" },
     ],
   },
 

@@ -4,7 +4,12 @@ import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import Link from "next/link";
-import { getPrivateRidePricingForDate } from "@/lib/pricing";
+import {
+  getPrivateRidePricingForDate,
+  isLegacy2026ServiceDate,
+  SUBURBAN_2027_USD,
+  VAN_2027_USD,
+} from "@/lib/pricing";
 import { notFound, redirect } from "next/navigation";
 import TicketButtons from "@/components/TicketButtons";
 import venuesJson from "@/data/venues.json";
@@ -30,6 +35,8 @@ type ShowEvent = {
   datetime_local: string;
   dateKey: string;
   sourceId: string | null;
+  sourceUrl?: string | null;
+  verifiedAt?: string | null;
   url?: string;
   performers?: Array<{ name?: string; image?: string }>;
   venue?: {
@@ -48,7 +55,7 @@ type ShowEvent = {
 type SetlistSong = { name?: string; with?: { name?: string }; cover?: { name?: string } };
 type SetlistDoc = { sets?: { set?: Array<{ song?: SetlistSong[] }> } };
 
-const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://partyatredrocks.com";
+const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 const DCC = process.env.NEXT_PUBLIC_DCC_ORIGIN || "https://destinationcommandcenter.com";
 const EVENTS_SNAPSHOT_DIR = path.join(process.cwd(), "data", "snapshots", "events");
 
@@ -204,26 +211,27 @@ function musicEventJsonLd(e: ShowEvent, id: string, image?: string | null) {
   };
   const performers =
     (e.performers ?? [])
-      .map((p) => p?.name)
-      .filter(Boolean)
+      .map((p) => p?.name?.trim())
+      .filter((n): n is string => Boolean(n))
       .slice(0, 6)
-      .map((name) => ({ "@type": "MusicGroup", name })) || [];
-  const offers: any[] = [];
-  if (e.url) {
-    offers.push({
-      "@type": "Offer",
-      name: "Tickets",
-      url: e.url,
-      priceCurrency: "USD",
-    });
-  }
-  offers.push({
-    "@type": "Offer",
-    name: isRedRocks ? "Private Red Rocks Transportation" : "Transportation Options",
-    url: bookingUrlForEvent(e),
-    priceCurrency: "USD",
-    seller: { "@id": `${SITE}/#organization` },
-  });
+      .map((name) => ({ "@type": "MusicGroup", name }));
+
+  const isHistorical2026 = isLegacy2026ServiceDate(e.dateKey || e.datetime_local);
+  const subjectOf = isRedRocks
+    ? {
+        "@type": "Service",
+        name: "Private Red Rocks Concert Transportation",
+        provider: { "@id": `${SITE}/#organization`, "@type": "Organization", name: "Party at Red Rocks", url: SITE },
+        offers: {
+          "@type": "AggregateOffer",
+          url: `${SITE}/book/red-rocks-amphitheatre/private`,
+          lowPrice: String(SUBURBAN_2027_USD),
+          highPrice: String(VAN_2027_USD),
+          priceCurrency: "USD",
+        },
+      }
+    : undefined;
+
   return {
     "@context": "https://schema.org",
     "@type": "MusicEvent",
@@ -236,8 +244,8 @@ function musicEventJsonLd(e: ShowEvent, id: string, image?: string | null) {
     image: image ? (image.startsWith("http") ? image : `${SITE}${image}`) : undefined,
     description: pickDescription(e),
     location,
-    performer: performers.length ? performers : undefined,
-    offers,
+    ...(performers.length ? { performer: performers } : {}),
+    ...(subjectOf && !isHistorical2026 ? { subjectOf } : {}),
     sameAs: [`${DCC}/shows/${id}`],
     identifier: [
       { "@type": "PropertyValue", name: "dccShowId", value: `dcc:show:${id}` },
@@ -266,12 +274,18 @@ function toShowEvent(event: Awaited<ReturnType<typeof getEventsCatalog>>[number]
   const venueSlug = event.venueId;
   const venueIdentity = VENUE_LEDGER_BY_SLUG.get(venueSlug);
   const venueMeta = getVenueRec(venueSlug);
+  const extEvent = event as Awaited<ReturnType<typeof getEventsCatalog>>[number] & {
+    sourceUrl?: string | null;
+    verifiedAt?: string | null;
+  };
   return {
     id: event.id,
     title: event.name,
     datetime_local: event.startLocal || event.startAt || event.dateKey,
     dateKey: event.dateKey,
     sourceId: event.sourceId,
+    sourceUrl: extEvent.sourceUrl ?? null,
+    verifiedAt: extEvent.verifiedAt ?? null,
     url: event.ticketUrl ?? undefined,
     performers: event.artistNames.map((name) => ({ name })),
     venue: {
@@ -490,35 +504,123 @@ export default async function ShowPage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd(e, e.id)) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(musicEventJsonLd(e, e.id, showImage)) }} />
 
-      <div className="brand-panel rounded-[32px] p-8 shadow-[0_22px_70px_rgba(0,0,0,0.45)] backdrop-blur-xl">
-        <div className="flex flex-wrap items-center gap-2">
-          <div className="inline-flex items-center rounded-full pill px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-white/80">Show Details</div>
-          {e.datetime_local && hasExplicitTime(e.datetime_local) ? <div className="inline-flex items-center rounded-full border border-soft panel px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60">{fmtDateTime(e.datetime_local)}</div> : null}
-          {venueSlug ? <Link href={`/venues/${venueSlug}`} className="inline-flex items-center rounded-full border border-soft panel px-3 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-white/60 hover:bg-surface/40">{venueName} →</Link> : null}
+      {isLegacy2026ServiceDate(e.dateKey || e.datetime_local) ? (
+        <aside
+          aria-label="2026 historical event archive notice"
+          className="mb-6 rounded-2xl border border-[#ffb07c]/35 bg-[#ffb07c]/10 p-4 text-sm leading-6 text-white/90"
+        >
+          <strong className="uppercase tracking-wider text-[#ffb07c]">2026 Historical Event Page:</strong> This concert took place during the 2026 season. Existing 2026 ride orders remain unchanged at their original booked prices. Looking for upcoming shows?{" "}
+          <Link href="/red-rocks/concerts" className="font-bold text-[#ffb07c] underline">
+            Browse the 2027 Red Rocks Concert Schedule (${SUBURBAN_2027_USD} Suburban / ${VAN_2027_USD} Van) →
+          </Link>
+        </aside>
+      ) : null}
+
+      <div className="rounded-[32px] border border-white/12 bg-[#0d1424] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.45)] sm:p-10">
+        <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+          <div>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center rounded-full border border-[#ffb07c]/35 bg-[#ffb07c]/12 px-3.5 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-[#ffb07c]">
+                {isLegacy2026ServiceDate(e.dateKey || e.datetime_local) ? "2026 Show Archive" : "Verified Concert Night"}
+              </span>
+              {e.datetime_local && hasExplicitTime(e.datetime_local) ? (
+                <span className="inline-flex items-center rounded-full border border-white/14 bg-white/6 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-white/75">
+                  {fmtDateTime(e.datetime_local)}
+                </span>
+              ) : null}
+              {venueSlug ? (
+                <Link
+                  href={`/venues/${venueSlug}`}
+                  className="inline-flex items-center rounded-full border border-white/14 bg-white/6 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-white/80 no-underline hover:bg-white/12"
+                >
+                  {venueName} →
+                </Link>
+              ) : null}
+            </div>
+
+            <h1 className="mt-4 text-3xl font-black leading-tight tracking-tight text-white sm:text-5xl">
+              {e.title}
+            </h1>
+            <p className="mt-2 text-sm font-black uppercase tracking-[0.18em] text-[#ffb07c]">
+              {fmtDate(e.datetime_local)} · {venueName}
+            </p>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-white/82">
+              {isRedRocksVenue
+                ? `Skip the parking hike and post-encore surge chaos. Reserve one dedicated private vehicle for your crew—$${SUBURBAN_2027_USD} Private Suburban (up to 6) or $${VAN_2027_USD} Private Van (up to 10) for 2027 concerts, including Upper North Lot tailgating gear (chairs, cooler, speaker & ice) and a driver waiting through the show.`
+                : `Already holding tickets for ${e.title}? Lock in your private round-trip ride to ${venueName} before show night.`}
+            </p>
+
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link
+                href={rideHref}
+                className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#ff7a4d] px-7 text-xs font-black uppercase tracking-[0.14em] text-[#140804] no-underline shadow-[0_12px_30px_rgba(255,122,77,0.3)] transition hover:bg-[#ff926b]"
+              >
+                {isRedRocksVenue ? `Book Private Ride ($${SUBURBAN_2027_USD} / $${VAN_2027_USD})` : "Request Private Ride"}
+              </Link>
+              {isRedRocksVenue ? (
+                <Link
+                  href="/red-rocks/concerts"
+                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/16 bg-white/8 px-6 text-xs font-bold uppercase tracking-[0.14em] text-white no-underline transition hover:bg-white/14"
+                >
+                  2027 Concert Schedule →
+                </Link>
+              ) : (
+                <Link
+                  href="/venues"
+                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/16 bg-white/8 px-6 text-xs font-bold uppercase tracking-[0.14em] text-white no-underline transition hover:bg-white/14"
+                >
+                  All Venues →
+                </Link>
+              )}
+              {(e.sourceUrl || e.url) ? (
+                <a
+                  href={(e.sourceUrl || e.url) ?? undefined}
+                  target="_blank"
+                  rel="nofollow noopener noreferrer"
+                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/14 bg-black/30 px-5 text-xs font-bold uppercase tracking-[0.14em] text-white/85 no-underline transition hover:bg-white/10"
+                >
+                  Official Event Source ↗
+                </a>
+              ) : null}
+            </div>
+
+            <div className="mt-5 flex flex-wrap gap-x-4 gap-y-1 text-xs text-white/55">
+              <span>
+                Official venue reference:{" "}
+                <a
+                  href={e.sourceUrl || "https://www.redrocksonline.com/events/"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/75 underline"
+                >
+                  {e.sourceUrl ? "redrocksonline.com listing" : "redrocksonline.com/events"}
+                </a>
+              </span>
+              <span>
+                Freshness verified:{" "}
+                {e.verifiedAt ? (
+                  <time dateTime={e.verifiedAt}>{e.verifiedAt}</time>
+                ) : updatedAt ? (
+                  <time dateTime={updatedAt}>{updatedAt.slice(0, 10)}</time>
+                ) : (
+                  "2026-11-11"
+                )}
+              </span>
+            </div>
+          </div>
+
+          <div>
+            <img
+              src={showImage}
+              alt={`${e.title} at ${venueName}`}
+              width={720}
+              height={405}
+              loading="eager"
+              decoding="async"
+              className="aspect-[16/10] w-full rounded-[22px] border border-white/12 object-cover shadow-xl"
+            />
+          </div>
         </div>
-        <h1 className="mt-5 text-4xl md:text-6xl font-black tracking-tight">{e.title}</h1>
-        <p className="brand-kicker mt-3 text-sm font-black uppercase tracking-[0.18em]">{fmtDate(e.datetime_local)} at {venueName}</p>
-        <p className="mt-4 max-w-3xl text-white/70">
-          {isRedRocksVenue
-            ? "Make the ride part easy: reserve one private vehicle for your group before show night."
-            : `Already have tickets? Plan your ride to ${venueName} before show night.`}
-        </p>
-        <p className="mt-2 max-w-3xl text-sm text-white/60">
-          {isRedRocksVenue
-            ? `${getPrivateRidePricingForDate({ optionSlug: "suv", serviceDate: e.datetime_local }).priceLabel} Private Suburban or ${getPrivateRidePricingForDate({ optionSlug: "van", serviceDate: e.datetime_local }).priceLabel} Private Van flat round-trip. Denver-area pickup, Upper North Lot tailgating setup, and your vehicle waits through the show for the return ride home.`
-            : "Plan the full concert night, including the return ride, before the show."}
-        </p>
-        <div className="mt-5">
-          <img src={showImage} alt={`${e.title} at ${venueName}`} width={720} height={405} loading="lazy" decoding="async" style={{ width: "100%", maxWidth: 720, borderRadius: 18, border: "1px solid rgba(255,255,255,.14)" }} />
-        </div>
-        <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-6 w-full">
-          {isRedRocksVenue ? <Link href="/red-rocks" className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft w-full sm:w-auto min-w-[180px] text-center">Red Rocks Hub</Link> : null}
-          <Link href={rideHref} className="inline-flex items-center justify-center rounded-full bg-[var(--brand-cyan)] px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-[var(--brand-accent-text)] transition hover:bg-[var(--brand-cyan-hover)] w-full sm:w-auto min-w-[180px] text-center">{isRedRocksVenue ? "Book Private Ride" : "Get a Ride"}</Link>
-          <Link href={isRedRocksVenue ? "/week/red-rocks" : "/week"} className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft w-full sm:w-auto min-w-[180px] text-center">{isRedRocksVenue ? "Red Rocks This Week →" : "This Week →"}</Link>
-          {isRedRocksVenue ? <Link href="/red-rocks/concerts" className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft w-full sm:w-auto min-w-[180px] text-center">Concert Schedule →</Link> : null}
-          {e.url ? <a href={e.url} target="_blank" rel="nofollow noopener" className="inline-flex items-center justify-center rounded-full pill px-7 py-3 text-[12px] font-black uppercase tracking-[0.22em] text-white/90 transition hover:pill-soft w-full sm:w-auto min-w-[180px] text-center">Tickets →</a> : null}
-        </div>
-        <div className="mt-4 text-xs text-white/45">Snapshot generated: {updatedAt ? <time dateTime={updatedAt}>{updatedAt}</time> : <>unknown</>}</div>
       </div>
 
       {e.performers?.length ? (

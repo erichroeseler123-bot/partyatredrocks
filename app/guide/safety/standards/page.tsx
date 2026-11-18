@@ -1,3 +1,10 @@
+
+export const metadata = {
+  title: "Colorado PUC Licensing, Driver Vetting & Insurance Standards | Party at Red Rocks",
+  description: "Learn about Party at Red Rocks' Colorado PUC LL-02649 authority, fingerprint driver background checks, vehicle inspections, and commercial liability coverage.",
+  alternates: { canonical: "https://www.partyatredrocks.com/guide/safety/standards" },
+};
+
 export default function SafetyStandards() {
   return (
     <div className="max-w-4xl mx-auto px-6 py-16">

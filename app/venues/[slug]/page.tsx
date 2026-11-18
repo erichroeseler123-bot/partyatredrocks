@@ -518,7 +518,7 @@ function getVenueReference(slug: string, v: VenueRec, name: string): VenueRefere
       "Set one exact pickup point and a fallback point before the show. Send instructions to your group before encore.",
     nearby: [`${v.city || "Denver"} hotels`, `${v.city || "Denver"} bars`, "Primary transit/arterial corridors"],
     rideOptions:
-      "Shared shuttles reduce post-show uncertainty; private SUVs/vans are best for groups that need tighter timing and control.",
+      "Pre-booked private SUVs ($499 Red Rocks / $250 Denver venues) and 10-passenger vans ($699 Red Rocks) remove post-show rideshare uncertainty and keep your group on one pickup and return plan.",
     faq: [
       {
         q: `What is the best transportation strategy for ${name}?`,

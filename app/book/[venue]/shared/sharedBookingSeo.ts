@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { BOOKING_COPY } from "@/lib/bookingCopy";
 import { bookingVisuals } from "@/lib/bookingVisuals";
+import { SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
 
 const SITE = "https://www.partyatredrocks.com";
 
@@ -9,27 +10,28 @@ function absoluteImageUrl(src: string) {
 }
 
 export function buildSharedBookingMetadata(path: string): Metadata {
-  const imageUrl = absoluteImageUrl(bookingVisuals.shared.imageSrc);
+  const imageUrl = absoluteImageUrl(bookingVisuals.private.imageSrc);
 
   return {
-    title: "Red Rocks Shuttle from Denver and Golden | Book Shared Seats",
+    title: `Private Red Rocks Transportation | $${SUBURBAN_2027_USD} Suburban & $${VAN_2027_USD} Van`,
     description: BOOKING_COPY.meta.sharedBookingDescription,
-    alternates: { canonical: `${SITE}${path}` },
+    robots: { index: false, follow: true },
+    alternates: { canonical: `${SITE}/book/red-rocks-amphitheatre/private` },
     openGraph: {
-      title: "Red Rocks Shuttle from Denver and Golden | Book Shared Seats",
+      title: `Private Red Rocks Transportation | $${SUBURBAN_2027_USD} Suburban & $${VAN_2027_USD} Van`,
       description: BOOKING_COPY.meta.sharedBookingDescription,
       url: `${SITE}${path}`,
       type: "website",
       images: [
         {
           url: imageUrl,
-          alt: bookingVisuals.shared.imageAlt,
+          alt: bookingVisuals.private.imageAlt,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: "Red Rocks Shuttle from Denver and Golden | Book Shared Seats",
+      title: `Private Red Rocks Transportation | $${SUBURBAN_2027_USD} Suburban & $${VAN_2027_USD} Van`,
       description: BOOKING_COPY.meta.sharedBookingDescription,
       images: [imageUrl],
     },
@@ -41,14 +43,15 @@ export function buildSharedBookingJsonLd(path: string) {
     {
       "@context": "https://schema.org",
       "@type": "Service",
-      name: "Red Rocks Shared Shuttle Seats",
-      serviceType: "Shared Red Rocks shuttle service",
+      name: "Private Red Rocks Concert Transportation",
+      serviceType: "Private concert transportation",
       provider: {
         "@type": "Organization",
         "@id": `${SITE}/#organization`,
         name: "Party at Red Rocks",
         url: SITE,
-        telephone: "+17203696292",
+        logo: `${SITE}/brand/red-rocks-shuttle.png`,
+        telephone: "+1-720-369-6292",
         email: "hello@partyatredrocks.com",
       },
       areaServed: [
@@ -57,108 +60,33 @@ export function buildSharedBookingJsonLd(path: string) {
         { "@type": "City", name: "Morrison, CO" },
       ],
       url: `${SITE}${path}`,
-      image: absoluteImageUrl(bookingVisuals.shared.imageSrc),
-      description: "Shared shuttle seats from Denver and Golden to Red Rocks with fixed pricing and a guaranteed ride home after the show.",
-      offers: {
-        "@type": "Offer",
-        priceCurrency: "USD",
-        price: "59",
-        url: `${SITE}${path}`,
-        itemOffered: {
-          "@type": "Service",
-          name: "Red Rocks Shared Shuttle Seats",
-        },
-      },
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: [
-        {
-          "@type": "Question",
-          name: "Where do shared riders get picked up?",
-          acceptedAnswer: {
-          "@type": "Answer",
-            text: "Shared riders choose Denver or Golden pickup, then receive a fixed shuttle plan tied to that city.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "When does the shuttle leave?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "The shuttle pickup time is always one hour before doors open.",
-          },
-        },
-      ],
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BusTrip",
-      name: "Shared Shuttle to Red Rocks",
-      provider: {
-        "@type": "Organization",
-        name: "Party at Red Rocks",
-        url: SITE,
-      },
-      itinerary: {
-        "@type": "ItemList",
+      image: absoluteImageUrl(bookingVisuals.private.imageSrc),
+      description: BOOKING_COPY.meta.privateBookingDescription,
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "2027 Private Red Rocks Vehicle Pricing",
         itemListElement: [
           {
-            "@type": "ListItem",
-            position: 1,
-            item: {
-              "@type": "Place",
-              name: "Denver Pickup",
-              address: {
-                "@type": "PostalAddress",
-                streetAddress: "1550 Court Pl",
-                addressLocality: "Denver",
-                addressRegion: "CO",
-                postalCode: "80202",
-                addressCountry: "US",
-              },
+            "@type": "Offer",
+            priceCurrency: "USD",
+            price: String(SUBURBAN_2027_USD),
+            url: `${SITE}/book/red-rocks-amphitheatre/private/suv`,
+            itemOffered: {
+              "@type": "Service",
+              name: "Private Suburban to Red Rocks (Up to 6)",
             },
           },
           {
-            "@type": "ListItem",
-            position: 2,
-            item: {
-              "@type": "Place",
-              name: "Golden Pickup",
-              address: {
-                "@type": "PostalAddress",
-                streetAddress: "1177 12th St",
-                addressLocality: "Golden",
-                addressRegion: "CO",
-                postalCode: "80401",
-                addressCountry: "US",
-              },
-            },
-          },
-          {
-            "@type": "ListItem",
-            position: 3,
-            item: {
-              "@type": "Place",
-              name: "Red Rocks Amphitheatre",
-              address: {
-                "@type": "PostalAddress",
-                streetAddress: "18300 W Alameda Pkwy",
-                addressLocality: "Morrison",
-                addressRegion: "CO",
-                postalCode: "80465",
-                addressCountry: "US",
-              },
+            "@type": "Offer",
+            priceCurrency: "USD",
+            price: String(VAN_2027_USD),
+            url: `${SITE}/book/red-rocks-amphitheatre/private/van`,
+            itemOffered: {
+              "@type": "Service",
+              name: "Private Van to Red Rocks (Up to 10)",
             },
           },
         ],
-      },
-      offers: {
-        "@type": "Offer",
-        url: `${SITE}${path}`,
-        price: "59.00",
-        priceCurrency: "USD",
       },
     },
   ];

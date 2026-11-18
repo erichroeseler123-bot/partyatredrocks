@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ShieldCheck } from "lucide-react";
+import { CheckCircle2, ShieldCheck, ArrowRight, Sparkles } from "lucide-react";
 import venuesJson from "@/data/venues.json";
 import { DccReturnBanner } from "@/components/booking/DccReturnBanner";
 import { postDccSatelliteEvent, postWtaPartnerAcceptedIfNeeded } from "@/lib/dccSatellite";
 import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
 import { bookingVisuals } from "@/lib/bookingVisuals";
-import { curatedImages } from "@/lib/curatedImages";
+import { PARR_VALUE_PROPOSITION } from "@/lib/pricing";
 import {
   getSuburbanDisplayPrice,
   PUBLIC_PRIVATE_RIDE_OPTIONS,
   SUBURBAN_PRICE_LABEL,
+  VAN_PRICE_LABEL,
 } from "@/lib/rideCatalog";
 import { buildPrivateBookingJsonLd, buildPrivateBookingMetadata, buildPrivateFaqJsonLd } from "../bookingSeo";
 
@@ -21,30 +21,18 @@ type VenueRow = {
   name?: string;
 };
 
-type ReasonCard = {
-  title: string;
-  body: string;
-};
-
-const REASONS: ReasonCard[] = [
-  {
-    title: "Suburban by default",
-    body: "Most groups just need one clean SUV, one pickup plan, and a return plan coordinated before show night.",
-  },
-  {
-    title: "Private pickup plan",
-    body: "Your group gets one direct pickup plan instead of sorting out multiple stops or post-show rideshare timing.",
-  },
-  {
-    title: "Built for transportation",
-    body: "This page is for getting your group to Red Rocks and back with one vehicle plan from pickup through the return ride.",
-  },
+const INCLUDED_SUV = [
+  "Door-to-door Denver, Golden, or Boulder hotel/home pickup + optional drink stop",
+  "Upper North Lot staging with chairs, cooler, Bluetooth speaker & fresh ice",
+  "Driver & locked black Suburban stay at Red Rocks through the entire concert",
+  "Direct return ride home after the encore—flat vehicle price, zero surge",
 ];
 
-const INCLUDED = [
-  "Tailgating + your vehicle waits in the same spot during the show",
-  "Door-to-door with liquor or grocery stop",
-  "Limo-lane access + planned return ride",
+const INCLUDED_VAN = [
+  "Keep up to 10 guests together in one high-roof Ford Transit passenger van",
+  "One coordinated pickup address + optional beverage/grocery stop en route",
+  "Upper North Lot tailgating setup included: chairs, cooler, Bluetooth speaker & ice",
+  "Dedicated commercial driver & van wait on-site through the show until you head home",
 ];
 
 function getVenue(slug: string): VenueRow | null {
@@ -78,7 +66,8 @@ export default async function PrivateOptionsPage({
 
   const qtyValue = firstValue(sp, "qty");
   const vehicleQty = qtyValue ? Math.max(1, Number(qtyValue) || 1) : 1;
-  const artist = firstValue(sp, "artist");
+  const artist = firstValue(sp, "artist") || firstValue(sp, "event");
+  const pickup = firstValue(sp, "pickup");
   const dateRaw = firstValue(sp, "date");
   const dateLabel = dateRaw
     ? new Date(`${dateRaw}T12:00:00`).toLocaleDateString("en-US", {
@@ -104,115 +93,297 @@ export default async function PrivateOptionsPage({
 
   const serviceJsonLd = buildPrivateBookingJsonLd({ venue, quantity: 1 });
   const faqJsonLd = buildPrivateFaqJsonLd();
-  const featuredOption = PUBLIC_PRIVATE_RIDE_OPTIONS.find((option) => option.slug === "suv");
-  const featuredVisual = bookingVisuals.privateOptions.suv;
-  if (!featuredOption || !featuredVisual) notFound();
+
+  const suvOption = PUBLIC_PRIVATE_RIDE_OPTIONS.find((option) => option.slug === "suv");
+  const vanOption = PUBLIC_PRIVATE_RIDE_OPTIONS.find((option) => option.slug === "van");
+  const suvVisual = bookingVisuals.privateOptions.suv;
+  const vanVisual = bookingVisuals.privateOptions.van;
+  if (!suvOption || !vanOption || !suvVisual || !vanVisual) notFound();
+
+  const suvHref = buildBookingHref({
+    target: "private-option",
+    venue,
+    option: suvOption.slug,
+    searchParams: sp,
+    overrides: { qty: vehicleQty },
+  });
+
+  const vanHref = buildBookingHref({
+    target: "private-option",
+    venue,
+    option: vanOption.slug,
+    searchParams: sp,
+    overrides: { qty: vehicleQty },
+  });
 
   return (
-    <main className="min-h-screen bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[#070b14] px-4 pb-16 pt-6 text-white sm:px-6 sm:pt-8 lg:px-8">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
-      <section className="mx-auto flex max-w-[1120px] flex-col gap-8">
-        <section className="relative overflow-hidden rounded-[34px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,16,32,0.98),rgba(6,9,18,0.96))] shadow-[0_40px_120px_rgba(0,0,0,0.45)]">
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-[250px] sm:h-[340px] lg:inset-0 lg:h-full">
-            <Image src={curatedImages.homepageHero} alt="Illuminated Red Rocks Amphitheatre show night vista above Morrison" fill unoptimized priority className="object-cover object-center opacity-48" sizes="(min-width: 1024px) 1120px, 100vw" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(98,246,255,0.14),transparent_40%),radial-gradient(circle_at_80%_20%,rgba(255,176,124,0.14),transparent_34%),linear-gradient(180deg,rgba(5,8,22,0.3),rgba(5,8,22,0.82)_55%,rgba(5,8,22,0.96)_100%)]" />
-            <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent to-[#070b15] lg:hidden" />
+      <section className="mx-auto flex max-w-[1240px] flex-col gap-8">
+        {/* Step Progress Bar */}
+        <nav aria-label="Booking progress" className="grid grid-cols-4 gap-2 rounded-2xl border border-white/10 bg-[#0d1424] p-3 text-[11px] font-bold uppercase tracking-wider">
+          <Link href="/red-rocks/concerts" className="truncate text-white/65 no-underline hover:text-white">
+            1. Event / Date
+          </Link>
+          <span className="truncate font-black text-[#ffb07c]">2. Choose Vehicle</span>
+          <span className="truncate text-white/55">3. Confirm Pickup</span>
+          <span className="truncate text-white/55">4. Book</span>
+        </nav>
+
+        {/* Hero */}
+        <section className="relative overflow-hidden rounded-[32px] border border-white/12 bg-[#0d1424] shadow-[0_32px_90px_rgba(0,0,0,0.5)]">
+          <div className="pointer-events-none absolute inset-0">
+            <picture>
+              <source media="(max-width: 640px)" srcSet="/images/redesign/hero-red-rocks-mobile.webp" />
+              <img
+                src="/images/redesign/red-rocks-sunset-crowd.webp"
+                alt="Red Rocks concert crowd and sandstone monoliths at twilight"
+                width={1120}
+                height={630}
+                fetchPriority="high"
+                loading="eager"
+                decoding="async"
+                className="h-full w-full object-cover object-center opacity-35"
+              />
+            </picture>
+            <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(7,11,20,0.95)_0%,rgba(7,11,20,0.78)_55%,rgba(7,11,20,0.94)_100%)]" />
           </div>
 
-          <div className="relative p-8 sm:p-10 lg:p-12">
-            <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-              <div>
-                <div className="inline-flex items-center rounded-full border border-[#ffb07c]/30 bg-[#ffb07c]/10 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">Private Red Rocks Transportation</div>
-                <h1 className="mt-5 max-w-4xl text-[2.5rem] font-black uppercase leading-[0.94] tracking-[-0.04em] sm:text-[4rem]">Private Transportation To Red Rocks. Start With The Suburban.</h1>
-                <p className="mt-5 max-w-3xl text-[15px] leading-7 text-white/80 sm:text-lg">
-                  Start here with the Suburban for most groups. Tailgating time is built in, and your vehicle waits in the same spot through the show so your return plan is already coordinated.
-                </p>
-                <p className="mt-3 max-w-3xl text-sm font-semibold uppercase tracking-[0.14em] text-white/72">One vehicle. One pickup plan. A return plan set before show night.</p>
+          <div className="relative p-6 sm:p-10 lg:p-12">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#ffb07c]/35 bg-[#ffb07c]/12 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#ffb07c]">
+              <Sparkles className="h-3.5 w-3.5" />
+              2027 Flat Vehicle Pricing · Upper North Lot Tailgating Included
+            </div>
 
-                {artist || dateLabel ? (
-                  <div className="mt-6 inline-flex flex-wrap items-center gap-2 rounded-[22px] border border-emerald-400/28 bg-emerald-500/10 px-4 py-3 text-sm text-white/90">
-                    <span className="font-black uppercase tracking-[0.16em] text-emerald-200">Selected Night</span>
-                    <span>{artist || "Your show"}{dateLabel ? ` · ${dateLabel}` : ""}</span>
-                  </div>
-                ) : null}
+            <h1 className="mt-4 max-w-4xl text-[2.2rem] font-black uppercase leading-[0.96] tracking-[-0.035em] sm:text-[3.5rem]">
+              Choose Your Private Red Rocks Vehicle
+            </h1>
 
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-                  <Link href={buildBookingHref({ target: "private-option", venue, option: featuredOption.slug, searchParams: sp, overrides: { qty: vehicleQty } })} className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#62f6ff] bg-[#62f6ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#05111a] shadow-[0_18px_40px_rgba(61,243,255,0.24)] transition hover:bg-[#8cf8ff]">Book Private Suburban</Link>
-                </div>
+            <p className="mt-4 max-w-3xl text-[15px] leading-7 text-white/84 sm:text-lg">
+              {PARR_VALUE_PROPOSITION.summary} {PARR_VALUE_PROPOSITION.tailgatingSummary}
+            </p>
+
+            {artist || dateLabel || pickup ? (
+              <div className="mt-5 inline-flex flex-wrap items-center gap-2 rounded-2xl border border-emerald-400/35 bg-emerald-500/12 px-4 py-3 text-sm text-white">
+                <span className="font-black uppercase tracking-[0.14em] text-emerald-200">Your Ride Context:</span>
+                <span>
+                  {artist || "Selected Concert"}
+                  {dateLabel ? ` · ${dateLabel}` : ""}
+                  {pickup ? ` · Pickup: ${pickup}` : ""}
+                </span>
               </div>
+            ) : null}
 
-              <div className="relative aspect-[16/10] overflow-hidden rounded-[28px] border border-white/10 bg-black/20 lg:aspect-auto lg:min-h-[280px]">
-                <Image
-                  src="/assets/venue/red-rocks/red-rocks-arrival.webp"
-                  alt="Red Rocks Park and Amphitheatre stone entrance sign for Upper North private arrival"
-                  fill
-                  unoptimized
-                  className="object-cover"
-                  sizes="(min-width: 1024px) 45vw, 100vw"
-                />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,8,22,0.08),rgba(5,8,22,0.74)_100%)]" />
-              </div>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a
+                href="#suv-booking"
+                className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#ff7a4d] px-6 text-xs font-black uppercase tracking-[0.14em] text-[#140804] no-underline transition hover:bg-[#ff926b]"
+              >
+                Private Suburban ({SUBURBAN_PRICE_LABEL} · Up to 6)
+              </a>
+              <a
+                href="#van-upgrade"
+                className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/20 bg-white/10 px-6 text-xs font-black uppercase tracking-[0.14em] text-white no-underline transition hover:bg-white/16"
+              >
+                Private Van ({VAN_PRICE_LABEL} · Up to 10)
+              </a>
             </div>
           </div>
         </section>
 
         <DccReturnBanner searchParams={sp} />
 
-        <section id="suv-booking" className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 sm:p-8">
-          <div className="text-[22px] font-black uppercase tracking-[0.18em] text-[#ffb07c] sm:text-[24px]">Step 1</div>
-          <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">Private Suburban - Up To 6 People - {SUBURBAN_PRICE_LABEL}</h2>
-          <p className="mt-3 max-w-2xl text-[15px] leading-7 text-white/74">Tailgating is built in, and the vehicle stays parked in the same spot waiting for your group until the show ends.</p>
-
-          <div className="mt-6">
-            <Link href={buildBookingHref({ target: "private-option", venue, option: featuredOption.slug, searchParams: sp, overrides: { qty: vehicleQty } })} className="group grid gap-6 rounded-[28px] border border-[#62f6ff]/24 bg-[#09101f] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:border-[#62f6ff]/48 lg:grid-cols-[1.1fr_0.9fr]">
-              <div className="relative aspect-[16/10] overflow-hidden rounded-[22px] border border-white/10 lg:aspect-auto lg:min-h-[240px]">
-                <Image src={featuredVisual.imageSrc} alt={featuredVisual.imageAlt} fill unoptimized className="object-cover" sizes="(min-width: 1024px) 50vw, 100vw" />
+        {/* Side-by-Side / Stacked Vehicle Cards with #suv-booking and #van-upgrade Anchors */}
+        <div className="grid gap-6 lg:grid-cols-2">
+          {/* Option 1: Private Suburban (#suv-booking) */}
+          <section
+            id="suv-booking"
+            aria-labelledby="suv-card-heading"
+            className="scroll-mt-24 flex flex-col justify-between overflow-hidden rounded-[30px] border border-[#ffb07c]/35 bg-[#0d1424] shadow-[0_24px_70px_rgba(0,0,0,0.42)]"
+          >
+            <div>
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-black">
+                <img
+                  src={suvVisual.imageSrc}
+                  alt={suvVisual.imageAlt}
+                  width={960}
+                  height={600}
+                  loading="eager"
+                  decoding="async"
+                  className="h-full w-full object-cover"
+                />
+                <div className="absolute left-4 top-4 rounded-full border border-[#ffb07c]/50 bg-[#070b14]/85 px-3.5 py-1 text-[11px] font-black uppercase tracking-[0.16em] text-[#ffb07c] backdrop-blur">
+                  Most Popular · Up to 6 Guests
+                </div>
               </div>
-              <div className="flex flex-col justify-center">
-                <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">{featuredOption.eyebrow}</div>
-                <h3 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">{featuredOption.title}</h3>
-                <ul className="mt-5 space-y-3">
-                  {INCLUDED.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm leading-6 text-white/82">
-                      <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#62f6ff]" />
+
+              <div className="p-6 sm:p-8">
+                <div className="flex flex-wrap items-baseline justify-between gap-3">
+                  <div>
+                    <div className="text-xs font-black uppercase tracking-[0.18em] text-[#ffb07c]">
+                      Option 1 · Full-Size Luxury SUV
+                    </div>
+                    <h2 id="suv-card-heading" className="mt-1 text-3xl font-black uppercase tracking-tight text-white">
+                      {suvOption.title}
+                    </h2>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-4xl font-black text-[#ffb07c]">{SUBURBAN_PRICE_LABEL}</div>
+                    <div className="text-[11px] font-bold uppercase tracking-wider text-white/65">
+                      Flat round-trip (~$83 each for 6)
+                    </div>
+                  </div>
+                </div>
+
+                <p className="mt-4 text-sm leading-6 text-white/80">
+                  Ideal for couples, double dates, and groups up to 6 who want leather seating, easy curbside hotel or home pickup, Upper North Lot tailgating, and a dedicated vehicle waiting through the encore.
+                </p>
+
+                <ul className="mt-5 space-y-2.5">
+                  {INCLUDED_SUV.map((item) => (
+                    <li key={item} className="flex items-start gap-2.5 text-sm leading-6 text-white/88">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#ffb07c]" />
                       <span>{item}</span>
                     </li>
                   ))}
                 </ul>
-                <div className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-full border border-[#62f6ff] bg-[#62f6ff] px-6 text-sm font-black uppercase tracking-[0.16em] text-[#05111a] sm:w-auto">Book Private Suburban - {SUBURBAN_PRICE_LABEL}</div>
+
+                <div className="mt-5 grid grid-cols-2 gap-2 text-xs font-bold text-white/75 sm:grid-cols-4">
+                  {[1, 2, 3, 4].map((vehicleNumber) => (
+                    <div key={vehicleNumber} className="rounded-xl border border-white/10 bg-black/25 px-3 py-2 text-center">
+                      {vehicleNumber === 1 ? "1 SUV" : `${vehicleNumber} SUVs`}:{" "}
+                      <span className="text-white">{getSuburbanDisplayPrice(vehicleNumber)} ea</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </Link>
+            </div>
+
+            <div className="border-t border-white/10 p-6 pt-5 sm:px-8 sm:pb-8">
+              <Link
+                href={suvHref}
+                className="inline-flex min-h-13 w-full items-center justify-center gap-2 rounded-full bg-[#ff7a4d] px-6 py-3.5 text-sm font-black uppercase tracking-[0.14em] text-[#140804] no-underline shadow-[0_12px_30px_rgba(255,122,77,0.3)] transition hover:bg-[#ff926b]"
+              >
+                <span>Select Private Suburban — {SUBURBAN_PRICE_LABEL}</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </section>
+
+          {/* Option 2: Private Van (#van-upgrade) */}
+          <section
+            id="van-upgrade"
+            aria-labelledby="van-card-heading"
+            className="scroll-mt-24 flex flex-col justify-between overflow-hidden rounded-[30px] border border-sky-300/30 bg-[#0d1424] shadow-[0_24px_70px_rgba(0,0,0,0.42)]"
+          >
+            <div>
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-black">
+                <img
+                  src={vanVisual.imageSrc}
+                  alt={vanVisual.imageAlt}
+                  width={960}
+                  height={600}
+                  loading="eager"
+                  decoding="async"
+                  className="h-full w-full object-cover"
+                />
+                <div className="absolute left-4 top-4 rounded-full border border-sky-300/50 bg-[#070b14]/85 px-3.5 py-1 text-[11px] font-black uppercase tracking-[0.16em] text-sky-200 backdrop-blur">
+                  Full-Crew Van · Up to 10 Guests
+                </div>
+              </div>
+
+              <div className="p-6 sm:p-8">
+                <div className="flex flex-wrap items-baseline justify-between gap-3">
+                  <div>
+                    <div className="text-xs font-black uppercase tracking-[0.18em] text-sky-300">
+                      Option 2 · 10-Passenger High-Roof Van
+                    </div>
+                    <h2 id="van-card-heading" className="mt-1 text-3xl font-black uppercase tracking-tight text-white">
+                      Private Van
+                    </h2>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-4xl font-black text-[#ffb07c]">{VAN_PRICE_LABEL}</div>
+                    <div className="text-[11px] font-bold uppercase tracking-wider text-white/65">
+                      Flat round-trip (~$70 each for 10)
+                    </div>
+                  </div>
+                </div>
+
+                <p className="mt-4 text-sm leading-6 text-white/80">
+                  Built for groups of 7 to 10 friends who want headroom, luggage/cooler space, one pickup timeline, Upper North Lot tailgating together, and one warm van waiting after the show.
+                </p>
+
+                <ul className="mt-5 space-y-2.5">
+                  {INCLUDED_VAN.map((item) => (
+                    <li key={item} className="flex items-start gap-2.5 text-sm leading-6 text-white/88">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-sky-300" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-5 rounded-xl border border-white/10 bg-black/25 px-4 py-3 text-xs leading-5 text-white/75">
+                  <strong className="text-white">Group over 10 guests?</strong> Combine a Private Van ({VAN_PRICE_LABEL}) + Private Suburban ({SUBURBAN_PRICE_LABEL}) for up to 16 guests, or{" "}
+                  <Link href="/contact" className="font-bold text-[#ffb07c] underline">
+                    text dispatch at 720-369-6292
+                  </Link>{" "}
+                  for multi-vehicle staging.
+                </div>
+              </div>
+            </div>
+
+            <div className="border-t border-white/10 p-6 pt-5 sm:px-8 sm:pb-8">
+              <Link
+                href={vanHref}
+                className="inline-flex min-h-13 w-full items-center justify-center gap-2 rounded-full bg-[#ff7a4d] px-6 py-3.5 text-sm font-black uppercase tracking-[0.14em] text-[#140804] no-underline shadow-[0_12px_30px_rgba(255,122,77,0.3)] transition hover:bg-[#ff926b]"
+              >
+                <span>Select Private Van — {VAN_PRICE_LABEL}</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </section>
+        </div>
+
+        {/* Transparent Pricing & Seasonal Operator Credibility */}
+        <section className="rounded-[30px] border border-white/10 bg-[#0d1424] p-6 sm:p-8">
+          <div className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-[#ffb07c]">
+            <ShieldCheck className="h-4 w-4" />
+            Everything Clear Before You Book
+          </div>
+          <h2 className="mt-2 text-2xl font-black uppercase tracking-tight text-white sm:text-3xl">
+            Why Groups Book Private Instead of Rideshare
+          </h2>
+          <div className="mt-5 grid gap-4 md:grid-cols-3">
+            <div className="rounded-2xl border border-white/10 bg-black/25 p-5">
+              <h3 className="text-base font-black uppercase text-white">Upper North Tailgate Ready</h3>
+              <p className="mt-2 text-sm leading-6 text-white/75">
+                Arrive at Red Rocks&apos; primary party lot with chairs, cooler, speaker, and ice ready—then lock everything inside during the concert.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-black/25 p-5">
+              <h3 className="text-base font-black uppercase text-white">Driver Never Leaves</h3>
+              <p className="mt-2 text-sm leading-6 text-white/75">
+                Your commercial driver stays staged on-site through weather delays or double encores so your group walks right out to a warm cabin.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-black/25 p-5">
+              <h3 className="text-base font-black uppercase text-white">Honest Exclusions</h3>
+              <p className="mt-2 text-sm leading-6 text-white/75">
+                {PARR_VALUE_PROPOSITION.exclusionsSummary} Existing 2026 reservations remain honored at their original booked prices.
+              </p>
+            </div>
           </div>
 
-          <div className="mt-5 grid gap-2 text-sm font-bold text-white/76 sm:grid-cols-4">
-            {[1, 2, 3, 4].map((vehicleNumber) => (
-              <div key={vehicleNumber} className="rounded-2xl border border-white/10 bg-black/18 px-4 py-3">
-                {vehicleNumber === 1 ? "1st" : vehicleNumber === 2 ? "2nd" : vehicleNumber === 3 ? "3rd" : "4th"} Suburban: <span className="text-white">{getSuburbanDisplayPrice(vehicleNumber)}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="rounded-[30px] border border-white/10 bg-[#0b1224] p-6 sm:p-8">
-          <div className="text-[12px] font-black uppercase tracking-[0.24em] text-[#ffb07c]">Why Private</div>
-          <h2 className="mt-3 text-3xl font-black uppercase tracking-[-0.03em] text-white sm:text-4xl">Why groups book private transportation</h2>
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
-            {REASONS.map((item) => (
-              <div key={item.title} className="rounded-[24px] border border-white/10 bg-[#09101f] p-5">
-                <h3 className="text-lg font-black uppercase tracking-[-0.02em] text-white">{item.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-white/74">{item.body}</p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-6 rounded-[24px] border border-white/10 bg-[#09101f] p-5 text-sm leading-6 text-white/74">
+          <div className="mt-6 rounded-2xl border border-white/10 bg-black/25 p-5 text-sm leading-6 text-white/78">
             <strong className="text-white">Year-Round Colorado Fleet Operation:</strong> 24/7 scheduled service subject to live vehicle and schedule availability. The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and{" "}
             <a
               href="https://gosno.co"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-bold text-[#62f6ff] underline decoration-[#62f6ff]/40 underline-offset-4 hover:text-white"
+              className="font-bold text-[#ffb07c] underline hover:text-white"
             >
               GoSno
             </a>{" "}

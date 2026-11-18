@@ -5,6 +5,7 @@ import styles from "./page.module.css";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.partyatredrocks.com/red-rocks-live" },
   title: "Red Rocks Live Planning Intelligence | Party at Red Rocks",
   description: "Live Red Rocks event and weather planning intelligence for private transportation planning.",
   robots: {

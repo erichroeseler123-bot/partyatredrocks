@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { BOOKING_COPY } from "@/lib/bookingCopy";
 import { bookingVisuals } from "@/lib/bookingVisuals";
-import { PUBLIC_PRIVATE_RIDE_OPTIONS, SITE, SUBURBAN_PRICE_LABEL } from "@/lib/rideCatalog";
+import { PUBLIC_PRIVATE_RIDE_OPTIONS, SITE, SUBURBAN_PRICE_LABEL, VAN_PRICE_LABEL } from "@/lib/rideCatalog";
 
 function absoluteImageUrl(src: string) {
   return src.startsWith("http") ? src : `${SITE}${src}`;
@@ -88,7 +88,7 @@ export function buildVenueBookingJsonLd(input: { venue: string; venueName: strin
 
 export function buildPrivateBookingMetadata(venue: string): Metadata {
   const canonical = `${SITE}/book/${venue}/private`;
-  const title = `Private Red Rocks Transportation | Suburban ${SUBURBAN_PRICE_LABEL} + Van Upgrade`;
+  const title = `Private Red Rocks Transportation | Suburban ${SUBURBAN_PRICE_LABEL} & Van ${VAN_PRICE_LABEL}`;
   return {
     title,
     description: BOOKING_COPY.meta.privateBookingDescription,

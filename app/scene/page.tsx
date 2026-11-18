@@ -4,6 +4,14 @@ import { SCENES } from "@/data/scenes";
 
 export const revalidate = 3600;
 
+
+export const metadata = {
+  title: "Colorado Live Music Scenes | Jam, EDM, Indie, Country & Hip-Hop",
+  description: "Explore Colorado live music scenes moving through Red Rocks Amphitheatre, Denver, and Boulder with direct show and ride links.",
+  alternates: { canonical: "https://www.partyatredrocks.com/scene" },
+  robots: { index: false, follow: true },
+};
+
 export default function SceneIndex() {
   return (
     <main className="bg-[#050816] px-4 pb-14 pt-24 text-white sm:px-6 lg:px-8">

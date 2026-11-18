@@ -2,21 +2,21 @@
   {
     "id": "rr-where",
     "question": "Where is Red Rocks Amphitheatre?",
-    "answer": "Red Rocks Amphitheatre is in Morrison, Colorado, west of Denver. Travel time can vary significantly on major show nights."
+    "answer": "Red Rocks Amphitheatre is at 18300 W Alameda Pkwy in Morrison, Colorado, roughly 25 to 35 minutes west of Downtown Denver depending on show-night canyon traffic."
   },
   {
     "id": "rr-best-shuttle",
-    "question": "What is the best transportation option for Red Rocks?",
-    "answer": "For groups that want one vehicle and one plan for the whole night, Party at Red Rocks offers private transportation with a $399 Suburban option and a $599 van option. The vehicle waits through the show for the return ride."
+    "question": "What private transportation options does Party at Red Rocks offer?",
+    "answer": "For groups wanting one vehicle and one plan for the whole night, Party at Red Rocks offers a $499 Private Suburban (up to 6 guests) and a $699 Private Van (up to 10 guests). Every ride includes pickup, Upper North Lot tailgating setup with chairs, cooler, speaker, and ice, on-site driver wait during the concert, and the return ride."
   },
   {
     "id": "rr-leave-time",
-    "question": "What time should I leave Denver for a show?",
-    "answer": "Plan to depart with buffer before doors. Departure timing depends on your pickup point, traffic, and whether the event is sold out."
+    "question": "What time should we leave Denver for a Red Rocks concert?",
+    "answer": "Leaving 2 to 2.5 hours before doors gives your group unhurried time for a quick beverage stop and Upper North Lot tailgating before walking into the top entrance."
   },
   {
     "id": "rr-weather",
-    "question": "What happens if weather changes?",
-    "answer": "Weather can shift quickly at the venue. Monitor venue alerts, bring layers, and follow operator updates for any pickup or departure adjustments."
+    "question": "What happens if Red Rocks weather changes?",
+    "answer": "Temperatures at 6,450 feet often drop 15 to 25 degrees after sunset. With a private vehicle waiting on-site through the show, your group can store extra jackets, blankets, and tailgate gear safely inside."
   }
 ]

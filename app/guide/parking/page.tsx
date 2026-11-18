@@ -7,6 +7,7 @@ import { guideVisuals } from "@/lib/guideVisuals";
 const PRIVATE_HREF = "/book/red-rocks-amphitheatre/private";
 
 export const metadata = {
+  alternates: { canonical: "https://www.partyatredrocks.com/guide/parking" },
   title: "Red Rocks Parking Guide",
   description: "Parking strategy, exit risk, and the private transportation alternative if you do not want to deal with lot chaos.",
 };

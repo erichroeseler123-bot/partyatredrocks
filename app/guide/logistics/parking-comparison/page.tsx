@@ -1,5 +1,12 @@
 import Link from 'next/link';
 
+
+export const metadata = {
+  title: "Red Rocks Parking Lot Comparison: Upper North vs Upper South vs Lower South",
+  description: "Compare every Red Rocks parking lot by stair climb, arrival fill time, tailgating atmosphere, and post-encore exit speed.",
+  alternates: { canonical: "https://www.partyatredrocks.com/guide/logistics/parking-comparison" },
+};
+
 export default function ParkingComparison() {
   return (
     <div className="max-w-4xl mx-auto px-6 py-16 prose prose-slate">

@@ -4,6 +4,7 @@ import { GuideVisualHero } from "@/components/guide/GuideVisualHero";
 import { guideVisuals } from "@/lib/guideVisuals";
 
 export const metadata = {
+  alternates: { canonical: "https://www.partyatredrocks.com/guide/policies" },
   title: "Red Rocks Policies Guide",
   description: "Bag policy, entry rules, and the practical version of what actually gets enforced at the gate.",
 };

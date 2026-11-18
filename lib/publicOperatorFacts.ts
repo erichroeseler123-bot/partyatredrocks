@@ -91,7 +91,7 @@ export const PARR_PUBLIC_FACTS = {
       address: "1717 Denver West Boulevard, Golden, CO 80401",
       shortAddress: "1717 Denver West Blvd, Golden, CO 80401",
       description:
-        "A hotel pickup for Denver Marriott West guests that still boards into the west-side Golden shared shuttle pool.",
+        "A convenient west-side hotel pickup for Denver Marriott West guests heading to Red Rocks.",
       instructions:
         "Meet outside the main hotel entrance unless we text you otherwise. We will text the exact curbside pickup note before boarding.",
       arrivalNote: "Arrive 10-15 minutes early so boarding stays easy for the whole hotel pickup group.",

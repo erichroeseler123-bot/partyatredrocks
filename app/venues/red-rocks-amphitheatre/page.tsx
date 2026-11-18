@@ -28,6 +28,13 @@ function first(sp: SP, key: string) {
   return Array.isArray(v) ? v[0] : v;
 }
 
+
+export const metadata = {
+  title: "Red Rocks Amphitheatre Venue Guide, Concerts & Private Rides | Party at Red Rocks",
+  description: "Red Rocks Amphitheatre venue guide: 2027 concert schedule, Upper North Lot tailgating, elevation & stair tips, and flat-rate private Suburban ($499) & Van ($699) rides.",
+  alternates: { canonical: "https://www.partyatredrocks.com/venues/red-rocks-amphitheatre" },
+};
+
 export default async function RedRocksPage({ searchParams }: { searchParams: Promise<SP> }) {
   const sp = await searchParams;
   const faqRows = await getFaqRowsWithGlobal("venues/red-rocks-amphitheatre.json");

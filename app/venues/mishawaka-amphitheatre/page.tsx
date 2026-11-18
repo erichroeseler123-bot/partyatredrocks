@@ -3,6 +3,7 @@ import { buildPageIntentMetadata } from "@/lib/pageIntentMetadata";
 import { PARR_PUBLIC_FACTS } from "@/lib/publicOperatorFacts";
 
 export const metadata = {
+  alternates: { canonical: "https://www.partyatredrocks.com/venues/mishawaka-amphitheatre" },
   ...buildPageIntentMetadata("/venues/mishawaka-amphitheatre"),
   title: "Mishawaka Transportation | Party at Red Rocks",
   description:

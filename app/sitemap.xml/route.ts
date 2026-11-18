@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { getEventsCatalog } from "@/lib/events/getCatalog";
+import { RED_ROCKS_ENTITIES } from "@/lib/redRocksAuthority";
 
 type UrlEntry = {
   loc: string;
@@ -26,41 +28,99 @@ function toXml(entries: UrlEntry[]) {
     })
     .join("\n");
 
-  return `<?xml version="1.0" encoding="UTF-8"?>\n` +
+  return (
+    `<?xml version="1.0" encoding="UTF-8"?>\n` +
     `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
     items +
-    `\n</urlset>\n`;
+    `\n</urlset>\n`
+  );
 }
 
-export const revalidate = 300;
+export const revalidate = 1800;
+
+const RETIRED_COMPARISON_PREFIXES = ["private-vs-", "shuttle-vs", "how-to-get-to-red-rocks", "red-rocks-shuttle"];
 
 export async function GET() {
   const base = "https://www.partyatredrocks.com";
-  const now = new Date().toISOString();
+  const lastmod = "2026-11-18";
 
-  const urls: UrlEntry[] = [
-    { loc: `${base}/`, lastmod: now, changefreq: "daily", priority: 1.0 },
-    { loc: `${base}/book/red-rocks-amphitheatre`, lastmod: now, changefreq: "daily", priority: 0.9 },
-    { loc: `${base}/book/red-rocks-amphitheatre/private`, lastmod: now, changefreq: "daily", priority: 0.9 },
-    { loc: `${base}/book/red-rocks-amphitheatre/private/suv`, lastmod: now, changefreq: "daily", priority: 0.9 },
-    { loc: `${base}/book/red-rocks-amphitheatre/private/van`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/red-rocks/transportation`, lastmod: now, changefreq: "daily", priority: 0.9 },
-    { loc: `${base}/red-rocks/shuttle`, lastmod: now, changefreq: "weekly", priority: 0.9 },
-    { loc: `${base}/red-rocks/car-service`, lastmod: now, changefreq: "weekly", priority: 0.9 },
-    { loc: `${base}/red-rocks/group-transportation`, lastmod: now, changefreq: "weekly", priority: 0.8 },
-    { loc: `${base}/red-rocks/parking`, lastmod: now, changefreq: "weekly", priority: 0.8 },
-    { loc: `${base}/guide/local/denver-pickups`, lastmod: now, changefreq: "daily", priority: 0.9 },
-    { loc: `${base}/guide/parking`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/guide/tailgating`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/guide/show-night-strategy`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/guide/show-night-strategy/post-show-pickup-plan`, lastmod: now, changefreq: "daily", priority: 0.8 },
-    { loc: `${base}/guide/logistics/bag-policy`, lastmod: now, changefreq: "daily", priority: 0.8 },
+  const corePaths: Array<{ path: string; changefreq: string; priority: number }> = [
+    { path: "/", changefreq: "daily", priority: 1.0 },
+    { path: "/book/red-rocks-amphitheatre/private", changefreq: "daily", priority: 0.9 },
+    { path: "/book/red-rocks-amphitheatre/private/suv", changefreq: "daily", priority: 0.9 },
+    { path: "/book/red-rocks-amphitheatre/private/van", changefreq: "daily", priority: 0.9 },
+    { path: "/red-rocks", changefreq: "weekly", priority: 0.9 },
+    { path: "/red-rocks/concerts", changefreq: "daily", priority: 0.9 },
+    { path: "/red-rocks/concerts/june", changefreq: "weekly", priority: 0.8 },
+    { path: "/red-rocks/concerts/july", changefreq: "weekly", priority: 0.8 },
+    { path: "/red-rocks/concerts/august", changefreq: "weekly", priority: 0.8 },
+    { path: "/red-rocks/what-to-wear", changefreq: "weekly", priority: 0.9 },
+    { path: "/red-rocks/weather", changefreq: "weekly", priority: 0.8 },
+    { path: "/red-rocks/post-concert-exit-guide", changefreq: "weekly", priority: 0.8 },
+    { path: "/red-rocks/transportation", changefreq: "weekly", priority: 0.9 },
+    { path: "/red-rocks/shuttle", changefreq: "weekly", priority: 0.9 },
+    { path: "/red-rocks/car-service", changefreq: "weekly", priority: 0.8 },
+    { path: "/red-rocks/group-transportation", changefreq: "weekly", priority: 0.8 },
+    { path: "/red-rocks/parking", changefreq: "weekly", priority: 0.8 },
+    { path: "/red-rocks/seating-chart", changefreq: "monthly", priority: 0.8 },
+    { path: "/red-rocks/map", changefreq: "monthly", priority: 0.8 },
+    { path: "/guide", changefreq: "weekly", priority: 0.8 },
+    { path: "/guide/tailgating", changefreq: "weekly", priority: 0.8 },
+    { path: "/guide/parking", changefreq: "weekly", priority: 0.8 },
+    { path: "/guide/parking/best-lots", changefreq: "monthly", priority: 0.7 },
+    { path: "/guide/local/denver-pickups", changefreq: "weekly", priority: 0.9 },
+    { path: "/guide/show-night-strategy", changefreq: "weekly", priority: 0.8 },
+    { path: "/guide/show-night-strategy/post-show-pickup-plan", changefreq: "weekly", priority: 0.8 },
+    { path: "/guide/logistics/bag-policy", changefreq: "weekly", priority: 0.8 },
+    { path: "/guide/compare", changefreq: "weekly", priority: 0.8 },
+    { path: "/guide/transportation", changefreq: "weekly", priority: 0.8 },
+    { path: "/guide/denver-concert-transportation", changefreq: "weekly", priority: 0.8 },
+    { path: "/guide/red-rocks-faq", changefreq: "monthly", priority: 0.7 },
+    { path: "/venues", changefreq: "weekly", priority: 0.8 },
+    { path: "/venues/red-rocks-amphitheatre", changefreq: "weekly", priority: 0.9 },
+    { path: "/venues/mishawaka-amphitheatre", changefreq: "monthly", priority: 0.7 },
+    { path: "/venues/mission-ballroom", changefreq: "monthly", priority: 0.7 },
+    { path: "/venues/fiddlers-green-amphitheatre", changefreq: "monthly", priority: 0.7 },
+    { path: "/venues/fillmore-auditorium", changefreq: "monthly", priority: 0.6 },
+    { path: "/venues/ogden-theatre", changefreq: "monthly", priority: 0.6 },
+    { path: "/venues/gothic-theatre", changefreq: "monthly", priority: 0.6 },
+    { path: "/venues/ball-arena", changefreq: "monthly", priority: 0.6 },
+    { path: "/venues/folsom-field", changefreq: "monthly", priority: 0.6 },
+    { path: "/about", changefreq: "monthly", priority: 0.7 },
+    { path: "/contact", changefreq: "monthly", priority: 0.7 },
   ];
+
+  const seen = new Set<string>();
+  const urls: UrlEntry[] = [];
+
+  function pushPath(p: string, changefreq: string, priority: number) {
+    const loc = p === "/" ? `${base}/` : `${base}${p}`;
+    if (seen.has(loc)) return;
+    seen.add(loc);
+    urls.push({ loc, lastmod, changefreq, priority });
+  }
+
+  for (const row of corePaths) {
+    pushPath(row.path, row.changefreq, row.priority);
+  }
+
+  for (const entity of RED_ROCKS_ENTITIES) {
+    const skip = RETIRED_COMPARISON_PREFIXES.some((prefix) => entity.slug.startsWith(prefix));
+    if (skip) continue;
+    pushPath(`/red-rocks/${entity.slug}`, "monthly", 0.7);
+  }
+
+  const events2027 = await getEventsCatalog(2027, "redrocks");
+  for (const ev of events2027) {
+    if (ev.venueId === "red-rocks-amphitheatre") {
+      pushPath(`/shows/${encodeURIComponent(ev.id)}`, "weekly", 0.7);
+    }
+  }
 
   return new NextResponse(toXml(urls), {
     headers: {
       "Content-Type": "application/xml; charset=utf-8",
-      "Cache-Control": "public, s-maxage=300, stale-while-revalidate=86400",
+      "Cache-Control": "public, s-maxage=1800, stale-while-revalidate=86400",
     },
   });
 }

@@ -6,16 +6,24 @@ type BrandMarkProps = {
   className?: string;
 };
 
+const SCANNED_FRAME_CLASSES: Record<BrandMarkDisplayVariant, string> = {
+  nav: "w-[116px] sm:w-[146px]",
+  footer: "w-[128px] sm:w-[148px]",
+  compact: "w-[96px]",
+  booking: "w-[164px] sm:w-[184px]",
+};
+
 export default function BrandMark({
   alt = BRAND_LOGO.alt,
   variant = "compact",
   className = "",
 }: BrandMarkProps) {
   const variantStyles = BRAND_MARK_VARIANTS[variant];
+  const widthClass = SCANNED_FRAME_CLASSES[variant] || "w-[120px]";
 
   return (
     <span className={["flex items-center", className].filter(Boolean).join(" ")}>
-      <span className={["flex items-center", variantStyles.frameClassName].join(" ")}>
+      <span className={["flex items-center", widthClass].join(" ")}>
         <img
           src={BRAND_LOGO.displaySrc}
           alt={alt}

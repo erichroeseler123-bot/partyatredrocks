@@ -1,3 +1,10 @@
+
+export const metadata = {
+  title: "Red Rocks Tailgating Rules: What's Allowed & Prohibited in the Lots",
+  description: "Do's and don'ts for tailgating in Red Rocks' Upper North and Lower lots: no glass, no open flames, clear food bags, and private vehicle setup.",
+  alternates: { canonical: "https://www.partyatredrocks.com/guide/logistics/tailgating-rules" },
+};
+
 export default function TailgatingRules() {
   return (
     <div className="max-w-4xl mx-auto px-6 py-16">

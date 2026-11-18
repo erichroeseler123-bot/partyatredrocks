@@ -35,7 +35,7 @@
       {
         "slug": "suv",
         "title": "Private Suburban",
-        "priceUsd": 399,
+        "priceUsd": 499,
         "maxGuests": 6,
         "fleetId": "parr-suburban",
         "publicSelfServe": true
@@ -43,7 +43,7 @@
       {
         "slug": "van",
         "title": "Upgrade to Private Van",
-        "priceUsd": 599,
+        "priceUsd": 699,
         "maxGuests": 10,
         "fleetId": "parr-van-10",
         "publicSelfServe": true
@@ -67,8 +67,8 @@
     ],
     "corridorPricing": {
       "redRocks": {
-        "suburban": "$399 round-trip",
-        "van10": "$599 round-trip"
+        "suburban": "$499 flat round-trip",
+        "van10": "$699 flat round-trip"
       },
       "mishawaka": {
         "privateSuburban": "$599 round-trip"
@@ -158,7 +158,7 @@
       "filePath": "app/book/[venue]/private/[option]/page.tsx",
       "mode": "rezdy_embed_with_direct_fallback",
       "vehicleSlug": "suv",
-      "publicPriceUsd": 399,
+      "publicPriceUsd": 499,
       "maxGuests": 6,
       "rezdyProductCode": "596193",
       "directFallbackUrl": "https://gosnotransportation58.rezdy.com/596193/suburban?iframe=true",
@@ -170,10 +170,10 @@
       "filePath": "app/book/[venue]/private/[option]/page.tsx",
       "mode": "rezdy_embed_with_direct_fallback",
       "vehicleSlug": "van",
-      "publicPriceUsd": 599,
+      "publicPriceUsd": 699,
       "maxGuests": 10,
       "rezdyProductCode": "630812",
-      "directFallbackUrl": "https://gosnotransportation58.rezdy.com/630812/10-passenger-van?iframe=true",
+      "directFallbackUrl": "https://gosnotransportation58.rezdy.com/630812/van-10-passenger?iframe=true",
       "status": "live_public_primary"
     },
     {
