@@ -206,7 +206,7 @@ export default async function CalendarPage({ searchParams }: Props) {
                     Venue
                   </Link>
                   {event.artists[0] ? (
-                    <Link className="comic-btn comic-btn-secondary" href={`/bands/${encodeURIComponent(event.artists[0])}`}>
+                    <Link className="comic-btn comic-btn-secondary" href={`/artists/${encodeURIComponent((event.artistNames[0] || event.artists[0]).replace(/^artist-/, "").toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""))}`}>
                       Band
                     </Link>
                   ) : null}

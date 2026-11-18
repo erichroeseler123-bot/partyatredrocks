@@ -210,6 +210,25 @@ export function middleware(req: NextRequest) {
     }
   }
 
+  // 1stBank Center (Broomfield, CO) permanently closed Nov 2023 & demolished 2024:
+  // Preserve /venues/1stbank-center at HTTP 200 as a truthful historical closure page;
+  // serve HTTP 410 Gone on empty schedule/subpages and /book/1stbank-center (0 GSC/Ahrefs/backlinks).
+  const lowerPath = pathname.toLowerCase().replace(/\/+$/, "") || "/";
+  if (
+    lowerPath.startsWith("/venues/1stbank-center/") ||
+    lowerPath === "/book/1stbank-center"
+  ) {
+    const goneHtml = `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="robots" content="noindex, nofollow"/><title>1stBank Center Permanently Closed (410 Gone) | Party at Red Rocks</title><style>body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:#070b14;color:#f8fafc;display:flex;min-height:100vh;align-items:center;justify-content:center;padding:24px}main{max-width:600px;background:#0d1424;border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:32px}h1{margin:0 0 12px;font-size:1.75rem}p{line-height:1.6;color:rgba(248,250,252,.8)}a{color:#ffb07c;font-weight:700}</style></head><body><main><p style="text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:#ffb07c;font-weight:800;margin:0 0 8px">HTTP 410 · Permanently Removed</p><h1>1stBank Center Schedule &amp; Subpages Retired</h1><p>1stBank Center in Broomfield, Colorado permanently closed in November 2023 and was demolished in 2024. No concerts or shuttle services operate for this venue.</p><p><a href="/venues/1stbank-center">Read the 1stBank Center closure note →</a> &nbsp;|&nbsp; <a href="/red-rocks/concerts">2027 Red Rocks Concerts →</a> &nbsp;|&nbsp; <a href="/venues">Active Colorado Venues →</a></p></main></body></html>`;
+    const goneRes = new NextResponse(goneHtml, {
+      status: 410,
+      headers: {
+        "Content-Type": "text/html; charset=utf-8",
+        "X-Robots-Tag": "noindex, nofollow",
+      },
+    });
+    return applyPreviewRobotsHeader(goneRes);
+  }
+
   // Collapsed single-hop permanent redirect for /find preserving all legitimate query/attribution params
   if (pathname === "/find" || pathname === "/find/") {
     const url = req.nextUrl.clone();

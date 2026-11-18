@@ -32,9 +32,7 @@ function slugify(input: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
-export function generateStaticParams() {
-  return MONTHS.map((m) => ({ month: m.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,

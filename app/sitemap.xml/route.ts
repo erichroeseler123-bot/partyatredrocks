@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
-import { getEventsCatalog } from "@/lib/events/getCatalog";
+import { getDenverDateKey, getEventsCatalog } from "@/lib/events/getCatalog";
 import { RED_ROCKS_ENTITIES } from "@/lib/redRocksAuthority";
+import { evaluateFutureRedRocksShowGate } from "@/lib/seo/indexationGate";
 
 type UrlEntry = {
   loc: string;
@@ -110,9 +111,27 @@ export async function GET() {
     pushPath(`/red-rocks/${entity.slug}`, "monthly", 0.7);
   }
 
+  const todayDenverKey = getDenverDateKey();
   const events2027 = await getEventsCatalog(2027, "redrocks");
   for (const ev of events2027) {
-    if (ev.venueId === "red-rocks-amphitheatre") {
+    if (ev.venueId !== "red-rocks-amphitheatre") continue;
+    const ext = ev as typeof ev & { sourceUrl?: string | null; doorsAt?: string | null };
+    const gate = evaluateFutureRedRocksShowGate({
+      id: ev.id,
+      title: ev.name,
+      venueSlug: ev.venueId,
+      dateKey: ev.dateKey,
+      todayDenverKey,
+      performers: ev.artistNames,
+      officialSourceUrl: ext.sourceUrl ?? null,
+      ticketUrl: ev.ticketUrl ?? null,
+      hasExplicitStartTime: Boolean(ev.startLocal && /T\d{2}:\d{2}/.test(ev.startLocal)),
+      hasExplicitDoorTime: Boolean(ext.doorsAt),
+      bookingHref: `/book/red-rocks-amphitheatre/private?date=${encodeURIComponent(ev.dateKey)}&event=${encodeURIComponent(ev.id)}`,
+      hasOperatorLogisticsSection: true,
+      hasHonestTimeLabel: true,
+    });
+    if (gate.passesAll) {
       pushPath(`/shows/${encodeURIComponent(ev.id)}`, "weekly", 0.7);
     }
   }

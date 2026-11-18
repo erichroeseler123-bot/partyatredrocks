@@ -20,7 +20,6 @@ const SERVED_VENUE_GROUPS: ServedVenueGroup[] = [
       "ball-arena",
       "fiddlers-green-amphitheatre",
       "fillmore-auditorium",
-      "1stbank-center",
       "levitt-pavilion-denver",
     ],
   },
