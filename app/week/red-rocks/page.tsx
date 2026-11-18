@@ -133,39 +133,51 @@ export default async function RedRocksLineupPage() {
       { "@type": "ListItem", position: 3, name: "Red Rocks", item: `${SITE}/week/red-rocks` },
     ],
   };
-  const itemListJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Upcoming Red Rocks shows this week",
-    itemListElement: events.slice(0, 24).map((event, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      url: `${SITE}/shows/${encodeURIComponent(event.id)}`,
-      name: event.name,
-      item: {
-        "@type": "MusicEvent",
-        name: event.name,
-        startDate: event.startLocal || event.startAt || event.dateKey,
-        url: `${SITE}/shows/${encodeURIComponent(event.id)}`,
-        eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-        eventStatus: "https://schema.org/EventScheduled",
-        location: {
-          "@type": "Place",
-          name: "Red Rocks Amphitheatre",
-          url: `${SITE}/venues/red-rocks-amphitheatre`,
-          address: {
-            "@type": "PostalAddress",
-            streetAddress: "18300 W Alameda Pkwy",
-            addressLocality: "Morrison",
-            addressRegion: "CO",
-            postalCode: "80465",
-            addressCountry: "US",
-          },
-        },
-      },
-    })),
-  };
-  const schemaJsonLd = [collectionJsonLd, breadcrumbJsonLd, itemListJsonLd];
+  const itemListJsonLd =
+    events.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "Upcoming Red Rocks shows this week",
+          itemListElement: events.slice(0, 24).map((event, index) => {
+            const verifiedPerformers = event.artistNames
+              .map((n) => n.trim())
+              .filter((n) => n.length > 0)
+              .map((name) => ({ "@type": "MusicGroup", name }));
+            return {
+              "@type": "ListItem",
+              position: index + 1,
+              url: `${SITE}/shows/${encodeURIComponent(event.id)}`,
+              name: event.name,
+              item: {
+                "@type": "MusicEvent",
+                name: event.name,
+                startDate: event.startLocal || event.startAt || event.dateKey,
+                url: `${SITE}/shows/${encodeURIComponent(event.id)}`,
+                eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+                eventStatus: "https://schema.org/EventScheduled",
+                ...(verifiedPerformers.length > 0 ? { performer: verifiedPerformers } : {}),
+                location: {
+                  "@type": "Place",
+                  name: "Red Rocks Amphitheatre",
+                  url: `${SITE}/venues/red-rocks-amphitheatre`,
+                  address: {
+                    "@type": "PostalAddress",
+                    streetAddress: "18300 W Alameda Pkwy",
+                    addressLocality: "Morrison",
+                    addressRegion: "CO",
+                    postalCode: "80465",
+                    addressCountry: "US",
+                  },
+                },
+              },
+            };
+          }),
+        }
+      : null;
+  const schemaJsonLd = itemListJsonLd
+    ? [collectionJsonLd, breadcrumbJsonLd, itemListJsonLd]
+    : [collectionJsonLd, breadcrumbJsonLd];
 
   return (
     <WeekClient

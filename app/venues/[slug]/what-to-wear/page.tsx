@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import venuesJson from "@/data/venues.json";
+import { evaluateVenuePageDisposition } from "@/lib/seo/indexationGate";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
@@ -38,11 +39,13 @@ export async function generateMetadata({
   const venue = getVenue(slug);
   if (!venue) return {};
   const name = venueName(slug, venue);
+  const gate = evaluateVenuePageDisposition(slug, "what-to-wear");
 
   return {
-    title: `What to Wear at ${name} | Concert Outfit Guide 2026`,
-    description: `What to wear to ${name} concerts in 2026. Layering, footwear, weather backup, and post-show ride readiness tips.`,
+    title: `What to Wear at ${name} | Concert Outfit Guide`,
+    description: `What to wear to ${name} concerts. Layering, footwear, weather backup, and post-show ride readiness tips.`,
     alternates: { canonical: `${SITE}/venues/${slug}/what-to-wear` },
+    robots: { index: gate.index, follow: gate.follow },
   };
 }
 

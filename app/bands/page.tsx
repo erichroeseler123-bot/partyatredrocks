@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { getMultiYearArtistsCatalog, getUpcomingEventsCatalog } from "@/lib/events/getCatalog";
+import { isNonArtistParserLabel } from "@/lib/seo/indexationGate";
 
 export const revalidate = 86400;
 
 export const metadata = {
+  alternates: { canonical: "https://www.partyatredrocks.com/bands" },
   title: "Bands & Artists | Party At Red Rocks",
   description: "Browse artists across venue schedules and jump straight into show dates and ride booking.",
   robots: {
@@ -11,6 +13,14 @@ export const metadata = {
     follow: true,
   },
 };
+
+function slugify(input: string): string {
+  return input
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
 
 export default async function BandsPage() {
   const [artists, events] = await Promise.all([
@@ -28,8 +38,10 @@ export default async function BandsPage() {
   }
 
   const rows = artists
+    .filter((artist) => !isNonArtistParserLabel(artist.name))
     .map((artist) => ({
       artist,
+      slug: slugify(artist.name),
       count: artistStats.get(artist.id)?.count ?? 0,
       nextDate: artistStats.get(artist.id)?.nextDate ?? null,
     }))
@@ -46,11 +58,11 @@ export default async function BandsPage() {
           <h1 className="comic-title">Bands & Artists</h1>
           <p className="comic-copy">Click an artist to see upcoming dates across venue schedules and book transportation.</p>
           <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-primary" href="/week">
-              Browse Schedules
+            <Link className="comic-btn comic-btn-primary" href="/red-rocks/concerts">
+              Browse Red Rocks Concerts
             </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/find">
-              Find Ride Options
+            <Link className="comic-btn comic-btn-secondary" href="/book/red-rocks-amphitheatre/private">
+              Private Ride Options
             </Link>
           </div>
         </div>
@@ -58,11 +70,11 @@ export default async function BandsPage() {
         <section className="comic-panel" style={{ marginTop: 14 }}>
           <div className="comic-tag">All Artists</div>
           <div className="comic-grid" style={{ marginTop: 12 }}>
-            {rows.map(({ artist, count, nextDate }) => (
-              <Link key={artist.id} className="comic-panel" href={`/bands/${encodeURIComponent(artist.id)}`}>
+            {rows.map(({ artist, slug, count, nextDate }) => (
+              <Link key={artist.id} className="comic-panel" href={`/artists/${encodeURIComponent(slug)}`}>
                 <div className="comic-h3">{artist.name}</div>
                 <p className="comic-copy" style={{ marginTop: 6 }}>
-                  {count} show{count === 1 ? "" : "s"}
+                  {count} upcoming show{count === 1 ? "" : "s"}
                 </p>
                 {nextDate ? <p className="comic-copy">Next: {nextDate}</p> : null}
               </Link>

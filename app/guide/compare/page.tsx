@@ -8,22 +8,25 @@ import { pageVisuals } from "@/lib/pageVisuals";
 
 const COMPARE_VISUALS = [
   {
-    title: "Shared Shuttle",
-    body: "Fixed pricing and one defined return plan beat improvising your way out with the crowd.",
-    imageSrc: curatedImages.compareShared,
-    imageAlt: "Shared shuttle transportation planning for Red Rocks",
+    title: "Private Suburban ($499)",
+    body: "Up to 6 guests in one full-size Suburban—door-to-door pickup, Upper North Lot tailgate gear, driver waiting on-site, and direct ride home.",
+    imageSrc: "/images/redesign/private-suburban-black.webp",
+    imageAlt: "Representative Chevrolet Suburban for private Red Rocks groups up to 6 guests",
+    disclosure: "Representative vehicle; exact vehicle may vary.",
   },
   {
-    title: "Private SUV",
-    body: "Best for small groups that want one vehicle, one pickup point, and a cleaner ride home.",
-    imageSrc: curatedImages.compareSUV,
-    imageAlt: "Private SUV service for Red Rocks groups",
+    title: "Private Van ($699)",
+    body: "Up to 10 guests in one 10-passenger van—everyone arrives, tailgates in Upper North Lot, and rides home together.",
+    imageSrc: "/images/redesign/private-van-black.webp",
+    imageAlt: "Representative 10-passenger van for Red Rocks concert groups",
+    disclosure: "Representative vehicle; exact vehicle may vary.",
   },
   {
-    title: "Sprinter Van",
-    body: "The van option keeps larger groups together without dropping back into generic fallback transport imagery.",
-    imageSrc: curatedImages.compareVan,
-    imageAlt: "Sprinter van transportation for Red Rocks groups",
+    title: "Rideshare & Third-Party Buses",
+    body: "Fixed bar bus stops or Jurassic Lot post-encore rideshare queues mean walking, splitting cars, and nowhere to lock tailgate gear.",
+    imageSrc: curatedImages.compareHero,
+    imageAlt: "Red Rocks concert arrival and parking comparison at dusk",
+    disclosure: null,
   },
 ] as const;
 
@@ -101,6 +104,9 @@ export default function ShuttleComparison() {
                 <p className="text-[11px] font-black uppercase tracking-[0.22em] text-cyan-300">Compare</p>
                 <h2 className="mt-3 text-2xl font-black tracking-tight">{item.title}</h2>
                 <p className="mt-3 text-soft leading-relaxed">{item.body}</p>
+                {item.disclosure ? (
+                  <p className="mt-2 text-xs text-white/55">{item.disclosure}</p>
+                ) : null}
               </div>
             </article>
           ))}
@@ -124,10 +130,10 @@ export default function ShuttleComparison() {
                 <td className="p-5 text-[#ffb07c]">Surge: $120 - $250 each way</td>
               </tr>
               <tr className="border-b border-soft bg-white/5">
-                <td className="p-5 font-bold">Drop-off Location</td>
-                <td className="p-5 font-bold text-[#4cc9f0] underline">Top Circle (Row 70)</td>
-                <td className="p-5">Upper North Lot</td>
-                <td className="p-5">Jurassic Lot (1 mile hike)</td>
+                <td className="p-5 font-bold">Staging & Tailgate</td>
+                <td className="p-5 font-bold text-[#ffb07c]">Upper North Lot + Chairs, Cooler, Speaker & Ice</td>
+                <td className="p-5">Drop-off only (no gear storage)</td>
+                <td className="p-5">Jurassic Lot (long uphill hike)</td>
               </tr>
               <tr className="border-b border-soft">
                 <td className="p-5 font-bold">Door-to-Door Pickup?</td>

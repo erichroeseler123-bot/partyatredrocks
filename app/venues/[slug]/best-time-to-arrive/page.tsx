@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import venuesJson from "@/data/venues.json";
+import { evaluateVenuePageDisposition } from "@/lib/seo/indexationGate";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
@@ -38,11 +39,13 @@ export async function generateMetadata({
   const venue = getVenue(slug);
   if (!venue) return {};
   const name = venueName(slug, venue);
+  const gate = evaluateVenuePageDisposition(slug, "best-time-to-arrive");
 
   return {
-    title: `Best Time to Arrive at ${name} | Concert Timing Guide 2026`,
-    description: `When to arrive at ${name} for 2026 shows. Practical arrival windows, parking buffer guidance, and post-show meetup planning.`,
+    title: `Best Time to Arrive at ${name} | Concert Timing Guide`,
+    description: `When to arrive at ${name} for show night. Practical arrival windows, parking buffer guidance, and post-show meetup planning.`,
     alternates: { canonical: `${SITE}/venues/${slug}/best-time-to-arrive` },
+    robots: { index: gate.index, follow: gate.follow },
   };
 }
 

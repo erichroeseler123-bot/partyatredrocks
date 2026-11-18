@@ -1,6 +1,7 @@
 import HomepageBridge from "@/components/HomepageBridge";
 
 export const metadata = {
+  alternates: { canonical: "https://www.partyatredrocks.com/guide/local-music-intelligence" },
   title: "Local Music Intelligence | Party at Red Rocks",
   description:
     "Show-night logistics, pickup reality, tailgate rules, and how to avoid the post-show trap.",

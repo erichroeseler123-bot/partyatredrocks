@@ -1,5 +1,12 @@
 import Link from 'next/link';
 
+
+export const metadata = {
+  title: "Red Rocks Concert Tailgating FAQ & Group Ride Guide | Party at Red Rocks",
+  description: "Answers to common Red Rocks tailgating questions: Upper North Lot setup, BYOB vehicle rules, no-glass policy, and $499/$699 private rides.",
+  alternates: { canonical: "https://www.partyatredrocks.com/guide/events/tailgate-guide" },
+};
+
 export default function TailgateGuide() {
   const faqs = [
     { q: "Why skip tailgating hassles and book private transportation instead?", a: "Tailgating is fun but stressful: hunting spots, lot traffic, and steep uphill hikes. Our private transportation eliminates it all—door-to-door pickup in a $499 Suburban (up to 6) or $699 van (up to 10), BYOB-friendly ride, and your vehicle waits for you through the show. Book private transportation → /book/red-rocks-amphitheatre/private." },

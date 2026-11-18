@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import {
   getDenverDateKey,
   getMultiYearArtistsCatalog,
@@ -13,6 +13,12 @@ import { selectImageByPriority } from "@/lib/media/selectImage";
 import type { HandoffSearchParams } from "@/lib/parrHandoff";
 import { buildBookingHref, normalizeVenueSlug } from "@/lib/parrHandoff";
 import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
+import {
+  evaluateArtistPageDisposition,
+  isManualReviewProtectedPath,
+  isNonArtistParserLabel,
+  isParrServedVenue,
+} from "@/lib/seo/indexationGate";
 
 export const runtime = "nodejs";
 export const revalidate = 3600;
@@ -77,6 +83,7 @@ function activeCatalogYears(): number[] {
 
 async function resolveArtistPageData(slug: string) {
   const years = activeCatalogYears();
+  const todayKey = getDenverDateKey();
   const [artists, events, media] = await Promise.all([
     getMultiYearArtistsCatalog({ scope: "all", years }),
     getMultiYearEventsCatalog({ scope: "all", years }),
@@ -95,7 +102,27 @@ async function resolveArtistPageData(slug: string) {
           image: matches[0].image ?? undefined,
         }
       : null);
-  if (!artist) return null;
+
+  const upcomingRedRocksCount = matches.filter(
+    (e) => e.dateKey >= todayKey && isRedRocksVenue(e.venueId)
+  ).length;
+  const historicalRedRocksCount = matches.filter(
+    (e) => e.dateKey < todayKey && isRedRocksVenue(e.venueId)
+  ).length;
+  const upcomingServedSecondaryCount = matches.filter(
+    (e) => e.dateKey >= todayKey && !isRedRocksVenue(e.venueId) && isParrServedVenue(e.venueId)
+  ).length;
+
+  const gateDecision = evaluateArtistPageDisposition({
+    artistSlug: slug,
+    upcomingRedRocksCount,
+    historicalRedRocksCount,
+    upcomingServedSecondaryCount,
+  });
+
+  if (!artist) {
+    return { artist: null, matches: [], heroImage: "/venues/rrsite.webp", portraitImage: null, venueBanner: "/venues/rrsite.webp", gateDecision };
+  }
 
   const mediaSources = media?.artistsById?.[artist.id]?.sources;
   const primaryVenueId =
@@ -137,31 +164,61 @@ async function resolveArtistPageData(slug: string) {
 
   const heroImage = portraitImage || venueBanner;
 
-  return { artist, matches, heroImage, portraitImage, venueBanner };
+  return { artist, matches, heroImage, portraitImage, venueBanner, gateDecision };
 }
 
+/**
+ * Only pre-build indexable Red Rocks & protected artist pages at build time;
+ * secondary club-only artist pages remain available on demand via ISR (`dynamicParams = true`)
+ * with `noindex, follow` so we avoid static doorway bloat without breaking links.
+ */
 export async function generateStaticParams() {
   const years = activeCatalogYears();
+  const todayKey = getDenverDateKey();
   const [artists, events] = await Promise.all([
     getMultiYearArtistsCatalog({ scope: "all", years }),
     getMultiYearEventsCatalog({ scope: "all", years }),
   ]);
-  const activeArtists = new Set(events.flatMap((event) => event.artistNames.map((name) => slugify(name))));
+
+  const redRocksOrProtectedSlugs = new Set<string>();
+  for (const event of events) {
+    if (
+      isRedRocksVenue(event.venueId) ||
+      (event.dateKey >= todayKey && isParrServedVenue(event.venueId))
+    ) {
+      for (const name of event.artistNames) {
+        if (!isNonArtistParserLabel(name)) {
+          redRocksOrProtectedSlugs.add(slugify(name));
+        }
+      }
+    }
+  }
 
   return artists
-    .filter((artist) => activeArtists.has(slugify(artist.name)))
-    .map((artist) => ({ artist: slugify(artist.name) }));
+    .map((artist) => slugify(artist.name))
+    .filter(
+      (slug) =>
+        Boolean(slug) &&
+        (redRocksOrProtectedSlugs.has(slug) || isManualReviewProtectedPath(`/artists/${slug}`))
+    )
+    .map((artist) => ({ artist }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { artist } = await params;
   const data = await resolveArtistPageData(artist);
-  if (!data) return { title: "Artist | Party At Red Rocks", robots: { index: false, follow: false } };
+  if (!data.artist || data.gateDecision.action === "not_found_404") {
+    return { title: "Artist | Party At Red Rocks", robots: { index: false, follow: false } };
+  }
 
   return {
     title: `${data.artist.name} Concerts in Colorado | Shows, Venues, Ride Planning`,
     description: `See ${data.artist.name} concert dates, Red Rocks history, venue details, and private ride planning options.`,
-    alternates: { canonical: `${SITE}/artists/${artist}` },
+    alternates: { canonical: `${SITE}/artists/${encodeURIComponent(artist)}` },
+    robots: {
+      index: data.gateDecision.index,
+      follow: data.gateDecision.follow,
+    },
   };
 }
 
@@ -169,7 +226,13 @@ export default async function ArtistPage({ params, searchParams }: Props) {
   const { artist } = await params;
   const sp = await searchParams;
   const data = await resolveArtistPageData(artist);
-  if (!data) notFound();
+
+  if (data.gateDecision.action === "redirect_308" && data.gateDecision.redirectDestination) {
+    permanentRedirect(data.gateDecision.redirectDestination);
+  }
+  if (!data.artist || data.gateDecision.action === "not_found_404") {
+    notFound();
+  }
 
   const { artist: artistRow, matches, heroImage, portraitImage, venueBanner } = data;
   const todayKey = getDenverDateKey();
@@ -202,9 +265,6 @@ export default async function ArtistPage({ params, searchParams }: Props) {
                 Colorado concert dates, venue details, Red Rocks history, and private ride planning for upcoming show nights.
               </p>
               <div style={{ marginTop: 14, display: "flex", gap: 8, flexWrap: "wrap" }}>
-                <Link href={`/bands/${encodeURIComponent(artistRow.id)}`} className="comic-btn comic-btn-secondary">
-                  Artist Profile
-                </Link>
                 <Link href="/red-rocks/concerts" className="comic-btn comic-btn-secondary">
                   Red Rocks Schedule
                 </Link>
@@ -323,7 +383,7 @@ export default async function ArtistPage({ params, searchParams }: Props) {
                   <div className="comic-tag">{dateLabel(event.dateKey)}</div>
                   <h2 className="comic-h3" style={{ marginTop: 8 }}>{event.name}</h2>
                   <Link href={`/shows/${encodeURIComponent(event.id)}`} className="comic-btn comic-btn-secondary" style={{ marginTop: 10 }}>
-                    Show Details
+                    Historical Show Record
                   </Link>
                 </article>
               ))}

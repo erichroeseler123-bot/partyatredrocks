@@ -10,7 +10,7 @@ export const bookingVisuals = {
     copy: BOOKING_COPY.copy.sharedRide,
   },
   private: {
-    imageSrc: curatedImages.privateSUV,
+    imageSrc: "/images/redesign/red-rocks-sunset-crowd.webp",
     imageAlt: "Illuminated Red Rocks Amphitheatre concert night view above Morrison",
     eyebrow: BOOKING_COPY.labels.privateBookingEyebrow,
     title: BOOKING_COPY.labels.privateBookingTitle,
@@ -18,12 +18,12 @@ export const bookingVisuals = {
   },
   privateOptions: {
     suv: {
-      imageSrc: "/fleet/fleet-suburban.jpg",
-      imageAlt: "Full-size Chevrolet Suburban SUV for private Red Rocks group transportation",
+      imageSrc: "/images/redesign/private-suburban-black.webp",
+      imageAlt: "Representative full-size SUV for private Red Rocks group transportation",
     },
     van: {
-      imageSrc: curatedImages.sprinterVan,
-      imageAlt: "Red Rocks Amphitheatre seating bowl for private 10-passenger group van rides",
+      imageSrc: "/images/redesign/private-van-black.webp",
+      imageAlt: "Representative 10-passenger private van for Red Rocks group rides",
     },
     sprinter: {
       imageSrc: curatedImages.sprinterVan,

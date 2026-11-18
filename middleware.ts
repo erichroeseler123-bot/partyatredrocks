@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { lookupLegacyStaticRedirect } from "./lib/legacyRedirects";
 
 const INTERNAL_OPS_COOKIE = "internal_ops_auth";
 const PARR_TRIP_CTX_COOKIE = "parr_trip_ctx";
@@ -29,6 +30,13 @@ const FORBIDDEN_URL_PII_PARAMS = [
   "privatenotes",
   "internalnotes",
 ];
+
+function applyPreviewRobotsHeader(res: NextResponse): NextResponse {
+  if (process.env.VERCEL_ENV === "preview") {
+    res.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
+  }
+  return res;
+}
 
 function constantTimeEqual(actual: string, expected: string): boolean {
   const encoder = new TextEncoder();
@@ -154,7 +162,7 @@ export function middleware(req: NextRequest) {
           maxAge: 60 * 60 * 24 * 7,
         });
       }
-      return redirectRes;
+      return applyPreviewRobotsHeader(redirectRes);
     }
   }
 
@@ -171,12 +179,14 @@ export function middleware(req: NextRequest) {
   if (isInternalOpsPath && !opsAuth?.authorized) {
     const isApi = pathname.startsWith("/api/");
     if (isApi) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return applyPreviewRobotsHeader(NextResponse.json({ error: "Unauthorized" }, { status: 401 }));
     }
-    return new NextResponse("Authentication required", {
-      status: 401,
-      headers: { "WWW-Authenticate": 'Basic realm="Internal Ops", charset="UTF-8"' },
-    });
+    return applyPreviewRobotsHeader(
+      new NextResponse("Authentication required", {
+        status: 401,
+        headers: { "WWW-Authenticate": 'Basic realm="Internal Ops", charset="UTF-8"' },
+      })
+    );
   }
 
   if (isInternalOpsPath && opsAuth?.method === "basic") {
@@ -194,29 +204,61 @@ export function middleware(req: NextRequest) {
           path: "/",
           maxAge: 60 * 60 * 8,
         });
-        return res;
+        res.headers.set("Cache-Control", "private, no-store");
+        return applyPreviewRobotsHeader(res);
       }
     }
   }
 
+  // 1stBank Center (Broomfield, CO) permanently closed Nov 2023 & demolished 2024:
+  // Preserve /venues/1stbank-center at HTTP 200 as a truthful historical closure page;
+  // serve HTTP 410 Gone on empty schedule/subpages and /book/1stbank-center (0 GSC/Ahrefs/backlinks).
+  const lowerPath = pathname.toLowerCase().replace(/\/+$/, "") || "/";
+  if (
+    lowerPath.startsWith("/venues/1stbank-center/") ||
+    lowerPath === "/book/1stbank-center"
+  ) {
+    const goneHtml = `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="robots" content="noindex, nofollow"/><title>1stBank Center Permanently Closed (410 Gone) | Party at Red Rocks</title><style>body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:#070b14;color:#f8fafc;display:flex;min-height:100vh;align-items:center;justify-content:center;padding:24px}main{max-width:600px;background:#0d1424;border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:32px}h1{margin:0 0 12px;font-size:1.75rem}p{line-height:1.6;color:rgba(248,250,252,.8)}a{color:#ffb07c;font-weight:700}</style></head><body><main><p style="text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:#ffb07c;font-weight:800;margin:0 0 8px">HTTP 410 · Permanently Removed</p><h1>1stBank Center Schedule &amp; Subpages Retired</h1><p>1stBank Center in Broomfield, Colorado permanently closed in November 2023 and was demolished in 2024. No concerts or shuttle services operate for this venue.</p><p><a href="/venues/1stbank-center">Read the 1stBank Center closure note →</a> &nbsp;|&nbsp; <a href="/red-rocks/concerts">2027 Red Rocks Concerts →</a> &nbsp;|&nbsp; <a href="/venues">Active Colorado Venues →</a></p></main></body></html>`;
+    const goneRes = new NextResponse(goneHtml, {
+      status: 410,
+      headers: {
+        "Content-Type": "text/html; charset=utf-8",
+        "X-Robots-Tag": "noindex, nofollow",
+      },
+    });
+    return applyPreviewRobotsHeader(goneRes);
+  }
+
+  // Collapsed single-hop permanent redirect for /find preserving all legitimate query/attribution params
+  if (pathname === "/find" || pathname === "/find/") {
+    const url = req.nextUrl.clone();
+    url.pathname = "/book/red-rocks-amphitheatre/private";
+    if (
+      url.searchParams.get("venue") &&
+      ["redrocks", "red-rocks", "red-rocks-amphitheater", "red-rocks-amphitheatre"].includes(
+        String(url.searchParams.get("venue")).trim().toLowerCase()
+      )
+    ) {
+      url.searchParams.delete("venue");
+    }
+    return applyPreviewRobotsHeader(NextResponse.redirect(url, 308));
+  }
+
   // LEGACY_SHOW_NUMERIC_IDS
-  // Old numeric /shows/{sourceId} links should land on a safe modern schedule page.
   if (pathname.startsWith("/shows/") && /^\/shows\/\d+\/?$/.test(pathname)) {
     const url = req.nextUrl.clone();
     url.pathname = "/red-rocks/concerts";
     url.search = "";
-    return NextResponse.redirect(url, 308);
+    return applyPreviewRobotsHeader(NextResponse.redirect(url, 308));
   }
-  // END LEGACY_SHOW_NUMERIC_IDS
 
   // LEGACY_MISHAWAKA_AND_PICKUP_LINKS
-  // Old social/directory links should land on the current venue or pickup pages.
   if (pathname.toLowerCase() === "/mishawaka") {
     const url = req.nextUrl.clone();
     url.pathname = "/venues/mishawaka-amphitheatre";
     url.hash = "private-transportation";
     url.search = "";
-    return NextResponse.redirect(url, 308);
+    return applyPreviewRobotsHeader(NextResponse.redirect(url, 308));
   }
 
   if (pathname.toLowerCase() === "/downtown") {
@@ -224,12 +266,10 @@ export function middleware(req: NextRequest) {
     url.pathname = "/guide/local/denver-pickups";
     url.hash = "downtown-pickup";
     url.search = "";
-    return NextResponse.redirect(url, 308);
+    return applyPreviewRobotsHeader(NextResponse.redirect(url, 308));
   }
-  // END LEGACY_MISHAWAKA_AND_PICKUP_LINKS
 
   // LEGACY_WIX_ROUTES
-  // Old Wix blog posts should consolidate to the best matching modern guide, not just the generic hub.
   if (pathname.startsWith("/post/")) {
     const slug = pathname.slice("/post/".length).toLowerCase();
     const url = req.nextUrl.clone();
@@ -266,57 +306,44 @@ export function middleware(req: NextRequest) {
     }
 
     url.search = "";
-    return NextResponse.redirect(url, 308);
+    return applyPreviewRobotsHeader(NextResponse.redirect(url, 308));
   }
 
-  const legacyRouteMap: Record<string, { pathname: string; hash?: string }> = {
-    "/party-bus-to-red-rocks": { pathname: "/party-bus" },
-    "/sprinter": { pathname: "/private-van" },
-    "/mishawaka-private-transportation": { pathname: "/venues/mishawaka-amphitheatre", hash: "private-transportation" },
-    "/general-7": { pathname: "/" },
-    "/la-quinta-fairfield": { pathname: "/guide/local/denver-pickups", hash: "hotel-pickup" },
-    "/upper-north": { pathname: "/guide/local/denver-pickups", hash: "private-pickup" },
-    "/tubing": { pathname: "/guide" },
-    "/hiking-at-red-rocks": { pathname: "/guide" },
-    "/guide/post-encore-strategy": { pathname: "/guide/show-night-strategy/post-show-pickup-plan" },
-    "/guide/bag-policy-2026": { pathname: "/guide/logistics/bag-policy" },
-    "/guide/sheraton-pickup": { pathname: "/guide/local/denver-pickups", hash: "downtown-pickup" },
-    "/concert-guide": { pathname: "/red-rocks/concert-guide" },
-    "/red-rocks-concert-guide": { pathname: "/red-rocks/concert-guide" },
-  };
-
-  const legacyDestination = legacyRouteMap[pathname];
+  const legacyDestination = lookupLegacyStaticRedirect(pathname);
   if (legacyDestination) {
     const url = req.nextUrl.clone();
     url.pathname = legacyDestination.pathname;
     url.hash = legacyDestination.hash || "";
     url.search = "";
-    return NextResponse.redirect(url, 308);
+    return applyPreviewRobotsHeader(NextResponse.redirect(url, 308));
   }
-  // END LEGACY_WIX_ROUTES
 
-  // Never override cache headers for these (they manage their own caching)
+  // Never override cache headers for self-managed machine/asset routes
   if (
     pathname === "/robots.txt" ||
     pathname === "/sitemap.xml" ||
+    pathname === "/llms.txt" ||
+    pathname === "/agent.json" ||
     pathname === "/.well-known/dcc-site" ||
     pathname.startsWith("/api/") ||
     pathname.startsWith("/_next/") ||
+    pathname.startsWith("/fonts/") ||
+    pathname.startsWith("/images/") ||
     pathname === "/favicon.ico"
   ) {
-    const passthrough = NextResponse.next();
-    if (process.env.VERCEL_ENV === "preview") {
-      passthrough.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
-    }
-    return passthrough;
+    return applyPreviewRobotsHeader(NextResponse.next());
   }
 
   const res = NextResponse.next();
-  res.headers.set("Cache-Control", "public, max-age=0, must-revalidate");
-  if (process.env.VERCEL_ENV === "preview") {
-    res.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
+  if (
+    isInternalOpsPath ||
+    pathname.startsWith("/booking/") ||
+    pathname.startsWith("/pay-balance/") ||
+    pathname.startsWith("/manager/")
+  ) {
+    res.headers.set("Cache-Control", "private, no-store");
   }
-  return res;
+  return applyPreviewRobotsHeader(res);
 }
 
 export const config = {

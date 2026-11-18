@@ -48,6 +48,14 @@ function nextDateLabel(raw: string | null) {
   });
 }
 
+
+export const metadata = {
+  title: "Colorado Concerts This Week | Venue-by-Venue Lineup",
+  description: "Upcoming concerts over the next 7 days across Red Rocks Amphitheatre, Denver, and Boulder venues.",
+  alternates: { canonical: "https://www.partyatredrocks.com/week" },
+  robots: { index: false, follow: true },
+};
+
 export default async function WeekPage({
   searchParams,
 }: {

@@ -1,54 +1,98 @@
-import Link from 'next/link';
+import type { Metadata } from "next";
+import Link from "next/link";
+import { SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
+
+const SITE = "https://www.partyatredrocks.com";
+
+export const metadata: Metadata = {
+  title: "Private Red Rocks Ride vs Daytime Park Shuttle Pilot (2026 Reference)",
+  description:
+    `Why daytime park transit pilots (9 AM – 5 PM) do not cover late-night Red Rocks concert exits, and how private group vehicles ($${SUBURBAN_2027_USD} Suburban / $${VAN_2027_USD} Van) handle the full show night.`,
+  alternates: { canonical: `${SITE}/guide/logistics/shuttle-vs-westracks-2026` },
+  openGraph: {
+    title: "Concert Transportation vs Daytime Park Pilot (2026 Reference)",
+    description:
+      "Daytime park shuttles stop before evening concerts end. Compare daytime park transit against dedicated private Red Rocks concert vehicles.",
+    url: `${SITE}/guide/logistics/shuttle-vs-westracks-2026`,
+    type: "article",
+  },
+};
 
 export default function WestracksComparison() {
   return (
-    <div className="max-w-4xl mx-auto px-6 py-20 bg-surface text-white">
-      <h1 className="text-5xl font-black mb-8 uppercase italic tracking-tighter">
-        Shuttle vs. Public Pilot: <span className="text-[#4cc9f0]">The 2026 Reality</span>
+    <main className="mx-auto max-w-4xl bg-surface px-6 py-24 text-white">
+      <aside
+        aria-label="2026 historical context notice"
+        className="mb-8 rounded-2xl border border-[#ffb07c]/35 bg-[#ffb07c]/10 p-5 text-sm leading-6 text-white/90"
+      >
+        <span className="font-black uppercase tracking-[0.16em] text-[#ffb07c]">2026 Transit Pilot Archive:</span>{" "}
+        This comparison documents the 2026 daytime park shuttle pilot vs. dedicated evening concert transportation. Existing 2026 bookings remain honored at their original rates; current 2027 public private round-trip pricing is{" "}
+        <strong>${SUBURBAN_2027_USD} Private Suburban</strong> (up to 6) and <strong>${VAN_2027_USD} Private Van</strong> (up to 10).
+      </aside>
+
+      <h1 className="mb-6 text-4xl font-black uppercase tracking-tight sm:text-5xl">
+        Concert Ride vs. Daytime Park Pilot: <span className="text-[#ffb07c]">The 2026 Reality</span>
       </h1>
-      <p className="text-muted text-xl mb-12 leading-relaxed">
-        The Westracks public shuttle launches Memorial Day 2026. While great for morning hikers, it is <strong>daytime only (9 AM - 5 PM)</strong>. If you are attending a concert, you need a different plan.
+      <p className="mb-12 text-lg leading-relaxed text-muted sm:text-xl">
+        Daytime park shuttle pilots are built for morning hikers and Trading Post visitors—operating <strong>daytime hours only (roughly 9 AM – 5 PM)</strong>. If you are going to an evening concert that lets out around 11:30 PM, daytime park buses will not bring your group home.
       </p>
-      
-      <div className="overflow-x-auto mb-16">
-        <table className="w-full border-collapse border border-soft">
+
+      <div className="mb-14 overflow-x-auto rounded-2xl border border-soft">
+        <table className="w-full border-collapse text-left text-sm sm:text-base">
           <thead>
             <tr className="bg-surface-strong">
-              <th className="p-4 border border-soft text-left uppercase">Feature</th>
-              <th className="p-4 border border-soft text-left">Westracks Pilot</th>
-              <th className="p-4 border border-soft text-left uppercase font-black text-[#4cc9f0]">Party at Red Rocks</th>
+              <th className="border-b border-soft p-4 uppercase">Feature</th>
+              <th className="border-b border-soft p-4">Daytime Park Pilot</th>
+              <th className="border-b border-soft p-4 font-black uppercase text-[#ffb07c]">
+                Party at Red Rocks (Private Vehicle)
+              </th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td className="p-4 border border-soft font-bold uppercase">Night Return</td>
-              <td className="p-4 border border-soft italic text-muted">No Service after 5 PM</td>
-              <td className="p-4 border border-soft font-bold uppercase text-green-500">Guaranteed Return</td>
+              <td className="border-b border-soft p-4 font-bold">Post-Encore Return</td>
+              <td className="border-b border-soft p-4 italic text-muted">No service after ~5 PM</td>
+              <td className="border-b border-soft p-4 font-bold text-emerald-400">
+                Driver & vehicle wait through the entire concert
+              </td>
             </tr>
             <tr>
-              <td className="p-4 border border-soft font-bold uppercase">Pickup</td>
-              <td className="p-4 border border-soft">Golden Station Area</td>
-              <td className="p-4 border border-soft font-bold uppercase">Sheraton Denver & Trailhead</td>
+              <td className="border-b border-soft p-4 font-bold">Pickup</td>
+              <td className="border-b border-soft p-4">Fixed transit station</td>
+              <td className="border-b border-soft p-4 font-bold">
+                Door-to-door from your Denver/Golden hotel, Airbnb, or home
+              </td>
             </tr>
             <tr>
-              <td className="p-4 border border-soft font-bold uppercase">Drop-off</td>
-              <td className="p-4 border border-soft">Trading Post (Lower)</td>
-              <td className="p-4 border border-soft font-bold uppercase text-[#ffb07c]">Top Circle (Row 70)</td>
+              <td className="border-b border-soft p-4 font-bold">Arrival & Tailgating</td>
+              <td className="border-b border-soft p-4">Trading Post (daytime drop)</td>
+              <td className="border-b border-soft p-4 font-bold text-[#ffb07c]">
+                Upper North Lot staging + chairs, cooler, speaker & ice
+              </td>
+            </tr>
+            <tr>
+              <td className="p-4 font-bold">2027 Public Pricing</td>
+              <td className="p-4 text-muted">Daytime park visitors only</td>
+              <td className="p-4 font-bold text-white">
+                ${SUBURBAN_2027_USD} Suburban (up to 6) · ${VAN_2027_USD} Van (up to 10)
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <div className="bg-surface-strong p-10 rounded-[2.5rem] border border-[#3df3ff]/35 text-center">
-        <h2 className="text-3xl font-black mb-4 uppercase">Don't Get Stranded</h2>
-        <p className="text-muted text-lg mb-8 leading-relaxed">
-          The public pilot won't bring you home from the show. We provide the only stress-free, 
-          late-night shuttle from the Top Circle directly back to Denver and Golden.
+      <div className="rounded-[2.5rem] border border-[#ffb07c]/35 bg-surface-strong p-8 text-center sm:p-10">
+        <h2 className="mb-4 text-3xl font-black uppercase">Don&apos;t Get Stranded After the Encore</h2>
+        <p className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
+          Reserve one private vehicle for your crew—pickup, Upper North Lot tailgating, driver waiting on-site during the show, and a safe direct ride home included for one flat vehicle price.
         </p>
-        <Link href="/book" className="btn-primary uppercase transition shadow-xl inline-block">
-          Secure Your Ride
+        <Link
+          href="/book/red-rocks-amphitheatre/private"
+          className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#ff6b3d] px-8 text-sm font-black uppercase tracking-[0.14em] text-white transition hover:bg-[#ff7f56]"
+        >
+          Choose Your Private Vehicle
         </Link>
       </div>
-    </div>
+    </main>
   );
 }

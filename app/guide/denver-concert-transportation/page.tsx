@@ -9,11 +9,11 @@ import { guideVisuals } from "@/lib/guideVisuals";
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
 export const metadata = {
-  title: "Denver Concert Transportation Guide",
+  title: "Denver Concert Transportation Guide | Red Rocks & Front Range Venues",
   description:
-    "Plan concert transportation across Denver and Red Rocks: compare ride options, review venue guides, and book the right ride for the night.",
+    "Plan concert transportation across Denver and Red Rocks: compare private Suburban ($499) and Private Van ($699) service, review venue guides, and book for your group.",
   alternates: {
-    canonical: "/guide/denver-concert-transportation",
+    canonical: `${SITE}/guide/denver-concert-transportation`,
   },
 };
 
@@ -30,24 +30,24 @@ const venueLinks = [
 
 const rideRows = [
   {
-    rideType: "Shared Shuttle",
-    bestFor: "Predictable round-trip service",
-    tradeoff: "Less flexibility on departure timing",
+    rideType: "Private Suburban ($499 Red Rocks)",
+    bestFor: "Groups up to 6 wanting door-to-door pickup, Upper North Lot tailgate & waiting driver",
+    tradeoff: "Flat vehicle rate rather than single-rider ticket",
   },
   {
-    rideType: "Private SUV",
-    bestFor: "Small groups with tighter schedule control",
-    tradeoff: "Higher upfront price",
+    rideType: "Private Van ($699 Red Rocks)",
+    bestFor: "Groups of 7–10 riding, tailgating, and heading home together",
+    tradeoff: "High demand on weekend sellouts—reserve early",
   },
   {
-    rideType: "10 Passenger Van",
-    bestFor: "Mid-size groups moving together",
-    tradeoff: "Best when booked ahead",
+    rideType: "Denver / Boulder Venue SUV ($250)",
+    bestFor: "Mission Ballroom, Ball Arena, Fiddler's Green & Folsom Field nights",
+    tradeoff: "Confirm availability with dispatch for non-Red Rocks dates",
   },
   {
-    rideType: "24 Passenger Party Bus",
-    bestFor: "Large group celebration nights",
-    tradeoff: "Works best when reserved early",
+    rideType: "Rideshare (Uber / Lyft)",
+    bestFor: "Solo riders with flexible post-show wait tolerance",
+    tradeoff: "Post-encore surge pricing, Jurassic Lot hikes, no gear storage",
   },
 ] as const;
 
@@ -78,11 +78,11 @@ export default async function DenverConcertTransportationGuidePage() {
           imageAlt={guideVisuals.transportation.imageAlt}
           actions={
             <>
-              <Link className="btn-primary" href="/book">
-                Book a Ride
+              <Link className="btn-primary" href="/book/red-rocks-amphitheatre/private">
+                Book Private Ride
               </Link>
-              <Link className="btn-ghost" href="/week">
-                Upcoming Shows
+              <Link className="btn-ghost" href="/red-rocks/concerts">
+                2027 Red Rocks Concerts
               </Link>
             </>
           }
@@ -130,21 +130,21 @@ export default async function DenverConcertTransportationGuidePage() {
 
         <section className="mt-10 grid gap-4 md:grid-cols-3">
           <article className="rounded-3xl border border-soft bg-surface-strong p-6">
-            <h2 className="text-2xl font-black tracking-tight">Solo or pair</h2>
+            <h2 className="text-2xl font-black tracking-tight">Couples & small crews</h2>
             <p className="mt-3 text-soft leading-relaxed">
-              Shared shuttle seats are usually the best mix of price and reliability.
+              Reserve a dedicated Private Suburban ($499 flat round-trip) when you want door-to-door service and zero post-show rideshare stress.
             </p>
           </article>
           <article className="rounded-3xl border border-soft bg-surface-strong p-6">
             <h2 className="text-2xl font-black tracking-tight">Group of 4–6</h2>
             <p className="mt-3 text-soft leading-relaxed">
-              A private SUV gives your group one vehicle and one return plan for the night.
+              Splitting a $499 Private Suburban (~$83 per guest for 6) includes Upper North Lot tailgating gear and a driver who waits through the show.
             </p>
           </article>
           <article className="rounded-3xl border border-soft bg-surface-strong p-6">
-            <h2 className="text-2xl font-black tracking-tight">Group of 7+</h2>
+            <h2 className="text-2xl font-black tracking-tight">Group of 7–10</h2>
             <p className="mt-3 text-soft leading-relaxed">
-              A 10 passenger van, 14 passenger Sprinter, or 24 passenger party bus keeps everyone together from pickup to return.
+              The 10-passenger Private Van ($699 flat round-trip, ~$70 per guest for 10) keeps your entire crew together from pickup to final drop-off.
             </p>
           </article>
         </section>

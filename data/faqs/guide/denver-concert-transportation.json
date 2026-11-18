@@ -2,16 +2,16 @@
   {
     "id": "denver-hub-purpose",
     "question": "What is this Denver concert transportation page for?",
-    "answer": "It is the planning hub that connects venue discovery, ride-type comparison, and booking flow across major Denver-area music venues."
+    "answer": "It is the planning hub that connects venue discovery, ride-type comparison, and private booking across Red Rocks and major Denver-area music venues."
   },
   {
     "id": "best-ride-choice",
-    "question": "How do I choose the right private vehicle?",
-    "answer": "Choose a private Suburban ($399) for groups up to 6, or upgrade to a private van ($599) for groups up to 10. Both options include door-to-door pickup and round-trip service with the vehicle waiting through the show."
+    "question": "How do I choose the right private vehicle for Red Rocks?",
+    "answer": "Choose a Private Suburban ($499 flat round-trip) for groups up to 6, or upgrade to a Private Van ($699 flat round-trip) for groups up to 10. Both include Denver-area pickup, Upper North Lot tailgating time with chairs, cooler, speaker, and ice, a driver and vehicle waiting through the show, and the return ride home."
   },
   {
     "id": "when-to-lock-pickup-plan",
     "question": "When should I lock my pickup plan?",
-    "answer": "Set your meetup and fallback points before encore. Last-minute pickup decisions are the most common failure point."
+    "answer": "Set your meetup and fallback points before the encore. Last-minute post-show pickup decisions are the most common failure point."
   }
 ]

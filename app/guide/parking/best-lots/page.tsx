@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
+  alternates: { canonical: "https://www.partyatredrocks.com/guide/parking/best-lots" },
   title: "Best Parking Lots at Red Rocks",
   description: "Which lots fill first, what’s closest to entries, and how to park for a faster exit.",
 };

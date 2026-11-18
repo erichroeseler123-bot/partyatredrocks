@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
   getPrivateRidePricingForDate,
@@ -8,13 +8,19 @@ import {
   SUBURBAN_2027_USD,
   VAN_2027_USD,
 } from "@/lib/pricing";
-import { CalendarDays, ShieldCheck, CloudSun, Car, Clock, CheckCircle2 } from "lucide-react";
-import { ReviewBlock } from "@/components/ReviewBlock";
 import {
-  buildAttributedDccRedRocksUrl,
-  getOrCreateJourneyId,
-  trackNetworkEvent,
-} from "@/lib/networkEvents";
+  CalendarDays,
+  ShieldCheck,
+  CheckCircle2,
+  MapPin,
+  Music,
+  Sparkles,
+  Clock,
+  ArrowRight,
+  Users,
+} from "lucide-react";
+import { ReviewBlock } from "@/components/ReviewBlock";
+import { trackNetworkEvent } from "@/lib/networkEvents";
 
 export type UpcomingRedRocksPreviewItem = {
   id: string;
@@ -44,19 +50,107 @@ type HomeSectionsProps = {
   verified2027Count?: number;
 };
 
-function buildCustomBookingHref(
-  optionSlug: "suv" | "van",
-  customDate: string,
-  customArtist: string
+const PICKUP_AREAS = [
+  "Downtown Denver / LoDo",
+  "RiNo Arts District",
+  "Union Station Hotel Zone",
+  "Golden / West Metro",
+  "Capitol Hill / Cherry Creek",
+  "Boulder",
+  "Custom Airbnb / Home Address",
+] as const;
+
+const YOUR_NIGHT_STEPS = [
+  {
+    step: "01",
+    phase: "4:30 PM",
+    title: "Door-to-Door Pickup",
+    body: "Your driver pulls up to your hotel, Airbnb, or house—plus a quick stop for drinks or snacks if your crew wants one.",
+    image: "/images/redesign/union-station-pickup.webp",
+    alt: "Evening pickup at Denver Union Station before heading to Red Rocks",
+  },
+  {
+    step: "02",
+    phase: "Pre-Show",
+    title: "Upper North Lot Tailgate",
+    body: "Roll into Red Rocks' primary party lot near the top ramp. Chairs, cooler, fresh ice, and a Bluetooth speaker are ready in the back.",
+    image: "/images/redesign/red-rocks-entrance-mobile.webp",
+    alt: "Red Rocks Park sandstone entrance leading up to the Upper North Lot",
+  },
+  {
+    step: "03",
+    phase: "Showtime",
+    title: "Walk Into the Amphitheatre",
+    body: "Stroll into the rocks hands-free while coolers, chairs, and extra hoodies stay safely locked inside your vehicle.",
+    image: "/images/redesign/red-rocks-sunset-crowd.webp",
+    alt: "Crowd watching a live sunset concert inside Red Rocks Amphitheatre",
+  },
+  {
+    step: "04",
+    phase: "All Show",
+    title: "Your Driver Waits On-Site",
+    body: "Your vehicle never leaves the mountain and is never double-booked. Leave early, stay through the second encore—your call.",
+    image: "/images/redesign/private-suburban-black-sm.webp",
+    alt: "Representative full-size SUV staged and waiting for concert guests",
+    representativeDisclosure: true,
+  },
+  {
+    step: "05",
+    phase: "Encore Exit",
+    title: "Warm, Safe Ride Home",
+    body: "Skip the mile-long rideshare hike and $200+ surge chaos. Step into a warm cabin with your whole crew and ride straight home.",
+    image: "/images/redesign/red-rocks-sunset-sky.webp",
+    alt: "Twilight glow over the Denver skyline from Red Rocks Amphitheatre",
+  },
+] as const;
+
+const INCLUDED_ITEMS = [
+  {
+    title: "Door-to-Door Pickup",
+    detail: "One pickup at your Denver, Golden, or Boulder hotel, rental, or home—plus an optional quick beverage stop.",
+  },
+  {
+    title: "Upper North Lot Staging",
+    detail: "Tailgate in Red Rocks' primary party lot near the upper entrance instead of climbing 380 stairs from Lower South.",
+  },
+  {
+    title: "Chairs, Cooler, Speaker & Ice",
+    detail: "No hauling tailgate gear through an airport or hotel lobby—your setup is stocked and waiting in the trunk.",
+  },
+  {
+    title: "Locked Gear Storage",
+    detail: "Keep tailgate coolers and extra cold-weather layers safely locked in your private vehicle during the show.",
+  },
+  {
+    title: "Dedicated Waiting Driver",
+    detail: "One commercial driver and one vehicle assigned solely to your group from departure through final drop-off.",
+  },
+  {
+    title: "Flat Round-Trip Rate",
+    detail: "Published vehicle price locked at booking—zero surge multipliers when 9,500 fans exit at midnight.",
+  },
+] as const;
+
+function buildBookingFlowHref(
+  optionSlug: "suv" | "van" | "compare",
+  dateValue: string,
+  artistValue: string,
+  pickupValue: string
 ): string {
   const params = new URLSearchParams();
-  if (/^\d{4}-\d{2}-\d{2}$/.test(customDate.trim())) {
-    params.set("date", customDate.trim());
+  if (/^\d{4}-\d{2}-\d{2}$/.test(dateValue.trim())) {
+    params.set("date", dateValue.trim());
   }
-  if (customArtist.trim()) {
-    params.set("artist", customArtist.trim());
+  if (artistValue.trim()) {
+    params.set("artist", artistValue.trim());
+  }
+  if (pickupValue.trim()) {
+    params.set("pickup", pickupValue.trim());
   }
   const query = params.toString();
+  if (optionSlug === "compare") {
+    return `/book/red-rocks-amphitheatre/private${query ? `?${query}` : ""}`;
+  }
   return `/book/red-rocks-amphitheatre/private/${optionSlug}${query ? `?${query}` : ""}`;
 }
 
@@ -69,12 +163,10 @@ function buildPresaleMailto(customDate: string, customArtist: string): string {
     [
       "Hi Party at Red Rocks team,",
       "",
-      `We are planning private group transportation for a 2027 Red Rocks concert:`,
-      `- Show / Presale Artist: ${customArtist.trim() || "(let us know once announced)"}`,
-      `- Target Show Date: ${customDate.trim() || "(TBD / presale drop)"}`,
-      `- Preferred Vehicle: $${SUBURBAN_2027_USD} Private Suburban (up to 6) or $${VAN_2027_USD} Private Van (up to 10) flat round-trip`,
-      "",
-      "Please share availability or notify us when this date opens.",
+      "We are planning private group transportation for a 2027 Red Rocks concert:",
+      `- Show / Artist: ${customArtist.trim() || "(TBD / presale)"}`,
+      `- Target Date: ${customDate.trim() || "(TBD)"}`,
+      `- Vehicle: $${SUBURBAN_2027_USD} Private Suburban (up to 6) or $${VAN_2027_USD} Private Van (up to 10)`,
     ].join("\n")
   );
   return `mailto:hello@partyatredrocks.com?subject=${subject}&body=${body}`;
@@ -83,20 +175,19 @@ function buildPresaleMailto(customDate: string, customArtist: string): string {
 export default function HomeSections({
   heroSrc,
   privateVehicleSrc,
-  privateVanSrc = "/venues/rrsite_thumb.webp",
-  urgency,
+  privateVanSrc = "/images/redesign/private-van-black.webp",
   upcoming2027Preview = [],
   verified2027Count = 0,
 }: HomeSectionsProps) {
+  const [selectedShowId, setSelectedShowId] = useState<string>("");
   const [customDate, setCustomDate] = useState("");
   const [customArtist, setCustomArtist] = useState("");
-  const [partySize, setPartySize] = useState<number>(4);
-  const [pickupArea, setPickupArea] = useState<string>("Denver Metro");
-  const [journeyId, setJourneyId] = useState<string>("");
+  const [partySize, setPartySize] = useState<number>(6);
+  const [pickupArea, setPickupArea] = useState<string>(PICKUP_AREAS[0]);
+  const [monthFilter, setMonthFilter] = useState<string>("all");
   const [showStickyMobileCta, setShowStickyMobileCta] = useState(false);
 
   useEffect(() => {
-    setJourneyId(getOrCreateJourneyId());
     trackNetworkEvent({
       eventName: "service_page_view",
       entryPage: "/",
@@ -104,599 +195,820 @@ export default function HomeSections({
     });
 
     const onScroll = () => {
-      setShowStickyMobileCta(window.scrollY > 360);
+      setShowStickyMobileCta(window.scrollY > 480);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const recommendedOption = partySize > 6 ? "van" : "suv";
-  const heroBookingHref = buildCustomBookingHref(recommendedOption, customDate, customArtist);
-  const dccConcertPlanUrl = buildAttributedDccRedRocksUrl({
-    date: customDate || undefined,
-    partySize,
-    origin: pickupArea,
-    entryPage: "/",
-    journeyId: journeyId || undefined,
-  });
-
+  const recommendedOption: "suv" | "van" = partySize > 6 ? "van" : "suv";
   const suvPricing = getPrivateRidePricingForDate({ optionSlug: "suv", serviceDate: customDate });
   const vanPricing = getPrivateRidePricingForDate({ optionSlug: "van", serviceDate: customDate });
 
-  const rideCards = [
-    {
-      title: "Private Suburban",
-      subtitle: `${suvPricing.priceLabel} Private Suburban`,
-      copy: "Up to 6 passengers • Flat round-trip",
-      bullets: [
-        "Upper North Lot tailgating setup (chairs, cooler, ice & speaker) + vehicle waits through the show",
-        "Denver-area hotel or home pickup with optional grocery/liquor stop & same vehicle home",
-      ],
-      href: "/book/red-rocks-amphitheatre/private/suv",
-      cta: `Book Private Suburban - ${suvPricing.priceLabel}`,
-      image: privateVehicleSrc,
-      alt: "Downtown Denver Union Station pickup corridor for private Suburban Red Rocks rides",
-      accent: "orange" as const,
-    },
-    {
-      title: "Private Van Upgrade",
-      subtitle: `${vanPricing.priceLabel} Private Van`,
-      copy: "Up to 10 passengers • Flat round-trip",
-      bullets: [
-        "Upper North Lot tailgating setup + one pickup plan",
-        "Driver & vehicle wait on-site through the show",
-      ],
-      href: "/book/red-rocks-amphitheatre/private/van",
-      cta: `Book Private Van - ${vanPricing.priceLabel}`,
-      image: privateVanSrc,
-      alt: "Red Rocks Amphitheatre sandstone seating bowl for private 10-passenger van groups",
-      accent: "cyan" as const,
-    },
-  ];
-
-  const customSuvHref = buildCustomBookingHref("suv", customDate, customArtist);
-  const customVanHref = buildCustomBookingHref("van", customDate, customArtist);
+  const primaryHeroHref = buildBookingFlowHref(recommendedOption, customDate, customArtist, pickupArea);
+  const compareVehiclesHref = buildBookingFlowHref("compare", customDate, customArtist, pickupArea);
+  const customSuvHref = buildBookingFlowHref("suv", customDate, customArtist, pickupArea);
+  const customVanHref = buildBookingFlowHref("van", customDate, customArtist, pickupArea);
   const presaleMailtoHref = buildPresaleMailto(customDate, customArtist);
 
+  const filteredShows = useMemo(() => {
+    const filtered =
+      monthFilter === "all"
+        ? upcoming2027Preview
+        : upcoming2027Preview.filter((item) => {
+            const m = Number(item.dateKey.slice(5, 7));
+            if (monthFilter === "spring") return m <= 4;
+            if (monthFilter === "may") return m === 5;
+            if (monthFilter === "summer") return m >= 6 && m <= 8;
+            if (monthFilter === "fall") return m >= 9;
+            return true;
+          });
+    return filtered.slice(0, 9);
+  }, [monthFilter, upcoming2027Preview]);
+
+  function handleSelectVerifiedShow(showId: string) {
+    setSelectedShowId(showId);
+    if (!showId || showId === "custom") {
+      return;
+    }
+    const found = upcoming2027Preview.find((item) => item.id === showId);
+    if (found) {
+      setCustomDate(found.dateKey);
+      setCustomArtist(found.name);
+      trackNetworkEvent({
+        eventName: "date_selected",
+        entryPage: "/",
+        date: found.dateKey,
+        travelIntent: "red-rocks-concert",
+      });
+    }
+  }
+
   return (
-    <main className="brand-page bg-[radial-gradient(circle_at_top,rgba(255,91,46,0.15),transparent_26%),radial-gradient(circle_at_18%_10%,rgba(59,130,246,0.14),transparent_18%),linear-gradient(180deg,#0b0b0f_0%,#0b0b0f_100%)]">
-      <section className="mx-auto flex w-full max-w-[1500px] flex-col gap-8 px-4 pb-24 pt-3 sm:px-6 sm:pt-4 lg:px-8">
-        <section className="relative overflow-hidden rounded-[32px] border border-[var(--brand-orange)]/20 bg-[var(--brand-bg-dark)] shadow-[0_40px_120px_rgba(0,0,0,0.58)]">
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-[230px] sm:h-[300px] lg:inset-0 lg:h-full">
-            <img
-              src={heroSrc}
-              alt="Illuminated Red Rocks Amphitheatre show night vista above Morrison"
-              fetchPriority="high"
-              loading="eager"
-              decoding="async"
-              className="absolute inset-0 h-full w-full object-cover object-center"
-            />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,10,18,0.18)_0%,rgba(7,10,18,0.54)_42%,rgba(7,10,18,0.84)_100%)]" />
-            <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(10,18,56,0.46)_0%,rgba(10,18,56,0.2)_44%,rgba(9,9,9,0.42)_100%)]" />
-            <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-[var(--brand-bg-dark)] lg:hidden" />
+    <main className="bg-[#070b14] text-white">
+      {/* ================= HERO: EMOTIONAL PROMISE + ONE UNIFIED BOOKING ACTION ================= */}
+      <section className="mx-auto max-w-[1440px] px-2.5 pt-2 sm:px-6 sm:pt-5 lg:px-8">
+        <div className="relative overflow-hidden rounded-[24px] border border-white/12 bg-[#0d1424] shadow-[0_36px_110px_rgba(0,0,0,0.65)] sm:rounded-[36px]">
+          <div className="pointer-events-none absolute inset-0">
+            <picture>
+              <source media="(max-width: 640px)" srcSet="/images/redesign/hero-red-rocks-mobile.webp" />
+              <source media="(max-width: 1080px)" srcSet="/images/redesign/hero-red-rocks-tablet.webp" />
+              <img
+                src={heroSrc}
+                alt="Live night concert crowd between the illuminated sandstone monoliths of Red Rocks Amphitheatre"
+                width={1600}
+                height={900}
+                fetchPriority="high"
+                loading="eager"
+                decoding="async"
+                className="h-full w-full object-cover object-center"
+              />
+            </picture>
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,11,20,0.48)_0%,rgba(7,11,20,0.74)_46%,rgba(7,11,20,0.96)_100%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,140,88,0.22),transparent_42%)]" />
           </div>
 
-          <div className="relative px-5 py-5 sm:px-8 sm:py-6 lg:px-10 lg:py-7">
-            <div className="mx-auto max-w-5xl text-center">
-              <p className="text-[11px] font-black uppercase tracking-[0.22em] text-white/75">Private Red Rocks Shuttle &amp; Group Transportation</p>
-              <h1 className="mt-2 text-[2rem] font-black leading-[0.98] tracking-[-0.04em] text-white sm:text-[2.9rem] lg:text-[3.35rem]">
-                Private transportation for your 2027 Red Rocks show
-              </h1>
-              <p className="mx-auto mt-2.5 max-w-3xl text-sm leading-6 text-white/84 sm:text-base">
-                Choose your show or date. Get Denver-area pickup, a private vehicle that waits through the concert and your return ride home.
-              </p>
+          <div className="relative px-3.5 pb-4 pt-3.5 sm:px-8 sm:pb-10 sm:pt-11 lg:px-12 lg:pb-12 lg:pt-14">
+            <div className="max-w-3xl">
+              <div className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-[#ffb07c]/40 bg-black/50 px-2.5 py-1 text-[9.5px] font-black uppercase tracking-[0.12em] text-[#ffb07c] backdrop-blur-sm sm:px-3.5 sm:py-1.5 sm:text-[11px] sm:tracking-[0.16em]">
+                <Sparkles className="h-3 w-3 shrink-0 sm:h-3.5 sm:w-3.5" />
+                <span className="sm:hidden">2027 Season · Tailgate Included</span>
+                <span className="hidden sm:inline">2027 Season · Upper North Tailgate Included</span>
+              </div>
 
-              {/* Show / Date + Party Size -> Vehicle & Price -> Check Live Availability */}
-              <div className="mx-auto mt-4 max-w-4xl rounded-2xl border border-white/15 bg-black/60 p-3.5 text-left backdrop-blur-md sm:p-4">
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[175px_minmax(0,1fr)_140px_auto] lg:items-end">
-                  <label className="flex flex-col gap-1 text-[11px] font-bold uppercase tracking-[0.12em] text-white/75">
-                    <span>Show Date</span>
-                    <input
-                      type="date"
-                      min="2026-01-01"
-                      max="2028-12-31"
-                      value={customDate}
-                      onChange={(e) => {
-                        setCustomDate(e.target.value);
-                        if (e.target.value) {
-                          trackNetworkEvent({
-                            eventName: "date_selected",
-                            entryPage: "/",
-                            date: e.target.value,
-                            travelIntent: "red-rocks-concert",
-                          });
-                        }
-                      }}
-                      className="min-h-11 rounded-xl border border-white/20 bg-[#0b101b] px-3 text-sm font-medium text-white focus:border-cyan-300 focus:outline-none"
-                    />
-                  </label>
-                  <label className="flex flex-col gap-1 text-[11px] font-bold uppercase tracking-[0.12em] text-white/75">
-                    <span>Show / Artist (Optional)</span>
-                    <input
-                      type="text"
-                      placeholder="e.g., Headliner or presale date"
-                      value={customArtist}
-                      onChange={(e) => setCustomArtist(e.target.value)}
-                      className="min-h-11 rounded-xl border border-white/20 bg-[#0b101b] px-3 text-sm font-medium text-white placeholder:text-white/40 focus:border-cyan-300 focus:outline-none"
-                    />
-                  </label>
-                  <label className="flex flex-col gap-1 text-[11px] font-bold uppercase tracking-[0.12em] text-white/75">
-                    <span>Party Size</span>
+              <h1 className="mt-2 text-[1.48rem] font-black leading-[1.08] tracking-[-0.03em] text-white sm:mt-4 sm:text-[3.25rem] sm:leading-[1.03] lg:text-[3.9rem]">
+                Your Red Rocks night—pickup, tailgate, the show &amp; a safe private ride home.
+              </h1>
+
+              <p className="mt-2 max-w-2xl text-[13px] leading-[1.45] text-white/88 sm:mt-4 sm:text-lg sm:leading-relaxed">
+                Skip the parking climb and rideshare chaos. Book a Private Suburban (
+                <strong className="text-[#ffb07c]">${SUBURBAN_2027_USD}</strong>, up to 6) or Private Van (
+                <strong className="text-[#ffb07c]">${VAN_2027_USD}</strong>, up to 10) with Upper North Lot tailgating—chairs, cooler, speaker &amp; ice—and a driver waiting all show.
+              </p>
+            </div>
+
+            {/* Unified 4-Step Mobile-First Booking Selector */}
+            <div className="mt-3 rounded-[20px] border border-white/16 bg-[#090e1a]/92 p-3 shadow-[0_24px_60px_rgba(0,0,0,0.55)] backdrop-blur-md sm:mt-7 sm:rounded-[24px] sm:p-6">
+              <div className="mb-2 flex flex-wrap items-center justify-between gap-x-2 gap-y-1 sm:mb-3">
+                <span className="text-[10px] font-black uppercase tracking-[0.15em] text-[#ffb07c] sm:text-[11px] sm:tracking-[0.18em]">
+                  Group Booking · 1 Flat Vehicle Rate
+                </span>
+                <Link
+                  href="/red-rocks/concerts"
+                  className="text-[11px] font-bold text-white/80 underline decoration-white/30 hover:text-[#ffb07c] sm:text-xs"
+                >
+                  All {verified2027Count} announced 2027 shows →
+                </Link>
+              </div>
+
+              <div className="grid gap-2 sm:gap-3 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.85fr)_minmax(0,0.9fr)_auto] lg:items-end">
+                <label className="flex min-w-0 flex-col gap-1 text-[10px] font-bold uppercase tracking-[0.1em] text-white/80 sm:gap-1.5 sm:text-[11px] sm:tracking-[0.12em]">
+                  <span>1. Choose Event or Date</span>
+                  <select
+                    aria-label="Choose a 2027 Red Rocks concert or custom date"
+                    value={selectedShowId}
+                    onChange={(e) => handleSelectVerifiedShow(e.target.value)}
+                    className="min-h-10 w-full min-w-0 truncate rounded-xl border border-white/20 bg-[#0f172a] px-3 text-xs font-semibold text-white focus:border-[#ffb07c] focus:outline-none sm:min-h-12 sm:px-3.5 sm:text-sm"
+                  >
+                    <option value="">Select 2027 concert (or any date)</option>
+                    {upcoming2027Preview.map((ev) => (
+                      <option key={ev.id} value={ev.id}>
+                        {ev.dateKey.slice(5)} · {ev.name}
+                      </option>
+                    ))}
+                    <option value="custom">Other / Newly Announced Date</option>
+                  </select>
+                </label>
+
+                <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:contents">
+                  <label className="flex min-w-0 flex-col gap-1 text-[10px] font-bold uppercase tracking-[0.08em] text-white/80 sm:gap-1.5 sm:text-[11px] sm:tracking-[0.12em]">
+                    <span className="truncate">2. Group &amp; Vehicle</span>
                     <select
+                      aria-label="Select group size and private vehicle"
                       value={partySize}
                       onChange={(e) => setPartySize(Number(e.target.value))}
-                      className="min-h-11 rounded-xl border border-white/20 bg-[#0b101b] px-3 text-sm font-medium text-white focus:border-cyan-300 focus:outline-none"
+                      className="min-h-10 w-full min-w-0 truncate rounded-xl border border-white/20 bg-[#0f172a] px-2.5 text-xs font-semibold text-white focus:border-[#ffb07c] focus:outline-none sm:min-h-12 sm:px-3.5 sm:text-sm"
                     >
-                      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
+                      {[2, 3, 4, 5, 6].map((n) => (
                         <option key={n} value={n}>
-                          {n} {n === 1 ? "guest" : "guests"}
+                          {n} · Suburban (${SUBURBAN_2027_USD})
+                        </option>
+                      ))}
+                      {[7, 8, 9, 10].map((n) => (
+                        <option key={n} value={n}>
+                          {n} · Van (${VAN_2027_USD})
                         </option>
                       ))}
                     </select>
                   </label>
-                  <Link
-                    href={heroBookingHref}
-                    onClick={() =>
-                      trackNetworkEvent({
-                        eventName: "availability_started",
-                        entryPage: "/",
-                        date: customDate || undefined,
-                        travelIntent: "red-rocks-concert",
-                      })
-                    }
-                    className="inline-flex min-h-11 items-center justify-center rounded-xl bg-[#ff6b3d] px-5 text-xs font-black uppercase tracking-[0.14em] text-[#1b0b05] no-underline transition hover:bg-[#ff845d]"
-                  >
-                    Check live availability →
-                  </Link>
+
+                  <label className="flex min-w-0 flex-col gap-1 text-[10px] font-bold uppercase tracking-[0.08em] text-white/80 sm:gap-1.5 sm:text-[11px] sm:tracking-[0.12em]">
+                    <span className="truncate">3. Pickup Area</span>
+                    <select
+                      aria-label="Confirm pickup area"
+                      value={pickupArea}
+                      onChange={(e) => setPickupArea(e.target.value)}
+                      className="min-h-10 w-full min-w-0 truncate rounded-xl border border-white/20 bg-[#0f172a] px-2.5 text-xs font-semibold text-white focus:border-[#ffb07c] focus:outline-none sm:min-h-12 sm:px-3.5 sm:text-sm"
+                    >
+                      {PICKUP_AREAS.map((area) => (
+                        <option key={area} value={area}>
+                          {area}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
                 </div>
-                <div className="mt-2.5 flex flex-wrap items-center justify-between gap-2 text-xs text-white/75">
+
+                <Link
+                  href={primaryHeroHref}
+                  onClick={() =>
+                    trackNetworkEvent({
+                      eventName: "availability_started",
+                      entryPage: "/",
+                      date: customDate || undefined,
+                      travelIntent: "red-rocks-concert",
+                    })
+                  }
+                  className="inline-flex min-h-11 w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#ff7a4d] px-4 text-xs font-black uppercase tracking-[0.12em] text-[#140804] no-underline shadow-[0_12px_30px_rgba(255,122,77,0.35)] transition hover:bg-[#ff926b] sm:min-h-12 sm:px-5 lg:w-auto"
+                >
                   <span>
-                    Recommended for {partySize} {partySize === 1 ? "guest" : "guests"}:{" "}
-                    <strong className="text-white">
-                      {partySize > 6
-                        ? `${vanPricing.priceLabel} Private Van (up to 10)`
-                        : `${suvPricing.priceLabel} Private Suburban (up to 6)`}
-                    </strong>{" "}
-                    · Flat round-trip vehicle rate, never per-guest
+                    Book {partySize > 6 ? `Van ($${VAN_2027_USD})` : `Suburban ($${SUBURBAN_2027_USD})`}
                   </span>
-                  <span className="text-emerald-300 font-semibold">Vehicle waits throughout the concert</span>
+                  <ArrowRight className="h-4 w-4 shrink-0" />
+                </Link>
+              </div>
+
+              {selectedShowId === "custom" ? (
+                <div className="mt-2.5 grid gap-2.5 border-t border-white/10 pt-2.5 sm:mt-3 sm:grid-cols-2 sm:gap-3 sm:pt-3">
+                  <label className="flex min-w-0 items-center gap-2.5 text-xs text-white/75">
+                    <span className="shrink-0 font-bold uppercase tracking-wider text-white/65">Exact Date:</span>
+                    <input
+                      type="date"
+                      min="2026-11-01"
+                      max="2028-12-31"
+                      value={customDate}
+                      onChange={(e) => setCustomDate(e.target.value)}
+                      className="min-h-9 min-w-0 flex-1 rounded-lg border border-white/15 bg-[#0f172a] px-2.5 text-xs font-medium text-white focus:border-[#ffb07c] focus:outline-none sm:min-h-10 sm:px-3"
+                    />
+                  </label>
+                  <label className="flex min-w-0 items-center gap-2.5 text-xs text-white/75">
+                    <span className="shrink-0 font-bold uppercase tracking-wider text-white/65">Artist (Opt):</span>
+                    <input
+                      type="text"
+                      value={customArtist}
+                      onChange={(e) => setCustomArtist(e.target.value)}
+                      placeholder="Headliner or tour name"
+                      className="min-h-9 min-w-0 flex-1 rounded-lg border border-white/15 bg-[#0f172a] px-2.5 text-xs font-medium text-white placeholder:text-white/40 focus:border-[#ffb07c] focus:outline-none sm:min-h-10 sm:px-3"
+                    />
+                  </label>
                 </div>
+              ) : !selectedShowId ? (
+                <>
+                  {/* Desktop inline custom date/artist inputs preserved */}
+                  <div className="mt-3 hidden gap-3 border-t border-white/10 pt-3 lg:grid lg:grid-cols-2">
+                    <label className="flex items-center gap-3 text-xs text-white/75">
+                      <span className="shrink-0 font-bold uppercase tracking-wider text-white/65">Exact Date:</span>
+                      <input
+                        type="date"
+                        min="2026-11-01"
+                        max="2028-12-31"
+                        value={customDate}
+                        onChange={(e) => setCustomDate(e.target.value)}
+                        className="min-h-10 flex-1 rounded-lg border border-white/15 bg-[#0f172a] px-3 text-xs font-medium text-white focus:border-[#ffb07c] focus:outline-none"
+                      />
+                    </label>
+                    <label className="flex items-center gap-3 text-xs text-white/75">
+                      <span className="shrink-0 font-bold uppercase tracking-wider text-white/65">Artist (Opt):</span>
+                      <input
+                        type="text"
+                        value={customArtist}
+                        onChange={(e) => setCustomArtist(e.target.value)}
+                        placeholder="Headliner or tour name"
+                        className="min-h-10 flex-1 rounded-lg border border-white/15 bg-[#0f172a] px-3 text-xs font-medium text-white placeholder:text-white/40 focus:border-[#ffb07c] focus:outline-none"
+                      />
+                    </label>
+                  </div>
+
+                  {/* Mobile compact disclosure for custom/presale date */}
+                  <details className="mt-2 border-t border-white/10 pt-2 lg:hidden">
+                    <summary className="cursor-pointer text-[11px] font-semibold text-white/75 hover:text-[#ffb07c]">
+                      Have a presale or unannounced 2027 date? Enter custom date
+                    </summary>
+                    <div className="mt-2 grid gap-2 sm:grid-cols-2">
+                      <label className="flex min-w-0 items-center gap-2 text-xs text-white/75">
+                        <span className="shrink-0 font-bold uppercase tracking-wider text-white/65">Date:</span>
+                        <input
+                          type="date"
+                          min="2026-11-01"
+                          max="2028-12-31"
+                          value={customDate}
+                          onChange={(e) => setCustomDate(e.target.value)}
+                          className="min-h-9 min-w-0 flex-1 rounded-lg border border-white/15 bg-[#0f172a] px-2.5 text-xs font-medium text-white focus:border-[#ffb07c] focus:outline-none"
+                        />
+                      </label>
+                      <label className="flex min-w-0 items-center gap-2 text-xs text-white/75">
+                        <span className="shrink-0 font-bold uppercase tracking-wider text-white/65">Artist:</span>
+                        <input
+                          type="text"
+                          value={customArtist}
+                          onChange={(e) => setCustomArtist(e.target.value)}
+                          placeholder="Headliner (optional)"
+                          className="min-h-9 min-w-0 flex-1 rounded-lg border border-white/15 bg-[#0f172a] px-2.5 text-xs font-medium text-white placeholder:text-white/40 focus:border-[#ffb07c] focus:outline-none"
+                        />
+                      </label>
+                    </div>
+                  </details>
+                </>
+              ) : null}
+
+              <div className="mt-2 flex flex-wrap items-center justify-between gap-x-2 gap-y-1 text-[11px] text-white/80 sm:mt-3 sm:text-xs">
+                <span>
+                  <strong className="text-white">
+                    {partySize > 6
+                      ? `${vanPricing.priceLabel} Private Van (~$${Math.round(vanPricing.priceUsd / partySize)} ea for ${partySize})`
+                      : `${suvPricing.priceLabel} Private Suburban (~$${Math.round(suvPricing.priceUsd / Math.max(1, partySize))} ea for ${partySize})`}
+                  </strong>
+                </span>
+                <Link
+                  href={compareVehiclesHref}
+                  className="font-bold text-[#ffb07c] underline decoration-[#ffb07c]/40 hover:text-white"
+                >
+                  Compare Suburban vs. Van →
+                </Link>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
 
-            <div className="mt-10 grid gap-5 lg:grid-cols-2">
-              {rideCards.map((ride) => {
-                const isVan = ride.accent === "cyan";
-                return (
+      <div className="mx-auto flex max-w-[1380px] flex-col gap-12 px-4 py-12 sm:gap-16 sm:px-6 sm:py-16 lg:px-8">
+        {/* ================= SIDE-BY-SIDE VEHICLE COMPARISON ================= */}
+        <section aria-labelledby="vehicle-comparison-heading">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <div className="text-xs font-black uppercase tracking-[0.2em] text-[#ffb07c]">
+                Private Fleet · No Shared Strangers · Zero Surge Pricing
+              </div>
+              <h2
+                id="vehicle-comparison-heading"
+                className="mt-2 text-3xl font-black tracking-[-0.03em] text-white sm:text-4xl"
+              >
+                Choose Your Group&apos;s Private Vehicle
+              </h2>
+            </div>
+            <p className="max-w-md text-sm text-white/75">
+              Both vehicles include your entire night—pickup, Upper North Lot tailgating setup, waiting driver, and return ride.
+            </p>
+          </div>
+
+          <div className="mt-7 grid gap-6 lg:grid-cols-2">
+            {/* Suburban Card */}
+            <article className="flex flex-col overflow-hidden rounded-[28px] border border-[#ffb07c]/30 bg-[#0d1424] shadow-[0_24px_70px_rgba(0,0,0,0.4)]">
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-black">
+                <img
+                  src={privateVehicleSrc}
+                  alt="Representative full-size SUV for private Red Rocks groups up to 6 guests"
+                  width={960}
+                  height={600}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full object-cover"
+                />
+                <div className="absolute left-3 top-3 rounded-full border border-[#ffb07c]/50 bg-[#070b14]/85 px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-[#ffb07c] backdrop-blur sm:left-4 sm:top-4 sm:px-3.5 sm:text-[11px]">
+                  Most Popular · Up to 6 Guests
+                </div>
+                <span className="absolute bottom-2.5 right-2.5 rounded-full bg-black/75 px-2.5 py-0.5 text-[10px] font-medium text-white/75 backdrop-blur-sm">
+                  Representative vehicle; exact vehicle may vary.
+                </span>
+              </div>
+
+              <div className="flex flex-1 flex-col justify-between p-5 sm:p-8">
+                <div>
+                  <div className="flex flex-wrap items-baseline justify-between gap-3">
+                    <h3 className="text-2xl font-black uppercase tracking-tight text-white sm:text-3xl">
+                      Private Suburban
+                    </h3>
+                    <div className="text-right">
+                      <span className="text-3xl font-black text-[#ffb07c] sm:text-4xl">
+                        {suvPricing.priceLabel}
+                      </span>
+                      <span className="block text-[11px] font-bold uppercase tracking-wider text-white/65">
+                        Flat round-trip (~$83 each for 6)
+                      </span>
+                    </div>
+                  </div>
+
+                  <p className="mt-3 text-sm leading-6 text-white/80">
+                    Full-size Chevrolet Suburban or equivalent SUV built for couples, double dates, and crews up to 6 who want spacious seating, Upper North Lot tailgating, and an effortless exit.
+                  </p>
+
+                  <ul className="mt-5 space-y-2.5 text-sm text-white/88">
+                    <li className="flex items-start gap-2.5">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#ffb07c]" />
+                      <span>Door-to-door Denver, Golden, or Boulder pickup + optional drink stop</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#ffb07c]" />
+                      <span>Upper North Lot tailgate gear included: chairs, cooler, Bluetooth speaker &amp; ice</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#ffb07c]" />
+                      <span>Driver &amp; locked SUV stay on-site through the entire show</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mt-6 flex flex-col gap-2.5 sm:mt-7 sm:flex-row">
                   <Link
-                    key={ride.title}
-                    href={ride.href}
-                    className={`group relative overflow-hidden rounded-[30px] border p-6 text-left no-underline shadow-[0_24px_80px_rgba(0,0,0,0.36)] transition hover:-translate-y-1 ${isVan ? "border-cyan-300/22 bg-[linear-gradient(180deg,rgba(8,20,34,0.98),rgba(5,12,22,0.98))] hover:border-cyan-200/44" : "border-[#ff8f5a]/26 bg-[linear-gradient(180deg,rgba(28,13,10,0.98),rgba(16,9,8,0.98))] hover:border-[#ff9d72]/52 lg:-mt-3 lg:mb-3 lg:p-7"}`}
+                    href={customSuvHref}
+                    className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full bg-[#ff7a4d] px-5 text-xs font-black uppercase tracking-[0.13em] text-[#140804] no-underline transition hover:bg-[#ff926b]"
                   >
-                    <div className="absolute right-4 top-4 h-20 w-28 overflow-hidden rounded-[18px] border border-white/10 opacity-85 sm:h-24 sm:w-36">
-                      <img src={ride.image} alt={ride.alt} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" />
-                    </div>
-
-                    <div className="pr-24 sm:pr-40">
-                      {!isVan ? (
-                        <div className="inline-flex rounded-full border border-[#ffb07c]/30 bg-[#ffb07c]/12 px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-[#ffcfad]">{ride.copy}</div>
-                      ) : null}
-                      <h2 className="text-[1.8rem] font-black uppercase tracking-[-0.05em] text-white sm:text-[2.2rem]">{ride.title}</h2>
-                      <div className="mt-3 text-[1.9rem] font-black tracking-[-0.04em] text-white sm:text-[2.6rem]">{ride.subtitle}</div>
-                      {isVan ? (
-                        <p className="mt-2 text-sm font-semibold uppercase tracking-[0.16em] text-white/68">{ride.copy}</p>
-                      ) : (
-                        <p className="mt-3 text-sm leading-6 text-white/76">Private transportation with your pickup and return plan coordinated before the show.</p>
-                      )}
-                    </div>
-
-                    {isVan ? (
-                      <div className="mt-6 flex flex-wrap gap-3">
-                        {ride.bullets.map((bullet) => (
-                          <span key={bullet} className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/14 bg-white/6 px-5 text-sm font-black uppercase tracking-[0.16em] text-white/86">{bullet}</span>
-                        ))}
-                      </div>
-                    ) : (
-                      <ul className="mt-6 space-y-2">
-                        {ride.bullets.map((bullet) => (
-                          <li key={bullet} className="flex items-start gap-3 text-sm leading-6 text-white/82">
-                            <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#ffb07c]" />
-                            <span>{bullet}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-
-                    <div className={`mt-8 inline-flex min-h-14 w-full items-center justify-center rounded-full px-6 text-sm font-black uppercase tracking-[0.16em] transition sm:w-auto ${isVan ? "bg-[#3df3ff] text-[#07111d] group-hover:bg-[#62f6ff]" : "bg-[#ff6b3d] text-[#1b0b05] group-hover:bg-[#ff845d]"}`}>
-                      {ride.cta} →
-                    </div>
+                    Book Private Suburban — {suvPricing.priceLabel}
                   </Link>
-                );
-              })}
-            </div>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-sm">
-              <Link href="/red-rocks/shuttle" className="brand-link font-bold no-underline">Red Rocks shuttle options</Link>
-              <span className="text-white/30">•</span>
-              <Link href="/red-rocks/car-service" className="brand-link font-bold no-underline">Private car service</Link>
-              <span className="text-white/30">•</span>
-              <Link href="/red-rocks/group-transportation" className="brand-link font-bold no-underline">Group transportation</Link>
-            </div>
+                  <Link
+                    href="/book/red-rocks-amphitheatre/private#suv-booking"
+                    className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/16 bg-white/6 px-5 text-xs font-bold uppercase tracking-[0.12em] text-white no-underline transition hover:bg-white/12"
+                  >
+                    Details
+                  </Link>
+                </div>
+              </div>
+            </article>
+
+            {/* Van Card */}
+            <article className="flex flex-col overflow-hidden rounded-[28px] border border-white/14 bg-[#0d1424] shadow-[0_24px_70px_rgba(0,0,0,0.4)]">
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-black">
+                <img
+                  src={privateVanSrc}
+                  alt="Representative 10-passenger private van for Red Rocks concert groups"
+                  width={960}
+                  height={600}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full object-cover"
+                />
+                <div className="absolute left-3 top-3 rounded-full border border-sky-300/45 bg-[#070b14]/85 px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-sky-200 backdrop-blur sm:left-4 sm:top-4 sm:px-3.5 sm:text-[11px]">
+                  Best Group Split · Up to 10 Guests
+                </div>
+                <span className="absolute bottom-2.5 right-2.5 rounded-full bg-black/75 px-2.5 py-0.5 text-[10px] font-medium text-white/75 backdrop-blur-sm">
+                  Representative vehicle; exact vehicle may vary.
+                </span>
+              </div>
+
+              <div className="flex flex-1 flex-col justify-between p-5 sm:p-8">
+                <div>
+                  <div className="flex flex-wrap items-baseline justify-between gap-3">
+                    <h3 className="text-2xl font-black uppercase tracking-tight text-white sm:text-3xl">
+                      Private Van
+                    </h3>
+                    <div className="text-right">
+                      <span className="text-3xl font-black text-[#ffb07c] sm:text-4xl">
+                        {vanPricing.priceLabel}
+                      </span>
+                      <span className="block text-[11px] font-bold uppercase tracking-wider text-white/65">
+                        Flat round-trip (~$70 each for 10)
+                      </span>
+                    </div>
+                  </div>
+
+                  <p className="mt-3 text-sm leading-6 text-white/80">
+                    Spacious 10-passenger private van so birthday crews, bachelor/bachelorette groups, and visiting friends stay together on one timeline instead of splitting into 3 Ubers.
+                  </p>
+
+                  <ul className="mt-5 space-y-2.5 text-sm text-white/88">
+                    <li className="flex items-start gap-2.5">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-sky-300" />
+                      <span>All 7–10 friends ride, pregame, and arrive together from one address</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-sky-300" />
+                      <span>Full Upper North Lot tailgate setup: chairs, cooler, Bluetooth speaker &amp; ice</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-sky-300" />
+                      <span>Dedicated driver &amp; van wait at Red Rocks until the encore wraps</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="mt-7 flex flex-col gap-2.5 sm:flex-row">
+                  <Link
+                    href={customVanHref}
+                    className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full bg-[#ff7a4d] px-6 text-xs font-black uppercase tracking-[0.14em] text-[#140804] no-underline transition hover:bg-[#ff926b]"
+                  >
+                    Book Private Van — {vanPricing.priceLabel}
+                  </Link>
+                  <Link
+                    href="/book/red-rocks-amphitheatre/private#van-upgrade"
+                    className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/16 bg-white/6 px-5 text-xs font-bold uppercase tracking-[0.12em] text-white no-underline transition hover:bg-white/12"
+                  >
+                    Van Details
+                  </Link>
+                </div>
+              </div>
+            </article>
           </div>
         </section>
 
-        {/* Section 2: Visual 7-Step Concert Night Experience & Flat-Price Value */}
-        <section aria-label="How the private ride works" className="rounded-[26px] border border-white/10 bg-white/[0.03] p-5 sm:p-6">
-          <div className="flex flex-col gap-2 lg:flex-row lg:items-end lg:justify-between mb-4">
-            <div>
-              <div className="text-[11px] font-black uppercase tracking-[0.2em] text-[#ffb07c]">
+        {/* ================= VISUAL "YOUR NIGHT" SEQUENCE ================= */}
+        <section aria-labelledby="your-night-heading" className="rounded-[32px] border border-white/10 bg-[#0d1424] p-6 sm:p-10">
+          <div className="max-w-3xl">
+            <div className="text-xs font-black uppercase tracking-[0.2em] text-[#ffb07c]">
+              From Front Door to Final Encore
+            </div>
+            <h2 id="your-night-heading" className="mt-2 text-3xl font-black tracking-[-0.03em] text-white sm:text-4xl">
+              How Your Red Rocks Night Plays Out
+            </h2>
+            <p className="mt-3 text-base leading-relaxed text-white/78">
+              Red Rocks isn&apos;t just a two-hour concert—it&apos;s golden hour in the foothills, cold drinks with your friends in Upper North Lot, watching the rocks light up after dark, and never worrying about who&apos;s driving down the canyon.
+            </p>
+          </div>
+
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {YOUR_NIGHT_STEPS.map((item) => (
+              <article
+                key={item.step}
+                className="flex flex-col overflow-hidden rounded-[22px] border border-white/10 bg-[#080d18]"
+              >
+                <div className="relative aspect-[16/10] w-full overflow-hidden">
+                  <img
+                    src={item.image}
+                    alt={item.alt}
+                    width={560}
+                    height={350}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_40%,rgba(8,13,24,0.88)_100%)]" />
+                  <span className="absolute bottom-2.5 left-3 rounded-full bg-black/70 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-widest text-[#ffb07c]">
+                    Step {item.step} · {item.phase}
+                  </span>
+                </div>
+                <div className="flex-1 p-4">
+                  <h3 className="text-base font-black uppercase tracking-tight text-white">{item.title}</h3>
+                  <p className="mt-1.5 text-xs leading-5 text-white/75">{item.body}</p>
+                  {"representativeDisclosure" in item && item.representativeDisclosure ? (
+                    <p className="mt-2 text-[10px] text-white/55">Representative vehicle; exact vehicle may vary.</p>
+                  ) : null}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* ================= SIMPLE EXPLANATION OF EVERYTHING INCLUDED ================= */}
+        <section aria-labelledby="everything-included-heading" className="rounded-[32px] border border-[#ffb07c]/25 bg-[linear-gradient(180deg,#13192b_0%,#0b101d_100%)] p-6 sm:p-10">
+          <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-3xl">
+              <div className="text-xs font-black uppercase tracking-[0.2em] text-[#ffb07c]">
                 {PARR_VALUE_PROPOSITION.headline}
               </div>
-              <p className="mt-1.5 max-w-4xl text-sm leading-6 text-white/82">
-                {PARR_VALUE_PROPOSITION.summary} {PARR_VALUE_PROPOSITION.tailgatingSummary}
+              <h2 id="everything-included-heading" className="mt-2 text-3xl font-black tracking-[-0.03em] text-white sm:text-4xl">
+                Everything Included in Your Flat Vehicle Rate
+              </h2>
+              <p className="mt-2 text-sm leading-6 text-white/80 sm:text-base">
+                {PARR_VALUE_PROPOSITION.summary}
               </p>
             </div>
-            <div className="text-xs text-white/60 lg:text-right shrink-0">
+            <div className="rounded-xl border border-white/10 bg-black/30 px-4 py-2.5 text-xs text-white/70">
               {PARR_VALUE_PROPOSITION.exclusionsSummary}
             </div>
           </div>
-          <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-7">
-            {[
-              { step: "1", label: "Pickup", sub: "Denver-area hotel or home" },
-              { step: "2", label: "Optional Stop", sub: "Grocery or liquor stop" },
-              { step: "3", label: "Upper North Lot", sub: "Red Rocks primary tailgate lot" },
-              { step: "4", label: "Tailgate Setup", sub: "Chairs, cooler, ice & speaker" },
-              { step: "5", label: "Tailgate", sub: "Time to tailgate pre-show" },
-              { step: "6", label: "Concert", sub: "Driver & vehicle wait on-site" },
-              { step: "7", label: "Same Vehicle Home", sub: "Flat rate, zero surge" },
-            ].map((item) => (
-              <div key={item.step} className="rounded-2xl border border-white/10 bg-black/40 p-3.5">
-                <div className="text-[10px] font-black uppercase tracking-wider text-cyan-300">
-                  Step {item.step}
+
+          <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {INCLUDED_ITEMS.map((item) => (
+              <div key={item.title} className="rounded-2xl border border-white/10 bg-black/30 p-5">
+                <div className="flex items-center gap-2.5">
+                  <CheckCircle2 className="h-5 w-5 shrink-0 text-[#ffb07c]" />
+                  <h3 className="text-base font-black text-white">{item.title}</h3>
                 </div>
-                <div className="mt-1 text-sm font-black text-white">{item.label}</div>
-                <div className="mt-0.5 text-xs text-white/65">{item.sub}</div>
+                <p className="mt-2 text-sm leading-6 text-white/75">{item.detail}</p>
               </div>
             ))}
           </div>
         </section>
 
-        {urgency ? (
-          <section className="brand-glass-bar overflow-hidden rounded-[24px] p-4 sm:p-5">
-            <div className="grid gap-4 sm:grid-cols-[120px_minmax(0,1fr)_auto] sm:items-center">
-              <div className="relative aspect-[16/10] overflow-hidden rounded-[18px] border border-white/10">
-                <img src={urgency.imageSrc} alt={urgency.imageAlt} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" />
-              </div>
-              <div>
-                <div className="brand-kicker text-[12px] sm:text-[13px] font-black uppercase tracking-[0.24em]">{urgency.label}</div>
-                <p className="mt-1 text-sm leading-6 text-white/82">{urgency.detail}</p>
-              </div>
-              <div className="flex flex-col items-stretch gap-2 sm:items-end">
-                <Link
-                  href={urgency.bookingHref || "/book/red-rocks-amphitheatre/private/suv"}
-                  className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#ff6b3d] px-5 text-xs font-black uppercase tracking-[0.14em] text-[#1b0b05] no-underline transition hover:bg-[#ff845d]"
-                >
-                  Book {suvPricing.priceLabel} ride
-                </Link>
-                <Link href="/week/red-rocks" className="brand-link inline-flex items-center justify-center text-xs font-black uppercase tracking-[0.14em] no-underline sm:justify-end">View lineup</Link>
-              </div>
-            </div>
-          </section>
-        ) : null}
-
-        {/* Truthful 2027 Red Rocks Season Ride Planning & Custom Show-Date / Presale Booking */}
+        {/* ================= VERIFIED 2027 RED ROCKS LINEUP PREVIEW ================= */}
         <section
           aria-labelledby="rr-2027-planning-heading"
-          className="brand-panel relative overflow-hidden rounded-[30px] border border-cyan-300/20 bg-[radial-gradient(ellipse_at_top_right,rgba(61,243,255,0.12),transparent_52%),linear-gradient(180deg,rgba(12,18,28,0.97)_0%,rgba(9,12,20,0.99)_100%)] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.4)] sm:p-8 lg:p-10"
+          className="rounded-[32px] border border-white/12 bg-[#0d1424] p-6 sm:p-10"
         >
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+          <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/30 bg-cyan-300/10 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.22em] text-cyan-200">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#ffb07c]/35 bg-[#ffb07c]/10 px-3.5 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-[#ffb07c]">
                 <CalendarDays className="h-3.5 w-3.5" />
-                2027 Red Rocks Season • Verified Calendar + Early Ride Booking
+                {verified2027Count} Verified 2027 Concerts · Official Red Rocks Calendar
               </div>
               <h2
                 id="rr-2027-planning-heading"
-                className="mt-4 text-2xl font-black tracking-[-0.03em] text-white sm:text-3xl lg:text-4xl"
+                className="mt-3 text-3xl font-black tracking-[-0.03em] text-white sm:text-4xl"
               >
                 Planning a 2027 Red Rocks concert night?
               </h2>
-              <p className="mt-3 text-sm leading-7 text-white/80 sm:text-base">
-                Red Rocks Amphitheatre announces its 2027 concert calendar in waves from late fall through spring. We publish only officially announced Red Rocks dates verified directly against{" "}
+              <p className="mt-2 text-sm leading-6 text-white/78 sm:text-base">
+                We publish only officially announced Red Rocks dates verified directly against{" "}
                 <a
                   href="https://www.redrocksonline.com/events/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-semibold text-cyan-300 underline decoration-cyan-300/40 underline-offset-4 hover:text-white"
+                  className="font-semibold text-[#ffb07c] underline hover:text-white"
                 >
                   redrocksonline.com
-                </a>
-                {" "}— never guessed or unconfirmed tour dates.
+                </a>{" "}
+                (freshness verified Nov 11, 2026) — never guessed or unconfirmed tour dates. Pick your show to prefill your vehicle booking.
               </p>
             </div>
 
-            <div className="flex shrink-0 flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2.5">
               <Link
-                href="/schedule"
-                className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/16 bg-white/6 px-5 text-xs font-black uppercase tracking-[0.16em] text-white no-underline transition hover:border-white/32 hover:bg-white/10"
+                href="/red-rocks/concerts"
+                className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#ff7a4d] px-5 text-xs font-black uppercase tracking-[0.14em] text-[#140804] no-underline transition hover:bg-[#ff926b]"
               >
-                {verified2027Count > 0 ? `Browse ${verified2027Count} Verified 2027 Dates` : "View Concert Schedule"}
+                View All {verified2027Count} Concerts →
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex min-h-11 items-center justify-center rounded-full border border-cyan-300/30 bg-cyan-300/10 px-5 text-xs font-black uppercase tracking-[0.16em] text-cyan-200 no-underline transition hover:bg-cyan-300/20"
+                className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/16 bg-white/6 px-5 text-xs font-bold uppercase tracking-[0.14em] text-white no-underline transition hover:bg-white/12"
               >
                 Ask Dispatch About 2027
               </Link>
             </div>
           </div>
 
-          {upcoming2027Preview.length > 0 ? (
-            <div className="mt-8">
-              <div className="text-[11px] font-black uppercase tracking-[0.2em] text-white/60">
-                First Officially Announced 2027 Red Rocks Concerts
-              </div>
-              <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {upcoming2027Preview.map((item) => (
-                  <div
-                    key={item.id}
-                    className="flex flex-col justify-between rounded-2xl border border-white/10 bg-white/[0.04] p-4"
-                  >
-                    <div>
-                      <div className="flex items-center justify-between gap-2 text-xs font-bold uppercase tracking-[0.14em] text-cyan-200">
-                        <span>{item.dateLabel}</span>
-                        {item.sourceUrl ? (
-                          <a
-                            href={item.sourceUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-[10px] font-semibold text-white/55 underline decoration-white/25 hover:text-white"
-                          >
-                            Official listing
-                          </a>
-                        ) : null}
-                      </div>
-                      <div className="mt-1.5 text-base font-black text-white">{item.name}</div>
-                      {item.supportLabel ? (
-                        <div className="mt-1 text-xs text-white/62">with {item.supportLabel}</div>
-                      ) : null}
-                    </div>
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      <Link
-                        href={item.suvBookingHref}
-                        className="inline-flex min-h-9 items-center justify-center rounded-full bg-[#ff6b3d] px-3.5 text-[11px] font-black uppercase tracking-[0.12em] text-[#1b0b05] no-underline transition hover:bg-[#ff845d]"
-                      >
-                        ${SUBURBAN_2027_USD} Suburban
-                      </Link>
-                      <Link
-                        href={item.vanBookingHref}
-                        className="inline-flex min-h-9 items-center justify-center rounded-full border border-cyan-300/35 bg-cyan-300/12 px-3.5 text-[11px] font-black uppercase tracking-[0.12em] text-cyan-200 no-underline transition hover:bg-cyan-300/22"
-                      >
-                        ${VAN_2027_USD} Private Van
-                      </Link>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ) : (
-            <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-sm leading-6 text-white/78">
-              Official 2027 Red Rocks concert dates have not yet been published in our current venue snapshot. If your artist presale just dropped or you already hold 2027 tickets, enter your exact show date below to reserve a private vehicle or request dispatch coordination.
-            </div>
-          )}
-
-          <div className="mt-8 rounded-2xl border border-white/12 bg-black/30 p-5 sm:p-6">
-            <div className="max-w-3xl">
-              <div className="text-xs font-black uppercase tracking-[0.18em] text-[#ffb07c]">
-                Custom 2027 Show-Date Booking &amp; Artist Presale Ride Interest
-              </div>
-              <p className="mt-1.5 text-sm leading-6 text-white/76">
-                Got artist presale tickets before our calendar syncs, or locking in a 2027 show night early? Enter your 2027 concert date to prefill online booking at live flat round-trip vehicle pricing (${SUBURBAN_2027_USD} Private Suburban up to 6 passengers, ${VAN_2027_USD} Private Van up to 10 passengers), or send our dispatch desk a presale coordination note.
-              </p>
-            </div>
-
-            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-[220px_minmax(0,1fr)_auto] lg:items-end">
-              <label className="flex flex-col gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-white/70">
-                <span>2027 Show Date</span>
-                <input
-                  type="date"
-                  min="2027-01-01"
-                  max="2027-12-31"
-                  value={customDate}
-                  onChange={(event) => setCustomDate(event.target.value)}
-                  className="min-h-11 rounded-xl border border-white/16 bg-[#0b101b] px-3.5 text-sm font-medium normal-case tracking-normal text-white focus:border-cyan-300 focus:outline-none"
-                />
-              </label>
-
-              <label className="flex flex-col gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-white/70">
-                <span>Artist or Tour (Optional)</span>
-                <input
-                  type="text"
-                  placeholder="e.g., Artist presale or headliner name"
-                  value={customArtist}
-                  onChange={(event) => setCustomArtist(event.target.value)}
-                  className="min-h-11 rounded-xl border border-white/16 bg-[#0b101b] px-3.5 text-sm font-medium normal-case tracking-normal text-white placeholder:text-white/35 focus:border-cyan-300 focus:outline-none"
-                />
-              </label>
-
-              <div className="flex flex-wrap gap-2 sm:col-span-2 lg:col-span-1">
-                <Link
-                  href={customSuvHref}
-                  className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#ff6b3d] px-4 text-xs font-black uppercase tracking-[0.14em] text-[#1b0b05] no-underline transition hover:bg-[#ff845d]"
-                >
-                  Book {suvPricing.priceLabel} Suburban
-                </Link>
-                <Link
-                  href={customVanHref}
-                  className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#3df3ff] px-4 text-xs font-black uppercase tracking-[0.14em] text-[#07111d] no-underline transition hover:bg-[#62f6ff]"
-                >
-                  Book {vanPricing.priceLabel} Van
-                </Link>
-                <a
-                  href={presaleMailtoHref}
-                  className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/18 bg-white/6 px-4 text-xs font-black uppercase tracking-[0.14em] text-white no-underline transition hover:bg-white/12"
-                >
-                  Presale / Custom Inquiry
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Section 4: DCC-Powered Planning (Embedded Facts + Contextual Handoff) */}
-        <section
-          aria-labelledby="dcc-concert-plan-heading"
-          className="brand-panel rounded-[30px] border border-cyan-300/20 bg-[linear-gradient(180deg,rgba(8,20,34,0.92),rgba(7,11,18,0.98))] p-6 sm:p-8"
-        >
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-            <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/30 bg-cyan-300/10 px-3.5 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-cyan-200">
-                <CloudSun className="h-3.5 w-3.5" />
-                Destination Command Center · Concert-Night Planning
-              </div>
-              <h2 id="dcc-concert-plan-heading" className="mt-3 text-2xl font-black tracking-tight text-white sm:text-3xl">
-                Plan the whole concert night
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-white/78 sm:text-base">
-                Check weather, venue conditions, pickup timing, and your complete transportation plan without leaving your booking flow.
-              </p>
-            </div>
-            <div className="flex flex-col gap-2 sm:flex-row lg:flex-col shrink-0">
-              <label className="flex flex-col gap-1 text-[10px] font-bold uppercase tracking-wider text-white/65">
-                <span>Pickup Area</span>
-                <select
-                  value={pickupArea}
-                  onChange={(e) => setPickupArea(e.target.value)}
-                  className="min-h-10 rounded-xl border border-white/15 bg-[#0b101b] px-3 text-xs font-semibold text-white"
-                >
-                  <option value="Denver Metro">Denver Metro / Downtown</option>
-                  <option value="Union Station">Union Station / LoDo</option>
-                  <option value="RiNo">RiNo</option>
-                  <option value="Golden">Golden / West Metro</option>
-                  <option value="Boulder">Boulder</option>
-                  <option value="DIA">Denver Airport Area (DIA)</option>
-                </select>
-              </label>
-              <a
-                href={dccConcertPlanUrl}
-                onClick={() => {
-                  trackNetworkEvent({
-                    eventName: "dcc_plan_opened",
-                    destinationSite: "dcc",
-                    entryPage: "/",
-                    date: customDate || undefined,
-                    travelIntent: "red-rocks-concert",
-                  });
-                  trackNetworkEvent({
-                    eventName: "network_handoff",
-                    destinationSite: "dcc",
-                    entryPage: "/",
-                    date: customDate || undefined,
-                    travelIntent: "red-rocks-concert",
-                  });
-                }}
-                className="inline-flex min-h-11 items-center justify-center rounded-xl border border-cyan-300/35 bg-cyan-300/15 px-4 text-xs font-black uppercase tracking-[0.12em] text-cyan-100 no-underline transition hover:bg-cyan-300/25"
+          {/* Month Filter Pills */}
+          <div className="mt-6 flex flex-wrap gap-2">
+            {[
+              { id: "all", label: "Next Announced" },
+              { id: "spring", label: "Mar – Apr" },
+              { id: "may", label: "May" },
+              { id: "summer", label: "Jun – Aug" },
+              { id: "fall", label: "Sep – Oct" },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setMonthFilter(tab.id)}
+                className={[
+                  "rounded-full border px-4 py-1.5 text-xs font-bold uppercase tracking-[0.14em] transition",
+                  monthFilter === tab.id
+                    ? "border-[#ffb07c] bg-[#ffb07c] text-[#140804]"
+                    : "border-white/14 bg-white/5 text-white/80 hover:border-white/30 hover:text-white",
+                ].join(" ")}
               >
-                Open full DCC concert plan →
-              </a>
-            </div>
+                {tab.label}
+              </button>
+            ))}
           </div>
 
-          <div className="mt-6 grid gap-3 sm:grid-cols-3 text-xs leading-6">
-            <div className="rounded-2xl border border-white/10 bg-black/35 p-4">
-              <div className="flex items-center gap-2 font-black uppercase tracking-wider text-cyan-300">
-                <Clock className="h-4 w-4" /> Pickup &amp; Tailgate Timing
-              </div>
-              <p className="mt-1.5 text-white/75">
-                Leave <strong>{pickupArea}</strong> ~2.5 hours before doors if tailgating, or ~90 minutes before showtime for direct arrival. Your private vehicle waits on-site through the encore.
-              </p>
+          {filteredShows.length > 0 ? (
+            <div className="mt-5 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
+              {filteredShows.map((item) => (
+                <article
+                  key={item.id}
+                  className="flex flex-col justify-between rounded-2xl border border-white/10 bg-[#080d18] p-4 transition hover:border-[#ffb07c]/40"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-2 text-xs font-bold uppercase tracking-[0.12em] text-[#ffb07c]">
+                      <span>{item.dateLabel}</span>
+                      <Link
+                        href={`/shows/${encodeURIComponent(item.id)}`}
+                        className="text-[11px] text-white/65 underline hover:text-white"
+                      >
+                        Show page
+                      </Link>
+                    </div>
+                    <h3 className="mt-1.5 text-base font-black text-white">{item.name}</h3>
+                    {item.supportLabel ? (
+                      <p className="mt-1 line-clamp-1 text-xs text-white/65">with {item.supportLabel}</p>
+                    ) : null}
+                  </div>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <Link
+                      href={item.suvBookingHref}
+                      className="inline-flex min-h-9 flex-1 items-center justify-center rounded-full bg-[#ff7a4d] px-3 text-[11px] font-black uppercase tracking-[0.1em] text-[#140804] no-underline transition hover:bg-[#ff926b]"
+                    >
+                      ${SUBURBAN_2027_USD} Suburban
+                    </Link>
+                    <Link
+                      href={item.vanBookingHref}
+                      className="inline-flex min-h-9 flex-1 items-center justify-center rounded-full border border-white/16 bg-white/8 px-3 text-[11px] font-bold uppercase tracking-[0.1em] text-white no-underline transition hover:bg-white/14"
+                    >
+                      ${VAN_2027_USD} Van
+                    </Link>
+                  </div>
+                </article>
+              ))}
             </div>
-            <div className="rounded-2xl border border-white/10 bg-black/35 p-4">
-              <div className="flex items-center gap-2 font-black uppercase tracking-wider text-amber-300">
-                <CloudSun className="h-4 w-4" /> Venue &amp; Weather Reality
-              </div>
-              <p className="mt-1.5 text-white/75">
-                Red Rocks sits at 6,450 ft elevation — evening temperatures drop 15–20°F after sunset, and sudden Front Range wind/lightning holds happen even on warm Denver afternoons.
-              </p>
+          ) : null}
+
+          <div className="mt-6 flex flex-col gap-3 rounded-2xl border border-white/10 bg-black/30 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
+            <div className="text-xs leading-5 text-white/75 sm:text-sm">
+              <strong className="text-[#ffb07c]">Custom 2027 Show-Date Booking:</strong> Hold artist presale tickets for a newly dropped date? Book any 2027 date directly in the selector above or email our dispatch desk.
             </div>
-            <div className="rounded-2xl border border-white/10 bg-black/35 p-4">
-              <div className="flex items-center gap-2 font-black uppercase tracking-wider text-emerald-300">
-                <Car className="h-4 w-4" /> Post-Show Exit Plan
-              </div>
-              <p className="mt-1.5 text-white/75">
-                Rideshare surge and wait times spike 60–90 minutes after encores. With a private Suburban or van, you walk straight to your waiting vehicle.
-              </p>
-            </div>
+            <a
+              href={presaleMailtoHref}
+              className="inline-flex min-h-10 shrink-0 items-center justify-center rounded-full border border-white/18 bg-white/8 px-4 text-xs font-bold uppercase tracking-[0.12em] text-white no-underline transition hover:bg-white/14"
+            >
+              Presale / Custom Date Note →
+            </a>
           </div>
         </section>
 
-        {/* Section 5: Trust, Licensing, Cancellation & Company Credibility */}
-        <section className="brand-panel relative overflow-hidden rounded-[30px] border border-white/12 bg-[radial-gradient(ellipse_at_top,rgba(255,91,46,0.14),transparent_55%),linear-gradient(180deg,rgba(20,20,26,0.96)_0%,rgba(11,11,15,0.98)_100%)] p-6 sm:p-8 lg:p-10 shadow-[0_24px_80px_rgba(0,0,0,0.36)]">
-          <div className="mx-auto max-w-4xl text-center">
-            <div className="inline-flex items-center rounded-full border border-[var(--brand-orange)]/30 bg-[var(--brand-orange)]/10 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.22em] text-[var(--brand-orange)]">
-              Licensed Colorado Private Fleet · Vehicle Waits Throughout the Concert
+        {/* ================= LOCAL PLANNING GUIDES (SEO DEPTH PRESERVED) ================= */}
+        <section aria-labelledby="local-guides-heading">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <div className="text-xs font-black uppercase tracking-[0.2em] text-[#ffb07c]">
+                Local Morrison &amp; Denver Know-How
+              </div>
+              <h2 id="local-guides-heading" className="mt-1.5 text-2xl font-black tracking-[-0.03em] text-white sm:text-3xl">
+                Know Before You Head Up Bear Creek Canyon
+              </h2>
             </div>
-            <p className="mt-4 text-lg font-bold leading-relaxed text-white sm:text-xl lg:text-[1.35rem]">
+            <Link href="/guide" className="text-xs font-bold uppercase tracking-[0.14em] text-[#ffb07c] underline">
+              Explore all Red Rocks guides →
+            </Link>
+          </div>
+
+          <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                href: "/red-rocks/what-to-wear",
+                icon: Clock,
+                tag: "6,450 ft Weather",
+                title: "What to Wear by Month",
+                copy: "Why Red Rocks drops 15–20°F after sunset—and what layers you can stash in your vehicle.",
+              },
+              {
+                href: "/guide/tailgating",
+                icon: Users,
+                tag: "Upper North Lot",
+                title: "Tailgating Rules & Setup",
+                copy: "No glass, no open flames, best arrival windows, and making the most of your included cooler & speaker.",
+              },
+              {
+                href: "/guide/local/denver-pickups",
+                icon: MapPin,
+                tag: "Denver & Golden",
+                title: "Pickup Zones & Timing",
+                copy: "How door-to-door pickups work across LoDo, RiNo, Union Station, Golden, and Boulder.",
+              },
+              {
+                href: "/red-rocks/post-concert-exit-guide",
+                icon: Music,
+                tag: "Encore Strategy",
+                title: "Post-Show Exit Reality",
+                copy: "How to dodge the Lower South stair climb and rideshare gridlock when the house lights come up.",
+              },
+            ].map((g) => {
+              const Icon = g.icon;
+              return (
+                <Link
+                  key={g.href}
+                  href={g.href}
+                  className="group rounded-[24px] border border-white/10 bg-[#0d1424] p-5 no-underline transition hover:-translate-y-0.5 hover:border-[#ffb07c]/40"
+                >
+                  <div className="flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.16em] text-[#ffb07c]">
+                    <Icon className="h-3.5 w-3.5" />
+                    <span>{g.tag}</span>
+                  </div>
+                  <h3 className="mt-2.5 text-lg font-black text-white group-hover:text-[#ffb07c]">{g.title}</h3>
+                  <p className="mt-2 text-xs leading-5 text-white/72">{g.copy}</p>
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* ================= TRUST, SAFETY & SEASONAL FLEET CREDIBILITY (DOWN-PAGE) ================= */}
+        <section
+          aria-labelledby="trust-safety-heading"
+          className="rounded-[32px] border border-white/12 bg-[#0d1424] p-6 sm:p-10"
+        >
+          <div className="mx-auto max-w-4xl text-center">
+            <div className="inline-flex items-center rounded-full border border-[#ffb07c]/30 bg-[#ffb07c]/10 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#ffb07c]">
+              Colorado PUC LL-02649 · Commercial Insurance · Direct Dispatch
+            </div>
+            <h2 id="trust-safety-heading" className="mt-4 text-2xl font-black tracking-tight text-white sm:text-3xl">
+              Real Colorado Fleet—Never Brokered Out to Strangers
+            </h2>
+            <p className="mt-3 text-base leading-relaxed text-white/80">
               The same Colorado transportation operation runs Party at Red Rocks during the summer concert season and{" "}
               <a
                 href="https://gosno.co"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[var(--brand-cyan)] underline decoration-[var(--brand-cyan)]/40 underline-offset-4 hover:text-white"
+                className="font-bold text-[#ffb07c] underline hover:text-white"
               >
                 GoSno
               </a>{" "}
               during the winter ski season, with 24/7 scheduled service subject to live vehicle and schedule availability.
             </p>
-            <div className="mt-6 grid grid-cols-1 gap-4 pt-6 border-t border-white/10 sm:grid-cols-3 text-left">
-              <div className="rounded-2xl border border-white/8 bg-white/4 p-4">
+
+            <div className="mt-7 grid gap-4 border-t border-white/10 pt-6 text-left sm:grid-cols-3">
+              <div className="rounded-2xl border border-white/10 bg-black/25 p-4">
                 <div className="flex items-center gap-2 text-sm font-black text-white">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-400" /> Vehicle Waits On-Site
+                  <CheckCircle2 className="h-4 w-4 text-emerald-400" /> Never Double-Booked
                 </div>
-                <div className="mt-1 text-xs leading-5 text-white/70">Your driver stays staged at Red Rocks throughout the entire show — never double-booked.</div>
+                <p className="mt-1.5 text-xs leading-5 text-white/72">
+                  Your vehicle is dedicated to your group for the entire evening and stays parked at Red Rocks while you enjoy the show.
+                </p>
               </div>
-              <div className="rounded-2xl border border-white/8 bg-white/4 p-4">
-                <div className="flex items-center gap-2 text-sm font-black text-[var(--brand-cyan)]">
-                  <ShieldCheck className="h-4 w-4 text-cyan-300" /> Licensed &amp; Insured
+              <div className="rounded-2xl border border-white/10 bg-black/25 p-4">
+                <div className="flex items-center gap-2 text-sm font-black text-white">
+                  <ShieldCheck className="h-4 w-4 text-[#ffb07c]" /> Vetted Mountain Drivers
                 </div>
-                <div className="mt-1 text-xs leading-5 text-white/70">PUC-compliant commercial passenger transportation with direct dispatch support at (720) 369-6292.</div>
+                <p className="mt-1.5 text-xs leading-5 text-white/72">
+                  CBI background-checked commercial chauffeurs who drive I-70 and Morrison canyon corridors year-round.
+                </p>
               </div>
-              <div className="rounded-2xl border border-white/8 bg-white/4 p-4">
-                <div className="flex items-center gap-2 text-sm font-black text-[var(--brand-orange)]">
-                  <CalendarDays className="h-4 w-4 text-orange-300" /> Clear Cancellation Policy
+              <div className="rounded-2xl border border-white/10 bg-black/25 p-4">
+                <div className="flex items-center gap-2 text-sm font-black text-white">
+                  <CalendarDays className="h-4 w-4 text-sky-300" /> Human Support at 720-369-6292
                 </div>
-                <div className="mt-1 text-xs leading-5 text-white/70">Full reschedule or refund flexibility ahead of show week; see booking terms for exact cutoff hours.</div>
+                <p className="mt-1.5 text-xs leading-5 text-white/72">
+                  Text or call local dispatch directly before show day to coordinate pickup addresses, stop requests, or schedule changes.
+                </p>
               </div>
+            </div>
+
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs font-bold uppercase tracking-[0.14em] text-white/70">
+              <Link href="/red-rocks/shuttle" className="text-[#ffb07c] no-underline hover:underline">
+                Red Rocks Shuttle Info
+              </Link>
+              <span>•</span>
+              <Link href="/red-rocks/car-service" className="text-[#ffb07c] no-underline hover:underline">
+                Private Car Service
+              </Link>
+              <span>•</span>
+              <Link href="/red-rocks/group-transportation" className="text-[#ffb07c] no-underline hover:underline">
+                Group Transportation
+              </Link>
             </div>
           </div>
         </section>
 
         <ReviewBlock />
-      </section>
+      </div>
 
+      {/* Sticky Mobile Booking Bar */}
       {showStickyMobileCta ? (
-        <div className="md:hidden fixed inset-x-3 bottom-3 z-40 rounded-2xl border border-white/15 bg-[#0b101b]/95 p-2.5 shadow-[0_16px_40px_rgba(0,0,0,0.65)] backdrop-blur-md">
+        <div className="fixed inset-x-3 bottom-3 z-40 rounded-2xl border border-white/16 bg-[#090e1a]/95 p-3 shadow-[0_18px_44px_rgba(0,0,0,0.75)] backdrop-blur-md md:hidden">
           <div className="flex items-center justify-between gap-3">
-            <div className="min-w-0 text-left">
-              <div className="truncate text-[11px] font-black uppercase tracking-[0.12em] text-white">
+            <div className="min-w-0">
+              <div className="truncate text-xs font-black uppercase tracking-wide text-white">
                 {partySize > 6 ? `${vanPricing.priceLabel} Private Van` : `${suvPricing.priceLabel} Private Suburban`}
               </div>
-              <div className="truncate text-[11px] text-white/70">
-                {partySize} {partySize === 1 ? "guest" : "guests"} · Vehicle waits on-site
+              <div className="truncate text-[11px] text-white/75">
+                Tailgate gear + waiting driver included
               </div>
             </div>
             <Link
-              href={heroBookingHref}
-              onClick={() =>
-                trackNetworkEvent({
-                  eventName: "availability_started",
-                  entryPage: "/",
-                  date: customDate || undefined,
-                  travelIntent: "red-rocks-concert",
-                })
-              }
-              className="inline-flex min-h-10 shrink-0 items-center justify-center rounded-xl bg-[#ff6b3d] px-4 text-[11px] font-black uppercase tracking-[0.12em] text-[#1b0b05] no-underline"
+              href={primaryHeroHref}
+              className="inline-flex min-h-10 shrink-0 items-center justify-center rounded-xl bg-[#ff7a4d] px-4 text-xs font-black uppercase tracking-[0.12em] text-[#140804] no-underline"
             >
-              Check Live Availability →
+              Book Ride →
             </Link>
           </div>
         </div>

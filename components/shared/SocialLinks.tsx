@@ -116,7 +116,7 @@ export default function SocialLinks({
             href={item.url}
             target="_blank"
             rel="noreferrer noopener"
-            aria-label={label}
+            aria-label={showLabels ? `${text} (${label})` : label}
             className={cx(
               "group rounded-full border backdrop-blur-[10px] transition duration-200",
               mode === "minimal" && "inline-flex items-center gap-2 px-2.5 py-1.5 text-xs font-semibold",

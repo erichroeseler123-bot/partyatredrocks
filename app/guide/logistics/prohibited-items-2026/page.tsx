@@ -1,64 +1,109 @@
-import Link from 'next/link';
+import type { Metadata } from "next";
+import Link from "next/link";
+import { SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
+
+const SITE = "https://www.partyatredrocks.com";
+
+export const metadata: Metadata = {
+  title: "Red Rocks Prohibited Items & Security Rules (2026 Reference & 2027 Prep)",
+  description:
+    `Red Rocks Amphitheatre prohibited items, single-pocket hydration pack rules, and why keeping extra gear locked in a private Suburban ($${SUBURBAN_2027_USD}) or Van ($${VAN_2027_USD}) saves your show night.`,
+  alternates: { canonical: `${SITE}/guide/logistics/prohibited-items-2026` },
+  openGraph: {
+    title: "Red Rocks Prohibited Items Deep Dive (2026 Season Reference)",
+    description:
+      "Hydration pack rules, battery limits, clear food bags, and locked private-vehicle gear storage at Red Rocks.",
+    url: `${SITE}/guide/logistics/prohibited-items-2026`,
+    type: "article",
+  },
+};
 
 export default function ProhibitedItems() {
   const items = [
-    { name: "Hydration Packs", rule: "Single-pocket only. Max 3L. No 'Hiking' packs with multiple zippers.", tip: "If it has more than 1 pocket, security will send you back." },
-    { name: "Vapes & Pens", rule: "Permitted in designated smoking areas only. Not in the seating bowl.", tip: "Keep them in your pocket during the scan; don't use them in the rows." },
-    { name: "External Batteries", rule: "Legal if smaller than a standard phone.", tip: "Massive power blocks for camping will be rejected." },
-    { name: "Food", rule: "Permitted in clear, 1-gallon plastic bags.", tip: "Fruit must be sliced. Security will not allow whole apples or oranges." }
+    {
+      name: "Hydration Packs",
+      rule: "Single-pocket only (plus the bladder compartment). Max 2L–3L bladder emptied before entry. Multi-zipper hiking packs are turned away.",
+      tip: "If it looks like a daypack with organizer pockets, leave it in your private vehicle.",
+    },
+    {
+      name: "Vapes & Pens",
+      rule: "Permitted in designated outer smoking areas only—not inside the seating bowl.",
+      tip: "Follow ushers' instructions in the rows; security actively enforces bowl rules.",
+    },
+    {
+      name: "External Batteries",
+      rule: "Pocket-sized phone power banks are permitted; oversized camping power stations are rejected.",
+      tip: "Bring a compact cable and pocket charger for post-encore coordination.",
+    },
+    {
+      name: "Outside Food",
+      rule: "Permitted for personal consumption in a clear 1-gallon plastic bag.",
+      tip: "Slice whole fruit ahead of time—whole apples or oranges are routinely turned back at security.",
+    },
   ];
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-20 bg-surface text-white text-left">
-      <header className="mb-16 border-l-4 border-[#4cc9f0] pl-8">
-        <h1 className="text-5xl font-black uppercase italic tracking-tighter">
-          2026 <span className="text-[#4cc9f0]">Prohibited</span> Items Deep Dive
+    <main className="mx-auto max-w-4xl bg-surface px-6 py-24 text-left text-white">
+      <aside
+        aria-label="2026 archive and 2027 update notice"
+        className="mb-8 rounded-2xl border border-[#ffb07c]/35 bg-[#ffb07c]/10 p-5 text-sm leading-6 text-white/90"
+      >
+        <span className="font-black uppercase tracking-[0.16em] text-[#ffb07c]">2026 Security Reference · 2027 Ready:</span>{" "}
+        Originally published for the 2026 Red Rocks season; always verify show-specific promoter rules on official Red Rocks channels before departure. Existing 2026 ride bookings remain honored at their original prices, while 2027 private round-trip vehicles book at{" "}
+        <strong>${SUBURBAN_2027_USD} Private Suburban</strong> and <strong>${VAN_2027_USD} Private Van</strong>.
+      </aside>
+
+      <header className="mb-12 border-l-4 border-[#ffb07c] pl-6 sm:pl-8">
+        <h1 className="text-4xl font-black uppercase tracking-tight sm:text-5xl">
+          2026 <span className="text-[#ffb07c]">Prohibited</span> Items Deep Dive
         </h1>
-        <p className="mt-4 text-muted text-xl font-medium max-w-2xl">
-          Don&apos;t get sent back to the lot. Security at the East Terrace and North ramps is utilizing 
-          AI-scanning for the 2026 season. Here is the intelligence you need.
+        <p className="mt-4 max-w-2xl text-lg font-medium text-muted sm:text-xl">
+          Don&apos;t get sent back down the ramp at doors. Entry lanes at the Upper North and East Terrace entrances screen bags quickly—know what passes and what stays in the vehicle.
         </p>
       </header>
 
-      {/* Rules Grid */}
-      <div className="grid gap-6 mb-16">
-        {items.map((item, i) => (
-          <div key={i} className="bg-surface-strong/50 border-soft shadow-soft p-8 rounded-[2rem]">
-            <h3 className="mb-2 text-2xl font-black uppercase italic text-[#ffb07c]">{item.name}</h3>
-            <p className="text-white font-bold mb-4">{item.rule}</p>
-            <div className="bg-surface/40 p-4 rounded-2xl border-soft shadow-soft text-muted text-base italic hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-              Pro Tip: {item.tip}
+      <h2 className="mb-6 text-2xl font-black uppercase tracking-tight text-white">
+        Most Common Gate Rejections
+      </h2>
+
+      <div className="mb-14 grid gap-6">
+        {items.map((item) => (
+          <div key={item.name} className="rounded-[2rem] border border-soft bg-surface-strong/60 p-7 shadow-soft">
+            <h3 className="mb-2 text-2xl font-black uppercase text-[#ffb07c]">{item.name}</h3>
+            <p className="mb-4 font-bold text-white">{item.rule}</p>
+            <div className="rounded-2xl border border-soft bg-surface/50 p-4 text-base text-muted">
+              <strong>Show-Night Tip:</strong> {item.tip}
             </div>
           </div>
         ))}
       </div>
 
-      {/* Internal "Web of Relevance" Links */}
-      <div className="bg-surface-strong p-10 rounded-[2.5rem] border-soft shadow-soft mb-16">
-        <h3 className="text-2xl font-black mb-6 uppercase italic text-white">Related Intelligence</h3>
-        <div className="grid sm:grid-cols-2 gap-6">
+      <section className="mb-14 rounded-[2.5rem] border border-soft bg-surface-strong p-8 sm:p-10">
+        <h2 className="mb-6 text-2xl font-black uppercase text-white">Related Red Rocks Prep Guides</h2>
+        <div className="grid gap-6 sm:grid-cols-2">
           <Link href="/guide/logistics/bag-policy" className="group">
-            <h4 className="text-strong font-bold transition group-hover:text-[#4cc9f0]">2026 Bag Rules →</h4>
-            <p className="text-muted text-base mt-1">Detailed sizing for fanny packs and purses.</p>
+            <h3 className="font-bold text-strong transition group-hover:text-[#ffb07c]">Bag Size & Clear Bag Rules →</h3>
+            <p className="mt-1 text-base text-muted">Exact dimensions for totes, fanny packs, and small clutches.</p>
           </Link>
-          <Link href="/guide/logistics/winter-survival" className="group">
-            <h4 className="text-strong font-bold group-hover:text-blue-500 transition">Winter Gear Prep →</h4>
-            <p className="text-muted text-base mt-1">What clothing items pass security in March.</p>
+          <Link href="/red-rocks/what-to-wear" className="group">
+            <h3 className="font-bold text-strong transition group-hover:text-[#ffb07c]">What to Wear at Red Rocks →</h3>
+            <p className="mt-1 text-base text-muted">Month-by-month layering strategy for 6,450 feet.</p>
           </Link>
         </div>
-      </div>
+      </section>
 
-      {/* Transactional Pivot */}
-      <div className="bg-white text-black p-12 rounded-[3.5rem] text-center shadow-2xl">
-        <h2 className="text-3xl font-black mb-4 uppercase italic">The Locked Storage Advantage</h2>
-        <p className="text-lg mb-8 leading-relaxed font-medium max-w-2xl mx-auto">
-          If security rejects an item, a rideshare leaves you stranded. Our shuttle drivers provide 
-          a final check and allow you to leave gear safely in our locked vehicles during the show.
+      <section className="rounded-[2.5rem] border border-[#ffb07c]/30 bg-[#0d1424] p-8 text-center shadow-2xl sm:p-12">
+        <h2 className="mb-4 text-3xl font-black uppercase text-white">The Waiting Private Vehicle Advantage</h2>
+        <p className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
+          If you arrive in an Uber and security turns away a bag or tailgate item, you have nowhere to put it. With a Party at Red Rocks Private Suburban (${SUBURBAN_2027_USD}) or Private Van (${VAN_2027_USD}), your driver and locked vehicle stay at Red Rocks through the entire concert—so tailgate coolers, chairs, and extra layers stay safe until the ride home.
         </p>
-        <Link href="/book" className="btn-primary uppercase transition shadow-lg inline-block">
-          Book Your 2026 Ride
+        <Link
+          href="/book/red-rocks-amphitheatre/private"
+          className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#ff6b3d] px-8 text-sm font-black uppercase tracking-[0.14em] text-white transition hover:bg-[#ff7f56]"
+        >
+          Choose Your Private Vehicle
         </Link>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

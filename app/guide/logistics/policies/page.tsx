@@ -1,5 +1,12 @@
 import Link from 'next/link';
 
+
+export const metadata = {
+  title: "Red Rocks Venue Policies: Smoking Areas, Accessibility & Re-Entry Rules",
+  description: "Practical guide to Red Rocks Amphitheatre venue policies, designated outer-stair smoking rules, accessible family restrooms, and gate screening.",
+  alternates: { canonical: "https://www.partyatredrocks.com/guide/logistics/policies" },
+};
+
 export default function VenuePolicies() {
   const faqSchema = {
     "@context": "https://schema.org",

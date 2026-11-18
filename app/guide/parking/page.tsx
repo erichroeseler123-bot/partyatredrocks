@@ -7,6 +7,7 @@ import { guideVisuals } from "@/lib/guideVisuals";
 const PRIVATE_HREF = "/book/red-rocks-amphitheatre/private";
 
 export const metadata = {
+  alternates: { canonical: "https://www.partyatredrocks.com/guide/parking" },
   title: "Red Rocks Parking Guide",
   description: "Parking strategy, exit risk, and the private transportation alternative if you do not want to deal with lot chaos.",
 };
@@ -58,12 +59,15 @@ export default function Page() {
               <div className="relative aspect-[16/10] border-b border-soft">
                 <Image
                   src="/fleet/fleet-suburban.jpg"
-                  alt="Full-size Chevrolet Suburban SUV for private Red Rocks door-to-door transportation"
+                  alt="Representative full-size SUV for private Red Rocks door-to-door transportation"
                   fill
                   unoptimized
                   sizes="(min-width: 768px) 45vw, 100vw"
                   className="object-cover"
                 />
+                <span className="absolute bottom-2.5 right-2.5 rounded-full bg-black/75 px-2.5 py-0.5 text-[10px] font-medium text-white/75 backdrop-blur-sm">
+                  Representative vehicle; exact vehicle may vary.
+                </span>
               </div>
               <div className="p-6">
                 <p className="text-[11px] font-black uppercase tracking-[0.22em] text-amber-300">Private Service</p>

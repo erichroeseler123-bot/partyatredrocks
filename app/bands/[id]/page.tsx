@@ -1,192 +1,131 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import {
-  getArtistById,
-  getEnrichedArtistById,
+  getDenverDateKey,
   getMultiYearArtistsCatalog,
   getMultiYearEventsCatalog,
-  resolveUpcomingYears,
 } from "@/lib/events/getCatalog";
-import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
-import { getMultiYearMediaIndex } from "@/lib/media/getMediaIndex";
-import { selectImageByPriority } from "@/lib/media/selectImage";
+import {
+  evaluateBandPageDisposition,
+  isParrServedVenue,
+} from "@/lib/seo/indexationGate";
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 type Props = { params: Promise<{ id: string }> };
 
-export async function generateStaticParams() {
-  const artists = await getMultiYearArtistsCatalog({ scope: "all" });
-  return artists.map((artist) => ({ id: artist.id }));
+function slugify(input: string): string {
+  return input
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+async function resolveBandContext(rawId: string) {
+  const cleanId = decodeURIComponent(rawId).trim();
+  const [artists, events] = await Promise.all([
+    getMultiYearArtistsCatalog({ scope: "all" }),
+    getMultiYearEventsCatalog({ scope: "all" }),
+  ]);
+  const matched =
+    artists.find((a) => a.id === cleanId) ??
+    artists.find((a) => slugify(a.name) === cleanId.replace(/^artist-/, ""));
+
+  if (!matched) return null;
+
+  const artistSlug = slugify(matched.name);
+  const todayDenverKey = getDenverDateKey();
+  const artistEvents = events.filter(
+    (ev) =>
+      ev.artists.includes(matched.id) ||
+      ev.artistNames.some((n) => slugify(n) === artistSlug)
+  );
+
+  const upcomingRedRocksCount = artistEvents.filter(
+    (ev) => ev.venueId === "red-rocks-amphitheatre" && ev.dateKey >= todayDenverKey
+  ).length;
+  const historicalRedRocksCount = artistEvents.filter(
+    (ev) => ev.venueId === "red-rocks-amphitheatre" && ev.dateKey < todayDenverKey
+  ).length;
+  const upcomingServedSecondaryCount = artistEvents.filter(
+    (ev) =>
+      ev.venueId !== "red-rocks-amphitheatre" &&
+      ev.dateKey >= todayDenverKey &&
+      isParrServedVenue(ev.venueId)
+  ).length;
+
+  return {
+    artist: matched,
+    artistSlug,
+    decision: evaluateBandPageDisposition({
+      bandId: cleanId,
+      artistSlug,
+      upcomingRedRocksCount,
+      historicalRedRocksCount,
+      upcomingServedSecondaryCount,
+    }),
+  };
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  const artist = await getArtistById(id, 2026);
-  if (!artist) {
-    return { title: "Artist | Party At Red Rocks" };
-  }
+  const ctx = await resolveBandContext(id);
+  const cleanId = decodeURIComponent(id).trim();
   return {
-    title: `${artist.name} | Party At Red Rocks`,
-    description: `See upcoming dates for ${artist.name} across venue schedules and book transportation.`,
+    title: ctx ? `${ctx.artist.name} | Colorado Tour Archive | Party at Red Rocks` : "Artist Profile | Party at Red Rocks",
+    alternates: { canonical: `https://www.partyatredrocks.com/bands/${encodeURIComponent(cleanId)}` },
+    robots: {
+      index: ctx ? ctx.decision.index : false,
+      follow: ctx ? ctx.decision.follow : false,
+    },
   };
 }
 
-function dateLabel(iso: string) {
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return iso;
-  return d.toLocaleString("en-US", {
-    weekday: "short",
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
-}
-
-export default async function BandPage({ params }: Props) {
+export default async function BandConsolidationPage({ params }: Props) {
   const { id } = await params;
-  const activeYears = resolveUpcomingYears();
-  const [artist, enriched, media] = await Promise.all([
-    getArtistById(id, activeYears[0] ?? 2026),
-    getEnrichedArtistById(id, activeYears[0] ?? 2026, "all"),
-    getMultiYearMediaIndex(activeYears),
-  ]);
-  if (!artist) notFound();
+  const ctx = await resolveBandContext(id);
+  if (!ctx) {
+    return notFound();
+  }
 
-  const [events, allArtists] = await Promise.all([
-    getMultiYearEventsCatalog({ scope: "all", years: activeYears }),
-    getMultiYearArtistsCatalog({ scope: "all", years: activeYears }),
-  ]);
-  const eventIdSet = new Set(artist.eventIds ?? []);
-  const mine = events
-    .filter((event) => event.artists.includes(artist.id) || eventIdSet.has(event.id))
-    .sort((a, b) => (a.startAt ?? "").localeCompare(b.startAt ?? ""));
-  const coArtistNames = (artist.coArtists ?? [])
-    .map((coId) => allArtists.find((candidate) => candidate.id === coId))
-    .filter((candidate): candidate is NonNullable<typeof candidate> => Boolean(candidate))
-    .slice(0, 24);
-  const showCount = artist.showCount ?? mine.length;
-  const mediaSources = media?.artistsById?.[artist.id]?.sources;
-  const sanitizedFallback =
-    mediaSources?.fallback && !mediaSources.fallback.includes("/fallback.")
-      ? mediaSources.fallback
-      : "/venues/rrsite.webp";
-  const heroImage = selectImageByPriority({
-    entityType: "artist",
-    title: artist.name,
-    artistName: artist.name,
-    queryHint: `${artist.name} live music artist portrait`,
-    alt: artist.name,
-    spotifyImage: mediaSources?.spotifyImage ?? enriched?.spotifyImage ?? null,
-    ticketmasterImage: mediaSources?.ticketmasterImage ?? null,
-    seatgeekImage: mediaSources?.seatgeekImage ?? artist.image ?? null,
-    localAsset: mediaSources?.localAsset ?? null,
-    fallback: sanitizedFallback,
-  });
-  const venueRows = (artist.venueIds || [])
-    .map((venueId) => ({ venueId, venueName: VENUE_LEDGER_BY_SLUG.get(venueId)?.name || venueId }))
-    .sort((a, b) => a.venueName.localeCompare(b.venueName));
+  if (ctx.decision.action === "not_found_404") {
+    return notFound();
+  }
 
+  if (ctx.decision.action === "redirect_308" && ctx.decision.redirectDestination) {
+    permanentRedirect(ctx.decision.redirectDestination);
+  }
+
+  // Thin club-only profile: render HTTP 200 with `noindex, follow` (never 308 into a noindex target)
   return (
-    <main className="comic-page pt-24 pb-10">
-      <section className="comic-wrap">
-        <div className="comic-hero">
-          <div className="comic-kicker">Artist</div>
-          <h1 className="comic-title">{artist.name}</h1>
-          <div style={{ marginTop: 10 }}>
-            <img
-              src={heroImage}
-              alt={artist.name}
-              loading="lazy"
-              decoding="async"
-              width={160}
-              height={160}
-              style={{ width: 160, height: 160, borderRadius: 16, objectFit: "cover", border: "1px solid rgba(255,255,255,.2)" }}
-            />
-          </div>
-          <p className="comic-copy">
-            {showCount} compiled show{showCount === 1 ? "" : "s"} across {artist.venueIds?.length ?? 0} venue
-            {(artist.venueIds?.length ?? 0) === 1 ? "" : "s"}.
-          </p>
-          <p className="comic-copy">
-            First date: {artist.firstDate ?? "n/a"} • Last date: {artist.lastDate ?? "n/a"}
-          </p>
-          <p className="comic-copy">Already have tickets? Use the show list below to pick your venue and lock in the ride.</p>
-          <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <Link className="comic-btn comic-btn-primary" href="/book">
-              Book a Ride
-            </Link>
-            <Link className="comic-btn comic-btn-secondary" href="/bands">
-              All Artists
-            </Link>
-          </div>
+    <main className="brand-page mx-auto max-w-4xl px-4 py-14 text-white">
+      <div className="rounded-[28px] border border-white/12 bg-[#0d1424] p-8 shadow-xl">
+        <div className="text-xs font-black uppercase tracking-[0.2em] text-[#8fd0ff]">
+          Colorado Concert Archive
         </div>
-
-        {venueRows.length > 0 ? (
-          <section className="comic-panel" style={{ marginTop: 16 }}>
-            <div className="comic-tag">Venues</div>
-            <div style={{ marginTop: 10, display: "flex", flexWrap: "wrap", gap: 8 }}>
-              {venueRows.map((venue) => (
-                <Link key={venue.venueId} className="comic-btn comic-btn-secondary" href={`/venues/${encodeURIComponent(venue.venueId)}`}>
-                  {venue.venueName}
-                </Link>
-              ))}
-            </div>
-          </section>
-        ) : null}
-
-        {coArtistNames.length > 0 ? (
-          <section className="comic-panel" style={{ marginTop: 16 }}>
-            <div className="comic-tag">Frequent Co-Artists</div>
-            <div style={{ marginTop: 10, display: "flex", flexWrap: "wrap", gap: 8 }}>
-              {coArtistNames.map((coArtist) => (
-                <Link key={coArtist.id} className="comic-btn comic-btn-secondary" href={`/bands/${encodeURIComponent(coArtist.id)}`}>
-                  {coArtist.name}
-                </Link>
-              ))}
-            </div>
-          </section>
-        ) : null}
-
-        <section className="comic-panel" style={{ marginTop: 16 }}>
-          <div className="comic-tag">Upcoming Dates</div>
-          {mine.length === 0 ? (
-            <p className="comic-copy" style={{ marginTop: 10 }}>
-              No dates found in the current snapshot.
-            </p>
-          ) : (
-            <div className="comic-grid" style={{ marginTop: 12 }}>
-              {mine.map((event) => {
-                const dt = event.startLocal ?? event.startAt ?? `${event.dateKey}T19:00:00`;
-                const bookHref = `/book?venue=${encodeURIComponent(event.venueId)}`;
-                const venueName = VENUE_LEDGER_BY_SLUG.get(event.venueId)?.name ?? event.venueId;
-
-                return (
-                  <article key={event.id} className="comic-panel">
-                    <div className="comic-tag">{dateLabel(dt)}</div>
-                    <div className="comic-h3">{event.name}</div>
-                    <p className="comic-copy" style={{ marginTop: 6 }}>
-                      {venueName}
-                    </p>
-
-                    <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-                      <Link className="comic-btn comic-btn-primary" href={bookHref}>
-                        Book Ride
-                      </Link>
-                      {event.ticketUrl ? (
-                        <a className="comic-btn comic-btn-secondary" href={event.ticketUrl} target="_blank" rel="noreferrer">
-                          Tickets
-                        </a>
-                      ) : null}
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-          )}
-        </section>
-      </section>
+        <h1 className="mt-3 text-3xl font-black tracking-tight sm:text-4xl">
+          {ctx.artist.name}
+        </h1>
+        <p className="mt-3 text-base leading-7 text-white/78">
+          View past Colorado club appearances for {ctx.artist.name} or browse verified 2027 Red Rocks Amphitheatre concerts with private group transportation.
+        </p>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link
+            href={`/artists/${encodeURIComponent(ctx.artistSlug)}`}
+            className="inline-flex min-h-11 items-center rounded-full border border-white/18 bg-white/8 px-6 text-xs font-bold uppercase tracking-[0.14em] text-white no-underline hover:bg-white/14"
+          >
+            View {ctx.artist.name} Concert History →
+          </Link>
+          <Link
+            href="/red-rocks/concerts"
+            className="inline-flex min-h-11 items-center rounded-full bg-[#ff6b3d] px-6 text-xs font-black uppercase tracking-[0.14em] text-white no-underline hover:bg-[#ff7f56]"
+          >
+            2027 Red Rocks Concert Schedule →
+          </Link>
+        </div>
+      </div>
     </main>
   );
 }

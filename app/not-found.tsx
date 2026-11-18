@@ -1,9 +1,11 @@
-import Link from 'next/link';
-import { Metadata } from 'next';
+import Link from "next/link";
+import type { Metadata } from "next";
+import { SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
 
 export const metadata: Metadata = {
-  title: 'Page Not Found | Party at Red Rocks',
-  description: 'The requested guide or event page could not be found.',
+  title: "Page Not Found | Party at Red Rocks",
+  description:
+    "This artist, event, or page does not have an active published listing yet. Browse announced 2027 Red Rocks concerts or search artists.",
   robots: {
     index: false,
     follow: true,
@@ -12,43 +14,78 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen bg-surface text-white flex flex-col items-center justify-center px-6 text-center">
-      <h1 className="text-9xl font-black text-red-600 italic tracking-tighter mb-4">404</h1>
+    <main className="flex min-h-[75vh] flex-col items-center justify-center bg-[#070b14] px-4 py-16 text-center text-white sm:px-6">
+      <div className="w-full max-w-2xl rounded-[28px] border border-white/12 bg-[#0d1424] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.45)] sm:p-10">
+        <div className="inline-flex items-center rounded-full border border-[#ffb07c]/35 bg-[#ffb07c]/12 px-3.5 py-1 text-[11px] font-black uppercase tracking-[0.2em] text-[#ffb07c]">
+          404 · Listing Not Found
+        </div>
 
-      <div className="max-w-xl">
-        <h2 className="text-3xl font-black uppercase mb-6">Looks like you took a wrong turn.</h2>
-        <p className="text-muted text-lg mb-10 leading-relaxed">
-          The page you’re looking for may have moved. Use the current Red Rocks guides below, or return to the homepage.
+        <h1 className="mt-4 text-3xl font-black uppercase tracking-tight text-white sm:text-4xl">
+          No Active Listing at This URL
+        </h1>
+
+        <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-white/78 sm:text-base">
+          If you followed an older artist or show link, that artist does not currently have an officially announced 2027 Red Rocks date in our verified schedule—or the page address has changed.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12 text-left">
-          <Link href="/guide/parking" className="p-4 border border-soft rounded-2xl hover:border-red-600 transition group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-            <span className="block font-black uppercase text-red-600 group-hover:text-red-500">Parking Guide</span>
-            <span className="text-xs text-muted">Plan arrival and parking for show night.</span>
+        <div className="mt-7 grid gap-3 text-left sm:grid-cols-2">
+          <Link
+            href="/red-rocks/concerts"
+            className="rounded-2xl border border-[#ffb07c]/35 bg-[#ffb07c]/10 p-4 no-underline transition hover:border-[#ffb07c]/65"
+          >
+            <span className="block text-xs font-black uppercase tracking-[0.14em] text-[#ffb07c]">
+              2027 Concert Calendar →
+            </span>
+            <span className="mt-1 block text-xs leading-5 text-white/80">
+              Browse all officially announced 2027 Red Rocks shows by month.
+            </span>
           </Link>
 
-          <Link href="/guide/logistics/bag-policy" className="p-4 border border-soft rounded-2xl hover:border-red-600 transition group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-            <span className="block font-black uppercase text-red-600 group-hover:text-red-500">Bag Policy</span>
-            <span className="text-xs text-muted">Check current bag-planning guidance.</span>
+          <Link
+            href="/search"
+            className="rounded-2xl border border-white/12 bg-white/[0.04] p-4 no-underline transition hover:border-white/30"
+          >
+            <span className="block text-xs font-black uppercase tracking-[0.14em] text-white">
+              Search Artists &amp; Venues →
+            </span>
+            <span className="mt-1 block text-xs leading-5 text-white/75">
+              Search upcoming concerts across Red Rocks, Denver, and Boulder.
+            </span>
           </Link>
 
-          <Link href="/guide/local/denver-pickups" className="p-4 border border-soft rounded-2xl hover:border-red-600 transition group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-            <span className="block font-black uppercase text-red-600 group-hover:text-red-500">Denver Pickups</span>
-            <span className="text-xs text-muted">Plan a private pickup from the Denver area.</span>
+          <Link
+            href="/book/red-rocks-amphitheatre/private"
+            className="rounded-2xl border border-white/12 bg-white/[0.04] p-4 no-underline transition hover:border-white/30"
+          >
+            <span className="block text-xs font-black uppercase tracking-[0.14em] text-white">
+              Private Vehicles (${SUBURBAN_2027_USD} / ${VAN_2027_USD}) →
+            </span>
+            <span className="mt-1 block text-xs leading-5 text-white/75">
+              Compare Private Suburban and 10-passenger Van round-trip rides.
+            </span>
           </Link>
 
-          <Link href="/red-rocks/transportation" className="p-4 border border-soft rounded-2xl hover:border-red-600 transition group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-            <span className="block font-black uppercase text-red-600 group-hover:text-red-500">Transportation</span>
-            <span className="text-xs text-muted">See the current private ride options.</span>
+          <Link
+            href="/guide"
+            className="rounded-2xl border border-white/12 bg-white/[0.04] p-4 no-underline transition hover:border-white/30"
+          >
+            <span className="block text-xs font-black uppercase tracking-[0.14em] text-white">
+              Red Rocks Planning Guides →
+            </span>
+            <span className="mt-1 block text-xs leading-5 text-white/75">
+              Tailgating rules, single-pocket bag checks, and weather layering.
+            </span>
           </Link>
         </div>
 
-        <Link
-          href="/"
-          className="inline-block btn-primary uppercase hover:bg-red-500 transition shadow-xl"
-        >
-          Return to Homepage
-        </Link>
+        <div className="mt-7">
+          <Link
+            href="/"
+            className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#ff7a4d] px-6 text-xs font-black uppercase tracking-[0.14em] text-[#140804] no-underline transition hover:bg-[#ff926b]"
+          >
+            Back to Homepage
+          </Link>
+        </div>
       </div>
     </main>
   );

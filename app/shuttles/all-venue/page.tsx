@@ -3,7 +3,7 @@ import Link from 'next/link';
 const venues = [
   { name: "Mission Ballroom", slug: "mission-ballroom", loc: "RiNo" },
   { name: "Ball Arena", slug: "ball-arena", loc: "Downtown" },
-  { name: "Fiddler's Green", slug: "fiddlers-green", loc: "DTC" },
+  { name: "Fiddler's Green", slug: "fiddlers-green-amphitheatre", loc: "DTC" },
   { name: "Fillmore Auditorium", slug: "fillmore-auditorium", loc: "Colfax" },
   { name: "Ogden Theatre", slug: "ogden-theatre", loc: "Colfax" },
   { name: "Bluebird Theater", slug: "bluebird-theater", loc: "East Colfax" },
@@ -23,6 +23,13 @@ const venues = [
   { name: "Dick's Sporting Goods Park", slug: "dick-sporting-goods-park", loc: "Commerce City" },
   { name: "Folsom Field", slug: "folsom-field", loc: "Boulder" }
 ];
+
+
+export const metadata = {
+  title: "All-Venue Private Concert Rides | Denver & Boulder Venues",
+  description: "Flat-rate private SUV and van concert rides for Mission Ballroom, Ball Arena, Fiddler's Green, Fillmore, Ogden, Gothic, and Folsom Field.",
+  alternates: { canonical: "https://www.partyatredrocks.com/shuttles/all-venue" },
+};
 
 export default function AllVenueHub() {
   return (

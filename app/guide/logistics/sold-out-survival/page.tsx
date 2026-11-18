@@ -1,6 +1,13 @@
 import Link from "next/link";
 import { buildBookingHref } from "@/lib/parrHandoff";
 
+
+export const metadata = {
+  title: "Red Rocks Sold-Out Concert Survival Guide | Arrival & Post-Encore Exit",
+  description: "How to handle sold-out 9,525-capacity Red Rocks nights: early departure windows, lot closures, cell network congestion, and pre-booked private rides.",
+  alternates: { canonical: "https://www.partyatredrocks.com/guide/logistics/sold-out-survival" },
+};
+
 export default function SoldOutSurvival() {
   const privateHref = buildBookingHref({
     target: "private",

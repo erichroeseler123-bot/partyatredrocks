@@ -17,6 +17,14 @@ function monthLabel(monthKey: string): string {
   return d.toLocaleDateString("en-US", { month: "long", year: "numeric" });
 }
 
+
+export const metadata = {
+  title: "Red Rocks Concerts by Month | Monthly Schedule Overview",
+  description: "Browse Red Rocks Amphitheatre concerts organized month by month and jump to show pages or private group ride booking.",
+  alternates: { canonical: "https://www.partyatredrocks.com/month/red-rocks" },
+  robots: { index: false, follow: true },
+};
+
 export default async function RedRocksMonthlyPage() {
   const [events, byMonth] = await Promise.all([
     getEventsCatalog(2026, "redrocks"),

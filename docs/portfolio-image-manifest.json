@@ -4,7 +4,7 @@
   "governancePolicy": {
     "truthfulnessMandate": "Every bookable or inquiry-based experience uses a verified product photo, a clearly appropriate destination-activity photo, or an honest designed placeholder — never an unrelated tour, wrong operator vehicle/vessel/aircraft, or AI-generated experience photo.",
     "aiImageryBoundary": "AI-generated images are prohibited for operators, vehicles, aircraft, vessels, venues, or bookable experiences.",
-    "totalCuratedFamilies": 89
+    "totalCuratedFamilies": 91
   },
   "assets": [
     {
@@ -2405,6 +2405,62 @@
           "width": 1280,
           "height": 800,
           "bytes": 127571
+        }
+      ]
+    },
+    {
+      "id": "parr-black-chevrolet-suburban-rst-2022",
+      "subject": "Black 2022 Chevrolet Suburban RST full-size SUV with tinted windows on roadway",
+      "location": "United States",
+      "sourcePageUrl": "https://commons.wikimedia.org/wiki/File:Chevrolet_Suburban_RST_(2022)_(53492230438).jpg",
+      "photographer": "Charles from Port Chester, New York",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "originalDimensions": "5241x3453",
+      "focalPointMobile": "50% 55%",
+      "truthfulnessLevel": "verified_destination_activity",
+      "deployments": [
+        {
+          "property": "parr",
+          "publicPath": "/images/redesign/private-suburban-black.webp",
+          "width": 960,
+          "height": 600,
+          "bytes": 115316
+        },
+        {
+          "property": "parr",
+          "publicPath": "/images/redesign/private-suburban-black-sm.webp",
+          "width": 560,
+          "height": 350,
+          "bytes": 42878
+        }
+      ]
+    },
+    {
+      "id": "parr-black-ford-transit-passenger-van-2023",
+      "subject": "Agate Black Metallic 2023 Ford Transit T-350HD XL high-roof passenger van",
+      "location": "Ellwood City, Pennsylvania, USA",
+      "sourcePageUrl": "https://commons.wikimedia.org/wiki/File:2023_Ford_Transit_T-350HD_XL_high_roof_extended_length_passenger_van,_front_left,_09-28-2024.jpg",
+      "photographer": "MercurySable99",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "originalDimensions": "4184x3298",
+      "focalPointMobile": "50% 52%",
+      "truthfulnessLevel": "verified_destination_activity",
+      "deployments": [
+        {
+          "property": "parr",
+          "publicPath": "/images/redesign/private-van-black.webp",
+          "width": 960,
+          "height": 600,
+          "bytes": 99702
+        },
+        {
+          "property": "parr",
+          "publicPath": "/images/redesign/private-van-black-sm.webp",
+          "width": 560,
+          "height": 350,
+          "bytes": 30972
         }
       ]
     }

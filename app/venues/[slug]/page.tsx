@@ -23,6 +23,7 @@ import {
 import { getCrossSiteVenue } from "@/lib/crossSiteMap";
 import { PlanningLinks } from "@/components/booking/PlanningLinks";
 import { getVenueCardImage, getVenueHeroImage } from "@/data/media";
+import { evaluateVenuePageDisposition, isParrServedVenue } from "@/lib/seo/indexationGate";
 
 export const runtime = "nodejs";
 export const revalidate = 300;
@@ -470,11 +471,12 @@ function venueFaqJsonLd(slug: string, v: VenueRec) {
     mainEntity: [
       {
         "@type": "Question",
-        name: `Do you run shuttles to ${name}?`,
+        name: `Do you offer private transportation to ${name}?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text:
-            "Yes — we cover Denver, Boulder, and Colorado Springs venues. Choose your show and book a ride with clear pickup details and a return plan after the show.",
+          text: isParrServedVenue(slug)
+            ? "Yes — Party at Red Rocks offers private Suburban and group van transportation for Red Rocks Amphitheatre, Denver & Boulder concert rooms, and Mishawaka Amphitheatre."
+            : "Party at Red Rocks focuses on Red Rocks Amphitheatre plus select Denver, Boulder, and Mishawaka concert venues; contact dispatch to confirm custom charter availability.",
         },
       },
       {
@@ -518,7 +520,7 @@ function getVenueReference(slug: string, v: VenueRec, name: string): VenueRefere
       "Set one exact pickup point and a fallback point before the show. Send instructions to your group before encore.",
     nearby: [`${v.city || "Denver"} hotels`, `${v.city || "Denver"} bars`, "Primary transit/arterial corridors"],
     rideOptions:
-      "Shared shuttles reduce post-show uncertainty; private SUVs/vans are best for groups that need tighter timing and control.",
+      "Pre-booked private SUVs ($499 Red Rocks / $250 Denver venues) and 10-passenger vans ($699 Red Rocks) remove post-show rideshare uncertainty and keep your group on one pickup and return plan.",
     faq: [
       {
         q: `What is the best transportation strategy for ${name}?`,
@@ -562,10 +564,31 @@ export async function generateMetadata({
     return {
       title: "Venue | Party at Red Rocks",
       description:
-        "Denver, Boulder, and Colorado concert shuttles, venue guides, and weekly show details.",
+        "Denver, Boulder, and Colorado concert transportation and venue guides.",
+      robots: { index: false, follow: false },
+    };
+  }
+
+  if (slug === "1stbank-center") {
+    const closureUrl = `${SITE}/venues/1stbank-center`;
+    return {
+      title: "1stBank Center (Broomfield, CO) — Permanently Closed Venue Reference | Party at Red Rocks",
+      description:
+        "1stBank Center in Broomfield, Colorado permanently closed in November 2023 and was demolished in 2024. See where Front Range tours relocated across Red Rocks, Denver, and Boulder.",
+      alternates: { canonical: closureUrl },
+      openGraph: {
+        title: "1stBank Center (Broomfield, CO) — Permanently Closed Venue Reference",
+        description:
+          "Historical venue closure reference for 1stBank Center in Broomfield, CO, with active Front Range concert venue alternatives.",
+        url: closureUrl,
+        siteName: "Party at Red Rocks",
+        type: "website",
+      },
       robots: { index: true, follow: true },
     };
   }
+
+  const gate = evaluateVenuePageDisposition(slug);
 
   const withIdentityName = {
     ...v,
@@ -616,11 +639,11 @@ export async function generateMetadata({
       images: [venueImageUrl],
     },
     robots: {
-      index: true,
-      follow: true,
+      index: gate.index,
+      follow: gate.follow,
       googleBot: {
-        index: true,
-        follow: true,
+        index: gate.index,
+        follow: gate.follow,
         "max-image-preview": "large",
         "max-snippet": -1,
         "max-video-preview": -1,
@@ -729,6 +752,88 @@ export default async function VenuePage({
   const identity = VENUE_LEDGER_BY_SLUG.get(slug);
   if (!identity) return notFound();
   const v = getVenue(slug) ?? {};
+
+  if (slug === "1stbank-center") {
+    const closureWebPageJsonLd = {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": `${SITE}/venues/1stbank-center#closure-reference`,
+      url: `${SITE}/venues/1stbank-center`,
+      name: "1stBank Center (Broomfield, CO) — Permanently Closed Venue Reference",
+      description:
+        "1stBank Center in Broomfield, Colorado permanently closed in November 2023 and was demolished in 2024.",
+    };
+
+    return (
+      <main className="brand-page px-4 pb-16 pt-24 text-white sm:px-6 lg:px-8">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd(slug, v)) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(closureWebPageJsonLd) }}
+        />
+        <section className="mx-auto max-w-4xl space-y-6">
+          <div className="rounded-[32px] border border-[#ffb07c]/35 bg-[#0d1424] p-8 shadow-[0_24px_80px_rgba(0,0,0,0.45)] sm:p-10">
+            <div className="inline-flex items-center rounded-full border border-[#ffb07c]/40 bg-[#ffb07c]/12 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#ffb07c]">
+              Historical Venue Closure Notice
+            </div>
+            <h1 className="mt-4 text-3xl font-black tracking-tight text-white sm:text-5xl">
+              1stBank Center (Broomfield, CO) — Permanently Closed
+            </h1>
+            <p className="mt-4 text-base leading-7 text-white/84">
+              <strong>1stBank Center</strong> (formerly Broomfield Event Center, 11450 Broomfield Ln, Broomfield, CO) held its final events in autumn 2023, permanently closed in November 2023, and was demolished in 2024. No concerts or Party at Red Rocks transportation services operate for this former venue.
+            </p>
+            <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+              <h2 className="text-lg font-black text-white">
+                Where Former 1stBank Center Tours Now Play on the Front Range
+              </h2>
+              <p className="mt-2 text-sm leading-6 text-white/76">
+                Multi-night EDM, jam, and arena-scale tours that previously booked 1stBank Center have largely moved to active Denver, Morrison, and Boulder rooms that Party at Red Rocks serves with private group vehicles:
+              </p>
+              <ul className="mt-4 grid gap-3 sm:grid-cols-2 text-sm">
+                <li>
+                  <Link href="/venues/red-rocks-amphitheatre" className="font-bold text-[#ffb07c] underline">
+                    Red Rocks Amphitheatre (Morrison) →
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/venues/mission-ballroom" className="font-bold text-[#8fd0ff] underline">
+                    Mission Ballroom (RiNo, Denver) →
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/venues/fiddlers-green-amphitheatre" className="font-bold text-[#8fd0ff] underline">
+                    Fiddler&apos;s Green Amphitheatre →
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/venues/ball-arena" className="font-bold text-[#8fd0ff] underline">
+                    Ball Arena (Downtown Denver) →
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link
+                href="/red-rocks/concerts"
+                className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#ff6b3d] px-6 text-xs font-black uppercase tracking-[0.14em] text-white no-underline hover:bg-[#ff7f56]"
+              >
+                2027 Red Rocks Concert Calendar →
+              </Link>
+              <Link
+                href="/venues"
+                className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/18 bg-white/8 px-6 text-xs font-bold uppercase tracking-[0.14em] text-white no-underline hover:bg-white/14"
+              >
+                Active Colorado Venues We Serve →
+              </Link>
+            </div>
+          </div>
+        </section>
+      </main>
+    );
+  }
   const name = identity.name;
   const city = cityLine(v);
   const reference = getVenueReference(slug, v, name);
@@ -1151,32 +1256,6 @@ export default async function VenuePage({
           </div>
           <p className="comic-copy text-center mt-4 opacity-80">
             Outdoor Denver amphitheatre where post-show exit timing heavily affects pickup ease.
-          </p>
-        </section>
-      ) : null}
-
-      {slug === "1stbank-center" ? (
-        <section className="comic-panel" style={{ marginTop: 32 }}>
-          <div className="comic-tag">1stBank Center Quick Guides</div>
-          <div className="flex flex-wrap gap-3 mt-4 justify-center">
-            <Link href="/venues/1stbank-center/concerts" className="comic-btn comic-btn-secondary">
-              Concert Schedule
-            </Link>
-            <Link href="/venues/1stbank-center/best-time-to-arrive" className="comic-btn comic-btn-secondary">
-              Best Time to Arrive
-            </Link>
-            <Link href="/venues/1stbank-center/parking" className="comic-btn comic-btn-secondary">
-              Parking Strategy
-            </Link>
-            <Link href="/venues/1stbank-center/transportation" className="comic-btn comic-btn-secondary">
-              Transportation & Rides
-            </Link>
-            <Link href="/venues/1stbank-center/map" className="comic-btn comic-btn-secondary">
-              Venue Map
-            </Link>
-          </div>
-          <p className="comic-copy text-center mt-4 opacity-80">
-            Large Broomfield arena with major tours, ample parking, and strong post-show traffic peaks.
           </p>
         </section>
       ) : null}

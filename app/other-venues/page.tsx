@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
+  alternates: { canonical: "https://www.partyatredrocks.com/other-venues" },
   title: "Other Venues + Mishawaka | Party at Red Rocks",
   description:
     "Mishawaka Amphitheatre and other venue transportation. Simple fixed pricing — request a vehicle for your group.",

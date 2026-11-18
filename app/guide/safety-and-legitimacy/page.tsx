@@ -1,68 +1,87 @@
-import Link from 'next/link';
+import type { Metadata } from "next";
+import Link from "next/link";
+import { SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
+
+const SITE = "https://www.partyatredrocks.com";
+
+export const metadata: Metadata = {
+  title: "Professional Transportation & Safety Standards | Party at Red Rocks",
+  description:
+    `Commercial passenger licensing, driver background vetting, commercial insurance, and flat-rate private group pricing ($${SUBURBAN_2027_USD} Suburban / $${VAN_2027_USD} Van) for Red Rocks concerts.`,
+  alternates: { canonical: `${SITE}/guide/safety-and-legitimacy` },
+};
 
 export default function SafetyAndLegitimacy() {
   const safetySchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "@id": "https://www.partyatredrocks.com/#organization",
-    "name": "Party at Red Rocks",
-    "url": "https://www.partyatredrocks.com/",
-    "description": "Independent Colorado transportation provider for Red Rocks and Denver venues with vetted drivers and commercial insurance coverage.",
-    "areaServed": ["Denver", "Boulder", "Morrison"],
-    "telephone": "+1-720-369-6292"
+    "@id": `${SITE}/#organization`,
+    name: "Party at Red Rocks",
+    url: `${SITE}/`,
+    description:
+      "Independent Colorado private concert transportation provider for Red Rocks and Denver venues with vetted drivers and commercial insurance coverage.",
+    areaServed: ["Denver", "Golden", "Boulder", "Morrison"],
+    telephone: "+1-720-369-6292",
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-20 bg-surface text-white">
+    <main className="mx-auto max-w-3xl bg-surface px-6 py-24 text-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(safetySchema) }} />
-      
-      <h1 className="text-4xl font-black mb-6 uppercase italic tracking-tighter">Professional Transportation Standards</h1>
-      
-      <p className="text-lg text-soft mb-16 leading-relaxed">
-        <strong>Party at Red Rocks</strong> runs shared shuttles and private rides for Red Rocks and Denver-area venues.
-        This page covers the driver, insurance, and booking standards behind the service.
+
+      <h1 className="mb-6 text-4xl font-black uppercase tracking-tight">Professional Transportation Standards</h1>
+
+      <p className="mb-14 text-lg leading-relaxed text-soft">
+        <strong>Party at Red Rocks</strong> operates dedicated private Suburban and 10-passenger van rides for Red Rocks Amphitheatre and Denver-area concert venues. Here are the licensing, driver vetting, insurance, and pricing standards behind every booking.
       </p>
 
-      <section className="panel rounded-[2.5rem] p-8 mb-16 shadow-2xl">
-          <h2 className="mb-6 text-2xl font-black uppercase italic text-[#4cc9f0]">Our 2026 Standards</h2>
+      <section className="panel mb-14 rounded-[2.5rem] p-8 shadow-2xl">
+        <h2 className="mb-6 text-2xl font-black uppercase text-[#ffb07c]">Operator Safety & Licensing Standards</h2>
         <ul className="space-y-6">
           <li className="flex gap-4">
             <span className="font-bold text-[#ffb07c]">01.</span>
             <div>
-              <strong className="block text-white uppercase tracking-wide">Professional Vetting</strong>
-              <p className="text-muted text-base mt-1">Every driver undergoes mandatory fingerprint-based criminal background checks—a standard we never compromise.</p>
+              <strong className="block uppercase tracking-wide text-white">Background-Checked Commercial Drivers</strong>
+              <p className="mt-1 text-base text-muted">
+                Every driver completes criminal background screening and Colorado mountain-corridor driving standards before operating concert nights.
+              </p>
             </div>
           </li>
           <li className="flex gap-4">
             <span className="font-bold text-[#ffb07c]">02.</span>
             <div>
-              <strong className="block text-white uppercase tracking-wide">Commercial Coverage</strong>
-              <p className="text-muted text-base mt-1">We maintain commercial insurance coverage for passenger transportation service.</p>
+              <strong className="block uppercase tracking-wide text-white">Commercial Passenger Coverage (PUC LL-02649)</strong>
+              <p className="mt-1 text-base text-muted">
+                Vehicles operate under active Colorado PUC luxury limousine authority and commercial passenger liability insurance—not personal rideshare policies.
+              </p>
             </div>
           </li>
           <li className="flex gap-4">
             <span className="font-bold text-[#ffb07c]">03.</span>
             <div>
-              <strong className="block text-white uppercase tracking-wide">Fixed-Rate Integrity</strong>
-              <p className="text-muted text-base mt-1">Your private ride rate ($499 Suburban / $699 van) is locked in when you book—never subject to surge pricing.</p>
+              <strong className="block uppercase tracking-wide text-white">Published Flat-Rate Integrity</strong>
+              <p className="mt-1 text-base text-muted">
+                Your 2027 round-trip rate (${SUBURBAN_2027_USD} Private Suburban up to 6 / ${VAN_2027_USD} Private Van up to 10) is locked when you book—zero post-show surge multipliers.
+              </p>
             </div>
           </li>
         </ul>
       </section>
 
-      <div className="prose prose-invert prose-sm">
-        <h3 className="text-xl font-black uppercase italic italic tracking-tight">Why It Helps</h3>
-        <p className="text-muted">
-          When the show ends and the lots empty all at once, clear pickup planning matters.
-          A reserved ride means your return plan is already in place before the encore ends.
+      <section>
+        <h2 className="text-xl font-black uppercase tracking-tight text-white">Why Pre-Booked Private Service Matters</h2>
+        <p className="mt-3 leading-relaxed text-muted">
+          When 9,500 fans exit Red Rocks at once in the dark, cell networks saturate and rideshare queues back up down the mountain. Having your own driver and vehicle waiting at Red Rocks means your ride home is already staged before the encore ends.
         </p>
-      </div>
+      </section>
 
-      <div className="mt-16 text-center border-t border-zinc-900 pt-10">
-        <Link href="/book/red-rocks-amphitheatre/private" className="btn-primary uppercase tracking-widest transition shadow-xl inline-block">
-          Book a Ride
+      <div className="mt-14 border-t border-white/10 pt-10 text-center">
+        <Link
+          href="/book/red-rocks-amphitheatre/private"
+          className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#ff6b3d] px-8 text-sm font-black uppercase tracking-[0.14em] text-white transition hover:bg-[#ff7f56]"
+        >
+          Choose Your Private Vehicle
         </Link>
       </div>
-    </div>
+    </main>
   );
 }

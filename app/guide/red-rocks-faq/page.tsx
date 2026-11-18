@@ -3,6 +3,7 @@ import type { HandoffSearchParams } from "@/lib/parrHandoff";
 import { buildBookingHref } from "@/lib/parrHandoff";
 
 export const metadata = {
+  alternates: { canonical: "https://www.partyatredrocks.com/guide/red-rocks-faq" },
   title: "Red Rocks FAQ | Party at Red Rocks",
   description:
     "Everything people actually need: private pickup timing, return plan, what to bring, cancellation rules, and common Red Rocks transportation questions.",

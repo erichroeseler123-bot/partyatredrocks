@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import venuesJson from "@/data/venues.json";
+import { evaluateVenuePageDisposition } from "@/lib/seo/indexationGate";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
@@ -38,11 +39,13 @@ export async function generateMetadata({
   const venue = getVenue(slug);
   if (!venue) return {};
   const name = venueName(slug, venue);
+  const gate = evaluateVenuePageDisposition(slug, "transportation");
 
   return {
-    title: `${name} Transportation Guide | Shuttle vs Rideshare 2026`,
-    description: `How to get to ${name}. Compare shuttle, rideshare, driving, and transit with a practical post-show exit strategy.`,
+    title: `${name} Transportation Guide | Group Charter vs Rideshare`,
+    description: `How to get to ${name}. Compare private group vehicles, rideshare, driving, and transit with a practical post-show exit strategy.`,
     alternates: { canonical: `${SITE}/venues/${slug}/transportation` },
+    robots: { index: gate.index, follow: gate.follow },
   };
 }
 

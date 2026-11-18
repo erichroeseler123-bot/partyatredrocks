@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 
 export default function PrivateVanPage() {
-  redirect("/book/red-rocks-amphitheatre/private#van-upgrade");
+  permanentRedirect("/book/red-rocks-amphitheatre/private#van-upgrade");
 }

@@ -1,46 +1,70 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-
 import { shows2026 } from "@/lib/shows-2026";
+import { SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
 
-type Show = (typeof shows2026)[number];
+const SITE = "https://www.partyatredrocks.com";
+
+export const metadata: Metadata = {
+  title: "2026 Red Rocks Season Lineup Archive | Event Guides",
+  description:
+    `Historical 2026 Red Rocks season preview and show-by-show guide archive. Planning a 2027 concert night? See the 2027 Red Rocks schedule and book private transportation ($${SUBURBAN_2027_USD} Suburban / $${VAN_2027_USD} Van).`,
+  alternates: { canonical: `${SITE}/guide/events/2026-season-preview` },
+  openGraph: {
+    title: "2026 Red Rocks Season Lineup Guide (Archive)",
+    description:
+      "Archived 2026 Red Rocks concert guide index, with direct links to 2027 concert dates and private group transportation.",
+    url: `${SITE}/guide/events/2026-season-preview`,
+    type: "article",
+  },
+};
 
 export default function SeasonPreview() {
-
   const sorted = [...shows2026].sort(
-    (a, b) =>
-      new Date(a.date).getTime() -
-      new Date(b.date).getTime()
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
   );
 
   return (
-    <main className="max-w-4xl mx-auto px-6 py-24 bg-surface text-white">
+    <main className="mx-auto max-w-4xl bg-surface px-6 py-24 text-white">
+      <aside
+        aria-label="2026 season archive notice"
+        className="mb-8 rounded-2xl border border-[#ffb07c]/35 bg-[#ffb07c]/10 p-5 text-sm leading-6 text-white/90"
+      >
+        <span className="font-black uppercase tracking-[0.16em] text-[#ffb07c]">2026 Season Archive:</span>{" "}
+        These show guides document the 2026 Red Rocks season. Existing 2026 bookings and quotes remain honored at their original prices. Looking for upcoming shows?{" "}
+        <Link href="/red-rocks/concerts" className="font-bold text-[#ffb07c] underline">
+          Explore the 2027 Red Rocks Concert Schedule
+        </Link>{" "}
+        or{" "}
+        <Link href="/book/red-rocks-amphitheatre/private" className="font-bold text-[#ffb07c] underline">
+          reserve a 2027 Private Suburban (${SUBURBAN_2027_USD}) or Private Van (${VAN_2027_USD})
+        </Link>
+        .
+      </aside>
 
-      {/* ================= HEADER ================= */}
-
-      <h1 className="text-5xl font-black mb-8 uppercase italic tracking-tighter leading-tight">
-        2026 <span className="text-[#4cc9f0]">Season</span> Lineup Guide
+      <h1 className="mb-6 text-4xl font-black uppercase leading-tight tracking-tight sm:text-5xl">
+        2026 <span className="text-[#ffb07c]">Season</span> Lineup Guide (Archive)
       </h1>
 
-      <p className="text-muted text-xl mb-12 leading-relaxed font-medium">
-        The definitive Red Rocks transportation guide for 2026.
+      <p className="mb-10 text-lg font-medium leading-relaxed text-muted">
+        Historical Red Rocks artist and arrival guides from the 2026 concert season.
       </p>
 
-      {/* ================= SHOW LIST ================= */}
+      <h2 className="mb-6 text-xl font-black uppercase tracking-wider text-white/85">
+        Archived 2026 Event Guides
+      </h2>
 
-      <div className="grid gap-6 mb-16">
-
+      <div className="mb-16 grid gap-6">
         {sorted.map((show) => {
-
           const date = new Date(show.date);
 
           return (
             <Link
               key={show.slug}
               href={`/guide/events/${show.slug}`}
-              className="group p-8 panel rounded-[2.5rem] shadow-xl transition-all hover:border-[#4cc9f0]"
+              className="group panel rounded-[2rem] p-7 shadow-xl transition-all hover:border-[#ffb07c]"
             >
-
-              <span className="font-mono text-base font-bold uppercase tracking-widest text-[#ffb07c]">
+              <span className="font-mono text-sm font-bold uppercase tracking-widest text-[#ffb07c]">
                 {date.toLocaleDateString("en-US", {
                   month: "long",
                   day: "numeric",
@@ -48,28 +72,32 @@ export default function SeasonPreview() {
                 })}
               </span>
 
-              <h3 className="mt-2 text-2xl font-black uppercase italic tracking-tight transition-colors group-hover:text-[#4cc9f0]">
+              <h3 className="mt-2 text-2xl font-black uppercase tracking-tight transition-colors group-hover:text-[#ffb07c]">
                 {show.artist}
               </h3>
 
-              <p className="text-muted text-base mt-3">
-                {show.venue}
-              </p>
-
+              <p className="mt-2 text-base text-muted">{show.venue}</p>
             </Link>
           );
         })}
-
       </div>
 
-      {/* ================= FOOTER ================= */}
-
-      <div className="pt-10 border-t border-zinc-900 text-center">
-        <p className="text-faint text-[10px] font-black uppercase tracking-[0.4em]">
-          © 2026 Party at Red Rocks
+      <div className="rounded-3xl border border-white/12 bg-surface-strong p-8 text-center">
+        <h2 className="text-2xl font-black uppercase tracking-tight text-white">
+          Planning a 2027 Red Rocks Night?
+        </h2>
+        <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-muted">
+          Book a flat-rate Private Suburban (${SUBURBAN_2027_USD}, up to 6 guests) or Private Van (${VAN_2027_USD}, up to 10 guests) with Upper North Lot tailgating gear and a driver waiting through the show.
         </p>
+        <div className="mt-6 flex flex-wrap justify-center gap-4">
+          <Link href="/red-rocks/concerts" className="btn-primary">
+            2027 Concert Calendar
+          </Link>
+          <Link href="/book/red-rocks-amphitheatre/private" className="btn-ghost">
+            Choose Private Vehicle
+          </Link>
+        </div>
       </div>
-
     </main>
   );
 }

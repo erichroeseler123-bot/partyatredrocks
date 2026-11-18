@@ -3,6 +3,7 @@ import type { HandoffSearchParams } from "@/lib/parrHandoff";
 import { buildBookingHref } from "@/lib/parrHandoff";
 
 export const metadata = {
+  alternates: { canonical: "https://www.partyatredrocks.com/red-rocks/transportation/post-show-pickup" },
   title: "Post-Show Pickup Strategy (Red Rocks)",
   description:
     "Where to meet, how to plan pickup, and how to reduce confusion after the encore.",
