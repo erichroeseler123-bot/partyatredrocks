@@ -9,6 +9,10 @@ type ReadOnlyRezdyResult = {
   data: Record<string, unknown> | null;
 };
 
+export type Phase3aAuditOptions = {
+  codes?: string[];
+};
+
 function getRezdyApiKey(): string {
   const key = process.env.REZDY_API_KEY?.trim() || "";
   if (!key) {
@@ -56,9 +60,14 @@ function sanitizeProductRecord(raw: unknown): Record<string, unknown> | null {
   const prod = raw as Record<string, unknown>;
   const out: Record<string, unknown> = {};
   for (const [k, v] of Object.entries(prod)) {
-    // Strip verbose image binary/gallery arrays to keep payload crisp, keep count
     if (k === "images" && Array.isArray(v)) {
       out.imagesCount = v.length;
+      out.imageUrls = v
+        .slice(0, 4)
+        .map((img) =>
+          img && typeof img === "object" ? (img as Record<string, unknown>).itemUrl ?? null : null
+        )
+        .filter(Boolean);
       continue;
     }
     out[k] = v;
@@ -76,6 +85,7 @@ function sanitizeBookingRecordToStructureOnly(raw: unknown): Record<string, unkn
   return {
     status: b.status ?? null,
     source: b.source ?? null,
+    sourceChannel: b.sourceChannel ?? null,
     paymentOption: b.paymentOption ?? null,
     sendNotifications: b.sendNotifications ?? null,
     totalAmount: b.totalAmount ?? null,
@@ -111,10 +121,12 @@ function sanitizeBookingRecordToStructureOnly(raw: unknown): Record<string, unkn
       recipient: p.recipient ?? null,
       currency: p.currency ?? null,
       amount: p.amount ?? null,
-      // Redact any card digits if label contains numbers; keep gateway/method word
       labelKind:
         typeof p.label === "string"
-          ? p.label.replace(/\d+/g, "X").slice(0, 60)
+          ? p.label
+              .replace(/(pi_|ch_|tok_|card_|pm_|py_|re_)[A-Za-z0-9_]+/g, "$1[REDACTED]")
+              .replace(/\d+/g, "X")
+              .slice(0, 60)
           : null,
     })),
   };
@@ -167,20 +179,35 @@ function scrubSecretsAndPii(payloadObj: unknown, secrets: string[]): Record<stri
   return JSON.parse(clean) as Record<string, unknown>;
 }
 
-export async function executePhase3aReadOnlyAudit() {
+const TARGET_CATEGORY_IDS = [
+  { id: "541037", label: "Party At Red Rocks (public catalog)" },
+  { id: "621841", label: "Private (hidden category)" },
+  { id: "638971", label: "Red Rocks Shuttle (hidden category)" },
+  { id: "608654", label: "Hotels / Denver hotel to Red Rocks Shuttle (hidden category)" },
+  { id: "617787", label: "Shuttles" },
+  { id: "562061", label: "Return Trips (hidden category)" },
+];
+
+export async function executePhase3aReadOnlyAudit(options: Phase3aAuditOptions = {}) {
   const apiKey = getRezdyApiKey();
   const stripePubKey =
     process.env.REZDY_STRIPE_PUBLISHABLE_KEY?.trim() ||
     process.env.NEXT_PUBLIC_REZDY_STRIPE_PUBLISHABLE_KEY?.trim() ||
     "";
 
-  // 1. Paginated GET /v1/products across entire supplier catalog
+  let upstreamGetRequestCount = 0;
+  const getTracked = async (pathWithQuery: string) => {
+    upstreamGetRequestCount += 1;
+    return rezdyGetReadOnly(pathWithQuery, apiKey);
+  };
+
+  // 1. Paginated GET /v1/products across entire supplier catalog (2 calls for 125 products)
   const allProducts: Array<Record<string, unknown>> = [];
   let productsEndpointStatus = 0;
   let productsEndpointError: unknown = null;
 
   for (let offset = 0; offset < 600; offset += 100) {
-    const res = await rezdyGetReadOnly(`/products?limit=100&offset=${offset}`, apiKey);
+    const res = await getTracked(`/products?limit=100&offset=${offset}`);
     if (offset === 0) {
       productsEndpointStatus = res.status;
       const reqStatus = res.data?.requestStatus as Record<string, unknown> | undefined;
@@ -193,75 +220,92 @@ export async function executePhase3aReadOnlyAudit() {
     if (batch.length < 100) break;
   }
 
-  // 2. Categories / Catalogs inspection (specifically catalog 541037 & legacy 638971)
-  const [
-    categoriesRes,
-    cat541037DetailRes,
-    cat541037ProductsQueryRes,
-    cat541037SubpathRes,
-    cat638971ProductsQueryRes,
-    probe596193Res,
-    probe630812Res,
-    probe541037Res,
-  ] = await Promise.all([
-    rezdyGetReadOnly("/categories?limit=100", apiKey),
-    rezdyGetReadOnly("/categories/541037", apiKey),
-    rezdyGetReadOnly("/products?category=541037&limit=100", apiKey),
-    rezdyGetReadOnly("/categories/541037/products?limit=100", apiKey),
-    rezdyGetReadOnly("/products?category=638971&limit=100", apiKey),
-    rezdyGetReadOnly("/products/596193", apiKey),
-    rezdyGetReadOnly("/products/630812", apiKey),
-    rezdyGetReadOnly("/products/541037", apiKey),
-  ]);
+  // 2. Categories / Catalogs inspection via authentic `/categories/{id}/products` subpath
+  const [categoriesRes, cat541037DetailRes, probe596193Res, probe630812Res, probe541037Res] =
+    await Promise.all([
+      getTracked("/categories?limit=100"),
+      getTracked("/categories/541037"),
+      getTracked("/products/596193"),
+      getTracked("/products/630812"),
+      getTracked("/products/541037"),
+    ]);
 
-  const cat541037Products = Array.isArray(cat541037ProductsQueryRes.data?.products)
-    ? (cat541037ProductsQueryRes.data?.products as Array<Record<string, unknown>>)
-    : Array.isArray(cat541037SubpathRes.data?.products)
-      ? (cat541037SubpathRes.data?.products as Array<Record<string, unknown>>)
+  const categoryMemberships: Record<string, unknown> = {};
+  const categoryDiscoveredCodes = new Set<string>();
+
+  for (const cat of TARGET_CATEGORY_IDS) {
+    const subRes = await getTracked(`/categories/${cat.id}/products?limit=100`);
+    const items = Array.isArray(subRes.data?.products)
+      ? (subRes.data?.products as Array<Record<string, unknown>>)
       : [];
-
-  const cat638971Products = Array.isArray(cat638971ProductsQueryRes.data?.products)
-    ? (cat638971ProductsQueryRes.data?.products as Array<Record<string, unknown>>)
-    : [];
-
-  // 3. Identify every candidate PARR / Red Rocks / Suburban / 10-Passenger Van product
-  const candidateCodes = new Set<string>();
-  for (const p of [...cat541037Products, ...cat638971Products]) {
-    if (typeof p.productCode === "string") candidateCodes.add(p.productCode);
+    for (const p of items) {
+      if (typeof p.productCode === "string" && p.productCode) {
+        categoryDiscoveredCodes.add(p.productCode);
+      }
+    }
+    categoryMemberships[cat.id] = {
+      label: cat.label,
+      httpStatus: subRes.status,
+      error: (subRes.data?.requestStatus as Record<string, unknown> | undefined)?.error ?? null,
+      count: items.length,
+      products: items.map((p) => ({
+        productCode: p.productCode ?? null,
+        id: p.id ?? null,
+        internalCode: p.internalCode ?? null,
+        name: p.name ?? null,
+        productType: p.productType ?? null,
+        bookingMode: p.bookingMode ?? null,
+        confirmMode: p.confirmMode ?? null,
+        isApiBookingSupported: p.isApiBookingSupported ?? null,
+        advertisedPrice: p.advertisedPrice ?? null,
+        priceOptions: Array.isArray(p.priceOptions) ? p.priceOptions : [],
+      })),
+    };
   }
-  for (const p of allProducts) {
-    const code = typeof p.productCode === "string" ? p.productCode : "";
-    if (!code) continue;
-    const blob = JSON.stringify({
-      code,
-      id: p.id,
-      internalCode: p.internalCode,
-      name: p.name,
-      shortDescription: p.shortDescription,
-      description: p.description,
-      productType: p.productType,
-    }).toLowerCase();
 
-    if (
-      blob.includes("red rocks") ||
-      blob.includes("596193") ||
-      blob.includes("630812") ||
-      blob.includes("541037") ||
-      blob.includes("morrison") ||
-      /^suburban$/i.test(String(p.name ?? "").trim()) ||
-      /10[\s-]*passenger|van[\s-]*10|^van$/i.test(String(p.name ?? "").trim()) ||
-      /suburban/i.test(String(p.name ?? ""))
-    ) {
-      candidateCodes.add(code);
+  // 3. Determine focused product codes to inspect well below Rezdy's 100 req/min rate limit
+  const explicitCodes = (options.codes ?? [])
+    .map((c) => c.trim().toUpperCase())
+    .filter((c) => /^[A-Z0-9_-]{3,20}$/.test(c));
+
+  const candidateCodes = new Set<string>();
+  if (explicitCodes.length > 0) {
+    for (const c of explicitCodes) candidateCodes.add(c);
+    // Also ensure any products strictly inside catalog 541037 are included
+    const cat541037Entry = categoryMemberships["541037"] as
+      | { products?: Array<{ productCode?: string | null }> }
+      | undefined;
+    for (const p of cat541037Entry?.products ?? []) {
+      if (p.productCode) candidateCodes.add(p.productCode);
+    }
+  } else {
+    for (const p of allProducts) {
+      const code = typeof p.productCode === "string" ? p.productCode : "";
+      if (!code) continue;
+      const ic = String(p.internalCode ?? "");
+      if (ic.toUpperCase().startsWith("GOSNO")) continue;
+      const nameStr = String(p.name ?? "");
+      const descStr = `${String(p.shortDescription ?? "")} ${String(p.description ?? "")}`;
+      if (
+        /red rocks|morrison|^suburban$|^van\s*-\s*10|^sprinter van/i.test(nameStr.trim()) ||
+        /red rocks/i.test(descStr)
+      ) {
+        candidateCodes.add(code);
+      }
+    }
+    const cat541037Entry = categoryMemberships["541037"] as
+      | { products?: Array<{ productCode?: string | null }> }
+      | undefined;
+    for (const p of cat541037Entry?.products ?? []) {
+      if (p.productCode) candidateCodes.add(p.productCode);
     }
   }
 
-  // Include 1 GoSno SUV & 1 GoSno Van reference product for structural comparison
-  const referenceCodes = ["P7477S", "PKQDPG"].filter((c) =>
-    allProducts.some((p) => p.productCode === c)
-  );
-
   const detailedProducts: Record<string, unknown> = {};
+  const windows2026 = [
+    { label: "2026-Apr-Jul", start: "2026-04-01 00:00:00", end: "2026-07-31 23:59:59" },
+    { label: "2026-Aug-Dec", start: "2026-08-01 00:00:00", end: "2026-12-31 23:59:59" },
+  ];
   const quarterWindows2027 = [
     { label: "2027-Q1", start: "2027-01-01 00:00:00", end: "2027-03-31 23:59:59" },
     { label: "2027-Q2", start: "2027-04-01 00:00:00", end: "2027-06-30 23:59:59" },
@@ -269,30 +313,39 @@ export async function executePhase3aReadOnlyAudit() {
     { label: "2027-Q4", start: "2027-10-01 00:00:00", end: "2027-12-31 23:59:59" },
   ];
 
+  const primaryVehicleCodes = new Set(["P0U1MY", "PJM9GD", "PJWY1B", "PP6ERS"]);
+
   for (const code of Array.from(candidateCodes)) {
-    const [prodDetailRes, pickupsRes, avail2026Res, ...avail2027QuarterResults] = await Promise.all([
-      rezdyGetReadOnly(`/products/${encodeURIComponent(code)}`, apiKey),
-      rezdyGetReadOnly(`/products/${encodeURIComponent(code)}/pickups`, apiKey),
-      rezdyGetReadOnly(
-        `/availability?productCode=${encodeURIComponent(code)}&startTimeLocal=${encodeURIComponent("2026-11-18 00:00:00")}&endTimeLocal=${encodeURIComponent("2026-12-31 23:59:59")}&limit=200`,
-        apiKey
-      ),
-      ...quarterWindows2027.map((w) =>
-        rezdyGetReadOnly(
-          `/availability?productCode=${encodeURIComponent(code)}&startTimeLocal=${encodeURIComponent(w.start)}&endTimeLocal=${encodeURIComponent(w.end)}&limit=200`,
-          apiKey
-        )
-      ),
+    const includeFull2026 = primaryVehicleCodes.has(code);
+    const active2026Windows = includeFull2026
+      ? windows2026
+      : [{ label: "2026-Nov-Dec", start: "2026-11-18 00:00:00", end: "2026-12-31 23:59:59" }];
+
+    const [prodDetailRes, pickupsRes, bookingsSampleRes] = await Promise.all([
+      getTracked(`/products/${encodeURIComponent(code)}`),
+      getTracked(`/products/${encodeURIComponent(code)}/pickups`),
+      getTracked(`/bookings?productCode=${encodeURIComponent(code)}&limit=5`),
     ]);
 
-    const bookingsSampleRes = await rezdyGetReadOnly(
-      `/bookings?productCode=${encodeURIComponent(code)}&limit=5`,
-      apiKey
+    const avail2026Results = await Promise.all(
+      active2026Windows.map((w) =>
+        getTracked(
+          `/availability?productCode=${encodeURIComponent(code)}&startTimeLocal=${encodeURIComponent(w.start)}&endTimeLocal=${encodeURIComponent(w.end)}&limit=200`
+        )
+      )
     );
 
-    const sessions2026 = Array.isArray(avail2026Res.data?.sessions)
-      ? (avail2026Res.data?.sessions as Array<Record<string, unknown>>)
-      : [];
+    const avail2027QuarterResults = await Promise.all(
+      quarterWindows2027.map((w) =>
+        getTracked(
+          `/availability?productCode=${encodeURIComponent(code)}&startTimeLocal=${encodeURIComponent(w.start)}&endTimeLocal=${encodeURIComponent(w.end)}&limit=200`
+        )
+      )
+    );
+
+    const sessions2026 = avail2026Results.flatMap((r) =>
+      Array.isArray(r.data?.sessions) ? (r.data?.sessions as Array<Record<string, unknown>>) : []
+    );
     const sessions2027 = avail2027QuarterResults.flatMap((r) =>
       Array.isArray(r.data?.sessions) ? (r.data?.sessions as Array<Record<string, unknown>>) : []
     );
@@ -309,10 +362,37 @@ export async function executePhase3aReadOnlyAudit() {
       pickupsHttpStatus: pickupsRes.status,
       pickups: pickupsRes.data,
       sessions2026: {
-        httpStatus: avail2026Res.status,
-        error: (avail2026Res.data?.requestStatus as Record<string, unknown> | undefined)?.error ?? null,
+        windowStatuses: avail2026Results.map((r, i) => ({
+          window: active2026Windows[i].label,
+          status: r.status,
+          count: Array.isArray(r.data?.sessions) ? r.data?.sessions.length : 0,
+          error: (r.data?.requestStatus as Record<string, unknown> | undefined)?.error ?? null,
+        })),
         totalCount: sessions2026.length,
-        sampleSessions: sessions2026.slice(0, 5),
+        firstSessionStart: sessions2026[0]?.startTimeLocal ?? null,
+        lastSessionStart: sessions2026[sessions2026.length - 1]?.startTimeLocal ?? null,
+        distinctSessionPriceOptions: Array.from(
+          new Set(
+            sessions2026.flatMap((s) => {
+              const opts = Array.isArray(s.priceOptions)
+                ? (s.priceOptions as Array<Record<string, unknown>>)
+                : [];
+              return opts.map(
+                (po) =>
+                  `${String(po.label ?? "")}|price=${String(po.price ?? "undefined")}|seatsUsed=${String(po.seatsUsed ?? "")}|groupType=${String(po.priceGroupType ?? "")}`
+              );
+            })
+          )
+        ),
+        distinctSeatModels: Array.from(
+          new Set(
+            sessions2026.map(
+              (s) =>
+                `seats=${String(s.seats ?? "")},seatsAvailable=${String(s.seatsAvailable ?? "")},allDay=${String(s.allDay ?? "")}`
+            )
+          )
+        ),
+        sampleSessions: sessions2026.slice(0, 6),
       },
       sessions2027: {
         quarterStatuses: avail2027QuarterResults.map((r, i) => ({
@@ -340,7 +420,8 @@ export async function executePhase3aReadOnlyAudit() {
         distinctSeatModels: Array.from(
           new Set(
             sessions2027.map(
-              (s) => `seats=${String(s.seats ?? "")},seatsAvailable=${String(s.seatsAvailable ?? "")},allDay=${String(s.allDay ?? "")}`
+              (s) =>
+                `seats=${String(s.seats ?? "")},seatsAvailable=${String(s.seatsAvailable ?? "")},allDay=${String(s.allDay ?? "")}`
             )
           )
         ),
@@ -354,24 +435,28 @@ export async function executePhase3aReadOnlyAudit() {
     };
   }
 
-  // 4. Reference GoSno products + global recent booking payment-gateway structure + resources check
-  const referenceProducts: Record<string, unknown> = {};
-  for (const refCode of referenceCodes) {
-    const r = await rezdyGetReadOnly(`/products/${encodeURIComponent(refCode)}`, apiKey);
-    referenceProducts[refCode] = sanitizeProductRecord(r.data?.product ?? r.data);
-  }
-
-  const [globalRecentBookingsRes, resourcesListRes, ...resourceProbeResults] = await Promise.all([
-    rezdyGetReadOnly("/bookings?limit=8", apiKey),
-    rezdyGetReadOnly("/resources", apiKey),
-    ...["102357", "91158", "102358", "102359", "92540", "83735"].map((rid) =>
-      rezdyGetReadOnly(`/resources/${rid}`, apiKey)
-    ),
+  const [globalRecentBookingsRes, resourcesListRes] = await Promise.all([
+    getTracked("/bookings?limit=8"),
+    getTracked("/resources"),
   ]);
 
   const rawGlobalBookings = Array.isArray(globalRecentBookingsRes.data?.bookings)
     ? globalRecentBookingsRes.data?.bookings
     : [];
+
+  // Summarize productType x bookingMode distribution across all 125 products for Phase 3A #2
+  const productTypeModeBreakdown: Record<string, { count: number; emptyPriceOptionsCount: number }> = {};
+  for (const p of allProducts) {
+    const key = `${String(p.productType ?? "UNKNOWN")}__${String(p.bookingMode ?? "UNKNOWN")}`;
+    if (!productTypeModeBreakdown[key]) {
+      productTypeModeBreakdown[key] = { count: 0, emptyPriceOptionsCount: 0 };
+    }
+    productTypeModeBreakdown[key].count += 1;
+    const opts = Array.isArray(p.priceOptions) ? p.priceOptions : [];
+    if (opts.length === 0) {
+      productTypeModeBreakdown[key].emptyPriceOptionsCount += 1;
+    }
+  }
 
   const payload = {
     ok: productsEndpointStatus === 200,
@@ -379,6 +464,7 @@ export async function executePhase3aReadOnlyAudit() {
     readOnlyGuarantee: {
       rezdyWritesExecuted: 0,
       allowedHttpMethodsToRezdy: ["GET"],
+      upstreamGetRequestCount,
     },
     credentialAndGatewayRuntimeStatus: {
       rezdyApiKeyConfiguredInRuntime: true,
@@ -394,47 +480,15 @@ export async function executePhase3aReadOnlyAudit() {
       productsEndpointStatus,
       productsEndpointError,
       totalProductsCount: allProducts.length,
-      allProductsIndex: allProducts.map((p) => ({
-        productCode: p.productCode ?? null,
-        id: p.id ?? null,
-        internalCode: p.internalCode ?? null,
-        name: p.name ?? null,
-        productType: p.productType ?? null,
-        bookingMode: p.bookingMode ?? null,
-        isApiBookingSupported: p.isApiBookingSupported ?? null,
-        confirmMode: p.confirmMode ?? null,
-        advertisedPrice: p.advertisedPrice ?? null,
-        priceOptions: Array.isArray(p.priceOptions) ? p.priceOptions : [],
-      })),
+      productTypeModeBreakdown,
     },
     categoriesAndNumericIdProbes: {
       categoriesListStatus: categoriesRes.status,
-      categoriesList: categoriesRes.data?.categories ?? categoriesRes.data,
       category541037Detail: {
         status: cat541037DetailRes.status,
         data: cat541037DetailRes.data,
       },
-      category541037Products: {
-        queryStatus: cat541037ProductsQueryRes.status,
-        subpathStatus: cat541037SubpathRes.status,
-        count: cat541037Products.length,
-        productCodes: cat541037Products.map((p) => ({
-          productCode: p.productCode ?? null,
-          id: p.id ?? null,
-          name: p.name ?? null,
-          productType: p.productType ?? null,
-          bookingMode: p.bookingMode ?? null,
-          isApiBookingSupported: p.isApiBookingSupported ?? null,
-        })),
-      },
-      category638971Products: {
-        queryStatus: cat638971ProductsQueryRes.status,
-        count: cat638971Products.length,
-        productCodes: cat638971Products.map((p) => ({
-          productCode: p.productCode ?? null,
-          name: p.name ?? null,
-        })),
-      },
+      categoryMemberships,
       directNumericProductProbes: {
         "596193": { status: probe596193Res.status, data: probe596193Res.data },
         "630812": { status: probe630812Res.status, data: probe630812Res.data },
@@ -443,7 +497,6 @@ export async function executePhase3aReadOnlyAudit() {
     },
     candidateCodesInspected: Array.from(candidateCodes),
     detailedProducts,
-    referenceComparisonProducts: referenceProducts,
     accountPaymentAndNotificationEvidenceFromRedactedOrders: {
       httpStatus: globalRecentBookingsRes.status,
       sampledCount: rawGlobalBookings.length,
@@ -452,15 +505,6 @@ export async function executePhase3aReadOnlyAudit() {
     resourcesInspection: {
       listStatus: resourcesListRes.status,
       listData: resourcesListRes.data,
-      knownVehicleResourceProbes: Object.fromEntries(
-        ["102357", "91158", "102358", "102359", "92540", "83735"].map((rid, idx) => [
-          rid,
-          {
-            status: resourceProbeResults[idx].status,
-            data: resourceProbeResults[idx].data,
-          },
-        ])
-      ),
     },
   };
 

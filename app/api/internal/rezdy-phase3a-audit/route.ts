@@ -44,7 +44,16 @@ export async function GET(request: Request) {
   }
 
   try {
-    const report = await executePhase3aReadOnlyAudit();
+    const reqUrl = new URL(request.url);
+    const codesParam = reqUrl.searchParams.get("codes")?.trim() || "";
+    const codes = codesParam
+      ? codesParam
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean)
+      : undefined;
+
+    const report = await executePhase3aReadOnlyAudit({ codes });
     return NextResponse.json(report, { status: 200, headers: NO_STORE_HEADERS });
   } catch (error) {
     const rawMsg = error instanceof Error ? error.message : "Phase 3A audit failed";
