@@ -20,6 +20,11 @@ import {
   Users,
 } from "lucide-react";
 import { ReviewBlock } from "@/components/ReviewBlock";
+import {
+  ParrShowBookingSelector,
+  type SelectedBookingContext,
+} from "@/components/booking/ParrShowBookingSelector";
+import type { CanonicalRedRocksBookingShow } from "@/lib/shows/redRocksBookingCatalog";
 import { trackNetworkEvent } from "@/lib/networkEvents";
 
 export type UpcomingRedRocksPreviewItem = {
@@ -48,6 +53,8 @@ type HomeSectionsProps = {
     | null;
   upcoming2027Preview?: UpcomingRedRocksPreviewItem[];
   verified2027Count?: number;
+  bookingCatalog?: CanonicalRedRocksBookingShow[];
+  todayDateKey?: string;
 };
 
 const PICKUP_AREAS = [
@@ -178,14 +185,26 @@ export default function HomeSections({
   privateVanSrc = "/images/redesign/private-van-black.webp",
   upcoming2027Preview = [],
   verified2027Count = 0,
+  bookingCatalog = [],
+  todayDateKey = "2026-11-18",
 }: HomeSectionsProps) {
-  const [selectedShowId, setSelectedShowId] = useState<string>("");
   const [customDate, setCustomDate] = useState("");
   const [customArtist, setCustomArtist] = useState("");
-  const [partySize, setPartySize] = useState<number>(6);
-  const [pickupArea, setPickupArea] = useState<string>(PICKUP_AREAS[0]);
+  const [partySize, setPartySize] = useState<number>(4);
+  const [pickupArea] = useState<string>(PICKUP_AREAS[0]);
   const [monthFilter, setMonthFilter] = useState<string>("all");
   const [showStickyMobileCta, setShowStickyMobileCta] = useState(false);
+
+  function handleBookingContextChange(ctx: SelectedBookingContext) {
+    setPartySize(ctx.partySize);
+    if (ctx.show && !ctx.show.isPastShow) {
+      setCustomDate(ctx.show.dateKey);
+      setCustomArtist(ctx.show.title);
+    } else {
+      setCustomDate("");
+      setCustomArtist("");
+    }
+  }
 
   useEffect(() => {
     trackNetworkEvent({
@@ -206,10 +225,10 @@ export default function HomeSections({
   const vanPricing = getPrivateRidePricingForDate({ optionSlug: "van", serviceDate: customDate });
 
   const primaryHeroHref = buildBookingFlowHref(recommendedOption, customDate, customArtist, pickupArea);
-  const compareVehiclesHref = buildBookingFlowHref("compare", customDate, customArtist, pickupArea);
   const customSuvHref = buildBookingFlowHref("suv", customDate, customArtist, pickupArea);
   const customVanHref = buildBookingFlowHref("van", customDate, customArtist, pickupArea);
   const presaleMailtoHref = buildPresaleMailto(customDate, customArtist);
+  void verified2027Count;
 
   const filteredShows = useMemo(() => {
     const filtered =
@@ -225,24 +244,6 @@ export default function HomeSections({
           });
     return filtered.slice(0, 9);
   }, [monthFilter, upcoming2027Preview]);
-
-  function handleSelectVerifiedShow(showId: string) {
-    setSelectedShowId(showId);
-    if (!showId || showId === "custom") {
-      return;
-    }
-    const found = upcoming2027Preview.find((item) => item.id === showId);
-    if (found) {
-      setCustomDate(found.dateKey);
-      setCustomArtist(found.name);
-      trackNetworkEvent({
-        eventName: "date_selected",
-        entryPage: "/",
-        date: found.dateKey,
-        travelIntent: "red-rocks-concert",
-      });
-    }
-  }
 
   return (
     <main className="bg-[#070b14] text-white">
@@ -287,195 +288,15 @@ export default function HomeSections({
               </p>
             </div>
 
-            {/* Unified 4-Step Mobile-First Booking Selector */}
-            <div className="mt-3 rounded-[20px] border border-white/16 bg-[#090e1a]/92 p-3 shadow-[0_24px_60px_rgba(0,0,0,0.55)] backdrop-blur-md sm:mt-7 sm:rounded-[24px] sm:p-6">
-              <div className="mb-2 flex flex-wrap items-center justify-between gap-x-2 gap-y-1 sm:mb-3">
-                <span className="text-[10px] font-black uppercase tracking-[0.15em] text-[#ffb07c] sm:text-[11px] sm:tracking-[0.18em]">
-                  Group Booking · 1 Flat Vehicle Rate
-                </span>
-                <Link
-                  href="/red-rocks/concerts"
-                  className="text-[11px] font-bold text-white/80 underline decoration-white/30 hover:text-[#ffb07c] sm:text-xs"
-                >
-                  All {verified2027Count} announced 2027 shows →
-                </Link>
-              </div>
-
-              <div className="grid gap-2 sm:gap-3 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.85fr)_minmax(0,0.9fr)_auto] lg:items-end">
-                <label className="flex min-w-0 flex-col gap-1 text-[10px] font-bold uppercase tracking-[0.1em] text-white/80 sm:gap-1.5 sm:text-[11px] sm:tracking-[0.12em]">
-                  <span>1. Choose Event or Date</span>
-                  <select
-                    aria-label="Choose a 2027 Red Rocks concert or custom date"
-                    value={selectedShowId}
-                    onChange={(e) => handleSelectVerifiedShow(e.target.value)}
-                    className="min-h-10 w-full min-w-0 truncate rounded-xl border border-white/20 bg-[#0f172a] px-3 text-xs font-semibold text-white focus:border-[#ffb07c] focus:outline-none sm:min-h-12 sm:px-3.5 sm:text-sm"
-                  >
-                    <option value="">Select 2027 concert (or any date)</option>
-                    {upcoming2027Preview.map((ev) => (
-                      <option key={ev.id} value={ev.id}>
-                        {ev.dateKey.slice(5)} · {ev.name}
-                      </option>
-                    ))}
-                    <option value="custom">Other / Newly Announced Date</option>
-                  </select>
-                </label>
-
-                <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:contents">
-                  <label className="flex min-w-0 flex-col gap-1 text-[10px] font-bold uppercase tracking-[0.08em] text-white/80 sm:gap-1.5 sm:text-[11px] sm:tracking-[0.12em]">
-                    <span className="truncate">2. Group &amp; Vehicle</span>
-                    <select
-                      aria-label="Select group size and private vehicle"
-                      value={partySize}
-                      onChange={(e) => setPartySize(Number(e.target.value))}
-                      className="min-h-10 w-full min-w-0 truncate rounded-xl border border-white/20 bg-[#0f172a] px-2.5 text-xs font-semibold text-white focus:border-[#ffb07c] focus:outline-none sm:min-h-12 sm:px-3.5 sm:text-sm"
-                    >
-                      {[2, 3, 4, 5, 6].map((n) => (
-                        <option key={n} value={n}>
-                          {n} · Suburban (${SUBURBAN_2027_USD})
-                        </option>
-                      ))}
-                      {[7, 8, 9, 10].map((n) => (
-                        <option key={n} value={n}>
-                          {n} · Van (${VAN_2027_USD})
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-
-                  <label className="flex min-w-0 flex-col gap-1 text-[10px] font-bold uppercase tracking-[0.08em] text-white/80 sm:gap-1.5 sm:text-[11px] sm:tracking-[0.12em]">
-                    <span className="truncate">3. Pickup Area</span>
-                    <select
-                      aria-label="Confirm pickup area"
-                      value={pickupArea}
-                      onChange={(e) => setPickupArea(e.target.value)}
-                      className="min-h-10 w-full min-w-0 truncate rounded-xl border border-white/20 bg-[#0f172a] px-2.5 text-xs font-semibold text-white focus:border-[#ffb07c] focus:outline-none sm:min-h-12 sm:px-3.5 sm:text-sm"
-                    >
-                      {PICKUP_AREAS.map((area) => (
-                        <option key={area} value={area}>
-                          {area}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                </div>
-
-                <Link
-                  href={primaryHeroHref}
-                  onClick={() =>
-                    trackNetworkEvent({
-                      eventName: "availability_started",
-                      entryPage: "/",
-                      date: customDate || undefined,
-                      travelIntent: "red-rocks-concert",
-                    })
-                  }
-                  className="inline-flex min-h-11 w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#ff7a4d] px-4 text-xs font-black uppercase tracking-[0.12em] text-[#140804] no-underline shadow-[0_12px_30px_rgba(255,122,77,0.35)] transition hover:bg-[#ff926b] sm:min-h-12 sm:px-5 lg:w-auto"
-                >
-                  <span>
-                    Book {partySize > 6 ? `Van ($${VAN_2027_USD})` : `Suburban ($${SUBURBAN_2027_USD})`}
-                  </span>
-                  <ArrowRight className="h-4 w-4 shrink-0" />
-                </Link>
-              </div>
-
-              {selectedShowId === "custom" ? (
-                <div className="mt-2.5 grid gap-2.5 border-t border-white/10 pt-2.5 sm:mt-3 sm:grid-cols-2 sm:gap-3 sm:pt-3">
-                  <label className="flex min-w-0 items-center gap-2.5 text-xs text-white/75">
-                    <span className="shrink-0 font-bold uppercase tracking-wider text-white/65">Exact Date:</span>
-                    <input
-                      type="date"
-                      min="2026-11-01"
-                      max="2028-12-31"
-                      value={customDate}
-                      onChange={(e) => setCustomDate(e.target.value)}
-                      className="min-h-9 min-w-0 flex-1 rounded-lg border border-white/15 bg-[#0f172a] px-2.5 text-xs font-medium text-white focus:border-[#ffb07c] focus:outline-none sm:min-h-10 sm:px-3"
-                    />
-                  </label>
-                  <label className="flex min-w-0 items-center gap-2.5 text-xs text-white/75">
-                    <span className="shrink-0 font-bold uppercase tracking-wider text-white/65">Artist (Opt):</span>
-                    <input
-                      type="text"
-                      value={customArtist}
-                      onChange={(e) => setCustomArtist(e.target.value)}
-                      placeholder="Headliner or tour name"
-                      className="min-h-9 min-w-0 flex-1 rounded-lg border border-white/15 bg-[#0f172a] px-2.5 text-xs font-medium text-white placeholder:text-white/40 focus:border-[#ffb07c] focus:outline-none sm:min-h-10 sm:px-3"
-                    />
-                  </label>
-                </div>
-              ) : !selectedShowId ? (
-                <>
-                  {/* Desktop inline custom date/artist inputs preserved */}
-                  <div className="mt-3 hidden gap-3 border-t border-white/10 pt-3 lg:grid lg:grid-cols-2">
-                    <label className="flex items-center gap-3 text-xs text-white/75">
-                      <span className="shrink-0 font-bold uppercase tracking-wider text-white/65">Exact Date:</span>
-                      <input
-                        type="date"
-                        min="2026-11-01"
-                        max="2028-12-31"
-                        value={customDate}
-                        onChange={(e) => setCustomDate(e.target.value)}
-                        className="min-h-10 flex-1 rounded-lg border border-white/15 bg-[#0f172a] px-3 text-xs font-medium text-white focus:border-[#ffb07c] focus:outline-none"
-                      />
-                    </label>
-                    <label className="flex items-center gap-3 text-xs text-white/75">
-                      <span className="shrink-0 font-bold uppercase tracking-wider text-white/65">Artist (Opt):</span>
-                      <input
-                        type="text"
-                        value={customArtist}
-                        onChange={(e) => setCustomArtist(e.target.value)}
-                        placeholder="Headliner or tour name"
-                        className="min-h-10 flex-1 rounded-lg border border-white/15 bg-[#0f172a] px-3 text-xs font-medium text-white placeholder:text-white/40 focus:border-[#ffb07c] focus:outline-none"
-                      />
-                    </label>
-                  </div>
-
-                  {/* Mobile compact disclosure for custom/presale date */}
-                  <details className="mt-2 border-t border-white/10 pt-2 lg:hidden">
-                    <summary className="cursor-pointer text-[11px] font-semibold text-white/75 hover:text-[#ffb07c]">
-                      Have a presale or unannounced 2027 date? Enter custom date
-                    </summary>
-                    <div className="mt-2 grid gap-2 sm:grid-cols-2">
-                      <label className="flex min-w-0 items-center gap-2 text-xs text-white/75">
-                        <span className="shrink-0 font-bold uppercase tracking-wider text-white/65">Date:</span>
-                        <input
-                          type="date"
-                          min="2026-11-01"
-                          max="2028-12-31"
-                          value={customDate}
-                          onChange={(e) => setCustomDate(e.target.value)}
-                          className="min-h-9 min-w-0 flex-1 rounded-lg border border-white/15 bg-[#0f172a] px-2.5 text-xs font-medium text-white focus:border-[#ffb07c] focus:outline-none"
-                        />
-                      </label>
-                      <label className="flex min-w-0 items-center gap-2 text-xs text-white/75">
-                        <span className="shrink-0 font-bold uppercase tracking-wider text-white/65">Artist:</span>
-                        <input
-                          type="text"
-                          value={customArtist}
-                          onChange={(e) => setCustomArtist(e.target.value)}
-                          placeholder="Headliner (optional)"
-                          className="min-h-9 min-w-0 flex-1 rounded-lg border border-white/15 bg-[#0f172a] px-2.5 text-xs font-medium text-white placeholder:text-white/40 focus:border-[#ffb07c] focus:outline-none"
-                        />
-                      </label>
-                    </div>
-                  </details>
-                </>
-              ) : null}
-
-              <div className="mt-2 flex flex-wrap items-center justify-between gap-x-2 gap-y-1 text-[11px] text-white/80 sm:mt-3 sm:text-xs">
-                <span>
-                  <strong className="text-white">
-                    {partySize > 6
-                      ? `${vanPricing.priceLabel} Private Van (~$${Math.round(vanPricing.priceUsd / partySize)} ea for ${partySize})`
-                      : `${suvPricing.priceLabel} Private Suburban (~$${Math.round(suvPricing.priceUsd / Math.max(1, partySize))} ea for ${partySize})`}
-                  </strong>
-                </span>
-                <Link
-                  href={compareVehiclesHref}
-                  className="font-bold text-[#ffb07c] underline decoration-[#ffb07c]/40 hover:text-white"
-                >
-                  Compare Suburban vs. Van →
-                </Link>
-              </div>
+            {/* Calm Unified Two-Way Show / Date Booking Entry Selector */}
+            <div className="mt-3.5 sm:mt-7">
+              <ParrShowBookingSelector
+                catalog={bookingCatalog}
+                todayDateKey={todayDateKey}
+                entrySurface="/"
+                mode="navigate"
+                onSelectionChange={handleBookingContextChange}
+              />
             </div>
           </div>
         </div>

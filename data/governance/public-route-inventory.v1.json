@@ -6,7 +6,7 @@
   "canonicalOrigin": "https://www.partyatredrocks.com",
   "operatingRole": "standalone_merchant_of_record_and_operator_surface",
   "summary": {
-    "totalAppRouteAndPageFiles": 245,
+    "totalAppRouteAndPageFiles": 251,
     "publicPagesCount": 197,
     "publicPagesByCategory": {
       "schedule_and_events": 35,
@@ -23,7 +23,7 @@
     "machineAndHandoffRoutesCount": 7,
     "bookingAndCheckoutApiRoutesCount": 13,
     "publicDataAndSupportApiRoutesCount": 16,
-    "excludedInternalAndAdminRoutesCount": 12,
+    "excludedInternalAndAdminRoutesCount": 18,
     "bookingActionsCount": 18,
     "registeredVenuesCount": 23,
     "vehicleClassesDefinedCount": 4,
@@ -2097,6 +2097,61 @@
         "POST"
       ],
       "reason": "internal_admin_manager_or_cron"
+    },
+    {
+      "routePattern": "/api/internal/rezdy-phase3a-audit",
+      "filePath": "app/api/internal/rezdy-phase3a-audit/route.ts",
+      "kind": "route",
+      "methods": [
+        "GET"
+      ],
+      "reason": "internal_admin_manager_or_cron"
+    },
+    {
+      "routePattern": "/api/internal/rezdy-phase3b-setup",
+      "filePath": "app/api/internal/rezdy-phase3b-setup/route.ts",
+      "kind": "route",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "reason": "internal_admin_manager_or_cron"
+    },
+    {
+      "routePattern": "/api/rezdy/availability",
+      "filePath": "app/api/rezdy/availability/route.ts",
+      "kind": "route",
+      "methods": [
+        "GET"
+      ],
+      "reason": "preview_native_rezdy_checkout_api"
+    },
+    {
+      "routePattern": "/api/rezdy/book",
+      "filePath": "app/api/rezdy/book/route.ts",
+      "kind": "route",
+      "methods": [
+        "POST"
+      ],
+      "reason": "preview_native_rezdy_checkout_api"
+    },
+    {
+      "routePattern": "/api/rezdy/confirmation",
+      "filePath": "app/api/rezdy/confirmation/route.ts",
+      "kind": "route",
+      "methods": [
+        "GET"
+      ],
+      "reason": "preview_native_rezdy_checkout_api"
+    },
+    {
+      "routePattern": "/api/rezdy/quote",
+      "filePath": "app/api/rezdy/quote/route.ts",
+      "kind": "route",
+      "methods": [
+        "POST"
+      ],
+      "reason": "preview_native_rezdy_checkout_api"
     }
   ]
 }

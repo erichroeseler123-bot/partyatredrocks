@@ -5,6 +5,7 @@ import { getSameAs } from "@/lib/socials";
 import { SITE_CONFIG } from "@/app/site-config";
 import { BOOKING_COPY } from "@/lib/bookingCopy";
 import { getDenverDateKey, getUpcomingEventsCatalog } from "@/lib/events/getCatalog";
+import { buildCanonicalRedRocksBookingCatalog } from "@/lib/shows/redRocksBookingCatalog";
 import { getDynamicImage } from "@/lib/getDynamicImage";
 import { curatedImages } from "@/lib/curatedImages";
 import { pageVisuals } from "@/lib/pageVisuals";
@@ -91,6 +92,7 @@ export default async function HomePage() {
     : null;
 
   const upcoming2027Events = upcomingEvents.filter((event) => event.dateKey >= "2027-01-01");
+  const bookingCatalog = buildCanonicalRedRocksBookingCatalog(denverToday);
   const upcoming2027Preview: UpcomingRedRocksPreviewItem[] = upcoming2027Events.map((event) => ({
     id: event.id,
     name: event.name,
@@ -239,6 +241,8 @@ export default async function HomePage() {
         urgency={urgency}
         upcoming2027Preview={upcoming2027Preview}
         verified2027Count={upcoming2027Events.length}
+        bookingCatalog={bookingCatalog}
+        todayDateKey={denverToday}
       />
       <section className="bg-[#070b14] px-4 pb-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-[1380px]">

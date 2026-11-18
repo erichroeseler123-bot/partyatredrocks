@@ -4,6 +4,11 @@ import { notFound } from "next/navigation";
 import { CheckCircle2, ShieldCheck, ArrowRight, Sparkles } from "lucide-react";
 import venuesJson from "@/data/venues.json";
 import { DccReturnBanner } from "@/components/booking/DccReturnBanner";
+import { ParrShowBookingSelector } from "@/components/booking/ParrShowBookingSelector";
+import {
+  buildCanonicalRedRocksBookingCatalog,
+  getCurrentDenverDateKey,
+} from "@/lib/shows/redRocksBookingCatalog";
 import { postDccSatelliteEvent, postWtaPartnerAcceptedIfNeeded } from "@/lib/dccSatellite";
 import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
 import { bookingVisuals } from "@/lib/bookingVisuals";
@@ -67,16 +72,16 @@ export default async function PrivateOptionsPage({
   const qtyValue = firstValue(sp, "qty");
   const vehicleQty = qtyValue ? Math.max(1, Number(qtyValue) || 1) : 1;
   const artist = firstValue(sp, "artist") || firstValue(sp, "event");
-  const pickup = firstValue(sp, "pickup");
+  const showIdParam = firstValue(sp, "show");
+  const partySizeParam = Number(firstValue(sp, "partySize")) || null;
   const dateRaw = firstValue(sp, "date");
-  const dateLabel = dateRaw
-    ? new Date(`${dateRaw}T12:00:00`).toLocaleDateString("en-US", {
-        weekday: "long",
-        month: "long",
-        day: "numeric",
-        year: "numeric",
-      })
-    : null;
+  const todayDateKey = getCurrentDenverDateKey();
+  const bookingCatalog = buildCanonicalRedRocksBookingCatalog(todayDateKey);
+  const preservedParams: Record<string, string | undefined> = {};
+  for (const [k, v] of Object.entries(sp)) {
+    const first = Array.isArray(v) ? v[0] : v;
+    if (first) preservedParams[k] = first;
+  }
 
   await postDccSatelliteEvent({
     eventType: "handoff_viewed",
@@ -169,16 +174,20 @@ export default async function PrivateOptionsPage({
               {PARR_VALUE_PROPOSITION.summary} {PARR_VALUE_PROPOSITION.tailgatingSummary}
             </p>
 
-            {artist || dateLabel || pickup ? (
-              <div className="mt-3 inline-flex flex-wrap items-center gap-1.5 rounded-xl border border-emerald-400/35 bg-emerald-500/12 px-3 py-2 text-xs text-white sm:mt-5 sm:gap-2 sm:rounded-2xl sm:px-4 sm:py-3 sm:text-sm">
-                <span className="font-black uppercase tracking-[0.12em] text-emerald-200">Your Ride Context:</span>
-                <span>
-                  {artist || "Selected Concert"}
-                  {dateLabel ? ` · ${dateLabel}` : ""}
-                  {pickup ? ` · Pickup: ${pickup}` : ""}
-                </span>
-              </div>
-            ) : null}
+            {/* Calm Two-Way Show / Date Booking Entry Selector */}
+            <div className="mt-4 sm:mt-6">
+              <ParrShowBookingSelector
+                catalog={bookingCatalog}
+                todayDateKey={todayDateKey}
+                entrySurface="/book/red-rocks-amphitheatre/private"
+                mode="navigate"
+                initialShowId={showIdParam}
+                initialDateKey={dateRaw}
+                initialArtist={artist}
+                initialPartySize={partySizeParam}
+                preservedQueryParams={preservedParams}
+              />
+            </div>
 
             <div className="mt-3.5 flex flex-wrap gap-2 sm:mt-6 sm:gap-3">
               <a

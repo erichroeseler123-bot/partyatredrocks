@@ -16,6 +16,7 @@ type Props = {
   maxPartySize: number;
   initialDate?: string | null;
   initialArtist?: string | null;
+  initialPartySize?: number | null;
   rezdyPublishableKey: string | null;
   fallbackEmbedProps: {
     page: string;
@@ -94,6 +95,7 @@ export function ParrNativeRezdyCheckout({
   maxPartySize,
   initialDate,
   initialArtist,
+  initialPartySize,
   rezdyPublishableKey,
   fallbackEmbedProps,
 }: Props) {
@@ -106,7 +108,12 @@ export function ParrNativeRezdyCheckout({
   const [quote, setQuote] = useState<QuoteState | null>(null);
   const [availError, setAvailError] = useState<string | null>(null);
 
-  const [partySize, setPartySize] = useState<number>(Math.min(4, maxPartySize));
+  const defaultPartySize =
+    typeof initialPartySize === "number" && initialPartySize >= 1 && initialPartySize <= maxPartySize
+      ? initialPartySize
+      : Math.min(4, maxPartySize);
+
+  const [partySize, setPartySize] = useState<number>(defaultPartySize);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");

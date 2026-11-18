@@ -5,10 +5,16 @@ import { CheckCircle2 } from "lucide-react";
 import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
 import { BookingVisualHero } from "@/components/booking/BookingVisualHero";
 import { DccReturnBanner } from "@/components/booking/DccReturnBanner";
+import { ParrShowBookingSelector } from "@/components/booking/ParrShowBookingSelector";
 import { LegalInlineNotice } from "@/components/legal/LegalInlineNotice";
 import { PrivateBookingForm } from "@/components/booking/PrivateBookingForm";
 import { ParrNativeRezdyCheckout } from "@/components/booking/rezdy/ParrNativeRezdyCheckout";
 import { RezdyBookingEmbed } from "@/components/booking/rezdy/RezdyBookingEmbed";
+import {
+  buildCanonicalRedRocksBookingCatalog,
+  getCurrentDenverDateKey,
+  resolveInitialRedRocksShow,
+} from "@/lib/shows/redRocksBookingCatalog";
 import {
   getSafeRezdyStripePublishableKey,
   isParrNativeRezdyCheckoutEnabled,
@@ -168,9 +174,20 @@ export default async function PrivateOptionPage({
           quantity: vehicleQty,
         });
 
+  const showIdParam = firstValue(sp, "show");
   const artist = firstValue(sp, "artist") || firstValue(sp, "event");
+  const partySizeParam = Number(firstValue(sp, "partySize")) || null;
   const pickup = firstValue(sp, "pickup");
   const dateRaw = firstValue(sp, "date");
+  const todayDateKey = getCurrentDenverDateKey();
+  const bookingCatalog = buildCanonicalRedRocksBookingCatalog(todayDateKey);
+  const initialResolution = resolveInitialRedRocksShow(
+    { showId: showIdParam, dateKey: dateRaw, artist },
+    bookingCatalog,
+    todayDateKey
+  );
+  const isPastShowRequest =
+    initialResolution.kind === "past_show" || initialResolution.kind === "past_unlisted_date";
   const dateLabel = dateRaw
     ? new Date(`${dateRaw}T12:00:00`).toLocaleDateString("en-US", {
         weekday: "long",
@@ -250,40 +267,63 @@ export default async function PrivateOptionPage({
 
         <DccReturnBanner searchParams={sp} />
 
-        {artist || dateLabel || pickup ? (
-          <section className="rounded-2xl border border-emerald-400/35 bg-emerald-500/12 p-4 sm:p-5">
-            <div className="text-[11px] font-black uppercase tracking-[0.2em] text-emerald-200">
-              Selected Trip Summary
+        {!isPastShowRequest && (artist || dateLabel || pickup) ? (
+          <section className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-emerald-400/35 bg-emerald-500/12 p-4 sm:p-5">
+            <div>
+              <div className="text-[11px] font-black uppercase tracking-[0.2em] text-emerald-200">
+                Selected Trip Summary
+              </div>
+              <p className="mt-1.5 text-sm text-white/90 sm:text-[15px]">
+                Booking{" "}
+                <strong className="text-white">
+                  {rideOption.slug === "suv" ? "Private Suburban" : "Private Van"}
+                </strong>{" "}
+                ({isNativeCheckout && nativeCfg ? `$${nativeCfg.expectedTotalChargedUsd.toFixed(2)} total` : pricingInfo.roundTripLabel})
+                {artist ? (
+                  <>
+                    {" "}
+                    for <strong className="text-white">{artist}</strong>
+                  </>
+                ) : null}
+                {dateLabel ? (
+                  <>
+                    {" "}
+                    on <strong className="text-white">{dateLabel}</strong>
+                  </>
+                ) : null}
+                {pickup ? (
+                  <>
+                    {" "}
+                    · Pickup area: <strong className="text-white">{pickup}</strong>
+                  </>
+                ) : null}
+                .
+              </p>
             </div>
-            <p className="mt-1.5 text-sm text-white/90 sm:text-[15px]">
-              Booking{" "}
-              <strong className="text-white">
-                {rideOption.slug === "suv" ? "Private Suburban" : "Private Van"}
-              </strong>{" "}
-              ({isNativeCheckout && nativeCfg ? `$${nativeCfg.expectedTotalChargedUsd.toFixed(2)} total` : pricingInfo.roundTripLabel})
-              {artist ? (
-                <>
-                  {" "}
-                  for <strong className="text-white">{artist}</strong>
-                </>
-              ) : null}
-              {dateLabel ? (
-                <>
-                  {" "}
-                  on <strong className="text-white">{dateLabel}</strong>
-                </>
-              ) : null}
-              {pickup ? (
-                <>
-                  {" "}
-                  · Pickup area: <strong className="text-white">{pickup}</strong>
-                </>
-              ) : null}
-              .
-            </p>
+            <Link
+              href={`/book/${venue}/private`}
+              className="inline-flex min-h-10 shrink-0 items-center justify-center rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs font-bold text-white no-underline transition hover:border-[#ffb07c] hover:bg-white/18"
+            >
+              Change show
+            </Link>
           </section>
         ) : null}
 
+        {isPastShowRequest ? (
+          <section className="rounded-[30px] border border-white/10 bg-[#0d1424] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.42)] sm:p-8">
+            <ParrShowBookingSelector
+              catalog={bookingCatalog}
+              todayDateKey={todayDateKey}
+              entrySurface="checkout"
+              mode="navigate"
+              initialShowId={showIdParam}
+              initialDateKey={dateRaw}
+              initialArtist={artist}
+              initialPartySize={partySizeParam}
+              initialVehicleSlug={rideOption.slug === "van" ? "van" : "suv"}
+            />
+          </section>
+        ) : (
         <section className="rounded-[30px] border border-white/10 bg-[#0d1424] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.42)] sm:p-8">
           <div className="flex flex-col gap-4 border-b border-white/10 pb-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
@@ -337,6 +377,7 @@ export default async function PrivateOptionPage({
                   maxPartySize={nativeCfg.maxPartySize}
                   initialDate={dateRaw}
                   initialArtist={artist}
+                  initialPartySize={partySizeParam}
                   rezdyPublishableKey={getSafeRezdyStripePublishableKey()}
                   fallbackEmbedProps={{
                     page: sourcePath,
@@ -386,6 +427,7 @@ export default async function PrivateOptionPage({
           </div>
           <LegalInlineNotice className="mt-6" />
         </section>
+        )}
       </section>
     </main>
   );
