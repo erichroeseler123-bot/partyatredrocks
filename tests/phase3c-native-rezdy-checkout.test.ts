@@ -86,7 +86,9 @@ test("2. Single-vehicle quantity rule & separate party size validation", async (
 
 test("3. Option B quote reconciliation: $499+$19.96=$518.96 (SUV) and $699+$27.96=$726.96 (Van) pass; unexpected totals fail closed", async () => {
   const prevApiKey = process.env.REZDY_API_KEY;
+  const prevParrSecret = process.env.PARR_SECRET;
   process.env.REZDY_API_KEY = "unit_test_rezdy_api_key";
+  process.env.PARR_SECRET = "unit_test_parr_secret_phase3c_01";
   try {
     const optionBFetch: FetchLike = async (input, init) => {
       const u = String(input);
@@ -215,12 +217,16 @@ test("3. Option B quote reconciliation: $499+$19.96=$518.96 (SUV) and $699+$27.9
   } finally {
     if (prevApiKey === undefined) delete process.env.REZDY_API_KEY;
     else process.env.REZDY_API_KEY = prevApiKey;
+    if (prevParrSecret === undefined) delete process.env.PARR_SECRET;
+    else process.env.PARR_SECRET = prevParrSecret;
   }
 });
 
 test("4. Server booking creation, idempotency, duplicate-submit lock, timeout recovery, confirmation & decline handling ($518.96 / $726.96)", async () => {
   const prevApiKey = process.env.REZDY_API_KEY;
+  const prevParrSecret = process.env.PARR_SECRET;
   process.env.REZDY_API_KEY = "unit_test_rezdy_api_key";
+  process.env.PARR_SECRET = "unit_test_parr_secret_phase3c_02";
   try {
     let postBookingsCalls = 0;
     const storedBookings = new Map<string, Record<string, unknown>>();
@@ -434,5 +440,7 @@ test("4. Server booking creation, idempotency, duplicate-submit lock, timeout re
   } finally {
     if (prevApiKey === undefined) delete process.env.REZDY_API_KEY;
     else process.env.REZDY_API_KEY = prevApiKey;
+    if (prevParrSecret === undefined) delete process.env.PARR_SECRET;
+    else process.env.PARR_SECRET = prevParrSecret;
   }
 });

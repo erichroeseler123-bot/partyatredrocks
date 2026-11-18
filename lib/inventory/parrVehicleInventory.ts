@@ -3,8 +3,15 @@ import "server-only";
 import crypto from "node:crypto";
 import { existsSync, mkdirSync } from "node:fs";
 import path from "node:path";
-import { BlobPreconditionFailedError, del, head, list, put } from "@vercel/blob";
-import { decryptVaultText, encryptVaultText, previewBlobPrefix } from "@/lib/blobVault";
+import {
+  BlobNotFoundError,
+  BlobPreconditionFailedError,
+  del,
+  get,
+  head,
+  list,
+  put,
+} from "@vercel/blob";
 import {
   saveInternalOrderStateUpdate,
   upsertRezdyNativeOrderMirror,
@@ -279,13 +286,130 @@ function createEmptyPoolLedger(input: {
 }
 
 // ============================================================================
-// Storage Backends: InMemoryCasStore, SqliteCasStore, and BlobCasStore
+// Dedicated PARR Secret Authority, Encryption, & Private Vercel Blob Storage
+// ============================================================================
+
+export class MissingParrSecretError extends Error {
+  readonly code = "MISSING_PARR_SECRET" as const;
+  constructor(
+    message = "PARR_SECRET is required for PARR inventory encryption, namespace derivation, and confirmation signing. Refusing to operate without PARR_SECRET."
+  ) {
+    super(message);
+    this.name = "MissingParrSecretError";
+  }
+}
+
+export class MissingPrivateBlobTokenError extends Error {
+  readonly code = "MISSING_PRIVATE_BLOB_TOKEN" as const;
+  constructor(
+    message = "PARR_INVENTORY_PRIVATE_READ_WRITE_TOKEN is required for private Vercel Blob inventory storage. Refusing to fall back to public Blob or ephemeral storage."
+  ) {
+    super(message);
+    this.name = "MissingPrivateBlobTokenError";
+  }
+}
+
+/**
+ * Requires dedicated `PARR_SECRET` with zero fallback.
+ * Fails closed if `PARR_SECRET` is absent, empty, or whitespace.
+ */
+export function requireDedicatedParrSecret(): string {
+  const raw = typeof process.env.PARR_SECRET === "string" ? process.env.PARR_SECRET.trim() : "";
+  if (!raw) {
+    throw new MissingParrSecretError();
+  }
+  return raw;
+}
+
+export function requirePrivateInventoryBlobToken(overrideToken?: string): string {
+  const raw =
+    typeof overrideToken === "string"
+      ? overrideToken.trim()
+      : typeof process.env.PARR_INVENTORY_PRIVATE_READ_WRITE_TOKEN === "string"
+        ? process.env.PARR_INVENTORY_PRIVATE_READ_WRITE_TOKEN.trim()
+        : "";
+  if (!raw) {
+    throw new MissingPrivateBlobTokenError();
+  }
+  return raw;
+}
+
+const INVENTORY_AAD = Buffer.from("parr.vehicle-inventory-ledger.v2", "utf8");
+
+function deriveInventoryEncryptionKey(): Buffer {
+  const secret = requireDedicatedParrSecret();
+  return crypto
+    .createHmac("sha256", secret)
+    .update("parr-vehicle-inventory-aes256gcm-v2", "utf8")
+    .digest();
+}
+
+export function deriveInventoryNamespacePrefix(): string {
+  const secret = requireDedicatedParrSecret();
+  const envScope = process.env.VERCEL_ENV === "production" ? "production" : "preview";
+  const nsHash = crypto
+    .createHmac("sha256", secret)
+    .update(`parr-vehicle-inventory-ns-v2:${envScope}`, "utf8")
+    .digest("hex")
+    .slice(0, 24);
+  return `${envScope}/parr-inventory-v2/${nsHash}`;
+}
+
+export function encryptInventoryLedger(plaintext: string): string {
+  const key = deriveInventoryEncryptionKey();
+  const iv = crypto.randomBytes(12);
+  const cipher = crypto.createCipheriv("aes-256-gcm", key, iv);
+  cipher.setAAD(INVENTORY_AAD);
+  const encrypted = Buffer.concat([cipher.update(plaintext, "utf8"), cipher.final()]);
+  const tag = cipher.getAuthTag();
+  return JSON.stringify({
+    v: 2,
+    alg: "aes-256-gcm",
+    iv: iv.toString("base64url"),
+    tag: tag.toString("base64url"),
+    ct: encrypted.toString("base64url"),
+  });
+}
+
+export function decryptInventoryLedger(rawCipher: string): string {
+  const key = deriveInventoryEncryptionKey();
+  let parsed: Record<string, unknown>;
+  try {
+    parsed = JSON.parse(rawCipher) as Record<string, unknown>;
+  } catch {
+    throw new Error("INVENTORY_DECRYPT_ERROR: Rejecting unencrypted or malformed inventory payload.");
+  }
+  if (
+    parsed?.v !== 2 ||
+    parsed?.alg !== "aes-256-gcm" ||
+    typeof parsed.iv !== "string" ||
+    typeof parsed.tag !== "string" ||
+    typeof parsed.ct !== "string"
+  ) {
+    throw new Error("INVENTORY_DECRYPT_ERROR: Unsupported or unencrypted inventory envelope.");
+  }
+  const decipher = crypto.createDecipheriv(
+    "aes-256-gcm",
+    key,
+    Buffer.from(parsed.iv, "base64url")
+  );
+  decipher.setAAD(INVENTORY_AAD);
+  decipher.setAuthTag(Buffer.from(parsed.tag, "base64url"));
+  const decrypted = Buffer.concat([
+    decipher.update(Buffer.from(parsed.ct, "base64url")),
+    decipher.final(),
+  ]);
+  return decrypted.toString("utf8");
+}
+
+// ============================================================================
+// Storage Backends: InMemoryCasStore, SqliteCasStore, and Private BlobCasStore
 // ============================================================================
 
 export class InMemoryCasInventoryStore implements ParrInventoryCasStore {
   private readonly pools = new Map<
     string,
-    { json: string; versionToken: string }
+    { cipher: string; versionToken: string }
   >();
   private readonly onBeforeWriteHook?: (poolKey: string) => Promise<void> | void;
 
@@ -293,11 +417,15 @@ export class InMemoryCasInventoryStore implements ParrInventoryCasStore {
     this.onBeforeWriteHook = opts?.onBeforeWriteHook;
   }
 
+  private scopedKey(poolKey: string): string {
+    return `${deriveInventoryNamespacePrefix()}/${poolKey}`;
+  }
+
   async readPool(poolKey: string) {
-    const row = this.pools.get(poolKey);
+    const row = this.pools.get(this.scopedKey(poolKey));
     if (!row) return { ledger: null, versionToken: null };
     return {
-      ledger: JSON.parse(row.json) as ParrDateVehiclePoolLedger,
+      ledger: JSON.parse(decryptInventoryLedger(row.cipher)) as ParrDateVehiclePoolLedger,
       versionToken: row.versionToken,
     };
   }
@@ -307,25 +435,30 @@ export class InMemoryCasInventoryStore implements ParrInventoryCasStore {
     nextLedger: ParrDateVehiclePoolLedger,
     expectedVersionToken: string | null
   ) {
+    const sKey = this.scopedKey(poolKey);
     if (this.onBeforeWriteHook) {
       await this.onBeforeWriteHook(poolKey);
     }
-    const existing = this.pools.get(poolKey);
+    const existing = this.pools.get(sKey);
     if (expectedVersionToken === null) {
       if (existing) throw new CasConflictError(poolKey);
     } else if (!existing || existing.versionToken !== expectedVersionToken) {
       throw new CasConflictError(poolKey);
     }
     const versionToken = `mem-v${nextLedger.revision}-${crypto.randomUUID()}`;
-    this.pools.set(poolKey, {
-      json: JSON.stringify(nextLedger),
+    this.pools.set(sKey, {
+      cipher: encryptInventoryLedger(JSON.stringify(nextLedger)),
       versionToken,
     });
     return { versionToken };
   }
 
   async listKnownPoolKeys() {
-    return Array.from(this.pools.keys()).sort();
+    const prefix = `${deriveInventoryNamespacePrefix()}/`;
+    return Array.from(this.pools.keys())
+      .filter((k) => k.startsWith(prefix))
+      .map((k) => k.slice(prefix.length))
+      .sort();
   }
 }
 
@@ -364,6 +497,7 @@ function resolveInventorySqlitePath(): string {
 
 export class SqliteCasInventoryStore implements ParrInventoryCasStore {
   private async withDb<T>(fn: (db: SqliteDatabase) => T): Promise<T> {
+    requireDedicatedParrSecret();
     const sqlite = await getSqliteModule();
     if (!sqlite?.DatabaseSync) {
       throw new Error("node:sqlite DatabaseSync unavailable for local inventory store.");
@@ -398,8 +532,9 @@ export class SqliteCasInventoryStore implements ParrInventoryCasStore {
         .prepare(`SELECT revision, ledgerJson FROM parr_vehicle_inventory_pools WHERE poolKey = ?`)
         .get(poolKey);
       if (!row) return { ledger: null, versionToken: null };
+      const decrypted = decryptInventoryLedger(String(row.ledgerJson));
       return {
-        ledger: JSON.parse(String(row.ledgerJson)) as ParrDateVehiclePoolLedger,
+        ledger: JSON.parse(decrypted) as ParrDateVehiclePoolLedger,
         versionToken: `sqlite-rev-${Number(row.revision)}`,
       };
     });
@@ -414,7 +549,7 @@ export class SqliteCasInventoryStore implements ParrInventoryCasStore {
       db.exec("BEGIN IMMEDIATE");
       try {
         const nowIso = new Date().toISOString();
-        const json = JSON.stringify(nextLedger);
+        const cipher = encryptInventoryLedger(JSON.stringify(nextLedger));
         if (expectedVersionToken === null) {
           const existing = db
             .prepare(`SELECT revision FROM parr_vehicle_inventory_pools WHERE poolKey = ?`)
@@ -431,7 +566,7 @@ export class SqliteCasInventoryStore implements ParrInventoryCasStore {
             nextLedger.vehicleSlug,
             nextLedger.revision,
             nowIso,
-            json
+            cipher
           );
         } else {
           const expectedRev = Number(expectedVersionToken.replace("sqlite-rev-", ""));
@@ -441,7 +576,7 @@ export class SqliteCasInventoryStore implements ParrInventoryCasStore {
                SET revision = ?, updatedAt = ?, ledgerJson = ?
                WHERE poolKey = ? AND revision = ?`
             )
-            .run(nextLedger.revision, nowIso, json, poolKey, expectedRev);
+            .run(nextLedger.revision, nowIso, cipher, poolKey, expectedRev);
           if (!res || Number(res.changes ?? 0) !== 1) {
             throw new CasConflictError(poolKey);
           }
@@ -467,32 +602,48 @@ export class SqliteCasInventoryStore implements ParrInventoryCasStore {
   }
 }
 
+export type VercelPrivateBlobOps = {
+  head: typeof head;
+  get: typeof get;
+  put: typeof put;
+  del: typeof del;
+  list: typeof list;
+};
+
 /**
- * Distributed linearizable CAS store over `@vercel/blob`:
- * - Uses `head(headPath)` against the strongly consistent Vercel Blob API (never CDN cached)
- *   to obtain `{ etag, contentType: "application/octet-stream;rev=<revId>" }`.
- * - Writes each encrypted state snapshot to an immutable write-once `revs/<poolKey>/<revId>.enc`
- *   blob (`allowOverwrite: false` -> zero stale CDN edge reads).
- * - Commits the pointer atomically via `put(headPath, revId, { ifMatch: expectedEtag })`,
- *   converting `BlobPreconditionFailedError` into `CasConflictError` for clean retry!
+ * Distributed linearizable CAS store over PRIVATE `@vercel/blob`:
+ * - Stores ALL head pointers (`.cas`) and immutable encrypted revisions (`.enc`) with `access: "private"`
+ *   inside the dedicated private Vercel Blob store (`PARR_INVENTORY_PRIVATE_READ_WRITE_TOKEN`).
+ * - Uses `head(headPath, { token })` against the strongly consistent Vercel Blob API
+ *   to obtain `{ etag, contentType }` and reads private bodies via `get(..., { access: "private", useCache: false, token })`.
+ * - Writes each AES-256-GCM encrypted state snapshot to an immutable write-once `revs/<poolKey>/<revId>.enc`
+ *   private blob (`allowOverwrite: false`).
+ * - Commits the head pointer atomically via `put(headPath, revId, { access: "private", ifMatch: expectedEtag, token })`,
+ *   converting `BlobPreconditionFailedError` into `CasConflictError` for clean CAS retry!
  */
-class BlobCasInventoryStore implements ParrInventoryCasStore {
-  private basePrefix(): string {
-    const keySecret = process.env.PARR_SECRET || process.env.BLOB_READ_WRITE_TOKEN || "parr-inv";
-    const nsHash = crypto
-      .createHmac("sha256", keySecret)
-      .update("parr-vehicle-inventory-v1")
-      .digest("hex")
-      .slice(0, 16);
-    return `${previewBlobPrefix()}cache/inventory-${nsHash}`;
+export class BlobCasInventoryStore implements ParrInventoryCasStore {
+  private readonly ops: VercelPrivateBlobOps;
+  private readonly overrideToken?: string;
+
+  constructor(opts?: { ops?: VercelPrivateBlobOps; token?: string }) {
+    this.ops = opts?.ops ?? { head, get, put, del, list };
+    this.overrideToken = opts?.token;
+  }
+
+  private assertPrivateBlobUrl(url: string, label: string): void {
+    if (!url.includes(".private.blob.vercel-storage.com/")) {
+      throw new Error(
+        `SECURITY_VIOLATION: ${label} URL (${url}) is not hosted on private Vercel Blob storage.`
+      );
+    }
   }
 
   private headPath(poolKey: string): string {
-    return `${this.basePrefix()}/heads/${poolKey}.cas`;
+    return `${deriveInventoryNamespacePrefix()}/heads/${poolKey}.cas`;
   }
 
   private revPath(poolKey: string, revId: string): string {
-    return `${this.basePrefix()}/revs/${poolKey}/${revId}.enc`;
+    return `${deriveInventoryNamespacePrefix()}/revs/${poolKey}/${revId}.enc`;
   }
 
   private parseRevFromContentType(ct: string): string | null {
@@ -501,27 +652,56 @@ class BlobCasInventoryStore implements ParrInventoryCasStore {
   }
 
   async readPool(poolKey: string) {
+    requireDedicatedParrSecret();
+    const token = requirePrivateInventoryBlobToken(this.overrideToken);
     const hPath = this.headPath(poolKey);
+
     let meta: Awaited<ReturnType<typeof head>>;
     try {
-      meta = await head(hPath);
-    } catch {
-      return { ledger: null, versionToken: null };
+      meta = await this.ops.head(hPath, { token });
+    } catch (err) {
+      if (
+        err instanceof BlobNotFoundError ||
+        (err instanceof Error && /not found|does not exist|404/i.test(err.message))
+      ) {
+        return { ledger: null, versionToken: null };
+      }
+      throw err;
     }
 
-    const revId = this.parseRevFromContentType(meta.contentType);
+    this.assertPrivateBlobUrl(meta.url, "Inventory head pointer");
+
+    let revId = this.parseRevFromContentType(meta.contentType);
+    if (!revId) {
+      const headGot = await this.ops.get(hPath, {
+        access: "private",
+        useCache: false,
+        token,
+      });
+      if (!headGot || headGot.statusCode !== 200) {
+        return { ledger: null, versionToken: null };
+      }
+      this.assertPrivateBlobUrl(headGot.blob.url, "Inventory head body");
+      revId = (await new Response(headGot.stream).text()).trim();
+    }
+
     if (!revId) {
       return { ledger: null, versionToken: null };
     }
 
     const rPath = this.revPath(poolKey, revId);
-    const revMeta = await head(rPath);
-    const res = await fetch(revMeta.url, { cache: "no-store" });
-    if (!res.ok) {
-      throw new Error(`Failed reading immutable inventory snapshot ${rPath}: HTTP ${res.status}`);
+    const revGot = await this.ops.get(rPath, {
+      access: "private",
+      useCache: false,
+      token,
+    });
+    if (!revGot || revGot.statusCode !== 200) {
+      throw new Error(`Failed reading private immutable inventory snapshot ${rPath}.`);
     }
-    const rawCipher = await res.text();
-    const plaintext = decryptVaultText(rawCipher);
+    this.assertPrivateBlobUrl(revGot.blob.url, "Inventory immutable revision");
+
+    const rawCipher = await new Response(revGot.stream).text();
+    const plaintext = decryptInventoryLedger(rawCipher);
     return {
       ledger: JSON.parse(plaintext) as ParrDateVehiclePoolLedger,
       versionToken: meta.etag,
@@ -533,31 +713,42 @@ class BlobCasInventoryStore implements ParrInventoryCasStore {
     nextLedger: ParrDateVehiclePoolLedger,
     expectedVersionToken: string | null
   ) {
+    requireDedicatedParrSecret();
+    const token = requirePrivateInventoryBlobToken(this.overrideToken);
     const revId = `r${nextLedger.revision}_${crypto.randomBytes(8).toString("hex")}`;
     const rPath = this.revPath(poolKey, revId);
-    const ciphertext = encryptVaultText(JSON.stringify(nextLedger));
+    const ciphertext = encryptInventoryLedger(JSON.stringify(nextLedger));
 
-    const snapBlob = await put(rPath, ciphertext, {
-      access: "public",
+    const snapBlob = await this.ops.put(rPath, ciphertext, {
+      access: "private",
+      token,
       addRandomSuffix: false,
       allowOverwrite: false,
       contentType: "application/octet-stream",
-      cacheControlMaxAge: 3600,
+      cacheControlMaxAge: 0,
     });
+    try {
+      this.assertPrivateBlobUrl(snapBlob.url, "Inventory immutable revision");
+    } catch (err) {
+      void this.ops.del(snapBlob.url, { token }).catch(() => undefined);
+      throw err;
+    }
 
     try {
-      const headBlob = await put(this.headPath(poolKey), revId, {
-        access: "public",
+      const headBlob = await this.ops.put(this.headPath(poolKey), revId, {
+        access: "private",
+        token,
         addRandomSuffix: false,
         allowOverwrite: expectedVersionToken !== null,
         ...(expectedVersionToken ? { ifMatch: expectedVersionToken } : {}),
         contentType: `application/octet-stream;rev=${revId}`,
-        cacheControlMaxAge: 60,
+        cacheControlMaxAge: 0,
       });
+      this.assertPrivateBlobUrl(headBlob.url, "Inventory head pointer");
       return { versionToken: headBlob.etag };
     } catch (err) {
-      // Clean up unreferenced candidate snapshot on CAS collision
-      void del(snapBlob.url).catch(() => undefined);
+      // Clean up unreferenced private candidate snapshot on CAS collision
+      void this.ops.del(snapBlob.url, { token }).catch(() => undefined);
       if (
         err instanceof BlobPreconditionFailedError ||
         (err instanceof Error &&
@@ -570,15 +761,25 @@ class BlobCasInventoryStore implements ParrInventoryCasStore {
   }
 
   async listKnownPoolKeys() {
-    const prefix = `${this.basePrefix()}/heads/`;
-    const listed = await list({ prefix, limit: 500 });
-    return listed.blobs
-      .map((b) => {
+    requireDedicatedParrSecret();
+    const token = requirePrivateInventoryBlobToken(this.overrideToken);
+    const prefix = `${deriveInventoryNamespacePrefix()}/heads/`;
+    const keys: string[] = [];
+    let cursor: string | undefined;
+
+    do {
+      const listed = await this.ops.list({ prefix, limit: 500, cursor, token });
+      for (const b of listed.blobs) {
+        this.assertPrivateBlobUrl(b.url, "Listed inventory head pointer");
         const name = b.pathname.slice(prefix.length);
-        return name.endsWith(".cas") ? name.slice(0, -4) : null;
-      })
-      .filter((k): k is string => Boolean(k))
-      .sort();
+        if (name.endsWith(".cas")) {
+          keys.push(name.slice(0, -4));
+        }
+      }
+      cursor = listed.hasMore ? listed.cursor : undefined;
+    } while (cursor);
+
+    return Array.from(new Set(keys)).sort();
   }
 }
 
@@ -586,7 +787,11 @@ let defaultSqliteStore: SqliteCasInventoryStore | null = null;
 let defaultBlobStore: BlobCasInventoryStore | null = null;
 
 function resolveDefaultInventoryStore(): ParrInventoryCasStore {
-  if (process.env.VERCEL === "1" && process.env.BLOB_READ_WRITE_TOKEN) {
+  if (
+    process.env.VERCEL === "1" ||
+    (process.env.NODE_ENV !== "test" &&
+      Boolean(process.env.PARR_INVENTORY_PRIVATE_READ_WRITE_TOKEN?.trim()))
+  ) {
     if (!defaultBlobStore) defaultBlobStore = new BlobCasInventoryStore();
     return defaultBlobStore;
   }
@@ -821,6 +1026,7 @@ export function computePoolSummary(
 export type UpstreamRezdyOrderSnapshot = {
   orderNumber: string;
   status: string;
+  refundStatus: string | null;
   resellerReference: string | null;
   productCode: string;
   startTimeLocal: string;
@@ -832,6 +1038,39 @@ export type UpstreamRezdyOrderSnapshot = {
   pickupLocation: string | null;
   rawBooking: Record<string, unknown>;
 };
+
+export function classifyUpstreamRezdyOrder(order: UpstreamRezdyOrderSnapshot): {
+  kind: "confirmed" | "cancelled_clean" | "ignorable_quote" | "ambiguous";
+  reason?: string;
+} {
+  const status = (order.status || "").trim().toUpperCase();
+  if (status === "CONFIRMED") {
+    return { kind: "confirmed" };
+  }
+  if (status === "QUOTED" || status === "ABANDONED_CART") {
+    return { kind: "ignorable_quote" };
+  }
+  if (status === "CANCELLED") {
+    const refStat = (order.refundStatus || "").trim().toUpperCase();
+    if (refStat === "FAILED" || refStat === "INCOMPLETE" || refStat === "PENDING_FAILURE") {
+      return {
+        kind: "ambiguous",
+        reason: `AMBIGUOUS_CANCELLED_REFUND_FAILED: Order ${order.orderNumber} (${order.productCode}) is CANCELLED with refundStatus=${refStat}.`,
+      };
+    }
+    if (order.totalPaid > 0 && refStat !== "COMPLETED" && refStat !== "REFUNDED") {
+      return {
+        kind: "ambiguous",
+        reason: `AMBIGUOUS_CANCELLED_UNREFUNDED_BALANCE: Order ${order.orderNumber} (${order.productCode}) is CANCELLED with unrefunded totalPaid=${order.totalPaid}.`,
+      };
+    }
+    return { kind: "cancelled_clean" };
+  }
+  return {
+    kind: "ambiguous",
+    reason: `AMBIGUOUS_UPSTREAM_ORDER_STATUS: Order ${order.orderNumber} (${order.productCode}) has ambiguous status=${status || "UNKNOWN"}.`,
+  };
+}
 
 function getRezdyApiKeyOrThrow(): string {
   const k = (process.env.REZDY_API_KEY || "").trim();
@@ -864,14 +1103,19 @@ async function fetchRezdyJsonReadOnly(
 
 function parseRezdyOrderSnapshotsForDate(
   rawBookings: Array<Record<string, unknown>>,
-  expectedProductCode: string,
+  expectedProductCodes: string[],
   expectedDateKey: string
 ): UpstreamRezdyOrderSnapshot[] {
+  const allowedCodes = new Set(expectedProductCodes.map((c) => c.trim().toUpperCase()));
   const out: UpstreamRezdyOrderSnapshot[] = [];
   for (const b of rawBookings) {
     const orderNumber = typeof b.orderNumber === "string" ? b.orderNumber.trim() : "";
     if (!orderNumber) continue;
     const status = typeof b.status === "string" ? b.status.trim().toUpperCase() : "UNKNOWN";
+    const refundStatus =
+      typeof b.refundStatus === "string" && b.refundStatus.trim()
+        ? b.refundStatus.trim().toUpperCase()
+        : null;
     const resellerReference =
       typeof b.resellerReference === "string" && b.resellerReference.trim()
         ? b.resellerReference.trim()
@@ -884,7 +1128,7 @@ function parseRezdyOrderSnapshotsForDate(
       const pCode = String(item.productCode || "").trim().toUpperCase();
       const startTimeLocal = String(item.startTimeLocal || "").trim();
       const itemDateKey = startTimeLocal.slice(0, 10);
-      if (pCode !== expectedProductCode.toUpperCase()) continue;
+      if (!allowedCodes.has(pCode)) continue;
       if (itemDateKey !== expectedDateKey) continue;
 
       const quantities = Array.isArray(item.quantities)
@@ -909,6 +1153,7 @@ function parseRezdyOrderSnapshotsForDate(
       out.push({
         orderNumber,
         status,
+        refundStatus,
         resellerReference,
         productCode: pCode,
         startTimeLocal,
@@ -931,24 +1176,54 @@ function parseRezdyOrderSnapshotsForDate(
 export async function fetchUpstreamRezdyOrdersForPool(
   input: {
     rezdyProductCode: "P94HN4" | "PU8R6Y";
+    additionalProductCodes?: string[];
     dateKey: string;
   },
   deps?: { fetchImpl?: FetchLike }
 ): Promise<UpstreamRezdyOrderSnapshot[]> {
   const minTour = `${input.dateKey} 00:00:00`;
   const maxTour = `${input.dateKey} 23:59:59`;
-  const json = await fetchRezdyJsonReadOnly(
-    `/bookings?productCode=${encodeURIComponent(input.rezdyProductCode)}&minTourStartDate=${encodeURIComponent(minTour)}&maxTourStartDate=${encodeURIComponent(maxTour)}&limit=100`,
-    deps?.fetchImpl
+  const productCodes = Array.from(
+    new Set([input.rezdyProductCode, ...(input.additionalProductCodes ?? [])])
   );
-  const rawBookings = Array.isArray(json.bookings)
-    ? (json.bookings as Array<Record<string, unknown>>)
-    : [];
-  return parseRezdyOrderSnapshotsForDate(
-    rawBookings,
-    input.rezdyProductCode,
-    input.dateKey
-  );
+  const pageLimit = 100;
+  const maxPages = 20;
+  const byOrderProduct = new Map<string, UpstreamRezdyOrderSnapshot>();
+
+  for (const code of productCodes) {
+    let offset = 0;
+    let pagesFetched = 0;
+    while (pagesFetched < maxPages) {
+      const offsetQuery = offset > 0 ? `&offset=${offset}` : "";
+      const json = await fetchRezdyJsonReadOnly(
+        `/bookings?productCode=${encodeURIComponent(code)}&minTourStartDate=${encodeURIComponent(minTour)}&maxTourStartDate=${encodeURIComponent(maxTour)}&limit=${pageLimit}${offsetQuery}`,
+        deps?.fetchImpl
+      );
+      const rawBookings = Array.isArray(json.bookings)
+        ? (json.bookings as Array<Record<string, unknown>>)
+        : [];
+      const parsed = parseRezdyOrderSnapshotsForDate(
+        rawBookings,
+        productCodes,
+        input.dateKey
+      );
+      for (const snap of parsed) {
+        byOrderProduct.set(`${snap.orderNumber}:${snap.productCode}`, snap);
+      }
+      pagesFetched += 1;
+      if (rawBookings.length < pageLimit) {
+        break;
+      }
+      if (pagesFetched >= maxPages) {
+        throw new Error(
+          `INCOMPLETE_PAGINATION_OVERFLOW: Rezdy returned >= ${pageLimit * maxPages} bookings on ${input.dateKey} for ${code}.`
+        );
+      }
+      offset += pageLimit;
+    }
+  }
+
+  return Array.from(byOrderProduct.values());
 }
 
 // ============================================================================
@@ -969,8 +1244,10 @@ export type InventoryRuntimeDeps = {
 };
 
 /**
- * Section E: Before enabling a date, establish its opening inventory from existing
- * confirmed Rezdy bookings so pre-existing or manually entered reservations are counted.
+ * Section E + Hardening Item 4:
+ * Before enabling a date, establish its opening inventory from existing confirmed & cancelled
+ * Rezdy bookings across both hidden native (`P94HN4` / `PU8R6Y`) and public widget (`P0U1MY` / `PJM9GD`)
+ * products. If reconciliation is incomplete or any order is ambiguous, the date remains durably BLOCKED.
  */
 export async function ensureOpeningInventorySeeded(
   input: {
@@ -981,6 +1258,7 @@ export async function ensureOpeningInventorySeeded(
   },
   deps?: InventoryRuntimeDeps
 ): Promise<ParrDateVehiclePoolLedger> {
+  requireDedicatedParrSecret();
   const nowFn = deps?.nowMs ?? Date.now;
   const identity = resolveCanonicalServiceShowIdentity({
     dateKey: input.dateKey,
@@ -996,17 +1274,23 @@ export async function ensureOpeningInventorySeeded(
     return existing.ledger;
   }
 
-  const upstreamConfirmed: UpstreamRezdyOrderSnapshot[] = deps?.skipOpeningRezdyFetch
-    ? []
-    : (
-        await fetchUpstreamRezdyOrdersForPool(
-          {
-            rezdyProductCode: cfg.rezdy.previewProductCode,
-            dateKey: identity.canonicalServiceDate,
-          },
-          { fetchImpl: deps?.fetchImpl }
-        )
-      ).filter((o) => o.status === "CONFIRMED");
+  let upstreamAll: UpstreamRezdyOrderSnapshot[] = [];
+  let incompleteFetchReason: string | null = null;
+
+  if (!deps?.skipOpeningRezdyFetch) {
+    try {
+      upstreamAll = await fetchUpstreamRezdyOrdersForPool(
+        {
+          rezdyProductCode: cfg.rezdy.previewProductCode,
+          additionalProductCodes: [cfg.rezdy.legacyPublicProductCode],
+          dateKey: identity.canonicalServiceDate,
+        },
+        { fetchImpl: deps?.fetchImpl }
+      );
+    } catch (err) {
+      incompleteFetchReason = `INCOMPLETE_OPENING_RECONCILIATION: ${err instanceof Error ? err.message : String(err)}`;
+    }
+  }
 
   return runAtomicPoolMutation<ParrDateVehiclePoolLedger>(
     {
@@ -1020,9 +1304,50 @@ export async function ensureOpeningInventorySeeded(
       }
 
       const nowIso = new Date(nowFn()).toISOString();
-      const seededOrders: string[] = [];
 
-      for (const order of upstreamConfirmed) {
+      if (incompleteFetchReason) {
+        draft.reconciliationBlocked = true;
+        if (!draft.reconciliationBlockReasons.includes(incompleteFetchReason)) {
+          draft.reconciliationBlockReasons.push(incompleteFetchReason);
+          draft.ownerAlerts.push({
+            alertId: `alt_${crypto.randomUUID()}`,
+            createdAt: nowIso,
+            resolvedAt: null,
+            resolvedBy: null,
+            resolutionNote: null,
+            severity: "critical",
+            code: "INCOMPLETE_OPENING_RECONCILIATION",
+            canonicalServiceDate: draft.canonicalServiceDate,
+            canonicalShowId: draft.canonicalShowId,
+            vehicleSlug: draft.vehicleSlug,
+            internalHoldId: null,
+            rezdyOrderReference: null,
+            summary: incompleteFetchReason,
+          });
+        }
+        draft.poolAuditLog.push({
+          at: nowIso,
+          action: "opening_reconciliation_incomplete_blocked",
+          actor: "system",
+          detail: incompleteFetchReason,
+        });
+        return { commit: true, result: draft };
+      }
+
+      const seededOrders: string[] = [];
+      const ambiguousReasons: string[] = [];
+
+      for (const order of upstreamAll) {
+        const classification = classifyUpstreamRezdyOrder(order);
+        if (classification.kind === "ignorable_quote") continue;
+        if (classification.kind === "ambiguous" && classification.reason) {
+          ambiguousReasons.push(classification.reason);
+          continue;
+        }
+
+        const targetState: ParrInventoryUnitState =
+          classification.kind === "confirmed" ? "confirmed_sold" : "cancelled_released";
+
         for (let unitIdx = 0; unitIdx < Math.max(1, order.quantity); unitIdx += 1) {
           const unitOrderRef =
             order.quantity > 1 ? `${order.orderNumber}#${unitIdx + 1}` : order.orderNumber;
@@ -1053,9 +1378,12 @@ export async function ensureOpeningInventorySeeded(
             createdAt: nowIso,
             updatedAt: nowIso,
             expiresAt: null,
-            state: "confirmed_sold",
+            state: targetState,
             lastReconciledAt: nowIso,
-            reconciliationNote: "Seeded from existing confirmed Rezdy booking prior to opening date.",
+            reconciliationNote:
+              targetState === "confirmed_sold"
+                ? `Seeded from existing confirmed Rezdy booking (${order.productCode}) prior to opening date.`
+                : `Recorded historical cancelled Rezdy booking (${order.productCode}); 0 capacity consumed.`,
             pricingSnapshot: {
               basePriceCents: cfg.basePriceCents,
               calculatedBookingFeeCents: cfg.calculatedBookingFeeCents,
@@ -1067,15 +1395,20 @@ export async function ensureOpeningInventorySeeded(
               {
                 at: nowIso,
                 fromState: null,
-                toState: "confirmed_sold",
-                event: "opening_inventory_seeded",
+                toState: targetState,
+                event:
+                  targetState === "confirmed_sold"
+                    ? "opening_inventory_seeded"
+                    : "opening_cancelled_order_recorded",
                 actor: "rezdy_opening_seed",
-                detail: `Counted pre-existing confirmed Rezdy order ${order.orderNumber}`,
+                detail: `Seeded Rezdy order ${order.orderNumber} (${order.productCode}, status=${order.status})`,
                 rezdyOrderReference: unitOrderRef,
               },
             ],
           });
-          seededOrders.push(unitOrderRef);
+          if (targetState === "confirmed_sold") {
+            seededOrders.push(unitOrderRef);
+          }
         }
       }
 
@@ -1083,13 +1416,37 @@ export async function ensureOpeningInventorySeeded(
       draft.openingConfirmedRezdyOrders = seededOrders;
       draft.lastReconciledAt = nowIso;
 
+      for (const amb of ambiguousReasons) {
+        draft.reconciliationBlocked = true;
+        if (!draft.reconciliationBlockReasons.includes(amb)) {
+          draft.reconciliationBlockReasons.push(amb);
+          draft.ownerAlerts.push({
+            alertId: `alt_${crypto.randomUUID()}`,
+            createdAt: nowIso,
+            resolvedAt: null,
+            resolvedBy: null,
+            resolutionNote: null,
+            severity: "critical",
+            code: "AMBIGUOUS_OPENING_ORDER_STATE",
+            canonicalServiceDate: draft.canonicalServiceDate,
+            canonicalShowId: draft.canonicalShowId,
+            vehicleSlug: draft.vehicleSlug,
+            internalHoldId: null,
+            rezdyOrderReference: null,
+            summary: amb,
+          });
+        }
+      }
+
       const confirmedCount = draft.reservations.filter(
         (r) => r.state === "confirmed_sold"
       ).length;
       if (confirmedCount > draft.capacity) {
         draft.reconciliationBlocked = true;
         const reason = `OPENING_SEED_OVER_CAPACITY: Rezdy has ${confirmedCount} confirmed bookings vs capacity ${draft.capacity}`;
-        draft.reconciliationBlockReasons.push(reason);
+        if (!draft.reconciliationBlockReasons.includes(reason)) {
+          draft.reconciliationBlockReasons.push(reason);
+        }
         draft.ownerAlerts.push({
           alertId: `alt_${crypto.randomUUID()}`,
           createdAt: nowIso,
@@ -1111,7 +1468,7 @@ export async function ensureOpeningInventorySeeded(
         at: nowIso,
         action: "opening_inventory_seeded",
         actor: "system",
-        detail: `Seeded ${seededOrders.length} pre-existing confirmed Rezdy unit(s); capacity=${draft.capacity}`,
+        detail: `Seeded ${seededOrders.length} pre-existing confirmed Rezdy unit(s); ambiguous=${ambiguousReasons.length}; capacity=${draft.capacity}`,
       });
 
       return { commit: true, result: draft };
@@ -1137,6 +1494,7 @@ export async function getPublicVehicleAvailability(
   },
   deps?: InventoryRuntimeDeps
 ) {
+  requireDedicatedParrSecret();
   const nowMs = (deps?.nowMs ?? Date.now)();
   const identity = resolveCanonicalServiceShowIdentity({
     dateKey: input.dateKey,
@@ -1207,6 +1565,7 @@ export async function acquireOrReuseCheckoutHold(
   },
   deps?: InventoryRuntimeDeps
 ): Promise<AcquireHoldResult> {
+  requireDedicatedParrSecret();
   const nowFn = deps?.nowMs ?? Date.now;
   const ttlMs = deps?.holdTtlMs ?? DEFAULT_CHECKOUT_HOLD_TTL_MS;
   const resellerReference = buildInventoryResellerReference(input.idempotencyKey);
@@ -2080,6 +2439,7 @@ export async function reconcilePoolWithRezdy(
   poolSummary: ComputedPoolSummary;
   ledger: ParrDateVehiclePoolLedger;
 }> {
+  requireDedicatedParrSecret();
   const nowFn = deps?.nowMs ?? Date.now;
   const cfg = PARR_2027_OPTION_B_PRICING_AUTHORITY[input.vehicleSlug];
   const identity = resolveCanonicalServiceShowIdentity({
@@ -2097,13 +2457,20 @@ export async function reconcilePoolWithRezdy(
     deps
   );
 
-  const upstreamOrders = await fetchUpstreamRezdyOrdersForPool(
-    {
-      rezdyProductCode: cfg.rezdy.previewProductCode,
-      dateKey: identity.canonicalServiceDate,
-    },
-    { fetchImpl: deps?.fetchImpl }
-  );
+  let upstreamOrders: UpstreamRezdyOrderSnapshot[] = [];
+  let incompleteReconcileError: string | null = null;
+  try {
+    upstreamOrders = await fetchUpstreamRezdyOrdersForPool(
+      {
+        rezdyProductCode: cfg.rezdy.previewProductCode,
+        additionalProductCodes: [cfg.rezdy.legacyPublicProductCode],
+        dateKey: identity.canonicalServiceDate,
+      },
+      { fetchImpl: deps?.fetchImpl }
+    );
+  } catch (err) {
+    incompleteReconcileError = `INCOMPLETE_REZDY_RECONCILIATION: ${err instanceof Error ? err.message : String(err)}`;
+  }
 
   const manualToMirror: UpstreamRezdyOrderSnapshot[] = [];
 
@@ -2118,6 +2485,44 @@ export async function reconcilePoolWithRezdy(
       const nowIso = new Date(nowMs).toISOString();
       sweepExpiredHoldsInDraft(draft, nowMs);
 
+      if (incompleteReconcileError) {
+        draft.reconciliationBlocked = true;
+        if (!draft.reconciliationBlockReasons.includes(incompleteReconcileError)) {
+          draft.reconciliationBlockReasons.push(incompleteReconcileError);
+          draft.ownerAlerts.push({
+            alertId: `alt_${crypto.randomUUID()}`,
+            createdAt: nowIso,
+            resolvedAt: null,
+            resolvedBy: null,
+            resolutionNote: null,
+            severity: "critical",
+            code: "INCOMPLETE_REZDY_RECONCILIATION",
+            canonicalServiceDate: draft.canonicalServiceDate,
+            canonicalShowId: draft.canonicalShowId,
+            vehicleSlug: draft.vehicleSlug,
+            internalHoldId: null,
+            rezdyOrderReference: null,
+            summary: incompleteReconcileError,
+          });
+        }
+        draft.poolAuditLog.push({
+          at: nowIso,
+          action: "rezdy_reconciliation_incomplete_blocked",
+          actor: input.actor || "rezdy_reconcile",
+          detail: incompleteReconcileError,
+        });
+        return {
+          commit: true,
+          result: {
+            manualOrdersAdded: [],
+            disagreementsDetected: [incompleteReconcileError],
+            reconciliationBlocked: true,
+            poolSummary: computePoolSummary(draft, nowMs),
+            ledger: JSON.parse(JSON.stringify(draft)) as ParrDateVehiclePoolLedger,
+          },
+        };
+      }
+
       const upstreamByOrderNum = new Map<string, UpstreamRezdyOrderSnapshot>();
       for (const u of upstreamOrders) {
         upstreamByOrderNum.set(u.orderNumber, u);
@@ -2125,6 +2530,14 @@ export async function reconcilePoolWithRezdy(
 
       const manualOrdersAdded: string[] = [];
       const disagreements: string[] = [];
+
+      // 0. Flag any upstream orders with ambiguous or unrefunded-cancelled states
+      for (const u of upstreamOrders) {
+        const cls = classifyUpstreamRezdyOrder(u);
+        if (cls.kind === "ambiguous" && cls.reason) {
+          disagreements.push(cls.reason);
+        }
+      }
 
       // 1. Check all existing PARR confirmed_sold / cancelled_released records against upstream Rezdy
       for (const rec of draft.reservations) {
@@ -2157,9 +2570,13 @@ export async function reconcilePoolWithRezdy(
         }
       }
 
-      // 2. Detect manual / external confirmed Rezdy bookings not yet in PARR reservations
+      // 2. Detect manual / external confirmed or clean-cancelled Rezdy bookings not yet in PARR reservations
       for (const u of upstreamOrders) {
-        if (u.status !== "CONFIRMED") continue;
+        const cls = classifyUpstreamRezdyOrder(u);
+        if (cls.kind !== "confirmed" && cls.kind !== "cancelled_clean") continue;
+
+        const targetState: ParrInventoryUnitState =
+          cls.kind === "confirmed" ? "confirmed_sold" : "cancelled_released";
 
         for (let unitIdx = 0; unitIdx < Math.max(1, u.quantity); unitIdx += 1) {
           const unitRef = u.quantity > 1 ? `${u.orderNumber}#${unitIdx + 1}` : u.orderNumber;
@@ -2188,9 +2605,12 @@ export async function reconcilePoolWithRezdy(
             createdAt: nowIso,
             updatedAt: nowIso,
             expiresAt: null,
-            state: "confirmed_sold",
+            state: targetState,
             lastReconciledAt: nowIso,
-            reconciliationNote: `Detected manual/external Rezdy booking ${u.orderNumber} during reconciliation.`,
+            reconciliationNote:
+              targetState === "confirmed_sold"
+                ? `Detected manual/external Rezdy booking ${u.orderNumber} (${u.productCode}) during reconciliation.`
+                : `Recorded historical cancelled Rezdy booking ${u.orderNumber} (${u.productCode}) during reconciliation.`,
             pricingSnapshot: {
               basePriceCents: cfg.basePriceCents,
               calculatedBookingFeeCents: cfg.calculatedBookingFeeCents,
@@ -2202,19 +2622,24 @@ export async function reconcilePoolWithRezdy(
               {
                 at: nowIso,
                 fromState: null,
-                toState: "confirmed_sold",
-                event: "manual_rezdy_booking_detected_and_counted",
+                toState: targetState,
+                event:
+                  targetState === "confirmed_sold"
+                    ? "manual_rezdy_booking_detected_and_counted"
+                    : "cancelled_rezdy_booking_recorded",
                 actor: input.actor || "rezdy_reconcile",
-                detail: `Imported manual Rezdy order ${u.orderNumber} (${unitRef})`,
+                detail: `Imported Rezdy order ${u.orderNumber} (${unitRef}, status=${u.status})`,
                 rezdyOrderReference: unitRef,
               },
             ],
           };
 
           draft.reservations.push(rec);
-          manualOrdersAdded.push(unitRef);
-          if (unitIdx === 0) {
-            manualToMirror.push(u);
+          if (targetState === "confirmed_sold") {
+            manualOrdersAdded.push(unitRef);
+            if (unitIdx === 0) {
+              manualToMirror.push(u);
+            }
           }
         }
       }

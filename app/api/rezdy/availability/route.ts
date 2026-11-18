@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import {
   getPublicVehicleAvailability,
+  MissingParrSecretError,
+  MissingPrivateBlobTokenError,
   SOLD_OUT_TRAVELER_MESSAGE,
 } from "@/lib/inventory/parrVehicleInventory";
 import {
@@ -73,6 +75,12 @@ export async function GET(request: Request) {
     });
     return NextResponse.json(result, { status: 200, headers: HEADERS });
   } catch (err) {
+    if (err instanceof MissingParrSecretError || err instanceof MissingPrivateBlobTokenError) {
+      return NextResponse.json(
+        { ok: false, code: err.code, error: err.message },
+        { status: 503, headers: HEADERS }
+      );
+    }
     return NextResponse.json(
       { ok: false, error: err instanceof Error ? err.message : "Availability lookup failed" },
       { status: 400, headers: HEADERS }

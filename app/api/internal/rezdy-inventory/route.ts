@@ -5,10 +5,17 @@ import {
 } from "@/lib/internalApiAuth";
 import {
   listAdminInventoryPools,
+  MissingParrSecretError,
+  MissingPrivateBlobTokenError,
   reconcilePoolWithRezdy,
   releaseInventoryAfterConfirmedCancellation,
+  requireDedicatedParrSecret,
   resolvePoolReconciliationDisagreement,
 } from "@/lib/inventory/parrVehicleInventory";
+import {
+  runParr2027SessionAndReconciliationAudit,
+  runPrivateVercelBlobStorageProof,
+} from "@/lib/rezdy/parr2027BaselineAudit";
 import { isPreviewOrDevEnvironment, type ParrNativeVehicleSlug } from "@/lib/rezdy/parrNativeRezdyService";
 
 export const runtime = "nodejs";
@@ -27,17 +34,65 @@ export async function GET(request: NextRequest) {
   if (!isPreviewOrDevEnvironment()) {
     return NextResponse.json({ ok: false, error: "Not Found" }, { status: 404, headers: HEADERS });
   }
+  try {
+    requireDedicatedParrSecret();
+  } catch (err) {
+    if (err instanceof MissingParrSecretError) {
+      return NextResponse.json(
+        { ok: false, code: err.code, error: err.message },
+        { status: 503, headers: HEADERS }
+      );
+    }
+    throw err;
+  }
   if (!isAuthorized(request)) {
     return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401, headers: HEADERS });
   }
 
-  const board = await listAdminInventoryPools();
-  return NextResponse.json({ ok: true, ...board }, { status: 200, headers: HEADERS });
+  try {
+    const mode = request.nextUrl.searchParams.get("mode") || "";
+    if (mode === "private_storage_proof") {
+      const proof = await runPrivateVercelBlobStorageProof();
+      return NextResponse.json({ ok: true, mode, proof }, { status: 200, headers: HEADERS });
+    }
+    if (mode === "audit_2027_baseline") {
+      const sync = request.nextUrl.searchParams.get("sync") === "1";
+      const audit = await runParr2027SessionAndReconciliationAudit({
+        syncNonEmptyOrderPoolsToStore: sync,
+      });
+      return NextResponse.json({ ok: true, mode, ...audit }, { status: 200, headers: HEADERS });
+    }
+
+    const board = await listAdminInventoryPools();
+    return NextResponse.json({ ok: true, ...board }, { status: 200, headers: HEADERS });
+  } catch (err) {
+    if (err instanceof MissingParrSecretError || err instanceof MissingPrivateBlobTokenError) {
+      return NextResponse.json(
+        { ok: false, code: err.code, error: err.message },
+        { status: 503, headers: HEADERS }
+      );
+    }
+    return NextResponse.json(
+      { ok: false, error: err instanceof Error ? err.message : "Inventory lookup failed" },
+      { status: 500, headers: HEADERS }
+    );
+  }
 }
 
 export async function POST(request: NextRequest) {
   if (!isPreviewOrDevEnvironment()) {
     return NextResponse.json({ ok: false, error: "Not Found" }, { status: 404, headers: HEADERS });
+  }
+  try {
+    requireDedicatedParrSecret();
+  } catch (err) {
+    if (err instanceof MissingParrSecretError) {
+      return NextResponse.json(
+        { ok: false, code: err.code, error: err.message },
+        { status: 503, headers: HEADERS }
+      );
+    }
+    throw err;
   }
   if (!isAuthorized(request)) {
     return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401, headers: HEADERS });

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { MissingParrSecretError } from "@/lib/inventory/parrVehicleInventory";
 import {
   getParrRezdyBookingConfirmation,
   isPreviewOrDevEnvironment,
@@ -28,7 +29,13 @@ export async function GET(request: Request) {
       sig,
     });
     return NextResponse.json(res, { status: res.httpStatus, headers: HEADERS });
-  } catch {
+  } catch (err) {
+    if (err instanceof MissingParrSecretError) {
+      return NextResponse.json(
+        { ok: false, code: err.code, message: err.message },
+        { status: 503, headers: HEADERS }
+      );
+    }
     return NextResponse.json(
       { ok: false, code: "LOOKUP_FAILED", message: "Unable to load reservation details right now." },
       { status: 502, headers: HEADERS }

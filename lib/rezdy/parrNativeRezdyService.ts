@@ -6,8 +6,10 @@ import {
   finalizeConfirmedRezdyHold,
   getPublicVehicleAvailability,
   InMemoryCasInventoryStore,
+  MissingParrSecretError,
   promoteHoldToPendingWithOutbox,
   releaseHoldAfterFailedAttempt,
+  requireDedicatedParrSecret,
   SOLD_OUT_TRAVELER_MESSAGE,
   type InventoryRuntimeDeps,
 } from "@/lib/inventory/parrVehicleInventory";
@@ -127,7 +129,7 @@ export function buildParrResellerReference(idempotencyKey: string): string {
 }
 
 function getConfirmationHmacSecret(): string {
-  const secret = (process.env.PARR_SECRET || process.env.REZDY_API_KEY || "parr-dev-test-hmac-key").trim();
+  const secret = requireDedicatedParrSecret();
   return crypto.createHash("sha256").update(`parr-confirm-sig:${secret}`, "utf8").digest("hex");
 }
 
@@ -298,6 +300,27 @@ export async function getParrRezdyAvailabilityForDate(
     ? (openSession.priceOptions as Array<Record<string, unknown>>)
     : [];
   const primaryOpt = priceOpts[0] ?? {};
+  const actualOptPrice = Number(primaryOpt.price ?? NaN);
+  if (!Number.isFinite(actualOptPrice) || Math.abs(actualOptPrice - cfg.basePriceUsd) > 0.005) {
+    return {
+      ok: true as const,
+      available: false,
+      soldOut: true,
+      statusMessage: SOLD_OUT_TRAVELER_MESSAGE,
+      vehicleSlug: cfg.slug,
+      productCode: cfg.productCode,
+      dateKey: input.dateKey,
+      canonicalShowId: parrInv.canonicalShowId,
+      capacity: cfg.dailyVehicleCapacity,
+      availableCount: 0,
+      basePriceUsd: cfg.basePriceUsd,
+      expectedBookingFeeUsd: cfg.expectedBookingFeeUsd,
+      expectedTotalChargedUsd: cfg.expectedTotalChargedUsd,
+      maxPartySize: cfg.maxPartySize,
+      vehicleQuantityAllowed: 1 as const,
+      session: null,
+    };
+  }
 
   return {
     ok: true as const,
@@ -321,7 +344,7 @@ export async function getParrRezdyAvailabilityForDate(
       endTimeLocal: openSession.endTimeLocal ? String(openSession.endTimeLocal) : null,
       seatsAvailable: Math.min(Number(openSession.seatsAvailable), parrInv.availableCount),
       optionLabel: String(primaryOpt.label || cfg.displayName),
-      optionPrice: Number(primaryOpt.price ?? cfg.basePriceUsd),
+      optionPrice: actualOptPrice,
       maxQuantity: 1,
     },
   };
@@ -540,6 +563,20 @@ export async function createParrRezdyBooking(
   input: CreateParrNativeBookingInput,
   deps?: { fetchImpl?: FetchLike; inventoryDeps?: InventoryRuntimeDeps }
 ) {
+  try {
+    requireDedicatedParrSecret();
+  } catch (err) {
+    if (err instanceof MissingParrSecretError) {
+      return {
+        ok: false as const,
+        httpStatus: 503,
+        code: err.code,
+        message: "Booking configuration is temporarily unavailable. Please use the classic booking widget.",
+      };
+    }
+    throw err;
+  }
+
   const validation = validateParrBookingInput(input);
   if (!validation.valid) {
     return {

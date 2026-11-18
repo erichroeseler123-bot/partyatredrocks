@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { BlobNotFoundError, BlobPreconditionFailedError } from "@vercel/blob";
 import { NextRequest } from "next/server";
 import {
   PARR_2026_PRICING,
@@ -16,25 +17,35 @@ import {
   getPrivateRidePricingForDate,
 } from "../lib/pricing";
 import {
+  BlobCasInventoryStore,
   InMemoryCasInventoryStore,
+  MissingParrSecretError,
+  MissingPrivateBlobTokenError,
   SOLD_OUT_TRAVELER_MESSAGE,
   SqliteCasInventoryStore,
   acquireOrReuseCheckoutHold,
+  decryptInventoryLedger,
+  deriveInventoryNamespacePrefix,
+  encryptInventoryLedger,
   ensureOpeningInventorySeeded,
   getPublicVehicleAvailability,
   listAdminInventoryPools,
   reconcilePoolWithRezdy,
   releaseInventoryAfterConfirmedCancellation,
+  requireDedicatedParrSecret,
   resolveCanonicalServiceShowIdentity,
   resolvePoolReconciliationDisagreement,
   type FetchLike,
   type ParrOwnerReconciliationAlert,
+  type VercelPrivateBlobOps,
 } from "../lib/inventory/parrVehicleInventory";
 import {
   PARR_PREVIEW_HIDDEN_PRODUCTS,
   createParrRezdyBooking,
   getParrRezdyStatelessQuote,
+  signConfirmationToken,
 } from "../lib/rezdy/parrNativeRezdyService";
+import { runParr2027SessionAndReconciliationAudit } from "../lib/rezdy/parr2027BaselineAudit";
 import {
   getInternalOrderByAnyReference,
   saveInternalOrder,
@@ -228,6 +239,7 @@ function withIsolatedOrderEnv(t: test.TestContext) {
     VERCEL: process.env.VERCEL,
     VERCEL_ENV: process.env.VERCEL_ENV,
     BLOB_READ_WRITE_TOKEN: process.env.BLOB_READ_WRITE_TOKEN,
+    PARR_INVENTORY_PRIVATE_READ_WRITE_TOKEN: process.env.PARR_INVENTORY_PRIVATE_READ_WRITE_TOKEN,
     REZDY_API_KEY: process.env.REZDY_API_KEY,
     PARR_SECRET: process.env.PARR_SECRET,
   };
@@ -237,6 +249,7 @@ function withIsolatedOrderEnv(t: test.TestContext) {
   delete process.env.VERCEL;
   process.env.VERCEL_ENV = "preview";
   delete process.env.BLOB_READ_WRITE_TOKEN;
+  delete process.env.PARR_INVENTORY_PRIVATE_READ_WRITE_TOKEN;
   process.env.REZDY_API_KEY = "test_rezdy_api_key_preview_only";
   process.env.PARR_SECRET = "test_parr_secret_preview_123456";
 
@@ -1173,5 +1186,459 @@ test("Section J #16 & #17: historical 2026 facts/orders ($399/$599), 35 protecte
     protectedUrlsVerified: protectedPaths.length,
     sitemapUrlCount: locCount,
     rezdyIdsVerified: ["596193", "630812", "541037", "P94HN4", "PU8R6Y"],
+  });
+});
+
+test("Hardening H1: Dedicated PARR_SECRET is strictly required (fail-closed with zero fallback to BLOB_READ_WRITE_TOKEN or REZDY_API_KEY)", async (t) => {
+  withIsolatedOrderEnv(t);
+
+  // Set non-PARR secrets to prove ZERO fallback to BLOB_READ_WRITE_TOKEN or REZDY_API_KEY!
+  process.env.BLOB_READ_WRITE_TOKEN = "vercel_blob_rw_public_token_must_not_be_used";
+  process.env.REZDY_API_KEY = "rezdy_api_key_must_not_be_used_as_secret";
+
+  for (const invalidVal of [undefined, "", "    "]) {
+    if (invalidVal === undefined) delete process.env.PARR_SECRET;
+    else process.env.PARR_SECRET = invalidVal;
+
+    assert.throws(() => requireDedicatedParrSecret(), MissingParrSecretError);
+    assert.throws(() => deriveInventoryNamespacePrefix(), MissingParrSecretError);
+    assert.throws(() => encryptInventoryLedger("test"), MissingParrSecretError);
+    assert.throws(() => decryptInventoryLedger('{"v":2}'), MissingParrSecretError);
+    assert.throws(() => signConfirmationToken("ORD123", "PARR-123"), MissingParrSecretError);
+
+    const memStore = new InMemoryCasInventoryStore();
+    await assert.rejects(() => memStore.readPool("2027-03-25__suv"), MissingParrSecretError);
+    await assert.rejects(
+      () => getPublicVehicleAvailability({ dateKey: "2026-08-01", vehicleSlug: "suv" }),
+      MissingParrSecretError
+    );
+    await assert.rejects(
+      () =>
+        acquireOrReuseCheckoutHold({
+          dateKey: "2027-03-25",
+          vehicleSlug: "suv",
+          idempotencyKey: "idem-missing-secret-01",
+          partySize: 4,
+        }),
+      MissingParrSecretError
+    );
+
+    const bookRes = await createParrRezdyBooking({
+      vehicleSlug: "suv",
+      sessionId: "9001",
+      startTimeLocal: "2027-03-25 16:30:00",
+      optionLabel: "Private Suburban (Up to 6 Guests)",
+      partySize: 4,
+      firstName: "Fail",
+      lastName: "Closed",
+      email: "failclosed@example.com",
+      phone: "7205550111",
+      pickupAddress: "1550 Court Pl, Denver, CO 80202",
+      cardToken: "tok_test_missing_secret",
+      idempotencyKey: "idem-missing-secret-book-01",
+    });
+    assert.equal(bookRes.ok, false);
+    assert.equal(bookRes.httpStatus, 503);
+    if (!bookRes.ok) {
+      assert.equal(bookRes.code, "MISSING_PARR_SECRET");
+    }
+
+    const availApiRes = await getPublicAvailabilityRoute(
+      new Request("https://preview.partyatredrocks.vercel.app/api/rezdy/availability?date=2027-03-25")
+    );
+    assert.equal(availApiRes.status, 503);
+    const availJson = await availApiRes.json();
+    assert.equal(availJson.code, "MISSING_PARR_SECRET");
+
+    const adminApiRes = await getAdminInventoryRoute(
+      new NextRequest("https://preview.partyatredrocks.vercel.app/api/internal/rezdy-inventory")
+    );
+    assert.equal(adminApiRes.status, 503);
+    const adminJson = await adminApiRes.json();
+    assert.equal(adminJson.code, "MISSING_PARR_SECRET");
+  }
+
+  // Verify v2 AES-256-GCM rejects plaintext passthrough and wrong PARR_SECRET
+  process.env.PARR_SECRET = "parr_secret_alpha_key_0001";
+  const cipherAlpha = encryptInventoryLedger('{"poolKey":"2027-03-25__suv"}');
+  assert.throws(
+    () => decryptInventoryLedger('{"poolKey":"2027-03-25__suv"}'),
+    /INVENTORY_DECRYPT_ERROR/
+  );
+  process.env.PARR_SECRET = "parr_secret_bravo_key_0002";
+  assert.throws(() => decryptInventoryLedger(cipherAlpha));
+
+  recordReceipt("hardening_h1_required_parr_secret_fail_closed", {
+    testedStates: ["undefined", "empty_string", "whitespace"],
+    zeroFallbackWhenBlobAndRezdyEnvPresent: true,
+    availabilityRouteStatusWithoutSecret: 503,
+    bookingStatusWithoutSecret: 503,
+    adminRouteStatusWithoutSecret: 503,
+    plaintextEnvelopeRejected: true,
+    crossKeyCipherRejected: true,
+  });
+});
+
+test("Hardening H2: Private BlobCasInventoryStore enforces access='private', private storage host, and ETag/ifMatch CAS race safety on final unit", async (t) => {
+  withIsolatedOrderEnv(t);
+
+  // Missing private blob token fails closed
+  const noTokenStore = new BlobCasInventoryStore();
+  await assert.rejects(() => noTokenStore.readPool("2027-04-03__suv"), MissingPrivateBlobTokenError);
+
+  const blobs = new Map<
+    string,
+    {
+      body: string;
+      contentType: string;
+      etag: string;
+      access: "public" | "private";
+      uploadedAt: Date;
+    }
+  >();
+  let etagSeq = 0;
+  let putCalls = 0;
+  let getCalls = 0;
+  let delCalls = 0;
+  let preconditionCollisions = 0;
+  let hostMode: "private" | "public" = "private";
+
+  const makeUrl = (pathname: string) =>
+    hostMode === "private"
+      ? `https://lxs117qwqh1xirgj.private.blob.vercel-storage.com/${pathname}`
+      : `https://byh4ev71yfs07fle.public.blob.vercel-storage.com/${pathname}`;
+
+  const mockOps: VercelPrivateBlobOps = {
+    head: (async (urlOrPathname: string) => {
+      const pathname = urlOrPathname.startsWith("http")
+        ? new URL(urlOrPathname).pathname.slice(1)
+        : urlOrPathname;
+      const entry = blobs.get(pathname);
+      if (!entry) throw new BlobNotFoundError();
+      return {
+        size: Buffer.byteLength(entry.body),
+        uploadedAt: entry.uploadedAt,
+        pathname,
+        contentType: entry.contentType,
+        contentDisposition: `inline; filename="${path.basename(pathname)}"`,
+        url: makeUrl(pathname),
+        downloadUrl: `${makeUrl(pathname)}?download=1`,
+        cacheControl: "private, no-cache",
+        etag: entry.etag,
+      };
+    }) as VercelPrivateBlobOps["head"],
+
+    get: (async (
+      urlOrPathname: string,
+      options: { access: "public" | "private"; useCache?: boolean }
+    ) => {
+      getCalls += 1;
+      assert.equal(options.access, "private", "All Blob gets MUST use access='private'");
+      assert.equal(options.useCache, false, "All Blob gets MUST bypass CDN cache (useCache=false)");
+      const pathname = urlOrPathname.startsWith("http")
+        ? new URL(urlOrPathname).pathname.slice(1)
+        : urlOrPathname;
+      const entry = blobs.get(pathname);
+      if (!entry) return null;
+      const bytes = new TextEncoder().encode(entry.body);
+      const stream = new ReadableStream<Uint8Array>({
+        start(controller) {
+          controller.enqueue(bytes);
+          controller.close();
+        },
+      });
+      return {
+        statusCode: 200 as const,
+        stream,
+        headers: new Headers({ "content-type": entry.contentType, etag: entry.etag }),
+        blob: {
+          url: makeUrl(pathname),
+          downloadUrl: `${makeUrl(pathname)}?download=1`,
+          pathname,
+          contentType: entry.contentType,
+          contentDisposition: "inline",
+          cacheControl: "private, no-cache",
+          size: bytes.byteLength,
+          uploadedAt: entry.uploadedAt,
+          etag: entry.etag,
+        },
+      };
+    }) as unknown as VercelPrivateBlobOps["get"],
+
+    put: (async (pathname: string, body: unknown, options) => {
+      putCalls += 1;
+      assert.equal(options.access, "private", "All Blob puts MUST use access='private'");
+      await new Promise((r) => setTimeout(r, 3));
+      const existing = blobs.get(pathname);
+      if (options.allowOverwrite === false && existing) {
+        preconditionCollisions += 1;
+        throw new BlobPreconditionFailedError();
+      }
+      if (options.ifMatch) {
+        if (!existing || existing.etag !== options.ifMatch) {
+          preconditionCollisions += 1;
+          throw new BlobPreconditionFailedError();
+        }
+      }
+      etagSeq += 1;
+      const etag = `"etag-private-${etagSeq}"`;
+      blobs.set(pathname, {
+        body: String(body),
+        contentType: options.contentType || "application/octet-stream",
+        etag,
+        access: options.access,
+        uploadedAt: new Date(),
+      });
+      return {
+        url: makeUrl(pathname),
+        downloadUrl: `${makeUrl(pathname)}?download=1`,
+        pathname,
+        contentType: options.contentType || "application/octet-stream",
+        contentDisposition: "inline",
+        etag,
+      };
+    }) as VercelPrivateBlobOps["put"],
+
+    del: (async (urlOrPathname: string | string[]) => {
+      delCalls += 1;
+      const targets = Array.isArray(urlOrPathname) ? urlOrPathname : [urlOrPathname];
+      for (const tUrl of targets) {
+        const pathname = tUrl.startsWith("http") ? new URL(tUrl).pathname.slice(1) : tUrl;
+        blobs.delete(pathname);
+      }
+    }) as VercelPrivateBlobOps["del"],
+
+    list: (async (options) => {
+      const prefix = options?.prefix || "";
+      const matched = Array.from(blobs.entries())
+        .filter(([k]) => k.startsWith(prefix))
+        .map(([pathname, entry]) => ({
+          url: makeUrl(pathname),
+          downloadUrl: `${makeUrl(pathname)}?download=1`,
+          pathname,
+          size: Buffer.byteLength(entry.body),
+          uploadedAt: entry.uploadedAt,
+          etag: entry.etag,
+        }));
+      return { blobs: matched, hasMore: false };
+    }) as VercelPrivateBlobOps["list"],
+  };
+
+  const privateStore = new BlobCasInventoryStore({
+    ops: mockOps,
+    token: "vercel_blob_rw_lxs117qwqh1xirgj_mock_private_token",
+  });
+  const mockRezdy = makeMockRezdyFetch();
+
+  // Verify public host URL is rejected immediately!
+  hostMode = "public";
+  await assert.rejects(
+    () =>
+      ensureOpeningInventorySeeded(
+        { dateKey: "2027-04-03", vehicleSlug: "suv" },
+        { store: privateStore, fetchImpl: mockRezdy.fetchImpl }
+      ),
+    /SECURITY_VIOLATION/
+  );
+  hostMode = "private";
+
+  // Pre-seed & hold 5 of 6 Suburbans on 2027-04-03 in Private Blob Store
+  await ensureOpeningInventorySeeded(
+    { dateKey: "2027-04-03", vehicleSlug: "suv" },
+    { store: privateStore, fetchImpl: mockRezdy.fetchImpl }
+  );
+  for (let i = 1; i <= 5; i += 1) {
+    const h = await acquireOrReuseCheckoutHold(
+      {
+        dateKey: "2027-04-03",
+        vehicleSlug: "suv",
+        idempotencyKey: `idem-priv-blob-pre-${i}`,
+        partySize: 5,
+      },
+      { store: privateStore, fetchImpl: mockRezdy.fetchImpl }
+    );
+    assert.equal(h.ok, true);
+  }
+
+  // Race 8 simultaneous requests for the 6th and FINAL Suburban over Private Blob ETag/ifMatch CAS!
+  const raceResults = await Promise.all(
+    Array.from({ length: 8 }, (_, idx) =>
+      acquireOrReuseCheckoutHold(
+        {
+          dateKey: "2027-04-03",
+          vehicleSlug: "suv",
+          idempotencyKey: `idem-priv-blob-racer-${idx + 1}`,
+          partySize: 6,
+        },
+        {
+          store: privateStore,
+          fetchImpl: mockRezdy.fetchImpl,
+          bypassInProcessQueueForCasTest: true,
+        }
+      )
+    )
+  );
+
+  const winners = raceResults.filter((r) => r.ok);
+  const losers = raceResults.filter((r) => !r.ok);
+  assert.equal(winners.length, 1, "Exactly 1 racer wins the final Suburban over private Blob ETag CAS");
+  assert.equal(losers.length, 7, "All other 7 racers fail cleanly with SOLD_OUT");
+  assert.ok(preconditionCollisions >= 1, "BlobPreconditionFailedError triggered and retried cleanly");
+  assert.ok(delCalls >= preconditionCollisions, "Unreferenced candidate snapshots cleaned up on CAS collision");
+
+  // Confirm every stored blob has access='private' and zero plaintext leakage
+  for (const [pathname, b] of Array.from(blobs.entries())) {
+    assert.equal(b.access, "private");
+    if (pathname.endsWith(".enc")) {
+      assert.doesNotMatch(b.body, /2027-04-03__suv|idem-priv-blob/);
+    }
+  }
+
+  recordReceipt("hardening_h2_private_blob_cas_race", {
+    totalPutCalls: putCalls,
+    totalGetCalls: getCalls,
+    preconditionCollisionsHandled: preconditionCollisions,
+    candidateBlobsCleanedUp: delCalls,
+    raceWinners: winners.length,
+    raceLosers: losers.length,
+    allStoredBlobsPrivate: true,
+  });
+});
+
+test("Hardening H3: Incomplete or ambiguous Rezdy reconciliation keeps dates blocked; clean cancelled orders record without blocking", async (t) => {
+  withIsolatedOrderEnv(t);
+  const store = new InMemoryCasInventoryStore();
+
+  // 1. Upstream Rezdy HTTP 503 during opening seed MUST durably block the date!
+  const failingFetch: FetchLike = async () =>
+    new Response(JSON.stringify({ error: "Rezdy 503" }), { status: 503 });
+
+  const blockedAvail = await getPublicVehicleAvailability(
+    { dateKey: "2027-04-09", vehicleSlug: "suv" },
+    { store, fetchImpl: failingFetch }
+  );
+  assert.equal(blockedAvail.available, false);
+  assert.equal(blockedAvail.poolState, "reconciliation_blocked");
+  assert.equal(blockedAvail.statusMessage, "Not available for this show.");
+
+  // 2. Upstream ambiguous status (`PROCESSING`) on 2027-04-10 blocks ONLY 2027-04-10 SUV
+  const ambiguousMock = makeMockRezdyFetch({
+    upstreamOrders: [
+      {
+        orderNumber: "ORD-AMB-PROC-01",
+        status: "PROCESSING",
+        totalAmount: 518.96,
+        totalPaid: 0,
+        items: [
+          {
+            productCode: "P94HN4",
+            startTimeLocal: "2027-04-10 16:30:00",
+            quantities: [{ value: 1 }],
+          },
+        ],
+      },
+      {
+        orderNumber: "ORD-CLEAN-CANCEL-01",
+        status: "CANCELLED",
+        refundStatus: "COMPLETED",
+        totalAmount: 726.96,
+        totalPaid: 0,
+        items: [
+          {
+            productCode: "PU8R6Y",
+            startTimeLocal: "2027-04-10 16:30:00",
+            quantities: [{ value: 1 }],
+          },
+        ],
+      },
+    ],
+  });
+
+  const ambSuv = await getPublicVehicleAvailability(
+    { dateKey: "2027-04-10", vehicleSlug: "suv" },
+    { store, fetchImpl: ambiguousMock.fetchImpl }
+  );
+  assert.equal(ambSuv.available, false);
+  assert.equal(ambSuv.poolState, "reconciliation_blocked");
+
+  const cleanCancelVan = await getPublicVehicleAvailability(
+    { dateKey: "2027-04-10", vehicleSlug: "van" },
+    { store, fetchImpl: ambiguousMock.fetchImpl }
+  );
+  assert.equal(cleanCancelVan.available, true);
+  assert.equal(cleanCancelVan.availableCount, 3, "Clean CANCELLED order consumes 0 units and does not block");
+
+  // 3. Verify 2027 baseline auditor flags covered vs missing vs price-mismatch vs ambiguous orders
+  const auditFetch: FetchLike = async (input) => {
+    const u = new URL(String(input));
+    if (u.pathname.endsWith("/v1/availability")) {
+      const code = u.searchParams.get("productCode");
+      const start = u.searchParams.get("startTimeLocal") || "";
+      if (start.startsWith("2027-03-01") && code === "P94HN4") {
+        return new Response(
+          JSON.stringify({
+            sessions: [
+              {
+                id: 7001,
+                productCode: "P94HN4",
+                startTimeLocal: "2027-03-25 16:30:00",
+                seatsAvailable: 6,
+                priceOptions: [{ label: "Group of 1", price: 499, maxQuantity: 1 }],
+              },
+              {
+                id: 7002,
+                productCode: "P94HN4",
+                startTimeLocal: "2027-03-26 16:30:00",
+                seatsAvailable: 6,
+                priceOptions: [{ label: "Group of 1", price: 450, maxQuantity: 1 }], // intentional mismatch
+              },
+            ],
+          }),
+          { status: 200 }
+        );
+      }
+      return new Response(JSON.stringify({ sessions: [] }), { status: 200 });
+    }
+    if (u.pathname.endsWith("/v1/bookings")) {
+      const code = u.searchParams.get("productCode");
+      if (code === "P94HN4") {
+        return new Response(
+          JSON.stringify({
+            bookings: [
+              {
+                orderNumber: "ORD-2027-AMB",
+                status: "ON_HOLD",
+                totalAmount: 518.96,
+                totalPaid: 0,
+                items: [{ productCode: "P94HN4", startTimeLocal: "2027-03-27 16:30:00", quantities: [{ value: 1 }] }],
+              },
+            ],
+          }),
+          { status: 200 }
+        );
+      }
+      return new Response(JSON.stringify({ bookings: [] }), { status: 200 });
+    }
+    return new Response(JSON.stringify({}), { status: 200 });
+  };
+
+  const audit = await runParr2027SessionAndReconciliationAudit({ fetchImpl: auditFetch });
+  assert.equal(audit.summary.totalUnique2027ServiceDates, 43);
+  const d0325 = audit.matrix.find((r) => r.dateKey === "2027-03-25");
+  const d0326 = audit.matrix.find((r) => r.dateKey === "2027-03-26");
+  const d0327 = audit.matrix.find((r) => r.dateKey === "2027-03-27");
+  assert.equal(d0325?.suburban.coverageStatus, "covered");
+  assert.equal(d0325?.suburban.effectiveDateStatus, "ready");
+  assert.equal(d0326?.suburban.coverageStatus, "mismatch");
+  assert.equal(d0326?.suburban.effectiveDateStatus, "blocked");
+  assert.equal(d0327?.suburban.coverageStatus, "missing_session");
+  assert.equal(d0327?.suburban.orderReconciliationStatus, "blocked_ambiguous");
+  assert.equal(d0327?.suburban.effectiveDateStatus, "blocked");
+
+  recordReceipt("hardening_h3_incomplete_and_ambiguous_reconciliation_blocking", {
+    incompleteSeedPoolState: blockedAvail.poolState,
+    ambiguousOrderPoolState: ambSuv.poolState,
+    cleanCancelledAvailableCount: cleanCancelVan.availableCount,
+    auditedUnique2027Dates: audit.summary.totalUnique2027ServiceDates,
   });
 });
