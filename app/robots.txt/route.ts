@@ -1,8 +1,18 @@
 import { NextResponse } from "next/server";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 export async function GET() {
+  if (process.env.VERCEL_ENV === "preview") {
+    return new NextResponse("User-agent: *\nDisallow: /\n", {
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Cache-Control": "no-store",
+        "X-Robots-Tag": "noindex, nofollow, noarchive",
+      },
+    });
+  }
+
   const body = `User-agent: *
 Allow: /
 

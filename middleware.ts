@@ -304,11 +304,18 @@ export function middleware(req: NextRequest) {
     pathname.startsWith("/_next/") ||
     pathname === "/favicon.ico"
   ) {
-    return NextResponse.next();
+    const passthrough = NextResponse.next();
+    if (process.env.VERCEL_ENV === "preview") {
+      passthrough.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
+    }
+    return passthrough;
   }
 
   const res = NextResponse.next();
   res.headers.set("Cache-Control", "public, max-age=0, must-revalidate");
+  if (process.env.VERCEL_ENV === "preview") {
+    res.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
+  }
   return res;
 }
 
