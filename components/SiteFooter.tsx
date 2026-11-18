@@ -138,7 +138,6 @@ export default function SiteFooter() {
                 brandKey={brandKey}
                 mode="footer"
                 showLabels
-                className="!flex-nowrap shrink-0"
               />
             </div>
           </div>

@@ -60,12 +60,15 @@ export default function TailgatingGuidePage() {
               <div className="relative aspect-[16/10] border-b border-white/10">
                 <Image
                   src="/fleet/fleet-suburban.jpg"
-                  alt="Full-size Chevrolet Suburban SUV for private Red Rocks group tailgating and round-trip rides"
+                  alt="Representative full-size SUV for private Red Rocks group tailgating and round-trip rides"
                   fill
                   unoptimized
                   sizes="(min-width: 768px) 45vw, 100vw"
                   className="object-cover"
                 />
+                <span className="absolute bottom-2.5 right-2.5 rounded-full bg-black/75 px-2.5 py-0.5 text-[10px] font-medium text-white/75 backdrop-blur-sm">
+                  Representative vehicle; exact vehicle may vary.
+                </span>
               </div>
               <div className="p-5">
                 <div className="text-[11px] font-black uppercase tracking-[0.18em] text-[#ffb07c]">Private Suburban</div>

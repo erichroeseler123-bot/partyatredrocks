@@ -24,12 +24,12 @@ type VenueRow = {
 const INCLUDED_SUV = [
   "Door-to-door Denver, Golden, or Boulder hotel/home pickup + optional drink stop",
   "Upper North Lot staging with chairs, cooler, Bluetooth speaker & fresh ice",
-  "Driver & locked black Suburban stay at Red Rocks through the entire concert",
+  "Driver & locked SUV stay at Red Rocks through the entire concert",
   "Direct return ride home after the encore—flat vehicle price, zero surge",
 ];
 
 const INCLUDED_VAN = [
-  "Keep up to 10 guests together in one high-roof Ford Transit passenger van",
+  "Keep up to 10 guests together in one spacious passenger van",
   "One coordinated pickup address + optional beverage/grocery stop en route",
   "Upper North Lot tailgating setup included: chairs, cooler, Bluetooth speaker & ice",
   "Dedicated commercial driver & van wait on-site through the show until you head home",
@@ -117,13 +117,16 @@ export default async function PrivateOptionsPage({
   });
 
   return (
-    <main className="min-h-screen bg-[#070b14] px-4 pb-16 pt-6 text-white sm:px-6 sm:pt-8 lg:px-8">
+    <main className="min-h-screen bg-[#070b14] px-3 pb-14 pt-3 text-white sm:px-6 sm:pb-16 sm:pt-8 lg:px-8">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
-      <section className="mx-auto flex max-w-[1240px] flex-col gap-8">
+      <section className="mx-auto flex max-w-[1240px] flex-col gap-4 sm:gap-8">
         {/* Step Progress Bar */}
-        <nav aria-label="Booking progress" className="grid grid-cols-4 gap-2 rounded-2xl border border-white/10 bg-[#0d1424] p-3 text-[11px] font-bold uppercase tracking-wider">
+        <nav
+          aria-label="Booking progress"
+          className="grid grid-cols-2 gap-1.5 rounded-xl border border-white/10 bg-[#0d1424] p-2.5 text-[10px] font-bold uppercase tracking-wider sm:grid-cols-4 sm:gap-2 sm:rounded-2xl sm:p-3 sm:text-[11px]"
+        >
           <Link href="/red-rocks/concerts" className="truncate text-white/65 no-underline hover:text-white">
             1. Event / Date
           </Link>
@@ -133,7 +136,7 @@ export default async function PrivateOptionsPage({
         </nav>
 
         {/* Hero */}
-        <section className="relative overflow-hidden rounded-[32px] border border-white/12 bg-[#0d1424] shadow-[0_32px_90px_rgba(0,0,0,0.5)]">
+        <section className="relative overflow-hidden rounded-[24px] border border-white/12 bg-[#0d1424] shadow-[0_24px_80px_rgba(0,0,0,0.5)] sm:rounded-[32px]">
           <div className="pointer-events-none absolute inset-0">
             <picture>
               <source media="(max-width: 640px)" srcSet="/images/redesign/hero-red-rocks-mobile.webp" />
@@ -151,23 +154,24 @@ export default async function PrivateOptionsPage({
             <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(7,11,20,0.95)_0%,rgba(7,11,20,0.78)_55%,rgba(7,11,20,0.94)_100%)]" />
           </div>
 
-          <div className="relative p-6 sm:p-10 lg:p-12">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#ffb07c]/35 bg-[#ffb07c]/12 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-[#ffb07c]">
-              <Sparkles className="h-3.5 w-3.5" />
-              2027 Flat Vehicle Pricing · Upper North Lot Tailgating Included
+          <div className="relative p-4 sm:p-10 lg:p-12">
+            <div className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-[#ffb07c]/35 bg-[#ffb07c]/12 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.13em] text-[#ffb07c] sm:px-4 sm:py-1.5 sm:text-[11px] sm:tracking-[0.2em]">
+              <Sparkles className="h-3 w-3 shrink-0 sm:h-3.5 sm:w-3.5" />
+              <span className="sm:hidden">2027 Flat Vehicle Pricing</span>
+              <span className="hidden sm:inline">2027 Flat Vehicle Pricing · Upper North Tailgate</span>
             </div>
 
-            <h1 className="mt-4 max-w-4xl text-[2.2rem] font-black uppercase leading-[0.96] tracking-[-0.035em] sm:text-[3.5rem]">
+            <h1 className="mt-2.5 max-w-4xl text-[1.58rem] font-black uppercase leading-[1.02] tracking-[-0.035em] sm:mt-4 sm:text-[3.5rem] sm:leading-[0.96]">
               Choose Your Private Red Rocks Vehicle
             </h1>
 
-            <p className="mt-4 max-w-3xl text-[15px] leading-7 text-white/84 sm:text-lg">
+            <p className="mt-2 max-w-3xl text-[13px] leading-[1.45] text-white/84 sm:mt-4 sm:text-lg sm:leading-7">
               {PARR_VALUE_PROPOSITION.summary} {PARR_VALUE_PROPOSITION.tailgatingSummary}
             </p>
 
             {artist || dateLabel || pickup ? (
-              <div className="mt-5 inline-flex flex-wrap items-center gap-2 rounded-2xl border border-emerald-400/35 bg-emerald-500/12 px-4 py-3 text-sm text-white">
-                <span className="font-black uppercase tracking-[0.14em] text-emerald-200">Your Ride Context:</span>
+              <div className="mt-3 inline-flex flex-wrap items-center gap-1.5 rounded-xl border border-emerald-400/35 bg-emerald-500/12 px-3 py-2 text-xs text-white sm:mt-5 sm:gap-2 sm:rounded-2xl sm:px-4 sm:py-3 sm:text-sm">
+                <span className="font-black uppercase tracking-[0.12em] text-emerald-200">Your Ride Context:</span>
                 <span>
                   {artist || "Selected Concert"}
                   {dateLabel ? ` · ${dateLabel}` : ""}
@@ -176,18 +180,18 @@ export default async function PrivateOptionsPage({
               </div>
             ) : null}
 
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="mt-3.5 flex flex-wrap gap-2 sm:mt-6 sm:gap-3">
               <a
                 href="#suv-booking"
-                className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#ff7a4d] px-6 text-xs font-black uppercase tracking-[0.14em] text-[#140804] no-underline transition hover:bg-[#ff926b]"
+                className="inline-flex min-h-10 items-center justify-center rounded-full bg-[#ff7a4d] px-4 text-[11px] font-black uppercase tracking-[0.12em] text-[#140804] no-underline transition hover:bg-[#ff926b] sm:min-h-11 sm:px-6 sm:text-xs sm:tracking-[0.14em]"
               >
-                Private Suburban ({SUBURBAN_PRICE_LABEL} · Up to 6)
+                Suburban ({SUBURBAN_PRICE_LABEL} · Up to 6)
               </a>
               <a
                 href="#van-upgrade"
-                className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/20 bg-white/10 px-6 text-xs font-black uppercase tracking-[0.14em] text-white no-underline transition hover:bg-white/16"
+                className="inline-flex min-h-10 items-center justify-center rounded-full border border-white/20 bg-white/10 px-4 text-[11px] font-black uppercase tracking-[0.12em] text-white no-underline transition hover:bg-white/16 sm:min-h-11 sm:px-6 sm:text-xs sm:tracking-[0.14em]"
               >
-                Private Van ({VAN_PRICE_LABEL} · Up to 10)
+                Van ({VAN_PRICE_LABEL} · Up to 10)
               </a>
             </div>
           </div>
@@ -196,12 +200,12 @@ export default async function PrivateOptionsPage({
         <DccReturnBanner searchParams={sp} />
 
         {/* Side-by-Side / Stacked Vehicle Cards with #suv-booking and #van-upgrade Anchors */}
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid gap-5 sm:gap-6 lg:grid-cols-2">
           {/* Option 1: Private Suburban (#suv-booking) */}
           <section
             id="suv-booking"
             aria-labelledby="suv-card-heading"
-            className="scroll-mt-24 flex flex-col justify-between overflow-hidden rounded-[30px] border border-[#ffb07c]/35 bg-[#0d1424] shadow-[0_24px_70px_rgba(0,0,0,0.42)]"
+            className="scroll-mt-20 flex flex-col justify-between overflow-hidden rounded-[24px] border border-[#ffb07c]/35 bg-[#0d1424] shadow-[0_24px_70px_rgba(0,0,0,0.42)] sm:rounded-[30px]"
           >
             <div>
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-black">
@@ -214,34 +218,37 @@ export default async function PrivateOptionsPage({
                   decoding="async"
                   className="h-full w-full object-cover"
                 />
-                <div className="absolute left-4 top-4 rounded-full border border-[#ffb07c]/50 bg-[#070b14]/85 px-3.5 py-1 text-[11px] font-black uppercase tracking-[0.16em] text-[#ffb07c] backdrop-blur">
+                <div className="absolute left-3 top-3 rounded-full border border-[#ffb07c]/50 bg-[#070b14]/85 px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-[#ffb07c] backdrop-blur sm:left-4 sm:top-4 sm:px-3.5 sm:text-[11px]">
                   Most Popular · Up to 6 Guests
                 </div>
+                <span className="absolute bottom-2.5 right-2.5 rounded-full bg-black/75 px-2.5 py-0.5 text-[10px] font-medium text-white/75 backdrop-blur-sm">
+                  Representative vehicle; exact vehicle may vary.
+                </span>
               </div>
 
-              <div className="p-6 sm:p-8">
+              <div className="p-5 sm:p-8">
                 <div className="flex flex-wrap items-baseline justify-between gap-3">
                   <div>
-                    <div className="text-xs font-black uppercase tracking-[0.18em] text-[#ffb07c]">
-                      Option 1 · Full-Size Luxury SUV
+                    <div className="text-[11px] font-black uppercase tracking-[0.16em] text-[#ffb07c] sm:text-xs">
+                      Option 1 · Full-Size SUV
                     </div>
-                    <h2 id="suv-card-heading" className="mt-1 text-3xl font-black uppercase tracking-tight text-white">
+                    <h2 id="suv-card-heading" className="mt-1 text-2xl font-black uppercase tracking-tight text-white sm:text-3xl">
                       {suvOption.title}
                     </h2>
                   </div>
                   <div className="text-right">
-                    <div className="text-4xl font-black text-[#ffb07c]">{SUBURBAN_PRICE_LABEL}</div>
+                    <div className="text-3xl font-black text-[#ffb07c] sm:text-4xl">{SUBURBAN_PRICE_LABEL}</div>
                     <div className="text-[11px] font-bold uppercase tracking-wider text-white/65">
                       Flat round-trip (~$83 each for 6)
                     </div>
                   </div>
                 </div>
 
-                <p className="mt-4 text-sm leading-6 text-white/80">
-                  Ideal for couples, double dates, and groups up to 6 who want leather seating, easy curbside hotel or home pickup, Upper North Lot tailgating, and a dedicated vehicle waiting through the encore.
+                <p className="mt-3 text-sm leading-6 text-white/80 sm:mt-4">
+                  Ideal for couples, double dates, and groups up to 6 who want spacious SUV seating, easy curbside hotel or home pickup, Upper North Lot tailgating, and a dedicated vehicle waiting through the encore.
                 </p>
 
-                <ul className="mt-5 space-y-2.5">
+                <ul className="mt-4 space-y-2 sm:mt-5 sm:space-y-2.5">
                   {INCLUDED_SUV.map((item) => (
                     <li key={item} className="flex items-start gap-2.5 text-sm leading-6 text-white/88">
                       <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#ffb07c]" />
@@ -250,7 +257,7 @@ export default async function PrivateOptionsPage({
                   ))}
                 </ul>
 
-                <div className="mt-5 grid grid-cols-2 gap-2 text-xs font-bold text-white/75 sm:grid-cols-4">
+                <div className="mt-4 grid grid-cols-2 gap-2 text-xs font-bold text-white/75 sm:mt-5 sm:grid-cols-4">
                   {[1, 2, 3, 4].map((vehicleNumber) => (
                     <div key={vehicleNumber} className="rounded-xl border border-white/10 bg-black/25 px-3 py-2 text-center">
                       {vehicleNumber === 1 ? "1 SUV" : `${vehicleNumber} SUVs`}:{" "}
@@ -261,13 +268,13 @@ export default async function PrivateOptionsPage({
               </div>
             </div>
 
-            <div className="border-t border-white/10 p-6 pt-5 sm:px-8 sm:pb-8">
+            <div className="border-t border-white/10 p-5 pt-4 sm:px-8 sm:pb-8 sm:pt-5">
               <Link
                 href={suvHref}
-                className="inline-flex min-h-13 w-full items-center justify-center gap-2 rounded-full bg-[#ff7a4d] px-6 py-3.5 text-sm font-black uppercase tracking-[0.14em] text-[#140804] no-underline shadow-[0_12px_30px_rgba(255,122,77,0.3)] transition hover:bg-[#ff926b]"
+                className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-[#ff7a4d] px-4 py-3 text-xs font-black uppercase tracking-[0.12em] text-[#140804] no-underline shadow-[0_12px_30px_rgba(255,122,77,0.3)] transition hover:bg-[#ff926b] sm:min-h-13 sm:px-6 sm:py-3.5 sm:text-sm sm:tracking-[0.14em]"
               >
                 <span>Select Private Suburban — {SUBURBAN_PRICE_LABEL}</span>
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRight className="h-4 w-4 shrink-0" />
               </Link>
             </div>
           </section>
@@ -276,7 +283,7 @@ export default async function PrivateOptionsPage({
           <section
             id="van-upgrade"
             aria-labelledby="van-card-heading"
-            className="scroll-mt-24 flex flex-col justify-between overflow-hidden rounded-[30px] border border-sky-300/30 bg-[#0d1424] shadow-[0_24px_70px_rgba(0,0,0,0.42)]"
+            className="scroll-mt-20 flex flex-col justify-between overflow-hidden rounded-[24px] border border-sky-300/30 bg-[#0d1424] shadow-[0_24px_70px_rgba(0,0,0,0.42)] sm:rounded-[30px]"
           >
             <div>
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-black">
@@ -289,34 +296,37 @@ export default async function PrivateOptionsPage({
                   decoding="async"
                   className="h-full w-full object-cover"
                 />
-                <div className="absolute left-4 top-4 rounded-full border border-sky-300/50 bg-[#070b14]/85 px-3.5 py-1 text-[11px] font-black uppercase tracking-[0.16em] text-sky-200 backdrop-blur">
+                <div className="absolute left-3 top-3 rounded-full border border-sky-300/50 bg-[#070b14]/85 px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-sky-200 backdrop-blur sm:left-4 sm:top-4 sm:px-3.5 sm:text-[11px]">
                   Full-Crew Van · Up to 10 Guests
                 </div>
+                <span className="absolute bottom-2.5 right-2.5 rounded-full bg-black/75 px-2.5 py-0.5 text-[10px] font-medium text-white/75 backdrop-blur-sm">
+                  Representative vehicle; exact vehicle may vary.
+                </span>
               </div>
 
-              <div className="p-6 sm:p-8">
+              <div className="p-5 sm:p-8">
                 <div className="flex flex-wrap items-baseline justify-between gap-3">
                   <div>
-                    <div className="text-xs font-black uppercase tracking-[0.18em] text-sky-300">
-                      Option 2 · 10-Passenger High-Roof Van
+                    <div className="text-[11px] font-black uppercase tracking-[0.16em] text-sky-300 sm:text-xs">
+                      Option 2 · 10-Passenger Van
                     </div>
-                    <h2 id="van-card-heading" className="mt-1 text-3xl font-black uppercase tracking-tight text-white">
+                    <h2 id="van-card-heading" className="mt-1 text-2xl font-black uppercase tracking-tight text-white sm:text-3xl">
                       Private Van
                     </h2>
                   </div>
                   <div className="text-right">
-                    <div className="text-4xl font-black text-[#ffb07c]">{VAN_PRICE_LABEL}</div>
+                    <div className="text-3xl font-black text-[#ffb07c] sm:text-4xl">{VAN_PRICE_LABEL}</div>
                     <div className="text-[11px] font-bold uppercase tracking-wider text-white/65">
                       Flat round-trip (~$70 each for 10)
                     </div>
                   </div>
                 </div>
 
-                <p className="mt-4 text-sm leading-6 text-white/80">
-                  Built for groups of 7 to 10 friends who want headroom, luggage/cooler space, one pickup timeline, Upper North Lot tailgating together, and one warm van waiting after the show.
+                <p className="mt-3 text-sm leading-6 text-white/80 sm:mt-4">
+                  Built for groups of 7 to 10 friends who want spacious seating, luggage/cooler room, one pickup timeline, Upper North Lot tailgating together, and one warm van waiting after the show.
                 </p>
 
-                <ul className="mt-5 space-y-2.5">
+                <ul className="mt-4 space-y-2 sm:mt-5 sm:space-y-2.5">
                   {INCLUDED_VAN.map((item) => (
                     <li key={item} className="flex items-start gap-2.5 text-sm leading-6 text-white/88">
                       <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-sky-300" />
@@ -325,7 +335,7 @@ export default async function PrivateOptionsPage({
                   ))}
                 </ul>
 
-                <div className="mt-5 rounded-xl border border-white/10 bg-black/25 px-4 py-3 text-xs leading-5 text-white/75">
+                <div className="mt-4 rounded-xl border border-white/10 bg-black/25 px-4 py-3 text-xs leading-5 text-white/75 sm:mt-5">
                   <strong className="text-white">Group over 10 guests?</strong> Combine a Private Van ({VAN_PRICE_LABEL}) + Private Suburban ({SUBURBAN_PRICE_LABEL}) for up to 16 guests, or{" "}
                   <Link href="/contact" className="font-bold text-[#ffb07c] underline">
                     text dispatch at 720-369-6292
@@ -335,13 +345,13 @@ export default async function PrivateOptionsPage({
               </div>
             </div>
 
-            <div className="border-t border-white/10 p-6 pt-5 sm:px-8 sm:pb-8">
+            <div className="border-t border-white/10 p-5 pt-4 sm:px-8 sm:pb-8 sm:pt-5">
               <Link
                 href={vanHref}
-                className="inline-flex min-h-13 w-full items-center justify-center gap-2 rounded-full bg-[#ff7a4d] px-6 py-3.5 text-sm font-black uppercase tracking-[0.14em] text-[#140804] no-underline shadow-[0_12px_30px_rgba(255,122,77,0.3)] transition hover:bg-[#ff926b]"
+                className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-[#ff7a4d] px-4 py-3 text-xs font-black uppercase tracking-[0.12em] text-[#140804] no-underline shadow-[0_12px_30px_rgba(255,122,77,0.3)] transition hover:bg-[#ff926b] sm:min-h-13 sm:px-6 sm:py-3.5 sm:text-sm sm:tracking-[0.14em]"
               >
                 <span>Select Private Van — {VAN_PRICE_LABEL}</span>
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRight className="h-4 w-4 shrink-0" />
               </Link>
             </div>
           </section>

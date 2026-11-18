@@ -265,3 +265,78 @@ test("Phase 2 Decision #4 & #5: full-site $499/$699 pricing consistency, FAQ/man
   const bookingPage = readText("app/booking/page.tsx");
   assert.match(bookingPage, /541037/);
 });
+
+test("Phase 2.1 #5: Next.js configuration authority — next.config.js is authoritative and next.config.ts delegates identically", async () => {
+  // Verify Next.js internal CONFIG_FILES precedence resolves next.config.js first
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { CONFIG_FILES } = require("next/dist/shared/lib/constants");
+  assert.equal(CONFIG_FILES[0], "next.config.js");
+
+  // Confirm next.config.js on disk directly exports ./lib/nextConfigShared.js
+  assert.match(readText("next.config.js"), /module\.exports\s*=\s*require\(["']\.\/lib\/nextConfigShared\.js["']\)/);
+  assert.match(readText("next.config.ts"), /require\(["']\.\/lib\/nextConfigShared\.js["']\)/);
+
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const sharedConfig = require("../lib/nextConfigShared.js");
+  const configTsMod = (await import("../next.config")) as { default?: { default?: unknown } & Record<string, unknown> };
+  const configTs = configTsMod.default?.redirects ? configTsMod.default : configTsMod.default?.default;
+
+  // Both entrypoints reference the exact same authoritative configuration object
+  assert.equal(configTs, sharedConfig, "next.config.ts must delegate to the exact same sharedConfig as next.config.js");
+
+  // Verify metadata/bot streaming behavior (htmlLimitedBots) & inlineCss come from authoritative config
+  assert.ok(sharedConfig.htmlLimitedBots instanceof RegExp, "htmlLimitedBots must be configured as a RegExp");
+  assert.equal(sharedConfig.htmlLimitedBots.test("Mozilla/5.0 HeadlessChrome/131.0"), true);
+  assert.equal(sharedConfig.htmlLimitedBots.test("Mozilla/5.0 (compatible; Googlebot/2.1)"), true);
+  assert.equal(sharedConfig.experimental?.inlineCss, true);
+  assert.deepEqual(sharedConfig.transpilePackages, ["react-map-gl", "mapbox-gl"]);
+
+  // Verify redirects come from authoritative config
+  const redirects = await sharedConfig.redirects();
+  const redirectMap = new Map(redirects.map((r: { source: string; destination: string }) => [r.source, r.destination]));
+  assert.equal(redirectMap.get("/party-bus-to-red-rocks"), "/red-rocks/group-transportation");
+  for (const [oldPath, target] of Object.entries(HISTORICAL_404_SUCCESSOR_REDIRECTS)) {
+    assert.equal(redirectMap.get(oldPath), target.pathname, `authoritative config missing redirect for ${oldPath}`);
+  }
+});
+
+test("Phase 2.1 #4 & #6: representative vehicle disclosure and /artists/zeds-dead 404 + branded not-found links", async () => {
+  // Representative vehicle disclosure present across all vehicle photo surfaces
+  for (const vehicleSurface of [
+    "components/home/HomeSections.tsx",
+    "app/book/[venue]/private/page.tsx",
+    "app/book/[venue]/private/[option]/page.tsx",
+    "app/guide/compare/page.tsx",
+    "app/red-rocks/shuttle/page.tsx",
+    "app/guide/parking/page.tsx",
+    "app/guide/tailgating/page.tsx",
+  ]) {
+    const src = readText(vehicleSurface);
+    assert.match(
+      src,
+      /Representative vehicle; exact vehicle may vary\./,
+      `${vehicleSurface} must include discreet representative vehicle disclosure`
+    );
+  }
+  assert.match(readText("components/booking/BookingVisualHero.tsx"), /imageNote/);
+
+  // /artists/zeds-dead must NOT redirect in middleware or next.config.js (must stay 404 until official 2027 date exists)
+  const zedsMwRes = middleware(new NextRequest("https://www.partyatredrocks.com/artists/zeds-dead"));
+  assert.equal(zedsMwRes.status, 200, "middleware must pass /artists/zeds-dead through to route handler (404), never redirect");
+  assert.equal(zedsMwRes.headers.get("location"), null);
+
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const sharedConfig = require("../lib/nextConfigShared.js");
+  const redirects = await sharedConfig.redirects();
+  assert.equal(
+    redirects.some((r: { source: string }) => r.source.includes("zeds-dead")),
+    false,
+    "next.config.js must not redirect /artists/zeds-dead"
+  );
+
+  // Branded 404 offers links to /red-rocks/concerts and /search
+  const notFoundSrc = readText("app/not-found.tsx");
+  assert.match(notFoundSrc, /href="\/red-rocks\/concerts"/);
+  assert.match(notFoundSrc, /href="\/search"/);
+  assert.match(notFoundSrc, /index:\s*false/);
+});

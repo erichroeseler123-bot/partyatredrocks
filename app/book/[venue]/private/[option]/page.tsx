@@ -162,6 +162,7 @@ export default async function PrivateOptionPage({
           copy={rideOption.body}
           imageSrc={bookingVisuals.privateOptions[rideOption.slug]?.imageSrc || bookingVisuals.private.imageSrc}
           imageAlt={bookingVisuals.privateOptions[rideOption.slug]?.imageAlt || bookingVisuals.private.imageAlt}
+          imageNote="Representative vehicle; exact vehicle may vary."
         />
 
         <DccReturnBanner searchParams={sp} />

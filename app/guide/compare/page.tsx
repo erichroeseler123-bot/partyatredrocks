@@ -9,21 +9,24 @@ import { pageVisuals } from "@/lib/pageVisuals";
 const COMPARE_VISUALS = [
   {
     title: "Private Suburban ($499)",
-    body: "Up to 6 guests in one black Suburban—door-to-door pickup, Upper North Lot tailgate gear, driver waiting on-site, and direct ride home.",
+    body: "Up to 6 guests in one full-size Suburban—door-to-door pickup, Upper North Lot tailgate gear, driver waiting on-site, and direct ride home.",
     imageSrc: "/images/redesign/private-suburban-black.webp",
-    imageAlt: "Black Chevrolet Suburban private concert vehicle for up to 6 guests",
+    imageAlt: "Representative Chevrolet Suburban for private Red Rocks groups up to 6 guests",
+    disclosure: "Representative vehicle; exact vehicle may vary.",
   },
   {
     title: "Private Van ($699)",
-    body: "Up to 10 guests in one high-roof passenger van—everyone arrives, tailgates in Upper North Lot, and rides home together.",
+    body: "Up to 10 guests in one 10-passenger van—everyone arrives, tailgates in Upper North Lot, and rides home together.",
     imageSrc: "/images/redesign/private-van-black.webp",
-    imageAlt: "Black 10-passenger Ford Transit private concert van for Red Rocks groups",
+    imageAlt: "Representative 10-passenger van for Red Rocks concert groups",
+    disclosure: "Representative vehicle; exact vehicle may vary.",
   },
   {
     title: "Rideshare & Third-Party Buses",
     body: "Fixed bar bus stops or Jurassic Lot post-encore rideshare queues mean walking, splitting cars, and nowhere to lock tailgate gear.",
     imageSrc: curatedImages.compareHero,
     imageAlt: "Red Rocks concert arrival and parking comparison at dusk",
+    disclosure: null,
   },
 ] as const;
 
@@ -101,6 +104,9 @@ export default function ShuttleComparison() {
                 <p className="text-[11px] font-black uppercase tracking-[0.22em] text-cyan-300">Compare</p>
                 <h2 className="mt-3 text-2xl font-black tracking-tight">{item.title}</h2>
                 <p className="mt-3 text-soft leading-relaxed">{item.body}</p>
+                {item.disclosure ? (
+                  <p className="mt-2 text-xs text-white/55">{item.disclosure}</p>
+                ) : null}
               </div>
             </article>
           ))}

@@ -91,7 +91,8 @@ const YOUR_NIGHT_STEPS = [
     title: "Your Driver Waits On-Site",
     body: "Your vehicle never leaves the mountain and is never double-booked. Leave early, stay through the second encore—your call.",
     image: "/images/redesign/private-suburban-black-sm.webp",
-    alt: "Black Chevrolet Suburban staged and waiting for concert guests",
+    alt: "Representative full-size SUV staged and waiting for concert guests",
+    representativeDisclosure: true,
   },
   {
     step: "05",
@@ -246,8 +247,8 @@ export default function HomeSections({
   return (
     <main className="bg-[#070b14] text-white">
       {/* ================= HERO: EMOTIONAL PROMISE + ONE UNIFIED BOOKING ACTION ================= */}
-      <section className="mx-auto max-w-[1440px] px-3 pt-3 sm:px-6 sm:pt-5 lg:px-8">
-        <div className="relative overflow-hidden rounded-[28px] border border-white/12 bg-[#0d1424] shadow-[0_36px_110px_rgba(0,0,0,0.65)] sm:rounded-[36px]">
+      <section className="mx-auto max-w-[1440px] px-2.5 pt-2 sm:px-6 sm:pt-5 lg:px-8">
+        <div className="relative overflow-hidden rounded-[24px] border border-white/12 bg-[#0d1424] shadow-[0_36px_110px_rgba(0,0,0,0.65)] sm:rounded-[36px]">
           <div className="pointer-events-none absolute inset-0">
             <picture>
               <source media="(max-width: 640px)" srcSet="/images/redesign/hero-red-rocks-mobile.webp" />
@@ -263,52 +264,53 @@ export default function HomeSections({
                 className="h-full w-full object-cover object-center"
               />
             </picture>
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,11,20,0.46)_0%,rgba(7,11,20,0.72)_46%,rgba(7,11,20,0.96)_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,11,20,0.48)_0%,rgba(7,11,20,0.74)_46%,rgba(7,11,20,0.96)_100%)]" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,140,88,0.22),transparent_42%)]" />
           </div>
 
-          <div className="relative px-4 pb-5 pt-5 sm:px-8 sm:pb-10 sm:pt-11 lg:px-12 lg:pb-12 lg:pt-14">
+          <div className="relative px-3.5 pb-4 pt-3.5 sm:px-8 sm:pb-10 sm:pt-11 lg:px-12 lg:pb-12 lg:pt-14">
             <div className="max-w-3xl">
-              <div className="inline-flex flex-wrap items-center gap-1.5 rounded-full border border-[#ffb07c]/40 bg-black/50 px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-[#ffb07c] backdrop-blur-sm sm:px-3.5 sm:py-1.5 sm:text-[11px]">
-                <Sparkles className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
-                2027 Season Open · Upper North Tailgate Included
+              <div className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-[#ffb07c]/40 bg-black/50 px-2.5 py-1 text-[9.5px] font-black uppercase tracking-[0.12em] text-[#ffb07c] backdrop-blur-sm sm:px-3.5 sm:py-1.5 sm:text-[11px] sm:tracking-[0.16em]">
+                <Sparkles className="h-3 w-3 shrink-0 sm:h-3.5 sm:w-3.5" />
+                <span className="sm:hidden">2027 Season · Tailgate Included</span>
+                <span className="hidden sm:inline">2027 Season · Upper North Tailgate Included</span>
               </div>
 
-              <h1 className="mt-3 text-[1.85rem] font-black leading-[1.03] tracking-[-0.035em] text-white sm:mt-4 sm:text-[3.25rem] lg:text-[3.9rem]">
-                Your Red Rocks night—pickup, tailgate, the show, and a safe private ride home.
+              <h1 className="mt-2 text-[1.48rem] font-black leading-[1.08] tracking-[-0.03em] text-white sm:mt-4 sm:text-[3.25rem] sm:leading-[1.03] lg:text-[3.9rem]">
+                Your Red Rocks night—pickup, tailgate, the show &amp; a safe private ride home.
               </h1>
 
-              <p className="mt-2.5 max-w-2xl text-sm leading-relaxed text-white/88 sm:mt-4 sm:text-lg">
-                Skip the parking climb and midnight rideshare chaos. Get your own black Suburban (
-                <strong className="text-[#ffb07c]">${SUBURBAN_2027_USD}</strong>, up to 6) or 10-passenger Van (
-                <strong className="text-[#ffb07c]">${VAN_2027_USD}</strong>, up to 10) with chairs, cooler, speaker, ice, and a driver who waits through the entire concert.
+              <p className="mt-2 max-w-2xl text-[13px] leading-[1.45] text-white/88 sm:mt-4 sm:text-lg sm:leading-relaxed">
+                Skip the parking climb and rideshare chaos. Book a Private Suburban (
+                <strong className="text-[#ffb07c]">${SUBURBAN_2027_USD}</strong>, up to 6) or Private Van (
+                <strong className="text-[#ffb07c]">${VAN_2027_USD}</strong>, up to 10) with Upper North Lot tailgating—chairs, cooler, speaker &amp; ice—and a driver waiting all show.
               </p>
             </div>
 
             {/* Unified 4-Step Mobile-First Booking Selector */}
-            <div className="mt-4 rounded-[22px] border border-white/16 bg-[#090e1a]/92 p-3.5 shadow-[0_24px_60px_rgba(0,0,0,0.55)] backdrop-blur-md sm:mt-7 sm:rounded-[24px] sm:p-6">
-              <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-                <span className="text-[11px] font-black uppercase tracking-[0.18em] text-[#ffb07c]">
-                  Start Your Group Booking · 1 Flat Vehicle Price
+            <div className="mt-3 rounded-[20px] border border-white/16 bg-[#090e1a]/92 p-3 shadow-[0_24px_60px_rgba(0,0,0,0.55)] backdrop-blur-md sm:mt-7 sm:rounded-[24px] sm:p-6">
+              <div className="mb-2 flex flex-wrap items-center justify-between gap-x-2 gap-y-1 sm:mb-3">
+                <span className="text-[10px] font-black uppercase tracking-[0.15em] text-[#ffb07c] sm:text-[11px] sm:tracking-[0.18em]">
+                  Group Booking · 1 Flat Vehicle Rate
                 </span>
                 <Link
                   href="/red-rocks/concerts"
-                  className="text-xs font-bold text-white/80 underline decoration-white/30 hover:text-[#ffb07c]"
+                  className="text-[11px] font-bold text-white/80 underline decoration-white/30 hover:text-[#ffb07c] sm:text-xs"
                 >
-                  Browse all {verified2027Count} announced 2027 shows →
+                  All {verified2027Count} announced 2027 shows →
                 </Link>
               </div>
 
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.85fr)_minmax(0,0.9fr)_auto] lg:items-end">
-                <label className="flex min-w-0 flex-col gap-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-white/80">
+              <div className="grid gap-2 sm:gap-3 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.85fr)_minmax(0,0.9fr)_auto] lg:items-end">
+                <label className="flex min-w-0 flex-col gap-1 text-[10px] font-bold uppercase tracking-[0.1em] text-white/80 sm:gap-1.5 sm:text-[11px] sm:tracking-[0.12em]">
                   <span>1. Choose Event or Date</span>
                   <select
                     aria-label="Choose a 2027 Red Rocks concert or custom date"
                     value={selectedShowId}
                     onChange={(e) => handleSelectVerifiedShow(e.target.value)}
-                    className="min-h-12 w-full min-w-0 truncate rounded-xl border border-white/20 bg-[#0f172a] px-3.5 text-sm font-semibold text-white focus:border-[#ffb07c] focus:outline-none"
+                    className="min-h-10 w-full min-w-0 truncate rounded-xl border border-white/20 bg-[#0f172a] px-3 text-xs font-semibold text-white focus:border-[#ffb07c] focus:outline-none sm:min-h-12 sm:px-3.5 sm:text-sm"
                   >
-                    <option value="">Select 2027 concert (or pick date)</option>
+                    <option value="">Select 2027 concert (or any date)</option>
                     {upcoming2027Preview.map((ev) => (
                       <option key={ev.id} value={ev.id}>
                         {ev.dateKey.slice(5)} · {ev.name}
@@ -318,42 +320,44 @@ export default function HomeSections({
                   </select>
                 </label>
 
-                <label className="flex min-w-0 flex-col gap-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-white/80">
-                  <span>2. Group Size &amp; Vehicle</span>
-                  <select
-                    aria-label="Select group size and private vehicle"
-                    value={partySize}
-                    onChange={(e) => setPartySize(Number(e.target.value))}
-                    className="min-h-12 w-full min-w-0 truncate rounded-xl border border-white/20 bg-[#0f172a] px-3.5 text-sm font-semibold text-white focus:border-[#ffb07c] focus:outline-none"
-                  >
-                    {[2, 3, 4, 5, 6].map((n) => (
-                      <option key={n} value={n}>
-                        {n} guests · Suburban (${SUBURBAN_2027_USD})
-                      </option>
-                    ))}
-                    {[7, 8, 9, 10].map((n) => (
-                      <option key={n} value={n}>
-                        {n} guests · Private Van (${VAN_2027_USD})
-                      </option>
-                    ))}
-                  </select>
-                </label>
+                <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:contents">
+                  <label className="flex min-w-0 flex-col gap-1 text-[10px] font-bold uppercase tracking-[0.08em] text-white/80 sm:gap-1.5 sm:text-[11px] sm:tracking-[0.12em]">
+                    <span className="truncate">2. Group &amp; Vehicle</span>
+                    <select
+                      aria-label="Select group size and private vehicle"
+                      value={partySize}
+                      onChange={(e) => setPartySize(Number(e.target.value))}
+                      className="min-h-10 w-full min-w-0 truncate rounded-xl border border-white/20 bg-[#0f172a] px-2.5 text-xs font-semibold text-white focus:border-[#ffb07c] focus:outline-none sm:min-h-12 sm:px-3.5 sm:text-sm"
+                    >
+                      {[2, 3, 4, 5, 6].map((n) => (
+                        <option key={n} value={n}>
+                          {n} · Suburban (${SUBURBAN_2027_USD})
+                        </option>
+                      ))}
+                      {[7, 8, 9, 10].map((n) => (
+                        <option key={n} value={n}>
+                          {n} · Van (${VAN_2027_USD})
+                        </option>
+                      ))}
+                    </select>
+                  </label>
 
-                <label className="flex min-w-0 flex-col gap-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-white/80">
-                  <span>3. Confirm Pickup Area</span>
-                  <select
-                    aria-label="Confirm pickup area"
-                    value={pickupArea}
-                    onChange={(e) => setPickupArea(e.target.value)}
-                    className="min-h-12 w-full min-w-0 truncate rounded-xl border border-white/20 bg-[#0f172a] px-3.5 text-sm font-semibold text-white focus:border-[#ffb07c] focus:outline-none"
-                  >
-                    {PICKUP_AREAS.map((area) => (
-                      <option key={area} value={area}>
-                        {area}
-                      </option>
-                    ))}
-                  </select>
-                </label>
+                  <label className="flex min-w-0 flex-col gap-1 text-[10px] font-bold uppercase tracking-[0.08em] text-white/80 sm:gap-1.5 sm:text-[11px] sm:tracking-[0.12em]">
+                    <span className="truncate">3. Pickup Area</span>
+                    <select
+                      aria-label="Confirm pickup area"
+                      value={pickupArea}
+                      onChange={(e) => setPickupArea(e.target.value)}
+                      className="min-h-10 w-full min-w-0 truncate rounded-xl border border-white/20 bg-[#0f172a] px-2.5 text-xs font-semibold text-white focus:border-[#ffb07c] focus:outline-none sm:min-h-12 sm:px-3.5 sm:text-sm"
+                    >
+                      {PICKUP_AREAS.map((area) => (
+                        <option key={area} value={area}>
+                          {area}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                </div>
 
                 <Link
                   href={primaryHeroHref}
@@ -365,18 +369,18 @@ export default function HomeSections({
                       travelIntent: "red-rocks-concert",
                     })
                   }
-                  className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#ff7a4d] px-5 text-xs font-black uppercase tracking-[0.12em] text-[#140804] no-underline shadow-[0_12px_30px_rgba(255,122,77,0.35)] transition hover:bg-[#ff926b] sm:col-span-2 lg:col-span-1"
+                  className="inline-flex min-h-11 w-full shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-[#ff7a4d] px-4 text-xs font-black uppercase tracking-[0.12em] text-[#140804] no-underline shadow-[0_12px_30px_rgba(255,122,77,0.35)] transition hover:bg-[#ff926b] sm:min-h-12 sm:px-5 lg:w-auto"
                 >
                   <span>
                     Book {partySize > 6 ? `Van ($${VAN_2027_USD})` : `Suburban ($${SUBURBAN_2027_USD})`}
                   </span>
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowRight className="h-4 w-4 shrink-0" />
                 </Link>
               </div>
 
-              {(selectedShowId === "custom" || !selectedShowId) && (
-                <div className="mt-3 grid gap-3 border-t border-white/10 pt-3 sm:grid-cols-2">
-                  <label className="flex items-center gap-3 text-xs text-white/75">
+              {selectedShowId === "custom" ? (
+                <div className="mt-2.5 grid gap-2.5 border-t border-white/10 pt-2.5 sm:mt-3 sm:grid-cols-2 sm:gap-3 sm:pt-3">
+                  <label className="flex min-w-0 items-center gap-2.5 text-xs text-white/75">
                     <span className="shrink-0 font-bold uppercase tracking-wider text-white/65">Exact Date:</span>
                     <input
                       type="date"
@@ -384,36 +388,92 @@ export default function HomeSections({
                       max="2028-12-31"
                       value={customDate}
                       onChange={(e) => setCustomDate(e.target.value)}
-                      className="min-h-10 flex-1 rounded-lg border border-white/15 bg-[#0f172a] px-3 text-xs font-medium text-white focus:border-[#ffb07c] focus:outline-none"
+                      className="min-h-9 min-w-0 flex-1 rounded-lg border border-white/15 bg-[#0f172a] px-2.5 text-xs font-medium text-white focus:border-[#ffb07c] focus:outline-none sm:min-h-10 sm:px-3"
                     />
                   </label>
-                  <label className="flex items-center gap-3 text-xs text-white/75">
+                  <label className="flex min-w-0 items-center gap-2.5 text-xs text-white/75">
                     <span className="shrink-0 font-bold uppercase tracking-wider text-white/65">Artist (Opt):</span>
                     <input
                       type="text"
                       value={customArtist}
                       onChange={(e) => setCustomArtist(e.target.value)}
                       placeholder="Headliner or tour name"
-                      className="min-h-10 flex-1 rounded-lg border border-white/15 bg-[#0f172a] px-3 text-xs font-medium text-white placeholder:text-white/40 focus:border-[#ffb07c] focus:outline-none"
+                      className="min-h-9 min-w-0 flex-1 rounded-lg border border-white/15 bg-[#0f172a] px-2.5 text-xs font-medium text-white placeholder:text-white/40 focus:border-[#ffb07c] focus:outline-none sm:min-h-10 sm:px-3"
                     />
                   </label>
                 </div>
-              )}
+              ) : !selectedShowId ? (
+                <>
+                  {/* Desktop inline custom date/artist inputs preserved */}
+                  <div className="mt-3 hidden gap-3 border-t border-white/10 pt-3 lg:grid lg:grid-cols-2">
+                    <label className="flex items-center gap-3 text-xs text-white/75">
+                      <span className="shrink-0 font-bold uppercase tracking-wider text-white/65">Exact Date:</span>
+                      <input
+                        type="date"
+                        min="2026-11-01"
+                        max="2028-12-31"
+                        value={customDate}
+                        onChange={(e) => setCustomDate(e.target.value)}
+                        className="min-h-10 flex-1 rounded-lg border border-white/15 bg-[#0f172a] px-3 text-xs font-medium text-white focus:border-[#ffb07c] focus:outline-none"
+                      />
+                    </label>
+                    <label className="flex items-center gap-3 text-xs text-white/75">
+                      <span className="shrink-0 font-bold uppercase tracking-wider text-white/65">Artist (Opt):</span>
+                      <input
+                        type="text"
+                        value={customArtist}
+                        onChange={(e) => setCustomArtist(e.target.value)}
+                        placeholder="Headliner or tour name"
+                        className="min-h-10 flex-1 rounded-lg border border-white/15 bg-[#0f172a] px-3 text-xs font-medium text-white placeholder:text-white/40 focus:border-[#ffb07c] focus:outline-none"
+                      />
+                    </label>
+                  </div>
 
-              <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-white/80">
+                  {/* Mobile compact disclosure for custom/presale date */}
+                  <details className="mt-2 border-t border-white/10 pt-2 lg:hidden">
+                    <summary className="cursor-pointer text-[11px] font-semibold text-white/75 hover:text-[#ffb07c]">
+                      Have a presale or unannounced 2027 date? Enter custom date
+                    </summary>
+                    <div className="mt-2 grid gap-2 sm:grid-cols-2">
+                      <label className="flex min-w-0 items-center gap-2 text-xs text-white/75">
+                        <span className="shrink-0 font-bold uppercase tracking-wider text-white/65">Date:</span>
+                        <input
+                          type="date"
+                          min="2026-11-01"
+                          max="2028-12-31"
+                          value={customDate}
+                          onChange={(e) => setCustomDate(e.target.value)}
+                          className="min-h-9 min-w-0 flex-1 rounded-lg border border-white/15 bg-[#0f172a] px-2.5 text-xs font-medium text-white focus:border-[#ffb07c] focus:outline-none"
+                        />
+                      </label>
+                      <label className="flex min-w-0 items-center gap-2 text-xs text-white/75">
+                        <span className="shrink-0 font-bold uppercase tracking-wider text-white/65">Artist:</span>
+                        <input
+                          type="text"
+                          value={customArtist}
+                          onChange={(e) => setCustomArtist(e.target.value)}
+                          placeholder="Headliner (optional)"
+                          className="min-h-9 min-w-0 flex-1 rounded-lg border border-white/15 bg-[#0f172a] px-2.5 text-xs font-medium text-white placeholder:text-white/40 focus:border-[#ffb07c] focus:outline-none"
+                        />
+                      </label>
+                    </div>
+                  </details>
+                </>
+              ) : null}
+
+              <div className="mt-2 flex flex-wrap items-center justify-between gap-x-2 gap-y-1 text-[11px] text-white/80 sm:mt-3 sm:text-xs">
                 <span>
-                  Selected:{" "}
                   <strong className="text-white">
                     {partySize > 6
-                      ? `${vanPricing.priceLabel} Private Van (~$${Math.round(vanPricing.priceUsd / partySize)} each for ${partySize})`
-                      : `${suvPricing.priceLabel} Private Suburban (~$${Math.round(suvPricing.priceUsd / Math.max(1, partySize))} each for ${partySize})`}
+                      ? `${vanPricing.priceLabel} Private Van (~$${Math.round(vanPricing.priceUsd / partySize)} ea for ${partySize})`
+                      : `${suvPricing.priceLabel} Private Suburban (~$${Math.round(suvPricing.priceUsd / Math.max(1, partySize))} ea for ${partySize})`}
                   </strong>
                 </span>
                 <Link
                   href={compareVehiclesHref}
                   className="font-bold text-[#ffb07c] underline decoration-[#ffb07c]/40 hover:text-white"
                 >
-                  Compare Suburban vs. Van side-by-side →
+                  Compare Suburban vs. Van →
                 </Link>
               </div>
             </div>
@@ -447,19 +507,22 @@ export default function HomeSections({
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-black">
                 <img
                   src={privateVehicleSrc}
-                  alt="Black Chevrolet Suburban full-size SUV for private Red Rocks groups up to 6 guests"
+                  alt="Representative full-size SUV for private Red Rocks groups up to 6 guests"
                   width={960}
                   height={600}
                   loading="lazy"
                   decoding="async"
                   className="h-full w-full object-cover"
                 />
-                <div className="absolute left-4 top-4 rounded-full border border-[#ffb07c]/50 bg-[#070b14]/85 px-3.5 py-1 text-[11px] font-black uppercase tracking-[0.16em] text-[#ffb07c] backdrop-blur">
+                <div className="absolute left-3 top-3 rounded-full border border-[#ffb07c]/50 bg-[#070b14]/85 px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-[#ffb07c] backdrop-blur sm:left-4 sm:top-4 sm:px-3.5 sm:text-[11px]">
                   Most Popular · Up to 6 Guests
                 </div>
+                <span className="absolute bottom-2.5 right-2.5 rounded-full bg-black/75 px-2.5 py-0.5 text-[10px] font-medium text-white/75 backdrop-blur-sm">
+                  Representative vehicle; exact vehicle may vary.
+                </span>
               </div>
 
-              <div className="flex flex-1 flex-col justify-between p-6 sm:p-8">
+              <div className="flex flex-1 flex-col justify-between p-5 sm:p-8">
                 <div>
                   <div className="flex flex-wrap items-baseline justify-between gap-3">
                     <h3 className="text-2xl font-black uppercase tracking-tight text-white sm:text-3xl">
@@ -476,7 +539,7 @@ export default function HomeSections({
                   </div>
 
                   <p className="mt-3 text-sm leading-6 text-white/80">
-                    Full-size black Chevrolet Suburban built for couples, double dates, and crews up to 6 who want leather comfort, Upper North Lot tailgating, and an effortless exit.
+                    Full-size Chevrolet Suburban or equivalent SUV built for couples, double dates, and crews up to 6 who want spacious seating, Upper North Lot tailgating, and an effortless exit.
                   </p>
 
                   <ul className="mt-5 space-y-2.5 text-sm text-white/88">
@@ -495,10 +558,10 @@ export default function HomeSections({
                   </ul>
                 </div>
 
-                <div className="mt-7 flex flex-col gap-2.5 sm:flex-row">
+                <div className="mt-6 flex flex-col gap-2.5 sm:mt-7 sm:flex-row">
                   <Link
                     href={customSuvHref}
-                    className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full bg-[#ff7a4d] px-6 text-xs font-black uppercase tracking-[0.14em] text-[#140804] no-underline transition hover:bg-[#ff926b]"
+                    className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full bg-[#ff7a4d] px-5 text-xs font-black uppercase tracking-[0.13em] text-[#140804] no-underline transition hover:bg-[#ff926b]"
                   >
                     Book Private Suburban — {suvPricing.priceLabel}
                   </Link>
@@ -517,19 +580,22 @@ export default function HomeSections({
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-black">
                 <img
                   src={privateVanSrc}
-                  alt="Black 10-passenger high-roof Ford Transit van for Red Rocks concert groups"
+                  alt="Representative 10-passenger private van for Red Rocks concert groups"
                   width={960}
                   height={600}
                   loading="lazy"
                   decoding="async"
                   className="h-full w-full object-cover"
                 />
-                <div className="absolute left-4 top-4 rounded-full border border-sky-300/45 bg-[#070b14]/85 px-3.5 py-1 text-[11px] font-black uppercase tracking-[0.16em] text-sky-200 backdrop-blur">
+                <div className="absolute left-3 top-3 rounded-full border border-sky-300/45 bg-[#070b14]/85 px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-sky-200 backdrop-blur sm:left-4 sm:top-4 sm:px-3.5 sm:text-[11px]">
                   Best Group Split · Up to 10 Guests
                 </div>
+                <span className="absolute bottom-2.5 right-2.5 rounded-full bg-black/75 px-2.5 py-0.5 text-[10px] font-medium text-white/75 backdrop-blur-sm">
+                  Representative vehicle; exact vehicle may vary.
+                </span>
               </div>
 
-              <div className="flex flex-1 flex-col justify-between p-6 sm:p-8">
+              <div className="flex flex-1 flex-col justify-between p-5 sm:p-8">
                 <div>
                   <div className="flex flex-wrap items-baseline justify-between gap-3">
                     <h3 className="text-2xl font-black uppercase tracking-tight text-white sm:text-3xl">
@@ -546,7 +612,7 @@ export default function HomeSections({
                   </div>
 
                   <p className="mt-3 text-sm leading-6 text-white/80">
-                    High-roof 10-passenger van so birthday crews, bachelor/bachelorette groups, and visiting friends stay together on one timeline instead of splitting into 3 Ubers.
+                    Spacious 10-passenger private van so birthday crews, bachelor/bachelorette groups, and visiting friends stay together on one timeline instead of splitting into 3 Ubers.
                   </p>
 
                   <ul className="mt-5 space-y-2.5 text-sm text-white/88">
@@ -622,6 +688,9 @@ export default function HomeSections({
                 <div className="flex-1 p-4">
                   <h3 className="text-base font-black uppercase tracking-tight text-white">{item.title}</h3>
                   <p className="mt-1.5 text-xs leading-5 text-white/75">{item.body}</p>
+                  {"representativeDisclosure" in item && item.representativeDisclosure ? (
+                    <p className="mt-2 text-[10px] text-white/55">Representative vehicle; exact vehicle may vary.</p>
+                  ) : null}
                 </div>
               </article>
             ))}

@@ -19,11 +19,11 @@ export const bookingVisuals = {
   privateOptions: {
     suv: {
       imageSrc: "/images/redesign/private-suburban-black.webp",
-      imageAlt: "Black Chevrolet Suburban SUV for private Red Rocks group transportation",
+      imageAlt: "Representative full-size SUV for private Red Rocks group transportation",
     },
     van: {
       imageSrc: "/images/redesign/private-van-black.webp",
-      imageAlt: "Black 10-passenger Ford Transit van for private Red Rocks group rides",
+      imageAlt: "Representative 10-passenger private van for Red Rocks group rides",
     },
     sprinter: {
       imageSrc: curatedImages.sprinterVan,

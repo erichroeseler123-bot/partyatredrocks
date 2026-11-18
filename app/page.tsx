@@ -154,7 +154,7 @@ export default async function HomePage() {
           itemOffered: {
             "@type": "Service",
             name: "Private Suburban to Red Rocks",
-            description: "Private concert transportation for up to 6 guests in a black Suburban with Upper North Lot tailgating setup and waiting driver.",
+            description: "Private concert transportation for up to 6 guests in a full-size Suburban or equivalent SUV with Upper North Lot tailgating setup and waiting driver.",
           },
         },
         {
@@ -221,6 +221,13 @@ export default async function HomePage() {
 
   return (
     <>
+      <link
+        rel="preload"
+        as="image"
+        href="/images/redesign/hero-red-rocks-mobile.webp"
+        media="(max-width: 640px)"
+        fetchPriority="high"
+      />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />

@@ -210,17 +210,20 @@ export default async function RedRocksShuttlePage({
                 <div className="relative mb-6 aspect-[16/10] overflow-hidden rounded-2xl border border-white/10">
                   <Image
                     src="/fleet/fleet-suburban.jpg"
-                    alt="Full-size Chevrolet Suburban SUV for private Red Rocks group transportation"
+                    alt="Representative full-size SUV for private Red Rocks group transportation"
                     fill
                     unoptimized
                     className="object-cover"
                     sizes="(min-width: 1024px) 560px, 100vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#070b18]/65 via-transparent to-transparent" />
+                  <span className="absolute bottom-2.5 right-2.5 rounded-full bg-black/75 px-2.5 py-0.5 text-[10px] font-medium text-white/75 backdrop-blur-sm">
+                    Representative vehicle; exact vehicle may vary.
+                  </span>
                 </div>
                 <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[#ffb07c]">
                   <CarFront className="h-4 w-4" />
-                  Luxury SUV Option
+                  Full-Size SUV Option
                 </div>
                 <h3 className="mt-3 text-3xl font-black uppercase tracking-tight text-white sm:text-4xl">
                   Private Suburban
@@ -230,13 +233,13 @@ export default async function RedRocksShuttlePage({
                   <span className="text-sm font-bold uppercase tracking-wider text-white/60">flat round-trip</span>
                 </div>
                 <p className="mt-4 text-sm leading-6 text-white/75">
-                  Comfortable, leather-appointed full-size Chevy Suburban or GMC Yukon XL. Ideal for couples, families, and smaller groups who want private luxury service without having to drive.
+                  Comfortable, spacious full-size Chevrolet Suburban or equivalent SUV. Ideal for couples, families, and smaller groups who want private door-to-door service without having to drive.
                 </p>
 
                 <div className="mt-6 space-y-3 border-t border-white/10 pt-6">
                   <div className="flex items-center gap-3 text-sm text-white/85">
                     <Users className="h-4 w-4 text-[#3df3ff] shrink-0" />
-                    <span><strong>Passenger capacity:</strong> Up to 6 guests (~$66/person)</span>
+                    <span><strong>Passenger capacity:</strong> Up to 6 guests (~$83 each split 6 ways)</span>
                   </div>
                   <div className="flex items-center gap-3 text-sm text-white/85">
                     <MapPin className="h-4 w-4 text-[#3df3ff] shrink-0" />
@@ -301,7 +304,7 @@ export default async function RedRocksShuttlePage({
                 <div className="mt-6 space-y-3 border-t border-white/10 pt-6">
                   <div className="flex items-center gap-3 text-sm text-white/85">
                     <Users className="h-4 w-4 text-[#ffb07c] shrink-0" />
-                    <span><strong>Passenger capacity:</strong> Up to 10 guests (under $60/person split 10 ways)</span>
+                    <span><strong>Passenger capacity:</strong> Up to 10 guests (~$70 each split 10 ways)</span>
                   </div>
                   <div className="flex items-center gap-3 text-sm text-white/85">
                     <MapPin className="h-4 w-4 text-[#ffb07c] shrink-0" />

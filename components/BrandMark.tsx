@@ -7,10 +7,10 @@ type BrandMarkProps = {
 };
 
 const SCANNED_FRAME_CLASSES: Record<BrandMarkDisplayVariant, string> = {
-  nav: "w-[116px] sm:w-[146px]",
-  footer: "w-[128px] sm:w-[148px]",
-  compact: "w-[96px]",
-  booking: "w-[164px] sm:w-[184px]",
+  nav: "w-[78px] min-[360px]:w-[88px] sm:w-[116px] lg:w-[138px]",
+  footer: "w-[120px] sm:w-[144px]",
+  compact: "w-[92px]",
+  booking: "w-[152px] sm:w-[180px]",
 };
 
 export default function BrandMark({
@@ -19,7 +19,7 @@ export default function BrandMark({
   className = "",
 }: BrandMarkProps) {
   const variantStyles = BRAND_MARK_VARIANTS[variant];
-  const widthClass = SCANNED_FRAME_CLASSES[variant] || "w-[120px]";
+  const widthClass = SCANNED_FRAME_CLASSES[variant] || "w-[112px]";
 
   return (
     <span className={["flex items-center", className].filter(Boolean).join(" ")}>
