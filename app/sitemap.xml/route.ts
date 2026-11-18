@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getDenverDateKey, getEventsCatalog } from "@/lib/events/getCatalog";
 import { RED_ROCKS_ENTITIES } from "@/lib/redRocksAuthority";
+import { ACTIVE_PARR_VENUE_SLUGS } from "@/lib/servedVenues";
 import { evaluateFutureRedRocksShowGate } from "@/lib/seo/indexationGate";
 
 type UrlEntry = {
@@ -78,15 +79,11 @@ export async function GET() {
     { path: "/guide/denver-concert-transportation", changefreq: "weekly", priority: 0.8 },
     { path: "/guide/red-rocks-faq", changefreq: "monthly", priority: 0.7 },
     { path: "/venues", changefreq: "weekly", priority: 0.8 },
-    { path: "/venues/red-rocks-amphitheatre", changefreq: "weekly", priority: 0.9 },
-    { path: "/venues/mishawaka-amphitheatre", changefreq: "monthly", priority: 0.7 },
-    { path: "/venues/mission-ballroom", changefreq: "monthly", priority: 0.7 },
-    { path: "/venues/fiddlers-green-amphitheatre", changefreq: "monthly", priority: 0.7 },
-    { path: "/venues/fillmore-auditorium", changefreq: "monthly", priority: 0.6 },
-    { path: "/venues/ogden-theatre", changefreq: "monthly", priority: 0.6 },
-    { path: "/venues/gothic-theatre", changefreq: "monthly", priority: 0.6 },
-    { path: "/venues/ball-arena", changefreq: "monthly", priority: 0.6 },
-    { path: "/venues/folsom-field", changefreq: "monthly", priority: 0.6 },
+    ...ACTIVE_PARR_VENUE_SLUGS.map((slug) => ({
+      path: `/venues/${slug}`,
+      changefreq: slug === "red-rocks-amphitheatre" ? "weekly" : "monthly",
+      priority: slug === "red-rocks-amphitheatre" ? 0.9 : slug === "mishawaka-amphitheatre" ? 0.7 : 0.6,
+    })),
     { path: "/about", changefreq: "monthly", priority: 0.7 },
     { path: "/contact", changefreq: "monthly", priority: 0.7 },
   ];
@@ -111,6 +108,9 @@ export async function GET() {
     pushPath(`/red-rocks/${entity.slug}`, "monthly", 0.7);
   }
 
+  // Note (SEO Gate 3): Historical 2026 Red Rocks show pages are intentionally held out of
+  // /sitemap.xml until full post-show setlist/archive recaps are populated; only verified
+  // future 2027 Red Rocks shows passing all 7 gate criteria are included in the XML sitemap.
   const todayDenverKey = getDenverDateKey();
   const events2027 = await getEventsCatalog(2027, "redrocks");
   for (const ev of events2027) {

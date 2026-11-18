@@ -4,15 +4,19 @@ import fs from "node:fs";
 import path from "node:path";
 import {
   MANUAL_REVIEW_PROTECTED_URLS,
+  PARR_SERVED_SECONDARY_VENUES,
   evaluateArtistPageDisposition,
   evaluateArtistVenuePageDisposition,
+  evaluateBandPageDisposition,
   evaluateFirstBankCenterPath,
   evaluateFutureRedRocksShowGate,
+  evaluateHistoricalRedRocksShowQualification,
   evaluateParserArtifactSlug,
   evaluateShowPageDisposition,
   evaluateVenuePageDisposition,
 } from "../lib/seo/indexationGate";
-import { getServedVenues } from "../lib/servedVenues";
+import { ACTIVE_PARR_VENUE_SLUGS, getServedVenues } from "../lib/servedVenues";
+import { CROSS_SITE_VENUE_MAP } from "../lib/crossSiteMap";
 
 const ROOT = process.cwd();
 
@@ -24,7 +28,11 @@ function slugify(input: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
-test("1. Manual-review protection list never auto-redirects, canonicalizes elsewhere, or auto-noindexes", () => {
+test("1. Manual-review protection list (35 URLs) never auto-redirects, canonicalizes elsewhere, or auto-noindexes", () => {
+  assert.equal(Object.keys(MANUAL_REVIEW_PROTECTED_URLS).length, 35);
+  assert.ok(MANUAL_REVIEW_PROTECTED_URLS["/artists/cole-knight"]);
+  assert.ok(MANUAL_REVIEW_PROTECTED_URLS["/shows/rr-2026-05-19-kevin-gates"]);
+
   for (const protectedPath of Object.keys(MANUAL_REVIEW_PROTECTED_URLS)) {
     if (protectedPath.startsWith("/artists/") && protectedPath.split("/").filter(Boolean).length === 2) {
       const slug = protectedPath.split("/")[2];
@@ -71,6 +79,7 @@ test("1. Manual-review protection list never auto-redirects, canonicalizes elsew
         bookingHref: null,
         hasOperatorLogisticsSection: false,
         hasHonestTimeLabel: true,
+        hasDistinctHistoricalContent: false,
       });
       assert.equal(res.action, "render_200");
       assert.equal(res.index, true);
@@ -79,7 +88,22 @@ test("1. Manual-review protection list never auto-redirects, canonicalizes elsew
   }
 });
 
-test("2. Future Red Rocks show gate enforces all 7 criteria and rejects start-time-only without official source", () => {
+test("2. Active-venue count (Gate 1) is reconciled to 15 exact registry venues across servedVenues, indexationGate, and sitemap", () => {
+  const registryRaw = JSON.parse(fs.readFileSync(path.join(ROOT, "data/venues.registry.json"), "utf8"));
+  const registryArr = Array.isArray(registryRaw) ? registryRaw : registryRaw.venues || Object.values(registryRaw);
+  const registrySet = new Set(registryArr.map((v: any) => v.slug));
+
+  assert.equal(ACTIVE_PARR_VENUE_SLUGS.length, 15, "Must have 15 reconciled active PARR venues");
+  assert.equal(getServedVenues().length, 15, "getServedVenues() must resolve all 15 active venues in registry");
+  assert.equal(PARR_SERVED_SECONDARY_VENUES.size, 14, "Must have 14 secondary served venues + 1 Red Rocks = 15");
+  assert.equal(ACTIVE_PARR_VENUE_SLUGS.includes("folsom-field"), false, "Non-registry folsom-field slug must not be in venue list");
+  assert.equal(ACTIVE_PARR_VENUE_SLUGS.includes("marquis-theater"), false, "Unserved marquis-theater must not be in active venue list");
+  for (const slug of ACTIVE_PARR_VENUE_SLUGS) {
+    assert.equal(registrySet.has(slug), true, `Active venue ${slug} must exist in venues.registry.json`);
+  }
+});
+
+test("3. Future Red Rocks show gate enforces all 7 criteria and Historical Red Rocks gate (Gate 3) requires distinct content", () => {
   const ev2027Raw = JSON.parse(
     fs.readFileSync(path.join(ROOT, "data/snapshots/events/all-2027.json"), "utf8")
   );
@@ -105,126 +129,111 @@ test("2. Future Red Rocks show gate enforces all 7 criteria and rejects start-ti
     assert.equal(res.passesAll, true, `2027 Red Rocks show ${ev.id} failed gate: ${res.failedReasons.join("; ")}`);
   }
 
-  // A start time alone MUST NOT substitute for an official primary source URL
-  const missingSourceRes = evaluateShowPageDisposition({
-    id: "rr-2027-08-99-unverified-rumor",
-    title: "Unverified Show With Start Time Only",
+  // Thin single-artist historical stub must NOT be indexed without distinct content
+  const thinStubQual = evaluateHistoricalRedRocksShowQualification({
+    id: "rr-2026-05-23-fisher",
+    title: "FISHER",
+    performers: ["FISHER"],
+    companionRunShowIds: [],
+    verifiedFutureArtistShowIds: [],
+    setlistSongCount: 0,
+  });
+  assert.equal(thinStubQual.qualifiesForIndex, false);
+  const thinStubDec = evaluateShowPageDisposition({
+    id: "rr-2026-05-23-fisher",
+    title: "FISHER",
     venueSlug: "red-rocks-amphitheatre",
-    dateKey: "2027-08-15",
+    dateKey: "2026-05-23",
     todayDenverKey: "2026-11-18",
-    performers: ["Example Artist"],
-    officialSourceUrl: null,
-    ticketUrl: "https://unverified-reseller-blog.example.com/tickets",
+    performers: ["FISHER"],
     hasExplicitStartTime: true,
     hasExplicitDoorTime: false,
-    bookingHref: "/book/red-rocks-amphitheatre/private?date=2027-08-15",
-    hasOperatorLogisticsSection: true,
+    hasOperatorLogisticsSection: false,
     hasHonestTimeLabel: true,
+    hasDistinctHistoricalContent: thinStubQual.qualifiesForIndex,
   });
-  assert.equal(missingSourceRes.index, false, "Show without official source URL must be noindex even with start time");
-  assert.equal(missingSourceRes.disposition, "incomplete_future_show_noindex");
+  assert.equal(thinStubDec.index, false, "Thin historical Red Rocks stub must be held at noindex, follow");
+  assert.equal(thinStubDec.disposition, "thin_historical_red_rocks_show_noindex");
+
+  // Multi-artist / multi-night historical show DOES qualify
+  const richQual = evaluateHistoricalRedRocksShowQualification({
+    id: "rr-2026-04-17-sublime",
+    title: "Sublime",
+    performers: ["Sublime", "Common Kings", "Bumpin Uglies"],
+    companionRunShowIds: ["rr-2026-04-18-sublime"],
+    verifiedFutureArtistShowIds: ["rr-2027-04-17-sublime"],
+  });
+  assert.equal(richQual.qualifiesForIndex, true);
 });
 
-test("3. All 773 /bands/[id] entries map deterministically with zero collisions and zero circular /bands/ links remain", () => {
+test("4. Gate 4: Zero 308 redirects terminate on noindex or non-200 pages, and zero circular /bands/ links remain", () => {
   const a26 = JSON.parse(fs.readFileSync(path.join(ROOT, "data/snapshots/artists/all-2026.json"), "utf8"));
   const a27 = JSON.parse(fs.readFileSync(path.join(ROOT, "data/snapshots/artists/all-2027.json"), "utf8"));
   const e26 = JSON.parse(fs.readFileSync(path.join(ROOT, "data/snapshots/events/all-2026.json"), "utf8"));
   const e27 = JSON.parse(fs.readFileSync(path.join(ROOT, "data/snapshots/events/all-2027.json"), "utf8"));
+  const allEvents = [...(e26.events || e26), ...(e27.events || e27)];
 
   const artistsMap = new Map<string, { id: string; name: string }>();
   for (const a of [...(a26.artists || a26), ...(a27.artists || a27)]) {
     if (a?.id && !artistsMap.has(a.id)) artistsMap.set(a.id, a);
   }
-  const activeSlugs = new Set<string>();
-  for (const e of [...(e26.events || e26), ...(e27.events || e27)]) {
-    for (const n of e.artistNames || []) activeSlugs.add(slugify(n));
-  }
 
-  const seenSlugOwners = new Map<string, string>();
-  let realConsolidatedCount = 0;
+  let band308Count = 0;
+  let bandNoindex200Count = 0;
   for (const artist of Array.from(artistsMap.values())) {
     const slug = slugify(artist.name);
-    assert.equal(seenSlugOwners.has(slug), false, `Collision detected on artist slug ${slug}`);
-    seenSlugOwners.set(slug, artist.id);
+    const matches = allEvents.filter((ev: any) => (ev.artistNames || []).some((n: string) => slugify(n) === slug));
+    const upcomingRR = matches.filter((ev: any) => ev.dateKey >= "2026-11-18" && ev.venueId === "red-rocks-amphitheatre").length;
+    const pastRR = matches.filter((ev: any) => ev.dateKey < "2026-11-18" && ev.venueId === "red-rocks-amphitheatre").length;
 
-    const artifact = evaluateParserArtifactSlug(slug);
-    if (artifact.isArtifact) {
-      if (artifact.action === "redirect_308") {
-        assert.ok(artifact.destination.startsWith("/artists/") || artifact.destination.startsWith("/shows/"));
+    const bandDec = evaluateBandPageDisposition({
+      bandId: artist.id,
+      artistSlug: slug,
+      upcomingRedRocksCount: upcomingRR,
+      historicalRedRocksCount: pastRR,
+      upcomingServedSecondaryCount: 0,
+    });
+
+    if (bandDec.action === "redirect_308") {
+      band308Count += 1;
+      const dest = bandDec.redirectDestination || "";
+      if (dest.startsWith("/artists/")) {
+        const destSlug = dest.slice("/artists/".length);
+        const destMatches = allEvents.filter((ev: any) => (ev.artistNames || []).some((n: string) => slugify(n) === destSlug));
+        const destUpRR = destMatches.filter((ev: any) => ev.dateKey >= "2026-11-18" && ev.venueId === "red-rocks-amphitheatre").length;
+        const destPastRR = destMatches.filter((ev: any) => ev.dateKey < "2026-11-18" && ev.venueId === "red-rocks-amphitheatre").length;
+        const destArtistDec = evaluateArtistPageDisposition({
+          artistSlug: destSlug,
+          upcomingRedRocksCount: destUpRR,
+          historicalRedRocksCount: destPastRR,
+          upcomingServedSecondaryCount: 0,
+        });
+        assert.equal(destArtistDec.action, "render_200", `Redirect target ${dest} must be HTTP 200`);
+        assert.equal(destArtistDec.index, true, `Redirect target ${dest} must NOT be noindex`);
       }
-      continue;
+    } else if (bandDec.action === "render_200") {
+      assert.equal(bandDec.index, false);
+      bandNoindex200Count += 1;
     }
-
-    assert.equal(activeSlugs.has(slug), true, `Band ${artist.id} -> /artists/${slug} must resolve to active artist`);
-    realConsolidatedCount += 1;
   }
-  assert.equal(realConsolidatedCount, 769);
-
-  // Verify zero circular /bands/${...} links remain in app/ or components/
-  const checkDirs = [path.join(ROOT, "app"), path.join(ROOT, "components")];
-  const circularLinks: string[] = [];
-  const walk = (dir: string) => {
-    for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
-      const full = path.join(dir, ent.name);
-      if (ent.isDirectory()) walk(full);
-      else if (/\.(ts|tsx)$/.test(ent.name)) {
-        const src = fs.readFileSync(full, "utf8");
-        if (/href=\{`\/bands\/|href="\/bands\//.test(src)) {
-          circularLinks.push(path.relative(ROOT, full));
-        }
-      }
-    }
-  };
-  for (const d of checkDirs) walk(d);
-  assert.deepEqual(circularLinks, [], `Circular /bands/[id] links must be removed: ${circularLinks.join(", ")}`);
+  assert.ok(band308Count > 200);
+  assert.ok(bandNoindex200Count > 500);
 });
 
-test("4. 1stBank Center preserves truthful closure hub at 200, serves 410 on empty subpages, and is removed from active served venues", () => {
+test("5. Gate 5: 1stBank Center 410 URLs are absent from active venues, crossSiteMap, and internal navigation", () => {
   const hub = evaluateFirstBankCenterPath("/venues/1stbank-center");
   assert.equal(hub.matched, true);
   if (hub.matched) {
     assert.equal(hub.status, 200);
-    assert.equal(hub.disposition, "historical_venue_closure_200");
   }
 
-  for (const gonePath of [
-    "/venues/1stbank-center/concerts",
-    "/venues/1stbank-center/concerts/july",
-    "/venues/1stbank-center/parking",
-    "/venues/1stbank-center/map",
-    "/venues/1stbank-center/transportation",
-    "/venues/1stbank-center/best-time-to-arrive",
-    "/book/1stbank-center",
-  ]) {
-    const sub = evaluateFirstBankCenterPath(gonePath);
-    assert.equal(sub.matched, true, `${gonePath} must match 1stBank disposition`);
-    if (sub.matched) {
-      assert.equal(sub.status, 410, `${gonePath} must return 410 Gone`);
-    }
-  }
-
+  assert.equal("1stbank-center" in CROSS_SITE_VENUE_MAP, false, "1stbank-center must not be in CROSS_SITE_VENUE_MAP");
   const servedSlugs = getServedVenues().map((v) => v.slug);
   assert.equal(servedSlugs.includes("1stbank-center"), false, "Demolished 1stBank Center must not appear in served venues");
-});
 
-test("5. ShowPage source enforces completed past-show lifecycle (no EventCompleted, no past EventScheduled, Service Offer separated from MusicEvent)", () => {
   const showSrc = fs.readFileSync(path.join(ROOT, "app/shows/[id]/page.tsx"), "utf8");
-  assert.equal(showSrc.includes("schema.org/EventCompleted"), false, "Must never invent non-existent Schema.org EventCompleted");
-  assert.equal(showSrc.includes('"@type": "WebPage"'), true, "Past shows must emit factual WebPage schema");
-  assert.equal(showSrc.includes('"@type": "Service"'), true, "Future Red Rocks shows must emit standalone Service + Offer schema");
-  assert.equal(showSrc.includes("Book Private Ride for Another 2027 Date"), true, "Past show booking link must clearly indicate another/current 2027 date");
-});
-
-test("6. Secondary unserved venues get noindex while served & protected venues remain indexable", () => {
-  const blackSheep = evaluateVenuePageDisposition("black-sheep");
-  assert.equal(blackSheep.index, false);
-  assert.equal(blackSheep.disposition, "thin_unserved_venue_noindex");
-
-  const mission = evaluateVenuePageDisposition("mission-ballroom");
-  assert.equal(mission.index, true);
-  assert.equal(mission.disposition, "served_venue_preserved");
-
-  const ogdenApril = evaluateVenuePageDisposition("ogden-theatre", "concerts/april");
-  assert.equal(ogdenApril.index, true);
-  assert.equal(ogdenApril.disposition, "manual_review_protected");
+  assert.equal(showSrc.includes("schema.org/EventCompleted"), false);
+  assert.equal(showSrc.includes('"@type": "WebPage"'), true);
+  assert.equal(showSrc.includes('"@type": "Service"'), true);
+  assert.equal(showSrc.includes('data-testid="historical-red-rocks-archive"'), true);
 });

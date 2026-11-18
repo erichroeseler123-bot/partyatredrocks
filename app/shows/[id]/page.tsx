@@ -22,11 +22,15 @@ import { getMultiYearMediaIndex } from "@/lib/media/getMediaIndex";
 import { selectImageByPriority } from "@/lib/media/selectImage";
 import { buildBookingHref } from "@/lib/parrHandoff";
 import {
+  CURATED_HISTORICAL_RED_ROCKS_NOTES,
   buildRedRocksShowLogisticsGuidance,
+  evaluateHistoricalRedRocksShowQualification,
   evaluateShowPageDisposition,
+  extractDistinctBilledActs,
   getParrVenueServiceSummary,
   isNonArtistParserLabel,
   isParrServedVenue,
+  normalizeBaseArtistKey,
 } from "@/lib/seo/indexationGate";
 
 export const runtime = "nodejs";
@@ -446,7 +450,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id: raw } = await params;
   const years = resolveShowYears(raw);
   const todayDenverKey = getDenverDateKey();
-  const [data, media] = await Promise.all([readShow(raw), getMultiYearMediaIndex(years)]);
+  const [data, media, allEvents] = await Promise.all([
+    readShow(raw),
+    getMultiYearMediaIndex(years),
+    getMultiYearEventsCatalog({ scope: "all", years }),
+  ]);
   const e = data?.event ?? null;
 
   if (!e) {
@@ -464,6 +472,46 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const redRocks = isRedRocksSlug(e.venue?.siteSlug);
   const cleanArtists = cleanPerformerNames(e.performers);
 
+  const distinctBilledActs = extractDistinctBilledActs(e.title, cleanArtists);
+  const baseKeys = new Set(
+    [e.title, ...distinctBilledActs].map(normalizeBaseArtistKey).filter(Boolean)
+  );
+  const eventYear = e.dateKey.slice(0, 4);
+  const companionRunShowIds =
+    isPast && redRocks
+      ? allEvents
+          .filter(
+            (ev) =>
+              ev.id !== e.id &&
+              ev.venueId === "red-rocks-amphitheatre" &&
+              ev.dateKey.startsWith(eventYear) &&
+              [ev.name, ...ev.artistNames].some((n) => baseKeys.has(normalizeBaseArtistKey(n)))
+          )
+          .map((ev) => ev.id)
+      : [];
+  const verifiedFutureShowIds =
+    isPast && redRocks
+      ? allEvents
+          .filter(
+            (ev) =>
+              ev.id !== e.id &&
+              ev.dateKey >= todayDenverKey &&
+              [ev.name, ...ev.artistNames].some((n) => baseKeys.has(normalizeBaseArtistKey(n)))
+          )
+          .map((ev) => ev.id)
+      : [];
+
+  const histQual =
+    isPast && redRocks
+      ? evaluateHistoricalRedRocksShowQualification({
+          id: canonicalId,
+          title: e.title,
+          performers: cleanArtists,
+          companionRunShowIds,
+          verifiedFutureArtistShowIds: verifiedFutureShowIds,
+        })
+      : null;
+
   const gateDecision = evaluateShowPageDisposition({
     id: canonicalId,
     title: e.title,
@@ -478,6 +526,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     bookingHref: isPast ? null : futureBookingPathForEvent(e),
     hasOperatorLogisticsSection: redRocks && !isPast,
     hasHonestTimeLabel: true,
+    hasDistinctHistoricalContent: histQual?.qualifiesForIndex ?? false,
   });
 
   const mediaRow = media?.eventsById?.[e.id] || (e.sourceId ? media?.eventsById?.[e.sourceId] : null) || null;
@@ -608,17 +657,35 @@ export default async function ShowPage({ params }: Props) {
     ? `https://www.setlist.fm/search?artistName=${encodeURIComponent(primaryArtist)}&query=${encodeURIComponent(`${venueName} ${e.dateKey}`)}`
     : "https://www.setlist.fm";
 
-  // Check if any performer on this bill has verified FUTURE dates (especially at Red Rocks)
-  const billSlugs = new Set(cleanArtists.map(slugify));
+  // Check if any performer on this bill has verified FUTURE dates (using normalized base-artist matching)
+  const distinctBilledActs = extractDistinctBilledActs(e.title, cleanArtists);
+  const billBaseKeys = new Set(
+    [e.title, ...distinctBilledActs].map(normalizeBaseArtistKey).filter(Boolean)
+  );
   const verifiedFutureArtistDates = allEvents
     .filter(
       (ev) =>
         ev.id !== e.id &&
         ev.dateKey >= todayDenverKey &&
-        ev.artistNames.some((n) => billSlugs.has(slugify(n)))
+        [ev.name, ...ev.artistNames].some((n) => billBaseKeys.has(normalizeBaseArtistKey(n)))
     )
     .sort((a, b) => a.dateKey.localeCompare(b.dateKey))
     .slice(0, 6);
+
+  const eventYear = e.dateKey.slice(0, 4);
+  const companionRunShows = isRedRocksVenue
+    ? allEvents
+        .filter(
+          (ev) =>
+            ev.id !== e.id &&
+            ev.venueId === "red-rocks-amphitheatre" &&
+            ev.dateKey.startsWith(eventYear) &&
+            [ev.name, ...ev.artistNames].some((n) => billBaseKeys.has(normalizeBaseArtistKey(n)))
+        )
+        .sort((a, b) => a.dateKey.localeCompare(b.dateKey))
+    : [];
+
+  const curatedHistoricalNote = CURATED_HISTORICAL_RED_ROCKS_NOTES[e.id] ?? null;
 
   const upcomingRedRocksShows = allEvents
     .filter(
@@ -827,6 +894,80 @@ export default async function ShowPage({ params }: Props) {
           </div>
         </div>
       </div>
+
+      {isPastShow && isRedRocksVenue ? (
+        <section
+          aria-labelledby="historical-rr-archive-heading"
+          data-testid="historical-red-rocks-archive"
+          className="mt-8 rounded-3xl border border-white/12 bg-[#0d1424] p-6 sm:p-8"
+        >
+          <div className="text-[11px] font-black uppercase tracking-[0.22em] text-[#ffb07c]">
+            Red Rocks Concert Archive · {e.dateKey.slice(0, 4)} Season Record
+          </div>
+          <h2 id="historical-rr-archive-heading" className="mt-2 text-2xl font-black text-white sm:text-3xl">
+            Historical Show Summary: {e.title} ({fmtDate(e.datetime_local)})
+          </h2>
+          {curatedHistoricalNote ? (
+            <p className="mt-3 text-base leading-7 text-white/84">
+              {curatedHistoricalNote}
+            </p>
+          ) : null}
+          <div className="mt-5 grid gap-4 md:grid-cols-2">
+            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+              <h3 className="text-sm font-black uppercase tracking-wider text-white">
+                Billed Lineup &amp; Schedule Record
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-white/78">
+                Performed at Red Rocks Amphitheatre (18300 W Alameda Pkwy, Morrison, CO · 6,450 ft) on{" "}
+                <strong>{fmtDate(e.datetime_local)}</strong>
+                {explicitTimeFormatted ? ` (${explicitTimeFormatted} MT listed start)` : ""}.
+                {distinctBilledActs.length >= 2
+                  ? ` Full billed lineup (${distinctBilledActs.length} acts): ${distinctBilledActs.join(", ")}.`
+                  : primaryArtist
+                    ? ` Headlined by ${primaryArtist}.`
+                    : ""}
+              </p>
+            </article>
+            <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+              <h3 className="text-sm font-black uppercase tracking-wider text-white">
+                {companionRunShows.length > 0 ? "Multi-Night Red Rocks Run" : "Planning Future Red Rocks Nights"}
+              </h3>
+              {companionRunShows.length > 0 ? (
+                <div className="mt-2 text-sm leading-6 text-white/78">
+                  <p>
+                    Part of a {companionRunShows.length + 1}-night {eventYear} Red Rocks run. Companion date
+                    {companionRunShows.length > 1 ? "s" : ""}:
+                  </p>
+                  <ul className="mt-2 space-y-1">
+                    {companionRunShows.map((sib) => (
+                      <li key={sib.id}>
+                        <Link
+                          href={`/shows/${encodeURIComponent(sib.id)}`}
+                          className="font-semibold text-[#8fd0ff] underline hover:text-white"
+                        >
+                          {sib.name} — {fmtDate(sib.dateKey)}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : (
+                <p className="mt-2 text-sm leading-6 text-white/78">
+                  Researching future {primaryArtist || "Red Rocks"} nights? Check{" "}
+                  <Link href="/red-rocks/concerts" className="text-[#8fd0ff] underline hover:text-white">
+                    upcoming 2027 Red Rocks concerts
+                  </Link>{" "}
+                  and{" "}
+                  <Link href="/guide/tailgating" className="text-[#8fd0ff] underline hover:text-white">
+                    Upper North Lot tailgating logistics
+                  </Link>{" "}
+                  before booking your group vehicle.
+                </p>
+              )}
+            </article>
+          </div>
+        </section>
+      ) : null}
 
       {isPastShow && verifiedFutureArtistDates.length > 0 ? (
         <section className="mt-8 rounded-3xl border border-[#8fd0ff]/30 bg-[#0d182d] p-6">

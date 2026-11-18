@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ALL_VENUES } from "@/lib/venues/registry";
 import { normalizeVenueSlug, type HandoffSearchParams } from "@/lib/parrHandoff";
 import { getCrossSiteVenue } from "@/lib/crossSiteMap";
@@ -7,10 +8,10 @@ function firstValue(searchParams: HandoffSearchParams, key: string) {
   return Array.isArray(value) ? value[0] : value;
 }
 
-
 export const metadata = {
   title: "Request Private Venue Transportation | Denver, Boulder & Mishawaka",
-  description: "Request private group concert transportation for Mission Ballroom, Ball Arena, Fiddler's Green, Folsom Field, Mishawaka, and Front Range venues.",
+  description:
+    "Request private group concert transportation for Mission Ballroom, Ball Arena, Fiddler's Green, Mishawaka, and Front Range venues.",
   alternates: { canonical: "https://www.partyatredrocks.com/book-all-venue" },
 };
 
@@ -21,11 +22,15 @@ export default async function BookAllVenue({
 }) {
   const sp = await searchParams;
   const venueSlug = normalizeVenueSlug(firstValue(sp, "venue"));
-  const venue = venueSlug ? ALL_VENUES.find((item) => item.slug === venueSlug) : null;
+  const isClosedFirstBank = venueSlug === "1stbank-center";
+  const venue =
+    venueSlug && !isClosedFirstBank
+      ? ALL_VENUES.find((item) => item.slug === venueSlug)
+      : null;
   const date = firstValue(sp, "date");
   const event = firstValue(sp, "event");
   const artist = firstValue(sp, "artist");
-  const dccEntry = venueSlug ? getCrossSiteVenue(venueSlug) : null;
+  const dccEntry = venueSlug && !isClosedFirstBank ? getCrossSiteVenue(venueSlug) : null;
 
   return (
     <main className="min-h-screen bg-surface text-white flex flex-col items-center justify-center px-6">
@@ -34,12 +39,23 @@ export default async function BookAllVenue({
           Request Your <span className="text-[#8fd0ff]">Private Ride</span>
         </h1>
         <p className="text-xl text-muted mb-12">
-          {venue?.name
-            ? `Tell us about your ${venue.name} ride and we will confirm the private transportation plan for your group.`
-            : "Private door-to-door transportation for Denver and Boulder venue nights."}
+          {isClosedFirstBank
+            ? "1stBank Center permanently closed in November 2023 and was demolished in 2024. Party at Red Rocks serves Red Rocks Amphitheatre and active Denver, Boulder, and Mishawaka concert venues."
+            : venue?.name
+              ? `Tell us about your ${venue.name} ride and we will confirm the private transportation plan for your group.`
+              : "Private door-to-door transportation for Denver and Boulder venue nights."}
         </p>
 
-        {venue ? (
+        {isClosedFirstBank ? (
+          <div className="mb-8 flex flex-wrap justify-center gap-3">
+            <Link href="/venues/1stbank-center" className="comic-btn comic-btn-secondary">
+              Read 1stBank Center Closure Note →
+            </Link>
+            <Link href="/venues" className="comic-btn comic-btn-primary">
+              Browse Active Colorado Venues →
+            </Link>
+          </div>
+        ) : venue ? (
           <div className="mb-8 rounded-[2rem] border border-white/10 bg-white/5 px-6 py-5 text-left text-sm text-white/78">
             <div className="font-black uppercase tracking-[0.18em] text-[#8fd0ff]">Ride Request</div>
             <div className="mt-3 space-y-2">

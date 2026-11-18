@@ -1,4 +1,5 @@
 import { PARR_2027_PRICING, SHUTTLE_PRICING } from "@/lib/pricing";
+import { ACTIVE_PARR_VENUE_SLUGS } from "@/lib/servedVenues";
 
 export const SITE_ORIGIN = "https://www.partyatredrocks.com";
 
@@ -225,6 +226,18 @@ export const MANUAL_REVIEW_PROTECTED_URLS: Record<string, ProtectedUrlEvidence> 
     baselineSummary: "Ahrefs Pos 10.0 for 'brit floyd red rocks 2023'.",
     queriesOrAnchors: ["brit floyd red rocks 2023"],
   },
+  "/artists/cole-knight": {
+    path: "/artists/cole-knight",
+    sources: ["GSC_JUL_OCT_2026"],
+    baselineSummary: "GSC May 2026 performance export (+3 clicks MoM).",
+    queriesOrAnchors: ["cole knight red rocks"],
+  },
+  "/shows/rr-2026-05-19-kevin-gates": {
+    path: "/shows/rr-2026-05-19-kevin-gates",
+    sources: ["GSC_JUL_OCT_2026"],
+    baselineSummary: "GSC May 2026 performance export (+3 clicks MoM).",
+    queriesOrAnchors: ["kevin gates red rocks"],
+  },
 };
 
 export function normalizeAuditPathname(pathname: string): string {
@@ -251,23 +264,9 @@ export function isManualReviewProtectedPath(pathname: string): boolean {
  * - Out-of-market Colorado Springs venues (`ford-amphitheater-colorado-springs`, `broadmoor-world-arena`, `black-sheep`)
  * - Unserved small bars / campus auditoriums (`ophelias`, `larimer-lounge`, `marquis-theater`, `chautauqua-auditorium`, `macky-auditorium`)
  */
-export const PARR_SERVED_SECONDARY_VENUES = new Set<string>([
-  "mishawaka-amphitheatre",
-  "mission-ballroom",
-  "fiddlers-green-amphitheatre",
-  "ball-arena",
-  "fillmore-auditorium",
-  "ogden-theatre",
-  "gothic-theatre",
-  "cervantes-masterpiece",
-  "levitt-pavilion-denver",
-  "paramount-theatre",
-  "summit-music-hall",
-  "bluebird-theater",
-  "boulder-theater",
-  "fox-theatre",
-  "folsom-field",
-]);
+export const PARR_SERVED_SECONDARY_VENUES = new Set<string>(
+  ACTIVE_PARR_VENUE_SLUGS.filter((slug) => slug !== "red-rocks-amphitheatre")
+);
 
 export function isParrServedVenue(venueSlug?: string | null): boolean {
   if (!venueSlug) return false;
@@ -513,10 +512,12 @@ export type GatePageDecision = {
     | "manual_review_service_preserved"
     | "indexable_future_red_rocks_show"
     | "historical_red_rocks_show"
+    | "thin_historical_red_rocks_show_noindex"
     | "incomplete_future_show_noindex"
     | "thin_past_secondary_show_noindex"
     | "indexable_red_rocks_artist"
     | "thin_club_only_artist_noindex"
+    | "thin_band_profile_noindex"
     | "consolidated_duplicate_308"
     | "thin_artist_venue_noindex"
     | "served_venue_preserved"
@@ -527,6 +528,76 @@ export type GatePageDecision = {
   flagForHumanReview: boolean;
   reason: string;
 };
+
+export const CURATED_HISTORICAL_RED_ROCKS_NOTES: Record<string, string> = {
+  "rr-2026-07-03-deadrocks-xii-zeds-dead":
+    "Deadrocks XII Night 2 continued Zeds Dead's signature Independence Day-week multi-night Red Rocks tradition in Morrison, pairing heavy bass production with midsummer Upper North Lot tailgating crowds.",
+  "rr-2026-07-02-deadrocks-xii-zeds-dead":
+    "Deadrocks XII Night 1 opened Zeds Dead's annual July Red Rocks two-night run ahead of the July 3 finale.",
+  "rr-2026-05-19-kevin-gates":
+    "Kevin Gates headlined this mid-May spring hip-hop evening at Red Rocks Amphitheatre (6,450 ft), where post-sunset Morrison canyon temperatures regularly drop 15–20°F.",
+};
+
+export function normalizeBaseArtistKey(rawName: string): string {
+  return rawName
+    .toLowerCase()
+    .replace(/^deadrocks\s+[ivx]+\s*[-–:]\s*/i, "")
+    .replace(/\s*[-–:]\s*(the wall|dark side of the moon|big bootie world|cyclops rocks.*|mister whatever|idols world tour|30th anniversary|day and night tour|rise of the roach tour|the forty year anomaly).*$/i, "")
+    .replace(/\s+presents\s+.*$/i, "")
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+export function extractDistinctBilledActs(title: string, performers?: string[]): string[] {
+  const clean = (performers ?? [])
+    .map((p) => p.trim())
+    .filter((p) => Boolean(p) && !isNonArtistParserLabel(p));
+  if (clean.length >= 2) return clean;
+  // Detect multi-artist co-headline titles collapsed into one SeatGeek string
+  if (/,/.test(title) || /\s+(&|and|with|b2b|x)\s+/i.test(title)) {
+    const parts = title
+      .split(/,|\s+(?:with|b2b)\s+/i)
+      .map((s) => s.trim())
+      .filter((s) => s.length >= 2 && !isNonArtistParserLabel(s));
+    if (parts.length >= 2) return parts;
+  }
+  return clean;
+}
+
+export function evaluateHistoricalRedRocksShowQualification(input: {
+  id: string;
+  title?: string | null;
+  performers?: string[];
+  companionRunShowIds?: string[];
+  verifiedFutureArtistShowIds?: string[];
+  setlistSongCount?: number;
+}): {
+  qualifiesForIndex: boolean;
+  distinctSignals: string[];
+} {
+  const signals: string[] = [];
+  if (CURATED_HISTORICAL_RED_ROCKS_NOTES[input.id]) {
+    signals.push("curated_historical_residency_note");
+  }
+  const billedActs = extractDistinctBilledActs(input.title || "", input.performers);
+  if (billedActs.length >= 2) {
+    signals.push(`verified_multi_artist_bill_${billedActs.length}`);
+  }
+  if ((input.companionRunShowIds?.length ?? 0) > 0) {
+    signals.push(`multi_night_red_rocks_run_${(input.companionRunShowIds?.length ?? 0) + 1}_nights`);
+  }
+  if ((input.verifiedFutureArtistShowIds?.length ?? 0) > 0) {
+    signals.push(`verified_future_return_dates_${input.verifiedFutureArtistShowIds?.length}`);
+  }
+  if ((input.setlistSongCount ?? 0) > 0) {
+    signals.push(`archived_setlist_songs_${input.setlistSongCount}`);
+  }
+  return {
+    qualifiesForIndex: signals.length > 0,
+    distinctSignals: signals,
+  };
+}
 
 export function evaluateShowPageDisposition(input: {
   id: string;
@@ -542,6 +613,7 @@ export function evaluateShowPageDisposition(input: {
   bookingHref?: string | null;
   hasOperatorLogisticsSection: boolean;
   hasHonestTimeLabel: boolean;
+  hasDistinctHistoricalContent?: boolean;
 }): GatePageDecision {
   const pathname = `/shows/${encodeURIComponent(input.id)}`;
   const protectedHit = getManualReviewProtectedEvidence(pathname);
@@ -586,14 +658,28 @@ export function evaluateShowPageDisposition(input: {
   }
 
   if (isPast && isRedRocks) {
+    const qualifies = input.hasDistinctHistoricalContent ?? false;
+    if (qualifies) {
+      return {
+        action: "render_200",
+        index: true,
+        follow: true,
+        canonicalPath: pathname,
+        disposition: "historical_red_rocks_show",
+        flagForHumanReview: false,
+        reason:
+          "Completed historical Red Rocks show with verified distinct lineup, multi-night residency, or 2027 return-date archive context.",
+      };
+    }
     return {
       action: "render_200",
-      index: true,
+      index: false,
       follow: true,
       canonicalPath: pathname,
-      disposition: "historical_red_rocks_show",
+      disposition: "thin_historical_red_rocks_show_noindex",
       flagForHumanReview: false,
-      reason: "Completed historical Red Rocks show retained at HTTP 200 with factual past-event lifecycle.",
+      reason:
+        "Completed single-artist Red Rocks stub without distinct lineup, setlist, multi-night run, or future return-date archive content; held at 200 noindex, follow until enriched.",
     };
   }
 
@@ -697,6 +783,89 @@ export function evaluateArtistPageDisposition(input: {
     disposition: "thin_club_only_artist_noindex",
     flagForHumanReview: false,
     reason: "Club-only past artist with zero Red Rocks shows, zero upcoming served shows, and zero GSC/backlink signals.",
+  };
+}
+
+/**
+ * Evaluates `/bands/[id]` consolidation while guaranteeing NO 308 redirect ever terminates
+ * on a `noindex` or non-200 page (SEO Production Gate 4).
+ */
+export function evaluateBandPageDisposition(input: {
+  bandId: string;
+  artistSlug: string;
+  upcomingRedRocksCount: number;
+  historicalRedRocksCount: number;
+  upcomingServedSecondaryCount: number;
+}): GatePageDecision {
+  const pathname = `/bands/${encodeURIComponent(input.bandId)}`;
+  const protectedHit = getManualReviewProtectedEvidence(pathname);
+  if (protectedHit) {
+    return {
+      action: "render_200",
+      index: true,
+      follow: true,
+      canonicalPath: pathname,
+      disposition: "manual_review_protected",
+      flagForHumanReview: true,
+      reason: `Manual-review protected URL (${protectedHit.baselineSummary})`,
+    };
+  }
+
+  const artifactCheck = evaluateParserArtifactSlug(input.artistSlug);
+  if (artifactCheck.isArtifact) {
+    if (artifactCheck.action === "not_found") {
+      return {
+        action: "not_found_404",
+        index: false,
+        follow: false,
+        canonicalPath: pathname,
+        disposition: "parser_artifact_404",
+        flagForHumanReview: false,
+        reason: artifactCheck.reason,
+      };
+    }
+    return {
+      action: "redirect_308",
+      index: false,
+      follow: true,
+      canonicalPath: artifactCheck.destination,
+      redirectDestination: artifactCheck.destination,
+      disposition: "consolidated_duplicate_308",
+      flagForHumanReview: false,
+      reason: artifactCheck.reason,
+    };
+  }
+
+  const targetArtistDecision = evaluateArtistPageDisposition({
+    artistSlug: input.artistSlug,
+    upcomingRedRocksCount: input.upcomingRedRocksCount,
+    historicalRedRocksCount: input.historicalRedRocksCount,
+    upcomingServedSecondaryCount: input.upcomingServedSecondaryCount,
+  });
+
+  if (targetArtistDecision.action === "render_200" && targetArtistDecision.index) {
+    const target = `/artists/${encodeURIComponent(input.artistSlug)}`;
+    return {
+      action: "redirect_308",
+      index: false,
+      follow: true,
+      canonicalPath: target,
+      redirectDestination: target,
+      disposition: "consolidated_duplicate_308",
+      flagForHumanReview: false,
+      reason: "Exact 1:1 duplicate of indexable HTTP 200 canonical /artists/[artist] profile; consolidated via 1-hop 308.",
+    };
+  }
+
+  return {
+    action: "render_200",
+    index: false,
+    follow: true,
+    canonicalPath: pathname,
+    disposition: "thin_band_profile_noindex",
+    flagForHumanReview: false,
+    reason:
+      "Thin club-only /bands/[id] profile kept at HTTP 200 noindex, follow (never 308-redirected into a noindex /artists/[artist] page).",
   };
 }
 

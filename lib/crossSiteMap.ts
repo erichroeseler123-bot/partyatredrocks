@@ -38,12 +38,6 @@ export const CROSS_SITE_VENUE_MAP: Record<string, CrossSiteVenueMapEntry> = {
     parrBookingPath: buildBookingHref({ target: "book", venue: "fillmore-auditorium" }),
     dccAuthorityPath: `${DCC_ORIGIN}/venues/fillmore-auditorium`,
   },
-  "1stbank-center": {
-    slug: "1stbank-center",
-    parrVenuePath: "/venues/1stbank-center",
-    parrBookingPath: buildBookingHref({ target: "book", venue: "1stbank-center" }),
-    dccAuthorityPath: `${DCC_ORIGIN}/venues/1stbank-center`,
-  },
   "levitt-pavilion-denver": {
     slug: "levitt-pavilion-denver",
     parrVenuePath: "/venues/levitt-pavilion-denver",
