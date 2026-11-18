@@ -9,8 +9,10 @@ type VehicleSlug = "suv" | "van";
 
 type Props = {
   vehicleSlug: VehicleSlug;
-  vehicleTitle: string;
-  expectedPriceUsd: number;
+  shortVehicleLabel: string;
+  basePriceUsd: number;
+  expectedBookingFeeUsd: number;
+  expectedTotalChargedUsd: number;
   maxPartySize: number;
   initialDate?: string | null;
   initialArtist?: string | null;
@@ -60,7 +62,8 @@ type AvailabilitySession = {
 type QuoteState = {
   totalDue: number;
   itemAmount: number;
-  totalItemTax: number;
+  bookingFeeUsd: number;
+  bookingFeeLabel: string;
   quoteParityPassed: boolean;
   blockedMessage: string | null;
 };
@@ -84,8 +87,10 @@ function createClientIdempotencyKey(): string {
 
 export function ParrNativeRezdyCheckout({
   vehicleSlug,
-  vehicleTitle,
-  expectedPriceUsd,
+  shortVehicleLabel,
+  basePriceUsd,
+  expectedBookingFeeUsd,
+  expectedTotalChargedUsd,
   maxPartySize,
   initialDate,
   initialArtist,
@@ -169,13 +174,14 @@ export function ParrNativeRezdyCheckout({
         });
         const qData = await qRes.json();
         if (!qRes.ok || !qData.ok) {
-          throw new Error(qData.message || qData.error || "Unable to verify flat vehicle quote.");
+          throw new Error(qData.message || qData.error || "Unable to verify vehicle quote.");
         }
 
         setQuote({
-          totalDue: qData.totalDue,
-          itemAmount: qData.itemAmount,
-          totalItemTax: qData.totalItemTax,
+          totalDue: Number(qData.totalDue),
+          itemAmount: Number(qData.itemAmount),
+          bookingFeeUsd: Number(qData.bookingFeeUsd),
+          bookingFeeLabel: String(qData.bookingFeeLabel || "Booking fee (4%)"),
           quoteParityPassed: Boolean(qData.quoteParityPassed),
           blockedMessage: qData.blockedMessage ?? null,
         });
@@ -309,7 +315,6 @@ export function ParrNativeRezdyCheckout({
         return;
       }
 
-      // Retrieve verified server confirmation record
       const confRes = await fetch(
         `/api/rezdy/confirmation?orderNumber=${encodeURIComponent(bookData.orderNumber)}&ref=${encodeURIComponent(bookData.resellerReference)}&sig=${encodeURIComponent(bookData.confirmationSig)}`,
         { cache: "no-store" }
@@ -321,7 +326,7 @@ export function ParrNativeRezdyCheckout({
         setConfirmation({
           orderNumber: bookData.orderNumber,
           status: bookData.status,
-          productName: vehicleTitle,
+          productName: shortVehicleLabel,
           startTimeLocal: session.startTimeLocal,
           partySize: String(partySize),
           pickupAddress,
@@ -338,6 +343,10 @@ export function ParrNativeRezdyCheckout({
       inFlightLockRef.current = false;
     }
   }
+
+  const activeBase = quote ? quote.itemAmount : basePriceUsd;
+  const activeFee = quote ? quote.bookingFeeUsd : expectedBookingFeeUsd;
+  const activeTotal = quote ? quote.totalDue : expectedTotalChargedUsd;
 
   if (submitStatus === "confirmed" && confirmation) {
     return (
@@ -363,8 +372,8 @@ export function ParrNativeRezdyCheckout({
             <dd className="mt-1 font-bold">{confirmation.pickupAddress || pickupAddress}</dd>
           </div>
           <div className="rounded-xl border border-white/12 bg-black/25 p-3 sm:col-span-2">
-            <dt className="text-xs uppercase tracking-wider text-white/60">Total Paid (All-In)</dt>
-            <dd className="mt-1 font-bold">${confirmation.totalPaid.toFixed(2)} USD</dd>
+            <dt className="text-xs uppercase tracking-wider text-white/60">Total Paid Today</dt>
+            <dd className="mt-1 text-lg font-black text-emerald-200">${confirmation.totalPaid.toFixed(2)} USD</dd>
           </div>
         </dl>
       </section>
@@ -384,14 +393,17 @@ export function ParrNativeRezdyCheckout({
         />
       ) : null}
 
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
+      <div className="flex flex-wrap items-start justify-between gap-3 border-b border-white/10 pb-4">
         <div>
           <div className="text-[11px] font-black uppercase tracking-[0.2em] text-[#ffb07c]">
             Preview Native Checkout · 1 Dedicated Vehicle
           </div>
-          <h3 className="mt-1 text-xl font-black sm:text-2xl">
-            {vehicleTitle} — ${expectedPriceUsd} Flat Round-Trip
+          <h3 className="mt-1 text-2xl font-black text-white sm:text-3xl">
+            ${activeTotal.toFixed(2)} Total — {shortVehicleLabel}
           </h3>
+          <p className="mt-1 text-xs text-white/75">
+            Includes ${activeBase.toFixed(2)} vehicle rate + ${activeFee.toFixed(2)} Booking fee (4%)
+          </p>
         </div>
         <button
           type="button"
@@ -401,6 +413,20 @@ export function ParrNativeRezdyCheckout({
         >
           Use Classic Rezdy Widget Fallback
         </button>
+      </div>
+
+      {/* Upfront itemized breakdown visible immediately before selecting a date or entering payment */}
+      <div
+        data-testid="parr-upfront-price-breakdown"
+        className="mt-4 rounded-2xl border border-white/16 bg-black/35 p-4"
+      >
+        <div className="space-y-1 text-sm text-white/80">
+          <div>{shortVehicleLabel}: ${activeBase.toFixed(2)}</div>
+          <div>Booking fee (4%): ${activeFee.toFixed(2)}</div>
+        </div>
+        <div className="mt-2 border-t border-white/12 pt-2 text-lg font-black text-[#ffb07c] sm:text-xl">
+          Total charged today: ${activeTotal.toFixed(2)}
+        </div>
       </div>
 
       <div className="mt-4 rounded-2xl border border-[#8fd0ff]/25 bg-[#8fd0ff]/10 px-4 py-3 text-xs leading-5 text-white/88">
@@ -544,13 +570,19 @@ export function ParrNativeRezdyCheckout({
               />
             </label>
 
-            <div className="rounded-2xl border border-white/14 bg-black/30 p-4">
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-white/75">1 × {vehicleTitle} (Round-Trip + Tailgate Gear)</span>
-                <span className="font-black text-white">${quote.totalDue.toFixed(2)} USD</span>
+            <div
+              data-testid="parr-prepayment-price-breakdown"
+              className="rounded-2xl border border-white/16 bg-black/35 p-4"
+            >
+              <div className="space-y-1 text-sm text-white/80">
+                <div>{shortVehicleLabel}: ${quote.itemAmount.toFixed(2)}</div>
+                <div>Booking fee (4%): ${quote.bookingFeeUsd.toFixed(2)}</div>
               </div>
-              <p className="mt-1 text-xs text-white/55">
-                Verified all-in vehicle total via RezdyPay. Concert tickets and optional gratuity excluded.
+              <div className="mt-2 border-t border-white/12 pt-2 text-lg font-black text-[#ffb07c] sm:text-xl">
+                Total charged today: ${quote.totalDue.toFixed(2)}
+              </div>
+              <p className="mt-1.5 text-xs text-white/60">
+                Round-trip private vehicle with Upper North Lot tailgating gear and on-site waiting driver. Concert tickets and optional driver gratuity excluded.
               </p>
             </div>
 
@@ -588,7 +620,7 @@ export function ParrNativeRezdyCheckout({
             >
               {submitStatus === "submitting"
                 ? "Confirming Reservation…"
-                : `Pay $${quote.totalDue.toFixed(2)} & Reserve ${vehicleTitle}`}
+                : `Pay $${quote.totalDue.toFixed(2)} & Reserve ${shortVehicleLabel}`}
             </button>
           </>
         ) : null}

@@ -10,13 +10,20 @@ export type ParrHiddenTestProductConfig = {
   slug: ParrNativeVehicleSlug;
   productCode: string;
   internalCode: string;
+  shortVehicleLabel: string;
   displayName: string;
-  expectedPriceUsd: number;
+  basePriceUsd: number;
+  bookingFeeRatePct: number;
+  bookingFeeLabel: string;
+  expectedBookingFeeUsd: number;
+  expectedTotalChargedUsd: number;
   maxPartySize: number;
 };
 
 /**
- * Preview-only hidden test products created in Phase 3B.
+ * Preview-only hidden test products created in Phase 3B (Option B all-in pricing).
+ * Base vehicle prices stay unchanged ($499.00 / $699.00) with the intentional 4% Rezdy Booking fee
+ * ($19.96 / $27.96) added and disclosed upfront so Total charged today reconciles at $518.96 / $726.96.
  * Live public products (`P0U1MY` / `596193` and `PJM9GD` / `630812`) remain untouched.
  */
 export const PARR_PREVIEW_HIDDEN_PRODUCTS: Record<ParrNativeVehicleSlug, ParrHiddenTestProductConfig> = {
@@ -24,16 +31,26 @@ export const PARR_PREVIEW_HIDDEN_PRODUCTS: Record<ParrNativeVehicleSlug, ParrHid
     slug: "suv",
     productCode: "P94HN4",
     internalCode: "PARR_2027_SUBURBAN_API_TEST",
+    shortVehicleLabel: "Private Suburban",
     displayName: "Private Suburban (Up to 6 Guests)",
-    expectedPriceUsd: 499,
+    basePriceUsd: 499,
+    bookingFeeRatePct: 4,
+    bookingFeeLabel: "Booking fee (4%)",
+    expectedBookingFeeUsd: 19.96,
+    expectedTotalChargedUsd: 518.96,
     maxPartySize: 6,
   },
   van: {
     slug: "van",
     productCode: "PU8R6Y",
     internalCode: "PARR_2027_VAN_API_TEST",
+    shortVehicleLabel: "Private Van",
     displayName: "Private 10-Passenger Van (Up to 10 Guests)",
-    expectedPriceUsd: 699,
+    basePriceUsd: 699,
+    bookingFeeRatePct: 4,
+    bookingFeeLabel: "Booking fee (4%)",
+    expectedBookingFeeUsd: 27.96,
+    expectedTotalChargedUsd: 726.96,
     maxPartySize: 10,
   },
 };
@@ -191,7 +208,9 @@ export async function getParrRezdyAvailabilityForDate(
       vehicleSlug: cfg.slug,
       productCode: cfg.productCode,
       dateKey: input.dateKey,
-      expectedPriceUsd: cfg.expectedPriceUsd,
+      basePriceUsd: cfg.basePriceUsd,
+      expectedBookingFeeUsd: cfg.expectedBookingFeeUsd,
+      expectedTotalChargedUsd: cfg.expectedTotalChargedUsd,
       maxPartySize: cfg.maxPartySize,
       vehicleQuantityAllowed: 1 as const,
       session: null,
@@ -209,7 +228,9 @@ export async function getParrRezdyAvailabilityForDate(
     vehicleSlug: cfg.slug,
     productCode: cfg.productCode,
     dateKey: input.dateKey,
-    expectedPriceUsd: cfg.expectedPriceUsd,
+    basePriceUsd: cfg.basePriceUsd,
+    expectedBookingFeeUsd: cfg.expectedBookingFeeUsd,
+    expectedTotalChargedUsd: cfg.expectedTotalChargedUsd,
     maxPartySize: cfg.maxPartySize,
     vehicleQuantityAllowed: 1 as const,
     session: {
@@ -218,7 +239,7 @@ export async function getParrRezdyAvailabilityForDate(
       endTimeLocal: openSession.endTimeLocal ? String(openSession.endTimeLocal) : null,
       seatsAvailable: Number(openSession.seatsAvailable),
       optionLabel: String(primaryOpt.label || cfg.displayName),
-      optionPrice: Number(primaryOpt.price ?? cfg.expectedPriceUsd),
+      optionPrice: Number(primaryOpt.price ?? cfg.basePriceUsd),
       maxQuantity: Number(primaryOpt.maxQuantity ?? 1),
     },
   };
@@ -272,35 +293,55 @@ export async function getParrRezdyStatelessQuote(
     : [];
   const firstItem = items[0] ?? {};
 
-  const itemAmount = Number(firstItem.amount ?? cfg.expectedPriceUsd);
-  const totalItemTax = Number(firstItem.totalItemTax ?? 0);
-  const totalAmount = Number(booking.totalAmount ?? firstItem.subtotal ?? itemAmount);
+  // Note: Rezdy REST API v1 returns the account-wide 4% "Booking fee" inside `items[0].totalItemTax`
+  // even when Settings -> Taxes & Fees has 0 taxes. Never label this charge as tax.
+  const itemAmount = Number(firstItem.amount ?? cfg.basePriceUsd);
+  const bookingFeeUsd = Number(firstItem.totalItemTax ?? 0);
+  const totalAmount = Number(booking.totalAmount ?? firstItem.subtotal ?? itemAmount + bookingFeeUsd);
   const totalDue = Number(booking.totalDue ?? totalAmount);
 
-  // Rezdy Track #3 Hard Gate: Require exact all-in totalDue ($499.00 Suburban / $699.00 Van) before continuing.
+  // Option B Hard Parity Gate: Traveler-visible breakdown and charged total must reconcile to the exact cent:
+  // - P94HN4: $499.00 base + $19.96 Booking fee (4%) = $518.96 total charged today
+  // - PU8R6Y: $699.00 base + $27.96 Booking fee (4%) = $726.96 total charged today
   const quoteParityPassed =
-    Math.abs(totalDue - cfg.expectedPriceUsd) < 0.005 &&
-    Math.abs(totalAmount - cfg.expectedPriceUsd) < 0.005 &&
-    Math.abs(totalItemTax) < 0.005;
+    Math.abs(itemAmount - cfg.basePriceUsd) < 0.005 &&
+    Math.abs(bookingFeeUsd - cfg.expectedBookingFeeUsd) < 0.005 &&
+    Math.abs(totalAmount - cfg.expectedTotalChargedUsd) < 0.005 &&
+    Math.abs(totalDue - cfg.expectedTotalChargedUsd) < 0.005;
+
+  const baseRounded = Number(itemAmount.toFixed(2));
+  const feeRounded = Number(bookingFeeUsd.toFixed(2));
+  const totalAmountRounded = Number(totalAmount.toFixed(2));
+  const totalDueRounded = Number(totalDue.toFixed(2));
 
   return {
     ok: true as const,
     vehicleSlug: cfg.slug,
     productCode: cfg.productCode,
-    expectedAllInUsd: cfg.expectedPriceUsd,
-    itemAmount: Number(itemAmount.toFixed(2)),
-    totalItemTax: Number(totalItemTax.toFixed(2)),
-    totalAmount: Number(totalAmount.toFixed(2)),
-    totalDue: Number(totalDue.toFixed(2)),
+    shortVehicleLabel: cfg.shortVehicleLabel,
+    basePriceUsd: cfg.basePriceUsd,
+    bookingFeeRatePct: cfg.bookingFeeRatePct,
+    bookingFeeLabel: cfg.bookingFeeLabel,
+    expectedBookingFeeUsd: cfg.expectedBookingFeeUsd,
+    expectedAllInUsd: cfg.expectedTotalChargedUsd,
+    itemAmount: baseRounded,
+    bookingFeeUsd: feeRounded,
+    totalAmount: totalAmountRounded,
+    totalDue: totalDueRounded,
     currency: String(booking.totalCurrency ?? "USD"),
     vehicleQuantity: 1 as const,
+    displayBreakdown: {
+      vehicleLine: `${cfg.shortVehicleLabel}: $${baseRounded.toFixed(2)}`,
+      bookingFeeLine: `${cfg.bookingFeeLabel}: $${feeRounded.toFixed(2)}`,
+      totalChargedTodayLine: `Total charged today: $${totalDueRounded.toFixed(2)}`,
+    },
     quoteParityPassed,
     blockedReason: quoteParityPassed
       ? null
-      : ("QUOTE_TOTAL_MISMATCH_REQUIRES_TAX_REVIEW" as const),
+      : ("QUOTE_TOTAL_MISMATCH" as const),
     blockedMessage: quoteParityPassed
       ? null
-      : `Rezdy stateless quote returned $${totalDue.toFixed(2)} (base $${itemAmount.toFixed(2)} + $${totalItemTax.toFixed(2)} tax/fee) instead of canonical all-in $${cfg.expectedPriceUsd.toFixed(2)}. Checkout is paused until the 4% rule on ${cfg.productCode} is reviewed in Rezdy Admin.`,
+      : `Rezdy stateless quote returned $${totalDueRounded.toFixed(2)} ($${baseRounded.toFixed(2)} vehicle + $${feeRounded.toFixed(2)} booking fee) instead of expected $${cfg.expectedTotalChargedUsd.toFixed(2)} ($${cfg.basePriceUsd.toFixed(2)} + $${cfg.expectedBookingFeeUsd.toFixed(2)} Booking fee (4%)). Checkout is paused until totals reconcile.`,
   };
 }
 
@@ -447,7 +488,7 @@ export async function createParrRezdyBooking(
       {
         productCode: cfg.productCode,
         startTimeLocal: normalizedStart,
-        expectedPriceUsd: cfg.expectedPriceUsd,
+        expectedPriceUsd: cfg.expectedTotalChargedUsd,
       },
       deps?.fetchImpl
     );
@@ -460,12 +501,12 @@ export async function createParrRezdyBooking(
         orderNumber: orderNum,
         resellerReference,
         status: String(preexisting.status),
-        totalPaid: Number(preexisting.totalPaid ?? cfg.expectedPriceUsd),
+        totalPaid: Number(preexisting.totalPaid ?? cfg.expectedTotalChargedUsd),
         confirmationSig: signConfirmationToken(orderNum, resellerReference),
       };
     }
 
-    // 2. Hard Stateless Quote Parity Gate ($499.00 / $699.00) before attempting any card charge!
+    // 2. Hard Stateless Quote Parity Gate ($518.96 Suburban / $726.96 Van) before attempting any card charge!
     const quote = await getParrRezdyStatelessQuote(
       {
         vehicleSlug: input.vehicleSlug,
@@ -481,7 +522,7 @@ export async function createParrRezdyBooking(
         httpStatus: 422,
         code: quote.ok ? (quote.blockedReason ?? "QUOTE_MISMATCH") : quote.code,
         message: quote.ok
-          ? (quote.blockedMessage ?? "Quote total did not match canonical flat vehicle price.")
+          ? (quote.blockedMessage ?? "Quote total did not reconcile with expected all-in booking total.")
           : quote.message,
       };
     }
@@ -502,7 +543,7 @@ export async function createParrRezdyBooking(
           productCode: cfg.productCode,
           sessionId: Number.parseInt(input.sessionId, 10),
           startTimeLocal: normalizedStart,
-          amount: cfg.expectedPriceUsd,
+          amount: cfg.basePriceUsd,
           quantities: [{ optionLabel: input.optionLabel, value: 1 }],
         },
       ],
@@ -547,7 +588,7 @@ export async function createParrRezdyBooking(
         orderNumber: orderNum,
         resellerReference,
         status: String(booking.status),
-        totalPaid: Number(booking.totalPaid ?? cfg.expectedPriceUsd),
+        totalPaid: Number(booking.totalPaid ?? cfg.expectedTotalChargedUsd),
         confirmationSig: signConfirmationToken(orderNum, resellerReference),
       };
     } catch (upstreamErr) {
@@ -557,7 +598,7 @@ export async function createParrRezdyBooking(
         {
           productCode: cfg.productCode,
           startTimeLocal: normalizedStart,
-          expectedPriceUsd: cfg.expectedPriceUsd,
+          expectedPriceUsd: cfg.expectedTotalChargedUsd,
         },
         deps?.fetchImpl
       ).catch(() => null);
@@ -571,7 +612,7 @@ export async function createParrRezdyBooking(
           orderNumber: orderNum,
           resellerReference,
           status: String(recovered.status),
-          totalPaid: Number(recovered.totalPaid ?? cfg.expectedPriceUsd),
+          totalPaid: Number(recovered.totalPaid ?? cfg.expectedTotalChargedUsd),
           confirmationSig: signConfirmationToken(orderNum, resellerReference),
         };
       }

@@ -56,7 +56,7 @@ test("2. Single-vehicle quantity rule & separate party size validation", async (
   const multiVehQuote = await getParrRezdyStatelessQuote({
     vehicleSlug: "suv",
     startTimeLocal: "2027-11-30 16:30:00",
-    optionLabel: "Private Suburban (Up to 6 Guests)",
+    optionLabel: "Group of 1",
     vehicleQuantity: 2,
   });
   assert.equal(multiVehQuote.ok, false);
@@ -67,9 +67,9 @@ test("2. Single-vehicle quantity rule & separate party size validation", async (
 
   const badParty = validateParrBookingInput({
     vehicleSlug: "suv",
-    sessionId: "523911939",
+    sessionId: "523934254",
     startTimeLocal: "2027-11-30 16:30:00",
-    optionLabel: "Private Suburban (Up to 6 Guests)",
+    optionLabel: "Group of 1",
     vehicleQuantity: 1,
     partySize: 8, // exceeds Suburban max 6
     firstName: "Alex",
@@ -84,69 +84,118 @@ test("2. Single-vehicle quantity rule & separate party size validation", async (
   assert.equal(badParty.code, "INVALID_PARTY_SIZE");
 });
 
-test("3. Availability + Stateless Quote $499.00 / $699.00 hard gate blocks 4% surcharge until resolved", async () => {
+test("3. Option B quote reconciliation: $499+$19.96=$518.96 (SUV) and $699+$27.96=$726.96 (Van) pass; unexpected totals fail closed", async () => {
   const prevApiKey = process.env.REZDY_API_KEY;
   process.env.REZDY_API_KEY = "unit_test_rezdy_api_key";
   try {
-    const mockFetch: FetchLike = async (input) => {
+    const optionBFetch: FetchLike = async (input, init) => {
       const u = String(input);
       if (u.includes("/availability?")) {
         return jsonRes({
           sessions: [
             {
-              id: 523911939,
+              id: 523934254,
               productCode: "P94HN4",
               startTimeLocal: "2027-11-30 16:30:00",
               seatsAvailable: 1,
-              priceOptions: [{ label: "Private Suburban (Up to 6 Guests)", price: 499, maxQuantity: 1 }],
+              priceOptions: [{ label: "Group of 1", price: 499, maxQuantity: 1 }],
             },
           ],
         });
       }
       if (u.includes("/bookings/quote")) {
+        const body = JSON.parse(String(init?.body ?? "{}"));
+        const code = body.items?.[0]?.productCode;
+        if (code === "P94HN4") {
+          return jsonRes({
+            booking: {
+              totalAmount: 518.96,
+              totalDue: 518.96,
+              totalCurrency: "USD",
+              items: [{ amount: 499, subtotal: 518.96, totalItemTax: 19.96 }],
+            },
+          });
+        }
         return jsonRes({
           booking: {
-            totalAmount: 518.96,
-            totalDue: 518.96,
+            totalAmount: 726.96,
+            totalDue: 726.96,
             totalCurrency: "USD",
-            items: [{ amount: 499, subtotal: 518.96, totalItemTax: 19.96 }],
+            items: [{ amount: 699, subtotal: 726.96, totalItemTax: 27.96 }],
           },
         });
-      }
-      if (u.includes("/bookings?resellerReference=")) {
-        return jsonRes({ bookings: [] });
       }
       throw new Error(`Unexpected URL: ${u}`);
     };
 
     const avail = await getParrRezdyAvailabilityForDate(
       { vehicleSlug: "suv", dateKey: "2027-11-30" },
-      { fetchImpl: mockFetch }
+      { fetchImpl: optionBFetch }
     );
     assert.equal(avail.available, true);
     assert.equal(avail.vehicleQuantityAllowed, 1);
 
-    const quote = await getParrRezdyStatelessQuote(
+    const suvQuote = await getParrRezdyStatelessQuote(
       {
         vehicleSlug: "suv",
         startTimeLocal: "2027-11-30 16:30:00",
-        optionLabel: "Private Suburban (Up to 6 Guests)",
+        optionLabel: "Group of 1",
       },
-      { fetchImpl: mockFetch }
+      { fetchImpl: optionBFetch }
     );
-    assert.equal(quote.ok, true);
-    if (quote.ok) {
-      assert.equal(quote.quoteParityPassed, false);
-      assert.equal(quote.blockedReason, "QUOTE_TOTAL_MISMATCH_REQUIRES_TAX_REVIEW");
+    assert.equal(suvQuote.ok, true);
+    if (suvQuote.ok) {
+      assert.equal(suvQuote.quoteParityPassed, true);
+      assert.equal(suvQuote.bookingFeeLabel, "Booking fee (4%)");
+      assert.equal(/tax/i.test(suvQuote.bookingFeeLabel), false);
+      assert.deepEqual(suvQuote.displayBreakdown, {
+        vehicleLine: "Private Suburban: $499.00",
+        bookingFeeLine: "Booking fee (4%): $19.96",
+        totalChargedTodayLine: "Total charged today: $518.96",
+      });
     }
 
-    // Booking creation MUST fail closed (422) before touching POST /bookings!
+    const vanQuote = await getParrRezdyStatelessQuote(
+      {
+        vehicleSlug: "van",
+        startTimeLocal: "2027-11-30 16:30:00",
+        optionLabel: "Group of 1",
+      },
+      { fetchImpl: optionBFetch }
+    );
+    assert.equal(vanQuote.ok, true);
+    if (vanQuote.ok) {
+      assert.equal(vanQuote.quoteParityPassed, true);
+      assert.deepEqual(vanQuote.displayBreakdown, {
+        vehicleLine: "Private Van: $699.00",
+        bookingFeeLine: "Booking fee (4%): $27.96",
+        totalChargedTodayLine: "Total charged today: $726.96",
+      });
+    }
+
+    // Mismatch quote ($525.00 instead of $518.96) MUST fail closed (422) before touching POST /bookings!
+    const mismatchFetch: FetchLike = async (input) => {
+      const u = String(input);
+      if (u.includes("/bookings?resellerReference=")) return jsonRes({ bookings: [] });
+      if (u.includes("/bookings/quote")) {
+        return jsonRes({
+          booking: {
+            totalAmount: 525,
+            totalDue: 525,
+            totalCurrency: "USD",
+            items: [{ amount: 499, subtotal: 525, totalItemTax: 26 }],
+          },
+        });
+      }
+      throw new Error(`Unexpected URL: ${u}`);
+    };
+
     const blockedBook = await createParrRezdyBooking(
       {
         vehicleSlug: "suv",
-        sessionId: "523911939",
+        sessionId: "523934254",
         startTimeLocal: "2027-11-30 16:30:00",
-        optionLabel: "Private Suburban (Up to 6 Guests)",
+        optionLabel: "Group of 1",
         partySize: 5,
         firstName: "Alex",
         lastName: "Rider",
@@ -156,12 +205,12 @@ test("3. Availability + Stateless Quote $499.00 / $699.00 hard gate blocks 4% su
         cardToken: "tok_visa123",
         idempotencyKey: "idem-quote-gate-block-01",
       },
-      { fetchImpl: mockFetch }
+      { fetchImpl: mismatchFetch }
     );
     assert.equal(blockedBook.ok, false);
     assert.equal(blockedBook.httpStatus, 422);
     if (!blockedBook.ok) {
-      assert.equal(blockedBook.code, "QUOTE_TOTAL_MISMATCH_REQUIRES_TAX_REVIEW");
+      assert.equal(blockedBook.code, "QUOTE_TOTAL_MISMATCH");
     }
   } finally {
     if (prevApiKey === undefined) delete process.env.REZDY_API_KEY;
@@ -169,7 +218,7 @@ test("3. Availability + Stateless Quote $499.00 / $699.00 hard gate blocks 4% su
   }
 });
 
-test("4. Server booking creation, idempotency, duplicate-submit lock, timeout recovery, confirmation & decline handling", async () => {
+test("4. Server booking creation, idempotency, duplicate-submit lock, timeout recovery, confirmation & decline handling ($518.96 / $726.96)", async () => {
   const prevApiKey = process.env.REZDY_API_KEY;
   process.env.REZDY_API_KEY = "unit_test_rezdy_api_key";
   try {
@@ -181,10 +230,10 @@ test("4. Server booking creation, idempotency, duplicate-submit lock, timeout re
       if (u.includes("/bookings/quote")) {
         return jsonRes({
           booking: {
-            totalAmount: 499,
-            totalDue: 499,
+            totalAmount: 518.96,
+            totalDue: 518.96,
             totalCurrency: "USD",
-            items: [{ amount: 499, subtotal: 499, totalItemTax: 0 }],
+            items: [{ amount: 499, subtotal: 518.96, totalItemTax: 19.96 }],
           },
         });
       }
@@ -202,14 +251,15 @@ test("4. Server booking creation, idempotency, duplicate-submit lock, timeout re
         postBookingsCalls += 1;
         const payload = JSON.parse(String(init.body));
         assert.equal(payload.items[0].quantities[0].value, 1, "Must submit quantity: 1");
+        assert.equal(payload.items[0].amount, 499, "Submits base amount 499; Rezdy applies 4% booking fee ($19.96 -> $518.96)");
         assert.equal(payload.creditCard.cardToken, "tok_visa_valid");
         assert.equal(payload.sendNotifications, false);
         const created = {
           orderNumber: "RZD990011",
           resellerReference: payload.resellerReference,
           status: "CONFIRMED",
-          totalAmount: 499,
-          totalPaid: 499,
+          totalAmount: 518.96,
+          totalPaid: 518.96,
           totalDue: 0,
           totalCurrency: "USD",
           items: [
@@ -218,7 +268,9 @@ test("4. Server booking creation, idempotency, duplicate-submit lock, timeout re
               productName: "Private Red Rocks Suburban (2027 Hidden Test)",
               startTimeLocal: "2027-11-30 16:30:00",
               amount: 499,
-              quantities: [{ optionLabel: "Private Suburban (Up to 6 Guests)", value: 1 }],
+              subtotal: 518.96,
+              totalItemTax: 19.96,
+              quantities: [{ optionLabel: "Group of 1", value: 1 }],
             },
           ],
           fields: payload.fields,
@@ -231,9 +283,9 @@ test("4. Server booking creation, idempotency, duplicate-submit lock, timeout re
 
     const basePayload = {
       vehicleSlug: "suv" as const,
-      sessionId: "523911939",
+      sessionId: "523934254",
       startTimeLocal: "2027-11-30 16:30:00",
-      optionLabel: "Private Suburban (Up to 6 Guests)",
+      optionLabel: "Group of 1",
       partySize: 6,
       firstName: "Taylor",
       lastName: "Morrison",
@@ -245,12 +297,12 @@ test("4. Server booking creation, idempotency, duplicate-submit lock, timeout re
       idempotencyKey: "idem-happy-flow-001",
     };
 
-    // First submit creates the order
     const first = await createParrRezdyBooking(basePayload, { fetchImpl: happyFetch });
     assert.equal(first.ok, true);
     if (!first.ok) throw new Error("Expected first booking to succeed");
     assert.equal(first.idempotentRecovery, false);
     assert.equal(first.orderNumber, "RZD990011");
+    assert.equal(first.totalPaid, 518.96);
     assert.equal(postBookingsCalls, 1);
 
     // Retry with identical idempotencyKey recovers existing booking WITHOUT calling POST /bookings again
@@ -259,6 +311,7 @@ test("4. Server booking creation, idempotency, duplicate-submit lock, timeout re
     if (!second.ok) throw new Error("Expected idempotent retry to succeed");
     assert.equal(second.idempotentRecovery, true);
     assert.equal(second.orderNumber, "RZD990011");
+    assert.equal(second.totalPaid, 518.96);
     assert.equal(postBookingsCalls, 1, "Idempotent retry must NOT call POST /bookings a second time");
 
     // Confirmation retrieval works with valid HMAC signature and rejects tampered signature
@@ -273,7 +326,7 @@ test("4. Server booking creation, idempotency, duplicate-submit lock, timeout re
     assert.equal(confOk.ok, true);
     if (confOk.ok) {
       assert.equal(confOk.confirmation.partySize, "6");
-      assert.equal(confOk.confirmation.totalPaid, 499);
+      assert.equal(confOk.confirmation.totalPaid, 518.96);
     }
 
     const confBadSig = await getParrRezdyBookingConfirmation(
@@ -318,7 +371,7 @@ test("4. Server booking creation, idempotency, duplicate-submit lock, timeout re
       const u = String(input);
       if (u.includes("/bookings/quote")) {
         return jsonRes({
-          booking: { totalAmount: 699, totalDue: 699, items: [{ amount: 699, subtotal: 699, totalItemTax: 0 }] },
+          booking: { totalAmount: 726.96, totalDue: 726.96, items: [{ amount: 699, subtotal: 726.96, totalItemTax: 27.96 }] },
         });
       }
       if (u.includes("/bookings?resellerReference=")) {
@@ -330,7 +383,7 @@ test("4. Server booking creation, idempotency, duplicate-submit lock, timeout re
               orderNumber: "RZD990022",
               resellerReference: timeoutRef,
               status: "CONFIRMED",
-              totalPaid: 699,
+              totalPaid: 726.96,
               items: [{ productCode: "PU8R6Y", startTimeLocal: "2027-11-30 16:30:00", quantities: [{ value: 1 }] }],
             },
           ],
@@ -346,7 +399,7 @@ test("4. Server booking creation, idempotency, duplicate-submit lock, timeout re
       {
         ...basePayload,
         vehicleSlug: "van",
-        optionLabel: "Private Van (Up to 10 Guests)",
+        optionLabel: "Group of 1",
         partySize: 9,
         idempotencyKey: timeoutIdem,
       },
@@ -356,6 +409,7 @@ test("4. Server booking creation, idempotency, duplicate-submit lock, timeout re
     if (recoveredVan.ok) {
       assert.equal(recoveredVan.idempotentRecovery, true);
       assert.equal(recoveredVan.orderNumber, "RZD990022");
+      assert.equal(recoveredVan.totalPaid, 726.96);
     }
 
     // Safe card-decline failure behavior (no booking recorded -> returns 402 CARD_DECLINED)
@@ -363,7 +417,7 @@ test("4. Server booking creation, idempotency, duplicate-submit lock, timeout re
       const u = String(input);
       if (u.includes("/bookings/quote")) {
         return jsonRes({
-          booking: { totalAmount: 499, totalDue: 499, items: [{ amount: 499, subtotal: 499, totalItemTax: 0 }] },
+          booking: { totalAmount: 518.96, totalDue: 518.96, items: [{ amount: 499, subtotal: 518.96, totalItemTax: 19.96 }] },
         });
       }
       if (u.includes("/bookings?resellerReference=")) return jsonRes({ bookings: [] });
