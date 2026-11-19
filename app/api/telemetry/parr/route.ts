@@ -2,7 +2,12 @@ import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { recordParrTelemetryEvent, type ParrStoredTelemetryEvent } from "@/lib/parrTelemetryStore";
 import {
+  deriveParrOutcomeLogicalEventId,
+  emitParrVerifiedBookingOutcomeAfterResponse,
+  flushParrAnalyticsAfterTasksForTest,
+  isParrAnalyticsDisabled,
   resolveParrDccCollectEndpoint,
+  resolveParrInternalCollectorSecret,
   scheduleParrAnalyticsAfter,
 } from "@/lib/analyticsV2Server";
 
@@ -23,6 +28,13 @@ const VALID_EVENTS = new Set<ParrStoredTelemetryEvent["name"]>([
 ]);
 
 export async function POST(request: Request) {
+  if (isParrAnalyticsDisabled()) {
+    return NextResponse.json(
+      { ok: true, accepted: false, reason: "site_analytics_disabled" },
+      { status: 202, headers: { "Cache-Control": "no-store" } },
+    );
+  }
+
   let rawText = "";
   let body: Record<string, unknown>;
   try {
@@ -36,6 +48,50 @@ export async function POST(request: Request) {
     body = JSON.parse(rawText) as Record<string, unknown>;
   } catch {
     return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
+  }
+
+  if (body.mode === "synthetic_booking_outcome_probe") {
+    if (process.env.VERCEL_ENV === "production") {
+      return NextResponse.json(
+        { ok: false, error: "synthetic_probe_forbidden_in_production" },
+        { status: 403 },
+      );
+    }
+    const expectedSecret = resolveParrInternalCollectorSecret();
+    const providedSecret = request.headers.get("x-dcc-internal-secret")?.trim() || "";
+    if (!expectedSecret || !providedSecret || providedSecret !== expectedSecret) {
+      return NextResponse.json({ ok: false, error: "unauthorized" }, { status: 401 });
+    }
+    const internalOrderId =
+      typeof body.internalOrderId === "string" && body.internalOrderId.trim()
+        ? body.internalOrderId.trim().slice(0, 96)
+        : "QA-PARR-PREVIEW-SYNTH-01";
+    const outcomeType = body.outcomeType === "cancelled" ? "cancelled" : "confirmed_paid";
+    const logicalEventId = deriveParrOutcomeLogicalEventId(internalOrderId, outcomeType);
+
+    // Zero real charges, bookings, cancellations, or refunds — exercises server emitter only
+    emitParrVerifiedBookingOutcomeAfterResponse({
+      internalOrderId,
+      outcomeType,
+      grossAmountUsd: typeof body.grossAmountUsd === "number" ? body.grossAmountUsd : 449,
+      dccHandoffId:
+        typeof body.handoffId === "string" ? body.handoffId : "qa_parr_preview_handoff",
+      productCode: "parr-private-suburban",
+      isTest: true,
+    });
+    await flushParrAnalyticsAfterTasksForTest();
+
+    return NextResponse.json(
+      {
+        ok: true,
+        accepted: true,
+        mode: "synthetic_booking_outcome_probe",
+        logicalEventId,
+        zeroRealChargesOrBookings: true,
+        forwardedTo: resolveParrDccCollectEndpoint() ? "dcc_v2_collect" : "preview_local_sink",
+      },
+      { status: 202, headers: { "Cache-Control": "no-store" } },
+    );
   }
 
   // Forward v2 batched envelopes asynchronously via Next.js after() without adding new app/ route files
@@ -70,7 +126,12 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json(
-      { ok: true, accepted: true, batchSize: body.events.length },
+      {
+        ok: true,
+        accepted: true,
+        batchSize: body.events.length,
+        forwardedTo: endpoint ? "dcc_v2_collect" : "preview_local_sink",
+      },
       { status: 202, headers: { "Cache-Control": "no-store" } },
     );
   }

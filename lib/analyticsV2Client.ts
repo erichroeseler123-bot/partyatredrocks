@@ -151,8 +151,23 @@ function getFt() {
   }
 }
 
+function isParrClientAnalyticsDisabled(): boolean {
+  const dcc = (process.env.NEXT_PUBLIC_DCC_ANALYTICS_DISABLED || "").trim().toLowerCase();
+  const pr = (process.env.NEXT_PUBLIC_PARR_ANALYTICS_DISABLED || "").trim().toLowerCase();
+  return (
+    dcc === "1" ||
+    dcc === "true" ||
+    dcc === "yes" ||
+    dcc === "on" ||
+    pr === "1" ||
+    pr === "true" ||
+    pr === "yes" ||
+    pr === "on"
+  );
+}
+
 export function enqueueParrAnalyticsEvent(input: ParrClientAnalyticsInput): string | null {
-  if (typeof window === "undefined" || Date.now() < openUntil) return null;
+  if (isParrClientAnalyticsDisabled() || typeof window === "undefined" || Date.now() < openUntil) return null;
   const rawPath = input.path || window.location?.pathname || "/";
   if (isSuppressedInternalParrPath(rawPath)) return null;
 

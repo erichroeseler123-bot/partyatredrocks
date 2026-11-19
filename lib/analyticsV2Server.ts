@@ -14,7 +14,24 @@ export async function flushParrAnalyticsAfterTasksForTest(): Promise<void> {
   }
 }
 
+function isTruthyFlag(val?: string | null): boolean {
+  const n = (val || "").trim().toLowerCase();
+  return n === "1" || n === "true" || n === "yes" || n === "on";
+}
+
+export function isParrAnalyticsDisabled(): boolean {
+  return (
+    isTruthyFlag(process.env.DCC_ANALYTICS_DISABLED) ||
+    isTruthyFlag(process.env.PARR_ANALYTICS_DISABLED) ||
+    isTruthyFlag(process.env.NEXT_PUBLIC_DCC_ANALYTICS_DISABLED) ||
+    isTruthyFlag(process.env.NEXT_PUBLIC_PARR_ANALYTICS_DISABLED)
+  );
+}
+
 export function resolveParrDccCollectEndpoint(): string | null {
+  if (isParrAnalyticsDisabled()) {
+    return null;
+  }
   const explicit = process.env.DCC_ANALYTICS_COLLECT_URL?.trim();
   if (explicit) return explicit;
   const origin = process.env.NEXT_PUBLIC_DCC_ORIGIN?.trim().replace(/\/+$/, "");
@@ -25,7 +42,7 @@ export function resolveParrDccCollectEndpoint(): string | null {
   return null;
 }
 
-function resolveParrInternalCollectorSecret(): string {
+export function resolveParrInternalCollectorSecret(): string {
   return (
     process.env.DCC_ANALYTICS_INTERNAL_SECRET?.trim() ||
     process.env.DCC_INTERNAL_API_SECRET?.trim() ||
@@ -93,6 +110,7 @@ export interface ParrVerifiedOutcomeInput {
 export function emitParrVerifiedBookingOutcomeAfterResponse(
   input: ParrVerifiedOutcomeInput,
 ): void {
+  if (isParrAnalyticsDisabled()) return;
   if (!input.internalOrderId || !input.internalOrderId.trim()) return;
   const endpoint = resolveParrDccCollectEndpoint();
   const secret = resolveParrInternalCollectorSecret();
