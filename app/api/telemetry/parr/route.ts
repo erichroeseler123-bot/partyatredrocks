@@ -97,6 +97,7 @@ export async function POST(request: Request) {
   // Forward v2 batched envelopes asynchronously via Next.js after() without adding new app/ route files
   if (Array.isArray(body.events)) {
     const endpoint = resolveParrDccCollectEndpoint();
+    const previewBypass = process.env.DCC_ANALYTICS_PREVIEW_BYPASS_SECRET?.trim() || "";
     const ua = request.headers.get("user-agent") || "";
     const lang = request.headers.get("accept-language") || "";
     const host = request.headers.get("x-forwarded-host") || request.headers.get("host") || "";
@@ -113,6 +114,7 @@ export async function POST(request: Request) {
             ...(ua ? { "User-Agent": ua } : {}),
             ...(lang ? { "Accept-Language": lang } : {}),
             ...(host ? { "x-forwarded-host": host } : {}),
+            ...(previewBypass ? { "x-vercel-protection-bypass": previewBypass } : {}),
             ...(isQa ? { "x-qa-test": "1" } : {}),
           },
           body: rawText,

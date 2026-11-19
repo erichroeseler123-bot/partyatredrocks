@@ -143,6 +143,7 @@ export function emitParrVerifiedBookingOutcomeAfterResponse(
   scheduleParrAnalyticsAfter(async () => {
     const fetchImpl = customFetchForTest || fetch;
     const targetUrl = endpoint || "https://www.destinationcommandcenter.com/api/v2/analytics/collect";
+    const previewBypass = process.env.DCC_ANALYTICS_PREVIEW_BYPASS_SECRET?.trim() || "";
     const body = JSON.stringify({
       deliveryId: `parr_srv_${crypto.randomUUID().replace(/-/g, "").slice(0, 20)}`,
       sentAt: occurredAt,
@@ -155,6 +156,7 @@ export function emitParrVerifiedBookingOutcomeAfterResponse(
           "Content-Type": "application/json",
           "User-Agent": "PARR-AnalyticsEmitter/2.0",
           ...(secret ? { "x-dcc-internal-secret": secret } : {}),
+          ...(previewBypass ? { "x-vercel-protection-bypass": previewBypass } : {}),
           ...(input.isTest ? { "x-qa-test": "1" } : {}),
         },
         body,
