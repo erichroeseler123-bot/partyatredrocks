@@ -4,6 +4,7 @@ import { confirmSharedPayment } from "@/lib/sharedInventory";
 import { getInternalOrderById } from "@/lib/orders";
 import { sendSharedBookingConfirmation } from "@/lib/sharedConfirmation";
 import { squareClient } from "@/lib/square";
+import { emitParrVerifiedBookingOutcomeAfterResponse } from "@/lib/analyticsV2Server";
 
 function toPaidCents(amount: unknown) {
   return typeof amount === "bigint" ? Number(amount) : typeof amount === "number" ? amount : null;
@@ -103,6 +104,18 @@ export async function reconcileSharedOrderFromSquare(input: {
   if (!result.alreadyConfirmed) {
     const updatedOrder = await getInternalOrderById(internalOrderId);
     await sendSharedBookingConfirmation(updatedOrder).catch(() => undefined);
+    const paidCents = toPaidCents(payment.totalMoney?.amount);
+    const orderPayment =
+      updatedOrder && typeof updatedOrder.payment === "object" && updatedOrder.payment
+        ? (updatedOrder.payment as Record<string, unknown>)
+        : null;
+    emitParrVerifiedBookingOutcomeAfterResponse({
+      internalOrderId,
+      outcomeType: "confirmed_paid",
+      grossAmountUsd: paidCents !== null ? paidCents / 100 : null,
+      dccHandoffId: typeof orderPayment?.dccHandoffId === "string" ? orderPayment.dccHandoffId : null,
+      productCode: typeof updatedOrder?.productCode === "string" ? updatedOrder.productCode : null,
+    });
   }
 
   return { ok: true as const, result };

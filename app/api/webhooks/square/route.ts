@@ -4,6 +4,7 @@ import { getInternalOrderById } from "@/lib/orders";
 import { sendSharedBookingConfirmation, VERIFIED_SUPPORT_CONTACT } from "@/lib/sharedConfirmation";
 import { confirmSharedPayment, getSharedHoldBySquareOrderId } from "@/lib/sharedInventory";
 import { squareClient, squareWebhookSignatureKey, squareWebhookUrl } from "@/lib/square";
+import { emitParrVerifiedBookingOutcomeAfterResponse } from "@/lib/analyticsV2Server";
 
 export const runtime = "nodejs";
 
@@ -98,10 +99,24 @@ export async function POST(request: Request) {
   });
 
   let confirmationEmailSent = false;
-  if (!result.alreadyConfirmed) {
-    const order = await getInternalOrderById(internalOrderId);
+  const order = !result.alreadyConfirmed ? await getInternalOrderById(internalOrderId) : null;
+  if (!result.alreadyConfirmed && order) {
     const emailResult = await sendSharedBookingConfirmation(order).catch(() => ({ sent: false as const }));
     confirmationEmailSent = Boolean(emailResult?.sent);
+  }
+
+  if (!result.alreadyConfirmed) {
+    const orderPayment =
+      order && typeof order.payment === "object" && order.payment
+        ? (order.payment as Record<string, unknown>)
+        : null;
+    emitParrVerifiedBookingOutcomeAfterResponse({
+      internalOrderId,
+      outcomeType: "confirmed_paid",
+      grossAmountUsd: totalPaidCents !== null ? totalPaidCents / 100 : null,
+      dccHandoffId: typeof orderPayment?.dccHandoffId === "string" ? orderPayment.dccHandoffId : null,
+      productCode: typeof order?.productCode === "string" ? order.productCode : null,
+    });
   }
 
   return NextResponse.json({
