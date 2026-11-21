@@ -26,7 +26,7 @@ export const PRIVATE_INVENTORY_POOLS: PrivateInventoryPool[] = [
     owner: "parr",
     label: "PARR Suburban",
     productCode: "parr-suburban",
-    capacity: 3,
+    capacity: 5,
     priority: 1,
   },
   {
@@ -35,6 +35,13 @@ export const PRIVATE_INVENTORY_POOLS: PrivateInventoryPool[] = [
     productCode: "parr-suburban",
     capacity: 1,
     priority: 2,
+  },
+  {
+    owner: "parr",
+    label: "PARR Private Van",
+    productCode: "parr-van-10",
+    capacity: 3,
+    priority: 1,
   },
   {
     owner: "friend_fleet",
@@ -167,7 +174,8 @@ export function getOrderFleetOwner(order: InternalOrderRow): FleetOwner | null {
 }
 
 function isOrderCanceled(order: InternalOrderRow) {
-  return stringValue(order.booking?.status) === "canceled";
+  const status = stringValue(order.booking?.status)?.toLowerCase();
+  return status === "canceled" || status === "cancelled";
 }
 
 function countActivePrivateAllocations(

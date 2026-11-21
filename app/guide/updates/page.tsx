@@ -2,7 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import GbpPost from "@/app/components/GbpPost";
 import { PARR_PUBLIC_FACTS } from "@/lib/publicOperatorFacts";
-import { SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
+import { PARR_COMPLETE_TOTAL_DISCLOSURE } from "@/lib/pricing";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
 
 const SITE = "https://www.partyatredrocks.com";
 
@@ -25,7 +31,7 @@ export default function UpdatesPage() {
         <GbpPost
           date="2027 Season Advisory"
           title="2027 Red Rocks Private Vehicle Reservations Open"
-          content={`Private round-trip reservations are open for announced 2027 Red Rocks concerts: $${SUBURBAN_2027_USD} Private Suburban (up to 6) and $${VAN_2027_USD} Private Van (up to 10), including Upper North Lot tailgating setup and on-site driver wait.`}
+          content={`Private round-trip reservations are open for announced 2027 Red Rocks concerts: ${SUBURBAN_ALL_IN_TOTAL_LABEL} Private Suburban total (${SUBURBAN_ITEMIZED_LABEL}, up to 6) and ${VAN_ALL_IN_TOTAL_LABEL} Private Van total (${VAN_ITEMIZED_LABEL}, up to 10), including Upper North Lot tailgating setup and on-site driver wait. ${PARR_COMPLETE_TOTAL_DISCLOSURE}`}
           ctaLink="/red-rocks/concerts"
         />
 

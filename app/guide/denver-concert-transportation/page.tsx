@@ -11,7 +11,7 @@ const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks
 export const metadata = {
   title: "Denver Concert Transportation Guide | Red Rocks & Front Range Venues",
   description:
-    "Plan concert transportation across Denver and Red Rocks: compare private Suburban ($499) and Private Van ($699) service, review venue guides, and book for your group.",
+    "Plan concert transportation across Denver and Red Rocks: compare Private Suburban ($518.96 total: $499.00 base + $19.96 Booking fee (4%)) and Private Van ($726.96 total: $699.00 base + $27.96 Booking fee (4%)) service, review venue guides, and book.",
   alternates: {
     canonical: `${SITE}/guide/denver-concert-transportation`,
   },
@@ -30,13 +30,13 @@ const venueLinks = [
 
 const rideRows = [
   {
-    rideType: "Private Suburban ($499 Red Rocks)",
-    bestFor: "Groups up to 6 wanting door-to-door pickup, Upper North Lot tailgate & waiting driver",
-    tradeoff: "Flat vehicle rate rather than single-rider ticket",
+    rideType: "Private Suburban ($518.96 total Red Rocks)",
+    bestFor: "Groups up to 6 wanting door-to-door pickup, Upper North Lot tailgate & waiting driver ($499.00 base + $19.96 Booking fee (4%))",
+    tradeoff: "Whole-vehicle reservation rather than single-rider ticket",
   },
   {
-    rideType: "Private Van ($699 Red Rocks)",
-    bestFor: "Groups of 7–10 riding, tailgating, and heading home together",
+    rideType: "Private Van ($726.96 total Red Rocks)",
+    bestFor: "Groups of 7–10 riding, tailgating, and heading home together ($699.00 base + $27.96 Booking fee (4%))",
     tradeoff: "High demand on weekend sellouts—reserve early",
   },
   {
@@ -132,19 +132,19 @@ export default async function DenverConcertTransportationGuidePage() {
           <article className="rounded-3xl border border-soft bg-surface-strong p-6">
             <h2 className="text-2xl font-black tracking-tight">Couples & small crews</h2>
             <p className="mt-3 text-soft leading-relaxed">
-              Reserve a dedicated Private Suburban ($499 flat round-trip) when you want door-to-door service and zero post-show rideshare stress.
+              Reserve a dedicated Private Suburban ($518.96 total: $499.00 base + $19.96 Booking fee (4%)) when you want door-to-door service and zero post-show rideshare stress.
             </p>
           </article>
           <article className="rounded-3xl border border-soft bg-surface-strong p-6">
             <h2 className="text-2xl font-black tracking-tight">Group of 4–6</h2>
             <p className="mt-3 text-soft leading-relaxed">
-              Splitting a $499 Private Suburban (~$83 per guest for 6) includes Upper North Lot tailgating gear and a driver who waits through the show.
+              Splitting a $518.96 total Private Suburban (about $87 per guest for 6) includes Upper North Lot tailgating gear and a driver who waits through the show.
             </p>
           </article>
           <article className="rounded-3xl border border-soft bg-surface-strong p-6">
             <h2 className="text-2xl font-black tracking-tight">Group of 7–10</h2>
             <p className="mt-3 text-soft leading-relaxed">
-              The 10-passenger Private Van ($699 flat round-trip, ~$70 per guest for 10) keeps your entire crew together from pickup to final drop-off.
+              The 10-passenger Private Van ($726.96 total: $699.00 base + $27.96 Booking fee (4%), about $73 per guest for 10) keeps your entire crew together from pickup to final drop-off.
             </p>
           </article>
         </section>

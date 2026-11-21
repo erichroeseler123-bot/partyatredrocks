@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
+import { PARR_COMPLETE_TOTAL_DISCLOSURE } from "@/lib/pricing";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
 
 const SITE = "https://www.partyatredrocks.com";
 
 export const metadata: Metadata = {
   title: "Red Rocks Prohibited Items & Security Rules (2026 Reference & 2027 Prep)",
   description:
-    `Red Rocks Amphitheatre prohibited items, single-pocket hydration pack rules, and why keeping extra gear locked in a private Suburban ($${SUBURBAN_2027_USD}) or Van ($${VAN_2027_USD}) saves your show night.`,
+    `Red Rocks Amphitheatre prohibited items, single-pocket hydration pack rules, and why keeping extra gear locked in a private Suburban (${SUBURBAN_ALL_IN_TOTAL_LABEL} total) or Van (${VAN_ALL_IN_TOTAL_LABEL} total, including 4% Booking fee) saves your show night.`,
   alternates: { canonical: `${SITE}/guide/logistics/prohibited-items-2026` },
   openGraph: {
     title: "Red Rocks Prohibited Items Deep Dive (2026 Season Reference)",
@@ -50,7 +56,7 @@ export default function ProhibitedItems() {
       >
         <span className="font-black uppercase tracking-[0.16em] text-[#ffb07c]">2026 Security Reference · 2027 Ready:</span>{" "}
         Originally published for the 2026 Red Rocks season; always verify show-specific promoter rules on official Red Rocks channels before departure. Existing 2026 ride bookings remain honored at their original prices, while 2027 private round-trip vehicles book at{" "}
-        <strong>${SUBURBAN_2027_USD} Private Suburban</strong> and <strong>${VAN_2027_USD} Private Van</strong>.
+        <strong>{SUBURBAN_ALL_IN_TOTAL_LABEL} Private Suburban total</strong> ({SUBURBAN_ITEMIZED_LABEL}) and <strong>{VAN_ALL_IN_TOTAL_LABEL} Private Van total</strong> ({VAN_ITEMIZED_LABEL}).
       </aside>
 
       <header className="mb-12 border-l-4 border-[#ffb07c] pl-6 sm:pl-8">
@@ -95,7 +101,7 @@ export default function ProhibitedItems() {
       <section className="rounded-[2.5rem] border border-[#ffb07c]/30 bg-[#0d1424] p-8 text-center shadow-2xl sm:p-12">
         <h2 className="mb-4 text-3xl font-black uppercase text-white">The Waiting Private Vehicle Advantage</h2>
         <p className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
-          If you arrive in an Uber and security turns away a bag or tailgate item, you have nowhere to put it. With a Party at Red Rocks Private Suburban (${SUBURBAN_2027_USD}) or Private Van (${VAN_2027_USD}), your driver and locked vehicle stay at Red Rocks through the entire concert—so tailgate coolers, chairs, and extra layers stay safe until the ride home.
+          If you arrive in an Uber and security turns away a bag or tailgate item, you have nowhere to put it. With a Party at Red Rocks Private Suburban ({SUBURBAN_ALL_IN_TOTAL_LABEL} total: {SUBURBAN_ITEMIZED_LABEL}) or Private Van ({VAN_ALL_IN_TOTAL_LABEL} total: {VAN_ITEMIZED_LABEL}), your driver and locked vehicle stay at Red Rocks through the entire concert—so tailgate coolers, chairs, and extra layers stay safe until the ride home. {PARR_COMPLETE_TOTAL_DISCLOSURE}
         </p>
         <Link
           href="/book/red-rocks-amphitheatre/private"

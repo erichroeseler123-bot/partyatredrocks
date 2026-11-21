@@ -28,7 +28,7 @@ export const pageVisuals = {
   compare: {
     title: "Comparing Red Rocks Ride Options | Private SUV & Van vs Rideshare",
     description:
-      "Compare flat-rate Private Suburban ($499) and Private Van ($699) service against rideshare surges and fixed bus stops so your group picks the right Red Rocks plan.",
+      "Compare Private Suburban ($518.96 total: $499.00 base + $19.96 Booking fee (4%)) and Private Van ($726.96 total: $699.00 base + $27.96 Booking fee (4%)) service against rideshare surges and fixed bus stops.",
     shareImage: `${SITE}${buildContentShareImage(
       "red rocks amphitheatre parking sunset",
       curatedImages.compareHero,

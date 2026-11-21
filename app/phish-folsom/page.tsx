@@ -1,4 +1,10 @@
 import Link from "next/link";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
@@ -98,7 +104,7 @@ export default function PhishFolsomPage() {
           <h3 className="comic-h3 mt-6">Your Shuttle Pricing for Phish Runs</h3>
           <div className="comic-copy mt-4 space-y-2">
             <p>
-              <strong>Red Rocks rates (if applicable for side shows)</strong>: Suburban $449, 10-pass van $699,
+              <strong>Red Rocks rates (if applicable for side shows)</strong>: Suburban {SUBURBAN_ALL_IN_TOTAL_LABEL} total ({SUBURBAN_ITEMIZED_LABEL}), 10-pass van {VAN_ALL_IN_TOTAL_LABEL} total ({VAN_ITEMIZED_LABEL}),
               14-pass van $799, 20-pass bus $1,000 round-trip
             </p>
             <p>

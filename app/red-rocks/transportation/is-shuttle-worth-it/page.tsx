@@ -1,4 +1,11 @@
 import Link from "next/link";
+import { PARR_COMPLETE_TOTAL_DISCLOSURE } from "@/lib/pricing";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
 
 const PRIVATE_HREF = "/book/red-rocks-amphitheatre/private";
 
@@ -40,8 +47,7 @@ export default function Page() {
           <div className="panel rounded-2xl p-6">
             <h2 className="text-xl font-bold">Current private ride pricing</h2>
             <p className="mt-2 text-soft">
-              Private Suburban service is $499. The private van upgrade is $699. Choose based on your group size
-              and vehicle preference.
+              Private Suburban service is {SUBURBAN_ALL_IN_TOTAL_LABEL} total ({SUBURBAN_ITEMIZED_LABEL}). The private van upgrade is {VAN_ALL_IN_TOTAL_LABEL} total ({VAN_ITEMIZED_LABEL}). Choose based on your group size and vehicle preference. {PARR_COMPLETE_TOTAL_DISCLOSURE}
             </p>
           </div>
           <div className="panel rounded-2xl p-6">

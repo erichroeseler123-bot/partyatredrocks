@@ -11,6 +11,7 @@ Disallow: /
 `
     : `User-agent: *
 Allow: /
+Disallow: /api/rezdy/
 
 Host: https://www.partyatredrocks.com
 Sitemap: https://www.partyatredrocks.com/sitemap.xml

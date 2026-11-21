@@ -10,6 +10,13 @@ import PrimaryCTASection from "@/components/PrimaryCTASection";
 import type { DisplayEvent } from "@/lib/events/presentation";
 import FAQBlock from "@/components/FAQBlock";
 import type { FaqRow } from "@/lib/faqs/schema";
+import { PARR_COMPLETE_TOTAL_DISCLOSURE } from "@/lib/pricing";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
 
 export type WeekEvent = DisplayEvent;
 
@@ -84,7 +91,7 @@ export default function WeekClient({
         <PageHero
           kicker="Upcoming Shows"
           title="Red Rocks Lineup"
-          description="Already have tickets? Find your show, then reserve one private vehicle for the whole night. Private Suburban is $499; larger groups can upgrade to a private van."
+          description={`Already have tickets? Find your show, then reserve one private vehicle for the whole night. Private Suburban is ${SUBURBAN_ALL_IN_TOTAL_LABEL} total (${SUBURBAN_ITEMIZED_LABEL}); larger groups can upgrade to a private van (${VAN_ALL_IN_TOTAL_LABEL} total: ${VAN_ITEMIZED_LABEL}). ${PARR_COMPLETE_TOTAL_DISCLOSURE}`}
           actions={[
             { href: "/red-rocks/shuttle", label: "See Private Ride Options" },
             { href: "/guide", label: "Guides", variant: "secondary" },
@@ -118,9 +125,9 @@ export default function WeekClient({
         <PrimaryCTASection
           kicker="Your Red Rocks Night"
           body="Find the artist and date below. Every Red Rocks ride button now carries the show into the private booking path so the customer does not have to start over."
-          secondaryBody="Private Suburban: $499. Private van upgrade: $699. One group, one vehicle, and the return ride is already part of the plan."
+          secondaryBody={`Private Suburban: ${SUBURBAN_ALL_IN_TOTAL_LABEL} total (${SUBURBAN_ITEMIZED_LABEL}). Private van upgrade: ${VAN_ALL_IN_TOTAL_LABEL} total (${VAN_ITEMIZED_LABEL}). One group, one vehicle, and the return ride is already part of the plan. ${PARR_COMPLETE_TOTAL_DISCLOSURE}`}
           actions={[
-            { href: "/red-rocks/shuttle", label: "Private Suburban — $499" },
+            { href: "/red-rocks/shuttle", label: `Private Suburban — ${SUBURBAN_ALL_IN_TOTAL_LABEL} total` },
             { href: "/venues/red-rocks-amphitheatre", label: "Venue Details", variant: "secondary" },
             { href: "/guide/show-night-strategy/post-show-pickup-plan", label: "Pickup Guide", variant: "secondary" },
             { href: "/guide/logistics/parking-lots", label: "Parking Guide", variant: "secondary" },

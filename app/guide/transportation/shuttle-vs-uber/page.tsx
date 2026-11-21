@@ -24,12 +24,12 @@ const comparisonRows = [
     primaryRisk: "Post-encore pricing, driver availability, and pickup friction can change quickly",
   },
   {
-    option: "Private Suburban — $499",
+    option: "Private Suburban — $518.96 total ($499.00 base + $19.96 Booking fee (4%))",
     strongestUse: "Door-to-door plan for your group with one vehicle waiting through the show",
-    primaryRisk: "Higher upfront cost than a single rideshare trip",
+    primaryRisk: "Higher upfront cost than a single one-way rideshare trip",
   },
   {
-    option: "Private Van — $699",
+    option: "Private Van — $726.96 total ($699.00 base + $27.96 Booking fee (4%))",
     strongestUse: "Larger private groups that want one vehicle and one return plan",
     primaryRisk: "Higher total price, best when the group needs the capacity",
   },

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
+import { SUBURBAN_ALL_IN_TOTAL_LABEL, VAN_ALL_IN_TOTAL_LABEL } from "@/lib/rideCatalog";
 
 export const metadata: Metadata = {
   title: "Page Not Found | Party at Red Rocks",
@@ -58,7 +58,7 @@ export default function NotFound() {
             className="rounded-2xl border border-white/12 bg-white/[0.04] p-4 no-underline transition hover:border-white/30"
           >
             <span className="block text-xs font-black uppercase tracking-[0.14em] text-white">
-              Private Vehicles (${SUBURBAN_2027_USD} / ${VAN_2027_USD}) →
+              Private Vehicles ({SUBURBAN_ALL_IN_TOTAL_LABEL} / {VAN_ALL_IN_TOTAL_LABEL} total) →
             </span>
             <span className="mt-1 block text-xs leading-5 text-white/75">
               Compare Private Suburban and 10-passenger Van round-trip rides.

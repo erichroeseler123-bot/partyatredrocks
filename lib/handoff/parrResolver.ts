@@ -3,8 +3,8 @@ import type { HandoffContext, InitialUiState, ResolverRule } from "./types";
 export const parrBaseState: InitialUiState = {
   headline: "Your Red Rocks ride - already handled.",
   supportLine:
-    "Live availability, flat pricing, and a return plan that is already built around show night.",
-  arrivalConfirmationLine: "Live availability • Flat rate • No waiting",
+    "Live availability, upfront itemized pricing, and a return plan that is already built around show night.",
+  arrivalConfirmationLine: "Live availability • Upfront total • No waiting",
   primaryCtaLabel: "Lock in your ride",
   urgency: "medium",
   resolverVariant: "private-first",
@@ -28,7 +28,7 @@ export const parrResolverRules: ResolverRule[] = [
       patch: {
         headline: "Lock in your Red Rocks ride in seconds.",
         arrivalConfirmationLine:
-          "Live availability • Flat rate • Return handled",
+          "Live availability • Upfront total • Return handled",
         primaryCtaLabel: "Book your ride",
         urgency: "high",
         fitSignal: "event-night",

@@ -8,6 +8,13 @@ import { VENUE_LEDGER_BY_SLUG } from "@/lib/venues/ledgerRegistry";
 import { eventMatchesGenre } from "@/lib/genres/artistGenres";
 import { getDynamicImage } from "@/lib/getDynamicImage";
 import { pageVisuals } from "@/lib/pageVisuals";
+import { PARR_COMPLETE_TOTAL_DISCLOSURE } from "@/lib/pricing";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 export const revalidate = 1800;
@@ -266,11 +273,11 @@ export default async function ScenesLandingPage() {
             Private Suburban Or Van, One Clean Ride Plan
           </h2>
           <p className="mt-3 max-w-4xl text-sm leading-6 text-white/74">
-            Fixed pricing, return ride coverage, and one booking flow for any scene night at Red Rocks.
+            Upfront itemized pricing, return ride coverage, and one booking flow for any scene night at Red Rocks. {PARR_COMPLETE_TOTAL_DISCLOSURE}
           </p>
           <div className="mt-4 flex flex-wrap gap-2 text-[11px] font-black uppercase tracking-[0.16em] text-white/82">
-            <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">$499 Private Suburban</div>
-            <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">$699 Private Van</div>
+            <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">{SUBURBAN_ALL_IN_TOTAL_LABEL} Total Private Suburban ({SUBURBAN_ITEMIZED_LABEL})</div>
+            <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">{VAN_ALL_IN_TOTAL_LABEL} Total Private Van ({VAN_ITEMIZED_LABEL})</div>
             <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">Guaranteed Return Ride</div>
             <div className="rounded-full border border-white/16 bg-white/6 px-4 py-2">Beat Surge Chaos</div>
           </div>

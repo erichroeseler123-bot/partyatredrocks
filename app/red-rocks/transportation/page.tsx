@@ -12,19 +12,25 @@ import PrimaryCTASection from "@/components/PrimaryCTASection";
 import { guideVisuals } from "@/lib/guideVisuals";
 import { curatedImages } from "@/lib/curatedImages";
 import { RED_ROCKS_ENTITIES } from "@/lib/redRocksAuthority";
+import { PARR_COMPLETE_TOTAL_DISCLOSURE } from "@/lib/pricing";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 const DEFAULT_OG_IMAGE = `${SITE}${curatedImages.guideTransportation}`;
+const TRANSPORT_META_DESC = `Find the best way to get to Red Rocks from Denver: compare private Suburbans (${SUBURBAN_ALL_IN_TOTAL_LABEL} total: ${SUBURBAN_ITEMIZED_LABEL}), vans (${VAN_ALL_IN_TOTAL_LABEL} total: ${VAN_ITEMIZED_LABEL}), rideshare surges, and parking lots.`;
 
 export const metadata: Metadata = {
   title: "Best Way to Get to Red Rocks | Transportation Options, Rideshare & Parking",
-  description:
-    "Find the best way to get to Red Rocks from Denver: compare private Suburbans ($499), vans ($699), rideshare surges, and parking lots. Straight answers, clear tradeoffs & live booking.",
+  description: TRANSPORT_META_DESC,
   alternates: { canonical: `${SITE}/red-rocks/transportation` },
   openGraph: {
     title: "Best Way to Get to Red Rocks | Transportation Options, Rideshare & Parking",
-    description:
-      "Find the best way to get to Red Rocks from Denver: compare private Suburbans ($499), vans ($699), rideshare surges, and parking lots. Straight answers, clear tradeoffs & live booking.",
+    description: TRANSPORT_META_DESC,
     url: `${SITE}/red-rocks/transportation`,
     type: "article",
     images: [
@@ -37,8 +43,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Best Way to Get to Red Rocks | Transportation Options, Rideshare & Parking",
-    description:
-      "Find the best way to get to Red Rocks from Denver: compare private Suburbans ($499), vans ($699), rideshare surges, and parking lots. Straight answers, clear tradeoffs & live booking.",
+    description: TRANSPORT_META_DESC,
     images: [DEFAULT_OG_IMAGE],
   },
 };
@@ -118,7 +123,7 @@ export default async function RedRocksTransportationPage({
         <GuideVisualHero
           eyebrow={guideVisuals.transportation.eyebrow}
           title="How To Get To Red Rocks"
-          copy="Red Rocks transportation usually comes down to three choices: drive and park, use rideshare, or book private transportation in advance. Party at Red Rocks currently offers private service only: a $499 Suburban or $699 van, with door-to-door pickup and the same vehicle waiting through the show."
+          copy={`Red Rocks transportation usually comes down to three choices: drive and park, use rideshare, or book private transportation in advance. Party at Red Rocks currently offers private service only: ${SUBURBAN_ALL_IN_TOTAL_LABEL} Suburban total (${SUBURBAN_ITEMIZED_LABEL}) or ${VAN_ALL_IN_TOTAL_LABEL} van total (${VAN_ITEMIZED_LABEL}), with door-to-door pickup and the same vehicle waiting through the show. ${PARR_COMPLETE_TOTAL_DISCLOSURE}`}
           imageSrc={guideVisuals.transportation.imageSrc}
           imageAlt={guideVisuals.transportation.imageAlt}
           actions={
@@ -155,7 +160,7 @@ export default async function RedRocksTransportationPage({
               <span className="inline-block rounded-full bg-emerald-500/20 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-emerald-400">#1 Best Overall</span>
               <h3 className="mt-2 font-bold text-white text-lg">Private Transportation</h3>
               <p className="mt-2 text-xs text-white/70 leading-5">
-                $499 Suburban (up to 6) or $699 Van (up to 10). Door-to-door pickup, Top Circle drop-off, vehicle stays parked on-site all night, and zero post-show surges.
+                {SUBURBAN_ALL_IN_TOTAL_LABEL} Suburban total ({SUBURBAN_ITEMIZED_LABEL}, up to 6) or {VAN_ALL_IN_TOTAL_LABEL} Van total ({VAN_ITEMIZED_LABEL}, up to 10). Door-to-door pickup, Top Circle drop-off, vehicle stays parked on-site all night, and zero post-show surges. {PARR_COMPLETE_TOTAL_DISCLOSURE}
               </p>
               <div className="mt-4">
                 <Link href="/book/red-rocks-amphitheatre/private" className="text-xs font-bold text-emerald-400 underline">

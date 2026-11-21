@@ -19,6 +19,7 @@ import {
 import { getInternalOrderByAnyReference } from '@/lib/orders';
 import { getPickupLocationDetails } from '@/lib/pickupLocations';
 import { PARR_PUBLIC_FACTS } from '@/lib/publicOperatorFacts';
+import { SUBURBAN_ALL_IN_TOTAL_LABEL } from '@/lib/rideCatalog';
 import { getSharedCheckoutStatus } from '@/lib/sharedInventory';
 import { getArtistProfile } from '@/lib/spotify';
 import { getProbableSetlist } from '@/lib/setlists';
@@ -781,7 +782,7 @@ export default async function PublicBookingPage(
                 href={bookingFlowUrl}
                 className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#ffb07c]/28 bg-[#ffb07c]/14 px-5 text-sm font-black uppercase tracking-[0.16em] text-white no-underline transition hover:bg-[#ffb07c]/20"
               >
-                Book Private Ride — from $499
+                Book Private Ride — from {SUBURBAN_ALL_IN_TOTAL_LABEL} total
               </Link>
             ) : null}
           </div>

@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
+import { PARR_COMPLETE_TOTAL_DISCLOSURE } from "@/lib/pricing";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
 
 const SITE = "https://www.partyatredrocks.com";
 
 export const metadata: Metadata = {
   title: "Private Red Rocks Ride vs Daytime Park Shuttle Pilot (2026 Reference)",
   description:
-    `Why daytime park transit pilots (9 AM – 5 PM) do not cover late-night Red Rocks concert exits, and how private group vehicles ($${SUBURBAN_2027_USD} Suburban / $${VAN_2027_USD} Van) handle the full show night.`,
+    `Why daytime park transit pilots (9 AM – 5 PM) do not cover late-night Red Rocks concert exits, and how private group vehicles (${SUBURBAN_ALL_IN_TOTAL_LABEL} Suburban total / ${VAN_ALL_IN_TOTAL_LABEL} Van total, including 4% Booking fee) handle the full show night.`,
   alternates: { canonical: `${SITE}/guide/logistics/shuttle-vs-westracks-2026` },
   openGraph: {
     title: "Concert Transportation vs Daytime Park Pilot (2026 Reference)",
@@ -26,8 +32,8 @@ export default function WestracksComparison() {
         className="mb-8 rounded-2xl border border-[#ffb07c]/35 bg-[#ffb07c]/10 p-5 text-sm leading-6 text-white/90"
       >
         <span className="font-black uppercase tracking-[0.16em] text-[#ffb07c]">2026 Transit Pilot Archive:</span>{" "}
-        This comparison documents the 2026 daytime park shuttle pilot vs. dedicated evening concert transportation. Existing 2026 bookings remain honored at their original rates; current 2027 public private round-trip pricing is{" "}
-        <strong>${SUBURBAN_2027_USD} Private Suburban</strong> (up to 6) and <strong>${VAN_2027_USD} Private Van</strong> (up to 10).
+        This comparison documents the 2026 daytime park shuttle pilot vs. dedicated evening concert transportation. Existing 2026 bookings remain honored at their original rates; current 2027 public private round-trip totals are{" "}
+        <strong>{SUBURBAN_ALL_IN_TOTAL_LABEL} Private Suburban total</strong> ({SUBURBAN_ITEMIZED_LABEL}, up to 6) and <strong>{VAN_ALL_IN_TOTAL_LABEL} Private Van total</strong> ({VAN_ITEMIZED_LABEL}, up to 10).
       </aside>
 
       <h1 className="mb-6 text-4xl font-black uppercase tracking-tight sm:text-5xl">
@@ -74,7 +80,7 @@ export default function WestracksComparison() {
               <td className="p-4 font-bold">2027 Public Pricing</td>
               <td className="p-4 text-muted">Daytime park visitors only</td>
               <td className="p-4 font-bold text-white">
-                ${SUBURBAN_2027_USD} Suburban (up to 6) · ${VAN_2027_USD} Van (up to 10)
+                {SUBURBAN_ALL_IN_TOTAL_LABEL} Suburban total ({SUBURBAN_ITEMIZED_LABEL}, up to 6) · {VAN_ALL_IN_TOTAL_LABEL} Van total ({VAN_ITEMIZED_LABEL}, up to 10)
               </td>
             </tr>
           </tbody>
@@ -84,7 +90,7 @@ export default function WestracksComparison() {
       <div className="rounded-[2.5rem] border border-[#ffb07c]/35 bg-surface-strong p-8 text-center sm:p-10">
         <h2 className="mb-4 text-3xl font-black uppercase">Don&apos;t Get Stranded After the Encore</h2>
         <p className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-          Reserve one private vehicle for your crew—pickup, Upper North Lot tailgating, driver waiting on-site during the show, and a safe direct ride home included for one flat vehicle price.
+          Reserve one private vehicle for your crew—pickup, Upper North Lot tailgating, driver waiting on-site during the show, and a safe direct ride home with upfront itemized pricing. {PARR_COMPLETE_TOTAL_DISCLOSURE}
         </p>
         <Link
           href="/book/red-rocks-amphitheatre/private"

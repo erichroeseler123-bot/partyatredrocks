@@ -739,17 +739,19 @@ export async function saveInternalOrderStateUpdate(input: OrderStateUpdateInput)
       if (input.rezdyBookingReference) {
         const existing = db
           .prepare(
-            `SELECT internalOrderId, paymentJson
+            `SELECT internalOrderId, bookingJson, paymentJson
              FROM orders
              WHERE rezdyBookingReference = ?
              ORDER BY createdAt DESC
              LIMIT 1`
           )
           .get(input.rezdyBookingReference) as
-          | { internalOrderId: string; paymentJson: string | null }
+          | { internalOrderId: string; bookingJson: string | null; paymentJson: string | null }
           | undefined;
 
         if (existing?.internalOrderId) {
+          const booking = parseJson(existing.bookingJson) ?? {};
+          if (input.bookingStatus) booking.status = input.bookingStatus;
           const payment = parseJson(existing.paymentJson) ?? {};
           if (paymentStatus) payment.status = paymentStatus;
           const followUpState = db
@@ -766,6 +768,7 @@ export async function saveInternalOrderStateUpdate(input: OrderStateUpdateInput)
                  operatorPaymentStep = CASE WHEN COALESCE(?, '') = 'paid' THEN 'paid' ELSE operatorPaymentStep END,
                  followUpStatus = COALESCE(?, followUpStatus),
                  lastTouchedAt = ?,
+                 bookingJson = ?,
                  paymentJson = ?
              WHERE internalOrderId = ?`
           ).run(
@@ -774,6 +777,7 @@ export async function saveInternalOrderStateUpdate(input: OrderStateUpdateInput)
             paymentStatus,
             nextFollowUpStatus,
             updatedAt,
+            asJson(booking),
             asJson(payment),
             existing.internalOrderId
           );
@@ -1219,11 +1223,95 @@ function lookupCandidates(order: InternalOrderRow) {
     order.rezdyBookingReference,
     order.sessionKey,
     typeof order.booking?.orderNumber === "string" ? order.booking.orderNumber : null,
+    typeof order.booking?.resellerReference === "string" ? order.booking.resellerReference : null,
+    typeof order.rezdyBookingPayload?.resellerReference === "string"
+      ? order.rezdyBookingPayload.resellerReference
+      : null,
     typeof order.booking?.squareOrderId === "string" ? order.booking.squareOrderId : null,
     typeof order.payment?.squareOrderId === "string" ? order.payment.squareOrderId : null,
     typeof order.payment?.squarePaymentId === "string" ? order.payment.squarePaymentId : null,
     typeof order.payment?.paymentLinkId === "string" ? order.payment.paymentLinkId : null,
   ].filter((value): value is string => Boolean(value && value.trim()));
+}
+
+export async function upsertRezdyNativeOrderMirror(input: {
+  orderNumber: string;
+  resellerReference?: string | null;
+  dccProductCode: "parr-suburban" | "parr-van-10";
+  rezdyProductCode: string;
+  serviceDate: string;
+  canonicalShowId: string;
+  startTimeLocal: string;
+  partySize: number;
+  customer: JsonRecord | null;
+  pickup: JsonRecord | null;
+  totalChargedUsd: number;
+  basePriceUsd: number;
+  bookingFeeUsd: number;
+  rezdyBookingPayload: JsonRecord;
+  source?: "native_checkout" | "opening_rezdy_seed" | "manual_rezdy_sync";
+}): Promise<{ internalOrderId: string; bookingToken: string; created: boolean }> {
+  const existingByOrder = await getInternalOrderByAnyReference(input.orderNumber);
+  if (existingByOrder) {
+    return {
+      internalOrderId: existingByOrder.internalOrderId,
+      bookingToken: existingByOrder.bookingToken || existingByOrder.internalOrderId,
+      created: false,
+    };
+  }
+  if (input.resellerReference) {
+    const existingByRef = await getInternalOrderByAnyReference(input.resellerReference);
+    if (existingByRef) {
+      return {
+        internalOrderId: existingByRef.internalOrderId,
+        bookingToken: existingByRef.bookingToken || existingByRef.internalOrderId,
+        created: false,
+      };
+    }
+  }
+
+  const saved = await saveInternalOrder({
+    rezdyBookingReference: input.orderNumber,
+    productCode: input.dccProductCode,
+    sessionKey: input.serviceDate,
+    customer: input.customer,
+    booking: {
+      status: "confirmed",
+      orderNumber: input.orderNumber,
+      resellerReference: input.resellerReference || null,
+      venueSlug: "red-rocks-amphitheatre",
+      date: input.serviceDate,
+      eventDate: input.serviceDate,
+      showId: input.canonicalShowId,
+      startTimeLocal: input.startTimeLocal,
+      partySize: input.partySize,
+      vehicleQuantity: 1,
+      rezdyProductCode: input.rezdyProductCode,
+      source: input.source || "native_checkout",
+    },
+    payment: {
+      status: "paid",
+      provider: "rezdypay",
+      handoffMode: "native_rezdy",
+      totalDue: input.totalChargedUsd,
+      totalPaid: input.totalChargedUsd,
+      basePriceUsd: input.basePriceUsd,
+      bookingFeeUsd: input.bookingFeeUsd,
+    },
+    pickup: input.pickup,
+    rezdyBookingPayload: {
+      ...input.rezdyBookingPayload,
+      date: input.serviceDate,
+      resellerReference: input.resellerReference || null,
+      rezdyProductCode: input.rezdyProductCode,
+    },
+  });
+
+  return {
+    internalOrderId: saved.internalOrderId,
+    bookingToken: saved.bookingToken,
+    created: true,
+  };
 }
 
 export async function getInternalOrderByAnyReference(

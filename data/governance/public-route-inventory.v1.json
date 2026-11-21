@@ -6,7 +6,7 @@
   "canonicalOrigin": "https://www.partyatredrocks.com",
   "operatingRole": "standalone_merchant_of_record_and_operator_surface",
   "summary": {
-    "totalAppRouteAndPageFiles": 245,
+    "totalAppRouteAndPageFiles": 252,
     "publicPagesCount": 197,
     "publicPagesByCategory": {
       "schedule_and_events": 35,
@@ -23,7 +23,7 @@
     "machineAndHandoffRoutesCount": 7,
     "bookingAndCheckoutApiRoutesCount": 13,
     "publicDataAndSupportApiRoutesCount": 16,
-    "excludedInternalAndAdminRoutesCount": 12,
+    "excludedInternalAndAdminRoutesCount": 19,
     "bookingActionsCount": 18,
     "registeredVenuesCount": 23,
     "vehicleClassesDefinedCount": 4,
@@ -35,16 +35,22 @@
       {
         "slug": "suv",
         "title": "Private Suburban",
-        "priceUsd": 499,
+        "priceUsd": 518.96,
+        "basePriceUsd": 499,
+        "bookingFeeUsd": 19.96,
         "maxGuests": 6,
+        "dailyVehicleCapacity": 6,
         "fleetId": "parr-suburban",
         "publicSelfServe": true
       },
       {
         "slug": "van",
         "title": "Upgrade to Private Van",
-        "priceUsd": 699,
+        "priceUsd": 726.96,
+        "basePriceUsd": 699,
+        "bookingFeeUsd": 27.96,
         "maxGuests": 10,
+        "dailyVehicleCapacity": 3,
         "fleetId": "parr-van-10",
         "publicSelfServe": true
       },
@@ -67,8 +73,8 @@
     ],
     "corridorPricing": {
       "redRocks": {
-        "suburban": "$499 flat round-trip",
-        "van10": "$699 flat round-trip"
+        "suburban": "$518.96 total ($499.00 base + $19.96 Booking fee (4%))",
+        "van10": "$726.96 total ($699.00 base + $27.96 Booking fee (4%))"
       },
       "mishawaka": {
         "privateSuburban": "$599 round-trip"
@@ -158,7 +164,9 @@
       "filePath": "app/book/[venue]/private/[option]/page.tsx",
       "mode": "rezdy_embed_with_direct_fallback",
       "vehicleSlug": "suv",
-      "publicPriceUsd": 499,
+      "publicPriceUsd": 518.96,
+      "basePriceUsd": 499,
+      "bookingFeeUsd": 19.96,
       "maxGuests": 6,
       "rezdyProductCode": "596193",
       "directFallbackUrl": "https://gosnotransportation58.rezdy.com/596193/suburban?iframe=true",
@@ -170,7 +178,9 @@
       "filePath": "app/book/[venue]/private/[option]/page.tsx",
       "mode": "rezdy_embed_with_direct_fallback",
       "vehicleSlug": "van",
-      "publicPriceUsd": 699,
+      "publicPriceUsd": 726.96,
+      "basePriceUsd": 699,
+      "bookingFeeUsd": 27.96,
       "maxGuests": 10,
       "rezdyProductCode": "630812",
       "directFallbackUrl": "https://gosnotransportation58.rezdy.com/630812/van-10-passenger?iframe=true",
@@ -2097,6 +2107,71 @@
         "POST"
       ],
       "reason": "internal_admin_manager_or_cron"
+    },
+    {
+      "routePattern": "/api/internal/rezdy-inventory",
+      "filePath": "app/api/internal/rezdy-inventory/route.ts",
+      "kind": "route",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "reason": "internal_admin_manager_or_cron"
+    },
+    {
+      "routePattern": "/api/internal/rezdy-phase3a-audit",
+      "filePath": "app/api/internal/rezdy-phase3a-audit/route.ts",
+      "kind": "route",
+      "methods": [
+        "GET"
+      ],
+      "reason": "internal_admin_manager_or_cron"
+    },
+    {
+      "routePattern": "/api/internal/rezdy-phase3b-setup",
+      "filePath": "app/api/internal/rezdy-phase3b-setup/route.ts",
+      "kind": "route",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "reason": "internal_admin_manager_or_cron"
+    },
+    {
+      "routePattern": "/api/rezdy/availability",
+      "filePath": "app/api/rezdy/availability/route.ts",
+      "kind": "route",
+      "methods": [
+        "GET"
+      ],
+      "reason": "preview_native_rezdy_checkout_api"
+    },
+    {
+      "routePattern": "/api/rezdy/book",
+      "filePath": "app/api/rezdy/book/route.ts",
+      "kind": "route",
+      "methods": [
+        "POST"
+      ],
+      "reason": "preview_native_rezdy_checkout_api"
+    },
+    {
+      "routePattern": "/api/rezdy/confirmation",
+      "filePath": "app/api/rezdy/confirmation/route.ts",
+      "kind": "route",
+      "methods": [
+        "GET"
+      ],
+      "reason": "preview_native_rezdy_checkout_api"
+    },
+    {
+      "routePattern": "/api/rezdy/quote",
+      "filePath": "app/api/rezdy/quote/route.ts",
+      "kind": "route",
+      "methods": [
+        "POST"
+      ],
+      "reason": "preview_native_rezdy_checkout_api"
     }
   ]
 }

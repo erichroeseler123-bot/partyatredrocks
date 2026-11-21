@@ -1,6 +1,13 @@
 import Link from "next/link";
 import { ArrowRight, CarFront, Clock3, Headphones, ShieldCheck } from "lucide-react";
 import { curatedImages } from "@/lib/curatedImages";
+import { PARR_COMPLETE_TOTAL_DISCLOSURE } from "@/lib/pricing";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
 
 export const metadata = {
   title: "About Party at Red Rocks | Private Colorado Concert Transportation",
@@ -231,7 +238,7 @@ export default function AboutPage() {
             <article className="brand-card rounded-[26px] p-6">
               <h3 className="text-2xl font-black uppercase tracking-[-0.03em] text-white">Private Concert Fleet</h3>
               <p className="mt-3 text-sm leading-6 text-white/70">
-                Party at Red Rocks offers private transportation only: the Private Suburban ($499 for up to 6 passengers) and the Private Van ($699 for up to 10 passengers). All rides are prearranged and subject to live vehicle and schedule availability.
+                Party at Red Rocks offers private transportation only: the Private Suburban ({SUBURBAN_ALL_IN_TOTAL_LABEL} total: {SUBURBAN_ITEMIZED_LABEL} for up to 6 passengers) and the Private Van ({VAN_ALL_IN_TOTAL_LABEL} total: {VAN_ITEMIZED_LABEL} for up to 10 passengers). {PARR_COMPLETE_TOTAL_DISCLOSURE} All rides are prearranged and subject to live vehicle and schedule availability.
               </p>
               <Link href="/book/red-rocks-amphitheatre/private" className="brand-link mt-5 inline-flex items-center text-sm font-bold">
                 View Private Vehicles

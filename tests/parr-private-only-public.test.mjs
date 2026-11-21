@@ -98,7 +98,7 @@ test("shuttles page metadata is private-vehicle-only", () => {
   assert.match(metadataBlock, /Red Rocks Shuttle & Private Transportation from Denver/);
   assert.match(
     metadataBlock,
-    /\$499 private Suburban \(up to 6\) or \$699 private van \(up to 10\)/,
+    /\$\{SUV\.allInTotalFormatted\} total private Suburban \(\$\{SUV\.itemizedSummary\}, up to 6\) or \$\{VAN\.allInTotalFormatted\} total private van \(\$\{VAN\.itemizedSummary\}, up to 10\)/,
   );
   assert.match(metadataBlock, /openGraph/);
   assert.match(metadataBlock, /twitter/);
@@ -252,7 +252,7 @@ test("PARR_PUBLIC_FACTS.trustPoints and single authoritative /llms.txt & /agent.
   );
   const facts = read("lib/publicOperatorFacts.ts");
   const trustBlock = facts.slice(facts.indexOf("trustPoints:"), facts.indexOf("pickups:"));
-  assert.match(trustBlock, /Private Suburban \(\$\$\{SUBURBAN_2027_USD\}\) and 10-passenger Private Van \(\$\$\{VAN_2027_USD\}\) flat round-trip options/);
+  assert.match(trustBlock, /Private Suburban \(\$\{SUV\.allInTotalFormatted\} total: \$\{SUV\.itemizedSummary\}\) and 10-passenger Private Van \(\$\{VAN\.allInTotalFormatted\} total: \$\{VAN\.itemizedSummary\}\) round-trip options/);
   assert.match(trustBlock, /GoSno/);
   assert.doesNotMatch(trustBlock, /Shared/i);
   assert.doesNotMatch(trustBlock, /Sprinter/i);

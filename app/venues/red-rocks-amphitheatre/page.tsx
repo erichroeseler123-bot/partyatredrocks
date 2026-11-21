@@ -9,6 +9,13 @@ import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
 import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
 import { buildBookingHref, type HandoffSearchParams } from "@/lib/parrHandoff";
 import { getVenueMedia, getVenueRelatedCardImage } from "@/data/media";
+import { PARR_COMPLETE_TOTAL_DISCLOSURE } from "@/lib/pricing";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.partyatredrocks.com";
 
@@ -31,7 +38,7 @@ function first(sp: SP, key: string) {
 
 export const metadata = {
   title: "Red Rocks Amphitheatre Venue Guide, Concerts & Private Rides | Party at Red Rocks",
-  description: "Red Rocks Amphitheatre venue guide: 2027 concert schedule, Upper North Lot tailgating, elevation & stair tips, and flat-rate private Suburban ($499) & Van ($699) rides.",
+  description: `Red Rocks Amphitheatre venue guide: 2027 concert schedule, Upper North Lot tailgating, elevation & stair tips, and private Suburban (${SUBURBAN_ALL_IN_TOTAL_LABEL} total: ${SUBURBAN_ITEMIZED_LABEL}) & Van (${VAN_ALL_IN_TOTAL_LABEL} total: ${VAN_ITEMIZED_LABEL}) rides.`,
   alternates: { canonical: "https://www.partyatredrocks.com/venues/red-rocks-amphitheatre" },
 };
 
@@ -60,15 +67,15 @@ export default async function RedRocksPage({ searchParams }: { searchParams: Pro
     {
       href: "/book/red-rocks-amphitheatre/private",
       label: "Transport",
-      title: "Private Suburban — $499",
-      body: "Private round-trip Red Rocks transportation with door-to-door service and your vehicle waiting through the show.",
+      title: `Private Suburban — ${SUBURBAN_ALL_IN_TOTAL_LABEL} total`,
+      body: `${SUBURBAN_ITEMIZED_LABEL}. Private round-trip Red Rocks transportation with door-to-door service and your vehicle waiting through the show.`,
       ...getVenueRelatedCardImage({ intent: "transport", transportKey: "fleet" }),
     },
     {
       href: "/book/red-rocks-amphitheatre/private",
       label: "Transport",
-      title: "Private Van — $699",
-      body: "Private van upgrade for larger groups that want one vehicle and one concert-night plan from pickup through the ride home.",
+      title: `Private Van — ${VAN_ALL_IN_TOTAL_LABEL} total`,
+      body: `${VAN_ITEMIZED_LABEL}. Private van upgrade for larger groups that want one vehicle and one concert-night plan from pickup through the ride home.`,
       ...getVenueRelatedCardImage({ intent: "transport", transportKey: "shuttle" }),
     },
   ];
@@ -134,7 +141,7 @@ export default async function RedRocksPage({ searchParams }: { searchParams: Pro
             <p className="mt-4 max-w-2xl text-[15px] leading-7 text-white/78 sm:text-lg">
               Morrison, CO. Live event schedule, private ride planning, venue logistics, and direct booking for Red Rocks concert nights.
             </p>
-            <p className="mt-3 text-sm text-white/62">Private Suburban $499 · Private van $699 · Door-to-door · Vehicle waits through the show</p>
+            <p className="mt-3 text-sm text-white/62">Private Suburban {SUBURBAN_ALL_IN_TOTAL_LABEL} total ({SUBURBAN_ITEMIZED_LABEL}) · Private van {VAN_ALL_IN_TOTAL_LABEL} total ({VAN_ITEMIZED_LABEL}) · Door-to-door · Vehicle waits through the show</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link href={bookTarget} className="comic-btn comic-btn-primary">Book Private Ride →</Link>
               <Link href="/week/red-rocks" className="comic-btn comic-btn-secondary">This Week at Red Rocks</Link>
@@ -156,7 +163,7 @@ export default async function RedRocksPage({ searchParams }: { searchParams: Pro
         ) : (
           <section className="comic-panel p-6 mb-8">
             <div className="text-[11px] font-black uppercase tracking-[.22em] text-white/60">Private Transportation</div>
-            <p className="mt-3 text-sm text-white/70">Choose the $499 Suburban or $699 private van for a planned round trip to Red Rocks.</p>
+            <p className="mt-3 text-sm text-white/70">Choose the {SUBURBAN_ALL_IN_TOTAL_LABEL} Suburban total ({SUBURBAN_ITEMIZED_LABEL}) or {VAN_ALL_IN_TOTAL_LABEL} private van total ({VAN_ITEMIZED_LABEL}) for a planned round trip to Red Rocks. {PARR_COMPLETE_TOTAL_DISCLOSURE}</p>
             <div className="mt-4 flex flex-wrap gap-3">
               <Link className="comic-btn comic-btn-primary" href={bookTarget}>See Private Ride Options</Link>
               <Link className="comic-btn comic-btn-secondary" href="/week/red-rocks">See events this week</Link>

@@ -4,6 +4,12 @@ import React from "react";
 import Link from "next/link";
 import { UnsplashImg } from "@/components/UnsplashImg";
 import { resolveMediaImage } from "@/lib/media/resolver";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
 
 const privateVanImage = resolveMediaImage({
   entityType: "transport",
@@ -44,19 +50,19 @@ export default function FleetGrid() {
             height={720}
           />
           <span className="absolute top-4 right-4 bg-neon-blue text-black font-black text-[11px] px-3 py-1 rounded-full shadow-[0_0_10px_var(--glowHex)]">
-            $499.00
+            {SUBURBAN_ALL_IN_TOTAL_LABEL} total
           </span>
         </div>
         <div>
           <h3 className="text-2xl font-black italic uppercase tracking-tighter text-white">PRIVATE SUBURBAN</h3>
-          <p className="text-[10px] text-muted font-bold uppercase tracking-widest mt-1 italic">// UP TO 6 PASSENGERS • DOOR-TO-DOOR</p>
+          <p className="text-[10px] text-muted font-bold uppercase tracking-widest mt-1 italic">// UP TO 6 PASSENGERS • {SUBURBAN_ITEMIZED_LABEL}</p>
         </div>
         
         <Link 
           href="/book/red-rocks-amphitheatre/private/suv"
           className="w-full py-4 bg-neon-blue text-black font-black uppercase italic tracking-tighter text-sm rounded-2xl hover:bg-surface/40 transition-all shadow-[0_0_20px_var(--glowHex)] active:scale-95 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
         >
-          BOOK PRIVATE SUBURBAN — $499
+          BOOK PRIVATE SUBURBAN — {SUBURBAN_ALL_IN_TOTAL_LABEL} TOTAL
         </Link>
       </div>
 
@@ -74,19 +80,19 @@ export default function FleetGrid() {
             height={720}
           />
           <span className="absolute top-4 right-4 bg-white text-black font-black text-[11px] px-3 py-1 rounded-full shadow-lg">
-            $699.00
+            {VAN_ALL_IN_TOTAL_LABEL} total
           </span>
         </div>
         <div>
           <h3 className="text-2xl font-black italic uppercase tracking-tighter text-white">PRIVATE 10-PASSENGER VAN</h3>
-          <p className="text-[10px] text-muted font-bold uppercase tracking-widest mt-1 italic">// UP TO 10 PASSENGERS • DOOR-TO-DOOR</p>
+          <p className="text-[10px] text-muted font-bold uppercase tracking-widest mt-1 italic">// UP TO 10 PASSENGERS • {VAN_ITEMIZED_LABEL}</p>
         </div>
         
         <Link 
           href="/book/red-rocks-amphitheatre/private/van"
           className="w-full py-4 bg-white text-black font-black uppercase italic tracking-tighter text-sm rounded-2xl hover:bg-white/80 transition-all shadow-lg active:scale-95 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
         >
-          BOOK PRIVATE VAN — $699
+          BOOK PRIVATE VAN — {VAN_ALL_IN_TOTAL_LABEL} TOTAL
         </Link>
       </div>
 

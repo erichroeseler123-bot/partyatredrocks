@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getEventsCatalog } from "@/lib/events/getCatalog";
-import { SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
 
 const SITE = "https://www.partyatredrocks.com";
 
@@ -10,7 +15,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: "2026 Red Rocks Concerts Archive | Historical Season Lineup",
   description:
-    `Historical 2026 Red Rocks Amphitheatre concert lineup archive. Looking for upcoming shows? View the official 2027 Red Rocks concert calendar and book $${SUBURBAN_2027_USD} Suburban or $${VAN_2027_USD} Van transportation.`,
+    `Historical 2026 Red Rocks Amphitheatre concert lineup archive. Looking for upcoming shows? View the official 2027 Red Rocks concert calendar and book ${SUBURBAN_ALL_IN_TOTAL_LABEL} Suburban total or ${VAN_ALL_IN_TOTAL_LABEL} Van total transportation (including 4% Booking fee).`,
   alternates: { canonical: `${SITE}/2026/red-rocks-concerts` },
   openGraph: {
     title: "2026 Red Rocks Concerts Archive | Party at Red Rocks",
@@ -50,7 +55,7 @@ export default async function RedRocks2026ConcertsPage() {
           <div className="comic-kicker">2026 Season Archive</div>
           <h1 className="comic-title">2026 Red Rocks Concerts (Historical Lineup)</h1>
           <p className="comic-copy">
-            Full historical Red Rocks Amphitheatre lineup for the 2026 season ({events.length} archived concerts). For upcoming 2027 Red Rocks dates and private group vehicles (${SUBURBAN_2027_USD} Suburban / ${VAN_2027_USD} Van), visit our live 2027 concert calendar.
+            Full historical Red Rocks Amphitheatre lineup for the 2026 season ({events.length} archived concerts). For upcoming 2027 Red Rocks dates and private group vehicles ({SUBURBAN_ALL_IN_TOTAL_LABEL} Suburban total: {SUBURBAN_ITEMIZED_LABEL} / {VAN_ALL_IN_TOTAL_LABEL} Van total: {VAN_ITEMIZED_LABEL}), visit our live 2027 concert calendar.
           </p>
           <div style={{ marginTop: 14, display: "flex", gap: 10, flexWrap: "wrap" }}>
             <Link className="comic-btn comic-btn-primary" href="/red-rocks/concerts">

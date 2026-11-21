@@ -5,6 +5,7 @@ import { getSameAs } from "@/lib/socials";
 import { SITE_CONFIG } from "@/app/site-config";
 import { BOOKING_COPY } from "@/lib/bookingCopy";
 import { getDenverDateKey, getUpcomingEventsCatalog } from "@/lib/events/getCatalog";
+import { buildCanonicalRedRocksBookingCatalog } from "@/lib/shows/redRocksBookingCatalog";
 import { getDynamicImage } from "@/lib/getDynamicImage";
 import { curatedImages } from "@/lib/curatedImages";
 import { pageVisuals } from "@/lib/pageVisuals";
@@ -91,6 +92,7 @@ export default async function HomePage() {
     : null;
 
   const upcoming2027Events = upcomingEvents.filter((event) => event.dateKey >= "2027-01-01");
+  const bookingCatalog = buildCanonicalRedRocksBookingCatalog(denverToday);
   const upcoming2027Preview: UpcomingRedRocksPreviewItem[] = upcoming2027Events.map((event) => ({
     id: event.id,
     name: event.name,
@@ -136,7 +138,7 @@ export default async function HomePage() {
     name: "Private Red Rocks Concert Transportation",
     serviceType: "Private concert transportation",
     description:
-      "Private round-trip concert transportation to Red Rocks Amphitheatre in a Private Suburban ($499) or 10-passenger Private Van ($699), including Upper North Lot tailgating gear and an on-site waiting driver.",
+      "Private round-trip concert transportation to Red Rocks Amphitheatre in a Private Suburban ($518.96 total: $499.00 base + $19.96 Booking fee (4%)) or 10-passenger Private Van ($726.96 total: $699.00 base + $27.96 Booking fee (4%)), including Upper North Lot tailgating gear and an on-site waiting driver.",
     provider: { "@id": `${SITE}/#organization` },
     areaServed: SERVICE_AREAS.map((city) => ({
       "@type": "City",
@@ -149,7 +151,8 @@ export default async function HomePage() {
         {
           "@type": "Offer",
           priceCurrency: "USD",
-          price: "499",
+          price: "518.96",
+          description: "$518.96 total ($499.00 base + $19.96 Booking fee (4%)). Your complete total is shown before payment.",
           url: `${SITE}/book/red-rocks-amphitheatre/private/suv`,
           itemOffered: {
             "@type": "Service",
@@ -160,7 +163,8 @@ export default async function HomePage() {
         {
           "@type": "Offer",
           priceCurrency: "USD",
-          price: "699",
+          price: "726.96",
+          description: "$726.96 total ($699.00 base + $27.96 Booking fee (4%)). Your complete total is shown before payment.",
           url: `${SITE}/book/red-rocks-amphitheatre/private/van`,
           itemOffered: {
             "@type": "Service",
@@ -178,7 +182,7 @@ export default async function HomePage() {
     mainEntity: [
       {
         "@type": "Question",
-        name: "What is included in the flat vehicle price?",
+        name: "What is included in your private vehicle booking?",
         acceptedAnswer: {
           "@type": "Answer",
           text: "Every private ride includes Denver-area pickup, an optional beverage/grocery stop, Upper North Lot staging, tailgating time with chairs, cooler, Bluetooth speaker and ice, a dedicated driver and vehicle waiting through the concert, and your return ride home.",
@@ -189,7 +193,7 @@ export default async function HomePage() {
         name: "How much does private Red Rocks transportation cost for 2027?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Published 2027 round-trip pricing is $499 flat for a Private Suburban (up to 6 guests) and $699 flat for a 10-passenger Private Van (up to 10 guests).",
+          text: "Published 2027 all-in totals are $518.96 for a Private Suburban ($499.00 base + $19.96 Booking fee (4%), up to 6 guests) and $726.96 for a 10-passenger Private Van ($699.00 base + $27.96 Booking fee (4%), up to 10 guests). Your complete total is shown before payment.",
         },
       },
       {
@@ -239,6 +243,8 @@ export default async function HomePage() {
         urgency={urgency}
         upcoming2027Preview={upcoming2027Preview}
         verified2027Count={upcoming2027Events.length}
+        bookingCatalog={bookingCatalog}
+        todayDateKey={denverToday}
       />
       <section className="bg-[#070b14] px-4 pb-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-[1380px]">

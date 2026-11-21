@@ -42,7 +42,7 @@ export default function TailgatingGuidePage() {
           imageAlt={guideVisuals.tailgating.imageAlt}
           actions={
             <Link href={PRIVATE_HREF} className="btn-primary">
-              Book Private Ride — $499 / $699
+              Book Private Ride — $518.96 / $726.96 Total
             </Link>
           }
         />
@@ -53,7 +53,7 @@ export default function TailgatingGuidePage() {
             Keep the whole night on one vehicle plan
           </h2>
           <p className="mt-3 max-w-3xl text-sm leading-6 text-white/72">
-            Party at Red Rocks currently offers private transportation only. Choose the $499 Suburban or $699 van when your group wants door-to-door pickup, time to enjoy the pre-show atmosphere, and the return ride handled after the concert.
+            Party at Red Rocks currently offers private transportation only. Choose the $518.96 total Suburban ($499.00 base + $19.96 Booking fee (4%)) or $726.96 total Van ($699.00 base + $27.96 Booking fee (4%)) when your group wants door-to-door pickup, pre-show tailgate time, and the return ride handled after the concert. Your complete total is shown before payment.
           </p>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             <article className="overflow-hidden rounded-[24px] border border-[#ffb07c]/24 bg-[#0b1224]">
@@ -72,7 +72,8 @@ export default function TailgatingGuidePage() {
               </div>
               <div className="p-5">
                 <div className="text-[11px] font-black uppercase tracking-[0.18em] text-[#ffb07c]">Private Suburban</div>
-                <h3 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white">$499 Private Ride</h3>
+                <h3 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white">$518.96 Total Private Ride</h3>
+                <p className="mt-1 text-xs font-semibold text-white/80">$499.00 base + $19.96 Booking fee (4%)</p>
                 <p className="mt-3 text-sm leading-7 text-white/74">One vehicle, no shared passengers, and one plan from pickup through the ride home.</p>
                 <Link href="/book/red-rocks-amphitheatre/private/suv" className="mt-5 inline-flex min-h-11 items-center justify-center rounded-full bg-[#3df3ff] px-5 text-sm font-black uppercase tracking-[0.16em] text-[#07111d]">
                   Book Suburban
@@ -92,7 +93,8 @@ export default function TailgatingGuidePage() {
               </div>
               <div className="p-5">
                 <div className="text-[11px] font-black uppercase tracking-[0.18em] text-[#8fd0ff]">Private Van</div>
-                <h3 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white">$699 Van</h3>
+                <h3 className="mt-3 text-2xl font-black uppercase tracking-[-0.03em] text-white">$726.96 Total Van</h3>
+                <p className="mt-1 text-xs font-semibold text-white/80">$699.00 base + $27.96 Booking fee (4%)</p>
                 <p className="mt-3 text-sm leading-7 text-white/74">A larger private vehicle for groups that need more space while keeping the same single-vehicle night plan.</p>
                 <Link href="/book/red-rocks-amphitheatre/private#van-upgrade" className="mt-5 inline-flex min-h-11 items-center justify-center rounded-full border border-white/14 bg-white/6 px-5 text-sm font-black uppercase tracking-[0.16em] text-white">
                   View Van Option

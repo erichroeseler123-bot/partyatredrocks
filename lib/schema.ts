@@ -1,4 +1,4 @@
-import { SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
+import { PARR_2027_OPTION_B_PRICING_AUTHORITY } from "@/lib/pricing";
 
 const SITE = "https://www.partyatredrocks.com";
 
@@ -40,8 +40,8 @@ export function getEventSchema(event: { artist?: string; date?: string; name?: s
       offers: {
         "@type": "AggregateOffer",
         url: `${SITE}/book/red-rocks-amphitheatre/private`,
-        lowPrice: String(SUBURBAN_2027_USD),
-        highPrice: String(VAN_2027_USD),
+        lowPrice: PARR_2027_OPTION_B_PRICING_AUTHORITY.suv.schemaPriceString,
+        highPrice: PARR_2027_OPTION_B_PRICING_AUTHORITY.van.schemaPriceString,
         priceCurrency: "USD",
       },
     },

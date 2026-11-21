@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SUBURBAN_ALL_IN_TOTAL_LABEL } from "@/lib/rideCatalog";
 
 export const metadata = {
   alternates: { canonical: "https://www.partyatredrocks.com/guide/parking/best-lots" },
@@ -38,7 +39,7 @@ export default function Page() {
 
         <div className="mt-10 flex flex-wrap gap-3">
           <Link href="/book/red-rocks-amphitheatre/private" className="btn-primary">
-            Book Private Ride — from $499 →
+            Book Private Ride — from {SUBURBAN_ALL_IN_TOTAL_LABEL} total →
           </Link>
           <Link
             href="/guide/parking"

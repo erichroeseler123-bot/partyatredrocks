@@ -292,8 +292,8 @@ const RED_ROCKS_ENTITY_SEEDS: RedRocksEntitySeed[] = [
       {
         heading: "Choosing Your Vehicle",
         paragraphs: [
-          "Choose the Private Suburban ($499 flat round-trip) for groups up to 6 guests.",
-          "Upgrade to the 10-passenger Private Van ($699 flat round-trip) when your crew needs extra room.",
+          "Choose the Private Suburban ($518.96 total: $499.00 base + $19.96 Booking fee (4%)) for groups up to 6 guests.",
+          "Upgrade to the 10-passenger Private Van ($726.96 total: $699.00 base + $27.96 Booking fee (4%)) when your crew needs extra room. Your complete total is shown before payment.",
         ],
       },
     ],

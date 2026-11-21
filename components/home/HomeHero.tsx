@@ -27,7 +27,7 @@ export default function HomeHero() {
 
         <p className="mt-6 max-w-3xl text-strong text-lg md:text-2xl font-medium leading-relaxed">
           Private Red Rocks transportation. Pro drivers. Reliable post-show return.
-          <span className="text-strong/80"> Private Suburban — $499, with a private van upgrade available.</span>
+          <span className="text-strong/80"> Private Suburban — $518.96 total ($499.00 base + $19.96 Booking fee (4%)), with a $726.96 total Private Van upgrade available.</span>
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row gap-3">

@@ -2,14 +2,20 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ServedVenueSections from "@/components/venues/ServedVenueSections";
 import { curatedImages } from "@/lib/curatedImages";
-import { SHUTTLE_PRICING, SUBURBAN_2027_USD, VAN_2027_USD } from "@/lib/pricing";
+import { PARR_COMPLETE_TOTAL_DISCLOSURE, SHUTTLE_PRICING } from "@/lib/pricing";
+import {
+  SUBURBAN_ALL_IN_TOTAL_LABEL,
+  SUBURBAN_ITEMIZED_LABEL,
+  VAN_ALL_IN_TOTAL_LABEL,
+  VAN_ITEMIZED_LABEL,
+} from "@/lib/rideCatalog";
 
 const SITE = "https://www.partyatredrocks.com";
 
 export const metadata: Metadata = {
   title: "Colorado Concert Venues & Private Transportation | Red Rocks, Denver & Boulder",
   description:
-    `Private group concert transportation for Red Rocks Amphitheatre ($${SUBURBAN_2027_USD} Suburban / $${VAN_2027_USD} Van), Mission Ballroom, Fiddler's Green, Folsom Field, Fillmore, Ogden, Gothic, and Mishawaka.`,
+    `Private group concert transportation for Red Rocks Amphitheatre (${SUBURBAN_ALL_IN_TOTAL_LABEL} Suburban total / ${VAN_ALL_IN_TOTAL_LABEL} Van total, including 4% Booking fee), Mission Ballroom, Fiddler's Green, Folsom Field, Fillmore, Ogden, Gothic, and Mishawaka.`,
   robots: {
     index: true,
     follow: true,
@@ -20,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Colorado Concert Venues Covered by Party at Red Rocks",
     description:
-      "Explore venue parking, arrival strategy, and flat-rate private group rides across Red Rocks, Denver, Boulder, and Poudre Canyon.",
+      "Explore venue parking, arrival strategy, and pre-arranged private group rides across Red Rocks, Denver, Boulder, and Poudre Canyon.",
     url: `${SITE}/venues`,
     type: "website",
     images: [{ url: `${SITE}${curatedImages.venuesHero}`, alt: "Colorado concert venues covered by Party at Red Rocks" }],
@@ -73,7 +79,7 @@ export default function VenuesPage() {
                 href="/book/red-rocks-amphitheatre/private"
                 className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#ff6b3d] px-7 text-sm font-black uppercase tracking-[0.14em] text-white transition hover:bg-[#ff7f56]"
               >
-                Book Red Rocks Ride (${SUBURBAN_2027_USD} / ${VAN_2027_USD})
+                Book Red Rocks Ride ({SUBURBAN_ALL_IN_TOTAL_LABEL} / {VAN_ALL_IN_TOTAL_LABEL} total)
               </Link>
               <Link
                 href="/red-rocks/concerts"
@@ -90,7 +96,7 @@ export default function VenuesPage() {
             <div className="text-xs font-black uppercase tracking-[0.18em] text-[#ffb07c]">Flagship Corridor</div>
             <h2 className="mt-2 text-2xl font-black uppercase tracking-tight text-white">Red Rocks Amphitheatre</h2>
             <p className="mt-2 text-sm leading-6 text-white/78">
-              Private Suburban (${SUBURBAN_2027_USD}, up to 6) and Private Van (${VAN_2027_USD}, up to 10) flat round-trip—includes Upper North Lot tailgating gear and driver waiting through the show.
+              Private Suburban ({SUBURBAN_ALL_IN_TOTAL_LABEL} total: {SUBURBAN_ITEMIZED_LABEL}, up to 6) and Private Van ({VAN_ALL_IN_TOTAL_LABEL} total: {VAN_ITEMIZED_LABEL}, up to 10)—includes Upper North Lot tailgating gear and driver waiting through the show. {PARR_COMPLETE_TOTAL_DISCLOSURE}
             </p>
             <div className="mt-4 flex flex-wrap gap-3 text-xs font-black uppercase tracking-[0.14em]">
               <Link href="/venues/red-rocks-amphitheatre" className="text-[#ffb07c] underline">

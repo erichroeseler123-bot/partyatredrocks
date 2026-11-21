@@ -28,7 +28,7 @@ export function PrivateOnlyAuthorityPage({ eyebrow, title, intro, points, search
           <p className="text-xs font-black uppercase tracking-[0.2em] text-muted">Current Party at Red Rocks service</p>
           <h2 className="mt-3 text-3xl font-black tracking-tight">Private transportation only</h2>
           <p className="mt-3 max-w-3xl leading-relaxed text-soft">
-            Party at Red Rocks currently offers private transportation: a private Suburban for $499 or a private van for $699. There are no shared shuttle seats. Your group gets one vehicle, one pickup plan, and the vehicle waits through the show for the return ride.
+            Party at Red Rocks currently offers private transportation: a Private Suburban for $518.96 total ($499.00 base + $19.96 Booking fee (4%)) or a Private Van for $726.96 total ($699.00 base + $27.96 Booking fee (4%)). Your complete total is shown before payment. There are no shared shuttle seats. Your group gets one vehicle, one pickup plan, and the vehicle waits through the show for the return ride.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link href={bookingHref} className="btn-primary">Book Private Ride</Link>
