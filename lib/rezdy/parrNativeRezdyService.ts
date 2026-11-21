@@ -696,6 +696,22 @@ export async function createParrRezdyBooking(
       };
     }
 
+    // Revalidate the client-selected supplier session before a Production charge.
+    // A stale or altered browser cannot substitute another date, product or rate.
+    if (process.env.VERCEL_ENV === "production") {
+      const data = await callRezdyJson(
+        `/availability?productCode=${cfg.productCode}&startTimeLocal=${encodeURIComponent(dateKey + " 00:00:00")}&endTimeLocal=${encodeURIComponent(dateKey + " 23:59:59")}&limit=100`,
+        { fetchImpl: deps?.fetchImpl }
+      );
+      const sessions = Array.isArray(data.sessions) ? data.sessions as Array<Record<string, unknown>> : [];
+      const selected = sessions.find((s) => String(s.id) === input.sessionId && s.startTimeLocal === normalizedStart);
+      const options = Array.isArray(selected?.priceOptions) ? selected.priceOptions as Array<Record<string, unknown>> : [];
+      if (!selected || Number(selected.seatsAvailable) < 1 || !options.some((o) => o.label === input.optionLabel && Math.abs(Number(o.price) - cfg.basePriceUsd) < 0.005)) {
+        return { ok: false as const, httpStatus: 409, code: "SESSION_CHANGED",
+          message: "Availability has changed. Please select your concert date again before paying." };
+      }
+    }
+
     // 2. Atomic Vehicle Inventory Hold Gate (Sections E, G, H):
     // Enforces 6 Suburbans / 3 Vans max, blocks sold-out & reconciliation-blocked pools,
     // prevents stale browsers from bypassing sold-out UI, and reuses same-idempotencyKey holds!

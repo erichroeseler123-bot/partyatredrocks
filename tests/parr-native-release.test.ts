@@ -21,6 +21,10 @@ test("Production leaves unpaid supplier orders blocked and requests customer not
   let posted = 0;
   const fetchImpl: FetchLike = async (input, init) => {
     const url = new URL(String(input));
+    if (url.pathname.endsWith("/availability")) return Response.json({ sessions: [{
+      id: 123456, startTimeLocal: "2027-05-13 16:30:00", seatsAvailable: 6,
+      priceOptions: [{ label: "Group of 1", price: 499 }],
+    }] });
     if (url.pathname.endsWith("/bookings/quote")) return Response.json({ booking: {
       totalAmount: 518.96, totalDue: 518.96, items: [{ amount: 499, totalItemTax: 19.96 }],
     } });
@@ -32,11 +36,16 @@ test("Production leaves unpaid supplier orders blocked and requests customer not
     }
     return Response.json({ bookings: [] });
   };
-  const result = await createParrRezdyBooking({
-    vehicleSlug: "suv", sessionId: "123456", startTimeLocal: "2027-05-13 16:30:00", optionLabel: "Group of 1",
+  const payload = {
+    vehicleSlug: "suv" as const, sessionId: "123456", startTimeLocal: "2027-05-13 16:30:00", optionLabel: "Group of 1",
     partySize: 2, firstName: "Test", lastName: "Rider", email: "test@example.com", phone: "3035550100",
     pickupAddress: "Test pickup, Denver", cardToken: "tok_test_release", idempotencyKey: "release-unpaid-test-1",
-  }, { fetchImpl, inventoryDeps: { store, skipOpeningRezdyFetch: true } });
+  };
+  const stale = await createParrRezdyBooking({ ...payload, sessionId: "999999" }, { fetchImpl, inventoryDeps: { store, skipOpeningRezdyFetch: true } });
+  assert.equal(stale.ok, false);
+  assert.equal(stale.httpStatus, 409);
+  assert.equal(posted, 0);
+  const result = await createParrRezdyBooking(payload, { fetchImpl, inventoryDeps: { store, skipOpeningRezdyFetch: true } });
   assert.equal(posted, 1);
   assert.equal(result.ok, false);
   assert.equal(result.httpStatus, 503);

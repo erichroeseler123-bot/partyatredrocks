@@ -131,6 +131,7 @@ export function ParrNativeRezdyCheckout({
   // Stable idempotency key per selected date + vehicle so retries never double-charge
   const idempotencyKeyRef = useRef<string>(createClientIdempotencyKey());
   const inFlightLockRef = useRef<boolean>(false);
+  const availabilityRequestRef = useRef(0);
   const cardMountRef = useRef<HTMLDivElement | null>(null);
   const stripeRef = useRef<StripeInstance | null>(null);
   const cardElementRef = useRef<StripeCardElement | null>(null);
@@ -142,6 +143,7 @@ export function ParrNativeRezdyCheckout({
 
   const loadAvailabilityAndQuote = useCallback(
     async (dateKey: string) => {
+      const requestId = ++availabilityRequestRef.current;
       if (!/^\d{4}-\d{2}-\d{2}$/.test(dateKey)) {
         setAvailState("idle");
         setSession(null);
@@ -169,6 +171,7 @@ export function ParrNativeRezdyCheckout({
           { cache: "no-store" }
         );
         const data = await res.json();
+        if (requestId !== availabilityRequestRef.current) return;
         if (!res.ok || !data.ok) {
           throw new Error(data.error || "Unable to check availability.");
         }
@@ -191,6 +194,7 @@ export function ParrNativeRezdyCheckout({
           }),
         });
         const qData = await qRes.json();
+        if (requestId !== availabilityRequestRef.current) return;
         if (!qRes.ok || !qData.ok) {
           throw new Error(qData.message || qData.error || "Unable to verify vehicle quote.");
         }
@@ -205,6 +209,7 @@ export function ParrNativeRezdyCheckout({
         });
         setAvailState("available");
       } catch (err) {
+        if (requestId !== availabilityRequestRef.current) return;
         setAvailState("error");
         setAvailError(err instanceof Error ? err.message : "Could not check vehicle availability.");
       }
@@ -274,7 +279,7 @@ export function ParrNativeRezdyCheckout({
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (inFlightLockRef.current || submitStatus === "submitting") return;
-    if (!session || !quote?.quoteParityPassed) return;
+    if (!session || !quote?.quoteParityPassed || session.startTimeLocal.slice(0, 10) !== selectedDate) return;
 
     if (!stripeRef.current || !cardElementRef.current) {
       setSubmitError(
@@ -646,7 +651,7 @@ export function ParrNativeRezdyCheckout({
 
             <button
               type="submit"
-              disabled={!rezdyPublishableKey || submitStatus === "submitting"}
+              disabled={!rezdyPublishableKey || submitStatus === "submitting" || session?.startTimeLocal.slice(0, 10) !== selectedDate}
               className="w-full rounded-full bg-[#ff6b3d] px-6 py-3.5 text-sm font-black uppercase tracking-[0.14em] text-white shadow-lg transition hover:bg-[#ff7f56] disabled:cursor-not-allowed disabled:opacity-50"
             >
               {submitStatus === "submitting"
