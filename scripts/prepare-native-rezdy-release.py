@@ -86,6 +86,8 @@ def main():
             occupied[order["startTimeLocal"][:10]] += order["quantity"]
         current = {session["startTimeLocal"][:10]: session for session in sessions(code)}
         if args.apply:
+            if details[code].get("charter") or details[code].get("productType") != "TRANSFER":
+                raise RuntimeError("Set the new API product type to Transfer in Rezdy first; Private Tour closes the entire date after one booking.")
             # One date contains several vehicles. Charter=true would close the entire
             # date after its FIRST booking, regardless of the remaining vehicle count.
             call("products/" + code, {"name": f"Private Red Rocks {vehicle} — API",
@@ -99,6 +101,9 @@ def main():
                     "seats": capacity, "seatsAvailable": remaining}, "POST")
                 created.append({"productCode": code, "date": date, "available": remaining})
                 (EVIDENCE / "parr-created-production-sessions.json").write_text(json.dumps(created, indent=2))
+            if "2027-11-30" in current:
+                path = "availability/product/" + code + "/startTimeLocal/" + urllib.parse.quote(current["2027-11-30"]["startTimeLocal"], safe="")
+                call(path, {"seatsAvailable": 0}, "PUT")
         if args.retire_legacy:
             legacy_sessions = sessions(legacy, "2026-11-21 00:00:00", "2030-12-31 23:59:59") if details[legacy]["bookingMode"] == "INVENTORY" else []
             legacy_snapshot = EVIDENCE / ("parr-legacy-sessions-before-" + legacy + ".json")

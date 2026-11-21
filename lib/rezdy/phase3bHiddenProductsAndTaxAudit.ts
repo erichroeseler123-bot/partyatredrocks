@@ -137,7 +137,7 @@ function buildHiddenProductSpec(kind: "suburban" | "van", existingPriceOptionId?
     internalCode: isSuburban
       ? PARR_2027_HIDDEN_SUBURBAN_INTERNAL_CODE
       : PARR_2027_HIDDEN_VAN_INTERNAL_CODE,
-    productType: "PRIVATE_TOUR",
+    productType: "TRANSFER",
     bookingMode: "INVENTORY",
     confirmMode: "AUTOCONFIRM",
     // Each unit is a private vehicle; the date pool supports several independent vehicle bookings.
