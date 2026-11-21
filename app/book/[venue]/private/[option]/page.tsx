@@ -371,6 +371,7 @@ export default async function PrivateOptionPage({
             {rideOption.slug === "suv" || rideOption.slug === "van" ? (
               isNativeCheckout && nativeCfg ? (
                 <ParrNativeRezdyCheckout
+                  allowClassicFallback={process.env.VERCEL_ENV !== "production"}
                   vehicleSlug={rideOption.slug}
                   shortVehicleLabel={nativeCfg.shortVehicleLabel}
                   basePriceUsd={nativeCfg.basePriceUsd}

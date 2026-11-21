@@ -1181,8 +1181,12 @@ export async function fetchUpstreamRezdyOrdersForPool(
   },
   deps?: { fetchImpl?: FetchLike }
 ): Promise<UpstreamRezdyOrderSnapshot[]> {
-  const minTour = `${input.dateKey} 00:00:00`;
-  const maxTour = `${input.dateKey} 23:59:59`;
+  // Rezdy filters use UTC ISO timestamps. A broad window includes the entire Denver
+  // service day across DST; parseRezdyOrderSnapshotsForDate enforces the exact local date.
+  const minTour = `${input.dateKey}T00:00:00Z`;
+  const nextDay = new Date(`${input.dateKey}T00:00:00Z`);
+  nextDay.setUTCDate(nextDay.getUTCDate() + 1);
+  const maxTour = `${nextDay.toISOString().slice(0, 10)}T12:00:00Z`;
   const productCodes = Array.from(
     new Set([input.rezdyProductCode, ...(input.additionalProductCodes ?? [])])
   );
@@ -1196,7 +1200,7 @@ export async function fetchUpstreamRezdyOrdersForPool(
     while (pagesFetched < maxPages) {
       const offsetQuery = offset > 0 ? `&offset=${offset}` : "";
       const json = await fetchRezdyJsonReadOnly(
-        `/bookings?productCode=${encodeURIComponent(code)}&minTourStartDate=${encodeURIComponent(minTour)}&maxTourStartDate=${encodeURIComponent(maxTour)}&limit=${pageLimit}${offsetQuery}`,
+        `/bookings?productCode=${encodeURIComponent(code)}&minTourStartTime=${encodeURIComponent(minTour)}&maxTourStartTime=${encodeURIComponent(maxTour)}&minDateCreated=1970-01-01T00%3A00%3A00Z&limit=${pageLimit}${offsetQuery}`,
         deps?.fetchImpl
       );
       const rawBookings = Array.isArray(json.bookings)
@@ -1518,7 +1522,9 @@ export async function getPublicVehicleAvailability(
   }
 
   const seeded = await ensureOpeningInventorySeeded(input, deps);
-  const summary = computePoolSummary(seeded, nowMs);
+  const summary = !deps?.skipOpeningRezdyFetch
+    ? (await reconcilePoolWithRezdy(input, deps)).poolSummary
+    : computePoolSummary(seeded, nowMs);
 
   return {
     canonicalServiceDate: summary.canonicalServiceDate,
@@ -1570,6 +1576,10 @@ export async function acquireOrReuseCheckoutHold(
   const ttlMs = deps?.holdTtlMs ?? DEFAULT_CHECKOUT_HOLD_TTL_MS;
   const resellerReference = buildInventoryResellerReference(input.idempotencyKey);
   const cfg = PARR_2027_OPTION_B_PRICING_AUTHORITY[input.vehicleSlug];
+
+  if (!deps?.skipOpeningRezdyFetch) {
+    await reconcilePoolWithRezdy(input, deps);
+  }
 
   const identity = resolveCanonicalServiceShowIdentity({
     dateKey: input.dateKey,

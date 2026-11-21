@@ -7,7 +7,7 @@ import {
 } from "@/lib/inventory/parrVehicleInventory";
 import {
   getParrRezdyAvailabilityForDate,
-  isPreviewOrDevEnvironment,
+  isParrNativeApiEnabled,
   type ParrNativeVehicleSlug,
 } from "@/lib/rezdy/parrNativeRezdyService";
 
@@ -20,7 +20,7 @@ const HEADERS = {
 };
 
 export async function GET(request: Request) {
-  if (!isPreviewOrDevEnvironment()) {
+  if (!isParrNativeApiEnabled()) {
     return NextResponse.json({ ok: false, error: "Not Found" }, { status: 404, headers: HEADERS });
   }
   const url = new URL(request.url);

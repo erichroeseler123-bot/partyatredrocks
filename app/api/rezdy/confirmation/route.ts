@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { MissingParrSecretError } from "@/lib/inventory/parrVehicleInventory";
 import {
   getParrRezdyBookingConfirmation,
-  isPreviewOrDevEnvironment,
+  isParrNativeApiEnabled,
 } from "@/lib/rezdy/parrNativeRezdyService";
 
 export const runtime = "nodejs";
@@ -14,7 +14,7 @@ const HEADERS = {
 };
 
 export async function GET(request: Request) {
-  if (!isPreviewOrDevEnvironment()) {
+  if (!isParrNativeApiEnabled()) {
     return NextResponse.json({ ok: false, error: "Not Found" }, { status: 404, headers: HEADERS });
   }
   const url = new URL(request.url);

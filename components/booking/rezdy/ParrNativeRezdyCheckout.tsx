@@ -18,6 +18,7 @@ type Props = {
   initialArtist?: string | null;
   initialPartySize?: number | null;
   rezdyPublishableKey: string | null;
+  allowClassicFallback?: boolean;
   fallbackEmbedProps: {
     page: string;
     surface: string;
@@ -97,6 +98,7 @@ export function ParrNativeRezdyCheckout({
   initialArtist,
   initialPartySize,
   rezdyPublishableKey,
+  allowClassicFallback = true,
   fallbackEmbedProps,
 }: Props) {
   const [useFallbackWidget, setUseFallbackWidget] = useState(false);
@@ -251,7 +253,7 @@ export function ParrNativeRezdyCheckout({
     };
   }, [rezdyPublishableKey, stripeLoaded, availState, quote?.quoteParityPassed]);
 
-  if (useFallbackWidget) {
+  if (useFallbackWidget && allowClassicFallback) {
     return (
       <div>
         <div className="mb-4 flex items-center justify-between rounded-2xl border border-white/14 bg-white/5 px-4 py-3 text-xs text-white/80">
@@ -382,8 +384,8 @@ export function ParrNativeRezdyCheckout({
         <h3 className="mt-2 text-2xl font-black sm:text-3xl">{confirmation.productName}</h3>
         <dl className="mt-5 grid gap-3 text-sm sm:grid-cols-2">
           <div className="rounded-xl border border-white/12 bg-black/25 p-3">
-            <dt className="text-xs uppercase tracking-wider text-white/60">Departure Session</dt>
-            <dd className="mt-1 font-bold">{confirmation.startTimeLocal}</dd>
+            <dt className="text-xs uppercase tracking-wider text-white/60">Service Date</dt>
+            <dd className="mt-1 font-bold">{confirmation.startTimeLocal.slice(0, 10)}</dd>
           </div>
           <div className="rounded-xl border border-white/12 bg-black/25 p-3">
             <dt className="text-xs uppercase tracking-wider text-white/60">Vehicle &amp; Party Size</dt>
@@ -418,7 +420,7 @@ export function ParrNativeRezdyCheckout({
       <div className="flex flex-wrap items-start justify-between gap-3 border-b border-white/10 pb-4">
         <div>
           <div className="text-[11px] font-black uppercase tracking-[0.2em] text-[#ffb07c]">
-            Preview Native Checkout · 1 Dedicated Vehicle
+            Reserve Your Private Ride · 1 Dedicated Vehicle
           </div>
           <h3 className="mt-1 text-2xl font-black text-white sm:text-3xl">
             ${activeTotal.toFixed(2)} Total — {shortVehicleLabel}
@@ -427,14 +429,14 @@ export function ParrNativeRezdyCheckout({
             Includes ${activeBase.toFixed(2)} vehicle rate + ${activeFee.toFixed(2)} Booking fee (4%)
           </p>
         </div>
-        <button
+        {allowClassicFallback ? <button
           type="button"
           data-testid="switch-to-classic-widget-btn"
           onClick={() => setUseFallbackWidget(true)}
           className="rounded-full border border-white/20 bg-white/8 px-4 py-2 text-xs font-bold text-white/85 transition hover:bg-white/15"
         >
           Use Classic Rezdy Widget Fallback
-        </button>
+        </button> : null}
       </div>
 
       {/* Upfront itemized breakdown visible immediately before selecting a date or entering payment */}
@@ -515,13 +517,13 @@ export function ParrNativeRezdyCheckout({
         {availState === "error" && availError ? (
           <div className="rounded-xl border border-rose-400/35 bg-rose-500/12 p-4 text-sm text-rose-100">
             {availError}{" "}
-            <button
+            {allowClassicFallback ? <button
               type="button"
               onClick={() => setUseFallbackWidget(true)}
               className="font-bold underline"
             >
               Open classic Rezdy widget
-            </button>
+            </button> : <span>Please try again shortly or contact us for help.</span>}
           </div>
         ) : null}
 
@@ -622,9 +624,7 @@ export function ParrNativeRezdyCheckout({
                 data-testid="missing-stripe-pk-notice"
                 className="rounded-xl border border-amber-400/35 bg-amber-500/12 p-4 text-xs leading-5 text-amber-100"
               >
-                <strong>RezdyPay Publishable Key Pending in Preview:</strong> Add{" "}
-                <code>REZDY_STRIPE_PUBLISHABLE_KEY</code> (<code>pk_...</code>) to Vercel Preview to mount the live
-                RezdyPay card input, or use the classic Rezdy widget fallback above.
+                Secure payment is temporarily unavailable. Please try again shortly or contact us for help.
               </div>
             ) : (
               <div>

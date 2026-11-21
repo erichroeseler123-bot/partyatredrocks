@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Script from "next/script";
 import { PhoneCall, ChevronLeft } from "lucide-react";
 import BookingOrderLookup from "@/components/booking/BookingOrderLookup";
 import { PARR_PUBLIC_FACTS } from "@/lib/publicOperatorFacts";
@@ -57,20 +56,13 @@ export default function BookingPage() {
             </p>
           </div>
 
-          <div className="relative min-h-[1000px] bg-white p-2">
-            <Script
-              src="https://gosnotransportation58.rezdy.com/pluginJs"
-              strategy="afterInteractive"
-            />
-            <iframe
-              seamless
-              width="100%"
-              height="1000px"
-              frameBorder="0"
-              className="rezdy"
-              title="Party at Red Rocks Booking"
-              src="https://gosnotransportation58.rezdy.com/catalog/541037/party-at-red-rocks?iframe=true"
-            />
+          <div className="grid gap-4 p-6 sm:grid-cols-2 sm:p-8">
+            <Link href="/book/red-rocks-amphitheatre/private/suv" className="rounded-2xl bg-[#ff6b3d] px-5 py-5 text-center font-bold text-white">
+              Book a Private Suburban — {SUBURBAN_ALL_IN_TOTAL_LABEL} total
+            </Link>
+            <Link href="/book/red-rocks-amphitheatre/private/van" className="rounded-2xl bg-[#ff6b3d] px-5 py-5 text-center font-bold text-white">
+              Book a Private Van — {VAN_ALL_IN_TOTAL_LABEL} total
+            </Link>
           </div>
         </div>
       </main>

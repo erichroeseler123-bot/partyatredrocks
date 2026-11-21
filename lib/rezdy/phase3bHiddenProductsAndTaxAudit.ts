@@ -7,6 +7,8 @@ const REZDY_V1_BASE = "https://api.rezdy.com/v1";
  * Phase 3B setup is strictly forbidden from mutating any existing product.
  */
 export const FORBIDDEN_LIVE_PRODUCT_CODES = new Set([
+  "P94HN4", // Promoted to Production: never run the old test-session reset against it.
+  "PU8R6Y", // Promoted to Production: never run the old test-session reset against it.
   "P0U1MY", // 596193 Live Suburban
   "PJM9GD", // 630812 Live 10-Passenger Van
   "PP6ERS", // Live 14-Passenger Sprinter
@@ -138,7 +140,8 @@ function buildHiddenProductSpec(kind: "suburban" | "van", existingPriceOptionId?
     productType: "PRIVATE_TOUR",
     bookingMode: "INVENTORY",
     confirmMode: "AUTOCONFIRM",
-    charter: true,
+    // Each unit is a private vehicle; the date pool supports several independent vehicle bookings.
+    charter: false,
     currency: "USD",
     advertisedPrice: price,
     unitLabel: "Vehicle",

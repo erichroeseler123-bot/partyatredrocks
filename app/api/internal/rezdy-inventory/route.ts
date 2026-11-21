@@ -16,7 +16,7 @@ import {
   runParr2027SessionAndReconciliationAudit,
   runPrivateVercelBlobStorageProof,
 } from "@/lib/rezdy/parr2027BaselineAudit";
-import { isPreviewOrDevEnvironment, type ParrNativeVehicleSlug } from "@/lib/rezdy/parrNativeRezdyService";
+import { isParrNativeApiEnabled, type ParrNativeVehicleSlug } from "@/lib/rezdy/parrNativeRezdyService";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -31,7 +31,7 @@ function isAuthorized(req: NextRequest): boolean {
 }
 
 export async function GET(request: NextRequest) {
-  if (!isPreviewOrDevEnvironment()) {
+  if (!isParrNativeApiEnabled()) {
     return NextResponse.json({ ok: false, error: "Not Found" }, { status: 404, headers: HEADERS });
   }
   try {
@@ -80,7 +80,7 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  if (!isPreviewOrDevEnvironment()) {
+  if (!isParrNativeApiEnabled()) {
     return NextResponse.json({ ok: false, error: "Not Found" }, { status: 404, headers: HEADERS });
   }
   try {

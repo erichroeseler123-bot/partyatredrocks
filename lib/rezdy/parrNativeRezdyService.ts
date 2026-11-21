@@ -14,7 +14,6 @@ import {
   type InventoryRuntimeDeps,
 } from "@/lib/inventory/parrVehicleInventory";
 import { PARR_2027_OPTION_B_PRICING_AUTHORITY } from "@/lib/pricing";
-import { FORBIDDEN_LIVE_PRODUCT_CODES } from "./phase3bHiddenProductsAndTaxAudit";
 
 const REZDY_V1_BASE = "https://api.rezdy.com/v1";
 
@@ -82,10 +81,19 @@ export function isPreviewOrDevEnvironment(): boolean {
 }
 
 export function isParrNativeRezdyCheckoutEnabled(opts?: { previewQueryFlag?: string | null }): boolean {
+  if (process.env.VERCEL_ENV === "production") {
+    return process.env.PARR_NATIVE_REZDY_CHECKOUT_ENABLED === "true";
+  }
   if (!isPreviewOrDevEnvironment()) return false;
   if (process.env.PARR_NATIVE_REZDY_CHECKOUT_ENABLED === "true") return true;
   if (opts?.previewQueryFlag === "native_preview") return true;
   return false;
+}
+
+/** Production activation is server-controlled; a public query string cannot enable it. */
+export function isParrNativeApiEnabled(): boolean {
+  return isPreviewOrDevEnvironment() ||
+    (process.env.VERCEL_ENV === "production" && isParrNativeRezdyCheckoutEnabled());
 }
 
 export function getSafeRezdyStripePublishableKey(): string | null {
@@ -114,8 +122,8 @@ function getRezdyApiKey(): string {
 
 function assertAllowedTestProductCode(productCode: string): void {
   const upper = productCode.trim().toUpperCase();
-  if (FORBIDDEN_LIVE_PRODUCT_CODES.has(upper)) {
-    throw new Error(`SAFETY_VIOLATION: Live product ${upper} is blocked during Preview native checkout testing.`);
+  if (upper !== "P94HN4" && upper !== "PU8R6Y") {
+    throw new Error("Booking product is outside the approved PARR API product list.");
   }
 }
 
@@ -126,6 +134,14 @@ export function buildParrResellerReference(idempotencyKey: string): string {
   }
   const digest = crypto.createHash("sha256").update(`parr-rezdy-v1:${clean}`, "utf8").digest();
   return `PARR-${digest.subarray(0, 16).toString("base64url")}`;
+}
+
+export function isFullyPaidRezdyConfirmation(booking: Record<string, unknown>, expectedTotal: number): boolean {
+  return booking.status === "CONFIRMED" && Boolean(booking.orderNumber) &&
+    Number.isFinite(Number(booking.totalPaid)) && Math.abs(Number(booking.totalPaid) - expectedTotal) < 0.01 &&
+    (booking.totalAmount == null || Math.abs(Number(booking.totalAmount) - expectedTotal) < 0.01) &&
+    (booking.totalDue == null || Number(booking.totalDue) <= 0.01) &&
+    (booking.totalCurrency == null || booking.totalCurrency === "USD");
 }
 
 function getConfirmationHmacSecret(): string {
@@ -549,6 +565,9 @@ async function recoverExistingBookingByResellerReference(
   if (found.status !== "CONFIRMED") {
     throw new Error(`Recovered RezdyPay booking is not CONFIRMED (status=${String(found.status)}).`);
   }
+  if (!isFullyPaidRezdyConfirmation(found, expected.expectedPriceUsd)) {
+    throw new Error("Recovered booking payment is not fully reconciled; operator review required.");
+  }
   if (found.totalAmount !== undefined) {
     const actualTotal = Number(found.totalAmount);
     if (Number.isFinite(actualTotal) && Math.abs(actualTotal - expected.expectedPriceUsd) > 0.02) {
@@ -765,11 +784,11 @@ export async function createParrRezdyBooking(
       };
     }
 
-    // 5. Submit server-side RezdyPay booking (sendNotifications: false during Preview testing)
+    // Rezdy sends the customer's confirmation for real Production bookings only.
     const partyFieldLabel = `Party Size (1-${cfg.maxPartySize} Guests)`;
     const bookingPayload = {
       resellerReference,
-      sendNotifications: false,
+      sendNotifications: process.env.VERCEL_ENV === "production",
       customer: customerRecord,
       items: [
         {
@@ -804,6 +823,16 @@ export async function createParrRezdyBooking(
         fetchImpl: deps?.fetchImpl,
       });
       const booking = (createdRes.booking ?? createdRes) as Record<string, unknown>;
+      if (booking.orderNumber && !isFullyPaidRezdyConfirmation(booking, cfg.expectedTotalChargedUsd)) {
+        await blockAmbiguousInFlightHold({
+          dateKey, vehicleSlug: input.vehicleSlug, internalHoldId, resellerReference,
+          errorDetail: "Rezdy returned an order without a fully reconciled payment.",
+        }, invDeps);
+        return {
+          ok: false as const, httpStatus: 503, code: "BOOKING_PENDING_RECONCILIATION",
+          message: "Your reservation is being verified. Please do not pay again; contact us with your reservation details.",
+        };
+      }
       if (!booking.orderNumber || booking.status !== "CONFIRMED") {
         await releaseHoldAfterFailedAttempt(
           {
@@ -924,7 +953,7 @@ export async function createParrRezdyBooking(
       const rawErrMsg = upstreamErr instanceof Error ? upstreamErr.message : String(upstreamErr);
       const errMsg = rawErrMsg.toLowerCase();
       const isDefinitiveCardDecline =
-        errMsg.includes("declin") || errMsg.includes("insufficient") || errMsg.includes("card");
+        errMsg.includes("declin") || errMsg.includes("insufficient") || errMsg.includes("expired card") || errMsg.includes("invalid card");
 
       if (recoveryLookupFailed && !isDefinitiveCardDecline) {
         // Upstream state is genuinely unknown; block the unit pending reconciliation so it cannot be resold!

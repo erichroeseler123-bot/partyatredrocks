@@ -19,7 +19,7 @@ function jsonRes(body: unknown, status = 200): Response {
   });
 }
 
-test("1. Feature flag & Stripe key safety: never enabled on Production, rejects secret keys, accepts pk_ keys", () => {
+test("1. Feature flag & Stripe key safety: explicitly enabled on Production, rejects secret keys, accepts pk_ keys", () => {
   const prevEnv = process.env.VERCEL_ENV;
   const prevFlag = process.env.PARR_NATIVE_REZDY_CHECKOUT_ENABLED;
   const prevPk = process.env.REZDY_STRIPE_PUBLISHABLE_KEY;
@@ -28,10 +28,13 @@ test("1. Feature flag & Stripe key safety: never enabled on Production, rejects 
     process.env.PARR_NATIVE_REZDY_CHECKOUT_ENABLED = "true";
     assert.equal(
       isParrNativeRezdyCheckoutEnabled({ previewQueryFlag: "native_preview" }),
-      false,
-      "Must NEVER enable native checkout on Production during Phase 3"
+      true,
+      "Release flag explicitly enables the production checkout"
     );
 
+    process.env.PARR_NATIVE_REZDY_CHECKOUT_ENABLED = "false";
+    assert.equal(isParrNativeRezdyCheckoutEnabled({ previewQueryFlag: "native_preview" }), false,
+      "A query flag cannot enable Production checkout");
     process.env.VERCEL_ENV = "preview";
     process.env.PARR_NATIVE_REZDY_CHECKOUT_ENABLED = "false";
     assert.equal(isParrNativeRezdyCheckoutEnabled(), false, "Off by default without flag");

@@ -978,6 +978,7 @@ test("Section J #13: stale browser submitting after sellout is rejected server-s
   );
 
   // Verify public `/api/rezdy/availability` response contains ZERO customer PII and ZERO fake "Only 1 left" scarcity
+  t.mock.method(globalThis, "fetch", mock.fetchImpl);
   const pubRes = await getPublicAvailabilityRoute(
     new Request("https://preview.partyatredrocks.vercel.app/api/rezdy/availability?date=2027-06-05")
   );
@@ -1155,7 +1156,10 @@ test("Section J #16 & #17: historical 2026 facts/orders ($399/$599), 35 protecte
 
   const bookingPageSrc = fs.readFileSync(path.join(ROOT, "app/booking/page.tsx"), "utf8");
   assert.match(bookingPageSrc, /Existing 2026 orders remain unchanged at their original booked prices\./);
-  assert.match(bookingPageSrc, /541037/);
+  assert.match(bookingPageSrc, /BookingOrderLookup/);
+  assert.match(bookingPageSrc, /\/book\/red-rocks-amphitheatre\/private\/suv/);
+  assert.match(bookingPageSrc, /\/book\/red-rocks-amphitheatre\/private\/van/);
+  assert.doesNotMatch(bookingPageSrc, /catalog\/541037/);
 
   // Test #17: 35 protected URLs, 117 sitemap URLs, canonical Show ID reuse, and Rezdy IDs
   const protectedPaths = Object.keys(MANUAL_REVIEW_PROTECTED_URLS);

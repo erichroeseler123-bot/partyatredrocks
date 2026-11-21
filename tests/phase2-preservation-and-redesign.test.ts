@@ -271,7 +271,10 @@ test("Phase 2 Decision #4 & #5: full-site $499/$699 pricing consistency, FAQ/man
   assert.match(optionPage, /596193/);
   assert.match(optionPage, /630812/);
   const bookingPage = readText("app/booking/page.tsx");
-  assert.match(bookingPage, /541037/);
+  assert.match(bookingPage, /BookingOrderLookup/);
+  assert.match(bookingPage, /\/book\/red-rocks-amphitheatre\/private\/suv/);
+  assert.match(bookingPage, /\/book\/red-rocks-amphitheatre\/private\/van/);
+  assert.doesNotMatch(bookingPage, /catalog\/541037/);
 });
 
 test("Phase 2.1 #5: Next.js configuration authority — next.config.js is authoritative and next.config.ts delegates identically", async () => {

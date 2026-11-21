@@ -224,7 +224,7 @@ async function fetchAll2027BookingsForProducts(
       for (let page = 0; page < maxPages; page += 1) {
         const offsetParam = offset > 0 ? `&offset=${offset}` : "";
         const data = await fetchRezdyReadOnly(
-          `/bookings?productCode=${encodeURIComponent(code)}&minTourStartDate=${encodeURIComponent("2027-01-01 00:00:00")}&maxTourStartDate=${encodeURIComponent("2027-12-31 23:59:59")}&limit=${limit}${offsetParam}`,
+          `/bookings?productCode=${encodeURIComponent(code)}&minTourStartTime=${encodeURIComponent("2027-01-01T00:00:00Z")}&maxTourStartTime=${encodeURIComponent("2028-01-01T12:00:00Z")}&minDateCreated=1970-01-01T00%3A00%3A00Z&limit=${limit}${offsetParam}`,
           fetchImpl
         );
         const rawBookings = Array.isArray(data.bookings)

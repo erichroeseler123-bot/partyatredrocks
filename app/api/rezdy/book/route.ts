@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import {
   createParrRezdyBooking,
-  isPreviewOrDevEnvironment,
+  isParrNativeApiEnabled,
   type CreateParrNativeBookingInput,
 } from "@/lib/rezdy/parrNativeRezdyService";
 
@@ -14,7 +14,7 @@ const HEADERS = {
 };
 
 export async function POST(request: Request) {
-  if (!isPreviewOrDevEnvironment()) {
+  if (!isParrNativeApiEnabled()) {
     return NextResponse.json({ ok: false, error: "Not Found" }, { status: 404, headers: HEADERS });
   }
   try {
