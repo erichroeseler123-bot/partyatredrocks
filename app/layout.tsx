@@ -4,6 +4,7 @@ import "./globals.css";
 import SiteNav from "@/components/SiteNav";
 import DisplayTheme from "@/components/DisplayTheme";
 import SiteFooter from "@/components/SiteFooter";
+import ParrAnalyticsBridge from "@/components/analytics/ParrAnalyticsBridge";
 import { BOOKING_COPY } from "@/lib/bookingCopy";
 import { pageVisuals } from "@/lib/pageVisuals";
 
@@ -84,6 +85,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body style={FONT_VARIABLES} className="bg-surface text-default antialiased">
         <DisplayTheme />
+        <ParrAnalyticsBridge />
         <SiteNav />
         {children}
         <SiteFooter />

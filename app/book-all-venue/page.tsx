@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { permanentRedirect } from "next/navigation";
 import { ALL_VENUES } from "@/lib/venues/registry";
 import { normalizeVenueSlug, type HandoffSearchParams } from "@/lib/parrHandoff";
 import { getCrossSiteVenue } from "@/lib/crossSiteMap";
@@ -22,6 +23,15 @@ export default async function BookAllVenue({
 }) {
   const sp = await searchParams;
   const venueSlug = normalizeVenueSlug(firstValue(sp, "venue"));
+  if (venueSlug === "mishawaka-amphitheatre") {
+    const preserved = new URLSearchParams();
+    for (const key of ["date", "event", "artist", "utm_source", "utm_medium", "utm_campaign"]) {
+      const value = firstValue(sp, key);
+      if (value) preserved.set(key, value);
+    }
+    const query = preserved.toString();
+    permanentRedirect(`/venues/mishawaka-amphitheatre${query ? `?${query}` : ""}#book`);
+  }
   const isClosedFirstBank = venueSlug === "1stbank-center";
   const venue =
     venueSlug && !isClosedFirstBank

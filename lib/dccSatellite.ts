@@ -8,6 +8,12 @@ const DEFAULT_DCC_CALLBACK_URL = "https://www.destinationcommandcenter.com/api/i
 const HANDOFF_ROOT = path.join(process.cwd(), "data", "handoffs", "dcc");
 
 function liveDccCallbacksEnabled() {
+  if (process.env.DCC_ANALYTICS_DISABLED === "1" || process.env.PARR_ANALYTICS_DISABLED === "1") {
+    return false;
+  }
+  if (process.env.VERCEL_ENV === "preview" && !process.env.DCC_SATELLITE_CALLBACK_URL) {
+    return false;
+  }
   return process.env.DCC_ENABLE_LIVE_CALLBACKS !== "false";
 }
 

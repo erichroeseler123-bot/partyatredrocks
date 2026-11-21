@@ -140,8 +140,23 @@ export function sanitizeTelemetryEventId(rawEventId?: string | null): string | u
   return trimmed;
 }
 
+function isParrLegacyNetworkDisabled(): boolean {
+  const dcc = (process.env.NEXT_PUBLIC_DCC_ANALYTICS_DISABLED || "").trim().toLowerCase();
+  const pr = (process.env.NEXT_PUBLIC_PARR_ANALYTICS_DISABLED || "").trim().toLowerCase();
+  return (
+    dcc === "1" ||
+    dcc === "true" ||
+    dcc === "yes" ||
+    dcc === "on" ||
+    pr === "1" ||
+    pr === "true" ||
+    pr === "yes" ||
+    pr === "on"
+  );
+}
+
 export function trackNetworkEvent(input: TrackNetworkEventInput): void {
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined" || isParrLegacyNetworkDisabled()) return;
   const sessionId = getAnonymousSessionId();
   const journeyId = input.journeyId || getOrCreateJourneyId();
   const eventId = sanitizeTelemetryEventId(input.eventId) || createOpaqueId("evt");
@@ -177,7 +192,14 @@ export function trackNetworkEvent(input: TrackNetworkEventInput): void {
     },
   });
 
-  const endpoint = "https://destinationcommandcenter.com/api/public/corridor-events";
+  const explicitCorridorUrl = (process.env.NEXT_PUBLIC_DCC_CORRIDOR_EVENTS_URL || "").trim();
+  const isProdParrHost =
+    /(?:^|\.)partyatredrocks\.com$/i.test(window.location.hostname || "") ||
+    process.env.NODE_ENV === "test";
+  const endpoint =
+    explicitCorridorUrl ||
+    (isProdParrHost ? "https://destinationcommandcenter.com/api/public/corridor-events" : "");
+  if (!endpoint) return;
   try {
     let sent = false;
     if (typeof navigator.sendBeacon === "function") {
