@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { DccSourceCitations } from "@/components/shared/DccSourceCitations";
 import type { HandoffSearchParams } from "@/lib/parrHandoff";
 import { buildBookingHref } from "@/lib/parrHandoff";
 import { PARR_COMPLETE_TOTAL_DISCLOSURE } from "@/lib/pricing";
@@ -99,6 +100,13 @@ export default async function Page({
             </p>
           </div>
         </section>
+
+        <DccSourceCitations
+          claimIds={[
+            "red-rocks-post-show-pickup-jurassic-lot",
+            "red-rocks-dropoff-and-lot-opening",
+          ]}
+        />
 
         <div className="mt-12 flex flex-wrap gap-3">
           <Link href={privateHref} className="btn-primary">

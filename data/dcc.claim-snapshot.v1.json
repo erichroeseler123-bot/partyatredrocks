@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "dcc.claim-snapshot.v1",
+  "sourcePath": "data/claims/dcc.claim-ledger.v1.json",
+  "sourceSha256": "9ffb81110574567024ceffc354a1ef6ae185babd8bf91e9d312b860104e990eb",
+  "asOf": "2026-11-22",
+  "site": "partyatredrocks",
+  "claims": [
+    {
+      "claimId": "red-rocks-post-show-pickup-jurassic-lot",
+      "category": "safety_navigation",
+      "claimText": "Red Rocks Amphitheatre directs end-of-event passenger pickup for private vehicles, taxis, and Uber/Lyft to the Jurassic Lot just inside Entrance 2 off Highway 93, recommending the downhill walk via Will Call Trail across from the Trading Post and down Red Rocks Park Road.",
+      "authorityName": "Red Rocks Park & Amphitheatre — Getting Here",
+      "authorityUrl": "https://www.redrocksonline.com/plan-your-visit/getting-here/",
+      "checkedAt": "2026-11-22",
+      "nextCheckAt": "2027-03-01",
+      "status": "verified",
+      "limitationsNote": "Event-night traffic control staff and temporary lot closures control on site; accessible shuttles use separate designated pickup points.",
+      "sites": [
+        "partyatredrocks"
+      ],
+      "effectiveStatus": "verified"
+    },
+    {
+      "claimId": "red-rocks-dropoff-and-lot-opening",
+      "category": "schedule_access",
+      "claimText": "Red Rocks event parking lots open 2 hours before event door time; limo and shuttle bus drop-off uses the Top Circle Lot (or Upper North Lot at traffic-control discretion), and unoccupied vehicles left past 10 a.m. the following day may be ticketed or towed.",
+      "authorityName": "Red Rocks Park & Amphitheatre — Getting Here",
+      "authorityUrl": "https://www.redrocksonline.com/plan-your-visit/getting-here/",
+      "checkedAt": "2026-11-22",
+      "nextCheckAt": "2027-03-01",
+      "status": "verified",
+      "limitationsNote": "Overnight camping in vehicles is prohibited, and overflow parking may be routed to the Jurassic Lot depending on arrival time.",
+      "sites": [
+        "partyatredrocks"
+      ],
+      "effectiveStatus": "verified"
+    },
+    {
+      "claimId": "red-rocks-single-pocket-bag-policy",
+      "category": "operational_status",
+      "claimText": "Red Rocks prohibits multi-pocket bags inside the amphitheatre; permitted bags include single-pocket or clear bags up to 13\" x 15\" x 8\", small purses or fanny packs 6\" x 9\" or smaller, emptied hydration packs up to 2L (at most one extra pocket), six-pack soft coolers up to 10\" x 7\" x 7\", and food in 1-gallon clear plastic bags, and items must fit under the 18\" x 12\" seat space.",
+      "authorityName": "Red Rocks Park & Amphitheatre — Permitted & Prohibited Items",
+      "authorityUrl": "https://www.redrocksonline.com/plan-your-visit/permitted-prohibited-items/",
+      "checkedAt": "2026-11-22",
+      "nextCheckAt": "2027-03-01",
+      "status": "verified",
+      "limitationsNote": "Individual shows may impose stricter camera, beverage-lid, or bag rules at the gates; glass, aluminum cans, umbrellas, and hard coolers are prohibited inside the venue.",
+      "sites": [
+        "partyatredrocks"
+      ],
+      "effectiveStatus": "verified"
+    },
+    {
+      "claimId": "red-rocks-tailgating-and-lot-rules",
+      "category": "operational_status",
+      "claimText": "Red Rocks confines tailgating to the rear of your vehicle without blocking adjacent spaces, prohibits glass containers parkwide as well as tents, canopies, amplified sound, portable generators, open-flame fires, and charcoal grills, and allows small propane grills (at least 12\" off the ground, flame 6\" or under) only when no temporary fire ban is in effect.",
+      "authorityName": "Red Rocks Park & Amphitheatre — Official FAQ",
+      "authorityUrl": "https://www.redrocksonline.com/plan-your-visit/faq/",
+      "checkedAt": "2026-11-22",
+      "nextCheckAt": "2027-03-01",
+      "status": "verified",
+      "limitationsNote": "Full-strength beer and wine in non-glass containers are allowed in parking lots subject to Colorado law, while beer kegs, hard liquor, vending, and bringing outside alcohol through the amphitheatre gates are prohibited.",
+      "sites": [
+        "partyatredrocks"
+      ],
+      "effectiveStatus": "verified"
+    },
+    {
+      "claimId": "red-rocks-official-event-calendar",
+      "category": "schedule_access",
+      "claimText": "Red Rocks Park & Amphitheatre publishes official concert, film, and fitness event dates and door times on its Event Calendar.",
+      "authorityName": "Red Rocks Park & Amphitheatre — Event Calendar",
+      "authorityUrl": "https://www.redrocksonline.com/events/",
+      "checkedAt": "2026-11-22",
+      "nextCheckAt": "2027-03-01",
+      "status": "verified",
+      "limitationsNote": "Show dates, support acts, and door times can change; confirm ticketed event times on the official calendar or AXS listing before show day.",
+      "sites": [
+        "partyatredrocks"
+      ],
+      "effectiveStatus": "verified"
+    }
+  ]
+}

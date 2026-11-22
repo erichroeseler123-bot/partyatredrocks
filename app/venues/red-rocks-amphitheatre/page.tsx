@@ -3,6 +3,7 @@ import Image from "next/image";
 import { getUpcomingRedRocksSchedule } from "@/lib/redrocksEvents";
 import RedRocksShowsGrid from "@/components/RedRocksShowsGrid";
 import FAQBlock from "@/components/FAQBlock";
+import { DccSourceCitations } from "@/components/shared/DccSourceCitations";
 import MusicWave from "@/components/MusicWave";
 import { UnsplashImg } from "@/components/UnsplashImg";
 import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
@@ -183,6 +184,15 @@ export default async function RedRocksPage({ searchParams }: { searchParams: Pro
         </section>
 
         <FAQBlock title="Red Rocks Venue FAQ" rows={faqRows} />
+
+        <DccSourceCitations
+          claimIds={[
+            "red-rocks-official-event-calendar",
+            "red-rocks-dropoff-and-lot-opening",
+            "red-rocks-post-show-pickup-jurassic-lot",
+            "red-rocks-single-pocket-bag-policy",
+          ]}
+        />
       </div>
     </main>
   );
