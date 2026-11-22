@@ -1,6 +1,7 @@
 import Link from "next/link";
 import FAQBlock from "@/components/FAQBlock";
 import { GuideVisualHero } from "@/components/guide/GuideVisualHero";
+import { DccSourceCitations } from "@/components/shared/DccSourceCitations";
 import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
 import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
 import { guideVisuals } from "@/lib/guideVisuals";
@@ -111,6 +112,13 @@ export default async function Page() {
         </section>
 
         <FAQBlock title="Post-Show Pickup FAQ" rows={faqRows} />
+
+        <DccSourceCitations
+          claimIds={[
+            "red-rocks-post-show-pickup-jurassic-lot",
+            "red-rocks-dropoff-and-lot-opening",
+          ]}
+        />
       </section>
     </main>
   );

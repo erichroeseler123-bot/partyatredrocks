@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { DccSourceCitations } from "@/components/shared/DccSourceCitations";
 import type { HandoffSearchParams } from "@/lib/parrHandoff";
 import { buildBookingHref } from "@/lib/parrHandoff";
 
@@ -52,6 +53,13 @@ export default async function Page({
             </p>
           </div>
         </section>
+
+        <DccSourceCitations
+          claimIds={[
+            "red-rocks-post-show-pickup-jurassic-lot",
+            "red-rocks-dropoff-and-lot-opening",
+          ]}
+        />
 
         <div className="mt-12">
           <Link href={buildBookingHref({ target: "private", venue: "red-rocks-amphitheatre", searchParams: sp })} className="btn-primary">

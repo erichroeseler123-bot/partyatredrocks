@@ -1,5 +1,6 @@
 import Link from "next/link";
 import FAQBlock from "@/components/FAQBlock";
+import { DccSourceCitations } from "@/components/shared/DccSourceCitations";
 import { getFaqRowsWithGlobal } from "@/lib/faqs/getFaqs";
 import { buildFaqPageJsonLd } from "@/lib/faqs/schema";
 
@@ -126,6 +127,14 @@ export default async function ParkingLots() {
         </section>
 
         <FAQBlock title="Red Rocks Parking FAQ" rows={faqRows} />
+
+        <DccSourceCitations
+          claimIds={[
+            "red-rocks-dropoff-and-lot-opening",
+            "red-rocks-post-show-pickup-jurassic-lot",
+          ]}
+          className="mt-2"
+        />
       </section>
     </main>
   );
